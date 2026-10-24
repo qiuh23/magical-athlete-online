@@ -1,46 +1,42 @@
 {
-  "version": 1,
-  "edition": "second-wind",
-  "generator": "Blender 5.2.3 LTS Release Candidate",
-  "source": "assets/blender/second-wind.blend",
-  "units": "metres",
-  "up": "+Y",
-  "forward": "+Z",
-  "pivot": "ground-centre",
-  "compression": "EXT_meshopt_compression",
-  "models": [
-    {
-      "id": "hotel",
-      "node": "toy_hotel",
-      "url": "/models/second-wind/hotel.glb",
-      "avatar": "/models/second-wind/avatars/hotel.png",
-      "bytes": 40140,
-      "triangles": 2972,
-      "draws": 6,
-      "bounds": [
-        0.6,
-        0.88359,
-        0.48
-      ],
-      "pivotY": 0,
-      "animations": [
-        "idle",
-        "move",
-        "skill",
-        "fall",
-        "recover"
-      ],
-      "recognition": "Walking red gable-roof hotel with broad white grin, round nose, chimney, side and rear windows.",
-      "inferred": "Back and side volumes extrapolated from the published single-view illustration.",
-      "referenceChecked": true,
-      "referenceImage": "https://johnnlds.github.io/Magical-Athlete-Racers/images/expansion/Hotel.png",
-      "editableSource": "assets/blender/second-wind/hotel.blend"
-    }
+  "id": "hotel",
+  "node": "toy_hotel",
+  "url": "/models/second-wind/hotel.glb",
+  "avatar": "/avatars/second-wind/hotel.svg",
+  "bytes": 39480,
+  "triangles": 3648,
+  "draws": 1,
+  "bounds": [
+    0.5664845897760158,
+    0.9800103928338197,
+    0.4271370649908949
   ],
-  "variants": [],
-  "totalBytes": 40140,
-  "totalTriangles": 2972,
-  "materialCount": 15,
-  "textureCount": 0,
-  "referenceStatus": "36 fan-site illustrations visually inspected; closed-volume toy interpretations; unseen views explicitly inferred; not exact official production sculpts."
+  "pivotY": 0,
+  "animations": [
+    "idle",
+    "move",
+    "skill",
+    "fall",
+    "recover"
+  ],
+  "recognition": "Registered card viewed: red gable-roofed walking hotel, round nose, white grin and chimney. Real roof/wall volume, side/back windows and support feet rebuilt.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "referenceChecked": true,
+  "referenceImage": "https://johnnlds.github.io/Magical-Athlete-Racers/images/expansion/Hotel.png",
+  "editableSource": "assets/blender/second-wind/hotel.blend",
+  "modelPreview": "/models/second-wind/avatars/hotel.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "motionProfile": "wheel",
+  "bones": 5,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "Registered card viewed: red gable-roofed walking hotel, round nose, white grin and chimney. Real roof/wall volume, side/back windows and support feet rebuilt.",
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "94175a0d949216daa004478406aebcbeb20cc5cf50dd827498f7d7053d0e53de",
+  "glbSha256": "bdfa6f6c9c1a7eac7f68c644f0bff2e6de9f62570b6a6ea13dc76953365667b5",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

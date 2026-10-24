@@ -3,13 +3,13 @@
   "node": "toy_mr-dice-guy",
   "url": "/models/second-wind/mr-dice-guy.glb",
   "avatar": "/avatars/second-wind/mr-dice-guy.svg",
-  "bytes": 72912,
-  "triangles": 5168,
-  "draws": 9,
+  "bytes": 58732,
+  "triangles": 6476,
+  "draws": 1,
   "bounds": [
-    0.6,
-    0.88877,
-    0.48337
+    0.5629444257942442,
+    0.9800103928338197,
+    0.28455457811400414
   ],
   "pivotY": 0,
   "animations": [
@@ -19,8 +19,8 @@
     "fall",
     "recover"
   ],
-  "recognition": "Olive dice magician, violet top hat with large numbered die, blue suit and red bow tie, four coloured floating dice.",
-  "inferred": "Back and side volumes extrapolated from the published single-view illustration.",
+  "recognition": "Registered card viewed: olive dice magician, purple top hat, blue suit/red bow and four floating coloured dice. Levitation is intentional static artwork; no game random logic is added.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
   "referenceChecked": true,
   "referenceImage": "https://johnnlds.github.io/Magical-Athlete-Racers/images/expansion/Mr.%20Dice%20Guy.png",
   "editableSource": "assets/blender/second-wind/mr-dice-guy.blend",
@@ -28,5 +28,15 @@
   "avatarStyle": "flat-cartoon-svg",
   "motionProfile": "biped",
   "bones": 5,
-  "mouthSurfaceVersion": "surface-mouth-v2"
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "Registered card viewed: olive dice magician, purple top hat, blue suit/red bow and four floating coloured dice. Levitation is intentional static artwork; no game random logic is added.",
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "77433a051b235c7d1032cbd776df1d200ed302baa875bc478c5efd37177c6f37",
+  "glbSha256": "60de8dad8b8e04983f4d929efe346a4adb5d8628db81763fb970bafebb4633ec",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

@@ -1,0 +1,42 @@
+{
+  "id": "wurstii-hoagie",
+  "nameZh": "霍吉",
+  "node": "toy_wurstii-hoagie",
+  "model": "/models/wurstii/wurstii-hoagie.glb",
+  "portrait": "/avatars/wurstii/wurstii-hoagie.png",
+  "editableSource": "assets/blender/wurstii/blend/wurstii-hoagie.blend",
+  "bytes": 55268,
+  "triangles": 5048,
+  "draws": 1,
+  "bounds": [
+    0.5999938962981048,
+    0.87960449366546,
+    0.3575548570207831
+  ],
+  "animations": [
+    "idle",
+    "move",
+    "skill",
+    "fall",
+    "recover"
+  ],
+  "modelPreview": "/models/wurstii/avatars/wurstii-hoagie.png",
+  "avatar": "/avatars/wurstii/wurstii-hoagie.svg",
+  "avatarStyle": "flat-cartoon-svg",
+  "bones": 5,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "pivotY": 0,
+  "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Hoagie: broad heavy figure, long black hair, blue cap/jeans, black skull-and-orange-flame shirt, white shoes. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "referenceChecked": true,
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "03a4b73508ec4dadc66214c8951336d8c9bd327f83e72071d105f0e8a195c946",
+  "glbSha256": "d3bbcd17c4075d032c7920449901f66157252db6970ece3cd3024003f5edd70b",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "recognition": "User-provided Wurstii reference card crop actually viewed: Hoagie: broad heavy figure, long black hair, blue cap/jeans, black skull-and-orange-flame shirt, white shoes. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "assetVersion": "authored-sculpt-final-20261024"
+}

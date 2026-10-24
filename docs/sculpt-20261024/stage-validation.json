@@ -1,0 +1,3980 @@
+[
+  {
+    "id": "alchemist",
+    "triangles": 7272,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 62264,
+    "staticBindMaxError": 3.4763181850636576e-8,
+    "bounds": [
+      0.5422528763695181,
+      0.9800103928338197,
+      0.4727317117831965
+    ],
+    "animatedPeak": [
+      0.5554914719840083,
+      1.008380999282451,
+      0.511770484921007
+    ],
+    "clips": [
+      "alchemist-idle",
+      "alchemist-move",
+      "alchemist-skill",
+      "alchemist-fall",
+      "alchemist-recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "baba-yaga",
+    "triangles": 2024,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 32616,
+    "staticBindMaxError": 3.0096260968148895e-8,
+    "bounds": [
+      0.47706535434644315,
+      0.9800103928338197,
+      0.3733634560564474
+    ],
+    "animatedPeak": [
+      0.48871245772404187,
+      1.013944209026956,
+      0.40398841675762565
+    ],
+    "clips": [
+      "baba-yaga-idle",
+      "baba-yaga-move",
+      "baba-yaga-skill",
+      "baba-yaga-fall",
+      "baba-yaga-recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "banana",
+    "triangles": 3400,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 42912,
+    "staticBindMaxError": 3.229719762434628e-8,
+    "bounds": [
+      0.44953764458143863,
+      0.9800103928338197,
+      0.24622333768537852
+    ],
+    "animatedPeak": [
+      0.46490885154488637,
+      0.9859375532486367,
+      0.2773062989825532
+    ],
+    "clips": [
+      "banana-idle",
+      "banana-move",
+      "banana-skill",
+      "banana-fall",
+      "banana-recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "blimp",
+    "triangles": 3323,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 37600,
+    "staticBindMaxError": 0,
+    "bounds": [
+      0.5999938962981048,
+      0.3769035920285653,
+      0.37134922330393383
+    ],
+    "animatedPeak": [
+      0.6146421847819453,
+      0.38088730639071144,
+      0.37922589821449054
+    ],
+    "clips": [
+      "blimp-idle",
+      "blimp-move",
+      "blimp-skill",
+      "blimp-fall",
+      "blimp-recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "centaur",
+    "triangles": 5496,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 55956,
+    "staticBindMaxError": 3.487571383744881e-8,
+    "bounds": [
+      0.3964964751121555,
+      0.8201239169240822,
+      0.5999939052387107
+    ],
+    "animatedPeak": [
+      0.4061765648365734,
+      0.8729048143475556,
+      0.6094978502872629
+    ],
+    "clips": [
+      "centaur-idle",
+      "centaur-move",
+      "centaur-skill",
+      "centaur-fall",
+      "centaur-recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "cheerleader",
+    "triangles": 5468,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 54992,
+    "staticBindMaxError": 3.5822096296620124e-8,
+    "bounds": [
+      0.5999939052387107,
+      0.7585070444557179,
+      0.3067110202337718
+    ],
+    "animatedPeak": [
+      0.6146421939408275,
+      0.7790553869990414,
+      0.3114576521475464
+    ],
+    "clips": [
+      "cheerleader-idle",
+      "cheerleader-move",
+      "cheerleader-skill",
+      "cheerleader-fall",
+      "cheerleader-recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "coach",
+    "triangles": 8458,
+    "draws": 1,
+    "bones": 7,
+    "bytes": 87120,
+    "staticBindMaxError": 8.175759365860609e-8,
+    "bounds": [
+      0.5999938535568006,
+      0.8889126393330435,
+      0.5287026660431875
+    ],
+    "animatedPeak": [
+      0.6090377979759843,
+      0.9080466696576095,
+      0.5446324418232993
+    ],
+    "clips": [
+      "coach-idle",
+      "coach-move",
+      "coach-skill",
+      "coach-fall",
+      "coach-recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "copycat",
+    "triangles": 6346,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 69240,
+    "staticBindMaxError": 3.492280731381114e-8,
+    "bounds": [
+      0.5999938828871961,
+      0.8415173927043313,
+      0.270271927974162
+    ],
+    "animatedPeak": [
+      0.6143920760597553,
+      0.8663382279261799,
+      0.29951265461112975
+    ],
+    "clips": [
+      "copycat-idle",
+      "copycat-move",
+      "copycat-skill",
+      "copycat-fall",
+      "copycat-recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "dicemonger",
+    "triangles": 7226,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 64552,
+    "staticBindMaxError": 3.415561457985971e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.9050569313269834,
+      0.3706167845991303
+    ],
+    "animatedPeak": [
+      0.6146421847819453,
+      0.9199977963017361,
+      0.39116932786055897
+    ],
+    "clips": [
+      "dicemonger-idle",
+      "dicemonger-move",
+      "dicemonger-skill",
+      "dicemonger-fall",
+      "dicemonger-recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "duelist",
+    "triangles": 5736,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 53596,
+    "staticBindMaxError": 3.2818645297205015e-8,
+    "bounds": [
+      0.522171697134312,
+      0.9800103928338197,
+      0.3429059775820017
+    ],
+    "animatedPeak": [
+      0.5349200295838802,
+      0.9950524742504804,
+      0.3559466706445552
+    ],
+    "clips": [
+      "duelist-idle",
+      "duelist-move",
+      "duelist-skill",
+      "duelist-fall",
+      "duelist-recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "egg",
+    "triangles": 4868,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 48128,
+    "staticBindMaxError": 2.3466861031365385e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.9365825525552253,
+      0.4219489120151372
+    ],
+    "animatedPeak": [
+      0.6146421847819453,
+      0.9476719597729458,
+      0.43354768360477414
+    ],
+    "clips": [
+      "egg-idle",
+      "egg-move",
+      "egg-skill",
+      "egg-fall",
+      "egg-recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "flip-flop",
+    "triangles": 4324,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 47748,
+    "staticBindMaxError": 3.398152065378565e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.7483748908450495,
+      0.4734641578022564
+    ],
+    "animatedPeak": [
+      0.6146421847819453,
+      0.7547564657017864,
+      0.480308806267725
+    ],
+    "clips": [
+      "flip-flop-idle",
+      "flip-flop-move",
+      "flip-flop-skill",
+      "flip-flop-fall",
+      "flip-flop-recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "genius",
+    "triangles": 9294,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 82080,
+    "staticBindMaxError": 3.494545226519576e-8,
+    "bounds": [
+      0.5624561464051272,
+      0.9800103928338197,
+      0.4413892091335614
+    ],
+    "animatedPeak": [
+      0.5761879859169711,
+      1.0126367804842702,
+      0.4516333875057257
+    ],
+    "clips": [
+      "genius-idle",
+      "genius-move",
+      "genius-skill",
+      "genius-fall",
+      "genius-recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "gunk",
+    "triangles": 6080,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 63716,
+    "staticBindMaxError": 2.391896845834308e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.625690463977246,
+      0.5003204458538388
+    ],
+    "animatedPeak": [
+      0.6146421847819453,
+      0.6369122847412487,
+      0.5076888375867046
+    ],
+    "clips": [
+      "gunk-idle",
+      "gunk-move",
+      "gunk-skill",
+      "gunk-fall",
+      "gunk-recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "hare",
+    "triangles": 6256,
+    "draws": 1,
+    "bones": 7,
+    "bytes": 76384,
+    "staticBindMaxError": 1.1996364909155828e-7,
+    "bounds": [
+      0.48960846211489173,
+      0.9800103928338197,
+      0.4013183936292529
+    ],
+    "animatedPeak": [
+      0.5015617937094936,
+      1.0134321222576217,
+      0.4218255892767372
+    ],
+    "clips": [
+      "hare-idle",
+      "hare-move",
+      "hare-skill",
+      "hare-fall",
+      "hare-recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "heckler",
+    "triangles": 6430,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 66816,
+    "staticBindMaxError": 3.525452618523121e-8,
+    "bounds": [
+      0.5999939141793164,
+      0.9188207795108527,
+      0.3926511429181799
+    ],
+    "animatedPeak": [
+      0.6146422030997098,
+      0.9403748994861747,
+      0.3939146793927929
+    ],
+    "clips": [
+      "heckler-idle",
+      "heckler-move",
+      "heckler-skill",
+      "heckler-fall",
+      "heckler-recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "huge-baby",
+    "triangles": 5082,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 58912,
+    "staticBindMaxError": 3.557725414658348e-8,
+    "bounds": [
+      0.56526383251442,
+      0.9800103928338197,
+      0.38575395977660454
+    ],
+    "animatedPeak": [
+      0.5790642190504166,
+      0.9932408143871967,
+      0.4002235683865033
+    ],
+    "clips": [
+      "huge-baby-idle",
+      "huge-baby-move",
+      "huge-baby-skill",
+      "huge-baby-fall",
+      "huge-baby-recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "hypnotist",
+    "triangles": 8928,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 90164,
+    "staticBindMaxError": 3.4099192789204726e-8,
+    "bounds": [
+      0.5999938940629534,
+      0.7868587406038657,
+      0.498245194921193
+    ],
+    "animatedPeak": [
+      0.6144291462533127,
+      0.7924143251423903,
+      0.5096946931710904
+    ],
+    "clips": [
+      "hypnotist-idle",
+      "hypnotist-move",
+      "hypnotist-skill",
+      "hypnotist-fall",
+      "hypnotist-recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "inchworm",
+    "triangles": 3136,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 41676,
+    "staticBindMaxError": 2.2239612430246168e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.650166320446459,
+      0.15494247214819612
+    ],
+    "animatedPeak": [
+      0.6146421847819453,
+      0.6565775220701112,
+      0.17555268324740553
+    ],
+    "clips": [
+      "inchworm-idle",
+      "inchworm-move",
+      "inchworm-skill",
+      "inchworm-fall",
+      "inchworm-recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "lackey",
+    "triangles": 4618,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 48508,
+    "staticBindMaxError": 3.5665851091832816e-8,
+    "bounds": [
+      0.5888851588488418,
+      0.9431440322881118,
+      0.5999938962981048
+    ],
+    "animatedPeak": [
+      0.6032622379222999,
+      0.9648058016957811,
+      0.605520679110569
+    ],
+    "clips": [
+      "lackey-idle",
+      "lackey-move",
+      "lackey-skill",
+      "lackey-fall",
+      "lackey-recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "leaptoad",
+    "triangles": 4622,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 55180,
+    "staticBindMaxError": 3.265688806452733e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.7270424189416536,
+      0.3603015228736228
+    ],
+    "animatedPeak": [
+      0.5999743608757797,
+      0.7677772636102594,
+      0.40327929587109856
+    ],
+    "clips": [
+      "leaptoad-idle",
+      "leaptoad-move",
+      "leaptoad-skill",
+      "leaptoad-fall",
+      "leaptoad-recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "legs",
+    "triangles": 5004,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 46160,
+    "staticBindMaxError": 3.4472743312494106e-8,
+    "bounds": [
+      0.4412366165789052,
+      0.9800103928338197,
+      0.29706717123935666
+    ],
+    "animatedPeak": [
+      0.4520089949133512,
+      1.002933512994613,
+      0.3760073116069831
+    ],
+    "clips": [
+      "legs-idle",
+      "legs-move",
+      "legs-skill",
+      "legs-fall",
+      "legs-recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "lovable-loser",
+    "triangles": 9296,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 88116,
+    "staticBindMaxError": 2.1655023920418275e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.5999939059206505,
+      0.44642476737499937
+    ],
+    "animatedPeak": [
+      0.6146421847819453,
+      0.6065098776827005,
+      0.5015740575652465
+    ],
+    "clips": [
+      "lovable-loser-idle",
+      "lovable-loser-move",
+      "lovable-loser-skill",
+      "lovable-loser-fall",
+      "lovable-loser-recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "magician",
+    "triangles": 6112,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 56512,
+    "staticBindMaxError": 3.5353975363367594e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.8147526590962308,
+      0.35389264115707464
+    ],
+    "animatedPeak": [
+      0.6146421847819453,
+      0.839572401583985,
+      0.3836194235277597
+    ],
+    "clips": [
+      "magician-idle",
+      "magician-move",
+      "magician-skill",
+      "magician-fall",
+      "magician-recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "mastermind",
+    "triangles": 6202,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 62180,
+    "staticBindMaxError": 3.2459014942604135e-8,
+    "bounds": [
+      0.5178991212422686,
+      0.9800103928338197,
+      0.4132816568635481
+    ],
+    "animatedPeak": [
+      0.5305431427569723,
+      0.9886161384881408,
+      0.4430459309483019
+    ],
+    "clips": [
+      "mastermind-idle",
+      "mastermind-move",
+      "mastermind-skill",
+      "mastermind-fall",
+      "mastermind-recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "mouth",
+    "triangles": 6370,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 66340,
+    "staticBindMaxError": 2.1789379855876364e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.6196478315049924,
+      0.15826899014252144
+    ],
+    "animatedPeak": [
+      0.6146421847819453,
+      0.6285638602005973,
+      0.23756861613606917
+    ],
+    "clips": [
+      "mouth-idle",
+      "mouth-move",
+      "mouth-skill",
+      "mouth-fall",
+      "mouth-recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "party-animal",
+    "triangles": 5830,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 61244,
+    "staticBindMaxError": 3.552197583157633e-8,
+    "bounds": [
+      0.5989562669759209,
+      0.9800103928338197,
+      0.38331248473032575
+    ],
+    "animatedPeak": [
+      0.6135792227126377,
+      1.0076464534547127,
+      0.3988185637054183
+    ],
+    "clips": [
+      "party-animal-idle",
+      "party-animal-move",
+      "party-animal-skill",
+      "party-animal-fall",
+      "party-animal-recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "rocket-scientist",
+    "triangles": 5280,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 50416,
+    "staticBindMaxError": 3.611556636683462e-8,
+    "bounds": [
+      0.5999939052387107,
+      0.8901028612380788,
+      0.314889980773339
+    ],
+    "animatedPeak": [
+      0.6139630569193713,
+      0.9083495101851533,
+      0.3211871387270972
+    ],
+    "clips": [
+      "rocket-scientist-idle",
+      "rocket-scientist-move",
+      "rocket-scientist-skill",
+      "rocket-scientist-fall",
+      "rocket-scientist-recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "romantic",
+    "triangles": 6226,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 62220,
+    "staticBindMaxError": 3.5446431250703005e-8,
+    "bounds": [
+      0.5672170171208838,
+      0.9800103928338197,
+      0.545854056434399
+    ],
+    "animatedPeak": [
+      0.5810650888279366,
+      1.0012647186257306,
+      0.5526703439191559
+    ],
+    "clips": [
+      "romantic-idle",
+      "romantic-move",
+      "romantic-skill",
+      "romantic-fall",
+      "romantic-recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "scoocher",
+    "triangles": 4606,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 48604,
+    "staticBindMaxError": 2.3670287859409407e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.6316721237828716,
+      0.3838007751701407
+    ],
+    "animatedPeak": [
+      0.6146421847819453,
+      0.6742097694190662,
+      0.41295590412573124
+    ],
+    "clips": [
+      "scoocher-idle",
+      "scoocher-move",
+      "scoocher-skill",
+      "scoocher-fall",
+      "scoocher-recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "sisyphus",
+    "triangles": 4676,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 52820,
+    "staticBindMaxError": 3.291811743441319e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.850062575612277,
+      0.39539780582507633
+    ],
+    "animatedPeak": [
+      0.6146421847819453,
+      0.8732871268607008,
+      0.3954654267429807
+    ],
+    "clips": [
+      "sisyphus-idle",
+      "sisyphus-move",
+      "sisyphus-skill",
+      "sisyphus-fall",
+      "sisyphus-recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "skipper",
+    "triangles": 6184,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 58908,
+    "staticBindMaxError": 3.480618559465078e-8,
+    "bounds": [
+      0.5528733176671652,
+      0.9800103928338197,
+      0.40345469527814
+    ],
+    "animatedPeak": [
+      0.5663712013992737,
+      1.0022226788609248,
+      0.4499711871398223
+    ],
+    "clips": [
+      "skipper-idle",
+      "skipper-move",
+      "skipper-skill",
+      "skipper-fall",
+      "skipper-recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "stickler",
+    "triangles": 4686,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 52076,
+    "staticBindMaxError": 3.4378503168385084e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.8820459744963015,
+      0.5594347913718012
+    ],
+    "animatedPeak": [
+      0.6146421847819452,
+      0.88893376830668,
+      0.5716159031717211
+    ],
+    "clips": [
+      "stickler-idle",
+      "stickler-move",
+      "stickler-skill",
+      "stickler-fall",
+      "stickler-recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "suckerfish",
+    "triangles": 2756,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 38908,
+    "staticBindMaxError": 2.4329989749499992e-8,
+    "bounds": [
+      0.4687032685323649,
+      0.439252906258025,
+      0.599993892602676
+    ],
+    "animatedPeak": [
+      0.4794344789943508,
+      0.44303646346337583,
+      0.6367781054362062
+    ],
+    "clips": [
+      "suckerfish-idle",
+      "suckerfish-move",
+      "suckerfish-skill",
+      "suckerfish-fall",
+      "suckerfish-recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "third-wheel",
+    "triangles": 5854,
+    "draws": 1,
+    "bones": 6,
+    "bytes": 57608,
+    "staticBindMaxError": 3.5923097754300625e-8,
+    "bounds": [
+      0.5655079974436792,
+      0.9800103854919932,
+      0.511001930280619
+    ],
+    "animatedPeak": [
+      0.579314345037519,
+      0.9820408247562387,
+      0.5283672811640676
+    ],
+    "clips": [
+      "third-wheel-idle",
+      "third-wheel-move",
+      "third-wheel-skill",
+      "third-wheel-fall",
+      "third-wheel-recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "twin",
+    "triangles": 4984,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 56316,
+    "staticBindMaxError": 3.293688410746021e-8,
+    "bounds": [
+      0.5999939007684078,
+      0.7302163871427263,
+      0.3051545762504959
+    ],
+    "animatedPeak": [
+      0.6138317475543607,
+      0.7389043902469545,
+      0.31751409168689804
+    ],
+    "clips": [
+      "twin-idle",
+      "twin-move",
+      "twin-skill",
+      "twin-fall",
+      "twin-recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "bite-mark",
+    "triangles": 7400,
+    "draws": 1,
+    "bones": 7,
+    "bytes": 82360,
+    "staticBindMaxError": 5.073407944035483e-8,
+    "bounds": [
+      0.5895564830742187,
+      0.9800103928338197,
+      0.43034150853498876
+    ],
+    "animatedPeak": [
+      0.6163939641764353,
+      1.0024146284269797,
+      0.4456946702923601
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "blunderdog",
+    "triangles": 5424,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 54772,
+    "staticBindMaxError": 3.399847166499634e-8,
+    "bounds": [
+      0.5999939141793164,
+      0.9396954406145482,
+      0.4114505508864851
+    ],
+    "animatedPeak": [
+      0.6146422030997098,
+      0.9621760269341412,
+      0.41375622582505844
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "cheatah",
+    "triangles": 6464,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 63204,
+    "staticBindMaxError": 3.591203829497618e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.9565721768577407,
+      0.5373088698278804
+    ],
+    "animatedPeak": [
+      0.6146421847819453,
+      0.9883031656892796,
+      0.54250505110272
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "critic",
+    "triangles": 5308,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 56092,
+    "staticBindMaxError": 3.488280385223864e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.9002350066860711,
+      0.5598010109742575
+    ],
+    "animatedPeak": [
+      0.6146421847819453,
+      0.9331344929510842,
+      0.5663502806851712
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "diva",
+    "triangles": 3474,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 40028,
+    "staticBindMaxError": 2.805903822731609e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.7139194921720023,
+      0.3424176763206885
+    ],
+    "animatedPeak": [
+      0.6146421847819453,
+      0.7407183293360604,
+      0.3560569890347533
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "doppelgangster",
+    "triangles": 7794,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 77708,
+    "staticBindMaxError": 3.4095865751845254e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.819635620757914,
+      0.22089297158726767
+    ],
+    "animatedPeak": [
+      0.6096448366240659,
+      0.8287356867883497,
+      0.23580761217698476
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "gloth",
+    "triangles": 3934,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 46428,
+    "staticBindMaxError": 3.503868200160354e-8,
+    "bounds": [
+      0.5963316751609852,
+      0.9800103934385633,
+      0.36548966676143213
+    ],
+    "animatedPeak": [
+      0.6108905539490952,
+      0.9874152140916104,
+      0.4067963130674642
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "hog-knight",
+    "triangles": 4968,
+    "draws": 1,
+    "bones": 7,
+    "bytes": 65496,
+    "staticBindMaxError": 9.01346537738205e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.8394726525085017,
+      0.31641591096665095
+    ],
+    "animatedPeak": [
+      0.5999743608757797,
+      0.8537495937089208,
+      0.3467393899508787
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "hopfrog",
+    "triangles": 2668,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 36544,
+    "staticBindMaxError": 2.4200864912767997e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.6443983417500574,
+      0.29725028229621264
+    ],
+    "animatedPeak": [
+      0.6146421847819453,
+      0.6746093828932935,
+      0.33581909418329925
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "hotel",
+    "triangles": 3648,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 39480,
+    "staticBindMaxError": 2.3371937894812103e-8,
+    "bounds": [
+      0.5664845897760158,
+      0.9800103928338197,
+      0.4271370649908949
+    ],
+    "animatedPeak": [
+      0.5803147799560943,
+      0.9920741087224477,
+      0.45395643594475094
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "icarus",
+    "triangles": 7792,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 72904,
+    "staticBindMaxError": 3.320898789204543e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.8587603510721502,
+      0.25049592577898494
+    ],
+    "animatedPeak": [
+      0.6146421847819453,
+      0.8675595663391541,
+      0.3185377577814601
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "kingtripper",
+    "triangles": 7016,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 68112,
+    "staticBindMaxError": 3.530588737081811e-8,
+    "bounds": [
+      0.5520798364207892,
+      0.9800103928338197,
+      0.3663136665022769
+    ],
+    "animatedPeak": [
+      0.5655583480521561,
+      1.001743206826624,
+      0.3791941301335505
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "kraken",
+    "triangles": 6320,
+    "draws": 1,
+    "bones": 13,
+    "bytes": 94768,
+    "staticBindMaxError": 4.418827314720388e-8,
+    "bounds": [
+      0.5999938833405091,
+      0.6776940386551021,
+      0.4831080043120497
+    ],
+    "animatedPeak": [
+      0.6196855207730779,
+      0.6927048047181837,
+      0.5073675570713465
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "le-saboteur",
+    "triangles": 5488,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 61052,
+    "staticBindMaxError": 3.4010166209549755e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.9104892261756059,
+      0.5239417706839198
+    ],
+    "animatedPeak": [
+      0.6146421847819453,
+      0.9304638525713549,
+      0.5263120377017803
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "magical-athlete",
+    "triangles": 4816,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 47004,
+    "staticBindMaxError": 3.229139876240225e-8,
+    "bounds": [
+      0.47993408001953186,
+      0.9800103928338197,
+      0.29584643086031676
+    ],
+    "animatedPeak": [
+      0.4916512206450087,
+      0.983614070657923,
+      0.3187542395588639
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "mole",
+    "triangles": 4604,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 44776,
+    "staticBindMaxError": 3.052856821467201e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.7068696861451798,
+      0.44032105471968747
+    ],
+    "animatedPeak": [
+      0.6146421847819453,
+      0.7316418849560572,
+      0.4407090232630334
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "mr-dice-guy",
+    "triangles": 6476,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 58732,
+    "staticBindMaxError": 3.478862014010708e-8,
+    "bounds": [
+      0.5629444257942442,
+      0.9800103928338197,
+      0.28455457811400414
+    ],
+    "animatedPeak": [
+      0.5766881861896115,
+      1.0013265315695452,
+      0.3250351867052249
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "mush",
+    "triangles": 6608,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 71560,
+    "staticBindMaxError": 2.479673135168226e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.6449171179521291,
+      0.4704123087256457
+    ],
+    "animatedPeak": [
+      0.6146421847819452,
+      0.6486728252509307,
+      0.500824881367685
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "nemesis",
+    "triangles": 4906,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 53616,
+    "staticBindMaxError": 3.5173865980290633e-8,
+    "bounds": [
+      0.5858638264107181,
+      0.9800103762932219,
+      0.28724021332819194
+    ],
+    "animatedPeak": [
+      0.6001671424851985,
+      0.9986978771830611,
+      0.298788771420728
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "nepo-baby",
+    "triangles": 5064,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 49272,
+    "staticBindMaxError": 3.095776137403772e-8,
+    "bounds": [
+      0.48573259681997133,
+      0.9800103928338197,
+      0.3493758912751093
+    ],
+    "animatedPeak": [
+      0.4975913027970214,
+      0.9970328429794482,
+      0.367088091110629
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "null",
+    "triangles": 3644,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 40468,
+    "staticBindMaxError": 2.5433920256849535e-8,
+    "bounds": [
+      0.5673390911587878,
+      0.9800103928338197,
+      0.43842890713217564
+    ],
+    "animatedPeak": [
+      0.5811901431890316,
+      0.9845533760759108,
+      0.45944089409634864
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "overtaker",
+    "triangles": 5828,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 59908,
+    "staticBindMaxError": 3.4888622660703395e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.8948026978362377,
+      0.3306985637541129
+    ],
+    "animatedPeak": [
+      0.6283900266961338,
+      0.9235763013040548,
+      0.3513126488549535
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "party-pooper",
+    "triangles": 6944,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 66440,
+    "staticBindMaxError": 3.5021858729071654e-8,
+    "bounds": [
+      0.554887539292581,
+      0.9800103928338197,
+      0.35895871380558053
+    ],
+    "animatedPeak": [
+      0.5684345983573412,
+      1.0036136939681102,
+      0.37042063510501494
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "penguin",
+    "triangles": 5088,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 45612,
+    "staticBindMaxError": 2.701894393803556e-8,
+    "bounds": [
+      0.599993887357499,
+      0.7446211008774765,
+      0.3274025696584979
+    ],
+    "animatedPeak": [
+      0.6146421756230631,
+      0.7599667294882599,
+      0.3280322281034379
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "re-runner",
+    "triangles": 5764,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 49504,
+    "staticBindMaxError": 2.994250812265811e-8,
+    "bounds": [
+      0.5935239722891934,
+      0.9800103928338197,
+      0.342356644403248
+    ],
+    "animatedPeak": [
+      0.6080143036439101,
+      1.0014660082292348,
+      0.3747871664838549
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "show-off",
+    "triangles": 4428,
+    "draws": 1,
+    "bones": 9,
+    "bytes": 58064,
+    "staticBindMaxError": 3.318515093549012e-8,
+    "bounds": [
+      0.5465254676961577,
+      0.9800103928338197,
+      0.4986724448377941
+    ],
+    "animatedPeak": [
+      0.5598683746223334,
+      0.9905987231261694,
+      0.5078206396662526
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "soulmate",
+    "triangles": 3772,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 42464,
+    "staticBindMaxError": 3.4717478902006126e-8,
+    "bounds": [
+      0.5686208685567797,
+      0.9800103928338197,
+      0.5216223561909652
+    ],
+    "animatedPeak": [
+      0.5825032139805293,
+      1.0115103579876215,
+      0.5253527477245014
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "speed-demon",
+    "triangles": 7794,
+    "draws": 1,
+    "bones": 7,
+    "bytes": 73860,
+    "staticBindMaxError": 3.514910451840486e-8,
+    "bounds": [
+      0.33533738212225717,
+      0.9180883352616003,
+      0.6000244148075808
+    ],
+    "animatedPeak": [
+      0.3435243299279763,
+      0.9203866372923786,
+      0.6002398350241391
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "spoilsport",
+    "triangles": 7234,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 73392,
+    "staticBindMaxError": 3.5286619605742256e-8,
+    "bounds": [
+      0.5549485928502893,
+      0.9800103928338197,
+      0.48414563432721947
+    ],
+    "animatedPeak": [
+      0.5684971424804233,
+      1.0105352495075062,
+      0.49550420406600093
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "stepdad",
+    "triangles": 5252,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 52352,
+    "staticBindMaxError": 2.8489150165536118e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.8657185583056124,
+      0.34113589892269663
+    ],
+    "animatedPeak": [
+      0.6146421847819453,
+      0.8879947576073088,
+      0.34217043334432085
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "streaker",
+    "triangles": 2750,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 39244,
+    "staticBindMaxError": 3.3606607594033445e-8,
+    "bounds": [
+      0.42439040542103623,
+      0.9800103928338197,
+      0.4204229904067651
+    ],
+    "animatedPeak": [
+      0.4334268309705109,
+      0.9975059136019424,
+      0.4283593672662819
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "stunner",
+    "triangles": 6510,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 70732,
+    "staticBindMaxError": 3.497376568021913e-8,
+    "bounds": [
+      0.5295571764275033,
+      0.9800103928338197,
+      0.4510025330362865
+    ],
+    "animatedPeak": [
+      0.5424858184301279,
+      0.9953296589583049,
+      0.4631509593958396
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "switcharoo",
+    "triangles": 5132,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 58644,
+    "staticBindMaxError": 3.2876452820814956e-8,
+    "bounds": [
+      0.4692526017029328,
+      0.9800103928338197,
+      0.4392223883785516
+    ],
+    "animatedPeak": [
+      0.47087361117162746,
+      1.004788031135196,
+      0.48954557034193114
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "tail",
+    "triangles": 1974,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 32400,
+    "staticBindMaxError": 3.303850893334682e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.86257516487034,
+      0.4376354211936021
+    ],
+    "animatedPeak": [
+      0.6146421847819453,
+      0.866361018166304,
+      0.4476443336327045
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "the-hose",
+    "triangles": 6700,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 78156,
+    "staticBindMaxError": 3.414836489231079e-8,
+    "bounds": [
+      0.6000244148075808,
+      0.7790765204555582,
+      0.2348704567341737
+    ],
+    "animatedPeak": [
+      0.614673448372219,
+      0.7884638577905029,
+      0.24818955299661746
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "understudy",
+    "triangles": 5426,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 55964,
+    "staticBindMaxError": 3.505820253197133e-8,
+    "bounds": [
+      0.5367595446638386,
+      0.9800103928338197,
+      0.3442182747909961
+    ],
+    "animatedPeak": [
+      0.549864025734733,
+      0.9997395651535123,
+      0.3579227307120636
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "extra-mile-broken-clock",
+    "triangles": 4408,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 48180,
+    "staticBindMaxError": 3.36079205969177e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.9702139510000678,
+      0.2932218434147269
+    ],
+    "animatedPeak": [
+      0.6146421847819453,
+      0.9927392820099062,
+      0.34275135788521377
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "extra-mile-cletus",
+    "triangles": 5592,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 51536,
+    "staticBindMaxError": 2.9348894088401023e-8,
+    "bounds": [
+      0.46681112094485305,
+      0.9800103928338197,
+      0.32099368266853845
+    ],
+    "animatedPeak": [
+      0.47820787682729576,
+      0.9971677670799294,
+      0.3703516995871391
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "extra-mile-doc-paradox",
+    "triangles": 7514,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 65448,
+    "staticBindMaxError": 3.497739183594611e-8,
+    "bounds": [
+      0.5679799798577837,
+      0.9800103762932219,
+      0.3246864223151341
+    ],
+    "animatedPeak": [
+      0.5818466785847805,
+      0.9807461615613157,
+      0.40064732156905636
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "extra-mile-doctor-dice",
+    "triangles": 4980,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 50344,
+    "staticBindMaxError": 2.6205563158242926e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.8273873104037599,
+      0.32776879665634545
+    ],
+    "animatedPeak": [
+      0.6146421847819453,
+      0.8398874209123217,
+      0.36672412406715615
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "extra-mile-dom-and-gary",
+    "triangles": 5720,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 59912,
+    "staticBindMaxError": 3.4792654123093324e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.8307748770486285,
+      0.3519394565215061
+    ],
+    "animatedPeak": [
+      0.6146421847819452,
+      0.8547523275538229,
+      0.35869434321706717
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "extra-mile-echo",
+    "triangles": 3300,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 37436,
+    "staticBindMaxError": 3.1712661823963014e-8,
+    "bounds": [
+      0.5575731681264687,
+      0.9800103762932219,
+      0.1892147587511826
+    ],
+    "animatedPeak": [
+      0.5805387252186016,
+      0.9816677828319638,
+      0.2228866115709141
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "extra-mile-gingy",
+    "triangles": 6076,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 64452,
+    "staticBindMaxError": 3.5576331420552424e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.9137546922208319,
+      0.1969359416486099
+    ],
+    "animatedPeak": [
+      0.6146421847819453,
+      0.9179815352167172,
+      0.24641314133643086
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "extra-mile-gluebert",
+    "triangles": 2668,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 35248,
+    "staticBindMaxError": 3.2840023367961865e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.9710074322700915,
+      0.2660603656117435
+    ],
+    "animatedPeak": [
+      0.6146421847819453,
+      0.9771385692308789,
+      0.3027860285742118
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "extra-mile-heads",
+    "triangles": 4446,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 46384,
+    "staticBindMaxError": 1.909626220041169e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.6260872181013921,
+      0.4721213415936766
+    ],
+    "animatedPeak": [
+      0.6146421847819453,
+      0.6417000222840995,
+      0.4861633226397223
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "extra-mile-honey-pot",
+    "triangles": 6574,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 62652,
+    "staticBindMaxError": 3.529840241367066e-8,
+    "bounds": [
+      0.5514694662312692,
+      0.9800103928338197,
+      0.4610126041444136
+    ],
+    "animatedPeak": [
+      0.5678844216930352,
+      1.0136495609743497,
+      0.47347276307200553
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "extra-mile-king-pete",
+    "triangles": 6772,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 63912,
+    "staticBindMaxError": 3.4880510790803005e-8,
+    "bounds": [
+      0.47431867427594837,
+      0.9800103928338197,
+      0.2522660030876491
+    ],
+    "animatedPeak": [
+      0.4858987200346385,
+      1.0014632685047744,
+      0.32793464864886007
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "extra-mile-lazy-bones",
+    "triangles": 4380,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 49068,
+    "staticBindMaxError": 2.0350195136022506e-8,
+    "bounds": [
+      0.42884609515671257,
+      0.5993529877485358,
+      0.6000244148075808
+    ],
+    "animatedPeak": [
+      0.4393159705267495,
+      0.6156612150524562,
+      0.6090277855573915
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "extra-mile-marksman",
+    "triangles": 3882,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 41940,
+    "staticBindMaxError": 3.167331722424926e-8,
+    "bounds": [
+      0.5529343546861172,
+      0.9800103928338197,
+      0.48524428620694826
+    ],
+    "animatedPeak": [
+      0.5664337285798212,
+      0.9884216257737513,
+      0.4875451785269846
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "extra-mile-moneybags",
+    "triangles": 5232,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 54260,
+    "staticBindMaxError": 3.4310830823308415e-8,
+    "bounds": [
+      0.46143986327707753,
+      0.9800103928338197,
+      0.3318582720419935
+    ],
+    "animatedPeak": [
+      0.47270548493911557,
+      0.9982023558530099,
+      0.3410032530771545
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "extra-mile-mr-fox",
+    "triangles": 6194,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 57476,
+    "staticBindMaxError": 3.417416145660777e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.8000122185800248,
+      0.249946592608417
+    ],
+    "animatedPeak": [
+      0.6146421847819453,
+      0.8205516867408442,
+      0.2863136237643163
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "extra-mile-oddball",
+    "triangles": 5026,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 52560,
+    "staticBindMaxError": 1.554173802906895e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.624011968896671,
+      0.5580004272591327
+    ],
+    "animatedPeak": [
+      0.6146421847819453,
+      0.6268289813599975,
+      0.5682013146747287
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "extra-mile-pooh",
+    "triangles": 4500,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 46288,
+    "staticBindMaxError": 3.260120731436623e-8,
+    "bounds": [
+      0.525406672839814,
+      0.9800103928338197,
+      0.333384202483605
+    ],
+    "animatedPeak": [
+      0.5409981865601399,
+      0.9940564202233786,
+      0.3572442801240582
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "extra-mile-robin-hood",
+    "triangles": 7204,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 66276,
+    "staticBindMaxError": 3.351498584715663e-8,
+    "bounds": [
+      0.5730765794797816,
+      0.9800103928338197,
+      0.3114719077120273
+    ],
+    "animatedPeak": [
+      0.5870677069084873,
+      0.9987316566974711,
+      0.32447588725140186
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "extra-mile-saint-nick",
+    "triangles": 6932,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 60820,
+    "staticBindMaxError": 3.290572616565554e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.916074113576156,
+      0.33893856624042484
+    ],
+    "animatedPeak": [
+      0.6146421847819453,
+      0.9381674515378181,
+      0.3535346561129739
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "extra-mile-school-bully",
+    "triangles": 5580,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 52460,
+    "staticBindMaxError": 3.4512014471250356e-8,
+    "bounds": [
+      0.5218054750206,
+      0.9800103928338197,
+      0.3320413880466516
+    ],
+    "animatedPeak": [
+      0.5345448665005952,
+      0.995292631846218,
+      0.35789174044595334
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "extra-mile-scout",
+    "triangles": 6874,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 58356,
+    "staticBindMaxError": 3.329529654887338e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.8661153120750603,
+      0.26319163356472147
+    ],
+    "animatedPeak": [
+      0.6146421847819452,
+      0.8834013827404493,
+      0.32019314161536205
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "extra-mile-shuffler",
+    "triangles": 3334,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 42040,
+    "staticBindMaxError": 2.510999978913461e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.7112643722792933,
+      0.1467329935605945
+    ],
+    "animatedPeak": [
+      0.6146421847819453,
+      0.7241182011764422,
+      0.23785755507682912
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "extra-mile-silly-goose",
+    "triangles": 3900,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 41820,
+    "staticBindMaxError": 3.429665064106553e-8,
+    "bounds": [
+      0.39979246817819114,
+      0.9800103928338197,
+      0.443494973096601
+    ],
+    "animatedPeak": [
+      0.40718410701592345,
+      1.0044604697214352,
+      0.44647098225309934
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "extra-mile-snake-eyes",
+    "triangles": 3408,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 41656,
+    "staticBindMaxError": 3.3013501092413316e-8,
+    "bounds": [
+      0.5358439893795587,
+      0.9800103928338197,
+      0.3212378270219801
+    ],
+    "animatedPeak": [
+      0.5489261180265206,
+      0.982012627403593,
+      0.348199817345986
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "extra-mile-snub",
+    "triangles": 4308,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 50540,
+    "staticBindMaxError": 3.5061027867687095e-8,
+    "bounds": [
+      0.5999939141793164,
+      0.8877529359383938,
+      0.41169469283120214
+    ],
+    "animatedPeak": [
+      0.6146422030997098,
+      0.9165069078527172,
+      0.43689500066009024
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "extra-mile-terrible-toddler",
+    "triangles": 2816,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 39136,
+    "staticBindMaxError": 3.5758595652454844e-8,
+    "bounds": [
+      0.5873287148655659,
+      0.9800103928338197,
+      0.27552110149651043
+    ],
+    "animatedPeak": [
+      0.6016677948183385,
+      0.9904448118691419,
+      0.2860628175887555
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "extra-mile-thief",
+    "triangles": 5396,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 54500,
+    "staticBindMaxError": 3.5468631365881437e-8,
+    "bounds": [
+      0.5685598347149033,
+      0.9800103928338197,
+      0.45893734806455805
+    ],
+    "animatedPeak": [
+      0.5824406900546226,
+      1.0163826862581233,
+      0.47544326818078453
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "extra-mile-toll-troll",
+    "triangles": 4752,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 50028,
+    "staticBindMaxError": 3.133407982313764e-8,
+    "bounds": [
+      0.5999938784168933,
+      0.9403973663534151,
+      0.285348061474565
+    ],
+    "animatedPeak": [
+      0.6146421664641808,
+      0.9543223217837697,
+      0.2949484970527302
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "extra-mile-totally-fair-ref",
+    "triangles": 5068,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 56128,
+    "staticBindMaxError": 3.088560043476075e-8,
+    "bounds": [
+      0.6000244148075808,
+      0.7642750429185813,
+      0.261268959624012
+    ],
+    "animatedPeak": [
+      0.614673448372219,
+      0.7838482980996624,
+      0.29371473015288907
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "extra-mile-whisper",
+    "triangles": 3156,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 39052,
+    "staticBindMaxError": 3.4896225125956816e-8,
+    "bounds": [
+      0.5905941953794976,
+      0.9800103928338197,
+      0.3556016724143193
+    ],
+    "animatedPeak": [
+      0.60501299897763,
+      0.9871780210846733,
+      0.35970011931020934
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "extra-mile-witch-hazel",
+    "triangles": 5332,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 47976,
+    "staticBindMaxError": 2.6073160563963155e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.8445082067221124,
+      0.2774132490699247
+    ],
+    "animatedPeak": [
+      0.6146421847819453,
+      0.8574662757619289,
+      0.3145615420375698
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "leaf-catfish",
+    "triangles": 5726,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 59676,
+    "staticBindMaxError": 2.997816721795461e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.7864009629480829,
+      0.47578356529875965
+    ],
+    "animatedPeak": [
+      0.6272458444855136,
+      0.7928512785440153,
+      0.4955556635142907
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "leaf-crash-dummy",
+    "triangles": 4892,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 54460,
+    "staticBindMaxError": 3.047754112079858e-8,
+    "bounds": [
+      0.5600146488845484,
+      0.9800103928338197,
+      0.255439928120448
+    ],
+    "animatedPeak": [
+      0.5736868815233314,
+      0.9978038657002998,
+      0.33141444197581504
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "leaf-dark-horse",
+    "triangles": 3942,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 47968,
+    "staticBindMaxError": 3.528120476375667e-8,
+    "bounds": [
+      0.3031708731345561,
+      0.8250068785857653,
+      0.5999938907102262
+    ],
+    "animatedPeak": [
+      0.30315133771223096,
+      0.8556871981969092,
+      0.6003393356331085
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "leaf-kangaroo",
+    "triangles": 3796,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 47544,
+    "staticBindMaxError": 3.284404713925956e-8,
+    "bounds": [
+      0.4448988332125245,
+      0.9800103928338197,
+      0.5491500595110935
+    ],
+    "animatedPeak": [
+      0.4449435844600601,
+      1.040869176492797,
+      0.6221020001489257
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "leaf-loan-shark",
+    "triangles": 4144,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 44208,
+    "staticBindMaxError": 3.0863352910943796e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.868037978229348,
+      0.4432508316293832
+    ],
+    "animatedPeak": [
+      0.6146421847819453,
+      0.8964344990782871,
+      0.47145258420014236
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "leaf-lonely-wolf",
+    "triangles": 3448,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 40652,
+    "staticBindMaxError": 3.0654820880696605e-8,
+    "bounds": [
+      0.31946775719473863,
+      0.707083336764225,
+      0.5999938962981048
+    ],
+    "animatedPeak": [
+      0.3272672629856258,
+      0.7395567441101383,
+      0.602535562547954
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "leaf-nepo-baby",
+    "triangles": 6288,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 63828,
+    "staticBindMaxError": 3.346065030711259e-8,
+    "bounds": [
+      0.5313272499771111,
+      0.9800103928338197,
+      0.3186132484248252
+    ],
+    "animatedPeak": [
+      0.5442991066660054,
+      0.9916316971199529,
+      0.34549359088189213
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "leaf-philanthropist",
+    "triangles": 5248,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 51176,
+    "staticBindMaxError": 3.188128717483677e-8,
+    "bounds": [
+      0.5923032319101535,
+      0.9800103928338197,
+      0.2486037818959581
+    ],
+    "animatedPeak": [
+      0.6067637600329601,
+      0.996966873933461,
+      0.30116485674527915
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "leaf-race-car",
+    "triangles": 3056,
+    "draws": 1,
+    "bones": 9,
+    "bytes": 43728,
+    "staticBindMaxError": 0,
+    "bounds": [
+      0.5082552568132572,
+      0.3556627094332713,
+      0.5999938962981048
+    ],
+    "animatedPeak": [
+      0.5082138579577348,
+      0.37134619861430296,
+      0.6399101850381639
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "leaf-revolutionary",
+    "triangles": 6898,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 69072,
+    "staticBindMaxError": 3.5379373028179196e-8,
+    "bounds": [
+      0.5725882747886594,
+      0.9800103928338197,
+      0.30060732281888
+    ],
+    "animatedPeak": [
+      0.5865674807161169,
+      0.9998689278305264,
+      0.35548789209841614
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "leaf-sole-survivor",
+    "triangles": 4976,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 52444,
+    "staticBindMaxError": 3.517664162928852e-8,
+    "bounds": [
+      0.5146641438032167,
+      0.9800103762932219,
+      0.2633747367778558
+    ],
+    "animatedPeak": [
+      0.5272291863765374,
+      1.002078550473282,
+      0.307991313705833
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "leaf-sore-loser",
+    "triangles": 3612,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 46248,
+    "staticBindMaxError": 3.599961569195073e-8,
+    "bounds": [
+      0.599993887357499,
+      0.8233283605145617,
+      0.4223761711478011
+    ],
+    "animatedPeak": [
+      0.614642175623063,
+      0.8522014264780208,
+      0.4223761711478011
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "leaf-spiteful-spirit",
+    "triangles": 2600,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 35912,
+    "staticBindMaxError": 3.11683608952274e-8,
+    "bounds": [
+      0.46479689585643047,
+      0.9800103928338197,
+      0.2990203558458205
+    ],
+    "animatedPeak": [
+      0.4761444763216754,
+      0.9837113755819191,
+      0.32303045279707504
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "leaf-toucan",
+    "triangles": 3744,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 45580,
+    "staticBindMaxError": 2.8407984355015907e-8,
+    "bounds": [
+      0.3098239082003235,
+      0.7057710409458858,
+      0.5999938962981048
+    ],
+    "animatedPeak": [
+      0.3173879684591205,
+      0.7104135311531892,
+      0.6042204662006216
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "leaf-triangle-man",
+    "triangles": 2788,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 36252,
+    "staticBindMaxError": 1.4461257565556913e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.8987395996771808,
+      0.24549089388302073
+    ],
+    "animatedPeak": [
+      0.6146421847819453,
+      0.9084601519914682,
+      0.2958404089804301
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "leaf-zombie",
+    "triangles": 5496,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 54084,
+    "staticBindMaxError": 3.4434808464418135e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.9115268555287135,
+      0.3297219763786737
+    ],
+    "animatedPeak": [
+      0.6146421847819453,
+      0.9352177035019454,
+      0.35516504799160875
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "leaf-thespian",
+    "triangles": 6408,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 57104,
+    "staticBindMaxError": 3.3423911844805056e-8,
+    "bounds": [
+      0.5831476790673543,
+      0.9800103928338197,
+      0.34400463881344034
+    ],
+    "animatedPeak": [
+      0.5973846829508347,
+      1.014639156268278,
+      0.4124060319420993
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "leaf-filmmaker",
+    "triangles": 6372,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 58088,
+    "staticBindMaxError": 3.3195698171611077e-8,
+    "bounds": [
+      0.5861384929960021,
+      0.9800103928338197,
+      0.37305825844483936
+    ],
+    "animatedPeak": [
+      0.6004485147976623,
+      1.0101687545327318,
+      0.3998606994905477
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "wurstii-bart-simpson",
+    "triangles": 4140,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 53664,
+    "staticBindMaxError": 3.404672098505748e-8,
+    "bounds": [
+      0.46143986327707753,
+      0.9800103928338197,
+      0.27643665471435536
+    ],
+    "animatedPeak": [
+      0.47270548493911557,
+      0.9790822584157319,
+      0.32352813760068455
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "wurstii-bucky-ohare",
+    "triangles": 5072,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 56932,
+    "staticBindMaxError": 3.08514486284234e-8,
+    "bounds": [
+      0.46913052766502883,
+      0.9800103928338197,
+      0.24707785271767327
+    ],
+    "animatedPeak": [
+      0.48058390968810083,
+      0.9792142760163741,
+      0.2688449569135567
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "wurstii-bullet-bill",
+    "triangles": 4782,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 57696,
+    "staticBindMaxError": 2.6011122836598963e-8,
+    "bounds": [
+      0.5940733054597613,
+      0.3526413769951476,
+      0.5999938916912417
+    ],
+    "animatedPeak": [
+      0.5932030808912168,
+      0.35812456284304334,
+      0.5991507343082305
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "wurstii-chip-n-dale",
+    "triangles": 5578,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 59196,
+    "staticBindMaxError": 1.669785019702502e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.5996582085569935,
+      0.33997620063774403
+    ],
+    "animatedPeak": [
+      0.5992342243984592,
+      0.6266257972229545,
+      0.34586399186832706
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "wurstii-diddy-kong",
+    "triangles": 5676,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 63896,
+    "staticBindMaxError": 3.5491065500609635e-8,
+    "bounds": [
+      0.5271156956694235,
+      0.9800103928338197,
+      0.48701438147504283
+    ],
+    "animatedPeak": [
+      0.5399847312082278,
+      0.9789350825126515,
+      0.4995544796270628
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "wurstii-dixie-kong",
+    "triangles": 5400,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 67480,
+    "staticBindMaxError": 3.559700300359093e-8,
+    "bounds": [
+      0.49714651195593385,
+      0.9800103928338197,
+      0.4196905485677898
+    ],
+    "animatedPeak": [
+      0.509283877970483,
+      0.9790752297795478,
+      0.42441995621430084
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "wurstii-dr-wily",
+    "triangles": 4672,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 51868,
+    "staticBindMaxError": 3.513947177892255e-8,
+    "bounds": [
+      0.543351542710654,
+      0.9800103928338197,
+      0.33960997344889676
+    ],
+    "animatedPeak": [
+      0.5566169612338633,
+      0.979165709472509,
+      0.34255944111062664
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "wurstii-dry-bones",
+    "triangles": 4062,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 53692,
+    "staticBindMaxError": 3.5020519176231526e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.9652699523176137,
+      0.48921170690023497
+    ],
+    "animatedPeak": [
+      0.5991149989890744,
+      0.9789885865305067,
+      0.4912946046294304
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "wurstii-eric",
+    "triangles": 5788,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 62148,
+    "staticBindMaxError": 3.222864596790638e-8,
+    "bounds": [
+      0.5012970366527298,
+      0.9800103928338197,
+      0.30042420728171637
+    ],
+    "animatedPeak": [
+      0.5135357338366344,
+      0.9791623553890267,
+      0.3090313900440557
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "wurstii-falco-lombardi",
+    "triangles": 3728,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 49188,
+    "staticBindMaxError": 3.5248359564473884e-8,
+    "bounds": [
+      0.5144199957274087,
+      0.9800103928338197,
+      0.3599353061233648
+    ],
+    "animatedPeak": [
+      0.5269790776543474,
+      0.9792564672595696,
+      0.36983173184083945
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "wurstii-frogger",
+    "triangles": 3124,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 44244,
+    "staticBindMaxError": 9.940603795314022e-9,
+    "bounds": [
+      0.5999938962981048,
+      0.3272499771111179,
+      0.5705130161442915
+    ],
+    "animatedPeak": [
+      0.5991882370103611,
+      0.3623858587279199,
+      0.5990750820473483
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "wurstii-hoagie",
+    "triangles": 5048,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 55268,
+    "staticBindMaxError": 3.521133410808679e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.87960449366546,
+      0.3575548570207831
+    ],
+    "animatedPeak": [
+      0.5992534732686092,
+      0.8970650166833772,
+      0.3570310950231941
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "wurstii-jason-vorhees",
+    "triangles": 3944,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 50656,
+    "staticBindMaxError": 3.530506797982791e-8,
+    "bounds": [
+      0.5611743522446364,
+      0.9800103928338197,
+      0.3140354671875042
+    ],
+    "animatedPeak": [
+      0.574874897953734,
+      0.979218399056238,
+      0.37354694892057727
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "wurstii-knuckles",
+    "triangles": 4388,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 54124,
+    "staticBindMaxError": 3.335885120079831e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.8117618450784498,
+      0.31849116073885453
+    ],
+    "animatedPeak": [
+      0.5991149989890744,
+      0.8289947553786678,
+      0.3265258147561887
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "wurstii-lakitu",
+    "triangles": 5132,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 64740,
+    "staticBindMaxError": 2.775962540985111e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.6897793636208331,
+      0.3488876003295999
+    ],
+    "animatedPeak": [
+      0.5991882370103611,
+      0.6963066289926299,
+      0.3889986621519724
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "wurstii-lizzie",
+    "triangles": 3976,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 48716,
+    "staticBindMaxError": 3.567079553063431e-8,
+    "bounds": [
+      0.5596179082613605,
+      0.9800103928338197,
+      0.5609302041688284
+    ],
+    "animatedPeak": [
+      0.5660988491088874,
+      0.9791400195120905,
+      0.5636539996337937
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "wurstii-magikarp",
+    "triangles": 3656,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 45460,
+    "staticBindMaxError": 2.542445104363509e-8,
+    "bounds": [
+      0.42756431775872067,
+      0.44602801599169895,
+      0.5999938899055035
+    ],
+    "animatedPeak": [
+      0.43059150681189934,
+      0.4462664646356517,
+      0.5991633692193215
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "wurstii-mario",
+    "triangles": 7560,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 76784,
+    "staticBindMaxError": 3.529469900657985e-8,
+    "bounds": [
+      0.5626392406994842,
+      0.9800103928338197,
+      0.3631702681760252
+    ],
+    "animatedPeak": [
+      0.576375550286874,
+      0.9792654571199771,
+      0.37311985521409397
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "wurstii-mr-game-and-watch",
+    "triangles": 1942,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 37340,
+    "staticBindMaxError": 3.5292440220770373e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.8239692492326577,
+      0.18552201910458693
+    ],
+    "animatedPeak": [
+      0.5991149989890744,
+      0.8264819651515722,
+      0.2358891230510735
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "wurstii-olaf",
+    "triangles": 6608,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 67036,
+    "staticBindMaxError": 3.213409309867458e-8,
+    "bounds": [
+      0.5532395397808771,
+      0.9800103928338197,
+      0.33112582781456956
+    ],
+    "animatedPeak": [
+      0.5667463644825587,
+      0.9792267739132015,
+      0.3694862355471142
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "wurstii-pitfall-harry",
+    "triangles": 4480,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 53596,
+    "staticBindMaxError": 3.503849535449813e-8,
+    "bounds": [
+      0.4508804589983825,
+      0.9800103928338197,
+      0.28510391552476577
+    ],
+    "animatedPeak": [
+      0.46188828270439775,
+      0.9791899245425619,
+      0.32507984650235605
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "wurstii-simon-belmont",
+    "triangles": 4556,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 53540,
+    "staticBindMaxError": 3.4229749660384114e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.9336832940686008,
+      0.2616656995161144
+    ],
+    "animatedPeak": [
+      0.5991639168650446,
+      0.9508834227128359,
+      0.3330859248562025
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "wurstii-tails",
+    "triangles": 4696,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 57144,
+    "staticBindMaxError": 3.499823460163406e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.9186376684485397,
+      0.48707541123691517
+    ],
+    "animatedPeak": [
+      0.5991149989890744,
+      0.9515583352953956,
+      0.4864034131804679
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "wurstii-yoshi",
+    "triangles": 4462,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 54488,
+    "staticBindMaxError": 3.5718169677652186e-8,
+    "bounds": [
+      0.5029450361644338,
+      0.9329203313089629,
+      0.6000244148075808
+    ],
+    "animatedPeak": [
+      0.515223967711417,
+      0.9563283933298662,
+      0.5991457094046311
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "wurstii-rollercoaster-tycoon-guest",
+    "triangles": 4752,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 51728,
+    "staticBindMaxError": 2.153615151500489e-8,
+    "bounds": [
+      0.49397259437849056,
+      0.9800103928338197,
+      0.2696615497299112
+    ],
+    "animatedPeak": [
+      0.5060324721709342,
+      0.9795117792999792,
+      0.3297524268351604
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "wurstii-spot",
+    "triangles": 3256,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 42956,
+    "staticBindMaxError": 2.8065984531318575e-8,
+    "bounds": [
+      0.5999938962981048,
+      0.6835535471812538,
+      0.21558275093844417
+    ],
+    "animatedPeak": [
+      0.5991149989890744,
+      0.6955505765720177,
+      0.2727102458742947
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "wurstii-rockford",
+    "triangles": 4412,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 54584,
+    "staticBindMaxError": 3.271219470835912e-8,
+    "bounds": [
+      0.48567155980101934,
+      0.9800103928338197,
+      0.3289895321512497
+    ],
+    "animatedPeak": [
+      0.4975287756164739,
+      0.979295070635586,
+      0.3541224304979681
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "wurstii-burt",
+    "triangles": 5140,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 56480,
+    "staticBindMaxError": 3.4948904577011595e-8,
+    "bounds": [
+      0.5667287209692679,
+      0.9800103928338197,
+      0.4288460887664078
+    ],
+    "animatedPeak": [
+      0.5805648713835566,
+      0.9791811695267686,
+      0.43056293309714944
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "wurstii-piranha-plant",
+    "triangles": 3400,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 48640,
+    "staticBindMaxError": 3.5108879390920784e-8,
+    "bounds": [
+      0.4079714346751305,
+      0.9800104031519418,
+      0.35743278456414207
+    ],
+    "animatedPeak": [
+      0.41793167477950377,
+      0.9790710738763565,
+      0.3683531015120457
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "wurstii-fluffin-puffins",
+    "triangles": 6760,
+    "draws": 1,
+    "bones": 5,
+    "bytes": 76272,
+    "staticBindMaxError": 2.0577837984705935e-8,
+    "bounds": [
+      0.599993887357499,
+      0.5125583601597955,
+      0.47938474918421387
+    ],
+    "animatedPeak": [
+      0.5992177816193929,
+      0.5181684652617,
+      0.4895409700498322
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "bite-mark-were",
+    "triangles": 4866,
+    "draws": 1,
+    "bones": 7,
+    "bytes": 60952,
+    "staticBindMaxError": 8.980442165252376e-8,
+    "bounds": [
+      0.5999938558359946,
+      0.8394421339981162,
+      0.42493972594378493
+    ],
+    "animatedPeak": [
+      0.631293762560474,
+      0.8574760597184714,
+      0.44268367413637894
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  },
+  {
+    "id": "hog-knight-hog",
+    "triangles": 7566,
+    "draws": 1,
+    "bones": 9,
+    "bytes": 85852,
+    "staticBindMaxError": 3.367613838669742e-8,
+    "bounds": [
+      0.4751121696817699,
+      0.7371745631007005,
+      0.6000244148075808
+    ],
+    "animatedPeak": [
+      0.4867115878868913,
+      0.7507637808447617,
+      0.6122911105767223
+    ],
+    "clips": [
+      "idle",
+      "move",
+      "skill",
+      "fall",
+      "recover"
+    ],
+    "passed": true
+  }
+]

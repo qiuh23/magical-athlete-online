@@ -9,7 +9,7 @@ import type { CharacterPool } from './types.js';
 export interface CharacterSource { url: string; title: string; locator: string; accessed: string; version: string }
 export interface CharacterData {
   edition?: 'original' | 'second-wind' | 'extra-mile' | 'leaf' | 'wurstii'; imageUrl?: string; verification?: string; limit?: string; adaptation?: string;
-  id: string; nameEn: string; nameZh: string; translation: '本项目译名'; ability: string;
+  id: string; nameEn: string; nameZh: string; translation: '本项目译名'; ability: string; example?: string;
   timing: string[]; optional: boolean; targets: string; scope: string; duration: string;
   statuses: string[]; sources: CharacterSource[]; testId: string; verified: boolean;
 }
@@ -53,7 +53,7 @@ export const ORIGINAL_CHARACTERS: readonly CharacterData[] = [
     "nameEn": "Baba Yaga",
     "nameZh": "芭芭雅嘎",
     "translation": "本项目译名",
-    "ability": "其他角色停在自己所在格，或自己停在已有其他角色的格子时，使那些角色绊倒。同组同时到达者之间不触发。",
+    "ability": "其他选手停到你所在格，或你停到已有其他选手的格子时，使那些选手绊倒。因同一次效果一起移动、同时到达的选手之间不触发。",
     "timing": [
       "stop"
     ],
@@ -256,7 +256,7 @@ export const ORIGINAL_CHARACTERS: readonly CharacterData[] = [
     "nameEn": "Copycat",
     "nameZh": "模仿猫",
     "translation": "本项目译名",
-    "ability": "持续拥有当前领先角色的印刷能力；并列领先时选择一名，不能在一个动作中途切换。不能补用赛前能力；与原角色能力矛盾时原角色优先。复制双胞胎只获得其印刷选择能力，不获得它选择的能力。",
+    "ability": "持续拥有当前领跑选手的角色卡上原本写明的能力；并列领先时选择一名，一个动作完成前不切换。不补用赛前效果；与原角色的能力冲突时，原角色优先。模仿双胞胎时，只获得其选择冠军的能力，不继承它已经选中的能力。",
     "timing": [
       "leader-change",
       "continuous"
@@ -398,7 +398,7 @@ export const ORIGINAL_CHARACTERS: readonly CharacterData[] = [
     "nameEn": "Flip Flop",
     "nameZh": "人字拖",
     "translation": "本项目译名",
-    "ability": "可以用与一名其他在赛角色交换位置，替代自己的主移动掷骰。双方同时传送并在目的地停下，不经过中间格，也不产生移动或越过。",
+    "ability": "你可以不掷主移动骰，改为与另一名在赛选手交换位置。双方同时传送到对方所在格，不经过中间格，不触发移动或越过效果，但会触发停在目的地的效果。",
     "timing": [
       "main-replacement"
     ],
@@ -431,7 +431,7 @@ export const ORIGINAL_CHARACTERS: readonly CharacterData[] = [
     "nameEn": "Genius",
     "nameZh": "天才",
     "translation": "本项目译名",
-    "ability": "掷主移动骰前，可以预测最终骰面。若猜中，完成当前回合及后果后再行动一次；猜中1而船长在赛时，船长的后继安排取代这次额外回合。",
+    "ability": "掷主移动骰前，你可以预测最终保留的点数。若猜中，完成本回合及其触发的效果后，再行动一个回合。若猜中1点且船长仍在赛，本回合结束后改由船长行动，你不获得这次额外回合。",
     "timing": [
       "before-main-roll",
       "turn-end"
@@ -468,12 +468,12 @@ export const ORIGINAL_CHARACTERS: readonly CharacterData[] = [
     "nameEn": "Gunk",
     "nameZh": "黏液怪",
     "translation": "本项目译名",
-    "ability": "所有其他在赛角色的主移动距离-1。多个此能力可叠加，距离可以为负；不会改变骰面。",
+    "ability": "所有其他在赛选手的主移动距离减少1格；多个此能力可以叠加，距离减至负数时后退。只改变移动距离，不改变骰子点数。项目双人规则：不影响你控制的另一名选手。",
     "timing": [
       "main-modifier"
     ],
     "optional": false,
-    "targets": "所有其他在赛角色",
+    "targets": "所有其他在赛选手；项目双人规则下排除你控制的另一名选手",
     "scope": "全赛道",
     "duration": "自身仍在赛期间",
     "statuses": [],
@@ -604,12 +604,12 @@ export const ORIGINAL_CHARACTERS: readonly CharacterData[] = [
     "nameEn": "Hypnotist",
     "nameZh": "催眠师",
     "translation": "本项目译名",
-    "ability": "回合开始时，可以将一名在赛角色传送到自己所在格。传送不算移动或越过，但目的地停留效果正常触发。",
+    "ability": "你的回合开始时，可以将另一名在赛选手传送到你所在格。传送不触发移动或越过效果，但会触发停在目的地的效果。",
     "timing": [
       "turn-start"
     ],
     "optional": true,
-    "targets": "一名在赛角色",
+    "targets": "另一名在赛选手",
     "scope": "全赛道",
     "duration": "即时",
     "statuses": [],
@@ -705,7 +705,7 @@ export const ORIGINAL_CHARACTERS: readonly CharacterData[] = [
     "nameEn": "Leaptoad",
     "nameZh": "跳跳蟾蜍",
     "translation": "本项目译名",
-    "ability": "任何移动都只计空格，跳过其他角色占据的格子，向后移动也适用。同组同时离开的格子视为空格；每个跳过的占用格是一次能力触发。",
+    "ability": "移动时只计算空格，跳过其他选手占据的格子，向后移动也一样。因同一次效果与你一起离开的选手不占格；每跳过一个被占据的格子，算一次能力触发。",
     "timing": [
       "movement-step"
     ],
@@ -840,7 +840,7 @@ export const ORIGINAL_CHARACTERS: readonly CharacterData[] = [
     "nameEn": "Mastermind",
     "nameZh": "幕后军师",
     "translation": "本项目译名",
-    "ability": "自己的首次回合开始时，预测一名比赛胜者。若预测者获胜，比赛立即结束，自己获得第二名。可预测自己并同时取得第一及第二；若自己已被淘汰，能力失效。",
+    "ability": "你的首次回合开始时，预测一名选手获得本场冠军。若你预测的选手夺冠，本场立即结束，你获得第二名。可以预测自己，并同时获得第一名和第二名；若你已被淘汰，此能力失效。",
     "timing": [
       "first-turn-start",
       "first-finish"
@@ -876,7 +876,7 @@ export const ORIGINAL_CHARACTERS: readonly CharacterData[] = [
     "nameEn": "M.O.U.T.H.",
     "nameZh": "大嘴怪",
     "translation": "本项目译名",
-    "ability": "自己停在已有恰好一名其他角色的格子时，将该角色淘汰出本场比赛。其他人单独来找自己不触发；同组同时到达者之间不触发。",
+    "ability": "你停到原本恰好有一名其他选手的格子时，将那名选手淘汰出本场比赛。别人停到你所在格不触发；因同一次效果与你一起移动、同时到达的选手不会被此能力淘汰。",
     "timing": [
       "stop"
     ],
@@ -911,7 +911,7 @@ export const ORIGINAL_CHARACTERS: readonly CharacterData[] = [
     "nameEn": "Party Animal",
     "nameZh": "派对动物",
     "translation": "本项目译名",
-    "ability": "回合开始时，所有其他角色同时朝自己移动1格。同格的每名其他角色，为自己的本回合主移动提供+1。同时到达者之间不触发相遇技能。",
+    "ability": "你的回合开始时，所有其他选手同时朝你移动1格。计算你的本次主移动时，每有一名其他选手与你同格，移动距离增加1格。因这次效果同时到达的选手之间不触发相遇能力。",
     "timing": [
       "turn-start",
       "main-modifier"
@@ -982,7 +982,7 @@ export const ORIGINAL_CHARACTERS: readonly CharacterData[] = [
     "nameEn": "Romantic",
     "nameZh": "浪漫家",
     "translation": "本项目译名",
-    "ability": "任一角色停在已有恰好一名其他角色的格子时，自己前进2格，可以因自己停下触发。同一组同时到达者之间不触发。",
+    "ability": "任一选手停到原本恰好有一名其他选手的格子时，你前进2格；你自己停下也可触发。因同一次效果一起移动、同时到达的选手之间不触发。",
     "timing": [
       "stop"
     ],
@@ -1015,7 +1015,7 @@ export const ORIGINAL_CHARACTERS: readonly CharacterData[] = [
     "nameEn": "Scoocher",
     "nameZh": "蹭蹭怪",
     "translation": "本项目译名",
-    "ability": "其他角色每次使用或触发能力并完成该能力后，自己前进1格。每个黏液减益、每次重掷、每格占用格跳跃分别计次；自己产生后果的新分支先完整结算。",
+    "ability": "其他选手每次使用或触发能力，并完成该能力后，你前进1格。每次黏液怪减速、每次重掷、每跳过一个被占据的格子分别计次。若你的前进又触发其他效果，先处理完这些效果，再继续结算。",
     "timing": [
       "power-complete"
     ],
@@ -1082,7 +1082,7 @@ export const ORIGINAL_CHARACTERS: readonly CharacterData[] = [
     "nameEn": "Skipper",
     "nameZh": "船长",
     "translation": "本项目译名",
-    "ability": "任一角色主移动最终骰面为1时，当前回合及全部后果结束后，改由自己下一个行动。之后从自己左边继续。自己的1也让自己再行动。",
+    "ability": "任一选手的主移动最终点数为1时，完成该回合及其触发的效果后，改由你行动；之后按本场固定行动顺序，从你之后的选手继续。你自己掷出1也会让你再行动一个回合。",
     "timing": [
       "main-roll-final",
       "turn-end"
@@ -1151,7 +1151,7 @@ export const ORIGINAL_CHARACTERS: readonly CharacterData[] = [
     "nameEn": "Suckerfish",
     "nameZh": "吸盘鱼",
     "translation": "本项目译名",
-    "ability": "其他同格角色开始移动前，可以选择随行至该次移动的目的地，一旦随行必须走完整次移动。双方同组同时抵达，被跟随者优先处理排名及后果；不能跟随传送。",
+    "ability": "与你同格的其他选手开始移动前，你可以选择跟随到这次移动的目的地；一旦跟随，就必须走完整段距离。你与被跟随者同时到达，被跟随者优先结算名次及后续效果。不能跟随传送。",
     "timing": [
       "before-move"
     ],

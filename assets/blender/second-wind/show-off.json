@@ -1,46 +1,42 @@
 {
-  "version": 1,
-  "edition": "second-wind",
-  "generator": "Blender 5.2.3 LTS Release Candidate",
-  "source": "assets/blender/second-wind.blend",
-  "units": "metres",
-  "up": "+Y",
-  "forward": "+Z",
-  "pivot": "ground-centre",
-  "compression": "EXT_meshopt_compression",
-  "models": [
-    {
-      "id": "show-off",
-      "node": "toy_show-off",
-      "url": "/models/second-wind/show-off.glb",
-      "avatar": "/models/second-wind/avatars/show-off.png",
-      "bytes": 46472,
-      "triangles": 3412,
-      "draws": 8,
-      "bounds": [
-        0.56024,
-        0.98,
-        0.41474
-      ],
-      "pivotY": 0,
-      "animations": [
-        "idle",
-        "move",
-        "skill",
-        "fall",
-        "recover"
-      ],
-      "recognition": "Violet circus elephant, curled trunk, pink hat/skates with green wheels, tall cyan/yellow chair behind.",
-      "inferred": "Back and side volumes extrapolated from the published single-view illustration.",
-      "referenceChecked": true,
-      "referenceImage": "https://johnnlds.github.io/Magical-Athlete-Racers/images/expansion/Show-Off.png",
-      "editableSource": "assets/blender/second-wind/show-off.blend"
-    }
+  "id": "show-off",
+  "node": "toy_show-off",
+  "url": "/models/second-wind/show-off.glb",
+  "avatar": "/avatars/second-wind/show-off.svg",
+  "bytes": 58064,
+  "triangles": 4428,
+  "draws": 1,
+  "bounds": [
+    0.5465254676961577,
+    0.9800103928338197,
+    0.4986724448377941
   ],
-  "variants": [],
-  "totalBytes": 46472,
-  "totalTriangles": 3412,
-  "materialCount": 15,
-  "textureCount": 0,
-  "referenceStatus": "36 fan-site illustrations visually inspected; closed-volume toy interpretations; unseen views explicitly inferred; not exact official production sculpts."
+  "pivotY": 0,
+  "animations": [
+    "idle",
+    "move",
+    "skill",
+    "fall",
+    "recover"
+  ],
+  "recognition": "Registered card viewed: violet circus elephant, pink skates/hat, green skate wheels and tall cyan/yellow chair. Full chair back/legs and elephant grip/body depth reconstructed.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "referenceChecked": true,
+  "referenceImage": "https://johnnlds.github.io/Magical-Athlete-Racers/images/expansion/Show-Off.png",
+  "editableSource": "assets/blender/second-wind/show-off.blend",
+  "modelPreview": "/models/second-wind/avatars/show-off.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "motionProfile": "biped",
+  "bones": 9,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "Registered card viewed: violet circus elephant, pink skates/hat, green skate wheels and tall cyan/yellow chair. Full chair back/legs and elephant grip/body depth reconstructed.",
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "96806344e2d18f38a02ea348b96413c3bb8bd6239444eacb5cc83b03e57b0f8f",
+  "glbSha256": "55109463c47bb39f1a9b6e1edb543dfdc00d0a264b996644765ad43e698d5085",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

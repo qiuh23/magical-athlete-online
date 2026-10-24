@@ -2,13 +2,13 @@
   "id": "extra-mile-lazy-bones",
   "node": "toy_extra-mile-lazy-bones",
   "url": "/models/extra-mile/extra-mile-lazy-bones.glb",
-  "bytes": 45196,
-  "triangles": 1796,
-  "draws": 3,
+  "bytes": 49068,
+  "triangles": 4380,
+  "draws": 1,
   "bounds": [
-    0.6,
-    0.78654,
-    0.55561
+    0.42884609515671257,
+    0.5993529877485358,
+    0.6000244148075808
   ],
   "pivotY": 0,
   "animations": [
@@ -23,7 +23,20 @@
   "editableSource": "assets/blender/extra-mile/extra-mile-lazy-bones.blend",
   "referenceChecked": true,
   "reference": "https://johnnlds.github.io/Magical-Athlete-Racers/ExtraMile.pdf",
-  "referenceDate": "2026-10-22",
-  "recognition": "white skeleton reclining in a red armchair, visible ribs and long shin bones",
-  "inferred": "Single-view card artwork informs the silhouette and identifying props. Side/back surfaces and joint placement are original project interpretations, not author-approved sculpts."
+  "referenceDate": "2026-10-24",
+  "recognition": "ExtraMile.pdf viewed: full white skeleton reclining in red armchair, holding blue bottle. Chair, ribs, pelvis and bony limbs are three-dimensional; chair must remain rigid during character animations.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "avatar": "/avatars/extra-mile/extra-mile-lazy-bones.svg",
+  "modelPreview": "/models/extra-mile/avatars/extra-mile-lazy-bones.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "ExtraMile.pdf viewed: full white skeleton reclining in red armchair, holding blue bottle. Chair, ribs, pelvis and bony limbs are three-dimensional; chair must remain rigid during character animations.",
+  "originalAuthorImageChecked": true,
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "f783c74cbd7d02439410d35eaf6cd3b27e8cf4e52b1942649fa303809f4f6d64",
+  "glbSha256": "a8ae3b7fd60bf717a6453ae7ad012edcb34eb4be234e5bccb6224a97276afe4b",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

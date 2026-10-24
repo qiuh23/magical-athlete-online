@@ -1,0 +1,42 @@
+{
+  "id": "wurstii-dr-wily",
+  "nameZh": "威利博士",
+  "node": "toy_wurstii-dr-wily",
+  "model": "/models/wurstii/wurstii-dr-wily.glb",
+  "portrait": "/avatars/wurstii/wurstii-dr-wily.png",
+  "editableSource": "assets/blender/wurstii/blend/wurstii-dr-wily.blend",
+  "bytes": 51868,
+  "triangles": 4672,
+  "draws": 1,
+  "bounds": [
+    0.543351542710654,
+    0.9800103928338197,
+    0.33960997344889676
+  ],
+  "animations": [
+    "idle",
+    "move",
+    "skill",
+    "fall",
+    "recover"
+  ],
+  "modelPreview": "/models/wurstii/avatars/wurstii-dr-wily.png",
+  "avatar": "/avatars/wurstii/wurstii-dr-wily.svg",
+  "avatarStyle": "flat-cartoon-svg",
+  "bones": 5,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "pivotY": 0,
+  "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Dr Wily: bald tan head, wild white side hair/moustache, white lab coat, dark tie/trousers and black shoes. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "referenceChecked": true,
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "e5c73d522a5b2ae92b7fe9f4577a616e5a082a6834a60eabae96f8636164ba82",
+  "glbSha256": "d9ca8851bdb6c75332fb9f8ac5cb2bf52cb5178c392b385718ff4f0aa2cdea29",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "recognition": "User-provided Wurstii reference card crop actually viewed: Dr Wily: bald tan head, wild white side hair/moustache, white lab coat, dark tie/trousers and black shoes. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "assetVersion": "authored-sculpt-final-20261024"
+}

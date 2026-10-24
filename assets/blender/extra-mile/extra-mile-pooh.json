@@ -2,13 +2,13 @@
   "id": "extra-mile-pooh",
   "node": "toy_extra-mile-pooh",
   "url": "/models/extra-mile/extra-mile-pooh.glb",
-  "bytes": 51904,
-  "triangles": 3400,
-  "draws": 6,
+  "bytes": 46288,
+  "triangles": 4500,
+  "draws": 1,
   "bounds": [
-    0.57236,
-    0.98,
-    0.35117
+    0.525406672839814,
+    0.9800103928338197,
+    0.333384202483605
   ],
   "pivotY": 0,
   "animations": [
@@ -23,9 +23,20 @@
   "editableSource": "assets/blender/extra-mile/extra-mile-pooh.blend",
   "referenceChecked": true,
   "reference": "https://johnnlds.github.io/Magical-Athlete-Racers/ExtraMile.pdf",
-  "referenceDate": "2026-10-22",
-  "recognition": "round pale yellow bear, honey pot and three red balloons",
-  "inferred": "Single-view card artwork informs the silhouette and identifying props. Side/back surfaces and joint placement are original project interpretations, not author-approved sculpts.",
-  "avatar": "/models/extra-mile/avatars/extra-mile-pooh.png",
-  "mouthSurfaceVersion": "surface-mouth-v2"
+  "referenceDate": "2026-10-24",
+  "recognition": "ExtraMile.pdf viewed: pale yellow bear hugging brown honey jar and holding red balloons, no red shirt in this specific artwork. Balloon strings physically connect to the hand; no background effects.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "avatar": "/avatars/extra-mile/extra-mile-pooh.svg",
+  "modelPreview": "/models/extra-mile/avatars/extra-mile-pooh.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "ExtraMile.pdf viewed: pale yellow bear hugging brown honey jar and holding red balloons, no red shirt in this specific artwork. Balloon strings physically connect to the hand; no background effects.",
+  "originalAuthorImageChecked": true,
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "7255808c9dfc099dc91b8ad7c0d1ec1f7db99c564764803786255bb2b1f966f7",
+  "glbSha256": "c7007af9179e607f735d0a7cafbe778eff10d5d7c07e072c6a41156decc5c191",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

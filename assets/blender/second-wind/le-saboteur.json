@@ -3,13 +3,13 @@
   "node": "toy_le-saboteur",
   "url": "/models/second-wind/le-saboteur.glb",
   "avatar": "/avatars/second-wind/le-saboteur.svg",
-  "bytes": 50848,
-  "triangles": 3736,
-  "draws": 4,
+  "bytes": 61052,
+  "triangles": 5488,
+  "draws": 1,
   "bounds": [
-    0.6,
-    0.85006,
-    0.50364
+    0.5999938962981048,
+    0.9104892261756059,
+    0.5239417706839198
   ],
   "pivotY": 0,
   "animations": [
@@ -19,8 +19,8 @@
     "fall",
     "recover"
   ],
-  "recognition": "Green crocodile in black/white striped shirt, small black beret, large snout and yellow-gloved hands.",
-  "inferred": "Back and side volumes extrapolated from the published single-view illustration.",
+  "recognition": "Registered card viewed: green crocodile, black/white striped shirt, black beret and yellow gloves. Full tail, jaw and clothes reconstructed.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
   "referenceChecked": true,
   "referenceImage": "https://johnnlds.github.io/Magical-Athlete-Racers/images/expansion/LeSaboteur.png",
   "editableSource": "assets/blender/second-wind/le-saboteur.blend",
@@ -28,5 +28,15 @@
   "avatarStyle": "flat-cartoon-svg",
   "motionProfile": "biped",
   "bones": 5,
-  "mouthSurfaceVersion": "surface-mouth-v2"
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "Registered card viewed: green crocodile, black/white striped shirt, black beret and yellow gloves. Full tail, jaw and clothes reconstructed.",
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "74e4e14e66542bfa8faae1c299dd325df4b79425bda280637c43c6a6b4ed5c04",
+  "glbSha256": "c3b96c8252cbc3e7a53e2ae86775fbe9a034dc27b0f2e98c312a361cf2c0d0b2",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

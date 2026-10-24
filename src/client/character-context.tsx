@@ -39,7 +39,7 @@ export function StepdadTarget({room,racer}:{room?:RoomView;racer?:Racer}) {
   const state=racer.flags.publicAbilities;
   if(racer.characterId!=='stepdad'&&!(state?.ownedPowers??state?.powers)?.includes('stepdad')&&!state?.acquired?.includes('stepdad'))return null;
   const target=room.racers.find(value=>value.id===(state?.stepTargetId??racer.flags.stepTarget)),controller=target?currentController(room,target):undefined;
-  return <section className="character-ownership" aria-label="继父本场左邻判定"><h3>继父 · 本场固定左邻</h3><p>{room.rulesVersion?.endsWith('events-v1')?'沿固定选手顺序取第一名其他玩家的非淘汰选手；跳过己方队友，目标被淘汰后顺延，与屏幕左右无关。':'按旧规则取赛前固定选手顺序的下一位，可以是自己控制的另一名选手，与屏幕左右无关。'}</p>{target?<p>本场目标：<strong>{CHARACTERS.find(character=>character.id===target.characterId)?.nameZh??target.characterId}</strong> · {controller?.name??'等待玩家同步'}{controller?.id===room.selfId?'（你）':''}。只对其主要移动加 2；该实例夺冠时，继父的当前控制者获得 3 分。</p>:<p>当前没有另一名合法固定左邻，不会强化继父自己。</p>}</section>;
+  return <section className="character-ownership" aria-label="继父本场左邻判定"><h3>继父 · 本场固定左邻</h3><p>{room.rulesVersion?.endsWith('events-v1')?'沿固定选手顺序取第一名其他玩家的非淘汰选手；跳过己方队友，目标被淘汰后顺延，与屏幕左右无关。':'按旧规则取赛前固定选手顺序的下一位，可以是自己控制的另一名选手，与屏幕左右无关。'}</p>{target?<p>本场目标：<strong>{CHARACTERS.find(character=>character.id===target.characterId)?.nameZh??target.characterId}</strong> · {controller?.name??'等待玩家同步'}{controller?.id===room.selfId?'（你）':''}。只对其主要移动加 2；该选手夺冠时，继父的当前控制者获得 3 分。</p>:<p>当前没有另一名合法固定左邻，不会强化继父自己。</p>}</section>;
 }
 
 const playerText=(room:RoomView,player:PlayerView|undefined)=>player?`${player.seat+1}号 · ${player.name}${player.id===room.selfId?'（你）':''}`:'等待同步玩家信息';

@@ -1,0 +1,42 @@
+{
+  "id": "wurstii-rollercoaster-tycoon-guest",
+  "nameZh": "过山车乐园游客",
+  "node": "toy_wurstii-rollercoaster-tycoon-guest",
+  "model": "/models/wurstii/wurstii-rollercoaster-tycoon-guest.glb",
+  "portrait": "/avatars/wurstii/wurstii-rollercoaster-tycoon-guest.png",
+  "editableSource": "assets/blender/wurstii/blend/wurstii-rollercoaster-tycoon-guest.blend",
+  "bytes": 51728,
+  "triangles": 4752,
+  "draws": 1,
+  "bounds": [
+    0.49397259437849056,
+    0.9800103928338197,
+    0.2696615497299112
+  ],
+  "animations": [
+    "idle",
+    "move",
+    "skill",
+    "fall",
+    "recover"
+  ],
+  "modelPreview": "/models/wurstii/avatars/wurstii-rollercoaster-tycoon-guest.png",
+  "avatar": "/avatars/wurstii/wurstii-rollercoaster-tycoon-guest.svg",
+  "avatarStyle": "flat-cartoon-svg",
+  "bones": 5,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "pivotY": 0,
+  "referenceBasis": "User-provided Wurstii reference card crop actually viewed: RollerCoaster Tycoon Guest: brown hair, green shirt, turquoise shorts and brown shoes. No balloon or extra theme invented. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "referenceChecked": true,
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "270ffcec6174156419a75561628fb70ac684603d6066a6bd765d87e30f4a2501",
+  "glbSha256": "d9f29af65d1cb8f81db888643c79a5c5c9721f48e9ae6ad88f634bdafe622e2d",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "recognition": "User-provided Wurstii reference card crop actually viewed: RollerCoaster Tycoon Guest: brown hair, green shirt, turquoise shorts and brown shoes. No balloon or extra theme invented. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "assetVersion": "authored-sculpt-final-20261024"
+}

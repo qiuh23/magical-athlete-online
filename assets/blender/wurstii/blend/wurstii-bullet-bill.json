@@ -1,0 +1,42 @@
+{
+  "id": "wurstii-bullet-bill",
+  "nameZh": "炮弹刺客",
+  "node": "toy_wurstii-bullet-bill",
+  "model": "/models/wurstii/wurstii-bullet-bill.glb",
+  "portrait": "/avatars/wurstii/wurstii-bullet-bill.png",
+  "editableSource": "assets/blender/wurstii/blend/wurstii-bullet-bill.blend",
+  "bytes": 57696,
+  "triangles": 4782,
+  "draws": 1,
+  "bounds": [
+    0.5940733054597613,
+    0.3526413769951476,
+    0.5999938916912417
+  ],
+  "animations": [
+    "idle",
+    "move",
+    "skill",
+    "fall",
+    "recover"
+  ],
+  "modelPreview": "/models/wurstii/avatars/wurstii-bullet-bill.png",
+  "avatar": "/avatars/wurstii/wurstii-bullet-bill.svg",
+  "avatarStyle": "flat-cartoon-svg",
+  "bones": 5,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "pivotY": 0,
+  "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Bullet Bill: black horizontal rounded cannon shell, white angry eyes and gloves, recessed rear rim. No legs, person body or game base added. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "referenceChecked": true,
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "b6c67e4ed7881da06a34a7e9e0ab582c6d1d692aa21993981883db5829efda6f",
+  "glbSha256": "3ee33fa67ca98eb29369cb3ecd0e2dce0461b6d735495971739165d7ba5a0014",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "recognition": "User-provided Wurstii reference card crop actually viewed: Bullet Bill: black horizontal rounded cannon shell, white angry eyes and gloves, recessed rear rim. No legs, person body or game base added. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "assetVersion": "authored-sculpt-final-20261024"
+}

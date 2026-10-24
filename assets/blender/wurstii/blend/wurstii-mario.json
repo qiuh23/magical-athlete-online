@@ -1,0 +1,42 @@
+{
+  "id": "wurstii-mario",
+  "nameZh": "马力欧",
+  "node": "toy_wurstii-mario",
+  "model": "/models/wurstii/wurstii-mario.glb",
+  "portrait": "/avatars/wurstii/wurstii-mario.png",
+  "editableSource": "assets/blender/wurstii/blend/wurstii-mario.blend",
+  "bytes": 76784,
+  "triangles": 7560,
+  "draws": 1,
+  "bounds": [
+    0.5626392406994842,
+    0.9800103928338197,
+    0.3631702681760252
+  ],
+  "animations": [
+    "idle",
+    "move",
+    "skill",
+    "fall",
+    "recover"
+  ],
+  "modelPreview": "/models/wurstii/avatars/wurstii-mario.png",
+  "avatar": "/avatars/wurstii/wurstii-mario.svg",
+  "avatarStyle": "flat-cartoon-svg",
+  "bones": 5,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "pivotY": 0,
+  "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Mario: red cap/shirt, blue overalls, yellow fasteners, brown moustache/shoes, white gloves. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "referenceChecked": true,
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "503d59ece6e97d4cb52bab903eb06581baedf807070155536b09b7bd2c6317e7",
+  "glbSha256": "e9669253ddb76c7875af88682a2ea4f1f67e1eb8cfbf94baf3b09433e9e2f7b7",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "recognition": "User-provided Wurstii reference card crop actually viewed: Mario: red cap/shirt, blue overalls, yellow fasteners, brown moustache/shoes, white gloves. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "assetVersion": "authored-sculpt-final-20261024"
+}

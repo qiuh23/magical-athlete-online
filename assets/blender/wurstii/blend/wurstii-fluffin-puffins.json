@@ -1,0 +1,42 @@
+{
+  "id": "wurstii-fluffin-puffins",
+  "nameZh": "蓬蓬海鹦",
+  "node": "toy_wurstii-fluffin-puffins",
+  "model": "/models/wurstii/wurstii-fluffin-puffins.glb",
+  "portrait": "/avatars/wurstii/wurstii-fluffin-puffins.png",
+  "editableSource": "assets/blender/wurstii/blend/wurstii-fluffin-puffins.blend",
+  "bytes": 76272,
+  "triangles": 6760,
+  "draws": 1,
+  "bounds": [
+    0.599993887357499,
+    0.5125583601597955,
+    0.47938474918421387
+  ],
+  "animations": [
+    "idle",
+    "move",
+    "skill",
+    "fall",
+    "recover"
+  ],
+  "modelPreview": "/models/wurstii/avatars/wurstii-fluffin-puffins.png",
+  "avatar": "/avatars/wurstii/wurstii-fluffin-puffins.svg",
+  "avatarStyle": "flat-cartoon-svg",
+  "bones": 5,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "pivotY": 0,
+  "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Fluffin/Huffin Puffins bird group: one larger white-headed bird with yellow belly and three complete small companions; never reduced to one generic bird. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "referenceChecked": true,
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "7c2700e0a859b2e6b0b1bd5cbde14b894fd9a0e67b8025ca2aa03933963104f8",
+  "glbSha256": "de4dbde332841d439abc4cdc958f832a306f329473e71b4832870931ff34aabd",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "recognition": "User-provided Wurstii reference card crop actually viewed: Fluffin/Huffin Puffins bird group: one larger white-headed bird with yellow belly and three complete small companions; never reduced to one generic bird. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "assetVersion": "authored-sculpt-final-20261024"
+}

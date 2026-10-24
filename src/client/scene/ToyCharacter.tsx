@@ -20,8 +20,8 @@ export interface ToyCharacterProps {
   motionEnabled?: boolean;
 }
 
-const MODEL_URL = '/models/toy-racers.glb?v=mouth-surface-v2-20261022';
-const ECONOMY_URL = '/models/toy-racers-economy.glb?v=mouth-surface-v2-20261022';
+const MODEL_URL = '/models/toy-racers.glb?v=authored-sculpt-final-20261024';
+const ECONOMY_URL = '/models/toy-racers-economy.glb?v=authored-sculpt-final-20261024';
 const createRecovery = (url: string) => new AssetRecovery({
   clearCache: () => useGLTF.clear(url),
   isOnline: () => navigator.onLine,
@@ -141,11 +141,11 @@ function Sculpture({ characterId, color, lowQuality = false, castShadow = true, 
 export function ToyCharacter({ characterId, color, lowQuality = false, castShadow = true, form, mount, animation, motionEnabled }: ToyCharacterProps) {
   const geometry = toyResources.baseGeometry(lowQuality);
   const modelId = characterId === 'bite-mark' && form === 'were-mouth' ? 'bite-mark-were' : characterId;
-  const url = wurstii.has(characterId) ? `/models/wurstii/${characterId}.glb` : characterId==='banana' ? `/models/banana/${lowQuality?'banana-economy':'banana'}.glb?v=reference-mouth-v2-20261022` : expansionModels[characterId] ?? (secondWind.has(characterId) ? `/models/second-wind/${modelId}.glb?v=mouth-surface-v2-20261022` : lowQuality ? ECONOMY_URL : MODEL_URL);
+  const url = wurstii.has(characterId) ? `/models/wurstii/${characterId}.glb?v=authored-sculpt-final-20261024` : characterId==='banana' ? `/models/banana/${lowQuality?'banana-economy':'banana'}.glb?v=authored-sculpt-final-20261024` : expansionModels[characterId] ?? (secondWind.has(characterId) ? `/models/second-wind/${modelId}.glb?v=authored-sculpt-final-20261024` : lowQuality ? ECONOMY_URL : MODEL_URL);
   return <group name={`racer-model-${characterId}`} userData={{racerModel:true}}>
     <mesh geometry={geometry.body} material={toyResources.baseMaterial(color, lowQuality)} receiveShadow={!lowQuality} castShadow={castShadow && !lowQuality} dispose={null} />
     <mesh geometry={geometry.cap} material={toyResources.baseMaterial(color, lowQuality, true)} receiveShadow={!lowQuality} dispose={null} />
-    {mount && <group position={[0, .164, 0]}><Sculpture characterId="hog-knight-hog" rootName="toy_hog-knight-hog" url="/models/second-wind/hog-knight-hog.glb?v=mouth-surface-v2-20261022" color={color} lowQuality={lowQuality} castShadow={castShadow} animation={animation} motionEnabled={motionEnabled} /></group>}
+    {mount && <group position={[0, .164, 0]}><Sculpture characterId="hog-knight-hog" rootName="toy_hog-knight-hog" url="/models/second-wind/hog-knight-hog.glb?v=authored-sculpt-final-20261024" color={color} lowQuality={lowQuality} castShadow={castShadow} animation={animation} motionEnabled={motionEnabled} /></group>}
     <group position={[0, .164 + (mount ? .34 : 0), mount ? -.07 : 0]} scale={mount ? .7 : 1} userData={{racerMainSculpture:true}}>
       <Sculpture url={url} rootName={`toy_${modelId}`} characterId={characterId} color={color} lowQuality={lowQuality} castShadow={castShadow} animation={animation} motionEnabled={motionEnabled} />
     </group>

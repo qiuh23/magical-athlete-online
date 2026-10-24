@@ -1,0 +1,42 @@
+{
+  "id": "wurstii-simon-belmont",
+  "nameZh": "西蒙·贝尔蒙特",
+  "node": "toy_wurstii-simon-belmont",
+  "model": "/models/wurstii/wurstii-simon-belmont.glb",
+  "portrait": "/avatars/wurstii/wurstii-simon-belmont.png",
+  "editableSource": "assets/blender/wurstii/blend/wurstii-simon-belmont.blend",
+  "bytes": 53540,
+  "triangles": 4556,
+  "draws": 1,
+  "bounds": [
+    0.5999938962981048,
+    0.9336832940686008,
+    0.2616656995161144
+  ],
+  "animations": [
+    "idle",
+    "move",
+    "skill",
+    "fall",
+    "recover"
+  ],
+  "modelPreview": "/models/wurstii/avatars/wurstii-simon-belmont.png",
+  "avatar": "/avatars/wurstii/wurstii-simon-belmont.svg",
+  "avatarStyle": "flat-cartoon-svg",
+  "bones": 5,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "pivotY": 0,
+  "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Simon Belmont: brown leather outfit/boots, pale muscular arms and brown hair; small coiled whip follows canonical equipment, not a new rule effect. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "referenceChecked": true,
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "a5ac55d0e7e32b5ff0c58317bd042313e5b707b4796f80ed1907c366cd93ca85",
+  "glbSha256": "1e0500461b3b83495be2e004dc78fa9018cfd56c1bd8e31a9e13792ec3ed4532",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "recognition": "User-provided Wurstii reference card crop actually viewed: Simon Belmont: brown leather outfit/boots, pale muscular arms and brown hair; small coiled whip follows canonical equipment, not a new rule effect. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "assetVersion": "authored-sculpt-final-20261024"
+}

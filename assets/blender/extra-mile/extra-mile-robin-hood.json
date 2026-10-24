@@ -2,13 +2,13 @@
   "id": "extra-mile-robin-hood",
   "node": "toy_extra-mile-robin-hood",
   "url": "/models/extra-mile/extra-mile-robin-hood.glb",
-  "bytes": 46544,
-  "triangles": 2884,
-  "draws": 6,
+  "bytes": 66276,
+  "triangles": 7204,
+  "draws": 1,
   "bounds": [
-    0.6,
-    0.86532,
-    0.3803
+    0.5730765794797816,
+    0.9800103928338197,
+    0.3114719077120273
   ],
   "pivotY": 0,
   "animations": [
@@ -23,9 +23,20 @@
   "editableSource": "assets/blender/extra-mile/extra-mile-robin-hood.blend",
   "referenceChecked": true,
   "reference": "https://johnnlds.github.io/Magical-Athlete-Racers/ExtraMile.pdf",
-  "referenceDate": "2026-10-22",
-  "recognition": "grey archer, pointed green feathered hat/tunic, belt and longbow",
-  "inferred": "Single-view card artwork informs the silhouette and identifying props. Side/back surfaces and joint placement are original project interpretations, not author-approved sculpts.",
-  "avatar": "/models/extra-mile/avatars/extra-mile-robin-hood.png",
-  "mouthSurfaceVersion": "surface-mouth-v2"
+  "referenceDate": "2026-10-24",
+  "recognition": "ExtraMile.pdf viewed: grey-faced Robin Hood, green tunic/hat, white feather, black moustache, drawn bow and rear quiver. Accessories are nonfunctional sculpted props.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "avatar": "/avatars/extra-mile/extra-mile-robin-hood.svg",
+  "modelPreview": "/models/extra-mile/avatars/extra-mile-robin-hood.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "ExtraMile.pdf viewed: grey-faced Robin Hood, green tunic/hat, white feather, black moustache, drawn bow and rear quiver. Accessories are nonfunctional sculpted props.",
+  "originalAuthorImageChecked": true,
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "727f7dbea9fa9cf68714da6504f2d6eb9aa198b02002b178636f97d6cabd111f",
+  "glbSha256": "a7e547d9a9b3da60bfec9ad78193569bc4426acb4dba725bb25f2d7a8c0203a0",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

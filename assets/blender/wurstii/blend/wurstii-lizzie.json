@@ -1,0 +1,42 @@
+{
+  "id": "wurstii-lizzie",
+  "nameZh": "莉齐",
+  "node": "toy_wurstii-lizzie",
+  "model": "/models/wurstii/wurstii-lizzie.glb",
+  "portrait": "/avatars/wurstii/wurstii-lizzie.png",
+  "editableSource": "assets/blender/wurstii/blend/wurstii-lizzie.blend",
+  "bytes": 48716,
+  "triangles": 3976,
+  "draws": 1,
+  "bounds": [
+    0.5596179082613605,
+    0.9800103928338197,
+    0.5609302041688284
+  ],
+  "animations": [
+    "idle",
+    "move",
+    "skill",
+    "fall",
+    "recover"
+  ],
+  "modelPreview": "/models/wurstii/avatars/wurstii-lizzie.png",
+  "avatar": "/avatars/wurstii/wurstii-lizzie.svg",
+  "avatarStyle": "flat-cartoon-svg",
+  "bones": 5,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "pivotY": 0,
+  "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Lizzie: green upright reptile with pale yellow belly, heavy tail, dorsal spikes and bent claw arms. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "referenceChecked": true,
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "c86d5136054eb83a759a962c1f9ba048c82011371c9ab464caf52292aabe2e36",
+  "glbSha256": "dc623db06f04851a0f272a687b59354e91a92be50ccd7a07ece655cd56b8a549",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "recognition": "User-provided Wurstii reference card crop actually viewed: Lizzie: green upright reptile with pale yellow belly, heavy tail, dorsal spikes and bent claw arms. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "assetVersion": "authored-sculpt-final-20261024"
+}

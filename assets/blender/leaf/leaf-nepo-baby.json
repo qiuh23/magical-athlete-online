@@ -2,13 +2,13 @@
   "id": "leaf-nepo-baby",
   "node": "toy_leaf-nepo-baby",
   "url": "/models/leaf/leaf-nepo-baby.glb",
-  "bytes": 51372,
-  "triangles": 3764,
-  "draws": 4,
+  "bytes": 63828,
+  "triangles": 6288,
+  "draws": 1,
   "bounds": [
-    0.6,
-    0.8977,
-    0.43408
+    0.5313272499771111,
+    0.9800103928338197,
+    0.3186132484248252
   ],
   "pivotY": 0,
   "animations": [
@@ -24,9 +24,20 @@
   "referenceChecked": true,
   "reference": "https://boardgamegeek.com/filepage/327878/leafs-fan-expansion-for-magical-athlete",
   "referenceFile": "PNG_Images_-_Leaf's_Fan_Expansion.zip / Gamepiece images / nepo-baby",
-  "referenceDate": "2026-10-22",
-  "recognition": "pink baby with pink knit cap, gold necklace, orange pacifier and white diaper; distinct Leaf version",
-  "inferred": "Author transparent gamepiece PNGs inform silhouettes/colors/props. Unseen back and side details and joints are project interpretations, not author-approved exact sculpts.",
-  "avatar": "/models/leaf/avatars/leaf-nepo-baby.png",
-  "mouthSurfaceVersion": "surface-mouth-v2"
+  "referenceDate": "2026-10-24",
+  "recognition": "Repository SVG actually viewed; registered traits: Leaf-specific pink baby, pink ribbed knit cap, orange pacifier, gold necklace and white diaper; not Second Wind Nepo Baby. Original author PNG not obtained during this rebuild; depth, underside/back and tailoring are project design.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "avatar": "/avatars/leaf/leaf-nepo-baby.svg",
+  "modelPreview": "/models/leaf/avatars/leaf-nepo-baby.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "Repository SVG actually viewed; registered traits: Leaf-specific pink baby, pink ribbed knit cap, orange pacifier, gold necklace and white diaper; not Second Wind Nepo Baby. Original author PNG not obtained during this rebuild; depth, underside/back and tailoring are project design.",
+  "originalAuthorImageChecked": false,
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "f6a68c839e2a81140deb5492bc660e4e43302eefe0ad54a830dbfeea1b4f59a3",
+  "glbSha256": "c80bcb2779ace2a6f3dde0cdc1402db8d8031bbf761c7d46d07a25a35988f061",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

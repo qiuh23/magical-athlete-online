@@ -1,0 +1,42 @@
+{
+  "id": "wurstii-dry-bones",
+  "nameZh": "枯骨龟",
+  "node": "toy_wurstii-dry-bones",
+  "model": "/models/wurstii/wurstii-dry-bones.glb",
+  "portrait": "/avatars/wurstii/wurstii-dry-bones.png",
+  "editableSource": "assets/blender/wurstii/blend/wurstii-dry-bones.blend",
+  "bytes": 53692,
+  "triangles": 4062,
+  "draws": 1,
+  "bounds": [
+    0.5999938962981048,
+    0.9652699523176137,
+    0.48921170690023497
+  ],
+  "animations": [
+    "idle",
+    "move",
+    "skill",
+    "fall",
+    "recover"
+  ],
+  "modelPreview": "/models/wurstii/avatars/wurstii-dry-bones.png",
+  "avatar": "/avatars/wurstii/wurstii-dry-bones.svg",
+  "avatarStyle": "flat-cartoon-svg",
+  "bones": 5,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "pivotY": 0,
+  "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Dry Bones: complete white turtle skeleton, dark eye sockets, grey shell/shoes and ribbed pale plastron. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "referenceChecked": true,
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "0a3ecb7801f5906c000849ba40c4195702f89adf7bc46c7e133cacd30e5c33c2",
+  "glbSha256": "d684ecb8cc500ffd662c751772468f93147ff514e72448168f5e4d3a2aafc802",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "recognition": "User-provided Wurstii reference card crop actually viewed: Dry Bones: complete white turtle skeleton, dark eye sockets, grey shell/shoes and ribbed pale plastron. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "assetVersion": "authored-sculpt-final-20261024"
+}

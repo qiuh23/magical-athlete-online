@@ -2,13 +2,13 @@
   "id": "leaf-sole-survivor",
   "node": "toy_leaf-sole-survivor",
   "url": "/models/leaf/leaf-sole-survivor.glb",
-  "bytes": 53224,
-  "triangles": 3286,
-  "draws": 6,
+  "bytes": 52444,
+  "triangles": 4976,
+  "draws": 1,
   "bounds": [
-    0.6,
-    0.91651,
-    0.41305
+    0.5146641438032167,
+    0.9800103762932219,
+    0.2633747367778558
   ],
   "pivotY": 0,
   "animations": [
@@ -24,9 +24,20 @@
   "referenceChecked": true,
   "reference": "https://boardgamegeek.com/filepage/327878/leafs-fan-expansion-for-magical-athlete",
   "referenceFile": "PNG_Images_-_Leaf's_Fan_Expansion.zip / Gamepiece images / sole-survivor",
-  "referenceDate": "2026-10-22",
-  "recognition": "orange survivor, olive helmet, long striped moustache, grass skirt and spear",
-  "inferred": "Author transparent gamepiece PNGs inform silhouettes/colors/props. Unseen back and side details and joints are project interpretations, not author-approved exact sculpts.",
-  "avatar": "/models/leaf/avatars/leaf-sole-survivor.png",
-  "mouthSurfaceVersion": "surface-mouth-v2"
+  "referenceDate": "2026-10-24",
+  "recognition": "Repository SVG actually viewed; registered traits: orange survivor, olive helmet, broad striped moustache, grass skirt and spear. Original author PNG not obtained during this rebuild; depth, underside/back and tailoring are project design.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "avatar": "/avatars/leaf/leaf-sole-survivor.svg",
+  "modelPreview": "/models/leaf/avatars/leaf-sole-survivor.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "Repository SVG actually viewed; registered traits: orange survivor, olive helmet, broad striped moustache, grass skirt and spear. Original author PNG not obtained during this rebuild; depth, underside/back and tailoring are project design.",
+  "originalAuthorImageChecked": false,
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "6e7175c49237b82155cd0458c7598a3ec7c1e96115ce4776f98778ececb1d7e2",
+  "glbSha256": "4858ade83ef40d507c94eb449dc521295944291d5a83f9a3dcb40c1ca6486ca0",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

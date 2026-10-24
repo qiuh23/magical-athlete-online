@@ -2,13 +2,13 @@
   "id": "extra-mile-cletus",
   "node": "toy_extra-mile-cletus",
   "url": "/models/extra-mile/extra-mile-cletus.glb",
-  "bytes": 47020,
-  "triangles": 2972,
-  "draws": 6,
+  "bytes": 51536,
+  "triangles": 5592,
+  "draws": 1,
   "bounds": [
-    0.6,
-    0.86615,
-    0.4916
+    0.46681112094485305,
+    0.9800103928338197,
+    0.32099368266853845
   ],
   "pivotY": 0,
   "animations": [
@@ -23,9 +23,20 @@
   "editableSource": "assets/blender/extra-mile/extra-mile-cletus.blend",
   "referenceChecked": true,
   "reference": "https://johnnlds.github.io/Magical-Athlete-Racers/ExtraMile.pdf",
-  "referenceDate": "2026-10-22",
-  "recognition": "pink hunter, tall brown hat, red shirt and long double barrel toy rifle",
-  "inferred": "Single-view card artwork informs the silhouette and identifying props. Side/back surfaces and joint placement are original project interpretations, not author-approved sculpts.",
-  "avatar": "/models/extra-mile/avatars/extra-mile-cletus.png",
-  "mouthSurfaceVersion": "surface-mouth-v2"
+  "referenceDate": "2026-10-24",
+  "recognition": "ExtraMile.pdf viewed: pink cartoon hunter, tall brown hat, red shirt, blue trousers and stylized double-barrel toy rifle. Prop is nonfunctional, simplified and held in both hands.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "avatar": "/avatars/extra-mile/extra-mile-cletus.svg",
+  "modelPreview": "/models/extra-mile/avatars/extra-mile-cletus.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "ExtraMile.pdf viewed: pink cartoon hunter, tall brown hat, red shirt, blue trousers and stylized double-barrel toy rifle. Prop is nonfunctional, simplified and held in both hands.",
+  "originalAuthorImageChecked": true,
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "03788c580b231b08deb42d4a81ddcde17197471b2e0bd65aa2931ec153f533eb",
+  "glbSha256": "468fc0ecc379ade6cc178f80ca873538b97a27a861c9460430f95b73efa5dcc8",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

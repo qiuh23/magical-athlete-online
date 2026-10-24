@@ -1227,7 +1227,7 @@ function fanMainReady(s:GameState,r:Racer):boolean{
     if(p===em('doctor-dice')){const targets=active(s).filter(x=>x.id!==r.id&&x.tripped);if(targets.length){askTarget(s,r,'em-doctor','骰子医生：传送并帮助一名倒地选手？',targets,{},true);return true;}}
     if(p===em('echo')&&s.flags.fanPreviousDistance!==undefined){ask(s,r,'em-echo',`回声：按上一选手实际主移动${s.flags.fanPreviousDistance}格移动？`,yesNo,{distance:s.flags.fanPreviousDistance},true);return true;}
     if(p===em('moneybags')&&owner(s,r).score>0){ask(s,r,'em-moneybags','钱袋先生：支付1积分选择1～8格代替主骰？',[...Array.from({length:8},(_,i)=>({id:String(i+1),label:`支付1分，移动${i+1}格`})),{id:'skip',label:'正常掷骰'}],{},true);return true;}
-    if(p===em('marksman')){const targets=active(s).filter(x=>x.id!==r.id&&separation(s,x,r)>3&&x.position>0);if(targets.length){askTarget(s,r,'em-marksman','神射手：选择3格之外的目标',targets,{},true);return true;}}
+    if(p===em('marksman')){const targets=active(s).filter(x=>x.id!==r.id&&separation(s,x,r)>3&&x.position>0);if(targets.length){askTarget(s,r,'em-marksman','神射手：选择相距至少4格的目标（不含起点）',targets,{},true);return true;}}
   }
   return false;
 }
@@ -1350,7 +1350,7 @@ function fanTask(s:GameState,r:Racer,t:Work){
     });
     if(options.length===1)usePower(s,r,[moves[options[0]!.id]!],em('whisper'));else if(options.length)ask(s,r,'em-whisper','低语：选择等距最近空格',options,{moves});
   }
-  if(t.step==='marksman-prompt'&&target&&live(target))ask(s,r,'em-marksman-roll',`神射手：累计${t.total}，目标第${t.space}格，请继续掷骰`,[{id:'roll',label:'掷射击骰'}],{targetId:target.id,space:t.space,total:t.total});
+  if(t.step==='marksman-prompt'&&target&&live(target))ask(s,r,'em-marksman-roll',`神射手：累计${t.total}点，需凑到目标格号${t.space}；请继续掷骰`,[{id:'roll',label:'掷射击骰'}],{targetId:target.id,space:t.space,total:t.total});
   if(t.step==='shuffle'){
     const all=order(s).filter(x=>!x.flags.gary),cards=shuffle(s,all.map(x=>x.characterId));for(let i=0;i<all.length;i++){const model=cards[i]!;all[i]!.flags.power=model;all[i]!.flags.powerSourceCard=model;all[i]!.flags.powerVia=em('shuffler');delete all[i]!.flags.copiedFrom;}
     acquirePower(r,em('shuffler'),{sourceCardId:em('shuffler'),via:em('shuffler')});

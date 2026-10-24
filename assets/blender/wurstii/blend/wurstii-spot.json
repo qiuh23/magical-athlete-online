@@ -1,0 +1,42 @@
+{
+  "id": "wurstii-spot",
+  "nameZh": "斯波特",
+  "node": "toy_wurstii-spot",
+  "model": "/models/wurstii/wurstii-spot.glb",
+  "portrait": "/avatars/wurstii/wurstii-spot.png",
+  "editableSource": "assets/blender/wurstii/blend/wurstii-spot.blend",
+  "bytes": 42956,
+  "triangles": 3256,
+  "draws": 1,
+  "bounds": [
+    0.5999938962981048,
+    0.6835535471812538,
+    0.21558275093844417
+  ],
+  "animations": [
+    "idle",
+    "move",
+    "skill",
+    "fall",
+    "recover"
+  ],
+  "modelPreview": "/models/wurstii/avatars/wurstii-spot.png",
+  "avatar": "/avatars/wurstii/wurstii-spot.svg",
+  "avatarStyle": "flat-cartoon-svg",
+  "bones": 5,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "pivotY": 0,
+  "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Spot: red oval mascot wearing black sunglasses, thin black limbs, white gloves/shoes and held red yo-yo. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "referenceChecked": true,
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "53e3061767457ea9a604cf64ed44dfd87bbbc4e734d1fb5d4eb989c057b22e18",
+  "glbSha256": "4bef917c23b24727988223526d8d8e6cab31ed32975ada6c7f65720ba2b80997",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "recognition": "User-provided Wurstii reference card crop actually viewed: Spot: red oval mascot wearing black sunglasses, thin black limbs, white gloves/shoes and held red yo-yo. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "assetVersion": "authored-sculpt-final-20261024"
+}

@@ -2,13 +2,13 @@
   "id": "extra-mile-king-pete",
   "node": "toy_extra-mile-king-pete",
   "url": "/models/extra-mile/extra-mile-king-pete.glb",
-  "bytes": 48196,
-  "triangles": 2874,
-  "draws": 6,
+  "bytes": 63912,
+  "triangles": 6772,
+  "draws": 1,
   "bounds": [
-    0.59766,
-    0.98,
-    0.40529
+    0.47431867427594837,
+    0.9800103928338197,
+    0.2522660030876491
   ],
   "pivotY": 0,
   "animations": [
@@ -23,9 +23,20 @@
   "editableSource": "assets/blender/extra-mile/extra-mile-king-pete.blend",
   "referenceChecked": true,
   "reference": "https://johnnlds.github.io/Magical-Athlete-Racers/ExtraMile.pdf",
-  "referenceDate": "2026-10-22",
-  "recognition": "blue child king, pointed golden crown, red jersey and baseball bat",
-  "inferred": "Single-view card artwork informs the silhouette and identifying props. Side/back surfaces and joint placement are original project interpretations, not author-approved sculpts.",
-  "avatar": "/models/extra-mile/avatars/extra-mile-king-pete.png",
-  "mouthSurfaceVersion": "surface-mouth-v2"
+  "referenceDate": "2026-10-24",
+  "recognition": "ExtraMile.pdf viewed: blue young king, red 17 jersey, purple trousers, very tall gold crown and baseball bat. Crown/back clothing completed in project design.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "avatar": "/avatars/extra-mile/extra-mile-king-pete.svg",
+  "modelPreview": "/models/extra-mile/avatars/extra-mile-king-pete.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "ExtraMile.pdf viewed: blue young king, red 17 jersey, purple trousers, very tall gold crown and baseball bat. Crown/back clothing completed in project design.",
+  "originalAuthorImageChecked": true,
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "afbffe7379d454d712b6e835b7e4175692c147f696f090c86f8b39e5d9e471f3",
+  "glbSha256": "2abbeb4582e7408bb9f04fb368d73b6fa6d281329e164e18993ddad7a8caf359",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

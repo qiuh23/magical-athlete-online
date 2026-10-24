@@ -1,0 +1,42 @@
+{
+  "id": "wurstii-dixie-kong",
+  "nameZh": "迪克西刚",
+  "node": "toy_wurstii-dixie-kong",
+  "model": "/models/wurstii/wurstii-dixie-kong.glb",
+  "portrait": "/avatars/wurstii/wurstii-dixie-kong.png",
+  "editableSource": "assets/blender/wurstii/blend/wurstii-dixie-kong.blend",
+  "bytes": 67480,
+  "triangles": 5400,
+  "draws": 1,
+  "bounds": [
+    0.49714651195593385,
+    0.9800103928338197,
+    0.4196905485677898
+  ],
+  "animations": [
+    "idle",
+    "move",
+    "skill",
+    "fall",
+    "recover"
+  ],
+  "modelPreview": "/models/wurstii/avatars/wurstii-dixie-kong.png",
+  "avatar": "/avatars/wurstii/wurstii-dixie-kong.svg",
+  "avatarStyle": "flat-cartoon-svg",
+  "bones": 5,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "pivotY": 0,
+  "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Dixie Kong: brown monkey, pink beret/top and long blonde ponytail. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "referenceChecked": true,
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "3a6c1915ae77b323e273c9ce7254e66179a78197000137fbf922e0c03b5ea97a",
+  "glbSha256": "67ad21b7757d1a8deabe99d43abbdb355cca81e32d5e24d1cf55b264e5208833",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "recognition": "User-provided Wurstii reference card crop actually viewed: Dixie Kong: brown monkey, pink beret/top and long blonde ponytail. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "assetVersion": "authored-sculpt-final-20261024"
+}

@@ -1,0 +1,42 @@
+{
+  "id": "wurstii-frogger",
+  "nameZh": "过河蛙",
+  "node": "toy_wurstii-frogger",
+  "model": "/models/wurstii/wurstii-frogger.glb",
+  "portrait": "/avatars/wurstii/wurstii-frogger.png",
+  "editableSource": "assets/blender/wurstii/blend/wurstii-frogger.blend",
+  "bytes": 44244,
+  "triangles": 3124,
+  "draws": 1,
+  "bounds": [
+    0.5999938962981048,
+    0.3272499771111179,
+    0.5705130161442915
+  ],
+  "animations": [
+    "idle",
+    "move",
+    "skill",
+    "fall",
+    "recover"
+  ],
+  "modelPreview": "/models/wurstii/avatars/wurstii-frogger.png",
+  "avatar": "/avatars/wurstii/wurstii-frogger.svg",
+  "avatarStyle": "flat-cartoon-svg",
+  "bones": 5,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "pivotY": 0,
+  "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Frogger: low green four-legged frog, yellow dorsal stripe, raised eyes and splayed toes; not upright humanoid. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "referenceChecked": true,
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "c3ab1971384de442715fd0faa011fbe025cbc8376446e8c2271115c4c5fb871e",
+  "glbSha256": "86abb2396306b5b7706c84b8db3ce78f6edd5a76a8b5441f8cce88165cc9ce55",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "recognition": "User-provided Wurstii reference card crop actually viewed: Frogger: low green four-legged frog, yellow dorsal stripe, raised eyes and splayed toes; not upright humanoid. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "assetVersion": "authored-sculpt-final-20261024"
+}

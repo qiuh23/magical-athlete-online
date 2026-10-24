@@ -1,46 +1,42 @@
 {
-  "version": 1,
-  "edition": "second-wind",
-  "generator": "Blender 5.2.3 LTS Release Candidate",
-  "source": "assets/blender/second-wind.blend",
-  "units": "metres",
-  "up": "+Y",
-  "forward": "+Z",
-  "pivot": "ground-centre",
-  "compression": "EXT_meshopt_compression",
-  "models": [
-    {
-      "id": "speed-demon",
-      "node": "toy_speed-demon",
-      "url": "/models/second-wind/speed-demon.glb",
-      "avatar": "/models/second-wind/avatars/speed-demon.png",
-      "bytes": 49368,
-      "triangles": 3940,
-      "draws": 8,
-      "bounds": [
-        0.38767,
-        0.82645,
-        0.6
-      ],
-      "pivotY": 0,
-      "animations": [
-        "idle",
-        "move",
-        "skill",
-        "fall",
-        "recover"
-      ],
-      "recognition": "Olive horned biker in blue jacket, orange streaming hair, complete red motorcycle, tyres/hubs, yellow headlamp.",
-      "inferred": "Back and side volumes extrapolated from the published single-view illustration.",
-      "referenceChecked": true,
-      "referenceImage": "https://johnnlds.github.io/Magical-Athlete-Racers/images/expansion/Speed%20Demon.png",
-      "editableSource": "assets/blender/second-wind/speed-demon.blend"
-    }
+  "id": "speed-demon",
+  "node": "toy_speed-demon",
+  "url": "/models/second-wind/speed-demon.glb",
+  "avatar": "/avatars/second-wind/speed-demon.svg",
+  "bytes": 73860,
+  "triangles": 7794,
+  "draws": 1,
+  "bounds": [
+    0.33533738212225717,
+    0.9180883352616003,
+    0.6000244148075808
   ],
-  "variants": [],
-  "totalBytes": 49368,
-  "totalTriangles": 3940,
-  "materialCount": 15,
-  "textureCount": 0,
-  "referenceStatus": "36 fan-site illustrations visually inspected; closed-volume toy interpretations; unseen views explicitly inferred; not exact official production sculpts."
+  "pivotY": 0,
+  "animations": [
+    "idle",
+    "move",
+    "skill",
+    "fall",
+    "recover"
+  ],
+  "recognition": "Registered card viewed: olive horned biker, blue jacket, streaming orange hair, complete red motorcycle and yellow headlamp. Seated legs, wheel spokes and rigid handlebar grip rebuilt.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "referenceChecked": true,
+  "referenceImage": "https://johnnlds.github.io/Magical-Athlete-Racers/images/expansion/Speed%20Demon.png",
+  "editableSource": "assets/blender/second-wind/speed-demon.blend",
+  "modelPreview": "/models/second-wind/avatars/speed-demon.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "motionProfile": "biped",
+  "bones": 7,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "Registered card viewed: olive horned biker, blue jacket, streaming orange hair, complete red motorcycle and yellow headlamp. Seated legs, wheel spokes and rigid handlebar grip rebuilt.",
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "d5c3eb67a8b17319b0c9e6fc424fd809043a1d483139b2b68673ef33e7dab882",
+  "glbSha256": "6b1bfbc5d332cd8bdc0a2808ec687c5096c218a1d308a5f02e5b5b4ec22933a2",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

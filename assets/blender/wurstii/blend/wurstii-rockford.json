@@ -1,0 +1,42 @@
+{
+  "id": "wurstii-rockford",
+  "nameZh": "洛克福德",
+  "node": "toy_wurstii-rockford",
+  "model": "/models/wurstii/wurstii-rockford.glb",
+  "portrait": "/avatars/wurstii/wurstii-rockford.png",
+  "editableSource": "assets/blender/wurstii/blend/wurstii-rockford.blend",
+  "bytes": 54584,
+  "triangles": 4412,
+  "draws": 1,
+  "bounds": [
+    0.48567155980101934,
+    0.9800103928338197,
+    0.3289895321512497
+  ],
+  "animations": [
+    "idle",
+    "move",
+    "skill",
+    "fall",
+    "recover"
+  ],
+  "modelPreview": "/models/wurstii/avatars/wurstii-rockford.png",
+  "avatar": "/avatars/wurstii/wurstii-rockford.svg",
+  "avatarStyle": "flat-cartoon-svg",
+  "bones": 5,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "pivotY": 0,
+  "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Rockford: squat pale miner face, red helmet/cap and warm orange clothing. Not replaced by a namesake character. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "referenceChecked": true,
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "22d8f5284f1cf4aaffd7d77611ae48f20ed8624321c9c9ffc2cd7d733192c075",
+  "glbSha256": "684148bf8965b51ce5689edb2426658c8bf3f386b2055f0e0f68e7dbcc0925e4",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "recognition": "User-provided Wurstii reference card crop actually viewed: Rockford: squat pale miner face, red helmet/cap and warm orange clothing. Not replaced by a namesake character. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "assetVersion": "authored-sculpt-final-20261024"
+}

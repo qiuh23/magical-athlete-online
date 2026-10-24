@@ -46,6 +46,7 @@ export function EffectiveAbilities({ racer, room, onDetail }: { racer: Racer; ro
         <button type="button" className="power-name character-ability-link" aria-label={`查看${power?.nameZh ?? id}的技能与当前玩家`} onClick={() => onDetail(id)}><Avatar id={id} /><span><strong>{power?.nameZh ?? id}</strong><small>{power?.nameEn ?? id}</small></span><span className="ability-open" aria-hidden="true">↗</span></button>
         <div className="ability-provenance">{provenance.map((entry, index) => <span key={index}>{entry.source}{entry.duration && <> · {entry.duration}</>}</span>)}{!active.includes(id) && <span className="ability-inactive-label">当前未生效</span>}</div>
         <p className="current-ability-description">{power?.ability ?? '角色规则正在载入。'}</p>
+        {power?.example && <p className="ability-example"><strong>例子：</strong>{power.example}</p>}
         {id === 'kraken' && <p className="ability-counter">本场剩余次数：<strong>{state?.krakenRemaining ?? 1}</strong></p>}
       </article>;
     })}</div>

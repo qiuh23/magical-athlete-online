@@ -1,0 +1,8 @@
+from pathlib import Path
+import json,shutil
+ROOT=Path(__file__).resolve().parents[2];stage=ROOT/'tmp/sculpt-stage';specs={r['id']:r for r in json.loads((ROOT/'docs/sculpt-20261024/stage-validation.json').read_text())}
+for id in ['kraken','hog-knight','hog-knight-hog','bite-mark','bite-mark-were','leaf-revolutionary','wurstii-magikarp']:
+ edition='leaf' if id.startswith('leaf-')else 'wurstii'if id.startswith('wurstii-')else 'second-wind';source=ROOT/'assets/blender'/edition/('blend'if edition=='wurstii'else '')/(id+'.blend');target=ROOT/'public/models'/edition/(id+'.glb');shutil.copyfile(stage/(id+'.blend'),source);shutil.copyfile(stage/(id+'.glb'),target)
+ path=target.parent/'manifest.json';manifest=json.loads(path.read_text());rows=manifest['models']+manifest.get('variants',[]);row=next(r for r in rows if r['id']==id);s=specs[id];reference=json.loads((stage/(id+'.json')).read_text());row.update({k:s[k]for k in ['bytes','triangles','draws','bounds','bones']});row.update(animations=['idle','move','skill','fall','recover'],generator='Blender 4.3.2',sculptVersion='authored-20261024',referenceBasis=reference['sourceReference'],compression='Meshopt; fixed world-unit SNORM16 positions without per-mesh transforms; normals10bit',originalAuthorImageChecked=id in ['kraken','hog-knight','hog-knight-hog','bite-mark'],mouthSurfaceVersion=None,sculptStatus='pending-game-visual-acceptance')
+ row.pop('byteBudget',None);row.pop('budgetReason',None)
+ source.with_suffix('.json').write_text(json.dumps(row,ensure_ascii=False,indent=2));manifest['totalBytes']=sum(r['bytes']for r in rows);manifest['totalTriangles']=sum(r['triangles']for r in rows);path.write_text(json.dumps(manifest,ensure_ascii=False,indent=2))

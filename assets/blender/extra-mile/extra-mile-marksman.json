@@ -2,13 +2,13 @@
   "id": "extra-mile-marksman",
   "node": "toy_extra-mile-marksman",
   "url": "/models/extra-mile/extra-mile-marksman.glb",
-  "bytes": 59728,
-  "triangles": 2678,
-  "draws": 6,
+  "bytes": 41940,
+  "triangles": 3882,
+  "draws": 1,
   "bounds": [
-    0.6,
-    0.78333,
-    0.40833
+    0.5529343546861172,
+    0.9800103928338197,
+    0.48524428620694826
   ],
   "pivotY": 0,
   "animations": [
@@ -23,7 +23,20 @@
   "editableSource": "assets/blender/extra-mile/extra-mile-marksman.blend",
   "referenceChecked": true,
   "reference": "https://johnnlds.github.io/Magical-Athlete-Racers/ExtraMile.pdf",
-  "referenceDate": "2026-10-22",
-  "recognition": "grey long-beaked bird archer, wooden bow and arrow",
-  "inferred": "Single-view card artwork informs the silhouette and identifying props. Side/back surfaces and joint placement are original project interpretations, not author-approved sculpts."
+  "referenceDate": "2026-10-24",
+  "recognition": "ExtraMile.pdf viewed: white long-beaked bird archer, yellow legs and beak, white crest and tail, wooden bow and arrow. Nonfunctional miniature prop is held across two folded wings.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "avatar": "/avatars/extra-mile/extra-mile-marksman.svg",
+  "modelPreview": "/models/extra-mile/avatars/extra-mile-marksman.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "ExtraMile.pdf viewed: white long-beaked bird archer, yellow legs and beak, white crest and tail, wooden bow and arrow. Nonfunctional miniature prop is held across two folded wings.",
+  "originalAuthorImageChecked": true,
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "d3892abc3884912ff35582119861f2daa450abc37e03363a0ce031513e3f1d10",
+  "glbSha256": "15064dc54c9f592697b16eb3c7982ee4e891feeb0325cd543bfc3d1af37949ac",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

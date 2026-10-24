@@ -2,13 +2,13 @@
   "id": "extra-mile-silly-goose",
   "node": "toy_extra-mile-silly-goose",
   "url": "/models/extra-mile/extra-mile-silly-goose.glb",
-  "bytes": 58564,
-  "triangles": 2812,
-  "draws": 5,
+  "bytes": 41820,
+  "triangles": 3900,
+  "draws": 1,
   "bounds": [
-    0.54858,
-    0.98,
-    0.4556
+    0.39979246817819114,
+    0.9800103928338197,
+    0.443494973096601
   ],
   "pivotY": 0,
   "animations": [
@@ -23,7 +23,20 @@
   "editableSource": "assets/blender/extra-mile/extra-mile-silly-goose.blend",
   "referenceChecked": true,
   "reference": "https://johnnlds.github.io/Magical-Athlete-Racers/ExtraMile.pdf",
-  "referenceDate": "2026-10-22",
-  "recognition": "white long-neck goose, yellow beak, dark sunglasses and propeller cap",
-  "inferred": "Single-view card artwork informs the silhouette and identifying props. Side/back surfaces and joint placement are original project interpretations, not author-approved sculpts."
+  "referenceDate": "2026-10-24",
+  "recognition": "ExtraMile.pdf viewed: white goose with long curved neck, orange beak, black sunglasses and multicolor propeller cap. Folded wings and feathered tail are complete volumes; no generic humanoid body.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "avatar": "/avatars/extra-mile/extra-mile-silly-goose.svg",
+  "modelPreview": "/models/extra-mile/avatars/extra-mile-silly-goose.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "ExtraMile.pdf viewed: white goose with long curved neck, orange beak, black sunglasses and multicolor propeller cap. Folded wings and feathered tail are complete volumes; no generic humanoid body.",
+  "originalAuthorImageChecked": true,
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "226c8f57efdaa0fe8a97a3e8eb44a6ba361e96e6ead0856650862e06775e2521",
+  "glbSha256": "7e466e82a5f912fdf688f4a0e0af0bc5a329fd22471afd8fbd2682da2cc5982b",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

@@ -2,13 +2,13 @@
   "id": "extra-mile-toll-troll",
   "node": "toy_extra-mile-toll-troll",
   "url": "/models/extra-mile/extra-mile-toll-troll.glb",
-  "bytes": 48948,
-  "triangles": 3142,
-  "draws": 5,
+  "bytes": 50028,
+  "triangles": 4752,
+  "draws": 1,
   "bounds": [
-    0.6,
-    0.90356,
-    0.42621
+    0.5999938784168933,
+    0.9403973663534151,
+    0.285348061474565
   ],
   "pivotY": 0,
   "animations": [
@@ -23,9 +23,20 @@
   "editableSource": "assets/blender/extra-mile/extra-mile-toll-troll.blend",
   "referenceChecked": true,
   "reference": "https://johnnlds.github.io/Magical-Athlete-Racers/ExtraMile.pdf",
-  "referenceDate": "2026-10-22",
-  "recognition": "green troll, spiky brown hair, pointed ears and ragged cream tunic",
-  "inferred": "Single-view card artwork informs the silhouette and identifying props. Side/back surfaces and joint placement are original project interpretations, not author-approved sculpts.",
-  "avatar": "/models/extra-mile/avatars/extra-mile-toll-troll.png",
-  "mouthSurfaceVersion": "surface-mouth-v2"
+  "referenceDate": "2026-10-24",
+  "recognition": "ExtraMile.pdf viewed: green troll with huge eyes/ears, upright brown spiky hair, tan laced rag vest and raised hands. Reference bridge/rail is scenery and deliberately not included as pawn base.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "avatar": "/avatars/extra-mile/extra-mile-toll-troll.svg",
+  "modelPreview": "/models/extra-mile/avatars/extra-mile-toll-troll.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "ExtraMile.pdf viewed: green troll with huge eyes/ears, upright brown spiky hair, tan laced rag vest and raised hands. Reference bridge/rail is scenery and deliberately not included as pawn base.",
+  "originalAuthorImageChecked": true,
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "cbde092bdd0c4b68c89554fb71baf0c359beefd950cb691ae64c6e7a40f01b4b",
+  "glbSha256": "3f1b988d69fe8dab6211a93cab25726893bd0e4d3081e42fc5c2b303ab444925",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

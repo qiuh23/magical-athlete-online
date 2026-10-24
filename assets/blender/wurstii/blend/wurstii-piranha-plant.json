@@ -1,0 +1,42 @@
+{
+  "id": "wurstii-piranha-plant",
+  "nameZh": "食人花",
+  "node": "toy_wurstii-piranha-plant",
+  "model": "/models/wurstii/wurstii-piranha-plant.glb",
+  "portrait": "/avatars/wurstii/wurstii-piranha-plant.png",
+  "editableSource": "assets/blender/wurstii/blend/wurstii-piranha-plant.blend",
+  "bytes": 48640,
+  "triangles": 3400,
+  "draws": 1,
+  "bounds": [
+    0.4079714346751305,
+    0.9800104031519418,
+    0.35743278456414207
+  ],
+  "animations": [
+    "idle",
+    "move",
+    "skill",
+    "fall",
+    "recover"
+  ],
+  "modelPreview": "/models/wurstii/avatars/wurstii-piranha-plant.png",
+  "avatar": "/avatars/wurstii/wurstii-piranha-plant.svg",
+  "avatarStyle": "flat-cartoon-svg",
+  "bones": 5,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "pivotY": 0,
+  "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Piranha Plant: red spotted open jaws with white lips/teeth, green stem/leaves emerging from green pipe. Pipe is integral reference prop, not a separate game base. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "referenceChecked": true,
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "939abaf9935718ee2da39fdc8facfb25354ac9424718dc3e022d75db63b5502b",
+  "glbSha256": "b90034896112dc34c27b25870ddcff274830f67e677a497f8dad8ef4921306d4",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "recognition": "User-provided Wurstii reference card crop actually viewed: Piranha Plant: red spotted open jaws with white lips/teeth, green stem/leaves emerging from green pipe. Pipe is integral reference prop, not a separate game base. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "assetVersion": "authored-sculpt-final-20261024"
+}

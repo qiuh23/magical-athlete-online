@@ -14,7 +14,7 @@ test('Second Wind has exactly 36 individually shipped Blender sculptures and two
   assert.deepEqual(manifest.models.map((m: { id: string }) => m.id).sort(), SECOND_WIND_CHARACTERS.map(c => c.id).sort());
   assert.deepEqual(manifest.variants.map((m: { id: string }) => m.id).sort(), ['bite-mark-were', 'hog-knight-hog']);
   assert.equal(manifest.up, '+Y'); assert.equal(manifest.forward, '+Z');
-  assert.match(manifest.generator, /^Blender 5\./);
+  assert.match(manifest.generator, /^Blender 4\.3\.2/);
   assert.ok((await stat(new URL('../assets/blender/second-wind.blend', import.meta.url))).size > 100_000);
   for (const model of [...manifest.models, ...manifest.variants]) {
     assert.ok((await stat(new URL(`../${model.editableSource}`, import.meta.url))).size > 50_000);
@@ -72,7 +72,7 @@ test('all 36 lobby previews are compact local PNGs without source-card redistrib
 });
 
 test('Blender closed-volume audit describes the exact 38 editable sources and shipping GLBs', async () => {
-  const audit = JSON.parse(await readFile(new URL('../docs/evidence/second-wind/source-audit.json', import.meta.url), 'utf8'));
+  const audit = JSON.parse(await readFile(new URL('../docs/sculpt-20261024/second-wind-source-audit.json', import.meta.url), 'utf8'));
   assert.equal(audit.passed, true); assert.equal(audit.sources.length, 38);
   for (const source of audit.sources) {
     assert.equal(source.boundaryEdges, 0); assert.equal(source.looseEdges, 0); assert.ok(source.editableParts >= 5);
@@ -82,7 +82,7 @@ test('Blender closed-volume audit describes the exact 38 editable sources and sh
 });
 
 test('Switcharoo muzzle, smile and nostrils stay centred on its head', async () => {
-  const audit = JSON.parse(await readFile(new URL('../docs/evidence/second-wind/source-audit.json', import.meta.url), 'utf8'));
+  const audit = JSON.parse(await readFile(new URL('../docs/sculpt-20261024/second-wind-source-audit.json', import.meta.url), 'utf8'));
   const alignment = audit.sources.find((source: { id: string }) => source.id === 'switcharoo')?.facialAlignment;
   assert.ok(alignment, 'the editable source must have an independently inspected face');
   assert.equal(alignment.nostrils, 2);

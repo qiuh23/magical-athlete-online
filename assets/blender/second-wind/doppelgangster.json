@@ -1,46 +1,42 @@
 {
-  "version": 1,
-  "edition": "second-wind",
-  "generator": "Blender 5.2.3 LTS Release Candidate",
-  "source": "assets/blender/second-wind.blend",
-  "units": "metres",
-  "up": "+Y",
-  "forward": "+Z",
-  "pivot": "ground-centre",
-  "compression": "EXT_meshopt_compression",
-  "models": [
-    {
-      "id": "doppelgangster",
-      "node": "toy_doppelgangster",
-      "url": "/models/second-wind/doppelgangster.glb",
-      "avatar": "/models/second-wind/avatars/doppelgangster.png",
-      "bytes": 49572,
-      "triangles": 4432,
-      "draws": 6,
-      "bounds": [
-        0.6,
-        0.91406,
-        0.32813
-      ],
-      "pivotY": 0,
-      "animations": [
-        "idle",
-        "move",
-        "skill",
-        "fall",
-        "recover"
-      ],
-      "recognition": "Two orange long-nosed gangsters, purple pinstripe suits and fedoras, red ties and lapel roses.",
-      "inferred": "Second companion, backs of suits, collars and pinstripe wrapping extrapolated in 3D.",
-      "referenceChecked": true,
-      "referenceImage": "https://johnnlds.github.io/Magical-Athlete-Racers/images/expansion/Doppelgangster.png",
-      "editableSource": "assets/blender/second-wind/doppelgangster.blend"
-    }
+  "id": "doppelgangster",
+  "node": "toy_doppelgangster",
+  "url": "/models/second-wind/doppelgangster.glb",
+  "avatar": "/avatars/second-wind/doppelgangster.svg",
+  "bytes": 77708,
+  "triangles": 7794,
+  "draws": 1,
+  "bounds": [
+    0.5999938962981048,
+    0.819635620757914,
+    0.22089297158726767
   ],
-  "variants": [],
-  "totalBytes": 49572,
-  "totalTriangles": 4432,
-  "materialCount": 15,
-  "textureCount": 0,
-  "referenceStatus": "36 fan-site illustrations visually inspected; closed-volume toy interpretations; unseen views explicitly inferred; not exact official production sculpts."
+  "pivotY": 0,
+  "animations": [
+    "idle",
+    "move",
+    "skill",
+    "fall",
+    "recover"
+  ],
+  "recognition": "Registered image viewed: two orange long-nosed gangsters in purple pinstripe suits/fedoras, red ties and roses. Separate staggered bodies, hands and full suit backs.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "referenceChecked": true,
+  "referenceImage": "https://johnnlds.github.io/Magical-Athlete-Racers/images/expansion/Doppelgangster.png",
+  "editableSource": "assets/blender/second-wind/doppelgangster.blend",
+  "modelPreview": "/models/second-wind/avatars/doppelgangster.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "motionProfile": "biped",
+  "bones": 5,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "Registered image viewed: two orange long-nosed gangsters in purple pinstripe suits/fedoras, red ties and roses. Separate staggered bodies, hands and full suit backs.",
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "e6f51e36dfaa18fc9df65d97f8be3dfa08259217b7b54f195b98e4e7cc13eb69",
+  "glbSha256": "6fa60b4154babd705ea7c85d1944b7a47a927d1cee8236708b02c8f3939a15fd",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

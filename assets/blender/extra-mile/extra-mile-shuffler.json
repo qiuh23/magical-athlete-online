@@ -2,13 +2,13 @@
   "id": "extra-mile-shuffler",
   "node": "toy_extra-mile-shuffler",
   "url": "/models/extra-mile/extra-mile-shuffler.glb",
-  "bytes": 50984,
-  "triangles": 2272,
-  "draws": 4,
+  "bytes": 42040,
+  "triangles": 3334,
+  "draws": 1,
   "bounds": [
-    0.6,
-    0.75971,
-    0.21947
+    0.5999938962981048,
+    0.7112643722792933,
+    0.1467329935605945
   ],
   "pivotY": 0,
   "animations": [
@@ -23,7 +23,20 @@
   "editableSource": "assets/blender/extra-mile/extra-mile-shuffler.blend",
   "referenceChecked": true,
   "reference": "https://johnnlds.github.io/Magical-Athlete-Racers/ExtraMile.pdf",
-  "referenceDate": "2026-10-22",
-  "recognition": "white playing card with black spade, blue limbs and red card stack",
-  "inferred": "Single-view card artwork informs the silhouette and identifying props. Side/back surfaces and joint placement are original project interpretations, not author-approved sculpts."
+  "referenceDate": "2026-10-24",
+  "recognition": "ExtraMile.pdf viewed: white ace-of-spades card creature, blue limbs and red deck. Body is a thick gently curved editable mesh with full back; the cards form a held fan rather than unattached floating graphics.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "avatar": "/avatars/extra-mile/extra-mile-shuffler.svg",
+  "modelPreview": "/models/extra-mile/avatars/extra-mile-shuffler.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "ExtraMile.pdf viewed: white ace-of-spades card creature, blue limbs and red deck. Body is a thick gently curved editable mesh with full back; the cards form a held fan rather than unattached floating graphics.",
+  "originalAuthorImageChecked": true,
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "1518193876660b39213bcdfbfea4180571c5c4dc7c7ec054a840e750c0809c54",
+  "glbSha256": "0c522b6488c81a53e28037f8595e9d2efac58e8b5ae94954a7e979923c805a91",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

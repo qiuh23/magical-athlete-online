@@ -1,0 +1,42 @@
+{
+  "id": "wurstii-olaf",
+  "nameZh": "奥拉夫",
+  "node": "toy_wurstii-olaf",
+  "model": "/models/wurstii/wurstii-olaf.glb",
+  "portrait": "/avatars/wurstii/wurstii-olaf.png",
+  "editableSource": "assets/blender/wurstii/blend/wurstii-olaf.blend",
+  "bytes": 67036,
+  "triangles": 6608,
+  "draws": 1,
+  "bounds": [
+    0.5532395397808771,
+    0.9800103928338197,
+    0.33112582781456956
+  ],
+  "animations": [
+    "idle",
+    "move",
+    "skill",
+    "fall",
+    "recover"
+  ],
+  "modelPreview": "/models/wurstii/avatars/wurstii-olaf.png",
+  "avatar": "/avatars/wurstii/wurstii-olaf.svg",
+  "avatarStyle": "flat-cartoon-svg",
+  "bones": 5,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "pivotY": 0,
+  "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Olaf of The Lost Vikings: green tunic, yellow beard, grey horned helmet and brown rectangular shield, not Frozen snowman. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "referenceChecked": true,
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "4f40d998b1b4eaea65720ebf3f5327091b6020749d52f8e3e70ed2b064be0aac",
+  "glbSha256": "72138bae87c7d437c0954205ae3cd155d5c5ebfd740b235a57b2f83846beabb8",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "recognition": "User-provided Wurstii reference card crop actually viewed: Olaf of The Lost Vikings: green tunic, yellow beard, grey horned helmet and brown rectangular shield, not Frozen snowman. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "assetVersion": "authored-sculpt-final-20261024"
+}

@@ -3,13 +3,13 @@
   "node": "toy_magical-athlete",
   "url": "/models/second-wind/magical-athlete.glb",
   "avatar": "/avatars/second-wind/magical-athlete.svg",
-  "bytes": 49648,
-  "triangles": 3074,
-  "draws": 6,
+  "bytes": 47004,
+  "triangles": 4816,
+  "draws": 1,
   "bounds": [
-    0.59129,
-    0.98,
-    0.46218
+    0.47993408001953186,
+    0.9800103928338197,
+    0.29584643086031676
   ],
   "pivotY": 0,
   "animations": [
@@ -19,8 +19,8 @@
     "fall",
     "recover"
   ],
-  "recognition": "Orange wizard athlete, blue star-covered robe and tall pointed hat, violet staff and golden star details.",
-  "inferred": "Back and side volumes extrapolated from the published single-view illustration.",
+  "recognition": "Registered card viewed: orange wizard athlete, blue pointed hat and star-covered robe, violet staff. Tailored body/back and rigid grip reconstructed.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
   "referenceChecked": true,
   "referenceImage": "https://johnnlds.github.io/Magical-Athlete-Racers/images/expansion/Magical%20Athlete.png",
   "editableSource": "assets/blender/second-wind/magical-athlete.blend",
@@ -28,5 +28,15 @@
   "avatarStyle": "flat-cartoon-svg",
   "motionProfile": "float",
   "bones": 5,
-  "mouthSurfaceVersion": "surface-mouth-v2"
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "Registered card viewed: orange wizard athlete, blue pointed hat and star-covered robe, violet staff. Tailored body/back and rigid grip reconstructed.",
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "78a8bb360d10d2253d8c7ea28604d5c18346cb6a80cda1f62995a9d98bc29f1a",
+  "glbSha256": "77eb9908209b8b2af0a360aff78b437d135a043aa87af3072b1ba01695688a91",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

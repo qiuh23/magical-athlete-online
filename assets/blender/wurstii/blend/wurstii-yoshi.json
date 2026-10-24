@@ -1,0 +1,42 @@
+{
+  "id": "wurstii-yoshi",
+  "nameZh": "耀西",
+  "node": "toy_wurstii-yoshi",
+  "model": "/models/wurstii/wurstii-yoshi.glb",
+  "portrait": "/avatars/wurstii/wurstii-yoshi.png",
+  "editableSource": "assets/blender/wurstii/blend/wurstii-yoshi.blend",
+  "bytes": 54488,
+  "triangles": 4462,
+  "draws": 1,
+  "bounds": [
+    0.5029450361644338,
+    0.9329203313089629,
+    0.6000244148075808
+  ],
+  "animations": [
+    "idle",
+    "move",
+    "skill",
+    "fall",
+    "recover"
+  ],
+  "modelPreview": "/models/wurstii/avatars/wurstii-yoshi.png",
+  "avatar": "/avatars/wurstii/wurstii-yoshi.svg",
+  "avatarStyle": "flat-cartoon-svg",
+  "bones": 5,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "pivotY": 0,
+  "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Yoshi: green dinosaur with large snout/tall eyes, white jaw/belly, orange shoes/spines, red saddle and tail. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "referenceChecked": true,
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "f95707ee6eee8467254b6aca89767f561e756fa61288a6a01f09e30c785e6808",
+  "glbSha256": "720fca7a55b4556049b818aa4cc5901a4fe0ae65299a60ea9852044a786a28b1",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "recognition": "User-provided Wurstii reference card crop actually viewed: Yoshi: green dinosaur with large snout/tall eyes, white jaw/belly, orange shoes/spines, red saddle and tail. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "assetVersion": "authored-sculpt-final-20261024"
+}

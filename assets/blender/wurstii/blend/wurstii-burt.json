@@ -1,0 +1,42 @@
+{
+  "id": "wurstii-burt",
+  "nameZh": "伯特",
+  "node": "toy_wurstii-burt",
+  "model": "/models/wurstii/wurstii-burt.glb",
+  "portrait": "/avatars/wurstii/wurstii-burt.png",
+  "editableSource": "assets/blender/wurstii/blend/wurstii-burt.blend",
+  "bytes": 56480,
+  "triangles": 5140,
+  "draws": 1,
+  "bounds": [
+    0.5667287209692679,
+    0.9800103928338197,
+    0.4288460887664078
+  ],
+  "animations": [
+    "idle",
+    "move",
+    "skill",
+    "fall",
+    "recover"
+  ],
+  "modelPreview": "/models/wurstii/avatars/wurstii-burt.png",
+  "avatar": "/avatars/wurstii/wurstii-burt.svg",
+  "avatarStyle": "flat-cartoon-svg",
+  "bones": 5,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "pivotY": 0,
+  "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Burt: rounded tan creature with black tuft, elongated brown nose, pink cheek and blue-white vertically striped trousers; explicitly not Sesame Street Bert. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "referenceChecked": true,
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "cafadab83ffbd6ad2c367e195500dcd98b77d5a8cb415147060b255ba3656a98",
+  "glbSha256": "a97fc8fdb9ce3d09552e27b94e449616fbe39b73abf35d98ed0601a0cb49bd21",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "recognition": "User-provided Wurstii reference card crop actually viewed: Burt: rounded tan creature with black tuft, elongated brown nose, pink cheek and blue-white vertically striped trousers; explicitly not Sesame Street Bert. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "assetVersion": "authored-sculpt-final-20261024"
+}

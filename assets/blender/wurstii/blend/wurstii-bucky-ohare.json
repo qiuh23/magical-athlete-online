@@ -1,0 +1,42 @@
+{
+  "id": "wurstii-bucky-ohare",
+  "nameZh": "巴基兔",
+  "node": "toy_wurstii-bucky-ohare",
+  "model": "/models/wurstii/wurstii-bucky-ohare.glb",
+  "portrait": "/avatars/wurstii/wurstii-bucky-ohare.png",
+  "editableSource": "assets/blender/wurstii/blend/wurstii-bucky-ohare.blend",
+  "bytes": 56932,
+  "triangles": 5072,
+  "draws": 1,
+  "bounds": [
+    0.46913052766502883,
+    0.9800103928338197,
+    0.24707785271767327
+  ],
+  "animations": [
+    "idle",
+    "move",
+    "skill",
+    "fall",
+    "recover"
+  ],
+  "modelPreview": "/models/wurstii/avatars/wurstii-bucky-ohare.png",
+  "avatar": "/avatars/wurstii/wurstii-bucky-ohare.svg",
+  "avatarStyle": "flat-cartoon-svg",
+  "bones": 5,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "pivotY": 0,
+  "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Bucky O Hare: green rabbit with long ears, purple-magenta space uniform, gold trim and orange gloves/boots. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "referenceChecked": true,
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "70f6337f183908a0aa269a2609c863d91e0f4c208ac61058064494c7a4534e4d",
+  "glbSha256": "edd4ea9698645e6ef530af3b528e779713d8c71d1322c7c3c7dbc50aab82753c",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "recognition": "User-provided Wurstii reference card crop actually viewed: Bucky O Hare: green rabbit with long ears, purple-magenta space uniform, gold trim and orange gloves/boots. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "assetVersion": "authored-sculpt-final-20261024"
+}

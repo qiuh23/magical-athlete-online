@@ -3,6 +3,9 @@ import { readFile, readdir, stat } from 'node:fs/promises';
 import test from 'node:test';
 import { AnimationMixer, Box3, LoadingManager, Mesh, MeshStandardMaterial, Vector3 } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
+import { cloneToyModel } from '../src/client/scene/toy-model-instance.js';
+import { SkinnedMesh } from 'three';
 import { WURSTII_CHARACTERS } from '../src/shared/wurstii.js';
 import { ToyResourceCache } from '../src/client/scene/pawn-materials.js';
 
@@ -36,10 +39,12 @@ for (const model of manifest.models) test(`${model.id}: self-contained 3D asset,
   const binary = bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
   const manager = new LoadingManager();
   manager.setURLModifier(url => { throw new Error(`Unexpected external dependency ${url}`); });
-  const gltf = await new GLTFLoader(manager).parseAsync(binary, '');
+  const gltf = await new GLTFLoader(manager).setMeshoptDecoder(MeshoptDecoder).parseAsync(binary, '');
   const source = gltf.scene.getObjectByName(model.node); assert.ok(source);
   // Match CharacterModel: animate the named clone, not the complete GLTF scene.
-  const root = source.clone(true); const sibling = source.clone(true);
+  const root = cloneToyModel(source,true); const sibling = cloneToyModel(source,true);
+  let skin:SkinnedMesh|undefined,siblingSkin:SkinnedMesh|undefined;root.traverse(o=>{if(o instanceof SkinnedMesh)skin??=o});sibling.traverse(o=>{if(o instanceof SkinnedMesh)siblingSkin??=o});assert.ok(skin&&siblingSkin);assert.notEqual(skin.skeleton.bones[0],siblingSkin.skeleton.bones[0]);
+  const initialPose=skin.skeleton.bones.map(b=>b.quaternion.toArray());
   const bounds = new Box3().setFromObject(root, true); const size = bounds.getSize(new Vector3());
   assert.ok(Math.abs(bounds.min.y) < .001, 'feet meet the existing player base');
   assert.ok(Math.abs(bounds.min.x + bounds.max.x) < .001);
@@ -67,7 +72,7 @@ for (const model of manifest.models) test(`${model.id}: self-contained 3D asset,
     });
     assert.equal(triangles, model.triangles); assert.ok(triangles <= 8000);
     assert.equal(draws, model.draws); assert.equal(draws, 1);
-    assert.deepEqual(gltf.animations.map(clip => clip.name).sort(), ['idle', 'move', 'skill']);
+    assert.deepEqual(gltf.animations.map(clip => clip.name).sort(), ['fall','idle','move','recover','skill']);
     for (const clip of gltf.animations) {
       assert.ok(clip.duration > 0);
       const mixer = new AnimationMixer(root); mixer.clipAction(clip).play();
@@ -81,7 +86,8 @@ for (const model of manifest.models) test(`${model.id}: self-contained 3D asset,
         assert.ok(Math.abs(root.position.x) < .001 && Math.abs(root.position.z) < .001, 'the board owns horizontal movement');
         assert.deepEqual(sibling.position.toArray(), source.position.toArray(), 'another player stays independent');
         assert.deepEqual(sibling.scale.toArray(), source.scale.toArray());
-        changed ||= root.position.y > .001 || Math.abs(root.scale.y - 1) > .001;
+        changed ||= skin!.skeleton.bones.some((b,j)=>b.quaternion.toArray().some((v,k)=>Math.abs(v-initialPose[j]![k]!)>.00001));
+        assert.deepEqual(root.position.toArray(),[0,0,0]);assert.deepEqual(root.scale.toArray(),[1,1,1]);assert.deepEqual(siblingSkin!.skeleton.bones.map(b=>b.quaternion.toArray()),initialPose);
       }
       assert.ok(changed, `${clip.name} binds to the cloned model and visibly animates`);
       mixer.stopAllAction(); mixer.uncacheRoot(root);

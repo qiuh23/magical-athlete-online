@@ -89,7 +89,7 @@ export function installLeaf(ctx:LeafContext){
     if(p===leaf('zombie')){
       const enabled=new Set(enabledCharacterIds(s.config,s.characterPool,s.mode==='practice'));
       const candidates=[...new Set((s.flags.leafPastLosers??[]) as string[])].filter(id=>id!==p&&enabled.has(id)&&CHARACTERS.some(card=>card.id===id));
-      if(candidates.length)ask(s,r,'leaf-zombie','僵尸：可选择此前失利角色的印刷能力',[...candidates.map(id=>({id,label:title(id)})),{id:'skip',label:'不复制'}],{candidates},true);
+      if(candidates.length)ask(s,r,'leaf-zombie','僵尸：可选择此前失利角色卡上原本写明的能力',[...candidates.map(id=>({id,label:title(id)})),{id:'skip',label:'不复制'}],{candidates},true);
     }
     return true;
   }
@@ -234,7 +234,7 @@ export function installLeaf(ctx:LeafContext){
     if(cycleDraw)return;
     for(const target of s.racers){const tokens=target.flags.leafLoanTokens as Record<string,boolean>|undefined;if(!tokens)continue;const retained=Object.values(tokens).filter(Boolean).length;delete target.flags.leafLoanTokens;if(retained)points(s,target,retained,'高利贷鲨未收回的卡面筹码');}
     const candidates=s.racers.filter(r=>!r.eliminated),last=Math.min(...candidates.map(r=>progress(s,r))),back=candidates.filter(r=>progress(s,r)===last);
-    if(back.length===1&&has(s,back[0]!,'sore-loser'))points(s,back[0]!,3,'输不起独自末位奖励');
+    if(back.length===1&&has(s,back[0]!,'sore-loser'))points(s,back[0]!,3,'不服输独自末位奖励');
   }
   /** Release actual cards before race instances are replaced. This does not
    * expose unused private card identities in the public event log. */
@@ -255,7 +255,7 @@ export function installLeaf(ctx:LeafContext){
         log(s,'cancel',`${name(r)}的历史复制来源已不在本房间启用角色包中，本次复制取消。`,{source:r.id,cause:leaf('zombie')});return true;
       }
       acquirePower(r,power,{sourceCardId:power,via:leaf('zombie')});r.flags.leafZombieCard=power;
-      log(s,'copy',`${name(r)}本场获得此前失利角色「${title(power)}」的印刷能力，并执行其赛前效果。`,{source:r.id,cause:leaf('zombie'),selectedCardId:power,grantedPowerIds:[power],grantDuration:'race'});push(s,{kind:'beforeRacePower',racerId:r.id,power});return true;
+      log(s,'copy',`${name(r)}本场获得此前失利角色「${title(power)}」卡上原本写明的能力，并执行其赛前效果。`,{source:r.id,cause:leaf('zombie'),selectedCardId:power,grantedPowerIds:[power],grantDuration:'race'});push(s,{kind:'beforeRacePower',racerId:r.id,power});return true;
     }
     if(t.step==='film-copy'){
       const power=String(t.characterId),hand=(r.flags.secretLeafHand??[]) as string[];if(!hand.includes(power))throw Error('影片复制时手牌已失效。');

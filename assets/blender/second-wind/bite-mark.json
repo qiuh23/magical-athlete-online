@@ -3,13 +3,13 @@
   "node": "toy_bite-mark",
   "url": "/models/second-wind/bite-mark.glb",
   "avatar": "/avatars/second-wind/bite-mark.svg",
-  "bytes": 49588,
-  "triangles": 3384,
-  "draws": 4,
+  "bytes": 82360,
+  "triangles": 7400,
+  "draws": 1,
   "bounds": [
-    0.6,
-    0.87734,
-    0.45245
+    0.5895564830742187,
+    0.9800103928338197,
+    0.43034150853498876
   ],
   "pivotY": 0,
   "animations": [
@@ -19,14 +19,24 @@
     "fall",
     "recover"
   ],
-  "recognition": "Olive pointed ears, long purple mane, off-white ringer shirt, hunched claw hands.",
-  "inferred": "Back and side volumes extrapolated from the published single-view illustration.",
+  "recognition": "Viewed registered Bite Mark art: ochre-olive skin, purple bouffant/sideburns, pointed ears, long nose, yellow worried eyes and off-white purple-trim shirt. Back hair, shoes and stance inferred.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
   "referenceChecked": true,
   "referenceImage": "https://johnnlds.github.io/Magical-Athlete-Racers/images/expansion/Bite%20Mark.png",
   "editableSource": "assets/blender/second-wind/bite-mark.blend",
   "modelPreview": "/models/second-wind/avatars/bite-mark.png",
   "avatarStyle": "flat-cartoon-svg",
   "motionProfile": "biped",
-  "bones": 5,
-  "mouthSurfaceVersion": "surface-mouth-v2"
+  "bones": 7,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "Viewed registered Bite Mark art: ochre-olive skin, purple bouffant/sideburns, pointed ears, long nose, yellow worried eyes and off-white purple-trim shirt. Back hair, shoes and stance inferred.",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "originalAuthorImageChecked": true,
+  "sculptStatus": "completed-local-validation",
+  "referenceDate": "2026-10-24",
+  "sourceSha256": "d817b08662548fec8c9b17c4cd0768cb2dec1066612ddaa3906c29c652c12395",
+  "glbSha256": "9e5ae2a4d87cf193a17c9e64bcf658b19057abcd7396c83e5271997e3fc27e47",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

@@ -2,13 +2,13 @@
   "id": "extra-mile-scout",
   "node": "toy_extra-mile-scout",
   "url": "/models/extra-mile/extra-mile-scout.glb",
-  "bytes": 50220,
-  "triangles": 3068,
-  "draws": 7,
+  "bytes": 58356,
+  "triangles": 6874,
+  "draws": 1,
   "bounds": [
-    0.6,
-    0.7315,
-    0.41994
+    0.5999938962981048,
+    0.8661153120750603,
+    0.26319163356472147
   ],
   "pivotY": 0,
   "animations": [
@@ -23,9 +23,20 @@
   "editableSource": "assets/blender/extra-mile/extra-mile-scout.blend",
   "referenceChecked": true,
   "reference": "https://johnnlds.github.io/Magical-Athlete-Racers/ExtraMile.pdf",
-  "referenceDate": "2026-10-22",
-  "recognition": "red scout, wide yellow hat, badge sash and green flag",
-  "inferred": "Single-view card artwork informs the silhouette and identifying props. Side/back surfaces and joint placement are original project interpretations, not author-approved sculpts.",
-  "avatar": "/models/extra-mile/avatars/extra-mile-scout.png",
-  "mouthSurfaceVersion": "surface-mouth-v2"
+  "referenceDate": "2026-10-24",
+  "recognition": "ExtraMile.pdf viewed: red scout, tan uniform/wide hat, green sash with badges, violet scarf and green pennant. Pennant is the reference scouting prop, not an invented political flag.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "avatar": "/avatars/extra-mile/extra-mile-scout.svg",
+  "modelPreview": "/models/extra-mile/avatars/extra-mile-scout.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "ExtraMile.pdf viewed: red scout, tan uniform/wide hat, green sash with badges, violet scarf and green pennant. Pennant is the reference scouting prop, not an invented political flag.",
+  "originalAuthorImageChecked": true,
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "984eaaf2dd7e154302fd9f106420b9f612d1f8f1fb74c0b480a69be7c408b9df",
+  "glbSha256": "82ecc84087f0d75b27d4a60b14753ee5c373b7713e0e68a10c5237222d6733cb",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

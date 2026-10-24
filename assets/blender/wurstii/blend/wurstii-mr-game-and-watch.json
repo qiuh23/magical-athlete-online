@@ -1,0 +1,42 @@
+{
+  "id": "wurstii-mr-game-and-watch",
+  "nameZh": "游戏与观看先生",
+  "node": "toy_wurstii-mr-game-and-watch",
+  "model": "/models/wurstii/wurstii-mr-game-and-watch.glb",
+  "portrait": "/avatars/wurstii/wurstii-mr-game-and-watch.png",
+  "editableSource": "assets/blender/wurstii/blend/wurstii-mr-game-and-watch.blend",
+  "bytes": 37340,
+  "triangles": 1942,
+  "draws": 1,
+  "bounds": [
+    0.5999938962981048,
+    0.8239692492326577,
+    0.18552201910458693
+  ],
+  "animations": [
+    "idle",
+    "move",
+    "skill",
+    "fall",
+    "recover"
+  ],
+  "modelPreview": "/models/wurstii/avatars/wurstii-mr-game-and-watch.png",
+  "avatar": "/avatars/wurstii/wurstii-mr-game-and-watch.svg",
+  "avatarStyle": "flat-cartoon-svg",
+  "bones": 5,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "pivotY": 0,
+  "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Mr Game and Watch: black profile silhouette with projecting round nose and gloved hands. Kept intentionally monochrome but all parts are closed thick volumes with complete side/back. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "referenceChecked": true,
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "f79589b79626510125d15b31598cba9998e6979d6ed8189be0fa73a1b6828650",
+  "glbSha256": "5e50a5524bcfcf27fb04e5851930b51ab253a41d436ac01981cda1f4c4d1390b",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "recognition": "User-provided Wurstii reference card crop actually viewed: Mr Game and Watch: black profile silhouette with projecting round nose and gloved hands. Kept intentionally monochrome but all parts are closed thick volumes with complete side/back. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "assetVersion": "authored-sculpt-final-20261024"
+}

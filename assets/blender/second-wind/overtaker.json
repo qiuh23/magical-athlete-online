@@ -3,13 +3,13 @@
   "node": "toy_overtaker",
   "url": "/models/second-wind/overtaker.glb",
   "avatar": "/avatars/second-wind/overtaker.svg",
-  "bytes": 56396,
-  "triangles": 3776,
-  "draws": 6,
+  "bytes": 59908,
+  "triangles": 5828,
+  "draws": 1,
   "bounds": [
-    0.6,
-    0.7944,
-    0.356
+    0.5999938962981048,
+    0.8948026978362377,
+    0.3306985637541129
   ],
   "pivotY": 0,
   "animations": [
@@ -19,8 +19,8 @@
     "fall",
     "recover"
   ],
-  "recognition": "Blue gravedigger, cream wrapped cap, brown coat, shovel and skull-topped staff; sculpted snout and cap seams.",
-  "inferred": "Back and side volumes extrapolated from the published single-view illustration.",
+  "recognition": "Registered card viewed: blue gravedigger with cream wrapped cap, brown coat, shovel and skull-topped staff. Full grip, cap seams and tool depth reconstructed.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
   "referenceChecked": true,
   "referenceImage": "https://johnnlds.github.io/Magical-Athlete-Racers/images/expansion/Overtaker.png",
   "editableSource": "assets/blender/second-wind/overtaker.blend",
@@ -28,5 +28,15 @@
   "avatarStyle": "flat-cartoon-svg",
   "motionProfile": "biped",
   "bones": 5,
-  "mouthSurfaceVersion": "surface-mouth-v2"
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "Registered card viewed: blue gravedigger with cream wrapped cap, brown coat, shovel and skull-topped staff. Full grip, cap seams and tool depth reconstructed.",
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "cbfffdc9ff73abf497859cd028a2852b7e5f57b358703669d751d8377700f03a",
+  "glbSha256": "f4b198f42d57be9b2f92cfdcfa23b6e4c3fbb300c94c75acbcfbdd54aae1f1d9",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

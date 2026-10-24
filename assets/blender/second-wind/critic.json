@@ -1,46 +1,42 @@
 {
-  "version": 1,
-  "edition": "second-wind",
-  "generator": "Blender 5.2.3 LTS Release Candidate",
-  "source": "assets/blender/second-wind.blend",
-  "units": "metres",
-  "up": "+Y",
-  "forward": "+Z",
-  "pivot": "ground-centre",
-  "compression": "EXT_meshopt_compression",
-  "models": [
-    {
-      "id": "critic",
-      "node": "toy_critic",
-      "url": "/models/second-wind/critic.glb",
-      "avatar": "/models/second-wind/avatars/critic.png",
-      "bytes": 40032,
-      "triangles": 3300,
-      "draws": 5,
-      "bounds": [
-        0.6,
-        0.96393,
-        0.58033
-      ],
-      "pivotY": 0,
-      "animations": [
-        "idle",
-        "move",
-        "skill",
-        "fall",
-        "recover"
-      ],
-      "recognition": "Blue turtle, tall purple shell, green jacket, chin-resting hand and cup; shell plate seams wrap onto the back.",
-      "inferred": "Back and side volumes extrapolated from the published single-view illustration.",
-      "referenceChecked": true,
-      "referenceImage": "https://johnnlds.github.io/Magical-Athlete-Racers/images/expansion/Critic.png",
-      "editableSource": "assets/blender/second-wind/critic.blend"
-    }
+  "id": "critic",
+  "node": "toy_critic",
+  "url": "/models/second-wind/critic.glb",
+  "avatar": "/avatars/second-wind/critic.svg",
+  "bytes": 56092,
+  "triangles": 5308,
+  "draws": 1,
+  "bounds": [
+    0.5999938962981048,
+    0.9002350066860711,
+    0.5598010109742575
   ],
-  "variants": [],
-  "totalBytes": 40032,
-  "totalTriangles": 3300,
-  "materialCount": 15,
-  "textureCount": 0,
-  "referenceStatus": "36 fan-site illustrations visually inspected; closed-volume toy interpretations; unseen views explicitly inferred; not exact official production sculpts."
+  "pivotY": 0,
+  "animations": [
+    "idle",
+    "move",
+    "skill",
+    "fall",
+    "recover"
+  ],
+  "recognition": "Registered card image viewed: blue turtle, purple shell, olive jacket, hand under chin and cup. Shell has complete rear seams and independent depth.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "referenceChecked": true,
+  "referenceImage": "https://johnnlds.github.io/Magical-Athlete-Racers/images/expansion/Critic.png",
+  "editableSource": "assets/blender/second-wind/critic.blend",
+  "modelPreview": "/models/second-wind/avatars/critic.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "motionProfile": "biped",
+  "bones": 5,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "Registered card image viewed: blue turtle, purple shell, olive jacket, hand under chin and cup. Shell has complete rear seams and independent depth.",
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "69eb53ca1d6364b9e339f11257e640dbe84f03323724a8480a214a73b96fe581",
+  "glbSha256": "c0b6d667ba55137e6dca629ac5fec8124e427d6e8d3d3cf13269cca68ba89202",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

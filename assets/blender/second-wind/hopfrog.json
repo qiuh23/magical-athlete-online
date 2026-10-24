@@ -3,13 +3,13 @@
   "node": "toy_hopfrog",
   "url": "/models/second-wind/hopfrog.glb",
   "avatar": "/avatars/second-wind/hopfrog.svg",
-  "bytes": 38672,
-  "triangles": 2352,
-  "draws": 3,
+  "bytes": 36544,
+  "triangles": 2668,
+  "draws": 1,
   "bounds": [
-    0.6,
-    0.78595,
-    0.35117
+    0.5999938962981048,
+    0.6443983417500574,
+    0.29725028229621264
   ],
   "pivotY": 0,
   "animations": [
@@ -19,8 +19,8 @@
     "fall",
     "recover"
   ],
-  "recognition": "Bright red broad-faced frog, two tall eye stalks, stretched spring-like legs and webbed feet.",
-  "inferred": "Back and side volumes extrapolated from the published single-view illustration.",
+  "recognition": "Registered card viewed: red frog, broad grinning face, tall paired eye stalks and spring-like legs. Distinct full body and webbed extremities rebuilt.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
   "referenceChecked": true,
   "referenceImage": "https://johnnlds.github.io/Magical-Athlete-Racers/images/expansion/Hopfrog.png",
   "editableSource": "assets/blender/second-wind/hopfrog.blend",
@@ -28,5 +28,15 @@
   "avatarStyle": "flat-cartoon-svg",
   "motionProfile": "quadruped",
   "bones": 5,
-  "mouthSurfaceVersion": "surface-mouth-v2"
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "Registered card viewed: red frog, broad grinning face, tall paired eye stalks and spring-like legs. Distinct full body and webbed extremities rebuilt.",
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "9a643cee6d9b958e1b7c588a3a29d1216d7c444c06f5fd0ba599ad5786502610",
+  "glbSha256": "1ae468437570730d8712e4e7903d05368347c2d7c9517476c20e5b809ee6ccdc",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

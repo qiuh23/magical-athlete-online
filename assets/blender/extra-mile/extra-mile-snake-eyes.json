@@ -2,13 +2,13 @@
   "id": "extra-mile-snake-eyes",
   "node": "toy_extra-mile-snake-eyes",
   "url": "/models/extra-mile/extra-mile-snake-eyes.glb",
-  "bytes": 50840,
-  "triangles": 2788,
-  "draws": 4,
+  "bytes": 41656,
+  "triangles": 3408,
+  "draws": 1,
   "bounds": [
-    0.40074,
-    0.98,
-    0.29464
+    0.5358439893795587,
+    0.9800103928338197,
+    0.3212378270219801
   ],
   "pivotY": 0,
   "animations": [
@@ -23,7 +23,20 @@
   "editableSource": "assets/blender/extra-mile/extra-mile-snake-eyes.blend",
   "referenceChecked": true,
   "reference": "https://johnnlds.github.io/Magical-Athlete-Racers/ExtraMile.pdf",
-  "referenceDate": "2026-10-22",
-  "recognition": "green coiled snake, cream belly, forked red tongue and two white dice above its eyes",
-  "inferred": "Single-view card artwork informs the silhouette and identifying props. Side/back surfaces and joint placement are original project interpretations, not author-approved sculpts."
+  "referenceDate": "2026-10-24",
+  "recognition": "ExtraMile.pdf viewed: green coiled snake with ivory belly, actual dice eyes, red forked tongue and a card fan held by tail. No human arms/legs or unsupported floating dice; no gameplay chips baked into pawn.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "avatar": "/avatars/extra-mile/extra-mile-snake-eyes.svg",
+  "modelPreview": "/models/extra-mile/avatars/extra-mile-snake-eyes.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "ExtraMile.pdf viewed: green coiled snake with ivory belly, actual dice eyes, red forked tongue and a card fan held by tail. No human arms/legs or unsupported floating dice; no gameplay chips baked into pawn.",
+  "originalAuthorImageChecked": true,
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "f20802d70fccd1e87a126ca0e8bc1db5171341102ec79a173714bbdc8dc41f48",
+  "glbSha256": "e912b5a11b98203d0cad6353e708e0f3f493af18ce70458ddf80f817fe4e55b3",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

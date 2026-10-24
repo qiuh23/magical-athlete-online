@@ -1,13 +1,13 @@
 {
   "version": 1,
-  "generator": "Blender 5.2.3 LTS Release Candidate",
-  "reference": "user supplied miniature stadium image, 2026-10-22",
+  "generator": "Blender 4.3.2 authored sculpt; Blender 5.2.2 economy/export assembly",
+  "reference": "Publisher original card, how-to-play PDF p22, actually viewed 2026-10-24",
   "high": {
     "id": "banana",
     "url": "/models/banana/banana.glb",
-    "bytes": 68764,
-    "triangles": 4950,
-    "draws": 7,
+    "bytes": 44512,
+    "triangles": 3400,
+    "draws": 1,
     "bones": 5,
     "animations": [
       "idle",
@@ -16,14 +16,15 @@
       "fall",
       "recover"
     ],
-    "source": "assets/blender/banana.blend"
+    "source": "assets/blender/banana.blend",
+    "glbSha256": "25bad0ab653cceb00f9d93b0013e7bc0ffee913c764d2b9f99803adce4e5372d"
   },
   "economy": {
     "id": "banana",
     "url": "/models/banana/banana-economy.glb",
-    "bytes": 61712,
-    "triangles": 3934,
-    "draws": 7,
+    "bytes": 38272,
+    "triangles": 2120,
+    "draws": 1,
     "bones": 5,
     "animations": [
       "idle",
@@ -32,6 +33,9 @@
       "fall",
       "recover"
     ],
-    "source": "assets/blender/banana.blend"
-  }
+    "source": "assets/blender/banana.blend",
+    "glbSha256": "eb5c77d8709fb3f55fa716f9bda68944b88169cccdbcc1d3aad2a0b396f6113b"
+  },
+  "sculptVersion": "authored-20261024",
+  "sourceSha256": "ab5e0b7dfb94a917e124942c294189a596b4cfa67a7200cede484ad5f0db9b3d"
 }

@@ -4,20 +4,20 @@
   "up": "+Y",
   "forward": "+Z",
   "pivot": "ground-centre",
-  "generator": "Blender 5.2.3 LTS Release Candidate",
+  "generator": "Blender 5.2.2 LTS source assembly; replacement sculpts Blender 4.3.2",
   "source": "assets/blender/toy-racers.blend",
   "collapseRatio": 0.36,
   "models": [
     {
       "id": "alchemist",
       "node": "toy_alchemist",
-      "triangles": 2025,
+      "triangles": 2120,
       "sourceTriangles": 5480,
-      "draws": 6,
+      "draws": 1,
       "bounds": [
-        0.59,
-        0.89758,
-        0.385
+        0.5422528763695181,
+        0.9799798743234341,
+        0.4709311126798612
       ],
       "pivotY": 0,
       "protectedSmallComponents": 13,
@@ -34,18 +34,24 @@
         "fall",
         "recover"
       ],
-      "bones": 5
+      "bones": 5,
+      "sculptVersion": "authored-20261024",
+      "generator": "Blender 4.3.2",
+      "referenceBasis": "Publisher card p22: green bent hat/robe, orange beard, purple/pink hands and cauldron. Complete robe back and held cauldron depth inferred.",
+      "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
+      "sculptStatus": "completed-local-validation",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "baba-yaga",
       "node": "toy_baba-yaga",
-      "triangles": 1390,
+      "triangles": 2024,
       "sourceTriangles": 3726,
-      "draws": 6,
+      "draws": 1,
       "bounds": [
-        0.55483,
-        1.015,
-        0.47275
+        0.47706535434644315,
+        0.9800103928338197,
+        0.3733634560564474
       ],
       "pivotY": 0,
       "protectedSmallComponents": 12,
@@ -62,18 +68,24 @@
         "fall",
         "recover"
       ],
-      "bones": 5
+      "bones": 5,
+      "sculptVersion": "authored-20261024",
+      "generator": "Blender 4.3.2",
+      "referenceBasis": "Publisher card p22: small orange-roofed hut on extremely long yellow chicken legs. Window, rear wall and roof thickness completed in project design.",
+      "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
+      "sculptStatus": "completed-local-validation",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "banana",
       "node": "toy_banana",
-      "triangles": 3319,
+      "triangles": 2120,
       "sourceTriangles": 9000,
-      "draws": 4,
+      "draws": 1,
       "bounds": [
-        0.59037,
-        0.938,
-        0.25949
+        0.44953764458143863,
+        0.9796136521988079,
+        0.24616229506329768
       ],
       "pivotY": 0,
       "protectedSmallComponents": 11,
@@ -90,18 +102,24 @@
         "fall",
         "recover"
       ],
-      "bones": 5
+      "bones": 5,
+      "sculptVersion": "authored-20261024",
+      "generator": "Blender 4.3.2",
+      "referenceBasis": "Publisher card p22: curved yellow banana, dark stem, orange birdlike feet and side-set face. Peel thickness and reverse seam are project interpretation.",
+      "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
+      "sculptStatus": "completed-local-validation",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "blimp",
       "node": "toy_blimp",
-      "triangles": 1294,
+      "triangles": 2119,
       "sourceTriangles": 3470,
-      "draws": 5,
+      "draws": 1,
       "bounds": [
-        0.58888,
-        0.63677,
-        0.38816
+        0.5999938962981048,
+        0.3769035920285653,
+        0.37134922330393383
       ],
       "pivotY": 0,
       "protectedSmallComponents": 6,
@@ -118,18 +136,24 @@
         "fall",
         "recover"
       ],
-      "bones": 5
+      "bones": 5,
+      "sculptVersion": "authored-20261024",
+      "generator": "Blender 4.3.2",
+      "referenceBasis": "Publisher card p22: silver ribbed dirigible with small face near the nose. Full tail fins and compact undercarriage inferred; explosion omitted from the static pawn.",
+      "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
+      "sculptStatus": "completed-local-validation",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "centaur",
       "node": "toy_centaur",
-      "triangles": 2623,
+      "triangles": 2120,
       "sourceTriangles": 7208,
-      "draws": 5,
+      "draws": 1,
       "bounds": [
-        0.59,
-        0.93799,
-        0.57777
+        0.3964964751121555,
+        0.8201239169240822,
+        0.5996581926938689
       ],
       "pivotY": 0,
       "protectedSmallComponents": 7,
@@ -146,18 +170,24 @@
         "fall",
         "recover"
       ],
-      "bones": 5
+      "bones": 5,
+      "sculptVersion": "authored-20261024",
+      "generator": "Blender 4.3.2",
+      "referenceBasis": "Publisher card p22: orange human torso, red equine body, long white hair and tail. Four legs, hooves and rear proportions reconstructed.",
+      "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
+      "sculptStatus": "completed-local-validation",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "cheerleader",
       "node": "toy_cheerleader",
-      "triangles": 3346,
+      "triangles": 2120,
       "sourceTriangles": 9048,
-      "draws": 6,
+      "draws": 1,
       "bounds": [
-        0.59,
-        0.78717,
-        0.3811
+        0.598925748466445,
+        0.7585070445894483,
+        0.30628376110110783
       ],
       "pivotY": 0,
       "protectedSmallComponents": 14,
@@ -174,18 +204,24 @@
         "fall",
         "recover"
       ],
-      "bones": 5
+      "bones": 5,
+      "sculptVersion": "authored-20261024",
+      "generator": "Blender 4.3.2",
+      "referenceBasis": "Publisher card p22: round red furry cheerleader, huge purple nose, purple pom-poms and white gloves. Back fur and lower stance inferred.",
+      "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
+      "sculptStatus": "completed-local-validation",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "coach",
       "node": "toy_coach",
-      "triangles": 1932,
+      "triangles": 2120,
       "sourceTriangles": 5276,
-      "draws": 5,
+      "draws": 1,
       "bounds": [
-        0.59,
-        0.89758,
-        0.46054
+        0.5975218553739436,
+        0.8886379727395738,
+        0.5287026502811631
       ],
       "pivotY": 0,
       "protectedSmallComponents": 7,
@@ -202,18 +238,24 @@
         "fall",
         "recover"
       ],
-      "bones": 5
+      "bones": 7,
+      "sculptVersion": "authored-20261024",
+      "generator": "Blender 4.3.2",
+      "referenceBasis": "Publisher card p22 viewed: green lizard, white/red varsity jacket, red cap, purple megaphone. Back tailoring/tail pose inferred.",
+      "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
+      "sculptStatus": "completed-local-validation",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "copycat",
       "node": "toy_copycat",
-      "triangles": 3084,
+      "triangles": 2120,
       "sourceTriangles": 8352,
-      "draws": 4,
+      "draws": 1,
       "bounds": [
-        0.59002,
-        0.92295,
-        0.36576
+        0.5964232431690277,
+        0.8409375410070066,
+        0.27027192394679656
       ],
       "pivotY": 0,
       "protectedSmallComponents": 16,
@@ -230,18 +272,24 @@
         "fall",
         "recover"
       ],
-      "bones": 5
+      "bones": 5,
+      "sculptVersion": "authored-20261024",
+      "generator": "Blender 4.3.2",
+      "referenceBasis": "Publisher card p22 viewed: two blue cats with white collars and yellow/purple ties. Staggered heights and complete backs/tails are project sculpt interpretation.",
+      "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
+      "sculptStatus": "completed-local-validation",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "dicemonger",
       "node": "toy_dicemonger",
-      "triangles": 1978,
+      "triangles": 2100,
       "sourceTriangles": 5252,
-      "draws": 4,
+      "draws": 1,
       "bounds": [
-        0.59,
-        0.77728,
-        0.43294
+        0.5999938962981048,
+        0.9050569313269834,
+        0.3654286351568673
       ],
       "pivotY": 0,
       "protectedSmallComponents": 15,
@@ -258,18 +306,24 @@
         "fall",
         "recover"
       ],
-      "bones": 5
+      "bones": 5,
+      "sculptVersion": "authored-20261024",
+      "generator": "Blender 4.3.2",
+      "referenceBasis": "Publisher card p22: purple dealer, red coat/hat and colorful dice rack inside opened coat. Cabinet depth, sleeves and back tailored in 3D.",
+      "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
+      "sculptStatus": "completed-local-validation",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "duelist",
       "node": "toy_duelist",
-      "triangles": 2011,
+      "triangles": 2119,
       "sourceTriangles": 5500,
-      "draws": 4,
+      "draws": 1,
       "bounds": [
-        0.58985,
-        0.90345,
-        0.44083
+        0.522171697134312,
+        0.9797662447507355,
+        0.34290597502715303
       ],
       "pivotY": 0,
       "protectedSmallComponents": 7,
@@ -286,18 +340,24 @@
         "fall",
         "recover"
       ],
-      "bones": 5
+      "bones": 5,
+      "sculptVersion": "authored-20261024",
+      "generator": "Blender 4.3.2",
+      "referenceBasis": "Publisher card p23: blue feathered hat and coat, pale blue face, long red nose, white neck ruff and rapier. Full garment construction/back inferred.",
+      "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
+      "sculptStatus": "completed-local-validation",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "egg",
       "node": "toy_egg",
-      "triangles": 1606,
+      "triangles": 2120,
       "sourceTriangles": 4340,
-      "draws": 3,
+      "draws": 1,
       "bounds": [
-        0.51556,
-        1.015,
-        0.49059
+        0.59999388967123,
+        0.9365825525552253,
+        0.41938535219649864
       ],
       "pivotY": 0,
       "protectedSmallComponents": 10,
@@ -314,20 +374,26 @@
         "fall",
         "recover"
       ],
-      "bones": 5
+      "bones": 5,
+      "sculptVersion": "authored-20261024",
+      "generator": "Blender 4.3.2",
+      "referenceBasis": "Publisher card p23: immense orange egg/shell canopy concealing a small blue/purple magician, red nose and two eyes on shell. Nested rear volumes inferred, no rule change.",
+      "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
+      "sculptStatus": "completed-local-validation",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "flip-flop",
       "node": "toy_flip-flop",
-      "triangles": 1506,
+      "triangles": 2120,
       "sourceTriangles": 4108,
-      "draws": 4,
+      "draws": 1,
       "bounds": [
-        0.59,
-        0.82709,
-        0.3052
+        0.5999938962981048,
+        0.744865261927867,
+        0.4721213433316752
       ],
-      "pivotY": 0,
+      "pivotY": -1.2862019183622902e-08,
       "protectedSmallComponents": 5,
       "canonicalBoundsScale": [
         0.9998503923416138,
@@ -342,18 +408,24 @@
         "fall",
         "recover"
       ],
-      "bones": 5
+      "bones": 5,
+      "sculptVersion": "authored-20261024",
+      "generator": "Blender 4.3.2",
+      "referenceBasis": "Publisher card p23: purple low soft creature, long yellow drooping moustache, swept grey hair. It is not a literal flip-flop shoe; back and underside inferred.",
+      "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
+      "sculptStatus": "completed-local-validation",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "genius",
       "node": "toy_genius",
-      "triangles": 1720,
+      "triangles": 2120,
       "sourceTriangles": 4564,
-      "draws": 5,
+      "draws": 1,
       "bounds": [
-        0.59,
-        0.91148,
-        0.36296
+        0.5624561296426283,
+        0.9785149858249291,
+        0.4413892025513474
       ],
       "pivotY": 0,
       "protectedSmallComponents": 11,
@@ -370,18 +442,24 @@
         "fall",
         "recover"
       ],
-      "bones": 5
+      "bones": 5,
+      "sculptVersion": "authored-20261024",
+      "generator": "Blender 4.3.2",
+      "referenceBasis": "Publisher card p23: pink long-snouted genius, blue untidy hair, round spectacles, red vest and calculator. Limbs, back tailoring and hand grip inferred.",
+      "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
+      "sculptStatus": "completed-local-validation",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "gunk",
       "node": "toy_gunk",
-      "triangles": 2520,
+      "triangles": 2120,
       "sourceTriangles": 6846,
-      "draws": 5,
+      "draws": 1,
       "bounds": [
-        0.59,
-        0.78864,
-        0.47682
+        0.5966368602557451,
+        0.6256904778307391,
+        0.495742676538085
       ],
       "pivotY": 0,
       "protectedSmallComponents": 5,
@@ -398,23 +476,29 @@
         "fall",
         "recover"
       ],
-      "bones": 5
+      "bones": 5,
+      "sculptVersion": "authored-20261024",
+      "generator": "Blender 4.3.2",
+      "referenceBasis": "Publisher card p23 viewed: olive dripping goo, drooping elongated nose, drowsy eyes and pooled base. Free-standing rear is a project interpretation.",
+      "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
+      "sculptStatus": "completed-local-validation",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "hare",
       "node": "toy_hare",
-      "triangles": 3406,
+      "triangles": 2120,
       "sourceTriangles": 9308,
-      "draws": 4,
+      "draws": 1,
       "bounds": [
-        0.4812,
-        1.015,
-        0.47107
+        0.48890653637602477,
+        0.9773858009406649,
+        0.3970457964498363
       ],
       "pivotY": 0,
       "protectedSmallComponents": 14,
       "canonicalBoundsScale": [
-        1.0,
+        1,
         1.000272274017334,
         1.0010868310928345
       ],
@@ -426,18 +510,24 @@
         "fall",
         "recover"
       ],
-      "bones": 5
+      "bones": 7,
+      "sculptVersion": "authored-20261024",
+      "generator": "Blender 4.3.2",
+      "referenceBasis": "Publisher card p23 viewed: sky-blue rabbit, swept long ears, red nose and incisors. Legs, back and tucked paws inferred.",
+      "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
+      "sculptStatus": "completed-local-validation",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "heckler",
       "node": "toy_heckler",
-      "triangles": 1208,
+      "triangles": 2120,
       "sourceTriangles": 3216,
-      "draws": 4,
+      "draws": 1,
       "bounds": [
-        0.5826,
-        0.8692,
-        0.59
+        0.5999939141793164,
+        0.9180578167512148,
+        0.391247291482284
       ],
       "pivotY": 0,
       "protectedSmallComponents": 11,
@@ -454,18 +544,24 @@
         "fall",
         "recover"
       ],
-      "bones": 5
+      "bones": 5,
+      "sculptVersion": "authored-20261024",
+      "generator": "Blender 4.3.2",
+      "referenceBasis": "Publisher card p23: pink spotted hyena, huge ears, red nose, yellow swept mane, green collar and laughing teeth. Rear spots and standing limbs inferred.",
+      "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
+      "sculptStatus": "completed-local-validation",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "huge-baby",
       "node": "toy_huge-baby",
-      "triangles": 2032,
+      "triangles": 2118,
       "sourceTriangles": 5568,
-      "draws": 6,
+      "draws": 1,
       "bounds": [
-        0.59,
-        0.97221,
-        0.45173
+        0.5652638375156283,
+        0.9701223954689113,
+        0.38044374903634604
       ],
       "pivotY": 0,
       "protectedSmallComponents": 9,
@@ -482,18 +578,24 @@
         "fall",
         "recover"
       ],
-      "bones": 5
+      "bones": 5,
+      "sculptVersion": "authored-20261024",
+      "generator": "Blender 4.3.2",
+      "referenceBasis": "Publisher card p23: oversized pink head/body, small drowsy face, orange/blue pacifier and white diaper. Side ears, hands and back folds inferred.",
+      "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
+      "sculptStatus": "completed-local-validation",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "hypnotist",
       "node": "toy_hypnotist",
-      "triangles": 1606,
+      "triangles": 2120,
       "sourceTriangles": 4368,
-      "draws": 5,
+      "draws": 1,
       "bounds": [
-        0.5583,
-        1.015,
-        0.48916
+        0.5950804018355056,
+        0.7725760779296581,
+        0.495223854958468
       ],
       "pivotY": 0,
       "protectedSmallComponents": 9,
@@ -510,23 +612,29 @@
         "fall",
         "recover"
       ],
-      "bones": 5
+      "bones": 5,
+      "sculptVersion": "authored-20261024",
+      "generator": "Blender 4.3.2",
+      "referenceBasis": "Publisher card p23: green/blue banded cobra, spiral eyes and red bow. Coiled rear and full hood thickness inferred; hypnotic detail is static geometry.",
+      "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
+      "sculptStatus": "completed-local-validation",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "inchworm",
       "node": "toy_inchworm",
-      "triangles": 2924,
+      "triangles": 2120,
       "sourceTriangles": 7828,
-      "draws": 4,
+      "draws": 1,
       "bounds": [
-        0.59,
-        0.8278,
-        0.27023
+        0.5998718222602009,
+        0.650166320446459,
+        0.1546067680027717
       ],
       "pivotY": 0,
       "protectedSmallComponents": 19,
       "canonicalBoundsScale": [
-        1.0,
+        1,
         1.000343680381775,
         0.9999423623085022
       ],
@@ -538,18 +646,24 @@
         "fall",
         "recover"
       ],
-      "bones": 5
+      "bones": 5,
+      "sculptVersion": "authored-20261024",
+      "generator": "Blender 4.3.2",
+      "referenceBasis": "Publisher card p24: looping purple/blue furry inchworm with green face and antennae. Continuous 3D bends and underside inferred; no detached decorative legs.",
+      "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
+      "sculptStatus": "completed-local-validation",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "lackey",
       "node": "toy_lackey",
-      "triangles": 2005,
+      "triangles": 2120,
       "sourceTriangles": 5510,
-      "draws": 4,
+      "draws": 1,
       "bounds": [
-        0.59,
-        0.7338,
-        0.35628
+        0.5837580492568744,
+        0.9431440322881118,
+        0.5993224975280045
       ],
       "pivotY": 0,
       "protectedSmallComponents": 5,
@@ -566,18 +680,24 @@
         "fall",
         "recover"
       ],
-      "bones": 5
+      "bones": 5,
+      "sculptVersion": "authored-20261024",
+      "generator": "Blender 4.3.2",
+      "referenceBasis": "Publisher card p24: hunched pink patched cloak, green elongated face/nose and green hands. Full back hump, hem and clasped stance inferred.",
+      "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
+      "sculptStatus": "completed-local-validation",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "leaptoad",
       "node": "toy_leaptoad",
-      "triangles": 1536,
+      "triangles": 2120,
       "sourceTriangles": 4020,
-      "draws": 5,
+      "draws": 1,
       "bounds": [
-        0.59,
-        0.70203,
-        0.4647
+        0.5952940458388012,
+        0.7258827375674219,
+        0.3603015228736228
       ],
       "pivotY": 0,
       "protectedSmallComponents": 14,
@@ -594,18 +714,24 @@
         "fall",
         "recover"
       ],
-      "bones": 5
+      "bones": 5,
+      "sculptVersion": "authored-20261024",
+      "generator": "Blender 4.3.2",
+      "referenceBasis": "Publisher card p24: bright blue frog, huge white eyes, long jumping limbs and orange webbed feet. Rear and relaxed jumping stance interpreted.",
+      "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
+      "sculptStatus": "completed-local-validation",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "legs",
       "node": "toy_legs",
-      "triangles": 1572,
+      "triangles": 2120,
       "sourceTriangles": 4168,
-      "draws": 4,
+      "draws": 1,
       "bounds": [
-        0.59,
-        0.84589,
-        0.39248
+        0.4406567648815804,
+        0.9800103928338197,
+        0.29706717123935666
       ],
       "pivotY": 0,
       "protectedSmallComponents": 9,
@@ -622,20 +748,26 @@
         "fall",
         "recover"
       ],
-      "bones": 5
+      "bones": 5,
+      "sculptVersion": "authored-20261024",
+      "generator": "Blender 4.3.2",
+      "referenceBasis": "Publisher card p24 shows dominant long green striped trousers, red shoes, purple coat and red bow; the cropped-off small yellow head is explicitly project completion, not independently visible original art.",
+      "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
+      "sculptStatus": "completed-local-validation",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "lovable-loser",
       "node": "toy_lovable-loser",
-      "triangles": 1758,
+      "triangles": 2120,
       "sourceTriangles": 4812,
-      "draws": 6,
+      "draws": 1,
       "bounds": [
-        0.59,
-        0.85998,
-        0.42068
+        0.5999938962981048,
+        0.5966979256566912,
+        0.4463332101932168
       ],
-      "pivotY": 0,
+      "pivotY": -1.0977018328851241e-08,
       "protectedSmallComponents": 5,
       "canonicalBoundsScale": [
         1.0004910230636597,
@@ -650,18 +782,24 @@
         "fall",
         "recover"
       ],
-      "bones": 5
+      "bones": 5,
+      "sculptVersion": "authored-20261024",
+      "generator": "Blender 4.3.2",
+      "referenceBasis": "Publisher card p24: green snail with large pink spiral shell, raised eye stalks and little flower. Shell reverse spiral and underside inferred.",
+      "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
+      "sculptStatus": "completed-local-validation",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "magician",
       "node": "toy_magician",
-      "triangles": 2126,
+      "triangles": 2119,
       "sourceTriangles": 5816,
-      "draws": 5,
+      "draws": 1,
       "bounds": [
-        0.58994,
-        1.00154,
-        0.52173
+        0.576799829096347,
+        0.8147526590962308,
+        0.35389263324695786
       ],
       "pivotY": 0,
       "protectedSmallComponents": 7,
@@ -678,18 +816,24 @@
         "fall",
         "recover"
       ],
-      "bones": 5
+      "bones": 5,
+      "sculptVersion": "authored-20261024",
+      "generator": "Blender 4.3.2",
+      "referenceBasis": "Publisher card p24: purple elephant, blue jacket, orange waistcoat, white bow, wand and held blue hat/die. Back costume and trunk underside reconstructed.",
+      "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
+      "sculptStatus": "completed-local-validation",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "mastermind",
       "node": "toy_mastermind",
-      "triangles": 2402,
+      "triangles": 2120,
       "sourceTriangles": 6416,
-      "draws": 4,
+      "draws": 1,
       "bounds": [
-        0.59,
-        0.96149,
-        0.3615
+        0.5167394178476188,
+        0.9800103928338197,
+        0.4132816630219247
       ],
       "pivotY": 0,
       "protectedSmallComponents": 15,
@@ -706,18 +850,24 @@
         "fall",
         "recover"
       ],
-      "bones": 5
+      "bones": 5,
+      "sculptVersion": "authored-20261024",
+      "generator": "Blender 4.3.2",
+      "referenceBasis": "Publisher card p24: huge pale brain above orange long-nosed schemer, green cloak and steepled hands. Full dome and cloak rear sculpted, not the former red crowned cube.",
+      "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
+      "sculptStatus": "completed-local-validation",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "mouth",
       "node": "toy_mouth",
-      "triangles": 2208,
+      "triangles": 2120,
       "sourceTriangles": 6060,
-      "draws": 4,
+      "draws": 1,
       "bounds": [
-        0.59,
-        0.79931,
-        0.45563
+        0.5999938962981048,
+        0.6195867945557862,
+        0.15826899014252144
       ],
       "pivotY": 0,
       "protectedSmallComponents": 10,
@@ -734,18 +884,24 @@
         "fall",
         "recover"
       ],
-      "bones": 5
+      "bones": 5,
+      "sculptVersion": "authored-20261024",
+      "generator": "Blender 4.3.2",
+      "referenceBasis": "Publisher card p24: red-lipped giant mouth with two tooth rows, tiny eyes, blue arms and legs. Recessed oral volume and reverse surface inferred.",
+      "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
+      "sculptStatus": "completed-local-validation",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "party-animal",
       "node": "toy_party-animal",
-      "triangles": 2402,
+      "triangles": 2120,
       "sourceTriangles": 6558,
-      "draws": 6,
+      "draws": 1,
       "bounds": [
-        0.55849,
-        1.01178,
-        0.41991
+        0.5945921201208533,
+        0.9753715792552207,
+        0.3833124733067237
       ],
       "pivotY": 0,
       "protectedSmallComponents": 11,
@@ -762,18 +918,24 @@
         "fall",
         "recover"
       ],
-      "bones": 5
+      "bones": 5,
+      "sculptVersion": "authored-20261024",
+      "generator": "Blender 4.3.2",
+      "referenceBasis": "Publisher card p24: yellow canine party animal, pink/green striped coat and hat, blue nose and raised hands. Rear coat and tail details inferred.",
+      "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
+      "sculptStatus": "completed-local-validation",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "rocket-scientist",
       "node": "toy_rocket-scientist",
-      "triangles": 1314,
+      "triangles": 2120,
       "sourceTriangles": 3554,
-      "draws": 6,
+      "draws": 1,
       "bounds": [
-        0.58912,
-        0.89484,
-        0.33522
+        0.5988647159177958,
+        0.8901028612380788,
+        0.314828943754387
       ],
       "pivotY": 0,
       "protectedSmallComponents": 7,
@@ -790,18 +952,24 @@
         "fall",
         "recover"
       ],
-      "bones": 5
+      "bones": 5,
+      "sculptVersion": "authored-20261024",
+      "generator": "Blender 4.3.2",
+      "referenceBasis": "Publisher card p25: green-faced scientist in white lab coat, huge goggles and swept yellow hair holding a red rocket. Grip and rocket reverse fins are project construction.",
+      "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
+      "sculptStatus": "completed-local-validation",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "romantic",
       "node": "toy_romantic",
-      "triangles": 1534,
+      "triangles": 2120,
       "sourceTriangles": 4020,
-      "draws": 5,
+      "draws": 1,
       "bounds": [
-        0.59,
-        0.86446,
-        0.28568
+        0.5580004272591327,
+        0.9731132094866921,
+        0.5458540564253038
       ],
       "pivotY": 0,
       "protectedSmallComponents": 71,
@@ -818,18 +986,24 @@
         "fall",
         "recover"
       ],
-      "bones": 5
+      "bones": 5,
+      "sculptVersion": "authored-20261024",
+      "generator": "Blender 4.3.2",
+      "referenceBasis": "Publisher card p25: pink long-snouted romantic, yellow jacket/red collar, open book and lapel flower. Complete limbs, tail and book depth inferred.",
+      "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
+      "sculptStatus": "completed-local-validation",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "scoocher",
       "node": "toy_scoocher",
-      "triangles": 1888,
+      "triangles": 2120,
       "sourceTriangles": 5120,
-      "draws": 4,
+      "draws": 1,
       "bounds": [
-        0.59,
-        0.80359,
-        0.35245
+        0.5924558200429388,
+        0.6316721240180906,
+        0.3838007751701408
       ],
       "pivotY": 0,
       "protectedSmallComponents": 11,
@@ -846,18 +1020,24 @@
         "fall",
         "recover"
       ],
-      "bones": 5
+      "bones": 5,
+      "sculptVersion": "authored-20261024",
+      "generator": "Blender 4.3.2",
+      "referenceBasis": "Publisher card p25: seated shaggy brown dog with spread drooping ears, sleepy lids and long pink tongue. Full back fur and resting paws inferred; no scooter invented.",
+      "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
+      "sculptStatus": "completed-local-validation",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "sisyphus",
       "node": "toy_sisyphus",
-      "triangles": 1689,
+      "triangles": 2120,
       "sourceTriangles": 4560,
-      "draws": 4,
+      "draws": 1,
       "bounds": [
-        0.59,
-        0.88184,
-        0.44958
+        0.5998718222602009,
+        0.850062575612277,
+        0.39533676733451706
       ],
       "pivotY": 0,
       "protectedSmallComponents": 11,
@@ -874,18 +1054,24 @@
         "fall",
         "recover"
       ],
-      "bones": 5
+      "bones": 5,
+      "sculptVersion": "authored-20261024",
+      "generator": "Blender 4.3.2",
+      "referenceBasis": "Publisher card p25: orange figure with long nose, sparse white hair, white wrapped toga and raised arms. Back wrapping and pushing stance inferred; no oversized boulder crowds adjacent pawns.",
+      "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
+      "sculptStatus": "completed-local-validation",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "skipper",
       "node": "toy_skipper",
-      "triangles": 1998,
+      "triangles": 2120,
       "sourceTriangles": 5488,
-      "draws": 4,
+      "draws": 1,
       "bounds": [
-        0.59,
-        0.96337,
-        0.44484
+        0.5500045777764214,
+        0.9665212112434198,
+        0.4034547012873549
       ],
       "pivotY": 0,
       "protectedSmallComponents": 5,
@@ -902,18 +1088,24 @@
         "fall",
         "recover"
       ],
-      "bones": 5
+      "bones": 5,
+      "sculptVersion": "authored-20261024",
+      "generator": "Blender 4.3.2",
+      "referenceBasis": "Publisher card p25: orange sailor in yellow coat and sou-wester holding a pink fake wheel. Wheel is an attached prop, not a locomotion system; back inferred.",
+      "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
+      "sculptStatus": "completed-local-validation",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "stickler",
       "node": "toy_stickler",
-      "triangles": 1508,
+      "triangles": 2120,
       "sourceTriangles": 4132,
-      "draws": 6,
+      "draws": 1,
       "bounds": [
-        0.53761,
-        1.015,
-        0.31712
+        0.5977050052926131,
+        0.8770714573034619,
+        0.5528733198884189
       ],
       "pivotY": 0,
       "protectedSmallComponents": 6,
@@ -930,18 +1122,24 @@
         "fall",
         "recover"
       ],
-      "bones": 5
+      "bones": 5,
+      "sculptVersion": "authored-20261024",
+      "generator": "Blender 4.3.2",
+      "referenceBasis": "Publisher card p25: pink coiled worm-like rules reader, blue hair, large nose and orange book. Back coils and book thickness inferred, not the former literal ruler.",
+      "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
+      "sculptStatus": "completed-local-validation",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "suckerfish",
       "node": "toy_suckerfish",
-      "triangles": 1412,
+      "triangles": 2120,
       "sourceTriangles": 3702,
-      "draws": 5,
+      "draws": 1,
       "bounds": [
-        0.59,
-        0.69837,
-        0.38269
+        0.4687032615481419,
+        0.43906979519841155,
+        0.5989867906981172
       ],
       "pivotY": 0,
       "protectedSmallComponents": 13,
@@ -958,20 +1156,26 @@
         "fall",
         "recover"
       ],
-      "bones": 5
+      "bones": 5,
+      "sculptVersion": "authored-20261024",
+      "generator": "Blender 4.3.2",
+      "referenceBasis": "Publisher card p25: green fish with large orange suction mouth, side eyes and swept dorsal rays. Complete tail and ventral supports inferred; no human legs.",
+      "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
+      "sculptStatus": "completed-local-validation",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "third-wheel",
       "node": "toy_third-wheel",
-      "triangles": 1396,
+      "triangles": 2120,
       "sourceTriangles": 3792,
-      "draws": 5,
+      "draws": 1,
       "bounds": [
-        0.59,
-        0.8173,
-        0.30519
+        0.5655079890169536,
+        0.9796441633673669,
+        0.51030000075541
       ],
-      "pivotY": 0,
+      "pivotY": 7.341826586379395e-09,
       "protectedSmallComponents": 6,
       "canonicalBoundsScale": [
         1.0073288679122925,
@@ -986,23 +1190,29 @@
         "fall",
         "recover"
       ],
-      "bones": 5
+      "bones": 6,
+      "sculptVersion": "authored-20261024",
+      "generator": "Blender 4.3.2",
+      "referenceBasis": "Publisher card p25: yellow long-nosed rat, red/pink striped shirt and one wheel. Full tire/spokes, rear tail and hands inferred.",
+      "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
+      "sculptStatus": "completed-local-validation",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "twin",
       "node": "toy_twin",
-      "triangles": 2436,
+      "triangles": 2120,
       "sourceTriangles": 6612,
-      "draws": 5,
+      "draws": 1,
       "bounds": [
-        0.59,
-        0.90645,
-        0.33358
+        0.5896176095520657,
+        0.7299112023913911,
+        0.29914242988372447
       ],
       "pivotY": 0,
       "protectedSmallComponents": 8,
       "canonicalBoundsScale": [
-        1.0,
+        1,
         0.9999145269393921,
         1.0015113353729248
       ],
@@ -1014,14 +1224,20 @@
         "fall",
         "recover"
       ],
-      "bones": 5
+      "bones": 5,
+      "sculptVersion": "authored-20261024",
+      "generator": "Blender 4.3.2",
+      "referenceBasis": "Publisher card p25: two yellow lizard-like twins, one black/white striped shirt and one pink shirt. Distinct bodies, tails and complete reverse views inferred.",
+      "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
+      "sculptStatus": "completed-local-validation",
+      "assetVersion": "authored-sculpt-final-20261024"
     }
   ],
-  "totalTriangles": 72714,
-  "bytes": 1256928,
-  "optimizedBytes": 1256928,
-  "compression": "EXT_meshopt_compression",
-  "materialCount": 10,
+  "totalTriangles": 76199,
+  "bytes": 1061300,
+  "optimizedBytes": 1061300,
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions, no per-mesh transform; normals10bit, vertex colours8bit",
+  "materialCount": 1,
   "textureCount": 0,
   "skeletalAnimation": true
 }

@@ -3,13 +3,13 @@
   "node": "toy_kingtripper",
   "url": "/models/second-wind/kingtripper.glb",
   "avatar": "/avatars/second-wind/kingtripper.svg",
-  "bytes": 57308,
-  "triangles": 3852,
-  "draws": 6,
+  "bytes": 68112,
+  "triangles": 7016,
+  "draws": 1,
   "bounds": [
-    0.6,
-    0.94995,
-    0.44117
+    0.5520798364207892,
+    0.9800103928338197,
+    0.3663136665022769
   ],
   "pivotY": 0,
   "animations": [
@@ -19,8 +19,8 @@
     "fall",
     "recover"
   ],
-  "recognition": "Green grinning lizard monarch, red/yellow jester crown, purple cape and golden sceptre.",
-  "inferred": "Back and side volumes extrapolated from the published single-view illustration.",
+  "recognition": "Registered card viewed: green grinning lizard king, red/yellow jester crown, purple coat and golden sceptre. Side/back coat and grasp reconstructed.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
   "referenceChecked": true,
   "referenceImage": "https://johnnlds.github.io/Magical-Athlete-Racers/images/expansion/Kingtripper.png",
   "editableSource": "assets/blender/second-wind/kingtripper.blend",
@@ -28,5 +28,15 @@
   "avatarStyle": "flat-cartoon-svg",
   "motionProfile": "biped",
   "bones": 5,
-  "mouthSurfaceVersion": "surface-mouth-v2"
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "Registered card viewed: green grinning lizard king, red/yellow jester crown, purple coat and golden sceptre. Side/back coat and grasp reconstructed.",
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "440f052b97ec30ec862f47a9451969801c764d58c076af3b07d56dd1a61d33dc",
+  "glbSha256": "552544444bad4d614873800abef7adf3ffeae542ce613899020f7c66c56d1c90",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

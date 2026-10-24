@@ -1,0 +1,42 @@
+{
+  "id": "wurstii-tails",
+  "nameZh": "塔尔斯",
+  "node": "toy_wurstii-tails",
+  "model": "/models/wurstii/wurstii-tails.glb",
+  "portrait": "/avatars/wurstii/wurstii-tails.png",
+  "editableSource": "assets/blender/wurstii/blend/wurstii-tails.blend",
+  "bytes": 57144,
+  "triangles": 4696,
+  "draws": 1,
+  "bounds": [
+    0.5999938962981048,
+    0.9186376684485397,
+    0.48707541123691517
+  ],
+  "animations": [
+    "idle",
+    "move",
+    "skill",
+    "fall",
+    "recover"
+  ],
+  "modelPreview": "/models/wurstii/avatars/wurstii-tails.png",
+  "avatar": "/avatars/wurstii/wurstii-tails.svg",
+  "avatarStyle": "flat-cartoon-svg",
+  "bones": 5,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "pivotY": 0,
+  "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Tails: orange fox, white muzzle/chest/gloves, red-white shoes and TWO large independently sculpted white-tipped tails. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "referenceChecked": true,
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "14d61a37997df21ab13382e199db20f99b973e0340efbb4685fe9d624d57f607",
+  "glbSha256": "0cf92c404a29486a28508c4a52b94eb8cc2f25d92003c21d687536fd98459dc3",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "recognition": "User-provided Wurstii reference card crop actually viewed: Tails: orange fox, white muzzle/chest/gloves, red-white shoes and TWO large independently sculpted white-tipped tails. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "assetVersion": "authored-sculpt-final-20261024"
+}

@@ -15,8 +15,8 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     ],
     "optional": true,
     "targets": "box",
-    "scope": "按选手实例；其他选手包含同一玩家的另一选手。",
-    "duration": "本次效果；生命、次数与永久加值保存至本场结束",
+    "scope": "按每名选手；其他选手包含同一玩家的另一选手。",
+    "duration": "本次移动；当前不可选",
     "statuses": [],
     "sources": [
       {
@@ -39,7 +39,7 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "verification": "原始卡文已核验；实体规则未适配，隔离不可玩",
     "imageUrl": "https://johnnlds.github.io/Magical-Athlete-Racers/images/extra-mile/Box.png",
     "adaptation": "待确定实体入盒判定的数字化方式，未用随机概率代替。",
-    "limit": "按每个独立触发分别结算"
+    "limit": "每次骰子触及盒外"
   },
   {
     "id": "extra-mile-broken-clock",
@@ -47,14 +47,14 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "nameZh": "坏时钟",
     "translation": "本项目译名",
     "edition": "extra-mile",
-    "ability": "主移动掷两骰；不同取较低值，相同取两骰总和。",
+    "ability": "主移动时掷两颗骰子：点数不同，取较小的点数；点数相同，取两颗骰子的点数之和，作为本次主移动的基础距离。",
     "timing": [
       "main-roll"
     ],
     "optional": false,
-    "targets": "self",
-    "scope": "按选手实例；其他选手包含同一玩家的另一选手。",
-    "duration": "本次效果；生命、次数与永久加值保存至本场结束",
+    "targets": "自己",
+    "scope": "按每名选手；其他选手包含同一玩家的另一选手。",
+    "duration": "本次主移动",
     "statuses": [],
     "sources": [
       {
@@ -76,7 +76,7 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "verified": true,
     "verification": "作者网页与PDF卡面交叉核对；规则采用PDF优先",
     "imageUrl": "https://johnnlds.github.io/Magical-Athlete-Racers/images/extra-mile/Broken%20Clock.png",
-    "limit": "按每个独立触发分别结算"
+    "limit": "每次主移动掷骰"
   },
   {
     "id": "extra-mile-cletus",
@@ -84,15 +84,15 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "nameZh": "克莱特斯",
     "translation": "本项目译名",
     "edition": "extra-mile",
-    "ability": "可代替主移动选择3格内另一选手，双方分别掷对抗骰：同点淘汰目标；自己高则重新进行正常主移动；对方高则对方前进1。",
+    "ability": "你可以不进行正常主移动，改为选择与你相距不超过3格的另一名选手，双方各掷一颗对抗骰。点数相同：淘汰目标；你的点数较大：重新掷主移动骰，照常进行主移动；目标的点数较大：目标前进1格，你不进行主移动。",
     "timing": [
       "main-replacement",
       "contest-roll"
     ],
     "optional": true,
-    "targets": "other-within-3",
-    "scope": "按选手实例；其他选手包含同一玩家的另一选手。",
-    "duration": "本次效果；生命、次数与永久加值保存至本场结束",
+    "targets": "与你相距不超过3格的另一名在赛选手",
+    "scope": "按每名选手；其他选手包含同一玩家的另一选手。",
+    "duration": "本次对抗及其结果",
     "statuses": [],
     "sources": [
       {
@@ -115,7 +115,7 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "verification": "作者网页与PDF卡面交叉核对；规则采用PDF优先",
     "imageUrl": "https://johnnlds.github.io/Magical-Athlete-Racers/images/extra-mile/Cletus.png",
     "adaptation": "对抗骰不触发仅主移动骰能力；双方控制者均须点击。",
-    "limit": "按每个独立触发分别结算"
+    "limit": "每次主移动前可选择一次对抗"
   },
   {
     "id": "extra-mile-doc-paradox",
@@ -123,16 +123,16 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "nameZh": "悖论博士",
     "translation": "本项目译名",
     "edition": "extra-mile",
-    "ability": "从终点倒向起点比赛；与其他选手同格时传回终点，并从此主移动增加3。",
+    "ability": "你从终点向起点比赛，到达起点即完赛。与其他选手同格时，你被传送回终点，且本场之后的主移动距离增加3格；每次被送回终点都会再增加3格，可以累积。",
     "timing": [
       "before-race",
       "stop",
       "main-modifier"
     ],
     "optional": false,
-    "targets": "self",
-    "scope": "按选手实例；其他选手包含同一玩家的另一选手。",
-    "duration": "本次效果；生命、次数与永久加值保存至本场结束",
+    "targets": "自己",
+    "scope": "按每名选手；其他选手包含同一玩家的另一选手。",
+    "duration": "加成累积至本场结束",
     "statuses": [],
     "sources": [
       {
@@ -155,7 +155,7 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "verification": "作者网页与PDF卡面交叉核对；规则采用PDF优先",
     "imageUrl": "https://johnnlds.github.io/Magical-Athlete-Racers/images/extra-mile/Doc%20Paradox.png",
     "adaptation": "数字适配：倒向起点完赛；倒向主移动的距离仍先应用通常加减；每次重置累计+3。",
-    "limit": "按每个独立触发分别结算"
+    "limit": "每次与其他选手同格时触发"
   },
   {
     "id": "extra-mile-doctor-dice",
@@ -169,9 +169,9 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
       "trip"
     ],
     "optional": true,
-    "targets": "tripped-other",
-    "scope": "按选手实例；其他选手包含同一玩家的另一选手。",
-    "duration": "本次效果；生命、次数与永久加值保存至本场结束",
+    "targets": "另一名已绊倒的在赛选手",
+    "scope": "按每名选手；其他选手包含同一玩家的另一选手。",
+    "duration": "免疫持续生效；救援加成仅本次主移动",
     "statuses": [],
     "sources": [
       {
@@ -193,7 +193,7 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "verified": true,
     "verification": "作者网页与PDF卡面交叉核对；规则采用PDF优先",
     "imageUrl": "https://johnnlds.github.io/Magical-Athlete-Racers/images/extra-mile/Doctor%20Dice.png",
-    "limit": "按每个独立触发分别结算"
+    "limit": "免疫绊倒持续生效；每次主移动前可救援一次"
   },
   {
     "id": "extra-mile-dom-and-gary",
@@ -201,7 +201,7 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "nameZh": "多姆与加里",
     "translation": "本项目译名",
     "edition": "extra-mile",
-    "ability": "加里从第4格开始，总在多姆之前行动；多姆越过或与加里同格会淘汰加里并获得主移动+2；加里前二完赛时拿走该名次积分。",
+    "ability": "赛前增加一名由你操控的选手“加里”，从第4格起跑，按本场固定顺序在多姆之前行动。多姆越过加里或与加里同格时，淘汰加里，之后多姆本场的主移动距离增加2格。加里获得前两名时占据对应名次，但该名次积分不计入任何玩家得分。",
     "timing": [
       "before-race",
       "pass",
@@ -209,9 +209,9 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
       "main-modifier"
     ],
     "optional": false,
-    "targets": "extra-pawn",
-    "scope": "按选手实例；其他选手包含同一玩家的另一选手。",
-    "duration": "本次效果；生命、次数与永久加值保存至本场结束",
+    "targets": "多姆与额外选手加里",
+    "scope": "按每名选手；其他选手包含同一玩家的另一选手。",
+    "duration": "加里参赛及捕获加成持续至本场结束",
     "statuses": [],
     "sources": [
       {
@@ -233,8 +233,8 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "verified": true,
     "verification": "作者网页与PDF卡面交叉核对；规则采用PDF优先",
     "imageUrl": "https://johnnlds.github.io/Magical-Athlete-Racers/images/extra-mile/Dom%20and%20Gary.png",
-    "adaptation": "数字适配：加里由多姆控制者操作但不为玩家计分，其拿走的名次积分退出本局。",
-    "limit": "按每个独立触发分别结算"
+    "adaptation": "加里由操控多姆的玩家操作，但不为任何玩家计分；加里获得的名次积分不再发给其他选手。",
+    "limit": "赛前增加一次加里；捕获加里一次"
   },
   {
     "id": "extra-mile-echo",
@@ -242,14 +242,14 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "nameZh": "回声",
     "translation": "本项目译名",
     "edition": "extra-mile",
-    "ability": "可代替掷骰，按前一名行动选手主移动的实际移动格数移动。",
+    "ability": "你可以不掷主移动骰，改用上一位行动选手的实际主移动距离作为基础距离，包括前进或后退方向，再计算你的移动加减效果。没有上一位选手的记录时，正常掷骰；传送不计为移动距离。",
     "timing": [
       "main-replacement"
     ],
     "optional": true,
-    "targets": "self",
-    "scope": "按选手实例；其他选手包含同一玩家的另一选手。",
-    "duration": "本次效果；生命、次数与永久加值保存至本场结束",
+    "targets": "自己",
+    "scope": "按每名选手；其他选手包含同一玩家的另一选手。",
+    "duration": "本次主移动",
     "statuses": [],
     "sources": [
       {
@@ -272,7 +272,7 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "verification": "作者网页与PDF卡面交叉核对；规则采用PDF优先",
     "imageUrl": "https://johnnlds.github.io/Magical-Athlete-Racers/images/extra-mile/Echo.png",
     "adaptation": "PDF写previous racer moved，网页写rolled；采用PDF。首次行动无前次记录时正常掷骰；传送不算移动。",
-    "limit": "按每个独立触发分别结算"
+    "limit": "每次主移动前可选择一次"
   },
   {
     "id": "extra-mile-gingy",
@@ -280,15 +280,15 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "nameZh": "姜饼人",
     "translation": "本项目译名",
     "edition": "extra-mile",
-    "ability": "有4点生命；其他选手单独落到自己的格子时失去1生命，主移动永久+1；生命归零淘汰。",
+    "ability": "你有4点生命。其他选手停到你所在格时，你失去1点生命，且本场之后的主移动距离增加1格，可以累积。你自己停到别人的格子不触发。生命降至0时，你被淘汰。",
     "timing": [
       "stop",
       "main-modifier"
     ],
     "optional": false,
-    "targets": "arriving-other",
-    "scope": "按选手实例；其他选手包含同一玩家的另一选手。",
-    "duration": "本次效果；生命、次数与永久加值保存至本场结束",
+    "targets": "停到你所在格的其他选手",
+    "scope": "按每名选手；其他选手包含同一玩家的另一选手。",
+    "duration": "生命与移动加成保留至本场结束",
     "statuses": [],
     "sources": [
       {
@@ -310,7 +310,7 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "verified": true,
     "verification": "作者网页与PDF卡面交叉核对；规则采用PDF优先",
     "imageUrl": "https://johnnlds.github.io/Magical-Athlete-Racers/images/extra-mile/Gingy.png",
-    "limit": "4生命"
+    "limit": "初始4点生命；每名到达的其他选手分别触发"
   },
   {
     "id": "extra-mile-gluebert",
@@ -324,9 +324,9 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
       "passed"
     ],
     "optional": false,
-    "targets": "other",
-    "scope": "按选手实例；其他选手包含同一玩家的另一选手。",
-    "duration": "本次效果；生命、次数与永久加值保存至本场结束",
+    "targets": "其他在赛选手",
+    "scope": "按每名选手；其他选手包含同一玩家的另一选手。",
+    "duration": "对应的那次移动",
     "statuses": [],
     "sources": [
       {
@@ -348,7 +348,7 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "verified": true,
     "verification": "作者网页与PDF卡面交叉核对；规则采用PDF优先",
     "imageUrl": "https://johnnlds.github.io/Magical-Athlete-Racers/images/extra-mile/Gluebert.png",
-    "limit": "按每个独立触发分别结算"
+    "limit": "每次同格选手的主移动、每次被越过时触发"
   },
   {
     "id": "extra-mile-heads",
@@ -356,14 +356,14 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "nameZh": "硬币头",
     "translation": "本项目译名",
     "edition": "extra-mile",
-    "ability": "每次自己掷骰后可使用骰子底面的点数（七减当前面）。",
+    "ability": "每次你掷出一颗骰子后，可以将它翻到底面，使用“7减去当前点数”的结果，例如将2变成5。每颗骰子只能翻面一次。",
     "timing": [
       "any-roll"
     ],
     "optional": true,
-    "targets": "self",
-    "scope": "按选手实例；其他选手包含同一玩家的另一选手。",
-    "duration": "本次效果；生命、次数与永久加值保存至本场结束",
+    "targets": "自己",
+    "scope": "按每名选手；其他选手包含同一玩家的另一选手。",
+    "duration": "当前这颗骰子的结果",
     "statuses": [],
     "sources": [
       {
@@ -386,7 +386,7 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "verification": "作者网页与PDF卡面交叉核对；规则采用PDF优先",
     "imageUrl": "https://johnnlds.github.io/Magical-Athlete-Racers/images/extra-mile/Heads.png",
     "adaptation": "每颗骰只翻一次；翻面在强制重掷检查之前，固定点数后不再翻回。",
-    "limit": "按每个独立触发分别结算"
+    "limit": "每颗骰子最多翻面一次"
   },
   {
     "id": "extra-mile-honey-pot",
@@ -394,16 +394,16 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "nameZh": "蜜罐",
     "translation": "本项目译名",
     "edition": "extra-mile",
-    "ability": "赛前向公共蜜罐加入等于场次的积分，并标记一格；选手落上后掷骰领取至多相应点数，自己每发出1分前进1格。",
+    "ability": "赛前由公共供应向蜜罐加入与当前场次相同数量的积分，例如第3场加入3分，不扣除你的积分；你选择一格作为蜜罐格。任何选手停到该格时，掷骰并领取相应点数的积分，余额不足则只领取剩余积分。每发出1分，你前进1格。",
     "timing": [
       "before-race",
       "stop",
       "ability-roll"
     ],
     "optional": false,
-    "targets": "marked-space",
-    "scope": "按选手实例；其他选手包含同一玩家的另一选手。",
-    "duration": "本次效果；生命、次数与永久加值保存至本场结束",
+    "targets": "赛前标记的格子，以及停到该格的选手",
+    "scope": "按每名选手；其他选手包含同一玩家的另一选手。",
+    "duration": "蜜罐余额与标记保留至本场结束",
     "statuses": [],
     "sources": [
       {
@@ -425,8 +425,8 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "verified": true,
     "verification": "作者网页与PDF卡面交叉核对；规则采用PDF优先",
     "imageUrl": "https://johnnlds.github.io/Magical-Athlete-Racers/images/extra-mile/Honey%20Pot.png",
-    "adaptation": "数字适配：蜜罐由公共供应补充，不扣控制者积分；余额不足只发余额；每名蜜罐独立标记，共享本场蜜罐。",
-    "limit": "按每个独立触发分别结算"
+    "adaptation": "蜜罐积分由公共供应提供，不扣除玩家积分。余额不足时只领取剩余积分；多个蜜罐角色各自标记一格，共享本场蜜罐余额。",
+    "limit": "赛前加分并标记一次；蜜罐有余额时，每次停格分别领取"
   },
   {
     "id": "extra-mile-king-pete",
@@ -434,14 +434,14 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "nameZh": "皮特国王",
     "translation": "本项目译名",
     "edition": "extra-mile",
-    "ability": "其他选手掷出5或6时，该次主移动少1格，自己前进1格。",
+    "ability": "其他选手每次掷出5或6时，你前进1格。若这是主移动掷骰，还使对方该次主移动距离减少1格；独立技能骰或对抗骰不会扣减主移动距离。",
     "timing": [
       "any-roll"
     ],
     "optional": false,
-    "targets": "other",
-    "scope": "按选手实例；其他选手包含同一玩家的另一选手。",
-    "duration": "本次效果；生命、次数与永久加值保存至本场结束",
+    "targets": "其他在赛选手",
+    "scope": "按每名选手；其他选手包含同一玩家的另一选手。",
+    "duration": "本次前进及对应的主移动扣减",
     "statuses": [],
     "sources": [
       {
@@ -464,7 +464,7 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "verification": "作者网页与PDF卡面交叉核对；规则采用PDF优先",
     "imageUrl": "https://johnnlds.github.io/Magical-Athlete-Racers/images/extra-mile/King%20Pete.png",
     "adaptation": "数字适配：主骰扣当前主移动；能力骰与对抗骰无主移动可扣，仍触发国王前进。",
-    "limit": "按每个独立触发分别结算"
+    "limit": "其他选手每次掷出5或6时触发"
   },
   {
     "id": "extra-mile-lazy-bones",
@@ -472,14 +472,14 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "nameZh": "懒骨头",
     "translation": "本项目译名",
     "edition": "extra-mile",
-    "ability": "未掷到6前不能离开起点；掷到6时传到领跑者所在格，并立即再行动一回合。",
+    "ability": "在你的主移动骰首次掷出6之前，不能靠主移动离开起点。每当你的主移动骰掷出6，就传送到领跑者所在格，代替本次主移动，并获得一个额外回合。首次掷出6后，其他点数可以正常移动。",
     "timing": [
       "main-roll"
     ],
     "optional": false,
-    "targets": "lead",
-    "scope": "按选手实例；其他选手包含同一玩家的另一选手。",
-    "duration": "本次效果；生命、次数与永久加值保存至本场结束",
+    "targets": "领跑选手；并列时选择一名",
+    "scope": "按每名选手；其他选手包含同一玩家的另一选手。",
+    "duration": "解锁正常移动持续至本场结束",
     "statuses": [],
     "sources": [
       {
@@ -502,7 +502,7 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "verification": "作者网页与PDF卡面交叉核对；规则采用PDF优先",
     "imageUrl": "https://johnnlds.github.io/Magical-Athlete-Racers/images/extra-mile/Lazy%20Bones.png",
     "adaptation": "数字适配：锁在起点仅限制自己的主移动；首次掷6后解除，随后每次主骰6仍执行传送和额外回合。",
-    "limit": "按每个独立触发分别结算"
+    "limit": "每次主移动掷出6时触发"
   },
   {
     "id": "extra-mile-marksman",
@@ -510,15 +510,16 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "nameZh": "神射手",
     "translation": "本项目译名",
     "edition": "extra-mile",
-    "ability": "主移动前可对3格之外的目标逐次掷骰累加；总和等于目标所在格则淘汰，否则超出后目标前进1。",
+    "ability": "进行主移动前，你可以选择一名与你相距至少4格、且不在起点的其他选手作为射击目标。每次掷一颗骰子，将点数不断相加，直到累计点数达到或超过目标所在格的编号。\n恰好相等：淘汰目标。超过：目标前进1格。\n射击结束后，你照常进行主移动。",
+    "example": "你在第2格，目标在第9格，需要凑到9点。先掷出4、3，累计7点，必须继续掷；下一骰为2就命中，为3则累计10点，目标前进到第10格。比较的是目标的格号，不是你们相距的7格。",
     "timing": [
       "before-main",
       "ability-roll"
     ],
     "optional": true,
-    "targets": "other-beyond-3",
-    "scope": "按选手实例；其他选手包含同一玩家的另一选手。",
-    "duration": "本次效果；生命、次数与永久加值保存至本场结束",
+    "targets": "与你相距至少4格、且不在起点的另一名在赛选手",
+    "scope": "按每名选手；其他选手包含同一玩家的另一选手。",
+    "duration": "本次射击；被淘汰者退出本场",
     "statuses": [],
     "sources": [
       {
@@ -540,8 +541,8 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "verified": true,
     "verification": "作者网页与PDF卡面交叉核对；规则采用PDF优先",
     "imageUrl": "https://johnnlds.github.io/Magical-Athlete-Racers/images/extra-mile/Marksman.png",
-    "adaptation": "数字适配：连续单骰累加，达到或超过目标格号即结束；每颗骰都等待操作者。",
-    "limit": "按每个独立触发分别结算"
+    "adaptation": "网页版按一颗一颗掷骰的方式射击；每次点击后只掷一颗，点数累计达到或超过射击开始时记录的目标格号后结束。",
+    "limit": "每次主移动前可射击一次；连续掷骰直到达到或超过目标格号"
   },
   {
     "id": "extra-mile-moneybags",
@@ -554,9 +555,9 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
       "main-replacement"
     ],
     "optional": true,
-    "targets": "self",
-    "scope": "按选手实例；其他选手包含同一玩家的另一选手。",
-    "duration": "本次效果；生命、次数与永久加值保存至本场结束",
+    "targets": "自己",
+    "scope": "按每名选手；其他选手包含同一玩家的另一选手。",
+    "duration": "本次主移动",
     "statuses": [],
     "sources": [
       {
@@ -578,7 +579,7 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "verified": true,
     "verification": "作者网页与PDF卡面交叉核对；规则采用PDF优先",
     "imageUrl": "https://johnnlds.github.io/Magical-Athlete-Racers/images/extra-mile/Moneybags.png",
-    "limit": "按每个独立触发分别结算"
+    "limit": "每次主移动前可支付1分使用一次"
   },
   {
     "id": "extra-mile-mr-fox",
@@ -591,9 +592,9 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
       "reaction"
     ],
     "optional": true,
-    "targets": "public-power",
-    "scope": "按选手实例；其他选手包含同一玩家的另一选手。",
-    "duration": "本次效果；生命、次数与永久加值保存至本场结束",
+    "targets": "即将生效的一次已公开能力",
+    "scope": "按每名选手；其他选手包含同一玩家的另一选手。",
+    "duration": "只阻止当前这一次能力效果",
     "statuses": [],
     "sources": [
       {
@@ -616,7 +617,7 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "verification": "作者网页与PDF卡面交叉核对；规则采用PDF优先",
     "imageUrl": "https://johnnlds.github.io/Magical-Athlete-Racers/images/extra-mile/Mr.%20Fox.png",
     "adaptation": "数字适配：按本场固定顺序响应，一个阻止成功即关闭窗口；阻止不再互相阻止；已付款和已花次数不返还。持续能力按单次可观察激活开启窗口。",
-    "limit": "每场3次"
+    "limit": "每场最多成功阻止3次"
   },
   {
     "id": "extra-mile-oddball",
@@ -630,9 +631,9 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
       "main-modifier"
     ],
     "optional": false,
-    "targets": "self",
-    "scope": "按选手实例；其他选手包含同一玩家的另一选手。",
-    "duration": "本次效果；生命、次数与永久加值保存至本场结束",
+    "targets": "自己",
+    "scope": "按每名选手；其他选手包含同一玩家的另一选手。",
+    "duration": "本次主移动",
     "statuses": [],
     "sources": [
       {
@@ -654,7 +655,7 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "verified": true,
     "verification": "作者网页与PDF卡面交叉核对；规则采用PDF优先",
     "imageUrl": "https://johnnlds.github.io/Magical-Athlete-Racers/images/extra-mile/Oddball.png",
-    "limit": "按每个独立触发分别结算"
+    "limit": "每次主移动掷骰"
   },
   {
     "id": "extra-mile-pooh",
@@ -662,15 +663,15 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "nameZh": "维尼",
     "translation": "本项目译名",
     "edition": "extra-mile",
-    "ability": "同一回合内多个能力发生后，自己前进1；倒地后立即起身。",
+    "ability": "每个回合中，从第二次能力结算完成起，每完成一次能力，你就前进1格。维尼自身的响应不计入，也不会因此反复触发自己。你绊倒后立即起身。",
     "timing": [
       "power-done",
       "trip"
     ],
     "optional": false,
-    "targets": "self",
-    "scope": "按选手实例；其他选手包含同一玩家的另一选手。",
-    "duration": "本次效果；生命、次数与永久加值保存至本场结束",
+    "targets": "自己",
+    "scope": "按每名选手；其他选手包含同一玩家的另一选手。",
+    "duration": "每次前进或立即起身",
     "statuses": [],
     "sources": [
       {
@@ -693,7 +694,7 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "verification": "作者网页与PDF卡面交叉核对；规则采用PDF优先",
     "imageUrl": "https://johnnlds.github.io/Magical-Athlete-Racers/images/extra-mile/Pooh.png",
     "adaptation": "数字适配：本回合第二次及之后每次能力完成均前进1；自己的该次响应不继续触发自己。",
-    "limit": "按每个独立触发分别结算"
+    "limit": "每回合从第二次能力完成起逐次触发；自身响应不计入"
   },
   {
     "id": "extra-mile-robin-hood",
@@ -701,15 +702,15 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "nameZh": "罗宾汉",
     "translation": "本项目译名",
     "edition": "extra-mile",
-    "ability": "自己越过或与领跑者同格时，从其拿1积分给末位玩家，然后自己前进2。",
+    "ability": "你越过领跑选手或与领跑选手同格时，从操控领跑选手的玩家那里转移1分，交给操控赛道末位选手的玩家，然后你前进2格。并列目标按本场固定行动顺序取第一名；领跑者没有积分时不转分，你仍前进2格。",
     "timing": [
       "pass",
       "stop"
     ],
     "optional": false,
-    "targets": "lead,last",
-    "scope": "按选手实例；其他选手包含同一玩家的另一选手。",
-    "duration": "本次效果；生命、次数与永久加值保存至本场结束",
+    "targets": "领跑选手和赛道末位选手的控制者",
+    "scope": "按每名选手；其他选手包含同一玩家的另一选手。",
+    "duration": "本次转分与前进",
     "statuses": [],
     "sources": [
       {
@@ -732,7 +733,7 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "verification": "作者网页与PDF卡面交叉核对；规则采用PDF优先",
     "imageUrl": "https://johnnlds.github.io/Magical-Athlete-Racers/images/extra-mile/Robin%20Hood.png",
     "adaptation": "数字适配：并列领先或末位按本场固定顺序取第一名不同选手；不足1分不转移，仍移动2格。",
-    "limit": "按每个独立触发分别结算"
+    "limit": "每次越过领跑者或与领跑者同格时触发"
   },
   {
     "id": "extra-mile-saint-nick",
@@ -740,15 +741,15 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "nameZh": "圣尼克",
     "translation": "本项目译名",
     "edition": "extra-mile",
-    "ability": "自己单独落到有其他选手的格子时，每名其他选手使自己前进1格；之后那些选手的控制者依次掷骰，1至3后退1格、4至6前进2格。",
+    "ability": "你停到已有其他选手的格子时，每名其他选手使你前进1格。完成这次前进及后续效果后，操控那些选手的玩家依次为各自选手掷一颗骰子：1～3点，该选手后退1格；4～6点，该选手前进2格。因同一次效果与你一起到达的选手不计入。",
     "timing": [
       "stop",
       "ability-roll"
     ],
     "optional": false,
-    "targets": "co-located-others",
-    "scope": "按选手实例；其他选手包含同一玩家的另一选手。",
-    "duration": "本次效果；生命、次数与永久加值保存至本场结束",
+    "targets": "你到达前已在该格的其他选手",
+    "scope": "按每名选手；其他选手包含同一玩家的另一选手。",
+    "duration": "本次前进与送礼骰效果",
     "statuses": [],
     "sources": [
       {
@@ -770,8 +771,8 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "verified": true,
     "verification": "作者网页与PDF卡面交叉核对；规则采用PDF优先",
     "imageUrl": "https://johnnlds.github.io/Magical-Athlete-Racers/images/extra-mile/Saint%20Nick.png",
-    "adaptation": "按选手实例计数与逐个掷骰，同玩家的两个选手仍分别执行；自身额外移动完成及连锁后才开始送礼骰。",
-    "limit": "按每个独立触发分别结算"
+    "adaptation": "按每名选手计数与逐个掷骰，同玩家的两个选手仍分别执行；自身额外移动完成及连锁后才开始送礼骰。",
+    "limit": "每次停到有其他选手的格子时，按其他选手逐名处理"
   },
   {
     "id": "extra-mile-school-bully",
@@ -779,15 +780,15 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "nameZh": "校园恶霸",
     "translation": "本项目译名",
     "edition": "extra-mile",
-    "ability": "主骰3使所有其他选手倒地；他们下一次主移动可掷恢复骰，1至3可起身并按该骰移动，恶霸前进2。",
+    "ability": "你的主移动最终点数为3时，使所有其他选手绊倒。被此效果绊倒的选手，下次进行主移动时掷一颗恢复骰：\n1～3点：起身，以该点数为基础距离进行主移动，校园恶霸前进2格。\n4～6点：只起身，跳过本次主移动。",
     "timing": [
       "main-roll",
       "recovery-roll"
     ],
-    "optional": true,
-    "targets": "all-others",
-    "scope": "按选手实例；其他选手包含同一玩家的另一选手。",
-    "duration": "本次效果；生命、次数与永久加值保存至本场结束",
+    "optional": false,
+    "targets": "所有其他在赛选手",
+    "scope": "按每名选手；其他选手包含同一玩家的另一选手。",
+    "duration": "绊倒持续至恢复；恢复骰只用于那次主移动",
     "statuses": [],
     "sources": [
       {
@@ -810,7 +811,7 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "verification": "作者网页与PDF卡面交叉核对；规则采用PDF优先",
     "imageUrl": "https://johnnlds.github.io/Magical-Athlete-Racers/images/extra-mile/School%20Bully.png",
     "adaptation": "PDF明确恢复成功后按该骰移动，网页省略，采用PDF；4至6只起身而失去主移动。",
-    "limit": "按每个独立触发分别结算"
+    "limit": "每个主移动最终3点；每名被绊倒者恢复时掷一次骰"
   },
   {
     "id": "extra-mile-scout",
@@ -823,9 +824,9 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
       "main-roll"
     ],
     "optional": true,
-    "targets": "self",
-    "scope": "按选手实例；其他选手包含同一玩家的另一选手。",
-    "duration": "本次效果；生命、次数与永久加值保存至本场结束",
+    "targets": "自己",
+    "scope": "按每名选手；其他选手包含同一玩家的另一选手。",
+    "duration": "本次传送；之后仍按原骰进行主移动",
     "statuses": [],
     "sources": [
       {
@@ -847,7 +848,7 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "verified": true,
     "verification": "作者网页与PDF卡面交叉核对；规则采用PDF优先",
     "imageUrl": "https://johnnlds.github.io/Magical-Athlete-Racers/images/extra-mile/Scout.png",
-    "limit": "按每个独立触发分别结算"
+    "limit": "每次主移动骰最终确定后可传送一次"
   },
   {
     "id": "extra-mile-shuffler",
@@ -855,15 +856,15 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "nameZh": "洗牌师",
     "translation": "本项目译名",
     "edition": "extra-mile",
-    "ability": "赛前将本场所有选手印刷能力洗牌重新分配；自己独自末位时可再次洗牌。",
+    "ability": "赛前，将本场所有选手的角色卡上原本写明的能力洗牌，随机重新分配。你的回合开始时，若你独自处于末位，可以再次洗牌。只重新分配能力，棋子、位置和控制者不交换；你仍保留再次洗牌的能力。",
     "timing": [
       "before-race",
       "turn-start"
     ],
     "optional": true,
-    "targets": "all-racers",
-    "scope": "按选手实例；其他选手包含同一玩家的另一选手。",
-    "duration": "本次效果；生命、次数与永久加值保存至本场结束",
+    "targets": "本场所有选手，不包括没有独立角色卡的加里",
+    "scope": "按每名选手；其他选手包含同一玩家的另一选手。",
+    "duration": "重分配的能力保留至再次洗牌或本场结束",
     "statuses": [],
     "sources": [
       {
@@ -885,8 +886,8 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "verified": true,
     "verification": "作者网页与PDF卡面交叉核对；规则采用PDF优先",
     "imageUrl": "https://johnnlds.github.io/Magical-Athlete-Racers/images/extra-mile/Shuffler.png",
-    "adaptation": "数字适配：重新分配能力不改控制者、位置与棋子；既有赛前窗口不重新打开，已建立对象与资源仍绑定实例。",
-    "limit": "按每个独立触发分别结算"
+    "adaptation": "重新分配能力不改变各选手的操控者、位置与棋子；已经执行的赛前效果不重复执行，已有标记和资源仍归原选手。",
+    "limit": "赛前一次；独自末位的自身回合开始时可再洗牌"
   },
   {
     "id": "extra-mile-silly-goose",
@@ -899,9 +900,9 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
       "main-roll"
     ],
     "optional": false,
-    "targets": "self",
-    "scope": "按选手实例；其他选手包含同一玩家的另一选手。",
-    "duration": "本次效果；生命、次数与永久加值保存至本场结束",
+    "targets": "自己",
+    "scope": "按每名选手；其他选手包含同一玩家的另一选手。",
+    "duration": "本次主移动",
     "statuses": [],
     "sources": [
       {
@@ -923,7 +924,7 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "verified": true,
     "verification": "作者网页与PDF卡面交叉核对；规则采用PDF优先",
     "imageUrl": "https://johnnlds.github.io/Magical-Athlete-Racers/images/extra-mile/Silly%20Goose.png",
-    "limit": "按每个独立触发分别结算"
+    "limit": "每次主移动掷骰"
   },
   {
     "id": "extra-mile-snake-eyes",
@@ -931,15 +932,15 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "nameZh": "蛇眼",
     "translation": "本项目译名",
     "edition": "extra-mile",
-    "ability": "赛前选择冠军并下注；猜中获得下注额3倍积分，否则失去下注额。",
+    "ability": "赛前预测一名选手获得本场冠军，并选择下注积分，最多不超过你当前的积分，也可以下注0分。下注时不扣分；本场结束时，猜中净增加下注额的3倍，猜错扣除下注额。和局视为未猜中。",
     "timing": [
       "before-race",
       "race-end"
     ],
     "optional": false,
-    "targets": "chosen-racer",
-    "scope": "按选手实例；其他选手包含同一玩家的另一选手。",
-    "duration": "本次效果；生命、次数与永久加值保存至本场结束",
+    "targets": "你预测会获得本场冠军的选手，可以是自己",
+    "scope": "按每名选手；其他选手包含同一玩家的另一选手。",
+    "duration": "预测与下注保留至本场结算",
     "statuses": [],
     "sources": [
       {
@@ -962,7 +963,7 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "verification": "作者网页与PDF卡面交叉核对；规则采用PDF优先",
     "imageUrl": "https://johnnlds.github.io/Magical-Athlete-Racers/images/extra-mile/Snake%20Eyes.png",
     "adaptation": "数字适配：下注额限当前玩家积分，不预扣；结束按净增3倍或扣注额结算；和局视为未猜中。",
-    "limit": "按每个独立触发分别结算"
+    "limit": "每场赛前下注一次，赛后结算一次"
   },
   {
     "id": "extra-mile-snub",
@@ -976,9 +977,9 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
       "main-modifier"
     ],
     "optional": false,
-    "targets": "self",
-    "scope": "按选手实例；其他选手包含同一玩家的另一选手。",
-    "duration": "本次效果；生命、次数与永久加值保存至本场结束",
+    "targets": "自己",
+    "scope": "按每名选手；其他选手包含同一玩家的另一选手。",
+    "duration": "加成持续至本场结束",
     "statuses": [],
     "sources": [
       {
@@ -1001,7 +1002,7 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "verification": "作者网页与PDF卡面交叉核对；规则采用PDF优先",
     "imageUrl": "https://johnnlds.github.io/Magical-Athlete-Racers/images/extra-mile/Snub.png",
     "adaptation": "记录本批选秀选择前的全桌选牌数；练习自由组队顺序视为该次选牌顺序。",
-    "limit": "按每个独立触发分别结算"
+    "limit": "按本批选秀的选牌顺序确定一次加成"
   },
   {
     "id": "extra-mile-terrible-toddler",
@@ -1009,15 +1010,15 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "nameZh": "可怕幼童",
     "translation": "本项目译名",
     "edition": "extra-mile",
-    "ability": "主骰1或2时，在主移动前额外掷一骰，使自己周围不超过该骰距离的所有选手倒地。",
+    "ability": "你的主移动最终点数为1或2时，先额外掷一颗范围骰，使与你相距不超过该骰点数的所有选手绊倒，包括你自己，然后继续本次主移动。",
     "timing": [
       "main-roll",
       "ability-roll"
     ],
     "optional": false,
-    "targets": "within-range",
-    "scope": "按选手实例；其他选手包含同一玩家的另一选手。",
-    "duration": "本次效果；生命、次数与永久加值保存至本场结束",
+    "targets": "与你相距不超过范围骰点数的所有在赛选手，包括自己",
+    "scope": "按每名选手；其他选手包含同一玩家的另一选手。",
+    "duration": "绊倒持续至各选手恢复",
     "statuses": [],
     "sources": [
       {
@@ -1040,7 +1041,7 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "verification": "作者网页与PDF卡面交叉核对；规则采用PDF优先",
     "imageUrl": "https://johnnlds.github.io/Magical-Athlete-Racers/images/extra-mile/Terrible%20Toddler.png",
     "adaptation": "anyone包含自己；额外范围骰不触发主移动专属能力。",
-    "limit": "按每个独立触发分别结算"
+    "limit": "每个主移动最终1或2点触发一次"
   },
   {
     "id": "extra-mile-thief",
@@ -1054,9 +1055,9 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
       "race-end"
     ],
     "optional": false,
-    "targets": "secret-other",
-    "scope": "按选手实例；其他选手包含同一玩家的另一选手。",
-    "duration": "本次效果；生命、次数与永久加值保存至本场结束",
+    "targets": "赛前秘密选择的另一名选手",
+    "scope": "按每名选手；其他选手包含同一玩家的另一选手。",
+    "duration": "目标保密至本场结束时揭晓",
     "statuses": [],
     "sources": [
       {
@@ -1078,8 +1079,8 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "verified": true,
     "verification": "作者网页与PDF卡面交叉核对；规则采用PDF优先",
     "imageUrl": "https://johnnlds.github.io/Magical-Athlete-Racers/images/extra-mile/Thief.png",
-    "adaptation": "秘密目标保存在GameState私有flags，不能放Racer公共flags。数字适配按目标实例的正向积分收入记账，最多偷其控制者当前剩余积分。",
-    "limit": "按每个独立触发分别结算"
+    "adaptation": "目标保密至本场结束。按目标这名选手在本场获得的积分计算窃取额，不包含其队友的收入；最多偷走操控目标的玩家当前剩余的积分。",
+    "limit": "每场赛前秘密选择一次，赛后窃取一次"
   },
   {
     "id": "extra-mile-toll-troll",
@@ -1093,9 +1094,9 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
       "stop"
     ],
     "optional": false,
-    "targets": "marked-space",
-    "scope": "按选手实例；其他选手包含同一玩家的另一选手。",
-    "duration": "本次效果；生命、次数与永久加值保存至本场结束",
+    "targets": "赛前标记的格子，以及停到该格的选手",
+    "scope": "按每名选手；其他选手包含同一玩家的另一选手。",
+    "duration": "标记保留至本场结束",
     "statuses": [],
     "sources": [
       {
@@ -1117,7 +1118,7 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "verified": true,
     "verification": "作者网页与PDF卡面交叉核对；规则采用PDF优先",
     "imageUrl": "https://johnnlds.github.io/Magical-Athlete-Racers/images/extra-mile/Toll%20Troll.png",
-    "limit": "按每个独立触发分别结算"
+    "limit": "赛前标记一次；每次有选手停到标记格时得分"
   },
   {
     "id": "extra-mile-totally-fair-ref",
@@ -1130,9 +1131,9 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
       "move"
     ],
     "optional": false,
-    "targets": "new-leader",
-    "scope": "按选手实例；其他选手包含同一玩家的另一选手。",
-    "duration": "本次效果；生命、次数与永久加值保存至本场结束",
+    "targets": "从非领先位置进入领先的其他选手，包括进入并列领先",
+    "scope": "按每名选手；其他选手包含同一玩家的另一选手。",
+    "duration": "绊倒持续至目标恢复",
     "statuses": [],
     "sources": [
       {
@@ -1155,7 +1156,7 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "verification": "作者网页与PDF卡面交叉核对；规则采用PDF优先",
     "imageUrl": "https://johnnlds.github.io/Magical-Athlete-Racers/images/extra-mile/Totally%20Fair%20Ref.png",
     "adaptation": "数字适配：从不在并列领先变为并列领先也算进入；同组同时到达合并检查。",
-    "limit": "按每个独立触发分别结算"
+    "limit": "每次其他选手从非领先位置进入领先时触发"
   },
   {
     "id": "extra-mile-whisper",
@@ -1163,14 +1164,14 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "nameZh": "低语",
     "translation": "本项目译名",
     "edition": "extra-mile",
-    "ability": "自己停到被占用格时，移动到前后最近空格；别人落到自己的格子时，自己前进至下个空格。",
+    "ability": "你停到已有其他选手的格子时，必须移动到前方或后方距离最近的空格；两边一样近时，由你选择。别人停到你所在格时，你必须向前移动到下一个空格。这些都是正常移动，会触发途中和停下时的效果。",
     "timing": [
       "stop"
     ],
-    "optional": true,
-    "targets": "nearest-empty",
-    "scope": "按选手实例；其他选手包含同一玩家的另一选手。",
-    "duration": "本次效果；生命、次数与永久加值保存至本场结束",
+    "optional": false,
+    "targets": "你需要移入的最近空格；等距时由你选择",
+    "scope": "按每名选手；其他选手包含同一玩家的另一选手。",
+    "duration": "本次移动及后续触发效果",
     "statuses": [],
     "sources": [
       {
@@ -1193,7 +1194,7 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "verification": "作者网页与PDF卡面交叉核对；规则采用PDF优先",
     "imageUrl": "https://johnnlds.github.io/Magical-Athlete-Racers/images/extra-mile/Whisper.png",
     "adaptation": "等距两个空格由控制者选择；以正常移动结算经过和停格触发。",
-    "limit": "按每个独立触发分别结算"
+    "limit": "每次符合条件的同格相遇都必须处理"
   },
   {
     "id": "extra-mile-witch-hazel",
@@ -1206,9 +1207,9 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
       "main-allocation"
     ],
     "optional": true,
-    "targets": "one-other",
-    "scope": "按选手实例；其他选手包含同一玩家的另一选手。",
-    "duration": "本次效果；生命、次数与永久加值保存至本场结束",
+    "targets": "另一名在赛选手",
+    "scope": "按每名选手；其他选手包含同一玩家的另一选手。",
+    "duration": "本次自身前进和目标后退",
     "statuses": [],
     "sources": [
       {
@@ -1231,7 +1232,7 @@ export const EXTRA_MILE_MANIFEST: readonly FanCharacterData[] = [
     "verification": "作者网页与PDF卡面交叉核对；规则采用PDF优先",
     "imageUrl": "https://johnnlds.github.io/Magical-Athlete-Racers/images/extra-mile/Witch%20Hazel.png",
     "adaptation": "PDF明确one other racer，网页写other racers；查未发现作者勘误，采用PDF单目标。全给自身或全给目标均可；负主移动不分配。",
-    "limit": "按每个独立触发分别结算"
+    "limit": "每次非负主移动距离确定后可分配一次"
   }
 ];
 export const FAN_CHARACTERS: readonly FanCharacterData[] = [...EXTRA_MILE_MANIFEST.filter(c=>c.id!=='extra-mile-box'),...LEAF_CHARACTERS];

@@ -3,13 +3,13 @@
   "node": "toy_icarus",
   "url": "/models/second-wind/icarus.glb",
   "avatar": "/avatars/second-wind/icarus.svg",
-  "bytes": 54728,
-  "triangles": 3720,
-  "draws": 7,
+  "bytes": 72904,
+  "triangles": 7792,
+  "draws": 1,
   "bounds": [
-    0.6,
-    0.7186,
-    0.32561
+    0.5999938962981048,
+    0.8587603510721502,
+    0.25049592577898494
   ],
   "pivotY": 0,
   "animations": [
@@ -19,8 +19,8 @@
     "fall",
     "recover"
   ],
-  "recognition": "Yellow aviator in pink coat/helmet, large green vertical wings with ribs and handheld poles; complete back harness.",
-  "inferred": "Back and side volumes extrapolated from the published single-view illustration.",
+  "recognition": "Registered card viewed: yellow aviator in pink coat/helmet, large upright green ribbed wings and held wing poles. Complete back harness and volumetric wings reconstructed.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
   "referenceChecked": true,
   "referenceImage": "https://johnnlds.github.io/Magical-Athlete-Racers/images/expansion/Icarus.png",
   "editableSource": "assets/blender/second-wind/icarus.blend",
@@ -28,5 +28,15 @@
   "avatarStyle": "flat-cartoon-svg",
   "motionProfile": "float",
   "bones": 5,
-  "mouthSurfaceVersion": "surface-mouth-v2"
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "Registered card viewed: yellow aviator in pink coat/helmet, large upright green ribbed wings and held wing poles. Complete back harness and volumetric wings reconstructed.",
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "c800c7238025842cd82f426663fe583570192b5f74e15e95e1781bd46cd04227",
+  "glbSha256": "10c74b9c47b218330f8491ff577ffd36c7e7137006a11194c5af9a490bf3cf1b",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

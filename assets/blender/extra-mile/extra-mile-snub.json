@@ -2,13 +2,13 @@
   "id": "extra-mile-snub",
   "node": "toy_extra-mile-snub",
   "url": "/models/extra-mile/extra-mile-snub.glb",
-  "bytes": 47864,
-  "triangles": 3200,
-  "draws": 4,
+  "bytes": 50540,
+  "triangles": 4308,
+  "draws": 1,
   "bounds": [
-    0.6,
-    0.84,
-    0.40182
+    0.5999939141793164,
+    0.8877529359383938,
+    0.41169469283120214
   ],
   "pivotY": 0,
   "animations": [
@@ -23,9 +23,20 @@
   "editableSource": "assets/blender/extra-mile/extra-mile-snub.blend",
   "referenceChecked": true,
   "reference": "https://johnnlds.github.io/Magical-Athlete-Racers/ExtraMile.pdf",
-  "referenceDate": "2026-10-22",
-  "recognition": "pink elephant, large ears, short curled trunk and red striped shorts",
-  "inferred": "Single-view card artwork informs the silhouette and identifying props. Side/back surfaces and joint placement are original project interpretations, not author-approved sculpts.",
-  "avatar": "/models/extra-mile/avatars/extra-mile-snub.png",
-  "mouthSurfaceVersion": "surface-mouth-v2"
+  "referenceDate": "2026-10-24",
+  "recognition": "ExtraMile.pdf viewed: sad pink elephant, red shorts, forehead bandage and tear. Wide ears and curved trunk are structural, with complete back and feet; no generic humanoid replacement.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "avatar": "/avatars/extra-mile/extra-mile-snub.svg",
+  "modelPreview": "/models/extra-mile/avatars/extra-mile-snub.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "ExtraMile.pdf viewed: sad pink elephant, red shorts, forehead bandage and tear. Wide ears and curved trunk are structural, with complete back and feet; no generic humanoid replacement.",
+  "originalAuthorImageChecked": true,
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "f3587c211bcd86d5d971f4f9ade1183fe31c4e2eb6956a78ae1600fe078db9ab",
+  "glbSha256": "36617a6f6b2f6118d570b0d7530db8446d11e2172c946b530927b0f0c8b59ae9",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

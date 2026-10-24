@@ -2,13 +2,13 @@
   "id": "extra-mile-dom-and-gary",
   "node": "toy_extra-mile-dom-and-gary",
   "url": "/models/extra-mile/extra-mile-dom-and-gary.glb",
-  "bytes": 45844,
-  "triangles": 3348,
-  "draws": 4,
+  "bytes": 59912,
+  "triangles": 5720,
+  "draws": 1,
   "bounds": [
-    0.6,
-    0.70208,
-    0.31455
+    0.5999938962981048,
+    0.8307748770486285,
+    0.3519394565215061
   ],
   "pivotY": 0,
   "animations": [
@@ -23,9 +23,20 @@
   "editableSource": "assets/blender/extra-mile/extra-mile-dom-and-gary.blend",
   "referenceChecked": true,
   "reference": "https://johnnlds.github.io/Magical-Athlete-Racers/ExtraMile.pdf",
-  "referenceDate": "2026-10-22",
-  "recognition": "orange cat with curled tail and separate small grey mouse companion",
-  "inferred": "Single-view card artwork informs the silhouette and identifying props. Side/back surfaces and joint placement are original project interpretations, not author-approved sculpts.",
-  "avatar": "/models/extra-mile/avatars/extra-mile-dom-and-gary.png",
-  "mouthSurfaceVersion": "surface-mouth-v2"
+  "referenceDate": "2026-10-24",
+  "recognition": "ExtraMile.pdf viewed: Dom orange cat and Gary small grey mouse. Both have full independent heads, bodies, limbs and tails; Gary is intentionally held by the cat, not an omitted companion.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "avatar": "/avatars/extra-mile/extra-mile-dom-and-gary.svg",
+  "modelPreview": "/models/extra-mile/avatars/extra-mile-dom-and-gary.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "ExtraMile.pdf viewed: Dom orange cat and Gary small grey mouse. Both have full independent heads, bodies, limbs and tails; Gary is intentionally held by the cat, not an omitted companion.",
+  "originalAuthorImageChecked": true,
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "9621b15f04559f9b5393f4c147a3db7d6a9a7c9f14c021c51af9dd0c4c0c39b7",
+  "glbSha256": "dbe6af6beb502a10716fa3dc4576eb658507b3e28f0103e86faa8bd78a33e7d2",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

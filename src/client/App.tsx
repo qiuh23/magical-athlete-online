@@ -32,7 +32,26 @@ const Board3D = lazy(() => import('./scene/Board3D.js').then(module => ({ defaul
 const characters = CHARACTERS;
 const findCharacter = (id: string) => characters.find((character) => character.id === id);
 const characterName = (id: string) => findCharacter(id)?.nameZh ?? id;
-const timingLabels: Record<string,string> = {'main-roll-final':'主移动骰最终确定后',passed:'发生越过时','main-move':'主要移动时','before-main':'主移动前','secret-guess':'秘密点数猜测','reroll-window':'重掷窗口','turn-start':'回合开始','before-first-finish':'首名冲线结算前','race-end':'比赛结束','before-race':'赛前',stop:'停在格子上','turn-end':'回合结束','main-roll':'主移动掷骰','other-main-roll':'其他选手主移动掷骰',continuous:'持续生效','any-roll':'任意掷骰',recovery:'起身阶段','push-your-luck':'追加投掷','first-finish':'首名冲线','ability-roll':'技能骰'};
+const timingLabels: Record<string,string> = {
+  'main-roll-final':'主移动骰最终确定后', 'main-roll':'掷主移动骰时', 'other-main-roll':'其他选手掷主移动骰时',
+  'main-move':'主移动时', 'main-modifier':'计算主移动距离时', 'main-replacement':'代替正常主移动',
+  'main-allocation':'分配主移动距离时', 'main-stop':'主移动结束并停下时', 'next-main':'下一次主移动时',
+  'before-main':'主移动前', 'before-main-roll':'掷主移动骰前', 'before-move':'开始移动前',
+  'after-main-move':'主移动完成后', 'movement-step':'移动途中逐格处理', move:'移动时', warp:'传送时',
+  passed:'发生越过时', pass:'越过其他选手时', stop:'停在格子上', 'before-stop':'即将停在格子上时',
+  'shared-space':'与其他选手同格时', 'leader-change':'领跑选手变化时', continuous:'持续生效',
+  'turn-start':'回合开始', 'first-turn-start':'自己的首次回合开始', 'turn-end':'回合结束',
+  'before-race':'赛前', 'race-end':'比赛结束', draft:'选秀时',
+  'before-first-finish':'首名选手冲线结算前', 'first-finish':'首名选手冲线时',
+  'action-complete':'一个动作及其效果完成后', 'power-complete':'能力结算完成后',
+  'power-done':'能力结算完成后', 'ability-complete':'能力结算完成后', reaction:'其他能力生效前',
+  'reroll-window':'可以决定是否重掷时', 'any-roll':'任意掷骰时', 'raw-die':'骰子最初点数出现时',
+  'contest-roll':'掷对抗骰时', 'ability-roll':'掷技能骰时', 'recovery-roll':'掷恢复骰时',
+  'push-your-luck':'追加掷骰时', 'choose-die':'选择骰子时', 'adjust-die':'调整骰子点数时',
+  'secret-guess':'猜测秘密点数时', 'secret-choice':'秘密选择时', 'choose-target':'选择目标时',
+  trip:'绊倒时', 'trip-immunity':'受到绊倒效果时', recovery:'起身阶段', recover:'从绊倒起身时',
+  score:'获得积分时', copy:'复制能力时', discard:'弃牌时',
+};
 type ShowCharacter = (id: string, racerId?: string) => void;
 interface CharacterDetail { id: string; racerId?: string; roomCode?: string; round?: number; }
 const phaseLabels = { lobby: '赛前集合', draft: '组建你的队伍', selection: '秘密选择运动员', race: '比赛进行中', results: '单场成绩', finished: '总成绩', paused: '比赛已暂停' };
@@ -462,7 +481,7 @@ function CharacterModal({ id, racerId, room, onDetail, onClose }: { id: string; 
   const requestedInstanceId = selectedId ?? racerId;
   const adaptation = FAN_CHARACTERS.find(card => card.id === id)?.adaptation;
   const copyNote = !room || [MAPS_RULES_VERSION,SCHEDULE_RULES_VERSION,FAN_V3_RULES_VERSION].includes(room.rulesVersion??'') ? COPY_ABILITY_PROJECT_NOTES[id] : undefined;
-  const printedAbility = <><p className="full-ability">{character?.ability ?? '角色资料正在载入。'}</p>{adaptation && <p className="character-project-note">数字化适配与项目裁定：{adaptation}</p>}{SECOND_WIND_PROJECT_NOTES[id] && <p className="character-project-note">{SECOND_WIND_PROJECT_NOTES[id]}</p>}{copyNote && <p className="character-project-note"><strong>复制交互的项目裁定：</strong>{copyNote}</p>}</>;
+  const printedAbility = <><p className="full-ability">{character?.ability ?? '角色资料正在载入。'}</p>{character?.example && <p className="ability-example"><strong>例子：</strong>{character.example}</p>}{adaptation && <p className="character-project-note">数字化适配与项目裁定：{adaptation}</p>}{SECOND_WIND_PROJECT_NOTES[id] && <p className="character-project-note">{SECOND_WIND_PROJECT_NOTES[id]}</p>}{copyNote && <p className="character-project-note"><strong>复制交互的项目裁定：</strong>{copyNote}</p>}</>;
   return <Modal title={characterName(id)} onClose={onClose}>
     <div className="character-modal character-detail">
       <header className="character-identity"><div className="modal-avatar"><Avatar id={id} /></div><div><p className="identity-kicker">角色身份</p><p className="identity-name">{characterName(id)}</p><p className="english-name">{character?.nameEn ?? id}</p><EditionBadge character={character} /></div></header>
@@ -472,10 +491,10 @@ function CharacterModal({ id, racerId, room, onDetail, onClose }: { id: string; 
         <EffectiveAbilities racer={racer} room={room} onDetail={onDetail} />
         <StepdadTarget room={room} racer={racer} />
         {racer.characterId === 'egg' && <EggAbility racer={racer} onDetail={onDetail} />}
-        <details className="printed-ability"><summary>角色基础能力 <small>查看原卡文字</small></summary>{printedAbility}</details>
+        <details className="printed-ability"><summary>角色基础能力 <small>查看完整说明与补充裁定</small></summary>{printedAbility}</details>
       </> : <section className="catalog-ability" aria-label="角色能力"><h3>角色能力</h3>{printedAbility}</section>}
       {!racer && <CharacterOwnership room={room} characterId={id} onSelect={setSelectedId} />}
-      {character && <details className="character-sources"><summary>详细规则与来源</summary><dl className="character-rule-metadata"><dt>发动时点</dt><dd>{character.timing.map(timing => timingLabels[timing] ?? timing).join(' / ')}</dd><dt>是否可选</dt><dd>{character.optional ? '可选：由当前控制者决定' : '强制：需要选项时等待当前控制者'}</dd><dt>合法目标</dt><dd>{character.targets}</dd><dt>次数限制</dt><dd>{character.limit ?? '按技能条件触发'}</dd><dt>持续时间</dt><dd>{character.duration}</dd><dt>核验状态</dt><dd>{character.verification ?? (character.verified ? '已按基础盒与发行商 FAQ 核验' : '待核验')}</dd></dl>{character.sources.map((source, index) => <p key={`${source.url}-${index}`}><a href={source.url} target="_blank" rel="noreferrer">{source.title} ↗</a><br />{source.locator} · {source.version}</p>)}{character.imageUrl && <p><a href={character.imageUrl} target="_blank" rel="noreferrer">外形参考图片 ↗</a></p>}</details>}
+      {character && <details className="character-sources"><summary>详细规则与来源</summary><dl className="character-rule-metadata"><dt>发动时点</dt><dd>{character.timing.map(timing => timingLabels[timing] ?? '按能力说明触发').join(' / ') || '无特殊能力'}</dd><dt>发动方式</dt><dd>{character.optional ? '包含可选效果：按能力说明选择是否使用，其余效果自动生效' : '满足条件时自动生效；需要选择目标或结果时，由操控该选手的玩家决定'}</dd><dt>作用对象</dt><dd>{character.targets}</dd><dt>次数限制</dt><dd>{character.limit ?? '每次满足能力说明中的条件时触发'}</dd><dt>持续时间</dt><dd>{character.duration}</dd><dt>核验状态</dt><dd>{character.verification ?? (character.verified ? '已按基础盒与发行商 FAQ 核验' : '待核验')}</dd></dl>{character.sources.map((source, index) => <p key={`${source.url}-${index}`}><a href={source.url} target="_blank" rel="noreferrer">{source.title} ↗</a><br />{source.locator} · {source.version}</p>)}{character.imageUrl && <p><a href={character.imageUrl} target="_blank" rel="noreferrer">外形参考图片 ↗</a></p>}</details>}
       <p className="small-note">角色中文名为本项目暂译。技能与合法选项由统一计算端裁定。</p>
     </div>
   </Modal>;

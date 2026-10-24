@@ -71,3 +71,13 @@ test('cache disposal releases only owned GPU resources and can rebuild cleanly',
   assert.notEqual(cache.baseGeometry(false), base);
   cache.dispose(); original.dispose();
 });
+
+test('authored PBR channels and opacity survive both tiers without disposing shared textures', async () => {
+  const {Texture,Vector2}=await import('three');const map=new Texture(),normalMap=new Texture(),roughnessMap=new Texture();
+  const source=new MeshStandardMaterial({name:'sculpt-cloth',roughness:.82,map,normalMap,roughnessMap,vertexColors:true,transparent:true,opacity:.65,alphaTest:.12,normalScale:new Vector2(.4,.6)});
+  const cache=new ToyResourceCache();let disposed=0;map.addEventListener('dispose',()=>disposed++);
+  assert.equal(cache.characterMaterial(source, false).defines?.PHYSICAL, '',
+    'copying standard channels must retain the high-quality physical shader');
+  for(const low of [true,false]){const material=cache.characterMaterial(source,low);assert.equal(material.map,map);assert.equal(material.normalMap,normalMap);assert.equal(material.roughnessMap,roughnessMap);assert.ok(material.normalScale.equals(source.normalScale));assert.equal(material.opacity,.65);assert.equal(material.alphaTest,.12);assert.equal(material.transparent,true);assert.equal(material.roughness,.82);assert.equal(material.vertexColors,true);assert.notEqual(material,source)}
+  cache.dispose();assert.equal(disposed,0);source.dispose();map.dispose();normalMap.dispose();roughnessMap.dispose();
+});

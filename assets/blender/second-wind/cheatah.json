@@ -3,13 +3,13 @@
   "node": "toy_cheatah",
   "url": "/models/second-wind/cheatah.glb",
   "avatar": "/avatars/second-wind/cheatah.svg",
-  "bytes": 57132,
-  "triangles": 4480,
-  "draws": 4,
+  "bytes": 63204,
+  "triangles": 6464,
+  "draws": 1,
   "bounds": [
-    0.6,
-    0.80444,
-    0.40718
+    0.5999938962981048,
+    0.9565721768577407,
+    0.5373088698278804
   ],
   "pivotY": 0,
   "animations": [
@@ -19,8 +19,8 @@
     "fall",
     "recover"
   ],
-  "recognition": "Orange spotted cheetah in a green spotted sweater, die in left paw, muzzle and curled tail.",
-  "inferred": "Back and side volumes extrapolated from the published single-view illustration.",
+  "recognition": "Registered card image viewed: orange spotted cheetah, green spotted sweater and held die. Integrated muzzle, actual paw grip, rear spots and tail volume reconstructed.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
   "referenceChecked": true,
   "referenceImage": "https://johnnlds.github.io/Magical-Athlete-Racers/images/expansion/Cheatah.png",
   "editableSource": "assets/blender/second-wind/cheatah.blend",
@@ -28,5 +28,15 @@
   "avatarStyle": "flat-cartoon-svg",
   "motionProfile": "quadruped",
   "bones": 5,
-  "mouthSurfaceVersion": "surface-mouth-v2"
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "Registered card image viewed: orange spotted cheetah, green spotted sweater and held die. Integrated muzzle, actual paw grip, rear spots and tail volume reconstructed.",
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "fce336e520046332f5a219737f6e8f67d4080ba4318683aaf1bc5552022b660e",
+  "glbSha256": "3f5df0366256aa2b84428211741cecb3c363e46ce9a3cc1d609a4c93006b8bc0",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

@@ -1,9 +1,9 @@
 {
-  "generator": "Dots / Blender 4.3.2",
+  "generator": "Blender 4.3.2 authored replacement sculptures",
   "up": "+Y",
   "forward": "+Z",
-  "portraitMethod": "Transparent Eevee render of the corresponding 3D model",
-  "animationMethod": "Whole-model breathing, bounce and squash; no skeletal limb animation",
+  "portraitMethod": "Existing selection portraits retained unchanged; new GLB renders are separate modelPreview files under /models/wurstii/avatars/",
+  "animationMethod": "Five independent local skeletal clips; game owns route position and fall/recovery orientation",
   "models": [
     {
       "id": "wurstii-bart-simpson",
@@ -12,22 +12,40 @@
       "model": "/models/wurstii/wurstii-bart-simpson.glb",
       "portrait": "/avatars/wurstii/wurstii-bart-simpson.png",
       "editableSource": "assets/blender/wurstii/blend/wurstii-bart-simpson.blend",
-      "bytes": 155684,
-      "triangles": 3978,
+      "bytes": 53664,
+      "triangles": 4140,
       "draws": 1,
       "bounds": [
-        0.3860644996166229,
-        0.8799999952316284,
-        0.24791397154331207
+        0.46143986327707753,
+        0.9800103928338197,
+        0.27643665471435536
       ],
       "animations": [
         "idle",
         "move",
-        "skill"
+        "skill",
+        "fall",
+        "recover"
       ],
-      "modelPreview": "/avatars/wurstii/wurstii-bart-simpson.png",
+      "modelPreview": "/models/wurstii/avatars/wurstii-bart-simpson.png",
       "avatar": "/avatars/wurstii/wurstii-bart-simpson.svg",
-      "avatarStyle": "flat-cartoon-svg"
+      "avatarStyle": "flat-cartoon-svg",
+      "bones": 5,
+      "generator": "Blender 4.3.2",
+      "sculptVersion": "authored-20261024",
+      "pivotY": 0,
+      "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Bart Simpson: yellow spiked head, orange T-shirt, blue shorts/shoes and narrow limbs. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "referenceChecked": true,
+      "originalAuthorImageChecked": true,
+      "referenceDate": "2026-10-24",
+      "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+      "sculptStatus": "completed-local-validation",
+      "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+      "sourceSha256": "572a863981ecabd8fc9f42eb45f78fb6b31a8565cde89d83319ca096ae23264a",
+      "glbSha256": "3d6775702f98bb032c668c5cc520569a8a58c0c40737b2f30ce7d0cd1d2dbba2",
+      "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+      "recognition": "User-provided Wurstii reference card crop actually viewed: Bart Simpson: yellow spiked head, orange T-shirt, blue shorts/shoes and narrow limbs. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "wurstii-bucky-ohare",
@@ -36,22 +54,40 @@
       "model": "/models/wurstii/wurstii-bucky-ohare.glb",
       "portrait": "/avatars/wurstii/wurstii-bucky-ohare.png",
       "editableSource": "assets/blender/wurstii/blend/wurstii-bucky-ohare.blend",
-      "bytes": 168732,
-      "triangles": 4364,
+      "bytes": 56932,
+      "triangles": 5072,
       "draws": 1,
       "bounds": [
-        0.4105469584465027,
-        0.8799999952316284,
-        0.2650153338909149
+        0.46913052766502883,
+        0.9800103928338197,
+        0.24707785271767327
       ],
       "animations": [
         "idle",
         "move",
-        "skill"
+        "skill",
+        "fall",
+        "recover"
       ],
-      "modelPreview": "/avatars/wurstii/wurstii-bucky-ohare.png",
+      "modelPreview": "/models/wurstii/avatars/wurstii-bucky-ohare.png",
       "avatar": "/avatars/wurstii/wurstii-bucky-ohare.svg",
-      "avatarStyle": "flat-cartoon-svg"
+      "avatarStyle": "flat-cartoon-svg",
+      "bones": 5,
+      "generator": "Blender 4.3.2",
+      "sculptVersion": "authored-20261024",
+      "pivotY": 0,
+      "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Bucky O Hare: green rabbit with long ears, purple-magenta space uniform, gold trim and orange gloves/boots. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "referenceChecked": true,
+      "originalAuthorImageChecked": true,
+      "referenceDate": "2026-10-24",
+      "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+      "sculptStatus": "completed-local-validation",
+      "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+      "sourceSha256": "70f6337f183908a0aa269a2609c863d91e0f4c208ac61058064494c7a4534e4d",
+      "glbSha256": "edd4ea9698645e6ef530af3b528e779713d8c71d1322c7c3c7dbc50aab82753c",
+      "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+      "recognition": "User-provided Wurstii reference card crop actually viewed: Bucky O Hare: green rabbit with long ears, purple-magenta space uniform, gold trim and orange gloves/boots. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "wurstii-bullet-bill",
@@ -60,22 +96,40 @@
       "model": "/models/wurstii/wurstii-bullet-bill.glb",
       "portrait": "/avatars/wurstii/wurstii-bullet-bill.png",
       "editableSource": "assets/blender/wurstii/blend/wurstii-bullet-bill.blend",
-      "bytes": 94604,
-      "triangles": 2484,
+      "bytes": 57696,
+      "triangles": 4782,
       "draws": 1,
       "bounds": [
-        0.5238806009292603,
-        0.34656721353530884,
-        0.5400000214576721
+        0.5940733054597613,
+        0.3526413769951476,
+        0.5999938916912417
       ],
       "animations": [
         "idle",
         "move",
-        "skill"
+        "skill",
+        "fall",
+        "recover"
       ],
-      "modelPreview": "/avatars/wurstii/wurstii-bullet-bill.png",
+      "modelPreview": "/models/wurstii/avatars/wurstii-bullet-bill.png",
       "avatar": "/avatars/wurstii/wurstii-bullet-bill.svg",
-      "avatarStyle": "flat-cartoon-svg"
+      "avatarStyle": "flat-cartoon-svg",
+      "bones": 5,
+      "generator": "Blender 4.3.2",
+      "sculptVersion": "authored-20261024",
+      "pivotY": 0,
+      "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Bullet Bill: black horizontal rounded cannon shell, white angry eyes and gloves, recessed rear rim. No legs, person body or game base added. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "referenceChecked": true,
+      "originalAuthorImageChecked": true,
+      "referenceDate": "2026-10-24",
+      "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+      "sculptStatus": "completed-local-validation",
+      "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+      "sourceSha256": "b6c67e4ed7881da06a34a7e9e0ab582c6d1d692aa21993981883db5829efda6f",
+      "glbSha256": "3ee33fa67ca98eb29369cb3ecd0e2dce0461b6d735495971739165d7ba5a0014",
+      "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+      "recognition": "User-provided Wurstii reference card crop actually viewed: Bullet Bill: black horizontal rounded cannon shell, white angry eyes and gloves, recessed rear rim. No legs, person body or game base added. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "wurstii-chip-n-dale",
@@ -84,22 +138,40 @@
       "model": "/models/wurstii/wurstii-chip-n-dale.glb",
       "portrait": "/avatars/wurstii/wurstii-chip-n-dale.png",
       "editableSource": "assets/blender/wurstii/blend/wurstii-chip-n-dale.blend",
-      "bytes": 300512,
-      "triangles": 7752,
+      "bytes": 59196,
+      "triangles": 5578,
       "draws": 1,
       "bounds": [
-        0.5400000214576721,
-        0.5833213925361633,
-        0.24920377135276794
+        0.5999938962981048,
+        0.5996582085569935,
+        0.33997620063774403
       ],
       "animations": [
         "idle",
         "move",
-        "skill"
+        "skill",
+        "fall",
+        "recover"
       ],
-      "modelPreview": "/avatars/wurstii/wurstii-chip-n-dale.png",
+      "modelPreview": "/models/wurstii/avatars/wurstii-chip-n-dale.png",
       "avatar": "/avatars/wurstii/wurstii-chip-n-dale.svg",
-      "avatarStyle": "flat-cartoon-svg"
+      "avatarStyle": "flat-cartoon-svg",
+      "bones": 5,
+      "generator": "Blender 4.3.2",
+      "sculptVersion": "authored-20261024",
+      "pivotY": 0,
+      "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Chip and Dale both present: two brown/cream chipmunks, Chip wearing fedora and black nose, Dale with red nose and separated teeth. Both have complete limbs and tails. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "referenceChecked": true,
+      "originalAuthorImageChecked": true,
+      "referenceDate": "2026-10-24",
+      "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+      "sculptStatus": "completed-local-validation",
+      "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+      "sourceSha256": "52fa4ccaebecae671a1fb869c20e6c27c18e37d043a973fe99614762b842ed7e",
+      "glbSha256": "eea0efebb96ec7d145001ecc90dffa62d30ae63648369d0e4ffe64f24e18aa98",
+      "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+      "recognition": "User-provided Wurstii reference card crop actually viewed: Chip and Dale both present: two brown/cream chipmunks, Chip wearing fedora and black nose, Dale with red nose and separated teeth. Both have complete limbs and tails. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "wurstii-diddy-kong",
@@ -108,22 +180,40 @@
       "model": "/models/wurstii/wurstii-diddy-kong.glb",
       "portrait": "/avatars/wurstii/wurstii-diddy-kong.png",
       "editableSource": "assets/blender/wurstii/blend/wurstii-diddy-kong.blend",
-      "bytes": 180364,
-      "triangles": 4536,
+      "bytes": 63896,
+      "triangles": 5676,
       "draws": 1,
       "bounds": [
-        0.462860107421875,
-        0.8799999952316284,
-        0.3883433938026428
+        0.5271156956694235,
+        0.9800103928338197,
+        0.48701438147504283
       ],
       "animations": [
         "idle",
         "move",
-        "skill"
+        "skill",
+        "fall",
+        "recover"
       ],
-      "modelPreview": "/avatars/wurstii/wurstii-diddy-kong.png",
+      "modelPreview": "/models/wurstii/avatars/wurstii-diddy-kong.png",
       "avatar": "/avatars/wurstii/wurstii-diddy-kong.svg",
-      "avatarStyle": "flat-cartoon-svg"
+      "avatarStyle": "flat-cartoon-svg",
+      "bones": 5,
+      "generator": "Blender 4.3.2",
+      "sculptVersion": "authored-20261024",
+      "pivotY": 0,
+      "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Diddy Kong: brown monkey, red cap/shirt and long curled tail. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "referenceChecked": true,
+      "originalAuthorImageChecked": true,
+      "referenceDate": "2026-10-24",
+      "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+      "sculptStatus": "completed-local-validation",
+      "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+      "sourceSha256": "7c1a0969c9f9a49833aa1fd28610d0c1bec949b39b54a5c4bfa15c17c7d901f7",
+      "glbSha256": "0204e761b9539dd8adaaf23293336be9c5ae946f260fea61f435b569802a06de",
+      "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+      "recognition": "User-provided Wurstii reference card crop actually viewed: Diddy Kong: brown monkey, red cap/shirt and long curled tail. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "wurstii-dixie-kong",
@@ -132,22 +222,40 @@
       "model": "/models/wurstii/wurstii-dixie-kong.glb",
       "portrait": "/avatars/wurstii/wurstii-dixie-kong.png",
       "editableSource": "assets/blender/wurstii/blend/wurstii-dixie-kong.blend",
-      "bytes": 212312,
-      "triangles": 5276,
+      "bytes": 67480,
+      "triangles": 5400,
       "draws": 1,
       "bounds": [
-        0.43705740571022034,
-        0.8799999952316284,
-        0.338817834854126
+        0.49714651195593385,
+        0.9800103928338197,
+        0.4196905485677898
       ],
       "animations": [
         "idle",
         "move",
-        "skill"
+        "skill",
+        "fall",
+        "recover"
       ],
-      "modelPreview": "/avatars/wurstii/wurstii-dixie-kong.png",
+      "modelPreview": "/models/wurstii/avatars/wurstii-dixie-kong.png",
       "avatar": "/avatars/wurstii/wurstii-dixie-kong.svg",
-      "avatarStyle": "flat-cartoon-svg"
+      "avatarStyle": "flat-cartoon-svg",
+      "bones": 5,
+      "generator": "Blender 4.3.2",
+      "sculptVersion": "authored-20261024",
+      "pivotY": 0,
+      "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Dixie Kong: brown monkey, pink beret/top and long blonde ponytail. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "referenceChecked": true,
+      "originalAuthorImageChecked": true,
+      "referenceDate": "2026-10-24",
+      "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+      "sculptStatus": "completed-local-validation",
+      "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+      "sourceSha256": "3a6c1915ae77b323e273c9ce7254e66179a78197000137fbf922e0c03b5ea97a",
+      "glbSha256": "67ad21b7757d1a8deabe99d43abbdb355cca81e32d5e24d1cf55b264e5208833",
+      "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+      "recognition": "User-provided Wurstii reference card crop actually viewed: Dixie Kong: brown monkey, pink beret/top and long blonde ponytail. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "wurstii-dr-wily",
@@ -156,22 +264,40 @@
       "model": "/models/wurstii/wurstii-dr-wily.glb",
       "portrait": "/avatars/wurstii/wurstii-dr-wily.png",
       "editableSource": "assets/blender/wurstii/blend/wurstii-dr-wily.blend",
-      "bytes": 132360,
-      "triangles": 3320,
+      "bytes": 51868,
+      "triangles": 4672,
       "draws": 1,
       "bounds": [
-        0.46725666522979736,
-        0.8800000548362732,
-        0.2647787630558014
+        0.543351542710654,
+        0.9800103928338197,
+        0.33960997344889676
       ],
       "animations": [
         "idle",
         "move",
-        "skill"
+        "skill",
+        "fall",
+        "recover"
       ],
-      "modelPreview": "/avatars/wurstii/wurstii-dr-wily.png",
+      "modelPreview": "/models/wurstii/avatars/wurstii-dr-wily.png",
       "avatar": "/avatars/wurstii/wurstii-dr-wily.svg",
-      "avatarStyle": "flat-cartoon-svg"
+      "avatarStyle": "flat-cartoon-svg",
+      "bones": 5,
+      "generator": "Blender 4.3.2",
+      "sculptVersion": "authored-20261024",
+      "pivotY": 0,
+      "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Dr Wily: bald tan head, wild white side hair/moustache, white lab coat, dark tie/trousers and black shoes. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "referenceChecked": true,
+      "originalAuthorImageChecked": true,
+      "referenceDate": "2026-10-24",
+      "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+      "sculptStatus": "completed-local-validation",
+      "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+      "sourceSha256": "e5c73d522a5b2ae92b7fe9f4577a616e5a082a6834a60eabae96f8636164ba82",
+      "glbSha256": "d9ca8851bdb6c75332fb9f8ac5cb2bf52cb5178c392b385718ff4f0aa2cdea29",
+      "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+      "recognition": "User-provided Wurstii reference card crop actually viewed: Dr Wily: bald tan head, wild white side hair/moustache, white lab coat, dark tie/trousers and black shoes. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "wurstii-dry-bones",
@@ -180,22 +306,40 @@
       "model": "/models/wurstii/wurstii-dry-bones.glb",
       "portrait": "/avatars/wurstii/wurstii-dry-bones.png",
       "editableSource": "assets/blender/wurstii/blend/wurstii-dry-bones.blend",
-      "bytes": 199184,
-      "triangles": 5112,
+      "bytes": 53692,
+      "triangles": 4062,
       "draws": 1,
       "bounds": [
-        0.4606242775917053,
-        0.8799999952316284,
-        0.40631577372550964
+        0.5999938962981048,
+        0.9652699523176137,
+        0.48921170690023497
       ],
       "animations": [
         "idle",
         "move",
-        "skill"
+        "skill",
+        "fall",
+        "recover"
       ],
-      "modelPreview": "/avatars/wurstii/wurstii-dry-bones.png",
+      "modelPreview": "/models/wurstii/avatars/wurstii-dry-bones.png",
       "avatar": "/avatars/wurstii/wurstii-dry-bones.svg",
-      "avatarStyle": "flat-cartoon-svg"
+      "avatarStyle": "flat-cartoon-svg",
+      "bones": 5,
+      "generator": "Blender 4.3.2",
+      "sculptVersion": "authored-20261024",
+      "pivotY": 0,
+      "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Dry Bones: complete white turtle skeleton, dark eye sockets, grey shell/shoes and ribbed pale plastron. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "referenceChecked": true,
+      "originalAuthorImageChecked": true,
+      "referenceDate": "2026-10-24",
+      "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+      "sculptStatus": "completed-local-validation",
+      "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+      "sourceSha256": "0a3ecb7801f5906c000849ba40c4195702f89adf7bc46c7e133cacd30e5c33c2",
+      "glbSha256": "d684ecb8cc500ffd662c751772468f93147ff514e72448168f5e4d3a2aafc802",
+      "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+      "recognition": "User-provided Wurstii reference card crop actually viewed: Dry Bones: complete white turtle skeleton, dark eye sockets, grey shell/shoes and ribbed pale plastron. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "wurstii-eric",
@@ -204,22 +348,40 @@
       "model": "/models/wurstii/wurstii-eric.glb",
       "portrait": "/avatars/wurstii/wurstii-eric.png",
       "editableSource": "assets/blender/wurstii/blend/wurstii-eric.blend",
-      "bytes": 275348,
-      "triangles": 7212,
+      "bytes": 62148,
+      "triangles": 5788,
       "draws": 1,
       "bounds": [
-        0.46883711218833923,
-        0.8799999952316284,
-        0.26790693402290344
+        0.5012970366527298,
+        0.9800103928338197,
+        0.30042420728171637
       ],
       "animations": [
         "idle",
         "move",
-        "skill"
+        "skill",
+        "fall",
+        "recover"
       ],
-      "modelPreview": "/avatars/wurstii/wurstii-eric.png",
+      "modelPreview": "/models/wurstii/avatars/wurstii-eric.png",
       "avatar": "/avatars/wurstii/wurstii-eric.svg",
-      "avatarStyle": "flat-cartoon-svg"
+      "avatarStyle": "flat-cartoon-svg",
+      "bones": 5,
+      "generator": "Blender 4.3.2",
+      "sculptVersion": "authored-20261024",
+      "pivotY": 0,
+      "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Eric of The Lost Vikings: red hair/long beard, grey white-horned helmet, blue trousers and red boots. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "referenceChecked": true,
+      "originalAuthorImageChecked": true,
+      "referenceDate": "2026-10-24",
+      "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+      "sculptStatus": "completed-local-validation",
+      "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+      "sourceSha256": "350bbc2262c3c8493018ed10cd5abfd4ce8ecaf6ab5c78d90dff5989cbdb0b00",
+      "glbSha256": "47d607087ed5dfc0911fb1ad529e64fc318e3a5d67f3306f7e07f463601a3fce",
+      "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+      "recognition": "User-provided Wurstii reference card crop actually viewed: Eric of The Lost Vikings: red hair/long beard, grey white-horned helmet, blue trousers and red boots. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "wurstii-falco-lombardi",
@@ -228,22 +390,40 @@
       "model": "/models/wurstii/wurstii-falco-lombardi.glb",
       "portrait": "/avatars/wurstii/wurstii-falco-lombardi.png",
       "editableSource": "assets/blender/wurstii/blend/wurstii-falco-lombardi.blend",
-      "bytes": 122852,
-      "triangles": 3052,
+      "bytes": 49188,
+      "triangles": 3728,
       "draws": 1,
       "bounds": [
-        0.4246402680873871,
-        0.8799999952316284,
-        0.3486943244934082
+        0.5144199957274087,
+        0.9800103928338197,
+        0.3599353061233648
       ],
       "animations": [
         "idle",
         "move",
-        "skill"
+        "skill",
+        "fall",
+        "recover"
       ],
-      "modelPreview": "/avatars/wurstii/wurstii-falco-lombardi.png",
+      "modelPreview": "/models/wurstii/avatars/wurstii-falco-lombardi.png",
       "avatar": "/avatars/wurstii/wurstii-falco-lombardi.svg",
-      "avatarStyle": "flat-cartoon-svg"
+      "avatarStyle": "flat-cartoon-svg",
+      "bones": 5,
+      "generator": "Blender 4.3.2",
+      "sculptVersion": "authored-20261024",
+      "pivotY": 0,
+      "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Falco Lombardi: blue bird with swept crest, orange brows, yellow beak, white flight jacket, red shirt and dark trousers. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "referenceChecked": true,
+      "originalAuthorImageChecked": true,
+      "referenceDate": "2026-10-24",
+      "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+      "sculptStatus": "completed-local-validation",
+      "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+      "sourceSha256": "86453dd54bd583548b8d9af212e60eafcbce325f3560b2b24d133930100b30f4",
+      "glbSha256": "89e321449655c9704b76a44ce32b0ab0adc836f595bf6394e1acaeb9dbec6254",
+      "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+      "recognition": "User-provided Wurstii reference card crop actually viewed: Falco Lombardi: blue bird with swept crest, orange brows, yellow beak, white flight jacket, red shirt and dark trousers. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "wurstii-frogger",
@@ -252,22 +432,40 @@
       "model": "/models/wurstii/wurstii-frogger.glb",
       "portrait": "/avatars/wurstii/wurstii-frogger.png",
       "editableSource": "assets/blender/wurstii/blend/wurstii-frogger.blend",
-      "bytes": 170408,
-      "triangles": 4328,
+      "bytes": 44244,
+      "triangles": 3124,
       "draws": 1,
       "bounds": [
-        0.5400000214576721,
-        0.39694249629974365,
-        0.4101738929748535
+        0.5999938962981048,
+        0.3272499771111179,
+        0.5705130161442915
       ],
       "animations": [
         "idle",
         "move",
-        "skill"
+        "skill",
+        "fall",
+        "recover"
       ],
-      "modelPreview": "/avatars/wurstii/wurstii-frogger.png",
+      "modelPreview": "/models/wurstii/avatars/wurstii-frogger.png",
       "avatar": "/avatars/wurstii/wurstii-frogger.svg",
-      "avatarStyle": "flat-cartoon-svg"
+      "avatarStyle": "flat-cartoon-svg",
+      "bones": 5,
+      "generator": "Blender 4.3.2",
+      "sculptVersion": "authored-20261024",
+      "pivotY": 0,
+      "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Frogger: low green four-legged frog, yellow dorsal stripe, raised eyes and splayed toes; not upright humanoid. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "referenceChecked": true,
+      "originalAuthorImageChecked": true,
+      "referenceDate": "2026-10-24",
+      "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+      "sculptStatus": "completed-local-validation",
+      "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+      "sourceSha256": "c3ab1971384de442715fd0faa011fbe025cbc8376446e8c2271115c4c5fb871e",
+      "glbSha256": "86abb2396306b5b7706c84b8db3ce78f6edd5a76a8b5441f8cce88165cc9ce55",
+      "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+      "recognition": "User-provided Wurstii reference card crop actually viewed: Frogger: low green four-legged frog, yellow dorsal stripe, raised eyes and splayed toes; not upright humanoid. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "wurstii-hoagie",
@@ -276,22 +474,40 @@
       "model": "/models/wurstii/wurstii-hoagie.glb",
       "portrait": "/avatars/wurstii/wurstii-hoagie.png",
       "editableSource": "assets/blender/wurstii/blend/wurstii-hoagie.blend",
-      "bytes": 225556,
-      "triangles": 6076,
+      "bytes": 55268,
+      "triangles": 5048,
       "draws": 1,
       "bounds": [
-        0.5400000214576721,
-        0.7812000513076782,
-        0.2916000485420227
+        0.5999938962981048,
+        0.87960449366546,
+        0.3575548570207831
       ],
       "animations": [
         "idle",
         "move",
-        "skill"
+        "skill",
+        "fall",
+        "recover"
       ],
-      "modelPreview": "/avatars/wurstii/wurstii-hoagie.png",
+      "modelPreview": "/models/wurstii/avatars/wurstii-hoagie.png",
       "avatar": "/avatars/wurstii/wurstii-hoagie.svg",
-      "avatarStyle": "flat-cartoon-svg"
+      "avatarStyle": "flat-cartoon-svg",
+      "bones": 5,
+      "generator": "Blender 4.3.2",
+      "sculptVersion": "authored-20261024",
+      "pivotY": 0,
+      "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Hoagie: broad heavy figure, long black hair, blue cap/jeans, black skull-and-orange-flame shirt, white shoes. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "referenceChecked": true,
+      "originalAuthorImageChecked": true,
+      "referenceDate": "2026-10-24",
+      "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+      "sculptStatus": "completed-local-validation",
+      "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+      "sourceSha256": "03a4b73508ec4dadc66214c8951336d8c9bd327f83e72071d105f0e8a195c946",
+      "glbSha256": "d3bbcd17c4075d032c7920449901f66157252db6970ece3cd3024003f5edd70b",
+      "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+      "recognition": "User-provided Wurstii reference card crop actually viewed: Hoagie: broad heavy figure, long black hair, blue cap/jeans, black skull-and-orange-flame shirt, white shoes. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "wurstii-jason-vorhees",
@@ -300,22 +516,40 @@
       "model": "/models/wurstii/wurstii-jason-vorhees.glb",
       "portrait": "/avatars/wurstii/wurstii-jason-vorhees.png",
       "editableSource": "assets/blender/wurstii/blend/wurstii-jason-vorhees.blend",
-      "bytes": 143928,
-      "triangles": 3616,
+      "bytes": 50656,
+      "triangles": 3944,
       "draws": 1,
       "bounds": [
-        0.4768282175064087,
-        0.8799999952316284,
-        0.24229076504707336
+        0.5611743522446364,
+        0.9800103928338197,
+        0.3140354671875042
       ],
       "animations": [
         "idle",
         "move",
-        "skill"
+        "skill",
+        "fall",
+        "recover"
       ],
-      "modelPreview": "/avatars/wurstii/wurstii-jason-vorhees.png",
+      "modelPreview": "/models/wurstii/avatars/wurstii-jason-vorhees.png",
       "avatar": "/avatars/wurstii/wurstii-jason-vorhees.svg",
-      "avatarStyle": "flat-cartoon-svg"
+      "avatarStyle": "flat-cartoon-svg",
+      "bones": 5,
+      "generator": "Blender 4.3.2",
+      "sculptVersion": "authored-20261024",
+      "pivotY": 0,
+      "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Jason NES sprite: purple outfit, cyan hockey mask and cyan hands. No additional weapon or gore added beyond source. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "referenceChecked": true,
+      "originalAuthorImageChecked": true,
+      "referenceDate": "2026-10-24",
+      "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+      "sculptStatus": "completed-local-validation",
+      "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+      "sourceSha256": "2bdd8f21fe52ad902b7ba67cce01108698646943fcfb3238348e15a64ed8e077",
+      "glbSha256": "dc7666348b3643f97bc8bfebc0b571e9871dd9fff149376554d8ac02ffdc8eb1",
+      "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+      "recognition": "User-provided Wurstii reference card crop actually viewed: Jason NES sprite: purple outfit, cyan hockey mask and cyan hands. No additional weapon or gore added beyond source. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "wurstii-knuckles",
@@ -324,22 +558,40 @@
       "model": "/models/wurstii/wurstii-knuckles.glb",
       "portrait": "/avatars/wurstii/wurstii-knuckles.png",
       "editableSource": "assets/blender/wurstii/blend/wurstii-knuckles.blend",
-      "bytes": 284920,
-      "triangles": 6964,
+      "bytes": 54124,
+      "triangles": 4388,
       "draws": 1,
       "bounds": [
-        0.5138102769851685,
-        0.8800000548362732,
-        0.39954501390457153
+        0.5999938962981048,
+        0.8117618450784498,
+        0.31849116073885453
       ],
       "animations": [
         "idle",
         "move",
-        "skill"
+        "skill",
+        "fall",
+        "recover"
       ],
-      "modelPreview": "/avatars/wurstii/wurstii-knuckles.png",
+      "modelPreview": "/models/wurstii/avatars/wurstii-knuckles.png",
       "avatar": "/avatars/wurstii/wurstii-knuckles.svg",
-      "avatarStyle": "flat-cartoon-svg"
+      "avatarStyle": "flat-cartoon-svg",
+      "bones": 5,
+      "generator": "Blender 4.3.2",
+      "sculptVersion": "authored-20261024",
+      "pivotY": 0,
+      "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Knuckles: red echidna, hanging head spines, cream muzzle, white crescent chest, large white spiked gloves and red/yellow shoes. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "referenceChecked": true,
+      "originalAuthorImageChecked": true,
+      "referenceDate": "2026-10-24",
+      "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+      "sculptStatus": "completed-local-validation",
+      "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+      "sourceSha256": "9ab1a947e1ba3593922160f80673f477f18a68ad619a7bce5e24597a38961833",
+      "glbSha256": "42446c3d37391bd28ec01227280a9b23393e69826fa57d442c2004d7376c46a0",
+      "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+      "recognition": "User-provided Wurstii reference card crop actually viewed: Knuckles: red echidna, hanging head spines, cream muzzle, white crescent chest, large white spiked gloves and red/yellow shoes. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "wurstii-lakitu",
@@ -348,22 +600,40 @@
       "model": "/models/wurstii/wurstii-lakitu.glb",
       "portrait": "/avatars/wurstii/wurstii-lakitu.png",
       "editableSource": "assets/blender/wurstii/blend/wurstii-lakitu.blend",
-      "bytes": 173016,
-      "triangles": 4404,
+      "bytes": 64740,
+      "triangles": 5132,
       "draws": 1,
       "bounds": [
-        0.5399999618530273,
-        0.8155437111854553,
-        0.4068604111671448
+        0.5999938962981048,
+        0.6897793636208331,
+        0.3488876003295999
       ],
       "animations": [
         "idle",
         "move",
-        "skill"
+        "skill",
+        "fall",
+        "recover"
       ],
-      "modelPreview": "/avatars/wurstii/wurstii-lakitu.png",
+      "modelPreview": "/models/wurstii/avatars/wurstii-lakitu.png",
       "avatar": "/avatars/wurstii/wurstii-lakitu.svg",
-      "avatarStyle": "flat-cartoon-svg"
+      "avatarStyle": "flat-cartoon-svg",
+      "bones": 5,
+      "generator": "Blender 4.3.2",
+      "sculptVersion": "authored-20261024",
+      "pivotY": 0,
+      "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Lakitu: yellow turtle in white smiling cloud, green shell and black-rimmed goggles. Cloud is integral character silhouette and grounded without a game base. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "referenceChecked": true,
+      "originalAuthorImageChecked": true,
+      "referenceDate": "2026-10-24",
+      "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+      "sculptStatus": "completed-local-validation",
+      "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+      "sourceSha256": "a15aad97df8a824cb131a2c5f5903aa4830c8bf2244eb188dd8e07ebf522a3b2",
+      "glbSha256": "96b39ce999e79ba13097a497e985ab5169a4f8d3ae09dd3c81d067d1b78769d7",
+      "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+      "recognition": "User-provided Wurstii reference card crop actually viewed: Lakitu: yellow turtle in white smiling cloud, green shell and black-rimmed goggles. Cloud is integral character silhouette and grounded without a game base. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "wurstii-lizzie",
@@ -372,22 +642,40 @@
       "model": "/models/wurstii/wurstii-lizzie.glb",
       "portrait": "/avatars/wurstii/wurstii-lizzie.png",
       "editableSource": "assets/blender/wurstii/blend/wurstii-lizzie.blend",
-      "bytes": 175248,
-      "triangles": 4152,
+      "bytes": 48716,
+      "triangles": 3976,
       "draws": 1,
       "bounds": [
-        0.5228526592254639,
-        0.8618568181991577,
-        0.5399999618530273
+        0.5596179082613605,
+        0.9800103928338197,
+        0.5609302041688284
       ],
       "animations": [
         "idle",
         "move",
-        "skill"
+        "skill",
+        "fall",
+        "recover"
       ],
-      "modelPreview": "/avatars/wurstii/wurstii-lizzie.png",
+      "modelPreview": "/models/wurstii/avatars/wurstii-lizzie.png",
       "avatar": "/avatars/wurstii/wurstii-lizzie.svg",
-      "avatarStyle": "flat-cartoon-svg"
+      "avatarStyle": "flat-cartoon-svg",
+      "bones": 5,
+      "generator": "Blender 4.3.2",
+      "sculptVersion": "authored-20261024",
+      "pivotY": 0,
+      "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Lizzie: green upright reptile with pale yellow belly, heavy tail, dorsal spikes and bent claw arms. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "referenceChecked": true,
+      "originalAuthorImageChecked": true,
+      "referenceDate": "2026-10-24",
+      "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+      "sculptStatus": "completed-local-validation",
+      "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+      "sourceSha256": "c86d5136054eb83a759a962c1f9ba048c82011371c9ab464caf52292aabe2e36",
+      "glbSha256": "dc623db06f04851a0f272a687b59354e91a92be50ccd7a07ece655cd56b8a549",
+      "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+      "recognition": "User-provided Wurstii reference card crop actually viewed: Lizzie: green upright reptile with pale yellow belly, heavy tail, dorsal spikes and bent claw arms. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "wurstii-magikarp",
@@ -396,22 +684,40 @@
       "model": "/models/wurstii/wurstii-magikarp.glb",
       "portrait": "/avatars/wurstii/wurstii-magikarp.png",
       "editableSource": "assets/blender/wurstii/blend/wurstii-magikarp.blend",
-      "bytes": 134524,
-      "triangles": 3444,
+      "bytes": 45460,
+      "triangles": 3656,
       "draws": 1,
       "bounds": [
-        0.5399999618530273,
-        0.5887951254844666,
-        0.39198794960975647
+        0.42756431775872067,
+        0.44602801599169895,
+        0.5999938899055035
       ],
       "animations": [
         "idle",
         "move",
-        "skill"
+        "skill",
+        "fall",
+        "recover"
       ],
-      "modelPreview": "/avatars/wurstii/wurstii-magikarp.png",
+      "modelPreview": "/models/wurstii/avatars/wurstii-magikarp.png",
       "avatar": "/avatars/wurstii/wurstii-magikarp.svg",
-      "avatarStyle": "flat-cartoon-svg"
+      "avatarStyle": "flat-cartoon-svg",
+      "bones": 5,
+      "generator": "Blender 4.3.2",
+      "sculptVersion": "authored-20261024",
+      "referenceBasis": "Existing repository Magikarp SVG / registered recognizable orange fish, white-yellow fins, whiskers and open mouth. Full body, underside and tail thickness interpreted in 3D; no new original-author-image claim.",
+      "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+      "originalAuthorImageChecked": true,
+      "sculptStatus": "completed-local-validation",
+      "pivotY": 0,
+      "referenceChecked": true,
+      "referenceDate": "2026-10-24",
+      "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+      "sourceSha256": "4bc333ce167826efbd77d41518c46bfbf881973d8c516a748a3eb38ba4987df7",
+      "glbSha256": "ea85fe278315828b753152cbfd398a4882bfa9cf9711b0370ab929e44631a69b",
+      "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+      "recognition": "Existing repository Magikarp SVG / registered recognizable orange fish, white-yellow fins, whiskers and open mouth. Full body, underside and tail thickness interpreted in 3D; no new original-author-image claim.",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "wurstii-mario",
@@ -420,22 +726,40 @@
       "model": "/models/wurstii/wurstii-mario.glb",
       "portrait": "/avatars/wurstii/wurstii-mario.png",
       "editableSource": "assets/blender/wurstii/blend/wurstii-mario.blend",
-      "bytes": 278204,
-      "triangles": 7504,
+      "bytes": 76784,
+      "triangles": 7560,
       "draws": 1,
       "bounds": [
-        0.536309003829956,
-        0.8799999952316284,
-        0.3285837173461914
+        0.5626392406994842,
+        0.9800103928338197,
+        0.3631702681760252
       ],
       "animations": [
         "idle",
         "move",
-        "skill"
+        "skill",
+        "fall",
+        "recover"
       ],
-      "modelPreview": "/avatars/wurstii/wurstii-mario.png",
+      "modelPreview": "/models/wurstii/avatars/wurstii-mario.png",
       "avatar": "/avatars/wurstii/wurstii-mario.svg",
-      "avatarStyle": "flat-cartoon-svg"
+      "avatarStyle": "flat-cartoon-svg",
+      "bones": 5,
+      "generator": "Blender 4.3.2",
+      "sculptVersion": "authored-20261024",
+      "pivotY": 0,
+      "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Mario: red cap/shirt, blue overalls, yellow fasteners, brown moustache/shoes, white gloves. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "referenceChecked": true,
+      "originalAuthorImageChecked": true,
+      "referenceDate": "2026-10-24",
+      "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+      "sculptStatus": "completed-local-validation",
+      "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+      "sourceSha256": "503d59ece6e97d4cb52bab903eb06581baedf807070155536b09b7bd2c6317e7",
+      "glbSha256": "e9669253ddb76c7875af88682a2ea4f1f67e1eb8cfbf94baf3b09433e9e2f7b7",
+      "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+      "recognition": "User-provided Wurstii reference card crop actually viewed: Mario: red cap/shirt, blue overalls, yellow fasteners, brown moustache/shoes, white gloves. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "wurstii-mr-game-and-watch",
@@ -444,22 +768,40 @@
       "model": "/models/wurstii/wurstii-mr-game-and-watch.glb",
       "portrait": "/avatars/wurstii/wurstii-mr-game-and-watch.png",
       "editableSource": "assets/blender/wurstii/blend/wurstii-mr-game-and-watch.blend",
-      "bytes": 150452,
-      "triangles": 3808,
+      "bytes": 37340,
+      "triangles": 1942,
       "draws": 1,
       "bounds": [
-        0.5400000214576721,
-        0.6627272367477417,
-        0.1402597278356552
+        0.5999938962981048,
+        0.8239692492326577,
+        0.18552201910458693
       ],
       "animations": [
         "idle",
         "move",
-        "skill"
+        "skill",
+        "fall",
+        "recover"
       ],
-      "modelPreview": "/avatars/wurstii/wurstii-mr-game-and-watch.png",
+      "modelPreview": "/models/wurstii/avatars/wurstii-mr-game-and-watch.png",
       "avatar": "/avatars/wurstii/wurstii-mr-game-and-watch.svg",
-      "avatarStyle": "flat-cartoon-svg"
+      "avatarStyle": "flat-cartoon-svg",
+      "bones": 5,
+      "generator": "Blender 4.3.2",
+      "sculptVersion": "authored-20261024",
+      "pivotY": 0,
+      "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Mr Game and Watch: black profile silhouette with projecting round nose and gloved hands. Kept intentionally monochrome but all parts are closed thick volumes with complete side/back. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "referenceChecked": true,
+      "originalAuthorImageChecked": true,
+      "referenceDate": "2026-10-24",
+      "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+      "sculptStatus": "completed-local-validation",
+      "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+      "sourceSha256": "f79589b79626510125d15b31598cba9998e6979d6ed8189be0fa73a1b6828650",
+      "glbSha256": "5e50a5524bcfcf27fb04e5851930b51ab253a41d436ac01981cda1f4c4d1390b",
+      "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+      "recognition": "User-provided Wurstii reference card crop actually viewed: Mr Game and Watch: black profile silhouette with projecting round nose and gloved hands. Kept intentionally monochrome but all parts are closed thick volumes with complete side/back. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "wurstii-olaf",
@@ -468,22 +810,40 @@
       "model": "/models/wurstii/wurstii-olaf.glb",
       "portrait": "/avatars/wurstii/wurstii-olaf.png",
       "editableSource": "assets/blender/wurstii/blend/wurstii-olaf.blend",
-      "bytes": 250396,
-      "triangles": 6492,
+      "bytes": 67036,
+      "triangles": 6608,
       "draws": 1,
       "bounds": [
-        0.5399999618530273,
-        0.7787195444107056,
-        0.23707315325737
+        0.5532395397808771,
+        0.9800103928338197,
+        0.33112582781456956
       ],
       "animations": [
         "idle",
         "move",
-        "skill"
+        "skill",
+        "fall",
+        "recover"
       ],
-      "modelPreview": "/avatars/wurstii/wurstii-olaf.png",
+      "modelPreview": "/models/wurstii/avatars/wurstii-olaf.png",
       "avatar": "/avatars/wurstii/wurstii-olaf.svg",
-      "avatarStyle": "flat-cartoon-svg"
+      "avatarStyle": "flat-cartoon-svg",
+      "bones": 5,
+      "generator": "Blender 4.3.2",
+      "sculptVersion": "authored-20261024",
+      "pivotY": 0,
+      "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Olaf of The Lost Vikings: green tunic, yellow beard, grey horned helmet and brown rectangular shield, not Frozen snowman. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "referenceChecked": true,
+      "originalAuthorImageChecked": true,
+      "referenceDate": "2026-10-24",
+      "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+      "sculptStatus": "completed-local-validation",
+      "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+      "sourceSha256": "4f40d998b1b4eaea65720ebf3f5327091b6020749d52f8e3e70ed2b064be0aac",
+      "glbSha256": "72138bae87c7d437c0954205ae3cd155d5c5ebfd740b235a57b2f83846beabb8",
+      "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+      "recognition": "User-provided Wurstii reference card crop actually viewed: Olaf of The Lost Vikings: green tunic, yellow beard, grey horned helmet and brown rectangular shield, not Frozen snowman. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "wurstii-pitfall-harry",
@@ -492,22 +852,40 @@
       "model": "/models/wurstii/wurstii-pitfall-harry.glb",
       "portrait": "/avatars/wurstii/wurstii-pitfall-harry.png",
       "editableSource": "assets/blender/wurstii/blend/wurstii-pitfall-harry.blend",
-      "bytes": 175664,
-      "triangles": 4608,
+      "bytes": 53596,
+      "triangles": 4480,
       "draws": 1,
       "bounds": [
-        0.40101268887519836,
-        0.8799999952316284,
-        0.27105486392974854
+        0.4508804589983825,
+        0.9800103928338197,
+        0.28510391552476577
       ],
       "animations": [
         "idle",
         "move",
-        "skill"
+        "skill",
+        "fall",
+        "recover"
       ],
-      "modelPreview": "/avatars/wurstii/wurstii-pitfall-harry.png",
+      "modelPreview": "/models/wurstii/avatars/wurstii-pitfall-harry.png",
       "avatar": "/avatars/wurstii/wurstii-pitfall-harry.svg",
-      "avatarStyle": "flat-cartoon-svg"
+      "avatarStyle": "flat-cartoon-svg",
+      "bones": 5,
+      "generator": "Blender 4.3.2",
+      "sculptVersion": "authored-20261024",
+      "pivotY": 0,
+      "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Pitfall Harry card-specific turquoise hat/clothes, blue footwear and pale face/arms. Side/back inferred, no unrelated whip or jungle props added. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "referenceChecked": true,
+      "originalAuthorImageChecked": true,
+      "referenceDate": "2026-10-24",
+      "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+      "sculptStatus": "completed-local-validation",
+      "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+      "sourceSha256": "edd1b7318afe11de46e115175e138174d39f7a8bc44706f3dd037b1b53703211",
+      "glbSha256": "0ca6ab8895fdeb7fb2ff7420927d363f9b3b754694a3953e8588905bbf670882",
+      "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+      "recognition": "User-provided Wurstii reference card crop actually viewed: Pitfall Harry card-specific turquoise hat/clothes, blue footwear and pale face/arms. Side/back inferred, no unrelated whip or jungle props added. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "wurstii-simon-belmont",
@@ -516,22 +894,40 @@
       "model": "/models/wurstii/wurstii-simon-belmont.glb",
       "portrait": "/avatars/wurstii/wurstii-simon-belmont.png",
       "editableSource": "assets/blender/wurstii/blend/wurstii-simon-belmont.blend",
-      "bytes": 217604,
-      "triangles": 5592,
+      "bytes": 53540,
+      "triangles": 4556,
       "draws": 1,
       "bounds": [
-        0.4930305778980255,
-        0.8799999952316284,
-        0.29781660437583923
+        0.5999938962981048,
+        0.9336832940686008,
+        0.2616656995161144
       ],
       "animations": [
         "idle",
         "move",
-        "skill"
+        "skill",
+        "fall",
+        "recover"
       ],
-      "modelPreview": "/avatars/wurstii/wurstii-simon-belmont.png",
+      "modelPreview": "/models/wurstii/avatars/wurstii-simon-belmont.png",
       "avatar": "/avatars/wurstii/wurstii-simon-belmont.svg",
-      "avatarStyle": "flat-cartoon-svg"
+      "avatarStyle": "flat-cartoon-svg",
+      "bones": 5,
+      "generator": "Blender 4.3.2",
+      "sculptVersion": "authored-20261024",
+      "pivotY": 0,
+      "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Simon Belmont: brown leather outfit/boots, pale muscular arms and brown hair; small coiled whip follows canonical equipment, not a new rule effect. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "referenceChecked": true,
+      "originalAuthorImageChecked": true,
+      "referenceDate": "2026-10-24",
+      "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+      "sculptStatus": "completed-local-validation",
+      "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+      "sourceSha256": "a5ac55d0e7e32b5ff0c58317bd042313e5b707b4796f80ed1907c366cd93ca85",
+      "glbSha256": "1e0500461b3b83495be2e004dc78fa9018cfd56c1bd8e31a9e13792ec3ed4532",
+      "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+      "recognition": "User-provided Wurstii reference card crop actually viewed: Simon Belmont: brown leather outfit/boots, pale muscular arms and brown hair; small coiled whip follows canonical equipment, not a new rule effect. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "wurstii-tails",
@@ -540,22 +936,40 @@
       "model": "/models/wurstii/wurstii-tails.glb",
       "portrait": "/avatars/wurstii/wurstii-tails.png",
       "editableSource": "assets/blender/wurstii/blend/wurstii-tails.blend",
-      "bytes": 165200,
-      "triangles": 4260,
+      "bytes": 57144,
+      "triangles": 4696,
       "draws": 1,
       "bounds": [
-        0.5399999618530273,
-        0.8337970972061157,
-        0.36383873224258423
+        0.5999938962981048,
+        0.9186376684485397,
+        0.48707541123691517
       ],
       "animations": [
         "idle",
         "move",
-        "skill"
+        "skill",
+        "fall",
+        "recover"
       ],
-      "modelPreview": "/avatars/wurstii/wurstii-tails.png",
+      "modelPreview": "/models/wurstii/avatars/wurstii-tails.png",
       "avatar": "/avatars/wurstii/wurstii-tails.svg",
-      "avatarStyle": "flat-cartoon-svg"
+      "avatarStyle": "flat-cartoon-svg",
+      "bones": 5,
+      "generator": "Blender 4.3.2",
+      "sculptVersion": "authored-20261024",
+      "pivotY": 0,
+      "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Tails: orange fox, white muzzle/chest/gloves, red-white shoes and TWO large independently sculpted white-tipped tails. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "referenceChecked": true,
+      "originalAuthorImageChecked": true,
+      "referenceDate": "2026-10-24",
+      "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+      "sculptStatus": "completed-local-validation",
+      "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+      "sourceSha256": "14d61a37997df21ab13382e199db20f99b973e0340efbb4685fe9d624d57f607",
+      "glbSha256": "0cf92c404a29486a28508c4a52b94eb8cc2f25d92003c21d687536fd98459dc3",
+      "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+      "recognition": "User-provided Wurstii reference card crop actually viewed: Tails: orange fox, white muzzle/chest/gloves, red-white shoes and TWO large independently sculpted white-tipped tails. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "wurstii-yoshi",
@@ -564,22 +978,40 @@
       "model": "/models/wurstii/wurstii-yoshi.glb",
       "portrait": "/avatars/wurstii/wurstii-yoshi.png",
       "editableSource": "assets/blender/wurstii/blend/wurstii-yoshi.blend",
-      "bytes": 168236,
-      "triangles": 4348,
+      "bytes": 54488,
+      "triangles": 4462,
       "draws": 1,
       "bounds": [
-        0.4072612524032593,
-        0.8547115921974182,
-        0.5400000214576721
+        0.5029450361644338,
+        0.9329203313089629,
+        0.6000244148075808
       ],
       "animations": [
         "idle",
         "move",
-        "skill"
+        "skill",
+        "fall",
+        "recover"
       ],
-      "modelPreview": "/avatars/wurstii/wurstii-yoshi.png",
+      "modelPreview": "/models/wurstii/avatars/wurstii-yoshi.png",
       "avatar": "/avatars/wurstii/wurstii-yoshi.svg",
-      "avatarStyle": "flat-cartoon-svg"
+      "avatarStyle": "flat-cartoon-svg",
+      "bones": 5,
+      "generator": "Blender 4.3.2",
+      "sculptVersion": "authored-20261024",
+      "pivotY": 0,
+      "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Yoshi: green dinosaur with large snout/tall eyes, white jaw/belly, orange shoes/spines, red saddle and tail. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "referenceChecked": true,
+      "originalAuthorImageChecked": true,
+      "referenceDate": "2026-10-24",
+      "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+      "sculptStatus": "completed-local-validation",
+      "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+      "sourceSha256": "f95707ee6eee8467254b6aca89767f561e756fa61288a6a01f09e30c785e6808",
+      "glbSha256": "720fca7a55b4556049b818aa4cc5901a4fe0ae65299a60ea9852044a786a28b1",
+      "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+      "recognition": "User-provided Wurstii reference card crop actually viewed: Yoshi: green dinosaur with large snout/tall eyes, white jaw/belly, orange shoes/spines, red saddle and tail. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "wurstii-rollercoaster-tycoon-guest",
@@ -588,22 +1020,40 @@
       "model": "/models/wurstii/wurstii-rollercoaster-tycoon-guest.glb",
       "portrait": "/avatars/wurstii/wurstii-rollercoaster-tycoon-guest.png",
       "editableSource": "assets/blender/wurstii/blend/wurstii-rollercoaster-tycoon-guest.blend",
-      "bytes": 153432,
-      "triangles": 4008,
+      "bytes": 51728,
+      "triangles": 4752,
       "draws": 1,
       "bounds": [
-        0.45913031697273254,
-        0.8799999952316284,
-        0.2984347641468048
+        0.49397259437849056,
+        0.9800103928338197,
+        0.2696615497299112
       ],
       "animations": [
         "idle",
         "move",
-        "skill"
+        "skill",
+        "fall",
+        "recover"
       ],
-      "modelPreview": "/avatars/wurstii/wurstii-rollercoaster-tycoon-guest.png",
+      "modelPreview": "/models/wurstii/avatars/wurstii-rollercoaster-tycoon-guest.png",
       "avatar": "/avatars/wurstii/wurstii-rollercoaster-tycoon-guest.svg",
-      "avatarStyle": "flat-cartoon-svg"
+      "avatarStyle": "flat-cartoon-svg",
+      "bones": 5,
+      "generator": "Blender 4.3.2",
+      "sculptVersion": "authored-20261024",
+      "pivotY": 0,
+      "referenceBasis": "User-provided Wurstii reference card crop actually viewed: RollerCoaster Tycoon Guest: brown hair, green shirt, turquoise shorts and brown shoes. No balloon or extra theme invented. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "referenceChecked": true,
+      "originalAuthorImageChecked": true,
+      "referenceDate": "2026-10-24",
+      "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+      "sculptStatus": "completed-local-validation",
+      "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+      "sourceSha256": "270ffcec6174156419a75561628fb70ac684603d6066a6bd765d87e30f4a2501",
+      "glbSha256": "d9f29af65d1cb8f81db888643c79a5c5c9721f48e9ae6ad88f634bdafe622e2d",
+      "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+      "recognition": "User-provided Wurstii reference card crop actually viewed: RollerCoaster Tycoon Guest: brown hair, green shirt, turquoise shorts and brown shoes. No balloon or extra theme invented. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "wurstii-spot",
@@ -612,22 +1062,40 @@
       "model": "/models/wurstii/wurstii-spot.glb",
       "portrait": "/avatars/wurstii/wurstii-spot.png",
       "editableSource": "assets/blender/wurstii/blend/wurstii-spot.blend",
-      "bytes": 132480,
-      "triangles": 3376,
+      "bytes": 42956,
+      "triangles": 3256,
       "draws": 1,
       "bounds": [
-        0.5400000214576721,
-        0.5194936394691467,
-        0.1640506386756897
+        0.5999938962981048,
+        0.6835535471812538,
+        0.21558275093844417
       ],
       "animations": [
         "idle",
         "move",
-        "skill"
+        "skill",
+        "fall",
+        "recover"
       ],
-      "modelPreview": "/avatars/wurstii/wurstii-spot.png",
+      "modelPreview": "/models/wurstii/avatars/wurstii-spot.png",
       "avatar": "/avatars/wurstii/wurstii-spot.svg",
-      "avatarStyle": "flat-cartoon-svg"
+      "avatarStyle": "flat-cartoon-svg",
+      "bones": 5,
+      "generator": "Blender 4.3.2",
+      "sculptVersion": "authored-20261024",
+      "pivotY": 0,
+      "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Spot: red oval mascot wearing black sunglasses, thin black limbs, white gloves/shoes and held red yo-yo. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "referenceChecked": true,
+      "originalAuthorImageChecked": true,
+      "referenceDate": "2026-10-24",
+      "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+      "sculptStatus": "completed-local-validation",
+      "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+      "sourceSha256": "53e3061767457ea9a604cf64ed44dfd87bbbc4e734d1fb5d4eb989c057b22e18",
+      "glbSha256": "4bef917c23b24727988223526d8d8e6cab31ed32975ada6c7f65720ba2b80997",
+      "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+      "recognition": "User-provided Wurstii reference card crop actually viewed: Spot: red oval mascot wearing black sunglasses, thin black limbs, white gloves/shoes and held red yo-yo. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "wurstii-rockford",
@@ -636,22 +1104,40 @@
       "model": "/models/wurstii/wurstii-rockford.glb",
       "portrait": "/avatars/wurstii/wurstii-rockford.png",
       "editableSource": "assets/blender/wurstii/blend/wurstii-rockford.blend",
-      "bytes": 133976,
-      "triangles": 3404,
+      "bytes": 54584,
+      "triangles": 4412,
       "draws": 1,
       "bounds": [
-        0.5400000214576721,
-        0.8230645060539246,
-        0.3222580552101135
+        0.48567155980101934,
+        0.9800103928338197,
+        0.3289895321512497
       ],
       "animations": [
         "idle",
         "move",
-        "skill"
+        "skill",
+        "fall",
+        "recover"
       ],
-      "modelPreview": "/avatars/wurstii/wurstii-rockford.png",
+      "modelPreview": "/models/wurstii/avatars/wurstii-rockford.png",
       "avatar": "/avatars/wurstii/wurstii-rockford.svg",
-      "avatarStyle": "flat-cartoon-svg"
+      "avatarStyle": "flat-cartoon-svg",
+      "bones": 5,
+      "generator": "Blender 4.3.2",
+      "sculptVersion": "authored-20261024",
+      "pivotY": 0,
+      "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Rockford: squat pale miner face, red helmet/cap and warm orange clothing. Not replaced by a namesake character. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "referenceChecked": true,
+      "originalAuthorImageChecked": true,
+      "referenceDate": "2026-10-24",
+      "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+      "sculptStatus": "completed-local-validation",
+      "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+      "sourceSha256": "22d8f5284f1cf4aaffd7d77611ae48f20ed8624321c9c9ffc2cd7d733192c075",
+      "glbSha256": "684148bf8965b51ce5689edb2426658c8bf3f386b2055f0e0f68e7dbcc0925e4",
+      "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+      "recognition": "User-provided Wurstii reference card crop actually viewed: Rockford: squat pale miner face, red helmet/cap and warm orange clothing. Not replaced by a namesake character. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "wurstii-burt",
@@ -660,22 +1146,40 @@
       "model": "/models/wurstii/wurstii-burt.glb",
       "portrait": "/avatars/wurstii/wurstii-burt.png",
       "editableSource": "assets/blender/wurstii/blend/wurstii-burt.blend",
-      "bytes": 146616,
-      "triangles": 3752,
+      "bytes": 56480,
+      "triangles": 5140,
       "draws": 1,
       "bounds": [
-        0.4980335533618927,
-        0.8799999952316284,
-        0.3882974088191986
+        0.5667287209692679,
+        0.9800103928338197,
+        0.4288460887664078
       ],
       "animations": [
         "idle",
         "move",
-        "skill"
+        "skill",
+        "fall",
+        "recover"
       ],
-      "modelPreview": "/avatars/wurstii/wurstii-burt.png",
+      "modelPreview": "/models/wurstii/avatars/wurstii-burt.png",
       "avatar": "/avatars/wurstii/wurstii-burt.svg",
-      "avatarStyle": "flat-cartoon-svg"
+      "avatarStyle": "flat-cartoon-svg",
+      "bones": 5,
+      "generator": "Blender 4.3.2",
+      "sculptVersion": "authored-20261024",
+      "pivotY": 0,
+      "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Burt: rounded tan creature with black tuft, elongated brown nose, pink cheek and blue-white vertically striped trousers; explicitly not Sesame Street Bert. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "referenceChecked": true,
+      "originalAuthorImageChecked": true,
+      "referenceDate": "2026-10-24",
+      "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+      "sculptStatus": "completed-local-validation",
+      "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+      "sourceSha256": "cafadab83ffbd6ad2c367e195500dcd98b77d5a8cb415147060b255ba3656a98",
+      "glbSha256": "a97fc8fdb9ce3d09552e27b94e449616fbe39b73abf35d98ed0601a0cb49bd21",
+      "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+      "recognition": "User-provided Wurstii reference card crop actually viewed: Burt: rounded tan creature with black tuft, elongated brown nose, pink cheek and blue-white vertically striped trousers; explicitly not Sesame Street Bert. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "wurstii-piranha-plant",
@@ -684,22 +1188,40 @@
       "model": "/models/wurstii/wurstii-piranha-plant.glb",
       "portrait": "/avatars/wurstii/wurstii-piranha-plant.png",
       "editableSource": "assets/blender/wurstii/blend/wurstii-piranha-plant.blend",
-      "bytes": 82564,
-      "triangles": 2052,
+      "bytes": 48640,
+      "triangles": 3400,
       "draws": 1,
       "bounds": [
-        0.3815774917602539,
-        0.8800000548362732,
-        0.3082125782966614
+        0.4079714346751305,
+        0.9800104031519418,
+        0.35743278456414207
       ],
       "animations": [
         "idle",
         "move",
-        "skill"
+        "skill",
+        "fall",
+        "recover"
       ],
-      "modelPreview": "/avatars/wurstii/wurstii-piranha-plant.png",
+      "modelPreview": "/models/wurstii/avatars/wurstii-piranha-plant.png",
       "avatar": "/avatars/wurstii/wurstii-piranha-plant.svg",
-      "avatarStyle": "flat-cartoon-svg"
+      "avatarStyle": "flat-cartoon-svg",
+      "bones": 5,
+      "generator": "Blender 4.3.2",
+      "sculptVersion": "authored-20261024",
+      "pivotY": 0,
+      "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Piranha Plant: red spotted open jaws with white lips/teeth, green stem/leaves emerging from green pipe. Pipe is integral reference prop, not a separate game base. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "referenceChecked": true,
+      "originalAuthorImageChecked": true,
+      "referenceDate": "2026-10-24",
+      "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+      "sculptStatus": "completed-local-validation",
+      "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+      "sourceSha256": "939abaf9935718ee2da39fdc8facfb25354ac9424718dc3e022d75db63b5502b",
+      "glbSha256": "b90034896112dc34c27b25870ddcff274830f67e677a497f8dad8ef4921306d4",
+      "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+      "recognition": "User-provided Wurstii reference card crop actually viewed: Piranha Plant: red spotted open jaws with white lips/teeth, green stem/leaves emerging from green pipe. Pipe is integral reference prop, not a separate game base. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "assetVersion": "authored-sculpt-final-20261024"
     },
     {
       "id": "wurstii-fluffin-puffins",
@@ -708,22 +1230,48 @@
       "model": "/models/wurstii/wurstii-fluffin-puffins.glb",
       "portrait": "/avatars/wurstii/wurstii-fluffin-puffins.png",
       "editableSource": "assets/blender/wurstii/blend/wurstii-fluffin-puffins.blend",
-      "bytes": 280332,
-      "triangles": 7700,
+      "bytes": 76272,
+      "triangles": 6760,
       "draws": 1,
       "bounds": [
-        0.5400000214576721,
-        0.46656474471092224,
-        0.3897125720977783
+        0.599993887357499,
+        0.5125583601597955,
+        0.47938474918421387
       ],
       "animations": [
         "idle",
         "move",
-        "skill"
+        "skill",
+        "fall",
+        "recover"
       ],
-      "modelPreview": "/avatars/wurstii/wurstii-fluffin-puffins.png",
+      "modelPreview": "/models/wurstii/avatars/wurstii-fluffin-puffins.png",
       "avatar": "/avatars/wurstii/wurstii-fluffin-puffins.svg",
-      "avatarStyle": "flat-cartoon-svg"
+      "avatarStyle": "flat-cartoon-svg",
+      "bones": 5,
+      "generator": "Blender 4.3.2",
+      "sculptVersion": "authored-20261024",
+      "pivotY": 0,
+      "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Fluffin/Huffin Puffins bird group: one larger white-headed bird with yellow belly and three complete small companions; never reduced to one generic bird. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "referenceChecked": true,
+      "originalAuthorImageChecked": true,
+      "referenceDate": "2026-10-24",
+      "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+      "sculptStatus": "completed-local-validation",
+      "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+      "sourceSha256": "7c2700e0a859b2e6b0b1bd5cbde14b894fd9a0e67b8025ca2aa03933963104f8",
+      "glbSha256": "de4dbde332841d439abc4cdc958f832a306f329473e71b4832870931ff34aabd",
+      "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+      "recognition": "User-provided Wurstii reference card crop actually viewed: Fluffin/Huffin Puffins bird group: one larger white-headed bird with yellow belly and three complete small companions; never reduced to one generic bird. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+      "assetVersion": "authored-sculpt-final-20261024"
     }
-  ]
+  ],
+  "totalBytes": 1669556,
+  "totalTriangles": 140190,
+  "pivot": "ground-centre",
+  "skeletalAnimation": true,
+  "compression": "EXT_meshopt_compression",
+  "bytes": 1669556,
+  "materialCount": 1,
+  "textureCount": 0
 }

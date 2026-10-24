@@ -2,13 +2,13 @@
   "id": "extra-mile-oddball",
   "node": "toy_extra-mile-oddball",
   "url": "/models/extra-mile/extra-mile-oddball.glb",
-  "bytes": 45392,
-  "triangles": 2044,
-  "draws": 3,
+  "bytes": 52560,
+  "triangles": 5026,
+  "draws": 1,
   "bounds": [
-    0.6,
-    0.77903,
-    0.52258
+    0.5999938962981048,
+    0.624011968896671,
+    0.5580004272591327
   ],
   "pivotY": 0,
   "animations": [
@@ -23,7 +23,20 @@
   "editableSource": "assets/blender/extra-mile/extra-mile-oddball.blend",
   "referenceChecked": true,
   "reference": "https://johnnlds.github.io/Magical-Athlete-Racers/ExtraMile.pdf",
-  "referenceDate": "2026-10-22",
-  "recognition": "white baseball, red stitching, thick black spectacles and buck teeth",
-  "inferred": "Single-view card artwork informs the silhouette and identifying props. Side/back surfaces and joint placement are original project interpretations, not author-approved sculpts."
+  "referenceDate": "2026-10-24",
+  "recognition": "ExtraMile.pdf viewed: white baseball with red stitches, round black spectacles, cheeky grin and buck teeth. No artificial humanoid torso or legs added; sphere is the complete rolling body.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "avatar": "/avatars/extra-mile/extra-mile-oddball.svg",
+  "modelPreview": "/models/extra-mile/avatars/extra-mile-oddball.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "ExtraMile.pdf viewed: white baseball with red stitches, round black spectacles, cheeky grin and buck teeth. No artificial humanoid torso or legs added; sphere is the complete rolling body.",
+  "originalAuthorImageChecked": true,
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "0703cafd06ae27cda009f65157577ffd051010f9e1e44ac3c45ea04bc99626c3",
+  "glbSha256": "2c415a558c3e5b327eaf30152e7bd84c72de0b57c6a33dd2a09af4a755233a25",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

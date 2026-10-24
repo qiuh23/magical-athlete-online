@@ -2,13 +2,13 @@
   "id": "extra-mile-witch-hazel",
   "node": "toy_extra-mile-witch-hazel",
   "url": "/models/extra-mile/extra-mile-witch-hazel.glb",
-  "bytes": 50060,
-  "triangles": 3332,
-  "draws": 6,
+  "bytes": 47976,
+  "triangles": 5332,
+  "draws": 1,
   "bounds": [
-    0.6,
-    0.81953,
-    0.50381
+    0.5999938962981048,
+    0.8445082067221124,
+    0.2774132490699247
   ],
   "pivotY": 0,
   "animations": [
@@ -23,9 +23,20 @@
   "editableSource": "assets/blender/extra-mile/extra-mile-witch-hazel.blend",
   "referenceChecked": true,
   "reference": "https://johnnlds.github.io/Magical-Athlete-Racers/ExtraMile.pdf",
-  "referenceDate": "2026-10-22",
-  "recognition": "green witch, crooked black hat, hooked nose and yellow broom",
-  "inferred": "Single-view card artwork informs the silhouette and identifying props. Side/back surfaces and joint placement are original project interpretations, not author-approved sculpts.",
-  "avatar": "/models/extra-mile/avatars/extra-mile-witch-hazel.png",
-  "mouthSurfaceVersion": "surface-mouth-v2"
+  "referenceDate": "2026-10-24",
+  "recognition": "ExtraMile.pdf viewed: green witch with hooked nose, black dress/crooked white-banded hat, red shoes and broom. Broom is visibly gripped and body fully modeled; no flying motion added to game rules.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "avatar": "/avatars/extra-mile/extra-mile-witch-hazel.svg",
+  "modelPreview": "/models/extra-mile/avatars/extra-mile-witch-hazel.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "ExtraMile.pdf viewed: green witch with hooked nose, black dress/crooked white-banded hat, red shoes and broom. Broom is visibly gripped and body fully modeled; no flying motion added to game rules.",
+  "originalAuthorImageChecked": true,
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "69ec5ce8a73025538398721634cf24ecd8179afad9c77cb5aa790656af7efb24",
+  "glbSha256": "e76e6f3522cecb1a856e2a9f7f29bbb9ae9eb9c5c5df1476c7a1ede772666e04",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

@@ -41,6 +41,8 @@
 .character-detail .ability-provenance>span{overflow-wrap:anywhere}
 .character-detail .ability-provenance .ability-inactive-label{color:#966132;font-weight:800}
 .character-detail .current-ability-description{font-size:13px;line-height:1.9;color:#263d31}
+.character-detail .current-ability-description,.character-detail .full-ability{white-space:pre-line}
+.character-detail .ability-example{margin-top:10px;padding:10px 12px;border-left:3px solid #729272;background:#f0f4e7;border-radius:4px;font-size:12px;line-height:1.8;color:#385240}
 .character-detail .ability-empty,.character-detail .disabled-ability{font-size:12px;line-height:1.8;margin:0 0 10px}
 .character-detail .ability-counter{padding-top:8px;margin-top:9px;border-top:1px solid #dce3d3;font-size:11px;line-height:1.7;color:#586e4e}
 .character-detail .ability-live-status{display:grid;gap:5px;font-size:11px;line-height:1.8;margin-top:11px;color:#516647}

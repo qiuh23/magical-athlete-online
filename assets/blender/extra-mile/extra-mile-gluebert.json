@@ -2,13 +2,13 @@
   "id": "extra-mile-gluebert",
   "node": "toy_extra-mile-gluebert",
   "url": "/models/extra-mile/extra-mile-gluebert.glb",
-  "bytes": 42104,
-  "triangles": 1744,
-  "draws": 3,
+  "bytes": 35248,
+  "triangles": 2668,
+  "draws": 1,
   "bounds": [
-    0.53756,
-    0.98,
-    0.36529
+    0.5999938962981048,
+    0.9710074322700915,
+    0.2660603656117435
   ],
   "pivotY": 0,
   "animations": [
@@ -23,7 +23,20 @@
   "editableSource": "assets/blender/extra-mile/extra-mile-gluebert.blend",
   "referenceChecked": true,
   "reference": "https://johnnlds.github.io/Magical-Athlete-Racers/ExtraMile.pdf",
-  "referenceDate": "2026-10-22",
-  "recognition": "white glue bottle, orange nozzle/label and white glue-puddle limbs",
-  "inferred": "Single-view card artwork informs the silhouette and identifying props. Side/back surfaces and joint placement are original project interpretations, not author-approved sculpts."
+  "referenceDate": "2026-10-24",
+  "recognition": "ExtraMile.pdf viewed: white glue bottle, orange nozzle and orange/blue face label, flowing white glue limbs. Entire bottle/limbs have volume and the puddle forms the character, not a game base.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "avatar": "/avatars/extra-mile/extra-mile-gluebert.svg",
+  "modelPreview": "/models/extra-mile/avatars/extra-mile-gluebert.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "ExtraMile.pdf viewed: white glue bottle, orange nozzle and orange/blue face label, flowing white glue limbs. Entire bottle/limbs have volume and the puddle forms the character, not a game base.",
+  "originalAuthorImageChecked": true,
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "e8a8072d8b7f131b902f6fc72d5ef47188a29157e7120b341bf96e9def63df02",
+  "glbSha256": "b650f60f8481af52dc254120e51214b9ba4bd46e718d87a51d203a2e85acccf4",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

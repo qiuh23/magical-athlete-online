@@ -1,0 +1,42 @@
+{
+  "id": "wurstii-falco-lombardi",
+  "nameZh": "法尔科",
+  "node": "toy_wurstii-falco-lombardi",
+  "model": "/models/wurstii/wurstii-falco-lombardi.glb",
+  "portrait": "/avatars/wurstii/wurstii-falco-lombardi.png",
+  "editableSource": "assets/blender/wurstii/blend/wurstii-falco-lombardi.blend",
+  "bytes": 49188,
+  "triangles": 3728,
+  "draws": 1,
+  "bounds": [
+    0.5144199957274087,
+    0.9800103928338197,
+    0.3599353061233648
+  ],
+  "animations": [
+    "idle",
+    "move",
+    "skill",
+    "fall",
+    "recover"
+  ],
+  "modelPreview": "/models/wurstii/avatars/wurstii-falco-lombardi.png",
+  "avatar": "/avatars/wurstii/wurstii-falco-lombardi.svg",
+  "avatarStyle": "flat-cartoon-svg",
+  "bones": 5,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "pivotY": 0,
+  "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Falco Lombardi: blue bird with swept crest, orange brows, yellow beak, white flight jacket, red shirt and dark trousers. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "referenceChecked": true,
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "86453dd54bd583548b8d9af212e60eafcbce325f3560b2b24d133930100b30f4",
+  "glbSha256": "89e321449655c9704b76a44ce32b0ab0adc836f595bf6394e1acaeb9dbec6254",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "recognition": "User-provided Wurstii reference card crop actually viewed: Falco Lombardi: blue bird with swept crest, orange brows, yellow beak, white flight jacket, red shirt and dark trousers. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "assetVersion": "authored-sculpt-final-20261024"
+}

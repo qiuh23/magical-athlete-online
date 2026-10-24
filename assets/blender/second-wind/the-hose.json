@@ -1,46 +1,42 @@
 {
-  "version": 1,
-  "edition": "second-wind",
-  "generator": "Blender 5.2.3 LTS Release Candidate",
-  "source": "assets/blender/second-wind.blend",
-  "units": "metres",
-  "up": "+Y",
-  "forward": "+Z",
-  "pivot": "ground-centre",
-  "compression": "EXT_meshopt_compression",
-  "models": [
-    {
-      "id": "the-hose",
-      "node": "toy_the-hose",
-      "url": "/models/second-wind/the-hose.glb",
-      "avatar": "/models/second-wind/avatars/the-hose.png",
-      "bytes": 36916,
-      "triangles": 2792,
-      "draws": 5,
-      "bounds": [
-        0.6,
-        0.81417,
-        0.25285
-      ],
-      "pivotY": 0,
-      "animations": [
-        "idle",
-        "move",
-        "skill",
-        "fall",
-        "recover"
-      ],
-      "recognition": "Three deep green garden-hose coils, upright eyed neck, brass nozzle with spray holes, hose tail; no opaque water-cone geometry.",
-      "inferred": "Back and side volumes extrapolated from the published single-view illustration.",
-      "referenceChecked": true,
-      "referenceImage": "https://johnnlds.github.io/Magical-Athlete-Racers/images/expansion/The%20Hose.png",
-      "editableSource": "assets/blender/second-wind/the-hose.blend"
-    }
+  "id": "the-hose",
+  "node": "toy_the-hose",
+  "url": "/models/second-wind/the-hose.glb",
+  "avatar": "/avatars/second-wind/the-hose.svg",
+  "bytes": 78156,
+  "triangles": 6700,
+  "draws": 1,
+  "bounds": [
+    0.6000244148075808,
+    0.7790765204555582,
+    0.2348704567341737
   ],
-  "variants": [],
-  "totalBytes": 36916,
-  "totalTriangles": 2792,
-  "materialCount": 15,
-  "textureCount": 0,
-  "referenceStatus": "36 fan-site illustrations visually inspected; closed-volume toy interpretations; unseen views explicitly inferred; not exact official production sculpts."
+  "pivotY": 0,
+  "animations": [
+    "idle",
+    "move",
+    "skill",
+    "fall",
+    "recover"
+  ],
+  "recognition": "Registered card viewed: three open green garden-hose coils, eyed upright neck and brass nozzle. No opaque spray cone; true tube volume and actual nozzle holes represented.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "referenceChecked": true,
+  "referenceImage": "https://johnnlds.github.io/Magical-Athlete-Racers/images/expansion/The%20Hose.png",
+  "editableSource": "assets/blender/second-wind/the-hose.blend",
+  "modelPreview": "/models/second-wind/avatars/the-hose.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "motionProfile": "long",
+  "bones": 5,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "Registered card viewed: three open green garden-hose coils, eyed upright neck and brass nozzle. No opaque spray cone; true tube volume and actual nozzle holes represented.",
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "1d04929dd8e79dfa78f61f26a3f7156aee249611544bc986cba14f5dd0f1bad6",
+  "glbSha256": "4bd1c88f363b8251ba5504d453028ad1826fe2fd0b7bbf06549c90b481582473",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

@@ -1,0 +1,42 @@
+{
+  "id": "wurstii-jason-vorhees",
+  "nameZh": "杰森",
+  "node": "toy_wurstii-jason-vorhees",
+  "model": "/models/wurstii/wurstii-jason-vorhees.glb",
+  "portrait": "/avatars/wurstii/wurstii-jason-vorhees.png",
+  "editableSource": "assets/blender/wurstii/blend/wurstii-jason-vorhees.blend",
+  "bytes": 50656,
+  "triangles": 3944,
+  "draws": 1,
+  "bounds": [
+    0.5611743522446364,
+    0.9800103928338197,
+    0.3140354671875042
+  ],
+  "animations": [
+    "idle",
+    "move",
+    "skill",
+    "fall",
+    "recover"
+  ],
+  "modelPreview": "/models/wurstii/avatars/wurstii-jason-vorhees.png",
+  "avatar": "/avatars/wurstii/wurstii-jason-vorhees.svg",
+  "avatarStyle": "flat-cartoon-svg",
+  "bones": 5,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "pivotY": 0,
+  "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Jason NES sprite: purple outfit, cyan hockey mask and cyan hands. No additional weapon or gore added beyond source. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "referenceChecked": true,
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "2bdd8f21fe52ad902b7ba67cce01108698646943fcfb3238348e15a64ed8e077",
+  "glbSha256": "dc7666348b3643f97bc8bfebc0b571e9871dd9fff149376554d8ac02ffdc8eb1",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "recognition": "User-provided Wurstii reference card crop actually viewed: Jason NES sprite: purple outfit, cyan hockey mask and cyan hands. No additional weapon or gore added beyond source. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "assetVersion": "authored-sculpt-final-20261024"
+}

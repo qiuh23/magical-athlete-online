@@ -2,13 +2,13 @@
   "id": "leaf-catfish",
   "node": "toy_leaf-catfish",
   "url": "/models/leaf/leaf-catfish.glb",
-  "bytes": 47308,
-  "triangles": 2144,
-  "draws": 3,
+  "bytes": 59676,
+  "triangles": 5726,
+  "draws": 1,
   "bounds": [
-    0.53264,
-    0.50406,
-    0.6
+    0.5999938962981048,
+    0.7864009629480829,
+    0.47578356529875965
   ],
   "pivotY": 0,
   "animations": [
@@ -24,7 +24,20 @@
   "referenceChecked": true,
   "reference": "https://boardgamegeek.com/filepage/327878/leafs-fan-expansion-for-magical-athlete",
   "referenceFile": "PNG_Images_-_Leaf's_Fan_Expansion.zip / Gamepiece images / catfish",
-  "referenceDate": "2026-10-22",
-  "recognition": "blue catfish, curled upright tail, pale belly and long white whiskers",
-  "inferred": "Author transparent gamepiece PNGs inform silhouettes/colors/props. Unseen back and side details and joints are project interpretations, not author-approved exact sculpts."
+  "referenceDate": "2026-10-24",
+  "recognition": "Repository SVG actually viewed; registered traits: blue catfish with cream belly, catlike head, long white whiskers and upright curled tail. Original author PNG not obtained during this rebuild; depth, underside/back and tailoring are project design.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "avatar": "/avatars/leaf/leaf-catfish.svg",
+  "modelPreview": "/models/leaf/avatars/leaf-catfish.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "Repository SVG actually viewed; registered traits: blue catfish with cream belly, catlike head, long white whiskers and upright curled tail. Original author PNG not obtained during this rebuild; depth, underside/back and tailoring are project design.",
+  "originalAuthorImageChecked": false,
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "a975ea7fda28afdeb056e8b9ce6988e831faa1079faed35cb8638ed551e94379",
+  "glbSha256": "b0446b22c71e5d56eb52fbe5e72f2b6147b8999b63c3197d059f863f0b63c390",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

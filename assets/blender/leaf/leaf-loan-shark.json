@@ -2,13 +2,13 @@
   "id": "leaf-loan-shark",
   "node": "toy_leaf-loan-shark",
   "url": "/models/leaf/leaf-loan-shark.glb",
-  "bytes": 44444,
-  "triangles": 1310,
-  "draws": 5,
+  "bytes": 44208,
+  "triangles": 4144,
+  "draws": 1,
   "bounds": [
-    0.52,
-    0.98,
-    0.52
+    0.5999938962981048,
+    0.868037978229348,
+    0.4432508316293832
   ],
   "pivotY": 0,
   "animations": [
@@ -24,7 +24,20 @@
   "referenceChecked": true,
   "reference": "https://boardgamegeek.com/filepage/327878/leafs-fan-expansion-for-magical-athlete",
   "referenceFile": "PNG_Images_-_Leaf's_Fan_Expansion.zip / Gamepiece images / loan-shark",
-  "referenceDate": "2026-10-22",
-  "recognition": "blue upright shark, red fedora and broad orange-toothed grin",
-  "inferred": "Author transparent gamepiece PNGs inform silhouettes/colors/props. Unseen back and side details and joints are project interpretations, not author-approved exact sculpts."
+  "referenceDate": "2026-10-24",
+  "recognition": "Repository SVG actually viewed; registered traits: upright blue loan shark in red fedora, wide orange-edged toothy grin and lateral/dorsal fins. Original author PNG not obtained during this rebuild; depth, underside/back and tailoring are project design.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "avatar": "/avatars/leaf/leaf-loan-shark.svg",
+  "modelPreview": "/models/leaf/avatars/leaf-loan-shark.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "Repository SVG actually viewed; registered traits: upright blue loan shark in red fedora, wide orange-edged toothy grin and lateral/dorsal fins. Original author PNG not obtained during this rebuild; depth, underside/back and tailoring are project design.",
+  "originalAuthorImageChecked": false,
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "f5bc1049990804943700ddb74210383c79f1e588b265eb9d868342c9bb2f8f4d",
+  "glbSha256": "50c648e8d041dd121455fd89e7f1d3361f684656ffa60d606b60085094fe7863",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

@@ -5,13 +5,22 @@ import { AnimationMixer, Bone, Box3, Mesh, SkinnedMesh, Vector3 } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 import { cloneToyModel } from '../src/client/scene/toy-model-instance.js';
+import { CHARACTERS } from '../src/shared/characters.js';
 
 async function load(path: string) {
   const bytes = await readFile(new URL(`../public/models/${path}.glb`, import.meta.url));
   return new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).parseAsync(bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength), '');
 }
 
-for (const path of ['toy-racers', 'toy-racers-economy', 'banana/banana', 'banana/banana-economy', 'second-wind/switcharoo', 'extra-mile/extra-mile-toll-troll', 'leaf/leaf-triangle-man']) {
+// The bundles cover every original; every separately shipped rig also needs the
+// vertex-level check because reduced motion bypasses its skinning altogether.
+const modelPaths = [
+  'toy-racers', 'toy-racers-economy', 'banana/banana', 'banana/banana-economy',
+  ...CHARACTERS.filter(character => character.edition && character.edition !== 'original')
+    .map(character => `${character.edition}/${character.id}`),
+  'second-wind/bite-mark-were', 'second-wind/hog-knight-hog',
+];
+for (const path of modelPaths) {
   test(`${path}: reduced motion uses shared static bind-pose geometry and can restore independent animation`, async () => {
     const asset = await load(path), source = asset.scene;
     source.updateWorldMatrix(true, true);

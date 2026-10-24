@@ -3,13 +3,13 @@
   "node": "toy_blunderdog",
   "url": "/models/second-wind/blunderdog.glb",
   "avatar": "/avatars/second-wind/blunderdog.svg",
-  "bytes": 52312,
-  "triangles": 3208,
-  "draws": 6,
+  "bytes": 54772,
+  "triangles": 5424,
+  "draws": 1,
   "bounds": [
-    0.6,
-    0.84167,
-    0.37351
+    0.5999939141793164,
+    0.9396954406145482,
+    0.4114505508864851
   ],
   "pivotY": 0,
   "animations": [
@@ -19,8 +19,8 @@
     "fall",
     "recover"
   ],
-  "recognition": "Yellow masked dog, red super-suit with large blue star, raised fists, blue boots and cape.",
-  "inferred": "Back and side volumes extrapolated from the published single-view illustration.",
+  "recognition": "Registered card image viewed: yellow masked superdog, red suit, blue chest star/boots/cape and raised fists. Sculpted back cape and complete limbs inferred.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
   "referenceChecked": true,
   "referenceImage": "https://johnnlds.github.io/Magical-Athlete-Racers/images/expansion/Blunderdog.png",
   "editableSource": "assets/blender/second-wind/blunderdog.blend",
@@ -28,5 +28,15 @@
   "avatarStyle": "flat-cartoon-svg",
   "motionProfile": "quadruped",
   "bones": 5,
-  "mouthSurfaceVersion": "surface-mouth-v2"
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "Registered card image viewed: yellow masked superdog, red suit, blue chest star/boots/cape and raised fists. Sculpted back cape and complete limbs inferred.",
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "07efc51909af7188eb0c4550bfb61ab4c8d0b452989b1d634df884ddb6422e92",
+  "glbSha256": "e594780f71ea90ea5ae1e99205768e5e6f959cad2bfc8adfa300f5ca84e561fd",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

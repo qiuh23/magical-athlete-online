@@ -2,13 +2,13 @@
   "id": "extra-mile-moneybags",
   "node": "toy_extra-mile-moneybags",
   "url": "/models/extra-mile/extra-mile-moneybags.glb",
-  "bytes": 47540,
-  "triangles": 3024,
-  "draws": 5,
+  "bytes": 54260,
+  "triangles": 5232,
+  "draws": 1,
   "bounds": [
-    0.57386,
-    0.98,
-    0.52903
+    0.46143986327707753,
+    0.9800103928338197,
+    0.3318582720419935
   ],
   "pivotY": 0,
   "animations": [
@@ -23,9 +23,20 @@
   "editableSource": "assets/blender/extra-mile/extra-mile-moneybags.blend",
   "referenceChecked": true,
   "reference": "https://johnnlds.github.io/Magical-Athlete-Racers/ExtraMile.pdf",
-  "referenceDate": "2026-10-22",
-  "recognition": "pink pig, black top hat, green trousers and curled tail",
-  "inferred": "Single-view card artwork informs the silhouette and identifying props. Side/back surfaces and joint placement are original project interpretations, not author-approved sculpts.",
-  "avatar": "/models/extra-mile/avatars/extra-mile-moneybags.png",
-  "mouthSurfaceVersion": "surface-mouth-v2"
+  "referenceDate": "2026-10-24",
+  "recognition": "ExtraMile.pdf viewed: pink pig gentleman, black top hat/suspenders, green trousers, red bow tie and curly tail. Snout has modeled nostrils and is integrated into a complete head.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "avatar": "/avatars/extra-mile/extra-mile-moneybags.svg",
+  "modelPreview": "/models/extra-mile/avatars/extra-mile-moneybags.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "ExtraMile.pdf viewed: pink pig gentleman, black top hat/suspenders, green trousers, red bow tie and curly tail. Snout has modeled nostrils and is integrated into a complete head.",
+  "originalAuthorImageChecked": true,
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "2850bd88e8a17ff708aa32a4381e4d3bf42e152bdcdfdc940137ef6d3555722d",
+  "glbSha256": "0c9922ee2912032fd3fe1e1ef61d2f54bd904ac3d1a74ab71099c0ac3136200a",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

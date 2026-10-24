@@ -2,13 +2,13 @@
   "id": "extra-mile-honey-pot",
   "node": "toy_extra-mile-honey-pot",
   "url": "/models/extra-mile/extra-mile-honey-pot.glb",
-  "bytes": 54888,
-  "triangles": 2320,
-  "draws": 5,
+  "bytes": 62652,
+  "triangles": 6574,
+  "draws": 1,
   "bounds": [
-    0.6,
-    0.81019,
-    0.54995
+    0.5514694662312692,
+    0.9800103928338197,
+    0.4610126041444136
   ],
   "pivotY": 0,
   "animations": [
@@ -23,7 +23,20 @@
   "editableSource": "assets/blender/extra-mile/extra-mile-honey-pot.blend",
   "referenceChecked": true,
   "reference": "https://johnnlds.github.io/Magical-Athlete-Racers/ExtraMile.pdf",
-  "referenceDate": "2026-10-22",
-  "recognition": "striped yellow bee, white wings and blue honey pot",
-  "inferred": "Single-view card artwork informs the silhouette and identifying props. Side/back surfaces and joint placement are original project interpretations, not author-approved sculpts."
+  "referenceDate": "2026-10-24",
+  "recognition": "ExtraMile.pdf viewed: yellow/black bee emerging from blue honey pot, white wings, antennae and held honey dipper. Honey drips are modeled onto the pot; pot belongs to the character, not a player base.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "avatar": "/avatars/extra-mile/extra-mile-honey-pot.svg",
+  "modelPreview": "/models/extra-mile/avatars/extra-mile-honey-pot.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "ExtraMile.pdf viewed: yellow/black bee emerging from blue honey pot, white wings, antennae and held honey dipper. Honey drips are modeled onto the pot; pot belongs to the character, not a player base.",
+  "originalAuthorImageChecked": true,
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "971a9e62ea125f11ee0068a80b7612fcb87166fd8ebc319810825372d2f4fd28",
+  "glbSha256": "8c5c7d637e9876d114aa476b43f2efbae949bd0504d97964e756dd221dd92ede",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

@@ -45,8 +45,15 @@ for (const variant of [
     const bounds = new Box3().setFromObject(model, true);
     const size = bounds.getSize(new Vector3());
     assert.ok(Math.abs(bounds.min.y) < 0.001, `${id} must rest on the ownership base`);
-    assert.ok(size.y > 0.5 && size.y < 1.016, `${id} must have readable toy scale`);
+    // These two reference-accurate horizontal creatures are intentionally short,
+    // not vertically stretched humanoids. Keep an explicit footprint/volume check.
+    const horizontal = id === 'blimp' || id === 'suckerfish';
+    assert.ok(size.y > (horizontal ? .30 : .5) && size.y < 1.016, `${id} must have readable toy scale`);
+    if (horizontal) { assert.ok(Math.max(size.x, size.z) > .55); assert.ok(Math.min(size.x, size.z) > .25); }
+    assert.deepEqual(model.position.toArray(), [0, 0, 0]);
+    assert.deepEqual(model.scale.toArray(), [1, 1, 1]);
     assert.ok(size.x <= 0.601 && size.z <= 0.601, `${id} exceeds shared-square footprint`);
+    // Identical-skin meshes now batch through a shared vertex-colour palette.
     let draws = 0;
     let triangles = 0;
     model.traverse(object => {
@@ -59,7 +66,7 @@ for (const variant of [
       assert.equal(material.map, null, `${id} must share a texture-free palette`);
       sharedMaterials.add(material);
     });
-    assert.ok(draws >= 2 && draws <= 8, `${id} has an excessive draw-call budget`);
+    assert.ok(draws >= 1 && draws <= 8, `${id} has an excessive draw-call budget`);
     assert.ok(triangles < variant.modelTriangles, `${id} has an excessive triangle budget`);
     allTriangles += triangles;
   }

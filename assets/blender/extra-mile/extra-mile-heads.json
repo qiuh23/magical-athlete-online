@@ -2,13 +2,13 @@
   "id": "extra-mile-heads",
   "node": "toy_extra-mile-heads",
   "url": "/models/extra-mile/extra-mile-heads.glb",
-  "bytes": 36072,
-  "triangles": 2412,
-  "draws": 4,
+  "bytes": 46384,
+  "triangles": 4446,
+  "draws": 1,
   "bounds": [
-    0.6,
-    0.5524,
-    0.45332
+    0.5999938962981048,
+    0.6260872181013921,
+    0.4721213415936766
   ],
   "pivotY": 0,
   "animations": [
@@ -23,7 +23,20 @@
   "editableSource": "assets/blender/extra-mile/extra-mile-heads.blend",
   "referenceChecked": true,
   "reference": "https://johnnlds.github.io/Magical-Athlete-Racers/ExtraMile.pdf",
-  "referenceDate": "2026-10-22",
-  "recognition": "horizontal copper coin, tall eyes and white limbs",
-  "inferred": "Single-view card artwork informs the silhouette and identifying props. Side/back surfaces and joint placement are original project interpretations, not author-approved sculpts."
+  "referenceDate": "2026-10-24",
+  "recognition": "ExtraMile.pdf viewed: horizontal copper coin with tall eyes, white limbs and embossed face. Coin rim and relief remain thick editable geometry; no floating tossed coin included.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "avatar": "/avatars/extra-mile/extra-mile-heads.svg",
+  "modelPreview": "/models/extra-mile/avatars/extra-mile-heads.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "ExtraMile.pdf viewed: horizontal copper coin with tall eyes, white limbs and embossed face. Coin rim and relief remain thick editable geometry; no floating tossed coin included.",
+  "originalAuthorImageChecked": true,
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "db315593d792a8cc7fbe6b45884477745710078c323289f170e4a2ae5006e6b9",
+  "glbSha256": "ae09d3ac3b357a1aefbdc0c7f22e851d4a9ca8c88fdaafe11de437eb1c358129",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

@@ -1,0 +1,42 @@
+{
+  "id": "wurstii-knuckles",
+  "nameZh": "纳克鲁斯",
+  "node": "toy_wurstii-knuckles",
+  "model": "/models/wurstii/wurstii-knuckles.glb",
+  "portrait": "/avatars/wurstii/wurstii-knuckles.png",
+  "editableSource": "assets/blender/wurstii/blend/wurstii-knuckles.blend",
+  "bytes": 54124,
+  "triangles": 4388,
+  "draws": 1,
+  "bounds": [
+    0.5999938962981048,
+    0.8117618450784498,
+    0.31849116073885453
+  ],
+  "animations": [
+    "idle",
+    "move",
+    "skill",
+    "fall",
+    "recover"
+  ],
+  "modelPreview": "/models/wurstii/avatars/wurstii-knuckles.png",
+  "avatar": "/avatars/wurstii/wurstii-knuckles.svg",
+  "avatarStyle": "flat-cartoon-svg",
+  "bones": 5,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "pivotY": 0,
+  "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Knuckles: red echidna, hanging head spines, cream muzzle, white crescent chest, large white spiked gloves and red/yellow shoes. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "referenceChecked": true,
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "9ab1a947e1ba3593922160f80673f477f18a68ad619a7bce5e24597a38961833",
+  "glbSha256": "42446c3d37391bd28ec01227280a9b23393e69826fa57d442c2004d7376c46a0",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "recognition": "User-provided Wurstii reference card crop actually viewed: Knuckles: red echidna, hanging head spines, cream muzzle, white crescent chest, large white spiked gloves and red/yellow shoes. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "assetVersion": "authored-sculpt-final-20261024"
+}

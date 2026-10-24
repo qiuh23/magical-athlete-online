@@ -1,0 +1,42 @@
+{
+  "id": "wurstii-chip-n-dale",
+  "nameZh": "奇奇与蒂蒂",
+  "node": "toy_wurstii-chip-n-dale",
+  "model": "/models/wurstii/wurstii-chip-n-dale.glb",
+  "portrait": "/avatars/wurstii/wurstii-chip-n-dale.png",
+  "editableSource": "assets/blender/wurstii/blend/wurstii-chip-n-dale.blend",
+  "bytes": 59196,
+  "triangles": 5578,
+  "draws": 1,
+  "bounds": [
+    0.5999938962981048,
+    0.5996582085569935,
+    0.33997620063774403
+  ],
+  "animations": [
+    "idle",
+    "move",
+    "skill",
+    "fall",
+    "recover"
+  ],
+  "modelPreview": "/models/wurstii/avatars/wurstii-chip-n-dale.png",
+  "avatar": "/avatars/wurstii/wurstii-chip-n-dale.svg",
+  "avatarStyle": "flat-cartoon-svg",
+  "bones": 5,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "pivotY": 0,
+  "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Chip and Dale both present: two brown/cream chipmunks, Chip wearing fedora and black nose, Dale with red nose and separated teeth. Both have complete limbs and tails. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "referenceChecked": true,
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "52fa4ccaebecae671a1fb869c20e6c27c18e37d043a973fe99614762b842ed7e",
+  "glbSha256": "eea0efebb96ec7d145001ecc90dffa62d30ae63648369d0e4ffe64f24e18aa98",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "recognition": "User-provided Wurstii reference card crop actually viewed: Chip and Dale both present: two brown/cream chipmunks, Chip wearing fedora and black nose, Dale with red nose and separated teeth. Both have complete limbs and tails. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "assetVersion": "authored-sculpt-final-20261024"
+}

@@ -11,9 +11,10 @@ for(const variant of ['toy-racers','toy-racers-economy']) test(`${variant}: all 
   const bytes=await readFile(new URL(`../public/models/${variant}.glb`,import.meta.url));
   const gltf=await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).parseAsync(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),'');
   assert.equal(gltf.scene.children.length,36);
+  const manifest=JSON.parse(await readFile(new URL(`../public/models/${variant}.manifest.json`,import.meta.url),'utf8'));
   for(const root of gltf.scene.children){
     const id=root.name.slice(4);let skins=0;
-    root.traverse(o=>{if(o instanceof SkinnedMesh){skins++;assert.equal(o.skeleton.bones.length,5);}});assert.ok(skins>0);
+    root.traverse(o=>{if(o instanceof SkinnedMesh){skins++;assert.equal(o.skeleton.bones.length,manifest.models.find((m:{id:string})=>m.id===id).bones);}});assert.ok(skins>0);
     for(const action of ['idle','move','skill','fall','recover']) assert.ok(gltf.animations.find(c=>c.name===`${id}-${action}`),`${id} missing ${action}`);
     const mixer=new AnimationMixer(root);mixer.clipAction(gltf.animations.find(c=>c.name===`${id}-move`)!).play();mixer.setTime(.2);
     assert.deepEqual(root.position.toArray(),[0,0,0]);assert.deepEqual(root.scale.toArray(),[1,1,1]);
@@ -40,11 +41,11 @@ for (const [pack, count] of [['extra-mile',31],['leaf',18]] as const) {
     if(model.id==='leaf-triangle-man') {
       assert.ok(size.y>.6&&size.z<.3,'the triangle must stand vertically, with complete side depth');
       root.updateWorldMatrix(true,true);root.traverse(o=>{if(o instanceof SkinnedMesh)o.skeleton.update();});
-      const body:Mesh[]=[];root.traverse(o=>{if(o instanceof Mesh&&o.name.includes('yellow'))body.push(o);});
+      const body:Mesh[]=[];root.traverse(o=>{if(o instanceof Mesh)body.push(o);});
       assert.ok(new Raycaster(new Vector3(0,size.y*.6,2),new Vector3(0,0,-1)).intersectObjects(body).length>0,'front face must be visible rather than culled by inward normals');
     }
     let triangles=0,draws=0,skins=0;
-    root.traverse(object=>{if(object instanceof Mesh){draws++;triangles+=(object.geometry.index?.count??object.geometry.attributes.position.count)/3;} if(object instanceof SkinnedMesh){skins++;assert.equal(object.skeleton.bones.length,5);}});
+    root.traverse(object=>{if(object instanceof Mesh){draws++;triangles+=(object.geometry.index?.count??object.geometry.attributes.position.count)/3;} if(object instanceof SkinnedMesh){skins++;assert.equal(object.skeleton.bones.length,model.bones);assert.ok(model.bones>=5&&model.bones<=16);}});
     assert.equal(triangles,model.triangles); assert.ok(triangles<8_000); assert.equal(draws,model.draws); assert.ok(draws<=9); assert.equal(skins,draws);
     assert.deepEqual(gltf.animations.map(clip=>clip.name).sort(),['fall','idle','move','recover','skill']);
     const instance=clone(root), second=clone(root); let firstSkin:SkinnedMesh|undefined,secondSkin:SkinnedMesh|undefined;

@@ -7,7 +7,7 @@ export const SECOND_WIND_CHARACTERS: readonly CharacterData[] = [
     "nameZh": "咬痕",
     "translation": "本项目译名",
     "edition": "second-wind",
-    "ability": "主移动最终骰面1或2时变成狼人巨口，消灭此次形态下越过的选手。",
+    "ability": "你的主移动最终点数为1或2时，变身为狼人巨口，持续至本场结束。变身后，你每次移动都会淘汰被你越过的其他选手。",
     "timing": [
       "main-roll-final",
       "passed"
@@ -15,8 +15,8 @@ export const SECOND_WIND_CHARACTERS: readonly CharacterData[] = [
     "optional": false,
     "targets": "被越过的其他选手",
     "scope": "按卡文；other 为其他选手，opposing 为其他玩家控制的选手",
-    "limit": "变身时",
-    "duration": "变身持续本场，官方第24页已确认",
+    "limit": "变身后每次越过其他选手时触发",
+    "duration": "变身持续至本场结束",
     "statuses": [],
     "sources": [
       {
@@ -52,7 +52,7 @@ export const SECOND_WIND_CHARACTERS: readonly CharacterData[] = [
     "nameZh": "糊涂狗",
     "translation": "本项目译名",
     "edition": "second-wind",
-    "ability": "处于末位时，主移动骰面乘三；否则主要移动改为后退。",
+    "ability": "计算主移动时，若你处于末位（包括并列末位），主移动骰的基础距离乘以3，再计算其他加减效果；否则将本次主移动的方向反转。",
     "timing": [
       "main-move"
     ],
@@ -141,7 +141,7 @@ export const SECOND_WIND_CHARACTERS: readonly CharacterData[] = [
     "nameZh": "评论家",
     "translation": "本项目译名",
     "edition": "second-wind",
-    "ability": "可以让前方选手每回合重掷一次主移动。",
+    "ability": "位于你前方的选手掷出主移动骰后，你可以要求其重掷一次，舍弃原来的结果。每个回合最多要求一次。",
     "timing": [
       "reroll-window"
     ],
@@ -185,7 +185,7 @@ export const SECOND_WIND_CHARACTERS: readonly CharacterData[] = [
     "nameZh": "歌剧女伶",
     "translation": "本项目译名",
     "edition": "second-wind",
-    "ability": "回合开始处于末位则与领跑者交换位置；否则与末位选手交换。并列时选择一名。",
+    "ability": "你的回合开始时，若你处于末位（包括并列末位），与一名领跑选手交换位置；否则与一名末位选手交换位置。目标有多名时，由你选择。",
     "timing": [
       "turn-start"
     ],
@@ -318,7 +318,7 @@ export const SECOND_WIND_CHARACTERS: readonly CharacterData[] = [
     "nameZh": "野猪骑士",
     "translation": "本项目译名",
     "edition": "second-wind",
-    "ability": "开赛骑野猪，每只坐骑为骑手主移动+2；其他选手停到其格便夺走坐骑。可同时骑多只野猪。",
+    "ability": "开赛时你骑着一只野猪。每只坐骑使当前骑手的主移动距离增加2格。其他选手停到当前骑手所在格时，会夺走坐骑；一名选手可以同时骑多只野猪。",
     "timing": [
       "before-race",
       "main-move",
@@ -629,13 +629,13 @@ export const SECOND_WIND_CHARACTERS: readonly CharacterData[] = [
     "nameZh": "魔法运动员",
     "translation": "本项目译名",
     "edition": "second-wind",
-    "ability": "主骰1：移动7；2：所有并列末位同时传送到自己；3：传送到另一选手所在格并绊倒该格其他所有人；4：移动4并额外回合；5：所有并列领跑者后退5；6：移动6并绊倒越过者。",
+    "ability": "根据主移动骰最终保留的点数，执行对应效果：\n1点：以7格为基础距离进行主移动。\n2点：将所有并列末位选手同时传送到你所在格。\n3点：传送到另一名选手所在格，并绊倒该格所有其他选手。\n4点：以4格为基础距离进行主移动，并获得一个额外回合。\n5点：所有并列领跑选手同时后退5格。\n6点：以6格为基础距离进行主移动，并绊倒被你越过的选手。",
     "timing": [
       "main-roll-final",
       "passed"
     ],
     "optional": false,
-    "targets": "按骰面确定；并列目标选一名",
+    "targets": "按点数确定：2点影响所有并列末位；3点选择另一名选手所在格；5点影响所有并列领跑者；6点影响被你越过的选手",
     "scope": "按卡文；other 为其他选手，opposing 为其他玩家控制的选手",
     "limit": "每次主移动",
     "duration": "本次效果",
@@ -674,7 +674,7 @@ export const SECOND_WIND_CHARACTERS: readonly CharacterData[] = [
     "nameZh": "鼹鼠",
     "translation": "本项目译名",
     "edition": "second-wind",
-    "ability": "若自己周围1格内没有其他选手，可不掷主骰，改为移动6。",
+    "ability": "若与你同格及前后相邻1格内都没有其他选手，你可以不掷主移动骰，改用6格作为主移动的基础距离。",
     "timing": [
       "before-main"
     ],
@@ -762,7 +762,7 @@ export const SECOND_WIND_CHARACTERS: readonly CharacterData[] = [
     "nameZh": "蘑菇泥",
     "translation": "本项目译名",
     "edition": "second-wind",
-    "ability": "主移动最终骰面1或2时抽一张选手牌，获得其能力至本场结束，可累积；不补用赛前或赛后效果。复制黏黏怪不继承已累积能力。",
+    "ability": "你的主移动最终点数为1或2时，从未选角色牌堆抽一张牌，额外获得该牌的能力，持续至本场结束，可以不断累积。不补用已经错过的发动时机，也不执行返场等赛后效果。复制蘑菇泥时，只获得它的抽牌能力，不继承它已经累积的能力。",
     "timing": [
       "main-roll-final"
     ],
@@ -806,7 +806,7 @@ export const SECOND_WIND_CHARACTERS: readonly CharacterData[] = [
     "nameZh": "宿敌",
     "translation": "本项目译名",
     "edition": "second-wind",
-    "ability": "其他选手掷主骰并完成移动后，自己可跟掷；相同则移动该点数。",
+    "ability": "其他选手掷出主移动骰并完成移动后，你可以额外掷一颗骰子。若与你跟随的那次主移动骰最终点数相同，你就前进相应格数。",
     "timing": [
       "other-main-roll"
     ],
@@ -894,7 +894,7 @@ export const SECOND_WIND_CHARACTERS: readonly CharacterData[] = [
     "nameZh": "虚无",
     "translation": "本项目译名",
     "edition": "second-wind",
-    "ability": "自己前方选手主移动−1，且没有能力。",
+    "ability": "位于你前方的选手，主移动距离减少1格，且所有能力暂时失效。不再位于你前方时，这些限制解除。",
     "timing": [
       "continuous",
       "main-move"
@@ -1118,7 +1118,7 @@ export const SECOND_WIND_CHARACTERS: readonly CharacterData[] = [
     "nameZh": "显摆精",
     "translation": "本项目译名",
     "edition": "second-wind",
-    "ability": "主移动掷骰后，可以继续掷骰并累计距离；若新骰不大于前一个骰面，本次不移动。",
+    "ability": "掷出主移动骰后，你可以继续掷骰，把点数累加为本次主移动的基础距离。每颗新骰都必须大于上一颗；若小于或等于上一颗，本次累计距离全部作废，不进行主移动。你可以在追加掷骰前停止，并按已累计的点数移动。",
     "timing": [
       "main-roll",
       "push-your-luck"
@@ -1208,7 +1208,7 @@ export const SECOND_WIND_CHARACTERS: readonly CharacterData[] = [
     "nameZh": "速度恶魔",
     "translation": "本项目译名",
     "edition": "second-wind",
-    "ability": "自己玩家每有1分，主移动+1；回合开始领先所有其他选手至少4格时淘汰。",
+    "ability": "控制你的玩家每有1分，你的主移动距离就增加1格。你的回合开始时，若你领先所有其他选手至少4格，你被淘汰。",
     "timing": [
       "turn-start",
       "main-move"
@@ -1387,7 +1387,7 @@ export const SECOND_WIND_CHARACTERS: readonly CharacterData[] = [
     "nameZh": "惊艳者",
     "translation": "本项目译名",
     "edition": "second-wind",
-    "ability": "自己周围1格内的其他选手，所有掷骰结果均为1。",
+    "ability": "与你同格或相距1格的其他选手，无论因什么原因掷骰，结果都视为1点。",
     "timing": [
       "any-roll"
     ],
@@ -1431,12 +1431,12 @@ export const SECOND_WIND_CHARACTERS: readonly CharacterData[] = [
     "nameZh": "交换袋鼠",
     "translation": "本项目译名",
     "edition": "second-wind",
-    "ability": "回合结束时，可与距离自己不超过1格的另一选手交换控制权。选手实例和位置保持。",
+    "ability": "你的回合结束时，可以与同格或相距1格的另一名选手交换控制权：你们的玩家互换操控的选手，双方棋子、位置和状态不变。",
     "timing": [
       "turn-end"
     ],
     "optional": true,
-    "targets": "相同格或相邻1格的其他在赛选手实例；包含队友，无目标时不显示技能选择",
+    "targets": "同格或相距1格的另一名在赛选手，包括你控制的另一名选手",
     "scope": "按卡文；other 为其他选手，opposing 为其他玩家控制的选手",
     "limit": "每回合结束一次",
     "duration": "本场控制权与牌归属",
@@ -1519,13 +1519,13 @@ export const SECOND_WIND_CHARACTERS: readonly CharacterData[] = [
     "nameZh": "水管",
     "translation": "本项目译名",
     "edition": "second-wind",
-    "ability": "本人回合结束时另掷一颗范围骰，绊倒严格前方1～骰面格（含边界）的所有在赛选手；同格和后方不受影响。",
+    "ability": "你的回合结束时，额外掷一颗范围骰，使你前方距离不超过该骰点数的所有在赛选手绊倒。例如掷出3，会绊倒你前方1、2、3格的选手；同格和后方不受影响。",
     "timing": [
       "turn-end",
       "ability-roll"
     ],
     "optional": false,
-    "targets": "距离自身严格前方1～最终范围骰面格的所有在赛选手，包含队友",
+    "targets": "你前方距离不超过范围骰最终点数的所有在赛选手，包括队友；不含同格和后方",
     "scope": "能力骰独立于主骰，不应用主移动加减；受惊艳者固定骰面与扫兴鬼重掷影响。恢复代替主移动后仍触发；完赛或淘汰后不触发。企鹅不是绊倒免疫",
     "limit": "每回合结束一次",
     "duration": "至目标恢复",
@@ -1564,7 +1564,7 @@ export const SECOND_WIND_CHARACTERS: readonly CharacterData[] = [
     "nameZh": "替补演员",
     "translation": "本项目译名",
     "edition": "second-wind",
-    "ability": "赛前复制另一名参赛者的印刷能力，可以选己方队友；执行赛前效果，不执行返场等赛后效果。",
+    "ability": "赛前选择另一名参赛选手，复制其角色卡上原本写明的能力，可以选择你控制的另一名选手。可以执行复制能力的赛前效果，不执行返场等赛后效果。",
     "timing": [
       "before-race"
     ],

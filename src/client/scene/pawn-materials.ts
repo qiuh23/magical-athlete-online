@@ -4,18 +4,21 @@ import { LatheGeometry, MeshPhysicalMaterial, MeshStandardMaterial, Vector2 } fr
 function toySurface(source: MeshStandardMaterial, lowQuality: boolean) {
   const paper = source.name === 'toy-paper' || source.name === 'toy-sw-paper';
   const ink = source.name === 'toy-ink' || source.name === 'toy-sw-ink' || source.name === 'toy-sw-dark';
-  const material = lowQuality ? source.clone() : new MeshPhysicalMaterial({
-    color: source.color,
-    side: source.side,
-    vertexColors: source.vertexColors,
-    flatShading: source.flatShading,
-    clearcoat: paper ? .08 : ink ? .28 : .16,
-    clearcoatRoughness: .52,
-    specularIntensity: .65,
-  });
+  const material = lowQuality ? source.clone() : new MeshPhysicalMaterial();
+  if (material instanceof MeshPhysicalMaterial) {
+    // Copy the authored standard PBR channels, without sharing mutable material
+    // state or assuming every character uses the old texture-free palette.
+    MeshStandardMaterial.prototype.copy.call(material, source);
+    // StandardMaterial.copy resets defines; retain the physical shader branch
+    // needed by clearcoat and specularIntensity below.
+    material.defines = { STANDARD: '', PHYSICAL: '' };
+    material.clearcoat = paper ? .025 : .04;
+    material.clearcoatRoughness = .72;
+    material.specularIntensity = .45;
+  }
   material.name = `${source.name}-${lowQuality ? 'matte' : 'satin'}`;
-  material.roughness = paper ? .64 : ink ? .38 : .5;
-  material.metalness = 0;
+  material.roughness = Math.max(paper ? .76 : ink ? .60 : .66, Math.min(.9, source.roughness));
+  material.metalness = Math.min(.15, Math.max(0, source.metalness));
   return material;
 }
 

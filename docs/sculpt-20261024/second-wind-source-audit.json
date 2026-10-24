@@ -1,0 +1,1161 @@
+{
+  "version": "authored-20261024",
+  "passed": true,
+  "sources": [
+    {
+      "id": "bite-mark",
+      "editableParts": 32,
+      "gameMeshes": 6,
+      "bones": 7,
+      "boundaryEdges": 0,
+      "looseEdges": 0,
+      "reopened": true,
+      "faceAttachmentProbes": [
+        {
+          "part": "GEO-bite-mark-uneasy-mouth-259",
+          "kind": "mouth",
+          "nearestGap": 1.2554209206427913e-05,
+          "furthestGap": 0.0246226005256176,
+          "sampleCount": 86
+        }
+      ],
+      "stageSourceSha256": "d817b08662548fec8c9b17c4cd0768cb2dec1066612ddaa3906c29c652c12395",
+      "source": "assets/blender/second-wind/bite-mark.blend",
+      "sourceSha256": "d817b08662548fec8c9b17c4cd0768cb2dec1066612ddaa3906c29c652c12395",
+      "glb": "public/models/second-wind/bite-mark.glb",
+      "glbSha256": "9e5ae2a4d87cf193a17c9e64bcf658b19057abcd7396c83e5271997e3fc27e47"
+    },
+    {
+      "id": "blunderdog",
+      "editableParts": 21,
+      "gameMeshes": 6,
+      "bones": 5,
+      "boundaryEdges": 0,
+      "looseEdges": 0,
+      "reopened": true,
+      "faceAttachmentProbes": [
+        {
+          "part": "GEO-blunderdog-eye-white-1081",
+          "kind": "eye",
+          "nearestGap": 0.0003501476312521845,
+          "furthestGap": 0.012452833354473114,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-blunderdog-eye-white-1087",
+          "kind": "eye",
+          "nearestGap": 0.00035014000604860485,
+          "furthestGap": 0.012452840805053711,
+          "sampleCount": 146
+        }
+      ],
+      "stageSourceSha256": "07efc51909af7188eb0c4550bfb61ab4c8d0b452989b1d634df884ddb6422e92",
+      "source": "assets/blender/second-wind/blunderdog.blend",
+      "sourceSha256": "07efc51909af7188eb0c4550bfb61ab4c8d0b452989b1d634df884ddb6422e92",
+      "glb": "public/models/second-wind/blunderdog.glb",
+      "glbSha256": "e594780f71ea90ea5ae1e99205768e5e6f959cad2bfc8adfa300f5ca84e561fd"
+    },
+    {
+      "id": "cheatah",
+      "editableParts": 32,
+      "gameMeshes": 5,
+      "bones": 5,
+      "boundaryEdges": 0,
+      "looseEdges": 0,
+      "reopened": true,
+      "faceAttachmentProbes": [
+        {
+          "part": "GEO-cheatah-eye-white-1097",
+          "kind": "eye",
+          "nearestGap": 7.848942914279178e-05,
+          "furthestGap": 0.019780227914452553,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-cheatah-eye-white-1099",
+          "kind": "eye",
+          "nearestGap": 9.710111771710217e-05,
+          "furthestGap": 0.0198659785091877,
+          "sampleCount": 146
+        }
+      ],
+      "stageSourceSha256": "fce336e520046332f5a219737f6e8f67d4080ba4318683aaf1bc5552022b660e",
+      "source": "assets/blender/second-wind/cheatah.blend",
+      "sourceSha256": "fce336e520046332f5a219737f6e8f67d4080ba4318683aaf1bc5552022b660e",
+      "glb": "public/models/second-wind/cheatah.glb",
+      "glbSha256": "3f5df0366256aa2b84428211741cecb3c363e46ce9a3cc1d609a4c93006b8bc0"
+    },
+    {
+      "id": "critic",
+      "editableParts": 17,
+      "gameMeshes": 5,
+      "bones": 5,
+      "boundaryEdges": 0,
+      "looseEdges": 0,
+      "reopened": true,
+      "faceAttachmentProbes": [
+        {
+          "part": "GEO-critic-eye-white-1134",
+          "kind": "eye",
+          "nearestGap": 3.680651934701018e-05,
+          "furthestGap": 0.0234533678740263,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-critic-eye-white-1136",
+          "kind": "eye",
+          "nearestGap": 7.775773701723665e-05,
+          "furthestGap": 0.023372193798422813,
+          "sampleCount": 146
+        }
+      ],
+      "stageSourceSha256": "69eb53ca1d6364b9e339f11257e640dbe84f03323724a8480a214a73b96fe581",
+      "source": "assets/blender/second-wind/critic.blend",
+      "sourceSha256": "69eb53ca1d6364b9e339f11257e640dbe84f03323724a8480a214a73b96fe581",
+      "glb": "public/models/second-wind/critic.glb",
+      "glbSha256": "c0b6d667ba55137e6dca629ac5fec8124e427d6e8d3d3cf13269cca68ba89202"
+    },
+    {
+      "id": "diva",
+      "editableParts": 22,
+      "gameMeshes": 5,
+      "bones": 5,
+      "boundaryEdges": 0,
+      "looseEdges": 0,
+      "reopened": true,
+      "faceAttachmentProbes": [],
+      "stageSourceSha256": "e1c5e74ef63a0101b010fd9e0a8c1d9eb32d19e8a97104b9092fb8aeb04e5de4",
+      "source": "assets/blender/second-wind/diva.blend",
+      "sourceSha256": "e1c5e74ef63a0101b010fd9e0a8c1d9eb32d19e8a97104b9092fb8aeb04e5de4",
+      "glb": "public/models/second-wind/diva.glb",
+      "glbSha256": "1799347378ef26d37727d105e4a63df35ff93f59bc6020c7aae2ff38c1dea6c4"
+    },
+    {
+      "id": "doppelgangster",
+      "editableParts": 40,
+      "gameMeshes": 5,
+      "bones": 5,
+      "boundaryEdges": 0,
+      "looseEdges": 0,
+      "reopened": true,
+      "faceAttachmentProbes": [
+        {
+          "part": "GEO-doppelgangster-eye-white-1170",
+          "kind": "eye",
+          "nearestGap": 0.00014341114729177207,
+          "furthestGap": 0.01113983802497387,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-doppelgangster-eye-white-1172",
+          "kind": "eye",
+          "nearestGap": 0.00012278431677259505,
+          "furthestGap": 0.011160030029714108,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-doppelgangster-eye-white-1190",
+          "kind": "eye",
+          "nearestGap": 0.0001436484744772315,
+          "furthestGap": 0.011139599606394768,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-doppelgangster-eye-white-1192",
+          "kind": "eye",
+          "nearestGap": 0.0001230340130859986,
+          "furthestGap": 0.011159784160554409,
+          "sampleCount": 146
+        }
+      ],
+      "stageSourceSha256": "e6f51e36dfaa18fc9df65d97f8be3dfa08259217b7b54f195b98e4e7cc13eb69",
+      "source": "assets/blender/second-wind/doppelgangster.blend",
+      "sourceSha256": "e6f51e36dfaa18fc9df65d97f8be3dfa08259217b7b54f195b98e4e7cc13eb69",
+      "glb": "public/models/second-wind/doppelgangster.glb",
+      "glbSha256": "6fa60b4154babd705ea7c85d1944b7a47a927d1cee8236708b02c8f3939a15fd"
+    },
+    {
+      "id": "gloth",
+      "editableParts": 23,
+      "gameMeshes": 3,
+      "bones": 5,
+      "boundaryEdges": 0,
+      "looseEdges": 0,
+      "reopened": true,
+      "faceAttachmentProbes": [
+        {
+          "part": "GEO-gloth-eye-white-1211",
+          "kind": "eye",
+          "nearestGap": 0.0018219270277768373,
+          "furthestGap": 0.02196619287133217,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-gloth-eye-white-1218",
+          "kind": "eye",
+          "nearestGap": 0.001846452010795474,
+          "furthestGap": 0.021968716755509377,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-gloth-goth-mouth-1225",
+          "kind": "mouth",
+          "nearestGap": 0.00019367078493814915,
+          "furthestGap": 0.01426905021071434,
+          "sampleCount": 146
+        }
+      ],
+      "stageSourceSha256": "41e87990cfd6cef4ca387a588f7487bc642a1e8b2c7adfab9886b53362e4323a",
+      "source": "assets/blender/second-wind/gloth.blend",
+      "sourceSha256": "41e87990cfd6cef4ca387a588f7487bc642a1e8b2c7adfab9886b53362e4323a",
+      "glb": "public/models/second-wind/gloth.glb",
+      "glbSha256": "6caa5e5e43a9406c17825294a8406602817fb5a694db5a4eac09cf5ffcee805f"
+    },
+    {
+      "id": "hog-knight",
+      "editableParts": 27,
+      "gameMeshes": 5,
+      "bones": 7,
+      "boundaryEdges": 0,
+      "looseEdges": 0,
+      "reopened": true,
+      "faceAttachmentProbes": [
+        {
+          "part": "GEO-hog-knight-eye-white-219",
+          "kind": "eye",
+          "nearestGap": 3.905692938133143e-05,
+          "furthestGap": 0.012194468639791012,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-hog-knight-eye-white-221",
+          "kind": "eye",
+          "nearestGap": 3.905692938133143e-05,
+          "furthestGap": 0.012194470502436161,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-hog-knight-surprised-mouth-224",
+          "kind": "mouth",
+          "nearestGap": 0.00010345820192014799,
+          "furthestGap": 0.011154942214488983,
+          "sampleCount": 86
+        }
+      ],
+      "stageSourceSha256": "fffc7dd4878ef4adaf31beedc5be3b16fef50b0cadd36c462c9341a3f838f0ba",
+      "source": "assets/blender/second-wind/hog-knight.blend",
+      "sourceSha256": "fffc7dd4878ef4adaf31beedc5be3b16fef50b0cadd36c462c9341a3f838f0ba",
+      "glb": "public/models/second-wind/hog-knight.glb",
+      "glbSha256": "c712119a7a82b968f48f896ce9465d2e4883025e3a141a576d9e612fdfeb8a2d"
+    },
+    {
+      "id": "hopfrog",
+      "editableParts": 18,
+      "gameMeshes": 3,
+      "bones": 5,
+      "boundaryEdges": 0,
+      "looseEdges": 0,
+      "reopened": true,
+      "faceAttachmentProbes": [],
+      "stageSourceSha256": "9a643cee6d9b958e1b7c588a3a29d1216d7c444c06f5fd0ba599ad5786502610",
+      "source": "assets/blender/second-wind/hopfrog.blend",
+      "sourceSha256": "9a643cee6d9b958e1b7c588a3a29d1216d7c444c06f5fd0ba599ad5786502610",
+      "glb": "public/models/second-wind/hopfrog.glb",
+      "glbSha256": "1ae468437570730d8712e4e7903d05368347c2d7c9517476c20e5b809ee6ccdc"
+    },
+    {
+      "id": "hotel",
+      "editableParts": 23,
+      "gameMeshes": 6,
+      "bones": 5,
+      "boundaryEdges": 0,
+      "looseEdges": 0,
+      "reopened": true,
+      "faceAttachmentProbes": [],
+      "stageSourceSha256": "94175a0d949216daa004478406aebcbeb20cc5cf50dd827498f7d7053d0e53de",
+      "source": "assets/blender/second-wind/hotel.blend",
+      "sourceSha256": "94175a0d949216daa004478406aebcbeb20cc5cf50dd827498f7d7053d0e53de",
+      "glb": "public/models/second-wind/hotel.glb",
+      "glbSha256": "bdfa6f6c9c1a7eac7f68c644f0bff2e6de9f62570b6a6ea13dc76953365667b5"
+    },
+    {
+      "id": "icarus",
+      "editableParts": 28,
+      "gameMeshes": 8,
+      "bones": 5,
+      "boundaryEdges": 0,
+      "looseEdges": 0,
+      "reopened": true,
+      "faceAttachmentProbes": [
+        {
+          "part": "GEO-icarus-eye-white-1274",
+          "kind": "eye",
+          "nearestGap": 0.002441094722598791,
+          "furthestGap": 0.022141411900520325,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-icarus-eye-white-1277",
+          "kind": "eye",
+          "nearestGap": 0.0024295009206980467,
+          "furthestGap": 0.02213444374501705,
+          "sampleCount": 146
+        }
+      ],
+      "stageSourceSha256": "c800c7238025842cd82f426663fe583570192b5f74e15e95e1781bd46cd04227",
+      "source": "assets/blender/second-wind/icarus.blend",
+      "sourceSha256": "c800c7238025842cd82f426663fe583570192b5f74e15e95e1781bd46cd04227",
+      "glb": "public/models/second-wind/icarus.glb",
+      "glbSha256": "10c74b9c47b218330f8491ff577ffd36c7e7137006a11194c5af9a490bf3cf1b"
+    },
+    {
+      "id": "kingtripper",
+      "editableParts": 25,
+      "gameMeshes": 6,
+      "bones": 5,
+      "boundaryEdges": 0,
+      "looseEdges": 0,
+      "reopened": true,
+      "faceAttachmentProbes": [
+        {
+          "part": "GEO-kingtripper-eye-white-1302",
+          "kind": "eye",
+          "nearestGap": 7.109590660547838e-05,
+          "furthestGap": 0.02135862223803997,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-kingtripper-eye-white-1304",
+          "kind": "eye",
+          "nearestGap": 0.00011911917681572959,
+          "furthestGap": 0.02142208069562912,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-kingtripper-king-grin-1306",
+          "kind": "mouth",
+          "nearestGap": 8.125397471303586e-06,
+          "furthestGap": 0.017232976853847504,
+          "sampleCount": 216
+        }
+      ],
+      "stageSourceSha256": "440f052b97ec30ec862f47a9451969801c764d58c076af3b07d56dd1a61d33dc",
+      "source": "assets/blender/second-wind/kingtripper.blend",
+      "sourceSha256": "440f052b97ec30ec862f47a9451969801c764d58c076af3b07d56dd1a61d33dc",
+      "glb": "public/models/second-wind/kingtripper.glb",
+      "glbSha256": "552544444bad4d614873800abef7adf3ffeae542ce613899020f7c66c56d1c90"
+    },
+    {
+      "id": "kraken",
+      "editableParts": 39,
+      "gameMeshes": 4,
+      "bones": 13,
+      "boundaryEdges": 0,
+      "looseEdges": 0,
+      "reopened": true,
+      "faceAttachmentProbes": [],
+      "stageSourceSha256": "57c9e0136c141f1bdde0b537a0e4443829ea1978864c9391214c5309fc02b518",
+      "source": "assets/blender/second-wind/kraken.blend",
+      "sourceSha256": "57c9e0136c141f1bdde0b537a0e4443829ea1978864c9391214c5309fc02b518",
+      "glb": "public/models/second-wind/kraken.glb",
+      "glbSha256": "6215fae70882e7026c8a3c7933259808863e446325d4ade6d3e3590232509689"
+    },
+    {
+      "id": "le-saboteur",
+      "editableParts": 23,
+      "gameMeshes": 4,
+      "bones": 5,
+      "boundaryEdges": 0,
+      "looseEdges": 0,
+      "reopened": true,
+      "faceAttachmentProbes": [
+        {
+          "part": "GEO-le-saboteur-eye-white-1332",
+          "kind": "eye",
+          "nearestGap": 4.707694097305648e-05,
+          "furthestGap": 0.02543530985713005,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-le-saboteur-eye-white-1334",
+          "kind": "eye",
+          "nearestGap": 3.351925624883734e-05,
+          "furthestGap": 0.025433195754885674,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-le-saboteur-grin-tooth-1336",
+          "kind": "mouth",
+          "nearestGap": 4.308529696572805e-06,
+          "furthestGap": 0.014065851457417011,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-le-saboteur-grin-tooth-1337",
+          "kind": "mouth",
+          "nearestGap": 6.54087561997585e-05,
+          "furthestGap": 0.014551512897014618,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-le-saboteur-grin-tooth-1338",
+          "kind": "mouth",
+          "nearestGap": 9.827257599681616e-05,
+          "furthestGap": 0.014560021460056305,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-le-saboteur-grin-tooth-1339",
+          "kind": "mouth",
+          "nearestGap": 9.939611118170433e-06,
+          "furthestGap": 0.014572453685104847,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-le-saboteur-grin-tooth-1340",
+          "kind": "mouth",
+          "nearestGap": 4.8012894694693387e-05,
+          "furthestGap": 0.014395675621926785,
+          "sampleCount": 146
+        }
+      ],
+      "stageSourceSha256": "74e4e14e66542bfa8faae1c299dd325df4b79425bda280637c43c6a6b4ed5c04",
+      "source": "assets/blender/second-wind/le-saboteur.blend",
+      "sourceSha256": "74e4e14e66542bfa8faae1c299dd325df4b79425bda280637c43c6a6b4ed5c04",
+      "glb": "public/models/second-wind/le-saboteur.glb",
+      "glbSha256": "c3b96c8252cbc3e7a53e2ae86775fbe9a034dc27b0f2e98c312a361cf2c0d0b2"
+    },
+    {
+      "id": "magical-athlete",
+      "editableParts": 19,
+      "gameMeshes": 7,
+      "bones": 5,
+      "boundaryEdges": 0,
+      "looseEdges": 0,
+      "reopened": true,
+      "faceAttachmentProbes": [
+        {
+          "part": "GEO-magical-athlete-eye-white-1352",
+          "kind": "eye",
+          "nearestGap": 3.0084625905146822e-05,
+          "furthestGap": 0.014842044562101364,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-magical-athlete-eye-white-1354",
+          "kind": "eye",
+          "nearestGap": 3.2332940463675186e-05,
+          "furthestGap": 0.014836793765425682,
+          "sampleCount": 146
+        }
+      ],
+      "stageSourceSha256": "78a8bb360d10d2253d8c7ea28604d5c18346cb6a80cda1f62995a9d98bc29f1a",
+      "source": "assets/blender/second-wind/magical-athlete.blend",
+      "sourceSha256": "78a8bb360d10d2253d8c7ea28604d5c18346cb6a80cda1f62995a9d98bc29f1a",
+      "glb": "public/models/second-wind/magical-athlete.glb",
+      "glbSha256": "77eb9908209b8b2af0a360aff78b437d135a043aa87af3072b1ba01695688a91"
+    },
+    {
+      "id": "mole",
+      "editableParts": 23,
+      "gameMeshes": 5,
+      "bones": 5,
+      "boundaryEdges": 0,
+      "looseEdges": 0,
+      "reopened": true,
+      "faceAttachmentProbes": [
+        {
+          "part": "GEO-mole-eye-white-1368",
+          "kind": "eye",
+          "nearestGap": 1.5260142390616238e-05,
+          "furthestGap": 0.015665991231799126,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-mole-eye-white-1370",
+          "kind": "eye",
+          "nearestGap": 8.710248039278667e-06,
+          "furthestGap": 0.015666013583540916,
+          "sampleCount": 146
+        }
+      ],
+      "stageSourceSha256": "bbd135d43bdb712269d12f4ca22a868245912e00e05cef4bd493491d104d9ec1",
+      "source": "assets/blender/second-wind/mole.blend",
+      "sourceSha256": "bbd135d43bdb712269d12f4ca22a868245912e00e05cef4bd493491d104d9ec1",
+      "glb": "public/models/second-wind/mole.glb",
+      "glbSha256": "83df021f2038a5d7e541c56de6dedabcc94cc134689ceba4b4a27729cb6bb86f"
+    },
+    {
+      "id": "mr-dice-guy",
+      "editableParts": 28,
+      "gameMeshes": 8,
+      "bones": 5,
+      "boundaryEdges": 0,
+      "looseEdges": 0,
+      "reopened": true,
+      "faceAttachmentProbes": [
+        {
+          "part": "GEO-mr-dice-guy-eye-white-1393",
+          "kind": "eye",
+          "nearestGap": 0.00013394173583947122,
+          "furthestGap": 0.01849232241511345,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-mr-dice-guy-eye-white-1395",
+          "kind": "eye",
+          "nearestGap": 0.00013862158812116832,
+          "furthestGap": 0.018504301086068153,
+          "sampleCount": 146
+        }
+      ],
+      "stageSourceSha256": "77433a051b235c7d1032cbd776df1d200ed302baa875bc478c5efd37177c6f37",
+      "source": "assets/blender/second-wind/mr-dice-guy.blend",
+      "sourceSha256": "77433a051b235c7d1032cbd776df1d200ed302baa875bc478c5efd37177c6f37",
+      "glb": "public/models/second-wind/mr-dice-guy.glb",
+      "glbSha256": "60de8dad8b8e04983f4d929efe346a4adb5d8628db81763fb970bafebb4633ec"
+    },
+    {
+      "id": "mush",
+      "editableParts": 20,
+      "gameMeshes": 3,
+      "bones": 5,
+      "boundaryEdges": 0,
+      "looseEdges": 0,
+      "reopened": true,
+      "faceAttachmentProbes": [
+        {
+          "part": "GEO-mush-eye-white-1421",
+          "kind": "eye",
+          "nearestGap": 6.244724318094086e-06,
+          "furthestGap": 0.014502654783427715,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-mush-eye-white-1423",
+          "kind": "eye",
+          "nearestGap": 7.788121729390696e-05,
+          "furthestGap": 0.01652117259800434,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-mush-eye-white-1426",
+          "kind": "eye",
+          "nearestGap": 0.00010050564742414281,
+          "furthestGap": 0.016376923769712448,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-mush-eye-white-1428",
+          "kind": "eye",
+          "nearestGap": 4.090338552487083e-05,
+          "furthestGap": 0.014717379584908485,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-mush-eye-white-1431",
+          "kind": "eye",
+          "nearestGap": 3.089666643063538e-05,
+          "furthestGap": 0.011148647405207157,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-mush-eye-white-1433",
+          "kind": "eye",
+          "nearestGap": 9.124872121901717e-06,
+          "furthestGap": 0.011502163484692574,
+          "sampleCount": 146
+        }
+      ],
+      "stageSourceSha256": "7d0e3ba36c331d571c96a18a46f944e395b54734be0a348bf2ef6654f2ced924",
+      "source": "assets/blender/second-wind/mush.blend",
+      "sourceSha256": "7d0e3ba36c331d571c96a18a46f944e395b54734be0a348bf2ef6654f2ced924",
+      "glb": "public/models/second-wind/mush.glb",
+      "glbSha256": "a26c7cbd77f9c46163f2c2c60bfc608ddf2b15ff9b64da8f134d0f5373cfae36"
+    },
+    {
+      "id": "nemesis",
+      "editableParts": 33,
+      "gameMeshes": 3,
+      "bones": 5,
+      "boundaryEdges": 0,
+      "looseEdges": 0,
+      "reopened": true,
+      "faceAttachmentProbes": [
+        {
+          "part": "GEO-nemesis-eye-white-1444",
+          "kind": "eye",
+          "nearestGap": 7.330439984798431e-05,
+          "furthestGap": 0.01292070746421814,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-nemesis-eye-white-1446",
+          "kind": "eye",
+          "nearestGap": 6.145378574728966e-05,
+          "furthestGap": 0.012831921689212322,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-nemesis-open-statue-mouth-1449",
+          "kind": "mouth",
+          "nearestGap": 0.005529348738491535,
+          "furthestGap": 0.01787455938756466,
+          "sampleCount": 146
+        }
+      ],
+      "stageSourceSha256": "2c9992cf18673c2ba81e54fe12d3d09ba16d9a683994c9ce53c4848b81ecdc79",
+      "source": "assets/blender/second-wind/nemesis.blend",
+      "sourceSha256": "2c9992cf18673c2ba81e54fe12d3d09ba16d9a683994c9ce53c4848b81ecdc79",
+      "glb": "public/models/second-wind/nemesis.glb",
+      "glbSha256": "740556a629ab8d0d34598a0d72830afad9cb5cd0065de9ee48905813f530f583"
+    },
+    {
+      "id": "nepo-baby",
+      "editableParts": 21,
+      "gameMeshes": 6,
+      "bones": 5,
+      "boundaryEdges": 0,
+      "looseEdges": 0,
+      "reopened": true,
+      "faceAttachmentProbes": [
+        {
+          "part": "GEO-nepo-baby-eye-white-1477",
+          "kind": "eye",
+          "nearestGap": 7.85725478635868e-06,
+          "furthestGap": 0.012318865396082401,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-nepo-baby-eye-white-1479",
+          "kind": "eye",
+          "nearestGap": 2.097586502713966e-06,
+          "furthestGap": 0.012315411120653152,
+          "sampleCount": 146
+        }
+      ],
+      "stageSourceSha256": "29c58e61b11065170d56386e755ebed62929e0145e2a2eeb48463d1f3ccf3950",
+      "source": "assets/blender/second-wind/nepo-baby.blend",
+      "sourceSha256": "29c58e61b11065170d56386e755ebed62929e0145e2a2eeb48463d1f3ccf3950",
+      "glb": "public/models/second-wind/nepo-baby.glb",
+      "glbSha256": "fdc76ed7ca286894a4d2438333b6cfd4fa3bef04f536ae659626e2d9a7433a62"
+    },
+    {
+      "id": "null",
+      "editableParts": 13,
+      "gameMeshes": 3,
+      "bones": 5,
+      "boundaryEdges": 0,
+      "looseEdges": 0,
+      "reopened": true,
+      "faceAttachmentProbes": [],
+      "stageSourceSha256": "3a85cca88089f952159e6b9ce82656a5f21de3bdc4c3614000a26c602cf8e65f",
+      "source": "assets/blender/second-wind/null.blend",
+      "sourceSha256": "3a85cca88089f952159e6b9ce82656a5f21de3bdc4c3614000a26c602cf8e65f",
+      "glb": "public/models/second-wind/null.glb",
+      "glbSha256": "758e7c0348b0a2aad5b730ab6ed8826312760948eda4b4c922e91c224acac290"
+    },
+    {
+      "id": "overtaker",
+      "editableParts": 21,
+      "gameMeshes": 6,
+      "bones": 5,
+      "boundaryEdges": 0,
+      "looseEdges": 0,
+      "reopened": true,
+      "faceAttachmentProbes": [
+        {
+          "part": "GEO-overtaker-eye-white-1512",
+          "kind": "eye",
+          "nearestGap": 1.2758558114001062e-05,
+          "furthestGap": 0.019632328301668167,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-overtaker-eye-white-1514",
+          "kind": "eye",
+          "nearestGap": 0.00011823754903161898,
+          "furthestGap": 0.019668100401759148,
+          "sampleCount": 146
+        }
+      ],
+      "stageSourceSha256": "cbfffdc9ff73abf497859cd028a2852b7e5f57b358703669d751d8377700f03a",
+      "source": "assets/blender/second-wind/overtaker.blend",
+      "sourceSha256": "cbfffdc9ff73abf497859cd028a2852b7e5f57b358703669d751d8377700f03a",
+      "glb": "public/models/second-wind/overtaker.glb",
+      "glbSha256": "f4b198f42d57be9b2f92cfdcfa23b6e4c3fbb300c94c75acbcfbdd54aae1f1d9"
+    },
+    {
+      "id": "party-pooper",
+      "editableParts": 24,
+      "gameMeshes": 7,
+      "bones": 5,
+      "boundaryEdges": 0,
+      "looseEdges": 0,
+      "reopened": true,
+      "faceAttachmentProbes": [
+        {
+          "part": "GEO-party-pooper-eye-white-1537",
+          "kind": "eye",
+          "nearestGap": 3.597092654672451e-05,
+          "furthestGap": 0.01839420758187771,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-party-pooper-eye-white-1539",
+          "kind": "eye",
+          "nearestGap": 0.00012861831055488437,
+          "furthestGap": 0.018403027206659317,
+          "sampleCount": 146
+        }
+      ],
+      "stageSourceSha256": "a8b2e2a352f00831aed50e046e14b1fcc5b7819b9c19d883016d0ee48f1eafae",
+      "source": "assets/blender/second-wind/party-pooper.blend",
+      "sourceSha256": "a8b2e2a352f00831aed50e046e14b1fcc5b7819b9c19d883016d0ee48f1eafae",
+      "glb": "public/models/second-wind/party-pooper.glb",
+      "glbSha256": "912d951d04bc86ab2b8d29c3b31d163f03261ed256a2ef6afb638bc740839509"
+    },
+    {
+      "id": "penguin",
+      "editableParts": 15,
+      "gameMeshes": 5,
+      "bones": 5,
+      "boundaryEdges": 0,
+      "looseEdges": 0,
+      "reopened": true,
+      "faceAttachmentProbes": [
+        {
+          "part": "GEO-penguin-eye-white-1562",
+          "kind": "eye",
+          "nearestGap": 3.356310799063067e-06,
+          "furthestGap": 0.014045492745935917,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-penguin-eye-white-1565",
+          "kind": "eye",
+          "nearestGap": 4.227160843583988e-06,
+          "furthestGap": 0.014041508547961712,
+          "sampleCount": 146
+        }
+      ],
+      "stageSourceSha256": "9cf9146f4701743b625dba0a7e79a5b7edd2cbaf5f04619039a227662cd16660",
+      "source": "assets/blender/second-wind/penguin.blend",
+      "sourceSha256": "9cf9146f4701743b625dba0a7e79a5b7edd2cbaf5f04619039a227662cd16660",
+      "glb": "public/models/second-wind/penguin.glb",
+      "glbSha256": "3d8125de9e6cfcb45f8ba934238ada2675223ea114c6b5b488327a717f749b9e"
+    },
+    {
+      "id": "re-runner",
+      "editableParts": 22,
+      "gameMeshes": 7,
+      "bones": 5,
+      "boundaryEdges": 0,
+      "looseEdges": 0,
+      "reopened": true,
+      "faceAttachmentProbes": [
+        {
+          "part": "GEO-re-runner-eye-white-1574",
+          "kind": "eye",
+          "nearestGap": 4.576353239826858e-05,
+          "furthestGap": 0.018567029386758804,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-re-runner-eye-white-1576",
+          "kind": "eye",
+          "nearestGap": 7.1006863436196e-05,
+          "furthestGap": 0.018557636067271233,
+          "sampleCount": 146
+        }
+      ],
+      "stageSourceSha256": "c2a5412c633fc6c005fe9922c0aac0b6bcd8113b126e215996840b04b0b4fec7",
+      "source": "assets/blender/second-wind/re-runner.blend",
+      "sourceSha256": "c2a5412c633fc6c005fe9922c0aac0b6bcd8113b126e215996840b04b0b4fec7",
+      "glb": "public/models/second-wind/re-runner.glb",
+      "glbSha256": "680bc5c52450e0e7701b6b2c1889596b4446e239b14de292950a8b36b72c4163"
+    },
+    {
+      "id": "show-off",
+      "editableParts": 22,
+      "gameMeshes": 7,
+      "bones": 9,
+      "boundaryEdges": 0,
+      "looseEdges": 0,
+      "reopened": true,
+      "faceAttachmentProbes": [
+        {
+          "part": "GEO-show-off-eye-white-1603",
+          "kind": "eye",
+          "nearestGap": 7.124969852156937e-05,
+          "furthestGap": 0.014294356107711792,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-show-off-eye-white-1605",
+          "kind": "eye",
+          "nearestGap": 5.153936581336893e-05,
+          "furthestGap": 0.014292296953499317,
+          "sampleCount": 146
+        }
+      ],
+      "stageSourceSha256": "96806344e2d18f38a02ea348b96413c3bb8bd6239444eacb5cc83b03e57b0f8f",
+      "source": "assets/blender/second-wind/show-off.blend",
+      "sourceSha256": "96806344e2d18f38a02ea348b96413c3bb8bd6239444eacb5cc83b03e57b0f8f",
+      "glb": "public/models/second-wind/show-off.glb",
+      "glbSha256": "55109463c47bb39f1a9b6e1edb543dfdc00d0a264b996644765ad43e698d5085"
+    },
+    {
+      "id": "soulmate",
+      "editableParts": 18,
+      "gameMeshes": 5,
+      "bones": 5,
+      "boundaryEdges": 0,
+      "looseEdges": 0,
+      "reopened": true,
+      "faceAttachmentProbes": [
+        {
+          "part": "GEO-soulmate-open-love-smile-1628",
+          "kind": "mouth",
+          "nearestGap": 0.00025265177828259766,
+          "furthestGap": 0.03464339300990105,
+          "sampleCount": 86
+        },
+        {
+          "part": "GEO-soulmate-smile-tongue-1629",
+          "kind": "mouth",
+          "nearestGap": 0.0251837819814682,
+          "furthestGap": 0.04536311328411102,
+          "sampleCount": 146
+        }
+      ],
+      "stageSourceSha256": "afc45b8abaafc1558e75098df221070903e7f5c16cd69637a3b7658a515dc813",
+      "source": "assets/blender/second-wind/soulmate.blend",
+      "sourceSha256": "afc45b8abaafc1558e75098df221070903e7f5c16cd69637a3b7658a515dc813",
+      "glb": "public/models/second-wind/soulmate.glb",
+      "glbSha256": "0841b04018a0c33bb22b4a4aa3fc5c019bf564ec7445437953bfdae390c8e215"
+    },
+    {
+      "id": "speed-demon",
+      "editableParts": 43,
+      "gameMeshes": 8,
+      "bones": 7,
+      "boundaryEdges": 0,
+      "looseEdges": 0,
+      "reopened": true,
+      "faceAttachmentProbes": [
+        {
+          "part": "GEO-speed-demon-eye-white-22",
+          "kind": "eye",
+          "nearestGap": 0.00022413440456148237,
+          "furthestGap": 0.014888392761349678,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-speed-demon-eye-white-24",
+          "kind": "eye",
+          "nearestGap": 0.00023495344794355333,
+          "furthestGap": 0.014880655333399773,
+          "sampleCount": 146
+        }
+      ],
+      "stageSourceSha256": "d5c3eb67a8b17319b0c9e6fc424fd809043a1d483139b2b68673ef33e7dab882",
+      "source": "assets/blender/second-wind/speed-demon.blend",
+      "sourceSha256": "d5c3eb67a8b17319b0c9e6fc424fd809043a1d483139b2b68673ef33e7dab882",
+      "glb": "public/models/second-wind/speed-demon.glb",
+      "glbSha256": "6b1bfbc5d332cd8bdc0a2808ec687c5096c218a1d308a5f02e5b5b4ec22933a2"
+    },
+    {
+      "id": "spoilsport",
+      "editableParts": 21,
+      "gameMeshes": 4,
+      "bones": 5,
+      "boundaryEdges": 0,
+      "looseEdges": 0,
+      "reopened": true,
+      "faceAttachmentProbes": [
+        {
+          "part": "GEO-spoilsport-eye-white-1675",
+          "kind": "eye",
+          "nearestGap": 0.5285606980323792,
+          "furthestGap": 0.5802536010742188,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-spoilsport-eye-white-1677",
+          "kind": "eye",
+          "nearestGap": 0.519721269607544,
+          "furthestGap": 0.5721487402915955,
+          "sampleCount": 146
+        }
+      ],
+      "stageSourceSha256": "b5b94bd7b209ce15440a0c056a78f466ff47c53130f8718de1736ae532b339b0",
+      "source": "assets/blender/second-wind/spoilsport.blend",
+      "sourceSha256": "b5b94bd7b209ce15440a0c056a78f466ff47c53130f8718de1736ae532b339b0",
+      "glb": "public/models/second-wind/spoilsport.glb",
+      "glbSha256": "8bd676a93787bed8698d3f9e21fa422c049bd8fba66bd3c69112e400c8a45523"
+    },
+    {
+      "id": "stepdad",
+      "editableParts": 20,
+      "gameMeshes": 7,
+      "bones": 5,
+      "boundaryEdges": 0,
+      "looseEdges": 0,
+      "reopened": true,
+      "faceAttachmentProbes": [
+        {
+          "part": "GEO-stepdad-eye-white-1696",
+          "kind": "eye",
+          "nearestGap": 1.9779741705860943e-05,
+          "furthestGap": 0.014678450301289558,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-stepdad-eye-white-1698",
+          "kind": "eye",
+          "nearestGap": 4.3196829210501164e-05,
+          "furthestGap": 0.014726418070495129,
+          "sampleCount": 146
+        }
+      ],
+      "stageSourceSha256": "8ff3b9fc0f4513994aa7a64426cf0b50e2b1b334d6948940eb96f8c002466ae6",
+      "source": "assets/blender/second-wind/stepdad.blend",
+      "sourceSha256": "8ff3b9fc0f4513994aa7a64426cf0b50e2b1b334d6948940eb96f8c002466ae6",
+      "glb": "public/models/second-wind/stepdad.glb",
+      "glbSha256": "ef912588135c61eb023aa5032be87aec454f43c339642791da20e8c3ff165676"
+    },
+    {
+      "id": "streaker",
+      "editableParts": 13,
+      "gameMeshes": 3,
+      "bones": 5,
+      "boundaryEdges": 0,
+      "looseEdges": 0,
+      "reopened": true,
+      "faceAttachmentProbes": [
+        {
+          "part": "GEO-streaker-eye-white-1716",
+          "kind": "eye",
+          "nearestGap": 0.379726380109787,
+          "furthestGap": 0.4298618733882904,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-streaker-eye-white-1718",
+          "kind": "eye",
+          "nearestGap": 0.3857002258300781,
+          "furthestGap": 0.4351479709148407,
+          "sampleCount": 146
+        }
+      ],
+      "stageSourceSha256": "564a0d21927491880061ba33c6f73128328ca1980349bf9844952b174849f993",
+      "source": "assets/blender/second-wind/streaker.blend",
+      "sourceSha256": "564a0d21927491880061ba33c6f73128328ca1980349bf9844952b174849f993",
+      "glb": "public/models/second-wind/streaker.glb",
+      "glbSha256": "e167ddbf5d5a3a6859bfac11551b875e3b247806eb2fed15b6754dbe4a73f201"
+    },
+    {
+      "id": "stunner",
+      "editableParts": 17,
+      "gameMeshes": 6,
+      "bones": 5,
+      "boundaryEdges": 0,
+      "looseEdges": 0,
+      "reopened": true,
+      "faceAttachmentProbes": [],
+      "stageSourceSha256": "f7920f368a32d0b12ddce25f148ca8b725ccfd4ece7f4735c3fcd7678bfc63bf",
+      "source": "assets/blender/second-wind/stunner.blend",
+      "sourceSha256": "f7920f368a32d0b12ddce25f148ca8b725ccfd4ece7f4735c3fcd7678bfc63bf",
+      "glb": "public/models/second-wind/stunner.glb",
+      "glbSha256": "9d298dde1be3aa2f619247c72b5b5ed59379a4055dfc6a826ae8647dadeeaf12"
+    },
+    {
+      "id": "switcharoo",
+      "editableParts": 22,
+      "gameMeshes": 6,
+      "bones": 5,
+      "boundaryEdges": 0,
+      "looseEdges": 0,
+      "reopened": true,
+      "faceAttachmentProbes": [
+        {
+          "part": "GEO-switcharoo-eye-white-14",
+          "kind": "eye",
+          "nearestGap": 0.003488611662760377,
+          "furthestGap": 0.025737550109624863,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-switcharoo-eye-white-19",
+          "kind": "eye",
+          "nearestGap": 0.0035571123007684946,
+          "furthestGap": 0.02575608156621456,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-switcharoo-symmetric-kangaroo-smile-11",
+          "kind": "mouth",
+          "nearestGap": 4.843423448619433e-05,
+          "furthestGap": 0.004691621288657188,
+          "sampleCount": 120
+        }
+      ],
+      "facialAlignment": {
+        "headX": -0.02424267679452896,
+        "snoutX": -0.02424267679452896,
+        "smileX": -0.024242065846920013,
+        "nostrilMidpointX": -0.024242684128694236,
+        "nostrils": 2,
+        "pairedEyes": 2
+      },
+      "stageSourceSha256": "d8fd98e4499f5aacbe58047cd71667c252e5eab877a5030958682fbfd15256bd",
+      "source": "assets/blender/second-wind/switcharoo.blend",
+      "sourceSha256": "d8fd98e4499f5aacbe58047cd71667c252e5eab877a5030958682fbfd15256bd",
+      "glb": "public/models/second-wind/switcharoo.glb",
+      "glbSha256": "9037c56508bfd1833123c22e775ae7b23c564a0719070956e9ad2c39f1a41ded"
+    },
+    {
+      "id": "tail",
+      "editableParts": 10,
+      "gameMeshes": 5,
+      "bones": 5,
+      "boundaryEdges": 0,
+      "looseEdges": 0,
+      "reopened": true,
+      "faceAttachmentProbes": [
+        {
+          "part": "GEO-tail-eye-white-1771",
+          "kind": "eye",
+          "nearestGap": 8.677387813804671e-05,
+          "furthestGap": 0.019528213888406754,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-tail-eye-white-1773",
+          "kind": "eye",
+          "nearestGap": 0.00016204832354560494,
+          "furthestGap": 0.017950229346752167,
+          "sampleCount": 146
+        }
+      ],
+      "stageSourceSha256": "cef788be1bfb0c557d336be94a304bf0d64203cfbcca8fbb5b685b2aeb1965bf",
+      "source": "assets/blender/second-wind/tail.blend",
+      "sourceSha256": "cef788be1bfb0c557d336be94a304bf0d64203cfbcca8fbb5b685b2aeb1965bf",
+      "glb": "public/models/second-wind/tail.glb",
+      "glbSha256": "b2f6164a4c241999cf60917f36cd470f4f5f89c419c169a971a701062828ba14"
+    },
+    {
+      "id": "the-hose",
+      "editableParts": 15,
+      "gameMeshes": 4,
+      "bones": 5,
+      "boundaryEdges": 0,
+      "looseEdges": 0,
+      "reopened": true,
+      "faceAttachmentProbes": [
+        {
+          "part": "GEO-the-hose-eye-white-1782",
+          "kind": "eye",
+          "nearestGap": 0.5991550087928772,
+          "furthestGap": 0.6498951315879822,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-the-hose-eye-white-1784",
+          "kind": "eye",
+          "nearestGap": 0.6354054808616638,
+          "furthestGap": 0.6854143738746643,
+          "sampleCount": 146
+        }
+      ],
+      "stageSourceSha256": "1d04929dd8e79dfa78f61f26a3f7156aee249611544bc986cba14f5dd0f1bad6",
+      "source": "assets/blender/second-wind/the-hose.blend",
+      "sourceSha256": "1d04929dd8e79dfa78f61f26a3f7156aee249611544bc986cba14f5dd0f1bad6",
+      "glb": "public/models/second-wind/the-hose.glb",
+      "glbSha256": "4bd1c88f363b8251ba5504d453028ad1826fe2fd0b7bbf06549c90b481582473"
+    },
+    {
+      "id": "understudy",
+      "editableParts": 20,
+      "gameMeshes": 6,
+      "bones": 5,
+      "boundaryEdges": 0,
+      "looseEdges": 0,
+      "reopened": true,
+      "faceAttachmentProbes": [
+        {
+          "part": "GEO-understudy-eye-white-1797",
+          "kind": "eye",
+          "nearestGap": 2.929380389105063e-05,
+          "furthestGap": 0.016960404813289642,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-understudy-eye-white-1799",
+          "kind": "eye",
+          "nearestGap": 5.872710244148038e-05,
+          "furthestGap": 0.01702657900750637,
+          "sampleCount": 146
+        }
+      ],
+      "stageSourceSha256": "e2c27877e3a42db288d4928e334c112c00abe8464531aa0ab3a9019137abe61d",
+      "source": "assets/blender/second-wind/understudy.blend",
+      "sourceSha256": "e2c27877e3a42db288d4928e334c112c00abe8464531aa0ab3a9019137abe61d",
+      "glb": "public/models/second-wind/understudy.glb",
+      "glbSha256": "7dd93a43282ce07b9e5473e14e0db8327e7c6d1b32420c99feaa9f7f8e2f903c"
+    },
+    {
+      "id": "bite-mark-were",
+      "editableParts": 37,
+      "gameMeshes": 6,
+      "bones": 7,
+      "boundaryEdges": 0,
+      "looseEdges": 0,
+      "reopened": true,
+      "faceAttachmentProbes": [],
+      "stageSourceSha256": "e60b9fb9bafcbc911a15c80a5b05c4d61222fdfaef42db912936b29bf4f04315",
+      "source": "assets/blender/second-wind/bite-mark-were.blend",
+      "sourceSha256": "e60b9fb9bafcbc911a15c80a5b05c4d61222fdfaef42db912936b29bf4f04315",
+      "glb": "public/models/second-wind/bite-mark-were.glb",
+      "glbSha256": "420adfdb1540c95fd1c0777a5a128979e41fbcdb347b564b474dfc66475122f5"
+    },
+    {
+      "id": "hog-knight-hog",
+      "editableParts": 25,
+      "gameMeshes": 6,
+      "bones": 9,
+      "boundaryEdges": 0,
+      "looseEdges": 0,
+      "reopened": true,
+      "faceAttachmentProbes": [
+        {
+          "part": "GEO-hog-knight-hog-eye-white-186",
+          "kind": "eye",
+          "nearestGap": 0.42567959427833557,
+          "furthestGap": 0.46178320050239563,
+          "sampleCount": 86
+        },
+        {
+          "part": "GEO-hog-knight-hog-eye-white-196",
+          "kind": "eye",
+          "nearestGap": 0.4239601492881775,
+          "furthestGap": 0.459557443857193,
+          "sampleCount": 86
+        },
+        {
+          "part": "GEO-hog-knight-hog-open-boar-mouth-200",
+          "kind": "mouth",
+          "nearestGap": 0.42137596011161804,
+          "furthestGap": 0.45685192942619324,
+          "sampleCount": 86
+        }
+      ],
+      "stageSourceSha256": "442f68ce42e11e6e47d523d76e7d99c21817bcc236bffa574a67ec8e88b0efb7",
+      "source": "assets/blender/second-wind/hog-knight-hog.blend",
+      "sourceSha256": "442f68ce42e11e6e47d523d76e7d99c21817bcc236bffa574a67ec8e88b0efb7",
+      "glb": "public/models/second-wind/hog-knight-hog.glb",
+      "glbSha256": "b5aca1fdb6d814028f6db99ce1f086cce9283e5c7de16375431b73d32e9ae1bd"
+    }
+  ]
+}

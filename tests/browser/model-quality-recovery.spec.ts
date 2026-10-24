@@ -43,7 +43,7 @@ test('economy model fetch failure keeps the game usable and automatically retrie
   const env=await fixture(browser,true);let requests=0,release!:()=>void;
   const retryGate=new Promise<void>(resolve=>{release=resolve;});
   try{
-    await env.page.route('**/models/toy-racers-economy.glb*',async route=>{
+    await env.page.route(/\/models\/(?:toy-racers-economy|banana\/banana-economy)\.glb(?:\?|$)/,async route=>{
       requests++;if(requests===1){await route.abort('failed');return;}await retryGate;await route.continue();
     });
     await env.open();const board=env.page.getByTestId('board-3d');
@@ -59,11 +59,13 @@ test('a failed detailed asset does not poison economy quality and can recover wh
   test.setTimeout(60_000);
   const env=await fixture(browser,false);let highRequests=0,economyRequests=0,allowHigh=false;
   try{
-    await env.page.route('**/models/toy-racers.glb*',async route=>{highRequests++;if(!allowHigh){await route.abort('failed');return;}await route.continue();});
-    await env.page.route('**/models/toy-racers-economy.glb*',async route=>{economyRequests++;await route.continue();});
+    // Banana is independently routed: block both real high-quality resources,
+    // otherwise one healthy banana is correctly not a fallback after a toggle.
+    await env.page.route(/\/models\/(?:toy-racers|banana\/banana)\.glb(?:\?|$)/,async route=>{highRequests++;if(!allowHigh){await route.abort('failed');return;}await route.continue();});
+    await env.page.route(/\/models\/(?:toy-racers-economy|banana\/banana-economy)\.glb(?:\?|$)/,async route=>{economyRequests++;await route.continue();});
     await env.open();const board=env.page.getByTestId('board-3d');await expect(board).toHaveAttribute('data-model-fallbacks','2');
-    await expect.poll(()=>highRequests).toBeGreaterThanOrEqual(1);
-    await quality(env.page,true);await loaded(env.page);expect(economyRequests).toBeGreaterThanOrEqual(1);
+    await expect.poll(()=>highRequests).toBeGreaterThanOrEqual(2);
+    await quality(env.page,true);await loaded(env.page);expect(economyRequests).toBeGreaterThanOrEqual(2);
     // Returning to the failed URL must mount its own fallback, independent of
     // the successfully loaded economy URL. A restored network resets its bounded budget.
     await quality(env.page,false);await expect(board).toHaveAttribute('data-model-fallbacks','2');

@@ -14,9 +14,9 @@ export const LEAF_CHARACTERS:readonly LeafCharacterData[] = [
       "trip-immunity"
     ],
     "optional": false,
-    "targets": "another-racer-passes",
+    "targets": "从你身后移动到你前方的另一名选手",
     "scope": "按稳定选手ID与当前控制者ID分别判定；非官方粉丝扩展",
-    "duration": "本场；临时复制能力持续到自身下回合换牌",
+    "duration": "本次前进",
     "statuses": [
       "tripped"
     ],
@@ -34,7 +34,7 @@ export const LEAF_CHARACTERS:readonly LeafCharacterData[] = [
     "verification": "已实际读取原始Printable卡面、两页Rulebook与PNG卡面；机制测试见leaf-expansion.test.ts",
     "adaptation": "不含从同格出发或停在同格；按选手而非控制者判断。",
     "artworkReference": "PNG Images ZIP / Gamepiece images/01 Catfish.png",
-    "limit": "每个独立合法触发分别处理；无统一技能次数上限"
+    "limit": "持续免疫绊倒；每次其他选手从身后越到前方时前进"
   },
   {
     "id": "leaf-crash-dummy",
@@ -49,9 +49,9 @@ export const LEAF_CHARACTERS:readonly LeafCharacterData[] = [
       "main-stop"
     ],
     "optional": false,
-    "targets": "all-sharing-racers",
+    "targets": "与你同格的所有选手，包括自己",
     "scope": "按稳定选手ID与当前控制者ID分别判定；非官方粉丝扩展",
-    "duration": "本场；临时复制能力持续到自身下回合换牌",
+    "duration": "加速仅本次主移动；绊倒持续至恢复",
     "statuses": [
       "tripped"
     ],
@@ -69,7 +69,7 @@ export const LEAF_CHARACTERS:readonly LeafCharacterData[] = [
     "verification": "已实际读取原始Printable卡面、两页Rulebook与PNG卡面；机制测试见leaf-expansion.test.ts",
     "adaptation": "主移动才引发碰撞；同一玩家的另一名选手仍受影响。",
     "artworkReference": "PNG Images ZIP / Gamepiece images/02 Crash Dummy.png",
-    "limit": "每个独立合法触发分别处理；无统一技能次数上限"
+    "limit": "赛前绊倒一次；每次主移动加速并检查停格"
   },
   {
     "id": "leaf-dark-horse",
@@ -77,15 +77,15 @@ export const LEAF_CHARACTERS:readonly LeafCharacterData[] = [
     "nameZh": "黑马",
     "translation": "本项目译名",
     "edition": "leaf",
-    "ability": "回合开始时独自末位，本回合主移动掷骰的距离翻倍。",
+    "ability": "你的回合开始时，若你独自处于末位，本回合主移动的基础距离翻倍；其他移动加减效果另外计算。",
     "timing": [
       "turn-start",
       "main-modifier"
     ],
     "optional": false,
-    "targets": "self",
+    "targets": "自己",
     "scope": "按稳定选手ID与当前控制者ID分别判定；非官方粉丝扩展",
-    "duration": "本场；临时复制能力持续到自身下回合换牌",
+    "duration": "本回合主移动",
     "statuses": [],
     "sources": [
       {
@@ -101,7 +101,7 @@ export const LEAF_CHARACTERS:readonly LeafCharacterData[] = [
     "verification": "已实际读取原始Printable卡面、两页Rulebook与PNG卡面；机制测试见leaf-expansion.test.ts",
     "adaptation": "回合开始快照判定；并列末位不翻倍。",
     "artworkReference": "PNG Images ZIP / Gamepiece images/03 Dark Horse.png",
-    "limit": "每个独立合法触发分别处理；无统一技能次数上限"
+    "limit": "每个自身回合开始时检查是否独自末位"
   },
   {
     "id": "leaf-kangaroo",
@@ -114,9 +114,9 @@ export const LEAF_CHARACTERS:readonly LeafCharacterData[] = [
       "stop"
     ],
     "optional": false,
-    "targets": "self",
+    "targets": "自己",
     "scope": "按稳定选手ID与当前控制者ID分别判定；非官方粉丝扩展",
-    "duration": "本场；临时复制能力持续到自身下回合换牌",
+    "duration": "本次前进",
     "statuses": [],
     "sources": [
       {
@@ -132,7 +132,7 @@ export const LEAF_CHARACTERS:readonly LeafCharacterData[] = [
     "verification": "已实际读取原始Printable卡面、两页Rulebook与PNG卡面；机制测试见leaf-expansion.test.ts",
     "adaptation": "适用所有移动；非只限主移动；自身移动不触发自己。",
     "artworkReference": "PNG Images ZIP / Gamepiece images/04 Kangaroo.png",
-    "limit": "每个独立合法触发分别处理；无统一技能次数上限"
+    "limit": "每次有选手结束移动并停到指定位置时触发"
   },
   {
     "id": "leaf-loan-shark",
@@ -147,9 +147,9 @@ export const LEAF_CHARACTERS:readonly LeafCharacterData[] = [
       "race-end"
     ],
     "optional": false,
-    "targets": "opponent-racers",
+    "targets": "其他玩家控制的选手，不包括你控制的队友",
     "scope": "按稳定选手ID与当前控制者ID分别判定；非官方粉丝扩展",
-    "duration": "本场；临时复制能力持续到自身下回合换牌",
+    "duration": "未领取筹码在本场结束时归持牌者",
     "statuses": [],
     "sources": [
       {
@@ -165,7 +165,7 @@ export const LEAF_CHARACTERS:readonly LeafCharacterData[] = [
     "verification": "已实际读取原始Printable卡面、两页Rulebook与PNG卡面；机制测试见leaf-expansion.test.ts",
     "adaptation": "双选手模式不放在同一控制者的另一张牌上；每张牌最多取回本能力放的1枚。",
     "artworkReference": "PNG Images ZIP / Gamepiece images/05 Loan Shark.png",
-    "limit": "每个独立合法触发分别处理；无统一技能次数上限"
+    "limit": "每张对手选手牌放1枚；每枚筹码只领取一次"
   },
   {
     "id": "leaf-lonely-wolf",
@@ -173,15 +173,15 @@ export const LEAF_CHARACTERS:readonly LeafCharacterData[] = [
     "nameZh": "孤狼",
     "translation": "本项目译名",
     "edition": "leaf",
-    "ability": "回合开始时与另一名选手同格，本次主移动+2；否则+1。此能力不触发小挪挪。",
+    "ability": "你的回合开始时，若与你同格的还有其他选手，本次主移动距离增加2格；否则增加1格。此能力不触发蹭蹭怪。",
     "timing": [
       "turn-start",
       "main-modifier"
     ],
     "optional": false,
-    "targets": "self",
+    "targets": "自己",
     "scope": "按稳定选手ID与当前控制者ID分别判定；非官方粉丝扩展",
-    "duration": "本场；临时复制能力持续到自身下回合换牌",
+    "duration": "本回合主移动",
     "statuses": [],
     "sources": [
       {
@@ -195,9 +195,9 @@ export const LEAF_CHARACTERS:readonly LeafCharacterData[] = [
     "testId": "LEAF-06",
     "verified": true,
     "verification": "已实际读取原始Printable卡面、两页Rulebook与PNG卡面；机制测试见leaf-expansion.test.ts",
-    "adaptation": "在回合开始、掷骰前判定同格；小挪挪Scoocher例外是作者规则。",
+    "adaptation": "在回合开始、掷骰前判定同格；蹭蹭怪（Scoocher）例外是作者规则。",
     "artworkReference": "PNG Images ZIP / Gamepiece images/06 Lonely Wolf.png",
-    "limit": "每个独立合法触发分别处理；无统一技能次数上限"
+    "limit": "每个自身回合开始时判定一次"
   },
   {
     "id": "leaf-nepo-baby",
@@ -205,14 +205,14 @@ export const LEAF_CHARACTERS:readonly LeafCharacterData[] = [
     "nameZh": "关系户宝宝",
     "translation": "本项目译名",
     "edition": "leaf",
-    "ability": "本局此前每枚冠军奖杯或亚军绶带，使自己的主移动+1。",
+    "ability": "控制你的玩家在本局此前比赛中，每获得一次冠军或亚军，你的主移动距离就增加1格；计算获奖次数，不计算积分数量。",
     "timing": [
       "main-modifier"
     ],
     "optional": false,
-    "targets": "self",
+    "targets": "自己",
     "scope": "按稳定选手ID与当前控制者ID分别判定；非官方粉丝扩展",
-    "duration": "本场；临时复制能力持续到自身下回合换牌",
+    "duration": "本次主移动",
     "statuses": [],
     "sources": [
       {
@@ -228,7 +228,7 @@ export const LEAF_CHARACTERS:readonly LeafCharacterData[] = [
     "verification": "已实际读取原始Printable卡面、两页Rulebook与PNG卡面；机制测试见leaf-expansion.test.ts",
     "adaptation": "只数本控制者在此前各场获得的第一、第二名，不数积分总额。",
     "artworkReference": "PNG Images ZIP / Gamepiece images/07 Nepo Baby.png",
-    "limit": "每个独立合法触发分别处理；无统一技能次数上限"
+    "limit": "每次主移动按此前冠亚军次数计算"
   },
   {
     "id": "leaf-philanthropist",
@@ -244,9 +244,9 @@ export const LEAF_CHARACTERS:readonly LeafCharacterData[] = [
       "next-main"
     ],
     "optional": false,
-    "targets": "another-racer",
+    "targets": "另一名在赛选手",
     "scope": "按稳定选手ID与当前控制者ID分别判定；非官方粉丝扩展",
-    "duration": "本场；临时复制能力持续到自身下回合换牌",
+    "duration": "赠骰用于接收者的下一次主移动；跳过掷骰则回合末弃掉",
     "statuses": [],
     "sources": [
       {
@@ -262,7 +262,7 @@ export const LEAF_CHARACTERS:readonly LeafCharacterData[] = [
     "verification": "已实际读取原始Printable卡面、两页Rulebook与PNG卡面；机制测试见leaf-expansion.test.ts",
     "adaptation": "赠骰是公开已知点数；不当作接受者新掷出的骰；同玩家另一选手是合法目标。",
     "artworkReference": "PNG Images ZIP / Gamepiece images/08 Philanthropist.png",
-    "limit": "每个独立合法触发分别处理；无统一技能次数上限"
+    "limit": "每次主移动掷两骰，赠送其中一颗"
   },
   {
     "id": "leaf-race-car",
@@ -277,9 +277,9 @@ export const LEAF_CHARACTERS:readonly LeafCharacterData[] = [
       "main-modifier"
     ],
     "optional": true,
-    "targets": "self",
+    "targets": "自己",
     "scope": "按稳定选手ID与当前控制者ID分别判定；非官方粉丝扩展",
-    "duration": "本场；临时复制能力持续到自身下回合换牌",
+    "duration": "加速仅本次主移动",
     "statuses": [],
     "sources": [
       {
@@ -295,7 +295,7 @@ export const LEAF_CHARACTERS:readonly LeafCharacterData[] = [
     "verification": "已实际读取原始Printable卡面、两页Rulebook与PNG卡面；机制测试见leaf-expansion.test.ts",
     "adaptation": "扣减实际积分且服务端校验余额；并非额外掷骰。",
     "artworkReference": "PNG Images ZIP / Gamepiece images/09 Race Car.png",
-    "limit": "每个独立合法触发分别处理；无统一技能次数上限"
+    "limit": "赛前得分一次；每回合最多支付1分加速"
   },
   {
     "id": "leaf-revolutionary",
@@ -309,9 +309,9 @@ export const LEAF_CHARACTERS:readonly LeafCharacterData[] = [
       "warp"
     ],
     "optional": false,
-    "targets": "self",
+    "targets": "自己",
     "scope": "按稳定选手ID与当前控制者ID分别判定；非官方粉丝扩展",
-    "duration": "本场；临时复制能力持续到自身下回合换牌",
+    "duration": "本次传送",
     "statuses": [],
     "sources": [
       {
@@ -327,7 +327,7 @@ export const LEAF_CHARACTERS:readonly LeafCharacterData[] = [
     "verification": "已实际读取原始Printable卡面、两页Rulebook与PNG卡面；机制测试见leaf-expansion.test.ts",
     "adaptation": "并列领先者同格；并列末位不触发。",
     "artworkReference": "PNG Images ZIP / Gamepiece images/10 Revolutionary.png",
-    "limit": "每个独立合法触发分别处理；无统一技能次数上限"
+    "limit": "每个自身回合开始时检查是否独自末位"
   },
   {
     "id": "leaf-sole-survivor",
@@ -342,9 +342,9 @@ export const LEAF_CHARACTERS:readonly LeafCharacterData[] = [
       "main-modifier"
     ],
     "optional": false,
-    "targets": "self",
+    "targets": "自己",
     "scope": "按稳定选手ID与当前控制者ID分别判定；非官方粉丝扩展",
-    "duration": "本场；临时复制能力持续到自身下回合换牌",
+    "duration": "本场收入对应的加成持续至本场结束",
     "statuses": [
       "tripped"
     ],
@@ -362,12 +362,12 @@ export const LEAF_CHARACTERS:readonly LeafCharacterData[] = [
     "verification": "已实际读取原始Printable卡面、两页Rulebook与PNG卡面；机制测试见leaf-expansion.test.ts",
     "adaptation": "仅本场此选手的入账，不能计同一玩家另一名选手所得；包含星格、高利贷鲨等来源。",
     "artworkReference": "PNG Images ZIP / Gamepiece images/11 Sole Survivor.png",
-    "limit": "每个独立合法触发分别处理；无统一技能次数上限"
+    "limit": "每次从站立变为绊倒时得分；每次主移动计算加成"
   },
   {
     "id": "leaf-sore-loser",
     "nameEn": "Sore Loser",
-    "nameZh": "输不起",
+    "nameZh": "不服输",
     "translation": "本项目译名",
     "edition": "leaf",
     "ability": "比赛结束时自己独自末位，获得3分。",
@@ -375,9 +375,9 @@ export const LEAF_CHARACTERS:readonly LeafCharacterData[] = [
       "race-end"
     ],
     "optional": false,
-    "targets": "self",
+    "targets": "自己",
     "scope": "按稳定选手ID与当前控制者ID分别判定；非官方粉丝扩展",
-    "duration": "本场；临时复制能力持续到自身下回合换牌",
+    "duration": "本次得分",
     "statuses": [],
     "sources": [
       {
@@ -393,7 +393,7 @@ export const LEAF_CHARACTERS:readonly LeafCharacterData[] = [
     "verification": "已实际读取原始Printable卡面、两页Rulebook与PNG卡面；机制测试见leaf-expansion.test.ts",
     "adaptation": "按实际位置判断独自末位；真正循环判和不追加赛末奖励。",
     "artworkReference": "PNG Images ZIP / Gamepiece images/12 Sore Loser.png",
-    "limit": "每个独立合法触发分别处理；无统一技能次数上限"
+    "limit": "每场比赛结束时检查一次"
   },
   {
     "id": "leaf-spiteful-spirit",
@@ -406,9 +406,9 @@ export const LEAF_CHARACTERS:readonly LeafCharacterData[] = [
       "recover"
     ],
     "optional": false,
-    "targets": "all-other-racers",
+    "targets": "所有其他在赛选手",
     "scope": "按稳定选手ID与当前控制者ID分别判定；非官方粉丝扩展",
-    "duration": "本场；临时复制能力持续到自身下回合换牌",
+    "duration": "本次前进；其他选手绊倒至恢复",
     "statuses": [
       "tripped"
     ],
@@ -426,7 +426,7 @@ export const LEAF_CHARACTERS:readonly LeafCharacterData[] = [
     "verification": "已实际读取原始Printable卡面、两页Rulebook与PNG卡面；机制测试见leaf-expansion.test.ts",
     "adaptation": "其他选手包括同一控制者的另一名选手；由同一规则队列按序结算。",
     "artworkReference": "PNG Images ZIP / Gamepiece images/13 Spiteful Spirit.png",
-    "limit": "每个独立合法触发分别处理；无统一技能次数上限"
+    "limit": "每次从绊倒恢复站立时触发"
   },
   {
     "id": "leaf-toucan",
@@ -440,9 +440,9 @@ export const LEAF_CHARACTERS:readonly LeafCharacterData[] = [
       "adjust-die"
     ],
     "optional": true,
-    "targets": "self",
+    "targets": "自己",
     "scope": "按稳定选手ID与当前控制者ID分别判定；非官方粉丝扩展",
-    "duration": "本场；临时复制能力持续到自身下回合换牌",
+    "duration": "当前主移动骰的最终点数",
     "statuses": [],
     "sources": [
       {
@@ -458,7 +458,7 @@ export const LEAF_CHARACTERS:readonly LeafCharacterData[] = [
     "verification": "已实际读取原始Printable卡面、两页Rulebook与PNG卡面；机制测试见leaf-expansion.test.ts",
     "adaptation": "调整不算再次掷骰；三角人等只看真实掷出值的能力不因调整触发。",
     "artworkReference": "PNG Images ZIP / Gamepiece images/14 Toucan.png",
-    "limit": "每个独立合法触发分别处理；无统一技能次数上限"
+    "limit": "每个主移动最终2点可调整一次"
   },
   {
     "id": "leaf-triangle-man",
@@ -466,14 +466,14 @@ export const LEAF_CHARACTERS:readonly LeafCharacterData[] = [
     "nameZh": "三角人",
     "translation": "本项目译名",
     "edition": "leaf",
-    "ability": "任何原因掷出的实体骰面为3时，自己前进1格，先于该骰的正常移动；多骰中的每个3分别触发。",
+    "ability": "任何选手因任何原因掷骰，只要骰子最初掷出的点数为3，你就前进1格，先于该骰对应的正常移动。多颗骰子中的每个3分别触发；之后修改的点数不算。",
     "timing": [
       "raw-die"
     ],
     "optional": false,
-    "targets": "self",
+    "targets": "自己",
     "scope": "按稳定选手ID与当前控制者ID分别判定；非官方粉丝扩展",
-    "duration": "本场；临时复制能力持续到自身下回合换牌",
+    "duration": "本次前进",
     "statuses": [],
     "sources": [
       {
@@ -489,7 +489,7 @@ export const LEAF_CHARACTERS:readonly LeafCharacterData[] = [
     "verification": "已实际读取原始Printable卡面、两页Rulebook与PNG卡面；机制测试见leaf-expansion.test.ts",
     "adaptation": "对抗、技能、主移动、重掷均适用，调整成3不触发；自己的主骰3先前进1再主移动3。",
     "artworkReference": "PNG Images ZIP / Gamepiece images/15 Triangle Man.png",
-    "limit": "每个独立合法触发分别处理；无统一技能次数上限"
+    "limit": "每颗骰子最初掷出3时分别触发"
   },
   {
     "id": "leaf-zombie",
@@ -497,15 +497,15 @@ export const LEAF_CHARACTERS:readonly LeafCharacterData[] = [
     "nameZh": "僵尸",
     "translation": "本项目译名",
     "edition": "leaf",
-    "ability": "赛前可以选择此前一场比赛失利的角色，本场使用其能力，仍使用自己的棋子，并获得所复制能力的赛前效果。",
+    "ability": "赛前，你可以选择一名在此前比赛中未获得冠军或亚军的角色。本场复制该角色卡上原本写明的能力，可以执行其赛前效果，仍使用僵尸的棋子。",
     "timing": [
       "before-race",
       "copy"
     ],
     "optional": true,
-    "targets": "previous-race-loser",
+    "targets": "此前比赛中未获冠军或亚军的角色",
     "scope": "按稳定选手ID与当前控制者ID分别判定；非官方粉丝扩展",
-    "duration": "本场；临时复制能力持续到自身下回合换牌",
+    "duration": "复制能力持续至本场结束",
     "statuses": [],
     "sources": [
       {
@@ -521,7 +521,7 @@ export const LEAF_CHARACTERS:readonly LeafCharacterData[] = [
     "verification": "已实际读取原始Printable卡面、两页Rulebook与PNG卡面；机制测试见leaf-expansion.test.ts",
     "adaptation": "项目数字化裁定：失利指该场未获冠军奖杯或亚军绶带；保留独立角色ID与棋子身份。",
     "artworkReference": "PNG Images ZIP / Gamepiece images/16 Zombie.png",
-    "limit": "每个独立合法触发分别处理；无统一技能次数上限"
+    "limit": "每场赛前可选择一次"
   },
   {
     "id": "leaf-thespian",
@@ -529,16 +529,16 @@ export const LEAF_CHARACTERS:readonly LeafCharacterData[] = [
     "nameZh": "戏剧演员",
     "translation": "本项目译名",
     "edition": "leaf",
-    "ability": "每次主移动掷骰前，弃掉未选角色牌堆顶牌，直到自己下个回合前拥有该牌的能力。忽略复制牌的赛前能力。",
+    "ability": "每次掷主移动骰前，弃掉未选角色牌堆最上方的一张牌，并获得这张牌的能力，持续到你的下个回合开始时。不执行复制能力的赛前效果。",
     "timing": [
       "before-main",
       "copy",
       "discard"
     ],
     "optional": false,
-    "targets": "unchosen-deck",
+    "targets": "未选角色牌堆最上方的牌",
     "scope": "按稳定选手ID与当前控制者ID分别判定；非官方粉丝扩展",
-    "duration": "借用能力在自身下回合开始失效；展示牌在同来源实际换牌或赛末归还",
+    "duration": "借来的能力在自己的下个回合开始时失效；展示的牌在再次换牌或本场结束时归还",
     "statuses": [],
     "sources": [
       {
@@ -554,7 +554,7 @@ export const LEAF_CHARACTERS:readonly LeafCharacterData[] = [
     "verification": "已实际读取原始Printable卡面、两页Rulebook与PNG卡面；机制测试见leaf-expansion.test.ts",
     "adaptation": "上一张已展示复制牌在下次换牌时回公共弃牌堆；牌堆耗尽则洗公共弃牌堆。",
     "artworkReference": "PNG Images ZIP / Gamepiece images/17 Thespian.png",
-    "limit": "同一选手每回合每种主骰前借牌机制一次；同文能力不叠加，嵌套子层不延长期限"
+    "limit": "每回合每种借牌能力各用一次；同种能力不叠加，连续借牌不会延长期限"
   },
   {
     "id": "leaf-filmmaker",
@@ -562,7 +562,7 @@ export const LEAF_CHARACTERS:readonly LeafCharacterData[] = [
     "nameZh": "电影制作人",
     "translation": "本项目译名",
     "edition": "leaf",
-    "ability": "赛前从未选角色牌堆抽7张私人手牌；每次主移动掷骰前弃1张，从此直到自己下个回合前拥有其能力。忽略复制牌的赛前能力。",
+    "ability": "赛前，从未选角色牌堆抽7张牌作为只有你能看到的手牌。每次掷主移动骰前，选择并弃掉其中一张，获得该牌的能力，持续到你的下个回合开始时。不执行复制能力的赛前效果。",
     "timing": [
       "before-race",
       "before-main",
@@ -571,9 +571,9 @@ export const LEAF_CHARACTERS:readonly LeafCharacterData[] = [
       "discard"
     ],
     "optional": false,
-    "targets": "own-secret-hand",
+    "targets": "你赛前抽取且尚未弃掉的私人手牌",
     "scope": "按稳定选手ID与当前控制者ID分别判定；非官方粉丝扩展",
-    "duration": "借用能力在自身下回合开始失效；私人手牌到赛末，展示牌在同来源实际换牌或赛末归还",
+    "duration": "借来的能力在自己的下个回合开始时失效；私人手牌保留至本场结束，展示的牌在再次换牌或本场结束时归还",
     "statuses": [],
     "sources": [
       {
@@ -589,6 +589,6 @@ export const LEAF_CHARACTERS:readonly LeafCharacterData[] = [
     "verification": "已实际读取原始Printable卡面、两页Rulebook与PNG卡面；机制测试见leaf-expansion.test.ts",
     "adaptation": "手牌仅当前控制者可见；公开展示已弃并正在复制的牌；上一张展示牌换牌时才回公共弃牌堆。",
     "artworkReference": "PNG Images ZIP / Gamepiece images/18 Filmmaker.png",
-    "limit": "同一选手每回合每种主骰前借牌机制一次；中途获得不补赛前七张，嵌套子层不延长期限"
+    "limit": "每回合每种借牌能力各用一次；中途获得不补发七张手牌，连续借牌不会延长期限"
   }
 ];

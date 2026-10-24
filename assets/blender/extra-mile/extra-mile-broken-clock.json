@@ -2,13 +2,13 @@
   "id": "extra-mile-broken-clock",
   "node": "toy_extra-mile-broken-clock",
   "url": "/models/extra-mile/extra-mile-broken-clock.glb",
-  "bytes": 55984,
-  "triangles": 2832,
-  "draws": 4,
+  "bytes": 48180,
+  "triangles": 4408,
+  "draws": 1,
   "bounds": [
-    0.6,
-    0.91875,
-    0.43125
+    0.5999938962981048,
+    0.9702139510000678,
+    0.2932218434147269
   ],
   "pivotY": 0,
   "animations": [
@@ -23,7 +23,20 @@
   "editableSource": "assets/blender/extra-mile/extra-mile-broken-clock.blend",
   "referenceChecked": true,
   "reference": "https://johnnlds.github.io/Magical-Athlete-Racers/ExtraMile.pdf",
-  "referenceDate": "2026-10-22",
-  "recognition": "cracked golden clock face, black bowler hat, moustache and brown feet",
-  "inferred": "Single-view card artwork informs the silhouette and identifying props. Side/back surfaces and joint placement are original project interpretations, not author-approved sculpts."
+  "referenceDate": "2026-10-24",
+  "recognition": "ExtraMile.pdf viewed: cracked gold clock, black bowler, moustache, dial and brown feet. Not a person with a clock texture; the notched clock is the thick 3D body.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "avatar": "/avatars/extra-mile/extra-mile-broken-clock.svg",
+  "modelPreview": "/models/extra-mile/avatars/extra-mile-broken-clock.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "ExtraMile.pdf viewed: cracked gold clock, black bowler, moustache, dial and brown feet. Not a person with a clock texture; the notched clock is the thick 3D body.",
+  "originalAuthorImageChecked": true,
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "2f8862acf39aa242ed29a9c867db39779b3926c516068e87298a66e384082f01",
+  "glbSha256": "ba1db9fe479ae2cc2283a0b381d940c826a362f1cc637cb8e50ef1239112baa8",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

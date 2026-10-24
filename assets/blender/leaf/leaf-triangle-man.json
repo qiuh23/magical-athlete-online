@@ -2,13 +2,13 @@
   "id": "leaf-triangle-man",
   "node": "toy_leaf-triangle-man",
   "url": "/models/leaf/leaf-triangle-man.glb",
-  "bytes": 27896,
-  "triangles": 1160,
-  "draws": 4,
+  "bytes": 36252,
+  "triangles": 2788,
+  "draws": 1,
   "bounds": [
-    0.6,
-    0.78,
-    0.22286
+    0.5999938962981048,
+    0.8987395996771808,
+    0.24549089388302073
   ],
   "pivotY": 0,
   "animations": [
@@ -24,7 +24,20 @@
   "referenceChecked": true,
   "reference": "https://boardgamegeek.com/filepage/327878/leafs-fan-expansion-for-magical-athlete",
   "referenceFile": "PNG_Images_-_Leaf's_Fan_Expansion.zip / Gamepiece images / triangle-man",
-  "referenceDate": "2026-10-22",
-  "recognition": "solid yellow triangular prism with green sides, pink bow tie, short legs and black shoes",
-  "inferred": "Author transparent gamepiece PNGs inform silhouettes/colors/props. Unseen back and side details and joints are project interpretations, not author-approved exact sculpts."
+  "referenceDate": "2026-10-24",
+  "recognition": "Repository SVG actually viewed; registered traits: solid yellow triangular prism, green reverse/sides, pink bow tie, short limbs and black shoes. Original author PNG not obtained during this rebuild; depth, underside/back and tailoring are project design.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "avatar": "/avatars/leaf/leaf-triangle-man.svg",
+  "modelPreview": "/models/leaf/avatars/leaf-triangle-man.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "Repository SVG actually viewed; registered traits: solid yellow triangular prism, green reverse/sides, pink bow tie, short limbs and black shoes. Original author PNG not obtained during this rebuild; depth, underside/back and tailoring are project design.",
+  "originalAuthorImageChecked": false,
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "b66036ff4a06f1679a0a86c29fc4cf1f365a38441964200b6c7a1cceee6c0652",
+  "glbSha256": "f54a7bb83c7c4376821b55a1af11e0615ffa34e93c3c711ef14bf8123554845f",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

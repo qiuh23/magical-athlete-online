@@ -2,13 +2,13 @@
   "id": "extra-mile-thief",
   "node": "toy_extra-mile-thief",
   "url": "/models/extra-mile/extra-mile-thief.glb",
-  "bytes": 47456,
-  "triangles": 3196,
-  "draws": 5,
+  "bytes": 54500,
+  "triangles": 5396,
+  "draws": 1,
   "bounds": [
-    0.6,
-    0.74917,
-    0.32194
+    0.5685598347149033,
+    0.9800103928338197,
+    0.45893734806455805
   ],
   "pivotY": 0,
   "animations": [
@@ -23,9 +23,20 @@
   "editableSource": "assets/blender/extra-mile/extra-mile-thief.blend",
   "referenceChecked": true,
   "reference": "https://johnnlds.github.io/Magical-Athlete-Racers/ExtraMile.pdf",
-  "referenceDate": "2026-10-22",
-  "recognition": "green burglar, dark beanie/mask, striped shirt and tan loot sack",
-  "inferred": "Single-view card artwork informs the silhouette and identifying props. Side/back surfaces and joint placement are original project interpretations, not author-approved sculpts.",
-  "avatar": "/models/extra-mile/avatars/extra-mile-thief.png",
-  "mouthSurfaceVersion": "surface-mouth-v2"
+  "referenceDate": "2026-10-24",
+  "recognition": "ExtraMile.pdf viewed: green goblin thief, black cap/mask, grey striped clothes and tan loot sack. Sack neck is physically held, ears and full back reconstructed from the card.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "avatar": "/avatars/extra-mile/extra-mile-thief.svg",
+  "modelPreview": "/models/extra-mile/avatars/extra-mile-thief.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "ExtraMile.pdf viewed: green goblin thief, black cap/mask, grey striped clothes and tan loot sack. Sack neck is physically held, ears and full back reconstructed from the card.",
+  "originalAuthorImageChecked": true,
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "cc66a21bddfdc30054f1c696e8a1a91e60611813d7c12dc5b335c5250aac259b",
+  "glbSha256": "6718a49f4a1a7ec1afaa3b81f581c22fa5439452d7d6bff0579d781b9b71e2d1",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

@@ -1,46 +1,42 @@
 {
-  "version": 1,
-  "edition": "second-wind",
-  "generator": "Blender 5.2.3 LTS Release Candidate",
-  "source": "assets/blender/second-wind.blend",
-  "units": "metres",
-  "up": "+Y",
-  "forward": "+Z",
-  "pivot": "ground-centre",
-  "compression": "EXT_meshopt_compression",
-  "models": [
-    {
-      "id": "mole",
-      "node": "toy_mole",
-      "url": "/models/second-wind/mole.glb",
-      "avatar": "/models/second-wind/avatars/mole.png",
-      "bytes": 38484,
-      "triangles": 3080,
-      "draws": 5,
-      "bounds": [
-        0.6,
-        0.77872,
-        0.51232
-      ],
-      "pivotY": 0,
-      "animations": [
-        "idle",
-        "move",
-        "skill",
-        "fall",
-        "recover"
-      ],
-      "recognition": "Large orange burrowing mole, pink nose/paws, two rectangular buckteeth, long molded whiskers and earth clods on back.",
-      "inferred": "Back and side volumes extrapolated from the published single-view illustration.",
-      "referenceChecked": true,
-      "referenceImage": "https://johnnlds.github.io/Magical-Athlete-Racers/images/expansion/Mole.png",
-      "editableSource": "assets/blender/second-wind/mole.blend"
-    }
+  "id": "mole",
+  "node": "toy_mole",
+  "url": "/models/second-wind/mole.glb",
+  "avatar": "/avatars/second-wind/mole.svg",
+  "bytes": 44776,
+  "triangles": 4604,
+  "draws": 1,
+  "bounds": [
+    0.5999938962981048,
+    0.7068696861451798,
+    0.44032105471968747
   ],
-  "variants": [],
-  "totalBytes": 38484,
-  "totalTriangles": 3080,
-  "materialCount": 15,
-  "textureCount": 0,
-  "referenceStatus": "36 fan-site illustrations visually inspected; closed-volume toy interpretations; unseen views explicitly inferred; not exact official production sculpts."
+  "pivotY": 0,
+  "animations": [
+    "idle",
+    "move",
+    "skill",
+    "fall",
+    "recover"
+  ],
+  "recognition": "Registered card viewed: shaggy orange mole, pink nose/paws, two buckteeth and long whiskers. Back dirt clods and real foreleg transitions reconstructed.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "referenceChecked": true,
+  "referenceImage": "https://johnnlds.github.io/Magical-Athlete-Racers/images/expansion/Mole.png",
+  "editableSource": "assets/blender/second-wind/mole.blend",
+  "modelPreview": "/models/second-wind/avatars/mole.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "motionProfile": "biped",
+  "bones": 5,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "Registered card viewed: shaggy orange mole, pink nose/paws, two buckteeth and long whiskers. Back dirt clods and real foreleg transitions reconstructed.",
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "bbd135d43bdb712269d12f4ca22a868245912e00e05cef4bd493491d104d9ec1",
+  "glbSha256": "83df021f2038a5d7e541c56de6dedabcc94cc134689ceba4b4a27729cb6bb86f",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

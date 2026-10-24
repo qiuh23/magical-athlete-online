@@ -2,13 +2,13 @@
   "id": "leaf-filmmaker",
   "node": "toy_leaf-filmmaker",
   "url": "/models/leaf/leaf-filmmaker.glb",
-  "bytes": 51532,
-  "triangles": 3440,
-  "draws": 5,
+  "bytes": 58088,
+  "triangles": 6372,
+  "draws": 1,
   "bounds": [
-    0.6,
-    0.80596,
-    0.45464
+    0.5861384929960021,
+    0.9800103928338197,
+    0.37305825844483936
   ],
   "pivotY": 0,
   "animations": [
@@ -24,9 +24,20 @@
   "referenceChecked": true,
   "reference": "https://boardgamegeek.com/filepage/327878/leafs-fan-expansion-for-magical-athlete",
   "referenceFile": "PNG_Images_-_Leaf's_Fan_Expansion.zip / Gamepiece images / filmmaker",
-  "referenceDate": "2026-10-22",
-  "recognition": "green-haired filmmaker in white shirt/light-blue jeans, yellow boots and volumetric grey movie camera",
-  "inferred": "Author transparent gamepiece PNGs inform silhouettes/colors/props. Unseen back and side details and joints are project interpretations, not author-approved exact sculpts.",
-  "avatar": "/models/leaf/avatars/leaf-filmmaker.png",
-  "mouthSurfaceVersion": "surface-mouth-v2"
+  "referenceDate": "2026-10-24",
+  "recognition": "Repository SVG actually viewed; registered traits: green-haired pink filmmaker, white shirt/light-blue jeans, yellow boots and volumetric grey twin-reel movie camera. Original author PNG not obtained during this rebuild; depth, underside/back and tailoring are project design.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "avatar": "/avatars/leaf/leaf-filmmaker.svg",
+  "modelPreview": "/models/leaf/avatars/leaf-filmmaker.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "Repository SVG actually viewed; registered traits: green-haired pink filmmaker, white shirt/light-blue jeans, yellow boots and volumetric grey twin-reel movie camera. Original author PNG not obtained during this rebuild; depth, underside/back and tailoring are project design.",
+  "originalAuthorImageChecked": false,
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "4b7da79bee2e5a7f7992d1f1fa550dceb81a7736bea69f07d2715419320b5fac",
+  "glbSha256": "b7b43e5859962f6c75a3634d9bce4bf9f42a2c6269f2e2d1f929e18ab6e66c30",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

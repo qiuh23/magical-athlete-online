@@ -1,0 +1,42 @@
+{
+  "id": "wurstii-pitfall-harry",
+  "nameZh": "探险家哈利",
+  "node": "toy_wurstii-pitfall-harry",
+  "model": "/models/wurstii/wurstii-pitfall-harry.glb",
+  "portrait": "/avatars/wurstii/wurstii-pitfall-harry.png",
+  "editableSource": "assets/blender/wurstii/blend/wurstii-pitfall-harry.blend",
+  "bytes": 53596,
+  "triangles": 4480,
+  "draws": 1,
+  "bounds": [
+    0.4508804589983825,
+    0.9800103928338197,
+    0.28510391552476577
+  ],
+  "animations": [
+    "idle",
+    "move",
+    "skill",
+    "fall",
+    "recover"
+  ],
+  "modelPreview": "/models/wurstii/avatars/wurstii-pitfall-harry.png",
+  "avatar": "/avatars/wurstii/wurstii-pitfall-harry.svg",
+  "avatarStyle": "flat-cartoon-svg",
+  "bones": 5,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "pivotY": 0,
+  "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Pitfall Harry card-specific turquoise hat/clothes, blue footwear and pale face/arms. Side/back inferred, no unrelated whip or jungle props added. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "referenceChecked": true,
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "edd1b7318afe11de46e115175e138174d39f7a8bc44706f3dd037b1b53703211",
+  "glbSha256": "0ca6ab8895fdeb7fb2ff7420927d363f9b3b754694a3953e8588905bbf670882",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "recognition": "User-provided Wurstii reference card crop actually viewed: Pitfall Harry card-specific turquoise hat/clothes, blue footwear and pale face/arms. Side/back inferred, no unrelated whip or jungle props added. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "assetVersion": "authored-sculpt-final-20261024"
+}

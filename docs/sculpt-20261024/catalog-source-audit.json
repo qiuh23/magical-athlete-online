@@ -1,0 +1,464 @@
+[
+  {
+    "source": "assets/blender/toy-racers.blend",
+    "sourceSha256": "24425cebae2799f565280f48c4e14927101d70291d8ded3c2e150aedfb9af5cd",
+    "openedWith": "Blender 5.2.2 LTS",
+    "rootCount": 36,
+    "models": [
+      {
+        "id": "alchemist",
+        "triangles": 7272,
+        "bones": 5,
+        "editableParts": 24
+      },
+      {
+        "id": "baba-yaga",
+        "triangles": 2024,
+        "bones": 5,
+        "editableParts": 19
+      },
+      {
+        "id": "banana",
+        "triangles": 3400,
+        "bones": 5,
+        "editableParts": 17
+      },
+      {
+        "id": "blimp",
+        "triangles": 3323,
+        "bones": 5,
+        "editableParts": 14
+      },
+      {
+        "id": "centaur",
+        "triangles": 5496,
+        "bones": 5,
+        "editableParts": 22
+      },
+      {
+        "id": "cheerleader",
+        "triangles": 5468,
+        "bones": 5,
+        "editableParts": 35
+      },
+      {
+        "id": "coach",
+        "triangles": 8458,
+        "bones": 7,
+        "editableParts": 37
+      },
+      {
+        "id": "copycat",
+        "triangles": 6346,
+        "bones": 5,
+        "editableParts": 54
+      },
+      {
+        "id": "dicemonger",
+        "triangles": 7226,
+        "bones": 5,
+        "editableParts": 45
+      },
+      {
+        "id": "duelist",
+        "triangles": 5736,
+        "bones": 5,
+        "editableParts": 22
+      },
+      {
+        "id": "egg",
+        "triangles": 4868,
+        "bones": 5,
+        "editableParts": 16
+      },
+      {
+        "id": "flip-flop",
+        "triangles": 4324,
+        "bones": 5,
+        "editableParts": 15
+      },
+      {
+        "id": "genius",
+        "triangles": 9294,
+        "bones": 5,
+        "editableParts": 38
+      },
+      {
+        "id": "gunk",
+        "triangles": 6080,
+        "bones": 5,
+        "editableParts": 12
+      },
+      {
+        "id": "hare",
+        "triangles": 6256,
+        "bones": 7,
+        "editableParts": 24
+      },
+      {
+        "id": "heckler",
+        "triangles": 6430,
+        "bones": 5,
+        "editableParts": 30
+      },
+      {
+        "id": "huge-baby",
+        "triangles": 5082,
+        "bones": 5,
+        "editableParts": 20
+      },
+      {
+        "id": "hypnotist",
+        "triangles": 8928,
+        "bones": 5,
+        "editableParts": 20
+      },
+      {
+        "id": "inchworm",
+        "triangles": 3136,
+        "bones": 5,
+        "editableParts": 8
+      },
+      {
+        "id": "lackey",
+        "triangles": 4618,
+        "bones": 5,
+        "editableParts": 15
+      },
+      {
+        "id": "leaptoad",
+        "triangles": 4622,
+        "bones": 5,
+        "editableParts": 18
+      },
+      {
+        "id": "legs",
+        "triangles": 5004,
+        "bones": 5,
+        "editableParts": 19
+      },
+      {
+        "id": "lovable-loser",
+        "triangles": 9296,
+        "bones": 5,
+        "editableParts": 19
+      },
+      {
+        "id": "magician",
+        "triangles": 6112,
+        "bones": 5,
+        "editableParts": 26
+      },
+      {
+        "id": "mastermind",
+        "triangles": 6202,
+        "bones": 5,
+        "editableParts": 19
+      },
+      {
+        "id": "mouth",
+        "triangles": 6370,
+        "bones": 5,
+        "editableParts": 29
+      },
+      {
+        "id": "party-animal",
+        "triangles": 5830,
+        "bones": 5,
+        "editableParts": 20
+      },
+      {
+        "id": "rocket-scientist",
+        "triangles": 5280,
+        "bones": 5,
+        "editableParts": 19
+      },
+      {
+        "id": "romantic",
+        "triangles": 6226,
+        "bones": 5,
+        "editableParts": 28
+      },
+      {
+        "id": "scoocher",
+        "triangles": 4606,
+        "bones": 5,
+        "editableParts": 16
+      },
+      {
+        "id": "sisyphus",
+        "triangles": 4676,
+        "bones": 5,
+        "editableParts": 22
+      },
+      {
+        "id": "skipper",
+        "triangles": 6184,
+        "bones": 5,
+        "editableParts": 20
+      },
+      {
+        "id": "stickler",
+        "triangles": 4686,
+        "bones": 5,
+        "editableParts": 22
+      },
+      {
+        "id": "suckerfish",
+        "triangles": 2756,
+        "bones": 5,
+        "editableParts": 15
+      },
+      {
+        "id": "third-wheel",
+        "triangles": 5854,
+        "bones": 6,
+        "editableParts": 27
+      },
+      {
+        "id": "twin",
+        "triangles": 4984,
+        "bones": 5,
+        "editableParts": 26
+      }
+    ],
+    "passed": true
+  },
+  {
+    "source": "assets/blender/second-wind.blend",
+    "sourceSha256": "058318c903af89e980ae3ff9dcf9a3645f5fcdbed74525482a142ed049b67e39",
+    "openedWith": "Blender 5.2.2 LTS",
+    "rootCount": 38,
+    "models": [
+      {
+        "id": "bite-mark",
+        "triangles": 7400,
+        "bones": 7,
+        "editableParts": 32
+      },
+      {
+        "id": "bite-mark-were",
+        "triangles": 4866,
+        "bones": 7,
+        "editableParts": 37
+      },
+      {
+        "id": "blunderdog",
+        "triangles": 5424,
+        "bones": 5,
+        "editableParts": 21
+      },
+      {
+        "id": "cheatah",
+        "triangles": 6464,
+        "bones": 5,
+        "editableParts": 32
+      },
+      {
+        "id": "critic",
+        "triangles": 5308,
+        "bones": 5,
+        "editableParts": 17
+      },
+      {
+        "id": "diva",
+        "triangles": 3474,
+        "bones": 5,
+        "editableParts": 22
+      },
+      {
+        "id": "doppelgangster",
+        "triangles": 7794,
+        "bones": 5,
+        "editableParts": 40
+      },
+      {
+        "id": "gloth",
+        "triangles": 3934,
+        "bones": 5,
+        "editableParts": 23
+      },
+      {
+        "id": "hog-knight",
+        "triangles": 4968,
+        "bones": 7,
+        "editableParts": 27
+      },
+      {
+        "id": "hog-knight-hog",
+        "triangles": 7566,
+        "bones": 9,
+        "editableParts": 25
+      },
+      {
+        "id": "hopfrog",
+        "triangles": 2668,
+        "bones": 5,
+        "editableParts": 18
+      },
+      {
+        "id": "hotel",
+        "triangles": 3648,
+        "bones": 5,
+        "editableParts": 23
+      },
+      {
+        "id": "icarus",
+        "triangles": 7792,
+        "bones": 5,
+        "editableParts": 28
+      },
+      {
+        "id": "kingtripper",
+        "triangles": 7016,
+        "bones": 5,
+        "editableParts": 25
+      },
+      {
+        "id": "kraken",
+        "triangles": 6320,
+        "bones": 13,
+        "editableParts": 39
+      },
+      {
+        "id": "le-saboteur",
+        "triangles": 5488,
+        "bones": 5,
+        "editableParts": 23
+      },
+      {
+        "id": "magical-athlete",
+        "triangles": 4816,
+        "bones": 5,
+        "editableParts": 19
+      },
+      {
+        "id": "mole",
+        "triangles": 4604,
+        "bones": 5,
+        "editableParts": 23
+      },
+      {
+        "id": "mr-dice-guy",
+        "triangles": 6476,
+        "bones": 5,
+        "editableParts": 28
+      },
+      {
+        "id": "mush",
+        "triangles": 6608,
+        "bones": 5,
+        "editableParts": 20
+      },
+      {
+        "id": "nemesis",
+        "triangles": 4906,
+        "bones": 5,
+        "editableParts": 33
+      },
+      {
+        "id": "nepo-baby",
+        "triangles": 5064,
+        "bones": 5,
+        "editableParts": 21
+      },
+      {
+        "id": "null",
+        "triangles": 3644,
+        "bones": 5,
+        "editableParts": 13
+      },
+      {
+        "id": "overtaker",
+        "triangles": 5828,
+        "bones": 5,
+        "editableParts": 21
+      },
+      {
+        "id": "party-pooper",
+        "triangles": 6944,
+        "bones": 5,
+        "editableParts": 24
+      },
+      {
+        "id": "penguin",
+        "triangles": 5088,
+        "bones": 5,
+        "editableParts": 15
+      },
+      {
+        "id": "re-runner",
+        "triangles": 5764,
+        "bones": 5,
+        "editableParts": 22
+      },
+      {
+        "id": "show-off",
+        "triangles": 4428,
+        "bones": 9,
+        "editableParts": 22
+      },
+      {
+        "id": "soulmate",
+        "triangles": 3772,
+        "bones": 5,
+        "editableParts": 18
+      },
+      {
+        "id": "speed-demon",
+        "triangles": 7794,
+        "bones": 7,
+        "editableParts": 43
+      },
+      {
+        "id": "spoilsport",
+        "triangles": 7234,
+        "bones": 5,
+        "editableParts": 21
+      },
+      {
+        "id": "stepdad",
+        "triangles": 5252,
+        "bones": 5,
+        "editableParts": 20
+      },
+      {
+        "id": "streaker",
+        "triangles": 2750,
+        "bones": 5,
+        "editableParts": 13
+      },
+      {
+        "id": "stunner",
+        "triangles": 6510,
+        "bones": 5,
+        "editableParts": 17
+      },
+      {
+        "id": "switcharoo",
+        "triangles": 5132,
+        "bones": 5,
+        "editableParts": 22
+      },
+      {
+        "id": "tail",
+        "triangles": 1974,
+        "bones": 5,
+        "editableParts": 10
+      },
+      {
+        "id": "the-hose",
+        "triangles": 6700,
+        "bones": 5,
+        "editableParts": 15
+      },
+      {
+        "id": "understudy",
+        "triangles": 5426,
+        "bones": 5,
+        "editableParts": 20
+      }
+    ],
+    "passed": true
+  }
+]

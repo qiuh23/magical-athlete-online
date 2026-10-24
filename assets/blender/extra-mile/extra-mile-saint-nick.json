@@ -2,13 +2,13 @@
   "id": "extra-mile-saint-nick",
   "node": "toy_extra-mile-saint-nick",
   "url": "/models/extra-mile/extra-mile-saint-nick.glb",
-  "bytes": 49320,
-  "triangles": 3422,
-  "draws": 5,
+  "bytes": 60820,
+  "triangles": 6932,
+  "draws": 1,
   "bounds": [
-    0.6,
-    0.76373,
-    0.29127
+    0.5999938962981048,
+    0.916074113576156,
+    0.33893856624042484
   ],
   "pivotY": 0,
   "animations": [
@@ -23,9 +23,20 @@
   "editableSource": "assets/blender/extra-mile/extra-mile-saint-nick.blend",
   "referenceChecked": true,
   "reference": "https://johnnlds.github.io/Magical-Athlete-Racers/ExtraMile.pdf",
-  "referenceDate": "2026-10-22",
-  "recognition": "red bishop mitre/coat, white beard, tan sack and golden crozier",
-  "inferred": "Single-view card artwork informs the silhouette and identifying props. Side/back surfaces and joint placement are original project interpretations, not author-approved sculpts.",
-  "avatar": "/models/extra-mile/avatars/extra-mile-saint-nick.png",
-  "mouthSurfaceVersion": "surface-mouth-v2"
+  "referenceDate": "2026-10-24",
+  "recognition": "ExtraMile.pdf viewed: Saint Nick in red bishop mitre/coat, gold cross/crozier, white beard, green gloves and tan sack. This follows the supplied card rather than substituting a generic Santa cap.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "avatar": "/avatars/extra-mile/extra-mile-saint-nick.svg",
+  "modelPreview": "/models/extra-mile/avatars/extra-mile-saint-nick.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "ExtraMile.pdf viewed: Saint Nick in red bishop mitre/coat, gold cross/crozier, white beard, green gloves and tan sack. This follows the supplied card rather than substituting a generic Santa cap.",
+  "originalAuthorImageChecked": true,
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "debcf19b7ca78d9b3c6aa7ac7c0576b01b44e45d0d7baf68837a6e809ba0d161",
+  "glbSha256": "8c5a8bda1cfc6196a6710245846eb3413b00432c1ed86cf72ffd55fe791d8ef4",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

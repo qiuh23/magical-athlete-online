@@ -2,13 +2,13 @@
   "id": "extra-mile-doc-paradox",
   "node": "toy_extra-mile-doc-paradox",
   "url": "/models/extra-mile/extra-mile-doc-paradox.glb",
-  "bytes": 54660,
-  "triangles": 3640,
-  "draws": 5,
+  "bytes": 65448,
+  "triangles": 7514,
+  "draws": 1,
   "bounds": [
-    0.6,
-    0.94304,
-    0.44315
+    0.5679799798577837,
+    0.9800103762932219,
+    0.3246864223151341
   ],
   "pivotY": 0,
   "animations": [
@@ -23,9 +23,20 @@
   "editableSource": "assets/blender/extra-mile/extra-mile-doc-paradox.blend",
   "referenceChecked": true,
   "reference": "https://johnnlds.github.io/Magical-Athlete-Racers/ExtraMile.pdf",
-  "referenceDate": "2026-10-22",
-  "recognition": "blue scientist, swept white hair and upright green time portal",
-  "inferred": "Single-view card artwork informs the silhouette and identifying props. Side/back surfaces and joint placement are original project interpretations, not author-approved sculpts.",
-  "avatar": "/models/extra-mile/avatars/extra-mile-doc-paradox.png",
-  "mouthSurfaceVersion": "surface-mouth-v2"
+  "referenceDate": "2026-10-24",
+  "recognition": "ExtraMile.pdf viewed: blue scientist with swept white hair/glasses emerging through an upright green portal. Portal has a real open hole and thick 3D rim, not a billboard.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "avatar": "/avatars/extra-mile/extra-mile-doc-paradox.svg",
+  "modelPreview": "/models/extra-mile/avatars/extra-mile-doc-paradox.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "ExtraMile.pdf viewed: blue scientist with swept white hair/glasses emerging through an upright green portal. Portal has a real open hole and thick 3D rim, not a billboard.",
+  "originalAuthorImageChecked": true,
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "b6ce874a89e86a9af349dd3dfedf9854c59634da52859782ab73914b0eb59217",
+  "glbSha256": "6b09041f554f1a8654d8590077bc7401f6ae2c1c1a569b3096932f8fdabdf95f",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

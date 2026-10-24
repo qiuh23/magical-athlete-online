@@ -1,46 +1,42 @@
 {
-  "version": 1,
-  "edition": "second-wind",
-  "generator": "Blender 5.2.3 LTS Release Candidate",
-  "source": "assets/blender/second-wind.blend",
-  "units": "metres",
-  "up": "+Y",
-  "forward": "+Z",
-  "pivot": "ground-centre",
-  "compression": "EXT_meshopt_compression",
-  "models": [
-    {
-      "id": "diva",
-      "node": "toy_diva",
-      "url": "/models/second-wind/diva.glb",
-      "avatar": "/models/second-wind/avatars/diva.png",
-      "bytes": 45896,
-      "triangles": 3868,
-      "draws": 5,
-      "bounds": [
-        0.6,
-        0.87123,
-        0.32712
-      ],
-      "pivotY": 0,
-      "animations": [
-        "idle",
-        "move",
-        "skill",
-        "fall",
-        "recover"
-      ],
-      "recognition": "Broad olive diva in fluffy pink boa, dark sunglasses, prominent red lips, hand mirror.",
-      "inferred": "Back and side volumes extrapolated from the published single-view illustration.",
-      "referenceChecked": true,
-      "referenceImage": "https://johnnlds.github.io/Magical-Athlete-Racers/images/expansion/Diva.png",
-      "editableSource": "assets/blender/second-wind/diva.blend"
-    }
+  "id": "diva",
+  "node": "toy_diva",
+  "url": "/models/second-wind/diva.glb",
+  "avatar": "/avatars/second-wind/diva.svg",
+  "bytes": 40028,
+  "triangles": 3474,
+  "draws": 1,
+  "bounds": [
+    0.5999938962981048,
+    0.7139194921720023,
+    0.3424176763206885
   ],
-  "variants": [],
-  "totalBytes": 45896,
-  "totalTriangles": 3868,
-  "materialCount": 15,
-  "textureCount": 0,
-  "referenceStatus": "36 fan-site illustrations visually inspected; closed-volume toy interpretations; unseen views explicitly inferred; not exact official production sculpts."
+  "pivotY": 0,
+  "animations": [
+    "idle",
+    "move",
+    "skill",
+    "fall",
+    "recover"
+  ],
+  "recognition": "Registered card image viewed: broad olive diva, pink feather boa, black sunglasses, red lips and mirror. Full closed body and boa backside reconstructed.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "referenceChecked": true,
+  "referenceImage": "https://johnnlds.github.io/Magical-Athlete-Racers/images/expansion/Diva.png",
+  "editableSource": "assets/blender/second-wind/diva.blend",
+  "modelPreview": "/models/second-wind/avatars/diva.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "motionProfile": "biped",
+  "bones": 5,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "Registered card image viewed: broad olive diva, pink feather boa, black sunglasses, red lips and mirror. Full closed body and boa backside reconstructed.",
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "e1c5e74ef63a0101b010fd9e0a8c1d9eb32d19e8a97104b9092fb8aeb04e5de4",
+  "glbSha256": "1799347378ef26d37727d105e4a63df35ff93f59bc6020c7aae2ff38c1dea6c4",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

@@ -2,13 +2,13 @@
   "id": "extra-mile-echo",
   "node": "toy_extra-mile-echo",
   "url": "/models/extra-mile/extra-mile-echo.glb",
-  "bytes": 49712,
-  "triangles": 2100,
-  "draws": 4,
+  "bytes": 37436,
+  "triangles": 3300,
+  "draws": 1,
   "bounds": [
-    0.6,
-    0.795,
-    0.23232
+    0.5575731681264687,
+    0.9800103762932219,
+    0.1892147587511826
   ],
   "pivotY": 0,
   "animations": [
@@ -23,7 +23,20 @@
   "editableSource": "assets/blender/extra-mile/extra-mile-echo.blend",
   "referenceChecked": true,
   "reference": "https://johnnlds.github.io/Magical-Athlete-Racers/ExtraMile.pdf",
-  "referenceDate": "2026-10-22",
-  "recognition": "upside-down dark bat hanging from a brown branch, folded wings and small ears",
-  "inferred": "Single-view card artwork informs the silhouette and identifying props. Side/back surfaces and joint placement are original project interpretations, not author-approved sculpts."
+  "referenceDate": "2026-10-24",
+  "recognition": "ExtraMile.pdf viewed: dark bat hanging upside down from a brown branch/tree, folded wings and downward ears. Branch/tree are true support volumes, not a background card.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "avatar": "/avatars/extra-mile/extra-mile-echo.svg",
+  "modelPreview": "/models/extra-mile/avatars/extra-mile-echo.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "ExtraMile.pdf viewed: dark bat hanging upside down from a brown branch/tree, folded wings and downward ears. Branch/tree are true support volumes, not a background card.",
+  "originalAuthorImageChecked": true,
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "fa000679f37a804851f22be34ef759cc97f35532c8968c8527836751aca771e8",
+  "glbSha256": "d622cade5b96438a25530f48f28d9627d4be34cb3248a44744e7c875db30bba4",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

@@ -1,46 +1,42 @@
 {
-  "version": 1,
-  "edition": "second-wind",
-  "generator": "Blender 5.2.3 LTS Release Candidate",
-  "source": "assets/blender/second-wind.blend",
-  "units": "metres",
-  "up": "+Y",
-  "forward": "+Z",
-  "pivot": "ground-centre",
-  "compression": "EXT_meshopt_compression",
-  "models": [
-    {
-      "id": "hog-knight",
-      "node": "toy_hog-knight",
-      "url": "/models/second-wind/hog-knight.glb",
-      "avatar": "/models/second-wind/avatars/hog-knight.png",
-      "bytes": 33584,
-      "triangles": 2574,
-      "draws": 4,
-      "bounds": [
-        0.55734,
-        0.98,
-        0.34435
-      ],
-      "pivotY": 0,
-      "animations": [
-        "idle",
-        "move",
-        "skill",
-        "fall",
-        "recover"
-      ],
-      "recognition": "Grey plate-armour knight, pink inset visor, flared helmet, lance and gauntlets. Green hog is a transferable separate model.",
-      "inferred": "Armour rear seams and the dismounted standing pose inferred. Mount rendered separately to follow service-owned rider state.",
-      "referenceChecked": true,
-      "referenceImage": "https://johnnlds.github.io/Magical-Athlete-Racers/images/expansion/Hog%20Knight.png",
-      "editableSource": "assets/blender/second-wind/hog-knight.blend"
-    }
+  "id": "hog-knight",
+  "node": "toy_hog-knight",
+  "url": "/models/second-wind/hog-knight.glb",
+  "avatar": "/avatars/second-wind/hog-knight.svg",
+  "bytes": 65496,
+  "triangles": 4968,
+  "draws": 1,
+  "bounds": [
+    0.5999938962981048,
+    0.8394726525085017,
+    0.31641591096665095
   ],
-  "variants": [],
-  "totalBytes": 33584,
-  "totalTriangles": 2574,
-  "materialCount": 15,
-  "textureCount": 0,
-  "referenceStatus": "36 fan-site illustrations visually inspected; closed-volume toy interpretations; unseen views explicitly inferred; not exact official production sculpts."
+  "pivotY": 0,
+  "animations": [
+    "idle",
+    "move",
+    "skill",
+    "fall",
+    "recover"
+  ],
+  "recognition": "Viewed registered Hog Knight card: rounded grey plate armour and pink surprised face. Complete standing legs, rear plate joints and hand pose inferred; rider remains separate from hog.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "referenceChecked": true,
+  "referenceImage": "https://johnnlds.github.io/Magical-Athlete-Racers/images/expansion/Hog%20Knight.png",
+  "editableSource": "assets/blender/second-wind/hog-knight.blend",
+  "modelPreview": "/models/second-wind/avatars/hog-knight.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "motionProfile": "biped",
+  "bones": 7,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "Viewed registered Hog Knight card: rounded grey plate armour and pink surprised face. Complete standing legs, rear plate joints and hand pose inferred; rider remains separate from hog.",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "originalAuthorImageChecked": true,
+  "sculptStatus": "completed-local-validation",
+  "referenceDate": "2026-10-24",
+  "sourceSha256": "fffc7dd4878ef4adaf31beedc5be3b16fef50b0cadd36c462c9341a3f838f0ba",
+  "glbSha256": "c712119a7a82b968f48f896ce9465d2e4883025e3a141a576d9e612fdfeb8a2d",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

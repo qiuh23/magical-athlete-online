@@ -1,0 +1,42 @@
+{
+  "id": "wurstii-magikarp",
+  "nameZh": "鲤鱼王",
+  "node": "toy_wurstii-magikarp",
+  "model": "/models/wurstii/wurstii-magikarp.glb",
+  "portrait": "/avatars/wurstii/wurstii-magikarp.png",
+  "editableSource": "assets/blender/wurstii/blend/wurstii-magikarp.blend",
+  "bytes": 45460,
+  "triangles": 3656,
+  "draws": 1,
+  "bounds": [
+    0.42756431775872067,
+    0.44602801599169895,
+    0.5999938899055035
+  ],
+  "animations": [
+    "idle",
+    "move",
+    "skill",
+    "fall",
+    "recover"
+  ],
+  "modelPreview": "/models/wurstii/avatars/wurstii-magikarp.png",
+  "avatar": "/avatars/wurstii/wurstii-magikarp.svg",
+  "avatarStyle": "flat-cartoon-svg",
+  "bones": 5,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "Existing repository Magikarp SVG / registered recognizable orange fish, white-yellow fins, whiskers and open mouth. Full body, underside and tail thickness interpreted in 3D; no new original-author-image claim.",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "originalAuthorImageChecked": true,
+  "sculptStatus": "completed-local-validation",
+  "pivotY": 0,
+  "referenceChecked": true,
+  "referenceDate": "2026-10-24",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "sourceSha256": "4bc333ce167826efbd77d41518c46bfbf881973d8c516a748a3eb38ba4987df7",
+  "glbSha256": "ea85fe278315828b753152cbfd398a4882bfa9cf9711b0370ab929e44631a69b",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "recognition": "Existing repository Magikarp SVG / registered recognizable orange fish, white-yellow fins, whiskers and open mouth. Full body, underside and tail thickness interpreted in 3D; no new original-author-image claim.",
+  "assetVersion": "authored-sculpt-final-20261024"
+}

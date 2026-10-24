@@ -1,0 +1,42 @@
+{
+  "id": "wurstii-diddy-kong",
+  "nameZh": "迪迪刚",
+  "node": "toy_wurstii-diddy-kong",
+  "model": "/models/wurstii/wurstii-diddy-kong.glb",
+  "portrait": "/avatars/wurstii/wurstii-diddy-kong.png",
+  "editableSource": "assets/blender/wurstii/blend/wurstii-diddy-kong.blend",
+  "bytes": 63896,
+  "triangles": 5676,
+  "draws": 1,
+  "bounds": [
+    0.5271156956694235,
+    0.9800103928338197,
+    0.48701438147504283
+  ],
+  "animations": [
+    "idle",
+    "move",
+    "skill",
+    "fall",
+    "recover"
+  ],
+  "modelPreview": "/models/wurstii/avatars/wurstii-diddy-kong.png",
+  "avatar": "/avatars/wurstii/wurstii-diddy-kong.svg",
+  "avatarStyle": "flat-cartoon-svg",
+  "bones": 5,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "pivotY": 0,
+  "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Diddy Kong: brown monkey, red cap/shirt and long curled tail. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "referenceChecked": true,
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "7c1a0969c9f9a49833aa1fd28610d0c1bec949b39b54a5c4bfa15c17c7d901f7",
+  "glbSha256": "0204e761b9539dd8adaaf23293336be9c5ae946f260fea61f435b569802a06de",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "recognition": "User-provided Wurstii reference card crop actually viewed: Diddy Kong: brown monkey, red cap/shirt and long curled tail. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "assetVersion": "authored-sculpt-final-20261024"
+}

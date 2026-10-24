@@ -2,13 +2,13 @@
   "id": "leaf-crash-dummy",
   "node": "toy_leaf-crash-dummy",
   "url": "/models/leaf/leaf-crash-dummy.glb",
-  "bytes": 47576,
-  "triangles": 3000,
-  "draws": 5,
+  "bytes": 54460,
+  "triangles": 4892,
+  "draws": 1,
   "bounds": [
-    0.6,
-    0.82516,
-    0.38874
+    0.5600146488845484,
+    0.9800103928338197,
+    0.255439928120448
   ],
   "pivotY": 0,
   "animations": [
@@ -24,9 +24,20 @@
   "referenceChecked": true,
   "reference": "https://boardgamegeek.com/filepage/327878/leafs-fan-expansion-for-magical-athlete",
   "referenceFile": "PNG_Images_-_Leaf's_Fan_Expansion.zip / Gamepiece images / crash-dummy",
-  "referenceDate": "2026-10-22",
-  "recognition": "orange segmented crash dummy with black calibration target and articulated joints",
-  "inferred": "Author transparent gamepiece PNGs inform silhouettes/colors/props. Unseen back and side details and joints are project interpretations, not author-approved exact sculpts.",
-  "avatar": "/models/leaf/avatars/leaf-crash-dummy.png",
-  "mouthSurfaceVersion": "surface-mouth-v2"
+  "referenceDate": "2026-10-24",
+  "recognition": "Repository SVG actually viewed; registered traits: orange segmented crash dummy with round dark joints and black/yellow calibration target. Original author PNG not obtained during this rebuild; depth, underside/back and tailoring are project design.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "avatar": "/avatars/leaf/leaf-crash-dummy.svg",
+  "modelPreview": "/models/leaf/avatars/leaf-crash-dummy.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "Repository SVG actually viewed; registered traits: orange segmented crash dummy with round dark joints and black/yellow calibration target. Original author PNG not obtained during this rebuild; depth, underside/back and tailoring are project design.",
+  "originalAuthorImageChecked": false,
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "e263c637d456c7d5f4e0ed7eec7faba98bd20b2a33976db0673bbd90430617c8",
+  "glbSha256": "5574b659d73304dce6f6112451052c14b87757119d95fb6854ef89696b5cf5dd",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

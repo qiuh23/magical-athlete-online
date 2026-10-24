@@ -1,0 +1,42 @@
+{
+  "id": "wurstii-bart-simpson",
+  "nameZh": "巴特·辛普森",
+  "node": "toy_wurstii-bart-simpson",
+  "model": "/models/wurstii/wurstii-bart-simpson.glb",
+  "portrait": "/avatars/wurstii/wurstii-bart-simpson.png",
+  "editableSource": "assets/blender/wurstii/blend/wurstii-bart-simpson.blend",
+  "bytes": 53664,
+  "triangles": 4140,
+  "draws": 1,
+  "bounds": [
+    0.46143986327707753,
+    0.9800103928338197,
+    0.27643665471435536
+  ],
+  "animations": [
+    "idle",
+    "move",
+    "skill",
+    "fall",
+    "recover"
+  ],
+  "modelPreview": "/models/wurstii/avatars/wurstii-bart-simpson.png",
+  "avatar": "/avatars/wurstii/wurstii-bart-simpson.svg",
+  "avatarStyle": "flat-cartoon-svg",
+  "bones": 5,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "pivotY": 0,
+  "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Bart Simpson: yellow spiked head, orange T-shirt, blue shorts/shoes and narrow limbs. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "referenceChecked": true,
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "572a863981ecabd8fc9f42eb45f78fb6b31a8565cde89d83319ca096ae23264a",
+  "glbSha256": "3d6775702f98bb032c668c5cc520569a8a58c0c40737b2f30ce7d0cd1d2dbba2",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "recognition": "User-provided Wurstii reference card crop actually viewed: Bart Simpson: yellow spiked head, orange T-shirt, blue shorts/shoes and narrow limbs. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "assetVersion": "authored-sculpt-final-20261024"
+}

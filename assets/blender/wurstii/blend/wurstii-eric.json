@@ -1,0 +1,42 @@
+{
+  "id": "wurstii-eric",
+  "nameZh": "埃里克",
+  "node": "toy_wurstii-eric",
+  "model": "/models/wurstii/wurstii-eric.glb",
+  "portrait": "/avatars/wurstii/wurstii-eric.png",
+  "editableSource": "assets/blender/wurstii/blend/wurstii-eric.blend",
+  "bytes": 62148,
+  "triangles": 5788,
+  "draws": 1,
+  "bounds": [
+    0.5012970366527298,
+    0.9800103928338197,
+    0.30042420728171637
+  ],
+  "animations": [
+    "idle",
+    "move",
+    "skill",
+    "fall",
+    "recover"
+  ],
+  "modelPreview": "/models/wurstii/avatars/wurstii-eric.png",
+  "avatar": "/avatars/wurstii/wurstii-eric.svg",
+  "avatarStyle": "flat-cartoon-svg",
+  "bones": 5,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "pivotY": 0,
+  "referenceBasis": "User-provided Wurstii reference card crop actually viewed: Eric of The Lost Vikings: red hair/long beard, grey white-horned helmet, blue trousers and red boots. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "referenceChecked": true,
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "350bbc2262c3c8493018ed10cd5abfd4ce8ecaf6ab5c78d90dff5989cbdb0b00",
+  "glbSha256": "47d607087ed5dfc0911fb1ad529e64fc318e3a5d67f3306f7e07f463601a3fce",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "recognition": "User-provided Wurstii reference card crop actually viewed: Eric of The Lost Vikings: red hair/long beard, grey white-horned helmet, blue trousers and red boots. Pixel-art silhouette/colours guide the design; rounded volumes, unseen back and small sculpt details are project interpretations.",
+  "assetVersion": "authored-sculpt-final-20261024"
+}

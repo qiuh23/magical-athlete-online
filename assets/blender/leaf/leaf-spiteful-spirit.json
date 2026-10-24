@@ -2,13 +2,13 @@
   "id": "leaf-spiteful-spirit",
   "node": "toy_leaf-spiteful-spirit",
   "url": "/models/leaf/leaf-spiteful-spirit.glb",
-  "bytes": 43644,
-  "triangles": 1808,
-  "draws": 3,
+  "bytes": 35912,
+  "triangles": 2600,
+  "draws": 1,
   "bounds": [
-    0.6,
-    0.91878,
-    0.35992
+    0.46479689585643047,
+    0.9800103928338197,
+    0.2990203558458205
   ],
   "pivotY": 0,
   "animations": [
@@ -24,7 +24,20 @@
   "referenceChecked": true,
   "reference": "https://boardgamegeek.com/filepage/327878/leafs-fan-expansion-for-magical-athlete",
   "referenceFile": "PNG_Images_-_Leaf's_Fan_Expansion.zip / Gamepiece images / spiteful-spirit",
-  "referenceDate": "2026-10-22",
-  "recognition": "orange living flame, multiple curved flame tips, glowing narrow eyes and jagged red mouth",
-  "inferred": "Author transparent gamepiece PNGs inform silhouettes/colors/props. Unseen back and side details and joints are project interpretations, not author-approved exact sculpts."
+  "referenceDate": "2026-10-24",
+  "recognition": "Repository SVG actually viewed; registered traits: orange living flame with multiple curved tips, yellow interior, narrow eyes and jagged red mouth; continuous volumetric flame, no humanoid legs. Original author PNG not obtained during this rebuild; depth, underside/back and tailoring are project design.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "avatar": "/avatars/leaf/leaf-spiteful-spirit.svg",
+  "modelPreview": "/models/leaf/avatars/leaf-spiteful-spirit.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "Repository SVG actually viewed; registered traits: orange living flame with multiple curved tips, yellow interior, narrow eyes and jagged red mouth; continuous volumetric flame, no humanoid legs. Original author PNG not obtained during this rebuild; depth, underside/back and tailoring are project design.",
+  "originalAuthorImageChecked": false,
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "95921d6d8ca2c03420c2cebf58a86f39c3c4a1b45e10481489ea1174dc6ce533",
+  "glbSha256": "c513922a9595f86e4caaeebfee6af3f740c2b626dd207eeb9d837ea11b47e132",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }

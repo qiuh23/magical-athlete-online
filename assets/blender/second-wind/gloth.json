@@ -1,46 +1,42 @@
 {
-  "version": 1,
-  "edition": "second-wind",
-  "generator": "Blender 5.2.3 LTS Release Candidate",
-  "source": "assets/blender/second-wind.blend",
-  "units": "metres",
-  "up": "+Y",
-  "forward": "+Z",
-  "pivot": "ground-centre",
-  "compression": "EXT_meshopt_compression",
-  "models": [
-    {
-      "id": "gloth",
-      "node": "toy_gloth",
-      "url": "/models/second-wind/gloth.glb",
-      "avatar": "/models/second-wind/avatars/gloth.png",
-      "bytes": 33544,
-      "triangles": 2560,
-      "draws": 4,
-      "bounds": [
-        0.59517,
-        0.98,
-        0.46545
-      ],
-      "pivotY": 0,
-      "animations": [
-        "idle",
-        "move",
-        "skill",
-        "fall",
-        "recover"
-      ],
-      "recognition": "Goth sloth/panda, black robe and hair, pale face, purple nose/collar, long purple raised claws.",
-      "inferred": "Back and side volumes extrapolated from the published single-view illustration.",
-      "referenceChecked": true,
-      "referenceImage": "https://johnnlds.github.io/Magical-Athlete-Racers/images/expansion/Gloth.png",
-      "editableSource": "assets/blender/second-wind/gloth.blend"
-    }
+  "id": "gloth",
+  "node": "toy_gloth",
+  "url": "/models/second-wind/gloth.glb",
+  "avatar": "/avatars/second-wind/gloth.svg",
+  "bytes": 46428,
+  "triangles": 3934,
+  "draws": 1,
+  "bounds": [
+    0.5963316751609852,
+    0.9800103934385633,
+    0.36548966676143213
   ],
-  "variants": [],
-  "totalBytes": 33544,
-  "totalTriangles": 2560,
-  "materialCount": 15,
-  "textureCount": 0,
-  "referenceStatus": "36 fan-site illustrations visually inspected; closed-volume toy interpretations; unseen views explicitly inferred; not exact official production sculpts."
+  "pivotY": 0,
+  "animations": [
+    "idle",
+    "move",
+    "skill",
+    "fall",
+    "recover"
+  ],
+  "recognition": "Registered card viewed: pale gothic sloth/panda face, black hair and robe, purple nose/collar and very long raised purple claws. Body and hidden hair back rebuilt.",
+  "inferred": "Unseen back/underside, complete depth, joints and costume construction are project interpretations, not original-author-approved sculpts.",
+  "referenceChecked": true,
+  "referenceImage": "https://johnnlds.github.io/Magical-Athlete-Racers/images/expansion/Gloth.png",
+  "editableSource": "assets/blender/second-wind/gloth.blend",
+  "modelPreview": "/models/second-wind/avatars/gloth.png",
+  "avatarStyle": "flat-cartoon-svg",
+  "motionProfile": "long",
+  "bones": 5,
+  "generator": "Blender 4.3.2",
+  "sculptVersion": "authored-20261024",
+  "referenceBasis": "Registered card viewed: pale gothic sloth/panda face, black hair and robe, purple nose/collar and very long raised purple claws. Body and hidden hair back rebuilt.",
+  "originalAuthorImageChecked": true,
+  "referenceDate": "2026-10-24",
+  "sculptStatus": "completed-local-validation",
+  "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions without transform changes",
+  "sourceSha256": "41e87990cfd6cef4ca387a588f7487bc642a1e8b2c7adfab9886b53362e4323a",
+  "glbSha256": "6caa5e5e43a9406c17825294a8406602817fb5a694db5a4eac09cf5ffcee805f",
+  "previewMethod": "Actual exported GLB decoded and re-imported into Blender; selection SVG unchanged",
+  "assetVersion": "authored-sculpt-final-20261024"
 }
