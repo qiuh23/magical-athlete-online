@@ -542,6 +542,7 @@ function beforeRace(s:GameState,r:Racer) {
   }
 }
 function beginTurn(s:GameState,r:Racer) {
+  delete r.flags.mainDieEventId;
   delete s.flags.twistFinaleStarted;
   if(!live(r)){advance(s,r);return;}leafRules.turnBoundary(s,r);if(forcedCycle(s,r))return;s.currentRacerId=r.id;s.turn=s.racers.indexOf(r);s.turnCount++;s.flags.awaitRoll=false;s.flags.loopSeen=[];r.flags.turnStart=r.position;r.flags.turnPower=effectivePower(s,r);r.flags.rerolls={};r.flags.geniusGuess=undefined;r.flags.mainBonus=0;
   r.flags.turnsTaken=Number(r.flags.turnsTaken??0)+1;
@@ -607,7 +608,7 @@ function finalRoll(s:GameState,r:Racer,face:number) {
   if(leafRules.finalRoll(s,r,face,firstTasks)||fanFinalRoll(s,r,face,firstTasks))return;
   if(secondWindFinalRoll(s,r,face,firstTasks))return;
   if(thirds.finalRoll(s,r,face,firstTasks)){push(s,...firstTasks);return;}
-  s.lastRoll={racerId:r.id,face,distance:face};log(s,'roll',`${name(r)}最终骰面为${face}`,{source:r.id,faces:[face],cause:'main',rollKind:'main'});
+  s.lastRoll={racerId:r.id,face,distance:face};log(s,'roll',`${name(r)}最终骰面为${face}`,{source:r.id,faces:[face],cause:'main',rollKind:'main',rollId:r.flags.mainDieEventId});
   r.flags.wurstiiFace=face;
   if(r.flags.burtGuess===face&&hasPower(s,r,'wurstii-burt'))push(s,{kind:'wurstiiBurtBonus',racerId:r.id});
   if(r.flags.geniusGuess===face)firstTasks.push({kind:'ability',racerId:r.id,power:'genius',effects:[emStep(r,'extra-turn')]});
@@ -1017,7 +1018,7 @@ function wurstiiEnd(s:GameState,r:Racer,t:Work) {
 function rollFor(s:GameState,r:Racer,reason:string):number {
   const stunners=stunnerSources(s,r);
   const raw=twists.fixedDie(s,r)??random(s,reason,6,stunners.length>0&&!powers(s,'leaf-triangle-man').length);r.flags.secretLeafLastRaw=raw;
-  if(stunners.length){log(s,'die-modified',`${name(r)}的骰面被惊艳者固定为1`,{source:stunners[0]!.id,targets:[r.id],faces:[raw,1],cause:'stunner'});return 1;}
+  if(stunners.length)return 1;
   return raw;
 }
 function stunnerSources(s:GameState,r:Racer){return powers(s,'stunner').filter(x=>x.id!==r.id&&separation(s,x,r)<=1);}
@@ -1147,6 +1148,13 @@ function secondWindChoice(s:GameState,r:Racer,c:PendingChoice,id:string):boolean
  * including any target choices it triggers, finishes before the replacement die. */
 function rollBatch(s:GameState,r:Racer,t:Work){
   const faces=(t.faces??[]) as number[];let face=Number(t.heldFace??rollFor(s,r,t.purpose==='main'?`${name(r)}主移动`:`${name(r)} ${t.purpose}`));
+  // Publish the throw before reactions can pause for Suckerfish or grant a
+  // power. A restored held die continues this throw, never starts another.
+  if(t.purpose==='main'&&(t.heldFace===undefined||t.dieEventId===undefined)){
+    log(s,'die',`${name(r)}掷出${face}`,{source:r.id,faces:[face],cause:'main',rollKind:'main'});
+    t.dieEventId=s.logs.at(-1)!.id;
+  }
+  if(t.heldFace===undefined){const stunners=stunnerSources(s,r);if(stunners.length)log(s,'die-modified',`${name(r)}的骰面被惊艳者固定为1`,{source:stunners[0]!.id,targets:[r.id],faces:[Number(r.flags.secretLeafLastRaw),1],cause:'stunner'});}
   if(t.heldFace===undefined&&!t.leafRawChecked){const observed=leafRules.rawDie(s,r,Number(r.flags.secretLeafLastRaw));if(observed.length){push(s,...observed,{...t,heldFace:face,leafRawChecked:true});return;}}
   if(thirds.beforeDie(s,r,t,face))return;
   if(hasPower(s,r,em('heads'))&&!t.headsChecked){ask(s,r,'em-heads',`硬币头：本骰${face}点，是否翻到底面${7-face}点？`,[{id:'keep',label:`保留${face}`},{id:'flip',label:`翻到${7-face}`}],{task:{...t,heldFace:face,headsChecked:true}});return;}
@@ -1163,7 +1171,7 @@ function rollBatch(s:GameState,r:Racer,t:Work){
   const ctx=(t.context??{}) as Record<string,any>;
   if(thirds.rollResult(s,r,t,faces)||leafRules.rollResult(s,r,t,faces,ctx))return;
   if(String(t.purpose).startsWith('em-')){fanRollResult(s,r,t,faces,ctx);return;}
-  if(t.purpose==='main'){r.flags.mainRolled=true;s.lastRoll={racerId:r.id,face,distance:face};log(s,'die',`${name(r)}掷出${face}`,{source:r.id,faces:[face],cause:'main',rollKind:'main'});rerollWindow(s,r,face);return;}
+  if(t.purpose==='main'){r.flags.mainRolled=true;r.flags.mainDieEventId=t.dieEventId;s.lastRoll={racerId:r.id,face,distance:face};rerollWindow(s,r,face);return;}
   if(t.purpose==='mr-dice-guy'){
     r.flags.mainRolled=true;
     const repeats=[...new Set(faces)].filter(n=>faces.filter(x=>x===n).length>1);
@@ -1421,7 +1429,7 @@ function resolutionSignature(s:GameState,scoreCycle=false):string{
   const flags={...s.flags};for(const key of ['choiceSeq','motionSeq','loopSeen','forcedCycleTrace','resolutionSeen','resolutionSeenScores','resolutionSuppressed','continuation','resolutionDiagnostic'])delete flags[key];
   if(Number(flags.fanTurnPowerCount)>=2)flags.fanTurnPowerCount=2;
   if(scoreCycle){delete flags.fanIncome;if(!powers(s,em('pooh')).length)delete flags.fanTurnPowerCount;}
-  return JSON.stringify({players:s.players.map(p=>({id:p.id,score:scoreCycle?0:p.score,hand:p.hand,used:p.used,selection:p.selection})),racers:s.racers.map(r=>{const racerFlags=semanticRacerFlags(s,r);if(scoreCycle)delete racerFlags.leafRaceIncome;return {...r,flags:racerFlags};}),phase:s.phase,round:s.round,turn:s.turn,current:s.currentRacerId,baseTurnOrder:s.baseTurnOrder,deck:s.deck,discard:s.discard,flags,next:s.queue[0],random:[s.rngState,s.randomStream]},(_key,value)=>value&&typeof value==='object'&&!Array.isArray(value)?Object.fromEntries(Object.keys(value).sort().map(key=>[key,value[key]])):value);
+  return JSON.stringify({players:s.players.map(p=>({id:p.id,score:scoreCycle?0:p.score,hand:p.hand,used:p.used,selection:p.selection})),racers:s.racers.map(r=>{const racerFlags=semanticRacerFlags(s,r);if(scoreCycle)delete racerFlags.leafRaceIncome;return {...r,flags:racerFlags};}),phase:s.phase,round:s.round,turn:s.turn,current:s.currentRacerId,baseTurnOrder:s.baseTurnOrder,deck:s.deck,discard:s.discard,flags,next:s.queue[0],random:[s.rngState,s.randomStream]},(key,value)=>key==='dieEventId'?undefined:value&&typeof value==='object'&&!Array.isArray(value)?Object.fromEntries(Object.keys(value).sort().map(key=>[key,value[key]])):value);
 }
 
 /** Reaction windows belong to one persisted activation, not to a character name
@@ -1512,6 +1520,7 @@ const leafRules=installLeaf({progress,sharing:sameSpace,forwardDistance,name,liv
  * Normalize their meaning, so new display/turn serials cannot hide a true loop. */
 function semanticRacerFlags(s:GameState,r:Racer):Record<string,unknown>{
   const flags={...r.flags};for(const key of ['leafDarkTurn','leafWolfTurn','leafBorrowTurn','leafPhilanthropistTurn','leafToucanTurn','leafCarAskedTurn','leafCarBonusTurn'])if(typeof flags[key]==='number')flags[key]=flags[key]===s.turnCount?'this-turn':'another-turn';
+  delete flags.mainDieEventId;
   if(flags.leafBorrowTurns&&typeof flags.leafBorrowTurns==='object')flags.leafBorrowTurns=Object.fromEntries(Object.entries(flags.leafBorrowTurns).map(([source,turn])=>[source,turn===s.turnCount?'this-turn':'another-turn']));
   if(Array.isArray(flags.leafGiftDice))flags.leafGiftDice=flags.leafGiftDice.map(gift=>{const {id:_id,...rule}=gift as Record<string,unknown>;return rule;});
   return flags;

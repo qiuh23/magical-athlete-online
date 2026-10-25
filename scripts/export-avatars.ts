@@ -22,12 +22,16 @@ for (const [pack, characters] of packs) {
   }
   const modelManifest = new URL(`../public/models/${pack}/manifest.json`, import.meta.url);
   const manifest = JSON.parse(await readFile(modelManifest,'utf8'));
+  const previousManifest = JSON.stringify(manifest);
   for (const model of manifest.models) {
     if (!characters.some(c => c.id === model.id)) continue;
-    model.modelPreview = pack === 'wurstii' ? model.portrait : `/models/${pack}/avatars/${model.id}.png`;
+    // Portrait publication must not replace previews from the 3D asset pipeline.
+    model.modelPreview ??= pack === 'wurstii' ? model.portrait : `/models/${pack}/avatars/${model.id}.png`;
     model.avatar = `/avatars/${pack}/${model.id}.svg`;
     model.avatarStyle = 'flat-cartoon-svg';
   }
-  await writeFile(modelManifest, JSON.stringify(manifest,null,2)+'\n');
+  if (JSON.stringify(manifest) !== previousManifest) {
+    await writeFile(modelManifest, JSON.stringify(manifest,null,2)+'\n');
+  }
   console.log(`Exported ${characters.length} ${pack} cartoon SVG portraits.`);
 }

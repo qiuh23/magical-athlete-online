@@ -170,10 +170,12 @@ export function installTwists(ctx:TwistContext){
       push(s,{kind:'move',racerId:r.id,distance:face,cause:'twist-alchemy-lab'});return;
     }
     const from=ctx.progress(s,monster.position),face=die(s,rollerId?racer(s,rollerId):undefined,'游荡狼人巨口移动');
+    const actor={name:'游荡巨口',characterId:'mouth'};
+    log(s,'ability-dice',`游荡巨口掷出${face}`,{actor,cause:'twist-alchemy-lab',faces:[face]});
     const end=from+face,limit=ctx.progress(s,ctx.finishPosition(s));
     const crossed=order(s).filter(r=>ctx.progress(s,r.position)>from&&ctx.progress(s,r.position)<end);
     monster.position=ctx.positionAt(s,Math.min(end,limit));monster.finished=end>=limit;
-    log(s,'twist-monster',`游荡狼人巨口掷出${face}，前进至${monster.position}格。`,{cause:'twist-alchemy-lab',faces:[face],before:[ctx.positionAt(s,from)],after:[monster.position]});
+    log(s,'twist-monster',`游荡巨口前进至${monster.position}格。`,{actor,cause:'twist-alchemy-lab',faces:[face],before:[ctx.positionAt(s,from)],after:[monster.position]});
     push(s,...crossed.map(r=>({kind:'eliminate',racerId:r.id,source:'twist-alchemy-lab'})));
   }
   function task(s:GameState,t:Work){

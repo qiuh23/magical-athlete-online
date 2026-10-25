@@ -38,13 +38,14 @@ export function installThirds(ctx:ThirdsContext){
   function extreme(s:GameState,ahead=true){const rs=active(s);const value=(ahead?Math.max:Math.min)(...rs.map(r=>ctx.progress(s,r.position)));return rs.filter(r=>ctx.progress(s,r.position)===value);}
   function npcStep(s:GameState,distance:number){
     const npc=state(s)?.npc;if(!npc||npc.finished)return;
+    const before=npc.position;
     for(let n=0;n<Math.abs(distance);n++){
       const options=nextTrackNodes(TRACKS[s.track],npc.position,Math.sign(distance)*(s.flags.twistReversed?-1:1));
       // Reference markers follow the shortest remaining route at a fork.
       npc.position=options.toSorted((a,b)=>Math.sign(distance)*(ctx.progress(s,b)-ctx.progress(s,a)))[0]??npc.position;
     }
     if(npc.position===ctx.finishPosition(s)&&distance>0)npc.finished=true;
-    log(s,'event-marker',`${label(npc.id)}标记到第${npc.position}格`,{cause:`thirds-${npc.id}`,after:[npc.position]});
+    log(s,'event-marker',`${label(npc.id)}标记到第${npc.position}格`,{actor:{name:label(npc.id),characterId:npc.id},cause:`thirds-${npc.id}`,before:[before],after:[npc.position]});
   }
   function prepareRace(s:GameState){
     delete s.flags.thirds;delete s.flags.thirdsStart;
@@ -299,7 +300,8 @@ export function installThirds(ctx:ThirdsContext){
   function rollResult(s:GameState,r:Racer,t:Work,faces:number[]){
     if(!String(t.purpose).startsWith('thirds-'))return false;
     const data=state(s)!;
-    log(s,'ability-dice',`${name(r)}掷出${faces.join('、')}`,{source:r.id,faces,cause:t.purpose});
+    const npc=t.purpose==='thirds-npc'?data.npc:undefined;
+    log(s,'ability-dice',`${npc?label(npc.id):name(r)}掷出${faces.join('、')}`,{...(npc?{actor:{name:label(npc.id),characterId:npc.id}}:{source:r.id}),faces,cause:t.purpose});
     if(t.purpose==='thirds-rocket'){r.flags.mainRolled=true;const distance=faces.reduce((a,b)=>a+b,0);s.lastRoll={racerId:r.id,face:faces.at(-1)!,distance};push(s,{kind:'mainMove',racerId:r.id,base:distance});}
     if(t.purpose==='thirds-duel'&&faces[0]!==t.context.face)push(s,trip(r));
     if(t.purpose==='thirds-npc'){

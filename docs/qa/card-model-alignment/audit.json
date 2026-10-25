@@ -1,0 +1,1217 @@
+{
+  "modelVersion": "authored-sculpt-final-20261024",
+  "baseline": "b2f3b53f73a71c7714f659f9cdab927a2dcc2359",
+  "reviewed": 151,
+  "changed": 139,
+  "method": "Manual comparison of the live SVG drawings, shipped model previews, recognition metadata and default runtime composition. Geometry tests do not certify visual identity.",
+  "characters": [
+    {
+      "id": "alchemist",
+      "changed": true,
+      "notes": "瓶身角色改为绿弯帽绿袍的炼金术士，补橙胡须、紫粉手、搅拌棒与紫色坩埚；以当前模型预览及recognition为准。",
+      "name": "炼金术士",
+      "pack": "original",
+      "modelPreview": "/models/original/avatars/alchemist.png"
+    },
+    {
+      "id": "baba-yaga",
+      "changed": true,
+      "notes": "保留鸡脚屋大类；改橙屋顶、灰白墙与蓝窗，移除屋脸，房体缩小并拉长黄色鸡腿和橙趾。",
+      "name": "芭芭雅嘎",
+      "pack": "original",
+      "modelPreview": "/models/original/avatars/baba-yaga.png"
+    },
+    {
+      "id": "banana",
+      "changed": true,
+      "notes": "保留香蕉大类；改竖向细长弯体、深色果柄、侧置小眼和橙色鸟足，去掉模型没有的人形手臂。",
+      "name": "香蕉",
+      "pack": "original",
+      "modelPreview": "/models/original/avatars/banana.png"
+    },
+    {
+      "id": "blimp",
+      "changed": true,
+      "notes": "粉色拟人飞艇改银灰分肋艇体，面部移到艇首，补尾翼并缩小下方吊舱。",
+      "name": "飞艇",
+      "pack": "original",
+      "modelPreview": "/models/original/avatars/blimp.png"
+    },
+    {
+      "id": "centaur",
+      "changed": true,
+      "notes": "蓝衣人马改橙色裸露上身、红马身与四条红腿，补白色长发及白尾、深色马蹄。",
+      "name": "半人马",
+      "pack": "original",
+      "modelPreview": "/models/original/avatars/centaur.png"
+    },
+    {
+      "id": "cheerleader",
+      "changed": true,
+      "notes": "人类裙装啦啦队员重画为红色圆筒毛怪，紫色大鼻、紫色花球、白手套、蓝绿色脚。",
+      "name": "啦啦队长",
+      "pack": "original",
+      "modelPreview": "/models/original/avatars/cheerleader.png"
+    },
+    {
+      "id": "coach",
+      "changed": true,
+      "notes": "黄脸蓝运动服教练重画为绿蜥蜴，红帽和白红夹克、绿色腹部、紫色扩音器及尾巴。",
+      "name": "教练",
+      "pack": "original",
+      "modelPreview": "/models/original/avatars/coach.png"
+    },
+    {
+      "id": "copycat",
+      "changed": true,
+      "notes": "蓝粉双猫改为两只蓝猫，保留错落站位并添加白领和黄紫两色领带、蓝尾。",
+      "name": "模仿猫",
+      "pack": "original",
+      "modelPreview": "/models/original/avatars/copycat.png"
+    },
+    {
+      "id": "dicemonger",
+      "changed": true,
+      "notes": "拟人骰子重画为紫脸红帽红外套的商贩，打开外套中摆放九颗彩色骰子。",
+      "name": "骰子商人",
+      "pack": "original",
+      "modelPreview": "/models/original/avatars/dicemonger.png"
+    },
+    {
+      "id": "duelist",
+      "changed": true,
+      "notes": "红衣白面罩双剑人重画为浅蓝脸、蓝羽帽蓝长外套、长红鼻白颈褶及单柄细剑。",
+      "name": "决斗家",
+      "pack": "original",
+      "modelPreview": "/models/original/avatars/duelist.png"
+    },
+    {
+      "id": "egg",
+      "changed": true,
+      "notes": "白色破壳鸡蛋重画为巨大的橙色壳顶，壳面小眼；壳下保留紫色边缘、蓝色小法师和红鼻。",
+      "name": "蛋",
+      "pack": "original",
+      "modelPreview": "/models/original/avatars/egg.png"
+    },
+    {
+      "id": "flip-flop",
+      "changed": true,
+      "notes": "字面拖鞋重画为紫色低软体怪，灰色后扫头发、黄色下垂长胡须与小黑口。",
+      "name": "人字拖",
+      "pack": "original",
+      "modelPreview": "/models/original/avatars/flip-flop.png"
+    },
+    {
+      "id": "genius",
+      "changed": true,
+      "notes": "外露脑袋角色重画为粉色长嘴学者，蓝色乱发、圆眼镜、红背心和蓝色计算器。",
+      "name": "天才",
+      "pack": "original",
+      "modelPreview": "/models/original/avatars/genius.png"
+    },
+    {
+      "id": "gunk",
+      "changed": true,
+      "notes": "带蓝点的圆团改橄榄色直立黏液，补困倦小眼、长垂鼻与积液底盘，去除无依据斑点。",
+      "name": "黏液怪",
+      "pack": "original",
+      "modelPreview": "/models/original/avatars/gunk.png"
+    },
+    {
+      "id": "hare",
+      "changed": true,
+      "notes": "黄色圆兔改天蓝色立兔，长耳后扫、红鼻、白门牙、收拢前爪和蓝色后足。",
+      "name": "野兔",
+      "pack": "original",
+      "modelPreview": "/models/original/avatars/hare.png"
+    },
+    {
+      "id": "heckler",
+      "changed": true,
+      "notes": "扩音器本体重画为粉色斑点鬣狗，巨耳、红鼻、黄色后扫鬃毛、绿色项圈与笑齿。",
+      "name": "起哄者",
+      "pack": "original",
+      "modelPreview": "/models/original/avatars/heckler.png"
+    },
+    {
+      "id": "huge-baby",
+      "changed": true,
+      "notes": "保留粉色巨婴身份；去掉蓝色衣物和笑齿，改白尿布、困倦小眼及橙蓝安抚奶嘴。",
+      "name": "巨婴",
+      "pack": "original",
+      "modelPreview": "/models/original/avatars/huge-baby.png"
+    },
+    {
+      "id": "hypnotist",
+      "changed": true,
+      "notes": "单眼斗篷人重画为绿蓝条带眼镜蛇，双螺旋眼、红领结、展开颈罩及盘绕底座。",
+      "name": "催眠师",
+      "pack": "original",
+      "modelPreview": "/models/original/avatars/hypnotist.png"
+    },
+    {
+      "id": "inchworm",
+      "changed": true,
+      "notes": "绿色多足阶梯虫改连续拱弯紫蓝分段虫体、绿脸和触角，去掉分离装饰腿。",
+      "name": "尺蠖",
+      "pack": "original",
+      "modelPreview": "/models/original/avatars/inchworm.png"
+    },
+    {
+      "id": "lackey",
+      "changed": true,
+      "notes": "蓝服托盘侍者重画为粉色补丁兜帽斗篷与驼背，露出绿色长鼻脸和绿手，移除餐盘。",
+      "name": "跟班",
+      "pack": "original",
+      "modelPreview": "/models/original/avatars/lackey.png"
+    },
+    {
+      "id": "leaptoad",
+      "changed": true,
+      "notes": "保留蛙身份；改明亮蓝色、巨白眼和橙色蹼足，延长跳跃后肢，去掉黄色腹块。",
+      "name": "跳跳蟾蜍",
+      "pack": "original",
+      "modelPreview": "/models/original/avatars/leaptoad.png"
+    },
+    {
+      "id": "legs",
+      "changed": true,
+      "notes": "蓝短裤粉腿改超长绿色条纹裤、红鞋、紫短外套及红领结；使用模型补全的小黄头。",
+      "name": "大长腿",
+      "pack": "original",
+      "modelPreview": "/models/original/avatars/legs.png"
+    },
+    {
+      "id": "lovable-loser",
+      "changed": true,
+      "notes": "抱奖杯的人重画为绿色蜗牛、大粉色螺旋壳、眼柄与小白花；无模型外的人体和奖杯。",
+      "name": "可爱的倒霉蛋",
+      "pack": "original",
+      "modelPreview": "/models/original/avatars/lovable-loser.png"
+    },
+    {
+      "id": "magician",
+      "changed": true,
+      "notes": "黄脸高帽魔术师重画为紫象，长象鼻、蓝夹克、橙背心、白领结、魔杖和手持蓝帽骰子。",
+      "name": "魔术师",
+      "pack": "original",
+      "modelPreview": "/models/original/avatars/magician.png"
+    },
+    {
+      "id": "mastermind",
+      "changed": true,
+      "notes": "红色王冠方体重画为巨大的浅色脑冠、橙长鼻面孔、绿斗篷和指尖相对的双手。",
+      "name": "幕后军师",
+      "pack": "original",
+      "modelPreview": "/models/original/avatars/mastermind.png"
+    },
+    {
+      "id": "mouth",
+      "changed": true,
+      "notes": "保留巨嘴；改深色口腔及上下分离牙列，缩小顶部双眼，黑色细肢改蓝色四肢和脚。",
+      "name": "大嘴怪",
+      "pack": "original",
+      "modelPreview": "/models/original/avatars/mouth.png"
+    },
+    {
+      "id": "party-animal",
+      "changed": true,
+      "notes": "黄色兽身红派对帽改黄色犬脸、蓝鼻、粉绿条纹长衣及配套帽，双手抬起。",
+      "name": "派对动物",
+      "pack": "original",
+      "modelPreview": "/models/original/avatars/party-animal.png"
+    },
+    {
+      "id": "rocket-scientist",
+      "changed": true,
+      "notes": "火箭本体重画为绿脸白实验服科学家，巨大护目镜、后扫黄发；红火箭作为手持物。",
+      "name": "火箭科学家",
+      "pack": "original",
+      "modelPreview": "/models/original/avatars/rocket-scientist.png"
+    },
+    {
+      "id": "romantic",
+      "changed": true,
+      "notes": "拟人粉心重画为粉色长嘴角色，黄色外套红领、打开的书与领襟花。",
+      "name": "浪漫家",
+      "pack": "original",
+      "modelPreview": "/models/original/avatars/romantic.png"
+    },
+    {
+      "id": "scoocher",
+      "changed": true,
+      "notes": "座椅拟人角色重画为坐姿棕色长毛狗，左右下垂耳、困倦眼、长粉舌和休息前爪。",
+      "name": "蹭蹭怪",
+      "pack": "original",
+      "modelPreview": "/models/original/avatars/scoocher.png"
+    },
+    {
+      "id": "sisyphus",
+      "changed": true,
+      "notes": "小黄人推蓝巨石改橙色长鼻人、稀疏白发与白缠布长袍，保留举手推姿，移除模型未包含巨石。",
+      "name": "西西弗斯",
+      "pack": "original",
+      "modelPreview": "/models/original/avatars/sisyphus.png"
+    },
+    {
+      "id": "skipper",
+      "changed": true,
+      "notes": "蓝白海军制服改橙脸、黄色雨帽雨衣和手持粉色船舵；船舵为道具而非脚轮。",
+      "name": "船长",
+      "pack": "original",
+      "modelPreview": "/models/original/avatars/skipper.png"
+    },
+    {
+      "id": "stickler",
+      "changed": true,
+      "notes": "字面黄色方尺重画为粉色盘绕长虫，蓝发、长鼻和橙色规则书。",
+      "name": "较真怪",
+      "pack": "original",
+      "modelPreview": "/models/original/avatars/stickler.png"
+    },
+    {
+      "id": "suckerfish",
+      "changed": true,
+      "notes": "蓝鱼黄吸盘改绿色鱼身、巨橙色吸盘口、侧眼与背鳍红射线；以腹鳍取代人腿。",
+      "name": "吸盘鱼",
+      "pack": "original",
+      "modelPreview": "/models/original/avatars/suckerfish.png"
+    },
+    {
+      "id": "third-wheel",
+      "changed": true,
+      "notes": "轮胎脸角色重画为黄长鼻鼠、红粉横条衫、黄色尾和手，单轮移到身体下方。",
+      "name": "电灯泡",
+      "pack": "original",
+      "modelPreview": "/models/original/avatars/third-wheel.png"
+    },
+    {
+      "id": "twin",
+      "changed": true,
+      "notes": "粉蓝水滴双人改两只黄色长嘴蜥蜴，一黑白横纹衫、一粉衫，分别补黄色四肢与尾。",
+      "name": "双胞胎",
+      "pack": "original",
+      "modelPreview": "/models/original/avatars/twin.png"
+    },
+    {
+      "id": "bite-mark",
+      "changed": true,
+      "notes": "默认形态改成褐橄榄肤色、圆厚紫发、黄色眼睛和白底紫边衣服；未使用 Were Mouth 变身。",
+      "name": "咬痕",
+      "pack": "second-wind",
+      "modelPreview": "/models/second-wind/avatars/bite-mark.png"
+    },
+    {
+      "id": "blunderdog",
+      "changed": false,
+      "notes": "黄色超级狗、蓝眼罩和披风、红衣蓝星、举拳一致；保留绘本夸张比例。",
+      "name": "糊涂狗",
+      "pack": "second-wind",
+      "modelPreview": "/models/second-wind/avatars/blunderdog.png"
+    },
+    {
+      "id": "cheatah",
+      "changed": true,
+      "notes": "将狐狸般尖耳改为模型的圆形猎豹耳，保留橙色斑点、绿毛衣和骰子。",
+      "name": "千术豹",
+      "pack": "second-wind",
+      "modelPreview": "/models/second-wind/avatars/cheatah.png"
+    },
+    {
+      "id": "critic",
+      "changed": true,
+      "notes": "收回长吻，重绘蓝色圆头乌龟、紫壳、橄榄绿外衣、托腮手势及白杯。",
+      "name": "评论家",
+      "pack": "second-wind",
+      "modelPreview": "/models/second-wind/avatars/critic.png"
+    },
+    {
+      "id": "diva",
+      "changed": true,
+      "notes": "宽圆橄榄色身体、小墨镜、粉色羽毛围巾和银色镜面对齐；去掉尖顶头型。",
+      "name": "歌剧女伶",
+      "pack": "second-wind",
+      "modelPreview": "/models/second-wind/avatars/diva.png"
+    },
+    {
+      "id": "doppelgangster",
+      "changed": true,
+      "notes": "双橙色长鼻人物、紫色条纹西服及帽子保留；黄色衣领改紫色翻领。",
+      "name": "替身帮",
+      "pack": "second-wind",
+      "modelPreview": "/models/second-wind/avatars/doppelgangster.png"
+    },
+    {
+      "id": "gloth",
+      "changed": true,
+      "notes": "保留黑袍白脸紫色长爪；将尖耳状头发改为圆厚黑发。",
+      "name": "葛洛斯",
+      "pack": "second-wind",
+      "modelPreview": "/models/second-wind/avatars/gloth.png"
+    },
+    {
+      "id": "hog-knight",
+      "changed": true,
+      "notes": "已核对 ToyCharacter 的 mount 组合：保留灰甲粉脸骑士骑乘绿弯角、白獠牙野猪；去掉模型没有的长矛，未误将单件骑士预览当完整形态。",
+      "name": "野猪骑士",
+      "pack": "second-wind",
+      "modelPreview": "/models/second-wind/avatars/hog-knight.png"
+    },
+    {
+      "id": "hopfrog",
+      "changed": false,
+      "notes": "红蛙、双高眼柱、宽笑脸和折叠弹跳腿一致；保留动态姿势。",
+      "name": "弹跳蛙",
+      "pack": "second-wind",
+      "modelPreview": "/models/second-wind/avatars/hopfrog.png"
+    },
+    {
+      "id": "hotel",
+      "changed": true,
+      "notes": "三角山墙改为模型的低矮层叠屋顶及立体红墙侧窗，改用小橙鼻、黑底牙口与棕脚，去掉星挂饰。",
+      "name": "旅馆",
+      "pack": "second-wind",
+      "modelPreview": "/models/second-wind/avatars/hotel.png"
+    },
+    {
+      "id": "icarus",
+      "changed": true,
+      "notes": "移除模型没有的大护目镜，重绘黄色飞行员、粉盔扣子长衣、直立绿翅及两根握杆。",
+      "name": "伊卡洛斯",
+      "pack": "second-wind",
+      "modelPreview": "/models/second-wind/avatars/icarus.png"
+    },
+    {
+      "id": "kingtripper",
+      "changed": true,
+      "notes": "绿蜥蜴紫衣及权杖保留；双尖帽改成模型的三尖红冠及三枚黄铃球。",
+      "name": "绊倒国王",
+      "pack": "second-wind",
+      "modelPreview": "/models/second-wind/avatars/kingtripper.png"
+    },
+    {
+      "id": "kraken",
+      "changed": true,
+      "notes": "移除误作身体角的奶油色尖片；保留粉色尖外套膜、低位眼睛和八条卷曲腕。",
+      "name": "海怪",
+      "pack": "second-wind",
+      "modelPreview": "/models/second-wind/avatars/kraken.png"
+    },
+    {
+      "id": "le-saboteur",
+      "changed": true,
+      "notes": "去掉现有模型没有的炸药及引线；保留绿鳄鱼、黑贝雷帽、黑白条纹衣和黄手套。",
+      "name": "破坏者",
+      "pack": "second-wind",
+      "modelPreview": "/models/second-wind/avatars/le-saboteur.png"
+    },
+    {
+      "id": "magical-athlete",
+      "changed": true,
+      "notes": "橙脸、尖蓝帽、星纹蓝长袍和直紫杖对齐；去掉水晶杖头，眼睛安置在帽檐下。",
+      "name": "魔法运动员",
+      "pack": "second-wind",
+      "modelPreview": "/models/second-wind/avatars/magical-athlete.png"
+    },
+    {
+      "id": "mole",
+      "changed": true,
+      "notes": "绿色毛簇及草地式底座改为橙色身体和明显粉脚，门牙改为两颗短方牙。",
+      "name": "鼹鼠",
+      "pack": "second-wind",
+      "modelPreview": "/models/second-wind/avatars/mole.png"
+    },
+    {
+      "id": "mr-dice-guy",
+      "changed": true,
+      "notes": "橄榄脸、紫帽、蓝套装和红领结对齐，两个悬浮骰子及衣服色块改为四个悬浮彩骰。",
+      "name": "骰子先生",
+      "pack": "second-wind",
+      "modelPreview": "/models/second-wind/avatars/mr-dice-guy.png"
+    },
+    {
+      "id": "mush",
+      "changed": true,
+      "notes": "尖角蓝怪改为青蓝色圆润连体团块，三组正面独立表情对应预览，未把背面表情强加正面。",
+      "name": "蘑菇泥",
+      "pack": "second-wind",
+      "modelPreview": "/models/second-wind/avatars/mush.png"
+    },
+    {
+      "id": "nemesis",
+      "changed": false,
+      "notes": "浅色古典雕像、卷发、褶皱长袍和直立长剑一致；保留近景构图。",
+      "name": "宿敌",
+      "pack": "second-wind",
+      "modelPreview": "/models/second-wind/avatars/nemesis.png"
+    },
+    {
+      "id": "nepo-baby",
+      "changed": true,
+      "notes": "改为无帽檐蓝桶帽与蓝吊带连体装，移除西服翻领、领带及单片镜，保留粉色婴儿、橙奶嘴与银拨浪鼓。",
+      "name": "关系宝宝",
+      "pack": "second-wind",
+      "modelPreview": "/models/second-wind/avatars/nepo-baby.png"
+    },
+    {
+      "id": "null",
+      "changed": true,
+      "notes": "云团边缘改为细长封闭深色卵形虚空，保留微小双眼与稀疏固定斑点。",
+      "name": "虚无",
+      "pack": "second-wind",
+      "modelPreview": "/models/second-wind/avatars/null.png"
+    },
+    {
+      "id": "overtaker",
+      "changed": true,
+      "notes": "改为蓝脸、米色缠绕头巾、棕长袍与蓝手，竖持骷髅杖和铁锹，去掉绿色翻领外套观感。",
+      "name": "超车骷髅",
+      "pack": "second-wind",
+      "modelPreview": "/models/second-wind/avatars/overtaker.png"
+    },
+    {
+      "id": "party-pooper",
+      "changed": true,
+      "notes": "粉绿条纹睡帽改为模型的绿色下垂帽与粉边；黄猫、粉绿睡衣和长蜡烛保留。",
+      "name": "扫兴鬼",
+      "pack": "second-wind",
+      "modelPreview": "/models/second-wind/avatars/party-pooper.png"
+    },
+    {
+      "id": "penguin",
+      "changed": true,
+      "notes": "圆润紫身、小棕帽及短扁橙喙对齐；按实际预览保留较小可见白腹及纽扣，源模型白腹大部分埋进身体，未修改模型。",
+      "name": "企鹅",
+      "pack": "second-wind",
+      "modelPreview": "/models/second-wind/avatars/penguin.png"
+    },
+    {
+      "id": "re-runner",
+      "changed": true,
+      "notes": "白脸改橙色皮肤，补橙色裸手；灰卷发、紫头带、粉黄运动服保留。",
+      "name": "返场跑者",
+      "pack": "second-wind",
+      "modelPreview": "/models/second-wind/avatars/re-runner.png"
+    },
+    {
+      "id": "show-off",
+      "changed": true,
+      "notes": "重绘紫象、粉帽粉轮滑鞋、绿轮及高大的青蓝黄框椅；去掉绿帽与低椅。",
+      "name": "显摆精",
+      "pack": "second-wind",
+      "modelPreview": "/models/second-wind/avatars/show-off.png"
+    },
+    {
+      "id": "soulmate",
+      "changed": true,
+      "notes": "移除猫耳猫脸，改成圆头黄色生物、眼白内心形瞳孔、粉鼻吐舌口和卷尾。",
+      "name": "灵魂伴侣",
+      "pack": "second-wind",
+      "modelPreview": "/models/second-wind/avatars/soulmate.png"
+    },
+    {
+      "id": "speed-demon",
+      "changed": true,
+      "notes": "橄榄有角骑手、蓝夹克、橙飘发及红摩托保留；补黄色前灯。",
+      "name": "速度恶魔",
+      "pack": "second-wind",
+      "modelPreview": "/models/second-wind/avatars/speed-demon.png"
+    },
+    {
+      "id": "spoilsport",
+      "changed": false,
+      "notes": "粉色哭泣猪、圆耳宽鼻口、卷尾和贴脸蓝泪一致；保留夸张哭脸。",
+      "name": "输不起",
+      "pack": "second-wind",
+      "modelPreview": "/models/second-wind/avatars/spoilsport.png"
+    },
+    {
+      "id": "stepdad",
+      "changed": true,
+      "notes": "紫海象、棕胡须、白獠牙、红背带及橙泡沫手指保留，蓝蝴蝶结改为模型黄色。",
+      "name": "继父",
+      "pack": "second-wind",
+      "modelPreview": "/models/second-wind/avatars/stepdad.png"
+    },
+    {
+      "id": "streaker",
+      "changed": true,
+      "notes": "大幅奔跑姿势改为模型的浅色细长尖顶身体、下垂双臂、窄脚和后扫尾，不加衣服。",
+      "name": "裸奔客",
+      "pack": "second-wind",
+      "modelPreview": "/models/second-wind/avatars/streaker.png"
+    },
+    {
+      "id": "stunner",
+      "changed": true,
+      "notes": "南瓜状横宽轮廓改成纵长五瓣橙色甜椒、弯棕梗、睫毛睁眼、小红唇及粉脚。",
+      "name": "惊艳者",
+      "pack": "second-wind",
+      "modelPreview": "/models/second-wind/avatars/stunner.png"
+    },
+    {
+      "id": "switcharoo",
+      "changed": false,
+      "notes": "黄色长耳袋鼠、粉圆眼镜、奶油育儿袋、长脚和长尾一致；保留风格化比例。",
+      "name": "交换袋鼠",
+      "pack": "second-wind",
+      "modelPreview": "/models/second-wind/avatars/switcharoo.png"
+    },
+    {
+      "id": "tail",
+      "changed": true,
+      "notes": "去掉额外躯干与独立长腿，改为独立弯绿尾、顶端眼睛、小背棘及底部小红脚垫。",
+      "name": "尾巴",
+      "pack": "second-wind",
+      "modelPreview": "/models/second-wind/avatars/tail.png"
+    },
+    {
+      "id": "the-hose",
+      "changed": true,
+      "notes": "平放叠层圆盘改为三个镂空直立绿圈、带眼竖管颈及有孔黄铜喷嘴，去掉静态模型没有的水滴。",
+      "name": "水管",
+      "pack": "second-wind",
+      "modelPreview": "/models/second-wind/avatars/the-hose.png"
+    },
+    {
+      "id": "understudy",
+      "changed": true,
+      "notes": "紫脸演员、黄衣白褶领、剧本保留；帽羽改为模型的橙弯羽，腿部主色改黄。",
+      "name": "替补演员",
+      "pack": "second-wind",
+      "modelPreview": "/models/second-wind/avatars/understudy.png"
+    },
+    {
+      "id": "extra-mile-broken-clock",
+      "changed": true,
+      "notes": "以金色缺口钟身替代白表盘同心圆；保留裂纹、黑圆顶帽和胡须，将四肢改为模型的棕色。",
+      "name": "坏时钟",
+      "pack": "extra-mile",
+      "modelPreview": "/models/extra-mile/avatars/extra-mile-broken-clock.png"
+    },
+    {
+      "id": "extra-mile-cletus",
+      "changed": true,
+      "notes": "拉高棕帽，补蓝色裤子和棕鞋，粉色双手握双管道具；保留粉肤、红衫和双管轮廓。",
+      "name": "克莱特斯",
+      "pack": "extra-mile",
+      "modelPreview": "/models/extra-mile/avatars/extra-mile-cletus.png"
+    },
+    {
+      "id": "extra-mile-doc-paradox",
+      "changed": true,
+      "notes": "蓝脸改浅蓝，白发改后掠形并加圆眼镜和棕色夹板；绿色传送门中间留空，补棕鞋。",
+      "name": "悖论博士",
+      "pack": "extra-mile",
+      "modelPreview": "/models/extra-mile/avatars/extra-mile-doc-paradox.png"
+    },
+    {
+      "id": "extra-mile-doctor-dice",
+      "changed": true,
+      "notes": "骰子四角点数改黑色，四肢和鞋改蓝色，头镜改银灰；保留白骰体与听诊器。",
+      "name": "骰子医生",
+      "pack": "extra-mile",
+      "modelPreview": "/models/extra-mile/avatars/extra-mile-doctor-dice.png"
+    },
+    {
+      "id": "extra-mile-dom-and-gary",
+      "changed": true,
+      "notes": "重分橙猫与灰鼠的头身比例；灰鼠移至橙猫手臂承托位置并补独立四肢尾巴，不再站在地上。",
+      "name": "多姆与加里",
+      "pack": "extra-mile",
+      "modelPreview": "/models/extra-mile/avatars/extra-mile-dom-and-gary.png"
+    },
+    {
+      "id": "extra-mile-echo",
+      "changed": true,
+      "notes": "展开紫翼改为暗色收拢翼与倒挂体形，保留下垂尖耳，并补模型的右侧树枝支撑。",
+      "name": "回声",
+      "pack": "extra-mile",
+      "modelPreview": "/models/extra-mile/avatars/extra-mile-echo.png"
+    },
+    {
+      "id": "extra-mile-gingy",
+      "changed": true,
+      "notes": "加入头部被咬缺口，饼干色改暖棕；保留白糖霜、蓝领结纽扣和红白拐杖糖。",
+      "name": "姜饼人",
+      "pack": "extra-mile",
+      "modelPreview": "/models/extra-mile/avatars/extra-mile-gingy.png"
+    },
+    {
+      "id": "extra-mile-gluebert",
+      "changed": true,
+      "notes": "去除将整瓶做成扁平黏液底座的轮廓，补白色胶体四肢，橙标签增加蓝边，保留橙瓶嘴。",
+      "name": "胶水伯特",
+      "pack": "extra-mile",
+      "modelPreview": "/models/extra-mile/avatars/extra-mile-gluebert.png"
+    },
+    {
+      "id": "extra-mile-heads",
+      "changed": true,
+      "notes": "铜币仍为横放厚圆盘，黑四肢改白色长四肢及白眼柄；保留凸起双眼与币面浮雕。",
+      "name": "硬币头",
+      "pack": "extra-mile",
+      "modelPreview": "/models/extra-mile/avatars/extra-mile-heads.png"
+    },
+    {
+      "id": "extra-mile-honey-pot",
+      "changed": true,
+      "notes": "蜂身下沉至蓝蜜罐内，补实际握住的棕色蜂蜜棒与蜂蜜滴；保留黑黄条纹、白翅和触角。",
+      "name": "蜜罐",
+      "pack": "extra-mile",
+      "modelPreview": "/models/extra-mile/avatars/extra-mile-honey-pot.png"
+    },
+    {
+      "id": "extra-mile-king-pete",
+      "changed": true,
+      "notes": "星形王袍改红色17号球衣，补紫裤黑鞋，王冠增高；蓝肤改模型浅蓝并保留棒球棒。",
+      "name": "皮特国王",
+      "pack": "extra-mile",
+      "modelPreview": "/models/extra-mile/avatars/extra-mile-king-pete.png"
+    },
+    {
+      "id": "extra-mile-lazy-bones",
+      "changed": true,
+      "notes": "灰色骨架改白骨与黑眼窝，补肋骨、骨盆及手边蓝瓶；保留红扶手椅与坐姿。",
+      "name": "懒骨头",
+      "pack": "extra-mile",
+      "modelPreview": "/models/extra-mile/avatars/extra-mile-lazy-bones.png"
+    },
+    {
+      "id": "extra-mile-marksman",
+      "changed": true,
+      "notes": "灰色鸟改白色长颈鸟，补白羽冠、尾羽和黄脚；保留黄长喙、木弓与箭。",
+      "name": "神射手",
+      "pack": "extra-mile",
+      "modelPreview": "/models/extra-mile/avatars/extra-mile-marksman.png"
+    },
+    {
+      "id": "extra-mile-moneybags",
+      "changed": true,
+      "notes": "移除绿色外套、蓝领结和模型没有的单片镜；改粉色上身、黑背带、红领结、绿裤及卷尾。",
+      "name": "钱袋先生",
+      "pack": "extra-mile",
+      "modelPreview": "/models/extra-mile/avatars/extra-mile-moneybags.png"
+    },
+    {
+      "id": "extra-mile-mr-fox",
+      "changed": true,
+      "notes": "蓝西装红领带改紫西装、白衬衫黑领带；保留橙狐、棕公文包与手持天平。",
+      "name": "狐狸先生",
+      "pack": "extra-mile",
+      "modelPreview": "/models/extra-mile/avatars/extra-mile-mr-fox.png"
+    },
+    {
+      "id": "extra-mile-oddball",
+      "changed": true,
+      "notes": "移除模型没有的手臂和双腿，方框镜改圆框镜；保留白棒球、红缝线、笑脸和门牙。",
+      "name": "怪球",
+      "pack": "extra-mile",
+      "modelPreview": "/models/extra-mile/avatars/extra-mile-oddball.png"
+    },
+    {
+      "id": "extra-mile-pooh",
+      "changed": true,
+      "notes": "熊毛改浅黄色，蓝罐改棕蜜罐并以双手抱住，双脚同毛色；保留无红衣造型和手持红气球。",
+      "name": "维尼",
+      "pack": "extra-mile",
+      "modelPreview": "/models/extra-mile/avatars/extra-mile-pooh.png"
+    },
+    {
+      "id": "extra-mile-robin-hood",
+      "changed": true,
+      "notes": "红羽毛改白羽毛，补黑胡须和后背箭袋，鞋改棕色；保留灰脸、绿帽绿衣和张弓。",
+      "name": "罗宾汉",
+      "pack": "extra-mile",
+      "modelPreview": "/models/extra-mile/avatars/extra-mile-robin-hood.png"
+    },
+    {
+      "id": "extra-mile-saint-nick",
+      "changed": true,
+      "notes": "补绿色手套、黑鞋，将背袋改浅棕；保留红主教帽袍、金十字权杖和白胡须。",
+      "name": "圣尼克",
+      "pack": "extra-mile",
+      "modelPreview": "/models/extra-mile/avatars/extra-mile-saint-nick.png"
+    },
+    {
+      "id": "extra-mile-school-bully",
+      "changed": true,
+      "notes": "前向黑帽改反戴紫帽，粉色大鼻吻改灰色宽脸和露齿怒容；补深色短裤、紫鞋及腰间弹弓。",
+      "name": "校园恶霸",
+      "pack": "extra-mile",
+      "modelPreview": "/models/extra-mile/avatars/extra-mile-school-bully.png"
+    },
+    {
+      "id": "extra-mile-scout",
+      "changed": true,
+      "notes": "红制服改棕制服与棕宽檐帽，黄绶带改绿色徽章绶带，补紫领巾；保留红肤和绿三角旗。",
+      "name": "童子军",
+      "pack": "extra-mile",
+      "modelPreview": "/models/extra-mile/avatars/extra-mile-scout.png"
+    },
+    {
+      "id": "extra-mile-shuffler",
+      "changed": true,
+      "notes": "移除身后独立红牌块，红牌改手持扇形牌组，腿鞋改蓝色；保留白黑桃A牌身。",
+      "name": "洗牌师",
+      "pack": "extra-mile",
+      "modelPreview": "/models/extra-mile/avatars/extra-mile-shuffler.png"
+    },
+    {
+      "id": "extra-mile-silly-goose",
+      "changed": true,
+      "notes": "黄喙黑线脚改橙喙橙蹼足，蓝单色帽改多色螺旋桨帽与圆墨镜；保留白鹅长颈翅尾。",
+      "name": "傻鹅",
+      "pack": "extra-mile",
+      "modelPreview": "/models/extra-mile/avatars/extra-mile-silly-goose.png"
+    },
+    {
+      "id": "extra-mile-snake-eyes",
+      "changed": true,
+      "notes": "大圆头改细长立颈与实物骰子双眼，补分节象牙色腹面和尾部持牌；保留绿盘蛇身与红分叉舌，不加人类肢体。",
+      "name": "蛇眼",
+      "pack": "extra-mile",
+      "modelPreview": "/models/extra-mile/avatars/extra-mile-snake-eyes.png"
+    },
+    {
+      "id": "extra-mile-snub",
+      "changed": true,
+      "notes": "补额头绷带和眼泪，调整为弯曲象鼻与忧伤眉眼，去掉模型没有的短裤条纹，双脚改粉色。",
+      "name": "落选仔",
+      "pack": "extra-mile",
+      "modelPreview": "/models/extra-mile/avatars/extra-mile-snub.png"
+    },
+    {
+      "id": "extra-mile-terrible-toddler",
+      "changed": true,
+      "notes": "从大脸和尖底尿布改完整粉色婴儿身体、外伸双臂、短腿和白尿布；保留哭嘴与两颗牙，移除悬浮泪滴。",
+      "name": "可怕幼童",
+      "pack": "extra-mile",
+      "modelPreview": "/models/extra-mile/avatars/extra-mile-terrible-toddler.png"
+    },
+    {
+      "id": "extra-mile-thief",
+      "changed": true,
+      "notes": "补绿色尖耳和握袋手，黑白粗条衣改灰白条衣，赃物袋改浅棕；保留黑帽眼罩与黑鞋。",
+      "name": "盗贼",
+      "pack": "extra-mile",
+      "modelPreview": "/models/extra-mile/avatars/extra-mile-thief.png"
+    },
+    {
+      "id": "extra-mile-toll-troll",
+      "changed": true,
+      "notes": "横向王冠式发型改直立棕刺发，放大双眼、双手举起；白衣金吊牌改浅棕系带破背心与绿色腿脚。",
+      "name": "收费巨魔",
+      "pack": "extra-mile",
+      "modelPreview": "/models/extra-mile/avatars/extra-mile-toll-troll.png"
+    },
+    {
+      "id": "extra-mile-totally-fair-ref",
+      "changed": true,
+      "notes": "补黑短裤和黑鞋，将胸前黄挂件改手持黄色判罚布，犬吻统一灰色；保留黑帽和白底竖条裁判衫。",
+      "name": "绝对公平裁判",
+      "pack": "extra-mile",
+      "modelPreview": "/models/extra-mile/avatars/extra-mile-totally-fair-ref.png"
+    },
+    {
+      "id": "extra-mile-whisper",
+      "changed": true,
+      "notes": "调整为圆润淡紫鬼影与垂褶下摆，双手抬至嘴部形成掩嘴姿态，移除模型没有的漂浮星光。",
+      "name": "低语",
+      "pack": "extra-mile",
+      "modelPreview": "/models/extra-mile/avatars/extra-mile-whisper.png"
+    },
+    {
+      "id": "extra-mile-witch-hazel",
+      "changed": true,
+      "notes": "紫帽带改白色，补红鞋；斜穿脸前的扫帚改双手明确握住的横向扫帚，保留绿肤钩鼻黑裙歪帽。",
+      "name": "女巫海泽尔",
+      "pack": "extra-mile",
+      "modelPreview": "/models/extra-mile/avatars/extra-mile-witch-hazel.png"
+    },
+    {
+      "id": "leaf-catfish",
+      "changed": true,
+      "notes": "蓝色猫鱼、奶油腹和卷尾原有身份正确，校准蓝色深浅。",
+      "name": "鲶鱼",
+      "pack": "leaf",
+      "modelPreview": "/models/leaf/avatars/leaf-catfish.png"
+    },
+    {
+      "id": "leaf-crash-dummy",
+      "changed": true,
+      "notes": "保留橙色分节假人及标靶，黑鞋改为橙色脚。",
+      "name": "碰撞假人",
+      "pack": "leaf",
+      "modelPreview": "/models/leaf/avatars/leaf-crash-dummy.png"
+    },
+    {
+      "id": "leaf-dark-horse",
+      "changed": true,
+      "notes": "改为四条蓝色马腿及深色蹄，保留长脸黑鬃尾。",
+      "name": "黑马",
+      "pack": "leaf",
+      "modelPreview": "/models/leaf/avatars/leaf-dark-horse.png"
+    },
+    {
+      "id": "leaf-filmmaker",
+      "changed": true,
+      "notes": "头发改深绿、裤子改浅蓝，保留粉色面孔、双轮摄影机及黄鞋。",
+      "name": "电影制作人",
+      "pack": "leaf",
+      "modelPreview": "/models/leaf/avatars/leaf-filmmaker.png"
+    },
+    {
+      "id": "leaf-kangaroo",
+      "changed": false,
+      "notes": "已对齐橙色袋鼠、长耳、奶油育儿袋、长足和尾巴，保留。",
+      "name": "袋鼠",
+      "pack": "leaf",
+      "modelPreview": "/models/leaf/avatars/leaf-kangaroo.png"
+    },
+    {
+      "id": "leaf-loan-shark",
+      "changed": true,
+      "notes": "校准蓝色身体，红礼帽及橙边利齿保留。",
+      "name": "高利贷鲨",
+      "pack": "leaf",
+      "modelPreview": "/models/leaf/avatars/leaf-loan-shark.png"
+    },
+    {
+      "id": "leaf-lonely-wolf",
+      "changed": true,
+      "notes": "两只人形黑鞋改为四条灰色兽腿，保留胸鬃及上卷尾。",
+      "name": "孤狼",
+      "pack": "leaf",
+      "modelPreview": "/models/leaf/avatars/leaf-lonely-wolf.png"
+    },
+    {
+      "id": "leaf-nepo-baby",
+      "changed": true,
+      "notes": "白色包裹改为仅下身尿布，露出粉色上身及双脚，保留奶嘴金链。",
+      "name": "关系户宝宝",
+      "pack": "leaf",
+      "modelPreview": "/models/leaf/avatars/leaf-nepo-baby.png"
+    },
+    {
+      "id": "leaf-philanthropist",
+      "changed": true,
+      "notes": "礼帽和马甲改粉蓝色，肤色校准浅棕，爱心金币保留。",
+      "name": "慈善家",
+      "pack": "leaf",
+      "modelPreview": "/models/leaf/avatars/leaf-philanthropist.png"
+    },
+    {
+      "id": "leaf-race-car",
+      "changed": false,
+      "notes": "红色方程式车、四轮、前翼、尾翼和挡风玻璃眼睛均一致，保留。",
+      "name": "赛车",
+      "pack": "leaf",
+      "modelPreview": "/models/leaf/avatars/leaf-race-car.png"
+    },
+    {
+      "id": "leaf-revolutionary",
+      "changed": true,
+      "notes": "三角帽改软塌弯帽，手杖改木色，粉肤紫外套和黑靴保留。",
+      "name": "革命家",
+      "pack": "leaf",
+      "modelPreview": "/models/leaf/avatars/leaf-revolutionary.png"
+    },
+    {
+      "id": "leaf-sole-survivor",
+      "changed": true,
+      "notes": "头盔和草裙校准深绿色，补橙色双脚，矛和条纹胡须保留。",
+      "name": "唯一幸存者",
+      "pack": "leaf",
+      "modelPreview": "/models/leaf/avatars/leaf-sole-survivor.png"
+    },
+    {
+      "id": "leaf-sore-loser",
+      "changed": true,
+      "notes": "保留橙色大鼻怒容、蓝短裤和举拳，黑鞋改橙色脚。",
+      "name": "不服输",
+      "pack": "leaf",
+      "modelPreview": "/models/leaf/avatars/leaf-sore-loser.png"
+    },
+    {
+      "id": "leaf-spiteful-spirit",
+      "changed": false,
+      "notes": "橙色多尖火焰、黄色内部、细眼和红色锯齿嘴一致，保留。",
+      "name": "怨灵",
+      "pack": "leaf",
+      "modelPreview": "/models/leaf/avatars/leaf-spiteful-spirit.png"
+    },
+    {
+      "id": "leaf-thespian",
+      "changed": true,
+      "notes": "保留皇冠、红披风、白领圈和独立蓝面具，脚改橙色。",
+      "name": "戏剧演员",
+      "pack": "leaf",
+      "modelPreview": "/models/leaf/avatars/leaf-thespian.png"
+    },
+    {
+      "id": "leaf-toucan",
+      "changed": false,
+      "notes": "粉红鸟身、黄色面斑、蓝色橙尖大喙和黑脚一致，保留。",
+      "name": "巨嘴鸟",
+      "pack": "leaf",
+      "modelPreview": "/models/leaf/avatars/leaf-toucan.png"
+    },
+    {
+      "id": "leaf-triangle-man",
+      "changed": true,
+      "notes": "校准黄三角主体和侧面明暗，保留粉红领结与短腿。",
+      "name": "三角人",
+      "pack": "leaf",
+      "modelPreview": "/models/leaf/avatars/leaf-triangle-man.png"
+    },
+    {
+      "id": "leaf-zombie",
+      "changed": true,
+      "notes": "皮肤改深绿、破衫改浅蓝，粉脑和棕裤保留。",
+      "name": "僵尸",
+      "pack": "leaf",
+      "modelPreview": "/models/leaf/avatars/leaf-zombie.png"
+    },
+    {
+      "id": "wurstii-bart-simpson",
+      "changed": true,
+      "notes": "红衫改橙衫、黑鞋改蓝鞋，保留黄皮尖发蓝短裤。",
+      "name": "巴特·辛普森",
+      "pack": "wurstii",
+      "modelPreview": "/models/wurstii/avatars/wurstii-bart-simpson.png"
+    },
+    {
+      "id": "wurstii-bucky-ohare",
+      "changed": true,
+      "notes": "红衣改紫色金边太空服，移除无依据头带，补橙色手套靴，毛色改深绿。",
+      "name": "巴基兔",
+      "pack": "wurstii",
+      "modelPreview": "/models/wurstii/avatars/wurstii-bucky-ohare.png"
+    },
+    {
+      "id": "wurstii-bullet-bill",
+      "changed": false,
+      "notes": "黑色横向炮弹、后缘和白手套已一致，保留。",
+      "name": "炮弹刺客",
+      "pack": "wurstii",
+      "modelPreview": "/models/wurstii/avatars/wurstii-bullet-bill.png"
+    },
+    {
+      "id": "wurstii-chip-n-dale",
+      "changed": true,
+      "notes": "重画完整双松鼠身体与尾巴，移除Dale红花衬衫，统一棕毛奶油腹，保留Chip帽子及两者不同鼻齿。",
+      "name": "奇奇与蒂蒂",
+      "pack": "wurstii",
+      "modelPreview": "/models/wurstii/avatars/wurstii-chip-n-dale.png"
+    },
+    {
+      "id": "wurstii-diddy-kong",
+      "changed": true,
+      "notes": "保留红帽红衫棕猴长尾，校准浅色脚。",
+      "name": "迪迪刚",
+      "pack": "wurstii",
+      "modelPreview": "/models/wurstii/avatars/wurstii-diddy-kong.png"
+    },
+    {
+      "id": "wurstii-dixie-kong",
+      "changed": true,
+      "notes": "保留粉帽上衣、金色长马尾及棕猴形体，校准浅色脚。",
+      "name": "迪克西刚",
+      "pack": "wurstii",
+      "modelPreview": "/models/wurstii/avatars/wurstii-dixie-kong.png"
+    },
+    {
+      "id": "wurstii-dr-wily",
+      "changed": true,
+      "notes": "粉肤改浅肤，缩短白实验服露黑裤黑鞋，保留白侧发胡须黑领带。",
+      "name": "威利博士",
+      "pack": "wurstii",
+      "modelPreview": "/models/wurstii/avatars/wurstii-dr-wily.png"
+    },
+    {
+      "id": "wurstii-dry-bones",
+      "changed": true,
+      "notes": "保留白骨龟及灰壳，黑鞋改灰鞋。",
+      "name": "枯骨龟",
+      "pack": "wurstii",
+      "modelPreview": "/models/wurstii/avatars/wurstii-dry-bones.png"
+    },
+    {
+      "id": "wurstii-eric",
+      "changed": true,
+      "notes": "粉肤改浅肤，补红鞋，蓝衣红胡须灰角盔保留。",
+      "name": "埃里克",
+      "pack": "wurstii",
+      "modelPreview": "/models/wurstii/avatars/wurstii-eric.png"
+    },
+    {
+      "id": "wurstii-falco-lombardi",
+      "changed": true,
+      "notes": "校准蓝羽，缩短白飞行服露黑裤棕鞋，保留红内衬与黄色喙。",
+      "name": "法尔科",
+      "pack": "wurstii",
+      "modelPreview": "/models/wurstii/avatars/wurstii-falco-lombardi.png"
+    },
+    {
+      "id": "wurstii-frogger",
+      "changed": true,
+      "notes": "校准绿色皮肤，将细黑四肢改绿色兽腿，保持低伏四足青蛙。",
+      "name": "过河蛙",
+      "pack": "wurstii",
+      "modelPreview": "/models/wurstii/avatars/wurstii-frogger.png"
+    },
+    {
+      "id": "wurstii-hoagie",
+      "changed": true,
+      "notes": "粉肤改浅肤，骷髅交叉骨改骷髅橙火焰图案，补白鞋，保留宽身黑长发蓝帽。",
+      "name": "霍吉",
+      "pack": "wurstii",
+      "modelPreview": "/models/wurstii/avatars/wurstii-hoagie.png"
+    },
+    {
+      "id": "wurstii-jason-vorhees",
+      "changed": true,
+      "notes": "重画紫色头套衣裤、青色冰球面具和手，移除模型没有的刀和红面纹。",
+      "name": "杰森",
+      "pack": "wurstii",
+      "modelPreview": "/models/wurstii/avatars/wurstii-jason-vorhees.png"
+    },
+    {
+      "id": "wurstii-knuckles",
+      "changed": true,
+      "notes": "绿鞋改红黄鞋，保留红色长刺、奶油吻部及白刺拳套。",
+      "name": "纳克鲁斯",
+      "pack": "wurstii",
+      "modelPreview": "/models/wurstii/avatars/wurstii-knuckles.png"
+    },
+    {
+      "id": "wurstii-lakitu",
+      "changed": true,
+      "notes": "绿镜框改黑镜框，保留黄龟绿壳及白色笑脸云。",
+      "name": "朱盖木",
+      "pack": "wurstii",
+      "modelPreview": "/models/wurstii/avatars/wurstii-lakitu.png"
+    },
+    {
+      "id": "wurstii-lizzie",
+      "changed": true,
+      "notes": "皮肤和双脚校准深绿，保留黄腹、背刺和粗尾。",
+      "name": "莉齐",
+      "pack": "wurstii",
+      "modelPreview": "/models/wurstii/avatars/wurstii-lizzie.png"
+    },
+    {
+      "id": "wurstii-magikarp",
+      "changed": false,
+      "notes": "橙鱼、黄白鱼鳍、长须和张口一致，保留。",
+      "name": "鲤鱼王",
+      "pack": "wurstii",
+      "modelPreview": "/models/wurstii/avatars/wurstii-magikarp.png"
+    },
+    {
+      "id": "wurstii-mario",
+      "changed": true,
+      "notes": "粉肤改浅肤、黑胡须鞋改棕色，保留红帽蓝背带及白手套。",
+      "name": "马力欧",
+      "pack": "wurstii",
+      "modelPreview": "/models/wurstii/avatars/wurstii-mario.png"
+    },
+    {
+      "id": "wurstii-mr-game-and-watch",
+      "changed": false,
+      "notes": "黑色侧面轮廓、大圆鼻和手套一致，保留。",
+      "name": "游戏与观看先生",
+      "pack": "wurstii",
+      "modelPreview": "/models/wurstii/avatars/wurstii-mr-game-and-watch.png"
+    },
+    {
+      "id": "wurstii-olaf",
+      "changed": true,
+      "notes": "粉肤改浅肤，椭圆盾改棕色矩形木盾、脚改浅灰，绿衣黄胡须保留。",
+      "name": "奥拉夫",
+      "pack": "wurstii",
+      "modelPreview": "/models/wurstii/avatars/wurstii-olaf.png"
+    },
+    {
+      "id": "wurstii-pitfall-harry",
+      "changed": true,
+      "notes": "重画青绿色衣帽蓝鞋浅肤形象，移除藤条道具。",
+      "name": "探险家哈利",
+      "pack": "wurstii",
+      "modelPreview": "/models/wurstii/avatars/wurstii-pitfall-harry.png"
+    },
+    {
+      "id": "wurstii-simon-belmont",
+      "changed": true,
+      "notes": "粉肤改浅肤、黑鞋改棕靴，保留棕皮衣长发和小盘鞭。",
+      "name": "西蒙·贝尔蒙特",
+      "pack": "wurstii",
+      "modelPreview": "/models/wurstii/avatars/wurstii-simon-belmont.png"
+    },
+    {
+      "id": "wurstii-tails",
+      "changed": true,
+      "notes": "保留橙狐、两条独立白尖尾和红白鞋，补白色手套。",
+      "name": "塔尔斯",
+      "pack": "wurstii",
+      "modelPreview": "/models/wurstii/avatars/wurstii-tails.png"
+    },
+    {
+      "id": "wurstii-yoshi",
+      "changed": true,
+      "notes": "校准深绿身体和橙背刺，保留白腹、橙鞋及大吻部。",
+      "name": "耀西",
+      "pack": "wurstii",
+      "modelPreview": "/models/wurstii/avatars/wurstii-yoshi.png"
+    },
+    {
+      "id": "wurstii-rollercoaster-tycoon-guest",
+      "changed": true,
+      "notes": "重画绿T恤青短裤棕鞋浅肤游客，移除无依据气球及马甲细节。",
+      "name": "过山车乐园游客",
+      "pack": "wurstii",
+      "modelPreview": "/models/wurstii/avatars/wurstii-rollercoaster-tycoon-guest.png"
+    },
+    {
+      "id": "wurstii-spot",
+      "changed": true,
+      "notes": "保留红椭圆黑墨镜、溜溜球及白鞋，补另一只白手套。",
+      "name": "斯波特",
+      "pack": "wurstii",
+      "modelPreview": "/models/wurstii/avatars/wurstii-spot.png"
+    },
+    {
+      "id": "wurstii-rockford",
+      "changed": true,
+      "notes": "重画红矿工帽、橙衣裤和浅肤，移除粉衣绿帽、吊坠与宝石。",
+      "name": "洛克福德",
+      "pack": "wurstii",
+      "modelPreview": "/models/wurstii/avatars/wurstii-rockford.png"
+    },
+    {
+      "id": "wurstii-burt",
+      "changed": true,
+      "notes": "黄头改浅棕，补长棕鼻，手臂改肤色、鞋改蓝色，保留蓝白竖条裤。",
+      "name": "伯特",
+      "pack": "wurstii",
+      "modelPreview": "/models/wurstii/avatars/wurstii-burt.png"
+    },
+    {
+      "id": "wurstii-piranha-plant",
+      "changed": true,
+      "notes": "绿茎、叶和管道改深绿，红色白斑嘴与利齿保留。",
+      "name": "食人花",
+      "pack": "wurstii",
+      "modelPreview": "/models/wurstii/avatars/wurstii-piranha-plant.png"
+    },
+    {
+      "id": "wurstii-fluffin-puffins",
+      "changed": true,
+      "notes": "四鸟改为紫身黄腹白头，保留一大三小完整群体。",
+      "name": "蓬蓬海鹦",
+      "pack": "wurstii",
+      "modelPreview": "/models/wurstii/avatars/wurstii-fluffin-puffins.png"
+    }
+  ]
+}

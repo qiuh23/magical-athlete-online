@@ -16,6 +16,7 @@ import { matchRaceCount, presetCompetition } from '../shared/competition.js';
 import { MAPS_RULES_VERSION, SCHEDULE_RULES_VERSION, FAN_V3_RULES_VERSION } from '../shared/rules-versions.js';
 import { SECOND_WIND_PROJECT_NOTES } from '../shared/second-wind.js';
 import { Avatar } from './avatars.js';
+import { PortraitScene, portraitStyle } from './PortraitScene.js';
 import { CharacterOwnership, StepdadTarget, characterContext, currentController } from './character-context.js';
 import { EggAbility, EffectiveAbilities } from './CharacterAbilities.js';
 import { AbilityReveal } from './AbilityReveal.js';
@@ -367,7 +368,22 @@ function Lobby({ room, busy, act, copy }: { room: RoomView; busy: boolean; act: 
 
 function CharacterCard({ id, selected, disabled, onChoose, onDetail, used }: { id: string; selected?: boolean; disabled?: boolean; onChoose?: () => void; onDetail: ShowCharacter; used?: boolean }) {
   const character = findCharacter(id);
-  return <article className={`character-card ${selected ? 'selected' : ''} ${used ? 'used' : ''}`}><button type="button" className="character-avatar-detail" onClick={()=>onDetail(id)} aria-label={`查看${characterName(id)}的技能与当前玩家`}><Avatar id={id} />{selected && <span className="selected-tick">✓</span>}{used && <span className="used-label">已上场</span>}</button><div className="character-copy"><EditionBadge character={character} /><h3>{characterName(id)}</h3><p className="english-name">{character?.nameEn ?? id.replace(/-/g, ' ')}</p><p className="ability-text">{character?.ability ?? '点击查看角色能力。'}</p>{onChoose&&<button type="button" className="character-art character-pick" disabled={disabled||used} onClick={onChoose} aria-label={`${selected?'取消选择':'选择'}${characterName(id)}`} aria-pressed={!!selected}>{selected?'取消选择':'选择角色'}</button>}<button type="button" className="detail-button" onClick={() => onDetail(id)}>查看能力与玩家 <span>＋</span></button></div></article>;
+  const number = String(characters.findIndex(card => card.id === id) + 1).padStart(3, '0');
+  return <article data-character-id={id} className={`character-card ${selected ? 'selected' : ''} ${used ? 'used' : ''}`} style={portraitStyle(id)}>
+    <button type="button" className="character-avatar-detail" onClick={()=>onDetail(id)} aria-label={`查看${characterName(id)}的技能与当前玩家`}>
+      <span className="card-print-line" aria-hidden="true"><span>MAGICAL ATHLETE</span><span>No. {number}</span></span>
+      <PortraitScene id={id} />
+      <span className="card-art-caption" aria-hidden="true"><span>胡闹运动会</span><span>✦</span><span>选手图鉴</span></span>
+      {selected && <span className="selected-tick" aria-label="已选择">✓</span>}{used && <span className="used-label">已上场</span>}
+    </button>
+    <div className="character-copy">
+      <h3>{characterName(id)}</h3><p className="english-name">{character?.nameEn ?? id.replace(/-/g, ' ')}</p>
+      <EditionBadge character={character} />
+      <p className="ability-text">{character?.ability ?? '点击查看角色能力。'}</p>
+      <div className="card-actions">{onChoose&&<button type="button" className="character-art character-pick" disabled={disabled||used} onClick={onChoose} aria-label={`${selected?'取消选择':'选择'}${characterName(id)}`} aria-pressed={!!selected}>{selected?'已选入队伍 · 取消':'选择角色'}<span aria-hidden="true">{selected ? '✓' : '↗'}</span></button>}
+      <button type="button" className="detail-button" onClick={() => onDetail(id)}>查看能力与玩家 <span aria-hidden="true">＋</span></button></div>
+    </div>
+  </article>;
 }
 function Draft({ room, busy, act, onDetail }: { room: RoomView; busy: boolean; act: (action: GameAction) => void; onDetail: ShowCharacter }) {
   const [pick, setPick] = useState<string | null>(null);
@@ -484,7 +500,7 @@ function CharacterModal({ id, racerId, room, onDetail, onClose }: { id: string; 
   const printedAbility = <><p className="full-ability">{character?.ability ?? '角色资料正在载入。'}</p>{character?.example && <p className="ability-example"><strong>例子：</strong>{character.example}</p>}{adaptation && <p className="character-project-note">数字化适配与项目裁定：{adaptation}</p>}{SECOND_WIND_PROJECT_NOTES[id] && <p className="character-project-note">{SECOND_WIND_PROJECT_NOTES[id]}</p>}{copyNote && <p className="character-project-note"><strong>复制交互的项目裁定：</strong>{copyNote}</p>}</>;
   return <Modal title={characterName(id)} onClose={onClose}>
     <div className="character-modal character-detail">
-      <header className="character-identity"><div className="modal-avatar"><Avatar id={id} /></div><div><p className="identity-kicker">角色身份</p><p className="identity-name">{characterName(id)}</p><p className="english-name">{character?.nameEn ?? id}</p><EditionBadge character={character} /></div></header>
+      <header className="character-identity"><div className="modal-avatar"><PortraitScene id={id} /></div><div><p className="identity-kicker">角色身份</p><p className="identity-name">{characterName(id)}</p><p className="english-name">{character?.nameEn ?? id}</p><EditionBadge character={character} /></div></header>
       {racer && <CharacterOwnership room={room} characterId={id} selectedId={racer.id} onSelect={setSelectedId} />}
       {requestedInstanceId && !context.racers.some(current => current.id === requestedInstanceId) && <p className="stale-instance-note">原先查看的选手已不在本场；以下显示当前可见信息。</p>}
       {racer ? <>

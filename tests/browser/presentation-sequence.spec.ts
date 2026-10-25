@@ -2,16 +2,16 @@ import {mkdirSync,writeFileSync} from 'node:fs';
 import {test,expect,type Browser,type Page} from '@playwright/test';
 import {createApplication} from '../../src/server/index.js';
 import {createGame,resolveTasks} from '../../src/engine/index.js';
-import type {Room} from '../../src/shared/types.js';
+import type {GameState,Room} from '../../src/shared/types.js';
 
 let application:ReturnType<typeof createApplication>,url:string;
 test.beforeAll(async()=>{application=createApplication(':memory:');await new Promise<void>(resolve=>application.http.listen(0,'127.0.0.1',resolve));const address=application.http.address();if(!address||typeof address==='string')throw Error('Missing test address');url=`http://127.0.0.1:${address.port}`;});
 test.afterAll(async()=>{await application.close();});
-async function fixture(browser:Browser,ai:boolean,round=1){
+async function fixture(browser:Browser,ai:boolean,round=1,configure?:(game:GameState)=>void){
   const created=application.rooms.create('动画验收',ai?3:1,0,ai?'ai':'practice',2),code=created.identity.roomCode;
   const room=structuredClone(application.rooms.get(code)),game=createGame(room.game.players,123,ai?'ai':'practice');game.phase='race';game.round=round;if(!ai){game.players[0]!.hand=['legs','alchemist','gunk'];game.players[0]!.used=['coach'];}
   game.racers=(ai?['legs','alchemist','centaur']:['coach']).map((characterId,index)=>({id:`r${index}`,playerId:game.players[index]!.id,characterId,position:ai?[15,5,2][index]!:26,tripped:false,finished:false,eliminated:false,flags:{}}));
-  game.currentRacerId=ai?'r2':'r0';game.flags.testDice=[ai?6:3];game.queue.push({kind:'beginTurn',racerId:game.currentRacerId});resolveTasks(game);
+  game.currentRacerId=ai?'r2':'r0';game.flags.testDice=[ai?6:3];configure?.(game);game.queue.push({kind:'beginTurn',racerId:game.currentRacerId});resolveTasks(game);
   room.game=game;room.updatedAt=Date.now()+60_000;room.version++;application.rooms.rooms.set(code,room);application.store.save(room);
   const context=await browser.newContext({viewport:{width:1280,height:900},deviceScaleFactor:1});
   await context.addInitScript(({identity})=>{localStorage.setItem(`magical-athlete:identity:${identity.roomCode}`,JSON.stringify(identity));localStorage.setItem('magical-athlete:animation-speed','1');localStorage.setItem('magical-athlete:reduced-motion','false');localStorage.setItem('magical-athlete:low-quality','true');localStorage.setItem('magical-athlete:muted','true');},{identity:created.identity});
@@ -21,6 +21,62 @@ async function fixture(browser:Browser,ai:boolean,round=1){
   return{context,page,code};
 }
 const phases=(page:Page)=>page.evaluate(()=>(window as unknown as {__seenPhases:string[]}).__seenPhases);
+
+test('Suckerfish follow shows the triggering die first and leaves the next main roll manual',async({browser})=>{
+  const session=await fixture(browser,false,1,game=>{
+    const base=game.racers[0]!;
+    game.racers=['banana','leaf-triangle-man','suckerfish'].map((characterId,i)=>({...base,id:`r${i}`,characterId,position:i?5:0,flags:{}}));
+    game.baseTurnOrder=game.racers.map(r=>r.id);
+  });try{
+    const {page,code}=session,board=page.getByTestId('board-3d');
+    await page.getByTestId('roll-button').click();await expect(board).toHaveAttribute('data-phase','dice');
+    await expect(page.locator('.dice-caption')).toContainText('香蕉');await expect(page.getByTestId('skill-choice')).toHaveCount(0);
+    await expect(page.getByTestId('skill-choice')).toBeVisible({timeout:15000});
+    expect(application.rooms.get(code).game.pending?.kind).toBe('suckerfish');
+    expect((await phases(page))[0]).toBe('dice');
+    await page.getByTestId('skill-choice').getByRole('button',{name:'使用技能',exact:true}).click();
+    await expect(page.getByTestId('roll-button')).toBeEnabled({timeout:20000});
+    expect((await phases(page)).filter(phase=>phase==='dice')).toHaveLength(1);
+    expect(application.rooms.get(code).game.randomLog).toHaveLength(1);
+    await page.waitForTimeout(1500);expect(application.rooms.get(code).game.randomLog).toHaveLength(1);
+  }finally{await session.context.close();}
+});
+
+test('a rolled Mush ability appears only after its die animation',async({browser})=>{
+  const session=await fixture(browser,false,1,game=>{game.racers[0]!.characterId='mush';game.racers[0]!.position=2;game.deck=['hare'];game.flags.testDice=[1];});try{
+    const {page}=session;await page.getByTestId('roll-button').click();
+    await expect(page.getByTestId('board-3d')).toHaveAttribute('data-phase','dice');await expect(page.getByTestId('ability-reveal')).toHaveCount(0);
+    await expect(page.getByTestId('ability-reveal')).toBeVisible({timeout:15000});
+    await expect(page.locator('.dice-spotlight')).toBeHidden();await expect(page.getByTestId('ability-reveal')).toContainText('野兔');
+  }finally{await session.context.close();}
+});
+
+test('wandering monster dice and cell-change banner use the monster portrait',async({browser})=>{
+  const session=await fixture(browser,false,1,game=>{game.track='twisty-twirl';game.racers[0]!.characterId='suckerfish';game.racers[0]!.position=5;game.flags.twist={triggered:true,deck:[],drawn:['alchemy-lab'],monster:{position:1}};game.flags.testDice=[3,4];});try{
+    const {page}=session,board=page.getByTestId('board-3d');await page.getByTestId('roll-button').click();
+    const dice=page.getByRole('status',{name:'游荡巨口正在掷赛场效果骰',exact:true});
+    await expect(dice).toBeVisible({timeout:15000});await expect(dice.locator('.dice-source-avatar')).toHaveAttribute('aria-label','游荡巨口');
+    await expect(dice.locator('button')).toHaveCount(0);await expect(board).toHaveAttribute('data-neutral-monster','1');
+    mkdirSync('test-results/dice-causality',{recursive:true});await page.screenshot({path:'test-results/dice-causality/monster-die.png'});
+    await expect(page.getByTestId('skill-banner')).toContainText('游荡巨口');await expect(board).toHaveAttribute('data-neutral-monster','1');
+    await expect(board).toHaveAttribute('data-neutral-monster','5');
+  }finally{await session.context.close();}
+});
+
+test('a special-event NPC die is not labelled as Suckerfish automatically taking a main roll',async({browser})=>{
+  const session=await fixture(browser,false,1,game=>{game.racers[0]!.characterId='suckerfish';game.racers[0]!.position=2;});try{
+    const room=structuredClone(application.rooms.get(session.code));room.game.flags.thirds={id:'mouth',round:1,held:{},extraCards:[],npc:{id:'mouth',position:30}};
+    room.game.flags.testDice=[4];room.game.flags.needsBegin=true;room.game.queue=[];
+    application.rooms.rooms.set(room.code,room);application.store.save(room);
+    const reply=application.rooms.act(room.code,room.hostId,{actionId:crypto.randomUUID(),expectedVersion:room.version,action:{type:'next'}});expect(reply.ok).toBe(true);
+    const updated=application.rooms.get(room.code);for(const socket of application.io.sockets.sockets.values())if(socket.data.identity?.roomCode===room.code)socket.emit('snapshot',application.rooms.view(updated,socket.data.identity.playerId));
+    const {page}=session,dice=page.locator('.dice-spotlight');await expect(dice).toBeVisible();
+    await expect(dice.locator('.dice-caption')).toContainText('大嘴怪 · 赛场效果骰');await expect(dice.locator('.dice-source-avatar')).toHaveAttribute('aria-label','大嘴怪');
+    await expect(page.getByTestId('board-3d')).toHaveAttribute('data-event-marker','30');
+    await expect(page.getByTestId('skill-banner')).toContainText('大嘴');await expect(page.getByTestId('board-3d')).toHaveAttribute('data-event-marker','26');
+    await expect(page.getByTestId('roll-button')).toBeEnabled();expect(updated.game.logs.filter(event=>event.type==='die')).toHaveLength(0);
+  }finally{await session.context.close();}
+});
 
 test('AI dice, movement and reactive skill finish in order before my next-turn choice appears',async({browser})=>{
   const session=await fixture(browser,true);try{

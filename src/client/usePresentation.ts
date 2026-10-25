@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { Racer, RoomView } from '../shared/types.js';
-import { beatDuration, completeBeat, createPlayback, receiveRoom, skipPlayback, type PlaybackState, type PresentationBeat, type PresentationOptions } from './presentation.js';
+import { beatDuration, completeBeat, createPlayback, receiveRoom, skipPlayback, presentedTrackState, type PlaybackState, type PresentationBeat, type PresentationOptions } from './presentation.js';
 
 export interface UsePresentationResult {
   state: PlaybackState | null;
@@ -46,5 +46,6 @@ export function usePresentation(room: RoomView | null, options: PresentationOpti
   const skip = useCallback(() => setState(previous => previous?.queue[0]?.kind === 'intro' ? completeBeat(previous) : previous && latestRoom.current ? skipPlayback(previous, latestRoom.current) : previous), []);
   // While a completed action is still being shown, the action prompt must wait.
   const displayRoom: RoomView | null = state ? { ...state.confirmed, players: state.confirmed.players.map(player => ({...player, name: room?.players.find(current => current.id === player.id)?.name ?? player.name})), spectators: room?.spectators ?? state.confirmed.spectators, racers: state.racers, ...(state.queue.length && ['results', 'finished'].includes(state.confirmed.phase) ? { phase: 'race' as const } : {}) } : room;
+  if(displayRoom&&state)displayRoom.trackState=presentedTrackState(state.confirmed,state.queue);
   return { state, beat, racers: state?.racers ?? room?.racers ?? [], playing: (state?.queue.length ?? 0) > 0, skip, startedAt, durationMs, displayRoom, startIntro, introReady };
 }

@@ -89,6 +89,8 @@ export interface RaceResult { drawReason?: 'forced-cycle' }
 export interface GameEvent { changes?: { racerId:string; playerId?:string; form?:string; mount?:string|null }[]; }
 
 export interface GameEvent { rollKind?: 'main'|'ability'|'contest'|'recovery'|'reroll'; }
+/** Public stage pieces have an identity, but no player-controlled racer seat. */
+export interface GameEvent { actor?: { name:string; characterId:string }; rollId?:number; }
 /** Public grant at this event's exact time; never private draw candidates. */
 export interface GameEvent { grantedPowerIds?: string[]; grantDuration?: PublicAbilityEntry['duration']; }
 

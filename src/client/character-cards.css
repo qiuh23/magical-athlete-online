@@ -1,0 +1,74 @@
+/* Printed character cards: warm stock, quiet ink, and a safe illustration stage. */
+body:has(.character-grid){background:#eceede}
+.avatar{overflow:hidden}
+.avatar.sw-avatar,.avatar.fan-avatar{border-radius:0;clip-path:none;background:transparent}
+.portrait-scene{position:relative;display:block;isolation:isolate;width:100%;aspect-ratio:1;color:var(--portrait-accent)}
+.portrait-scenery{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.portrait-scene>.avatar{position:absolute;width:73%;height:73%;left:13.5%;top:12%;filter:drop-shadow(0 3px 1px #31453a1c);transition:transform .25s ease}
+.character-grid{gap:24px;align-items:stretch}
+.character-card{position:relative;display:flex;flex-direction:column;min-width:0;padding:7px;border:1px solid #bcc0a9;border-radius:15px;background:#fffdf5;box-shadow:0 2px 3px #3143320b,0 9px 22px -14px #25392d66;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.character-card:after{content:"";position:absolute;inset:3px;border:1px solid #dedfce;border-radius:12px;pointer-events:none}
+.character-card.selected{border-color:#426647;outline:3px solid #527851;outline-offset:3px;box-shadow:0 8px 24px -12px #284f4173}
+.character-card.used{opacity:.7}
+.character-card.used .portrait-scene{filter:grayscale(.7)}
+.character-card:nth-child(n) .character-avatar-detail{display:flex;flex-direction:column;justify-content:flex-start;position:relative;height:auto;padding:14px 12px 10px;background-color:var(--portrait-paper);background-image:radial-gradient(#62594312 .65px,transparent .65px);background-size:5px 5px;border:1px solid #536d4826;border-radius:9px 9px 4px 4px;overflow:hidden;color:var(--portrait-accent)}
+.card-print-line{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:4px;width:100%;font-family:Georgia,"Times New Roman",serif;font-size:9px;font-weight:700;letter-spacing:.1em;white-space:nowrap}
+.card-print-line>span:last-child{font-size:10px;font-style:italic;letter-spacing:0;font-variant-numeric:tabular-nums}
+.character-avatar-detail .portrait-scene{width:100%;max-width:255px;margin:-1px auto -19px}
+.character-avatar-detail .portrait-scene>.avatar{width:73%;height:73%}
+.character-avatar-detail:hover .avatar{transform:none}
+.card-art-caption{display:flex;align-items:center;justify-content:space-between;width:100%;border-top:1px solid #536d4830;padding-top:7px;font-size:8px;letter-spacing:.2em;font-weight:700}
+.card-art-caption>span:nth-child(2){font-size:13px;line-height:1;opacity:.6}
+.character-card .character-copy{display:flex;flex-direction:column;flex:1;min-width:0;padding:18px 14px 8px}
+.character-copy h3{font-family:"Noto Serif SC","Songti SC","STSong","SimSun",serif;font-size:25px;line-height:1.35;font-weight:900;letter-spacing:.025em;color:#2c4237;overflow-wrap:anywhere}
+.character-card .english-name{font-family:Georgia,"Times New Roman",serif;font-style:italic;font-size:12px;line-height:1.5;letter-spacing:.02em;font-weight:400;color:#6e7968;opacity:1;margin:4px 0 12px;overflow-wrap:anywhere}
+.character-copy .edition-badge{align-self:flex-start;max-width:100%;margin:0;padding:3px 6px;background:#f2f1e7;color:#66705c;border:1px solid #d5d8c8;border-radius:3px;font-size:9px;line-height:1.5;font-weight:500;white-space:normal}
+.character-copy .ability-text{min-height:0;margin-top:12px;color:#465443;font-size:12px;line-height:1.85;overflow-wrap:anywhere;white-space:pre-line}
+.card-actions{margin-top:auto;padding-top:16px}
+.character-card:nth-child(n) .character-art.character-pick{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:42px;height:auto;margin:0;padding:9px 12px;border:1px solid #2e5147;border-radius:5px;background:#355b4f;color:#fffdf1;font-size:12px;font-weight:700;transition:background .2s ease,transform .2s ease}
+.character-card:nth-child(n) .character-art.character-pick[aria-pressed=true]{background:#e7efde;color:#36553d;border-color:#7b966e}
+.character-card:nth-child(n) .character-art.character-pick:disabled{background:#f0f0e5;border-color:#d5d7c7;color:#8a917e;opacity:1}
+.character-card .detail-button{min-height:39px;margin:7px 0 0;padding:8px 0 2px;border:0;color:#63765c;font-size:10px;font-weight:600}
+.character-card .detail-button span{font-weight:400}
+.character-card .selected-tick{top:34px;right:11px;width:27px;height:27px;border:2px solid #fffdf4;background:#3d644c;color:#fffdf4;box-shadow:0 2px 5px #2d463429;z-index:2}
+.character-card .used-label{bottom:32px;background:#3a493c;border:1px solid #fffdf4;z-index:2}
+.character-card button:focus-visible{outline:3px solid #4b715a;outline-offset:3px;z-index:3}
+.character-detail .character-identity .modal-avatar{width:106px;height:106px;padding:0;border:1px solid #d1d9c3;border-radius:12px;background:#f0f1e3;overflow:hidden}
+.character-detail .modal-avatar .portrait-scene{background:var(--portrait-paper)}
+.character-detail .identity-name{font-family:"Noto Serif SC","Songti SC","STSong","SimSun",serif;font-size:23px;color:#2c4237}
+.modal-panel:has(.character-detail){border:1px solid #a6b198;border-radius:15px;box-shadow:0 20px 80px #152d3a40;background:#fffdf5}
+.modal-panel:has(.character-detail) .modal-header{background:#f1f2e6;border-bottom:1px solid #d5d9c5;color:#34523e}
+.modal-panel:has(.character-detail) .modal-header h2{font-size:18px;letter-spacing:.03em}
+.modal-panel:has(.character-detail) .close-button{background:#fffdf5;border:1px solid #a6b198;color:#45664c}
+@media(hover:hover){
+ .character-card:hover{transform:translateY(-4px);border-color:#a4b198;box-shadow:0 5px 8px #3143320a,0 16px 30px -15px #25392d55}
+ .character-avatar-detail:hover .avatar{transform:translateY(-3px) rotate(-2deg)}
+ .character-card:nth-child(n) .character-art.character-pick:hover:not(:disabled){background:#27483e}
+ .character-card:nth-child(n) .character-art.character-pick[aria-pressed=true]:hover:not(:disabled){background:#d9e6cd}
+ .character-card .detail-button:hover{color:#294d3d}
+}
+.character-card .character-pick:active:not(:disabled){transform:translateY(1px)}
+@media(max-width:1000px){.character-grid{gap:18px}}
+@media(max-width:650px){
+ .character-grid{gap:13px}
+ .character-card{padding:5px;border-radius:11px}
+ .character-card:after{inset:2px;border-radius:9px}
+ .character-card:nth-child(n) .character-avatar-detail{padding:10px 7px 7px;border-radius:6px 6px 3px 3px}
+ .card-print-line{font-size:6px;letter-spacing:.04em}
+ .card-print-line>span:last-child{font-size:8px}
+ .character-avatar-detail .portrait-scene{margin:2px auto -11px}
+ .card-art-caption{font-size:7px;letter-spacing:.05em;padding-top:5px}
+ .character-card .character-copy{padding:12px 7px 5px}
+ .character-copy h3{font-size:20px;line-height:1.4}
+ .character-card .english-name{font-size:10px;margin:3px 0 9px}
+ .character-copy .edition-badge{font-size:8px;padding:2px 4px}
+ .character-copy .ability-text{font-size:11px;line-height:1.8;margin-top:10px}
+ .card-actions{padding-top:12px}
+ .character-card:nth-child(n) .character-art.character-pick{font-size:11px;min-height:44px;padding:9px 8px}
+ .character-card .detail-button{font-size:9px;min-height:44px;margin-top:3px}
+ .character-card .selected-tick{top:25px;right:7px;width:23px;height:23px}
+ .character-detail .character-identity .modal-avatar{width:86px;height:86px}
+ .character-detail .identity-name{font-size:20px}
+}
+@media(prefers-reduced-motion:reduce){.character-card,.portrait-scene>.avatar{transition:none}.character-card:hover,.character-avatar-detail:hover .avatar{transform:none}}
+html[data-motion=reduce] .character-card:hover,html[data-motion=reduce] .character-avatar-detail:hover .avatar{transform:none}

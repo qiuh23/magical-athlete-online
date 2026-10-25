@@ -1,4 +1,5 @@
 import type { GameEvent, Racer, RoomView } from '../shared/types.js';
+import { CHARACTERS } from '../shared/characters.js';
 import { abilityRevealForEvent, type AbilityRevealData } from './ability-reveal.js';
 
 /** Presentation consumes confirmed event IDs. It never sends a rule action. */
@@ -17,6 +18,7 @@ export interface PresentationBeat {
   kind: PresentationKind;
   events: GameEvent[];
   source?: string;
+  actor?: GameEvent['actor'];
   targets: string[];
   motions: PresentationMotion[];
   face?: number;
@@ -102,7 +104,7 @@ function beatForEvent(event: GameEvent, room: RoomView): PresentationBeat | unde
   else if (event.type === 'warp') kind = event.cause === 'flip-flop' ? 'swap' : 'warp';
   else if (event.type === 'place') kind = 'warp';
   else if (['trip', 'recover', 'score', 'finish', 'eliminate'].includes(event.type)) kind = event.type as PresentationKind;
-  else if (abilityReveal || ['twist', 'power', 'copy', 'prediction', 'duel', 'cancel', 'reroll', 'skip', 'transform', 'mount', 'control', 'secret-reveal', 'die-modified', 'cancel-race', 'cycle-draw', 'loop'].includes(event.type)) kind = 'skill';
+  else if (abilityReveal || ['twist', 'twist-monster', 'event-marker', 'power', 'copy', 'prediction', 'duel', 'cancel', 'reroll', 'skip', 'transform', 'mount', 'control', 'secret-reveal', 'die-modified', 'cancel-race', 'cycle-draw', 'loop'].includes(event.type)) kind = 'skill';
   else return undefined;
   const faces = event.faces?.length && event.faces.every(value => Number.isInteger(value) && value >= 1 && value <= 6) ? [...event.faces] : undefined;
   const face = kind === 'dice' ? confirmedFace(event, room) : undefined;
@@ -111,7 +113,30 @@ function beatForEvent(event: GameEvent, room: RoomView): PresentationBeat | unde
   const longest = motions.reduce((steps, motion) => Math.max(steps, Math.max(0,motion.path.length-1)), 0);
   const durationMs = kind === 'dice' ? event.type === 'multi-dice' ? 3600 : 2500 : kind === 'duel-dice' ? 3000 : kind === 'skill' ? 1800 : kind === 'move' ? Math.min(2200, Math.max(800, 280 + Math.max(1, longest) * 240)) : kind === 'swap' || kind === 'warp' || kind === 'finish' ? 1100 : 850;
   const boundary = eventsOf(room).findLast(log => log.id <= event.id && (log.type === 'turn' || log.type === 'reveal'));
-  return { key: `${room.code}:${room.round}:${event.id}`, chainId: `${room.code}:${room.round}:chain:${boundary?.id ?? 0}`, kind, events: [event], source: event.source, targets: event.targets ?? (event.source ? [event.source] : []), motions, face, faces, cause: event.cause, durationMs, naturalDurationMs: durationMs, ...(abilityReveal ? {abilityReveal} : {}) };
+  // Compatibility for saved public events that predate explicit stage actors.
+  const npc=event.cause==='thirds-npc'?room.trackState?.event?.npc:undefined;
+  const actor=event.actor??(npc?{name:CHARACTERS.find(card=>card.id===npc.id)?.nameZh??npc.id,characterId:npc.id}:!event.source&&(event.type==='twist-monster'||event.cause==='twist-alchemy-lab')?{name:'游荡巨口',characterId:'mouth'}:undefined);
+  const source=actor?undefined:event.source;
+  return { key: `${room.code}:${room.round}:${event.id}`, chainId: `${room.code}:${room.round}:chain:${boundary?.id ?? 0}`, kind, events: [event], source, actor, targets: event.targets ?? (source ? [source] : []), motions, face, faces, cause: event.cause, durationMs, naturalDurationMs: durationMs, ...(abilityReveal ? {abilityReveal} : {}) };
+}
+
+/** A stage die never borrows the current turn's racer portrait. */
+export function presentationActor(beat:PresentationBeat|undefined,racers:Racer[]) {
+  if(beat?.actor)return {...beat.actor,racerId:undefined};
+  const racer=racers.find(racer=>racer.id===beat?.source);
+  return racer?{name:CHARACTERS.find(card=>card.id===racer.characterId)?.nameZh??racer.characterId,characterId:racer.characterId,racerId:racer.id}:{name:'赛场效果',characterId:undefined,racerId:undefined};
+}
+
+/** Keep public pieces at the pre-effect cell until their queued movement ends. */
+export function presentedTrackState(room:RoomView,queue:PresentationBeat[]):RoomView['trackState'] {
+  if(!room.trackState||!queue.length)return room.trackState;
+  const state=structuredClone(room.trackState);
+  for(const beat of queue.toReversed())for(const event of beat.events.toReversed()){
+    if(event.before?.[0]===undefined)continue;
+    const piece=event.type==='twist-monster'?state.twist?.monster:event.type==='event-marker'?state.event?.npc:undefined;
+    if(piece){piece.position=event.before[0];piece.finished=false;}
+  }
+  return state;
 }
 
 /** Queue pressure may gently shorten unstarted beats, never erase their readable
@@ -241,7 +266,7 @@ export function receiveRoom(state: PlaybackState, room: RoomView, options: { rec
     if (!beat) continue;
     // `die` is the throw; `roll` confirms it after the optional reroll window.
     // They may arrive in different snapshots. A reroll emits a new `die` ID.
-    if (event.type === 'roll' && lastDie && lastDie.source === event.source && lastDie.face === beat.face) { lastDie = undefined; continue; }
+    if (event.type === 'roll' && (event.rollId!==undefined&&event.rollId<event.id || lastDie&&lastDie.source===event.source&&lastDie.face===beat.face)) { lastDie = undefined; continue; }
     if (event.type === 'die') lastDie = { source: event.source, face: beat.face!, eventId: event.id };
     if (event.type === 'roll') lastDie = undefined;
     const merged = mergeSimultaneous(queue.at(-1), beat, state.queue[0]?.key);

@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import type { Racer, RoomView } from '../../shared/types.js';
 import { TRACKS, type TrackId } from '../../shared/tracks.js';
 import { CHARACTERS } from '../../shared/characters.js';
-import type { PresentationBeat } from '../presentation.js';
+import { presentationActor, type PresentationBeat } from '../presentation.js';
 import { Avatar } from '../avatars.js';
 import { ToyCharacter } from './ToyCharacter.js';
 import { DioramaStadium } from './DioramaStadium.js';
@@ -93,8 +93,8 @@ export function Board3D({ room, racers, beat, queue, startedAt, durationMs, lowQ
   const scoreLabel = useRef<HTMLSpanElement>(null);
   useEffect(() => { const m = matchMedia('(max-width: 650px)'); const update = () => setCompact(m.matches); m.addEventListener('change', update); return () => m.removeEventListener('change', update); }, []);
   useDiceSound(beat, durationMs, muted);
-  const active = beat?.source ?? room.currentRacerId;
-  const selected = racers.find(r => r.id === active);
+  const active = beat ? beat.source : room.currentRacerId;
+  const selected = presentationActor(beat,racers);
   const dice = beat?.kind === 'dice' || beat?.kind === 'duel-dice';
   const duelContenders = beat?.kind === 'duel-dice' && beat.faces?.length === 2 ? beat.targets.slice(0, 2).flatMap((id, index) => { const racer = racers.find(value => value.id === id); return racer ? [{ racerId: id, characterId: racer.characterId, name: characterName(racer.characterId), face: beat.faces![index]! }] : []; }) : undefined;
   useEffect(() => {
@@ -143,7 +143,7 @@ export function Board3D({ room, racers, beat, queue, startedAt, durationMs, lowQ
     {route && onChooseRoute && <RouteButtons route={route} buttons={routeButtons} disabled={choiceBusy} onChoose={onChooseRoute} />}
     <div className="scene-labels" aria-hidden="true">{racers.filter(r => !r.eliminated).map(racer => { const owner = room.players.find(p => p.id === racer.playerId), scale = occupancy(racer, racers, racer.position, compact, room.track).scale; return <span key={racer.id} data-racer-id={racer.id} ref={element => { if (element) labels.current.set(racer.id, element); else labels.current.delete(racer.id); }} className={`pawn-seat ${active === racer.id ? 'is-active' : ''} ${scale < .5 ? 'is-crowded' : scale < .9 ? 'is-shared' : ''}`} style={{ borderColor: owner?.color }}>{(owner?.seat ?? 0) + 1}</span>; })}<span ref={scoreLabel} className="score-float" style={{ display: beat?.kind === 'score' || beat?.kind === 'finish' ? undefined : 'none' }}>{beat?.events[0]?.text.match(/[+＋-]\d+分/)?.[0] ?? (beat?.kind === 'finish' ? '冲线！' : '得分！')}</span></div>
     {lost && <div className="scene-fallback"><strong>正在恢复图形画面…</strong><button onClick={() => { setLost(false); setResetKey(n => n + 1); }}>重新载入 3D</button></div>}
-    <SceneBoundary resetKey={resetKey} retry={() => setResetKey(n => n + 1)}><DiceSpotlight active={dice} beatKey={dice ? beat?.key : undefined} contenders={duelContenders} face={beat?.face ?? room.lastRoll?.face ?? 1} faces={beat?.faces} cause={beat?.cause} detail={beat?.events.map(event=>event.text).join(" · ")} sourceRacerId={selected?.id} sourceCharacterId={selected?.characterId} onDetail={onDetail} startedAt={startedAt} durationMs={durationMs} reducedMotion={reducedMotion} lowQuality={lowQuality} source={selected ? characterName(selected.characterId) : '运动员'} /></SceneBoundary>
+    <SceneBoundary resetKey={resetKey} retry={() => setResetKey(n => n + 1)}><DiceSpotlight active={dice} beatKey={dice ? beat?.key : undefined} contenders={duelContenders} face={beat?.face ?? room.lastRoll?.face ?? 1} faces={beat?.faces} cause={beat?.cause} detail={beat?.events.map(event=>event.text).join(" · ")} sourceRacerId={selected.racerId} sourceCharacterId={selected.characterId} stageActor={!!beat?.actor} onDetail={onDetail} startedAt={startedAt} durationMs={durationMs} reducedMotion={reducedMotion} lowQuality={lowQuality} source={selected.name} /></SceneBoundary>
     <ActionBanner track={room.track} reversed={room.trackState?.reversed} beat={beat} racers={racers} onDetail={onDetail} />
     <ul className="sr-only" aria-label="立体棋盘选手位置">{racers.map(r => <li key={r.id} data-testid="scene-racer" data-racer-id={r.id} data-position={r.position} data-target-position={beat?.motions.find(m => m.racerId === r.id)?.to ?? r.position}>{characterName(r.characterId)} · {r.position} 格{r.tripped ? ' · 绊倒' : ''}</li>)}</ul>
   </section>;
@@ -289,14 +289,15 @@ function ActionBanner({ track, reversed, beat, racers, onDetail }: { track: Trac
   if (!beat || beat.events.some(event => event.type === 'twist') || beat.abilityReveal || !skillMove && !['skill', 'trip', 'recover', 'score', 'finish', 'warp', 'swap'].includes(beat.kind)) return null;
   const affected = racers.filter(racer => beat.targets.includes(racer.id));
   const actor = skillMove ? affected[0] : racers.find(racer => racer.id === beat.source) ?? affected[0];
+  const stageActor=beat.actor;
   const distances = [...new Set(beat.motions.map(motion => trackMovementDistance(track, motion.path, reversed)))];
   const distance = distances[0] ?? 0;
   const motionText = distances.length > 1 ? '同时移动' : `${beat.motions.length > 1 ? '同时' : ''}${distance < 0 ? '后退' : '前进'}${Math.abs(distance)}格`;
   const effectName = beat.cause === 'track-arrow' ? '箭头格' : abilityCaption(beat.cause);
   const title = skillMove ? `${effectName} → ${motionText}` : beat.kind === 'skill' ? beat.events[0]?.type === 'cycle-draw' ? '强制循环 · 本场和局' : beat.events[0]?.type === 'loop' ? '连锁重复 · 停止重复分支' : beat.events[0]?.type === 'skip' ? beat.cause==='show-off'?'追加失败 · 主移动取消':'跳过本次行动' : abilityCaption(beat.cause ?? actor?.characterId) : beat.kind === 'trip' ? '绊倒！' : beat.kind === 'recover' ? '起身 · 本次不掷骰' : beat.kind === 'swap' ? '交换位置' : beat.kind === 'warp' ? '瞬间移动' : beat.kind === 'finish' ? '冲过终点！' : beat.events[0]?.text.match(/[+＋-]\d+分/)?.[0] ?? '获得分数';
-  const caption = skillMove ? `技能效果 · ${affected.map(racer => characterName(racer.characterId)).join('、') || '受影响角色'}` : `${actor ? characterName(actor.characterId) : '魔法赛道'} · ${beat.kind === 'skill' ? '技能发动' : '赛场瞬间'}`;
+  const caption = stageActor ? `${stageActor.name} · 赛场效果` : skillMove ? `技能效果 · ${affected.map(racer => characterName(racer.characterId)).join('、') || '受影响角色'}` : `${actor ? characterName(actor.characterId) : '魔法赛道'} · ${beat.kind === 'skill' ? '技能发动' : '赛场瞬间'}`;
   const detail = `${beat.kind === 'recover' ? '起身替代主移动，本次不掷骰。' : ''}${beat.events.map(event => event.text).join(' · ')}`;
-  return <div key={beat.key} className={`scene-action-banner banner-${beat.kind}`} data-testid="skill-banner" role="status">{actor && <button type="button" className="skill-banner-avatar board-avatar-button" onClick={() => onDetail(actor.characterId, actor.id)} aria-label={`查看${characterName(actor.characterId)}技能与当前玩家`}><Avatar id={actor.characterId} /></button>}<div><small>{caption}</small><strong>{title}</strong><span>{detail}</span></div><b aria-hidden="true">✦</b></div>;
+  return <div key={beat.key} className={`scene-action-banner banner-${beat.kind}`} data-testid="skill-banner" role="status">{stageActor ? <span className="skill-banner-avatar" aria-label={stageActor.name}><Avatar id={stageActor.characterId}/></span> : actor && <button type="button" className="skill-banner-avatar board-avatar-button" onClick={() => onDetail(actor.characterId, actor.id)} aria-label={`查看${characterName(actor.characterId)}技能与当前玩家`}><Avatar id={actor.characterId} /></button>}<div><small>{caption}</small><strong>{title}</strong><span>{detail}</span></div><b aria-hidden="true">✦</b></div>;
 }
 
 function Pawn({ racer, racers, room, compact, beat, startedAt, durationMs, lowQuality, reducedMotion, active, onDetail, labels }: { racer: Racer; racers: Racer[]; room: RoomView; compact: boolean; beat?: PresentationBeat; startedAt: number; durationMs: number; lowQuality: boolean; reducedMotion: boolean; active: boolean; onDetail: (id: string, racerId?: string) => void; labels: React.RefObject<Map<string, HTMLSpanElement>> }) {
