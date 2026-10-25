@@ -9,6 +9,7 @@ on:
         options:
           - eight-only
           - ability-interactions
+          - deployment
           - all
   push:
     branches: [main]
@@ -55,7 +56,7 @@ jobs:
           HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
       - run: pnpm typecheck
       - name: Validate runtime backends, credentials, creation retries and quotas
-        run: pnpm exec tsx --test tests/random-id.test.ts tests/backends.test.ts tests/network-backends.test.ts tests/dual-backend-server.test.ts tests/dual-backend-worker.test.ts tests/owner-recovery.test.ts tests/community-network.test.ts tests/deployment-capacity.test.ts tests/deployment-info.test.ts tests/ci-installer.test.ts tests/deployment-workflow.test.ts
+        run: pnpm exec tsx --test tests/random-id.test.ts tests/backends.test.ts tests/network-backends.test.ts tests/dual-backend-server.test.ts tests/dual-backend-worker.test.ts tests/owner-recovery.test.ts tests/community-network.test.ts tests/deployment-capacity.test.ts tests/deployment-info.test.ts tests/ci-validation-scope.test.ts tests/ci-installer.test.ts tests/deployment-workflow.test.ts
       - name: Validate frozen schedules, long drafting, score audit and worker persistence
         run: pnpm exec tsx --test tests/competition.test.ts tests/schedule-review.test.ts tests/rules-version.test.ts tests/relay.test.ts
       - name: Validate Scout playback and owner-absence room lifecycle
@@ -84,10 +85,12 @@ jobs:
         env:
           CI: true
       - name: Validate route dice reminder and pre-race map preview
+        if: steps.validation.outputs.suite != 'deployment'
         run: pnpm exec playwright test tests/browser/route-selection-preview.spec.ts
         env:
           CI: true
       - name: Validate home configuration, pending choices and rematch setup
+        if: steps.validation.outputs.suite != 'deployment'
         run: pnpm exec playwright test tests/browser/competition.spec.ts --grep "home shows|tour can be created|two browsers preserve|rematch"
         env:
           CI: true
@@ -97,7 +100,7 @@ jobs:
         env:
           CI: true
       - name: Validate representative Whirly and Bridges scenes
-        if: steps.validation.outputs.suite != 'all'
+        if: steps.validation.outputs.suite != 'all' && steps.validation.outputs.suite != 'deployment'
         run: pnpm exec playwright test tests/browser/new-track-scenes.spec.ts tests/browser/whirly-model.spec.ts tests/browser/expansion-bridges.spec.ts --grep "whirly-world actual|Whirly|Bridges actual scene"
         env:
           CI: true
@@ -107,10 +110,12 @@ jobs:
         env:
           CI: true
       - name: Validate special event setup, private choices and refresh
+        if: steps.validation.outputs.suite != 'deployment'
         run: pnpm exec playwright test tests/browser/special-events.spec.ts
         env:
           CI: true
       - name: Validate owner-absence voting and current-race closure
+        if: steps.validation.outputs.suite != 'deployment'
         run: pnpm exec playwright test tests/browser/room-continuation.spec.ts
         env:
           CI: true
@@ -125,11 +130,12 @@ jobs:
         env:
           CI: true
       - name: Validate relay snapshot and playback diagnostic helpers
+        if: steps.validation.outputs.suite != 'deployment'
         run: pnpm exec playwright test -c playwright.relay.config.ts --grep "snapshot aggregation|playback skip|playback diagnostics"
         env:
           CI: true
       - run: pnpm exec playwright test -c playwright.relay.config.ts --grep "server authority 8 independent"
-        if: steps.validation.outputs.suite != 'ability-interactions'
+        if: steps.validation.outputs.suite != 'ability-interactions' && steps.validation.outputs.suite != 'deployment'
         env:
           CI: true
           RELAY_SMOKE: '1'

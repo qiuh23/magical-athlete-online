@@ -20,6 +20,7 @@ cp -a dist/server "$WORK/server"
 mkdir "$WORK/dist"
 mv "$WORK/client" "$WORK/server" "$WORK/dist/"
 cp -a node_modules package.json pnpm-lock.yaml "$WORK/"
+cp pnpm-workspace.yaml "$WORK/"
 (cd "$WORK" && CI=true pnpm prune --prod --ignore-scripts --yes)
 node --input-type=module - "$WORK" "$OUTPUT" "$COMMIT" "$TARGET" "$RUN_ID" "$PR_NUMBER" <<'NODE'
 import fs from 'node:fs';
