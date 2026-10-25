@@ -1,5 +1,5 @@
-# Controlled temporary direct-IP HTTP entry. No filing exemption is implied.
-# ACCESS_CIDRS is validated to individually approved IPv4 /32 sources.
+# Temporary direct-IP HTTP entry. No filing exemption is implied.
+# IPv4 /32 by default; 0.0.0.0/0 requires explicit PUBLIC_HTTP_ACCESS=true.
 server {
     listen 80;
     server_name ${PUBLIC_IP};

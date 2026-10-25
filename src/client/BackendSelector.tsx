@@ -49,10 +49,10 @@ export function BackendSelector({ statuses, selected, checking, onSelect, onRefr
         <span className="backend-name"><strong>{backendLabel(status.backend.id)}</strong><span className="backend-status">{statusLabels[status.state]}</span></span>
         <span className="backend-detail">{status.state === 'available' && status.latencyMs !== undefined ? `连接延迟 ${Math.round(status.latencyMs)} ms` : status.state === 'checking' ? '正在检测 API 与实时连接' : status.state === 'undeployed' ? '尚未部署或开放' : status.error || '连接失败'}</span>
         {selected === status.backend.id && <span className="backend-selected">已选择</span>}
-      </button>{status.entryUrl && <a className="backend-entry-link" href={status.entryUrl}>打开{backendLabel(status.backend.id)}临时 HTTP 入口（限白名单网络）</a>}</div>)}
+      </button>{status.entryUrl && <a className="backend-entry-link" href={status.entryUrl}>打开{backendLabel(status.backend.id)}临时 HTTP 入口</a>}</div>)}
     </div>
     <p className="backend-help">加入者也需要能够连接所选服务器；有国内玩家时建议选择阿里云内地。</p>
-    {temporaryHttpPage() && <p className="backend-help">临时 HTTP 连接未加密，仅供受控测试。请保留当前入口以恢复本机房间身份。</p>}
+    {temporaryHttpPage() && <p className="backend-help">临时 HTTP 连接未加密。请保留当前入口以恢复本机房间身份。</p>}
     {!checking && !statuses.some(status => status.state === 'available') && <p className="backend-failure" role="status">当前没有可用服务器，暂时无法在线建房。请稍后重新检测。</p>}
   </section>;
 }

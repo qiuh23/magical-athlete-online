@@ -6,15 +6,16 @@
 
 用户希望尽快通过阿里云独立网页选择两个后端。新增直接 IP 的 HTTP 页面与 Socket.IO 支持，以及 HTTPS 页面上的明确入口切换提示。浏览器 UUID 使用安全随机字节回退；没有把 HTTP 地址静默注入 HTTPS 请求，也不将恢复凭据放入跳转 URL。
 
-- HTTP 测试入口：`http://115.29.188.62`；已实际部署并从批准网络验证，仅允许安全组及 Nginx 中已批准的来源 IPv4 `/32`。
+- 临时 HTTP 入口：`http://115.29.188.62`；已实际部署。用户随后明确要求“允许所有其他地址”，现已将安全组 TCP 80 与 Nginx 来源改为 `0.0.0.0/0`，允许公网 IPv4 访问，不再要求朋友提供 IP。SSH 仍仅允许管理地址，Node 3000 仍回环。
 - 正式域名：`https://magical-athlete-online.cn`；仍待 ICP 完成后申请正式 HTTPS 并开放。
 - Cloudflare：`https://magical-athlete.qiuh23.workers.dev`；保留正式服务，已实际降至 15，阿里云为 15；切换时原服真人房为 0，没有结束既有对局。
 - 无新增付费项目，既有 ECS 99 元 + 域名 38 元，总计 137 元，均关闭自动续费。
-- 阿里云应用实际版本 `734791023b182a0760f2bfab9fe2a05460bc3c17`；Cloudflare 版本 `5977d248-c9c8-4f89-be7d-7cb12fbe3604`，源 `9f3d3cf` 与 `7347910` 的源码树完全一致（后者基于已合并的最新 main）。原 PR #22 已由外部合并，本次新增改动见 [PR #23](https://github.com/qiuh23/magical-athlete-online/pull/23)，不自动合并。
+- 首次 HTTP 发布的阿里云应用版本 `734791023b182a0760f2bfab9fe2a05460bc3c17`、Cloudflare 版本 `5977d248-c9c8-4f89-be7d-7cb12fbe3604`；源 `9f3d3cf` 与 `7347910` 的源码树完全一致（后者基于已合并的最新 main）。取消白名单后的页面提示和后续部署版本以 [PR #23](https://github.com/qiuh23/magical-athlete-online/pull/23) 最新记录为准。原 PR #22 已由外部合并，本 PR 不自动合并。
 - 实际 HTTP 双入口 14 项通过：各后端双会话、HTTPS 邀请切 HTTP、私密目录、准备、双向聊天、断线和刷新身份恢复、桌面/手机、练习合法掷骰及 AI 启动；4 个测试房关闭，页面异常为 0。随后真实 HTTP 服务重启测试验证两身份、准备状态、聊天和建房回执全部恢复，测试房也关闭。
 - ECS 无法直连 CF 的部署配额接口，已通过管理端实时读取实际配额并经 SSH 传入 root/0600、5 分钟有效的来源绑定快照完成前置检查；未跳过配额验证，阿里云运行时查房不依赖 CF。
+- 公网 HTTP 模式实际启用：health 报告 `publicAccessEnabled:true`、`controlledValidation:false`，与只限来源验证明确区分。未开放公网 443，正式域名 HTTPS 仍待备案通过。
 
-HTTP/IP 不豁免备案；[阿里云官方要求](https://help.aliyun.com/zh/icp-filing/basic-icp-service/product-overview/icp-filing-requirements-for-a-regular-website) 同时说明 IP 和 HTTP 的备案要求。临时入口属于受控验证，不宣称国内全网公开上线。备案继续审核，本人留意审核电话及短信即可。具体操作、关闭和切换 HTTPS 见 [HTTP 过渡说明](http-transition.md)。
+HTTP/IP 不豁免备案；[阿里云官方要求](https://help.aliyun.com/zh/icp-filing/basic-icp-service/product-overview/icp-filing-requirements-for-a-regular-website) 同时说明 IP 和 HTTP 的备案要求。用户在获知这些限制后明确要求允许所有其他来源，故临时 IP HTTP 已开放公网，但不能据此写成备案成功或保证运营商不会限制访问。备案继续审核，本人留意审核电话及短信即可。具体操作、关闭和切换 HTTPS 见 [HTTP 过渡说明](http-transition.md)。
 ## 已核实与已批准
 
 - 中国站账号已完成实名，现有 Alibaba Cloud CLI OAuth 配置可执行只读查询。配置和凭据保留在本机，不提交仓库。
