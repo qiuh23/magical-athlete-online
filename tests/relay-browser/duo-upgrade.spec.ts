@@ -18,7 +18,7 @@ async function fixture(browser:Browser){
   const [host,guest]=await Promise.all(contexts.map(context=>context.newPage())) as [Page,Page],errors:string[]=[];
   for(const page of [host,guest])page.on('pageerror',error=>errors.push(error.message));
   await host.goto(url);await host.getByRole('tab',{name:'创建房间',exact:true}).click();await host.getByLabel('你的昵称').fill('双人计算房主');await host.getByLabel('房间人数上限').selectOption('2');await host.getByLabel('每次操作时限').selectOption('0');await host.getByRole('button',{name:'创建房间，召集朋友'}).click();
-  await expect(host.locator('.connection.is-online')).toBeVisible();const code=host.url().split('/').at(-1)!;
+  await expect(host.locator('.connection.is-online')).toBeVisible();const code=host.url().split('/').at(-1)!.replace(/^[CA]-/,'');
   await guest.goto(`${url}/room/${code}`);await guest.getByLabel('你的昵称').fill('双人手机选手');await guest.getByRole('button',{name:'加入这场胡闹'}).click();await expect(guest.locator('.connection.is-online')).toBeVisible();
   await expect.poll(async()=>(await saved(host,code)).game.players.length).toBe(2);
   mkdirSync(output,{recursive:true});return{contexts,host,guest,code,errors};

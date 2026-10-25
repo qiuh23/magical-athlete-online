@@ -12,7 +12,7 @@ export function useRaceIntroReset(room: RoomView | null | undefined) {
     let storage: Storage | undefined;
     try { storage = localStorage; } catch { /* Storage is optional. */ }
     resetRaceIntroForSetup(room, storage, seenInDocument);
-  }, [room?.code, room?.createdAt, room?.selfId, room?.phase, room?.round]);
+  }, [room?.backendId, room?.code, room?.createdAt, room?.selfId, room?.phase, room?.round]);
 }
 
 /** Optional local presentation. It never delays authority, choices or confirmed play. */

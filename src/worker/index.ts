@@ -12,7 +12,8 @@ import { personalRoom, roomExpiry, type RoomClosure, type RoomCloseReason } from
 import { continuationAction, continuationPaused, offerContinuation, updateContinuation } from '../shared/room-continuation.js';
 import { legacyRoomConfig, legacyPoolForConfig, validateRoomConfig, validateRoomConfigForPlayers, MULTIPLAYER_ROOM_LIMIT, ROOM_CAPACITY_MESSAGE, type RoomConfig } from '../shared/room-config.js';
 
-interface Env { ROOMS: DurableObjectNamespace<RoomRelay>; ASSETS: Fetcher }
+import { connectivityInfo, multiplayerQuota, trustedOrigins } from '../shared/backend-protocol.js';
+interface Env { ROOMS: DurableObjectNamespace<RoomRelay>; ASSETS: Fetcher; PUBLIC_ORIGINS?:string; DUAL_BACKEND_ENABLED?:string; MULTIPLAYER_ROOM_LIMIT?:string; BACKENDS_CONFIG_JSON?:string }
 interface StoredMember { isAI?:boolean; id:string; name:string; seat:number; tokenHash:string; renameUsed?:boolean }
 interface StoredSpectator { id:string; name:string; tokenHash:string }
 interface RoomRecord {
@@ -83,7 +84,7 @@ function httpRate(request:Request):boolean {
   if(requestWindows.size>2048){for(const [address,window] of requestWindows)if(now-window.at>60_000)requestWindows.delete(address);if(requestWindows.size>2048)requestWindows.delete(requestWindows.keys().next().value!);}
   return ++current.count<=120;
 }
-function originAllowed(request:Request):boolean { const origin=request.headers.get('Origin');return origin===null||origin===new URL(request.url).origin; }
+function originAllowed(request:Request,env:Env):boolean { const origin=request.headers.get('Origin');return origin===null||origin===new URL(request.url).origin||trustedOrigins(env.PUBLIC_ORIGINS).includes(origin); }
 function parseIdentity(value:unknown):Identity|null {
   if(!object(value)||!only(value,['roomCode','playerId','token','role'])||(value.role!==undefined&&value.role!=='player'&&value.role!=='spectator')||typeof value.roomCode!=='string'||!CODE.test(value.roomCode)||typeof value.playerId!=='string'||!UUID.test(value.playerId)||typeof value.token!=='string'||!TOKEN.test(value.token))return null;
   return value as unknown as Identity;
@@ -107,13 +108,20 @@ function actionReply(value:unknown):value is ActionReply {
   return object(value)&&only(value,['ok','error','version','duplicate'])&&typeof value.ok==='boolean'&&(value.error===undefined||textId(value.error,1000))&&(value.version===undefined||(Number.isSafeInteger(value.version)&&(value.version as number)>=0))&&(value.duplicate===undefined||typeof value.duplicate==='boolean');
 }
 
-export default {
-  async fetch(request:Request,env:Env):Promise<Response> {
+async function handleRequest(request:Request,env:Env):Promise<Response> {
     try {
       const url=new URL(request.url);
+      if(url.pathname==='/backends.json'&&env.BACKENDS_CONFIG_JSON)return json(JSON.parse(env.BACKENDS_CONFIG_JSON));
       if(!url.pathname.startsWith('/api/'))return env.ASSETS.fetch(request);
-      if(!originAllowed(request))return json({error:'来源不被允许。'},403);
+      if(!originAllowed(request,env))return json({error:'来源不被允许。'},403);
+      if(request.method==='OPTIONS')return new Response(null,{status:204,headers:{'Access-Control-Allow-Methods':'GET, POST, OPTIONS','Access-Control-Allow-Headers':'Content-Type','Access-Control-Max-Age':'600'}});
       if(!httpRate(request))return json({error:'请求太频繁，请稍后再试。'},429);
+      if(url.pathname==='/api/connectivity'&&request.method==='GET')return json(connectivityInfo('cloudflare'));
+      if(url.pathname==='/api/connectivity/ws'&&request.method==='GET'){
+        if(request.headers.get('Upgrade')?.toLowerCase()!=='websocket')return json({error:'此地址需要WebSocket连接。'},426);
+        const pair=new WebSocketPair();pair[1].accept();pair[1].send(JSON.stringify(connectivityInfo('cloudflare')));pair[1].close(1000,'probe complete');
+        return new Response(null,{status:101,webSocket:pair[0]});
+      }
       if(url.pathname==='/api/browser/health'&&request.method==='GET')return json({ok:true,hosting:'browser',transport:'durable-object-websocket'});
       if(url.pathname==='/api/browser/rooms'&&request.method==='GET')return env.ROOMS.get(env.ROOMS.idFromName(DIRECTORY_ID)).fetch('https://room.internal/directory/list');
       if(url.pathname==='/api/browser/rooms'&&request.method==='POST'){
@@ -174,6 +182,16 @@ export default {
       }
       return json({error:'接口不存在。'},404);
     } catch(error) { return json({error:error instanceof HttpError?error.message:'中继暂时不可用，请保留网页并稍后重试。'},error instanceof HttpError?error.status:503); }
+}
+
+export default {
+  async fetch(request:Request,env:Env):Promise<Response>{
+    const response=await handleRequest(request,env);
+    // Upgrade responses retain their platform-owned socket unchanged.
+    if(response.status===101||!new URL(request.url).pathname.startsWith('/api/'))return response;
+    const headers=new Headers(response.headers);headers.set('Vary','Origin');
+    const origin=request.headers.get('Origin');if(origin&&originAllowed(request,env))headers.set('Access-Control-Allow-Origin',origin);
+    return new Response(response.body,{status:response.status,statusText:response.statusText,headers});
   },
 };
 
@@ -232,7 +250,7 @@ export class RoomRelay extends DurableObject<Env> {
         const key='creation:'+input.requestId,prior=await txn.get<RoomReservation>(key);
         if(prior){if(prior.request!==input.request)throw new HttpError(409,'同一建房请求编号不能用于不同设置。');reservation=prior;return;}
         const slots=await txn.list<CapacitySlot>({prefix:'capacity:'});
-        if(input.mode==='multiplayer'&&slots.size>=MULTIPLAYER_ROOM_LIMIT)throw new HttpError(409,ROOM_CAPACITY_MESSAGE);
+        if(input.mode==='multiplayer'&&slots.size>=multiplayerQuota(this.env.DUAL_BACKEND_ENABLED==='true',this.env.MULTIPLAYER_ROOM_LIMIT))throw new HttpError(409,ROOM_CAPACITY_MESSAGE);
         let code:string;do{code=Array.from(crypto.getRandomValues(new Uint8Array(6)),b=>codeAlphabet[b%codeAlphabet.length]).join('');}while(await txn.get('capacity:'+code)||await txn.get('directory:'+code));
         reservation={...input,code,reservedAt:Date.now()};await txn.put(key,reservation);
         if(input.mode==='multiplayer')await txn.put('capacity:'+code,{code,requestId:input.requestId,reservedAt:reservation.reservedAt,revision:1} satisfies CapacitySlot);
@@ -315,7 +333,7 @@ export class RoomRelay extends DurableObject<Env> {
   private async capacity():Promise<{used:number;limit:number}>{
     let used=0;
     await this.ctx.storage.transaction(async txn=>{await this.importDirectoryCapacity(txn,Date.now());used=(await txn.list({prefix:'capacity:'})).size;});
-    return {used,limit:MULTIPLAYER_ROOM_LIMIT};
+    return {used,limit:multiplayerQuota(this.env.DUAL_BACKEND_ENABLED==='true',this.env.MULTIPLAYER_ROOM_LIMIT)};
   }
   /** Run remote checks outside this object's mutation queue: a queried room may
    * itself be waiting for a directory upsert. Compare the observed durable slot

@@ -30,7 +30,7 @@ test('playback diagnostics preserves an unclickable failure and streams only pub
   const record = playbackRecord({ seat: 4, step: 19, action: 'roll', roomVersion: 79 });
   const error = await skipQueuedPlayback(page, record, { timeoutMs: 1_600, clickTimeoutMs: 150 }).then(() => undefined, error => error as Error);
   expect(error).toBeInstanceOf(Error);
-  expect(error!.message).toContain('locator.click: Timeout');
+  expect(error!.message).toContain('click: Timeout');
   expect(record.status).toBe('failed');
   expect(record.error).toBe(error!.message.split('\n')[0]);
   expect(record.attempts).toBeGreaterThan(0);
@@ -55,7 +55,7 @@ test('playback diagnostics bounds a stalled probe without masking the locator er
   try {
     const error = await skipQueuedPlayback(page, record, { timeoutMs: 2_600, clickTimeoutMs: 150 }).then(() => undefined, error => error as Error);
     expect(error).toBeInstanceOf(Error);
-    expect(error!.message).toContain('locator.click: Timeout');
+    expect(error!.message).toContain('click: Timeout');
     expect(record).toMatchObject({ status: 'failed', probeError: 'playback initial sample exceeded 2000ms' });
     expect(record.error).toBe(error!.message.split('\n')[0]);
     expect(record.before).toBeUndefined();

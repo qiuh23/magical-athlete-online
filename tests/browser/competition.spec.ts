@@ -70,8 +70,8 @@ for(const [preset,name,count] of [['official','官方巡回',4],['extended','扩
   await page.getByLabel('你的昵称').fill('巡回测试');await page.getByLabel('房间人数上限').selectOption('3');
   await page.locator('.preset-select').filter({hasText:name}).click();
   await page.getByRole('button',{name:'创建房间，召集朋友'}).click();
-  await expect(page).toHaveURL(/\/room\/[A-Z2-9]{6}$/);
-  const code=page.url().split('/').at(-1)!;
+  await expect(page).toHaveURL(/\/room\/[CA]-[A-Z2-9]{6}$/);
+  const code=page.url().split('/').at(-1)!.replace(/^[CA]-/,'');
   const competition=app.rooms.get(code).game.config!.competition!;
   expect(competition.preset).toBe(preset);expect(competition.raceCount).toBe(count);expect(competition.rotation[3]).toBe('whirly-world');
   await page.reload();await expect(page.locator('.connection.is-online')).toBeVisible();
@@ -161,12 +161,12 @@ for(const [rounds,n] of [[4,2],[6,3],[8,2]] as const)test(`${n} independent brow
     const host=pages[0]!;await host.goto(url);await host.getByRole('tab',{name:'创建房间',exact:true}).click();
     await host.getByLabel('你的昵称').fill('同名');await host.getByLabel('房间人数上限').selectOption(String(n));await host.getByLabel('每次操作时限').selectOption('0');
     if(rounds!==4){await host.getByRole('button',{name:'修改经典赛赛程',exact:true}).click();await host.getByLabel('比赛场数').selectOption(String(rounds));await host.getByRole('button',{name:'添加 Mild Mile',exact:true}).click();}
-    await host.getByLabel('房间可见性').selectOption('private');await host.getByRole('button',{name:'创建房间，召集朋友'}).click();await expect(host).toHaveURL(/\/room\/[A-Z2-9]{6}$/);
-    const code=host.url().split('/').at(-1)!;expect(app.rooms.list().some(r=>r.code===code)).toBe(false);
+    await host.getByLabel('房间可见性').selectOption('private');await host.getByRole('button',{name:'创建房间，召集朋友'}).click();await expect(host).toHaveURL(/\/room\/[CA]-[A-Z2-9]{6}$/);
+    const code=host.url().split('/').at(-1)!.replace(/^[CA]-/,'');expect(app.rooms.list().some(r=>r.code===code)).toBe(false);
     for(const page of pages.slice(1)){await page.goto(`${url}/room/${code}`);await page.getByLabel('你的昵称').fill('同名');await page.getByRole('button',{name:'加入这场胡闹',exact:true}).click();await expect(page.getByRole('button',{name:'我准备好了',exact:true})).toBeVisible();}
     // Only seed the pre-game random generator; all draft/race actions use real UIs.
     const lobby=app.rooms.get(code);lobby.game.rngState=13000+rounds;delete lobby.game.randomStream;
-    const ids=await Promise.all(pages.map(p=>p.evaluate(code=>JSON.parse(localStorage.getItem(`magical-athlete:identity:${code}`)!).playerId,code)));
+    const ids=await Promise.all(pages.map(p=>p.evaluate(code=>JSON.parse(localStorage.getItem(`magical-athlete:identity:cloudflare:${code}`)!).playerId,code)));
     expect(new Set(ids).size).toBe(n);expect(new Set(lobby.game.players.map(p=>p.name)).size).toBe(n);
     for(const page of pages){await sync(page,app.rooms.get(code).version);await page.getByRole('button',{name:'我准备好了',exact:true}).click();await expect(page.getByRole('button',{name:'取消准备',exact:true})).toBeVisible();}
     await host.locator('.room-config-panel > summary').click();await host.getByRole('checkbox',{name:'Extra Mile',exact:true}).check();await host.getByRole('button',{name:'保存本房间设置',exact:true}).click();

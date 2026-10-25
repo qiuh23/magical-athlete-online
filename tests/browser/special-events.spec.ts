@@ -27,8 +27,8 @@ test('special event setup explains automatic events, validates rounds and saves 
  await page.screenshot({path:info.outputPath('special-event-setup-desktop.png'),fullPage:true});
  await page.setViewportSize({width:390,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
  await page.screenshot({path:info.outputPath('special-event-setup-mobile.png'),fullPage:true});
- await page.getByRole('button',{name:'创建房间，召集朋友'}).click();await expect(page).toHaveURL(/\/room\/[A-Z2-9]{6}$/);
- const code=page.url().split('/').at(-1)!;
+ await page.getByRole('button',{name:'创建房间，召集朋友'}).click();await expect(page).toHaveURL(/\/room\/[CA]-[A-Z2-9]{6}$/);
+ const code=page.url().split('/').at(-1)!.replace(/^[CA]-/,'');
  expect(app.rooms.get(code).game.config?.competition?.thrillingThirds).toEqual({enabled:true,rounds:[1,3]});
  await page.reload();await page.locator('.room-config-panel > summary').click();
  await expect(page.locator('.event-status')).toContainText('第 1、3 场各抽取 1 项');

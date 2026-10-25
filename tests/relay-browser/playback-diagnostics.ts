@@ -97,7 +97,10 @@ export async function boundedRead<T>(operation: Promise<T>, label: string, timeo
 }
 
 export async function skipQueuedPlayback(page: Page, record = playbackRecord(), options: { timeoutMs?: number; clickTimeoutMs?: number } = {}) {
-  const started = Date.now(), timeoutMs = options.timeoutMs ?? 20_000, clickTimeoutMs = options.clickTimeoutMs ?? 1_000;
+  // Eight SwiftShader clients can delay renderer samples by 4–6 seconds in CI.
+  // Keep a real, actionable click while allowing its two-frame stability check
+  // to finish; the overall queue deadline and explicit failure probes stay bound.
+  const started = Date.now(), timeoutMs = options.timeoutMs ?? 20_000, clickTimeoutMs = options.clickTimeoutMs ?? 8_000;
   let probe = { stop() {} };
   try {
     // Start sampling without waiting for the renderer. A slow probe must not
@@ -108,13 +111,19 @@ export async function skipQueuedPlayback(page: Page, record = playbackRecord(), 
     await expect(async () => {
       record.stage = 'check-visible';
       if (await skip.isVisible()) {
-        record.stage = 'click'; record.attempts++;
-        try { await skip.click({ timeout: clickTimeoutMs }); record.clicked = true; }
-        catch (error) {
-          record.clickErrors.push({ elapsedMs: Date.now() - started, message: errorSummary(error) });
-          if (record.clickErrors.length > 20) record.clickErrors.shift();
-          record.stage = 'recheck-visible';
-          if (await skip.isVisible()) throw error;
+        // Resolve once: a locator click otherwise keeps looking for a future
+        // button after this optional control naturally disappears. A handle
+        // still performs Playwright's actionability checks, but detaches promptly.
+        const [target] = await skip.elementHandles();
+        if (target) {
+          record.stage = 'click'; record.attempts++;
+          try { await target.click({ timeout: clickTimeoutMs }); record.clicked = true; }
+          catch (error) {
+            record.clickErrors.push({ elapsedMs: Date.now() - started, message: errorSummary(error) });
+            if (record.clickErrors.length > 20) record.clickErrors.shift();
+            record.stage = 'recheck-visible';
+            if (await skip.isVisible()) throw error;
+          } finally { await target.dispose(); }
         }
       }
       record.stage = 'wait-hidden';

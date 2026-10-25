@@ -10,10 +10,10 @@ async function saved(page: Page, code: string): Promise<Room> {
     const db = await new Promise<IDBDatabase>((resolve, reject) => { const request = indexedDB.open('magical-athlete-browser-authority-v1', 1); request.onsuccess = () => resolve(request.result); request.onerror = () => reject(request.error); });
     try { return await new Promise<string>((resolve, reject) => { const request = db.transaction('rooms').objectStore('rooms').get(code); request.onsuccess = () => resolve(JSON.stringify(request.result.room)); request.onerror = () => reject(request.error); }); }
     finally { db.close(); }
-  }, code)) as Room;
+  }, code.replace(/^C-/,''))) as Room;
 }
 async function identity(page: Page, code: string): Promise<Identity> {
-  return page.evaluate(code => JSON.parse(localStorage.getItem(`magical-athlete:identity:${code}`)!), code);
+  return page.evaluate(code => JSON.parse(localStorage.getItem(`magical-athlete:identity:cloudflare:${code.replace(/^C-/,'')}`)!), code);
 }
 async function synced(page: Page, version: number) {
   await expect.poll(async () => Number(await page.locator('.game-shell').getAttribute('data-room-version'))).toBeGreaterThanOrEqual(version);
@@ -74,7 +74,7 @@ test('directory: full lobby spectating, explicit departures, seat reuse and fres
     await viewer.screenshot({ path: testInfo.outputPath('spectator-lobby-mobile.png'), fullPage: true });
     await viewer.getByRole('button', { name: '退出观看', exact: true }).click(); await expect(viewer).toHaveURL(`${url}/`);
     await currentView(peers.views, host, view => view.spectators?.length === 0);
-    expect(await viewer.evaluate(code => localStorage.getItem(`magical-athlete:identity:${code}:spectator`), peers.code)).toBeNull();
+    expect(await viewer.evaluate(code => localStorage.getItem(`magical-athlete:identity:cloudflare:${code.replace(/^C-/,'')}:spectator`), peers.code)).toBeNull();
     await guest.getByRole('button', { name: '退出房间', exact: true }).click(); await expect(guest).toHaveURL(`${url}/`); await currentView(peers.views, host, view => view.players.length === 1);
     await viewer.getByRole('tab', { name: '现有房间', exact: true }).click(); const row = viewer.getByTestId(`directory-room-${peers.code}`); await expect(row).toContainText('1 / 2 位选手'); await expect(row).toContainText('0 人观战'); await noOverflow(viewer);
     await viewer.screenshot({ path: testInfo.outputPath('directory-mobile.png'), fullPage: true });
@@ -134,10 +134,10 @@ test('same browser: watching in another tab preserves the host authority and ori
     const watching = await identity(observer, peers.code); expect(watching.role).toBe('spectator'); expect(watching.playerId).not.toBe(player.playerId);
     await expect(host.locator('.connection.is-online')).toBeVisible(); await expect(host.getByRole('button', { name: '开始选秀', exact: true })).toBeVisible();
     const room = await saved(host, peers.code); expect(room.hostId).toBe(player.playerId); expect(room.game.players).toHaveLength(2); expect(room.game.players.find(person => person.id === player.playerId)?.connected).toBe(true);
-    expect(await observer.evaluate(code => JSON.parse(localStorage.getItem(`magical-athlete:identity:${code}:player`)!), peers.code)).toEqual(player);
+    expect(await observer.evaluate(code => JSON.parse(localStorage.getItem(`magical-athlete:identity:cloudflare:${code.replace(/^C-/,'')}:player`)!), peers.code)).toEqual(player);
     await observer.getByRole('button', { name: '退出观看', exact: true }).click(); await expect(observer).toHaveURL(`${url}/`);
-    expect(await observer.evaluate(code => localStorage.getItem(`magical-athlete:identity:${code}:spectator`), peers.code)).toBeNull();
-    expect(await observer.evaluate(code => JSON.parse(localStorage.getItem(`magical-athlete:identity:${code}:player`)!), peers.code)).toEqual(player); await expect(host.locator('.connection.is-online')).toBeVisible();
+    expect(await observer.evaluate(code => localStorage.getItem(`magical-athlete:identity:cloudflare:${code.replace(/^C-/,'')}:spectator`), peers.code)).toBeNull();
+    expect(await observer.evaluate(code => JSON.parse(localStorage.getItem(`magical-athlete:identity:cloudflare:${code.replace(/^C-/,'')}:player`)!), peers.code)).toEqual(player); await expect(host.locator('.connection.is-online')).toBeVisible();
     await observer.getByRole('tab', { name: '现有房间', exact: true }).click(); await observer.getByTestId(`directory-room-${peers.code}`).getByRole('button', { name: '返回房间', exact: true }).click(); await expect(observer.locator('.connection.is-online')).toBeVisible();
     expect(await identity(observer, peers.code)).toEqual(player); await expect(observer.getByRole('button', { name: '我准备好了', exact: true })).toBeVisible(); expect((await saved(host, peers.code)).game.players).toHaveLength(2); expect(peers.errors).toEqual([]);
   } finally { await Promise.all(peers.contexts.map(context => context.close())); }
@@ -236,7 +236,7 @@ test('Home returns to the retained owner room in every mode without creating ano
       // storage and the authoritative status must remove the obsolete return.
       await exit();await expect(returnButton).toBeEnabled();const closer=await context.newPage();await closer.goto(`${url}/room/${code}`);await expect(closer.locator('.connection.is-online')).toBeVisible();
       await closer.getByRole('button',{name:'结束房间',exact:true}).click();await closer.getByRole('button',{name:'确认结束',exact:true}).click();await expect(closer.locator('[data-room-closed="true"]')).toBeVisible();
-      await expect(card).toHaveCount(0);await page.reload();await expect(card).toHaveCount(0);expect(await page.evaluate(code=>localStorage.getItem(`magical-athlete:identity:${code}:player`),code)).toBeNull();await closer.reload();await expect(closer.locator('[data-room-closed="true"]')).toBeVisible();expect(errors).toEqual([]);
+      await expect(card).toHaveCount(0);await page.reload();await expect(card).toHaveCount(0);expect(await page.evaluate(code=>localStorage.getItem(`magical-athlete:identity:cloudflare:${code.replace(/^C-/,'')}:player`),code)).toBeNull();await closer.reload();await expect(closer.locator('[data-room-closed="true"]')).toBeVisible();expect(errors).toEqual([]);
     }finally{await context.close();}
   }
 });

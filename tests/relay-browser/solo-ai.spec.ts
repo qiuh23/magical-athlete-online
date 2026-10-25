@@ -22,10 +22,10 @@ async function setup(page: Page, mode: 'practice' | 'ai', aiCount = 3) {
   await page.getByRole('tab', { name: mode === 'practice' ? '自己练习' : '人机对战', exact: true }).click();
   if (mode === 'ai') await page.getByLabel('AI 人数', { exact: true }).selectOption(String(aiCount));
   await page.getByRole('button', { name: mode === 'practice' ? '开始自己练习' : '开始人机对战', exact: true }).click();
-  await expect(page).toHaveURL(/\/room\/[A-Z2-9]{6}$/);
+  await expect(page).toHaveURL(/\/room\/[CA]-[A-Z2-9]{6}$/);
   await expect(page.locator('.connection.is-online')).toBeVisible();
-  const code = page.url().split('/').at(-1)!;
-  const selfId = await page.evaluate(code => JSON.parse(localStorage.getItem(`magical-athlete:identity:${code}`)!).playerId as string, code);
+  const code = page.url().split('/').at(-1)!.replace(/^[CA]-/,'');
+  const selfId = await page.evaluate(code => JSON.parse(localStorage.getItem(`magical-athlete:identity:cloudflare:${code}`)!).playerId as string, code);
   return { code, selfId };
 }
 async function viewport(page: Page) {
