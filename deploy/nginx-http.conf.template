@@ -1,0 +1,24 @@
+# Controlled temporary direct-IP HTTP entry. No filing exemption is implied.
+# ACCESS_CIDRS is validated to individually approved IPv4 /32 sources.
+server {
+    listen 80;
+    server_name ${PUBLIC_IP};
+    server_tokens off;
+    client_max_body_size 16k;
+    if ($host != "${PUBLIC_IP}") { return 421; }
+${HTTP_ACCESS_RULES}
+    deny all;
+    location / {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_read_timeout 75s;
+        proxy_send_timeout 75s;
+        proxy_buffering off;
+    }
+}

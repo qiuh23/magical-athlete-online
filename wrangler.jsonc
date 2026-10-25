@@ -5,8 +5,8 @@
   "compatibility_date": "2026-10-20",
   "workers_dev": true,
   "vars": {
-    "DUAL_BACKEND_ENABLED": "false",
-    "PUBLIC_ORIGINS": ""
+    "DUAL_BACKEND_ENABLED": "true",
+    "PUBLIC_ORIGINS": "http://115.29.188.62"
   },
   "assets": {
     "directory": "./dist/browser",
