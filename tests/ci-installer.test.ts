@@ -5,7 +5,7 @@ import {mkdtempSync,readFileSync,rmSync,writeFileSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {fileURLToPath} from 'node:url';
-const {validateRequest}=await import(new URL('../scripts/deploy/ci-install.mjs',import.meta.url).href);
+const {validateRequest,releaseName,rollbackDestinationCommit}=await import(new URL('../scripts/deploy/ci-install.mjs',import.meta.url).href);
 const request={target:'preview',commit:'a'.repeat(40),runId:123,artifactUrl:'https://productionresultssa0.blob.core.windows.net/actions-results/artifact.zip?sig=temporary',artifactSha256:'b'.repeat(64),prNumber:23};
 const encode=(value:unknown)=>Buffer.from(JSON.stringify(value)).toString('base64');
 const python=process.platform==='win32'?'python':'python3';
@@ -31,6 +31,25 @@ test('rollback requests bind the same operating-system identity and exact workfl
   assert.throws(()=>validateRequest(encode({...rollback,target:'production'}),'athlete-preview-deploy'));
   assert.throws(()=>validateRequest(encode({...rollback,artifactUrl:request.artifactUrl}),'athlete-preview-deploy'));
   assert.throws(()=>validateRequest(encode({...rollback,action:'shell'}),'athlete-preview-deploy'));
+});
+
+test('same-source workflow builds have independent release directories and retain manual compatibility',()=>{
+  const commit=request.commit,base=join(tmpdir(),'athlete-release-builds');
+  const earlier=join(base,'releases',releaseName(commit,123));
+  const next=join(base,'releases',releaseName(commit,124));
+  assert.notEqual(earlier,next);
+  assert.equal(releaseName(commit),commit);
+  assert.equal(releaseName(commit,''),commit);
+  assert.equal(releaseName(commit,'123'),releaseName(commit,123));
+  for(const buildId of ['../123','123/other','00123','0',0,-1,1.5,Number.MAX_SAFE_INTEGER+1])assert.throws(()=>releaseName(commit,buildId));
+  assert.throws(()=>releaseName('../'+commit,123));
+});
+
+test('rollback recognizes only a direct validated previous release and records its source commit',()=>{
+  const commit=request.commit,base=join(tmpdir(),'athlete-release-builds');
+  assert.equal(rollbackDestinationCommit(join(base,'releases',releaseName(commit,123)),base),commit);
+  assert.equal(rollbackDestinationCommit(join(base,'releases',commit),base),commit);
+  for(const path of [join(base,'outside',commit),join(base,'releases',commit,'nested'),join(base,'releases',`${commit}-0`),join(base,'releases',`${commit}-123-other`),join(base,'releases',`${commit}-9007199254740992`)])assert.throws(()=>rollbackDestinationCommit(path,base));
 });
 
 test('release extraction rejects parent traversal, external symlinks and unexpected root files',()=>{

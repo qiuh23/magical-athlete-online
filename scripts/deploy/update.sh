@@ -21,7 +21,16 @@ else
     [[ $(git rev-parse HEAD) == "$COMMIT" && -z $(git status --porcelain --untracked-files=no) ]] || { echo 'Checkout must be clean and match the requested commit.' >&2; exit 1; }
 fi
 BASE=$DEPLOY_BASE
-RELEASE=$BASE/releases/$COMMIT
+# A checked build is identified by both its source and workflow run. Reusing
+# a same-commit directory would retain an older run's deployment.json/.ready.
+# Manual source deployments keep their existing forty-character directory.
+RELEASE_NAME=$(node --input-type=module - "$SCRIPT_DIR/ci-install.mjs" "$COMMIT" "${DEPLOY_BUILD_ID:-}" <<'NODE'
+import {pathToFileURL} from 'node:url';
+const {releaseName}=await import(pathToFileURL(process.argv[2]).href);
+console.log(releaseName(process.argv[3],process.argv[4]));
+NODE
+)
+RELEASE=$BASE/releases/$RELEASE_NAME
 if [[ ! -f $RELEASE/.ready ]]; then
     [[ ! -e $RELEASE ]] || { echo 'Incomplete release already exists; inspect it before retrying.' >&2; exit 1; }
     install -d -m 0750 -o root -g "$DEPLOY_GROUP" "$RELEASE"

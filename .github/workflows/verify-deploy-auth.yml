@@ -41,7 +41,14 @@ jobs:
           if(!/^cn-[a-z0-9-]+$/.test(region??'')||!/^i-[a-z0-9]+$/.test(instance??''))throw Error('Missing fixed preview deployment target.');
           function api(operation,args){
             try{return JSON.parse(execFileSync('aliyun',['ecs',operation,'--RegionId',region,...args],{encoding:'utf8',stdio:['ignore','pipe','pipe'],timeout:45000,maxBuffer:1024*1024}));}
-            catch{throw Error(`Scoped Alibaba ${operation} authorization check failed; credentials were withheld from logs.`);}
+            catch(error){
+              let detail;try{detail=JSON.parse(String(error.stderr||error.stdout||''));}catch{}
+              const code=detail?.Code??detail?.code;
+              const safeCode=typeof code==='string'&&/^[A-Za-z0-9_.-]{1,100}$/.test(code)?code:'unavailable';
+              const denied=detail?.AccessDeniedDetail;
+              const safePolicy=typeof denied?.PolicyType==='string'&&/^[A-Za-z]{1,40}$/.test(denied.PolicyType)?denied.PolicyType:'unavailable';
+              throw Error(`Scoped Alibaba ${operation} failed: code=${safeCode}, policy=${safePolicy}; credentials and command parameters were withheld.`);
+            }
           }
           const command=Buffer.from('id -un\n').toString('base64');
           const started=api('RunCommand',['--InstanceId.1',instance,'--Name','athlete-preview-auth-check','--Type','RunShellScript','--Username',username,'--WorkingDir','/tmp','--Timeout','60','--KeepCommand','false','--RepeatMode','Once','--ContentEncoding','Base64','--CommandContent',command]);

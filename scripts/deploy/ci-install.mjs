@@ -10,6 +10,18 @@ import {pipeline} from 'node:stream/promises';
 
 const directory=dirname(fileURLToPath(import.meta.url));
 const allowedUsers={'athlete-deploy':'production','athlete-preview-deploy':'preview'};
+export function releaseName(commit,buildId){
+  if(!/^[a-f0-9]{40}$/.test(commit))throw Error('Invalid release commit.');
+  if(buildId===undefined||buildId==='')return commit;
+  if(!/^[1-9][0-9]*$/.test(String(buildId))||!Number.isSafeInteger(Number(buildId)))throw Error('Invalid release build ID.');
+  return `${commit}-${buildId}`;
+}
+export function rollbackDestinationCommit(active,base){
+  if(typeof active!=='string'||active!==join(base,'releases',basename(active))||!/^[a-f0-9]{40}(?:-[1-9][0-9]*)?$/.test(basename(active)))throw Error('Unexpected rollback destination.');
+  const [commit,buildId]=basename(active).split('-');
+  releaseName(commit,buildId);
+  return commit;
+}
 export function validateRequest(encoded,sudoUser){
   if(typeof encoded!=='string'||encoded.length>32_000||!/^[A-Za-z0-9+/]+={0,2}$/.test(encoded))throw Error('Invalid deployment request encoding.');
   const value=JSON.parse(Buffer.from(encoded,'base64').toString('utf8'));
@@ -39,7 +51,7 @@ async function run(command,args,env){
 export async function install(encoded,sudoUser,locked=false){
   if(process.getuid?.()!==0)throw Error('The deployment installer must be run through its constrained sudo entrypoint.');
   const request=validateRequest(encoded,sudoUser);
-  const environment={PATH:'/opt/node/bin:/usr/sbin:/usr/bin:/sbin:/bin',HOME:'/root',LANG:'C.UTF-8',DEPLOY_TARGET:request.target,DEPLOY_LOCK_HELD:'true',SUDO_USER:sudoUser};
+  const environment={PATH:'/opt/node/bin:/usr/sbin:/usr/bin:/sbin:/bin',HOME:'/root',LANG:'C.UTF-8',DEPLOY_TARGET:request.target,DEPLOY_BUILD_ID:String(request.runId),DEPLOY_LOCK_HELD:'true',SUDO_USER:sudoUser};
   if(!locked){
     await run('/usr/bin/flock',['--wait','900',`/run/lock/magical-athlete-${request.target}.deploy.lock`,'/opt/node/bin/node',fileURLToPath(import.meta.url),'--locked',encoded],environment);
     return;
@@ -53,13 +65,13 @@ export async function install(encoded,sudoUser,locked=false){
   if(request.action==='rollback'){
     const base=request.target==='production'?'/opt/magical-athlete':'/opt/magical-athlete-preview';
     const current=await realpath(join(base,'current'));
-    if(current!==join(base,'releases',request.commit)){console.log(`No rollback needed for ${request.target}; this attempt is not active.`);return;}
+    if(current!==join(base,'releases',releaseName(request.commit,request.runId))){console.log(`No rollback needed for ${request.target}; this attempt is not active.`);return;}
     if(previous?.runId!==request.runId||previous.commit!==request.commit)throw Error('Rollback requires the current successful deployment to belong to this exact workflow attempt.');
     await run('/bin/bash',[join(directory,'rollback.sh')],environment);
     const active=await realpath(join(base,'current'));
-    if(!active.startsWith(`${base}/releases/`)||!/^[a-f0-9]{40}$/.test(basename(active)))throw Error('Unexpected rollback destination.');
+    const activeCommit=rollbackDestinationCommit(active,base);
     const nextState=`${statePath}.next-${process.pid}`;
-    await writeFile(nextState,JSON.stringify({...previous,rolledBack:true,activeCommit:basename(active),rolledBackAt:new Date().toISOString()}),{mode:0o600});
+    await writeFile(nextState,JSON.stringify({...previous,rolledBack:true,activeCommit,rolledBackAt:new Date().toISOString()}),{mode:0o600});
     await rename(nextState,statePath);
     console.log(`Rolled back ${request.target} workflow run ${request.runId} to ${basename(active)}.`);
     return;
