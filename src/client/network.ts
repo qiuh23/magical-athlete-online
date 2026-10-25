@@ -1,10 +1,11 @@
+import { randomId } from './random-id.js';
 import { PresentationEventClient } from './presentation-events.js';
 import { io, type Socket } from 'socket.io-client';
 import type { ActionEnvelope, ActionReply, CharacterPool, ChatReply, ChatSend, GameAction, GameMode, Identity, Phase, PublicEventReply, RenameReply, RoomRole, RoomSummary, RoomView } from '../shared/types.js';
 import { CommunityFeed, type CommunityState } from './community.js';
 import type { RelayJoinReply } from '../shared/relay.js';
 import { BrowserRelayConnection, prepareBrowserRoom } from './browser-connection.js';
-import { backendUrl, formatRoomCode, getBackend, getBackends, isBackendId, loadBackends, parseRoomCode, probeBackend, roomApiPrefix, type BackendId } from './backends.js';
+import { backendUrl, formatRoomCode, getBackend, getBackends, httpEntryUrl, isBackendId, loadBackends, parseRoomCode, probeBackend, roomApiPrefix, type BackendId } from './backends.js';
 
 export const BROWSER_HOST_MODE = import.meta.env?.VITE_HOST_MODE === 'browser';
 export interface RoomConnection {
@@ -123,6 +124,7 @@ export function ownedRoomCandidates():Identity[] {
 export async function checkOwnedRoom(identity:Identity):Promise<OwnedRoom|null> {
   await loadBackends();const id=backendOf(identity),backend=getBackend(id);
   if(!backend.enabled)throw Error(`${backend.label}尚未部署或开放。`);
+  if(httpEntryUrl(backend,identity.roomCode))throw Error('请从临时 HTTP 入口恢复原房间；本机凭据仍保留。');
   const prefix=roomApiPrefix(backend);
   const response=await fetch(`${prefix}/${encodeURIComponent(identity.roomCode)}/resume-status`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(wireIdentity(identity)),signal:AbortSignal.timeout(4500),cache:'no-store'});
   if([404,410].includes(response.status)){forgetClosedRoom(identity.roomCode,'closed',id);return null;}
@@ -139,6 +141,7 @@ export async function listRoomDirectory():Promise<RoomDirectoryReply> {
   await loadBackends();
   const results=await Promise.all(getBackends().map(async backend=>{
     if(!backend.enabled)return {backendId:backend.id,available:false,error:'未部署',rooms:[] as RoomSummary[]};
+    if(httpEntryUrl(backend))return {backendId:backend.id,available:false,error:'请从临时 HTTP 入口读取此服务器房间。',rooms:[] as RoomSummary[]};
     try {const response=await fetch(roomApiPrefix(backend),{cache:'no-store',signal:AbortSignal.timeout(4500)}),reply=await response.json();if(!response.ok||!Array.isArray(reply.rooms))throw Error();return {backendId:backend.id,available:true,rooms:(reply.rooms as RoomSummary[]).map(room=>({...room,backendId:backend.id})),capacity:reply.capacity as {used:number;limit:number}|undefined};}
     catch{return {backendId:backend.id,available:false,error:'连接失败',rooms:[] as RoomSummary[]};}
   }));
@@ -147,7 +150,7 @@ export async function listRoomDirectory():Promise<RoomDirectoryReply> {
 }
 export async function listRooms():Promise<RoomSummary[]>{return(await listRoomDirectory()).rooms;}
 export async function leaveRoom(identity:Identity):Promise<void> {
-  await loadBackends();const backend=getBackend(backendOf(identity));if(!backend.enabled)return;
+  await loadBackends();const backend=getBackend(backendOf(identity));if(!backend.enabled||httpEntryUrl(backend))return;
   const prefix=roomApiPrefix(backend);let response:Response;
   try {response=await fetch(`${prefix}/${encodeURIComponent(identity.roomCode)}/leave`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(wireIdentity(identity)),signal:AbortSignal.timeout(4000)});}catch{return;}
   const reply=await response.json().catch(()=>({}));if([401,404,410].includes(response.status)){forgetIdentity(identity.roomCode,identity);return;}if(!response.ok)throw Error(reply.error||'退出房间未确认，请重试。');if(!reply.retainIdentity)forgetIdentity(identity.roomCode,identity);
@@ -161,13 +164,14 @@ export async function enterRoom(code:string|null,data:EntryData):Promise<JoinRep
   if(code&&!parsed?.backendId&&!data.backendId&&enabled.length!==1)throw Error('六位旧房间码无法确定归属，请选择服务器。');
   const id=parsed?.backendId??data.backendId??enabled[0]?.id;if(!id)throw Error('请先选择可用的服务器。');
   const backend=getBackend(id);if(!backend.enabled)throw Error(`${backend.label}尚未部署或开放。`);
+  if(httpEntryUrl(backend,code??undefined))throw Error(`${backend.label}使用临时 HTTP 入口，请打开入口后重试原房间。`);
   const {role,backendId:_,...creation}=data;
   let body:unknown=code?{name:data.name,...(role?{role}:{})}:creation;
   if(!code){
     const pending=readPendingCreation();
     if(pending&&pending.backendId!==id)throw Error(`原服务器${getBackend(pending.backendId).label}的建房结果尚未确认，请先在原服务器重试。`);
     if((await probeBackend(id)).state!=='available')throw Error(`${backend.label}连接失败，请重新检测或选择服务器。`);
-    const request=pending??{backendId:id,requestId:data.requestId??crypto.randomUUID(),creation};
+    const request=pending??{backendId:id,requestId:data.requestId??randomId(),creation};
     request.creation={...request.creation,requestId:request.requestId};body=request.creation;
     // This receipt survives reloads; uncertain requests must never move to another backend.
     sessionStorage.setItem(PENDING_CREATE_KEY,JSON.stringify(request));
@@ -194,6 +198,7 @@ export function connectRoom(identity: Identity, onSnapshot: (room: RoomView) => 
   const listeners=new Set<(state:CommunityState)=>void>(),unsubscribes=new Map<(state:CommunityState)=>void,()=>void>();
   const start=()=>{if(disposed||inner||loading)return;loading=true;onStatus('connecting');void loadBackends().then(()=>{
     loading=false;if(disposed)return;const backend=getBackend(backendOf(identity));if(!backend.enabled){onStatus('error',`${backend.label}尚未部署或开放。`);return;}
+    if(httpEntryUrl(backend,identity.roomCode)){onStatus('error','请从临时 HTTP 入口恢复原房间；本机凭据仍保留。');return;}
     inner=connectConfiguredRoom(identity,onSnapshot,onStatus);for(const listener of listeners){const unsubscribe=inner.subscribeCommunity?.(listener);if(unsubscribe)unsubscribes.set(listener,unsubscribe);}
   }).catch(()=>{loading=false;if(!disposed)onStatus('error','无法读取服务器部署配置，请重试原房间。');});};
   start();
@@ -233,7 +238,7 @@ function socketRequest(socket: Socket, envelope: ActionEnvelope): Promise<Action
   return new Promise((resolve, reject) => socket.timeout(6500).emit('action', envelope, (error: Error | null, reply: ActionReply) => error ? reject(error) : resolve(reply)));
 }
 export async function sendAction(socket: RoomConnection, room: RoomView, action: GameAction): Promise<ActionReply> {
-  const envelope: ActionEnvelope = { actionId: crypto.randomUUID(), expectedVersion: room.version, action };
+  const envelope: ActionEnvelope = { actionId: randomId(), expectedVersion: room.version, action };
   // Retrying uses the same id so a lost acknowledgement cannot apply an action twice.
   const attempt = () => socket.request(envelope);
   try { return await attempt(); }

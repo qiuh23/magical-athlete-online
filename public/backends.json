@@ -1,1 +1,1 @@
-{"backends":[{"id":"cloudflare","origin":"","transport":"worker","enabled":true},{"id":"aliyun","origin":"","transport":"socketio","enabled":false}]}
+{"backends":[{"id":"cloudflare","origin":"","transport":"worker","enabled":true},{"id":"aliyun","origin":"http://115.29.188.62","transport":"socketio","enabled":true,"allowInsecureHttp":true}]}

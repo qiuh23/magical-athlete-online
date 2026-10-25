@@ -1,3 +1,4 @@
+import { randomId } from './random-id.js';
 import { PresentationEventClient } from './presentation-events.js';
 import { BrowserAuthority } from '../browser/authority.js';
 import type { RelayMetadata, RelayServerMessage, RelayClientMessage } from '../shared/relay.js';
@@ -57,7 +58,7 @@ export class BrowserRelayConnection implements RoomConnection {
   private chatSyncIds=new Set<string>();
   private communityReplies = new Map<string, {resolve: (reply: ChatReply | RenameReply) => void; reject: (error: Error) => void; timer: ReturnType<typeof setTimeout>}>();
   subscribeCommunity = this.community.subscribe;
-  sendChat(message: ChatSend): Promise<ChatReply> { return this.communityRequest({type: 'chat-send', requestId: crypto.randomUUID(), ...message}) as Promise<ChatReply>; }
+  sendChat(message: ChatSend): Promise<ChatReply> { return this.communityRequest({type: 'chat-send', requestId: randomId(), ...message}) as Promise<ChatReply>; }
   rename(request: {requestId: string; name: string}): Promise<RenameReply> { return this.communityRequest({type: 'rename', ...request}) as Promise<RenameReply>; }
   private communityRequest(message: Extract<RelayClientMessage, {type: 'chat-send' | 'rename'}>): Promise<ChatReply | RenameReply> {
     if (!this.authenticated || this.roomClosed || this.disposed) return Promise.reject(Error('聊天连接已中断，请等待重连。'));
@@ -113,7 +114,7 @@ export class BrowserRelayConnection implements RoomConnection {
   }
   acknowledgeEvents(cursor:number){this.eventClient.acknowledge(cursor);}
   readEvents(afterId:number):Promise<PublicEventBatch>{
-    const requestId=crypto.randomUUID();
+    const requestId=randomId();
     return new Promise((resolve,reject)=>{
       const timer=setTimeout(()=>{this.eventReplies.delete(requestId);reject(Error('动画记录同步超时，请重新连接。'));},10_000);
       this.eventReplies.set(requestId,{resolve,reject,timer});
@@ -141,7 +142,7 @@ export class BrowserRelayConnection implements RoomConnection {
     clearInterval(this.upkeep); this.ws?.close(1000, 'page closed'); this.ws = null;
     this.rejectReplies('页面已断开连接。'); this.releaseLock?.();
   }
-  emit(event: 'sync') { if (event === 'sync' && this.authenticated && !this.roomClosed) { this.syncRequestId = crypto.randomUUID(); this.send({ type: 'sync', requestId: this.syncRequestId }); } }
+  emit(event: 'sync') { if (event === 'sync' && this.authenticated && !this.roomClosed) { this.syncRequestId = randomId(); this.send({ type: 'sync', requestId: this.syncRequestId }); } }
   async request(envelope: ActionEnvelope): Promise<ActionReply> {
     let current = envelope;
     for (let attempt = 0; ; attempt++) {
@@ -153,12 +154,12 @@ export class BrowserRelayConnection implements RoomConnection {
       const room = this.latestRoom;
       if (current.action.type !== 'ready' || reply.ok || reply.error !== '画面已更新，请同步后重试。' || attempt >= 2 ||
           reply.version === undefined || reply.version <= current.expectedVersion || !room || room.closedAt || room.phase !== 'lobby' || room.version < reply.version) return reply;
-      current = { actionId: crypto.randomUUID(), expectedVersion: room.version, action: current.action };
+      current = { actionId: randomId(), expectedVersion: room.version, action: current.action };
     }
   }
   private requestOnce(envelope: ActionEnvelope): Promise<ActionReply> {
     if (!this.connected && !(envelope.action.type === 'close' && this.canClose)) return Promise.reject(Error(this.authorityOnline ? '连接已中断，正在重新同步。' : HOST_OFFLINE));
-    const requestId = crypto.randomUUID();
+    const requestId = randomId();
     return new Promise((resolve, reject) => {
       const timer = setTimeout(() => { this.replies.delete(requestId); if (this.roomClosed && envelope.action.type === 'close') resolve({ ok: true }); else reject(Error('操作确认超时。')); }, 6500);
       this.replies.set(requestId, { resolve, reject, timer, closing: envelope.action.type === 'close' });
@@ -224,7 +225,7 @@ export class BrowserRelayConnection implements RoomConnection {
       this.authenticated = true; this.reconnectDelay = 700; this.metadata = message.meta;
       this.chatHydrating=true;this.chatSyncIds.clear();
       this.community.update({connected: true}); this.communityRoster(message.meta);
-      const chatRequestId=crypto.randomUUID();this.chatSyncIds.add(chatRequestId);this.send({type:'chat-sync',requestId:chatRequestId,afterId:0});
+      const chatRequestId=randomId();this.chatSyncIds.add(chatRequestId);this.send({type:'chat-sync',requestId:chatRequestId,afterId:0});
       this.lastPongAt = Date.now(); this.ping(this.lastPongAt);
       this.authorityOnline = message.authorityOnline; this.authorityRole = message.authority;
       if (this.requestedRole && (!message.authority || !this.authority)) { this.fail('中继未确认本页的计算资格，已停止计算。'); return; }

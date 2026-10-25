@@ -34,6 +34,25 @@ async function mockBackends(page: Page, state: {cloudflare:boolean;aliyun:boolea
   });
 }
 
+test('HTTPS 入口提前说明 HTTP 限制并保留邀请房间码，不发送混合内容请求', async ({page}) => {
+  await mockBackends(page,{cloudflare:true,aliyun:true});
+  let insecureRequests=0;
+  page.on('request',request=>{if(request.url().startsWith('http://203.0.113.8'))insecureRequests++;});
+  await page.route('https://secure.entry.test/**',async route=>{
+    const path=new URL(route.request().url()).pathname;
+    if(path==='/backends.json')return route.fulfill({json:{backends:[
+      {id:'cloudflare',origin:'https://cf.backend.test',transport:'worker',enabled:true},
+      {id:'aliyun',origin:'http://203.0.113.8',transport:'socketio',enabled:true,allowInsecureHttp:true},
+    ]}});
+    return route.fulfill({response:await page.request.get(url+path)});
+  });
+  await page.goto('https://secure.entry.test/room/A-XYZ678');
+  const ali=page.getByRole('radio',{name:'阿里云内地',exact:true});
+  await expect(ali).toBeDisabled();await expect(ali).toContainText('HTTPS 页面无法连接此 HTTP 服务器');
+  await expect(page.getByRole('link',{name:'从临时 HTTP 入口加入此房间'})).toHaveAttribute('href','http://203.0.113.8/room/A-XYZ678');
+  expect(insecureRequests).toBe(0);
+});
+
 test('Cloudflare 连接失败时禁选并推荐阿里云，建房共用该选择', async ({page}) => {
   await mockBackends(page,{cloudflare:false,aliyun:true});
   await page.goto(url);
