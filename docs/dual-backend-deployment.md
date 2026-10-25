@@ -8,6 +8,8 @@
 
 ## 相同前端、相同规则
 
+自动发布新增共享预览：PR 检查成功后更新预览，main 检查成功后更新正式入口，同学提交的 PR 不受作者限制。启用共享预览后每端分配正式 14、预览 1，合计仍最多 30；完整流程及部署状态见 [自动部署说明](automatic-deployment.md) 与实际状态记录。
+
 两端运行相同 Git 提交的 `src/engine` 和 `src/shared`。Worker 继续使用 Durable Objects 和原生 WebSocket，Node 继续使用 SQLite 和 Socket.IO；不复制规则引擎。`src/shared/backend-protocol.ts` 发布共同协议和规则标记，HTTP 与专用实时探测同时成功且版本匹配后，客户端才允许选择。
 
 `GET /api/connectivity`、Worker `/api/connectivity/ws`、Node Socket.IO `auth:{probe:true}` 只返回标记，不创建房间、不加载 AI、不写房间名额；实时检测连接完成或超时后释放。房间 API 仍用原来的鉴权凭据和服务端规则结算。

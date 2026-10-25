@@ -34,6 +34,25 @@ async function mockBackends(page: Page, state: {cloudflare:boolean;aliyun:boolea
   });
 }
 
+test('共享预览标明 PR 和提交，手机布局保持可用', async ({page}) => {
+  await page.setViewportSize({width:390,height:844});
+  await mockBackends(page,{cloudflare:true,aliyun:true});
+  await page.route('**/deployment.json',route=>route.fulfill({json:{target:'preview',commit:'a'.repeat(40),prNumber:23,runId:123}}));
+  await page.goto(url);
+  await expect(page.getByRole('complementary',{name:'测试环境'})).toContainText('PR #23 · 提交 aaaaaaa');
+  await expect(page.getByRole('radio',{name:'阿里云内地',exact:true})).toBeEnabled();
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
+});
+
+test('正式部署元数据不显示测试标记', async ({page}) => {
+  await mockBackends(page,{cloudflare:true,aliyun:true});
+  await page.route('**/deployment.json',route=>route.fulfill({json:{target:'production',commit:'a'.repeat(40),runId:123}}));
+  await page.goto(url);
+  await expect(page.getByRole('radio',{name:'Cloudflare',exact:true})).toBeEnabled();
+  await expect(page.getByRole('complementary',{name:'测试环境'})).toHaveCount(0);
+  expect(await page.evaluate(()=>document.documentElement.dataset.previewEnvironment)).toBeUndefined();
+});
+
 test('HTTPS 入口提前说明 HTTP 限制并保留邀请房间码，不发送混合内容请求', async ({page}) => {
   await mockBackends(page,{cloudflare:true,aliyun:true});
   let insecureRequests=0;

@@ -8,6 +8,9 @@ const snapshot={origin,capturedAt:new Date(now).toISOString(),capacity:{used:3,l
 test('capacity admission rejects excess occupancy or single-backend limits without evicting rooms',()=>{
   assert.equal(validateCapacity(snapshot.capacity),snapshot.capacity);
   for(const capacity of [{used:16,limit:15},{used:0,limit:30},{used:-1,limit:15},{used:0,limit:-1},{used:0.5,limit:15},null])assert.throws(()=>validateCapacity(capacity));
+  assert.deepEqual(validateCapacity({used:14,limit:14},14),{used:14,limit:14});
+  assert.throws(()=>validateCapacity({used:15,limit:14},14));
+  assert.throws(()=>validateCapacity({used:0,limit:15},14));
 });
 
 test('management snapshots require exact origin, freshness and bounded future clock skew',()=>{

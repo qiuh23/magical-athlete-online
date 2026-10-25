@@ -37,9 +37,13 @@ else
     grep -Fqx 'CONTROLLED_VALIDATION=true' "$ENV_FILE" || { echo 'Enable the controlled validation application gate first.' >&2; exit 1; }
 fi
 grep -Fqx 'HOST=127.0.0.1' "$ENV_FILE" && grep -Fqx 'PORT=3000' "$ENV_FILE" || { echo 'The application must remain on loopback port 3000.' >&2; exit 1; }
-grep -Fqx 'DUAL_BACKEND_ENABLED=true' "$ENV_FILE" && grep -Fqx 'MULTIPLAYER_ROOM_LIMIT=15' "$ENV_FILE" || { echo 'The Aliyun dual-backend quota must be 15.' >&2; exit 1; }
+grep -Fqx 'DUAL_BACKEND_ENABLED=true' "$ENV_FILE" || { echo 'Dual-backend admission must be enabled.' >&2; exit 1; }
+QUOTA_MAX=15
+if grep -Fqx 'SHARED_PREVIEW_ENABLED=true' "$ENV_FILE"; then QUOTA_MAX=14; fi
+ALI_LIMIT=$(sed -n 's/^MULTIPLAYER_ROOM_LIMIT=//p' "$ENV_FILE")
+[[ $ALI_LIMIT =~ ^([0-9]|1[0-5])$ && $ALI_LIMIT -le $QUOTA_MAX ]] || { echo "Aliyun production quota must be <=$QUOTA_MAX." >&2; exit 1; }
 grep -Fqx "PUBLIC_ORIGIN=http://$PUBLIC_IP" "$ENV_FILE" || { echo 'PUBLIC_ORIGIN must exactly match the direct-IP HTTP entry.' >&2; exit 1; }
-bash "$SOURCE_DIR/scripts/deploy/check-dual-capacity.sh"
+CF_MAX_CAPACITY=$QUOTA_MAX bash "$SOURCE_DIR/scripts/deploy/check-dual-capacity.sh"
 export PUBLIC_IP HTTP_ACCESS_RULES
 TARGET=/etc/nginx/sites-available/magical-athlete
 BACKUP=''

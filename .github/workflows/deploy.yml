@@ -1,0 +1,137 @@
+name: Reusable dual-backend deployment
+on:
+  workflow_call:
+    inputs:
+      target:
+        required: true
+        type: string
+      commit:
+        required: true
+        type: string
+      checks_run_id:
+        required: true
+        type: string
+      pr_number:
+        required: true
+        type: string
+      allow_fork_preview:
+        required: true
+        type: string
+permissions:
+  contents: read
+  actions: write
+  pull-requests: read
+  id-token: write
+jobs:
+  release:
+    if: inputs.target == 'preview' || inputs.target == 'production'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    concurrency:
+      group: magical-athlete-deploy-${{ inputs.target }}
+      cancel-in-progress: false
+    environment:
+      name: ${{ inputs.target }}
+      url: ${{ inputs.target == 'preview' && 'https://magical-athlete-preview.qiuh23.workers.dev' || 'https://magical-athlete.qiuh23.workers.dev' }}
+    env:
+      CHECKS_RUN_ID: ${{ inputs.checks_run_id }}
+      EXPECTED_TARGET: ${{ inputs.target }}
+      EXPECTED_COMMIT: ${{ inputs.commit }}
+      EXPECTED_PR_NUMBER: ${{ inputs.pr_number }}
+      ALLOW_FORK_PREVIEW: ${{ inputs.allow_fork_preview }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Initialize trusted deployment paths
+        run: |
+          printf 'RELEASE_RECORD=%s/release-record.json\n' "$RUNNER_TEMP" >> "$GITHUB_ENV"
+          printf 'WORKER_ARTIFACT_DIR=%s/worker-release\n' "$RUNNER_TEMP" >> "$GITHUB_ENV"
+          printf 'WRANGLER_TOOL_DIR=%s/wrangler-tool\n' "$RUNNER_TEMP" >> "$GITHUB_ENV"
+      - name: Recheck current checked commit after the deployment queue
+        id: current
+        run: node scripts/deploy/ci-gate.mjs
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - name: Download prebuilt Worker artifact as data
+        if: steps.current.outputs.deploy == 'true'
+        uses: actions/download-artifact@v4
+        with:
+          name: worker-${{ inputs.commit }}
+          path: ${{ runner.temp }}/worker-release
+          run-id: ${{ inputs.checks_run_id }}
+          github-token: ${{ github.token }}
+      - name: Prepare fixed target configuration without executing PR code
+        if: steps.current.outputs.deploy == 'true'
+        run: node scripts/deploy/ci-release.mjs prepare
+      - name: Set up fixed Alibaba CLI
+        if: steps.current.outputs.deploy == 'true'
+        uses: aliyun/setup-aliyun-cli-action@09a5f86915bb556e27bf050e9a5e339aeb073df5 # v1
+        with:
+          version: 3.5.2
+      - name: Record previous Cloudflare version
+        if: steps.current.outputs.deploy == 'true'
+        id: previous
+        run: node scripts/deploy/ci-release.mjs previous
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+      - name: Deploy prebuilt Worker and assets
+        if: steps.current.outputs.deploy == 'true'
+        id: worker
+        uses: cloudflare/wrangler-action@953926a2e2182532811c01a25e53647d93bf07c0 # v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          wranglerVersion: 4.151.3
+          packageManager: npm
+          workingDirectory: ${{ runner.temp }}/wrangler-tool
+          command: deploy --no-bundle --config wrangler.json
+      - name: Obtain target-scoped temporary Alibaba credentials
+        if: steps.current.outputs.deploy == 'true'
+        id: credentials
+        uses: aliyun/configure-aliyun-credentials-action@1e5248c8d5d93a8781ac344a68e19a43341e79e6 # v1
+        with:
+          role-to-assume: ${{ vars.ALIYUN_ROLE_ARN }}
+          oidc-provider-arn: ${{ vars.ALIYUN_OIDC_PROVIDER_ARN }}
+          audience: sts.aliyuncs.com
+          role-session-name: athlete-${{ inputs.target }}-${{ github.run_id }}
+          role-session-expiration: 3600
+      - name: Install matching Linux bundle through Cloud Assistant
+        if: steps.current.outputs.deploy == 'true'
+        id: aliyun
+        run: node scripts/deploy/ci-release.mjs install
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          ALIYUN_REGION_ID: ${{ vars.ALIYUN_REGION_ID }}
+          ALIYUN_INSTANCE_ID: ${{ vars.ALIYUN_INSTANCE_ID }}
+      - name: Verify matching deployment, rules, HTTP and realtime
+        if: steps.current.outputs.deploy == 'true'
+        id: verify
+        run: node scripts/deploy/ci-release.mjs verify
+      - name: Restore previous Alibaba release on a partial failure
+        if: always() && steps.credentials.outcome == 'success' && (steps.aliyun.outcome == 'failure' || steps.verify.outcome == 'failure')
+        run: node scripts/deploy/ci-release.mjs rollback
+        env:
+          ALIYUN_REGION_ID: ${{ vars.ALIYUN_REGION_ID }}
+          ALIYUN_INSTANCE_ID: ${{ vars.ALIYUN_INSTANCE_ID }}
+      - name: Restore previous Cloudflare version on a partial failure
+        if: always() && steps.previous.outputs.version != '' && (steps.worker.outcome == 'failure' || steps.credentials.outcome == 'failure' || steps.aliyun.outcome == 'failure' || steps.verify.outcome == 'failure')
+        uses: cloudflare/wrangler-action@953926a2e2182532811c01a25e53647d93bf07c0 # v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          wranglerVersion: 4.151.3
+          packageManager: npm
+          workingDirectory: ${{ runner.temp }}/wrangler-tool
+          command: rollback ${{ steps.previous.outputs.version }} --yes --config wrangler.json --message "Paired Alibaba deployment or verification failed"
+      - name: Remove consumed artifacts after successful verification
+        if: steps.current.outputs.deploy == 'true' && steps.verify.outcome == 'success'
+        continue-on-error: true
+        run: node scripts/deploy/ci-release.mjs cleanup
+        env:
+          GITHUB_TOKEN: ${{ github.token }}

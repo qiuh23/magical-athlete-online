@@ -1,0 +1,31 @@
+[Unit]
+Description=Magical Athlete isolated shared PR preview
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=athlete-preview
+Group=athlete-preview
+WorkingDirectory=/opt/magical-athlete-preview/current
+EnvironmentFile=/etc/magical-athlete-preview/server.env
+Environment=NODE_OPTIONS=--max-old-space-size=256
+ExecStart=/opt/node/bin/node dist/server/server/index.js
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=30
+KillSignal=SIGTERM
+UMask=0027
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/magical-athlete-preview
+InaccessiblePaths=/var/lib/magical-athlete /etc/magical-athlete /var/backups/magical-athlete
+MemoryHigh=320M
+MemoryMax=384M
+MemorySwapMax=128M
+CPUQuota=50%
+TasksMax=128
+
+[Install]
+WantedBy=multi-user.target

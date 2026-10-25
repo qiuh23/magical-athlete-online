@@ -6,6 +6,7 @@
   "workers_dev": true,
   "vars": {
     "DUAL_BACKEND_ENABLED": "true",
+    "MULTIPLAYER_ROOM_LIMIT": "14",
     "PUBLIC_ORIGINS": "http://115.29.188.62"
   },
   "assets": {

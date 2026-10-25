@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 [[ $EUID -eq 0 ]] || { echo 'Run with sudo.' >&2; exit 1; }
-DATABASE=/var/lib/magical-athlete/rooms.sqlite
+SCRIPT_DIR=$(cd -- "$(dirname -- "$0")" && pwd)
+source "$SCRIPT_DIR/target-paths.sh"
+DATABASE=$DEPLOY_DATA/rooms.sqlite
 [[ -f $DATABASE ]] || exit 0
-BACKUP_DIR=/var/backups/magical-athlete
+BACKUP_DIR=$DEPLOY_BACKUPS
 install -d -m 0700 "$BACKUP_DIR"
 BACKUP=$BACKUP_DIR/rooms-$(date -u +%Y%m%dT%H%M%S)-$$.sqlite
 # SQLite online backup includes committed WAL state while the service runs.
