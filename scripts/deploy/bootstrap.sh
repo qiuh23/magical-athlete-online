@@ -4,7 +4,7 @@ set -euo pipefail
 [[ $EUID -eq 0 ]] || { echo 'Run with sudo.' >&2; exit 1; }
 SOURCE_DIR=$(cd -- "$(dirname -- "$0")/../.." && pwd)
 apt-get update
-apt-get install -y ca-certificates curl xz-utils sqlite3 nginx certbot python3-certbot-nginx gettext-base
+apt-get install -y ca-certificates curl git xz-utils sqlite3 nginx certbot python3-certbot-nginx gettext-base
 # The server is initially private; no nginx listener or firewall rule is opened.
 if [[ ! -f /etc/magical-athlete/server.env ]]; then systemctl stop nginx; fi
 case "$(uname -m)" in x86_64) ARCH=x64;; aarch64) ARCH=arm64;; *) echo 'Unsupported architecture.' >&2; exit 1;; esac
@@ -14,14 +14,14 @@ if [[ ! -x /opt/node/bin/node ]] || [[ $(/opt/node/bin/node -p 'process.versions
     if [[ -n ${NODE_DOWNLOAD_DIR:-} ]]; then
         cp -- "$NODE_DOWNLOAD_DIR/SHASUMS256.txt" "$WORK/SHASUMS256.txt"
     else
-        curl --fail --location --retry 3 https://nodejs.org/dist/latest-v24.x/SHASUMS256.txt -o "$WORK/SHASUMS256.txt" || { echo 'Official Node download unavailable. Upload its archive and SHASUMS256.txt, then rerun with NODE_DOWNLOAD_DIR.' >&2; exit 1; }
+        curl --fail --location --connect-timeout 15 --max-time 60 --retry 2 https://nodejs.org/dist/latest-v24.x/SHASUMS256.txt -o "$WORK/SHASUMS256.txt" || { echo 'Official Node download unavailable. Upload its archive and SHASUMS256.txt, then rerun with NODE_DOWNLOAD_DIR.' >&2; exit 1; }
     fi
     NODE_ARCHIVE=$(awk -v arch="$ARCH" '$2 ~ "^node-v24\\.[0-9]+\\.[0-9]+-linux-"arch"\\.tar\\.xz$" {print $2}' "$WORK/SHASUMS256.txt")
     [[ -n $NODE_ARCHIVE && $NODE_ARCHIVE != *$'\n'* ]] || { echo 'Unable to resolve a single official Node 24 release.' >&2; exit 1; }
     if [[ -n ${NODE_DOWNLOAD_DIR:-} ]]; then
         cp -- "$NODE_DOWNLOAD_DIR/$NODE_ARCHIVE" "$WORK/$NODE_ARCHIVE"
     else
-        curl --fail --location --retry 3 "https://nodejs.org/dist/latest-v24.x/$NODE_ARCHIVE" -o "$WORK/$NODE_ARCHIVE"
+        curl --fail --location --connect-timeout 15 --max-time 600 --retry 2 "https://nodejs.org/dist/latest-v24.x/$NODE_ARCHIVE" -o "$WORK/$NODE_ARCHIVE"
     fi
     (cd "$WORK" && awk -v name="$NODE_ARCHIVE" '$2==name' SHASUMS256.txt | sha256sum --check -)
     mkdir -p /opt/node
