@@ -1,5 +1,18 @@
 # 胡闹运动会 · 好友联机
 
+## 在线游玩入口
+
+| 入口 | 地址 | 当前状态 |
+| --- | --- | --- |
+| Cloudflare | [打开游戏](https://magical-athlete.qiuh23.workers.dev) | HTTPS，可用 |
+| 阿里云内地 | [打开游戏](http://115.29.188.62) | 临时公网 HTTP，可用；国内玩家优先使用 |
+
+进入首页后在“服务器”区域检测并选择后端，再创建真人房、个人练习或 AI 对战。分享完整邀请链接或带服务器前缀的房间码（`C-ABC234` / `A-XYZ678`），加入者会连接原房间所属服务器。加入者也需要能够连接所选服务器；有国内玩家时建议选择阿里云内地。
+
+阿里云目前使用未加密的临时 HTTP 入口；从 Cloudflare 的 HTTPS 页面加入阿里云房间时，按页面提示切换至 HTTP 入口。请保留创建或加入房间时的网站与浏览器，以恢复本地身份。域名 `magical-athlete-online.cn` 的 ICP 备案仍在审核，域名 HTTPS 尚未开放，审核通过后再切换。
+
+开发验收使用独立的共享预览：[Cloudflare 测试入口](https://magical-athlete-preview.qiuh23.workers.dev) · [阿里云测试入口](http://115.29.188.62:8080)。预览会随最新成功 PR 更新，页面显示 PR/提交，房间和数据与现用入口独立；日常分享请使用上表地址。
+
 Wurstii A 扩展：新增30名中文角色、独立立绘与3D模型，接入现有“角色包与玩法”勾选设置，默认关闭；五个包全开共151张。详细适配卡文见 [Wurstii A 规则](public/rules/wurstii-a.md)，素材与历史验收见 [Wurstii 美术接入](docs/wurstii-art.md)。旧 Wurstii 对局保留冻结规则；每批选秀最后一张由系统自动分配。
 
 2026-10-22：[复制与临时抽牌嵌套裁定](docs/copy-ability-rulings.md)、[当前能力详情排版](docs/ability-detail-layout-2026-10-22.md)。本轮采用能力专项验证，类型、构建和打包预演仍保留，不重复八人完整对局。
@@ -18,7 +31,7 @@ Wurstii A 扩展：新增30名中文角色、独立立绘与3D模型，接入现
 
 ## 主路线：打开网页就能当房主
 
-玩家使用同一个HTTPS网址，输入昵称创建房间，再把邀请链接或六位房间号发给朋友。**本分支新建房间由服务器的 SQLite Durable Object 负责计算与保存对局**；Cloudflare Workers 提供网页、WebSocket和房间权威状态。旧的浏览器计算房间保留原存档与规则版本。朋友无需安装软件、登录游戏账号或配置网络，房主也无需运行本机Node服务。
+玩家从上述任一入口打开网页，选择可连接的服务器，输入昵称创建房间，再把邀请链接或完整房间码发给朋友。**新建房间由所属服务器负责计算与保存对局**：Cloudflare 使用 Workers、WebSocket 和 SQLite Durable Objects，阿里云使用 Node、Socket.IO 和 SQLite，两端共用游戏规则。旧的浏览器计算房间保留原存档与规则版本。朋友无需安装软件或登录游戏账号，房主也无需运行本机 Node 服务。
 
 当前房主可在等人大厅或对局顶部点击“结束房间”，再次确认后解散整个房间。所有玩家会收到解散提示；原房间号和邀请链接不能恢复此房间。
 
@@ -32,7 +45,7 @@ Wurstii A 扩展：新增30名中文角色、独立立绘与3D模型，接入现
 
 旧浏览器计算房间的计算网页需要保持打开和联网。关闭页面或设备休眠时旧房间对局暂停；回到原设备、原浏览器和同一网站后，可从IndexedDB中的存档恢复。其他玩家不会接管完整秘密状态。手机切到后台可能暂停网页，请在游玩时保持前台；清理站点数据或使用无痕窗口可能丢失恢复能力。此旧模式的计算房主可以访问完整对局状态；新建服务端房间不把完整秘密状态交给任何玩家网页。
 
-**正式网站：[打开胡闹运动会](https://magical-athlete.qiuh23.workers.dev)。** 已部署到用户确认的Workers Free，使用固定`workers.dev`域名，无需购买域名或云服务器。原3D版本已验证两种模式2、6、8人完整四场，正式网站8人四场、房主与客人恢复和再来一局；本次沉浸式、单练与人机的独立验收结果见[本次报告](docs/immersive-practice.md)。使用和维护方式见 [浏览器房主说明](docs/browser-host.md)，证据见 [测试报告](docs/testing.md)。
+两个现用入口见本文开头。Cloudflare 使用 Workers Free，阿里云使用已部署的杭州 ECS；双后端及临时 HTTP 的部署、更新与回滚见 [自动发布说明](docs/automatic-deployment.md)和 [HTTP/HTTPS 切换说明](docs/http-transition.md)。原3D版本已验证两种模式2、6、8人完整四场，早期正式网站8人四场、房主与客人恢复和再来一局；沉浸式、单练与人机的独立验收结果见[验收报告](docs/immersive-practice.md)，历史证据见 [测试报告](docs/testing.md)。
 
 ## 本地开发与检查
 
@@ -56,13 +69,13 @@ pnpm dev:browser
 
 ## GitHub更新与网站同步
 
-代码仓库为私有的 [qiuh23/magical-athlete-online](https://github.com/qiuh23/magical-athlete-online)。GitHub Actions 默认仅做必要的类型检查、构建、Worker 打包预演及 **一场八人联机检查**。单元与动画专项通过手动 `all` 按需执行，完整四场矩阵保留手动命令；最新远端结果见 Actions 页。
+代码仓库为私有的 [qiuh23/magical-athlete-online](https://github.com/qiuh23/magical-athlete-online)。GitHub Actions 执行类型、固定单元组、构建、Worker 打包预演与相关浏览器检查，默认包含 **一场八人联机检查**；纯部署收尾可使用受约束的 `deployment` 范围，避免重复整局。完整矩阵按需手动执行，最新远端结果见 Actions 页。
 
 3D 版本的[单场八人 CI 已通过](https://github.com/qiuh23/magical-athlete-online/actions/runs/39540261380)，约 1.6 分钟。按用户要求，用例总时限为 15 分钟，整个 CI 任务上限为 30 分钟。
 
 此前2D版本代码`46f4071`的[完整CI已通过](https://github.com/qiuh23/magical-athlete-online/actions/runs/39468302305)：122项回归和两种模式共6组完整网页验收全部通过。
 
-Cloudflare Workers Builds已连接此私有仓库和生产分支`main`，已实际验证一次推送后自动构建、部署成功，网站地址不变。默认构建`pnpm build`同时生成两种版本，面板也可用`pnpm build:browser`只构建网页版本；部署命令`pnpm exec wrangler deploy`。现有对局结束后再发布涉及规则或协议的更新。具体配置见 [GitHub自动同步步骤](docs/browser-host.md#github-自动同步)。
+双端发布流程为：同仓库 PR 检查成功后更新共享预览，合并到 `main` 且检查成功后更新两个现用入口，不自动合并、不按作者限制同学的 PR。fork 预览需维护者批准。首次启用需要将本次发布工作流合入 `main`；当前预览已用成功 CI 的同一份产物完成实际部署验收。仅修改 README 等被忽略文档不会触发构建或部署。权限、精确提交校验、隔离、更新及回滚见 [自动发布说明](docs/automatic-deployment.md)。现有对局结束后再发布涉及规则或协议的更新。
 
 ## 备用：Node与本机Tailscale
 
