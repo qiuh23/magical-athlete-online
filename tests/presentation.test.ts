@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { applyGameAction, createGame, enqueueMove, resolveTasks } from '../src/engine/index.js';
 import type { GameEvent, GameState, Racer, RoomView } from '../src/shared/types.js';
-import { beatDuration, completeBeat, confirmedFace, createPlayback, receiveRoom, skipPlayback, trackPath } from '../src/client/presentation.js';
+import { beatDuration, completeBeat, confirmedFace, createPlayback, presentationActor, receiveRoom, skipPlayback, trackPath } from '../src/client/presentation.js';
 import { visibleTwists } from '../src/client/TrackInfo.js';
 
 function racer(id: string, position = 0): Racer { return { id, playerId: `p${id}`, characterId: 'coach', position, tripped: false, finished: false, eliminated: false, flags: {} }; }
@@ -442,5 +442,167 @@ test('project cycle decisions receive a readable public skill beat before the re
   for(const type of ['loop','cycle-draw']){
     const state=receiveRoom(createPlayback(view()),view(2,[{id:1,type,source:'b',cause:'forced-cycle',text:'循环按项目房规处理'}]));
     assert.equal(state.queue[0]?.kind,'skill');assert(beatDuration(state.queue[0]!,{speed:8})>=1500);
+  }
+});
+
+function diceReactionFixture(ids:string[],begin=true) {
+  const players=ids.map((_,seat)=>({id:`p${seat}`,name:`玩家${seat}`,seat,color:'#000',ready:true,connected:true,score:0,hand:[],used:[],selection:[]}));
+  const game=createGame(players,456);game.phase='race';game.round=1;game.currentRacerId='r0';
+  game.config={version:'room-config-v1',characterPacks:{original:true,'second-wind':true,'extra-mile':true,'leaf-fan':true},optionalRules:[]};
+  game.racers=ids.map((characterId,index)=>({...racer(`r${index}`,2+index*8),playerId:`p${index}`,characterId}));
+  game.baseTurnOrder=game.racers.map(racer=>racer.id);game.flags.needsBegin=false;
+  if(begin){game.queue=[{kind:'beginTurn',racerId:'r0'}];resolveTasks(game);}
+  const snapshot=(version:number):RoomView=>({...view(version,structuredClone(game.logs),structuredClone(game.racers)),currentRacerId:game.currentRacerId,lastRoll:game.lastRoll&&{...game.lastRoll}});
+  const choose=(optionId:string)=>{assert(game.pending);applyGameAction(game,game.pending.playerId,{type:'choose',choiceId:game.pending.id,optionId});};
+  return {game,snapshot,choose};
+}
+
+test('a real main three settles before Triangle reacts, including a Stunner replacement',()=>{
+  for(const stunner of [false,true]){
+    const {game,snapshot}=diceReactionFixture(stunner?['banana','leaf-triangle-man','stunner','blimp']:['banana','leaf-triangle-man','blimp']);
+    if(stunner)game.racers[2]!.position=2;
+    const initial=snapshot(1);game.flags.testDice=[3];applyGameAction(game,'p0',{type:'roll'});
+    let state=receiveRoom(createPlayback(initial),snapshot(2));
+    assert.equal(state.queue[0]?.kind,'dice');assert.equal(state.queue[0]?.face,3);assert.equal(state.queue[0]?.source,'r0');
+    const movement=state.queue.findIndex(beat=>beat.kind==='move'&&beat.cause==='leaf-triangle-man');assert(movement>0);
+    assert.equal(state.queue.filter(beat=>beat.kind==='dice').length,1);
+    assert.equal(game.lastRoll?.face,stunner?1:3);assert.deepEqual(game.randomLog.map(draw=>draw.value),[3]);
+    while(state.queue[0]?.cause!=='leaf-triangle-man'||state.queue[0]?.kind!=='move'){assert(state.queue.length);assert.equal(state.racers[1]!.position,10);state=completeBeat(state);}
+    assert.equal(state.racers[1]!.position,10);state=completeBeat(state);assert.equal(state.racers[1]!.position,11);
+  }
+});
+
+test('a real skill raw three is public before its Triangle reaction, even when that reaction pauses the batch',()=>{
+  const {game,snapshot,choose}=diceReactionFixture(['leaf-philanthropist','leaf-triangle-man','extra-mile-mr-fox','blimp']);
+  const initial=snapshot(1);game.flags.testDice=[3,2];applyGameAction(game,'p0',{type:'roll'});
+  choose('allow'); // Allow Philanthropist's roll; Fox can still pause Triangle.
+  assert.equal(game.pending?.kind,'em-fox');
+  assert.equal(game.logs.some(event=>event.type==='multi-dice'),false,'the later batch summary cannot explain a reaction that is already waiting for input');
+  let state=receiveRoom(createPlayback(initial),snapshot(2));
+  assert.equal(state.queue[0]?.kind,'dice');assert.equal(state.queue[0]?.source,'r0');assert.equal(state.queue[0]?.face,3);
+  assert.equal(state.queue[0]?.events[0]?.type,'die-trigger');
+  assert.deepEqual(game.randomLog.map(draw=>draw.value),[3]);
+  choose('allow');state=receiveRoom(state,snapshot(3));
+  assert(state.queue.findIndex(beat=>beat.kind==='move'&&beat.cause==='leaf-triangle-man')>0);
+});
+
+test('Mr Dice Guy choosing an existing result never throws again across live, completed or restored batch playback',()=>{
+  for(const mode of ['queued','completed','restored'] as const){
+    const {game,snapshot,choose}=diceReactionFixture(['mr-dice-guy','banana','blimp']);
+    const initial=snapshot(1);game.flags.testDice=[2,2,4,4,5,6];choose('roll');
+    assert.equal(game.pending?.kind,'mr-dice-pick');
+    let state=mode==='restored'?createPlayback(snapshot(2)):receiveRoom(createPlayback(initial),snapshot(2));
+    if(mode==='completed')while(state.queue.length)state=completeBeat(state);
+    choose('4');state=receiveRoom(state,snapshot(3));
+    assert.equal(game.randomLog.length,6);assert.equal(game.lastRoll?.face,4);assert.equal(game.racers[0]!.position,6);
+    assert.equal(state.queue.filter(beat=>beat.kind==='dice').length,mode==='queued'?1:0);
+    assert(state.queue.some(beat=>beat.kind==='move'&&beat.source==='r0'));
+  }
+});
+
+test('a six-dice selection does not suppress another racer throw, a new-turn throw or an explicit whole-batch reroll',()=>{
+  const batch:GameEvent={id:1,type:'multi-dice',source:'a',faces:[1,2,2,4,4,6],cause:'mr-dice-guy',text:'六颗主骰'};
+  const initial=view(1,[batch]);
+  const another=receiveRoom(createPlayback(initial),view(2,[batch,{...roll(2,4),source:'b'}]));assert.deepEqual(another.queue.map(beat=>beat.kind),['dice']);
+  const nextTurn=receiveRoom(createPlayback(initial),view(2,[batch,{id:2,type:'turn',source:'a',text:'新回合'},roll(3,4)]));assert.deepEqual(nextTurn.queue.map(beat=>beat.kind),['dice']);
+  const rerolled=receiveRoom(createPlayback(initial),view(2,[batch,{...batch,id:2,faces:[2,3,3,4,5,6]}]));assert.equal(rerolled.queue[0]?.kind,'dice');assert.deepEqual(rerolled.queue[0]?.faces,[2,3,3,4,5,6]);
+});
+
+test('Triangle reactions never publish a pending opponent contest die ahead of the paired reveal',()=>{
+  const {game,choose}=diceReactionFixture(['duelist','banana','leaf-triangle-man','blimp'],false);
+  game.racers[1]!.position=game.racers[0]!.position;game.queue=[{kind:'duelCheck',racerId:'r0'}];resolveTasks(game);choose('r1');
+  game.flags.testDice=[3,2];choose('roll');
+  assert.equal(game.pending?.kind,'duel-roll');assert.equal(game.pending?.playerId,'p1');
+  assert.equal(game.racers[2]!.position,19);
+  assert.equal(game.logs.some(event=>['die-trigger','die','ability-dice','duel-dice'].includes(event.type)),false);
+  choose('roll');assert.deepEqual(game.logs.find(event=>event.type==='duel-dice')?.faces,[3,2]);
+});
+
+test('each real three in a six-dice batch precedes its own reaction and selection adds no extra die',()=>{
+  const {game,snapshot,choose}=diceReactionFixture(['mr-dice-guy','leaf-triangle-man','blimp']);
+  const initial=snapshot(1);game.flags.testDice=[3,3,4,4,5,6];choose('roll');
+  const state=receiveRoom(createPlayback(initial),snapshot(2));
+  const triggers=state.queue.filter(beat=>beat.events[0]?.type==='die-trigger');assert.equal(triggers.length,2);
+  for(const trigger of triggers){const next=state.queue.slice(state.queue.indexOf(trigger)+1);assert.equal(trigger.face,3);assert.equal(trigger.source,'r0');assert.equal(next[0]?.kind,'skill');assert.equal(next[0]?.cause,'leaf-triangle-man');assert.equal(next[1]?.kind,'move');assert.equal(next[1]?.cause,'leaf-triangle-man');}
+  assert.equal(state.queue.filter(beat=>beat.events[0]?.type==='multi-dice').length,1);
+  choose('4');const selected=receiveRoom(state,snapshot(3));
+  assert.equal(selected.queue.filter(beat=>beat.kind==='dice').length,3,'only the two real triggering threes and the one public batch are shown');
+  assert.equal(game.racers[1]!.position,12);assert.equal(game.randomLog.length,6);
+});
+
+test('single skill dice confirm their trigger by rollId across paused, completed and restored playback without replaying the throw',()=>{
+  for(const purpose of ['nemesis','the-hose','show-off'])for(const mode of ['queued','completed','restored'] as const){
+    const {game,snapshot,choose}=diceReactionFixture([purpose,'leaf-triangle-man','extra-mile-mr-fox','blimp'],false);
+    const initial=snapshot(1);
+    game.flags.testDice=[3];game.queue=[{kind:'rollBatch',racerId:'r0',count:1,purpose,faces:[],context:{face:3,previous:2,total:2}}];resolveTasks(game);
+    assert.equal(game.pending?.kind,'em-fox');assert.equal(game.logs.filter(event=>event.type==='die-trigger').length,1);
+    const trigger=game.logs.find(event=>event.type==='die-trigger')!;
+    let state=mode==='restored'?createPlayback(snapshot(2)):receiveRoom(createPlayback(initial),snapshot(2));
+    if(mode==='completed')while(state.queue.length)state=completeBeat(state);
+    Object.assign(game,JSON.parse(JSON.stringify(game))); // Restore the actual paused die continuation.
+    let responses=0;while(game.pending?.kind==='em-fox'){assert(++responses<10);choose('allow');}
+    const confirmation=game.logs.find(event=>event.type===(purpose==='show-off'?'die':'ability-dice')&&event.cause===purpose)!;
+    assert(confirmation);assert.equal(confirmation.rollId,trigger.id);assert.equal(game.randomLog.length,1);
+    state=receiveRoom(state,snapshot(3));
+    assert.equal(state.queue.filter(beat=>beat.kind==='dice').length,mode==='queued'?1:0);
+    assert.equal(state.queue.find(beat=>beat.events[0]?.id===confirmation.id)?.kind,'skill');
+    while(state.queue.length)state=completeBeat(state);
+    // A subsequent real three has a different public identity and still plays.
+    game.flags.testDice=[3];
+    if(purpose==='show-off')choose('roll');
+    else {game.queue=[{kind:'rollBatch',racerId:'r0',count:1,purpose,faces:[],context:{face:3}}];resolveTasks(game);}
+    responses=0;while(game.pending?.kind==='em-fox'){assert(++responses<10);choose('allow');}
+    state=receiveRoom(state,snapshot(4));
+    assert.equal(game.randomLog.length,2);assert.equal(state.queue.filter(beat=>beat.kind==='dice').length,1);
+    const nextConfirmation=game.logs.findLast(event=>event.type===(purpose==='show-off'?'die':'ability-dice')&&event.cause===purpose)!;
+    assert.notEqual(nextConfirmation.rollId,confirmation.rollId);
+  }
+});
+
+test('Mr Dice Guy confirms its original batch when Toucan changes the selected repeated two to an unrolled six',()=>{
+  const {game,snapshot,choose}=diceReactionFixture(['mr-dice-guy','banana','blimp']);
+  game.racers[0]!.flags.acquiredPowers=['leaf-toucan'];
+  const initial=snapshot(1);game.flags.testDice=[2,2,3,4,4,5];choose('roll');
+  const batch=game.logs.find(event=>event.type==='multi-dice')!;
+  let state=receiveRoom(createPlayback(initial),snapshot(2));while(state.queue.length)state=completeBeat(state);
+  choose('2');assert.equal(game.pending?.kind,'leaf-toucan');state=receiveRoom(state,snapshot(3));
+  choose('6');state=receiveRoom(state,snapshot(4));
+  assert.equal(game.lastRoll?.face,6);assert.equal(game.randomLog.length,6);
+  assert.equal(game.logs.findLast(event=>event.type==='roll')?.rollId,batch.id);
+  assert.equal(state.queue.some(beat=>beat.kind==='dice'),false);
+  assert(state.queue.some(beat=>beat.kind==='move'&&beat.source==='r0'));
+});
+
+test('an NPC raw three identifies the stage actor before Triangle reacts and confirms the same die without replay',()=>{
+  const {game,snapshot}=diceReactionFixture(['banana','leaf-triangle-man','blimp'],false);
+  game.flags.thirds={id:'mouth',round:1,held:{},extraCards:[],npc:{id:'mouth',position:30}};
+  const initial=snapshot(1);game.flags.testDice=[3];game.queue=[{kind:'rollBatch',racerId:'r0',count:1,purpose:'thirds-npc',faces:[]}];resolveTasks(game);
+  const trigger=game.logs.find(event=>event.type==='die-trigger')!;
+  assert.equal(trigger.source,undefined);assert.deepEqual(trigger.actor,{name:'大嘴怪',characterId:'mouth'});assert.match(trigger.text,/^大嘴怪掷出3/);
+  const confirmation=game.logs.find(event=>event.type==='ability-dice'&&event.cause==='thirds-npc')!;
+  assert.equal(confirmation.rollId,trigger.id);assert.equal(confirmation.source,undefined);assert.deepEqual(confirmation.actor,trigger.actor);
+  const state=receiveRoom(createPlayback(initial),snapshot(2));
+  assert.equal(state.queue[0]?.kind,'dice');assert.equal(state.queue[0]?.source,undefined);assert.deepEqual(state.queue[0]?.actor,trigger.actor);
+  assert.deepEqual(presentationActor(state.queue[0],state.racers),{name:'大嘴怪',characterId:'mouth',racerId:undefined});
+  assert.equal(state.queue.filter(beat=>beat.kind==='dice').length,1);assert.equal(state.queue.find(beat=>beat.events[0]?.id===confirmation.id)?.kind,'skill');
+  assert.equal(game.randomLog.length,1);assert.equal(game.racers[1]!.position,11);
+});
+
+test('Alchemy Lab dice identify the wandering monster or its transformed owner instead of the current racer',()=>{
+  for(const transformed of [false,true]){
+    const {game,snapshot}=diceReactionFixture(['banana','bite-mark','blimp'],false);
+    game.track='twisty-twirl';game.flags.twist={triggered:true,deck:[],drawn:['alchemy-lab'],monster:{position:1,...(transformed?{racerId:'r1'}:{})}};
+    const initial=snapshot(1);game.flags.testDice=[3];game.queue=[{kind:'twist',step:'monster',rollerId:'r0'}];resolveTasks(game);
+    const state=receiveRoom(createPlayback(initial),snapshot(2));
+    const die=state.queue.find(beat=>beat.kind==='dice')!;assert(die);assert.equal(die.face,3);
+    const selected=presentationActor(die,state.racers);
+    assert.notEqual(selected.racerId,game.currentRacerId);
+    if(transformed){
+      assert.equal(die.source,'r1');assert.equal(die.actor,undefined);assert.equal(selected.characterId,'bite-mark');assert.equal(selected.racerId,'r1');
+    }else{
+      assert.equal(die.source,undefined);assert.deepEqual(selected,{name:'游荡巨口',characterId:'mouth',racerId:undefined});
+      const movement=state.queue.find(beat=>beat.events[0]?.type==='twist-monster')!;assert(movement);assert.deepEqual(movement.actor,die.actor);assert.equal(movement.source,undefined);
+    }
+    assert.equal(game.randomLog.length,1);
   }
 });

@@ -31,6 +31,7 @@ export interface PresentationBeat {
   abilityReveal?: AbilityRevealData;
 }
 interface ConfirmedDie { source?: string; face: number; eventId: number }
+interface ConfirmedBatch { source?: string; faces: number[]; eventId: number }
 export interface PlaybackState {
   roomCode: string;
   version: number;
@@ -41,6 +42,8 @@ export interface PlaybackState {
   queue: PresentationBeat[];
   confirmed: RoomView;
   lastDie?: ConfirmedDie;
+  /** Mr Dice Guy chooses from an already public throw, even across snapshots. */
+  lastBatch?: ConfirmedBatch;
   /** Later rounds wait behind every confirmed beat from the current board. */
   deferredRooms?: RoomView[];
 }
@@ -54,14 +57,16 @@ const eventsOf = (room: RoomView) => room.presentationEvents ?? room.logs;
 /** Joining or restoring a room establishes a baseline; old rolls are not replayed. */
 export function createPlayback(room: RoomView): PlaybackState {
   let lastDie: ConfirmedDie | undefined;
+  let lastBatch: ConfirmedBatch | undefined;
   for (const event of eventsOf(room)) {
     if (event.type === 'die') {
       const face = confirmedFace(event, room);
       if (face !== undefined) lastDie = { source: event.source, face, eventId: event.id };
     }
-    if (['roll', 'turn', 'reveal', 'phase'].includes(event.type)) lastDie = undefined;
+    if (event.type === 'multi-dice' && event.cause === 'mr-dice-guy' && event.faces?.length === 6) lastBatch = {source:event.source,faces:[...event.faces],eventId:event.id};
+    if (['roll', 'turn', 'reveal', 'phase'].includes(event.type)) { lastDie = undefined; lastBatch = undefined; }
   }
-  return { roomCode: room.code, version: room.version, round: room.round, eventCursor: highestEvent(eventsOf(room)), racers: cloneRacers(room.racers), queue: [], confirmed: room, lastDie };
+  return { roomCode: room.code, version: room.version, round: room.round, eventCursor: highestEvent(eventsOf(room)), racers: cloneRacers(room.racers), queue: [], confirmed: room, lastDie, lastBatch };
 }
 
 export function trackPath(from: number, to: number): number[] {
@@ -98,7 +103,10 @@ function eventMotion(event: GameEvent, kind: PresentationKind): PresentationMoti
 function beatForEvent(event: GameEvent, room: RoomView): PresentationBeat | undefined {
   let kind: PresentationKind;
   const abilityReveal = abilityRevealForEvent(event, room);
-  if (['die', 'roll', 'ability-dice', 'multi-dice'].includes(event.type)) kind = 'dice';
+  // A public trigger already showed this exact physical die. Preserve the
+  // final skill explanation without animating a second apparent throw.
+  if (['die', 'ability-dice'].includes(event.type) && event.rollId !== undefined && event.rollId < event.id) kind = 'skill';
+  else if (['die', 'die-trigger', 'roll', 'ability-dice', 'multi-dice'].includes(event.type)) kind = 'dice';
   else if (event.type === 'duel-dice') kind = 'duel-dice';
   else if (event.type === 'move') kind = 'move';
   else if (event.type === 'warp') kind = event.cause === 'flip-flop' ? 'swap' : 'warp';
@@ -252,6 +260,7 @@ export function receiveRoom(state: PlaybackState, room: RoomView, options: { rec
   const baseRacers = revealingRace ? cloneRacers(room.racers).map(racer => ({ ...racer, playerId: racer.identityPlayerId ?? racer.playerId, flags: { ...racer.flags, prediction: undefined, form: undefined, hogOwnerId: undefined }, position: 0, tripped: false, finished: false, eliminated: false, rank: undefined })) : state.racers;
   const queue = revealingRace ? [] : [...state.queue];
   let lastDie = revealingRace ? undefined : state.lastDie;
+  let lastBatch = revealingRace ? undefined : state.lastBatch;
   for (const event of fresh) {
     if (revealingRace && event.type === 'reveal') {
       // One local clock owns the tour and the following confirmed beats. A
@@ -261,19 +270,21 @@ export function receiveRoom(state: PlaybackState, room: RoomView, options: { rec
     }
     // Scout and other reactions can move racers between the throw and its
     // confirmation. Only a new turn/race ends that pending throw.
-    if (['turn', 'reveal', 'phase'].includes(event.type)) lastDie = undefined;
+    if (['turn', 'reveal', 'phase'].includes(event.type)) { lastDie = undefined; lastBatch = undefined; }
     const beat = beatForEvent(event, room);
     if (!beat) continue;
     // `die` is the throw; `roll` confirms it after the optional reroll window.
     // They may arrive in different snapshots. A reroll emits a new `die` ID.
-    if (event.type === 'roll' && (event.rollId!==undefined&&event.rollId<event.id || lastDie&&lastDie.source===event.source&&lastDie.face===beat.face)) { lastDie = undefined; continue; }
-    if (event.type === 'die') lastDie = { source: event.source, face: beat.face!, eventId: event.id };
-    if (event.type === 'roll') lastDie = undefined;
+    const batchSelection = lastBatch && lastBatch.source === event.source && lastBatch.faces.filter(face => face === beat.face).length > 1;
+    if (event.type === 'roll' && (event.rollId!==undefined&&event.rollId<event.id || lastDie&&lastDie.source===event.source&&lastDie.face===beat.face || batchSelection)) { lastDie = undefined; lastBatch = undefined; continue; }
+    if (event.type === 'die' && beat.kind === 'dice') lastDie = { source: event.source, face: beat.face!, eventId: event.id };
+    if (event.type === 'multi-dice' && event.cause === 'mr-dice-guy' && beat.faces?.length === 6) lastBatch = {source:event.source,faces:[...beat.faces],eventId:event.id};
+    if (event.type === 'roll') { lastDie = undefined; lastBatch = undefined; }
     const merged = mergeSimultaneous(queue.at(-1), beat, state.queue[0]?.key);
     if (merged) queue[queue.length - 1] = merged;
     else queue.push(beat);
   }
-  return { ...state, round: room.round, version: room.version, eventCursor: latestId, confirmed: room, queue: paceQueuedBeats(queue, state.queue[0]?.key), lastDie, racers: queue.length ? baseRacers : cloneRacers(room.racers) };
+  return { ...state, round: room.round, version: room.version, eventCursor: latestId, confirmed: room, queue: paceQueuedBeats(queue, state.queue[0]?.key), lastDie, lastBatch, racers: queue.length ? baseRacers : cloneRacers(room.racers) };
 }
 
 /** Apply all targets together after their visual beat; later skills cannot jump ahead. */

@@ -61,20 +61,6 @@ export function RoomChat({ room, community, connection, immersive, onRename }: {
     viewport?.addEventListener('resize', update); viewport?.addEventListener('scroll',update); window.addEventListener('resize',update); update();
     return () => { viewport?.removeEventListener('resize', update); viewport?.removeEventListener('scroll',update); window.removeEventListener('resize',update); document.documentElement.style.removeProperty('--chat-keyboard-offset'); };
   }, []);
-  useEffect(() => {
-    if (!immersive) return;
-    let panel: Element | null = null;
-    const resize = new ResizeObserver(() => measure());
-    const measure = () => {
-      const next = document.querySelector('.floating-choice');
-      if (next !== panel) { resize.disconnect(); panel = next; if (panel) resize.observe(panel); }
-      const height = panel?.getBoundingClientRect().height;
-      if (height) document.documentElement.style.setProperty('--chat-skill-height', `${height}px`);
-      else document.documentElement.style.removeProperty('--chat-skill-height');
-    };
-    const changes = new MutationObserver(measure); changes.observe(document.body, {childList: true, subtree: true}); measure();
-    return () => {resize.disconnect();changes.disconnect();document.documentElement.style.removeProperty('--chat-skill-height');};
-  }, [immersive]);
   const send = async (event: React.FormEvent) => {
     event.preventDefault();
     const value = text.trim();
