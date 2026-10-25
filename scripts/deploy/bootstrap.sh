@@ -7,6 +7,22 @@ apt-get update
 apt-get install -y ca-certificates curl git xz-utils sqlite3 nginx certbot python3-certbot-nginx gettext-base
 # The server is initially private; no nginx listener or firewall rule is opened.
 if [[ ! -f /etc/magical-athlete/server.env ]]; then systemctl stop nginx; fi
+# Some Ubuntu cloud images leave only socket activation listening while the
+# ssh service is stopped. Keep a regular service and a systemd-managed runtime
+# directory so management connections also survive reboot. Authentication and
+# the cloud security group's allowed sources remain unchanged.
+if systemctl cat ssh.service >/dev/null 2>&1; then
+    install -d -m 0755 /run/sshd /etc/systemd/system/ssh.service.d
+    cat > /etc/systemd/system/ssh.service.d/10-magical-athlete-runtime.conf <<'SSH_UNIT'
+[Service]
+RuntimeDirectory=sshd
+RuntimeDirectoryMode=0755
+SSH_UNIT
+    /usr/sbin/sshd -t
+    systemctl daemon-reload
+    if systemctl cat ssh.socket >/dev/null 2>&1; then systemctl disable --now ssh.socket; fi
+    systemctl enable --now ssh.service
+fi
 case "$(uname -m)" in x86_64) ARCH=x64;; aarch64) ARCH=arm64;; *) echo 'Unsupported architecture.' >&2; exit 1;; esac
 if [[ ! -x /opt/node/bin/node ]] || [[ $(/opt/node/bin/node -p 'process.versions.node.split(".")[0]') != 24 ]]; then
     WORK=$(mktemp -d)

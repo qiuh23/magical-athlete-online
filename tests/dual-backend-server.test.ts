@@ -50,6 +50,7 @@ test('Node lightweight HTTP/realtime probes, CORS, private launch gate and authe
     const preflight=await fetch(origin+'/api/rooms',{method:'OPTIONS',headers:{Origin:'https://example.workers.dev','Access-Control-Request-Method':'POST','Access-Control-Request-Headers':'Content-Type'}});
     assert.equal(preflight.status,204);assert.equal(preflight.headers.get('Access-Control-Allow-Headers'),'Content-Type');
     assert.equal((await fetch(origin+'/api/connectivity',{headers:{Origin:'https://evil.example'}})).status,403);
+    const health=await (await fetch(origin+'/api/health')).json() as {publicAccessEnabled:boolean;controlledValidation:boolean};assert.equal(health.publicAccessEnabled,false);assert.equal(health.controlledValidation,false);
     assert.equal((await fetch(origin+'/api/rooms',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:'公开拒绝',maxPlayers:2})})).status,503);
     const probe=io(origin,{auth:{probe:true},transports:['websocket'],reconnection:false,extraHeaders:{Origin:'https://example.workers.dev'}});
     try{const reply=await socketEvent(probe,'connectivity');assert.deepEqual(reply,connectivityInfo('aliyun'));}finally{probe.disconnect();}
@@ -58,6 +59,15 @@ test('Node lightweight HTTP/realtime probes, CORS, private launch gate and authe
     try{const error=await socketEvent<Error>(blocked,'connect_error');assert.match(error.message,/尚未开放/);}finally{blocked.disconnect();}
     assert.equal(application.rooms.capacity().limit,15);
   }finally{await application.close();for(const key of keys){if(previous[key]===undefined)delete process.env[key];else process.env[key]=previous[key];}}
+});
+
+test('controlled validation accepts loopback rooms while reporting public access closed',async()=>{
+  const keys=['NODE_ENV','HOST','CONTROLLED_VALIDATION','PUBLIC_ACCESS_ENABLED'],previous=Object.fromEntries(keys.map(key=>[key,process.env[key]]));
+  Object.assign(process.env,{NODE_ENV:'production',HOST:'127.0.0.1',CONTROLLED_VALIDATION:'true',PUBLIC_ACCESS_ENABLED:'false'});
+  const application=createApplication(':memory:');application.http.listen(0,'127.0.0.1');await once(application.http,'listening');
+  const origin=`http://127.0.0.1:${(application.http.address() as {port:number}).port}`;
+  try{const health=await(await fetch(origin+'/api/health')).json() as {publicAccessEnabled:boolean;controlledValidation:boolean};assert.equal(health.publicAccessEnabled,false);assert.equal(health.controlledValidation,true);const response=await fetch(origin+'/api/rooms',{method:'POST',headers:{'Content-Type':'application/json',Origin:'http://127.0.0.1:3341'},body:JSON.stringify({name:'受控验证',maxPlayers:2})});assert.equal(response.status,201);}
+  finally{await application.close();for(const key of keys){if(previous[key]===undefined)delete process.env[key];else process.env[key]=previous[key];}}
 });
 
 test('Node idempotent HTTP create and restart restore identity, chat and room state',async()=>{

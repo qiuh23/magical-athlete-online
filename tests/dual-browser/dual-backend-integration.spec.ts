@@ -2,9 +2,13 @@ import { test, expect, type BrowserContext, type Page } from '@playwright/test';
 import { createApplication } from '../../src/server/index.js';
 
 const nodeOrigin = 'http://127.0.0.1:3321', workerOrigin = 'http://127.0.0.1:8797';
+// A management-only SSH tunnel can validate the actual deployed Node instance
+// with the same independent browser flow, without exposing a public game API.
+const aliyunOrigin = process.env.ALIYUN_TEST_ORIGIN ?? nodeOrigin;
+const entryOrigin = process.env.DUAL_ENTRY_ORIGIN ?? nodeOrigin;
 const deployment = {backends: [
   {id: 'cloudflare', origin: workerOrigin, transport: 'worker', enabled: true},
-  {id: 'aliyun', origin: nodeOrigin, transport: 'socketio', enabled: true},
+  {id: 'aliyun', origin: aliyunOrigin, transport: 'socketio', enabled: true},
 ]};
 let application: ReturnType<typeof createApplication>;
 test.beforeAll(async () => {
@@ -37,7 +41,7 @@ for (const backend of ['cloudflare', 'aliyun'] as const) {
       for (let i = 0; i < 2; i++) { const context = await browser.newContext(); contexts.push(context); await configured(context); }
       const host = await contexts[0]!.newPage(), guest = await contexts[1]!.newPage();
       for (const page of [host, guest]) page.on('pageerror', error => errors.push(error.message));
-      await host.goto(nodeOrigin);
+      await host.goto(entryOrigin);
       const server = host.getByRole('radio', {name: backend === 'cloudflare' ? 'Cloudflare' : '阿里云内地', exact: true});
       await expect(server).toBeEnabled(); await server.click();
       await host.getByRole('tab', {name: '创建房间', exact: true}).click();
@@ -79,7 +83,7 @@ for (const backend of ['cloudflare', 'aliyun'] as const) {
     try {
       const page = await context.newPage();
       for (const mode of ['practice', 'ai'] as const) {
-        await page.goto(nodeOrigin);
+        await page.goto(entryOrigin);
         const server = page.getByRole('radio', {name: backend === 'cloudflare' ? 'Cloudflare' : '阿里云内地', exact: true});
         await expect(server).toBeEnabled(); await server.click();
         await page.getByRole('tab', {name: mode === 'practice' ? '自己练习' : '人机对战', exact: true}).click();

@@ -192,7 +192,12 @@ test(`server authority ${n} independent players: ${smoke?'one race, host/guest r
     for(const guest of pages.slice(1))expect(await boundedRead(guest.evaluate(async()=>(await indexedDB.databases()).some(db=>db.name==='magical-athlete-browser-authority-v1')),'archive-presence read')).toBe(false);
     await synced(host,(await saved(host,code)).version);await host.getByRole('button',{name:'开始选秀',exact:true}).click();await expect.poll(async()=>(await saved(host,code)).game.phase).toBe('draft');
     while((await saved(host,code)).game.phase==='draft'){
-      const draftRoom=await saved(host,code),d=draftRoom.game.draft!;latestPublicRoom=publicRoom(draftRoom);mark('draft',`pick-${d.cursor}`,draftRoom);const p=pages[ids.indexOf(d.order[d.cursor]!) ]!;await synced(p,(await saved(host,code)).version);
+      const draftRoom=await saved(host,code),d=draftRoom.game.draft!;latestPublicRoom=publicRoom(draftRoom);mark('draft',`pick-${d.cursor}`,draftRoom);
+      // The shared authority automatically assigns a batch's final card. A
+      // published one-card snapshot can arrive just before that system action;
+      // clicking it races the next market and may resolve to its disabled card.
+      if(d.market.length===1){await expect.poll(async()=>{const next=(await saved(host,code)).game;return next.phase!=='draft'||next.draft?.cursor!==d.cursor||next.draft?.batch!==d.batch;}).toBe(true);continue;}
+      const p=pages[ids.indexOf(d.order[d.cursor]!) ]!;await synced(p,(await saved(host,code)).version);
       await p.locator('.character-card .character-art').first().click();const confirm=p.getByRole('button',{name:/确认选择/});if(await confirm.count())await confirm.click();
       await expect.poll(async()=>(await saved(host,code)).game.draft?.cursor??-1).not.toBe(d.cursor);
     }
