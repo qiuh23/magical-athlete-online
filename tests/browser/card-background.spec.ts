@@ -15,7 +15,7 @@ test.beforeAll(async () => {
 });
 test.afterAll(async () => { await application.close(); });
 
-test('flat blue and yellow cards keep artwork, selection and details readable on desktop and mobile', async ({ browser }) => {
+test('flat card backgrounds keep artwork, selection and details readable on desktop and mobile', async ({ browser }) => {
   const created = application.rooms.create('卡牌检查', 2, 0);
   const guest = application.rooms.join(created.identity.roomCode, '卡牌伙伴');
   const room = application.rooms.get(created.identity.roomCode);
@@ -42,12 +42,16 @@ test('flat blue and yellow cards keep artwork, selection and details readable on
       page.on('pageerror', error => errors.push(error.message));
       await page.goto(`${url}/room/${created.identity.roomCode}`);
       const cards = page.locator('.character-card');
+      const colors: Record<string, string> = {
+        banana: 'rgb(181, 214, 107)', romantic: 'rgb(246, 168, 208)',
+        skipper: 'rgb(157, 183, 251)', 'leaf-triangle-man': 'rgb(181, 214, 107)',
+      };
       await expect(cards).toHaveCount(4);
       for (const card of await cards.all()) {
         const artwork = card.locator('.character-avatar-detail');
         expect(await artwork.evaluate(element => getComputedStyle(element).backgroundImage)).toBe('none');
-        expect(await artwork.evaluate(element => getComputedStyle(element).backgroundColor)).toBe('rgb(37, 77, 228)');
-        expect(await card.locator('.character-copy').evaluate(element => getComputedStyle(element).backgroundColor)).toBe('rgb(255, 218, 39)');
+        expect(await artwork.evaluate(element => getComputedStyle(element).backgroundColor)).toBe(colors[(await card.getAttribute('data-character-id'))!]);
+        expect(await card.locator('.character-copy').evaluate(element => getComputedStyle(element).backgroundColor)).toBe('rgb(255, 253, 245)');
         await expect(artwork.locator('.portrait-scenery')).toHaveCount(0);
         const frame = await artwork.boundingBox(), avatar = await artwork.locator('.avatar').boundingBox();
         expect(frame).toBeTruthy(); expect(avatar).toBeTruthy();
@@ -67,7 +71,7 @@ test('flat blue and yellow cards keep artwork, selection and details readable on
       await expect(dialog.locator('.portrait-scene .avatar')).toBeVisible();
       await expect(dialog.locator('.portrait-scenery')).toHaveCount(0);
       await expect(dialog.locator('.identity-name')).toHaveText('香蕉');
-      expect(await dialog.locator('.modal-header').evaluate(element => getComputedStyle(element).backgroundColor)).toBe('rgb(37, 77, 228)');
+      expect(await dialog.locator('.modal-header').evaluate(element => getComputedStyle(element).backgroundColor)).toBe('rgb(241, 242, 230)');
       await dialog.screenshot({ path: `${output}/${name}-detail.png` });
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
       expect(errors).toEqual([]);
