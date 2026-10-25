@@ -52,7 +52,7 @@ jobs:
           HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
       - run: pnpm typecheck
       - name: Validate runtime backends, credentials, creation retries and quotas
-        run: pnpm exec tsx --test tests/random-id.test.ts tests/backends.test.ts tests/network-backends.test.ts tests/dual-backend-server.test.ts tests/dual-backend-worker.test.ts tests/owner-recovery.test.ts tests/community-network.test.ts
+        run: pnpm exec tsx --test tests/random-id.test.ts tests/backends.test.ts tests/network-backends.test.ts tests/dual-backend-server.test.ts tests/dual-backend-worker.test.ts tests/owner-recovery.test.ts tests/community-network.test.ts tests/deployment-capacity.test.ts
       - name: Validate frozen schedules, long drafting, score audit and worker persistence
         run: pnpm exec tsx --test tests/competition.test.ts tests/schedule-review.test.ts tests/rules-version.test.ts tests/relay.test.ts
       - name: Validate Scout playback and owner-absence room lifecycle

@@ -1,0 +1,2 @@
+# These scripts are copied from Windows and executed directly on Linux hosts.
+scripts/deploy/*.sh text eol=lf

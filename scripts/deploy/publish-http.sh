@@ -45,7 +45,11 @@ fi
 systemctl enable nginx
 systemctl restart magical-athlete
 systemctl reload-or-restart nginx
-curl --fail --silent --show-error http://127.0.0.1:3000/api/connectivity
+for attempt in {1..20}; do
+    if curl --fail --silent http://127.0.0.1:3000/api/connectivity; then break; fi
+    if [[ $attempt == 20 ]]; then echo 'Application did not become healthy within 20 seconds.' >&2; exit 1; fi
+    sleep 1
+done
 echo
 echo "Controlled HTTP entry configured: http://$PUBLIC_IP (approved source IPv4s only)."
 echo 'Open security-group TCP 80 only for the same /32 sources; keep 3000 and public 443 closed.'

@@ -180,14 +180,14 @@ test(`server authority ${n} independent players: ${smoke?'one race, host/guest r
     const host=pages[0]!;
     mark('setup','create-room');
     await host.goto(url);await host.getByRole('tab',{name:'创建房间',exact:true}).click();await host.getByLabel('你的昵称').fill('浏览器计算房主');await host.getByLabel('房间人数上限').selectOption(String(n));await host.getByLabel('每次操作时限').selectOption('0');
-    await host.getByRole('button',{name:'创建房间，召集朋友'}).click();await expect(host).toHaveURL(/\/room\/[CA]-[A-Z2-9]{6}$/);const code=host.url().split('/').at(-1)!.replace(/^[CA]-/,'');activeCode=code;
+    await host.getByRole('button',{name:'创建房间，召集朋友'}).click();await expect(host).toHaveURL(/\/room\/C-[A-Z2-9]{6}$/);const roomUrl=host.url(),code=roomUrl.split('/').at(-1)!.replace(/^C-/,'');activeCode=code;
     await expect(host.getByText('已连接',{exact:true})).toBeVisible();
     for(let i=1;i<n;i++){
       mark('setup',`join-${i}`);
-      const p=pages[i]!;await p.goto(`${url}/room/${code}`);await p.getByLabel('你的昵称').fill(`网页同学${i}`);await p.getByRole('button',{name:'加入这场胡闹'}).click();await expect(p.getByRole('button',{name:'我准备好了',exact:true})).toBeVisible();
+      const p=pages[i]!;await p.goto(roomUrl);await p.getByLabel('你的昵称').fill(`网页同学${i}`);await p.getByRole('button',{name:'加入这场胡闹'}).click();await expect(p.getByRole('button',{name:'我准备好了',exact:true})).toBeVisible();
     }
     for(const p of pages){await synced(p,(await saved(host,code)).version);await p.getByRole('button',{name:'我准备好了',exact:true}).click();await expect(p.getByRole('button',{name:'取消准备',exact:true})).toBeVisible();}
-    await host.getByRole('button',{name:'邀请朋友',exact:true}).click();expect(await boundedRead(host.evaluate(()=>navigator.clipboard.readText()),'clipboard read')).toBe(`${url}/room/C-${code}`);
+    await host.getByRole('button',{name:'邀请朋友',exact:true}).click();expect(await boundedRead(host.evaluate(()=>navigator.clipboard.readText()),'clipboard read')).toBe(roomUrl);
     const ids=await Promise.all(pages.map(p=>boundedRead(p.evaluate(code=>JSON.parse(localStorage.getItem(`magical-athlete:identity:cloudflare:${code}`)!).playerId,code),'player identity read')));expect(new Set(ids).size).toBe(n);
     for(const guest of pages.slice(1))expect(await boundedRead(guest.evaluate(async()=>(await indexedDB.databases()).some(db=>db.name==='magical-athlete-browser-authority-v1')),'archive-presence read')).toBe(false);
     await synced(host,(await saved(host,code)).version);await host.getByRole('button',{name:'开始选秀',exact:true}).click();await expect.poll(async()=>(await saved(host,code)).game.phase).toBe('draft');
@@ -219,19 +219,19 @@ test(`server authority ${n} independent players: ${smoke?'one race, host/guest r
       }
       if(!hostRecovered&&g.phase==='race'){
         mark('host-recovery','duplicate-tab',room,steps);
-        const duplicate=await contexts[0]!.newPage();observe(duplicate);await duplicate.goto(`${url}/room/${code}`);await expect(duplicate.getByText('已连接',{exact:true})).toBeVisible();await duplicate.close();
+        const duplicate=await contexts[0]!.newPage();observe(duplicate);await duplicate.goto(roomUrl);await expect(duplicate.getByText('已连接',{exact:true})).toBeVisible();await duplicate.close();
         const before=(await saved(host,code)).game;
         mark('host-recovery','host-offline',room,steps);
         await host.goto('about:blank');await expect(pages[1]!.getByText('已连接',{exact:true})).toBeVisible();
         mark('host-recovery','host-return',room,steps);
-        await host.goto(`${url}/room/${code}`);await expect(host.getByText('已连接',{exact:true})).toBeVisible();
+        await host.goto(roomUrl);await expect(host.getByText('已连接',{exact:true})).toBeVisible();
         const after=(await saved(host,code)).game;
         for(const key of ['rngState','randomLog','pending','queue','racers','round','results'] as const)expect(after[key]).toEqual(before[key]);
         hostRecovered=true;continue;
       }
       if(!guestRecovered&&g.phase==='race'){
         mark('guest-recovery','offline-reload',room,steps);
-        const p=pages.at(-1)!;await contexts.at(-1)!.setOffline(true);await p.reload().catch(()=>{});await contexts.at(-1)!.setOffline(false);await p.goto(`${url}/room/${code}`);await expect(p.getByText('已连接',{exact:true})).toBeVisible();
+        const p=pages.at(-1)!;await contexts.at(-1)!.setOffline(true);await p.reload().catch(()=>{});await contexts.at(-1)!.setOffline(false);await p.goto(roomUrl);await expect(p.getByText('已连接',{exact:true})).toBeVisible();
         expect(await boundedRead(p.evaluate(code=>JSON.parse(localStorage.getItem(`magical-athlete:identity:cloudflare:${code}`)!).playerId,code),'recovered identity read')).toBe(ids.at(-1));guestRecovered=true;continue;
       }
       if(!raceShot&&g.phase==='race')mark('scene','capture-desktop-mobile',room,steps);

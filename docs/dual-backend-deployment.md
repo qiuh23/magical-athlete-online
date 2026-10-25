@@ -4,7 +4,7 @@
 
 本分支包含连接适配、服务端配置与可重复执行的部署脚本。**杭州 ECS 和域名已实际购买，首期合计 137 元；ICP 已由本人提交、仍在审核。** 云端验证与进度见 [实际状态记录](aliyun-readiness.md)。本机测试不能替代云端或国内真实网络实测。阿里云服务端的公网开放闸门默认关闭；新增 [来源 IP 白名单限制的临时 HTTP 入口](http-transition.md)，使用现有受控验证闸门。
 
-正式 Cloudflare 入口为 <https://magical-athlete.qiuh23.workers.dev>，此前已按用户授权手动发布源版本 `21de691`。临时 HTTP 目标为 `http://115.29.188.62`，仅供允许的测试网络；正式域名 `https://magical-athlete-online.cn` 仍未开放。每次实际部署的提交、检查和入口状态在 PR 中记录；PR 不自动合并。
+正式 Cloudflare 入口为 <https://magical-athlete.qiuh23.workers.dev>，本次版本 `5977d248-c9c8-4f89-be7d-7cb12fbe3604`。临时 HTTP 入口 `http://115.29.188.62` 已实际部署并通过受控网络验证，仅供允许的测试网络；正式域名 `https://magical-athlete-online.cn` 仍未开放。具体提交、检查和入口状态在实际状态记录及 PR #23 中记录；PR 不自动合并。
 
 ## 相同前端、相同规则
 
