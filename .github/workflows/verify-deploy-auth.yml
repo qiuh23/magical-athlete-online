@@ -43,12 +43,15 @@ jobs:
             try{return JSON.parse(execFileSync('aliyun',['ecs',operation,'--RegionId',region,...args],{encoding:'utf8',stdio:['ignore','pipe','pipe'],timeout:45000,maxBuffer:1024*1024}));}
             catch(error){
               let detail;for(const raw of [error.stdout,error.stderr]){try{detail=JSON.parse(String(raw||''));break;}catch{}}
-              const code=detail?.Code??detail?.code??error.code;
+              const raw=[error.stdout,error.stderr].map(value=>String(value||'')).join('\n');
+              const textCode=raw.match(/(?:ErrorCode|Error Code)\s*[:=]\s*([A-Za-z0-9_.-]{1,100})/i)?.[1];
+              const code=detail?.Code??detail?.code??error.code??textCode;
               const safeCode=typeof code==='string'&&/^[A-Za-z0-9_.-]{1,100}$/.test(code)?code:'unavailable';
               const denied=detail?.AccessDeniedDetail;
               const safePolicy=typeof denied?.PolicyType==='string'&&/^[A-Za-z]{1,40}$/.test(denied.PolicyType)?denied.PolicyType:'unavailable';
-              let message=typeof detail?.message==='string'?detail.message:typeof detail?.Message==='string'?detail.Message:'';
-              for(const key of ['ALIBABA_CLOUD_ACCESS_KEY_ID','ALIBABA_CLOUD_ACCESS_KEY_SECRET','ALIBABA_CLOUD_SECURITY_TOKEN'])if(process.env[key])message=message.replaceAll(process.env[key],'[redacted]');
+              let message=typeof detail?.message==='string'?detail.message:typeof detail?.Message==='string'?detail.Message:raw;
+              for(const [key,value] of Object.entries(process.env))if(/TOKEN|SECRET|ACCESS_KEY/i.test(key)&&value?.length>5)message=message.replaceAll(value,'[redacted]');
+              message=message.replace(/(AccessKeyId|AccessKeySecret|SecurityToken|Signature)=[^&\s]+/gi,'$1=[redacted]');
               message=message.replace(/[A-Za-z0-9_+/=-]{30,}/g,'[redacted]').slice(0,240);
               throw Error(`Scoped Alibaba ${operation} failed: code=${safeCode}, policy=${safePolicy}, exit=${error.status??'none'}, detail=${message||'unavailable'}; credentials and command parameters were withheld.`);
             }

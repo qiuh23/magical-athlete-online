@@ -11,6 +11,7 @@ on:
           - ability-interactions
           - all
   push:
+    branches: [main]
     paths-ignore:
       - README.md
       - docs/testing.md
