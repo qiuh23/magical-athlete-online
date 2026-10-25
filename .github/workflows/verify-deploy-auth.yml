@@ -40,7 +40,7 @@ jobs:
           const region=process.env.ALIYUN_REGION_ID,instance=process.env.ALIYUN_INSTANCE_ID;
           if(!/^cn-[a-z0-9-]+$/.test(region??'')||!/^i-[a-z0-9]+$/.test(instance??''))throw Error('Missing fixed preview deployment target.');
           function api(operation,args){
-            try{return JSON.parse(execFileSync('aliyun',['ecs',operation,'--RegionId',region,...args],{encoding:'utf8',stdio:['ignore','pipe','pipe'],timeout:45000,maxBuffer:1024*1024}));}
+            try{return JSON.parse(execFileSync('aliyun',['ecs',operation,'--region',region,'--RegionId',region,...args],{encoding:'utf8',stdio:['ignore','pipe','pipe'],timeout:45000,maxBuffer:1024*1024}));}
             catch(error){
               let detail;for(const raw of [error.stdout,error.stderr]){try{detail=JSON.parse(String(raw||''));break;}catch{}}
               const raw=[error.stdout,error.stderr].map(value=>String(value||'')).join('\n');

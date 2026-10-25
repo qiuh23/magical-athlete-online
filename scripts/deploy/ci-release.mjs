@@ -29,7 +29,7 @@ async function artifactUrl(release) {
   mask(url);return url;
 }
 function aliyun(command,args) {
-  try{return JSON.parse(execFileSync('aliyun',['ecs',command,'--RegionId',process.env.ALIYUN_REGION_ID,...args],{encoding:'utf8',stdio:['ignore','pipe','pipe'],timeout:45_000,maxBuffer:2*1024*1024}));}
+  try{return JSON.parse(execFileSync('aliyun',['ecs',command,'--region',process.env.ALIYUN_REGION_ID,'--RegionId',process.env.ALIYUN_REGION_ID,...args],{encoding:'utf8',stdio:['ignore','pipe','pipe'],timeout:45_000,maxBuffer:2*1024*1024}));}
   catch{throw Error(`Aliyun ${command} failed; credentials and command payload were withheld from logs.`);}
 }
 export async function invokeAliyun(release,action='install') {
