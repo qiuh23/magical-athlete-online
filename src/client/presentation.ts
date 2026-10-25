@@ -303,11 +303,24 @@ export function skipPlayback(state: PlaybackState, room: RoomView = state.confir
 
 // Reduce movement time while retaining time to read what caused each change.
 const REDUCED_MOTION_MS:Record<PresentationKind,number>={intro:1000,dice:400,'duel-dice':1800,move:400,warp:450,swap:450,skill:1800,trip:500,recover:500,score:500,finish:650,eliminate:500};
+/** A readable result is independent of throw speed and reduced motion. */
+export function diceResultReadMs(beat:PresentationBeat|undefined):number {
+  return beat?.kind==='duel-dice'?1500:beat?.kind==='dice'?beat.events.some(event=>event.type==='multi-dice')?1800:1000:0;
+}
+
+/** Dice wait for a committed result and a paint opportunity before their read
+ * clock starts. A delayed renderer can never consume that time in advance. */
+export function beatCompletionTime(beat:PresentationBeat,startedAt:number,durationMs:number,diceSettledAt?:number):number|undefined {
+  const readMs=diceResultReadMs(beat);
+  if(readMs&&diceSettledAt===undefined)return undefined;
+  return Math.max(startedAt+durationMs,readMs?diceSettledAt!+readMs:0);
+}
+
 export function beatDuration(beat: PresentationBeat, options: PresentationOptions = {}): number {
   if (beat.kind === 'intro') return options.reducedMotion ? 1000 : beat.naturalDurationMs ?? beat.durationMs;
   const speed = Math.max(0.5, Math.min(8, Number.isFinite(options.speed) ? options.speed! : 1));
   const duration = Math.round((options.reducedMotion ? REDUCED_MOTION_MS[beat.kind] : beat.durationMs) / speed);
   // Speed controls shorten motion, not the minimum time to understand a skill.
   const minimum = beat.abilityReveal ? 3000 : beat.events.some(event => event.type === 'multi-dice') ? 2200 : beat.events.some(event => event.type === 'ability-dice') ? 1800 : beat.kind === 'skill' || beat.kind === 'duel-dice' ? 1500 : 0;
-  return Math.max(minimum, duration);
+  return Math.max(minimum, diceResultReadMs(beat), duration);
 }

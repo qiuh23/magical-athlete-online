@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { Racer, RoomView } from '../shared/types.js';
-import { beatDuration, completeBeat, createPlayback, receiveRoom, skipPlayback, presentedTrackState, type PlaybackState, type PresentationBeat, type PresentationOptions } from './presentation.js';
+import { beatCompletionTime, beatDuration, completeBeat, createPlayback, diceResultReadMs, receiveRoom, skipPlayback, presentedTrackState, type PlaybackState, type PresentationBeat, type PresentationOptions } from './presentation.js';
 
 export interface UsePresentationResult {
   state: PlaybackState | null;
@@ -13,6 +13,7 @@ export interface UsePresentationResult {
   displayRoom: RoomView | null;
   startIntro: (key:string) => void;
   introReady: boolean;
+  onDiceSettled: (key:string) => void;
 }
 
 /** A visual clock only. Its timers never advance the rule engine or room service. */
@@ -35,17 +36,28 @@ export function usePresentation(room: RoomView | null, options: PresentationOpti
   const startIntro = useCallback((key:string)=>setIntroReadyKey(key),[]);
   const introReady = beat?.kind !== 'intro' || introReadyKey === beat.key;
   const durationMs = beat ? beatDuration(beat, options) : 0;
+  const [diceSettled,setDiceSettled]=useState<{key:string;at:number}>();
+  const activeDiceKey=useRef<string|undefined>(undefined);
+  activeDiceKey.current=diceResultReadMs(beat)?beat?.key:undefined;
+  const onDiceSettled=useCallback((key:string)=>{
+    if(activeDiceKey.current!==key)return;
+    setDiceSettled(previous=>previous?.key===key?previous:{key,at:performance.now()});
+  },[]);
+  useEffect(()=>{setDiceSettled(previous=>previous?.key===beat?.key?previous:undefined);},[beat?.key]);
+  const diceSettledAt=diceSettled?.key===beat?.key?diceSettled?.at:undefined;
   // Bind the visible clock to the beat in the same render. An effect-set clock
   // lets a new die/pawn render once with the preceding beat's completed time.
   const startedAt = useMemo(() => performance.now(), [beat?.key,beat?.kind==='intro'?introReadyKey:undefined]);
   useEffect(() => {
     if (!beat || !introReady) return;
-    const timer = setTimeout(() => setState(previous => previous?.queue[0]?.key === beat.key ? completeBeat(previous) : previous), Math.max(0, durationMs - (performance.now() - startedAt)));
+    const completeAt=beatCompletionTime(beat,startedAt,durationMs,diceSettledAt);
+    if(completeAt===undefined)return;
+    const timer = setTimeout(() => setState(previous => previous?.queue[0]?.key === beat.key ? completeBeat(previous) : previous), Math.max(0, completeAt-performance.now()));
     return () => clearTimeout(timer);
-  }, [beat?.key, durationMs, startedAt, introReady]);
-  const skip = useCallback(() => setState(previous => previous?.queue[0]?.kind === 'intro' ? completeBeat(previous) : previous && latestRoom.current ? skipPlayback(previous, latestRoom.current) : previous), []);
+  }, [beat?.key, durationMs, startedAt, introReady, diceSettledAt]);
+  const skip = useCallback(() => {activeDiceKey.current=undefined;setDiceSettled(undefined);setState(previous => previous?.queue[0]?.kind === 'intro' ? completeBeat(previous) : previous && latestRoom.current ? skipPlayback(previous, latestRoom.current) : previous);}, []);
   // While a completed action is still being shown, the action prompt must wait.
   const displayRoom: RoomView | null = state ? { ...state.confirmed, players: state.confirmed.players.map(player => ({...player, name: room?.players.find(current => current.id === player.id)?.name ?? player.name})), spectators: room?.spectators ?? state.confirmed.spectators, racers: state.racers, ...(state.queue.length && ['results', 'finished'].includes(state.confirmed.phase) ? { phase: 'race' as const } : {}) } : room;
   if(displayRoom&&state)displayRoom.trackState=presentedTrackState(state.confirmed,state.queue);
-  return { state, beat, racers: state?.racers ?? room?.racers ?? [], playing: (state?.queue.length ?? 0) > 0, skip, startedAt, durationMs, displayRoom, startIntro, introReady };
+  return { state, beat, racers: state?.racers ?? room?.racers ?? [], playing: (state?.queue.length ?? 0) > 0, skip, startedAt, durationMs, displayRoom, startIntro, introReady, onDiceSettled };
 }

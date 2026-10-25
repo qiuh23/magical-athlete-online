@@ -75,7 +75,7 @@ jobs:
       - run: pnpm exec wrangler deploy --dry-run
       - run: pnpm exec playwright install --with-deps chromium
       - name: Validate dice causality, stable chat and flat card backgrounds
-        run: pnpm exec playwright test tests/browser/presentation-sequence.spec.ts tests/browser/chat-layout.spec.ts tests/browser/card-background.spec.ts --grep "Triangle waits|six-dice threes|single skill die|choosing an existing six-dice|stage NPC triggering|wandering monster dice|special-event NPC die|race chat stays anchored|flat card backgrounds"
+        run: pnpm exec playwright test tests/browser/presentation-sequence.spec.ts tests/browser/dice-readback.spec.ts tests/browser/chat-layout.spec.ts tests/browser/card-background.spec.ts --grep "Triangle waits|six-dice threes|single skill die|choosing an existing six-dice|stage NPC triggering|wandering monster dice|special-event NPC die|race chat stays anchored|flat card backgrounds|a stalled"
         env:
           CI: true
       - name: Validate server selection, desktop/mobile and independent backend sessions

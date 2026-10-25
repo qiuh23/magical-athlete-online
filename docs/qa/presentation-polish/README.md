@@ -32,7 +32,7 @@
 - `pnpm exec wrangler deploy --dry-run`：打包和绑定检查通过，未执行发布。
 - `pnpm exec playwright test tests/browser/presentation-sequence.spec.ts tests/browser/card-background.spec.ts tests/browser/chat-layout.spec.ts --reporter=list`：初轮最终功能代码 17/17 通过，耗时约 1.9 分钟。覆盖两类大嘴场地骰与三角人连锁、单骰与六骰消重、AI 连锁、跨场和日志缺页恢复、三种聊天视口及卡牌。
 - 纯色卡牌最终配色收尾：重新运行类型检查、完整构建，以及 `pnpm exec playwright test tests/browser/card-background.spec.ts --reporter=list`，1/1 通过（桌面/手机选中与详情均包含在内）。本页修改后截图已替换为最终纯色版本。
-- CI 增加上述范围中的 11 项短回归，实际 `--list` 已确认包含卡牌、三种聊天视口及骰子/场地用例；`actionlint` 和 `git diff --check` 通过。既有八人冒烟仍最多一场。
+- 后续远端 CI 暴露的阅读时钟问题、确定性卡顿复现及修复验证见 [CI 阅读时钟记录](ci-reading-clock.md)。当前显式筛选为 13 项短回归，已用 `--list` 核对；既有八人冒烟仍最多一场。
 
 ## 验证边界
 

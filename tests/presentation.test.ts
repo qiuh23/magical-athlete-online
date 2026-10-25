@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { applyGameAction, createGame, enqueueMove, resolveTasks } from '../src/engine/index.js';
 import type { GameEvent, GameState, Racer, RoomView } from '../src/shared/types.js';
-import { beatDuration, completeBeat, confirmedFace, createPlayback, presentationActor, receiveRoom, skipPlayback, trackPath } from '../src/client/presentation.js';
+import { beatCompletionTime, beatDuration, completeBeat, confirmedFace, createPlayback, diceResultReadMs, presentationActor, receiveRoom, skipPlayback, trackPath } from '../src/client/presentation.js';
 import { visibleTwists } from '../src/client/TrackInfo.js';
 
 function racer(id: string, position = 0): Racer { return { id, playerId: `p${id}`, characterId: 'coach', position, tripped: false, finished: false, eliminated: false, flags: {} }; }
@@ -185,7 +185,7 @@ test('presentation speed and reduced motion only change durations, never final r
   const diceBeat = state.queue[0]!;
   assert.equal(beatDuration(diceBeat), 2500);
   assert.equal(beatDuration(diceBeat, { speed: 2 }), 1250);
-  assert.equal(beatDuration(diceBeat, { speed: 2, reducedMotion: true }), 200);
+  assert.equal(beatDuration(diceBeat, { speed: 2, reducedMotion: true }), 1000);
   assert.equal(confirmedFace({ id: 1, type: 'die', text: '第6号运动员掷出2', source: 'a' }), 2);
   assert.equal(confirmedFace({ id: 2, type: 'die', text: '运动员掷出9', source: 'a' }), undefined);
   assert.deepEqual(trackPath(4, 1), [4, 3, 2, 1]);
@@ -327,13 +327,13 @@ test('reduced motion retains skill reading time and explicit 2x or 4x only chang
   const events:GameEvent[]=[die(1,3),roll(2,3),{id:3,type:'power',source:'a',text:'技能说明'},motion(4,['a'],[0],[3]),{id:5,type:'trip',source:'a',targets:['b'],text:'绊倒'},{id:6,type:'recover',source:'b',targets:['b'],text:'起身'},{id:7,type:'score',source:'a',text:'获得1分'},{id:8,type:'finish',source:'a',text:'冲线'}];
   const confirmed=view(2,events,[{...racer('a',30),finished:true,rank:1},racer('b')]);
   const state=receiveRoom(createPlayback(view()),confirmed),snapshot=JSON.stringify(confirmed);
-  assert.deepEqual(state.queue.map(beat=>[beat.kind,beatDuration(beat,{reducedMotion:true})]),[['dice',400],['skill',1800],['move',400],['trip',500],['recover',500],['score',500],['finish',650]]);
+  assert.deepEqual(state.queue.map(beat=>[beat.kind,beatDuration(beat,{reducedMotion:true})]),[['dice',1000],['skill',1800],['move',400],['trip',500],['recover',500],['score',500],['finish',650]]);
   const skill=state.queue.find(beat=>beat.kind==='skill')!;
   assert.equal(beatDuration(skill,{reducedMotion:true,speed:2}),1500);
   assert.equal(beatDuration(skill,{reducedMotion:true,speed:4}),1500);
   for(const speed of [1,2,4]){
     let playback=state;
-    while(playback.queue.length){const beat=playback.queue[0]!;assert.equal(beatDuration(beat,{reducedMotion:true,speed}),Math.max(beat.kind==='skill'?1500:0,Math.round(beatDuration(beat,{reducedMotion:true})/speed)));playback=completeBeat(playback);}
+    while(playback.queue.length){const beat=playback.queue[0]!;assert.equal(beatDuration(beat,{reducedMotion:true,speed}),Math.max(beat.kind==='skill'?1500:diceResultReadMs(beat),Math.round(beatDuration(beat,{reducedMotion:true})/speed)));playback=completeBeat(playback);}
     assert.deepEqual(playback.racers,confirmed.racers);assert.equal(JSON.stringify(confirmed),snapshot);
   }
 });
@@ -605,4 +605,20 @@ test('Alchemy Lab dice identify the wandering monster or its transformed owner i
     }
     assert.equal(game.randomLog.length,1);
   }
+});
+
+test('dice completion waits for the actual result paint opportunity and preserves reading time after a stalled clock',()=>{
+  const events:GameEvent[]=[die(1,3),{id:2,type:'multi-dice',source:'a',faces:[1,2,2,3,4,6],cause:'mr-dice-guy',text:'六骰'}, {id:3,type:'duel-dice',source:'a',targets:['a','b'],faces:[3,2],text:'决斗'},motion(4,['a'],[0],[3])];
+  const state=receiveRoom(createPlayback(view()),view(2,events));
+  assert.deepEqual(state.queue.map(diceResultReadMs),[1000,1800,1500,0]);
+  for(const beat of state.queue.slice(0,3))for(const options of [{},{speed:8},{reducedMotion:true,speed:8}]){
+    const durationMs=beatDuration(beat,options),readMs=diceResultReadMs(beat);
+    assert(durationMs>=readMs);
+    assert.equal(beatCompletionTime(beat,100,durationMs),undefined,'a wall-clock deadline cannot hide an unconfirmed result');
+    const lateResultAt=100+durationMs+3000;
+    assert.equal(beatCompletionTime(beat,100,durationMs,lateResultAt),lateResultAt+readMs,'a delayed result receives its full readable interval');
+    assert.equal(beatCompletionTime(beat,100,durationMs,100),100+durationMs,'an immediately visible result still respects the ordinary beat deadline');
+  }
+  const movement=state.queue[3]!;
+  assert.equal(beatCompletionTime(movement,100,800),900,'movement keeps its existing independent visual clock');
 });
