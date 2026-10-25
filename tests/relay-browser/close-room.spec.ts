@@ -29,7 +29,7 @@ async function pair(browser: Browser, mobileHost = false) {
     const [host, guest] = pages as [Page, Page];
     await host.goto(url);await host.getByRole('tab',{name:'创建房间',exact:true}).click(); await host.getByLabel('你的昵称').fill('解散房主'); await host.getByLabel('房间人数上限').selectOption('2'); await host.getByLabel('每次操作时限').selectOption('0');
     await host.getByRole('button', { name: '创建房间，召集朋友' }).click(); await expect(host.locator('.connection.is-online')).toBeVisible();
-    const code = host.url().split('/').at(-1)!;
+    const code = host.url().split('/').at(-1)!.replace(/^[CA]-/,'');
     await guest.goto(`${url}/room/${code}`); await guest.getByLabel('你的昵称').fill('解散访客'); await guest.getByRole('button', { name: '加入这场胡闹' }).click(); await expect(guest.locator('.connection.is-online')).toBeVisible();
     await expect(host.getByText('解散访客', { exact: true })).toBeVisible();
     return { contexts, pages: [host, guest] as [Page, Page], code, errors, closeRequests };
@@ -71,7 +71,7 @@ test('close: the management host can dissolve an active race without rolling or 
   const room = await pair(browser); const [host, guest] = room.pages;
   try {
     for (const page of room.pages) { await synced(page, (await saved(host, room.code)).version); await page.getByRole('button', { name: '我准备好了', exact: true }).click(); await expect(page.getByRole('button', { name: '取消准备', exact: true })).toBeVisible(); }
-    const ids = await Promise.all(room.pages.map(page => page.evaluate(code => JSON.parse(localStorage.getItem(`magical-athlete:identity:${code}`)!).playerId as string, room.code)));
+    const ids = await Promise.all(room.pages.map(page => page.evaluate(code => JSON.parse(localStorage.getItem(`magical-athlete:identity:cloudflare:${code}`)!).playerId as string, room.code)));
     await synced(host, (await saved(host, room.code)).version); await host.getByRole('button', { name: '开始选秀', exact: true }).click(); await expect.poll(async () => (await saved(host, room.code)).game.phase).toBe('draft');
     while ((await saved(host, room.code)).game.phase === 'draft') {
       const draft = (await saved(host, room.code)).game.draft!; const picker = room.pages[ids.indexOf(draft.order[draft.cursor]!)]!;

@@ -1,0 +1,27 @@
+.backend-settings { margin: 0 0 30px; padding: 22px; border: 1.5px solid var(--ink); border-radius: 12px; background: #e9edeb; }
+.backend-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 15px; }
+.backend-heading h2 { margin: 0; font-size: 20px; }
+.backend-heading p { margin: 5px 0 0; font-size: 12px; color: #535b57; }
+.backend-heading > button { min-height: 40px; flex-shrink: 0; }
+.backend-options { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+.backend-option { position: relative; min-width: 0; padding: 15px; text-align: left; border: 2px solid #a7ada8; border-radius: 9px; background: var(--paper); color: var(--ink); }
+.backend-option[aria-checked="true"] { border-color: var(--blue); box-shadow: 0 0 0 1px var(--blue); }
+.backend-option:disabled { opacity: .8; cursor: default; }
+.backend-name { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; }
+.backend-name strong { font-size: 15px; }
+.backend-status { font-size: 11px; padding: 3px 7px; border-radius: 20px; background: #e5e5df; }
+.state-available .backend-status { background: #d4e7ce; color: #25442a; }
+.state-unavailable .backend-status { background: #f3d9d4; color: #7d3229; }
+.backend-detail { display: block; margin-top: 9px; font-size: 12px; line-height: 1.6; overflow-wrap: anywhere; }
+.backend-selected { display: block; margin-top: 7px; color: var(--blue); font-size: 11px; font-weight: 700; }
+.backend-help,.backend-failure { margin: 13px 0 0; font-size: 12px; line-height: 1.8; }
+.backend-failure { color: #8b3326; }
+.target-backend-note { font-size: 12px; line-height: 1.8; color: #4e5b68; }
+.legacy-backend-choice { min-width: 0; padding: 13px; border: 1px solid #c2c9c4; border-radius: 8px; }
+.legacy-backend-choice legend { font-size: 12px; font-weight: 700; padding: 0 5px; }
+.legacy-backend-choice label { display: flex; align-items: center; gap: 8px; min-height: 42px; }
+.legacy-backend-choice input { width: auto; }
+.directory-backend { color: #485d72; font-size: 11px; }
+.pending-creation { margin-bottom: 25px; padding: 18px; background: #fff2c8; border: 1px solid #9e8041; border-radius: 10px; }
+.pending-creation p { margin: 0 0 12px; font-size: 13px; line-height: 1.8; }
+@media(max-width:650px) { .backend-settings { padding: 16px; margin-bottom: 24px; } .backend-options { grid-template-columns: 1fr; gap: 10px; } .backend-heading h2 { font-size: 18px; } .backend-option { min-height: 83px; } }

@@ -12,7 +12,7 @@ async function chat(page: Page) { if (!await page.getByTestId('room-chat').count
 async function send(page: Page, text: string) { await chat(page); await page.getByLabel('聊天消息', {exact:true}).fill(text); await page.getByRole('button', {name:'发送',exact:true}).click(); await expect(page.getByLabel('聊天消息',{exact:true})).toHaveValue(''); }
 async function probe(page: Page, code: string) {
   await page.evaluate(async code => {
-    const identity = JSON.parse(localStorage.getItem(`magical-athlete:identity:${code}`)!);
+    const {backendId:_,...identity} = JSON.parse(localStorage.getItem(`magical-athlete:identity:cloudflare:${code}`)!);
     const socket = new WebSocket(`${location.protocol === 'https:' ? 'wss:' : 'ws:'}//${location.host}/api/browser/ws/${code}`);
     // The independent test socket must renew its own lease during long matches.
     const heartbeat=setInterval(()=>{if(socket.readyState===WebSocket.OPEN)socket.send('ping');},15000);
@@ -52,7 +52,7 @@ for (const pool of ['second-wind','mixed','fans'] as const) test(`${pool}: ${poo
     }
     const [host,guest,mobile,viewer]=pages as [Page,Page,Page,Page];
     await host.goto(url);await host.getByRole('tab',{name:'创建房间',exact:true}).click();await host.getByLabel('你的昵称').fill('同名');await host.getByLabel('房间人数上限').selectOption('3');await host.getByLabel('每次操作时限').selectOption('0');await host.getByRole('checkbox',{name:'基础角色包',exact:true}).setChecked(pool!=='second-wind');await host.getByRole('checkbox',{name:'Second Wind',exact:true}).check();if(pool==='fans'){await host.getByRole('checkbox',{name:'Extra Mile',exact:true}).check();await host.getByRole('checkbox',{name:'Leaf’s Fan Expansion',exact:true}).check();}if(rounds===6){await host.getByRole('button',{name:'修改经典赛赛程',exact:true}).click();await host.getByLabel('比赛场数').selectOption('6');await host.getByRole('button',{name:'添加 Mild Mile',exact:true}).click();}await host.getByRole('button',{name:'创建房间，召集朋友',exact:true}).click();await online(host);
-    const code=host.url().split('/').at(-1)!;
+    const code=host.url().split('/').at(-1)!.replace(/^[CA]-/,'');
     for (const page of [guest,mobile,viewer]) {await page.goto(`${url}/room/${code}`);await page.getByLabel('你的昵称').fill('同名');if(page===viewer)await page.getByRole('radio',{name:/作为观战者/}).check();await page.getByRole('button',{name:page===viewer?'进入房间观战':'加入这场胡闹',exact:true}).click();await online(page);}
     await expect(host.locator('.lobby-seats')).toContainText('同名1');await expect(host.locator('.lobby-seats')).toContainText('同名2');
     await send(host,'大厅聊天保留 <b>纯文本</b>');await chat(mobile);await expect(mobile.getByRole('log')).toContainText('大厅聊天保留 <b>纯文本</b>');expect(await mobile.getByRole('log').locator('b').count()).toBe(0);
@@ -123,7 +123,7 @@ test('Node visual fixture: mobile were form and transferred mount retain actiona
   await page.setViewportSize({width:390,height:844});const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
   await page.addInitScript(()=>{localStorage.setItem('magical-athlete:reduced-motion','true');localStorage.setItem('magical-athlete:muted','true');});
   await page.goto(`http://127.0.0.1:${address.port}`);await page.getByRole('tab',{name:'自己练习',exact:true}).click();await page.getByRole('button',{name:'开始自己练习',exact:true}).click();await online(page);
-  const code=page.url().split('/').at(-1)!;
+  const code=page.url().split('/').at(-1)!.replace(/^[CA]-/,'');
       const room=fixtureApp.rooms.get(code),g=room.game,p=g.players[0]!;room.version++;room.deadline=null;g.phase='race';g.round=1;g.track='mild';g.turn=0;g.turnCount=1;g.currentRacerId='visual-bite';g.queue=[];g.logs=[];g.results=[];g.flags={awaitRoll:false};
       g.racers=['bite-mark','hog-knight','coach','null'].map((characterId,i)=>({id:['visual-bite','visual-hog','visual-coach','visual-null'][i],identityPlayerId:p.id,playerId:p.id,characterId,position:[10,13,16,20][i],tripped:false,finished:false,eliminated:false,flags:i===0?{form:'were-mouth'}:i===2?{hogOwnerId:'visual-hog'}:{}}));g.baseTurnOrder=g.racers.map((r:any)=>r.id);
       g.pending={id:'visual-choice',playerId:p.id,racerId:'visual-bite',kind:'kingtripper',title:'画面验收：选择目标',optional:true,options:[{id:'visual-hog',label:'猪骑士'},{id:'skip',label:'放弃'}],context:{}};fixtureApp.store.save(room);

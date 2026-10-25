@@ -161,8 +161,8 @@ test('现有房间同时支持房间码和列表，以选手或观众身份加�
         await noOverflow(page);
       }
     }
-    expect(application.rooms.get(code).game.players).toHaveLength(3);
-    expect(application.rooms.get(code).spectators).toHaveLength(2);
+    expect(application.rooms.get(code.replace(/^[CA]-/,'')).game.players).toHaveLength(3);
+    expect(application.rooms.get(code.replace(/^[CA]-/,'')).spectators).toHaveLength(2);
     expect(errors).toEqual([]);
   } finally { await Promise.all(contexts.map(context => context.close())); }
 });

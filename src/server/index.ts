@@ -12,6 +12,7 @@ import { Rooms } from './rooms.js';
 import { systemRoomAction as systemAction } from '../engine/runtime.js';
 import type { ActionEnvelope, Identity } from '../shared/types.js';
 import { validateRoomConfig } from '../shared/room-config.js';
+import { connectivityInfo, multiplayerQuota, trustedOrigins, type BackendId } from '../shared/backend-protocol.js';
 
 const action=z.discriminatedUnion('type',[
   z.object({type:z.literal('continue-vote'),continuationId:z.string().max(100),continue:z.boolean()}).strict(),
@@ -27,22 +28,30 @@ const nickname=z.string().trim().min(1,'请输入昵称。').max(20,'昵称最�
 class RateLimiter { map=new Map<string,{count:number;at:number}>(); constructor(readonly limit:number,readonly ms:number){} accept(key:string):boolean {const now=Date.now();let r=this.map.get(key); if(!r||now-r.at>this.ms){r={count:0,at:now};this.map.set(key,r);} if(this.map.size>10000) for(const [k,v]of this.map)if(now-v.at>this.ms)this.map.delete(k);return ++r.count<=this.limit;} }
 
 export function createApplication(dbPath=resolve(process.env.DATA_DIR??'data','rooms.sqlite')) {
-  const store=new Store(dbPath); const rooms=new Rooms(store,Number(process.env.ACTION_TIMEOUT_SECONDS??120));
+  const backendId:BackendId=process.env.BACKEND_ID==='aliyun'||(process.env.BACKEND_ID===undefined&&process.env.NODE_ENV==='production')?'aliyun':'cloudflare';
+  const quota=multiplayerQuota(process.env.DUAL_BACKEND_ENABLED==='true'||backendId==='aliyun',process.env.MULTIPLAYER_ROOM_LIMIT);
+  const store=new Store(dbPath,quota); const rooms=new Rooms(store,Number(process.env.ACTION_TIMEOUT_SECONDS??120));
   const app=express(); const http=createServer(app);
-  const allowedOrigin=(o:string|undefined)=>!o || o===process.env.PUBLIC_ORIGIN || (process.env.NODE_ENV!=='production'&&/^http:\/\/(localhost|127\.0\.0\.1):\d+$/.test(o));
+  const controlled=process.env.CONTROLLED_VALIDATION==='true'&&['127.0.0.1','::1'].includes(process.env.HOST??'');
+  const acceptingRooms=process.env.NODE_ENV!=='production'||process.env.PUBLIC_ACCESS_ENABLED==='true'||controlled;
+  const origins=trustedOrigins([process.env.PUBLIC_ORIGIN,process.env.PUBLIC_ORIGINS].filter(Boolean).join(','));
+  const allowedOrigin=(o:string|undefined)=>!o || origins.includes(o) || ((process.env.NODE_ENV!=='production'||controlled)&&/^http:\/\/(localhost|127\.0\.0\.1):\d+$/.test(o));
   app.disable('x-powered-by'); if(process.env.TRUST_PROXY==='1') app.set('trust proxy',1);
   // GLTFLoader decodes embedded textures through blob URLs (fetch or image loading).
-  app.use((req,res,next)=>{ res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('Referrer-Policy','no-referrer');res.setHeader('Content-Security-Policy',"default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'wasm-unsafe-eval'; img-src 'self' data: blob:; connect-src 'self' ws: wss: blob:; font-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'self'"); if(req.method==='POST'&&!allowedOrigin(req.headers.origin)){res.status(403).json({error:'来源不被允许。'});return;}next();});
+  app.use((req,res,next)=>{ res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('Referrer-Policy','no-referrer');res.setHeader('Content-Security-Policy',"default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'wasm-unsafe-eval'; img-src 'self' data: blob:; connect-src 'self' https: http: ws: wss: blob:; font-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'self'"); if(req.method==='POST'&&!allowedOrigin(req.headers.origin)){res.status(403).json({error:'来源不被允许。'});return;}next();});
+  app.use('/api',(req,res,next)=>{const origin=req.headers.origin;if(!allowedOrigin(origin)){res.status(403).json({error:'来源不被允许。'});return;}res.vary('Origin');if(origin)res.setHeader('Access-Control-Allow-Origin',origin);if(req.method==='OPTIONS'){res.setHeader('Access-Control-Allow-Methods','GET, POST, OPTIONS');res.setHeader('Access-Control-Allow-Headers','Content-Type');res.setHeader('Access-Control-Max-Age','600');res.status(204).end();return;}next();});
   app.use(express.json({limit:'4kb'})); const apiRate=new RateLimiter(120,60000);
   app.use('/api',(req,res,next)=>{res.setHeader('Cache-Control','no-store');if(!apiRate.accept(req.ip??'unknown')){res.status(429).json({error:'请求太频繁，请稍后再试。'});return;}next();});
-  const io=new Server(http,{maxHttpBufferSize:8192,serveClient:false,allowRequest:(req,cb)=>cb(null,allowedOrigin(req.headers.origin)),pingInterval:15000,pingTimeout:20000});
+  app.use('/api/rooms',(_req,res,next)=>{if(!acceptingRooms){res.status(503).json({error:'阿里云内地尚未开放。'});return;}next();});
+  const io=new Server(http,{maxHttpBufferSize:8192,serveClient:false,cors:{origin:(origin,callback)=>callback(null,allowedOrigin(origin)),methods:['GET','POST']},allowRequest:(req,cb)=>cb(null,allowedOrigin(req.headers.origin)),pingInterval:15000,pingTimeout:20000});
   const broadcast=(code:string)=>{if(rooms.expire(code))return;const room=rooms.rooms.get(code);if(!room||room.closedAt!==undefined)return;for(const socket of io.sockets.sockets.values()) if(socket.data.identity?.roomCode===code) socket.emit('snapshot',rooms.view(room,socket.data.identity.playerId));};
   rooms.onChanged=broadcast;
   const notifyClosed=(code:string)=>{const room=rooms.rooms.get(code),closed=rooms.closed(code);if(room?.closedAt===undefined&&!closed)return;const sockets=[...io.sockets.sockets.values()].filter(socket=>socket.data.identity?.roomCode===code);for(const socket of sockets)socket.emit('room-closed',{code,closedAt:closed?.closedAt??room!.closedAt,...(closed?{reason:closed.reason}:{})});for(const socket of sockets)socket.disconnect(true);};
   rooms.onExpired=(code,expiresAt,reason='expired')=>{resuming.delete(code);const sockets=[...io.sockets.sockets.values()].filter(socket=>socket.data.identity?.roomCode===code);for(const socket of sockets)socket.emit('room-closed',{code,closedAt:expiresAt,reason});for(const socket of sockets)socket.disconnect(true);};
   const resuming=new Set<string>();let closing=false;
   const scheduleContinuation=(code:string)=>{if(closing||rooms.expire(code))return;const current=rooms.rooms.get(code);if(resuming.has(code)||!current||current.closedAt!==undefined||(current.continuation&&current.continuation.stage!=='playing')||!systemAction(current.game))return;resuming.add(code);setImmediate(()=>{resuming.delete(code);if(closing||rooms.expire(code))return;const room=rooms.rooms.get(code);if(!room||room.closedAt!==undefined)return;const next=systemAction(room.game);if(!next)return;const result=rooms.act(code,next.playerId,{actionId:crypto.randomUUID(),expectedVersion:room.version,action:next.action});if(result.ok){broadcast(code);scheduleContinuation(code);}});};
-  app.get('/api/health',(_req,res)=>res.json({ok:true,storage:'sqlite',version:'0.1.0'}));
+  app.get('/api/health',(_req,res)=>res.json({ok:true,storage:'sqlite',version:'0.1.0',publicAccessEnabled:acceptingRooms,controlledValidation:controlled}));
+  app.get('/api/connectivity',(_req,res)=>res.json(connectivityInfo(backendId)));
   app.get('/api/rooms',(_req,res,next)=>{try{res.json({rooms:rooms.list(),capacity:rooms.capacity()});}catch(e){next(e);}});
   app.post('/api/rooms',(req,res,next)=>{try{const b=z.object({name:nickname,maxPlayers:z.number().int().min(2).max(8).default(8),timeoutSeconds:z.union([z.literal(0),z.number().int().min(30).max(600)]).optional(),mode:z.enum(['multiplayer','practice','ai']).optional(),aiCount:z.number().int().min(1).max(7).optional(),characterPool:z.enum(['original','second-wind','mixed','wurstii','all']).optional(),config:z.unknown().optional().transform(value=>value===undefined?undefined:validateRoomConfig(value)),requestId:z.string().regex(/^[a-zA-Z0-9_-]{16,100}$/).optional()}).strict().parse(req.body);res.status(201).json(rooms.create(b.name,b.maxPlayers,b.timeoutSeconds,b.mode,b.aiCount,b.characterPool,b.config,b.requestId));}catch(e){next(e);}});
   app.post('/api/rooms/:code/join',(req,res,next)=>{try{const b=z.object({name:nickname,role:z.enum(['player','spectator']).optional()}).strict().parse(req.body);const r=rooms.join(String(req.params.code),b.name,b.role);res.status(201).json(r);broadcast(r.identity.roomCode);}catch(e){next(e);}});
@@ -68,8 +77,9 @@ export function createApplication(dbPath=resolve(process.env.DATA_DIR??'data','r
     if(rooms.rooms.get(i.roomCode)?.closedAt!==undefined)notifyClosed(i.roomCode);else broadcast(i.roomCode);
   }catch(e){next(e);}});
   const connections=new Map<string,Set<string>>(); const socketRate=new RateLimiter(40,10000);
-  io.use((socket,next)=>{try{const i=identity.parse(socket.handshake.auth) as Identity;rooms.authenticate(i);if((connections.get(`${i.roomCode}:${i.playerId}`)?.size??0)>=5) throw Error('同一身份打开的页面过多。');socket.data.identity=i;next();}catch(e){next(Error(e instanceof Error?e.message:'身份无效。'));}});
+  io.use((socket,next)=>{try{if(socket.handshake.auth?.probe===true){if(!apiRate.accept(socket.handshake.address))throw Error('检测太频繁。');socket.data.probe=true;next();return;}if(!acceptingRooms)throw Error('阿里云内地尚未开放。');const i=identity.parse(socket.handshake.auth) as Identity;rooms.authenticate(i);if((connections.get(`${i.roomCode}:${i.playerId}`)?.size??0)>=5) throw Error('同一身份打开的页面过多。');socket.data.identity=i;next();}catch(e){next(Error(e instanceof Error?e.message:'身份无效。'));}});
   io.on('connection',socket=>{
+    if(socket.data.probe){socket.emit('connectivity',connectivityInfo(backendId));const timeout=setTimeout(()=>socket.disconnect(true),1500);timeout.unref();socket.once('disconnect',()=>clearTimeout(timeout));return;}
     const i=socket.data.identity as Identity;if(rooms.expire(i.roomCode))return;if(rooms.rooms.get(i.roomCode)?.closedAt!==undefined){notifyClosed(i.roomCode);return;}const key=`${i.roomCode}:${i.playerId}`;let set=connections.get(key);if(!set){set=new Set();connections.set(key,set);}set.add(socket.id);
     rooms.presence(i.roomCode,i.playerId,true);broadcast(i.roomCode);
     socket.on('sync',()=>{if(rooms.expire(i.roomCode))return;const room=rooms.rooms.get(i.roomCode);if(room?.closedAt!==undefined){notifyClosed(i.roomCode);return;}if(room&&socketRate.accept(key))socket.emit('snapshot',rooms.view(room,i.playerId));});
@@ -106,7 +116,8 @@ export function createApplication(dbPath=resolve(process.env.DATA_DIR??'data','r
   const clientDir=resolve(fileURLToPath(new URL('../../../dist/client/',import.meta.url)));
   // Compiled entry is dist/server/server/index.js; dev entry is src/server/index.ts.
   const staticDir=existsSync(resolve('dist/client/index.html'))?resolve('dist/client'):clientDir;
-  app.use(express.static(staticDir,{index:false,maxAge:'1h'}));
+  app.get('/backends.json',(_req,res)=>{res.setHeader('Cache-Control','no-store');const other=backendId==='aliyun'?'cloudflare':'aliyun';res.json(process.env.BACKENDS_CONFIG_JSON?JSON.parse(process.env.BACKENDS_CONFIG_JSON):{backends:[{id:backendId,origin:'',transport:'socketio',enabled:true},{id:other,origin:'',transport:other==='cloudflare'?'worker':'socketio',enabled:false}]});});
+  app.use(express.static(staticDir,{index:false,maxAge:'1h',setHeaders:(res,path)=>{if(path.endsWith('backends.json'))res.setHeader('Cache-Control','no-store');}}));
   app.get('/{*path}',(_req,res)=>{if(existsSync(resolve(staticDir,'index.html')))res.sendFile(resolve(staticDir,'index.html'));else res.status(503).send('前端尚未构建。请运行 pnpm build。');});
   app.use((e:unknown,_req:express.Request,res:express.Response,_next:express.NextFunction)=>{res.status(400).json({error:e instanceof z.ZodError?e.issues[0]?.message:e instanceof Error?e.message:'请求失败。'});});
   return {app,http,io,rooms,store,close:async()=>{closing=true;clearInterval(timer);await new Promise<void>(r=>io.close(()=>r()));if(http.listening)await new Promise<void>(r=>http.close(()=>r()));store.close();}};

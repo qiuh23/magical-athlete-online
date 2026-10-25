@@ -190,8 +190,8 @@ export function cameraFocusPoints(focus: CameraFocus, racers: Racer[], compact: 
   });
 }
 
-export function raceIntroKey(room: Pick<RoomView, 'code' | 'createdAt' | 'round' | 'selfId'>) {
-  return `magical-athlete:intro:${room.code}:${room.createdAt ?? ''}:${room.round}:${room.selfId}`;
+export function raceIntroKey(room: Pick<RoomView, 'code' | 'createdAt' | 'round' | 'selfId' | 'backendId'>) {
+  return `magical-athlete:intro:${room.backendId ?? 'cloudflare'}:${room.code}:${room.createdAt ?? ''}:${room.round}:${room.selfId}`;
 }
 
 /** Rejoining an underway race must never replay its opening tour. */
@@ -215,7 +215,7 @@ export function claimRaceIntro(key: string, storage: Pick<Storage, 'getItem' | '
 /** Setup is a new chance to introduce entrants, including same-room rematches. */
 export function resetRaceIntroForSetup(room: RoomView, storage: Pick<Storage, 'length' | 'key' | 'removeItem'> | undefined, seen: Set<string>) {
   if (!['lobby', 'draft', 'selection'].includes(room.phase)) return false;
-  const prefix = `magical-athlete:intro:${room.code}:${room.createdAt ?? ''}:`;
+  const prefix = `magical-athlete:intro:${room.backendId ?? 'cloudflare'}:${room.code}:${room.createdAt ?? ''}:`;
   const suffix = `:${room.selfId}`;
   const belongs = (key: string) => key.startsWith(prefix) && key.endsWith(suffix);
   for (const key of seen) if (belongs(key)) seen.delete(key);

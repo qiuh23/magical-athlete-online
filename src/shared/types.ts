@@ -59,7 +59,9 @@ export interface PlayerView extends Omit<Player, 'hand' | 'selection'> { handCou
 export interface PublicEventBatch { afterId: number; latestId: number; events: GameEvent[]; }
 export interface PublicEventReply { ok: boolean; batch?: PublicEventBatch; error?: string; }
 export interface RoomView { presentationEvents?: GameEvent[]; mode?: GameMode; turnStage?: 'starting' | 'choice' | 'roll' | 'resolving'; code: string; version: number; hostId: string; selfId: string; maxPlayers: number; timeoutSeconds: number; deadline: number | null; phase: Phase; round: number; track: import('./tracks.js').TrackId; players: PlayerView[]; draft?: Draft; racers: Racer[]; currentRacerId?: string; pending?: Omit<PendingChoice, 'context'>; waitingFor?: string; logs: GameEvent[]; results: RaceResult[]; lastRoll?: GameState['lastRoll']; rulesStatus: string; }
-export interface Identity { roomCode: string; playerId: string; token: string; role?: RoomRole; }
+export interface Identity { roomCode: string; playerId: string; token: string; role?: RoomRole; backendId?: import('./backend-protocol.js').BackendId; }
+export interface RoomSummary { backendId?: import('./backend-protocol.js').BackendId; }
+export interface RoomView { backendId?: import('./backend-protocol.js').BackendId; }
 export interface ActionReply { ok: boolean; error?: string; version?: number; duplicate?: boolean; }
 export interface RoomView { hosting?: 'browser' | 'local' | 'worker'; authorityId?: string; authorityOnline?: boolean; closedAt?: number; }
 export interface RoomView { baseTurnOrder?: string[]; hostLeftAt?: number; closeReason?: 'expired' | 'host-away' | 'dismissed'; }

@@ -4,11 +4,15 @@
   "main": "src/worker/index.ts",
   "compatibility_date": "2026-10-20",
   "workers_dev": true,
+  "vars": {
+    "DUAL_BACKEND_ENABLED": "false",
+    "PUBLIC_ORIGINS": ""
+  },
   "assets": {
     "directory": "./dist/browser",
     "binding": "ASSETS",
     "not_found_handling": "single-page-application",
-    "run_worker_first": ["/api/*"]
+    "run_worker_first": ["/api/*", "/backends.json"]
   },
   "durable_objects": {
     "bindings": [{ "name": "ROOMS", "class_name": "RoomRelay" }]

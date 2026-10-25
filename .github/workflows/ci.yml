@@ -51,6 +51,8 @@ jobs:
           REQUESTED_SUITE: ${{ inputs.browser_suite }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
       - run: pnpm typecheck
+      - name: Validate runtime backends, credentials, creation retries and quotas
+        run: pnpm exec tsx --test tests/backends.test.ts tests/network-backends.test.ts tests/dual-backend-server.test.ts tests/dual-backend-worker.test.ts tests/owner-recovery.test.ts tests/community-network.test.ts
       - name: Validate frozen schedules, long drafting, score audit and worker persistence
         run: pnpm exec tsx --test tests/competition.test.ts tests/schedule-review.test.ts tests/rules-version.test.ts tests/relay.test.ts
       - name: Validate Scout playback and owner-absence room lifecycle
@@ -68,6 +70,12 @@ jobs:
       - run: pnpm build
       - run: pnpm exec wrangler deploy --dry-run
       - run: pnpm exec playwright install --with-deps chromium
+      - name: Validate server selection, desktop/mobile and independent backend sessions
+        run: |
+          pnpm exec playwright test tests/browser/dual-backend.spec.ts
+          pnpm exec playwright test -c playwright.dual.config.ts
+        env:
+          CI: true
       - name: Validate home entries and player/spectator admission
         run: pnpm exec playwright test tests/browser/home-entry.spec.ts
         env:

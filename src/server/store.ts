@@ -10,7 +10,7 @@ export interface CreationReceipt<T=unknown> { request:string; result:T }
 /** Acknowledgement is sent only after this synchronous FULL transaction commits. */
 export class Store {
   readonly db: DatabaseSync;
-  constructor(path: string) {
+  constructor(path: string, readonly multiplayerLimit = MULTIPLAYER_ROOM_LIMIT) {
     if (path !== ':memory:') mkdirSync(dirname(path), { recursive: true });
     this.db = new DatabaseSync(path);
     this.db.exec(`PRAGMA journal_mode=WAL; PRAGMA synchronous=FULL; PRAGMA foreign_keys=ON; PRAGMA busy_timeout=5000;
@@ -22,7 +22,7 @@ export class Store {
       CREATE TABLE IF NOT EXISTS receipts(room_code TEXT NOT NULL REFERENCES rooms(code) ON DELETE CASCADE, player_id TEXT NOT NULL, action_id TEXT NOT NULL, request TEXT NOT NULL, result TEXT NOT NULL, PRIMARY KEY(room_code,player_id,action_id));`);
   }
   load(): Room[] { return (this.db.prepare('SELECT state FROM rooms').all() as {state:string}[]).map(x => JSON.parse(x.state) as Room); }
-  capacity(now=Date.now()):{used:number;limit:number} { return {used:this.load().filter(room=>(room.mode??'multiplayer')==='multiplayer'&&room.closedAt===undefined&&roomExpiry(room)>now).length,limit:MULTIPLAYER_ROOM_LIMIT}; }
+  capacity(now=Date.now()):{used:number;limit:number} { return {used:this.load().filter(room=>(room.mode??'multiplayer')==='multiplayer'&&room.closedAt===undefined&&roomExpiry(room)>now).length,limit:this.multiplayerLimit}; }
   creationReceipt<T>(requestId:string):CreationReceipt<T>|undefined { const row=this.db.prepare('SELECT request,result FROM create_receipts WHERE request_id=?').get(requestId) as {request:string;result:string}|undefined;return row&&{request:row.request,result:JSON.parse(row.result) as T}; }
   /** Every process uses the same SQLite transaction for admission and creation. */
   createRoom<T>(room:Room,id:string,tokenHash:string,result:T,now:number,requestId?:string,request=''):T {
@@ -30,7 +30,7 @@ export class Store {
     this.transaction(()=>{
       const prior=requestId?this.creationReceipt<T>(requestId):undefined;
       if(prior){if(prior.request!==request)throw Error('同一建房请求编号不能用于不同设置。');committed=prior.result;return;}
-      if((room.mode??'multiplayer')==='multiplayer'&&this.capacity(now).used>=MULTIPLAYER_ROOM_LIMIT)throw Error(ROOM_CAPACITY_MESSAGE);
+      if((room.mode??'multiplayer')==='multiplayer'&&this.capacity(now).used>=this.multiplayerLimit)throw Error(ROOM_CAPACITY_MESSAGE);
       this.save(room);this.db.prepare('INSERT INTO identities VALUES(?,?,?)').run(room.code,id,tokenHash);
       if(requestId)this.db.prepare('INSERT INTO create_receipts VALUES(?,?,?)').run(requestId,request,JSON.stringify(result));
     });

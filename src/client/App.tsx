@@ -25,9 +25,11 @@ import { RulesContent } from './RulesContent.js';
 import { EventLog, PublicEventConnection } from './EventLog.js';
 import { pendingPrompt } from './pending-prompt.js';
 import { FAN_CHARACTERS } from '../shared/fan-expansions.js';
-import { BROWSER_HOST_MODE, checkOwnedRoom, connectRoom, enterRoom, forgetClosedRoom, forgetIdentity, leaveRoom, listRoomDirectory, ownedRoomCandidates, OWNED_ROOMS_CHANGED, readClosedRoom, readIdentity, readRouteIdentity, rememberOwnedRoom, saveIdentity, sendAction, type ConnectionState, type OwnedRoom, type RoomConnection } from './network.js';
+import { BROWSER_HOST_MODE, checkOwnedRoom, connectRoom, enterRoom, forgetClosedRoom, forgetIdentity, leaveRoom, listRoomDirectory, ownedRoomCandidates, OWNED_ROOMS_CHANGED, readClosedRoom, readIdentity, readPendingCreation, readRouteIdentity, rememberOwnedRoom, saveIdentity, sendAction, type ConnectionState, type OwnedRoom, type RoomConnection } from './network.js';
 import { usePresentation, type UsePresentationResult } from './usePresentation.js';
 import { useRaceIntroReset } from './scene/useRaceIntro.js';
+import { BackendSelector, backendLabel, useBackendSelection } from './BackendSelector.js';
+import { formatRoomCode, parseRoomCode, type BackendId } from './backends.js';
 const Board3D = lazy(() => import('./scene/Board3D.js').then(module => ({ default: module.Board3D })));
 
 const characters = CHARACTERS;
@@ -57,6 +59,16 @@ type ShowCharacter = (id: string, racerId?: string) => void;
 interface CharacterDetail { id: string; racerId?: string; roomCode?: string; round?: number; }
 const phaseLabels = { lobby: '赛前集合', draft: '组建你的队伍', selection: '秘密选择运动员', race: '比赛进行中', results: '单场成绩', finished: '总成绩', paused: '比赛已暂停' };
 function currentCode() { return /^\/room\/([a-z0-9-]+)/i.exec(location.pathname)?.[1]?.toUpperCase() ?? ''; }
+function uniqueSavedIdentity(code: string, role: RoomRole): Identity | null {
+  const candidates = (['cloudflare','aliyun'] as const).map(id => readIdentity(code,role,id)).filter((identity): identity is Identity => !!identity);
+  return candidates.length === 1 ? candidates[0]! : null;
+}
+function routeClosedStatus(code: string) {
+  const identity = readRouteIdentity(code);
+  // A bare legacy code without credentials can refer to either server.
+  if (!parseRoomCode(code)?.backendId && !identity) return null;
+  return readClosedRoom(code,identity?.backendId);
+}
 const setting = (key: string, fallback: boolean) => { try { const value = localStorage.getItem(`magical-athlete:${key}`); return value === null ? fallback : value === 'true'; } catch { return fallback; } };
 function Icon({ kind, size = 22 }: { kind: 'dice' | 'flag' | 'copy' | 'sound' | 'mute' | 'arrow' | 'trophy' | 'people' | 'bot'; size?: number }) {
   const paths: Record<string, ReactNode> = {
@@ -84,7 +96,7 @@ export function App() {
   useRaceIntroReset(room);
   const [endRoom, setEndRoom] = useState(false);
   const [leaving, setLeaving] = useState(false);
-  const [connection, setConnection] = useState<ConnectionState>(()=>readClosedRoom(currentCode())??'connecting');
+  const [connection, setConnection] = useState<ConnectionState>(()=>routeClosedStatus(currentCode())??'connecting');
   const [connectionError, setConnectionError] = useState('');
   const [error, setError] = useState('');
   const [notice, setNotice] = useState('');
@@ -115,13 +127,13 @@ export function App() {
     } catch { /* Browser audio may be unavailable; play never depends on sound. */ }
   }, [muted]);
   useEffect(() => { document.documentElement.dataset.motion = reduceMotion ? 'reduce' : 'full'; try { localStorage.setItem('magical-athlete:reduced-motion', String(reduceMotion)); localStorage.setItem('magical-athlete:muted', String(muted)); } catch { /* Preferences are optional. */ } }, [reduceMotion, muted]);
-  useEffect(() => { const pop = () => { const next = currentCode(); setCode(next); setIdentity(readRouteIdentity(next)); setRoom(null); setError(''); setEndRoom(false); setConnection(readClosedRoom(next)??'connecting'); }; addEventListener('popstate', pop); return () => removeEventListener('popstate', pop); }, []);
+  useEffect(() => { const pop = () => { const next = currentCode(); setCode(next); setIdentity(readRouteIdentity(next)); setRoom(null); setError(''); setEndRoom(false); setConnection(routeClosedStatus(next)??'connecting'); }; addEventListener('popstate', pop); return () => removeEventListener('popstate', pop); }, []);
   useEffect(() => {
     if (!identity) return;
     saveIdentity(identity);
     setConnection('connecting'); setConnectionError('');
     let firstSnapshot=true;
-    const client = connectRoom(identity, (next) => { rememberOwnedRoom(next,identity,firstSnapshot);firstSnapshot=false;setRoom(previous => previous?.code === next.code && previous.version > next.version ? previous : next); }, (state, message) => { if(state==='closed'||state==='expired')forgetClosedRoom(identity.roomCode,state);setConnection(state); setConnectionError(message ?? ''); });
+    const client = connectRoom(identity, (next) => { rememberOwnedRoom(next,identity,firstSnapshot);firstSnapshot=false;setRoom(previous => previous?.code === next.code && previous.backendId === next.backendId && previous.version > next.version ? previous : next); }, (state, message) => { if(state==='closed'||state==='expired')forgetClosedRoom(identity.roomCode,state,identity.backendId);setConnection(state); setConnectionError(message ?? ''); });
     socket.current = client;
     const unsubscribeCommunity = client.subscribeCommunity?.(setCommunity);
     const sync = () => { if (document.visibilityState === 'visible' && client.connected) client.emit('sync'); };
@@ -129,7 +141,7 @@ export function App() {
     return () => { unsubscribeCommunity?.(); client.disconnect(); socket.current = null; setCommunity({messages: [], latestId: 0, connected: false}); document.removeEventListener('visibilitychange', sync); removeEventListener('focus', sync); removeEventListener('online', sync); removeEventListener('pageshow', sync); };
   }, [identity]);
   useEffect(() => { if (!notice) return; const timer = setTimeout(() => setNotice(''), 4000); return () => clearTimeout(timer); }, [notice]);
-  useEffect(() => { if (connection === 'expired') document.title = '房间已到期 | 胡闹运动会'; else if (connection === 'closed' || room?.closedAt) document.title = '房间已关闭 | 胡闹运动会'; else if (room) document.title = `${room.code} · ${phaseLabels[room.phase]} | 胡闹运动会`; else document.title = '胡闹运动会 · 好友联机'; }, [room, connection]);
+  useEffect(() => { if (connection === 'expired') document.title = '房间已到期 | 胡闹运动会'; else if (connection === 'closed' || room?.closedAt) document.title = '房间已关闭 | 胡闹运动会'; else if (room) document.title = `${formatRoomCode(room.code,room.backendId??'cloudflare')} · ${phaseLabels[room.phase]} | 胡闹运动会`; else document.title = '胡闹运动会 · 好友联机'; }, [room, connection]);
   const act = useCallback(async (action: GameAction) => {
     const client = socket.current;
     if (!room || room.role === 'spectator' || room.closedAt || !client || !(client.connected || (action.type === 'close' && client.canClose)) || busyRef.current) return false;
@@ -138,8 +150,8 @@ export function App() {
     catch (cause) { setError(cause instanceof Error ? cause.message : '操作未确认，请重新同步。'); return false; }
     finally { busyRef.current = false; setBusy(false); }
   }, [room, sound]);
-  const enter = (next: { identity: Identity; room: RoomView }) => { history.pushState({}, '', `/room/${next.room.code}`); setCode(next.room.code); setRoom(next.room); setIdentity(next.identity); setError(''); setConnection('connecting'); };
-  const resume = (saved: Identity) => { saveIdentity(saved); history.pushState({}, '', `/room/${saved.roomCode}`); setCode(saved.roomCode); setRoom(null); setIdentity(saved); setError(''); setConnection('connecting'); };
+  const enter = (next: { identity: Identity; room: RoomView }) => { const route = formatRoomCode(next.room.code,next.identity.backendId??'cloudflare'); history.pushState({}, '', `/room/${route}`); setCode(route); setRoom(next.room); setIdentity(next.identity); setError(''); setConnection('connecting'); };
+  const resume = (saved: Identity) => { saveIdentity(saved); const route = formatRoomCode(saved.roomCode,saved.backendId??'cloudflare'); history.pushState({}, '', `/room/${route}`); setCode(route); setRoom(null); setIdentity(saved); setError(''); setConnection('connecting'); };
   const copy = async (value: string, label: string) => { try { await navigator.clipboard.writeText(value); setNotice(`${label}已复制`); } catch { setCopyFallback(value); } };
   const home = () => { history.pushState({}, '', '/'); setCode(''); setIdentity(null); setRoom(null); setError(''); setEndRoom(false); setLeaving(false); setConnection('connecting'); setConnectionError(''); };
   const leave = async () => {
@@ -164,14 +176,15 @@ export function App() {
   const closed = expired || connection === 'closed' || !!room?.closedAt;
   const awayClosed = room?.closeReason === 'host-away' || connectionError.includes('保留期限');
   const spectator = room?.role === 'spectator';
+  const externalCode = room ? formatRoomCode(room.code,identity?.backendId??room.backendId??'cloudflare') : code;
   const visiblePhase = visibleRoom?.phase ?? room?.phase;
   const immersive = !closed && !!room && !!visiblePhase && ['race', 'results', 'finished'].includes(visiblePhase);
   useEffect(() => { document.documentElement.dataset.view = immersive ? 'race' : 'page'; return () => { delete document.documentElement.dataset.view; }; }, [immersive]);
   useEffect(() => { document.documentElement.dataset.chatChoice = immersive && !!room?.pending ? 'true' : 'false'; return () => { delete document.documentElement.dataset.chatChoice; }; }, [immersive, room?.pending?.id]);
   return <PublicEventConnection value={socket.current}>
     {!immersive && <header className="site-header"><button className="wordmark" disabled={busy} onClick={identity && !closed ? requestLeave : home} aria-label="胡闹运动会首页"><span className="logo-dice"><Icon kind="dice" size={28} /></span><span>胡闹运动会<small>Magical Athlete · 随时开跑</small></span></button><nav><button className="header-link" onClick={() => setRules(true)}>怎么玩</button><button className="sound-toggle" onClick={() => setMuted(!muted)} aria-label={muted ? '开启提示音' : '关闭提示音'} aria-pressed={!muted}><Icon kind={muted ? 'mute' : 'sound'} /></button></nav></header>}
-    {closed ? <main className="restore-screen room-closed" data-room-closed="true"><div className="large-dice"><Icon kind="flag" size={68} /></div><h1>{expired ? '房间已到期' : awayClosed ? '房间已关闭' : '房间已解散'}</h1><p>{expired || awayClosed ? <>房主最后一个有效连接离线后，个人练习保留 10 分钟，人机与好友房保留 30 分钟。<br />返回首页即可创建或加入新的房间。</> : <>此房间已关闭，所有玩家和观战者已退出。<br />此房间不能恢复。</>}</p><Button onClick={home}>返回首页</Button></main> : !identity ? <Home code={code} onEnter={enter} onResume={resume} onHome={home} onDetail={showCharacter} /> : !room ? <main className="restore-screen"><div className="large-dice"><Icon kind="dice" size={68} /></div><h1>{connectionError.includes('计算房主网页离线') ? '等待计算房主返回' : '正在回到赛场…'}</h1><p>{connectionError || '正在恢复你的座位与对局进度。'}</p>{connection === 'offline' && <Button secondary onClick={() => socket.current?.connect()}>重新同步</Button>}{connection === 'error' && <><Button onClick={() => socket.current?.connect()}>重新连接</Button><Button secondary onClick={() => { forgetIdentity(code); setIdentity(null); }}>重新输入昵称</Button></>}<Button secondary disabled={busy} onClick={requestLeave}>{identity.role === 'spectator' ? '退出观看' : '退出房间'}</Button>{error && <p className="form-error" role="alert">{error}</p>}</main> : <>
-      {!immersive && <div className="room-bar"><div className="room-label">房间 <button onClick={() => void copy(room.code, '房间码')} title="复制房间码">{room.code}<Icon kind="copy" size={15} /></button>{spectator && <span className="spectator-badge">正在观战</span>}<span className={`connection ${online ? 'is-online' : ''}`}><i />{online ? '已连接' : connection === 'connecting' ? '连接中' : '重连中'}</span></div><div className="room-actions"><button className="invite-button" onClick={() => void copy(`${location.origin}/room/${room.code}`, '邀请链接')}><Icon kind="copy" size={17} />邀请朋友</button><button className="leave-room-button" disabled={busy} onClick={requestLeave}>{spectator ? '退出观看' : '退出房间'}</button>{!spectator && room.hostId === room.selfId && <button className="end-room-button" disabled={busy || !canCloseRoom} onClick={() => setEndRoom(true)}>结束房间</button>}</div></div>}
+    {closed ? <main className="restore-screen room-closed" data-room-closed="true"><div className="large-dice"><Icon kind="flag" size={68} /></div><h1>{expired ? '房间已到期' : awayClosed ? '房间已关闭' : '房间已解散'}</h1><p>{expired || awayClosed ? <>房主最后一个有效连接离线后，个人练习保留 10 分钟，人机与好友房保留 30 分钟。<br />返回首页即可创建或加入新的房间。</> : <>此房间已关闭，所有玩家和观战者已退出。<br />此房间不能恢复。</>}</p><Button onClick={home}>返回首页</Button></main> : !identity ? <Home code={code} onEnter={enter} onResume={resume} onHome={home} onDetail={showCharacter} /> : !room ? <main className="restore-screen"><div className="large-dice"><Icon kind="dice" size={68} /></div><h1>{connectionError.includes('计算房主网页离线') ? '等待计算房主返回' : '正在回到赛场…'}</h1><p>{connectionError || '正在恢复你的座位与对局进度。'}</p>{connection === 'offline' && <Button secondary onClick={() => socket.current?.connect()}>重新同步</Button>}{connection === 'error' && <><Button onClick={() => socket.current?.connect()}>重新连接</Button><Button secondary onClick={() => { forgetIdentity(code,identity); setIdentity(null); }}>重新输入昵称</Button></>}<Button secondary disabled={busy} onClick={requestLeave}>{identity.role === 'spectator' ? '退出观看' : '退出房间'}</Button>{error && <p className="form-error" role="alert">{error}</p>}</main> : <>
+      {!immersive && <div className="room-bar"><div className="room-label">房间 <button onClick={() => void copy(externalCode, '房间码')} title="复制房间码">{externalCode}<Icon kind="copy" size={15} /></button>{spectator && <span className="spectator-badge">正在观战</span>}<span className={`connection ${online ? 'is-online' : ''}`}><i />{online ? '已连接' : connection === 'connecting' ? '连接中' : '重连中'}</span></div><div className="room-actions"><button className="invite-button" onClick={() => void copy(`${location.origin}/room/${externalCode}`, '邀请链接')}><Icon kind="copy" size={17} />邀请朋友</button><button className="leave-room-button" disabled={busy} onClick={requestLeave}>{spectator ? '退出观看' : '退出房间'}</button>{!spectator && room.hostId === room.selfId && <button className="end-room-button" disabled={busy || !canCloseRoom} onClick={() => setEndRoom(true)}>结束房间</button>}</div></div>}
       {!online && <div className="connection-banner" role="status">{connectionError || '连接暂时中断，恢复后会自动同步。'}<button onClick={() => { socket.current?.connect(); socket.current?.emit('sync'); }}>立即重连</button></div>}
       {error && !endRoom && <div className="error-banner" role="alert"><span>{error}</span><button onClick={() => setError('')} aria-label="关闭错误提示">×</button></div>}
       <main className={`game-shell phase-${visibleRoom?.phase ?? room.phase}`} data-room-version={room.version}>
@@ -181,7 +194,7 @@ export function App() {
         {visiblePhase === 'lobby' ? <Lobby room={room} busy={busy || !online} act={act} copy={copy} /> : <>
           {visiblePhase === 'draft' && <Draft room={visibleRoom ?? room} busy={busy || !online} act={act} onDetail={showCharacter} />}
           {visiblePhase === 'selection' && <Selection room={visibleRoom ?? room} busy={busy || !online} act={act} onDetail={showCharacter} />}
-          {visiblePhase && ['race', 'results', 'finished'].includes(visiblePhase) && <Race room={room} busy={busy || !online} leavingBusy={busy} canClose={canCloseRoom} act={act} onDetail={showCharacter} presentation={presentation} lowQuality={lowQuality} setLowQuality={setLowQuality} reduceMotion={reduceMotion} setReduceMotion={setReduceMotion} muted={muted} setMuted={setMuted} animationSpeed={animationSpeed} setAnimationSpeed={setAnimationSpeed} online={online} onRename={() => setRenameOpen(true)} onRules={() => setRules(true)} onEnd={() => setEndRoom(true)} onLeave={requestLeave} onInvite={() => void copy(`${location.origin}/room/${room.code}`, '邀请链接')} />}
+          {visiblePhase && ['race', 'results', 'finished'].includes(visiblePhase) && <Race room={room} busy={busy || !online} leavingBusy={busy} canClose={canCloseRoom} act={act} onDetail={showCharacter} presentation={presentation} lowQuality={lowQuality} setLowQuality={setLowQuality} reduceMotion={reduceMotion} setReduceMotion={setReduceMotion} muted={muted} setMuted={setMuted} animationSpeed={animationSpeed} setAnimationSpeed={setAnimationSpeed} online={online} onRename={() => setRenameOpen(true)} onRules={() => setRules(true)} onEnd={() => setEndRoom(true)} onLeave={requestLeave} onInvite={() => void copy(`${location.origin}/room/${externalCode}`, '邀请链接')} />}
           {visiblePhase === 'paused' && <div className="paper-panel"><h2>比赛已保存</h2><p>需要处理规则状态后继续，当前对局与所有分数均已保留。</p><p>{room.rulesStatus}</p><Button secondary onClick={() => socket.current?.emit('sync')}>重新同步</Button></div>}
           {!immersive && <><div className="below-game"><Scoreboard room={room} /><EventLog room={room} /></div><MyTeam room={room} onDetail={showCharacter} /></>}
         </>}
@@ -189,7 +202,7 @@ export function App() {
       </main>
     </>}
     {!immersive && <Footer />}
-    {room && !closed && <RoomChat key={room.code} room={room} community={community} connection={socket.current} immersive={immersive} onRename={() => setRenameOpen(true)} />}
+    {room && !closed && <RoomChat key={externalCode} room={room} community={community} connection={socket.current} immersive={immersive} onRename={() => setRenameOpen(true)} />}
     {renameOpen && room && !closed && !spectator && <Modal title="修改昵称" onClose={() => setRenameOpen(false)}><RenameForm room={room} community={community} connection={socket.current} onSuccess={name => { setRenameOpen(false); setNotice(`昵称已更新为 ${name}`); }} /></Modal>}
     {notice && <div className="toast" role="status">{notice}</div>}
     {room && !closed && <RoomContinuationNotice room={room} busy={busy || !online} resultsVisible={!!visiblePhase&&['results','finished'].includes(visiblePhase)&&visibleRoom?.round===room.continuation?.round&&!presentation.playing} act={act} />}
@@ -202,6 +215,8 @@ export function App() {
 }
 
 function Home({ code, onEnter, onResume, onHome, onDetail }: { code: string; onEnter: (reply: { identity: Identity; room: RoomView }) => void; onResume: (identity: Identity) => void; onHome: () => void; onDetail: ShowCharacter }) {
+  const servers = useBackendSelection();
+  const [legacyBackend, setLegacyBackend] = useState<BackendId | null>(null);
   const [name, setName] = useState(() => { try { return localStorage.getItem('magical-athlete:name') ?? ''; } catch { return ''; } });
   const [joinCode, setJoinCode] = useState(code);
   const [maxPlayers, setMaxPlayers] = useState(6);
@@ -241,9 +256,16 @@ function Home({ code, onEnter, onResume, onHome, onDetail }: { code: string; onE
       if (!nickname) { document.querySelector<HTMLInputElement>('[name="name"]')?.focus(); throw new Error('先给自己取个昵称，再选择房间。'); }
       const targetCode = mode === 'join' ? (selectedCode ?? joinCode).trim().toUpperCase() : null;
       if (mode === 'join' && !targetCode) throw new Error('请选择列表中的房间，或输入朋友发来的房间码。');
-      const saved = targetCode ? readIdentity(targetCode, selectedRole) : null;
+      const parsed = targetCode ? parseRoomCode(targetCode) : null;
+      if (targetCode && !parsed) throw new Error('请输入完整房间码，例如 C-ABC234 或 A-XYZ678。');
+      const enabled = servers.statuses.filter(status => status.backend.enabled);
+      const knownIdentity = targetCode && !parsed?.backendId && !legacyBackend ? uniqueSavedIdentity(targetCode,selectedRole) : null;
+      const targetBackend = parsed?.backendId ?? (targetCode ? legacyBackend ?? knownIdentity?.backendId ?? (enabled.length === 1 ? enabled[0]?.backend.id : undefined) : servers.selected);
+      if (!targetBackend) throw new Error(targetCode ? '这是六位旧房间码，请先选择房间所属服务器。' : '请先选择可用服务器。');
+      if (!servers.statuses.some(status => status.backend.id === targetBackend && status.state === 'available')) throw new Error(`${backendLabel(targetBackend)}连接失败或尚未开放，请重新检测后重试。`);
+      const saved = targetCode ? readIdentity(targetCode, selectedRole, targetBackend) : null;
       if (saved) { onResume(saved); return; }
-      const creation={ name: nickname, maxPlayers, timeoutSeconds: mode === 'practice' || mode === 'ai' ? 0 : timeoutSeconds, mode: mode === 'practice' || mode === 'ai' ? mode : 'multiplayer' as const, aiCount, characterPool: legacyPoolForConfig(roomConfig), config:roomConfig, ...(mode === 'join' ? { role: selectedRole } : {}) };
+      const creation={ name: nickname, backendId: targetBackend, maxPlayers, timeoutSeconds: mode === 'practice' || mode === 'ai' ? 0 : timeoutSeconds, mode: mode === 'practice' || mode === 'ai' ? mode : 'multiplayer' as const, aiCount, characterPool: legacyPoolForConfig(roomConfig), config:roomConfig, ...(mode === 'join' ? { role: selectedRole } : {}) };
       const signature=JSON.stringify(creation);if(creationRequest.current?.signature!==signature)creationRequest.current={signature,id:crypto.randomUUID()};
       const reply = await enterRoom(targetCode, {...creation,requestId:creationRequest.current.id});
       try { localStorage.setItem('magical-athlete:name', nickname); } catch { /* Optional. */ }
@@ -253,11 +275,23 @@ function Home({ code, onEnter, onResume, onHome, onDetail }: { code: string; onE
     finally { setBusy(false); }
   }
   function submit(event: React.FormEvent) { event.preventDefault(); void enterSelected(); }
+  const pendingCreation = readPendingCreation();
+  async function retryPendingCreation() {
+    if (busy || !pendingCreation) return;
+    setBusy(true);setError('');
+    try { onEnter(await enterRoom(null,{name:name.trim()||'胡闹选手',backendId:pendingCreation.backendId,requestId:pendingCreation.requestId})); }
+    catch(cause){setError(cause instanceof Error?cause.message:'原服务器尚未确认建房，请重试。');}
+    finally{setBusy(false);}
+  }
   const heroIds = ['banana', 'rocket-scientist', 'egg', 'huge-baby', 'centaur'];
-  const roomDirectory = <RoomDirectory busy={busy} onJoin={(roomCode, nextRole) => { setJoinCode(roomCode); setRole(nextRole); void enterSelected(roomCode, nextRole); }} />;
+  const roomDirectory = <RoomDirectory busy={busy||servers.checking} onJoin={(roomCode, nextRole) => { setJoinCode(roomCode); setRole(nextRole); void enterSelected(roomCode, nextRole); }} />;
+  const joinTarget = parseRoomCode(joinCode);
+  const ambiguousLegacy = mode === 'join' && !!joinTarget && !joinTarget.backendId && !uniqueSavedIdentity(joinCode,role) && servers.statuses.filter(status => status.backend.enabled).length > 1;
   return <main className="home">
     <OwnedRoomReturn onResume={onResume} />
     <section className="hero"><div className="hero-title"><span>各就各位，</span><h1>胡闹<br />运动会<span className="title-star">✦</span></h1><p>选个怪咖，掷个骰子。<br />和朋友一起，认真地胡闹一场。</p></div><div className="hero-art" aria-hidden="true"><div className="hero-orbit" /><div className="hero-finish"><Icon kind="flag" size={58} /></div>{heroIds.map((id, index) => <div className={`hero-racer hero-racer-${index}`} key={id}><Avatar id={id} /></div>)}<div className="hero-stamp">1～8 人<br /><strong>随时开跑!</strong></div></div></section>
+    <BackendSelector statuses={servers.statuses} selected={servers.selected} checking={servers.checking} disabled={busy} onSelect={servers.choose} onRefresh={() => void servers.refresh()} />
+    {pendingCreation && <section className="pending-creation" aria-label="确认原建房请求"><p>上次在 {backendLabel(pendingCreation.backendId)} 的建房请求尚未确认。超时可能已经建房，请先重试原请求。</p><Button secondary disabled={busy} onClick={() => void retryPendingCreation()}>重试原服务器建房</Button>{error && <p className="form-error" role="alert">{error}</p>}</section>}
     <section className={`entry-panel${configuring?' configuring':''}`}>
       <div className="entry-heading"><h2>今天，怎么开跑？</h2><p>召集朋友，或去现有房间入座、观战。</p></div>
       <div className="entry-tabs" role="tablist" aria-label="进入游戏方式" onKeyDown={navigateEntries}>{([
@@ -271,11 +305,13 @@ function Home({ code, onEnter, onResume, onHome, onDetail }: { code: string; onE
         <label>你的昵称<input name="name" placeholder={mode === 'practice' || mode === 'ai' ? '胡闹选手（可直接开始）' : '比如：跑不动同学'} autoComplete="nickname" maxLength={20} value={name} onChange={event => setName(event.target.value)} required={mode === 'create' || mode === 'join'} /></label>
         {mode === 'join' && !code && <>{roomDirectory}<div className="join-code-heading"><h3>用房间码加入</h3><p>私密房间也可凭房间码进入，选择你的加入身份。</p></div></>}
         {mode === 'join' ? <><fieldset className="join-role"><legend>加入身份</legend><label><input type="radio" name="roomRole" value="player" checked={role === 'player'} onChange={() => setRole('player')} /><span>作为选手<small>入座并参与比赛</small></span></label><label><input type="radio" name="roomRole" value="spectator" checked={role === 'spectator'} onChange={() => setRole('spectator')} /><span>作为观战者<small>满员或开赛后也能观看</small></span></label></fieldset><label>房间码<input name="roomCode" className="room-code-input" placeholder="输入朋友发来的房间码" autoCapitalize="characters" maxLength={12} value={joinCode} onChange={event => setJoinCode(event.target.value.toUpperCase().replace(/[^A-Z0-9-]/g, ''))} required /></label></> : mode === 'practice' ? <div className="solo-intro"><strong>专属练习赛道</strong><p>从完整角色牌池中自由选择 {matchRaceCount({config:roomConfig})} 张，再选人、掷骰、体验技能。不限时。</p></div> : mode === 'ai' ? <label>AI 人数<select aria-label="AI 人数" value={aiCount} onChange={event => setAiCount(Number(event.target.value))}>{Array.from({ length: 7 }, (_, i) => i + 1).map(n => <option key={n} value={n}>{n} 位 AI{n === 1 ? ' · 两人双角色' : n >= 6 ? ' · 扩展规则' : ''}</option>)}</select></label> : <div className="form-split"><label>房间人数上限<select value={maxPlayers} onChange={event => setMaxPlayers(Number(event.target.value))}>{Array.from({ length: 7 }, (_, i) => i + 2).map(n => <option key={n} value={n}>{n} 人{n >= 7 ? ' · 扩展规则' : n === 2 ? ' · 双角色' : ' · 标准'}</option>)}</select></label><label>每次操作时限<select value={timeoutSeconds} onChange={event => setTimeoutSeconds(Number(event.target.value))}><option value={0}>不限时</option><option value={60}>60 秒</option><option value={90}>90 秒</option><option value={120}>120 秒</option><option value={180}>180 秒</option></select></label></div>}
+        {mode === 'join' && joinTarget?.backendId && <p className="target-backend-note" role="status">此房间属于 {backendLabel(joinTarget.backendId)}，将直接连接该服务器。</p>}
+        {ambiguousLegacy && <fieldset className="legacy-backend-choice"><legend>六位旧房间码所属服务器</legend>{servers.statuses.filter(status => status.backend.enabled).map(status => <label key={status.backend.id}><input type="radio" name="legacyBackend" checked={legacyBackend === status.backend.id} disabled={status.state !== 'available'} onChange={() => setLegacyBackend(status.backend.id)} />{backendLabel(status.backend.id)}</label>)}<p className="target-backend-note">请向房主确认服务器，避免进入另一端的同码房间。</p></fieldset>}
         {mode === 'create' && <label>房间可见性<select aria-label="房间可见性" value={roomConfig.visibility??'public'} onChange={e=>setRoomConfig({...roomConfig,visibility:e.target.value as 'public'|'private'})}><option value="public">公开 · 可从房间列表加入或观战</option><option value="private">私密 · 仅凭链接或房间码进入</option></select></label>}
         {mode !== 'join' && <RoomConfigFields config={roomConfig} onChange={setRoomConfig} disabled={busy} players={mode==='practice'?1:mode==='ai'?aiCount+1:maxPlayers} practice={mode==='practice'} />}
         {maxPlayers >= 7 && mode === 'create' && <p className="form-note">7～8 人使用本项目扩展规则，初始选牌唯一；平衡性未经官方验证。</p>}
         {error && <p className="form-error" role="alert">{error}</p>}
-        <Button type="submit" disabled={busy||(mode!=='join'&&!!roomConfigError(roomConfig,mode==='ai'?aiCount+1:mode==='practice'?1:maxPlayers,mode==='practice'))}>{busy ? '正在进入…' : mode === 'practice' ? '开始自己练习' : mode === 'ai' ? '开始人机对战' : mode === 'create' ? '创建房间，召集朋友' : role === 'spectator' ? '进入房间观战' : '加入这场胡闹'}<Icon kind="arrow" /></Button>
+        <Button type="submit" disabled={busy||servers.checking||(mode!=='join'&&(!!pendingCreation||!servers.available||!!roomConfigError(roomConfig,mode==='ai'?aiCount+1:mode==='practice'?1:maxPlayers,mode==='practice')))}>{busy ? '正在进入…' : mode === 'practice' ? '开始自己练习' : mode === 'ai' ? '开始人机对战' : mode === 'create' ? '创建房间，召集朋友' : role === 'spectator' ? '进入房间观战' : '加入这场胡闹'}<Icon kind="arrow" /></Button>
         <p className="form-note">{mode === 'practice' ? '无需等待 · 随时练习 · 自动保存' : mode === 'ai' ? 'AI 自动选秀与行动 · 遵守相同规则' : '无需注册 · 链接邀请 · 电脑手机都能玩'}</p>
         <p className="form-note room-lifetime-note">房主在线时保留；最后一个房主标签页离线后，个人练习保留 10 分钟，人机与好友房保留 30 分钟。</p>
         {mode === 'join' && code && roomDirectory}
@@ -306,17 +342,18 @@ function OwnedRoomReturn({ onResume }: { onResume: (identity: Identity) => void 
     return () => { active=false;clearInterval(timer);removeEventListener('focus',changed);removeEventListener('storage',changed);removeEventListener(OWNED_ROOMS_CHANGED,changed); };
   },[revision]);
   async function resume(room: OwnedRoom) {
-    if(returning)return;setReturning(room.code);setError('');
+    const external = formatRoomCode(room.code,room.backendId??'cloudflare');
+    if(returning)return;setReturning(external);setError('');
     try {
-      const identity=readIdentity(room.code,'player');if(!identity){setRevision(value=>value+1);return;}
+      const identity=readIdentity(room.code,'player',room.backendId);if(!identity){setRevision(value=>value+1);return;}
       const current=await checkOwnedRoom(identity);
-      if(!current){setRooms(previous=>previous.filter(saved=>saved.code!==room.code));return;}
+      if(!current){setRooms(previous=>previous.filter(saved=>saved.code!==room.code||saved.backendId!==room.backendId));return;}
       rememberOwnedRoom({ ...current,hostId:current.playerId,ownerId:current.playerId },identity,true);onResume(identity);
     }catch(cause){setError(cause instanceof Error?cause.message:'暂时无法返回原房间，请稍后重试。');}
     finally{setReturning('');}
   }
   if(!rooms.length&&!error&&!checking)return null;
-  return <section className="owned-room-return" aria-label="返回创建的房间"><div className="owned-room-heading"><div><h2>返回刚才创建的房间</h2><p>用原来的身份和对局继续，无需重新创建。</p></div>{checking&&<span role="status">正在确认房间…</span>}</div>{rooms.length>0&&<div className="owned-room-list">{rooms.slice(0,3).map((room,index)=><article key={room.code} data-testid={`owned-room-${room.code}`}><div><strong>房间 {room.code}</strong><span>{room.mode==='practice'?'自己练习':room.mode==='ai'?'人机对战':'好友联机'} · {phaseLabels[room.phase]}</span><small><RoomLifetime expiresAt={room.expiresAt} mode={room.mode} /></small></div><Button disabled={!!returning} onClick={()=>void resume(room)}>{returning===room.code?'正在返回…':index===0?'返回刚才创建的房间':`返回房间 ${room.code}`}</Button></article>)}</div>}{error&&<div className="owned-room-error" role="status"><span>{error}</span><button type="button" className="text-button" disabled={checking} onClick={()=>setRevision(value=>value+1)}>重新检查</button></div>}</section>;
+  return <section className="owned-room-return" aria-label="返回创建的房间"><div className="owned-room-heading"><div><h2>返回刚才创建的房间</h2><p>用原来的身份和对局继续，无需重新创建。</p></div>{checking&&<span role="status">正在确认房间…</span>}</div>{rooms.length>0&&<div className="owned-room-list">{rooms.slice(0,3).map((room,index)=>{ const external = formatRoomCode(room.code,room.backendId??'cloudflare');return <article key={external} data-testid={`owned-room-${external}`}><div><strong>房间 {external}</strong><span>{backendLabel(room.backendId)} · {room.mode==='practice'?'自己练习':room.mode==='ai'?'人机对战':'好友联机'} · {phaseLabels[room.phase]}</span><small><RoomLifetime expiresAt={room.expiresAt} mode={room.mode} /></small></div><Button disabled={!!returning} onClick={()=>void resume(room)}>{returning===external?'正在返回…':index===0?'返回刚才创建的房间':`返回房间 ${external}`}</Button></article>;})}</div>}{error&&<div className="owned-room-error" role="status"><span>{error}</span><button type="button" className="text-button" disabled={checking} onClick={()=>setRevision(value=>value+1)}>重新检查</button></div>}</section>;
 }
 
 function RoomLifetime({ expiresAt, mode }: { expiresAt?: number; mode?: RoomView['mode'] }) {
@@ -330,6 +367,7 @@ function RoomLifetime({ expiresAt, mode }: { expiresAt?: number; mode?: RoomView
 
 function RoomDirectory({ busy, onJoin }: { busy: boolean; onJoin: (code: string, role: RoomRole) => void }) {
   const [rooms, setRooms] = useState<RoomSummary[]>([]);
+  const [backends, setBackends] = useState<Awaited<ReturnType<typeof listRoomDirectory>>['backends']>([]);
   const [capacity,setCapacity]=useState<{used:number;limit:number}|undefined>();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -341,7 +379,7 @@ function RoomDirectory({ busy, onJoin }: { busy: boolean; onJoin: (code: string,
       if (fetching) return;
       fetching = true;
       if (current) setLoading(true);
-      try { const next = await listRoomDirectory(); if (current) { setRooms(next.rooms.filter(room => room.mode !== 'practice'));setCapacity(next.capacity); setError(''); } }
+      try { const next = await listRoomDirectory(); if (current) { setRooms(next.rooms.filter(room => room.mode !== 'practice'));setCapacity(next.capacity);setBackends(next.backends??[]); setError(''); } }
       catch (cause) { if (current) setError(cause instanceof Error ? cause.message : '房间列表暂时无法加载，可使用房间码加入。'); }
       finally { fetching = false; if (current) setLoading(false); }
     };
@@ -351,10 +389,11 @@ function RoomDirectory({ busy, onJoin }: { busy: boolean; onJoin: (code: string,
     addEventListener('focus', focus);
     return () => { current = false; clearInterval(timer); removeEventListener('focus', focus); };
   }, [revision]);
-  return <section className="room-directory" aria-label="现有房间"><div className="room-directory-heading"><div><h3>现有房间</h3><p>选一个房间，立即加入或围观。</p>{capacity&&<p className={`room-capacity${capacity.used>=capacity.limit?' is-full':''}`} role="status">对战房间 {capacity.used} / {capacity.limit}</p>}</div><button type="button" className="text-button" disabled={loading} onClick={() => setRevision(value => value + 1)}>{loading ? '刷新中…' : '刷新列表'}</button></div>{error && <p className="directory-error" role="alert">{error}</p>}{!rooms.length ? <p className="directory-empty" role="status">{loading ? '正在寻找赛场…' : error ? '可稍后刷新，或通过房间码加入。' : '还没有房间，快去创建第一场运动会吧。'}</p> : <div className="room-directory-list">{rooms.map(room => {
-    const returning = !!readIdentity(room.code, 'player');
+  return <section className="room-directory" aria-label="现有房间"><div className="room-directory-heading"><div><h3>现有房间</h3><p>选一个房间，立即加入或围观。</p>{capacity&&<p className={`room-capacity${capacity.used>=capacity.limit?' is-full':''}`} role="status">对战房间 {capacity.used} / {capacity.limit}</p>}</div><button type="button" className="text-button" disabled={loading} onClick={() => setRevision(value => value + 1)}>{loading ? '刷新中…' : '刷新列表'}</button></div>{backends?.filter(backend=>!backend.available).map(backend=><p key={backend.backendId} className="directory-error" role="status">{backendLabel(backend.backendId)}：{backend.error||'暂不可用，房间列表读取失败'}</p>)}{error && <p className="directory-error" role="alert">{error}</p>}{!rooms.length ? <p className="directory-empty" role="status">{loading ? '正在寻找赛场…' : error||backends?.some(backend=>!backend.available) ? '部分服务器列表未确认，请稍后刷新或通过房间码加入。' : '还没有房间，快去创建第一场运动会吧。'}</p> : <div className="room-directory-list">{rooms.map(room => {
+    const external = formatRoomCode(room.code,room.backendId??'cloudflare');
+    const returning = !!readIdentity(room.code, 'player',room.backendId);
     const canJoin = returning || (room.phase === 'lobby' && (!room.mode || room.mode === 'multiplayer') && room.playerCount < room.maxPlayers && room.authorityOnline !== false);
-    return <article className="directory-room" key={room.code} data-testid={`directory-room-${room.code}`}><div className="directory-room-main"><div><strong>{room.hostName} 的房间</strong><span className={`directory-phase ${room.phase === 'lobby' ? 'is-lobby' : ''}`}>{phaseLabels[room.phase]}</span></div><p><b>{room.code}</b><span>{room.playerCount} / {room.maxPlayers} 位选手</span><span>{room.spectatorCount} 人观战</span></p><small><RoomLifetime expiresAt={room.expiresAt} mode={room.mode} />{room.authorityOnline === false && ' · 等待计算房主返回'}</small></div><div className="directory-room-actions"><Button type="button" disabled={busy || !canJoin} onClick={() => onJoin(room.code, 'player')}>{returning ? '返回房间' : room.mode === 'practice' || room.mode === 'ai' ? '专属赛场' : room.phase !== 'lobby' ? '已开赛' : room.playerCount >= room.maxPlayers ? '已满员' : '加入房间'}</Button><Button type="button" secondary disabled={busy} onClick={() => onJoin(room.code, 'spectator')}>观战</Button></div></article>;
+    return <article className="directory-room" key={external} data-testid={`directory-room-${external}`}><div className="directory-room-main"><div><strong>{room.hostName} 的房间</strong><span className={`directory-phase ${room.phase === 'lobby' ? 'is-lobby' : ''}`}>{phaseLabels[room.phase]}</span></div><p><b>{external}</b><span className="directory-backend">{backendLabel(room.backendId)}</span><span>{room.playerCount} / {room.maxPlayers} 位选手</span><span>{room.spectatorCount} 人观战</span></p><small><RoomLifetime expiresAt={room.expiresAt} mode={room.mode} />{room.authorityOnline === false && ' · 等待计算房主返回'}</small></div><div className="directory-room-actions"><Button type="button" disabled={busy || !canJoin} onClick={() => onJoin(external, 'player')}>{returning ? '返回房间' : room.mode === 'practice' || room.mode === 'ai' ? '专属赛场' : room.phase !== 'lobby' ? '已开赛' : room.playerCount >= room.maxPlayers ? '已满员' : '加入房间'}</Button><Button type="button" secondary disabled={busy} onClick={() => onJoin(external, 'spectator')}>观战</Button></div></article>;
   })}</div>}<p className="directory-footnote">列表每 10 秒自动刷新。开赛后或满员的房间仍可观战。</p></section>;
 }
 
@@ -362,8 +401,9 @@ function Lobby({ room, busy, act, copy }: { room: RoomView; busy: boolean; act: 
   const self = room.role === 'spectator' ? undefined : room.players.find(player => player.id === room.selfId);
   const ready = room.players.length >= (room.mode==='practice'?1:2) && room.players.every(player => player.ready && player.connected);
   const isHost = room.selfId === room.hostId;
-  const invite = `${location.origin}/room/${room.code}`;
-  return <><RoomConfigPanel room={room} busy={busy} act={act} /><div className="lobby-layout"><section className="player-area"><div className="lobby-count"><span>{room.players.length}<small> / {room.maxPlayers} 人已入座</small></span><span className="ready-count">{room.players.filter(p => p.ready).length} 人已准备</span></div><div className="lobby-seats">{Array.from({ length: room.maxPlayers }, (_, index) => { const player = room.players.find(p => p.seat === index); return player ? <div className={`seat ${player.id === room.selfId ? 'self-seat' : ''}`} key={player.id} style={{ '--player-color': player.color } as CSSProperties}><span className="seat-avatar">{player.name.slice(0, 1)}<span>{player.seat + 1}</span></span><div><strong>{player.name}{player.id === room.selfId && <small>你</small>}</strong><p>{player.id === room.hostId ? '房主' : '运动员'} · {player.connected ? '在线' : '暂时离线'}</p></div><span className={`ready-badge ${player.ready ? 'is-ready' : ''}`}>{player.ready ? '已准备 ✓' : '等准备'}</span></div> : <div className="seat empty-seat" key={index}><span className="empty-avatar">＋</span><span>虚位以待<small>把链接发给朋友</small></span></div>; })}</div>{self && <div className="lobby-actions"><Button secondary={self.ready} disabled={busy} onClick={() => act({ type: 'ready', ready: !self.ready })}>{self.ready ? '取消准备' : '我准备好了'}</Button>{isHost && <Button disabled={busy || !ready} onClick={() => act({ type: 'start' })}><Icon kind="flag" />开始选秀</Button>}</div>}<p className="helper-text">{!self ? '你正在观战，等待选手准备与房主开局。' : room.players.length < (room.mode==='practice'?1:2) ? '再邀请至少一位朋友，就能开始。' : ready ? isHost ? '全员准备完毕，随时开跑！' : '全员准备完毕，等待房主开局。' : '所有人点击准备后，房主就能开始选秀。'}</p></section><aside className="lobby-invite"><div className="invite-drawing"><Icon kind="flag" size={86} /></div><h2>朋友集合！</h2><p>把专属链接发给同学，<br />打开、取名，就能入座。</p><div className="invite-code">{room.code}</div><Button onClick={() => copy(invite, '邀请链接')}><Icon kind="copy" />复制邀请链接</Button><a className="selectable-link" href={invite}>{invite}</a><p className="small-note">刷新会保留座位。<br />用同一浏览器回来即可重连。</p>{isHost && room.players.length > 1 && <details className="transfer-host"><summary>转交房主</summary>{room.players.filter(p => p.id !== room.selfId).map(player => <button key={player.id} disabled={busy} onClick={() => act({ type: 'transfer', playerId: player.id })}>交给 {player.name}</button>)}</details>}</aside></div></>;
+  const externalCode = formatRoomCode(room.code,room.backendId??'cloudflare');
+  const invite = `${location.origin}/room/${externalCode}`;
+  return <><RoomConfigPanel room={room} busy={busy} act={act} /><div className="lobby-layout"><section className="player-area"><div className="lobby-count"><span>{room.players.length}<small> / {room.maxPlayers} 人已入座</small></span><span className="ready-count">{room.players.filter(p => p.ready).length} 人已准备</span></div><div className="lobby-seats">{Array.from({ length: room.maxPlayers }, (_, index) => { const player = room.players.find(p => p.seat === index); return player ? <div className={`seat ${player.id === room.selfId ? 'self-seat' : ''}`} key={player.id} style={{ '--player-color': player.color } as CSSProperties}><span className="seat-avatar">{player.name.slice(0, 1)}<span>{player.seat + 1}</span></span><div><strong>{player.name}{player.id === room.selfId && <small>你</small>}</strong><p>{player.id === room.hostId ? '房主' : '运动员'} · {player.connected ? '在线' : '暂时离线'}</p></div><span className={`ready-badge ${player.ready ? 'is-ready' : ''}`}>{player.ready ? '已准备 ✓' : '等准备'}</span></div> : <div className="seat empty-seat" key={index}><span className="empty-avatar">＋</span><span>虚位以待<small>把链接发给朋友</small></span></div>; })}</div>{self && <div className="lobby-actions"><Button secondary={self.ready} disabled={busy} onClick={() => act({ type: 'ready', ready: !self.ready })}>{self.ready ? '取消准备' : '我准备好了'}</Button>{isHost && <Button disabled={busy || !ready} onClick={() => act({ type: 'start' })}><Icon kind="flag" />开始选秀</Button>}</div>}<p className="helper-text">{!self ? '你正在观战，等待选手准备与房主开局。' : room.players.length < (room.mode==='practice'?1:2) ? '再邀请至少一位朋友，就能开始。' : ready ? isHost ? '全员准备完毕，随时开跑！' : '全员准备完毕，等待房主开局。' : '所有人点击准备后，房主就能开始选秀。'}</p></section><aside className="lobby-invite"><div className="invite-drawing"><Icon kind="flag" size={86} /></div><h2>朋友集合！</h2><p>把专属链接发给同学，<br />打开、取名，就能入座。</p><div className="invite-code">{externalCode}</div><p className="directory-backend">{backendLabel(room.backendId)}</p><Button onClick={() => copy(invite, '邀请链接')}><Icon kind="copy" />复制邀请链接</Button><a className="selectable-link" href={invite}>{invite}</a><p className="small-note">刷新会保留座位。<br />用同一浏览器回来即可重连。</p>{isHost && room.players.length > 1 && <details className="transfer-host"><summary>转交房主</summary>{room.players.filter(p => p.id !== room.selfId).map(player => <button key={player.id} disabled={busy} onClick={() => act({ type: 'transfer', playerId: player.id })}>交给 {player.name}</button>)}</details>}</aside></div></>;
 }
 
 function CharacterCard({ id, selected, disabled, onChoose, onDetail, used }: { id: string; selected?: boolean; disabled?: boolean; onChoose?: () => void; onDetail: ShowCharacter; used?: boolean }) {
@@ -393,7 +433,7 @@ function Draft({ room, busy, act, onDetail }: { room: RoomView; busy: boolean; a
   const current = room.players.find(p => p.id === currentId);
   const mine = room.role !== 'spectator' && currentId === room.selfId;
   useEffect(() => setPick(null), [draft?.cursor, draft?.batch]);
-  if (room.mode === 'practice') return <PracticeTeam key={room.code} room={room} busy={busy} readOnly={room.role === 'spectator'} act={act} onDetail={onDetail} />;
+  if (room.mode === 'practice') return <PracticeTeam key={formatRoomCode(room.code,room.backendId??'cloudflare')} room={room} busy={busy} readOnly={room.role === 'spectator'} act={act} onDetail={onDetail} />;
   return <><div className={`turn-notice ${mine ? 'your-turn' : ''}`}><Icon kind="flag" /><span>{mine ? '轮到你挑选了' : `等待 ${current?.name ?? '运动员'} 挑选`}<small>每位角色仅能被一人选走，挑一位加入你的队伍。</small></span><Countdown deadline={room.deadline} /></div><div className="draft-order">{draft?.order.map((id, index) => <span key={`${id}-${index}`} className={index === draft.cursor ? 'active' : index < draft.cursor ? 'done' : ''}>{room.players.find(p => p.id === id)?.name}{index < draft.cursor ? ' ✓' : ''}</span>)}</div>{controls}<div className="character-grid">{filter(draft?.market ?? []).map(id => <CharacterCard key={id} id={id} selected={pick === id} disabled={!mine || busy} onChoose={() => setPick(pick === id ? null : id)} onDetail={onDetail} />)}</div>{mine && <div className="sticky-action"><span>{pick ? `让 ${characterName(pick)} 加入队伍` : '点击一位运动员，读懂能力再选'}</span><Button disabled={busy || !pick} onClick={() => { if (pick) act({ type: 'draft', characterId: pick }); }}>确认选择{pick ? ` · ${characterName(pick)}` : ''}</Button></div>}</>;
 }
 function PracticeTeam({ room, busy, readOnly, act, onDetail }: { room:RoomView; busy: boolean; readOnly: boolean; act: (action: GameAction) => void; onDetail: ShowCharacter }) {
@@ -452,7 +492,7 @@ function Race({ room, busy, leavingBusy, canClose, act, onDetail, presentation, 
       <RoomConfigPanel room={room} busy={busy} act={act} /><p className="race-menu-note">技能提示至少停留 1.5 秒，便于看清发动原因；加速设置主要缩短移动与掷骰演出。</p>
       <div className="race-menu-links">{!spectator && <Button secondary onClick={() => { setSettingsOpen(false); onRename(); }}>修改昵称 · 剩余 {room.renameRemaining ?? 1} 次</Button>}<Button secondary onClick={() => { setSettingsOpen(false); onRules(); }}>帮助与规则</Button>{room.mode !== 'practice' && room.mode !== 'ai' && <Button secondary onClick={onInvite}>邀请朋友</Button>}<Button secondary disabled={leavingBusy} onClick={() => { setSettingsOpen(false); onLeave(); }}>{spectator ? '退出观看' : '退出房间'}</Button>{!spectator && room.hostId === room.selfId && <button className="end-room-button" disabled={leavingBusy || !canClose} onClick={() => { setSettingsOpen(false); onEnd(); }}>结束房间</button>}</div>
       <details><summary>累计积分</summary><Scoreboard room={room} /></details><details><summary>赛场播报</summary><EventLog room={room} /></details><details><summary>运动员与位置</summary><div className="racer-strip">{showing.racers.map(racer => <RacerSummary key={racer.id} racer={racer} room={room} onDetail={(id, racerId) => { setSettingsOpen(false); onDetail(id, racerId); }} />)}</div></details>{!spectator && <details><summary>我的队伍</summary><MyTeam room={room} onDetail={(id, racerId) => { setSettingsOpen(false); onDetail(id, racerId); }} /></details>}
-      <p className="race-menu-note"><RoomLifetime expiresAt={room.expiresAt} mode={room.mode} /> · {room.spectators?.filter(spectator => spectator.connected).length ?? 0} 人观战</p><p className="race-menu-note">房间 {room.code} · {room.players.length >= 7 ? '7～8 人扩展规则' : room.players.length === 2 ? '两人双角色模式' : room.mode === 'practice' ? '单人练习规则' : '标准规则'}<br />拖动平移 · 滚轮或双指缩放 · {spectator ? '跟随选手' : '回到自己'}可恢复自动观看{room.hosting === 'browser' && <><br />请保持计算房主网页打开。对局进度自动保存在原浏览器中。</>}</p>
+      <p className="race-menu-note"><RoomLifetime expiresAt={room.expiresAt} mode={room.mode} /> · {room.spectators?.filter(spectator => spectator.connected).length ?? 0} 人观战</p><p className="race-menu-note">房间 {formatRoomCode(room.code,room.backendId??'cloudflare')} · {backendLabel(room.backendId)} · {room.players.length >= 7 ? '7～8 人扩展规则' : room.players.length === 2 ? '两人双角色模式' : room.mode === 'practice' ? '单人练习规则' : '标准规则'}<br />拖动平移 · 滚轮或双指缩放 · {spectator ? '跟随选手' : '回到自己'}可恢复自动观看{room.hosting === 'browser' && <><br />请保持计算房主网页打开。对局进度自动保存在原浏览器中。</>}</p>
     </div></Modal>}
   </section>;
 }

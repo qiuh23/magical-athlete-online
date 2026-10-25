@@ -4,6 +4,7 @@ import type { RelayMetadata, RelayServerMessage, RelayClientMessage } from '../s
 import type { ActionEnvelope, ActionReply, ChatReply, ChatSend, Identity, PublicEventBatch, RenameReply, RoomView } from '../shared/types.js';
 import { CommunityFeed } from './community.js';
 import type { ConnectionState, RoomConnection } from './network.js';
+import { backendUrl, type BackendDefinition } from './backends.js';
 
 const lockName = (code: string) => `magical-athlete:authority:${code}`;
 const HOST_OFFLINE = '计算房主网页离线，等待其返回。';
@@ -85,7 +86,7 @@ export class BrowserRelayConnection implements RoomConnection {
   };
   private readonly online = () => { if (!this.disposed && !this.blocked && !this.roomClosed) this.open(!!this.authority); };
 
-  constructor(private identity: Identity, private onSnapshot: (room: RoomView) => void, private onStatus: (status: ConnectionState, message?: string) => void) {
+  constructor(private identity: Identity, private onSnapshot: (room: RoomView) => void, private onStatus: (status: ConnectionState, message?: string) => void, private backend?:BackendDefinition) {
     this.eventClient=new PresentationEventClient(afterId=>this.readEvents(afterId),room=>this.onSnapshot(room),error=>this.fail(error instanceof Error?error.message:'未能补齐动画记录，请重新连接。'));
     window.addEventListener('offline', this.offline);
     window.addEventListener('online', this.online);
@@ -177,10 +178,10 @@ export class BrowserRelayConnection implements RoomConnection {
     this.authenticated = false; this.synchronized = false; this.syncRequestId = null; this.authorityRole = false; this.requestedRole = authority;
     this.lastPingAt = 0; this.lastPongAt = 0;
     this.ws?.close(1000, 'reconnecting');
-    const url = new URL(`/api/browser/ws/${encodeURIComponent(this.identity.roomCode)}`, location.origin); url.protocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+    const url = new URL(this.backend ? backendUrl(this.backend,`/api/browser/ws/${encodeURIComponent(this.identity.roomCode)}`) : `/api/browser/ws/${encodeURIComponent(this.identity.roomCode)}`,location.origin); url.protocol = url.protocol === 'https:' ? 'wss:' : 'ws:';
     const ws = this.ws = new WebSocket(url);
     this.onStatus('connecting');
-    ws.addEventListener('open', () => { if (generation === this.generation) this.send({ type: 'auth', identity: this.identity, authority }); });
+    ws.addEventListener('open', () => { if (generation === this.generation) this.send({ type: 'auth', identity: {roomCode:this.identity.roomCode,playerId:this.identity.playerId,token:this.identity.token,...(this.identity.role?{role:this.identity.role}:{})}, authority }); });
     ws.addEventListener('message', event => {
       if (generation !== this.generation || this.disposed) return;
       if (event.data === 'pong') { this.lastPongAt = Date.now(); return; }

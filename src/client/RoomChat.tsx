@@ -7,7 +7,8 @@ import { CHAT_NOTICE_CONFIG, ChatNoticeBubble, advanceChatNotices, appendChatNot
 
 export function RoomChat({ room, community, connection, immersive, onRename }: { room: RoomView; community: CommunityState; connection: RoomConnection | null; immersive: boolean; onRename: () => void }) {
   const [open, setOpen] = useState(false), [text, setText] = useState(''), [sending, setSending] = useState(false), [error, setError] = useState('');
-  const [seen, setSeen] = useState(() => { try { return Number(sessionStorage.getItem(`magical-athlete:chat-read:${room.code}`)) || community.latestId; } catch { return community.latestId; } });
+  const readKey = `magical-athlete:chat-read:${room.backendId ?? 'cloudflare'}:${room.code}`;
+  const [seen, setSeen] = useState(() => { try { return Number(sessionStorage.getItem(readKey)) || community.latestId; } catch { return community.latestId; } });
   const [newBelow, setNewBelow] = useState(false);
   const [notices,setNotices]=useState<ChatNotice[]>([]);
   const [noticeLimit,setNoticeLimit]=useState(() => matchMedia(`(max-width:${CHAT_NOTICE_CONFIG.mobileBreakpoint}px)`).matches ? CHAT_NOTICE_CONFIG.mobileLimit : CHAT_NOTICE_CONFIG.desktopLimit);
@@ -17,7 +18,7 @@ export function RoomChat({ room, community, connection, immersive, onRename }: {
   const list = useRef<HTMLDivElement>(null), bottom = useRef(true), initial = useRef(true);
   const retry = useRef<{ text: string; clientMessageId: string } | null>(null);
   const unread = community.messages.filter(message => message.id > seen && message.senderId !== room.selfId).length;
-  const markRead = () => { setSeen(community.latestId); try { sessionStorage.setItem(`magical-athlete:chat-read:${room.code}`, String(community.latestId)); } catch { /* Optional read marker. */ } };
+  const markRead = () => { setSeen(community.latestId); try { sessionStorage.setItem(readKey, String(community.latestId)); } catch { /* Optional read marker. */ } };
   const scrollBottom = () => { if (list.current) list.current.scrollTop = list.current.scrollHeight; bottom.current = true; setNewBelow(false); markRead(); };
   useEffect(()=>{
     const revision=community.liveRevision??0;
