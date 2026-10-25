@@ -1,0 +1,62 @@
+name: Deploy checked backends
+on:
+  workflow_run:
+    workflows: [Checks]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      checks_run_id:
+        description: Successful own-repository Checks run ID to deploy
+        required: true
+        type: string
+      allow_fork_preview:
+        description: Maintainer has reviewed this fork commit and explicitly approves its shared preview
+        required: false
+        default: false
+        type: boolean
+permissions:
+  contents: read
+  actions: read
+  pull-requests: read
+jobs:
+  select:
+    if: vars.AUTO_DEPLOY_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    outputs:
+      deploy: ${{ steps.gate.outputs.deploy }}
+      target: ${{ steps.gate.outputs.target }}
+      commit: ${{ steps.gate.outputs.commit }}
+      run_id: ${{ steps.gate.outputs.run_id }}
+      pr_number: ${{ steps.gate.outputs.pr_number }}
+      allow_fork_preview: ${{ github.event_name == 'workflow_dispatch' && inputs.allow_fork_preview && 'true' || 'false' }}
+    steps:
+      # workflow_run and this explicit ref always load the trusted main branch.
+      # PR artifacts are data; no PR package/build scripts run with credentials.
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Select current successful own-repository build
+        id: gate
+        run: node scripts/deploy/ci-gate.mjs
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+  deploy:
+    needs: select
+    if: needs.select.outputs.deploy == 'true'
+    permissions:
+      contents: read
+      actions: write
+      pull-requests: read
+      id-token: write
+    uses: ./.github/workflows/deploy.yml
+    with:
+      target: ${{ needs.select.outputs.target }}
+      commit: ${{ needs.select.outputs.commit }}
+      checks_run_id: ${{ needs.select.outputs.run_id }}
+      pr_number: ${{ needs.select.outputs.pr_number }}
+      allow_fork_preview: ${{ needs.select.outputs.allow_fork_preview }}
+    secrets: inherit

@@ -2,6 +2,30 @@
 
 本记录区分账号查询、费用批准、资源创建、受控验证和公开上线。部署操作见 [双后端部署说明](dual-backend-deployment.md)。更新时间：2026-10-25（北京时间）。
 
+## 本次临时 HTTP 接入
+
+### GitHub 自动部署追加
+
+用户选择 PR 检查后更新共享测试入口，合并到 main 并检查通过后更新两个现有入口，不自动合并。同仓库 PR 不限制作者；同学的 PR 正常合并后也会发布，外部 fork 的预览由维护者明确批准。详细流程和首次启用条件见 [自动部署说明](automatic-deployment.md)。
+
+- GitHub 预览/生产 environments 已创建，生产限制 main；Cloudflare 专用令牌已获用户确认、设为不过期，并验证有效后加密存入两环境 Secrets。令牌及云账号凭据不在仓库。
+- 阿里云 GitHub OIDC 提供商及两个环境角色已实际配置；只授权现有 ECS、各自部署用户和短期凭据，没有创建长期 AccessKey。
+- 阿里云受限安装器、独立预览用户、目录、systemd 和 Nginx 已实际安装；预览内存 384MiB、CPU 50%，不能读取正式数据库或环境文件。预览应用仍待第一份实际 CI 构建产物安装。
+- 为预留各端一个共享测试房，正式两端实际配额已改为 14；测试固定各 1，合计仍为 30。Cloudflare 仅改设置，正式应用代码和网页保持原发布版本；阿里云保留原正式应用及数据。没有强制结束对局。
+- 自动触发器尚未在 main，本 PR 合入后才会生效。当前安排一次真实 OIDC 授权检查及 Linux 产物安装验证，不能把已写工作流或已配置密钥当成全自动链路已验收。
+
+用户希望尽快通过阿里云独立网页选择两个后端。新增直接 IP 的 HTTP 页面与 Socket.IO 支持，以及 HTTPS 页面上的明确入口切换提示。浏览器 UUID 使用安全随机字节回退；没有把 HTTP 地址静默注入 HTTPS 请求，也不将恢复凭据放入跳转 URL。
+
+- 临时 HTTP 入口：`http://115.29.188.62`；已实际部署。用户随后明确要求“允许所有其他地址”，现已将安全组 TCP 80 与 Nginx 来源改为 `0.0.0.0/0`，允许公网 IPv4 访问，不再要求朋友提供 IP。SSH 仍仅允许管理地址，Node 3000 仍回环。
+- 正式域名：`https://magical-athlete-online.cn`；仍待 ICP 完成后申请正式 HTTPS 并开放。
+- Cloudflare：`https://magical-athlete.qiuh23.workers.dev`；保留正式服务，已实际降至 15，阿里云为 15；切换时原服真人房为 0，没有结束既有对局。
+- 无新增付费项目，既有 ECS 99 元 + 域名 38 元，总计 137 元，均关闭自动续费。
+- 首次 HTTP 发布的阿里云应用版本 `734791023b182a0760f2bfab9fe2a05460bc3c17`、Cloudflare 版本 `5977d248-c9c8-4f89-be7d-7cb12fbe3604`；源 `9f3d3cf` 与 `7347910` 的源码树完全一致（后者基于已合并的最新 main）。取消白名单后的页面提示和后续部署版本以 [PR #23](https://github.com/qiuh23/magical-athlete-online/pull/23) 最新记录为准。原 PR #22 已由外部合并，本 PR 不自动合并。
+- 实际 HTTP 双入口 14 项通过：各后端双会话、HTTPS 邀请切 HTTP、私密目录、准备、双向聊天、断线和刷新身份恢复、桌面/手机、练习合法掷骰及 AI 启动；4 个测试房关闭，页面异常为 0。随后真实 HTTP 服务重启测试验证两身份、准备状态、聊天和建房回执全部恢复，测试房也关闭。
+- ECS 无法直连 CF 的部署配额接口，已通过管理端实时读取实际配额并经 SSH 传入 root/0600、5 分钟有效的来源绑定快照完成前置检查；未跳过配额验证，阿里云运行时查房不依赖 CF。
+- 公网 HTTP 模式实际启用：health 报告 `publicAccessEnabled:true`、`controlledValidation:false`，与只限来源验证明确区分。未开放公网 443，正式域名 HTTPS 仍待备案通过。
+
+HTTP/IP 不豁免备案；[阿里云官方要求](https://help.aliyun.com/zh/icp-filing/basic-icp-service/product-overview/icp-filing-requirements-for-a-regular-website) 同时说明 IP 和 HTTP 的备案要求。用户在获知这些限制后明确要求允许所有其他来源，故临时 IP HTTP 已开放公网，但不能据此写成备案成功或保证运营商不会限制访问。备案继续审核，本人留意审核电话及短信即可。具体操作、关闭和切换 HTTPS 见 [HTTP 过渡说明](http-transition.md)。
 ## 已核实与已批准
 
 - 中国站账号已完成实名，现有 Alibaba Cloud CLI OAuth 配置可执行只读查询。配置和凭据保留在本机，不提交仓库。
@@ -20,14 +44,14 @@
 
 杭州 ECS 查询时 `cn-hangzhou-b/g/h/i/j/k` 均有库存。已核实可用的纯 Ubuntu 24.04 x86_64 官方镜像：`ubuntu_24_04_x64_20G_alibase_20260916.vhd`。创建时仍需复核库存和订单金额。
 
-## 创建与验证进度
+## 此前资源创建与受控验证记录（HTTP 变更前）
 
 - 费用确认：已完成。
 - ECS：已实际创建 `magical-athlete-cn`，杭州 k 可用区，批准的配置，订单实付 **99 元**。API 复查 `AutoRenewEnabled=false`，当前账号一年续费报价也是 99 元；续费资格未来仍需再次核实。
 - 配套 VPC、交换机、安全组和 SSH 密钥已创建，没有加购 EIP、数据库、负载均衡或其他付费服务。管理密钥及资源清单只保存在本机受保护目录，不提交仓库。
 - 首次购买因余额不足未成功；用户充值后使用相同 `ClientToken` 成功创建一台，没有重复购买。
 - 域名 `magical-athlete-online.cn` 已注册成功，注册期 2026-10-25 至 2027-10-25。注册任务成功，账务流水确认实付 **38 元**；与 ECS 合计 **137 元**。取消自动续费后再次查询 `AutoRenewEnabled=false`。
-- 域名联系人模板及域名自身实名均已通过；最后 `QueryDomainByDomainName` 确认 `RealNameStatus=SUCCEED`、`DomainNameVerificationStatus=SUCCEED`。这些审核与 ICP 备案不同，**ICP备案尚未开始**。用户确认主体为“个人”，省份为“北京”。
+- 域名联系人模板及域名自身实名均已通过；最后 `QueryDomainByDomainName` 确认 `RealNameStatus=SUCCEED`、`DomainNameVerificationStatus=SUCCEED`。这些审核与 ICP 备案不同，**ICP备案已由本人提交，目前阿里云初审中**。用户确认主体为“个人”，省份为“北京”。
 - 免费阿里云 DNS 的 `@` A 记录直接指向本次 ECS，TTL 600，没有经过 Cloudflare 代理。正式域名为 `https://magical-athlete-online.cn`，**尚未开放**，不能作为正常公网服务使用。
 - 安全组仅对管理地址 `/32` 开放 SSH 22；没有公网 80/443/3000 入站。云助手初始化，严格校验主机公钥后建立 SSH 隧道验证。
 - 已实际安装 Ubuntu 24.04、官方 Node 24.22.1（SHA 校验）、pnpm 11.25.0、nginx、SQLite、certbot，配置 2 GiB swap、systemd、持久化目录和每日备份。
@@ -40,25 +64,25 @@
 
 ## ICP 与公开上线待办
 
-1. 域名实名已通过，仍需备案系统识别同步结果，持有者必须与备案主体一致；按北京要求准备个人材料。域名证书可在“域名列表 → 管理 → 域名证书下载”获取，无需另购证书服务；含姓名的证书不写入仓库。
+1. 域名实名和个人材料已本人完成，免费标准 ICP 申请已于 2026-10-25 17:09 提交；最新确认阶段为阿里云初审，留意审核电话及后续短信。域名证书不写入仓库，无需再填联系人模板。
 2. 本次 ECS 实查中国内地、PrePaid 年包、公网 IP、3 Mbps 带宽，满足官方列出的技术条件；这是依据条件的推断，仍需备案控制台最终核验可备案实例。同一账号会自动关联，不编造或购买额外服务码。
-3. 用户准备证件、联系人、地址、网站信息等备案材料并亲自完成需要的实名/人脸/短信核验；不得将这些个人信息写入仓库。
+3. 如审核要求补充材料，由本人在官方系统完成；不得将证件、联系方式等个人信息写入仓库。
 4. 如项目被主管部门归为游戏运营、出版或其他前置审批类别，先取得对应要求的核实结果与必要资质。公开开放前完成备案及适用的审批；不得把普通网站备案推断成全部资格已满足。
 5. 阿里云节点的 DNS 直接指向阿里云公网入口，避免再套 Cloudflare 代理。开放国内节点前先将 Cloudflare 真人房配额降至 15，并等待存量真人房占用不超过 15；保留已有对局，不强制关闭。
 
 官方依据：[ICP 备案流程](https://www.alibabacloud.com/help/en/icp-filing/basic-icp-service/user-guide/icp-filing-application-overview)、[备案驳回与游戏类前置审批](https://help.aliyun.com/zh/icp-filing/basic-icp-service/support/for-the-record-to-dismiss-the-faq)、[轻量备案与带宽限制](https://help.aliyun.com/zh/simple-application-server/product-overview/limits)、[轻量规格及流量规则](https://help.aliyun.com/zh/simple-application-server/product-overview/instance-families/)、[ECS 99 计划](https://cn.aliyun.com/activity/ecs/99program)、[RunInstances 公网 IP 与购买参数](https://help.aliyun.com/zh/ecs/developer-reference/api-ecs-2014-05-26-runinstances)。
 
-## 备案填写草稿（未提交）
+## 本人已提交备案的内容依据
 
 主体类型：个人；主体省份：北京。网站拟用名称：胡闹运动会（待备案审核确认名称适用性）。域名：`magical-athlete-online.cn`。接入商：阿里云，杭州 ECS 包年实例。
 
 服务内容如实填写为：提供多人在线桌游对战、房间聊天、个人练习和 AI 对战。实际收费情况和运营方式由用户确认，不能擅自填写为普通博客或签署“不涉及游戏”承诺以规避审核。游戏相关前置审批及个人主体是否适用，须取得接入商/主管部门对实际形态的核实结果。
 
-个人姓名、证件、联系方式、详细地址仅在阿里云官方备案系统中由本人填写；人脸、短信、真实性承诺及最终提交由用户亲自完成。当前未创建 ICP 订单，未替用户接受新付费或审批条款。
+个人姓名、证件、联系方式、详细地址仅在阿里云官方备案系统中由本人填写；人脸、短信、真实性承诺及最终提交由用户亲自完成。本人已于 2026-10-25 提交免费标准 ICP 申请，当前阿里云初审中；未加购代办或其他付费服务。
 
 北京材料核对：个人需年满 18 周岁，中国公民使用身份证；身份证有效期应大于 1 个月，域名有效期应大于 30 天，域名持有者与主办人一致，并由网站负责人完成人脸核验。网站名称和内容应真实符合个人服务规则，不能借改成博客名称隐藏实际游戏内容。这些条件来自 [阿里云北京备案规则（2026-09-14更新）](https://help.aliyun.com/zh/icp-filing/icp-filing-regulations-for-beijing/) 和 [信息填写规则](https://help.aliyun.com/zh/icp-filing/basic-icp-service/user-guide/fill-in-website-information)，不是已取得备案许可。
 
-可复制至备案咨询的内容：本人拟以北京个人主体开办“胡闹运动会”，域名 magical-athlete-online.cn，服务包括多人在线桌游对战、房间聊天、个人练习和 AI 对战。请核实该实际形态能否使用个人主体备案、需哪些游戏/出版等前置审批，以及对应材料。收费及运营模式由本人如实补充。此咨询草稿尚未由代理发送给第三方。
+可复制至备案咨询的内容：本人拟以北京个人主体开办“胡闹运动会”，域名 magical-athlete-online.cn，服务包括多人在线桌游对战、房间聊天、个人练习和 AI 对战。请核实该实际形态能否使用个人主体备案、需哪些游戏/出版等前置审批，以及对应材料。收费及运营模式由本人如实补充。该咨询内容仅为历史准备记录；实际网站备注由本人确认并提交。
 
 正式开放后最短国内实测：用手机移动网络直接打开国内域名；另一设备通过 A- 房间链接加入，发送一条聊天并刷新恢复。当前端口关闭期间不要求执行此步骤，也不把模拟断网或管理隧道当作国内真实网络结果。
 

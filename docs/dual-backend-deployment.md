@@ -2,11 +2,13 @@
 
 ## 当前交付状态
 
-本分支包含连接适配、服务端配置与可重复执行的部署脚本。**已获用户批准并创建杭州 ECS，服务器首年实际扣费 99 元；云端验证、域名与备案进度以 [实际状态记录](aliyun-readiness.md) 为准。** 本机的 Node/Worker 验证不能替代云端或国内网络实测。阿里云在正式运行时配置中保持 `enabled:false`；服务端生产默认拒绝建房、加入和普通实时连接。
+本分支包含连接适配、服务端配置与可重复执行的部署脚本。**杭州 ECS 和域名已实际购买，首期合计 137 元；ICP 已由本人提交、仍在审核。** 云端验证与进度见 [实际状态记录](aliyun-readiness.md)。本机测试不能替代云端或国内真实网络实测。部署模板默认关闭公网；[临时 HTTP 入口](http-transition.md) 先完成白名单验证后，已按用户追加的“允许所有其他地址”指示开启公网 IPv4 模式。
 
-正式 Cloudflare 入口沿用 <https://magical-athlete.qiuh23.workers.dev>，本分支合并后仍按仓库现有发布流程发布。此地址并不代表本分支已经部署。阿里云正式地址需用户确认已有域名与备案资格后填写；本地 `http://127.0.0.1` 地址仅用于开发或 SSH 受控验证。
+正式 Cloudflare 入口为 <https://magical-athlete.qiuh23.workers.dev>。临时 HTTP 入口 `http://115.29.188.62` 已实际部署并允许所有公网 IPv4，可在同一页面选择两个后端；正式域名 `https://magical-athlete-online.cn` 仍未开放。具体提交、检查和入口状态在实际状态记录及 PR #23 中记录；PR 不自动合并。
 
 ## 相同前端、相同规则
+
+自动发布新增共享预览：PR 检查成功后更新预览，main 检查成功后更新正式入口，同学提交的 PR 不受作者限制。启用共享预览后每端分配正式 14、预览 1，合计仍最多 30；完整流程及部署状态见 [自动部署说明](automatic-deployment.md) 与实际状态记录。
 
 两端运行相同 Git 提交的 `src/engine` 和 `src/shared`。Worker 继续使用 Durable Objects 和原生 WebSocket，Node 继续使用 SQLite 和 Socket.IO；不复制规则引擎。`src/shared/backend-protocol.ts` 发布共同协议和规则标记，HTTP 与专用实时探测同时成功且版本匹配后，客户端才允许选择。
 
@@ -37,7 +39,7 @@ Worker 当前单端默认配额 30，Node 阿里云配额默认 15。启用双�
 
 必须先取得用户费用确认，再购买中国内地轻量应用服务器或 ECS。确认内容包括中国站账号、地域、CPU/内存、系统盘、带宽/流量、首期实付、续费、自动续费状态、备案服务码资格。不能用海外服务器套餐的资格或营销首年价格推定中国内地备案资格。官方流程及本次账号/报价核实记录见本 PR 的云接入准备记录。
 
-该项目属于公开联网游戏相关内容，除网站 ICP 备案外是否需额外游戏/文化/出版或其他资质，必须以阿里云备案审核及主管部门对实际运营形态的意见确认；不能把“非商业”“同好”当作当然豁免。实名、付款、人脸核验、备案材料、最终提交由用户在中国站控制台完成。备案和必要资格未满足时只做受控验证，不开放公网游戏接口。
+用户确认仅与熟人休闲使用，不收费、不投放广告；本次未发起额外游戏审批或付费代办。网站 ICP 已本人提交；如审核方对实际服务内容提出其他要求，再根据明确要求处理。HTTP 或 IP 不构成备案豁免；用户随后明确要求公网 HTTP，当前对外可访问与备案是否通过分别记录，不宣称已经取得备案资格。
 
 ## 初始化与受控验证
 
@@ -47,13 +49,13 @@ Worker 当前单端默认配额 30，Node 阿里云配额默认 15。启用双�
 2. 检查 `/etc/magical-athlete/server.env`（root:athlete，0640）。复制的模板默认 `PUBLIC_ACCESS_ENABLED=false`、`CONTROLLED_VALIDATION=false`，只绑定 `127.0.0.1`。填写实际 origin/配置；所有生产地址均由部署者控制。
 3. 如进行受控测试，设置 `CONTROLLED_VALIDATION=true`，保留 `HOST=127.0.0.1` 与 `PUBLIC_ACCESS_ENABLED=false`，重启服务。通过 `ssh -L 3000:127.0.0.1:3000 <管理用户名>@<实例IP>` 访问 `http://127.0.0.1:3000`；在受控浏览器的临时配置中启用 Aliyun，不能同步到公开配置。测试结束恢复 false。
 4. 执行 `sudo bash scripts/deploy/update.sh <完整40位提交SHA>`。脚本要求干净 checkout 与指定 SHA 一致，安装锁定依赖、类型检查并构建，保留旧 release，在线备份 SQLite，原子切换软链接、重启，失败自动回退代码。
-5. 验证两独立浏览器建房/加入、有效操作、聊天、刷新与断线恢复，练习与 AI 启动；停止重启服务后用原凭据恢复同一房间、聊天和游戏状态。检查日志 `journalctl -u magical-athlete`。这一步需服务器实际存在，当前尚未执行。
+5. 验证两独立浏览器建房/加入、有效操作、聊天、刷新与断线恢复，练习与 AI 启动；停止重启服务后用原凭据恢复同一房间、聊天和游戏状态。检查日志 `journalctl -u magical-athlete`。此前实际 ECS 已完成此组受控验证；新的 HTTP 入口还需单独验收。
 
 `bootstrap.sh` 会从 nodejs.org 下载并校验官方发布的 SHA256。若国内实例无法访问 Node/软件源，应在核实官方镜像或离线安装包后重试，不让国内玩家的浏览器依赖这些安装源。`update.sh` 首次构建需要安装开发依赖；运行时只读取构建产物，写目录只有 `/var/lib/magical-athlete`。
 
 **低配实例优先使用预编译包。** 2GiB 内存同时运行游戏、TypeScript 与两次 Vite 构建可能被系统终止；不能把本机充足内存的构建成功视为云端编译容量证明。在 Linux CI/构建机（与实例 CPU 架构相同、Node 24）运行 `bash scripts/deploy/package.sh <完整SHA> /绝对路径/release.tar.gz`，脚本从该提交导出源码、锁定安装、检查并构建，裁剪为生产依赖，将完整国内网页资源和 Node 产物打包，生成 `.sha256`。通过 SSH 将两文件传至服务器，再执行 `sudo bash scripts/deploy/update.sh <完整SHA> /绝对路径/release.tar.gz`。服务器校验 SHA256 和包内提交、平台、架构、Node 版本后解包，无需在实例编译或访问 npm。包与校验文件必须从同一个受信 CI 获取，校验和不替代来源验证。不要打包 Windows 的 `node_modules`。
 
-Node 下载受阻时，不自动换第三方镜像。在可访问 nodejs.org 的环境下载同一官方 Node 24 发布目录中的 Linux 对应架构 `.tar.xz` 和 `SHASUMS256.txt`，经 SSH 上传同一目录，然后执行 `sudo env NODE_DOWNLOAD_DIR=/该目录 bash scripts/deploy/bootstrap.sh`；仍校验官方清单中的 SHA256。源码构建模式继续保留，适合已有足够内存的构建服务器。上述预编译与离线路径当前仅完成脚本语法检查，尚未在真实 Linux 云主机执行。
+Node 下载受阻时，不自动换第三方镜像。在可访问 nodejs.org 的环境下载同一官方 Node 24 发布目录中的 Linux 对应架构 `.tar.xz` 和 `SHASUMS256.txt`，经 SSH 上传同一目录，然后执行 `sudo env NODE_DOWNLOAD_DIR=/该目录 bash scripts/deploy/bootstrap.sh`；仍校验官方清单中的 SHA256。源码构建模式继续保留，适合已有足够内存的构建服务器。本次 ECS 的官方 Node 离线安装、构建和生产打包路径已实际执行成功。
 
 ## 公开入口与 HTTPS
 

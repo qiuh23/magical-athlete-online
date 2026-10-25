@@ -1,3 +1,4 @@
+import { randomId } from './random-id.js';
 import { TRACKS } from '../shared/tracks.js';
 import { trackMovementDistance, routeChoice } from './scene/math.js';
 import { TrackInfo } from './TrackInfo.js';
@@ -29,7 +30,7 @@ import { BROWSER_HOST_MODE, checkOwnedRoom, connectRoom, enterRoom, forgetClosed
 import { usePresentation, type UsePresentationResult } from './usePresentation.js';
 import { useRaceIntroReset } from './scene/useRaceIntro.js';
 import { BackendSelector, backendLabel, useBackendSelection } from './BackendSelector.js';
-import { formatRoomCode, parseRoomCode, type BackendId } from './backends.js';
+import { formatRoomCode, getBackend, httpEntryUrl, parseRoomCode, type BackendId } from './backends.js';
 const Board3D = lazy(() => import('./scene/Board3D.js').then(module => ({ default: module.Board3D })));
 
 const characters = CHARACTERS;
@@ -266,7 +267,7 @@ function Home({ code, onEnter, onResume, onHome, onDetail }: { code: string; onE
       const saved = targetCode ? readIdentity(targetCode, selectedRole, targetBackend) : null;
       if (saved) { onResume(saved); return; }
       const creation={ name: nickname, backendId: targetBackend, maxPlayers, timeoutSeconds: mode === 'practice' || mode === 'ai' ? 0 : timeoutSeconds, mode: mode === 'practice' || mode === 'ai' ? mode : 'multiplayer' as const, aiCount, characterPool: legacyPoolForConfig(roomConfig), config:roomConfig, ...(mode === 'join' ? { role: selectedRole } : {}) };
-      const signature=JSON.stringify(creation);if(creationRequest.current?.signature!==signature)creationRequest.current={signature,id:crypto.randomUUID()};
+      const signature=JSON.stringify(creation);if(creationRequest.current?.signature!==signature)creationRequest.current={signature,id:randomId()};
       const reply = await enterRoom(targetCode, {...creation,requestId:creationRequest.current.id});
       try { localStorage.setItem('magical-athlete:name', nickname); } catch { /* Optional. */ }
       onEnter(reply);
@@ -306,6 +307,7 @@ function Home({ code, onEnter, onResume, onHome, onDetail }: { code: string; onE
         {mode === 'join' && !code && <>{roomDirectory}<div className="join-code-heading"><h3>用房间码加入</h3><p>私密房间也可凭房间码进入，选择你的加入身份。</p></div></>}
         {mode === 'join' ? <><fieldset className="join-role"><legend>加入身份</legend><label><input type="radio" name="roomRole" value="player" checked={role === 'player'} onChange={() => setRole('player')} /><span>作为选手<small>入座并参与比赛</small></span></label><label><input type="radio" name="roomRole" value="spectator" checked={role === 'spectator'} onChange={() => setRole('spectator')} /><span>作为观战者<small>满员或开赛后也能观看</small></span></label></fieldset><label>房间码<input name="roomCode" className="room-code-input" placeholder="输入朋友发来的房间码" autoCapitalize="characters" maxLength={12} value={joinCode} onChange={event => setJoinCode(event.target.value.toUpperCase().replace(/[^A-Z0-9-]/g, ''))} required /></label></> : mode === 'practice' ? <div className="solo-intro"><strong>专属练习赛道</strong><p>从完整角色牌池中自由选择 {matchRaceCount({config:roomConfig})} 张，再选人、掷骰、体验技能。不限时。</p></div> : mode === 'ai' ? <label>AI 人数<select aria-label="AI 人数" value={aiCount} onChange={event => setAiCount(Number(event.target.value))}>{Array.from({ length: 7 }, (_, i) => i + 1).map(n => <option key={n} value={n}>{n} 位 AI{n === 1 ? ' · 两人双角色' : n >= 6 ? ' · 扩展规则' : ''}</option>)}</select></label> : <div className="form-split"><label>房间人数上限<select value={maxPlayers} onChange={event => setMaxPlayers(Number(event.target.value))}>{Array.from({ length: 7 }, (_, i) => i + 2).map(n => <option key={n} value={n}>{n} 人{n >= 7 ? ' · 扩展规则' : n === 2 ? ' · 双角色' : ' · 标准'}</option>)}</select></label><label>每次操作时限<select value={timeoutSeconds} onChange={event => setTimeoutSeconds(Number(event.target.value))}><option value={0}>不限时</option><option value={60}>60 秒</option><option value={90}>90 秒</option><option value={120}>120 秒</option><option value={180}>180 秒</option></select></label></div>}
         {mode === 'join' && joinTarget?.backendId && <p className="target-backend-note" role="status">此房间属于 {backendLabel(joinTarget.backendId)}，将直接连接该服务器。</p>}
+        {mode === 'join' && joinTarget?.backendId && httpEntryUrl(getBackend(joinTarget.backendId),joinCode) && <p className="target-backend-note"><a className="backend-entry-link" href={httpEntryUrl(getBackend(joinTarget.backendId),joinCode)!}>从临时 HTTP 入口加入此房间</a>房间码会保留；其他入口的本机身份不会自动转移。</p>}
         {ambiguousLegacy && <fieldset className="legacy-backend-choice"><legend>六位旧房间码所属服务器</legend>{servers.statuses.filter(status => status.backend.enabled).map(status => <label key={status.backend.id}><input type="radio" name="legacyBackend" checked={legacyBackend === status.backend.id} disabled={status.state !== 'available'} onChange={() => setLegacyBackend(status.backend.id)} />{backendLabel(status.backend.id)}</label>)}<p className="target-backend-note">请向房主确认服务器，避免进入另一端的同码房间。</p></fieldset>}
         {mode === 'create' && <label>房间可见性<select aria-label="房间可见性" value={roomConfig.visibility??'public'} onChange={e=>setRoomConfig({...roomConfig,visibility:e.target.value as 'public'|'private'})}><option value="public">公开 · 可从房间列表加入或观战</option><option value="private">私密 · 仅凭链接或房间码进入</option></select></label>}
         {mode !== 'join' && <RoomConfigFields config={roomConfig} onChange={setRoomConfig} disabled={busy} players={mode==='practice'?1:mode==='ai'?aiCount+1:maxPlayers} practice={mode==='practice'} />}

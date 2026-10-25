@@ -1,0 +1,77 @@
+name: Deployment authorization check
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+permissions:
+  contents: read
+  id-token: write
+jobs:
+  preview-authorization:
+    if: vars.AUTO_DEPLOY_BOOTSTRAP_VERIFY == 'true' && (github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: preview
+    steps:
+      # Deliberately no checkout: this one-time check executes only constant
+      # inline code and official pinned actions, never a PR's scripts.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: aliyun/setup-aliyun-cli-action@09a5f86915bb556e27bf050e9a5e339aeb073df5 # v1
+        with:
+          version: 3.5.2
+      - uses: aliyun/configure-aliyun-credentials-action@1e5248c8d5d93a8781ac344a68e19a43341e79e6 # v1
+        with:
+          role-to-assume: ${{ vars.ALIYUN_ROLE_ARN }}
+          oidc-provider-arn: ${{ vars.ALIYUN_OIDC_PROVIDER_ARN }}
+          audience: sts.aliyuncs.com
+          role-session-name: athlete-auth-check-${{ github.run_id }}
+          role-session-expiration: 1800
+      - name: Prove scoped Cloud Assistant authorization with a harmless command
+        env:
+          ALIYUN_REGION_ID: ${{ vars.ALIYUN_REGION_ID }}
+          ALIYUN_INSTANCE_ID: ${{ vars.ALIYUN_INSTANCE_ID }}
+        run: |
+          node --input-type=module <<'NODE'
+          import {execFileSync} from 'node:child_process';
+          import {appendFile} from 'node:fs/promises';
+          const username='athlete-preview-deploy';
+          const region=process.env.ALIYUN_REGION_ID,instance=process.env.ALIYUN_INSTANCE_ID;
+          if(!/^cn-[a-z0-9-]+$/.test(region??'')||!/^i-[a-z0-9]+$/.test(instance??''))throw Error('Missing fixed preview deployment target.');
+          function api(operation,args){
+            try{return JSON.parse(execFileSync('aliyun',['ecs',operation,'--region',region,'--RegionId',region,...args],{encoding:'utf8',stdio:['ignore','pipe','pipe'],timeout:45000,maxBuffer:1024*1024}));}
+            catch(error){
+              let detail;for(const raw of [error.stdout,error.stderr]){try{detail=JSON.parse(String(raw||''));break;}catch{}}
+              const raw=[error.stdout,error.stderr].map(value=>String(value||'')).join('\n');
+              const textCode=raw.match(/(?:ErrorCode|Error Code)\s*[:=]\s*([A-Za-z0-9_.-]{1,100})/i)?.[1];
+              const code=detail?.Code??detail?.code??error.code??textCode;
+              const safeCode=typeof code==='string'&&/^[A-Za-z0-9_.-]{1,100}$/.test(code)?code:'unavailable';
+              const denied=detail?.AccessDeniedDetail;
+              const safePolicy=typeof denied?.PolicyType==='string'&&/^[A-Za-z]{1,40}$/.test(denied.PolicyType)?denied.PolicyType:'unavailable';
+              let message=typeof detail?.message==='string'?detail.message:typeof detail?.Message==='string'?detail.Message:raw;
+              for(const [key,value] of Object.entries(process.env))if(/TOKEN|SECRET|ACCESS_KEY/i.test(key)&&value?.length>5)message=message.replaceAll(value,'[redacted]');
+              message=message.replace(/(AccessKeyId|AccessKeySecret|SecurityToken|Signature)=[^&\s]+/gi,'$1=[redacted]');
+              message=message.replace(/[A-Za-z0-9_+/=-]{30,}/g,'[redacted]').slice(0,240);
+              throw Error(`Scoped Alibaba ${operation} failed: code=${safeCode}, policy=${safePolicy}, exit=${error.status??'none'}, detail=${message||'unavailable'}; credentials and command parameters were withheld.`);
+            }
+          }
+          const command=Buffer.from('id -un\n').toString('base64');
+          const started=api('RunCommand',['--InstanceId.1',instance,'--Name','athlete-preview-auth-check','--Type','RunShellScript','--Username',username,'--WorkingDir','/tmp','--Timeout','60','--KeepCommand','false','--RepeatMode','Once','--ContentEncoding','Base64','--CommandContent',command]);
+          if(typeof started.InvokeId!=='string')throw Error('No authorization-check invocation ID returned.');
+          let confirmed=false;
+          for(let attempt=0;attempt<30;attempt++){
+            await new Promise(resolve=>setTimeout(resolve,2000));
+            const result=api('DescribeInvocationResults',['--InvokeId',started.InvokeId,'--InstanceId',instance]);
+            const row=result.Invocation?.InvocationResults?.InvocationResult?.[0];
+            if(!row)continue;
+            if(row.InvocationStatus==='Success'&&row.ExitCode===0){
+              if(Buffer.from(row.Output??'','base64').toString('utf8').trim()!==username)throw Error('Cloud Assistant ran under an unexpected operating-system identity.');
+              confirmed=true;break;
+            }
+            if(['Failed','Timeout','Cancelled','Stopped','Terminated','Invalid'].includes(row.InvocationStatus))throw Error(`Harmless preview authorization check failed (${row.InvocationStatus}).`);
+          }
+          if(!confirmed)throw Error('Preview authorization result timed out.');
+          console.log('GitHub OIDC and instance-scoped preview Cloud Assistant execution/read authorization verified.');
+          await appendFile(process.env.GITHUB_STEP_SUMMARY,'Preview OIDC → scoped STS → fixed ECS → athlete-preview-deploy identity verified using `id -un`. No application release was performed. Disable AUTO_DEPLOY_BOOTSTRAP_VERIFY after this check.\n');
+          NODE

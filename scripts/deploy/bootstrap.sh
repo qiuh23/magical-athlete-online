@@ -4,7 +4,7 @@ set -euo pipefail
 [[ $EUID -eq 0 ]] || { echo 'Run with sudo.' >&2; exit 1; }
 SOURCE_DIR=$(cd -- "$(dirname -- "$0")/../.." && pwd)
 apt-get update
-apt-get install -y ca-certificates curl git xz-utils sqlite3 nginx certbot python3-certbot-nginx gettext-base
+apt-get install -y ca-certificates curl git xz-utils sqlite3 nginx certbot python3 python3-certbot-nginx gettext-base sudo
 # The server is initially private; no nginx listener or firewall rule is opened.
 if [[ ! -f /etc/magical-athlete/server.env ]]; then systemctl stop nginx; fi
 # Some Ubuntu cloud images leave only socket activation listening while the
@@ -51,7 +51,11 @@ install -d -o athlete -g athlete -m 0750 /var/lib/magical-athlete
 install -d -o root -g root -m 0700 /var/backups/magical-athlete
 if [[ ! -f /etc/magical-athlete/server.env ]]; then install -o root -g athlete -m 0640 "$SOURCE_DIR/deploy/aliyun.env.example" /etc/magical-athlete/server.env; fi
 install -m 0644 "$SOURCE_DIR/deploy/magical-athlete.service" /etc/systemd/system/magical-athlete.service
-install -m 0750 "$SOURCE_DIR/scripts/deploy/backup.sh" /usr/local/sbin/magical-athlete-backup
+install -d -o root -g root -m 0755 /usr/local/lib/magical-athlete-deploy
+install -m 0644 "$SOURCE_DIR/scripts/deploy/backup.sh" /usr/local/lib/magical-athlete-deploy/backup.sh
+install -m 0644 "$SOURCE_DIR/scripts/deploy/target-paths.sh" /usr/local/lib/magical-athlete-deploy/target-paths.sh
+printf '%s\n' '#!/bin/sh' 'exec /bin/bash /usr/local/lib/magical-athlete-deploy/backup.sh' > /usr/local/sbin/magical-athlete-backup
+chmod 0750 /usr/local/sbin/magical-athlete-backup
 printf '%s\n' '#!/bin/sh' 'exec /usr/local/sbin/magical-athlete-backup' > /etc/cron.daily/magical-athlete-backup
 chmod 0750 /etc/cron.daily/magical-athlete-backup
 systemctl daemon-reload

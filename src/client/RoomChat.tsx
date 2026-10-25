@@ -1,3 +1,4 @@
+import { randomId } from './random-id.js';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import type { RoomView } from '../shared/types.js';
@@ -80,7 +81,7 @@ export function RoomChat({ room, community, connection, immersive, onRename }: {
     if (!value || sending || !connection?.sendChat) return;
     if (value.length > 500) { setError('消息最多 500 个字符。'); return; }
     setSending(true); setError('');
-    const request = retry.current?.text === value ? retry.current : { text: value, clientMessageId: crypto.randomUUID() };
+    const request = retry.current?.text === value ? retry.current : { text: value, clientMessageId: randomId() };
     retry.current = request;
     try {
       const reply = await connection.sendChat(request);
@@ -120,7 +121,7 @@ export function RenameForm({ room, community, connection, onSuccess }: { room: R
     setBusy(true); setError('');
     const trimmed = name.trim();
     if (!trimmed || trimmed.length > 20) { setError('昵称需要 1～20 个字符。'); setBusy(false); return; }
-    if (request.current?.name !== trimmed) request.current = { requestId: crypto.randomUUID(), name: trimmed };
+    if (request.current?.name !== trimmed) request.current = { requestId: randomId(), name: trimmed };
     try { const reply = await connection.rename(request.current!); if (reply.ok && reply.name) onSuccess(reply.name); else { setError(reply.error ?? '修改未成功，请重试。'); request.current = null; } }
     catch (cause) { setError(cause instanceof Error ? cause.message : '尚未确认修改，请重试。'); }
     finally { setBusy(false); }
