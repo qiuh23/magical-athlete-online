@@ -13,6 +13,9 @@ export interface PresentationSnapshot {
     faces: string;
     label: string;
     caption: string;
+    resultText: string;
+    valueCount: number;
+    reason: string;
     avatarLabel: string;
     avatarTag: string;
     buttonCount: number;
@@ -55,6 +58,7 @@ export async function observePresentation(page: Page) {
           visible: !dice.hidden, eventKey: dice.getAttribute('data-dice-event-key') ?? '',
           mode: dice.getAttribute('data-dice-mode') ?? '', face: dice.getAttribute('data-up-face') ?? '', faces: dice.getAttribute('data-up-faces') ?? '',
           label: dice.getAttribute('aria-label') ?? '', caption: dice.querySelector('.dice-caption')?.textContent ?? '',
+          resultText: dice.querySelector('.dice-result')?.textContent ?? '', valueCount: dice.querySelectorAll('.dice-result b').length, reason: dice.querySelector('.dice-reason')?.textContent ?? '',
           avatarLabel: avatar?.getAttribute('aria-label') ?? '', avatarTag: avatar?.tagName ?? '', buttonCount: dice.querySelectorAll('button').length,
           readMs: Number(dice.getAttribute('data-result-read-ms')),
         } : null,

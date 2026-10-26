@@ -98,3 +98,29 @@ test('an unowned die never falls back to the current racer, including old NPC ev
   assert.equal(beat.source,undefined);assert.equal(presentationActor(beat,game.racers).characterId,'mouth');
   assert.equal(presentationActor({...beat,actor:undefined},game.racers).characterId,undefined);
 });
+
+for(const [faces,distance] of [[[5,2],2],[[4,4],8]] as const)for(const split of [false,true])test(`Broken Clock shows both ${faces} once, including split confirmation=${split}`,()=>{
+  const game=fixture(['extra-mile-broken-clock','banana','banana'],[1,14,24]),initial=view(game);
+  roll(game,...faces);const final=view(game,3),batch=final.logs.find(event=>event.type==='ability-dice'&&event.cause==='extra-mile-broken-clock');assert(batch);
+  let playback=createPlayback(initial);
+  if(split){
+    const partial={...final,version:2,logs:final.logs.filter(event=>event.id<=batch.id)};
+    playback=receiveRoom(playback,partial);
+    assert.deepEqual(playback.queue.filter(beat=>beat.kind==='dice').map(beat=>beat.faces),[[...faces]]);
+    while(playback.queue.length)playback=completeBeat(playback);
+    assert(!receiveRoom(createPlayback(partial),final).queue.some(beat=>beat.kind==='dice'),'refresh must not repeat the public batch');
+  }
+  playback=receiveRoom(playback,final);
+  assert.equal(playback.queue.filter(beat=>beat.kind==='dice').length,split?0:1);
+  if(!split)assert.deepEqual(playback.queue.find(beat=>beat.kind==='dice')!.faces,[...faces]);
+  assert.equal(game.racers[0]!.position,1+distance);assert.equal(game.randomLog.length,2);
+});
+
+test('Philanthropist displays its pair and choosing either public die does not throw again',()=>{
+  const game=fixture(['leaf-philanthropist','banana','banana'],[1,14,24]),initial=view(game);
+  roll(game,5,2);let playback=receiveRoom(createPlayback(initial),view(game,2));
+  assert.deepEqual(playback.queue.filter(beat=>beat.kind==='dice').map(beat=>beat.faces),[[5,2]]);
+  while(playback.queue.length)playback=completeBeat(playback);
+  choose(game,'0');assert.equal(game.pending?.kind,'leaf-philanthropist-target');choose(game,'r1');
+  playback=receiveRoom(playback,view(game,3));assert(!playback.queue.some(beat=>beat.kind==='dice'));assert.equal(game.randomLog.length,2);
+});

@@ -1,5 +1,5 @@
 import { randomId } from './random-id.js';
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from 'react';
 import { createPortal } from 'react-dom';
 import type { RoomView } from '../shared/types.js';
 import type { RoomConnection } from './network.js';
@@ -11,6 +11,7 @@ export function RoomChat({ room, community, connection, immersive, onRename }: {
   const readKey = `magical-athlete:chat-read:${room.backendId ?? 'cloudflare'}:${room.code}`;
   const [seen, setSeen] = useState(() => { try { return Number(sessionStorage.getItem(readKey)) || community.latestId; } catch { return community.latestId; } });
   const [newBelow, setNewBelow] = useState(false);
+  const [minimapBottom,setMinimapBottom]=useState(90);
   const [notices,setNotices]=useState<ChatNotice[]>([]);
   const [noticeLimit,setNoticeLimit]=useState(() => matchMedia(`(max-width:${CHAT_NOTICE_CONFIG.mobileBreakpoint}px)`).matches ? CHAT_NOTICE_CONFIG.mobileLimit : CHAT_NOTICE_CONFIG.desktopLimit);
   const noticeRegion=useRef<HTMLDivElement>(null),noticeRects=useRef(new Map<string,DOMRect>());
@@ -21,6 +22,19 @@ export function RoomChat({ room, community, connection, immersive, onRename }: {
   const unread = community.messages.filter(message => message.id > seen && message.senderId !== room.selfId).length;
   const markRead = () => { setSeen(community.latestId); try { sessionStorage.setItem(readKey, String(community.latestId)); } catch { /* Optional read marker. */ } };
   const scrollBottom = () => { if (list.current) list.current.scrollTop = list.current.scrollHeight; bottom.current = true; setNewBelow(false); markRead(); };
+  useLayoutEffect(()=>{
+    if(!immersive)return;
+    // Observe the map only. Mounting a pending choice must not move chat.
+    let map:HTMLElement|null=null;
+    const update=()=>{if(map)setMinimapBottom(Math.ceil(map.getBoundingClientRect().bottom)+12);};
+    const observer=new ResizeObserver(update);
+    const attach=()=>{map=document.querySelector<HTMLElement>('[data-testid="board-minimap"]');if(map){observer.observe(map);update();return true;}return false;};
+    // The scene is lazy-loaded; stop observing DOM as soon as it is ready.
+    const mounting=new MutationObserver(()=>{if(attach())mounting.disconnect();});
+    if(!attach())mounting.observe(document.body,{childList:true,subtree:true});
+    window.addEventListener('resize',update);
+    return()=>{observer.disconnect();mounting.disconnect();window.removeEventListener('resize',update);};
+  },[immersive,room.round]);
   useEffect(()=>{
     const revision=community.liveRevision??0;
     if(open||!community.connected)setNotices([]);
@@ -78,7 +92,7 @@ export function RoomChat({ room, community, connection, immersive, onRename }: {
   };
   // A viewport overlay must not inherit any ancestor's transform/containment:
   // those turn fixed coordinates into page-local coordinates during scenes.
-  return createPortal(<aside className={`room-community ${immersive ? 'in-race' : ''} ${open ? 'is-open' : ''}`} data-testid="room-community" onKeyDown={event => { event.stopPropagation(); if (event.key === 'Escape') setOpen(false); }}>
+  return createPortal(<aside className={`room-community ${immersive ? 'in-race' : ''} ${open ? 'is-open' : ''}`} style={{'--chat-minimap-bottom':`${minimapBottom}px`} as CSSProperties} data-testid="room-community" onKeyDown={event => { event.stopPropagation(); if (event.key === 'Escape') setOpen(false); }}>
     {!open&&notices.length>0&&<div ref={noticeRegion} className="chat-notice-region" aria-live="polite" aria-relevant="additions" aria-label="新聊天消息">{notices.map(notice=><ChatNoticeBubble key={notice.message.id} notice={notice} onOpen={()=>setOpen(true)} />)}</div>}
     {!open && <button className="chat-toggle" aria-label={`房间聊天${unread ? `，${unread} 条未读` : ''}`} aria-expanded={false} onClick={() => setOpen(true)}>💬 聊天{unread > 0 && <b className="chat-unread">{unread}</b>}</button>}
     {open && <section className="room-chat" aria-label="房间聊天" data-testid="room-chat">

@@ -21,12 +21,13 @@ function publish(room: Room) {
   }
 }
 async function fixture(browser: Browser, viewport: { width: number; height: number }) {
-  const created = application.rooms.create('聊天定位验收', 1, 0, 'practice');
+  const created = application.rooms.create('聊天定位验收', 8, 0);
+  for(let index=1;index<8;index++)application.rooms.join(created.identity.roomCode,`选手${index+1}`);
   const room = structuredClone(application.rooms.get(created.identity.roomCode));
-  const game = createGame(room.game.players, 123, 'practice');
+  const game = createGame(room.game.players, 123);
   game.phase = 'race'; game.round = 1; game.currentRacerId = 'r0';
-  game.racers = [{ id: 'r0', playerId: room.hostId, characterId: 'coach', position: 3, tripped: false, finished: false, eliminated: false, flags: {} }];
-  game.baseTurnOrder = ['r0']; game.queue = []; room.game = game;
+  game.racers = game.players.map((player,index)=>({ id: `r${index}`, playerId: player.id, characterId: 'coach', position: 3+index*2, tripped: false, finished: false, eliminated: false, flags: {} }));
+  game.baseTurnOrder = game.racers.map(racer=>racer.id); game.queue = []; room.game = game;
   room.version++; room.updatedAt = Date.now() + 60_000; publish(room);
   const context = await browser.newContext({ viewport });
   await context.addInitScript(identity => {
@@ -63,15 +64,23 @@ async function stable(page: Page, before: Awaited<ReturnType<typeof rect>>, open
   // invisible overlay that intercepts clicks below its visible contents.
   expect(Math.abs(after.height - after.childHeight)).toBeLessThan(1);
   if (open) expect(Math.abs(after.height - before.height)).toBeLessThan(1);
+  if((page.viewportSize()?.width??0)>650){
+    expect(await page.evaluate(()=>{
+      const chat=document.querySelector('[data-testid="room-community"]')!.getBoundingClientRect(),map=document.querySelector('[data-testid="board-minimap"]')!.getBoundingClientRect();
+      return Math.min(chat.right,map.right)>Math.max(chat.left,map.left)&&Math.min(chat.bottom,map.bottom)>Math.max(chat.top,map.top);
+    }),'desktop chat must leave the entire minimap visible').toBe(false);
+  }
 }
 async function accessibleChoice(page: Page) {
   const choice = page.getByTestId('skill-choice');
   const boxes = await page.evaluate(() => {
     const chat = document.querySelector('[data-testid="room-chat"]')!.getBoundingClientRect();
     const skill = document.querySelector('[data-testid="skill-choice"]')!.getBoundingClientRect();
-    return { overlap: Math.min(chat.right, skill.right) > Math.max(chat.left, skill.left) && Math.min(chat.bottom, skill.bottom) > Math.max(chat.top, skill.top) };
+    const map=document.querySelector('[data-testid="board-minimap"]')!.getBoundingClientRect();
+    return { overlap: Math.min(chat.right, skill.right) > Math.max(chat.left, skill.left) && Math.min(chat.bottom, skill.bottom) > Math.max(chat.top, skill.top), mapOverlap:innerWidth>650&&Math.min(map.right,skill.right)>Math.max(map.left,skill.left)&&Math.min(map.bottom,skill.bottom)>Math.max(map.top,skill.top) };
   });
   expect(boxes.overlap).toBe(false);
+  expect(boxes.mapOverlap).toBe(false);
   const button = choice.getByRole('button').first(); await button.scrollIntoViewIfNeeded();
   expect(await button.evaluate(element => {
     const box = element.getBoundingClientRect(); return element.contains(document.elementFromPoint(box.x + box.width / 2, box.y + box.height / 2));
@@ -80,6 +89,7 @@ async function accessibleChoice(page: Page) {
 
 for (const [name, viewport] of [
   ['desktop', { width: 1280, height: 900 }],
+  ['small-desktop', { width: 1024, height: 768 }],
   ['phone', { width: 390, height: 844 }],
   ['landscape', { width: 900, height: 500 }],
 ] as const) {
@@ -101,8 +111,7 @@ for (const [name, viewport] of [
       await page.getByRole('button', { name: '发送', exact: true }).click();
       await expect(page.getByLabel('聊天消息', { exact: true })).toHaveValue('');
       await expect(page.getByRole('log')).toContainText('选择技能时聊天仍可发送'); await stable(page, opened, true);
-      mkdirSync('docs/qa/presentation-polish', { recursive: true });
-      await page.screenshot({ path: `docs/qa/presentation-polish/chat-${name}.png` });
+      if(!process.env.CI){mkdirSync('docs/qa/interaction-feedback', { recursive: true });await page.screenshot({ path: `docs/qa/interaction-feedback/chat-${name}.png` });}
       if (name === 'phone') {
         // Exercise the existing visualViewport keyboard bridge without assuming
         // that a desktop browser can display the operating system's phone keyboard.

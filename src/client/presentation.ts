@@ -31,7 +31,7 @@ export interface PresentationBeat {
   abilityReveal?: AbilityRevealData;
 }
 interface ConfirmedDie { source?: string; face: number; eventId: number }
-interface ConfirmedBatch { source?: string; faces: number[]; eventId: number }
+interface ConfirmedBatch { source?: string; faces: number[]; eventId: number; cause?: string }
 export interface PlaybackState {
   roomCode: string;
   version: number;
@@ -42,7 +42,7 @@ export interface PlaybackState {
   queue: PresentationBeat[];
   confirmed: RoomView;
   lastDie?: ConfirmedDie;
-  /** Mr Dice Guy chooses from an already public throw, even across snapshots. */
+  /** Main movement can confirm an already public batch across snapshots. */
   lastBatch?: ConfirmedBatch;
   /** Later rounds wait behind every confirmed beat from the current board. */
   deferredRooms?: RoomView[];
@@ -53,6 +53,10 @@ const cloneRacers = (racers: Racer[]) => racers.map(racer => ({ ...racer, flags:
 const highestEvent = (events: GameEvent[]) => events.reduce((id, event) => Math.max(id, event.id), 0);
 const roster = (racers: Racer[]) => racers.map(racer => `${racer.id}:${racer.characterId}`).sort().join('|');
 const eventsOf = (room: RoomView) => room.presentationEvents ?? room.logs;
+const mainBatch = (event:GameEvent) => event.faces && event.faces.length > 1 && (
+  event.type === 'multi-dice' && ['mr-dice-guy','leaf-philanthropist'].includes(event.cause ?? '') ||
+  event.type === 'ability-dice' && event.cause === 'extra-mile-broken-clock'
+) ? {source:event.source,faces:[...event.faces],eventId:event.id,cause:event.cause} : undefined;
 
 /** Joining or restoring a room establishes a baseline; old rolls are not replayed. */
 export function createPlayback(room: RoomView): PlaybackState {
@@ -63,7 +67,7 @@ export function createPlayback(room: RoomView): PlaybackState {
       const face = confirmedFace(event, room);
       if (face !== undefined) lastDie = { source: event.source, face, eventId: event.id };
     }
-    if (event.type === 'multi-dice' && event.cause === 'mr-dice-guy' && event.faces?.length === 6) lastBatch = {source:event.source,faces:[...event.faces],eventId:event.id};
+    if (mainBatch(event)) lastBatch = mainBatch(event);
     if (['roll', 'turn', 'reveal', 'phase'].includes(event.type)) { lastDie = undefined; lastBatch = undefined; }
   }
   return { roomCode: room.code, version: room.version, round: room.round, eventCursor: highestEvent(eventsOf(room)), racers: cloneRacers(room.racers), queue: [], confirmed: room, lastDie, lastBatch };
@@ -116,10 +120,11 @@ function beatForEvent(event: GameEvent, room: RoomView): PresentationBeat | unde
   else return undefined;
   const faces = event.faces?.length && event.faces.every(value => Number.isInteger(value) && value >= 1 && value <= 6) ? [...event.faces] : undefined;
   const face = kind === 'dice' ? confirmedFace(event, room) : undefined;
-  if (kind === 'dice' && face === undefined && !(event.type === 'multi-dice' && faces?.length === 6)) return undefined;
+  const batch = kind === 'dice' && !!faces && faces.length > 1;
+  if (kind === 'dice' && face === undefined && !batch) return undefined;
   const motions = eventMotion(event, kind);
   const longest = motions.reduce((steps, motion) => Math.max(steps, Math.max(0,motion.path.length-1)), 0);
-  const durationMs = kind === 'dice' ? event.type === 'multi-dice' ? 3600 : 2500 : kind === 'duel-dice' ? 3000 : kind === 'skill' ? 1800 : kind === 'move' ? Math.min(2200, Math.max(800, 280 + Math.max(1, longest) * 240)) : kind === 'swap' || kind === 'warp' || kind === 'finish' ? 1100 : 850;
+  const durationMs = kind === 'dice' ? batch ? 3600 : 2500 : kind === 'duel-dice' ? 3000 : kind === 'skill' ? 1800 : kind === 'move' ? Math.min(2200, Math.max(800, 280 + Math.max(1, longest) * 240)) : kind === 'swap' || kind === 'warp' || kind === 'finish' ? 1100 : 850;
   const boundary = eventsOf(room).findLast(log => log.id <= event.id && (log.type === 'turn' || log.type === 'reveal'));
   // Compatibility for saved public events that predate explicit stage actors.
   const npc=event.cause==='thirds-npc'?room.trackState?.event?.npc:undefined;
@@ -275,10 +280,14 @@ export function receiveRoom(state: PlaybackState, room: RoomView, options: { rec
     if (!beat) continue;
     // `die` is the throw; `roll` confirms it after the optional reroll window.
     // They may arrive in different snapshots. A reroll emits a new `die` ID.
-    const batchSelection = lastBatch && lastBatch.source === event.source && lastBatch.faces.filter(face => face === beat.face).length > 1;
+    const batchSelection = lastBatch && lastBatch.source === event.source && (
+      lastBatch.cause === 'extra-mile-broken-clock' ? beat.face === Math.min(...lastBatch.faces) :
+      lastBatch.cause === 'leaf-philanthropist' ? lastBatch.faces.includes(beat.face!) :
+      lastBatch.faces.filter(face => face === beat.face).length > 1
+    );
     if (event.type === 'roll' && (event.rollId!==undefined&&event.rollId<event.id || lastDie&&lastDie.source===event.source&&lastDie.face===beat.face || batchSelection)) { lastDie = undefined; lastBatch = undefined; continue; }
     if (event.type === 'die' && beat.kind === 'dice') lastDie = { source: event.source, face: beat.face!, eventId: event.id };
-    if (event.type === 'multi-dice' && event.cause === 'mr-dice-guy' && beat.faces?.length === 6) lastBatch = {source:event.source,faces:[...beat.faces],eventId:event.id};
+    if (mainBatch(event)) lastBatch = mainBatch(event);
     if (event.type === 'roll') { lastDie = undefined; lastBatch = undefined; }
     const merged = mergeSimultaneous(queue.at(-1), beat, state.queue[0]?.key);
     if (merged) queue[queue.length - 1] = merged;
@@ -305,7 +314,7 @@ export function skipPlayback(state: PlaybackState, room: RoomView = state.confir
 const REDUCED_MOTION_MS:Record<PresentationKind,number>={intro:1000,dice:400,'duel-dice':1800,move:400,warp:450,swap:450,skill:1800,trip:500,recover:500,score:500,finish:650,eliminate:500};
 /** A readable result is independent of throw speed and reduced motion. */
 export function diceResultReadMs(beat:PresentationBeat|undefined):number {
-  return beat?.kind==='duel-dice'?1500:beat?.kind==='dice'?beat.events.some(event=>event.type==='multi-dice')?1800:1000:0;
+  return beat?.kind==='duel-dice'?1500:beat?.kind==='dice'?(beat.faces?.length??0)>1?1800:1000:0;
 }
 
 /** Dice wait for a committed result and a paint opportunity before their read
@@ -321,6 +330,6 @@ export function beatDuration(beat: PresentationBeat, options: PresentationOption
   const speed = Math.max(0.5, Math.min(8, Number.isFinite(options.speed) ? options.speed! : 1));
   const duration = Math.round((options.reducedMotion ? REDUCED_MOTION_MS[beat.kind] : beat.durationMs) / speed);
   // Speed controls shorten motion, not the minimum time to understand a skill.
-  const minimum = beat.abilityReveal ? 3000 : beat.events.some(event => event.type === 'multi-dice') ? 2200 : beat.events.some(event => event.type === 'ability-dice') ? 1800 : beat.kind === 'skill' || beat.kind === 'duel-dice' ? 1500 : 0;
+  const minimum = beat.abilityReveal ? 3000 : beat.kind === 'dice' && (beat.faces?.length??0)>1 ? 2200 : beat.events.some(event => event.type === 'ability-dice') ? 1800 : beat.kind === 'skill' || beat.kind === 'duel-dice' ? 1500 : 0;
   return Math.max(minimum, diceResultReadMs(beat), duration);
 }
