@@ -293,7 +293,7 @@ export function installThirds(ctx:ThirdsContext){
       case 'thirds-reroll':if(id==='use')push(s,...order(s).filter(x=>x.id!==r.id).map(x=>move(x,1)),{kind:'rollBatch',racerId:r.id,count:1,purpose:'main',faces:[]});else push(s,{kind:'rerollWindow',racerId:r.id,face:context.face});break;
       case 'thirds-fish':{const motion=context.motion as Work;if(id!=='skip')motion.plans.push({racerId:id,follow:context.lead});push(s,motion);break;}
       case 'thirds-scooch':if(id!=='skip')push(s,trip(r),work('scooch-target',{racerId:r.id,target:id}));break;
-      case 'thirds-duel':push(s,...context.targets.map((rid:string)=>dieTask(racer(s,rid)!,'duel',{face:Number(id)})));break;
+      case 'thirds-duel':push(s,...context.targets.map((rid:string)=>dieTask(racer(s,rid)!,'duel',{face:Number(id),rollReason:`决斗家事件：与${name(r)}同格，须掷出${Number(id)}点，否则绊倒。`})));break;
     }
     return true;
   }
@@ -301,7 +301,8 @@ export function installThirds(ctx:ThirdsContext){
     if(!String(t.purpose).startsWith('thirds-'))return false;
     const data=state(s)!;
     const npc=t.purpose==='thirds-npc'?data.npc:undefined;
-    log(s,'ability-dice',`${npc?label(npc.id):name(r)}掷出${faces.join('、')}`,{...(npc?{actor:{name:label(npc.id),characterId:npc.id}}:{source:r.id}),faces,cause:t.purpose,rollId:Number(t.count)===1?t.dieEventId:undefined});
+    const rollReason=t.purpose==='thirds-duel'?t.context?.rollReason:undefined;
+    log(s,'ability-dice',`${npc?label(npc.id):name(r)}掷出${faces.join('、')}${rollReason?`；${rollReason}${faces[0]===t.context.face?'点数符合，免于绊倒。':'点数不符，将被绊倒。'}`:''}`,{...(npc?{actor:{name:label(npc.id),characterId:npc.id}}:{source:r.id}),faces,cause:t.purpose,rollId:Number(t.count)===1?t.dieEventId:undefined,...(rollReason?{rollReason}:{})});
     if(t.purpose==='thirds-rocket'){r.flags.mainRolled=true;const distance=faces.reduce((a,b)=>a+b,0);s.lastRoll={racerId:r.id,face:faces.at(-1)!,distance};push(s,{kind:'mainMove',racerId:r.id,base:distance});}
     if(t.purpose==='thirds-duel'&&faces[0]!==t.context.face)push(s,trip(r));
     if(t.purpose==='thirds-npc'){

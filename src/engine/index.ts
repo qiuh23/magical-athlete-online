@@ -1168,7 +1168,7 @@ function rollBatch(s:GameState,r:Racer,t:Work){
       if(!['main','duel','em-cletus'].includes(String(t.purpose))){
         const npc=t.purpose==='thirds-npc'?thirds.publicState(s)?.npc:undefined;
         const actor=npc?{name:character(npc.id)?.nameZh??npc.id,characterId:npc.id}:undefined;
-        log(s,'die-trigger',`${actor?.name??name(r)}掷出${raw}，触发三角人反应`,{...(actor?{actor}:{source:r.id}),faces:[raw],cause:t.purpose,rollKind:'ability'});
+        log(s,'die-trigger',`${actor?.name??name(r)}掷出${raw}，触发三角人反应`,{...(actor?{actor}:{source:r.id}),faces:[raw],cause:t.purpose,rollKind:'ability',...(t.purpose==='thirds-duel'&&t.context?.rollReason?{rollReason:t.context.rollReason}:{})});
         t.dieEventId=s.logs.at(-1)!.id;
       }
       push(s,...observed,{...t,heldFace:face,leafRawChecked:true});return;

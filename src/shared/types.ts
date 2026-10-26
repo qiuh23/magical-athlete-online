@@ -92,7 +92,7 @@ export interface GameEvent { changes?: { racerId:string; playerId?:string; form?
 
 export interface GameEvent { rollKind?: 'main'|'ability'|'contest'|'recovery'|'reroll'; }
 /** Public stage pieces have an identity, but no player-controlled racer seat. */
-export interface GameEvent { actor?: { name:string; characterId:string }; rollId?:number; }
+export interface GameEvent { actor?: { name:string; characterId:string }; rollId?:number; rollReason?:string; }
 /** Public grant at this event's exact time; never private draw candidates. */
 export interface GameEvent { grantedPowerIds?: string[]; grantDuration?: PublicAbilityEntry['duration']; }
 

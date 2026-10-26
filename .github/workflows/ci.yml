@@ -55,96 +55,16 @@ jobs:
           REQUESTED_SUITE: ${{ inputs.browser_suite }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
       - run: pnpm typecheck
-      - name: Validate runtime backends, credentials, creation retries and quotas
-        run: pnpm exec tsx --test tests/random-id.test.ts tests/backends.test.ts tests/network-backends.test.ts tests/dual-backend-server.test.ts tests/dual-backend-worker.test.ts tests/owner-recovery.test.ts tests/community-network.test.ts tests/deployment-capacity.test.ts tests/deployment-info.test.ts tests/ci-validation-scope.test.ts tests/ci-installer.test.ts tests/deployment-workflow.test.ts
-      - name: Validate frozen schedules, long drafting, score audit and worker persistence
-        run: pnpm exec tsx --test tests/competition.test.ts tests/schedule-review.test.ts tests/rules-version.test.ts tests/relay.test.ts
-      - name: Validate Scout playback and owner-absence room lifecycle
-        run: pnpm exec tsx --test tests/fan-expansions.test.ts tests/presentation.test.ts tests/camera.test.ts tests/room-continuation.test.ts tests/room-lifecycle.test.ts tests/community-network.test.ts
-      - name: Validate map topology, abilities, Twists and saved map matches
-        run: pnpm exec tsx --test tests/leaf-tracks.test.ts tests/new-track-scenes.test.ts tests/whirly-model.test.ts tests/map-rules.test.ts tests/map-targets.test.ts tests/leaf-map-abilities.test.ts tests/map-matches.test.ts tests/twist-cards.test.ts tests/twist-integration.test.ts
-      - name: Validate expansion scenery and delivered model assets
-        run: pnpm exec tsx --test tests/expansion-scenery.test.ts tests/bridges-display.test.ts tests/revolutionary-sculpt.test.ts tests/avatars.test.ts tests/mouth-surfaces.test.ts
-      - name: Validate special events, official card corrections and mixed long schedules
-        run: pnpm exec tsx --test tests/special-events.test.ts tests/event-matches.test.ts tests/second-wind.test.ts tests/second-wind-review.test.ts tests/copy-ability-interactions.test.ts
-      - run: pnpm test
-        if: steps.validation.outputs.suite == 'all'
-      - run: pnpm test:abilities
-        if: steps.validation.outputs.suite == 'ability-interactions'
+      # Run the fast rule/protocol regressions once, instead of overlapping subsets.
+      - name: Validate rules, persistence, transports and deployment guards
+        run: pnpm test
       - run: pnpm build
       - run: pnpm exec wrangler deploy --dry-run
       - run: pnpm exec playwright install --with-deps chromium
-      - name: Validate dice causality, stable chat and flat card backgrounds
-        run: pnpm exec playwright test tests/browser/presentation-sequence.spec.ts tests/browser/dice-readback.spec.ts tests/browser/chat-layout.spec.ts tests/browser/card-background.spec.ts --grep "Triangle waits|six-dice threes|single skill die|choosing an existing six-dice|stage NPC triggering|wandering monster dice|special-event NPC die|race chat stays anchored|flat card backgrounds|a stalled"
-        env:
-          CI: true
-      - name: Validate event-piece camera and nearby skill shots on desktop and phone
-        id: camera
-        run: pnpm exec playwright test tests/browser/camera-choreography.spec.ts
-        env:
-          CI: true
-      - name: Preserve camera observations before later browser suites
-        if: always() && (steps.camera.outcome == 'success' || steps.camera.outcome == 'failure')
-        uses: actions/upload-artifact@v4
-        with:
-          name: camera-choreography
-          path: |
-            test-results/
-            docs/qa/camera-choreography/
-          retention-days: 7
-      - name: Validate server selection, desktop/mobile and independent backend sessions
-        run: |
-          pnpm exec playwright test tests/browser/dual-backend.spec.ts
-          pnpm exec playwright test -c playwright.dual.config.ts
-        env:
-          CI: true
-      - name: Validate home entries and player/spectator admission
-        run: pnpm exec playwright test tests/browser/home-entry.spec.ts
-        env:
-          CI: true
-      - name: Validate route dice reminder and pre-race map preview
+      # The automatic UI gate stays small; long visual matrices are manual.
+      - name: Validate dice batches, choice details, event reasons and chat layout
         if: steps.validation.outputs.suite != 'deployment'
-        run: pnpm exec playwright test tests/browser/route-selection-preview.spec.ts
-        env:
-          CI: true
-      - name: Validate home configuration, pending choices and rematch setup
-        if: steps.validation.outputs.suite != 'deployment'
-        run: pnpm exec playwright test tests/browser/competition.spec.ts --grep "home shows|tour can be created|two browsers preserve|rematch"
-        env:
-          CI: true
-      - name: Validate complete four, six and eight-race competitions
-        if: steps.validation.outputs.suite == 'all'
-        run: pnpm exec playwright test tests/browser/competition.spec.ts --grep "independent browsers finish"
-        env:
-          CI: true
-      - name: Validate representative Whirly and Bridges scenes
-        if: steps.validation.outputs.suite != 'all' && steps.validation.outputs.suite != 'deployment'
-        run: pnpm exec playwright test tests/browser/new-track-scenes.spec.ts tests/browser/whirly-model.spec.ts tests/browser/expansion-bridges.spec.ts --grep "whirly-world actual|Whirly|Bridges actual scene"
-        env:
-          CI: true
-      - name: Validate new map scenes and controls
-        if: steps.validation.outputs.suite == 'all'
-        run: pnpm exec playwright test tests/browser/new-track-scenes.spec.ts tests/browser/whirly-model.spec.ts tests/browser/expansion-bridges.spec.ts tests/browser/expansion-movement.spec.ts tests/browser/expansion-low.spec.ts
-        env:
-          CI: true
-      - name: Validate special event setup, private choices and refresh
-        if: steps.validation.outputs.suite != 'deployment'
-        run: pnpm exec playwright test tests/browser/special-events.spec.ts
-        env:
-          CI: true
-      - name: Validate owner-absence voting and current-race closure
-        if: steps.validation.outputs.suite != 'deployment'
-        run: pnpm exec playwright test tests/browser/room-continuation.spec.ts
-        env:
-          CI: true
-      # Default to one eight-player race with reconnects. A validation trailer
-      # can select focused ability checks; broad suites stay manual.
-      - name: Validate room-list admission and spectating
-        run: pnpm exec playwright test -c playwright.relay.config.ts tests/relay-browser/room-directory.spec.ts --grep "directory:"
-        env:
-          CI: true
-      - run: pnpm exec playwright test tests/browser/three-scene.spec.ts --grep "3D dice settles|3D simultaneous"
-        if: steps.validation.outputs.suite == 'all'
+        run: pnpm exec playwright test tests/browser/interaction-feedback.spec.ts tests/browser/chat-layout.spec.ts
         env:
           CI: true
       - name: Validate relay snapshot and playback diagnostic helpers
@@ -152,13 +72,51 @@ jobs:
         run: pnpm exec playwright test -c playwright.relay.config.ts --grep "snapshot aggregation|playback skip|playback diagnostics"
         env:
           CI: true
-      - run: pnpm exec playwright test -c playwright.relay.config.ts --grep "server authority 8 independent"
-        if: steps.validation.outputs.suite != 'ability-interactions' && steps.validation.outputs.suite != 'deployment'
+      - name: Validate one eight-player race with recovery and privacy
+        if: steps.validation.outputs.suite == 'eight-only' || steps.validation.outputs.suite == 'all'
+        run: pnpm exec playwright test -c playwright.relay.config.ts --grep "server authority 8 independent"
         env:
           CI: true
           RELAY_SMOKE: '1'
-      - run: pnpm exec playwright test tests/browser/egg-character-info.spec.ts tests/browser/ability-reveal-intro.spec.ts
-        if: steps.validation.outputs.suite == 'ability-interactions'
+      - name: Validate server selection and independent backend sessions
+        if: steps.validation.outputs.suite == 'deployment' || steps.validation.outputs.suite == 'all'
+        run: |
+          pnpm exec playwright test tests/browser/dual-backend.spec.ts tests/browser/home-entry.spec.ts
+          pnpm exec playwright test -c playwright.dual.config.ts
+        env:
+          CI: true
+      - name: Validate ability details and public reveals
+        if: steps.validation.outputs.suite == 'ability-interactions' || steps.validation.outputs.suite == 'all'
+        run: pnpm exec playwright test tests/browser/egg-character-info.spec.ts tests/browser/ability-reveal-intro.spec.ts
+        env:
+          CI: true
+      - name: Validate manual presentation and camera regressions
+        if: steps.validation.outputs.suite == 'all'
+        run: pnpm exec playwright test tests/browser/presentation-sequence.spec.ts tests/browser/dice-readback.spec.ts tests/browser/card-background.spec.ts tests/browser/camera-choreography.spec.ts tests/browser/route-selection-preview.spec.ts
+        env:
+          CI: true
+      - name: Preserve visual observations before later browser suites
+        if: always() && steps.validation.outputs.suite == 'all'
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-regressions
+          path: |
+            test-results/
+            docs/qa/camera-choreography/
+          retention-days: 7
+      - name: Validate manual competition, event and room lifecycle flows
+        if: steps.validation.outputs.suite == 'all'
+        run: pnpm exec playwright test tests/browser/competition.spec.ts tests/browser/special-events.spec.ts tests/browser/room-continuation.spec.ts
+        env:
+          CI: true
+      - name: Validate manual map scenes and controls
+        if: steps.validation.outputs.suite == 'all'
+        run: pnpm exec playwright test tests/browser/new-track-scenes.spec.ts tests/browser/whirly-model.spec.ts tests/browser/expansion-bridges.spec.ts tests/browser/expansion-movement.spec.ts tests/browser/expansion-low.spec.ts tests/browser/three-scene.spec.ts
+        env:
+          CI: true
+      - name: Validate manual room directory and spectating
+        if: steps.validation.outputs.suite == 'all'
+        run: pnpm exec playwright test -c playwright.relay.config.ts tests/relay-browser/room-directory.spec.ts --grep "directory:"
         env:
           CI: true
       - name: Package the checked Linux build for both backends
