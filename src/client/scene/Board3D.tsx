@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import type { Racer, RoomView } from '../../shared/types.js';
 import { TRACKS, type TrackId } from '../../shared/tracks.js';
 import { CHARACTERS } from '../../shared/characters.js';
-import { presentationActor, type PresentationBeat } from '../presentation.js';
+import { diceResultReadMs, presentationActor, type PresentationBeat } from '../presentation.js';
 import { Avatar } from '../avatars.js';
 import { ToyCharacter } from './ToyCharacter.js';
 import { DioramaStadium } from './DioramaStadium.js';
@@ -37,6 +37,7 @@ interface Props extends ScenePlayback {
   onDetail: (id: string, racerId?: string) => void;
   onSkipIntro?: () => void;
   onIntroReady?: (key:string) => void;
+  onDiceSettled?: (key:string) => void;
   introReady?: boolean;
   onChooseRoute?: (optionId: string) => void;
   choiceBusy?: boolean;
@@ -62,7 +63,7 @@ class SceneBoundary extends Component<{ children: ReactNode; resetKey: number; r
   render() { return this.state.failed ? <div className="scene-fallback" role="status"><strong>3D 场景暂时无法显示</strong><p>选手位置与操作仍可在下方查看。</p><button onClick={this.props.retry}>重新载入 3D</button></div> : this.props.children; }
 }
 
-export function Board3D({ room, racers, beat, queue, startedAt, durationMs, lowQuality, reducedMotion, muted, onDetail, onSkipIntro, onIntroReady, introReady = true, onChooseRoute, choiceBusy = false }: Props) {
+export function Board3D({ room, racers, beat, queue, startedAt, durationMs, lowQuality, reducedMotion, muted, onDetail, onSkipIntro, onIntroReady, onDiceSettled, introReady = true, onChooseRoute, choiceBusy = false }: Props) {
   const [automaticLow, setAutomaticLow] = useState(false);
   lowQuality = lowQuality || automaticLow;
   const spectator = room.role === 'spectator';
@@ -143,7 +144,7 @@ export function Board3D({ room, racers, beat, queue, startedAt, durationMs, lowQ
     {route && onChooseRoute && <RouteButtons route={route} buttons={routeButtons} disabled={choiceBusy} onChoose={onChooseRoute} />}
     <div className="scene-labels" aria-hidden="true">{racers.filter(r => !r.eliminated).map(racer => { const owner = room.players.find(p => p.id === racer.playerId), scale = occupancy(racer, racers, racer.position, compact, room.track).scale; return <span key={racer.id} data-racer-id={racer.id} ref={element => { if (element) labels.current.set(racer.id, element); else labels.current.delete(racer.id); }} className={`pawn-seat ${active === racer.id ? 'is-active' : ''} ${scale < .5 ? 'is-crowded' : scale < .9 ? 'is-shared' : ''}`} style={{ borderColor: owner?.color }}>{(owner?.seat ?? 0) + 1}</span>; })}<span ref={scoreLabel} className="score-float" style={{ display: beat?.kind === 'score' || beat?.kind === 'finish' ? undefined : 'none' }}>{beat?.events[0]?.text.match(/[+＋-]\d+分/)?.[0] ?? (beat?.kind === 'finish' ? '冲线！' : '得分！')}</span></div>
     {lost && <div className="scene-fallback"><strong>正在恢复图形画面…</strong><button onClick={() => { setLost(false); setResetKey(n => n + 1); }}>重新载入 3D</button></div>}
-    <SceneBoundary resetKey={resetKey} retry={() => setResetKey(n => n + 1)}><DiceSpotlight active={dice} beatKey={dice ? beat?.key : undefined} contenders={duelContenders} face={beat?.face ?? room.lastRoll?.face ?? 1} faces={beat?.faces} cause={beat?.cause} detail={beat?.events.map(event=>event.text).join(" · ")} sourceRacerId={selected.racerId} sourceCharacterId={selected.characterId} stageActor={!!beat?.actor} onDetail={onDetail} startedAt={startedAt} durationMs={durationMs} reducedMotion={reducedMotion} lowQuality={lowQuality} source={selected.name} /></SceneBoundary>
+    <SceneBoundary resetKey={resetKey} retry={() => setResetKey(n => n + 1)}><DiceSpotlight resultReadMs={diceResultReadMs(beat)} onSettled={onDiceSettled} active={dice} beatKey={dice ? beat?.key : undefined} contenders={duelContenders} face={beat?.face ?? room.lastRoll?.face ?? 1} faces={beat?.faces} cause={beat?.cause} triggered={beat?.events[0]?.type==='die-trigger'} detail={beat?.events.map(event=>event.text).join(" · ")} sourceRacerId={selected.racerId} sourceCharacterId={selected.characterId} stageActor={!!beat?.actor} onDetail={onDetail} startedAt={startedAt} durationMs={durationMs} reducedMotion={reducedMotion} lowQuality={lowQuality} source={selected.name} /></SceneBoundary>
     <ActionBanner track={room.track} reversed={room.trackState?.reversed} beat={beat} racers={racers} onDetail={onDetail} />
     <ul className="sr-only" aria-label="立体棋盘选手位置">{racers.map(r => <li key={r.id} data-testid="scene-racer" data-racer-id={r.id} data-position={r.position} data-target-position={beat?.motions.find(m => m.racerId === r.id)?.to ?? r.position}>{characterName(r.characterId)} · {r.position} 格{r.tripped ? ' · 绊倒' : ''}</li>)}</ul>
   </section>;

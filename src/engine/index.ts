@@ -1147,15 +1147,33 @@ function secondWindChoice(s:GameState,r:Racer,c:PendingChoice,id:string):boolean
 /** Each die and forced reroll is a JSON continuation. Party Pooper's movement,
  * including any target choices it triggers, finishes before the replacement die. */
 function rollBatch(s:GameState,r:Racer,t:Work){
+  // A replacement or next physical die starts a new identity; a held die
+  // resumes its existing public trigger through serialized reactions.
+  if(t.heldFace===undefined&&t.purpose!=='main')delete t.dieEventId;
   const faces=(t.faces??[]) as number[];let face=Number(t.heldFace??rollFor(s,r,t.purpose==='main'?`${name(r)}主移动`:`${name(r)} ${t.purpose}`));
   // Publish the throw before reactions can pause for Suckerfish or grant a
   // power. A restored held die continues this throw, never starts another.
   if(t.purpose==='main'&&(t.heldFace===undefined||t.dieEventId===undefined)){
-    log(s,'die',`${name(r)}掷出${face}`,{source:r.id,faces:[face],cause:'main',rollKind:'main'});
+    const raw=t.heldFace===undefined?Number(r.flags.secretLeafLastRaw):face;
+    log(s,'die',`${name(r)}掷出${raw}`,{source:r.id,faces:[raw],cause:'main',rollKind:'main'});
     t.dieEventId=s.logs.at(-1)!.id;
   }
   if(t.heldFace===undefined){const stunners=stunnerSources(s,r);if(stunners.length)log(s,'die-modified',`${name(r)}的骰面被惊艳者固定为1`,{source:stunners[0]!.id,targets:[r.id],faces:[Number(r.flags.secretLeafLastRaw),1],cause:'stunner'});}
-  if(t.heldFace===undefined&&!t.leafRawChecked){const observed=leafRules.rawDie(s,r,Number(r.flags.secretLeafLastRaw));if(observed.length){push(s,...observed,{...t,heldFace:face,leafRawChecked:true});return;}}
+  if(t.heldFace===undefined&&!t.leafRawChecked){
+    const raw=Number(r.flags.secretLeafLastRaw),observed=leafRules.rawDie(s,r,raw);
+    if(observed.length){
+      // A public raw-three reaction may precede the batch's final summary or
+      // pause for another skill. Publish its actual cause first. Contest dice
+      // retain their established simultaneous-reveal privacy window.
+      if(!['main','duel','em-cletus'].includes(String(t.purpose))){
+        const npc=t.purpose==='thirds-npc'?thirds.publicState(s)?.npc:undefined;
+        const actor=npc?{name:character(npc.id)?.nameZh??npc.id,characterId:npc.id}:undefined;
+        log(s,'die-trigger',`${actor?.name??name(r)}掷出${raw}，触发三角人反应`,{...(actor?{actor}:{source:r.id}),faces:[raw],cause:t.purpose,rollKind:'ability'});
+        t.dieEventId=s.logs.at(-1)!.id;
+      }
+      push(s,...observed,{...t,heldFace:face,leafRawChecked:true});return;
+    }
+  }
   if(thirds.beforeDie(s,r,t,face))return;
   if(hasPower(s,r,em('heads'))&&!t.headsChecked){ask(s,r,'em-heads',`硬币头：本骰${face}点，是否翻到底面${7-face}点？`,[{id:'keep',label:`保留${face}`},{id:'flip',label:`翻到${7-face}`}],{task:{...t,heldFace:face,headsChecked:true}});return;}
   if(!t.taxChecked){const kings=face>=5?powers(s,em('king-pete')).filter(x=>x.id!==r.id):[];if(kings.length){push(s,...kings.map(k=>({kind:'ability',racerId:k.id,power:em('king-pete'),effects:[...(t.purpose==='main'||t.purpose==='em-broken-clock'?[{kind:'fan',racerId:r.id,step:'tax'}]:[]),{kind:'move',racerId:k.id,distance:1,cause:em('king-pete')}]})),{...t,heldFace:face,headsChecked:true,taxChecked:true});return;}}
@@ -1176,14 +1194,16 @@ function rollBatch(s:GameState,r:Racer,t:Work){
     r.flags.mainRolled=true;
     const repeats=[...new Set(faces)].filter(n=>faces.filter(x=>x===n).length>1);
     log(s,'multi-dice',`${name(r)}掷出六骰：${faces.join('、')}`,{source:r.id,faces,cause:t.purpose});
+    // The selected (and possibly adjusted) result confirms this public batch.
+    r.flags.mainDieEventId=s.logs.at(-1)!.id;
     if(repeats.length)ask(s,r,'mr-dice-pick','选择出现两次以上的点数',repeats.map(n=>({id:String(n),label:`${n}（${faces.filter(x=>x===n).length}次）`})),{});
     else {log(s,'house-rule','项目房规：六颗主骰均不相同，等待当前控制者重新投整组六骰，主移动尚未执行。',{source:r.id,cause:'mr-dice-reroll'});ask(s,r,'mr-dice-reroll','项目房规：六骰均不同，请重掷整组六骰',[{id:'roll',label:'六骰均不同，重掷六骰'}],{});}
     return;
   }
-  if(t.purpose==='nemesis'){const matches=face===ctx.face;log(s,'ability-dice',`${name(r)}跟掷${face}，对比已公开主骰${ctx.face}：${matches?`相同，发动${face}格额外移动`:'不同，本次不移动'}`,{source:r.id,faces:[face],cause:t.purpose});if(matches)usePower(s,r,[{kind:'move',racerId:r.id,distance:face,cause:t.purpose}],t.purpose);return;}
-  if(t.purpose==='the-hose'){const targets=order(s,active(s).filter(x=>x.id!==r.id&&forwardDistance(s,r.position,x.position)>0&&forwardDistance(s,r.position,x.position)<=face));log(s,'ability-dice',`${name(r)}水管范围${face}：绊倒前方${face}步内的${targets.length}名选手`,{source:r.id,targets:targets.map(x=>x.id),faces:[face],cause:t.purpose});usePower(s,r,targets.map(x=>({kind:'trip',racerId:x.id,source:r.id})),t.purpose);return;}
+  if(t.purpose==='nemesis'){const matches=face===ctx.face;log(s,'ability-dice',`${name(r)}跟掷${face}，对比已公开主骰${ctx.face}：${matches?`相同，发动${face}格额外移动`:'不同，本次不移动'}`,{source:r.id,faces:[face],cause:t.purpose,rollId:t.dieEventId});if(matches)usePower(s,r,[{kind:'move',racerId:r.id,distance:face,cause:t.purpose}],t.purpose);return;}
+  if(t.purpose==='the-hose'){const targets=order(s,active(s).filter(x=>x.id!==r.id&&forwardDistance(s,r.position,x.position)>0&&forwardDistance(s,r.position,x.position)<=face));log(s,'ability-dice',`${name(r)}水管范围${face}：绊倒前方${face}步内的${targets.length}名选手`,{source:r.id,targets:targets.map(x=>x.id),faces:[face],cause:t.purpose,rollId:t.dieEventId});usePower(s,r,targets.map(x=>({kind:'trip',racerId:x.id,source:r.id})),t.purpose);return;}
   if(t.purpose==='show-off'){
-    log(s,'die',`${name(r)}追加掷出${face}`,{source:r.id,faces:[face],cause:t.purpose});
+    log(s,'die',`${name(r)}追加掷出${face}`,{source:r.id,faces:[face],cause:t.purpose,rollId:t.dieEventId});
     if(face<=Number(ctx.previous)){r.flags.showOffResolved=true;log(s,'skip','新骰不大于前骰，显摆精主移动取消',{source:r.id,cause:t.purpose});}
     else ask(s,r,'show-off',`累计${Number(ctx.total)+face}；继续或停止？`,[{id:'stop',label:'停止并移动'},{id:'roll',label:'继续投掷'}],{previous:face,total:Number(ctx.total)+face},true);
     return;
@@ -1372,7 +1392,7 @@ function fanRollResult(s:GameState,r:Racer,t:Work,faces:number[],ctx:Record<stri
   };const rollInfo=rollLabels[String(t.purpose)];
   // Contest dice stay private until both controllers have rolled, just as the
   // established Duelist window; public triggered side effects remain public.
-  if(t.purpose!=='em-cletus'||ctx.firstFace!==undefined)log(s,'ability-dice',`${owner(s,r).name}的${name(r)}掷出${faces.join('、')}（${rollInfo?.label??t.purpose}）`,{source:r.id,faces,cause:rollInfo?.power??String(t.purpose),rollKind:t.purpose==='em-cletus'?'contest':t.purpose==='em-broken-clock'?'main':t.purpose==='em-bully-recover'?'recovery':'ability'});
+  if(t.purpose!=='em-cletus'||ctx.firstFace!==undefined)log(s,'ability-dice',`${owner(s,r).name}的${name(r)}掷出${faces.join('、')}（${rollInfo?.label??t.purpose}）`,{source:r.id,faces,cause:rollInfo?.power??String(t.purpose),rollId:Number(t.count)===1?t.dieEventId:undefined,rollKind:t.purpose==='em-cletus'?'contest':t.purpose==='em-broken-clock'?'main':t.purpose==='em-bully-recover'?'recovery':'ability'});
   if(t.purpose==='em-broken-clock'){r.flags.mainRolled=true;const value=faces[0]===faces[1]?faces[0]!+faces[1]!:Math.min(...faces);r.flags.fanBase=value;push(s,{kind:'powerDone',racerId:r.id,power:em('broken-clock')});rerollWindow(s,r,Math.min(...faces));return;}
   if(t.purpose==='em-cletus'&&source&&target&&live(source)&&live(target)){
     if(ctx.firstFace===undefined){ask(s,target,'em-cletus-roll',`${owner(s,target).name}的${name(target)}：对手已投掷，结果暂存，请掷对抗骰后一起揭晓`,[{id:'roll',label:'掷对抗骰'}],{...ctx,firstFace:face});return;}

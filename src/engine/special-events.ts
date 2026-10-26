@@ -301,7 +301,7 @@ export function installThirds(ctx:ThirdsContext){
     if(!String(t.purpose).startsWith('thirds-'))return false;
     const data=state(s)!;
     const npc=t.purpose==='thirds-npc'?data.npc:undefined;
-    log(s,'ability-dice',`${npc?label(npc.id):name(r)}掷出${faces.join('、')}`,{...(npc?{actor:{name:label(npc.id),characterId:npc.id}}:{source:r.id}),faces,cause:t.purpose});
+    log(s,'ability-dice',`${npc?label(npc.id):name(r)}掷出${faces.join('、')}`,{...(npc?{actor:{name:label(npc.id),characterId:npc.id}}:{source:r.id}),faces,cause:t.purpose,rollId:Number(t.count)===1?t.dieEventId:undefined});
     if(t.purpose==='thirds-rocket'){r.flags.mainRolled=true;const distance=faces.reduce((a,b)=>a+b,0);s.lastRoll={racerId:r.id,face:faces.at(-1)!,distance};push(s,{kind:'mainMove',racerId:r.id,base:distance});}
     if(t.purpose==='thirds-duel'&&faces[0]!==t.context.face)push(s,trip(r));
     if(t.purpose==='thirds-npc'){

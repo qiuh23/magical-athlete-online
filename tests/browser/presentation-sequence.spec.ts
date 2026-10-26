@@ -2,7 +2,8 @@ import {mkdirSync,writeFileSync} from 'node:fs';
 import {test,expect,type Browser,type Page} from '@playwright/test';
 import {createApplication} from '../../src/server/index.js';
 import {createGame,resolveTasks} from '../../src/engine/index.js';
-import type {GameState,Room} from '../../src/shared/types.js';
+import type {GameEvent,GameState,Room} from '../../src/shared/types.js';
+import {observePresentation,presentationRecords,waitForPresentationRecord,type PresentationSnapshot} from './presentation-observer.js';
 
 let application:ReturnType<typeof createApplication>,url:string;
 test.beforeAll(async()=>{application=createApplication(':memory:');await new Promise<void>(resolve=>application.http.listen(0,'127.0.0.1',resolve));const address=application.http.address();if(!address||typeof address==='string')throw Error('Missing test address');url=`http://127.0.0.1:${address.port}`;});
@@ -17,10 +18,127 @@ async function fixture(browser:Browser,ai:boolean,round=1,configure?:(game:GameS
   await context.addInitScript(({identity})=>{localStorage.setItem(`magical-athlete:identity:${identity.roomCode}`,JSON.stringify(identity));localStorage.setItem('magical-athlete:animation-speed','1');localStorage.setItem('magical-athlete:reduced-motion','false');localStorage.setItem('magical-athlete:low-quality','true');localStorage.setItem('magical-athlete:muted','true');},{identity:created.identity});
   const page=await context.newPage();await page.goto(`${url}/room/${code}`);await expect(page.getByTestId('board-3d')).toHaveAttribute('data-phase','idle');
   await expect.poll(async()=>Number(await page.getByTestId('board-3d').getAttribute('data-triangles'))).toBeGreaterThan(100);
-  await page.evaluate(()=>{const board=document.querySelector('[data-testid="board-3d"]')!;const scope=window as unknown as {__seenPhases:string[]};scope.__seenPhases=[];new MutationObserver(()=>{const phase=board.getAttribute('data-phase')!;if(scope.__seenPhases.at(-1)!==phase)scope.__seenPhases.push(phase);}).observe(board,{attributes:true,attributeFilter:['data-phase']});});
+  await observePresentation(page);
   return{context,page,code};
 }
 const phases=(page:Page)=>page.evaluate(()=>(window as unknown as {__seenPhases:string[]}).__seenPhases);
+type Session=Awaited<ReturnType<typeof fixture>>;
+async function attachFailure(session:Session){
+  // All logs are public game events. Never attach hands, pending context, the
+  // deck, RNG state, or a complete private server room.
+  try{
+    const room=application.rooms.get(session.code);
+    let browser:unknown;try{browser=await presentationRecords(session.page);}catch(error){browser={unavailable:String(error)};}
+    const path=test.info().outputPath('presentation-failure.json');
+    writeFileSync(path,JSON.stringify({server:{code:room.code,version:room.version,phase:room.game.phase,round:room.game.round,currentRacerId:room.game.currentRacerId,logs:room.game.logs,lastRoll:room.game.lastRoll,randomDrawCount:room.game.randomLog.length},browser},null,2));
+    await test.info().attach('presentation-failure.json',{contentType:'application/json',path});
+  }catch{/* Diagnostics must preserve the original assertion failure. */}
+}
+async function settledDie(session:Session,expected:{face:number;actor:string;caption:string;stage?:boolean;positions:Record<string,number>;neutralMonster?:string;eventMarker?:string;eventType:GameEvent['type'];cause:string;source?:string}){
+  const record=await waitForPresentationRecord(session.page,item=>item.phase==='dice'&&!!item.dice?.visible&&item.dice.face===String(expected.face)&&item.dice.caption.includes(expected.caption)&&item.dice.avatarLabel===(expected.stage?expected.actor:`查看${expected.actor}技能与当前玩家`)&&item.dice.avatarTag===(expected.stage?'SPAN':'BUTTON')&&item.dice.buttonCount===(expected.stage?0:1)&&Object.entries(expected.positions).every(([id,position])=>item.positions[id]?.position===position)&&(expected.neutralMonster===undefined||item.neutralMonster===expected.neutralMonster)&&(expected.eventMarker===undefined||item.eventMarker===expected.eventMarker),`${expected.actor} must visibly confirm ${expected.face} with its own portrait before pieces move`);
+  const game=application.rooms.get(session.code).game;
+  const event=game.logs.find(item=>item.type===expected.eventType&&item.cause===expected.cause&&item.source===expected.source&&item.faces?.[0]===expected.face&&(!expected.stage||item.actor?.name===expected.actor));
+  expect(event,'the recorded die must identify its actual public server event').toBeDefined();
+  expect(record.eventIds).toContain(event!.id);expect(record.dice!.eventKey).toBe(`${session.code}:${game.round}:${event!.id}`);
+  return record;
+}
+async function triangleSequence(session:Session,settled:PresentationSnapshot,id:string){
+  const records=await presentationRecords(session.page),logs=application.rooms.get(session.code).game.logs;
+  const skillEvent=logs.find(event=>event.id>settled.eventIds[0]!&&event.type==='power'&&event.source===id&&event.cause==='leaf-triangle-man');
+  const moveEvent=logs.find(event=>event.id>settled.eventIds[0]!&&event.type==='move'&&event.targets?.includes(id)&&event.cause==='leaf-triangle-man');
+  expect(skillEvent,'Triangle must emit its reactive skill').toBeDefined();expect(moveEvent,'Triangle must emit its reactive movement').toBeDefined();
+  const skill=records.find(record=>record.seq>settled.seq&&record.phase==='skill'&&record.eventIds.includes(skillEvent!.id)&&record.positions[id]?.position===8&&record.banner?.text.includes('三角人'));
+  expect(skill,'the Triangle skill must be committed after the settled die, while Triangle is still at 8').toBeDefined();
+  const movement=records.find(record=>record.seq>(skill?.seq??Infinity)&&record.phase==='move'&&record.eventIds.includes(moveEvent!.id)&&record.positions[id]?.position===8&&record.positions[id]?.target===9);
+  expect(movement,'Triangle movement must follow its skill and target 9 from 8').toBeDefined();
+  expect(records.some(record=>record.seq>(movement?.seq??Infinity)&&record.positions[id]?.position===9),'Triangle must reach 9 only after its movement').toBe(true);
+  expect(records.filter(record=>record.seq<=settled.seq&&record.positions[id]).every(record=>record.positions[id]!.position===8),'Triangle must not move before its cause is visible').toBe(true);
+}
+
+test('Triangle waits for the triggering three to settle before its skill and movement',async({browser})=>{
+  const session=await fixture(browser,false,1,game=>{
+    const base=game.racers[0]!;
+    game.racers=['banana','leaf-triangle-man'].map((characterId,index)=>({...base,id:`r${index}`,characterId,position:index?8:0,flags:{}}));
+    game.baseTurnOrder=game.racers.map(racer=>racer.id);
+    game.flags.testDice=[3];
+  });try{
+    const {page,code}=session,board=page.getByTestId('board-3d');
+    const triangle=page.locator('[data-testid="scene-racer"][data-racer-id="r1"]');
+    await page.getByTestId('roll-button').click();
+    const settled=await settledDie(session,{face:3,actor:'香蕉',caption:'香蕉 · 主移动骰',positions:{r1:8},eventType:'die',cause:'main',source:'r0'});
+    await expect(board).toHaveAttribute('data-phase','idle',{timeout:20000});
+    await expect(triangle).toHaveAttribute('data-position','9');
+    await triangleSequence(session,settled,'r1');
+    const seen=(await phases(page)).filter(phase=>phase!=='idle');
+    expect(seen[0]).toBe('dice');expect(seen.indexOf('dice')).toBeLessThan(seen.indexOf('skill'));
+    expect(seen.indexOf('skill')).toBeLessThan(seen.indexOf('move'));
+    expect(seen.filter(phase=>phase==='dice')).toHaveLength(1);
+    expect(application.rooms.get(code).game.randomLog).toHaveLength(1);
+  }catch(error){await attachFailure(session);throw error;}finally{await session.context.close();}
+});
+
+test('choosing an existing six-dice result moves immediately without another throw',async({browser})=>{
+  const session=await fixture(browser,false,1,game=>{
+    game.racers[0]!.characterId='mr-dice-guy';game.racers[0]!.position=4;
+    game.flags.testDice=[2,2,4,4,5,6];
+  });try{
+    const {page,code}=session,board=page.getByTestId('board-3d');
+    await page.getByTestId('skill-choice').getByRole('button',{name:'掷六骰',exact:true}).click();
+    await expect(page.locator('.dice-spotlight[data-dice-mode="multi"]')).toBeVisible();
+    await expect(page.getByTestId('skill-choice')).toBeVisible({timeout:15000});
+    expect(application.rooms.get(code).game.pending?.kind).toBe('mr-dice-pick');
+    mkdirSync('test-results/dice-causality',{recursive:true});
+    await page.screenshot({path:'test-results/dice-causality/six-dice-selection.png'});
+    await page.evaluate(()=>{(window as unknown as {__seenPhases:string[]}).__seenPhases=[];});
+    await page.getByTestId('skill-choice').getByRole('button',{name:'2（2次）',exact:true}).click();
+    await expect(board).toHaveAttribute('data-phase','move');
+    await expect(board).toHaveAttribute('data-phase','idle',{timeout:15000});
+    await expect(page.locator('[data-testid="scene-racer"][data-racer-id="r0"]')).toHaveAttribute('data-position','6');
+    expect(await phases(page)).not.toContain('dice');
+    expect(application.rooms.get(code).game.randomLog).toHaveLength(6);
+  }catch(error){await attachFailure(session);throw error;}finally{await session.context.close();}
+});
+
+test('six-dice threes show their confirmed trigger before Triangle reacts',async({browser})=>{
+  const session=await fixture(browser,false,1,game=>{
+    const base=game.racers[0]!;
+    game.racers=['mr-dice-guy','leaf-triangle-man'].map((characterId,index)=>({...base,id:`r${index}`,characterId,position:index?8:0,flags:{}}));
+    game.baseTurnOrder=game.racers.map(racer=>racer.id);game.flags.testDice=[3,2,2,4,5,6];
+  });try{
+    const {page,code}=session,triangle=page.locator('[data-testid="scene-racer"][data-racer-id="r1"]');
+    await page.getByTestId('skill-choice').getByRole('button',{name:'掷六骰',exact:true}).click();
+    const settled=await settledDie(session,{face:3,actor:'骰子先生',caption:'骰子先生 · 三角人触发骰',positions:{r1:8},eventType:'die-trigger',cause:'mr-dice-guy',source:'r0'});
+    await expect(page.getByTestId('skill-choice')).toBeVisible({timeout:20000});
+    await expect(triangle).toHaveAttribute('data-position','9');
+    await triangleSequence(session,settled,'r1');
+    expect((await phases(page)).filter(phase=>phase!=='idle')).toEqual(['dice','skill','move','dice']);
+    const game=application.rooms.get(code).game;
+    expect(game.randomLog).toHaveLength(6);expect(game.logs.filter(event=>event.type==='multi-dice')).toHaveLength(1);
+  }catch(error){await attachFailure(session);throw error;}finally{await session.context.close();}
+});
+
+test('a single skill die keeps its trigger and confirmation within one throw',async({browser})=>{
+  const session=await fixture(browser,false,1,game=>{
+    const base=game.racers[0]!;
+    game.racers=['banana','nemesis','leaf-triangle-man'].map((characterId,index)=>({...base,id:`r${index}`,characterId,position:index===2?8:index?5:0,flags:{}}));
+    game.baseTurnOrder=game.racers.map(racer=>racer.id);game.flags.testDice=[2,3];
+  });try{
+    const {page,code}=session,board=page.getByTestId('board-3d');
+    await page.getByTestId('roll-button').click();
+    await settledDie(session,{face:2,actor:'香蕉',caption:'香蕉 · 主移动骰',positions:{r2:8},eventType:'die',cause:'main',source:'r0'});
+    await expect(board).toHaveAttribute('data-phase','idle',{timeout:20000});
+    await expect(page.getByTestId('skill-choice')).toBeVisible({timeout:20000});
+    expect(application.rooms.get(code).game.pending?.kind).toBe('nemesis');
+    await page.evaluate(()=>{(window as unknown as {__seenPhases:string[]}).__seenPhases=[];});
+    await page.getByTestId('skill-choice').getByRole('button',{name:'使用技能',exact:true}).click();
+    const settled=await settledDie(session,{face:3,actor:'宿敌',caption:'宿敌 · 三角人触发骰',positions:{r2:8},eventType:'die-trigger',cause:'nemesis',source:'r1'});
+    await expect(board).toHaveAttribute('data-phase','idle',{timeout:20000});
+    await triangleSequence(session,settled,'r2');
+    expect((await phases(page)).filter(phase=>phase==='dice')).toHaveLength(1);
+    expect(application.rooms.get(code).game.randomLog).toHaveLength(2);
+    await expect(page.locator('[data-testid="scene-racer"][data-racer-id="r2"]')).toHaveAttribute('data-position','9');
+  }catch(error){await attachFailure(session);throw error;}finally{await session.context.close();}
+});
 
 test('Suckerfish follow shows the triggering die first and leaves the next main roll manual',async({browser})=>{
   const session=await fixture(browser,false,1,game=>{
@@ -39,7 +157,7 @@ test('Suckerfish follow shows the triggering die first and leaves the next main 
     expect((await phases(page)).filter(phase=>phase==='dice')).toHaveLength(1);
     expect(application.rooms.get(code).game.randomLog).toHaveLength(1);
     await page.waitForTimeout(1500);expect(application.rooms.get(code).game.randomLog).toHaveLength(1);
-  }finally{await session.context.close();}
+  }catch(error){await attachFailure(session);throw error;}finally{await session.context.close();}
 });
 
 test('a rolled Mush ability appears only after its die animation',async({browser})=>{
@@ -48,19 +166,23 @@ test('a rolled Mush ability appears only after its die animation',async({browser
     await expect(page.getByTestId('board-3d')).toHaveAttribute('data-phase','dice');await expect(page.getByTestId('ability-reveal')).toHaveCount(0);
     await expect(page.getByTestId('ability-reveal')).toBeVisible({timeout:15000});
     await expect(page.locator('.dice-spotlight')).toBeHidden();await expect(page.getByTestId('ability-reveal')).toContainText('野兔');
-  }finally{await session.context.close();}
+  }catch(error){await attachFailure(session);throw error;}finally{await session.context.close();}
 });
 
 test('wandering monster dice and cell-change banner use the monster portrait',async({browser})=>{
   const session=await fixture(browser,false,1,game=>{game.track='twisty-twirl';game.racers[0]!.characterId='suckerfish';game.racers[0]!.position=5;game.flags.twist={triggered:true,deck:[],drawn:['alchemy-lab'],monster:{position:1}};game.flags.testDice=[3,4];});try{
     const {page}=session,board=page.getByTestId('board-3d');await page.getByTestId('roll-button').click();
-    const dice=page.getByRole('status',{name:'游荡巨口正在掷赛场效果骰',exact:true});
-    await expect(dice).toBeVisible({timeout:15000});await expect(dice.locator('.dice-source-avatar')).toHaveAttribute('aria-label','游荡巨口');
-    await expect(dice.locator('button')).toHaveCount(0);await expect(board).toHaveAttribute('data-neutral-monster','1');
-    mkdirSync('test-results/dice-causality',{recursive:true});await page.screenshot({path:'test-results/dice-causality/monster-die.png'});
-    await expect(page.getByTestId('skill-banner')).toContainText('游荡巨口');await expect(board).toHaveAttribute('data-neutral-monster','1');
+    const settled=await settledDie(session,{face:4,actor:'游荡巨口',caption:'游荡巨口 · 赛场效果骰',stage:true,positions:{},neutralMonster:'1',eventType:'ability-dice',cause:'twist-alchemy-lab'});
     await expect(board).toHaveAttribute('data-neutral-monster','5');
-  }finally{await session.context.close();}
+    const records=await presentationRecords(page),event=application.rooms.get(session.code).game.logs.find(item=>item.type==='twist-monster'&&item.actor?.name==='游荡巨口'&&item.before?.[0]===1)!;
+    expect(event).toBeDefined();
+    const banner=records.find(record=>record.seq>settled.seq&&record.phase==='skill'&&record.eventIds.includes(event.id)&&record.neutralMonster==='1'&&record.banner?.text.includes('游荡巨口')&&record.banner.avatarLabel==='游荡巨口'&&record.banner.avatarTag==='SPAN'&&record.banner.buttonCount===0);
+    expect(banner,'the monster banner must follow its own settled die before the marker changes').toBeDefined();
+    expect(records.some(record=>record.seq>(banner?.seq??Infinity)&&record.neutralMonster==='5')).toBe(true);
+    // Capture only the stable result, after all causal assertions. CI retains
+    // the existing stable scene evidence without spending a transient window.
+    if(!process.env.CI){mkdirSync('test-results/dice-causality',{recursive:true});await page.screenshot({path:'test-results/dice-causality/monster-after.png'});}
+  }catch(error){await attachFailure(session);throw error;}finally{await session.context.close();}
 });
 
 test('a special-event NPC die is not labelled as Suckerfish automatically taking a main roll',async({browser})=>{
@@ -70,12 +192,42 @@ test('a special-event NPC die is not labelled as Suckerfish automatically taking
     application.rooms.rooms.set(room.code,room);application.store.save(room);
     const reply=application.rooms.act(room.code,room.hostId,{actionId:crypto.randomUUID(),expectedVersion:room.version,action:{type:'next'}});expect(reply.ok).toBe(true);
     const updated=application.rooms.get(room.code);for(const socket of application.io.sockets.sockets.values())if(socket.data.identity?.roomCode===room.code)socket.emit('snapshot',application.rooms.view(updated,socket.data.identity.playerId));
-    const {page}=session,dice=page.locator('.dice-spotlight');await expect(dice).toBeVisible();
-    await expect(dice.locator('.dice-caption')).toContainText('大嘴怪 · 赛场效果骰');await expect(dice.locator('.dice-source-avatar')).toHaveAttribute('aria-label','大嘴怪');
-    await expect(page.getByTestId('board-3d')).toHaveAttribute('data-event-marker','30');
-    await expect(page.getByTestId('skill-banner')).toContainText('大嘴');await expect(page.getByTestId('board-3d')).toHaveAttribute('data-event-marker','26');
+    const {page}=session;
+    const settled=await settledDie(session,{face:4,actor:'大嘴怪',caption:'大嘴怪 · 赛场效果骰',stage:true,positions:{r0:2},eventMarker:'30',eventType:'ability-dice',cause:'thirds-npc'});
+    await expect(page.getByTestId('board-3d')).toHaveAttribute('data-event-marker','26');
+    const records=await presentationRecords(page),event=updated.game.logs.find(item=>item.type==='event-marker'&&item.actor?.characterId==='mouth'&&item.after?.[0]===26)!;
+    expect(event).toBeDefined();
+    const banner=records.find(record=>record.seq>settled.seq&&record.phase==='skill'&&record.eventIds.includes(event.id)&&record.eventMarker==='30'&&record.banner?.text.includes('大嘴')&&record.banner.avatarLabel==='大嘴怪'&&record.banner.avatarTag==='SPAN'&&record.banner.buttonCount===0);
+    expect(banner,'the NPC banner must follow its own settled die before the marker changes').toBeDefined();
+    expect(records.some(record=>record.seq>(banner?.seq??Infinity)&&record.eventMarker==='26')).toBe(true);
     await expect(page.getByTestId('roll-button')).toBeEnabled();expect(updated.game.logs.filter(event=>event.type==='die')).toHaveLength(0);
-  }finally{await session.context.close();}
+  }catch(error){await attachFailure(session);throw error;}finally{await session.context.close();}
+});
+
+test('a stage NPC triggering Triangle keeps its own portrait and effect-die label',async({browser})=>{
+  const session=await fixture(browser,false,1,game=>{
+    const base=game.racers[0]!;
+    game.racers=['suckerfish','leaf-triangle-man'].map((characterId,index)=>({...base,id:`r${index}`,characterId,position:index?8:2,flags:{}}));
+    game.baseTurnOrder=game.racers.map(racer=>racer.id);
+  });try{
+    const room=structuredClone(application.rooms.get(session.code));
+    room.game.flags.thirds={id:'mouth',round:1,held:{},extraCards:[],npc:{id:'mouth',position:30}};
+    room.game.flags.testDice=[3];room.game.flags.needsBegin=true;room.game.queue=[];
+    application.rooms.rooms.set(room.code,room);application.store.save(room);
+    const reply=application.rooms.act(room.code,room.hostId,{actionId:crypto.randomUUID(),expectedVersion:room.version,action:{type:'next'}});
+    expect(reply.ok,reply.error).toBe(true);
+    const updated=application.rooms.get(room.code);
+    for(const socket of application.io.sockets.sockets.values())if(socket.data.identity?.roomCode===room.code)socket.emit('snapshot',application.rooms.view(updated,socket.data.identity.playerId));
+    const {page}=session,board=page.getByTestId('board-3d');
+    const settled=await settledDie(session,{face:3,actor:'大嘴怪',caption:'大嘴怪 · 赛场效果骰 · 触发三角人',stage:true,positions:{r1:8},eventMarker:'30',eventType:'die-trigger',cause:'thirds-npc'});
+    await expect(board).toHaveAttribute('data-phase','idle',{timeout:20000});
+    await expect(board).toHaveAttribute('data-event-marker','27');
+    await expect(page.locator('[data-testid="scene-racer"][data-racer-id="r1"]')).toHaveAttribute('data-position','9');
+    await triangleSequence(session,settled,'r1');
+    expect((await phases(page)).filter(phase=>phase==='dice')).toHaveLength(1);
+    expect(updated.game.logs.filter(event=>event.type==='die')).toHaveLength(0);
+    await expect(page.getByTestId('roll-button')).toBeEnabled();
+  }catch(error){await attachFailure(session);throw error;}finally{await session.context.close();}
 });
 
 test('AI dice, movement and reactive skill finish in order before my next-turn choice appears',async({browser})=>{
@@ -88,7 +240,7 @@ test('AI dice, movement and reactive skill finish in order before my next-turn c
     await expect(session.page.getByTestId('skill-choice')).toBeVisible({timeout:20000});
     const seen=await phases(session.page);expect(seen.indexOf('dice')).toBeLessThan(seen.indexOf('move'));expect(seen.indexOf('move')).toBeLessThan(seen.indexOf('skill'));expect(seen.filter(phase=>phase==='move').length).toBeGreaterThanOrEqual(2);
     expect(application.rooms.get(session.code).game.racers.find(racer=>racer.id==='r2')?.position).toBe(8);
-  }finally{await session.context.close();}
+  }catch(error){await attachFailure(session);throw error;}finally{await session.context.close();}
 });
 
 test('a fast next-round snapshot cannot unmount the current dice or finish animation',async({browser})=>{
@@ -101,7 +253,7 @@ test('a fast next-round snapshot cannot unmount the current dice or finish anima
     await expect(board).toHaveAttribute('data-phase','finish',{timeout:15000});
     await expect(session.page.locator('.hand-selection')).toBeVisible({timeout:15000});expect(await session.page.getByTestId('board-3d').count()).toBe(0);
     expect(await phases(session.page)).toContain('finish');
-  }finally{await session.context.close();}
+  }catch(error){await attachFailure(session);throw error;}finally{await session.context.close();}
 });
 
 
@@ -122,7 +274,7 @@ test('a real Node log gap pages the earliest die, power and move before displayi
     expect((await phases(session.page)).filter(phase=>phase!=='idle')).toEqual(['dice','skill','move']);
     expect(requests.length).toBeGreaterThan(1);expect(requests[0]).toBe(start);expect(requests.every((cursor,index)=>index===0||cursor>requests[index-1]!)).toBe(true);
     await expect(session.page.locator('[data-testid="scene-racer"][data-racer-id="r0"]')).toHaveAttribute('data-position','29');
-  }finally{await session.context.close();}
+  }catch(error){await attachFailure(session);throw error;}finally{await session.context.close();}
 });
 
 
@@ -136,5 +288,5 @@ test('the fourth-race finished snapshot waits for its final die, movement and fi
     mkdirSync('test-results/animation-sequence',{recursive:true});
     await session.page.screenshot({path:'test-results/animation-sequence/final-race-visual-complete.png'});
     writeFileSync('test-results/animation-sequence/final-race-visual-complete.json',JSON.stringify({authoritativePhase:application.rooms.get(session.code).game.phase,observed,resultsVisible:true},null,2));
-  }finally{await session.context.close();}
+  }catch(error){await attachFailure(session);throw error;}finally{await session.context.close();}
 });

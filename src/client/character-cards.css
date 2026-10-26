@@ -1,25 +1,23 @@
-/* Printed character cards: warm stock, quiet ink, and a safe illustration stage. */
+/* Flat cartoon cards with a safe illustration stage. */
 body:has(.character-grid){background:#eceede}
 .avatar{overflow:hidden}
 .avatar.sw-avatar,.avatar.fan-avatar{border-radius:0;clip-path:none;background:transparent}
 .portrait-scene{position:relative;display:block;isolation:isolate;width:100%;aspect-ratio:1;color:var(--portrait-accent)}
-.portrait-scenery{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.portrait-scene>.avatar{position:absolute;width:73%;height:73%;left:13.5%;top:12%;filter:drop-shadow(0 3px 1px #31453a1c);transition:transform .25s ease}
+.portrait-scene>.avatar{position:absolute;width:88%;height:88%;left:6%;top:5%;transition:transform .25s ease}
 .character-grid{gap:24px;align-items:stretch}
 .character-card{position:relative;display:flex;flex-direction:column;min-width:0;padding:7px;border:1px solid #bcc0a9;border-radius:15px;background:#fffdf5;box-shadow:0 2px 3px #3143320b,0 9px 22px -14px #25392d66;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
 .character-card:after{content:"";position:absolute;inset:3px;border:1px solid #dedfce;border-radius:12px;pointer-events:none}
 .character-card.selected{border-color:#426647;outline:3px solid #527851;outline-offset:3px;box-shadow:0 8px 24px -12px #284f4173}
 .character-card.used{opacity:.7}
 .character-card.used .portrait-scene{filter:grayscale(.7)}
-.character-card:nth-child(n) .character-avatar-detail{display:flex;flex-direction:column;justify-content:flex-start;position:relative;height:auto;padding:14px 12px 10px;background-color:var(--portrait-paper);background-image:radial-gradient(#62594312 .65px,transparent .65px);background-size:5px 5px;border:1px solid #536d4826;border-radius:9px 9px 4px 4px;overflow:hidden;color:var(--portrait-accent)}
+.character-card:nth-child(n) .character-avatar-detail{display:flex;flex-direction:column;justify-content:flex-start;position:relative;height:auto;padding:14px 12px 10px;background:var(--portrait-paper);border:1px solid #293b3633;border-radius:9px 9px 4px 4px;overflow:hidden;color:var(--portrait-accent)}
 .card-print-line{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:4px;width:100%;font-family:Georgia,"Times New Roman",serif;font-size:9px;font-weight:700;letter-spacing:.1em;white-space:nowrap}
 .card-print-line>span:last-child{font-size:10px;font-style:italic;letter-spacing:0;font-variant-numeric:tabular-nums}
-.character-avatar-detail .portrait-scene{width:100%;max-width:255px;margin:-1px auto -19px}
-.character-avatar-detail .portrait-scene>.avatar{width:73%;height:73%}
+.character-avatar-detail .portrait-scene{width:100%;max-width:255px;margin:-1px auto -5px}
 .character-avatar-detail:hover .avatar{transform:none}
 .card-art-caption{display:flex;align-items:center;justify-content:space-between;width:100%;border-top:1px solid #536d4830;padding-top:7px;font-size:8px;letter-spacing:.2em;font-weight:700}
 .card-art-caption>span:nth-child(2){font-size:13px;line-height:1;opacity:.6}
-.character-card .character-copy{display:flex;flex-direction:column;flex:1;min-width:0;padding:18px 14px 8px}
+.character-card .character-copy{display:flex;flex-direction:column;flex:1;min-width:0;padding:18px 14px 8px;background:#fffdf5}
 .character-copy h3{font-family:"Noto Serif SC","Songti SC","STSong","SimSun",serif;font-size:25px;line-height:1.35;font-weight:900;letter-spacing:.025em;color:#2c4237;overflow-wrap:anywhere}
 .character-card .english-name{font-family:Georgia,"Times New Roman",serif;font-style:italic;font-size:12px;line-height:1.5;letter-spacing:.02em;font-weight:400;color:#6e7968;opacity:1;margin:4px 0 12px;overflow-wrap:anywhere}
 .character-copy .edition-badge{align-self:flex-start;max-width:100%;margin:0;padding:3px 6px;background:#f2f1e7;color:#66705c;border:1px solid #d5d8c8;border-radius:3px;font-size:9px;line-height:1.5;font-weight:500;white-space:normal}
@@ -56,7 +54,7 @@ body:has(.character-grid){background:#eceede}
  .character-card:nth-child(n) .character-avatar-detail{padding:10px 7px 7px;border-radius:6px 6px 3px 3px}
  .card-print-line{font-size:6px;letter-spacing:.04em}
  .card-print-line>span:last-child{font-size:8px}
- .character-avatar-detail .portrait-scene{margin:2px auto -11px}
+ .character-avatar-detail .portrait-scene{margin:2px auto 0}
  .card-art-caption{font-size:7px;letter-spacing:.05em;padding-top:5px}
  .character-card .character-copy{padding:12px 7px 5px}
  .character-copy h3{font-size:20px;line-height:1.4}
