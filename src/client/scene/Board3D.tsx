@@ -19,7 +19,7 @@ import { DiceSpotlight } from './DiceSpotlight.js';
 import { pawnRoute, strideLift, strideProgress } from './pawn-motion.js';
 import { pawnFallPose } from './pawn-fall.js';
 
-import { actionFocus, choiceFocus, idleFollowFocus, introFocus, ownFocus, pawnOccupancy, pawnWorldPoint, type CameraFocus, type CameraMode } from './camera.js';
+import { actionFocus, choiceFocus, idleFollowFocus, introFocus, ownFocus, pawnOccupancy, pawnWorldPoint, planCameraShot, type CameraFocus, type CameraMode, type CameraShot } from './camera.js';
 import './scene.css';
 
 export interface ScenePlayback {
@@ -89,6 +89,7 @@ export function Board3D({ room, racers, beat, queue, startedAt, durationMs, lowQ
     update();return()=>clearTimeout(timer);
   },[beat?.key,startedAt,durationMs,reducedMotion,introReady]);
   const root = useRef<HTMLElement>(null);
+  const previousShot = useRef<CameraShot | undefined>(undefined);
   const labels = useRef(new Map<string, HTMLSpanElement>());
   const routeButtons = useRef(new Map<string, HTMLButtonElement>());
   const scoreLabel = useRef<HTMLSpanElement>(null);
@@ -98,19 +99,22 @@ export function Board3D({ room, racers, beat, queue, startedAt, durationMs, lowQ
   const selected = presentationActor(beat,racers);
   const dice = beat?.kind === 'dice' || beat?.kind === 'duel-dice';
   const duelContenders = beat?.kind === 'duel-dice' && beat.faces?.length === 2 ? beat.targets.slice(0, 2).flatMap((id, index) => { const racer = racers.find(value => value.id === id); return racer ? [{ racerId: id, characterId: racer.characterId, name: characterName(racer.characterId), face: beat.faces![index]! }] : []; }) : undefined;
+  const currentAction = beat && beat.kind !== 'intro' ? actionFocus(beat, racers, room) : null;
+  const action = currentAction?.positions.length ? currentAction : null;
+  const shot = action && beat ? planCameraShot(beat, racers, queue ?? [], { track: room.track, trackState: room.trackState, compact, width: root.current?.clientWidth || window.innerWidth, height: root.current?.clientHeight || window.innerHeight }, previousShot.current) : undefined;
   useEffect(() => {
-    if (beat && beat.kind !== 'intro') setHeldFocus(actionFocus(beat, racers));
+    if (action) setHeldFocus(action);
   }, [beat?.key]);
-  const action = beat && beat.kind !== 'intro' ? actionFocus(beat, racers) : null;
+  useEffect(() => { previousShot.current = shot; });
   const myAction = action?.ids.some(id => racers.some(racer => racer.id === id && racer.playerId === room.selfId));
   const choosing = !beat && !(queue?.length) ? choiceFocus(room, racers) : undefined;
   const route = choosing && onChooseRoute ? routeChoice(room) : undefined;
   const introIndex = introStep.key === beat?.key ? introStep.index : 0;
   const intro = {focus:beat?.kind==='intro'?introFocus(racers,introIndex,reducedMotion):undefined,racer:beat?.kind==='intro'&&!reducedMotion?racers[introIndex]:undefined,index:introIndex,total:racers.length,reducedMotion,skip:()=>{if(beat?.kind==='intro')onSkipIntro?.();}};
   const idleFocus = autoWatch && heldFocus && heldFocus.chainId !== dismissedChain ? idleFollowFocus(room, racers, heldFocus) : ownFocus(room, racers);
-  const focus: CameraFocus = route && choosing ? choosing : cameraMode === 'overview' ? { state: 'overview', ids: active ? [active] : [], positions: [] } : choosing ?? (manualCamera ? { state: 'manual', ids: [], positions: [] } : intro.focus ?? (action && action.chainId !== dismissedChain && (autoWatch || myAction) ? action : idleFocus));
+  const focus: CameraFocus = route && choosing ? choosing : cameraMode === 'overview' ? { state: 'overview', ids: active ? [active] : [], positions: [] } : choosing ?? (manualCamera ? { state: 'manual', ids: [], positions: [] } : intro.focus ?? (action && action.chainId !== dismissedChain && (autoWatch || myAction) ? shot!.focus : idleFocus));
   const returnSelf = () => { intro.skip(); setCameraMode('self'); setManualCamera(false); setDismissedChain(action?.chainId ?? heldFocus?.chainId ?? 'manual-self'); setCameraReset(value => value + 1); };
-  return <section ref={root} className={`board-scene ${compact ? 'compact-scene' : ''}`} data-testid="board-3d" data-track={room.track} data-node-count={trackNodeIds(room.track).length} data-twist-boundary={TRACKS[room.track].twistBoundary?`${TRACKS[room.track].twistBoundary!.before}-${TRACKS[room.track].twistBoundary!.after}`:undefined} data-neutral-monster={room.trackState?.twist?.monster&&!room.trackState.twist.monster.racerId&&!room.trackState.twist.monster.finished?room.trackState.twist.monster.position:undefined} data-twist-chips={room.trackState?.twist?.chips?.join(',')} data-special-event={room.trackState?.event?.id} data-event-marker={room.trackState?.event?.npc?.position} data-trampolines={room.trackState?.event?.trampolines?.join(',')} data-phase={beat?.kind ?? 'idle'} data-intro-ready={String(introReady)} data-event-ids={beat?.events.map(e => e.id).join(',') ?? ''} data-motion-count={beat?.motions.length ?? 0} data-renderer="react-three-fiber" data-frameloop={beat && beat.kind!=='intro' && !dice && !reducedMotion ? 'always' : 'demand'} data-camera-mode={cameraMode} data-camera-state={focus.state} data-camera-target-ids={focus.ids.join(',')} data-camera-chain-id={focus.chainId ?? ''} aria-label={`${TRACKS[room.track].name}立体棋盘`}>
+  return <section ref={root} className={`board-scene ${compact ? 'compact-scene' : ''}`} data-testid="board-3d" data-track={room.track} data-node-count={trackNodeIds(room.track).length} data-twist-boundary={TRACKS[room.track].twistBoundary?`${TRACKS[room.track].twistBoundary!.before}-${TRACKS[room.track].twistBoundary!.after}`:undefined} data-neutral-monster={room.trackState?.twist?.monster&&!room.trackState.twist.monster.racerId&&!room.trackState.twist.monster.finished?room.trackState.twist.monster.position:undefined} data-twist-chips={room.trackState?.twist?.chips?.join(',')} data-special-event={room.trackState?.event?.id} data-event-marker={room.trackState?.event?.npc?.position} data-trampolines={room.trackState?.event?.trampolines?.join(',')} data-phase={beat?.kind ?? 'idle'} data-intro-ready={String(introReady)} data-event-ids={beat?.events.map(e => e.id).join(',') ?? ''} data-motion-count={beat?.motions.length ?? 0} data-renderer="react-three-fiber" data-frameloop={beat && beat.kind!=='intro' && !dice && !reducedMotion ? 'always' : 'demand'} data-camera-mode={cameraMode} data-camera-state={focus.state} data-camera-target-ids={focus.ids.join(',')} data-camera-chain-id={focus.chainId ?? ''} data-camera-positions={focus.positions.join(',')} data-camera-piece={focus.piece} data-camera-shot={shot?.keys.join(',')} aria-label={`${TRACKS[room.track].name}立体棋盘`}>
     <div className="scene-camera-toolbar">
       <div className="scene-camera-modes" role="group" aria-label="棋盘视角"><button aria-pressed={cameraMode === 'self'} aria-label={spectator ? '跟随当前选手' : undefined} onClick={returnSelf}>{spectator ? '跟随' : '自己'}</button><button aria-pressed={cameraMode === 'overview'} onClick={() => { intro.skip(); setCameraMode('overview'); setManualCamera(false); setCameraReset(value => value + 1); }}>总览</button></div>
       <button className="camera-home" onClick={returnSelf} aria-label="恢复默认视角" title={spectator ? '跟随当前选手' : '回到自己的棋子'}>⌖ <span>{spectator ? '跟随选手' : '回到自己'}</span></button>

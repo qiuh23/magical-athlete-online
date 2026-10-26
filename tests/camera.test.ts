@@ -3,8 +3,10 @@ import assert from 'node:assert/strict';
 import { OrthographicCamera, Vector3 } from 'three';
 import type { Racer, RoomView } from '../src/shared/types.js';
 import type { PresentationBeat } from '../src/client/presentation.js';
-import { actionFocus, idleFollowFocus, advanceIntroStep, cameraFocusPoints, cameraFrame, cameraProject, cameraStep, cameraView, choiceFocus, claimRaceIntro, introFocus, introStepAt, INTRO_REDUCED_MS, INTRO_STEP_MS, ownFocus, pawnOccupancy, pawnWorldPoint, raceIntroEligible, raceIntroKey, resetRaceIntroForSetup, START_CENTER_OFFSET, START_EXTENSION, startPlacement } from '../src/client/scene/camera.js';
+import { actionFocus, planCameraShot, idleFollowFocus, advanceIntroStep, cameraFocusPoints, cameraFrame, cameraProject, cameraStep, cameraView, choiceFocus, claimRaceIntro, introFocus, introStepAt, INTRO_REDUCED_MS, INTRO_STEP_MS, ownFocus, pawnOccupancy, pawnWorldPoint, raceIntroEligible, raceIntroKey, resetRaceIntroForSetup, START_CENTER_OFFSET, START_EXTENSION, startPlacement } from '../src/client/scene/camera.js';
+import { createPlayback, presentedTrackState, receiveRoom } from '../src/client/presentation.js';
 import { BOARD_CENTER_SPAN, boardPoint, TILE } from '../src/client/scene/math.js';
+import { THIRD_EVENTS } from '../src/shared/special-events.js';
 
 const racer = (id: string, playerId: string, position: number): Racer => ({ id, playerId, characterId: 'coach', position, tripped: false, finished: false, eliminated: false, flags: {} });
 const racers = [racer('a', 'me', 2), racer('b', 'other', 14), racer('c', 'me', 7)];
@@ -42,16 +44,72 @@ test('distant swaps and reconnect gaps cannot cause an unbounded camera jump', (
   assert.equal(cameraStep(80, 160, 5, true), 1, 'reduced motion applies the new frame directly');
 });
 
-test('only the current confirmed action frames its actor and path; later reactions wait', () => {
+test('current action identity and motion remain independent of camera anticipation', () => {
   const move = beat('move', 'turn1', 'b', 14, 20);
-  const reaction = beat('reaction', 'turn1', 'a', 2, 4);
-  const otherTurn = beat('later', 'turn2', 'c', 7, 30);
-  const focus = actionFocus(move, racers, [move, reaction, otherTurn]);
+  const focus = actionFocus(move, racers);
   assert.equal(focus.chainId, 'turn1');
   assert.deepEqual(focus.ids, ['b']);
   assert.ok(focus.positions.includes(14) && focus.positions.includes(20));
   assert.ok(!focus.positions.includes(2) && !focus.positions.includes(4));
   assert.ok(!focus.positions.includes(30));
+});
+
+test('Blimp and other public marker moves frame their endpoints instead of the start', () => {
+  for (const characterId of ['blimp', 'mouth', 'legs', 'egg']) {
+    const marker: PresentationBeat = { key: 'marker', chainId: 'turn', kind: 'skill', actor: { name: characterId, characterId }, targets: [], motions: [], durationMs: 1800, events: [{ id: 1, type: 'event-marker', text: '标记移动', before: [17], after: [18] }] };
+    const focus = actionFocus(marker, racers);
+    assert.deepEqual(focus.positions, [17, 18]); assert.deepEqual(focus.ids, []); assert.equal(focus.piece, 'event-npc');
+    for (const compact of [false, true]) {
+      const frame = cameraFrame(focus.positions, compact, compact ? 390 : 1280, compact ? 844 : 900, false, cameraFocusPoints(focus, racers, compact));
+      const before = boardPoint(17, compact), after = boardPoint(18, compact);
+      assert.equal(frame.x, (before[0] + after[0]) / 2); assert.equal(frame.z, (before[2] + after[2]) / 2);
+    }
+  }
+});
+
+test('stage dice use the presented piece position, including future marker rewinds and neutral monsters', () => {
+  const initial: RoomView = { ...room, trackState: { reversed: false, event: { id: 'mouth', description: THIRD_EVENTS.mouth, direction: 1, npc: { id: 'mouth', position: 30 }, trampolines: undefined, newStart: undefined } } };
+  const updated: RoomView = { ...initial, version: 2, trackState: { reversed: false, event: { ...initial.trackState!.event!, npc: { id: 'mouth', position: 26 } } }, logs: [
+    { id: 1, type: 'ability-dice', text: '大嘴掷出4', actor: { name: '大嘴', characterId: 'mouth' }, cause: 'thirds-npc', faces: [4] },
+    { id: 2, type: 'event-marker', text: '大嘴移动', actor: { name: '大嘴', characterId: 'mouth' }, before: [30], after: [26] },
+  ] };
+  const state = receiveRoom(createPlayback(initial), updated);
+  const shown = { trackState: presentedTrackState(updated, state.queue) };
+  assert.deepEqual(actionFocus(state.queue[0]!, racers, shown).positions, [30]);
+  assert.deepEqual(actionFocus(state.queue[1]!, racers, shown).positions, [30, 26]);
+  const neutral: PresentationBeat = { key: 'monster', kind: 'dice', actor: { name: '游荡巨口', characterId: 'mouth' }, cause: 'twist-alchemy-lab', targets: [], motions: [], events: [], durationMs: 2500 };
+  assert.deepEqual(actionFocus(neutral, racers, { trackState: { ...initial.trackState!, twist: { triggered: true, drawn: [], monster: { position: 19 } } } }).positions, [19], 'explicit monster identity wins even if a Mouth event marker also exists');
+  const held = actionFocus(state.queue[1]!, racers, shown);
+  assert.deepEqual(idleFollowFocus({ ...updated, role: 'spectator', selfId: 'watcher' }, racers, held).positions, [26]);
+});
+
+test('nearby confirmed skills keep one readable shot through their movements on desktop and phone', () => {
+  const nearby = [racer('a', 'me', 11), racer('b', 'other', 12), racer('c', 'me', 13)];
+  const first = { ...beat('first', 'chain', 'a', 11, 12), kind: 'skill' as const, motions: [] };
+  const move = beat('move', 'chain', 'a', 11, 12);
+  const second = { ...beat('second', 'chain', 'b', 12, 13), kind: 'skill' as const, motions: [] };
+  const secondMove = beat('second-move', 'chain', 'b', 12, 13);
+  const queue = [first, move, second, secondMove];
+  for (const compact of [false, true]) {
+    const context = { track: 'mild' as const, compact, width: compact ? 390 : 1280, height: compact ? 844 : 900 };
+    const shot = planCameraShot(first, nearby, queue, context);
+    assert.deepEqual(shot.keys, queue.map(value => value.key));
+    assert.deepEqual(shot.focus.ids, ['a', 'b']); assert.deepEqual(shot.focus.positions, [11, 12, 13]);
+    const following = planCameraShot(second, nearby.map(value => value.id === 'a' ? { ...value, position: 12 } : value), queue.slice(2), context, shot);
+    assert.equal(following, shot, 'keep the full composition instead of zooming back in for each reaction');
+    assert.equal(first.kind, 'skill'); assert.deepEqual(first.targets, ['a']); assert.deepEqual(first.motions, []);
+    assert.deepEqual(nearby.map(value => value.position), [11, 12, 13], 'planning never moves the displayed pawns');
+  }
+});
+
+test('shot planning stops at distant effects, dice, new turns and unreadable long chains', () => {
+  const context = { track: 'mild' as const, compact: true, width: 390, height: 844 };
+  const first = beat('first', 'chain', 'a', 2, 3);
+  for (const next of [beat('far', 'chain', 'b', 24, 25), { ...beat('die', 'chain', 'a', 3, 3), kind: 'dice' as const }, beat('turn', 'next-chain', 'a', 3, 4), { ...beat('unknown', 'chain', 'missing', 3, 3), motions: [] }]) {
+    assert.deepEqual(planCameraShot(first, racers, [first, next], context).keys, ['first']);
+  }
+  const long = Array.from({ length: 20 }, (_, index) => ({ ...beat(`long-${index}`, 'chain', 'a', 2, 3), durationMs: 1800 }));
+  assert.ok(planCameraShot(long[0]!, racers, long, context).keys.length <= 3);
 });
 
 test('between turns auto-follow stays with the latest actor, follows own reactions, and returns at own next turn',()=>{

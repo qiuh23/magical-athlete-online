@@ -6,7 +6,9 @@ import { WHIRLY_MODEL_BOUNDS } from './whirly-model.js';
 
 export type CameraMode = 'self' | 'overview';
 export type CameraState = 'self' | 'action' | 'choice' | 'manual' | 'overview' | 'intro';
-export interface CameraFocus { state: CameraState; ids: string[]; positions: number[]; chainId?: string }
+export interface CameraFocus { state: CameraState; ids: string[]; positions: number[]; chainId?: string; piece?: 'event-npc' | 'twist-monster' }
+export interface CameraShot { keys: string[]; focus: CameraFocus }
+export interface CameraContext { track: TrackId; trackState?: RoomView['trackState']; compact: boolean; width: number; height: number }
 export type WorldPoint = [number, number, number];
 export const ACTION_HOLD_MS = 700;
 export const INTRO_STEP_MS = 1350;
@@ -28,23 +30,73 @@ export function cameraStep(distance: number, zoom: number, delta: number, reduce
 }
 
 /** Only public, already-confirmed presentation data enters the camera. */
-export function actionFocus(beat: PresentationBeat, racers: Racer[], _queue: PresentationBeat[] = []): CameraFocus {
-  // Future reactions wait their turn: the camera follows the effect being shown.
-  const beats = [beat];
-  const ids = [...new Set(beats.flatMap(value => [value.source, ...value.targets]).filter((id): id is string => !!id))];
+export function actionFocus(beat: PresentationBeat, racers: Racer[], room?: Pick<RoomView, 'trackState'>): CameraFocus {
+  const ids = [...new Set([beat.source, ...beat.targets, ...beat.motions.map(motion => motion.racerId)]
+    .filter((id): id is string => !!id && racers.some(racer => racer.id === id)))];
   const positions = ids.flatMap(id => {
-    const motions = beats.flatMap(value => value.motions).filter(value => value.racerId === id);
+    const motions = beat.motions.filter(value => value.racerId === id);
     if (motions.length) return motions.flatMap(motion => motion.path);
     const racer = racers.find(value => value.id === id);
     return racer ? [racer.position] : [];
   });
-  return { state: 'action', ids, positions, chainId: beat.chainId ?? beat.key };
+  const npc = room?.trackState?.event?.npc, monster = room?.trackState?.twist?.monster;
+  const marker = beat.events.find(event => event.type === 'event-marker' || event.type === 'twist-monster' && !event.source);
+  const piece = marker ? marker.type === 'event-marker' ? 'event-npc' : 'twist-monster'
+    : beat.cause === 'thirds-npc' ? 'event-npc'
+    : !beat.source && beat.cause === 'twist-alchemy-lab' ? 'twist-monster'
+    : beat.actor && npc?.id === beat.actor.characterId ? 'event-npc' : undefined;
+  if (piece) {
+    // Public pieces have no racer seat. Their event endpoints and presented
+    // track state locate them without borrowing a player or falling back to 0.
+    const endpoints = [...(marker?.before ?? []), ...(marker?.after ?? [])].filter(Number.isFinite);
+    const position = piece === 'event-npc' ? npc?.position : monster?.position;
+    positions.push(...(endpoints.length ? endpoints : position === undefined ? [] : [position]));
+  }
+  return { state: 'action', ids, positions: [...new Set(positions)], chainId: beat.chainId ?? beat.key, ...(piece ? { piece } : {}) };
+}
+
+/** Hold a readable composition for a short, nearby run of confirmed effects.
+ * Only the camera anticipates: highlights, pawns and skill banners keep their
+ * existing event clocks. Dice and turn boundaries always start a new shot. */
+export function planCameraShot(beat: PresentationBeat, racers: Racer[], queue: PresentationBeat[], context: CameraContext, previous?: CameraShot): CameraShot {
+  const current = actionFocus(beat, racers, context);
+  const eligible = (value: PresentationBeat) => ['skill', 'move', 'warp', 'swap', 'trip', 'recover'].includes(value.kind);
+  if (!eligible(beat) || !current.positions.length || !beat.chainId) return { keys: [beat.key], focus: current };
+  if (previous && previous.keys.length > 1 && previous.focus.chainId === current.chainId && previous.keys.includes(beat.key)
+    && current.ids.every(id => previous.focus.ids.includes(id)) && current.positions.every(position => previous.focus.positions.includes(position))) return previous;
+  const frame = (focus: CameraFocus) => cameraFrame(focus.positions, context.compact, context.width, context.height, false, cameraFocusPoints(focus, racers, context.compact, context.track), false, context.track);
+  const baseline = frame(current);
+  const shot: CameraShot = { keys: [beat.key], focus: current };
+  let elapsed = beat.naturalDurationMs ?? beat.durationMs;
+  const index = queue.findIndex(value => value.key === beat.key);
+  if (index < 0) return shot;
+  for (const next of queue.slice(index + 1, index + 6)) {
+    if (!eligible(next) || next.chainId !== beat.chainId) break;
+    elapsed += next.naturalDurationMs ?? next.durationMs;
+    if (elapsed > 6500) break;
+    // Advance only this local planning copy to the next effect's *starting*
+    // positions. Never use a future authoritative snapshot's final positions.
+    const plannedRacers = racers.map(racer => {
+      const motions = queue.slice(index, queue.indexOf(next)).flatMap(value => value.motions).filter(motion => motion.racerId === racer.id);
+      return motions.length ? { ...racer, position: motions.at(-1)!.to } : racer;
+    });
+    const upcoming = actionFocus(next, plannedRacers, context);
+    if (!upcoming.positions.length) break;
+    const combined: CameraFocus = { ...current, ids: [...new Set([...shot.focus.ids, ...upcoming.ids])], positions: [...new Set([...shot.focus.positions, ...upcoming.positions])] };
+    const zoom = frame(combined).zoom;
+    // At most three racers and a modest pullback keep faces/poses readable.
+    if (combined.ids.length > 3 || zoom < Math.max(context.compact ? 42 : 62, baseline.zoom * .72)) break;
+    shot.keys.push(next.key); shot.focus = combined;
+  }
+  return shot;
 }
 
 /** Between actions, stay with the last public actor until my next turn starts. */
 export function idleFollowFocus(room: RoomView, racers: Racer[], lastAction?: CameraFocus | null): CameraFocus {
   const current = racers.find(racer => racer.id === room.currentRacerId);
   if (current?.playerId === room.selfId && !current.finished && !current.eliminated) return ownFocus(room, racers);
+  const piece = lastAction?.piece === 'event-npc' ? room.trackState?.event?.npc : lastAction?.piece === 'twist-monster' ? room.trackState?.twist?.monster : undefined;
+  if (piece && !piece.finished && !('racerId' in piece && piece.racerId)) return { ...lastAction!, ids: [], positions: [piece.position] };
   const lastSource = lastAction?.ids[0] ?? room.logs.findLast(event => ['die', 'roll', 'ability-dice', 'multi-dice', 'power', 'copy', 'transform', 'control', 'mount', 'move', 'warp', 'trip'].includes(event.type) && event.source)?.source;
   const actor = racers.find(racer => racer.id === lastSource) ?? current;
   return actor ? { state: 'action', ids: [actor.id], positions: [actor.position], chainId: lastAction?.chainId } : ownFocus(room, racers);
