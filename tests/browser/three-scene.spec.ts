@@ -3,6 +3,7 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import { createApplication } from '../../src/server/index.js';
 import { resolveTasks } from '../../src/engine/index.js';
 import type { GameState, Room } from '../../src/shared/types.js';
+import { parseRoomCode } from '../../src/client/backends.js';
 
 // Fixtures live only inside this isolated test server. Every tested action is
 // submitted by the actual UI and confirmed by the unchanged rules engine.
@@ -44,12 +45,14 @@ async function pair(browser: Browser, mobile = false, recordVideo = false) {
   await host.getByLabel('每次操作时限').selectOption('0');
   await host.getByRole('button', { name: '创建房间，召集朋友' }).click();
   await expect(host.locator('.connection.is-online')).toBeVisible();
-  const code = host.url().split('/').at(-1)!;
-  await guest.goto(`${url}/room/${code}`);
+  const routeCode = host.url().split('/').at(-1)!, target = parseRoomCode(routeCode);
+  if (!target) throw Error('Missing qualified room code');
+  const code = target.code, backendId = target.backendId ?? 'cloudflare';
+  await guest.goto(`${url}/room/${routeCode}`);
   await guest.getByLabel('你的昵称').fill('立体访客');
   await guest.getByRole('button', { name: '加入这场胡闹' }).click();
   await expect(guest.locator('.connection.is-online')).toBeVisible();
-  const ids = await Promise.all(pages.map(page => page.evaluate(code => JSON.parse(localStorage.getItem(`magical-athlete:identity:${code}`)!).playerId as string, code)));
+  const ids = await Promise.all(pages.map(page => page.evaluate(({ code, backendId }) => JSON.parse(localStorage.getItem(`magical-athlete:identity:${backendId}:${code}`)!).playerId as string, { code, backendId })));
   return { contexts, host, guest, code, ids, errors };
 }
 type Pair = Awaited<ReturnType<typeof pair>>;
