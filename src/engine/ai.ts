@@ -1,5 +1,6 @@
 import { TRACKS } from '../shared/tracks.js';
 import { matchRaceCount } from '../shared/competition.js';
+import { racersPerPlayer } from '../shared/room-config.js';
 import type { GameAction, Racer, RoomView } from '../shared/types.js';
 
 // Only a projected player view crosses this boundary: no deck, random state,
@@ -50,7 +51,7 @@ export function decideAI(view:RoomView):GameAction|undefined {
   const self=view.players.find(p=>p.id===view.selfId);if(!self)return;
   if(view.mode==='practice'&&view.phase==='draft'&&view.draft){const cards=[...view.draft.market].sort((a,b)=>value(b)-value(a)||a.localeCompare(b));return{type:'practice-team',characterIds:cards.slice(0,matchRaceCount(view))};}
   if(view.phase==='draft'&&view.draft?.order[view.draft.cursor]===self.id){const best=[...view.draft.market].sort((a,b)=>value(b)-value(a)||a.localeCompare(b))[0];if(best)return{type:'draft',characterId:best};}
-  if(view.phase==='selection'&&!self.selected){const n=view.players.length===2?2:1;const hand=[...(self.hand??[])].sort((a,b)=>value(b)-value(a)||a.localeCompare(b));if(hand.length>=n)return{type:'select',characterIds:hand.slice(0,n)};}
+  if(view.phase==='selection'&&!self.selected){const n=racersPerPlayer(view.players.length,view.config);const hand=[...(self.hand??[])].sort((a,b)=>value(b)-value(a)||a.localeCompare(b));if(hand.length>=n)return{type:'select',characterIds:hand.slice(0,n)};}
   if(view.phase==='results'&&view.hostId===self.id)return{type:'next'};
   if(view.phase!=='race')return;
   const c=view.pending,r=view.racers.find(r=>r.id===(c?.racerId??view.currentRacerId));
