@@ -6,7 +6,7 @@ import { createGame } from '../src/engine/index.js';
 import { decideAI } from '../src/engine/ai.js';
 import { roomRules, systemRoomAction } from '../src/engine/runtime.js';
 import { presetCompetition, type RaceCount } from '../src/shared/competition.js';
-import { legacyRoomConfig, validateRoomConfigForPlayers } from '../src/shared/room-config.js';
+import { legacyRoomConfig, racersPerPlayer, validateRoomConfigForPlayers } from '../src/shared/room-config.js';
 import { projectRoom } from '../src/shared/room-core.js';
 import type { GameAction, GameState, Player, Room, ScoreBreakdown } from '../src/shared/types.js';
 
@@ -40,10 +40,10 @@ function ledgerBalances(state: GameState) {
   if (state.results.at(-1)?.round === state.round) assert.deepEqual(state.results.at(-1)!.scores, state.scoreLedger);
 }
 
-for (const rounds of [4, 6, 8] as const) for (const count of [2, 3, 8]) test(`all packs with events: ${count} players finish ${rounds} races with public AI, restored rounds and balanced scores`, () => {
-  const seed = 61700 + count * 100 + rounds, cardsPerRace = count === 2 ? 2 : 1;
+for (const rounds of [4, 6, 8] as const) for (const [count,mode] of [[2,'double'],[3,'single'],[3,'double'],[8,'single']] as const) test(`all packs with events: ${count} players ${mode} finish ${rounds} races with public AI, restored rounds and balanced scores`, () => {
+  const seed = 61700 + count * 100 + rounds, cardsPerRace = racersPerPlayer(count,{threePlayerMode:mode});
   const room: Room = { code: 'MAP234', hostId: 'p0', createdAt: 1, updatedAt: 1, version: 1, maxPlayers: count, timeoutSeconds: 0, deadline: null, game: createGame(players(count), seed) };
-  room.game.config = configuration(rounds, count);
+  room.game.config = validateRoomConfigForPlayers({...configuration(rounds, count),threePlayerMode:mode},count);
   roomRules(room.game).startGame(room.game);
   room.game.flags.thirdsDeck=Object.keys(THIRD_EVENTS).slice(((count-2)*8+rounds)%30).concat(Object.keys(THIRD_EVENTS));
   const plan = structuredClone(room.game.matchPlan), restored = new Set<number>();
@@ -98,7 +98,7 @@ for (const rounds of [4, 6, 8] as const) for (const count of [2, 3, 8]) test(`al
     assert.equal(JSON.stringify(state.results), before);
   } catch (error) {
     mkdirSync('.local', { recursive: true });
-    writeFileSync(`.local/event-match-${count}-${rounds}-failure.json`, JSON.stringify({ seed, steps, lastAction, room }, null, 2));
+    writeFileSync(`.local/event-match-${count}-${mode}-${rounds}-failure.json`, JSON.stringify({ seed, steps, lastAction, room }, null, 2));
     throw error;
   }
 });

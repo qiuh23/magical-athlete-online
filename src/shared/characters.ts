@@ -468,12 +468,12 @@ export const ORIGINAL_CHARACTERS: readonly CharacterData[] = [
     "nameEn": "Gunk",
     "nameZh": "黏液怪",
     "translation": "本项目译名",
-    "ability": "所有其他在赛选手的主移动距离减少1格；多个此能力可以叠加，距离减至负数时后退。只改变移动距离，不改变骰子点数。项目双人规则：不影响你控制的另一名选手。",
+    "ability": "所有其他在赛选手的主移动距离减少1格；多个此能力可以叠加，距离减至负数时后退。只改变移动距离，不改变骰子点数。项目双角色规则（两人及三人双角色）：不影响你控制的其他选手。",
     "timing": [
       "main-modifier"
     ],
     "optional": false,
-    "targets": "所有其他在赛选手；项目双人规则下排除你控制的另一名选手",
+    "targets": "所有其他在赛选手；项目双角色规则下排除你控制的其他选手",
     "scope": "全赛道",
     "duration": "自身仍在赛期间",
     "statuses": [],

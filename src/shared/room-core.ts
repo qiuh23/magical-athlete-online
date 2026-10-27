@@ -9,6 +9,13 @@ import { publicCopyCardIds } from './character-info.js';
 import type { RandomSeed } from './random.js';
 import { applyContinuationAction, continuationAction, continuationPaused, updateContinuation } from './room-continuation.js';
 
+function upgradeLobbyRules(room:Room,config:import('./room-config.js').RoomConfig):void {
+  if(room.game.phase==='lobby'&&rulesVersion(room.game)!==CURRENT_RULES_VERSION){
+    const previous=room.game;room.game=createGame(previous.players,0,room.mode,legacyPoolForConfig(config));
+    room.game.rngState=previous.rngState;room.game.randomStream=structuredClone(previous.randomStream);room.game.randomLog=structuredClone(previous.randomLog);
+  }
+}
+
 /** Pure room policy shared by browser authority and future server adapters.
  * Time and entropy are explicit inputs. This module imports no Node APIs. */
 export function validateMetadata(meta: RelayMetadata): void {
@@ -121,10 +128,7 @@ export function reduceRoomAction(original: Room, playerId: string, action: GameA
       { const config = validateRoomConfigForPlayers(action.config,room.maxPlayers,room.mode==='practice');
       // Only an explicit pre-draft edit upgrades an older executable rule set.
       // Preserve its secret entropy rather than resetting it to a public seed.
-      if(room.game.phase==='lobby'&&rulesVersion(room.game)!==CURRENT_RULES_VERSION){
-        const previous=room.game;room.game=createGame(previous.players,0,room.mode,legacyPoolForConfig(config));
-        room.game.rngState=previous.rngState;room.game.randomStream=structuredClone(previous.randomStream);room.game.randomLog=structuredClone(previous.randomLog);
-      }
+      upgradeLobbyRules(room,config);
       room.game.config = config;
       room.game.characterPool = legacyPoolForConfig(room.game.config);
       room.configFrozen = false;
@@ -138,8 +142,14 @@ export function reduceRoomAction(original: Room, playerId: string, action: GameA
       p.ready = action.ready; break;
     case 'start':
       if (room.hostId !== playerId) throw Error('只有房主能开始比赛。');
-      if(room.game.config&&rulesVersion(room.game)===CURRENT_RULES_VERSION)validateRoomConfigForPlayers(room.game.config,room.game.players.length,room.mode==='practice');
       if (room.game.phase !== 'lobby' || room.game.players.length < (room.mode==='practice'?1:2) || !room.game.players.every(p => p.ready && p.connected)) throw Error('需要至少2名玩家，且全员在线并准备。');
+      if(action.threePlayerMode!==undefined){
+        if(room.game.players.length!==3)throw Error('三人玩法仅在实际入座3人时选择，请重新开局。');
+        const config=validateRoomConfigForPlayers({... (room.game.config??legacyRoomConfig(room.game.characterPool)),threePlayerMode:action.threePlayerMode},3);
+        // An explicit start-time choice is a pre-draft configuration edit too.
+        upgradeLobbyRules(room,config);room.game.config=config;
+      }
+      if(room.game.config&&rulesVersion(room.game)===CURRENT_RULES_VERSION)validateRoomConfigForPlayers(room.game.config,room.game.players.length,room.mode==='practice');
       roomRules(room.game).startGame(room.game); room.configFrozen = true; break;
     case 'transfer':
       if (room.hostId !== playerId) throw Error('只有房主能移交管理权。');
@@ -180,7 +190,11 @@ export function validateActionEnvelope(value: unknown): ActionEnvelope {
     case 'results-seen': keys(a,['type','continuationId']); action={type:'results-seen',continuationId:string(a.continuationId)}; break;
     case 'configure': keys(a,['type','config']); action={type:'configure',config:validateRoomConfig(a.config)}; break;
     case 'ready': keys(a,['type','ready']); if (typeof a.ready !== 'boolean') throw Error('准备状态无效。'); action={type:'ready',ready:a.ready}; break;
-    case 'start': case 'roll': case 'next': case 'rematch': case 'close': keys(a,['type']); action={type:a.type}; break;
+    case 'start':
+      keys(a,['type','threePlayerMode']);
+      if(a.threePlayerMode!==undefined&&a.threePlayerMode!=='single'&&a.threePlayerMode!=='double')throw Error('三人玩法无效。');
+      action={type:'start',...(a.threePlayerMode!==undefined?{threePlayerMode:a.threePlayerMode}:{})};break;
+    case 'roll': case 'next': case 'rematch': case 'close': keys(a,['type']); action={type:a.type}; break;
     case 'draft': keys(a,['type','characterId']); action={type:'draft',characterId:string(a.characterId,50)}; break;
     case 'practice-team':
       keys(a,['type','characterIds']);if(!Array.isArray(a.characterIds)||![4,6,8].includes(a.characterIds.length))throw Error('请选择本局所需的4、6或8张练习角色牌。');

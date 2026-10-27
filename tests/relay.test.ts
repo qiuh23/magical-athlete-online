@@ -78,6 +78,15 @@ async function join(env:Awaited<ReturnType<typeof create>>){
   const response=await env.relay.fetch(new Request('https://room.internal/join/ABC234',{method:'POST',body:JSON.stringify({name:'同名'})}));
   assert.equal(response.status,201);return await response.json() as RelayJoinReply;
 }
+for(const capacity of [3,8])for(const mode of ['single','double'] as const)test(`Worker three-player start: ${capacity} seats, ${mode}, durable choice and duplicate receipt`,async()=>{
+  let env=await modern('multiplayer',legacyRoomConfig(),capacity);const members=[env.created,await join(env),await join(env)],peers=[];
+  for(const member of members)peers.push(await authenticate(env,member.identity));
+  for(const peer of peers)assert((await workerAction(env,peer,{type:'ready',ready:true})).result?.ok);
+  const started=await workerAction(env,peers[0]!,{type:'start',threePlayerMode:mode});assert(started.result?.ok);
+  const record=await env.ctx.storage.get<any>('room');assert.equal(record.phase,'draft');assert.equal(record.config.threePlayerMode,mode);assert.equal(record.serverRoom.game.config.threePlayerMode,mode);assert.equal(record.serverRoom.game.players.length,3);assert(record.configFrozen);
+  env={...await instance(env.ctx.storage,env.ctx.sockets),created:env.created};
+  const replay=await workerAction(env,peers[0]!,{type:'start',threePlayerMode:mode},crypto.randomUUID(),started.envelope);assert(replay.result?.ok);assert(replay.result.duplicate);assert.equal((await env.ctx.storage.get<any>('room')).serverRoom.game.config.threePlayerMode,mode);
+});
 const act=(type:'start'|'roll'|'close'='roll'):ActionEnvelope=>({actionId:crypto.randomUUID(),expectedVersion:1,action:{type}});
 async function deliver(env:Awaited<ReturnType<typeof create>>,host:Socket,to:string,view:RoomView,requestId?:string){
   await env.relay.webSocketMessage(host,JSON.stringify({type:'deliver',to,room:view,phase:view.phase,adminHostId:env.created.identity.playerId,...(requestId?{requestId,result:{ok:true,version:view.version}}:{})}));

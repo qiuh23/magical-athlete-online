@@ -95,7 +95,8 @@ function actionEnvelope(value:unknown):value is ActionEnvelope {
   switch(a.type){
     case 'configure':try{return only(a,['type','config'])&&!!validateRoomConfig(a.config);}catch{return false;}
     case 'ready':return only(a,['type','ready'])&&typeof a.ready==='boolean';
-    case 'start':case 'roll':case 'next':case 'rematch':case 'close':return only(a,['type']);
+    case 'start':return only(a,['type','threePlayerMode'])&&(a.threePlayerMode===undefined||a.threePlayerMode==='single'||a.threePlayerMode==='double');
+    case 'roll':case 'next':case 'rematch':case 'close':return only(a,['type']);
     case 'draft':return only(a,['type','characterId'])&&textId(a.characterId,50);
     case 'practice-team':return only(a,['type','characterIds'])&&Array.isArray(a.characterIds)&&[4,6,8].includes(a.characterIds.length)&&a.characterIds.every(id=>textId(id,50));
     case 'select':return only(a,['type','characterIds'])&&Array.isArray(a.characterIds)&&a.characterIds.length>=1&&a.characterIds.length<=2&&a.characterIds.every(id=>textId(id,50));
