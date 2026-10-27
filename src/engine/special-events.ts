@@ -1,5 +1,6 @@
 import { CHARACTERS } from '../shared/characters.js';
 import { THIRD_EVENTS, type ThirdEventId } from '../shared/special-events.js';
+import { eventTwistRestriction } from '../shared/event-twist-compatibility.js';
 import { TRACKS } from '../shared/tracks.js';
 import { nextTrackNodes } from '../shared/track-topology.js';
 import { sharing } from '../shared/race-track.js';
@@ -24,6 +25,7 @@ export function installThirds(ctx:ThirdsContext){
   const {name,live,racer,active,owner,order,ask,push,log}=ctx;
   const state=(s:GameState)=>s.flags.thirds as ThirdsState|undefined;
   const event=(s:GameState,id:ThirdEventId)=>state(s)?.id===id;
+  const description=(s:GameState)=>THIRD_EVENTS[state(s)!.id]+(s.track==='twisty-twirl'?eventTwistRestriction(state(s)!.id):'');
   const work=(step:string,more:Record<string,any>={}):Work=>({kind:'thirds',step,...more});
   const label=(id:string)=>CHARACTERS.find(c=>c.id===id)?.nameZh??id;
   const dieTask=(r:Racer,purpose:string,context:Record<string,any>={},count=1):Work=>({kind:'rollBatch',racerId:r.id,purpose:`thirds-${purpose}`,count,faces:[],context});
@@ -58,7 +60,7 @@ export function installThirds(ctx:ThirdsContext){
   }
   function setup(s:GameState){
     const data=state(s)!;const {id}=data;
-    log(s,'special-event',`特殊赛事：${label(id)} — ${THIRD_EVENTS[id]}`,{cause:`thirds-${id}`});
+    log(s,'special-event',`特殊赛事：${label(id)} — ${description(s)}`,{cause:`thirds-${id}`});
     const rs=order(s);
     if(id==='alchemist'){
       const cards=ctx.shuffle(s,rs.map(r=>r.characterId));rs.forEach((r,i)=>{r.characterId=cards[i]!;});
@@ -316,6 +318,6 @@ export function installThirds(ctx:ThirdsContext){
     for(const id of [...Object.values(data.held),...data.extraCards])if(!s.discard.includes(id))s.discard.push(id);
     data.held={};data.extraCards=[];delete data.guesses;delete data.pendingAwards;
   }
-  function publicState(s:GameState){const data=state(s);if(!data)return;return {id:data.id,description:THIRD_EVENTS[data.id],npc:data.npc?{...data.npc}:undefined,trampolines:data.trampolines?[...data.trampolines]:undefined,direction:data.direction??1,newStart:data.newStart};}
+  function publicState(s:GameState){const data=state(s);if(!data)return;return {id:data.id,description:description(s),npc:data.npc?{...data.npc}:undefined,trampolines:data.trampolines?[...data.trampolines]:undefined,direction:data.direction??1,newStart:data.newStart};}
   return {state,prepareRace,turnStartTasks,mainReady,beforeDie,reroll,finalRoll,distance,afterMainTasks,stops,beforeMotion,beforeFinish,beforeEnd,endTurnTasks,nextTurn,task,choice,rollResult,finishRace,publicState};
 }
