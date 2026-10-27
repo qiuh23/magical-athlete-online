@@ -1,4 +1,6 @@
 import { CHARACTERS } from '../shared/characters.js';
+import { twistEventConflict } from '../shared/event-twist-compatibility.js';
+import type { ThirdEventId } from '../shared/special-events.js';
 import type { ChoiceOption, GameState, PendingChoice, Player, Racer, Task } from '../shared/types.js';
 import { TWIST_CARDS, type TwistCardId } from '../shared/twists.js';
 export { TWIST_CARDS, type TwistCardId } from '../shared/twists.js';
@@ -83,7 +85,7 @@ export function installTwists(ctx:TwistContext){
       }
       case 'bonkbug':t.bonkbug=true;break;
       case 'conveyor':
-        t.conveyor=true;push(s,{kind:'warp',plans:order(s).map(r=>({racerId:r.id,position:ctx.positionAt(s,1)})),cause:'twist-conveyor'});break;
+        t.conveyor=true;push(s,{kind:'warp',plans:order(s).map(r=>({racerId:r.id,position:ctx.positionAt(s,ctx.progress(s,ctx.startPosition(s))+1)})),cause:'twist-conveyor'});break;
       case 'curse-wands':t.curseWands=true;break;
       case 'fans':push(s,work('draw',{triggerId}),work('draw',{triggerId}));break;
       case 'mirror-world':
@@ -183,6 +185,10 @@ export function installTwists(ctx:TwistContext){
     const data=state(s);if(!data)return true;
     switch(t.step){
       case 'draw':{
+        // Filter at every draw so Fans continuations and saved decks use the
+        // revealed event without consuming a draw or shuffling again.
+        const event=(s.flags.thirds as {id:ThirdEventId}|undefined)?.id;
+        data.deck=data.deck.filter(id=>!twistEventConflict(event,id));
         const id=data.deck.shift();if(!id)return true;data.drawn.push(id);
         log(s,'twist',`Twist：${TWIST_CARDS.find(c=>c.id===id)!.name}`,{source:t.triggerId,cause:id});
         applyCard(s,id,String(t.triggerId));break;
