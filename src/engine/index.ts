@@ -470,7 +470,16 @@ function completeMotion(s:GameState,c:Work){
 function resolveStops(s:GameState,c:Work){
   const t=c.motion as Work,moved=c.moved as {racerId:string;distance?:number;follow?:string}[];
   const before=c.before as Record<string,number>,paths=c.paths as Record<string,number[]>;
-  const extra=c.extra as Work[],passEffects=c.passEffects as Work[],movingIds=c.movingIds as string[],arrivals=c.arrivals as string[];
+  const extra=c.extra as Work[],passEffects=c.passEffects as Work[],movingIds=c.movingIds as string[];
+  let arrivals=c.arrivals as string[];
+  if(c.landingStage){
+    // A track warp or field move can replace the original landing entirely.
+    // Its nested movement already resolves its own destination's effects.
+    arrivals=arrivals.filter(id=>{const r=racer(s,id);return r&&live(r)&&r.position===c.arrivalPositions[id];});
+    if(c.landingStage==='event'){
+      push(s,...thirds.stops(s,arrivals,before,t),{...c,arrivals,landingStage:'racers'});return;
+    }
+  }else{
   // Huge Baby's exclusion is a replacement placement, not an extra movement.
   let exclusionChanged=true;
   // Each replacement strictly lowers the displaced racer's position, so this
@@ -491,7 +500,10 @@ function resolveStops(s:GameState,c:Work){
     }
   }
   }
-  const board=arrivals.map(id=>({kind:'board',racerId:id,whirlPair:t.whirlPair}));const stops:Work[]=[...thirds.stops(s,arrivals,before,t),...leafRules.stopTasks(s,arrivals,before,t),...fanStopTasks(s,arrivals,before,t)];
+    const arrivalPositions=Object.fromEntries(arrivals.map(id=>[id,racer(s,id)!.position]));
+    push(s,...arrivals.map(id=>({kind:'board',racerId:id,whirlPair:t.whirlPair})),{...c,arrivals,arrivalPositions,landingStage:'event'});return;
+  }
+  const stops:Work[]=[...leafRules.stopTasks(s,arrivals,before,t),...fanStopTasks(s,arrivals,before,t)];
   if(t.cause==='main')for(const p of moved)racer(s,p.racerId)!.flags.fanMainDistance=Math.sign(p.distance??0)*Math.max(0,(paths[p.racerId]?.length??1)-1);
   for(const source of order(s)){
     for(const power of effectivePowers(s,source)){
@@ -510,7 +522,7 @@ function resolveStops(s:GameState,c:Work){
   }
   for(const carrier of active(s).filter(x=>hogs(x).length)){const targets=order(s,active(s).filter(x=>x.id!==carrier.id&&sameSpace(s,x,carrier)&&arrivals.includes(x.id)&&!arrivals.includes(carrier.id)));for(const target of targets)for(const hogOwnerId of hogs(carrier))stops.push({kind:'hogTake',racerId:target.id,hogOwnerId});}
   const fishDone=moved.filter(p=>p.follow).map(p=>({kind:'powerDone',racerId:p.racerId,power:'suckerfish'}));
-  push(s,...board,{kind:'refreshCopies'},...orderEffectTasks(s,[...passEffects,...stops]),...extra,...fishDone);
+  push(s,{kind:'refreshCopies'},...orderEffectTasks(s,[...passEffects,...stops]),...extra,...fishDone);
 }
 function orderEffectTasks(s:GameState,tasks:Work[]):Work[] { const ids=order(s).map(r=>r.id);return tasks.toSorted((a,b)=>Number(b.priority==='pre-stop')-Number(a.priority==='pre-stop')||ids.indexOf(String(a.racerId))-ids.indexOf(String(b.racerId))); }
 
@@ -635,15 +647,15 @@ function wurstiiMainBonus(s:GameState,r:Racer,power:string):number {
 }
 function mainMove(s:GameState,r:Racer,base:number) {
   if(!live(r))return;
-  let distance=Number(r.flags.showOffDistance??r.flags.fanBase??base);r.flags.showOffDistance=undefined;delete r.flags.fanBase;const effects:Work[]=[];const power=effectivePower(s,r);
-  distance=secondWindDistance(s,r,distance);
+  let distance=Number(r.flags.showOffDistance??r.flags.fanBase??base);r.flags.showOffDistance=undefined;delete r.flags.fanBase;const effects:Work[]=[];
+  distance=secondWindDistance(s,r,distance,effects);
   for(const p of effectivePowers(s,r)){
     const bonus=wurstiiMainBonus(s,r,p);
     if(bonus){distance+=bonus;effects.push({kind:'powerDone',racerId:r.id,power:p});}
   }
-  if(hasPower(s,r,'blimp')){distance+=Number(r.flags.blimpBonus??(progress(s,r)<progress(s,secondCorner(s))?3:-1));effects.push({kind:'powerDone',racerId:r.id,power});}
-  if(hasPower(s,r,'hare')){distance+=2;effects.push({kind:'powerDone',racerId:r.id,power});}
-  if(hasPower(s,r,'party-animal')){const bonus=active(s).filter(x=>x.id!==r.id&&sameSpace(s,x,r)).length;distance+=bonus;if(bonus)effects.push({kind:'powerDone',racerId:r.id,power});}
+  if(hasPower(s,r,'blimp')){distance+=Number(r.flags.blimpBonus??(progress(s,r)<progress(s,secondCorner(s))?3:-1));effects.push({kind:'powerDone',racerId:r.id,power:'blimp'});}
+  if(hasPower(s,r,'hare')){distance+=2;effects.push({kind:'powerDone',racerId:r.id,power:'hare'});}
+  if(hasPower(s,r,'party-animal')){const bonus=active(s).filter(x=>x.id!==r.id&&sameSpace(s,x,r)).length;distance+=bonus;if(bonus)effects.push({kind:'powerDone',racerId:r.id,power:'party-animal'});}
   for(const source of order(s)){
     for(const p of effectivePowers(s,source)){
     if(p==='coach'&&sameSpace(s,source,r)){distance++;effects.push({kind:'powerDone',racerId:source.id,power:p});}
@@ -807,13 +819,18 @@ function rawTask(s:GameState,t:Work) {
     case 'move':case 'warp':motion(s,t);break;
     case 'motion-arrival':completeMotion(s,t);break;
     case 'motion-stops':resolveStops(s,t);break;
-    case 'powerDone':
-      fanPowerDone(s,t);
+    case 'powerDone':{
+      const poohReady=fanPowerDone(s,t);
       // Every individual power activation generates its own response, including
       // separate Leaptoad skipped spaces and distinct passive modifier uses.
-      if(t.power==='leaf-lonely-wolf')break;
-      for(const sc of order(s).filter(x=>x.id!==t.racerId).toReversed())for(const power of effectivePowers(s,sc).filter(p=>p==='scoocher'||p==='wurstii-mr-game-and-watch').toReversed())push(s,{kind:'ability',racerId:sc.id,power,effects:[{kind:'move',racerId:sc.id,distance:1,cause:power}]});
-      break;
+      // All observers belong to the same timing window, regardless of pack.
+      // A response's nested consequences still finish before the next observer.
+      const responses=order(s).flatMap(source=>effectivePowers(s,source).flatMap(power=>{
+        const reacts=power===em('pooh')?poohReady:t.power!=='leaf-lonely-wolf'&&source.id!==t.racerId&&['scoocher','wurstii-mr-game-and-watch'].includes(power);
+        return reacts?[{kind:'ability',racerId:source.id,power,effects:[{kind:'move',racerId:source.id,distance:1,cause:power}]}]:[];
+      }));
+      push(s,...responses);break;
+    }
     case 'board':if(r&&live(r)){
       push(s,...twists.boardTasks(s,r));
       const special=TRACKS[s.track].specials[r.position];if(!special)break;
@@ -843,7 +860,7 @@ function rawTask(s:GameState,t:Work) {
 /** Bounded work is resumable, never an arbitrary limit on valid power chains. */
 export function resolveTasks(s:GameState):void {
   const diagnostic=(s.flags.resolutionDiagnostic??={events:0,rngState:s.rngState,randomStream:s.randomStream?structuredClone(s.randomStream):undefined,startLogId:s.logs.at(-1)?.id??0}) as {events:number;rngState:number;randomStream?:unknown;startLogId:number};
-  type Checkpoint={queueLength:number;tail:string};
+  type Checkpoint={queueLength:number;tail:string;kind?:string};
   const seen=new Map<string,Checkpoint>((s.flags.resolutionSeen??[]) as [string,Checkpoint][]);
   let budget=0,historyBytes=[...seen].reduce((n,[key,value])=>n+key.length+value.tail.length,0);
   const save=()=>{s.flags.resolutionSeen=[...seen];delete s.flags.resolutionSeenScores;delete s.flags.resolutionSuppressed;};
@@ -859,7 +876,10 @@ export function resolveTasks(s:GameState):void {
     const signature=(scoreCycle?'score-cycle:':'')+resolutionSignature(s,scoreCycle),earlier=seen.get(signature);
     const fixedRacer=next.kind==='rollBatch'?racer(s,String(next.racerId)):undefined;
     const fixedDiceCycle=!!fixedRacer&&twists.fixedDie(s,fixedRacer)!==undefined;
-    if(earlier&&(s.queue.length>earlier.queueLength||(scoreCycle||fixedDiceCycle)&&s.queue.length===earlier.queueLength)){
+    // A fully resolved landing can return to the same ability without growing
+    // the continuation stack. Match its exact tail too; separate queued uses
+    // shrink that tail and must still execute independently.
+    if(earlier&&(s.queue.length>earlier.queueLength||(scoreCycle||fixedDiceCycle||next.kind==='ability')&&s.queue.length===earlier.queueLength)){
       const tailLength=earlier.queueLength-1,tail=tailLength?s.queue.slice(-tailLength):[];
       if(JSON.stringify(tail)===earlier.tail){
         if(fixedDiceCycle){s.phase='paused';s.flags.ruleHold={kind:'fixed-die-cycle',message:'固定骰与强制重掷回到同一规则状态，本场暂停并保留待处理效果；未补判名次或分数。'};s.flags.continuation=true;save();log(s,'cycle-paused',String((s.flags.ruleHold as {message:string}).message),{cause:'twist-fixed-die'});return;}
@@ -867,12 +887,26 @@ export function resolveTasks(s:GameState):void {
         s.queue=tail;seen.clear();historyBytes=0;continue;
       }
     }
-    if(!earlier){
-      const checkpoint={queueLength:s.queue.length,tail:JSON.stringify(s.queue.slice(1))};
+    // Landing continuations carry large snapshots but introduce no new rule
+    // action. Keep the bounded history for actual effects rather than evicting
+    // every ability checkpoint before a multi-stage landing finishes.
+    if(!earlier&&!['motion-arrival','motion-stops','board','refreshCopies'].includes(next.kind)){
+      const checkpoint={queueLength:s.queue.length,tail:JSON.stringify(s.queue.slice(1)),kind:next.kind};
       const bytes=signature.length+checkpoint.tail.length;
       // Forgetting a checkpoint may miss a very long cycle but cannot invent
       // one. Bound diagnostic scratch space independently of legal chain size.
-      if(bytes<=96000){while(seen.size&&(seen.size>=256||historyBytes+bytes>96000)){const oldest=[...seen.keys()].find(key=>!key.startsWith('score-cycle:'))??seen.keys().next().value!;const entry=seen.get(oldest)!;historyBytes-=oldest.length+entry.tail.length;seen.delete(oldest);}seen.set(signature,checkpoint);historyBytes+=bytes;}
+      if(bytes<=96000){
+        const boundary=next.kind==='ability'||next.kind==='rollBatch';
+        let room=true;
+        while(seen.size&&(seen.size>=256||historyBytes+bytes>96000)){
+          const ordinary=[...seen.keys()].find(key=>!key.startsWith('score-cycle:')&&!['ability','rollBatch'].includes(seen.get(key)!.kind??''));
+          // Low-level motion details cannot evict every power/roll boundary
+          // before a closed multi-card branch returns to that boundary.
+          if(!ordinary&&!boundary){room=false;break;}
+          const oldest=ordinary??[...seen.keys()].find(key=>!key.startsWith('score-cycle:'))??seen.keys().next().value!;const entry=seen.get(oldest)!;historyBytes-=oldest.length+entry.tail.length;seen.delete(oldest);
+        }
+        if(room){seen.set(signature,checkpoint);historyBytes+=bytes;}
+      }
     }
     const scores=s.players.map(p=>p.score);
     task(s,s.queue.shift()! as Work);
@@ -1084,19 +1118,20 @@ function secondWindRollEffect(s:GameState,r:Racer,t:Work) {
     if(face===6){r.flags.magicPassTrip=true;usePower(s,r,[{kind:'mainMove',racerId:r.id,base:6}],t.power);}
   }
 }
-function secondWindDistance(s:GameState,r:Racer,distance:number):number {
+function secondWindDistance(s:GameState,r:Racer,distance:number,effects:Work[]):number {
   const ps=effectivePowers(s,r);
-  if(ps.includes('blunderdog')){if(extremeTargets(s,false).some(x=>x.id===r.id)){if(r.flags.mainRolled)distance*=3;}else r.flags.mainDirection=-Number(r.flags.mainDirection??1);}
-  if(ps.includes('penguin')&&r.tripped&&r.flags.mainRolled){distance*=2;log(s,'power',`${name(r)}绊倒状态下将主骰加倍`,{source:r.id,cause:'penguin'});}
-  if(ps.includes('gloth'))distance--;
-  if(ps.includes('icarus'))distance+=3;
-  if(ps.includes('overtaker'))distance+=active(s).filter(x=>progress(s,x)>progress(s,r)).length;
-  if(ps.includes('speed-demon'))distance+=owner(s,r).score;
+  const done=(source:Racer,power:string)=>effects.push({kind:'powerDone',racerId:source.id,power});
+  if(ps.includes('blunderdog')){if(extremeTargets(s,false).some(x=>x.id===r.id)){if(r.flags.mainRolled){distance*=3;done(r,'blunderdog');}}else{r.flags.mainDirection=-Number(r.flags.mainDirection??1);done(r,'blunderdog');}}
+  if(ps.includes('penguin')&&r.tripped&&r.flags.mainRolled){distance*=2;log(s,'power',`${name(r)}绊倒状态下将主骰加倍`,{source:r.id,cause:'penguin'});done(r,'penguin');}
+  if(ps.includes('gloth')){distance--;done(r,'gloth');}
+  if(ps.includes('icarus')){distance+=3;done(r,'icarus');}
+  if(ps.includes('overtaker')){const bonus=active(s).filter(x=>progress(s,x)>progress(s,r)).length;if(bonus){distance+=bonus;done(r,'overtaker');}}
+  if(ps.includes('speed-demon')&&owner(s,r).score){distance+=owner(s,r).score;done(r,'speed-demon');}
   // A stolen hog is an object carried by its rider, independent of rider powers.
   distance+=2*hogs(r).length;
   for(const source of order(s)){
-    if(hasPower(s,source,'null')&&progress(s,r)>progress(s,source))distance--;
-    if(hasPower(s,source,'stepdad')&&stepdadTarget(s,source)?.id===r.id)distance+=2;
+    if(hasPower(s,source,'null')&&progress(s,r)>progress(s,source)){distance--;done(source,'null');}
+    if(hasPower(s,source,'stepdad')&&stepdadTarget(s,source)?.id===r.id){distance+=2;done(source,'stepdad');}
   }
   return distance;
 }
@@ -1305,7 +1340,7 @@ function fanChoice(s:GameState,r:Racer,c:PendingChoice,id:string):boolean{
     if(id==='block'&&live(r)&&hasPower(s,r,em('mr-fox'))&&Number(r.flags.foxUsed??0)<3&&source&&(live(source)||pending.kind==='wurstiiAward')){
       r.flags.foxUsed=Number(r.flags.foxUsed??0)+1;pending.reactionBlocked=[...(pending.reactionBlocked??[]),ctx.key];
       log(s,'block',`${owner(s,r).name}的${name(r)}阻止${name(source)}本次「${character(ctx.power)?.nameZh??ctx.power}」（本场剩余${3-Number(r.flags.foxUsed)}次）`,{source:r.id,targets:[source.id],cause:em('mr-fox')});
-      pending.reactionChecked=[...(pending.reactionChecked??[]),ctx.key];push(s,pending,{kind:'powerDone',racerId:r.id,power:em('mr-fox')});
+      pending.reactionChecked=[...(pending.reactionChecked??[]),ctx.key];push(s,{kind:'powerDone',racerId:r.id,power:em('mr-fox')},pending);
     }else{pending.reactionAsked=[...(pending.reactionAsked??[]),`${ctx.key}:${r.id}`];push(s,pending);}return true;
   }
   if(c.kind==='em-heads'){const t=ctx.task as Work;t.heldFace=id==='flip'?7-Number(t.heldFace):t.heldFace;if(id==='flip')usePower(s,r,[t],em('heads'),[{...t,heldFace:7-Number(t.heldFace)}]);else push(s,t);return true;}
@@ -1427,9 +1462,9 @@ function fanStopTasks(s:GameState,arrivals:string[],before:Record<string,number>
   return out;
 }
 function fanPowerDone(s:GameState,t:Work){
-  if(t.power===em('pooh'))return;
+  if(t.power===em('pooh'))return false;
   s.flags.fanTurnPowerCount=Number(s.flags.fanTurnPowerCount??0)+1;
-  if(Number(s.flags.fanTurnPowerCount)>=2)for(const pooh of powers(s,em('pooh')).toReversed())push(s,{kind:'ability',racerId:pooh.id,power:em('pooh'),effects:[{kind:'move',racerId:pooh.id,distance:1,cause:em('pooh')}]});
+  return Number(s.flags.fanTurnPowerCount)>=2;
 }
 function fanRaceEnd(s:GameState,draw:boolean){
   if(s.flags.fanEndRound===s.round)return;s.flags.fanEndRound=s.round;
