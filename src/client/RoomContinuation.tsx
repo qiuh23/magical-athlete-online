@@ -18,7 +18,7 @@ export function RoomContinuationNotice({room, busy, resultsVisible, act}: {room:
   },[c?.id,c?.stage,seen,resultsVisible,busy,room.selfId,room.role]);
   if(!c)return null;
   if(c.stage==='voting')return <div className="modal-backdrop"><section className="modal-panel" role="dialog" aria-modal="true" aria-labelledby="continue-title"><header className="modal-header"><h2 id="continue-title">房主已离开，是否继续？</h2></header><div className="end-room-confirm">
-    <p>房主离线保留期限已到，当前比赛尚未完成。所有在场真人选手同意后只打完当前这一场，本场结果显示后解散。离线席位由 AI 临时代打，回来后可接手。</p>
+    <p>房主离线保留期限已到，当前比赛尚未完成。所有在场真人选手同意后只打完当前这一场，本场结果显示后解散。离线席位由 AI 临时代打，回来后可接手。房主在正式关闭前返回会取消此限制，继续完整对局。</p>
     <p role="status">{Math.max(0,Math.ceil((c.deadline-now)/1000))} 秒内确认 · 已同意 {c.accepted.length}/{c.voters.length} 人；有人拒绝或超时未确认即关闭。</p>
     <ul>{c.voters.map(id=><li key={id}>{room.players.find(p=>p.id===id)?.name}：{c.accepted.includes(id)?'已同意':'等待确认'}</li>)}</ul>
     {c.voters.includes(room.selfId)?<div className="end-room-confirm-actions"><button className="button button-danger" disabled={busy} onClick={()=>void act({type:'continue-vote',continuationId:c.id,continue:false})}>不继续，解散房间</button><button className="button" disabled={busy||c.accepted.includes(room.selfId)} onClick={()=>void act({type:'continue-vote',continuationId:c.id,continue:true})}>{c.accepted.includes(room.selfId)?'已同意，等待其他人':'继续比赛'}</button></div>:<p>正在等待参赛选手确认。</p>}

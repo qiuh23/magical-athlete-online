@@ -58,8 +58,15 @@ export class Store {
     const row = this.db.prepare('SELECT request,result FROM receipts WHERE room_code=? AND player_id=? AND action_id=?').get(code, playerId, actionId) as {request:string;result:string}|undefined;
     return row && {request:row.request,result:JSON.parse(row.result) as ActionReply};
   }
-  commitAction(room: Room, id: string, actionId: string, request: string, result: ActionReply): void {
-    this.transaction(() => { this.save(room); this.db.prepare('INSERT INTO receipts VALUES(?,?,?,?,?)').run(room.code,id,actionId,request,JSON.stringify(result)); });
+  commitAction(room: Room, id: string, actionId: string, request: string, result: ActionReply, revokedId?:string): void {
+    this.transaction(() => {
+      this.save(room); this.db.prepare('INSERT INTO receipts VALUES(?,?,?,?,?)').run(room.code,id,actionId,request,JSON.stringify(result));
+      if(revokedId){
+        this.db.prepare('DELETE FROM identities WHERE room_code=? AND player_id=?').run(room.code,revokedId);
+        this.db.prepare('DELETE FROM receipts WHERE room_code=? AND player_id=?').run(room.code,revokedId);
+        this.db.prepare('DELETE FROM member_receipts WHERE room_code=? AND player_id=?').run(room.code,revokedId);
+      }
+    });
   }
   memberReceipt<T>(code:string,id:string,kind:string,requestId:string):{request:string;result:T}|undefined {
     const row=this.db.prepare('SELECT request,result FROM member_receipts WHERE room_code=? AND player_id=? AND kind=? AND request_id=?').get(code,id,kind,requestId) as {request:string;result:string}|undefined;

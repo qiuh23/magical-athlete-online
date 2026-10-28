@@ -1,0 +1,4 @@
+.seat-kick{flex-shrink:0;min-height:44px;padding:5px 8px;border:1px solid #a94338;border-radius:7px;background:#fff7ed;color:#8e302b;font-size:11px;font-weight:800;cursor:pointer}
+.seat-kick:hover:not(:disabled){background:#ffe3d8}.seat-kick:disabled{opacity:.5;cursor:default}
+.seat:has(.seat-kick)>div{min-width:0;overflow-wrap:anywhere}
+@media(max-width:650px){.end-room-confirm .leave-room-options{grid-template-columns:1fr}}

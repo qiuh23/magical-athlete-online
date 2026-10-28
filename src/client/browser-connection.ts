@@ -192,6 +192,7 @@ export class BrowserRelayConnection implements RoomConnection {
     ws.addEventListener('error', () => { if (generation === this.generation && !this.disposed) this.onStatus('offline', '与联机中继的连接暂时中断，正在重连。'); });
     ws.addEventListener('close', event => {
       if (generation !== this.generation || this.disposed) return;
+      if(event.code===4403){this.disconnect();this.onStatus('kicked','你已被房主踢出房间，原席位和准备状态已清除。');return;}
       if (event.code === 4404 && /过期|3小时/.test(event.reason)) this.roomExpired = true;
       if (event.code === 4410 || this.roomClosed || this.roomExpired) { this.finishClosed(); return; }
       this.authenticated = false; this.synchronized = false; this.authorityRole = false; this.rejectReplies('连接已中断。');
@@ -219,6 +220,8 @@ export class BrowserRelayConnection implements RoomConnection {
       const pending = this.communityReplies.get(message.requestId);
       if (message.result.ok) this.community.update({name: message.result.name, renameRemaining: message.result.remaining});
       if (pending) { clearTimeout(pending.timer); this.communityReplies.delete(message.requestId); pending.resolve(message.result); }
+    } else if (message.type === 'room-kicked') {
+      if(message.code===this.identity.roomCode){this.disconnect();this.onStatus('kicked',message.message);}
     } else if (message.type === 'room-closed') {
       if (message.code === this.identity.roomCode) { this.roomExpired = message.reason === 'expired'; this.roomClosedMessage=message.reason==='host-away'?'房主离线保留期限已到，房间已关闭。':ROOM_CLOSED; this.finishClosed(); }
     } else if (message.type === 'auth-ok') {

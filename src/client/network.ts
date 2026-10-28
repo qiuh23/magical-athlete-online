@@ -193,7 +193,7 @@ export async function enterRoom(code:string|null,data:EntryData):Promise<JoinRep
   if(backend.transport==='worker'&&!code)await prepareBrowserRoom((reply as RelayJoinReply).meta);
   rememberOwnedRoom(reply.room,reply.identity,true);return reply;
 }
-export type ConnectionState = 'connecting' | 'online' | 'offline' | 'error' | 'closed' | 'expired';
+export type ConnectionState = 'connecting' | 'online' | 'offline' | 'error' | 'closed' | 'expired' | 'kicked';
 export function connectRoom(identity: Identity, onSnapshot: (room: RoomView) => void, onStatus: (state: ConnectionState, message?: string) => void): RoomConnection {
   // On an invitation/reload the room may connect before Home has loaded the
   // deployment registry. Never send saved credentials to the page's default.
@@ -220,17 +220,20 @@ function connectConfiguredRoom(identity: Identity, onSnapshot: (room: RoomView) 
   socket.on('snapshot', (room: RoomView) => community.update({messages: room.chat, latestId: room.chatLatestId, renameRemaining: room.renameRemaining, name: room.players.find(player => player.id === identity.playerId)?.name ?? room.spectators?.find(viewer => viewer.id === identity.playerId)?.name},'history'));
   let closed = false;
   let expired = false;
+  let kicked = false;
   let closedMessage='房间已解散，请创建或加入其他房间。';
   const readEvents:NonNullable<RoomConnection['readEvents']>=async afterId=>{
     const reply=await new Promise<PublicEventReply>((resolve,reject)=>socket.timeout(6500).emit('events',{afterId},(error:Error|null,value:PublicEventReply)=>error?reject(error):resolve(value)));
     if(!reply.ok||!reply.batch)throw Error(reply.error??'尚未取得完整动画记录。');return reply.batch;
   };
   const eventClient=new PresentationEventClient(readEvents,receive,error=>onStatus('error',error instanceof Error?error.message:'动画记录同步失败，请重新连接。'));
+  const finishKicked = () => { kicked=true;closed=true;eventClient.reset();forgetIdentity(identity.roomCode,identity);socket.io.reconnection(false);socket.disconnect();onStatus('kicked','你已被房主踢出房间，原席位和准备状态已清除。'); };
   const finishClosed = () => { closed = true; forgetClosedRoom(identity.roomCode,'closed',backend.id); eventClient.reset(); socket.io.reconnection(false); socket.disconnect(); onStatus(expired ? 'expired' : 'closed', expired ? '房间已到期关闭，请重新创建。' : closedMessage); };
   socket.on('connect', () => { eventClient.reset(); if (closed) { finishClosed(); return; } onStatus('online'); socket.emit('sync'); });
   socket.on('snapshot', (room: RoomView) => { if(room.closedAt)receive(room);else eventClient.receive({...room,backendId:backend.id}); if (room.closedAt) { closed = true; socket.io.reconnection(false); onStatus('closed', '房间已解散，请创建或加入其他房间。'); } });
   socket.on('room-closed', (event: { code: string; reason?: 'expired'|'host-away'|'dismissed' }) => { if (event.code === identity.roomCode) { expired = event.reason === 'expired'; if(event.reason==='host-away')closedMessage='房主离线保留期限已到，房间已关闭。'; finishClosed(); } });
-  socket.on('disconnect', () => { if (closed) finishClosed(); else onStatus('offline'); });
+  socket.on('room-kicked',(event:{code:string})=>{if(event.code===identity.roomCode)finishKicked();});
+  socket.on('disconnect', () => { if(kicked)onStatus('kicked');else if (closed) finishClosed(); else onStatus('offline'); });
   socket.on('connect_error', (error: Error & { data?: { code?: string } }) => { if (error.data?.code === 'ROOM_EXPIRED' || /3小时|已过期/.test(error.message)) { expired = true; finishClosed(); } else if (error.data?.code === 'ROOM_CLOSED' || /房间已解散|房间已关闭/.test(error.message)) {if(error.message.includes('房间已关闭'))closedMessage=error.message;finishClosed();} else onStatus('error', error.message); });
   return { get connected() { return !closed && socket.connected; }, subscribeCommunity: community.subscribe, readEvents,
     sendChat(message) { return new Promise((resolve,reject) => socket.timeout(6500).emit('chat-send', message, (error: Error | null, reply: ChatReply) => { if (error) reject(error); else { if (reply.message) community.update({messages: [reply.message]}); resolve(reply); } })); },

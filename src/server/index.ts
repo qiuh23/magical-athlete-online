@@ -15,6 +15,7 @@ import { validateRoomConfig } from '../shared/room-config.js';
 import { connectivityInfo, multiplayerQuota, trustedOrigins, type BackendId } from '../shared/backend-protocol.js';
 
 const action=z.discriminatedUnion('type',[
+  z.object({type:z.literal('kick'),playerId:z.string().uuid()}).strict(),
   z.object({type:z.literal('pause')}).strict(),z.object({type:z.literal('resume')}).strict(),
   z.object({type:z.literal('continue-vote'),continuationId:z.string().max(100),continue:z.boolean()}).strict(),
   z.object({type:z.literal('results-seen'),continuationId:z.string().max(100)}).strict(),
@@ -45,7 +46,11 @@ export function createApplication(dbPath=resolve(process.env.DATA_DIR??'data','r
   app.use('/api',(req,res,next)=>{res.setHeader('Cache-Control','no-store');if(!apiRate.accept(req.ip??'unknown')){res.status(429).json({error:'请求太频繁，请稍后再试。'});return;}next();});
   app.use('/api/rooms',(_req,res,next)=>{if(!acceptingRooms){res.status(503).json({error:'阿里云内地尚未开放。'});return;}next();});
   const io=new Server(http,{maxHttpBufferSize:8192,serveClient:false,cors:{origin:(origin,callback)=>callback(null,allowedOrigin(origin)),methods:['GET','POST']},allowRequest:(req,cb)=>cb(null,allowedOrigin(req.headers.origin)),pingInterval:15000,pingTimeout:20000});
-  const broadcast=(code:string)=>{if(rooms.expire(code))return;const room=rooms.rooms.get(code);if(!room||room.closedAt!==undefined)return;for(const socket of io.sockets.sockets.values()) if(socket.data.identity?.roomCode===code) socket.emit('snapshot',rooms.view(room,socket.data.identity.playerId));};
+  const broadcast=(code:string)=>{if(rooms.expire(code))return;const room=rooms.rooms.get(code);if(!room||room.closedAt!==undefined)return;for(const socket of io.sockets.sockets.values()) if(socket.data.identity?.roomCode===code) {
+    const id=socket.data.identity.playerId;
+    if(!room.game.players.some(p=>p.id===id)&&!room.spectators?.some(p=>p.id===id)){socket.emit('room-kicked',{code,message:'你已被房主踢出房间，原席位和准备状态已清除。'});socket.disconnect(true);continue;}
+    socket.emit('snapshot',rooms.view(room,id));
+  }};
   rooms.onChanged=broadcast;
   const notifyClosed=(code:string)=>{const room=rooms.rooms.get(code),closed=rooms.closed(code);if(room?.closedAt===undefined&&!closed)return;const sockets=[...io.sockets.sockets.values()].filter(socket=>socket.data.identity?.roomCode===code);for(const socket of sockets)socket.emit('room-closed',{code,closedAt:closed?.closedAt??room!.closedAt,...(closed?{reason:closed.reason}:{})});for(const socket of sockets)socket.disconnect(true);};
   rooms.onExpired=(code,expiresAt,reason='expired')=>{resuming.delete(code);const sockets=[...io.sockets.sockets.values()].filter(socket=>socket.data.identity?.roomCode===code);for(const socket of sockets)socket.emit('room-closed',{code,closedAt:expiresAt,reason});for(const socket of sockets)socket.disconnect(true);};
@@ -109,7 +114,7 @@ export function createApplication(dbPath=resolve(process.env.DATA_DIR??'data','r
       let result;try{if(!socketRate.accept(key))throw Error('操作太频繁。');const query=z.object({requestId:z.string().max(100),name:z.string()}).strict().parse(input);result=rooms.rename(i.roomCode,i.playerId,query.requestId,query.name);}catch(error){result={ok:false,error:error instanceof Error?error.message:'修改昵称失败。'};}
       if(typeof ack==='function')ack(result);if(result.ok){broadcast(i.roomCode);publishChat();}
     });
-    socket.on('action',(input:unknown,ack:unknown)=>{let result;let parsed:ActionEnvelope|undefined;try{if(!socketRate.accept(key))throw Error('操作太快，请稍后重试。');parsed=envelope.parse(input) as ActionEnvelope;result=rooms.act(i.roomCode,i.playerId,parsed);}catch(e){result={ok:false,error:e instanceof z.ZodError?'操作格式不正确。':e instanceof Error?e.message:'操作失败。'};} if(typeof ack==='function')ack(result);if(result.ok&&(rooms.rooms.get(i.roomCode)?.closedAt!==undefined||rooms.closed(i.roomCode))){resuming.delete(i.roomCode);notifyClosed(i.roomCode);return;}broadcast(i.roomCode);scheduleContinuation(i.roomCode);});
+    socket.on('action',(input:unknown,ack:unknown)=>{let result;let parsed:ActionEnvelope|undefined;try{if(!socketRate.accept(key))throw Error('操作太快，请稍后重试。');parsed=envelope.parse(input) as ActionEnvelope;result=rooms.act(i.roomCode,i.playerId,parsed);}catch(e){result={ok:false,error:e instanceof z.ZodError?'操作格式不正确。':e instanceof Error?e.message:'操作失败。'};} if(typeof ack==='function')ack(result);if(result.ok&&(rooms.rooms.get(i.roomCode)?.closedAt!==undefined||rooms.closed(i.roomCode))){resuming.delete(i.roomCode);notifyClosed(i.roomCode);return;}if(result.ok&&!result.duplicate&&parsed?.action.type==='kick')publishChat();broadcast(i.roomCode);scheduleContinuation(i.roomCode);});
     socket.on('disconnect',()=>{const list=connections.get(key);list?.delete(socket.id);if(!list?.size){connections.delete(key);rooms.presence(i.roomCode,i.playerId,false);broadcast(i.roomCode);}});
   });
   const timer=setInterval(()=>{for(const code of rooms.tick()){broadcast(code);scheduleContinuation(code);}},250);timer.unref();
