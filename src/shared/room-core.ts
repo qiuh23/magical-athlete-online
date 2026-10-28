@@ -10,6 +10,7 @@ import { publicCopyCardIds } from './character-info.js';
 import type { RandomSeed } from './random.js';
 import { applyContinuationAction, continuationAction, continuationPaused, updateContinuation } from './room-continuation.js';
 import { actionAllowedWhilePaused, canPausePhase } from './room-pause.js';
+import { projectChoice } from './choice-preview.js';
 
 function upgradeLobbyRules(room:Room,config:import('./room-config.js').RoomConfig):void {
   if(room.game.phase==='lobby'&&rulesVersion(room.game)!==CURRENT_RULES_VERSION){
@@ -271,6 +272,6 @@ export function projectRoom(room: Room, playerId: string, options: ProjectionOpt
     pause:room.pause ? {...room.pause} : undefined, phase:g.phase, round:g.round, track:g.track, hosting:'browser', authorityId:options.authorityId, authorityOnline:room.closedAt === undefined && options.authorityOnline, ...(room.closedAt === undefined ? {} : {closedAt:room.closedAt}),
     players:g.players.map(({hand,selection,renameRequestId,...p}) => ({ ...p, handCount:hand.length, selected:selection.length>0, ...(p.id===playerId ? {hand:[...hand],selection:[...selection]} : {}) })),
     draft:g.draft ? structuredClone(g.draft) : undefined, racers:g.racers.map(r=>({...structuredClone(r),flags:{...publicRacerFlags(r.flags),...publicCopyCardIds(r,g.logs),publicAbilities:publicAbilityState(g,r)}})), baseTurnOrder:g.baseTurnOrder?[...g.baseTurnOrder]:undefined, currentRacerId:g.currentRacerId,
-    pending:pending?.playerId===playerId ? {id:pending.id,playerId:pending.playerId,racerId:pending.racerId,title:pending.title,options:structuredClone(pending.options),optional:pending.optional,kind:pending.kind} : undefined,
+    pending:pending?.playerId===playerId ? projectChoice(g,pending) : undefined,
     waitingFor:pending?.playerId,waitingPrompt:pending?{playerId:pending.playerId,racerId:pending.racerId,kind:pending.kind}:undefined, logs:structuredClone(g.logs.slice(-120)), results:structuredClone(g.results), lastRoll:g.lastRoll ? {...g.lastRoll} : undefined, rulesStatus:typeof (g.flags.ruleHold as {message?:unknown}|undefined)?.message==='string'?String((g.flags.ruleHold as {message:string}).message):RULES_STATUS };
 }

@@ -21,8 +21,8 @@ export interface ToyCharacterProps {
   motionEnabled?: boolean;
 }
 
-const MODEL_URL = '/models/toy-racers.glb?v=authored-sculpt-final-20261024';
-const ECONOMY_URL = '/models/toy-racers-economy.glb?v=authored-sculpt-final-20261024';
+const MODEL_URL = '/models/toy-racers.glb?v=blimp-surface-face-20261028';
+const ECONOMY_URL = '/models/toy-racers-economy.glb?v=blimp-surface-face-20261028';
 const createRecovery = (url: string) => new AssetRecovery({
   clearCache: () => useGLTF.clear(url),
   isOnline: () => navigator.onLine,

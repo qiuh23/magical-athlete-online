@@ -45,6 +45,11 @@ export interface RacerFlags extends Record<string, unknown> {
 export interface Racer { id: string; playerId: string; characterId: string; position: number; tripped: boolean; finished: boolean; eliminated: boolean; rank?: number; flags: RacerFlags; }
 export interface ChoiceOption { id: string; label: string; }
 export interface PendingChoice { id: string; playerId: string; racerId?: string; title: string; options: ChoiceOption[]; optional: boolean; kind: string; context: Record<string, unknown>; }
+/** Read-only character hints, projected only to the player answering this choice. */
+export interface PendingChoiceView extends Omit<PendingChoice, 'context' | 'options'> {
+  offeredCharacterId?: string;
+  options: (ChoiceOption & { characterId?: string; racerId?: string })[];
+}
 export interface GameEvent { id: number; type: string; text: string; source?: string; targets?: string[]; faces?: number[]; before?: number[]; after?: number[]; group?: string; cause?: string; selectedCardId?: string; }
 export interface Draft { market: string[]; order: string[]; cursor: number; batch: number; }
 export interface RaceResult { round: number; placements: { racerId: string; playerId: string; characterId: string; rank: number; points: number }[]; }
@@ -62,7 +67,7 @@ export interface RoomView { continuation?: import('./room-continuation.js').Room
 export interface PlayerView extends Omit<Player, 'hand' | 'selection'> { handCount: number; selected: boolean; hand?: string[]; selection?: string[]; }
 export interface PublicEventBatch { afterId: number; latestId: number; events: GameEvent[]; }
 export interface PublicEventReply { ok: boolean; batch?: PublicEventBatch; error?: string; }
-export interface RoomView { presentationEvents?: GameEvent[]; mode?: GameMode; turnStage?: 'starting' | 'choice' | 'roll' | 'resolving'; code: string; version: number; hostId: string; selfId: string; maxPlayers: number; timeoutSeconds: number; deadline: number | null; phase: Phase; round: number; track: import('./tracks.js').TrackId; players: PlayerView[]; draft?: Draft; racers: Racer[]; currentRacerId?: string; pending?: Omit<PendingChoice, 'context'>; waitingFor?: string; logs: GameEvent[]; results: RaceResult[]; lastRoll?: GameState['lastRoll']; rulesStatus: string; }
+export interface RoomView { presentationEvents?: GameEvent[]; mode?: GameMode; turnStage?: 'starting' | 'choice' | 'roll' | 'resolving'; code: string; version: number; hostId: string; selfId: string; maxPlayers: number; timeoutSeconds: number; deadline: number | null; phase: Phase; round: number; track: import('./tracks.js').TrackId; players: PlayerView[]; draft?: Draft; racers: Racer[]; currentRacerId?: string; pending?: PendingChoiceView; waitingFor?: string; logs: GameEvent[]; results: RaceResult[]; lastRoll?: GameState['lastRoll']; rulesStatus: string; }
 export interface Identity { roomCode: string; playerId: string; token: string; role?: RoomRole; backendId?: import('./backend-protocol.js').BackendId; }
 export interface RoomSummary { backendId?: import('./backend-protocol.js').BackendId; }
 export interface RoomView { backendId?: import('./backend-protocol.js').BackendId; }
