@@ -1,7 +1,7 @@
 import { test, expect, type BrowserContext, type Page } from '@playwright/test';
 import { createApplication } from '../../src/server/index.js';
 
-const nodeOrigin = 'http://127.0.0.1:3321', workerOrigin = 'http://127.0.0.1:8797';
+const nodeOrigin = 'http://127.0.0.1:3321', workerOrigin = 'https://127.0.0.1:8797';
 // A management-only SSH tunnel can validate the actual deployed Node instance
 // with the same independent browser flow, without exposing a public game API.
 const aliyunOrigin = process.env.ALIYUN_TEST_ORIGIN ?? nodeOrigin;
@@ -26,6 +26,43 @@ async function configured(context: BrowserContext) {
     localStorage.setItem('magical-athlete:reduced-motion', 'true');
   });
 }
+
+test('legacy cross-entry identity stays at its original webpage and restores the same room',async({browser})=>{
+  const context=await browser.newContext();await configured(context);
+  try {
+    const response=await context.request.post(workerOrigin+'/api/browser/rooms',{data:{name:'旧入口房主',maxPlayers:2,timeoutSeconds:0}});
+    expect(response.status()).toBe(201);
+    const reply=await response.json(),identity={...reply.identity,backendId:'cloudflare'};
+    const route='/room/C-'+identity.roomCode,key=`magical-athlete:identity:cloudflare:${identity.roomCode}`;
+    await context.addInitScript(({identity,key,entry})=>{
+      if(location.origin===entry&&!localStorage.getItem(key)){
+        localStorage.setItem(key,JSON.stringify(identity));
+        localStorage.setItem(key+':player',JSON.stringify(identity));
+      }
+    },{identity,key,entry:entryOrigin});
+    const page=await context.newPage();
+    await page.goto(entryOrigin+route);await online(page);
+    await expect(page).toHaveURL(entryOrigin+route);
+    await expect(page.getByRole('radio',{name:'阿里云内地',exact:true})).toHaveCount(0);
+    await expect(page.locator('.selectable-link')).toHaveAttribute('href',workerOrigin+route);
+    await page.evaluate(()=>Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:()=>Promise.reject(Error('Test manual copy'))}}));
+    await page.getByRole('button',{name:'邀请朋友',exact:true}).click();
+    await expect(page.getByLabel('待复制的邀请内容')).toHaveValue(workerOrigin+route);
+    await page.getByRole('button',{name:'完成',exact:true}).click();
+    await page.getByRole('button',{name:'我准备好了',exact:true}).click();
+    await page.reload();await online(page);
+    await expect(page).toHaveURL(entryOrigin+route);
+    await expect(page.getByRole('button',{name:'取消准备',exact:true})).toBeVisible();
+    expect(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)!),key)).toEqual(identity);
+    await page.goto(entryOrigin);
+    await page.getByRole('button',{name:'返回刚才创建的房间',exact:true}).click();
+    await online(page);await expect(page).toHaveURL(entryOrigin+route);
+    expect(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)!),key)).toEqual(identity);
+    await page.getByRole('button',{name:'结束房间',exact:true}).click();
+    await page.getByRole('button',{name:'确认结束',exact:true}).click();
+    await expect(page.locator('[data-room-closed="true"]')).toBeVisible();
+  } finally {await context.close();}
+});
 async function online(page: Page) { await expect(page.locator('.connection.is-online')).toBeVisible(); }
 async function sendChat(page: Page, text: string) {
   await page.getByRole('button', {name: /^房间聊天/}).click();
@@ -44,6 +81,7 @@ for (const backend of ['cloudflare', 'aliyun'] as const) {
       await host.goto(entryOrigin);
       const server = host.getByRole('radio', {name: backend === 'cloudflare' ? 'Cloudflare' : '阿里云内地', exact: true});
       await expect(server).toBeEnabled(); await server.click();
+      await expect(host).toHaveURL((backend === 'cloudflare' ? workerOrigin : aliyunOrigin)+'/');
       await host.getByRole('tab', {name: '创建房间', exact: true}).click();
       await host.getByLabel('你的昵称').fill(`房主${backend}`);
       await host.getByLabel('房间人数上限').selectOption('2');
@@ -54,6 +92,7 @@ for (const backend of ['cloudflare', 'aliyun'] as const) {
       expect(route).toMatch(backend === 'cloudflare' ? /^\/room\/C-[A-Z2-9]{6}$/ : /^\/room\/A-[A-Z2-9]{6}$/);
       // An independently hosted webpage must use the invitation's backend, not its own origin.
       await guest.goto(workerOrigin + route);
+      await expect(guest).toHaveURL((backend === 'cloudflare' ? workerOrigin : aliyunOrigin)+route);
       await guest.getByLabel('你的昵称').fill(`客人${backend}`);
       await guest.getByRole('button', {name: '加入这场胡闹', exact: true}).click();
       await online(guest);
@@ -74,6 +113,9 @@ for (const backend of ['cloudflare', 'aliyun'] as const) {
       await expect(guest.getByRole('log', {name: '聊天记录'})).toContainText(message);
       await host.getByRole('button', {name: '收起聊天'}).click();
       await host.screenshot({path: testInfo.outputPath(`${backend}-desktop.png`), fullPage: true});
+      await host.getByRole('button',{name:'结束房间',exact:true}).click();
+      await host.getByRole('button',{name:'确认结束',exact:true}).click();
+      await expect(guest.locator('[data-room-closed="true"]')).toBeVisible();
       expect(errors).toEqual([]);
     } finally { await Promise.all(contexts.map(context => context.close())); }
   });
@@ -86,6 +128,7 @@ for (const backend of ['cloudflare', 'aliyun'] as const) {
         await page.goto(entryOrigin);
         const server = page.getByRole('radio', {name: backend === 'cloudflare' ? 'Cloudflare' : '阿里云内地', exact: true});
         await expect(server).toBeEnabled(); await server.click();
+        await expect(page).toHaveURL((backend === 'cloudflare' ? workerOrigin : aliyunOrigin)+'/');
         await page.getByRole('tab', {name: mode === 'practice' ? '自己练习' : '人机对战', exact: true}).click();
         await page.getByLabel('你的昵称').fill(`冒烟${mode}`);
         if (mode === 'ai') await page.getByLabel('AI 人数', {exact: true}).selectOption('1');
@@ -98,6 +141,9 @@ for (const backend of ['cloudflare', 'aliyun'] as const) {
           await page.getByRole('button', {name: '确认练习阵容', exact: true}).click();
           await expect(page.getByRole('heading', {name: '组建你的队伍', exact: true})).toHaveCount(0);
         }
+        await page.getByRole('button',{name:'结束房间',exact:true}).click();
+        await page.getByRole('button',{name:'确认结束',exact:true}).click();
+        await expect(page.locator('[data-room-closed="true"]')).toBeVisible();
       }
     } finally { await context.close(); }
   });

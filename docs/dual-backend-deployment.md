@@ -10,7 +10,7 @@
 
 自动发布新增共享预览：PR 检查成功后更新预览，main 检查成功后更新正式入口，同学提交的 PR 不受作者限制。启用共享预览后每端分配正式 14、预览 1，合计仍最多 30；完整流程及部署状态见 [自动部署说明](automatic-deployment.md) 与实际状态记录。
 
-两端运行相同 Git 提交的 `src/engine` 和 `src/shared`。Worker 继续使用 Durable Objects 和原生 WebSocket，Node 继续使用 SQLite 和 Socket.IO；不复制规则引擎。`src/shared/backend-protocol.ts` 发布共同协议和规则标记，HTTP 与专用实时探测同时成功且版本匹配后，客户端才允许选择。
+两端运行相同 Git 提交的 `src/engine` 和 `src/shared`。Worker 继续使用 Durable Objects 和原生 WebSocket，Node 继续使用 SQLite 和 Socket.IO；不复制规则引擎。`src/shared/backend-protocol.ts` 发布共同协议和规则标记。当前入口的 HTTP 与实时探测成功且版本匹配后才允许建房；其他已部署服务器显示“切换入口”，不依赖跨域探测，也不因 HTTPS 无法访问 HTTP 而被误判下线。
 
 `GET /api/connectivity`、Worker `/api/connectivity/ws`、Node Socket.IO `auth:{probe:true}` 只返回标记，不创建房间、不加载 AI、不写房间名额；实时检测连接完成或超时后释放。房间 API 仍用原来的鉴权凭据和服务端规则结算。
 
@@ -25,7 +25,11 @@
 
 空 `origin` 表示当前网页 origin。Worker 默认使用随前端发布的 `public/backends.json`；Node 开发默认动态返回同源 Socket.IO 配置，生产必须设置 `BACKENDS_CONFIG_JSON`。两种入口均可通过该非密钥环境变量覆盖配置；不要在 URL 参数、邀请码或房间列表里接受任意后端地址。配置仅含公开地址，绝不包含云密钥。
 
-Node 自行提供 `dist/client` 内的完整 HTML、JS、模型、图片等资源，国内入口不需要先打开 Cloudflare 页面。国内 DNS 应直接解析至阿里云公网 IP；不要开启 Cloudflare 代理。跨入口在原网页连接目标后端，身份保留于原网页域的浏览器存储；不同网站域名之间的本地存储不共享，旧玩家应使用原网页入口恢复。
+Node 自行提供 `dist/client` 内的完整 HTML、JS、模型、图片等资源，国内入口不需要先打开 Cloudflare 页面。国内 DNS 应直接解析至阿里云公网 IP；不要开启 Cloudflare 代理。选择服务器通过顶层导航打开配置中的目标 origin，静态资源、API 和实时连接随页面一起切换；同一 origin 不导航。HTTPS → HTTP 不尝试混合内容请求。首页仅探测当前入口、读取当前服务器的房间列表，阿里云游戏不等待 Cloudflare 网络。
+
+邀请链接始终由房间后端的配置 origin 和带前缀的公开房间码构建。无本机身份的带前缀邀请从错误入口打开时自动 `replace` 到对应入口，不复制 query、fragment、身份或 Token。六位旧码保留已有凭据/会话的归属判断，无明确归属时仍由用户确认服务器；不能用当前入口或上次偏好猜测同码房间。
+
+localStorage、sessionStorage 和旧浏览器计算存档仍属于各自网页 origin；不做跨域凭据迁移。已保存身份的旧跨入口房间继续使用原入口与原凭据恢复，局内不展示切服操作；未确认的建房回执禁止切服，仍在原服务器重试同一请求编号。新创建和加入只在目标入口写入身份。Preview 使用其独立 `/backends.json`，切换仅发生于同一环境的两个入口，不回退正式地址。验证证据见[入口切换验收](qa/server-entry-switch/README.md)。
 
 ## 配额切换与存量
 

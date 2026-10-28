@@ -1,11 +1,12 @@
 import { test, expect, type BrowserContext, type Page } from '@playwright/test';
 import { createApplication } from '../../src/server/index.js';
+import {mkdirSync} from 'node:fs';
 
 // The resolver maps these names to this test's loopback listener. Unlike
 // localhost, an ordinary HTTP hostname is not a browser secure context.
 const entryOrigin = 'http://game.http.test:3322';
 const secondEntry = 'http://guest.http.test:3322';
-const workerOrigin = 'http://127.0.0.1:8797';
+const workerOrigin = 'https://127.0.0.1:8797';
 const deployment = { backends: [
   { id: 'cloudflare', origin: workerOrigin, transport: 'worker', enabled: true },
   { id: 'aliyun', origin: entryOrigin, transport: 'socketio', enabled: true, allowInsecureHttp: true },
@@ -71,17 +72,27 @@ for (const backend of ['aliyun', 'cloudflare'] as const) {
   test(`ordinary HTTP entry: ${backend} create/join/chat/reconnect across independent entries`, async ({ browser }, info) => {
     const contexts = await Promise.all([browser.newContext(), browser.newContext()]);
     const errors: string[] = [];
+    const mainlandRequests: string[] = [];
     let host: Page | undefined;
     try {
       await Promise.all(contexts.map(configured));
       host = await contexts[0]!.newPage();
       const guest = await contexts[1]!.newPage();
       for (const page of [host, guest]) page.on('pageerror', error => errors.push(error.message));
-      await host.goto(entryOrigin);
-      expect(await host.evaluate(() => ({ secure: isSecureContext, uuid: typeof crypto.randomUUID, random: typeof crypto.getRandomValues })))
-        .toEqual({ secure: false, uuid: 'undefined', random: 'function' });
+      // Exercise both top-level directions with the real Worker and Node builds.
+      const targetOrigin = backend === 'aliyun' ? entryOrigin : workerOrigin;
+      await host.goto(backend === 'aliyun' ? workerOrigin : entryOrigin);
       const selected = host.getByRole('radio', { name: backend === 'aliyun' ? '阿里云内地' : 'Cloudflare', exact: true });
       await expect(selected).toBeEnabled(); await selected.click();
+      await expect(host).toHaveURL(targetOrigin+'/');
+      if (backend === 'aliyun') {
+        expect(await host.evaluate(() => ({ secure: isSecureContext, uuid: typeof crypto.randomUUID, random: typeof crypto.getRandomValues })))
+          .toEqual({ secure: false, uuid: 'undefined', random: 'function' });
+        // Simulate losing VPN/Cloudflare after reaching the mainland entry.
+        await contexts[0]!.route(workerOrigin+'/**',route=>route.abort('internetdisconnected'));
+        await contexts[0]!.routeWebSocket('wss://127.0.0.1:8797/**',ws=>ws.close());
+        host.on('request',request=>mainlandRequests.push(request.url()));
+      }
       await host.getByRole('tab', { name: '创建房间', exact: true }).click();
       await host.getByLabel('你的昵称').fill(`HTTP房主${backend}`);
       await host.getByLabel('房间人数上限').selectOption('2');
@@ -95,11 +106,20 @@ for (const backend of ['aliyun', 'cloudflare'] as const) {
       const directory = await host.request.get(backend === 'aliyun' ? 'http://127.0.0.1:3322/api/rooms' : `${workerOrigin}/api/browser/rooms`);
       expect(directory.status()).toBe(200);
       expect((await directory.json()).rooms.map((room: { code: string }) => room.code)).not.toContain(code);
-      await guest.goto((backend === 'aliyun' ? secondEntry : workerOrigin) + route);
+      const wrongEntry = backend === 'aliyun' ? workerOrigin : secondEntry;
+      await guest.goto(wrongEntry + route+'?token=must-not-transfer#private');
+      await expect(guest).toHaveURL(targetOrigin+route);
+      if (backend === 'aliyun') {
+        await contexts[1]!.route(workerOrigin+'/**',route=>route.abort('internetdisconnected'));
+        await contexts[1]!.routeWebSocket('wss://127.0.0.1:8797/**',ws=>ws.close());
+        guest.on('request',request=>mainlandRequests.push(request.url()));
+      }
       await guest.getByLabel('你的昵称').fill(`HTTP访客${backend}`);
       await guest.getByRole('button', { name: '加入这场胡闹', exact: true }).click();
       await online(guest);
       await expect(host.locator('.lobby-seats')).toContainText(`HTTP访客${backend}`);
+      await expect(host.getByRole('radio',{name:'Cloudflare',exact:true})).toHaveCount(0);
+      await expect(host.locator('.selectable-link')).toHaveAttribute('href',targetOrigin+route);
       await host.getByRole('button', { name: '我准备好了', exact: true }).click();
       await expect(host.getByRole('button', { name: '取消准备', exact: true })).toBeVisible();
       const message = `HTTP-${backend}-聊天`;
@@ -107,17 +127,29 @@ for (const backend of ['aliyun', 'cloudflare'] as const) {
       await guest.getByRole('button', { name: /^房间聊天/ }).click();
       await expect(guest.getByRole('log', { name: '聊天记录' })).toContainText(message);
       const identity = await persistedIdentity(guest, backend, code);
+      const ownerIdentity = await persistedIdentity(host, backend, code);
       await contexts[1]!.setOffline(true);
       await expect(guest.locator('.connection.is-online')).toHaveCount(0);
       await contexts[1]!.setOffline(false); await online(guest);
       await guest.reload(); await online(guest);
       expect(await persistedIdentity(guest, backend, code)).toEqual(identity);
+      await host.reload();await online(host);
+      expect(await persistedIdentity(host, backend, code)).toEqual(ownerIdentity);
+      await expect(host.getByRole('button',{name:'取消准备',exact:true})).toBeVisible();
       await guest.getByRole('button', { name: /^房间聊天/ }).click();
       await expect(guest.getByRole('log', { name: '聊天记录' })).toContainText(message);
-      await host.getByRole('button', { name: '收起聊天', exact: true }).click();
+      // Reload closes the host's local chat panel, while history remains stored.
+      if (backend === 'aliyun') {
+        expect(mainlandRequests.filter(value=>/^https?:/.test(value)).every(value=>new URL(value).origin===entryOrigin)).toBe(true);
+        expect(mainlandRequests.some(value=>value.includes('/assets/')&&value.endsWith('.js'))).toBe(true);
+        expect(mainlandRequests.some(value=>value.includes('/assets/')&&value.endsWith('.css'))).toBe(true);
+        mkdirSync('docs/qa/server-entry-switch',{recursive:true});
+        await host.screenshot({path:'docs/qa/server-entry-switch/aliyun-independent-desktop.png',fullPage:true});
+      }
       await host.setViewportSize({ width: 390, height: 844 });
       expect(await host.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
       await host.screenshot({ path: info.outputPath(`http-${backend}-mobile.png`), fullPage: true });
+      if (backend === 'aliyun') await host.screenshot({path:'docs/qa/server-entry-switch/aliyun-independent-mobile.png',fullPage:true});
       await closeOwnRoom(host);
       await expect(guest.locator('[data-room-closed="true"]')).toBeVisible();
       expect(errors).toEqual([]);
@@ -137,6 +169,8 @@ test('ordinary HTTP entry: practice can submit a valid dice roll and AI can star
     await page.goto(entryOrigin);
     const backend = page.getByRole('radio', { name: '阿里云内地', exact: true });
     await expect(backend).toBeEnabled(); await backend.click();
+    await context.route(workerOrigin+'/**',route=>route.abort('internetdisconnected'));
+    await context.routeWebSocket('wss://127.0.0.1:8797/**',ws=>ws.close());
     await page.getByRole('tab', { name: '自己练习', exact: true }).click();
     await page.getByRole('button', { name: '开始自己练习', exact: true }).click();
     await online(page);

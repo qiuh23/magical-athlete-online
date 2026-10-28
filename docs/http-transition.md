@@ -1,6 +1,6 @@
 # 临时 HTTP 入口与 HTTPS 切换
 
-临时入口从阿里云公网 IP 独立提供网页、资源、API 和 Socket.IO，浏览器先打开 `http://实例IP`，再在该页面选择阿里云或 Cloudflare。HTTP 页面可以访问受信的 Cloudflare HTTPS/WSS 入口；Cloudflare 的 HTTPS 页面不能直接连接公网 HTTP/WS 后端。后端地址仍只由 `/backends.json` 决定，邀请码不会指定任意 URL。
+临时入口从阿里云公网 IP 独立提供网页、资源、API 和 Socket.IO。首页选服通过顶层导航切换到目标服务器的网页入口，已位于目标 origin 时不刷新；Cloudflare HTTPS → 阿里云 HTTP 不尝试混合内容 API/WebSocket。新建和加入的身份保存在目标网页 origin，带前缀邀请从错误入口打开会自动跳转，仅保留公开房间码。原先保存在其他入口的旧身份继续在原入口恢复，不自动跨域迁移。具体行为与验证统一见[双后端接入](dual-backend-deployment.md)及[入口切换验收](qa/server-entry-switch/README.md)。后端地址仍只由 `/backends.json` 决定，邀请码不会指定任意 URL。
 
 **HTTP 与 IP 不会免除中国内地网站的 ICP 备案要求。** 免费备案申请继续审核，不能把临时 HTTP 已可访问写成备案通过。HTTP 传输不加密，房间凭据、聊天和游戏操作可能被链路上的人读取或篡改。部署脚本默认只允许指定 IPv4 `/32`；在用户明确要求允许其他所有地址后，也支持显式开启公网 IPv4 HTTP 模式。
 
@@ -39,6 +39,6 @@ sudo env PUBLIC_IP=实例公网IPv4 ACCESS_CIDRS=0.0.0.0/0 PUBLIC_HTTP_ACCESS=tr
 sudo env DOMAIN=实际备案域名 CERT_EMAIL=运维邮箱 ICP_CONFIRMED=true bash scripts/deploy/publish.sh
 ```
 
-它会以 HTTPS 站点配置替换临时 IP 配置并启用证书续期。届时安全组按公开 HTTPS 入口开放 80/443，更新两端受信 origin 白名单和 `/backends.json`，验证两种网页入口均能连接两个后端后再标为 HTTPS 正式可用。不要继续使用 HTTP 后端地址，否则 HTTPS 页面仍会受到混合内容限制。
+它会以 HTTPS 站点配置替换临时 IP 配置并启用证书续期。届时安全组按公开 HTTPS 入口开放 80/443，更新两端受信 origin 白名单和 `/backends.json`，验证两个网页入口能互相跳转并在各自入口连接所属后端后再标为 HTTPS 正式可用。域名升级属于后续独立任务。
 
 服务进程、数据目录、配额和房间码保持一致，不需要迁移规则或 SQLite。HTTP IP 与 HTTPS 域名的浏览器存储彼此隔离；切换前让当前临时房间自然结束，或先完成经过验证的凭据迁移，不能把数据库仍在误认为新域名自动拥有旧页面本地身份。更新、代码回滚和备份继续使用 [既有部署流程](dual-backend-deployment.md)。
