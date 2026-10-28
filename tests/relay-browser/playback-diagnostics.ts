@@ -117,7 +117,10 @@ export async function skipQueuedPlayback(page: Page, record = playbackRecord(), 
         const [target] = await skip.elementHandles();
         if (target) {
           record.stage = 'click'; record.attempts++;
-          try { await target.click({ timeout: clickTimeoutMs }); record.clicked = true; }
+          // This overlay must already be reachable in the viewport. Chromium's
+          // automatic scroll can stall with eight software-rendered canvases;
+          // retain visibility, stability and hit-target checks without scrolling.
+          try { await target.click({ timeout: clickTimeoutMs, scroll: 'none' }); record.clicked = true; }
           catch (error) {
             record.clickErrors.push({ elapsedMs: Date.now() - started, message: errorSummary(error) });
             if (record.clickErrors.length > 20) record.clickErrors.shift();
