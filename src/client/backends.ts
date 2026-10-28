@@ -3,7 +3,7 @@ import { PROTOCOL_VERSION, BACKEND_RULES_VERSION, type BackendId } from '../shar
 export type { BackendId } from '../shared/backend-protocol.js';
 
 export interface BackendDefinition { id: BackendId; label: string; origin: string; transport: 'worker' | 'socketio'; enabled: boolean; allowInsecureHttp?: true }
-export interface BackendStatus { backend: BackendDefinition; state: 'checking' | 'available' | 'unavailable' | 'undeployed'; latencyMs?: number; error?: string; entryUrl?: string }
+export interface BackendStatus { backend: BackendDefinition; state: 'checking' | 'available' | 'entry' | 'unavailable' | 'undeployed'; latencyMs?: number; error?: string; entryUrl?: string }
 const labels: Record<BackendId,string> = { cloudflare: 'Cloudflare', aliyun: '阿里云内地' };
 const preferenceKey = 'magical-athlete:backend-preference:v1';
 const pageOrigin = () => typeof location === 'undefined' ? 'http://localhost' : location.origin;
@@ -48,13 +48,26 @@ export async function loadBackends(force=false):Promise<BackendDefinition[]> {
   })().catch(error => { loading = undefined; throw error; });
 }
 export function backendUrl(backend:BackendDefinition, path:string):string { return new URL(path,backend.origin || pageOrigin()).toString(); }
+/** Always rebuild an entry from the trusted registry and a public code only.
+ * Never copy the current query, fragment, credentials or an arbitrary URL. */
+export function roomEntryUrl(backend:BackendDefinition, code?:string):string {
+  const parsed=code ? parseRoomCode(code) : null;
+  return backendUrl(backend,parsed ? `/room/${formatRoomCode(parsed.code,backend.id)}` : '/');
+}
+export function backendEntryUrl(backend:BackendDefinition, code?:string, fromOrigin=pageOrigin()):string|null {
+  if (!backend.enabled || new URL(backend.origin || fromOrigin).origin === new URL(fromOrigin).origin) return null;
+  return roomEntryUrl(backend,code);
+}
+export function currentBackendId():BackendId|undefined {
+  return definitions.find(backend=>backend.enabled && new URL(backend.origin || pageOrigin()).origin === pageOrigin())?.id;
+}
 /** HTTPS cannot fetch/ws a public HTTP origin. Only a deployment-owned entry
  * link may change pages; it carries a room code, never a token or endpoint. */
 export function httpEntryUrl(backend:BackendDefinition, code?:string, fromOrigin=pageOrigin()):string|null {
   if (!backend.enabled || !fromOrigin.startsWith('https:') || !backend.origin.startsWith('http:')) return null;
   if (['localhost','127.0.0.1','[::1]'].includes(new URL(backend.origin).hostname)) return null;
   const parsed=code ? parseRoomCode(code) : typeof location === 'undefined' ? null : parseRoomCode(location.pathname.replace(/^\/room\//,''));
-  return backendUrl(backend,parsed ? `/room/${formatRoomCode(parsed.code,parsed.backendId??backend.id)}` : '/');
+  return roomEntryUrl(backend,parsed ? formatRoomCode(parsed.code,backend.id) : undefined);
 }
 export function temporaryHttpPage():boolean { return pageOrigin().startsWith('http:') && !['localhost','127.0.0.1','[::1]'].includes(new URL(pageOrigin()).hostname); }
 export function roomApiPrefix(backend:BackendDefinition):string { return backendUrl(backend,backend.transport === 'worker' ? '/api/browser/rooms' : '/api/rooms'); }
@@ -64,8 +77,10 @@ function validProbe(value:unknown,id:BackendId):boolean { const item=value as Re
 export async function probeBackend(id:BackendId):Promise<BackendStatus> {
   const backend=getBackend(id);
   if (!backend.enabled) return {backend,state:'undeployed'};
-  const entryUrl=httpEntryUrl(backend);
-  if (entryUrl) return {backend,state:'unavailable',error:'HTTPS 页面无法连接此 HTTP 服务器，请打开临时入口。',entryUrl};
+  const entryUrl=typeof location === 'undefined' ? null : backendEntryUrl(backend);
+  // A different webpage entry is navigable even when this page cannot probe it.
+  // In particular, never attempt mixed-content HTTP or realtime requests.
+  if (entryUrl) return {backend,state:'entry',entryUrl};
   const started=performance.now();
   try {
     const http = (async () => {

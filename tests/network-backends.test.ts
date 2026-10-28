@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createApplication} from '../src/server/index.js';
-import {connectRoom,enterRoom,forgetClosedRoom,forgetIdentity,ownedRoomCandidates,readClosedRoom,readIdentity,readPendingCreation,readRouteIdentity,saveIdentity,wireIdentity} from '../src/client/network.js';
+import {connectRoom,enterRoom,forgetClosedRoom,forgetIdentity,listRoomDirectory,ownedRoomCandidates,readClosedRoom,readIdentity,readPendingCreation,readRouteIdentity,saveIdentity,wireIdentity} from '../src/client/network.js';
 import {probeBackend,loadBackends} from '../src/client/backends.js';
 import type {Identity,RoomView} from '../src/shared/types.js';
 
@@ -63,10 +63,34 @@ test('runtime routing isolates credentials and retries uncertain creation on its
     await t.test('an uncertain pending create cannot move to the other backend',async()=>{
       session.setItem('magical-athlete:pending-create:v1',JSON.stringify({backendId:'aliyun',requestId:'pending-create-same-id',creation:{name:'原房主'}}));
       const before=creationRequests.length;await assert.rejects(enterRoom(null,{name:'新房主',backendId:'cloudflare'}),/原服务器.*尚未确认/);assert.equal(creationRequests.length,before);
-      offlineCn=true;await assert.rejects(enterRoom(null,{name:'原房主',backendId:'aliyun'}),/连接失败/);assert.equal(readPendingCreation()?.requestId,'pending-create-same-id');offlineCn=false;
+      offlineCn=true;await assert.rejects(enterRoom(null,{name:'原房主',backendId:'aliyun'}),/建房结果尚未确认/);assert.equal(readPendingCreation()?.requestId,'pending-create-same-id');offlineCn=false;
       const original=await enterRoom(null,{name:'后来改过的表单',backendId:'aliyun',requestId:'different-ui-id'});
       assert.equal(original.room.players[0]!.name,'原房主');assert.equal(JSON.parse(creationRequests.at(-1)!.body).requestId,'pending-create-same-id');
       session.clear();
+    });
+    await t.test('browser entry guards avoid cross-origin probes and new seats but preserve original pending receipts',async()=>{
+      const locationDescriptor=Object.getOwnPropertyDescriptor(globalThis,'location'),routedFetch=globalThis.fetch;
+      const requests:string[]=[];
+      Object.defineProperty(globalThis,'location',{value:{origin:cfOrigin,pathname:'/'},configurable:true});
+      globalThis.fetch=async(input,init)=>{requests.push(String(input));return routedFetch(input,init);};
+      try {
+        assert.equal((await probeBackend('aliyun')).state,'entry');
+        await assert.rejects(enterRoom(null,{name:'新房主',backendId:'aliyun'}),/先打开.*入口/);
+        await assert.rejects(enterRoom('A-XYZ678',{name:'新访客'}),/先打开.*入口/);
+        assert.equal(requests.length,0,'no remote probe, room creation or join was sent');
+        const directory=await listRoomDirectory();
+        assert.equal(directory.backends?.find(item=>item.backendId==='aliyun')?.error,'请切换入口查看此服务器房间。');
+        assert.equal(requests.some(url=>url.startsWith(cnOrigin)),false);
+        const receipt={backendId:'aliyun',requestId:'legacy-origin-receipt-id',creation:{name:'旧入口原房主'}};
+        session.setItem('magical-athlete:pending-create:v1',JSON.stringify(receipt));
+        const original=await enterRoom(null,{name:'不替换原请求',backendId:'aliyun'});
+        assert.equal(original.room.players[0]!.name,'旧入口原房主');
+        assert.equal(JSON.parse(creationRequests.at(-1)!.body).requestId,receipt.requestId);
+        assert.equal(readPendingCreation(),null);
+      }finally{
+        globalThis.fetch=routedFetch;
+        if(locationDescriptor)Object.defineProperty(globalThis,'location',locationDescriptor);else Reflect.deleteProperty(globalThis,'location');
+      }
     });
   }finally{globalThis.fetch=nativeFetch;await Promise.all([cf.close(),cn.close()]);}
 });

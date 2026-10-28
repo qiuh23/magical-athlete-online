@@ -5,7 +5,7 @@ import type { ActionEnvelope, ActionReply, CharacterPool, ChatReply, ChatSend, G
 import { CommunityFeed, type CommunityState } from './community.js';
 import type { RelayJoinReply } from '../shared/relay.js';
 import { BrowserRelayConnection, prepareBrowserRoom } from './browser-connection.js';
-import { backendUrl, formatRoomCode, getBackend, getBackends, httpEntryUrl, isBackendId, loadBackends, parseRoomCode, probeBackend, roomApiPrefix, type BackendId } from './backends.js';
+import { backendEntryUrl, backendUrl, formatRoomCode, getBackend, getBackends, httpEntryUrl, isBackendId, loadBackends, parseRoomCode, probeBackend, roomApiPrefix, type BackendId } from './backends.js';
 
 export const BROWSER_HOST_MODE = import.meta.env?.VITE_HOST_MODE === 'browser';
 export interface RoomConnection {
@@ -141,7 +141,7 @@ export async function listRoomDirectory():Promise<RoomDirectoryReply> {
   await loadBackends();
   const results=await Promise.all(getBackends().map(async backend=>{
     if(!backend.enabled)return {backendId:backend.id,available:false,error:'未部署',rooms:[] as RoomSummary[]};
-    if(httpEntryUrl(backend))return {backendId:backend.id,available:false,error:'请从临时 HTTP 入口读取此服务器房间。',rooms:[] as RoomSummary[]};
+    if(typeof location !== 'undefined' && backendEntryUrl(backend))return {backendId:backend.id,available:false,error:'请切换入口查看此服务器房间。',rooms:[] as RoomSummary[]};
     try {const response=await fetch(roomApiPrefix(backend),{cache:'no-store',signal:AbortSignal.timeout(4500)}),reply=await response.json();if(!response.ok||!Array.isArray(reply.rooms))throw Error();return {backendId:backend.id,available:true,rooms:(reply.rooms as RoomSummary[]).map(room=>({...room,backendId:backend.id})),capacity:reply.capacity as {used:number;limit:number}|undefined};}
     catch{return {backendId:backend.id,available:false,error:'连接失败',rooms:[] as RoomSummary[]};}
   }));
@@ -165,12 +165,15 @@ export async function enterRoom(code:string|null,data:EntryData):Promise<JoinRep
   const id=parsed?.backendId??data.backendId??enabled[0]?.id;if(!id)throw Error('请先选择可用的服务器。');
   const backend=getBackend(id);if(!backend.enabled)throw Error(`${backend.label}尚未部署或开放。`);
   if(httpEntryUrl(backend,code??undefined))throw Error(`${backend.label}使用临时 HTTP 入口，请打开入口后重试原房间。`);
+  const pending=readPendingCreation();
+  // Existing receipts/identities stay on their original origin. New seats and
+  // rooms must be created at their server's own entry so reload can recover them.
+  if(typeof location !== 'undefined' && backendEntryUrl(backend) && (code || pending?.backendId!==id))throw Error(`请先打开${backend.label}入口，再创建或加入房间。`);
   const {role,backendId:_,...creation}=data;
   let body:unknown=code?{name:data.name,...(role?{role}:{})}:creation;
   if(!code){
-    const pending=readPendingCreation();
     if(pending&&pending.backendId!==id)throw Error(`原服务器${getBackend(pending.backendId).label}的建房结果尚未确认，请先在原服务器重试。`);
-    if((await probeBackend(id)).state!=='available')throw Error(`${backend.label}连接失败，请重新检测或选择服务器。`);
+    if(!pending && (await probeBackend(id)).state!=='available')throw Error(`${backend.label}连接失败，请重新检测或选择服务器。`);
     const request=pending??{backendId:id,requestId:data.requestId??randomId(),creation};
     request.creation={...request.creation,requestId:request.requestId};body=request.creation;
     // This receipt survives reloads; uncertain requests must never move to another backend.
