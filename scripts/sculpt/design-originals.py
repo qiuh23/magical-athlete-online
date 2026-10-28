@@ -49,16 +49,42 @@ def banana():
  L('ink',[(x,y,front_at(body,x,y)+.005)for x,y in [(.005,.49),(.06,.475),(.11,.50)]],.004,'banana-smile')
  return 'Publisher card p22: curved yellow banana, dark stem, orange birdlike feet and side-set face. Peel thickness and reverse seam are project interpretation.'
 def blimp():
- # Full silver dirigible, not the old pink spherical head with basket.
- O('grey',(0,.43,0),(.29,.15,.14),'silver-envelope')
+ # Keep the established silver envelope; the face is printed on its skin.
+ envelope=O('grey',(0,.43,0),(.29,.15,.14),'silver-envelope')
  for z in [-.075,0,.075]:L('paper',[(-.27,.43,z*.25),(-.13,.53,z),(.12,.53,z),(.27,.43,z*.25)],.004,'envelope-rib')
- for d in [-1,1]:fin('grey',[(d*.02,.43,-.08),(d*.02,.60,-.19),(d*.02,.43,-.22)],'tail-fin',.04)
- O('grey',(-.22,.40,.10),(.045,.04,.03),'nose-cheek')
- for x in [-.245,-.195]:eye(x,.45,.105,.017)
- O('red',(-.22,.365,.12),(.025,.012,.008),'small-gasp')
- # Tiny undercarriage feet are sculpt supports, not a separate pedestal.
- for x in [-.10,.10]:B('grey',(x,.265,0),(.055,.065,.045),'undercarriage')
- return 'Publisher card p22: silver ribbed dirigible with small face near the nose. Full tail fins and compact undercarriage inferred; explosion omitted from the static pawn.'
+ # The nose is at -X: anchor thin stabilisers at the opposite end of the hull.
+ fin('grey',[(.16,.47,0),(.24,.59,0),(.30,.59,0),(.28,.43,0)],'tail-fin-vertical',.014)
+ fin('grey',[(.16,.43,0),(.28,.43,0),(.31,.43,.16),(.23,.43,.16)],'tail-fin-right',.014)
+ fin('grey',[(.16,.43,0),(.23,.43,-.16),(.31,.43,-.16),(.28,.43,0)],'tail-fin-left',.014)
+ def skin_mark(color,x,y,rx,ry,tag,offset=.001):
+  # Sample the real envelope, so every part of the expression hugs its curve.
+  vertices=[(x,y,front_at(envelope,x,y)+offset)]
+  for ring in range(1,4):
+   for i in range(24):
+    a=i*math.tau/24;px=x+rx*ring/3*math.cos(a);py=y+ry*ring/3*math.sin(a)
+    vertices.append((px,py,front_at(envelope,px,py)+offset))
+  faces=[(0,1+i,1+(i+1)%24)for i in range(24)]
+  for ring in range(2):
+   a=1+ring*24;b=a+24
+   faces.extend((a+i,b+i,b+(i+1)%24,a+(i+1)%24)for i in range(24))
+  # Close each printed mark with a thin back just inside the envelope. The
+  # visible surface stays unchanged, while the exported piece is watertight.
+  count=len(vertices);front=list(faces)
+  vertices.extend((px,py,pz-offset-.00025)for px,py,pz in vertices[:count])
+  faces.extend(tuple(count+i for i in reversed(face))for face in front)
+  edge=1+2*24
+  faces.extend((edge+i,count+edge+i,count+edge+(i+1)%24,edge+(i+1)%24)for i in range(24))
+  mesh=bpy.data.meshes.new(tag);mesh.from_pydata(vertices,[],faces);mesh.update()
+  ob=bpy.data.objects.new(tag,mesh);scene.collection.objects.link(ob);return add(ob,color,tag)
+ for x in [-.215,-.170]:
+  skin_mark('paper',x,.455,.016,.021,'eye-white')
+  skin_mark('ink',x-.003,.455,.006,.012,'eye-pupil',.0018)
+ skin_mark('red',-.197,.410,.020,.008,'small-gasp')
+ # Two short struts connect a single gondola to the envelope.
+ for x in [-.07,.07]:L('grey',[(x,.30,0),(x,.26,0)],.009,'gondola-strut')
+ O('grey',(0,.24,.01),(.115,.035,.048),'gondola')
+ for x in [-.055,0,.055]:B('ink',(x,.248,.054),(.033,.018,.003),'gondola-window')
+ return 'Publisher card p22: silver ribbed dirigible with small face near the nose. Face marks conform to the envelope, without a separate cheek or head. Thin tail stabilisers and a connected single gondola are project sculpt interpretation; explosion omitted from the static pawn.'
 def centaur():
  body=O('red',(0,.30,-.06),(.17,.13,.24),'horse-barrel')
  for d in [-1,1]:

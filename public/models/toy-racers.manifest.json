@@ -96,15 +96,15 @@
     {
       "id": "blimp",
       "node": "toy_blimp",
-      "triangles": 3323,
+      "triangles": 3738,
       "draws": 1,
       "bounds": [
         0.5999938962981048,
-        0.3769035920285653,
-        0.37134922330393383
+        0.3857234412671285,
+        0.3206274605548265
       ],
       "pivotY": 0,
-      "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
+      "refinement": "Surface-conforming eyes and mouth; no protruding cheek. Thin tail stabilisers and a connected gondola.",
       "motionProfile": "float",
       "animations": [
         "idle",
@@ -114,12 +114,12 @@
         "recover"
       ],
       "bones": 5,
-      "sculptVersion": "authored-20261024",
-      "generator": "Blender 4.3.2",
-      "referenceBasis": "Publisher card p22: silver ribbed dirigible with small face near the nose. Full tail fins and compact undercarriage inferred; explosion omitted from the static pawn.",
-      "sculptStatus": "completed-local-validation",
-      "recognition": "Publisher card p22: silver ribbed dirigible with small face near the nose. Full tail fins and compact undercarriage inferred; explosion omitted from the static pawn.",
-      "assetVersion": "authored-sculpt-final-20261024",
+      "sculptVersion": "blimp-surface-face-closed-20261028",
+      "generator": "Blender 5.2.3 LTS Release Candidate",
+      "referenceBasis": "Publisher card p22: silver ribbed dirigible with small face near the nose. Face marks conform to the envelope, without a separate cheek or head. Thin tail stabilisers and a connected single gondola are project sculpt interpretation; explosion omitted from the static pawn.",
+      "sculptStatus": "verified-local-desktop-phone",
+      "recognition": "Publisher card p22: silver ribbed dirigible with small face near the nose. Face marks conform to the envelope, without a separate cheek or head. Thin tail stabilisers and a connected single gondola are project sculpt interpretation; explosion omitted from the static pawn.",
+      "assetVersion": "blimp-surface-face-closed-20261028",
       "modelPreview": "/models/original/avatars/blimp.png"
     },
     {
@@ -338,7 +338,7 @@
         0.7483748908450495,
         0.4734641578022564
       ],
-      "pivotY": -1.3557421101247672e-08,
+      "pivotY": -1.3557421101247672e-8,
       "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
       "motionProfile": "biped",
       "animations": [
@@ -396,7 +396,7 @@
         0.625690463977246,
         0.5003204458538388
       ],
-      "pivotY": -5.118832266562173e-09,
+      "pivotY": -5.118832266562173e-9,
       "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
       "motionProfile": "long",
       "animations": [
@@ -659,7 +659,7 @@
         0.5999939059206505,
         0.44642476737499937
       ],
-      "pivotY": -1.1654515827380454e-08,
+      "pivotY": -1.1654515827380454e-8,
       "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
       "motionProfile": "biped",
       "animations": [
@@ -1010,7 +1010,7 @@
         0.9800103854919932,
         0.511001930280619
       ],
-      "pivotY": 7.341826586379395e-09,
+      "pivotY": 7.341826586379395e-9,
       "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
       "motionProfile": "wheel",
       "animations": [
@@ -1059,11 +1059,11 @@
       "modelPreview": "/models/original/avatars/twin.png"
     }
   ],
-  "totalTriangles": 202453,
+  "totalTriangles": 202868,
   "materialCount": 1,
   "textureCount": 0,
-  "bytes": 1871764,
-  "optimizedBytes": 1871764,
+  "bytes": 1962520,
+  "optimizedBytes": 1962520,
   "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions, no per-mesh transform; normals10bit, vertex colours8bit",
   "skeletalAnimation": true
 }

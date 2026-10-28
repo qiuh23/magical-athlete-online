@@ -29,7 +29,7 @@
 .minimap-positions small{font-size:9px;font-weight:800;color:#708373}
 .minimap-positions b{font-size:11px;color:#34594e}
 .minimap-positions em{font-size:8px;font-weight:700;font-style:normal;margin-left:1px;color:#708373}
-@media(max-width:650px){
+@media(max-width:650px),(max-width:1000px) and (max-height:570px){
  .scene-camera-toolbar{gap:4px;max-width:calc(100% - 176px)}
  .board-minimap{width:148px;max-width:calc(100% - 24px);padding:9px 8px;border-radius:13px}
  .minimap-heading{font-size:9px;letter-spacing:0}

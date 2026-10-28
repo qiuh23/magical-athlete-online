@@ -167,15 +167,15 @@ for id in ids:
     bpy.context.view_layer.objects.active=ob;mod=ob.modifiers.new('Per-character mobile export cap','DECIMATE');mod.ratio=limit/total;bpy.ops.object.modifier_apply(modifier=mod.name)
  if row['edition']=='wurstii':
   meshes=[o for o in game.children if o.type=='MESH'];palette=bpy.data.materials.new('sculpt_vertex_palette');palette.use_nodes=True
-  bsdf=palette.node_tree.nodes.get('Principled BSDF');bsdf.inputs['Base Color'].default_value=(1,1,1,1);bsdf.inputs['Roughness'].default_value=.74
+  bsdf=next(node for node in palette.node_tree.nodes if node.type=='BSDF_PRINCIPLED');bsdf.inputs['Base Color'].default_value=(1,1,1,1);bsdf.inputs['Roughness'].default_value=.74
   color_node=palette.node_tree.nodes.new('ShaderNodeVertexColor');color_node.layer_name='SculptColor';palette.node_tree.links.new(color_node.outputs['Color'],bsdf.inputs['Base Color'])
   for ob in meshes:
-   c=ob.data.materials[0].node_tree.nodes.get('Principled BSDF').inputs['Base Color'].default_value[:];attr=ob.data.color_attributes.new(name='SculptColor',type='FLOAT_COLOR',domain='CORNER')
+   c=next(node for node in ob.data.materials[0].node_tree.nodes if node.type=='BSDF_PRINCIPLED').inputs['Base Color'].default_value[:];attr=ob.data.color_attributes.new(name='SculptColor',type='FLOAT_COLOR',domain='CORNER')
    for value in attr.data:value.color=c
    ob.data.materials.clear();ob.data.materials.append(palette)
   select(meshes);bpy.context.view_layer.objects.active=meshes[0];bpy.ops.object.join();bpy.context.object.parent=game;bpy.context.object.name=id+'_vertex_sculpt'
  for mat in MATS.values():
-  bs=mat.node_tree.nodes.get('Principled BSDF');bs.inputs['Roughness'].default_value=.74;bs.inputs['Coat Weight'].default_value=.025
+  bs=next(node for node in mat.node_tree.nodes if node.type=='BSDF_PRINCIPLED');bs.inputs['Roughness'].default_value=.74;bs.inputs['Coat Weight'].default_value=.025
  motion={'__file__':str(ROOT/'scripts/refine-racer-motion.py'),'__name__':'racer_motion'};exec(compile(Path(motion['__file__']).read_text(),motion['__file__'],'exec'),motion);motion['LONG'].add('wurstii-magikarp')
  for value in ['speed-demon','show-off','leaf-race-car']:motion['WHEEL'].add(value)
  for value in ['leaf-dark-horse','leaf-lonely-wolf','wurstii-frogger']:motion['QUAD'].add(value)

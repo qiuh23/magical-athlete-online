@@ -113,21 +113,15 @@
     {
       "id": "blimp",
       "node": "toy_blimp",
-      "triangles": 2119,
-      "sourceTriangles": 3470,
+      "triangles": 2120,
+      "sourceTriangles": 3738,
       "draws": 1,
       "bounds": [
-        0.5999938962981048,
-        0.3769035920285653,
-        0.37134922330393383
+        0.5995666371654409,
+        0.38505203405865657,
+        0.31879634998626666
       ],
       "pivotY": 0,
-      "protectedSmallComponents": 6,
-      "canonicalBoundsScale": [
-        1.0002875328063965,
-        0.9923474788665771,
-        1.0001249313354492
-      ],
       "motionProfile": "float",
       "animations": [
         "idle",
@@ -137,12 +131,12 @@
         "recover"
       ],
       "bones": 5,
-      "sculptVersion": "authored-20261024",
-      "generator": "Blender 4.3.2",
-      "referenceBasis": "Publisher card p22: silver ribbed dirigible with small face near the nose. Full tail fins and compact undercarriage inferred; explosion omitted from the static pawn.",
-      "refinement": "New character-specific volume, anatomical silhouette, inset face and authored costume; source reference priority.",
-      "sculptStatus": "completed-local-validation",
-      "assetVersion": "authored-sculpt-final-20261024"
+      "sculptVersion": "blimp-surface-face-closed-20261028",
+      "generator": "Blender 5.2.3 LTS Release Candidate",
+      "referenceBasis": "Publisher card p22: silver ribbed dirigible with small face near the nose. Face marks conform to the envelope, without a separate cheek or head. Thin tail stabilisers and a connected single gondola are project sculpt interpretation; explosion omitted from the static pawn.",
+      "refinement": "Surface-conforming eyes and mouth; no protruding cheek. Thin tail stabilisers and a connected gondola.",
+      "sculptStatus": "verified-local-desktop-phone",
+      "assetVersion": "blimp-surface-face-closed-20261028"
     },
     {
       "id": "centaur",
@@ -393,7 +387,7 @@
         0.744865261927867,
         0.4721213433316752
       ],
-      "pivotY": -1.2862019183622902e-08,
+      "pivotY": -1.2862019183622902e-8,
       "protectedSmallComponents": 5,
       "canonicalBoundsScale": [
         0.9998503923416138,
@@ -767,7 +761,7 @@
         0.5966979256566912,
         0.4463332101932168
       ],
-      "pivotY": -1.0977018328851241e-08,
+      "pivotY": -1.0977018328851241e-8,
       "protectedSmallComponents": 5,
       "canonicalBoundsScale": [
         1.0004910230636597,
@@ -1175,7 +1169,7 @@
         0.9796441633673669,
         0.51030000075541
       ],
-      "pivotY": 7.341826586379395e-09,
+      "pivotY": 7.341826586379395e-9,
       "protectedSmallComponents": 6,
       "canonicalBoundsScale": [
         1.0073288679122925,
@@ -1233,11 +1227,11 @@
       "assetVersion": "authored-sculpt-final-20261024"
     }
   ],
-  "totalTriangles": 76199,
-  "bytes": 1061300,
-  "optimizedBytes": 1061300,
+  "totalTriangles": 76200,
+  "bytes": 1082256,
+  "optimizedBytes": 1082256,
   "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions, no per-mesh transform; normals10bit, vertex colours8bit",
-  "materialCount": 1,
+  "materialCount": 2,
   "textureCount": 0,
   "skeletalAnimation": true
 }

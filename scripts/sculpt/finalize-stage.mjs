@@ -1,6 +1,8 @@
 import{resolve}from'node:path';import{pathToFileURL}from'node:url';import fs from'node:fs/promises';
-const dir=resolve('.tools/sculpt/node_modules'),load=p=>import(pathToFileURL(resolve(dir,p)).href);const{NodeIO}=await load('@gltf-transform/core/dist/index.js'),{EXTMeshoptCompression,KHRMeshQuantization,ALL_EXTENSIONS}=await load('@gltf-transform/extensions/dist/index.js'),{dedup,prune,resample,quantize,joinPrimitives}=await load('@gltf-transform/functions/dist/index.js'),{MeshoptEncoder,MeshoptDecoder}=await load('meshoptimizer/index.js');await MeshoptEncoder.ready;await MeshoptDecoder.ready;const io=new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({'meshopt.encoder':MeshoptEncoder,'meshopt.decoder':MeshoptDecoder});
-for(const id of process.argv.slice(2)){const p=`tmp/sculpt-stage/${id}.glb`,doc=await io.read(p);
+import{createRequire}from'node:module';
+const require=createRequire(pathToFileURL(resolve(process.env.SCULPT_NODE_MODULES??'.tools/sculpt/node_modules','__resolve__.cjs'))),load=p=>import(pathToFileURL(require.resolve(p)).href);const{NodeIO}=await load('@gltf-transform/core'),{EXTMeshoptCompression,KHRMeshQuantization,ALL_EXTENSIONS}=await load('@gltf-transform/extensions'),{dedup,prune,resample,quantize,joinPrimitives}=await load('@gltf-transform/functions'),{MeshoptEncoder,MeshoptDecoder}=await load('meshoptimizer/index.js');await MeshoptEncoder.ready;await MeshoptDecoder.ready;const io=new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({'meshopt.encoder':MeshoptEncoder,'meshopt.decoder':MeshoptDecoder});
+const economy=process.argv.includes('--economy');
+for(const id of process.argv.slice(2).filter(value=>value!=='--economy')){const p=`tmp/sculpt-stage/${id}${economy?'-economy':''}.glb`,doc=await io.read(p);
 // All texture-free toy surfaces use one neutral palette, preserving authored
 // vertex colours. Identical-skin sibling joining does not change bind matrices.
 const palette=doc.createMaterial('toy-paper').setBaseColorFactor([1,1,1,1]).setRoughnessFactor(.74).setMetallicFactor(0);
