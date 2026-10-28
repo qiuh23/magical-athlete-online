@@ -29,6 +29,10 @@
 
 `CI=true RELAY_SMOKE=1 pnpm exec playwright test -c playwright.relay.config.ts --grep "server authority 8 independent"`：只运行一场，1/1 通过，约 1.7 分钟。覆盖真实操作 ACK、房主/客人恢复、私有视图和桌面/手机布局；48 次播放检查中完成 40 次真实跳过点击，其余可自然结束，最长处理 3009ms。未增加八人场数或修改既有远端预算。
 
+[Checks161](https://github.com/qiuh23/magical-athlete-online/actions/runs/40713197660/job/122903734757)另外捕获手机模拟键盘升起时的布局测量时序：键盘偏移变量先更新，聊天高度由 ResizeObserver 稍后发布，原检查立即读取中间尺寸，误报技能面板与小地图重叠；失败截图已恢复正常。原代码在本地相同 CI 配置连续 3 次复现，改为轮询原有“不与聊天和小地图重叠”的几何断言后连续 3 次通过。实际按钮点击命中检查、应用布局及时间预算保持，未增加重试或新测试场次。
+
+随后按远端原命令联合运行 `interaction-feedback.spec.ts` 与 `chat-layout.spec.ts`，9/9 通过（40.9 秒），覆盖桌面、小桌面、手机、短横屏、聊天收放、技能选项变化与键盘偏移。
+
 ## 界面证据
 
 桌面选秀：按钮旁直接显示说明。

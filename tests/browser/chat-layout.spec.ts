@@ -72,14 +72,14 @@ async function stable(page: Page, before: Awaited<ReturnType<typeof rect>>, open
 }
 async function accessibleChoice(page: Page) {
   const choice = page.getByTestId('skill-choice');
-  const boxes = await page.evaluate(() => {
+  // The keyboard offset updates before ResizeObserver publishes the resized
+  // chat height. Assert the resulting layout after both measurements settle.
+  await expect.poll(() => page.evaluate(() => {
     const chat = document.querySelector('[data-testid="room-chat"]')!.getBoundingClientRect();
     const skill = document.querySelector('[data-testid="skill-choice"]')!.getBoundingClientRect();
     const map=document.querySelector('[data-testid="board-minimap"]')!.getBoundingClientRect();
     return { overlap: Math.min(chat.right, skill.right) > Math.max(chat.left, skill.left) && Math.min(chat.bottom, skill.bottom) > Math.max(chat.top, skill.top), mapOverlap:Math.min(map.right,skill.right)>Math.max(map.left,skill.left)&&Math.min(map.bottom,skill.bottom)>Math.max(map.top,skill.top) };
-  });
-  expect(boxes.overlap).toBe(false);
-  expect(boxes.mapOverlap).toBe(false);
+  }), { message: 'skill choice must settle outside chat and the minimap' }).toEqual({ overlap: false, mapOverlap: false });
   const button = choice.locator('.choice-options .button').first(); await button.scrollIntoViewIfNeeded();
   expect(await button.evaluate(element => {
     const box = element.getBoundingClientRect(); return element.contains(document.elementFromPoint(box.x + box.width / 2, box.y + box.height / 2));
