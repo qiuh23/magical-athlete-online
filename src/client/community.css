@@ -23,28 +23,44 @@ html[data-motion="reduce"] .chat-notice.is-leaving{opacity:0}
 @media(prefers-reduced-motion:reduce){.chat-notice{animation:none!important;will-change:auto}.chat-notice.is-leaving{opacity:0}}
 @media(max-width:650px){.chat-notice-region{gap:6px;max-height:calc(100dvh - 205px)}.chat-notice{padding:8px 10px}.chat-notice span{font-size:12px;-webkit-line-clamp:2}}
 
-/* The desktop map and chat share a side column. Only the map size sets the
-   anchor, so mounting choices cannot make chat jump. */
-body>.room-community.in-race{top:max(90px,var(--chat-minimap-bottom,90px));right:max(20px,env(safe-area-inset-right));bottom:auto;left:auto}
-body>.room-community.in-race .room-chat{width:252px;height:min(440px,max(210px,calc(100dvh - var(--chat-minimap-bottom,90px) - 124px)));max-height:none}
-body>.room-community.in-race .chat-notice-region{top:calc(100% + 10px);bottom:auto;right:0;left:auto;width:252px;max-height:max(80px,calc(100dvh - var(--chat-minimap-bottom,90px) - 160px))}
-@media(max-width:650px){
- body>.room-community.in-race{top:max(8px,min(162px,calc(57dvh - 164px - var(--chat-keyboard-offset,0px))));right:8px;left:auto}
- body>.room-community.in-race.is-open{left:8px;right:8px}
- body>.room-community.in-race .room-chat{width:100%;height:min(290px,max(140px,calc(57dvh - 190px - var(--chat-keyboard-offset,0px) / 2)))}
- body>.room-community.in-race .chat-notice-region{width:min(310px,calc(100vw - 28px));max-height:max(80px,calc(57dvh - 236px - var(--chat-keyboard-offset,0px) / 2))}
+/* Chat stays near the lower controls. Its own measured height reserves room
+   for choices; mounting or resizing a choice never changes the chat anchor. */
+body>.room-community.in-race{top:auto;right:max(20px,env(safe-area-inset-right));bottom:max(118px,env(safe-area-inset-bottom));left:auto}
+body>.room-community.in-race .room-chat{width:252px;height:min(440px,max(160px,calc(100dvh - var(--chat-minimap-bottom,90px) - 146px)));max-height:none}
+body>.room-community.in-race .chat-notice-region{top:auto;bottom:calc(100% + 10px);right:0;left:auto;width:252px;max-height:max(0px,calc(100dvh - var(--chat-minimap-bottom,90px) - 190px))}
+@media(max-width:650px),(max-width:1000px) and (max-height:570px){
+ body>.room-community.in-race{top:auto;bottom:calc(max(14px,env(safe-area-inset-bottom)) + var(--chat-keyboard-offset,0px));left:12px;right:auto}
+ body>.room-community.in-race.is-open{left:8px;right:8px;max-width:none}
+ body>.room-community.in-race .room-chat{width:100%;height:min(300px,max(210px,38dvh),max(210px,calc(100dvh - var(--chat-keyboard-offset,0px) - var(--chat-minimap-bottom,230px) - 180px)));max-height:calc(100dvh - var(--chat-keyboard-offset,0px) - var(--chat-minimap-bottom,230px) - 28px)}
+ body>.room-community.in-race .room-chat header{flex-shrink:0;padding:8px 12px}
+ body>.room-community.in-race .chat-personal{flex-shrink:0;padding:2px 10px}
+ body>.room-community.in-race .room-chat form{flex-shrink:0;padding:7px}
+ body>.room-community.in-race .chat-messages{min-height:0}
+ body>.room-community.in-race .chat-notice-region{position:relative;top:auto;bottom:auto;left:auto;right:auto;margin-bottom:8px;width:min(310px,calc(100vw - 28px));max-height:min(164px,max(0px,calc(100dvh - var(--chat-keyboard-offset,0px) - var(--chat-minimap-bottom,230px) - 90px)))}
+ html[data-view="race"] .floating-choice.choice-panel{bottom:calc(max(14px,env(safe-area-inset-bottom)) + var(--chat-keyboard-offset,0px) + var(--race-chat-height,44px) + 12px);max-height:min(68dvh,calc(100dvh - var(--chat-keyboard-offset,0px) - var(--race-chat-height,44px) - var(--race-minimap-bottom,230px) - 42px))}
+ html[data-view="race"] body .floating-choice.choice-panel.character-choice-panel{max-height:min(68dvh,calc(100dvh - var(--chat-keyboard-offset,0px) - var(--race-chat-height,44px) - var(--race-minimap-bottom,230px) - 42px))}
+ html[data-view="race"] .floating-choice.choice-panel.is-collapsed{max-height:none}
+ html[data-view="race"] .floating-racers{bottom:calc(max(100px,calc(var(--race-chat-height,44px) + 28px)) + var(--chat-keyboard-offset,0px))}
+ html[data-view="race"] body:has(.floating-choice.is-collapsed) .floating-racers{bottom:calc(var(--race-chat-height,44px) + var(--chat-keyboard-offset,0px) + 130px)}
+ body:has(>.room-community.in-race.is-open) .floating-roll,body:has(>.room-community.in-race .chat-notice-region) .floating-roll{bottom:calc(max(14px,env(safe-area-inset-bottom)) + var(--chat-keyboard-offset,0px) + var(--race-chat-height,44px) + 12px)}
 }
-@media(min-width:651px) and (max-width:1200px){
+@media(min-width:651px) and (max-width:1200px) and (min-height:571px){
  body:has(>.room-community.in-race.is-open) .floating-choice.choice-panel,
  body:has(>.room-community.in-race .chat-notice-region) .floating-choice.choice-panel{left:18px;transform:none;width:min(620px,calc(100% - 304px))}
 }
 /* Short landscape viewports put the map alongside chat. */
-@media(min-width:651px) and (max-height:570px){
- body>.room-community.in-race{top:90px}
+@media(min-width:1001px) and (max-height:570px){
+ body>.room-community.in-race{top:auto}
  .immersive-race .board-minimap{top:90px;right:284px;width:190px}
- body>.room-community.in-race .room-chat{height:min(300px,calc(100dvh - 120px))}
+ body>.room-community.in-race .room-chat{height:min(300px,calc(100dvh - 216px))}
  body:has(>.room-community.in-race.is-open) .floating-choice.choice-panel,
  body:has(>.room-community.in-race .chat-notice-region) .floating-choice.choice-panel{left:18px;transform:none;width:calc(100% - 506px)}
+}
+@media(min-width:651px) and (max-width:1000px) and (max-height:570px){
+ .immersive-race .board-minimap{top:8px;right:8px;width:160px}
+ html[data-view="race"] body .floating-choice.choice-panel{left:12px;transform:none;width:calc(100% - 192px);max-height:calc(100dvh - var(--chat-keyboard-offset,0px) - var(--race-chat-height,44px) - 110px)}
+ html[data-view="race"] body .floating-choice.choice-panel.character-choice-panel{max-height:calc(100dvh - var(--chat-keyboard-offset,0px) - var(--race-chat-height,44px) - 110px)}
+ html[data-view="race"] body .floating-choice.choice-panel.is-collapsed{max-height:none}
 }
 
 .continuation-notice{position:fixed;top:8px;left:50%;transform:translateX(-50%);z-index:80;max-width:90vw;padding:9px 16px;border:2px solid var(--ink);border-radius:8px;background:var(--yellow);font-size:12px;text-align:center}

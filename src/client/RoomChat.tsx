@@ -15,6 +15,7 @@ export function RoomChat({ room, community, connection, immersive, onRename }: {
   const [notices,setNotices]=useState<ChatNotice[]>([]);
   const [noticeLimit,setNoticeLimit]=useState(() => matchMedia(`(max-width:${CHAT_NOTICE_CONFIG.mobileBreakpoint}px)`).matches ? CHAT_NOTICE_CONFIG.mobileLimit : CHAT_NOTICE_CONFIG.desktopLimit);
   const noticeRegion=useRef<HTMLDivElement>(null),noticeRects=useRef(new Map<string,DOMRect>());
+  const portal = useRef<HTMLElement>(null);
   const noticed=useRef(community.liveRevision??0);
   const noticedMessage=useRef(community.liveMessages?.at(-1)?.id??0);
   const list = useRef<HTMLDivElement>(null), bottom = useRef(true), initial = useRef(true);
@@ -26,15 +27,23 @@ export function RoomChat({ room, community, connection, immersive, onRename }: {
     if(!immersive)return;
     // Observe the map only. Mounting a pending choice must not move chat.
     let map:HTMLElement|null=null;
-    const update=()=>{if(map)setMinimapBottom(Math.ceil(map.getBoundingClientRect().bottom)+12);};
+    const update=()=>{if(map){const bottom=Math.ceil(map.getBoundingClientRect().bottom)+12;setMinimapBottom(bottom);document.documentElement.style.setProperty('--race-minimap-bottom',`${bottom}px`);}};
     const observer=new ResizeObserver(update);
     const attach=()=>{map=document.querySelector<HTMLElement>('[data-testid="board-minimap"]');if(map){observer.observe(map);update();return true;}return false;};
     // The scene is lazy-loaded; stop observing DOM as soon as it is ready.
     const mounting=new MutationObserver(()=>{if(attach())mounting.disconnect();});
     if(!attach())mounting.observe(document.body,{childList:true,subtree:true});
     window.addEventListener('resize',update);
-    return()=>{observer.disconnect();mounting.disconnect();window.removeEventListener('resize',update);};
+    return()=>{observer.disconnect();mounting.disconnect();window.removeEventListener('resize',update);document.documentElement.style.removeProperty('--race-minimap-bottom');};
   },[immersive,room.round]);
+  useLayoutEffect(() => {
+    if (!immersive || !portal.current) return;
+    // Bottom sheets and live notices reserve their own space. Choices never
+    // participate in this measurement, so resizing a choice cannot move chat.
+    const update = () => document.documentElement.style.setProperty('--race-chat-height', `${Math.ceil(portal.current!.getBoundingClientRect().height)}px`);
+    const observer = new ResizeObserver(update); observer.observe(portal.current); update();
+    return () => { observer.disconnect(); document.documentElement.style.removeProperty('--race-chat-height'); };
+  }, [immersive, open, notices.length]);
   useEffect(()=>{
     const revision=community.liveRevision??0;
     if(open||!community.connected)setNotices([]);
@@ -92,7 +101,7 @@ export function RoomChat({ room, community, connection, immersive, onRename }: {
   };
   // A viewport overlay must not inherit any ancestor's transform/containment:
   // those turn fixed coordinates into page-local coordinates during scenes.
-  return createPortal(<aside className={`room-community ${immersive ? 'in-race' : ''} ${open ? 'is-open' : ''}`} style={{'--chat-minimap-bottom':`${minimapBottom}px`} as CSSProperties} data-testid="room-community" onKeyDown={event => { event.stopPropagation(); if (event.key === 'Escape') setOpen(false); }}>
+  return createPortal(<aside ref={portal} className={`room-community ${immersive ? 'in-race' : ''} ${open ? 'is-open' : ''}`} style={{'--chat-minimap-bottom':`${minimapBottom}px`} as CSSProperties} data-testid="room-community" onKeyDown={event => { event.stopPropagation(); if (event.key === 'Escape') setOpen(false); }}>
     {!open&&notices.length>0&&<div ref={noticeRegion} className="chat-notice-region" aria-live="polite" aria-relevant="additions" aria-label="新聊天消息">{notices.map(notice=><ChatNoticeBubble key={notice.message.id} notice={notice} onOpen={()=>setOpen(true)} />)}</div>}
     {!open && <button className="chat-toggle" aria-label={`房间聊天${unread ? `，${unread} 条未读` : ''}`} aria-expanded={false} onClick={() => setOpen(true)}>💬 聊天{unread > 0 && <b className="chat-unread">{unread}</b>}</button>}
     {open && <section className="room-chat" aria-label="房间聊天" data-testid="room-chat">
