@@ -56,7 +56,12 @@ export function applyContinuationAction(room: Room, playerId: string, action: Ga
     if (c.stage !== 'voting' || now >= c.deadline || !c.voters.includes(playerId)) throw Error('继续比赛确认已经结束。');
     if (!action.continue) {room.closedAt = now; room.closeReason = 'host-away'; return;}
     if (!c.accepted.includes(playerId)) c.accepted.push(playerId);
-    if (c.voters.every(id => c.accepted.includes(id))) c.stage = 'playing';
+    if (c.voters.every(id => c.accepted.includes(id))) {
+      c.stage = 'playing';
+      // Only unanimous continuation replaces the absent owner's manual pause.
+      // Voting itself must leave the paused choices and visuals untouched.
+      delete room.pause;
+    }
   } else if (action.type === 'results-seen') {
     if (c.stage !== 'results' || !['results','finished'].includes(room.game.phase)) throw Error('本场结果尚未显示。');
     if (!c.seen.includes(playerId)) c.seen.push(playerId);

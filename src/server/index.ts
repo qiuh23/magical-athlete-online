@@ -15,6 +15,7 @@ import { validateRoomConfig } from '../shared/room-config.js';
 import { connectivityInfo, multiplayerQuota, trustedOrigins, type BackendId } from '../shared/backend-protocol.js';
 
 const action=z.discriminatedUnion('type',[
+  z.object({type:z.literal('pause')}).strict(),z.object({type:z.literal('resume')}).strict(),
   z.object({type:z.literal('continue-vote'),continuationId:z.string().max(100),continue:z.boolean()}).strict(),
   z.object({type:z.literal('results-seen'),continuationId:z.string().max(100)}).strict(),
   z.object({type:z.literal('configure'),config:z.unknown().transform(value=>validateRoomConfig(value))}).strict(),
@@ -49,7 +50,7 @@ export function createApplication(dbPath=resolve(process.env.DATA_DIR??'data','r
   const notifyClosed=(code:string)=>{const room=rooms.rooms.get(code),closed=rooms.closed(code);if(room?.closedAt===undefined&&!closed)return;const sockets=[...io.sockets.sockets.values()].filter(socket=>socket.data.identity?.roomCode===code);for(const socket of sockets)socket.emit('room-closed',{code,closedAt:closed?.closedAt??room!.closedAt,...(closed?{reason:closed.reason}:{})});for(const socket of sockets)socket.disconnect(true);};
   rooms.onExpired=(code,expiresAt,reason='expired')=>{resuming.delete(code);const sockets=[...io.sockets.sockets.values()].filter(socket=>socket.data.identity?.roomCode===code);for(const socket of sockets)socket.emit('room-closed',{code,closedAt:expiresAt,reason});for(const socket of sockets)socket.disconnect(true);};
   const resuming=new Set<string>();let closing=false;
-  const scheduleContinuation=(code:string)=>{if(closing||rooms.expire(code))return;const current=rooms.rooms.get(code);if(resuming.has(code)||!current||current.closedAt!==undefined||(current.continuation&&current.continuation.stage!=='playing')||!systemAction(current.game))return;resuming.add(code);setImmediate(()=>{resuming.delete(code);if(closing||rooms.expire(code))return;const room=rooms.rooms.get(code);if(!room||room.closedAt!==undefined)return;const next=systemAction(room.game);if(!next)return;const result=rooms.act(code,next.playerId,{actionId:crypto.randomUUID(),expectedVersion:room.version,action:next.action});if(result.ok){broadcast(code);scheduleContinuation(code);}});};
+  const scheduleContinuation=(code:string)=>{if(closing||rooms.expire(code))return;const current=rooms.rooms.get(code);if(resuming.has(code)||!current||current.closedAt!==undefined||current.pause||(current.continuation&&current.continuation.stage!=='playing')||!systemAction(current.game))return;resuming.add(code);setImmediate(()=>{resuming.delete(code);if(closing||rooms.expire(code))return;const room=rooms.rooms.get(code);if(!room||room.closedAt!==undefined||room.pause)return;const next=systemAction(room.game);if(!next)return;const result=rooms.act(code,next.playerId,{actionId:crypto.randomUUID(),expectedVersion:room.version,action:next.action});if(result.ok){broadcast(code);scheduleContinuation(code);}});};
   app.get('/api/health',(_req,res)=>res.json({ok:true,storage:'sqlite',version:'0.1.0',publicAccessEnabled:process.env.PUBLIC_ACCESS_ENABLED==='true',controlledValidation:controlled}));
   app.get('/api/connectivity',(_req,res)=>res.json(connectivityInfo(backendId)));
   app.get('/api/rooms',(_req,res,next)=>{try{res.json({rooms:rooms.list(),capacity:rooms.capacity()});}catch(e){next(e);}});

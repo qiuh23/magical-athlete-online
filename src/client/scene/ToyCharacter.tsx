@@ -10,6 +10,7 @@ import { expansionModels } from './expansion-models.js';
 import { cloneToyModel } from './toy-model-instance.js';
 
 export interface ToyCharacterProps {
+  paused?: boolean;
   characterId: string;
   color: string;
   lowQuality?: boolean;
@@ -76,7 +77,7 @@ function CharacterAsset({ revision, recovery, color, url, rootName, ...props }: 
   return <CharacterModel scene={scene} animations={animations} recovery={recovery} rootName={rootName} {...props} />;
 }
 
-function CharacterModel({ scene, recovery, characterId, lowQuality = false, castShadow = true, rootName, animations, animation = 'idle', motionEnabled = true }: Pick<ToyCharacterProps, 'characterId' | 'lowQuality' | 'castShadow' | 'animation' | 'motionEnabled'> & { scene: Group; recovery: AssetRecovery; rootName?: string; animations: AnimationClip[] }) {
+function CharacterModel({ paused = false, scene, recovery, characterId, lowQuality = false, castShadow = true, rootName, animations, animation = 'idle', motionEnabled = true }: Pick<ToyCharacterProps, 'paused' | 'characterId' | 'lowQuality' | 'castShadow' | 'animation' | 'motionEnabled'> & { scene: Group; recovery: AssetRecovery; rootName?: string; animations: AnimationClip[] }) {
   useEffect(() => { recovery.success(); }, [scene, recovery]);
   const model = useMemo(() => {
     const source = scene.getObjectByName(rootName ?? `toy_${characterId}`) ?? scene.children[0];
@@ -104,7 +105,7 @@ function CharacterModel({ scene, recovery, characterId, lowQuality = false, cast
     return () => { action.fadeOut(.1); };
   }, [mixer, animations, animation, characterId]);
   useEffect(() => () => { mixer?.stopAllAction(); mixer?.uncacheRoot(model); }, [mixer, model]);
-  useFrame((_, delta) => { if (mixer && animations.length) mixer.update(Math.min(delta, .1)); });
+  useFrame((_, delta) => { if (!paused && mixer && animations.length) mixer.update(Math.min(delta, .1)); });
   // Source geometry belongs to useGLTF; satin palette variants to toyResources.
   return <primitive object={model} dispose={null} />;
 }

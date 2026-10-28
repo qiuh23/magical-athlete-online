@@ -170,10 +170,10 @@ export class BrowserAuthority {
       if(!this.meta.members.some(m=>m.id===this.meta.authorityId&&m.connected))return false;
       const cached=this.record.room;
       if(now>=roomExpiry({...cached,hostLeftAt:this.meta.hostLeftAt}))return false;
-      if(cached.closedAt!==undefined)return false;
+      if(cached.closedAt!==undefined||cached.pause)return false;
       if(!immediateRoomAction(cached,now)&&(cached.deadline===null||cached.deadline>now))return false;
       return this.commit<boolean>((record,receipts,save) => {
-        if(record.room.closedAt!==undefined){save(record,false);return;}
+        if(record.room.closedAt!==undefined||record.room.pause){save(record,false);return;}
         const immediate=immediateRoomAction(record.room,now);
         if(!immediate && (record.room.deadline===null||record.room.deadline>now)){save(record,false);return;}
         const next=immediate??timeoutAction(record.room.game);

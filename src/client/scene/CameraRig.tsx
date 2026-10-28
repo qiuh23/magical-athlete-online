@@ -8,6 +8,7 @@ import type { Racer } from '../../shared/types.js';
 import { cameraFocusPoints, cameraFrame, cameraStep, cameraView, MAX_CAMERA_ZOOM, type CameraFocus } from './camera.js';
 
 interface Props {
+  paused?: boolean;
   track?: TrackId;
   compact: boolean;
   reset: number;
@@ -19,7 +20,7 @@ interface Props {
 }
 
 /** Demand-rendered follow camera. Manual pan/zoom remains untouched until reset. */
-export function CameraRig({ track = 'mild', compact, reset, focus, racers, reducedMotion, onManual, root }: Props) {
+export function CameraRig({ paused = false, track = 'mild', compact, reset, focus, racers, reducedMotion, onManual, root }: Props) {
   const { camera, size, invalidate } = useThree();
   const controls = useRef<OrbitControlsImpl>(null);
   const userDrag = useRef(false);
@@ -45,7 +46,7 @@ export function CameraRig({ track = 'mild', compact, reset, focus, racers, reduc
   useEffect(() => { if (focus.state === 'choice') userDrag.current = false; invalidate(); }, [focus.state, focus.ids.join(','), frame.x, frame.z, frame.zoom]);
   useFrame((_, delta) => {
     if (!controls.current || !(camera instanceof THREE.OrthographicCamera)) return;
-    if (!userDrag.current && focus.state !== 'manual') {
+    if (!paused && !userDrag.current && focus.state !== 'manual') {
       target.set(frame.x, frame.y, frame.z);
       desiredOffset.set(...view.offset).multiplyScalar(eyeDistance); offset.subVectors(camera.position, controls.current.target);
       const distance = Math.max(controls.current.target.distanceTo(target), offset.distanceTo(desiredOffset));

@@ -48,6 +48,20 @@ async function readyAndStart(authority:BrowserAuthority,meta:RelayMetadata) {
   assert.equal((await command(authority,'p0',{type:'start'})).reply.ok,true);
 }
 
+test('manual pause survives browser authority reload, freezes timeout and AI, and replays receipts safely',async()=>{
+  const env=environment(),meta=metadata(2,120);let authority=await BrowserAuthority.create(meta,env.options);
+  await readyAndStart(authority,meta);env.clock.now+=30_000;
+  const before=await raw(env),pause=await command(authority,'p0',{type:'pause'});assert(pause.reply.ok);
+  assert.equal(authority.view('p1').pause?.remainingMs,90_000);env.clock.now+=300_000;
+  assert.equal(await authority.tick(),false);assert.deepEqual((await raw(env)).room.game,before.room.game);
+  const draft=before.room.game.draft!;assert.equal((await command(authority,draft.order[draft.cursor]!,{type:'draft',characterId:draft.market[0]!})).reply.ok,false);
+  authority.dispose();authority=await BrowserAuthority.load({...meta,phase:'draft'},env.options);assert(authority.view('p0').pause);
+  assert((await authority.action('p0',pause.envelope)).duplicate);assert.equal(await authority.tick(),false);
+  assert((await command(authority,'p0',{type:'resume'})).reply.ok);assert.equal(authority.view('p0').deadline,env.clock.now+90_000);
+  assert.equal((await authority.action('p0',pause.envelope)).duplicate,true);assert.equal(authority.view('p0').pause,undefined,'an old lost pause ACK never pauses a resumed game again');
+  assert((await command(authority,draft.order[draft.cursor]!,{type:'draft',characterId:draft.market[0]!})).reply.ok);authority.dispose();
+});
+
 test('close: only the current management host can dissolve a started room, and its receipt survives reload',async()=>{
   const env=environment();const meta=metadata();const a=await BrowserAuthority.create(meta,env.options);
   assert.match((await command(a,'p1',{type:'close'})).reply.error??'',/只有房主/);
