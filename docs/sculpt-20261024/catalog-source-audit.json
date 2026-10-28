@@ -1,8 +1,8 @@
 [
   {
     "source": "assets/blender/toy-racers.blend",
-    "sourceSha256": "24425cebae2799f565280f48c4e14927101d70291d8ded3c2e150aedfb9af5cd",
-    "openedWith": "Blender 5.2.2 LTS",
+    "sourceSha256": "a1aacba5d21ce1e769418f82c1c747d67b13811c83af8a1dcf88ab005e05f4f1",
+    "openedWith": "Blender 5.2.3 LTS Release Candidate",
     "rootCount": 36,
     "models": [
       {
@@ -25,9 +25,9 @@
       },
       {
         "id": "blimp",
-        "triangles": 3323,
+        "triangles": 3738,
         "bones": 5,
-        "editableParts": 14
+        "editableParts": 18
       },
       {
         "id": "centaur",
@@ -227,7 +227,7 @@
   {
     "source": "assets/blender/second-wind.blend",
     "sourceSha256": "058318c903af89e980ae3ff9dcf9a3645f5fcdbed74525482a142ed049b67e39",
-    "openedWith": "Blender 5.2.2 LTS",
+    "openedWith": "Blender 5.2.3 LTS Release Candidate",
     "rootCount": 38,
     "models": [
       {

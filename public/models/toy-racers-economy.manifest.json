@@ -114,7 +114,7 @@
       "id": "blimp",
       "node": "toy_blimp",
       "triangles": 2120,
-      "sourceTriangles": 2898,
+      "sourceTriangles": 3738,
       "draws": 1,
       "bounds": [
         0.5995666371654409,
@@ -131,12 +131,12 @@
         "recover"
       ],
       "bones": 5,
-      "sculptVersion": "blimp-surface-face-20261028",
+      "sculptVersion": "blimp-surface-face-closed-20261028",
       "generator": "Blender 5.2.3 LTS Release Candidate",
       "referenceBasis": "Publisher card p22: silver ribbed dirigible with small face near the nose. Face marks conform to the envelope, without a separate cheek or head. Thin tail stabilisers and a connected single gondola are project sculpt interpretation; explosion omitted from the static pawn.",
       "refinement": "Surface-conforming eyes and mouth; no protruding cheek. Thin tail stabilisers and a connected gondola.",
       "sculptStatus": "verified-local-desktop-phone",
-      "assetVersion": "blimp-surface-face-20261028"
+      "assetVersion": "blimp-surface-face-closed-20261028"
     },
     {
       "id": "centaur",
@@ -1228,8 +1228,8 @@
     }
   ],
   "totalTriangles": 76200,
-  "bytes": 1083404,
-  "optimizedBytes": 1083404,
+  "bytes": 1082256,
+  "optimizedBytes": 1082256,
   "compression": "EXT_meshopt_compression; fixed world-unit SNORM16 positions, no per-mesh transform; normals10bit, vertex colours8bit",
   "materialCount": 2,
   "textureCount": 0,

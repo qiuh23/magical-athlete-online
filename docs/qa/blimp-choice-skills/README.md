@@ -15,13 +15,23 @@
 ## 本地验证
 
 - `pnpm typecheck`：客户端、Node 与 Worker 类型检查通过。
-- 定向单元 **183/183**：选择投影、秘密信息、交换集市、角色详情、两档模型预算、静态/独立动画实例，以及聊天同步、未读、通知寿命和隔离。
+- 完整单元 **1444/1444**：本次 CI 修复执行仓库既有 `pnpm test` 入口，包含原先的 183 项选择、模型和聊天定向检查，以及模型审计新鲜度检查。
 - 浏览器 **12 个定向用例**：桌面/手机各覆盖交换集市的比较、详情、收起后对照角色、展开、刷新、私密承诺和实际替换；蛋、电影制作人、重复冠军双胞胎的提示与真实选择；已有抽卡详情回归；飞艇玩家棋子与场地标记的两档载入、实际移动和刷新；既有聊天布局4项覆盖桌面、小电脑、手机和短横屏，同时检查3条实时消息、发送、输入、软键盘模拟及小地图/选项矩形不相交与按钮可点击。
 - `pnpm build` 与本地 Worker dry run 通过；构建只有既有的大 chunk 提示。
-- 高/低模型分别为 **1,959,388 / 1,083,404 字节**；飞艇 **2,898 / 2,120 三角形、1 个 draw、5 个骨骼、5 段动画**，贴地 pivot 为 0。两档仍满足既有模型预算。
+- 高/低模型分别为 **1,962,520 / 1,082,256 字节**；飞艇 **3,738 / 2,120 三角形、1 个 draw、5 个骨骼、5 段动画**，贴地 pivot 为 0。两档仍满足既有模型预算。
 - 逐个比较原包与替换后包，其余 **35 名角色在两档的顶点属性和索引均一致**；其他角色的动画名称集合一致。见 [模型核验](model-verification.json)。
 
-只运行上述本地定向检查，没有完整多人长局，没有新增或手动触发远端 CI。PR 创建后沿用仓库既有检查。手机为 390×844 的 Edge 浏览器视口，未作实体手机性能测量。
+没有完整多人浏览器长局，没有新增或手动触发远端 CI。PR 沿用仓库既有检查。手机为 390×844 的 Edge 浏览器视口，未作实体手机性能测量。
+
+## CI #157 失败与复核
+
+[失败日志](https://github.com/qiuh23/magical-athlete-online/actions/runs/40697341411/job/122847523020) 对应提交 `d1fec068`：完整单元 1444 项中 1443 通过，`tests/mouth-surfaces.test.ts` 失败。飞艇已改写共享的 `toy-racers.blend` 与 GLB，但 `source-audit.json` 保留旧哈希；断言首先显示同属该文件的 `alchemist`，并非炼金术士几何发生变化。浏览器步骤尚未执行，“无测试截图 artifact”和 Node 20 提示不是本次失败原因。
+
+重新打开实际 Blender 源文件后，还发现飞艇表情贴片共有 120 条开放边缘。为保持闭合几何，给每块贴片增加薄侧壁和藏在艇身内的背面，保留原可见曲面与轮廓。重新导出两档模型，原版 36 个角色实际审计均为 0 条开放边缘、0 条孤立边；表情的两个眼睛与嘴也重新测量贴合距离。
+
+`audit-sources.py --original-catalog` 现在能直接重开共享源文件，复核全部 36 个角色后再合并更新原有 153 条审计记录。历史嘴部修复证据和其他扩展审计保持原样，未跳过或放宽原有断言。目录源审计同步重建，失败提示补充具体过期文件路径。
+
+本地先复现同一哈希断言，再确认原失败检查通过；完整 `pnpm test` **1444/1444**，约 23.3 秒。双档资源预算检查通过，飞艇桌面高画质与手机低画质两项实际载入、移动、刷新再次通过；此前选卡及聊天专项无需重复长局。
 
 ## 实测图
 
@@ -48,6 +58,14 @@ node scripts/sculpt/finalize-stage.mjs --economy blimp
 node scripts/sculpt/assemble-originals.mjs --finalized blimp
 ```
 
-`--finalized` 将已压缩的单角色导出装入原包，以无损方式重封已有量化数据，避免重新过滤其他角色的法线。导出后按真实 GLB 更新清单中的字节、三角形、bounds 与本次角色版本，再执行 `tests/3d-assets.test.ts`。Blender 材质节点按类型查找，兼容本机中文节点名称。
+`--finalized` 将已压缩的单角色导出装入原包，以无损方式重封已有量化数据，避免重新过滤其他角色的法线。导出后按真实 GLB 更新清单中的字节、三角形、bounds 与本次角色版本，再刷新实际源文件审计并验证：
+
+```powershell
+& $blender -b --python-exit-code 1 --python scripts/sculpt/audit-sources.py -- --original-catalog
+& $blender -b --python-exit-code 1 --python scripts/sculpt/audit-catalogs.py
+pnpm exec tsx --test tests/mouth-surfaces.test.ts tests/3d-assets.test.ts
+```
+
+Blender 材质节点按类型查找，兼容本机中文节点名称。
 
 游戏近景使用已有的本地 `scripts/art-qa-build.mjs` 开放相机核验接口，再以 `BLIMP_MODEL_QA=1` 显式运行 `tests/browser/blimp-model.spec.ts`；生产构建不包含该接口。

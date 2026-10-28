@@ -67,6 +67,13 @@ def blimp():
   for ring in range(2):
    a=1+ring*24;b=a+24
    faces.extend((a+i,b+i,b+(i+1)%24,a+(i+1)%24)for i in range(24))
+  # Close each printed mark with a thin back just inside the envelope. The
+  # visible surface stays unchanged, while the exported piece is watertight.
+  count=len(vertices);front=list(faces)
+  vertices.extend((px,py,pz-offset-.00025)for px,py,pz in vertices[:count])
+  faces.extend(tuple(count+i for i in reversed(face))for face in front)
+  edge=1+2*24
+  faces.extend((edge+i,count+edge+i,count+edge+(i+1)%24,edge+(i+1)%24)for i in range(24))
   mesh=bpy.data.meshes.new(tag);mesh.from_pydata(vertices,[],faces);mesh.update()
   ob=bpy.data.objects.new(tag,mesh);scene.collection.objects.link(ob);return add(ob,color,tag)
  for x in [-.215,-.170]:

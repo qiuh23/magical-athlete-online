@@ -25,11 +25,10 @@
           "sampleCount": 146
         }
       ],
-      "stageSourceSha256": "2c20a9c223d1e06d3ee84704b1fe976d5f4ab46585a8db795e1654b7a37ce5f9",
       "source": "assets/blender/toy-racers.blend",
-      "sourceSha256": "24425cebae2799f565280f48c4e14927101d70291d8ded3c2e150aedfb9af5cd",
+      "sourceSha256": "a1aacba5d21ce1e769418f82c1c747d67b13811c83af8a1dcf88ab005e05f4f1",
       "glb": "public/models/toy-racers.glb",
-      "glbSha256": "9923efce58e10157e2acf8576afd201fd788e61db1d4a4d64558d1d39aa059e4"
+      "glbSha256": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2"
     },
     {
       "id": "baba-yaga",
@@ -40,11 +39,10 @@
       "looseEdges": 0,
       "reopened": true,
       "faceAttachmentProbes": [],
-      "stageSourceSha256": "6b5d4b32cb6f8ff8aded539b4f2ad15a83ae8958500d18de7d40470998f5fb73",
       "source": "assets/blender/toy-racers.blend",
-      "sourceSha256": "24425cebae2799f565280f48c4e14927101d70291d8ded3c2e150aedfb9af5cd",
+      "sourceSha256": "a1aacba5d21ce1e769418f82c1c747d67b13811c83af8a1dcf88ab005e05f4f1",
       "glb": "public/models/toy-racers.glb",
-      "glbSha256": "9923efce58e10157e2acf8576afd201fd788e61db1d4a4d64558d1d39aa059e4"
+      "glbSha256": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2"
     },
     {
       "id": "banana",
@@ -686,15 +684,14 @@
           ]
         ]
       },
-      "stageSourceSha256": "ab5e0b7dfb94a917e124942c294189a596b4cfa67a7200cede484ad5f0db9b3d",
       "source": "assets/blender/toy-racers.blend",
-      "sourceSha256": "24425cebae2799f565280f48c4e14927101d70291d8ded3c2e150aedfb9af5cd",
+      "sourceSha256": "a1aacba5d21ce1e769418f82c1c747d67b13811c83af8a1dcf88ab005e05f4f1",
       "glb": "public/models/toy-racers.glb",
-      "glbSha256": "9923efce58e10157e2acf8576afd201fd788e61db1d4a4d64558d1d39aa059e4"
+      "glbSha256": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2"
     },
     {
       "id": "blimp",
-      "editableParts": 14,
+      "editableParts": 18,
       "gameMeshes": 4,
       "bones": 5,
       "boundaryEdges": 0,
@@ -702,25 +699,31 @@
       "reopened": true,
       "faceAttachmentProbes": [
         {
-          "part": "GEO-blimp-eye-white-412",
+          "part": "GEO-blimp-eye-white-10",
           "kind": "eye",
-          "nearestGap": 8.532753417966887e-05,
-          "furthestGap": 0.03617805242538452,
+          "nearestGap": 0.00022659043315798044,
+          "furthestGap": 0.0009344351710751653,
           "sampleCount": 146
         },
         {
-          "part": "GEO-blimp-eye-white-414",
+          "part": "GEO-blimp-eye-white-8",
           "kind": "eye",
-          "nearestGap": 8.493634959449992e-05,
-          "furthestGap": 0.014073876664042473,
+          "nearestGap": 0.00019584281835705042,
+          "furthestGap": 0.0008372031152248383,
+          "sampleCount": 146
+        },
+        {
+          "part": "GEO-blimp-small-gasp-12",
+          "kind": "mouth",
+          "nearestGap": 0.00020913932530675083,
+          "furthestGap": 0.0009343886049464345,
           "sampleCount": 146
         }
       ],
-      "stageSourceSha256": "7f68c8e515ea7fee3c20001ef5e86c3c53d6c06a4be7b16e73e82eecd352d0cd",
       "source": "assets/blender/toy-racers.blend",
-      "sourceSha256": "24425cebae2799f565280f48c4e14927101d70291d8ded3c2e150aedfb9af5cd",
+      "sourceSha256": "a1aacba5d21ce1e769418f82c1c747d67b13811c83af8a1dcf88ab005e05f4f1",
       "glb": "public/models/toy-racers.glb",
-      "glbSha256": "9923efce58e10157e2acf8576afd201fd788e61db1d4a4d64558d1d39aa059e4"
+      "glbSha256": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2"
     },
     {
       "id": "centaur",
@@ -746,11 +749,10 @@
           "sampleCount": 146
         }
       ],
-      "stageSourceSha256": "f8c778bc7a793270850b436082ea0e5cc41e1e6252473deb66d06a7f9280dff1",
       "source": "assets/blender/toy-racers.blend",
-      "sourceSha256": "24425cebae2799f565280f48c4e14927101d70291d8ded3c2e150aedfb9af5cd",
+      "sourceSha256": "a1aacba5d21ce1e769418f82c1c747d67b13811c83af8a1dcf88ab005e05f4f1",
       "glb": "public/models/toy-racers.glb",
-      "glbSha256": "9923efce58e10157e2acf8576afd201fd788e61db1d4a4d64558d1d39aa059e4"
+      "glbSha256": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2"
     },
     {
       "id": "cheerleader",
@@ -783,11 +785,10 @@
           "sampleCount": 86
         }
       ],
-      "stageSourceSha256": "a067db00b50ef100a9ae6fa1862c5df34b513b91c1b7a2e2199da38510ee0c8e",
       "source": "assets/blender/toy-racers.blend",
-      "sourceSha256": "24425cebae2799f565280f48c4e14927101d70291d8ded3c2e150aedfb9af5cd",
+      "sourceSha256": "a1aacba5d21ce1e769418f82c1c747d67b13811c83af8a1dcf88ab005e05f4f1",
       "glb": "public/models/toy-racers.glb",
-      "glbSha256": "9923efce58e10157e2acf8576afd201fd788e61db1d4a4d64558d1d39aa059e4"
+      "glbSha256": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2"
     },
     {
       "id": "coach",
@@ -841,11 +842,10 @@
           "sampleCount": 120
         }
       ],
-      "stageSourceSha256": "c6d87fd6a91056f27af8624e0d73b0ff32bbeb5fdb3b1407347cbdf77a98deef",
       "source": "assets/blender/toy-racers.blend",
-      "sourceSha256": "24425cebae2799f565280f48c4e14927101d70291d8ded3c2e150aedfb9af5cd",
+      "sourceSha256": "a1aacba5d21ce1e769418f82c1c747d67b13811c83af8a1dcf88ab005e05f4f1",
       "glb": "public/models/toy-racers.glb",
-      "glbSha256": "9923efce58e10157e2acf8576afd201fd788e61db1d4a4d64558d1d39aa059e4"
+      "glbSha256": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2"
     },
     {
       "id": "copycat",
@@ -885,11 +885,10 @@
           "sampleCount": 146
         }
       ],
-      "stageSourceSha256": "546cc88f34a332a2e51beedbbb74f8b91c84a0ff5962ec806f36aa7b279c80d2",
       "source": "assets/blender/toy-racers.blend",
-      "sourceSha256": "24425cebae2799f565280f48c4e14927101d70291d8ded3c2e150aedfb9af5cd",
+      "sourceSha256": "a1aacba5d21ce1e769418f82c1c747d67b13811c83af8a1dcf88ab005e05f4f1",
       "glb": "public/models/toy-racers.glb",
-      "glbSha256": "9923efce58e10157e2acf8576afd201fd788e61db1d4a4d64558d1d39aa059e4"
+      "glbSha256": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2"
     },
     {
       "id": "dicemonger",
@@ -922,11 +921,10 @@
           "sampleCount": 120
         }
       ],
-      "stageSourceSha256": "6a8185ef120e42a37e22f06dc76812beb75a1c37b5a2a28c661338e697be70f8",
       "source": "assets/blender/toy-racers.blend",
-      "sourceSha256": "24425cebae2799f565280f48c4e14927101d70291d8ded3c2e150aedfb9af5cd",
+      "sourceSha256": "a1aacba5d21ce1e769418f82c1c747d67b13811c83af8a1dcf88ab005e05f4f1",
       "glb": "public/models/toy-racers.glb",
-      "glbSha256": "9923efce58e10157e2acf8576afd201fd788e61db1d4a4d64558d1d39aa059e4"
+      "glbSha256": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2"
     },
     {
       "id": "duelist",
@@ -952,11 +950,10 @@
           "sampleCount": 146
         }
       ],
-      "stageSourceSha256": "beb802a719ede4382d8b7bdcda15c04fbf4fca55fdd5b7f0f6ba0de77681db35",
       "source": "assets/blender/toy-racers.blend",
-      "sourceSha256": "24425cebae2799f565280f48c4e14927101d70291d8ded3c2e150aedfb9af5cd",
+      "sourceSha256": "a1aacba5d21ce1e769418f82c1c747d67b13811c83af8a1dcf88ab005e05f4f1",
       "glb": "public/models/toy-racers.glb",
-      "glbSha256": "9923efce58e10157e2acf8576afd201fd788e61db1d4a4d64558d1d39aa059e4"
+      "glbSha256": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2"
     },
     {
       "id": "egg",
@@ -996,11 +993,10 @@
           "sampleCount": 146
         }
       ],
-      "stageSourceSha256": "572b97ab0c6e2d5e3786e8f3bdce9b299bc7f034528c3c4fabe239cc0e29b578",
       "source": "assets/blender/toy-racers.blend",
-      "sourceSha256": "24425cebae2799f565280f48c4e14927101d70291d8ded3c2e150aedfb9af5cd",
+      "sourceSha256": "a1aacba5d21ce1e769418f82c1c747d67b13811c83af8a1dcf88ab005e05f4f1",
       "glb": "public/models/toy-racers.glb",
-      "glbSha256": "9923efce58e10157e2acf8576afd201fd788e61db1d4a4d64558d1d39aa059e4"
+      "glbSha256": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2"
     },
     {
       "id": "flip-flop",
@@ -1011,11 +1007,10 @@
       "looseEdges": 0,
       "reopened": true,
       "faceAttachmentProbes": [],
-      "stageSourceSha256": "5db35dbe68387bf2f1315754797c031464efdd5ffc94b63433adb2105b82eb23",
       "source": "assets/blender/toy-racers.blend",
-      "sourceSha256": "24425cebae2799f565280f48c4e14927101d70291d8ded3c2e150aedfb9af5cd",
+      "sourceSha256": "a1aacba5d21ce1e769418f82c1c747d67b13811c83af8a1dcf88ab005e05f4f1",
       "glb": "public/models/toy-racers.glb",
-      "glbSha256": "9923efce58e10157e2acf8576afd201fd788e61db1d4a4d64558d1d39aa059e4"
+      "glbSha256": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2"
     },
     {
       "id": "genius",
@@ -1048,11 +1043,10 @@
           "sampleCount": 216
         }
       ],
-      "stageSourceSha256": "3a682dca66bca6b7ba9d2414b543c7dabee94e84909fbf498fef1d7dd4a8dff9",
       "source": "assets/blender/toy-racers.blend",
-      "sourceSha256": "24425cebae2799f565280f48c4e14927101d70291d8ded3c2e150aedfb9af5cd",
+      "sourceSha256": "a1aacba5d21ce1e769418f82c1c747d67b13811c83af8a1dcf88ab005e05f4f1",
       "glb": "public/models/toy-racers.glb",
-      "glbSha256": "9923efce58e10157e2acf8576afd201fd788e61db1d4a4d64558d1d39aa059e4"
+      "glbSha256": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2"
     },
     {
       "id": "gunk",
@@ -1063,11 +1057,10 @@
       "looseEdges": 0,
       "reopened": true,
       "faceAttachmentProbes": [],
-      "stageSourceSha256": "75b54c171e9a2404afe8328a565d43e4d4ee54203a3067a07b10d8e8265a09a1",
       "source": "assets/blender/toy-racers.blend",
-      "sourceSha256": "24425cebae2799f565280f48c4e14927101d70291d8ded3c2e150aedfb9af5cd",
+      "sourceSha256": "a1aacba5d21ce1e769418f82c1c747d67b13811c83af8a1dcf88ab005e05f4f1",
       "glb": "public/models/toy-racers.glb",
-      "glbSha256": "9923efce58e10157e2acf8576afd201fd788e61db1d4a4d64558d1d39aa059e4"
+      "glbSha256": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2"
     },
     {
       "id": "hare",
@@ -1100,11 +1093,10 @@
           "sampleCount": 120
         }
       ],
-      "stageSourceSha256": "28f57801e33abfa34f1752b4c64562c9c55cbcacec886ef7de52a0eeb6d04647",
       "source": "assets/blender/toy-racers.blend",
-      "sourceSha256": "24425cebae2799f565280f48c4e14927101d70291d8ded3c2e150aedfb9af5cd",
+      "sourceSha256": "a1aacba5d21ce1e769418f82c1c747d67b13811c83af8a1dcf88ab005e05f4f1",
       "glb": "public/models/toy-racers.glb",
-      "glbSha256": "9923efce58e10157e2acf8576afd201fd788e61db1d4a4d64558d1d39aa059e4"
+      "glbSha256": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2"
     },
     {
       "id": "heckler",
@@ -1130,11 +1122,10 @@
           "sampleCount": 146
         }
       ],
-      "stageSourceSha256": "f431c62f2abf36ddb50f174b9de405378e1ae7b8ec8f83933dd8ad12dc67418c",
       "source": "assets/blender/toy-racers.blend",
-      "sourceSha256": "24425cebae2799f565280f48c4e14927101d70291d8ded3c2e150aedfb9af5cd",
+      "sourceSha256": "a1aacba5d21ce1e769418f82c1c747d67b13811c83af8a1dcf88ab005e05f4f1",
       "glb": "public/models/toy-racers.glb",
-      "glbSha256": "9923efce58e10157e2acf8576afd201fd788e61db1d4a4d64558d1d39aa059e4"
+      "glbSha256": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2"
     },
     {
       "id": "huge-baby",
@@ -1160,11 +1151,10 @@
           "sampleCount": 146
         }
       ],
-      "stageSourceSha256": "e81841eac1ebfa06e1693ff351b48e4cc156e98efbde7012021dc7563c3c7888",
       "source": "assets/blender/toy-racers.blend",
-      "sourceSha256": "24425cebae2799f565280f48c4e14927101d70291d8ded3c2e150aedfb9af5cd",
+      "sourceSha256": "a1aacba5d21ce1e769418f82c1c747d67b13811c83af8a1dcf88ab005e05f4f1",
       "glb": "public/models/toy-racers.glb",
-      "glbSha256": "9923efce58e10157e2acf8576afd201fd788e61db1d4a4d64558d1d39aa059e4"
+      "glbSha256": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2"
     },
     {
       "id": "hypnotist",
@@ -1183,11 +1173,10 @@
           "sampleCount": 86
         }
       ],
-      "stageSourceSha256": "9d94c0039fdb7bfec5cdb0051b4dc93850991245bd254e42ee3bbff0dfd536b9",
       "source": "assets/blender/toy-racers.blend",
-      "sourceSha256": "24425cebae2799f565280f48c4e14927101d70291d8ded3c2e150aedfb9af5cd",
+      "sourceSha256": "a1aacba5d21ce1e769418f82c1c747d67b13811c83af8a1dcf88ab005e05f4f1",
       "glb": "public/models/toy-racers.glb",
-      "glbSha256": "9923efce58e10157e2acf8576afd201fd788e61db1d4a4d64558d1d39aa059e4"
+      "glbSha256": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2"
     },
     {
       "id": "inchworm",
@@ -1213,11 +1202,10 @@
           "sampleCount": 146
         }
       ],
-      "stageSourceSha256": "293d3bb33c19ff485774ea0c0ab9b3957fc1dd201c263762f5a2d809d28ec1be",
       "source": "assets/blender/toy-racers.blend",
-      "sourceSha256": "24425cebae2799f565280f48c4e14927101d70291d8ded3c2e150aedfb9af5cd",
+      "sourceSha256": "a1aacba5d21ce1e769418f82c1c747d67b13811c83af8a1dcf88ab005e05f4f1",
       "glb": "public/models/toy-racers.glb",
-      "glbSha256": "9923efce58e10157e2acf8576afd201fd788e61db1d4a4d64558d1d39aa059e4"
+      "glbSha256": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2"
     },
     {
       "id": "lackey",
@@ -1228,11 +1216,10 @@
       "looseEdges": 0,
       "reopened": true,
       "faceAttachmentProbes": [],
-      "stageSourceSha256": "5c5fb9b8bf9189057529164f5fa4ff8d6fa808a69ec03750fc94f26ce0336711",
       "source": "assets/blender/toy-racers.blend",
-      "sourceSha256": "24425cebae2799f565280f48c4e14927101d70291d8ded3c2e150aedfb9af5cd",
+      "sourceSha256": "a1aacba5d21ce1e769418f82c1c747d67b13811c83af8a1dcf88ab005e05f4f1",
       "glb": "public/models/toy-racers.glb",
-      "glbSha256": "9923efce58e10157e2acf8576afd201fd788e61db1d4a4d64558d1d39aa059e4"
+      "glbSha256": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2"
     },
     {
       "id": "leaptoad",
@@ -1251,11 +1238,10 @@
           "sampleCount": 120
         }
       ],
-      "stageSourceSha256": "976da7d1dc1911b2a2aa47d5bc890a678972bd55ea83298889ea6117ac084a0a",
       "source": "assets/blender/toy-racers.blend",
-      "sourceSha256": "24425cebae2799f565280f48c4e14927101d70291d8ded3c2e150aedfb9af5cd",
+      "sourceSha256": "a1aacba5d21ce1e769418f82c1c747d67b13811c83af8a1dcf88ab005e05f4f1",
       "glb": "public/models/toy-racers.glb",
-      "glbSha256": "9923efce58e10157e2acf8576afd201fd788e61db1d4a4d64558d1d39aa059e4"
+      "glbSha256": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2"
     },
     {
       "id": "legs",
@@ -1281,11 +1267,10 @@
           "sampleCount": 146
         }
       ],
-      "stageSourceSha256": "91c90825c89ad43440e270a73cb4046406d19af1548754521099865d0fb2b74b",
       "source": "assets/blender/toy-racers.blend",
-      "sourceSha256": "24425cebae2799f565280f48c4e14927101d70291d8ded3c2e150aedfb9af5cd",
+      "sourceSha256": "a1aacba5d21ce1e769418f82c1c747d67b13811c83af8a1dcf88ab005e05f4f1",
       "glb": "public/models/toy-racers.glb",
-      "glbSha256": "9923efce58e10157e2acf8576afd201fd788e61db1d4a4d64558d1d39aa059e4"
+      "glbSha256": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2"
     },
     {
       "id": "lovable-loser",
@@ -1296,11 +1281,10 @@
       "looseEdges": 0,
       "reopened": true,
       "faceAttachmentProbes": [],
-      "stageSourceSha256": "b3cd493e74b79fd6f5206d05c4fe8b75d7d061cab33a395a2266df47cc0b21f0",
       "source": "assets/blender/toy-racers.blend",
-      "sourceSha256": "24425cebae2799f565280f48c4e14927101d70291d8ded3c2e150aedfb9af5cd",
+      "sourceSha256": "a1aacba5d21ce1e769418f82c1c747d67b13811c83af8a1dcf88ab005e05f4f1",
       "glb": "public/models/toy-racers.glb",
-      "glbSha256": "9923efce58e10157e2acf8576afd201fd788e61db1d4a4d64558d1d39aa059e4"
+      "glbSha256": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2"
     },
     {
       "id": "magician",
@@ -1326,11 +1310,10 @@
           "sampleCount": 146
         }
       ],
-      "stageSourceSha256": "3d4e59802e90e6108d66364925f8793807442ef46caac6a773656c61903946b1",
       "source": "assets/blender/toy-racers.blend",
-      "sourceSha256": "24425cebae2799f565280f48c4e14927101d70291d8ded3c2e150aedfb9af5cd",
+      "sourceSha256": "a1aacba5d21ce1e769418f82c1c747d67b13811c83af8a1dcf88ab005e05f4f1",
       "glb": "public/models/toy-racers.glb",
-      "glbSha256": "9923efce58e10157e2acf8576afd201fd788e61db1d4a4d64558d1d39aa059e4"
+      "glbSha256": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2"
     },
     {
       "id": "mastermind",
@@ -1356,11 +1339,10 @@
           "sampleCount": 146
         }
       ],
-      "stageSourceSha256": "ac87d706a59f5248100a4af4594f7b9845e54884e94ad5a7a89db1582011f337",
       "source": "assets/blender/toy-racers.blend",
-      "sourceSha256": "24425cebae2799f565280f48c4e14927101d70291d8ded3c2e150aedfb9af5cd",
+      "sourceSha256": "a1aacba5d21ce1e769418f82c1c747d67b13811c83af8a1dcf88ab005e05f4f1",
       "glb": "public/models/toy-racers.glb",
-      "glbSha256": "9923efce58e10157e2acf8576afd201fd788e61db1d4a4d64558d1d39aa059e4"
+      "glbSha256": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2"
     },
     {
       "id": "mouth",
@@ -1371,11 +1353,10 @@
       "looseEdges": 0,
       "reopened": true,
       "faceAttachmentProbes": [],
-      "stageSourceSha256": "b2e00fafae762af9c8724d272d08422481018539c32cb23de08f70d8684de3dd",
       "source": "assets/blender/toy-racers.blend",
-      "sourceSha256": "24425cebae2799f565280f48c4e14927101d70291d8ded3c2e150aedfb9af5cd",
+      "sourceSha256": "a1aacba5d21ce1e769418f82c1c747d67b13811c83af8a1dcf88ab005e05f4f1",
       "glb": "public/models/toy-racers.glb",
-      "glbSha256": "9923efce58e10157e2acf8576afd201fd788e61db1d4a4d64558d1d39aa059e4"
+      "glbSha256": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2"
     },
     {
       "id": "party-animal",
@@ -1401,11 +1382,10 @@
           "sampleCount": 146
         }
       ],
-      "stageSourceSha256": "d9d89ea952b73ac7bf0022d325acc59bd664db291656341c95ed642e96dc67db",
       "source": "assets/blender/toy-racers.blend",
-      "sourceSha256": "24425cebae2799f565280f48c4e14927101d70291d8ded3c2e150aedfb9af5cd",
+      "sourceSha256": "a1aacba5d21ce1e769418f82c1c747d67b13811c83af8a1dcf88ab005e05f4f1",
       "glb": "public/models/toy-racers.glb",
-      "glbSha256": "9923efce58e10157e2acf8576afd201fd788e61db1d4a4d64558d1d39aa059e4"
+      "glbSha256": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2"
     },
     {
       "id": "rocket-scientist",
@@ -1416,11 +1396,10 @@
       "looseEdges": 0,
       "reopened": true,
       "faceAttachmentProbes": [],
-      "stageSourceSha256": "8ad6827b09ffe8af80af7c0afd59a87b9e8b3f452f99489ad6218929b1fcb7cb",
       "source": "assets/blender/toy-racers.blend",
-      "sourceSha256": "24425cebae2799f565280f48c4e14927101d70291d8ded3c2e150aedfb9af5cd",
+      "sourceSha256": "a1aacba5d21ce1e769418f82c1c747d67b13811c83af8a1dcf88ab005e05f4f1",
       "glb": "public/models/toy-racers.glb",
-      "glbSha256": "9923efce58e10157e2acf8576afd201fd788e61db1d4a4d64558d1d39aa059e4"
+      "glbSha256": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2"
     },
     {
       "id": "romantic",
@@ -1453,11 +1432,10 @@
           "sampleCount": 216
         }
       ],
-      "stageSourceSha256": "f5030602ce9d745fbc717a8cf76165db2de9fc9e14e93e32e8ee9668b12c154c",
       "source": "assets/blender/toy-racers.blend",
-      "sourceSha256": "24425cebae2799f565280f48c4e14927101d70291d8ded3c2e150aedfb9af5cd",
+      "sourceSha256": "a1aacba5d21ce1e769418f82c1c747d67b13811c83af8a1dcf88ab005e05f4f1",
       "glb": "public/models/toy-racers.glb",
-      "glbSha256": "9923efce58e10157e2acf8576afd201fd788e61db1d4a4d64558d1d39aa059e4"
+      "glbSha256": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2"
     },
     {
       "id": "scoocher",
@@ -1483,11 +1461,10 @@
           "sampleCount": 146
         }
       ],
-      "stageSourceSha256": "ae6f4c151e4aad72936c044d8968fbe52c912caa1bde347126474bcef05113e1",
       "source": "assets/blender/toy-racers.blend",
-      "sourceSha256": "24425cebae2799f565280f48c4e14927101d70291d8ded3c2e150aedfb9af5cd",
+      "sourceSha256": "a1aacba5d21ce1e769418f82c1c747d67b13811c83af8a1dcf88ab005e05f4f1",
       "glb": "public/models/toy-racers.glb",
-      "glbSha256": "9923efce58e10157e2acf8576afd201fd788e61db1d4a4d64558d1d39aa059e4"
+      "glbSha256": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2"
     },
     {
       "id": "sisyphus",
@@ -1520,11 +1497,10 @@
           "sampleCount": 146
         }
       ],
-      "stageSourceSha256": "6246acdd80deffae0caceb518401e6c613ba9b99c897784a3663dd36121cd7d1",
       "source": "assets/blender/toy-racers.blend",
-      "sourceSha256": "24425cebae2799f565280f48c4e14927101d70291d8ded3c2e150aedfb9af5cd",
+      "sourceSha256": "a1aacba5d21ce1e769418f82c1c747d67b13811c83af8a1dcf88ab005e05f4f1",
       "glb": "public/models/toy-racers.glb",
-      "glbSha256": "9923efce58e10157e2acf8576afd201fd788e61db1d4a4d64558d1d39aa059e4"
+      "glbSha256": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2"
     },
     {
       "id": "skipper",
@@ -1550,11 +1526,10 @@
           "sampleCount": 146
         }
       ],
-      "stageSourceSha256": "16b8803694fe3c69cf91666c79b73249655d680af6e361e4a0551ef5f059e4c2",
       "source": "assets/blender/toy-racers.blend",
-      "sourceSha256": "24425cebae2799f565280f48c4e14927101d70291d8ded3c2e150aedfb9af5cd",
+      "sourceSha256": "a1aacba5d21ce1e769418f82c1c747d67b13811c83af8a1dcf88ab005e05f4f1",
       "glb": "public/models/toy-racers.glb",
-      "glbSha256": "9923efce58e10157e2acf8576afd201fd788e61db1d4a4d64558d1d39aa059e4"
+      "glbSha256": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2"
     },
     {
       "id": "stickler",
@@ -1580,11 +1555,10 @@
           "sampleCount": 146
         }
       ],
-      "stageSourceSha256": "f11172160bdf516bb5b19a2dde668aac48271fff63ec1d2db6c5e83b076b2471",
       "source": "assets/blender/toy-racers.blend",
-      "sourceSha256": "24425cebae2799f565280f48c4e14927101d70291d8ded3c2e150aedfb9af5cd",
+      "sourceSha256": "a1aacba5d21ce1e769418f82c1c747d67b13811c83af8a1dcf88ab005e05f4f1",
       "glb": "public/models/toy-racers.glb",
-      "glbSha256": "9923efce58e10157e2acf8576afd201fd788e61db1d4a4d64558d1d39aa059e4"
+      "glbSha256": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2"
     },
     {
       "id": "suckerfish",
@@ -1595,11 +1569,10 @@
       "looseEdges": 0,
       "reopened": true,
       "faceAttachmentProbes": [],
-      "stageSourceSha256": "bb65def9b20855f7a2395dc9b0e7eaa65f016c37ac85a4ad82dd22b9534f77e5",
       "source": "assets/blender/toy-racers.blend",
-      "sourceSha256": "24425cebae2799f565280f48c4e14927101d70291d8ded3c2e150aedfb9af5cd",
+      "sourceSha256": "a1aacba5d21ce1e769418f82c1c747d67b13811c83af8a1dcf88ab005e05f4f1",
       "glb": "public/models/toy-racers.glb",
-      "glbSha256": "9923efce58e10157e2acf8576afd201fd788e61db1d4a4d64558d1d39aa059e4"
+      "glbSha256": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2"
     },
     {
       "id": "third-wheel",
@@ -1625,11 +1598,10 @@
           "sampleCount": 146
         }
       ],
-      "stageSourceSha256": "712820be2fb7364beaf194d0cb1df7c89d37e42638e5502302c549361a4e1140",
       "source": "assets/blender/toy-racers.blend",
-      "sourceSha256": "24425cebae2799f565280f48c4e14927101d70291d8ded3c2e150aedfb9af5cd",
+      "sourceSha256": "a1aacba5d21ce1e769418f82c1c747d67b13811c83af8a1dcf88ab005e05f4f1",
       "glb": "public/models/toy-racers.glb",
-      "glbSha256": "9923efce58e10157e2acf8576afd201fd788e61db1d4a4d64558d1d39aa059e4"
+      "glbSha256": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2"
     },
     {
       "id": "twin",
@@ -1669,11 +1641,10 @@
           "sampleCount": 146
         }
       ],
-      "stageSourceSha256": "0564f6a08e1bd61e9dddcd786c87d1c2d8df2efe08e112a826b1483604116ffd",
       "source": "assets/blender/toy-racers.blend",
-      "sourceSha256": "24425cebae2799f565280f48c4e14927101d70291d8ded3c2e150aedfb9af5cd",
+      "sourceSha256": "a1aacba5d21ce1e769418f82c1c747d67b13811c83af8a1dcf88ab005e05f4f1",
       "glb": "public/models/toy-racers.glb",
-      "glbSha256": "9923efce58e10157e2acf8576afd201fd788e61db1d4a4d64558d1d39aa059e4"
+      "glbSha256": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2"
     },
     {
       "id": "bite-mark",
