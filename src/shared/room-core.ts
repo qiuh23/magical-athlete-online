@@ -3,7 +3,8 @@ import { timeoutRoomAction, CURRENT_RULES_VERSION, LEGACY_RULES_VERSION, WURSTII
 import { MAX_SPECTATORS, PLAYER_COLORS, RULES_STATUS } from './constants.js';
 import type { ActionEnvelope, GameAction, Player, Room, RoomView } from './types.js';
 import type { RelayMember, RelayMetadata } from './relay.js';
-import { personalRoom, roomExpiry, roomExpiryMessage } from './room-lifecycle.js';
+import { personalRoom, roomExpiry, roomExpiryMessage, PAUSED_OWNER_AWAY_MS } from './room-lifecycle.js';
+import { appendChat } from './chat.js';
 import { legacyRoomConfig, legacyPoolForConfig, validateRoomConfig, validateRoomConfigForPlayers } from './room-config.js';
 import { publicCopyCardIds } from './character-info.js';
 import type { RandomSeed } from './random.js';
@@ -101,8 +102,29 @@ export function reconcileRoster(original: Room, meta: RelayMetadata, now: number
   // A transiently absent connection never removes its identity or resets a hand.
   for (const p of room.game.players) if (!meta.members.some(m => m.id === p.id) && !p.isAI && p.connected) { p.connected = false; changed = true; }
   if (changed && room.game.phase === 'lobby') room.game.players.sort((a,b) => a.seat-b.seat);
+  if (updateOwnerPresence(room,room.hostLeftAt===undefined,now)) changed = true;
   if (changed) { room.version++; room.updatedAt = now; }
   return { room, changed };
+}
+/** Presence changes never rewind gameplay. A pause keeps its first offline deadline. */
+export function updateOwnerPresence(room:Room,connected:boolean,now:number):boolean {
+  if(room.closedAt!==undefined)return false;
+  let changed=false;
+  if(connected){
+    if(room.hostLeftAt!==undefined){delete room.hostLeftAt;changed=true;}
+    if(room.continuation){
+      const previous=room.continuation;delete room.continuation;
+      if(previous.stage!=='playing'){
+        setRoomDeadline(room,now);
+        if(!room.pause&&previous.stage==='voting'&&previous.remainingMs!==undefined)room.deadline=previous.remainingMs===null?null:now+previous.remainingMs;
+      }
+      changed=true;
+    }
+  }else{
+    if(room.hostLeftAt===undefined){room.hostLeftAt=now;changed=true;}
+    if(!personalRoom(room)&&room.pause&&room.pause.offlineExpiresAt===undefined){room.pause.offlineExpiresAt=room.hostLeftAt+PAUSED_OWNER_AWAY_MS;changed=true;}
+  }
+  return changed;
 }
 export function setRoomDeadline(room: Room, now: number): void {
   room.deadline = room.closedAt === undefined && !room.pause && !continuationPaused(room) && room.timeoutSeconds > 0 && timeoutRoomAction(room.game) ? now + room.timeoutSeconds*1000 : null;
@@ -153,6 +175,16 @@ export function reduceRoomAction(original: Room, playerId: string, action: GameA
     case 'ready':
       if (room.game.phase !== 'lobby') throw Error('只能在大厅准备。');
       p.ready = action.ready; break;
+    case 'kick': {
+      if(room.hostId!==playerId)throw Error('只有房主能踢出玩家。');
+      if(room.game.phase!=='lobby')throw Error('只能在大厅、选秀开始前踢出玩家。');
+      if(action.playerId===playerId)throw Error('房主不能踢出自己。');
+      const target=room.game.players.find(player=>player.id===action.playerId);
+      if(!target)throw Error('该玩家已不在房间席位中。');
+      room.game.players=room.game.players.filter(player=>player.id!==target.id);
+      room.chat=appendChat(room.chat,{senderId:playerId,senderName:'系统',text:`${target.name} 已被房主踢出房间。`,sentAt:options.now,kind:'system'});
+      break;
+    }
     case 'start':
       if (room.hostId !== playerId) throw Error('只有房主能开始比赛。');
       if (room.game.phase !== 'lobby' || room.game.players.length < (room.mode==='practice'?1:2) || !room.game.players.every(p => p.ready && p.connected)) throw Error('需要至少2名玩家，且全员在线并准备。');
@@ -217,7 +249,7 @@ export function validateActionEnvelope(value: unknown): ActionEnvelope {
       keys(a,['type','characterIds']); if (!Array.isArray(a.characterIds) || a.characterIds.length < 1 || a.characterIds.length > 2) throw Error('请选择本场所需角色。');
       action={type:'select',characterIds:a.characterIds.map(id => string(id,50))}; break;
     case 'choose': keys(a,['type','choiceId','optionId']); action={type:'choose',choiceId:string(a.choiceId),optionId:string(a.optionId)}; break;
-    case 'transfer': keys(a,['type','playerId']); action={type:'transfer',playerId:string(a.playerId)}; break;
+    case 'kick': case 'transfer': keys(a,['type','playerId']); action={type:a.type,playerId:string(a.playerId)}; break;
     default: throw Error('无法识别这个操作。');
   }
   return { actionId, expectedVersion:Number(e.expectedVersion), action };

@@ -10,7 +10,7 @@ import { createGame, resolveTasks } from '../src/engine/index.js';
 import { CONTINUE_VOTE_MS, CONTINUE_RESULTS_MS } from '../src/shared/room-continuation.js';
 import type { RelayJoinReply } from '../src/shared/relay.js';
 import { MAX_SPECTATORS } from '../src/shared/constants.js';
-import { PERSONAL_ROOM_AWAY_MS, ownerAwayMs } from '../src/shared/room-lifecycle.js';
+import { PERSONAL_ROOM_AWAY_MS, PAUSED_OWNER_AWAY_MS, ownerAwayMs } from '../src/shared/room-lifecycle.js';
 
 // Exercise the real relay handlers. Only the platform base class, persistent
 // storage, and socket transport are substituted; rule/network logic is not.
@@ -1109,7 +1109,7 @@ test('idle authoritative room never schedules the no-deadline sentinel as an ala
   assert(!host.sent.some(message=>message.type==='error'&&/2189|Invalid.*date/.test(message.message)));
 }));
 
-async function continuationWorker(){
+async function continuationWorker(paused=false){
   let env=await modern('multiplayer',legacyRoomConfig(),3);
   const a=await join(env),b=await join(env),spectator=await spectate(env);
   const host=await authenticate(env),peers=[await authenticate(env,a.identity),await authenticate(env,b.identity)],viewer=await authenticate(env,spectator.identity);
@@ -1118,6 +1118,7 @@ async function continuationWorker(){
   g.racers=g.players.map((p,i)=>({id:`r${i}`,playerId:p.id,characterId:'coach',position:10-i,tripped:false,finished:false,eliminated:false,flags:{}}));
   record.serverRoom.game=g;record.phase='race';record.serverRoom.version++;await env.ctx.storage.put('room',record);
   env={...await instance(env.ctx.storage,env.ctx.sockets),created:env.created};
+  if(paused)assert((await workerAction(env,host,{type:'pause'})).result.ok);
   await env.relay.webSocketClose(host,1000,'owner left',true);
   return{env,peers,viewer,identities:[a.identity,b.identity]};
 }
@@ -1192,4 +1193,73 @@ test('worker refusal closes immediately and unread result screens eventually exp
     }
     assert.equal((await env.ctx.storage.get<any>('closed')).reason,'host-away');assert(peers.every(p=>p.closeCode===4410));
   }
+}));
+
+test('Worker kick validates host/lobby/target, revokes all target tabs and durable credentials, and reuses the seat with a fresh identity',async()=>{
+  let env=await modern('multiplayer',legacyRoomConfig(),3);const guest=await join(env),third=await join(env),spectator=await spectate(env);
+  const host=await authenticate(env),one=await authenticate(env,guest.identity),two=await authenticate(env,guest.identity),other=await authenticate(env,third.identity),viewer=await authenticate(env,spectator.identity);
+  assert.equal((await workerAction(env,one,{type:'kick',playerId:third.identity.playerId})).result.ok,false);
+  assert.equal((await workerAction(env,host,{type:'kick',playerId:env.created.identity.playerId})).result.ok,false);
+  assert.equal((await workerAction(env,viewer,{type:'kick',playerId:guest.identity.playerId})).result,undefined);
+  assert((await workerAction(env,one,{type:'ready',ready:true})).result.ok);
+  const action={type:'kick' as const,playerId:guest.identity.playerId},result=await workerAction(env,host,action);assert(result.result.ok);
+  const room=await env.ctx.storage.get<any>('room');assert(!room.members.some((p:any)=>p.id===guest.identity.playerId));assert(!room.serverRoom.game.players.some((p:any)=>p.id===guest.identity.playerId));assert.match(room.serverRoom.chat.messages.at(-1).text,/踢出/);
+  for(const socket of [one,two]){assert.equal(socket.closeCode,4403);assert(socket.sent.some(m=>m.type==='room-kicked'));}
+  assert(other.sent.findLast(m=>m.type==='snapshot').room.chat.some((m:any)=>/踢出/.test(m.text)));
+  assert((await workerAction(env,host,action,crypto.randomUUID(),result.envelope)).result.duplicate);
+  env={...await instance(env.ctx.storage,env.ctx.sockets),created:env.created};assert.equal((await authenticate(env,guest.identity)).closeCode,4401);
+  const replacement=await join(env);assert.notEqual(replacement.identity.playerId,guest.identity.playerId);assert.equal(replacement.meta.members.find(p=>p.id===replacement.identity.playerId)!.seat,1);assert.equal(replacement.room.players.find(p=>p.id===replacement.identity.playerId)!.ready,false);
+  const replacementSocket=await authenticate(env,replacement.identity);for(const socket of [host,other,replacementSocket])assert((await workerAction(env,socket,{type:'ready',ready:true})).result.ok);
+  assert((await workerAction(env,host,{type:'start'})).result.ok);assert.equal((await workerAction(env,host,{type:'kick',playerId:third.identity.playerId})).result.ok,false);
+});
+
+test('Worker failed kick transaction cannot revoke a live seat before its receipt commits',async()=>{
+  const env=await modern('multiplayer',legacyRoomConfig(),3),guest=await join(env),host=await authenticate(env),peer=await authenticate(env,guest.identity);
+  const action={type:'kick' as const,playerId:guest.identity.playerId};await env.relay.webSocketMessage(host,JSON.stringify({type:'sync'}));const version=host.sent.findLast(m=>m.type==='snapshot').room.version;
+  const envelope={actionId:crypto.randomUUID(),expectedVersion:version,action};env.ctx.storage.failPut=`action-receipt:${env.created.identity.playerId}:${envelope.actionId}`;
+  assert.equal((await workerAction(env,host,action,'failed-kick',envelope)).result,undefined);assert.equal(peer.readyState,1);assert((await env.ctx.storage.get<any>('room')).members.some((p:any)=>p.id===guest.identity.playerId));
+  assert((await workerAction(env,host,action,'retry-kick',envelope)).result.ok);assert.equal(peer.closeCode,4403);
+});
+
+test('Worker manual pause keeps its first four-hour offline deadline across hibernation, short reconnect and an online owner past that deadline',async()=>controlledClock(async clock=>{
+  let {env,peers}=await continuationWorker(true);const until=clock.now+PAUSED_OWNER_AWAY_MS;
+  assert.equal((await env.ctx.storage.get<any>('room')).serverRoom.pause.offlineExpiresAt,until);
+  clock.now+=PERSONAL_ROOM_AWAY_MS;await env.relay.alarm();assert.equal((await env.ctx.storage.get<any>('room')).serverRoom.continuation,undefined);
+  let owner=await authenticate(env);env={...await instance(env.ctx.storage,env.ctx.sockets),created:env.created};
+  clock.now=until+60_000;owner.lastAutoResponseAt=new Date(clock.now);await env.relay.alarm();assert.equal((await env.ctx.storage.get<any>('room')).hostLeftAt,undefined);
+  await env.relay.webSocketClose(owner,1000,'离开同一次暂停',true);await env.relay.alarm();let record=await env.ctx.storage.get<any>('room');assert.equal(record.serverRoom.pause.offlineExpiresAt,until);assert.equal(record.serverRoom.continuation.stage,'voting');
+  owner=await authenticate(env);record=await env.ctx.storage.get<any>('room');assert.equal(record.serverRoom.continuation,undefined);assert(record.serverRoom.pause);assert.equal(record.serverRoom.pause.offlineExpiresAt,until);
+  assert((await workerAction(env,owner,{type:'resume'})).result.ok);assert((await workerAction(env,owner,{type:'pause'})).result.ok);await env.relay.webSocketClose(owner,1000,'新的暂停',true);
+  record=await env.ctx.storage.get<any>('room');assert.equal(record.serverRoom.pause.offlineExpiresAt,clock.now+PAUSED_OWNER_AWAY_MS);assert(peers.every(p=>p.readyState===1));
+}));
+
+for(const paused of [false,true])test(`Worker owner return cancels voting, paused=${paused}, and late votes cannot reapply restrictions`,async()=>controlledClock(async clock=>{
+  let {env,peers}=await continuationWorker(paused);clock.now+=paused?PAUSED_OWNER_AWAY_MS:PERSONAL_ROOM_AWAY_MS;await env.relay.alarm();
+  const record=await env.ctx.storage.get<any>('room'),c=record.serverRoom.continuation,action={type:'continue-vote' as const,continuationId:c.id,continue:true};
+  const vote=await workerAction(env,peers[0]!,action);assert(vote.result.ok);
+  const owner=await authenticate(env);let returned=await env.ctx.storage.get<any>('room');assert.equal(returned.serverRoom.continuation,undefined);assert.equal(!!returned.serverRoom.pause,paused);assert.deepEqual(returned.serverRoom.game.racers,record.serverRoom.game.racers);assert.deepEqual(returned.serverRoom.game.randomLog,record.serverRoom.game.randomLog);
+  assert.equal((await workerAction(env,peers[1]!,action)).result.ok,false);assert((await workerAction(env,peers[0]!,action,crypto.randomUUID(),vote.envelope)).result.duplicate);
+  env={...await instance(env.ctx.storage,env.ctx.sockets),created:env.created};returned=await env.ctx.storage.get<any>('room');assert.equal(returned.serverRoom.continuation,undefined);assert.equal(owner.readyState,1);
+}));
+
+test('Worker owner return after unanimous continuation keeps executed rolls and removes the current-race-only restriction',async()=>controlledClock(async clock=>{
+  const {env,peers}=await continuationWorker(true);clock.now+=PAUSED_OWNER_AWAY_MS;await env.relay.alarm();let record=await env.ctx.storage.get<any>('room');
+  for(const peer of peers)assert((await workerAction(env,peer,{type:'continue-vote',continuationId:record.serverRoom.continuation.id,continue:true})).result.ok);
+  clock.now+=1_500;await env.relay.alarm();record=await env.ctx.storage.get<any>('room');assert(record.serverRoom.game.randomLog.length>0);assert.equal(record.serverRoom.pause,undefined);
+  await authenticate(env);const returned=await env.ctx.storage.get<any>('room');assert.equal(returned.serverRoom.continuation,undefined);assert.deepEqual(returned.serverRoom.game.racers,record.serverRoom.game.racers);assert.deepEqual(returned.serverRoom.game.randomLog,record.serverRoom.game.randomLog);assert.deepEqual(returned.serverRoom.game.logs,record.serverRoom.game.logs);
+}));
+
+for(const returnFirst of [false,true])for(const agree of [false,true])test(`Worker serializes owner return against the last ${agree?'agreement':'refusal'}, return first=${returnFirst}`,async()=>controlledClock(async clock=>{
+  const {env,peers}=await continuationWorker();clock.now+=PERSONAL_ROOM_AWAY_MS;await env.relay.alarm();let record=await env.ctx.storage.get<any>('room');const c=record.serverRoom.continuation;
+  assert((await workerAction(env,peers[0]!,{type:'continue-vote',continuationId:c.id,continue:true})).result.ok);record=await env.ctx.storage.get<any>('room');
+  const owner=connect(env.ctx),auth=()=>env.relay.webSocketMessage(owner,JSON.stringify({type:'auth',identity:env.created.identity,authority:false}));
+  const vote=()=>env.relay.webSocketMessage(peers[1]!,JSON.stringify({type:'action',requestId:'last-vote',envelope:{actionId:crypto.randomUUID(),expectedVersion:record.serverRoom.version,action:{type:'continue-vote',continuationId:c.id,continue:agree}}}));
+  await Promise.all(returnFirst?[auth(),vote()]:[vote(),auth()]);
+  if(!returnFirst&&!agree){assert.equal((await env.ctx.storage.get<any>('closed')).reason,'host-away');assert.equal(owner.closeCode,4410);assert.equal(await env.ctx.storage.get('room'),undefined);}
+  else{assert.equal((await env.ctx.storage.get<any>('room')).serverRoom.continuation,undefined);assert.equal(owner.readyState,1);}
+}));
+
+test('Worker four-hour paused expiry with no humans closes permanently, including after reconstruction',async()=>controlledClock(async clock=>{
+  let {env,peers}=await continuationWorker(true);for(const peer of peers)await env.relay.webSocketClose(peer,1000,'离开',true);clock.now+=PAUSED_OWNER_AWAY_MS;await env.relay.alarm();assert.equal((await env.ctx.storage.get<any>('closed')).reason,'host-away');
+  env={...await instance(env.ctx.storage),created:env.created};assert.equal((await authenticate(env)).closeCode,4410);assert.equal(await env.ctx.storage.get('room'),undefined);
 }));

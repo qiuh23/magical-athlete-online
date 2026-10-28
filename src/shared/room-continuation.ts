@@ -11,6 +11,7 @@ export interface RoomContinuation {
   deadline: number;
   seen: string[];
   emptySince?: number;
+  remainingMs?: number | null;
 }
 export const continuationAction = (action: GameAction) => action.type === 'continue-vote' || action.type === 'results-seen';
 export const continuationPaused = (room: Room) => !!room.continuation && room.continuation.stage !== 'playing';
@@ -22,12 +23,12 @@ export function offerContinuation(room: Room, now: number): boolean {
     || humans(room).some(p => p.id === (room.ownerId ?? room.hostId))) return false;
   const voters = humans(room).map(p => p.id);
   if (!voters.length) return false;
-  room.continuation = {id: crypto.randomUUID(), round:Math.max(1,room.game.round), stage:'voting', voters, accepted:[], deadline:now + CONTINUE_VOTE_MS, seen:[]};
+  room.continuation = {id: crypto.randomUUID(), round:Math.max(1,room.game.round), stage:'voting', voters, accepted:[], deadline:now + CONTINUE_VOTE_MS, seen:[], remainingMs:room.deadline===null?null:Math.max(0,room.deadline-now)};
   room.deadline = null; room.version++; room.updatedAt = now;
   return true;
 }
 
-/** The agreement survives reconnects; returning owners cannot turn it into a new room. */
+/** The agreement survives guest reconnects until the owner returns or the room closes. */
 export function updateContinuation(room: Room, now: number): boolean {
   const c = room.continuation;
   if (!c || room.closedAt !== undefined) return false;

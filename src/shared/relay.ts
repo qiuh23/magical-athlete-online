@@ -17,6 +17,7 @@ export type RelayClientMessage =
  | {type:'deliver-events';to:string;requestId:string;error:string}
  | {type:'deliver';to:string;room?:RoomView;requestId?:string;result?:ActionReply;phase:Phase;adminHostId:string};
 export type RelayServerMessage =
+ | {type:'room-kicked';code:string;message:string}
  | {type:'chat';messages:ChatMessage[];latestId:number;requestId?:string;result?:ChatReply}
  | {type:'rename-result';requestId:string;result:RenameReply}
  | {type:'auth-ok';meta:RelayMetadata;authority:boolean;authorityOnline:boolean}
