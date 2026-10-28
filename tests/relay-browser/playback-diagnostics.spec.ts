@@ -7,7 +7,7 @@ test('playback diagnostics records a real skip and survives navigation', async (
     if (version === 8) await page.reload();
     await page.setContent(`<main class="game-shell" data-room-version="${version}">
       <section data-testid="board-3d" data-phase="move" data-render-frame-count="42" data-frameloop="demand"></section>
-      <button data-testid="skip-animation" aria-label="跳过动画" onclick="this.remove()">跳过</button>
+      <button data-testid="skip-animation" aria-label="跳过动画" onclick="if(event.isTrusted)this.remove()">跳过</button>
       <button data-testid="roll-button">掷骰子</button></main>`);
     const record = playbackRecord({ seat: 4, step: 19, action: 'roll', roomVersion: version });
     const result = await skipQueuedPlayback(page, record);
@@ -17,6 +17,25 @@ test('playback diagnostics records a real skip and survives navigation', async (
     expect(record.probeError).toBeUndefined();
     await expect(page.getByRole('button', { name: '掷骰子', exact: true })).toBeEnabled();
   }
+});
+
+test('playback diagnostics rejects an offscreen skip without scrolling it into view', async ({ page }) => {
+  await page.setContent('<div style="height:2000px"></div><button data-testid="skip-animation" aria-label="跳过动画" onclick="window.skipClicked=true;this.remove()">跳过</button>');
+  const record = playbackRecord();
+  const error = await skipQueuedPlayback(page, record, { timeoutMs: 1_000, clickTimeoutMs: 150 }).then(() => undefined, error => error as Error);
+  expect(error).toBeInstanceOf(Error);
+  expect(record).toMatchObject({ status: 'failed', clicked: false });
+  expect(await page.evaluate(() => ({ scrollY, clicked: !!(window as unknown as { skipClicked?: boolean }).skipClicked }))).toEqual({ scrollY: 0, clicked: false });
+});
+
+test('playback diagnostics still rejects an enabled skip covered by another element', async ({ page }) => {
+  await page.setContent('<button data-testid="skip-animation" aria-label="跳过动画" onclick="window.skipClicked=true;this.remove()">跳过</button><div style="position:fixed;inset:0;z-index:999" data-testid="public-overlay"></div>');
+  const record = playbackRecord();
+  const error = await skipQueuedPlayback(page, record, { timeoutMs: 1_000, clickTimeoutMs: 150 }).then(() => undefined, error => error as Error);
+  expect(error).toBeInstanceOf(Error);
+  expect(record).toMatchObject({ status: 'failed', clicked: false });
+  expect(record.before?.ui).toMatchObject({ skipButton: { disabled: false, centerHitsButton: false, centerHit: { testId: 'public-overlay' } } });
+  expect(await page.evaluate(() => !!(window as unknown as { skipClicked?: boolean }).skipClicked)).toBe(false);
 });
 
 test('playback diagnostics preserves an unclickable failure and streams only public evidence', async ({ page }) => {
