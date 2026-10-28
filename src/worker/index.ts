@@ -496,7 +496,7 @@ export class RoomRelay extends DurableObject<Env> {
     const room=state??this.workerRoom();
     if(continuationPaused(room))return room.continuation!.deadline;
     if(room.continuation?.stage==='playing'&&!room.game.players.some(p=>!p.isAI&&p.connected))return room.continuation.emptySince===undefined?now+10:roomExpiry(room);
-    if(room.game.phase==='paused'||room.game.flags.workerFault)return Number.MAX_SAFE_INTEGER;
+    if(room.pause||room.game.phase==='paused'||room.game.flags.workerFault)return Number.MAX_SAFE_INTEGER;
     if(personalRoom(room)&&!room.continuation&&!room.game.players.some(player=>player.id===room.ownerId&&player.connected))return Number.MAX_SAFE_INTEGER;
     let candidate:ReturnType<typeof immediateRoomAction>;
     try{candidate=immediateRoomAction({...room,updatedAt:now-1_200},now);}catch{return now+1_000;}
@@ -558,7 +558,7 @@ export class RoomRelay extends DurableObject<Env> {
       this.record={...this.record,serverRoom:room};await this.ctx.storage.put('room',this.record);await this.broadcastWorker();
     }
     if(continuationPaused(room))return;
-    if(room.game.phase==='paused'||room.game.flags.workerFault)return;
+    if(room.pause||room.game.phase==='paused'||room.game.flags.workerFault)return;
     if(personalRoom(room)&&!room.continuation&&!room.game.players.some(player=>player.id===room.ownerId&&player.connected))return;
     let immediate:ReturnType<typeof immediateRoomAction>,next:ReturnType<typeof timeoutRoomAction>;
     try{immediate=immediateRoomAction(room,now);next=immediate??(room.deadline!==null&&room.deadline<=now?timeoutRoomAction(room.game):undefined);}

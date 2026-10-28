@@ -200,6 +200,7 @@ export class Rooms {
       // Local server bots pause when the human leaves; no unattended match
       // consumes their remaining turns while they are disconnected.
       if((original.mode==='ai'||original.mode==='practice')&&!original.game.players.some(p=>!p.isAI&&p.connected))continue;
+      if(original.pause)continue;
       const immediate=immediateRoomAction(original,now);
       if(!immediate&&(!original.deadline||original.deadline>now))continue;
       const a=immediate??timeoutAction(original.game);if(!a)continue;

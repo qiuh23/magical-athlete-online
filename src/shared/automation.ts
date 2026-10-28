@@ -8,7 +8,7 @@ export interface ScheduledAction {playerId:string;action:GameAction;reason:'syst
 /** Authority scheduling. AI pauses between intents; presentation never changes
  * rules, deadlines, legal choices, or the resulting state. */
 export function immediateRoomAction(room:Room,now:number):ScheduledAction|undefined {
-  if(room.closedAt!==undefined||continuationPaused(room)||!hasRoomRules(room.game))return;
+  if(room.closedAt!==undefined||room.pause||continuationPaused(room)||!hasRoomRules(room.game))return;
   if(room.continuation&&!room.game.players.some(p=>!p.isAI&&p.connected))return;
   const system=systemAction(room.game);if(system)return{...system,reason:'system'};
   if(now<room.updatedAt+1_200)return;

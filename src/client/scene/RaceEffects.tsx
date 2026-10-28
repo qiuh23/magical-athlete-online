@@ -7,6 +7,7 @@ import type { Racer } from '../../shared/types.js';
 import type { PresentationBeat } from '../presentation.js';
 import { pawnOccupancy } from './camera.js';
 import { boardPoint, trackMovementDistance } from './math.js';
+import { wallPresentationClock, type PresentationClock } from '../presentation-clock.js';
 import { raceEffectDescriptors, type MarkerKind, type RaceEffectMarker, type RacePathMark } from './race-effects.js';
 
 const colors: Record<MarkerKind, string> = { trip: '#f56650', recover: '#218f79', score: '#e7a92c', finish: '#e7a92c', warp: '#9471ca', swap: '#cf6ba8', skill: '#369fbb', eliminate: '#75697f' };
@@ -31,7 +32,7 @@ function glyph(kind: MarkerKind): Shape[] {
   return [polygon(points)];
 }
 
-function Marker({ track, marker, racers, compact, startedAt, durationMs, reducedMotion, lowQuality }: { track: TrackId; marker: RaceEffectMarker; racers: Racer[]; compact: boolean; startedAt: number; durationMs: number; reducedMotion: boolean; lowQuality: boolean }) {
+function Marker({ clock, track, marker, racers, compact, startedAt, durationMs, reducedMotion, lowQuality }: { clock: PresentationClock; track: TrackId; marker: RaceEffectMarker; racers: Racer[]; compact: boolean; startedAt: number; durationMs: number; reducedMotion: boolean; lowQuality: boolean }) {
   const root = useRef<Group>(null), pulse = useRef<Group>(null), badge = useRef<Group>(null), particles = useRef<InstancedMesh>(null);
   const materials = useRef<(MeshBasicMaterial | null)[]>([]);
   const dummy = useMemo(() => new Object3D(), []);
@@ -43,7 +44,7 @@ function Marker({ track, marker, racers, compact, startedAt, durationMs, reduced
   const celebrate = !lowQuality && !reducedMotion && ['score', 'finish', 'trip'].includes(marker.kind);
   useFrame(() => {
     if (!root.current) return;
-    const t = MathUtils.clamp((performance.now() - startedAt) / Math.max(1, durationMs), 0, 1);
+    const t = MathUtils.clamp((clock.now() - startedAt) / Math.max(1, durationMs), 0, 1);
     let alpha = reducedMotion ? .92 : Math.min(1, t * 8) * Math.min(1, (1 - t) * 5);
     if (!reducedMotion && marker.endpoint) alpha *= marker.endpoint === 'departure' ? 1 - MathUtils.smoothstep(t, .25, .7) : MathUtils.smoothstep(t, .25, .6);
     root.current.visible = reducedMotion || alpha > .005;
@@ -69,27 +70,27 @@ function Marker({ track, marker, racers, compact, startedAt, durationMs, reduced
   </group>;
 }
 
-function PathArrow({ track, reversed, mark, compact, startedAt, durationMs, reducedMotion }: { track: TrackId; reversed: boolean; mark: RacePathMark; compact: boolean; startedAt: number; durationMs: number; reducedMotion: boolean }) {
+function PathArrow({ clock, track, reversed, mark, compact, startedAt, durationMs, reducedMotion }: { clock: PresentationClock; track: TrackId; reversed: boolean; mark: RacePathMark; compact: boolean; startedAt: number; durationMs: number; reducedMotion: boolean }) {
   const root = useRef<Group>(null), material = useRef<MeshBasicMaterial>(null);
   const shape = useMemo(() => polygon([[-.14, -.11], [0, .06], [.14, -.11], [.14, .04], [0, .22], [-.14, .04]]), []);
   const point = boardPoint(mark.position, compact, track), previous = boardPoint(mark.previous, compact, track);
   useFrame(() => {
     if (!root.current || !material.current) return;
-    const t = MathUtils.clamp((performance.now() - startedAt) / Math.max(1, durationMs), 0, 1);
+    const t = MathUtils.clamp((clock.now() - startedAt) / Math.max(1, durationMs), 0, 1);
     material.current.opacity = reducedMotion ? .8 : .75 * Math.min(1, (1 - t) * 5);
     root.current.visible = reducedMotion || t < 1;
   });
   return <group ref={root} position={[point[0], point[1] + .016, point[2]]} rotation={[0, Math.atan2(point[0] - previous[0], point[2] - previous[2]), 0]}><mesh rotation={[Math.PI / 2, 0, 0]}><shapeGeometry args={[shape]} /><meshBasicMaterial ref={material} color={trackMovementDistance(track, [mark.previous, mark.position], reversed) < 0 ? '#f56650' : '#43bca0'} transparent depthWrite={false} side={DoubleSide} toneMapped={false} /></mesh></group>;
 }
 
-export interface RaceEffectsProps { track?: TrackId; reversed?: boolean; beat?: PresentationBeat; racers: Racer[]; compact: boolean; startedAt: number; durationMs: number; reducedMotion: boolean; lowQuality?: boolean }
+export interface RaceEffectsProps { clock?: PresentationClock; track?: TrackId; reversed?: boolean; beat?: PresentationBeat; racers: Racer[]; compact: boolean; startedAt: number; durationMs: number; reducedMotion: boolean; lowQuality?: boolean }
 
 /** Transient scene accents never alter confirmed playback or game timing. */
-export function RaceEffects({ track = 'mild', reversed = false, beat, racers, compact, startedAt, durationMs, reducedMotion, lowQuality = false }: RaceEffectsProps) {
+export function RaceEffects({ clock = wallPresentationClock, track = 'mild', reversed = false, beat, racers, compact, startedAt, durationMs, reducedMotion, lowQuality = false }: RaceEffectsProps) {
   const descriptors = useMemo(() => raceEffectDescriptors(beat, racers), [beat, racers]);
   const destinations = useMemo(() => racers.map(racer => ({ ...racer, position: beat?.motions.find(motion => motion.racerId === racer.id)?.to ?? racer.position })), [beat, racers]);
   return <group name="confirmed-race-effects">
-    {descriptors.markers.map(marker => <Marker key={`${beat?.key}:${marker.racerId}:${marker.endpoint ?? 'status'}`} marker={marker} racers={marker.endpoint === 'arrival' ? destinations : racers} {...{ track, compact, startedAt, durationMs, reducedMotion, lowQuality }} />)}
-    {descriptors.path.map((mark, index) => <PathArrow key={`${beat?.key}:${index}`} mark={mark} {...{ track, reversed, compact, startedAt, durationMs, reducedMotion }} />)}
+    {descriptors.markers.map(marker => <Marker key={`${beat?.key}:${marker.racerId}:${marker.endpoint ?? 'status'}`} marker={marker} racers={marker.endpoint === 'arrival' ? destinations : racers} {...{ clock, track, compact, startedAt, durationMs, reducedMotion, lowQuality }} />)}
+    {descriptors.path.map((mark, index) => <PathArrow key={`${beat?.key}:${index}`} mark={mark} {...{ clock, track, reversed, compact, startedAt, durationMs, reducedMotion }} />)}
   </group>;
 }

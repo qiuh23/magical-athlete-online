@@ -74,6 +74,23 @@ async function workerAction(env:Awaited<ReturnType<typeof create>>,socket:Socket
   await env.relay.webSocketMessage(socket,JSON.stringify({type:'action',requestId,envelope:request}));
   return {envelope:request,result:socket.sent.findLast(message=>message.type==='ack'&&message.requestId===requestId)?.result};
 }
+
+test('Worker manual pause persists through hibernation, freezes alarms/AI, and resumes the same private skill once',async()=>controlledClock(async clock=>{
+  let env=await modern('ai');const host=await authenticate(env),id=env.created.identity.playerId;
+  const stored=await env.ctx.storage.get<any>('room'),game=stored.serverRoom.game;
+  game.phase='race';game.round=1;game.currentRacerId='r0';game.players[0].score=2;
+  game.racers=game.players.map((p:any,i:number)=>({id:`r${i}`,playerId:p.id,characterId:i===0?'extra-mile-moneybags':'banana',position:i*10,tripped:false,finished:false,eliminated:false,flags:{}}));
+  game.baseTurnOrder=game.racers.map((r:any)=>r.id);game.queue=[{kind:'beginTurn',racerId:'r0'}];resolveTasks(game);assert.equal(game.pending.kind,'em-moneybags');
+  stored.serverRoom.deadline=clock.now+30_000;stored.serverRoom.timeoutSeconds=30;stored.timeoutSeconds=30;await env.ctx.storage.put('room',stored);env={...await instance(env.ctx.storage,env.ctx.sockets),created:env.created};
+  const paused=await workerAction(env,host,{type:'pause'});assert(paused.result.ok);const frozen=await env.ctx.storage.get<any>('room');assert.deepEqual(frozen.serverRoom.game,game);
+  clock.now+=60_000;host.lastAutoResponseAt=new Date(clock.now);await env.relay.alarm();assert.deepEqual((await env.ctx.storage.get<any>('room')).serverRoom.game,game);
+  env={...await instance(env.ctx.storage,env.ctx.sockets),created:env.created};const pending=game.pending;
+  assert.equal((await workerAction(env,host,{type:'choose',choiceId:pending.id,optionId:'4'})).result.ok,false);
+  assert((await workerAction(env,host,{type:'pause'},crypto.randomUUID(),paused.envelope)).result.duplicate);
+  const resumed=await workerAction(env,host,{type:'resume'});assert(resumed.result.ok);let current=await env.ctx.storage.get<any>('room');assert.equal(current.serverRoom.deadline,clock.now+30_000);assert.deepEqual(current.serverRoom.game.pending,pending);
+  const choice=await workerAction(env,host,{type:'choose',choiceId:pending.id,optionId:'4'});assert(choice.result.ok);assert((await workerAction(env,host,{type:'choose',choiceId:pending.id,optionId:'4'},crypto.randomUUID(),choice.envelope)).result.duplicate);
+  current=await env.ctx.storage.get<any>('room');assert.equal(current.serverRoom.game.players.find((p:any)=>p.id===id).score,1);assert.equal(current.serverRoom.game.racers[0].position,4);assert.equal(current.serverRoom.game.randomLog.length,game.randomLog.length);assert.equal(current.serverRoom.pause,undefined);
+}));
 async function join(env:Awaited<ReturnType<typeof create>>){
   const response=await env.relay.fetch(new Request('https://room.internal/join/ABC234',{method:'POST',body:JSON.stringify({name:'同名'})}));
   assert.equal(response.status,201);return await response.json() as RelayJoinReply;
