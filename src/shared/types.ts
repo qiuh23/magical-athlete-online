@@ -45,9 +45,12 @@ export interface RacerFlags extends Record<string, unknown> {
 export interface Racer { id: string; playerId: string; characterId: string; position: number; tripped: boolean; finished: boolean; eliminated: boolean; rank?: number; flags: RacerFlags; }
 export interface ChoiceOption { id: string; label: string; }
 export interface PendingChoice { id: string; playerId: string; racerId?: string; title: string; options: ChoiceOption[]; optional: boolean; kind: string; context: Record<string, unknown>; }
-/** Read-only character hints, projected only to the player answering this choice. */
+export interface ChoiceDiceHint { racerId?: string; characterId?: string; faces: number[]; }
+/** Read-only hints, projected only to the player answering this choice. */
 export interface PendingChoiceView extends Omit<PendingChoice, 'context' | 'options'> {
   offeredCharacterId?: string;
+  diceHint?: ChoiceDiceHint;
+  relatedRacerIds?: string[];
   options: (ChoiceOption & { characterId?: string; racerId?: string })[];
 }
 export interface GameEvent { id: number; type: string; text: string; source?: string; targets?: string[]; faces?: number[]; before?: number[]; after?: number[]; group?: string; cause?: string; selectedCardId?: string; }
