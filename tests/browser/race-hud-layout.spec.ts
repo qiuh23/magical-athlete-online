@@ -13,7 +13,7 @@ test.beforeAll(async () => {
 });
 test.afterAll(async () => app.close());
 
-test('mobile event controls stay below the live countdown for hosts and guests, including wrapped status and dice playback', async ({ browser }) => {
+test('tablet and mobile race controls stay separate for hosts and guests, including wrapped status and dice playback', async ({ browser }) => {
   const made = app.rooms.create('事件布局房主', 3, 120), code = made.identity.roomCode;
   const guest = app.rooms.join(code, '事件布局选手'); app.rooms.join(code, '第三位');
   const room = app.rooms.get(code), game = createGame(room.game.players, 123);
@@ -39,7 +39,7 @@ test('mobile event controls stay below the live countdown for hosts and guests, 
       const status = page.getByTestId('animation-phase'), event = page.getByTestId('special-event'), summary = event.locator('summary');
       await expect(status.locator('.countdown')).toBeVisible();
       await expect(page.getByTestId('board-minimap')).toBeVisible();
-      const layout = async () => {
+      const layout = async (tablet = false) => {
         await expect.poll(() => page.evaluate(() => {
           const status = document.querySelector('.race-status-pill')!.getBoundingClientRect();
           const event = document.querySelector('[data-testid="special-event"] summary')!.getBoundingClientRect();
@@ -50,15 +50,55 @@ test('mobile event controls stay below the live countdown for hosts and guests, 
         expect(await summary.evaluate(element => {
           const box = element.getBoundingClientRect(); return element.contains(document.elementFromPoint(box.x + box.width / 2, box.y + box.height / 2));
         })).toBe(true);
+        if (tablet) {
+          await expect.poll(() => page.evaluate(() => {
+            const panels = [
+              ['buttons', '.race-hud-buttons'], ['match', '.race-match-label'],
+              ['camera', '.scene-camera-toolbar'], ['status', '.race-status-pill'],
+              ['event', '.race-track-info'], ['minimap', '[data-testid="board-minimap"]'],
+            ].map(([name, selector]) => ({ name, box: document.querySelector(selector!)!.getBoundingClientRect() }));
+            return panels.flatMap((panel, index) => panels.slice(index + 1).flatMap(other =>
+              Math.min(panel.box.right, other.box.right) > Math.max(panel.box.left, other.box.left)
+                && Math.min(panel.box.bottom, other.box.bottom) > Math.max(panel.box.top, other.box.top)
+                ? [`${panel.name}/${other.name}`] : []));
+          }), { message: 'tablet header, camera, status, event and minimap must have separate space' }).toEqual([]);
+          const controls = page.locator('.race-hud-buttons button, .scene-camera-toolbar button, .scene-camera-toolbar summary');
+          for (const control of await controls.all()) {
+            await expect(control).toBeVisible();
+            expect(await control.evaluate(element => {
+              const box = element.getBoundingClientRect();
+              return element.contains(document.elementFromPoint(box.x + box.width / 2, box.y + box.height / 2));
+            }), `${await control.innerText()} must remain reachable on a tablet`).toBe(true);
+          }
+        }
       };
-      for (const width of role === 'host' ? [1440, 430, 390, 320] : [390]) {
-        await page.setViewportSize({ width, height: width === 320 ? 667 : width <= 430 ? 844 : 900 });
-        await layout();
+      const tablets = [
+        { width: 768, height: 1024 }, { width: 820, height: 1180 },
+        { width: 1024, height: 768 }, { width: 1180, height: 820 },
+        { width: 1366, height: 1024 },
+      ];
+      const existing = role === 'host'
+        ? [{ width: 1440, height: 900 }, { width: 430, height: 844 }, { width: 390, height: 844 }, { width: 320, height: 667 }]
+        : [{ width: 390, height: 844 }];
+      for (const viewport of [...existing, ...tablets]) {
+        const tablet = tablets.includes(viewport);
+        await page.setViewportSize(viewport);
+        await layout(tablet);
         await summary.click(); await expect(event).not.toHaveAttribute('open', '');
-        await layout(); await summary.click(); await expect(event).toHaveAttribute('open', '');
-        if (!process.env.CI && (width === 390 || width === 320 || width === 1440)) {
-          mkdirSync('docs/qa/mobile-event-countdown', { recursive: true });
-          await page.screenshot({ path: `docs/qa/mobile-event-countdown/${role}-${width}.png` });
+        await layout(tablet); await summary.click(); await expect(event).toHaveAttribute('open', '');
+        await layout(tablet);
+        if(tablet){
+          const camera=page.locator('.camera-options');
+          await camera.locator('summary').click();await expect(camera).toHaveAttribute('open','');
+          await layout(tablet);
+          expect(await camera.locator('input').evaluate(element=>{
+            const box=element.getBoundingClientRect();return element.contains(document.elementFromPoint(box.x+box.width/2,box.y+box.height/2));
+          }),'expanded camera settings must remain reachable').toBe(true);
+          await camera.locator('summary').click();await expect(camera).not.toHaveAttribute('open','');await layout(tablet);
+        }
+        if (!process.env.CI && (viewport.width === 768 || viewport.width === 1024)) {
+          mkdirSync('docs/qa/ipad-hud-skills', { recursive: true });
+          await page.screenshot({ path: `docs/qa/ipad-hud-skills/${role}-${viewport.width}.png` });
         }
       }
     }
@@ -69,7 +109,6 @@ test('mobile event controls stay below the live countdown for hosts and guests, 
     const status = (await owner!.getByTestId('animation-phase').boundingBox())!;
     const event = (await owner!.getByTestId('special-event').boundingBox())!;
     expect(event.y).toBeGreaterThanOrEqual(status.y + status.height + 8);
-    if (!process.env.CI) await owner!.screenshot({ path: 'docs/qa/mobile-event-countdown/host-playback.png' });
     await owner!.getByTestId('skip-animation').click({ scroll: 'none' });
     await expect(owner!.getByTestId('board-3d')).toHaveAttribute('data-phase', 'idle');
     expect(errors).toEqual([]);

@@ -129,3 +129,20 @@ html[data-view="race"] .modal-panel{color:var(--ink)}
  .race-status-stack>.race-status-pill{position:static;transform:none;max-width:100%;flex-wrap:wrap;white-space:normal;border-radius:14px;pointer-events:auto}
  .race-status-stack>.race-track-info{position:static;width:min(245px,100%);pointer-events:auto}
 }
+/* Tablets keep the header, camera controls and status in separate rows. Their
+   measured heights also cover host pause text and long player/status names. */
+@media(min-width:651px) and (max-width:1366px) and (min-height:571px){
+ .race-hud-top{right:calc(max(20px,env(safe-area-inset-right)) + 272px);max-width:none;flex-wrap:wrap;gap:8px 12px}
+ .race-hud-buttons{flex-wrap:wrap;max-width:100%}
+ .race-match-label{flex-direction:row;align-items:center;gap:10px}
+ .race-match-label>strong>span{display:none}
+ .immersive-race .scene-camera-toolbar{top:calc(max(16px,env(safe-area-inset-top)) + var(--race-hud-height,110px) + 10px);max-width:calc(100% - 312px);align-items:flex-start}
+ .immersive-race .camera-options label,.immersive-race .camera-options small{position:static}
+ .race-status-stack{position:absolute;z-index:38;top:calc(max(16px,env(safe-area-inset-top)) + var(--race-hud-height,110px) + var(--race-camera-height,46px) + 20px);left:max(18px,env(safe-area-inset-left));right:calc(max(20px,env(safe-area-inset-right)) + 272px);display:flex;flex-direction:column;align-items:flex-start;gap:8px;pointer-events:none}
+ .race-status-stack>.race-status-pill{position:static;transform:none;max-width:100%;flex-wrap:wrap;white-space:normal;border-radius:14px;pointer-events:auto}
+ .race-status-stack>.race-track-info{position:static;width:min(310px,100%);max-height:26dvh;pointer-events:auto}
+}
+@media(min-width:651px) and (max-width:1000px) and (min-height:571px){
+ .race-hud-top .room-pause-actions{display:contents}
+ .race-hud-top .room-pause-description{order:1;flex-basis:100%}
+}
