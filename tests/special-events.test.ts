@@ -71,6 +71,26 @@ test('Rocket replacement is rolled main movement, so a tripped Penguin doubles i
  assert.equal(s.racers[0]!.position,12);assert.equal(s.lastRoll?.distance,10);assert.equal(s.racers[0]!.tripped,false);assert.deepEqual(s.randomLog.map(l=>l.value),[2,3]);
 });
 test('event Duel uses retained dice and Suckerfish persists a followed branch',()=>{const d=fixture('duelist',[2,5,20]);move(d,3);assert.equal(d.pending?.kind,'thirds-duel');d.flags.testDice=[2];choose(d,'3');assert(d.racers[1]!.tripped);let f=fixture('suckerfish',[2,2,20]);move(f,3);assert.equal(f.pending?.kind,'thirds-fish');f=JSON.parse(JSON.stringify(f));choose(f,'r1');assert.deepEqual(f.racers.map(r=>r.position),[5,5,20]);});
+test('Suckerfish event carries from the start and partners can carry each other on consecutive turns after recovery',()=>{
+ let s=fixture('suckerfish',[0,0,0]);begin(s);roll(s,3);
+ assert.equal(s.pending?.kind,'thirds-fish');assert.equal(s.pending?.playerId,'p0');assert.deepEqual(s.pending?.options.map(o=>o.id),['skip','r1','r2']);
+ assert.deepEqual(s.racers.map(r=>r.position),[0,0,0],'the first move waits for the starting-line passenger choice');
+ s=JSON.parse(JSON.stringify(s));choose(s,'r1');assert.deepEqual(s.racers.map(r=>r.position),[3,3,0]);assert.equal(s.currentRacerId,'r1');
+ applyGameAction(s,'p0',{type:'next'});roll(s,2);
+ assert.equal(s.pending?.kind,'thirds-fish');assert.equal(s.pending?.playerId,'p1');assert.deepEqual(s.pending?.options.map(o=>o.id),['skip','r0']);
+ s=JSON.parse(JSON.stringify(s));choose(s,'r0');assert.deepEqual(s.racers.map(r=>r.position),[5,5,0]);
+ assert.deepEqual(s.logs.filter(l=>l.type==='move').map(l=>l.targets),[['r0','r1'],['r1','r0']]);assert.equal(s.phase,'race');assert(!s.logs.some(l=>l.type==='loop'));
+});
+test('Suckerfish event carries only one live same-space passenger and awards the moving leader first at the finish',()=>{
+ const s=fixture('suckerfish',[29,29,29,20]);s.racers[2]!.eliminated=true;move(s,1,'r1');
+ assert.equal(s.pending?.kind,'thirds-fish');assert.equal(s.pending?.playerId,'p1');assert.deepEqual(s.pending?.options.map(o=>o.id),['skip','r0']);choose(s,'r0');
+ assert.equal(s.phase,'results');assert.deepEqual(s.results[0]!.placements.map(p=>p.racerId),['r1','r0']);assert.equal(s.racers[3]!.position,20);
+});
+test('Suckerfish event can decline at the start and does not carry passengers on warps or zero movement',()=>{
+ const skipped=fixture('suckerfish',[0,0,0]);move(skipped,2);choose(skipped,'skip');assert.deepEqual(skipped.racers.map(r=>r.position),[2,0,0]);assert.equal(skipped.pending,undefined);
+ const warped=fixture('suckerfish',[0,0,0]);enqueueWarp(warped,'r0',4);resolveTasks(warped);assert.equal(warped.pending,undefined);assert.deepEqual(warped.racers.map(r=>r.position),[4,0,0]);
+ const still=fixture('suckerfish',[0,0,0]);move(still,0);assert.equal(still.pending,undefined);assert.deepEqual(still.racers.map(r=>r.position),[0,0,0]);
+});
 test('same Boardwalks fork selected repeatedly cannot reset public Blimp or Whisper loop detection',()=>{
  for(const whisper of [false,true]){const s=fixture(whisper?'stickler':'blimp',[17,17,25],[whisper?'extra-mile-whisper':'banana','banana','banana']);s.track='boardwalks';if(!whisper)data(s).npc={id:'blimp',position:17};move(s,1);for(let i=0;s.pending&&i<12;i++)choose(s,'18');assert.equal(s.pending,undefined);assert.equal(s.phase,'race');assert(s.logs.some(l=>l.type==='loop'));assert(s.logs.length<100);}
 });

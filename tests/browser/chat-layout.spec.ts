@@ -28,6 +28,7 @@ async function fixture(browser: Browser, viewport: { width: number; height: numb
   game.phase = 'race'; game.round = 1; game.currentRacerId = 'r0';
   game.racers = game.players.map((player,index)=>({ id: `r${index}`, playerId: player.id, characterId: 'coach', position: 3+index*2, tripped: false, finished: false, eliminated: false, flags: {} }));
   game.baseTurnOrder = game.racers.map(racer=>racer.id); game.queue = []; room.game = game;
+  if(viewport.width>650&&viewport.width<=1366&&viewport.height>570)game.flags.thirds={id:'suckerfish',round:1,held:{},extraCards:[]};
   room.version++; room.updatedAt = Date.now() + 60_000; publish(room);
   const context = await browser.newContext({ viewport });
   await context.addInitScript(identity => {
@@ -70,6 +71,18 @@ async function stable(page: Page, before: Awaited<ReturnType<typeof rect>>, open
       return Math.min(chat.right,map.right)>Math.max(chat.left,map.left)&&Math.min(chat.bottom,map.bottom)>Math.max(chat.top,map.top);
     }),'chat must leave the entire minimap visible').toBe(false);
 }
+async function tabletChatSpace(page:Page){
+  await expect.poll(()=>page.getByTestId('room-chat').evaluate(element=>{
+    const chat=element.getBoundingClientRect(),status=document.querySelector('.race-status-stack')!.getBoundingClientRect();
+    return {left:chat.left,belowStatus:chat.top>=status.bottom+12};
+  })).toMatchObject({left:18,belowStatus:true});
+  const box=(await page.getByTestId('room-chat').boundingBox())!;
+  expect(box.width).toBeGreaterThanOrEqual(310);
+  expect(await page.getByRole('log').evaluate(element=>element.getBoundingClientRect().height)).toBeGreaterThan(80);
+  expect(await page.locator('.floating-racer').first().evaluate(element=>{
+    const box=element.getBoundingClientRect();return element.contains(document.elementFromPoint(box.x+box.width/2,box.y+box.height/2));
+  })).toBe(true);
+}
 async function accessibleChoice(page: Page) {
   const choice = page.getByTestId('skill-choice');
   // The keyboard offset updates before ResizeObserver publishes the resized
@@ -89,6 +102,10 @@ async function accessibleChoice(page: Page) {
 for (const [name, viewport] of [
   ['desktop', { width: 1280, height: 900 }],
   ['small-desktop', { width: 1024, height: 768 }],
+  ['ipad-portrait', { width: 768, height: 1024 }],
+  ['ipad-air-portrait', { width: 820, height: 1180 }],
+  ['ipad-air-landscape', { width: 1180, height: 820 }],
+  ['ipad-pro-landscape', { width: 1366, height: 1024 }],
   ['phone', { width: 390, height: 844 }],
   ['landscape', { width: 900, height: 500 }],
 ] as const) {
@@ -106,6 +123,8 @@ for (const [name, viewport] of [
       await stable(page, closed, false);
       await page.getByRole('button', { name: /^房间聊天/ }).click();
       await expect(page.getByTestId('room-chat')).toBeVisible(); const opened = await rect(page); await stable(page, opened, true);
+      const tablet=viewport.width>650&&viewport.width<=1366&&viewport.height>570;
+      if(tablet)await tabletChatSpace(page);
       expect(Math.abs(opened.bottom - closed.bottom)).toBeLessThan(1); await accessibleChoice(page);
       choice(code, 'short'); await expect(page.getByTestId('skill-choice').locator('.choice-options .button')).toHaveCount(1); await stable(page, opened, true); await accessibleChoice(page);
       choice(code, 'long'); await expect(page.getByTestId('skill-choice').locator('.choice-options .button')).toHaveCount(12); await stable(page, opened, true); await accessibleChoice(page);
@@ -113,19 +132,19 @@ for (const [name, viewport] of [
       await page.getByRole('button', { name: '发送', exact: true }).click();
       await expect(page.getByLabel('聊天消息', { exact: true })).toHaveValue('');
       await expect(page.getByRole('log')).toContainText('选择技能时聊天仍可发送'); await stable(page, opened, true);
-      if(!process.env.CI){mkdirSync('docs/qa/blimp-choice-skills', { recursive: true });await page.screenshot({ path: `docs/qa/blimp-choice-skills/chat-${name}.png` });}
-      if (name === 'phone') {
+      if(!process.env.CI&&(name==='small-desktop'||name==='ipad-portrait')){mkdirSync('docs/qa/ipad-hud-skills', { recursive: true });await page.screenshot({ path: `docs/qa/ipad-hud-skills/chat-${name}.png` });}
+      if (name === 'phone'||name==='small-desktop') {
         // Exercise the existing visualViewport keyboard bridge without assuming
         // that a desktop browser can display the operating system's phone keyboard.
         await page.evaluate(() => {
-          Object.defineProperty(visualViewport!, 'height', { configurable: true, value: innerHeight - 260 });
+          Object.defineProperty(visualViewport!, 'height', { configurable: true, value: innerHeight - 300 });
           visualViewport!.dispatchEvent(new Event('resize'));
         });
-        await expect.poll(() => page.evaluate(() => document.documentElement.style.getPropertyValue('--chat-keyboard-offset'))).toBe('260px');
+        await expect.poll(() => page.evaluate(() => document.documentElement.style.getPropertyValue('--chat-keyboard-offset'))).toBe('300px');
         await accessibleChoice(page);
         await expect(page.getByLabel('聊天消息', { exact: true })).toBeVisible();
         expect(await page.getByLabel('聊天消息', { exact: true }).evaluate(element => {
-          const box = element.getBoundingClientRect(); return box.top >= 0 && box.bottom <= visualViewport!.height;
+          const box = element.getBoundingClientRect(); return box.top >= 0 && box.bottom <= visualViewport!.height&&element.contains(document.elementFromPoint(box.x+box.width/2,box.y+box.height/2));
         })).toBe(true);
         await page.evaluate(() => { delete (visualViewport as unknown as { height?: number }).height; visualViewport!.dispatchEvent(new Event('resize')); });
         await stable(page, opened, true);
@@ -144,7 +163,7 @@ for (const [name, viewport] of [
       expect(noticesOverlap).toEqual({map:false,skill:false});
       const action=page.getByTestId('skill-choice').locator('.choice-options .button').first();await action.scrollIntoViewIfNeeded();
       expect(await action.evaluate(element=>{const b=element.getBoundingClientRect();return element.contains(document.elementFromPoint(b.x+b.width/2,b.y+b.height/2));})).toBe(true);
-      if(!process.env.CI)await page.screenshot({path:`docs/qa/blimp-choice-skills/chat-notice-${name}.png`});
+      if(!process.env.CI&&(name==='small-desktop'||name==='ipad-portrait'))await page.screenshot({path:`docs/qa/ipad-hud-skills/chat-notice-${name}.png`});
       await page.getByRole('button',{name:/^房间聊天/}).click();await expect(page.getByTestId('chat-notice')).toHaveCount(0);
       await page.getByRole('button',{name:'收起聊天',exact:true}).click();
       choice(code, 'none'); await expect(page.getByTestId('skill-choice')).toHaveCount(0); await stable(page, closed, false);

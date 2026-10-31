@@ -44,9 +44,19 @@ body>.room-community.in-race .chat-notice-region{top:auto;bottom:calc(100% + 10p
  html[data-view="race"] body:has(.floating-choice.is-collapsed) .floating-racers{bottom:calc(var(--race-chat-height,44px) + var(--chat-keyboard-offset,0px) + 130px)}
  body:has(>.room-community.in-race.is-open) .floating-roll,body:has(>.room-community.in-race .chat-notice-region) .floating-roll{bottom:calc(max(14px,env(safe-area-inset-bottom)) + var(--chat-keyboard-offset,0px) + var(--race-chat-height,44px) + 12px)}
 }
-@media(min-width:651px) and (max-width:1200px) and (min-height:571px){
+@media(min-width:651px) and (max-width:1366px) and (min-height:571px){
+ html[data-view="race"]{--tablet-chat-width:clamp(310px,30vw,360px)}
+ body>.room-community.in-race{--tablet-chat-bottom:max(14px,env(safe-area-inset-bottom),calc(118px - var(--chat-keyboard-offset,0px)));left:max(18px,env(safe-area-inset-left));right:auto;bottom:calc(var(--tablet-chat-bottom) + var(--chat-keyboard-offset,0px))}
+ body>.room-community.in-race .room-chat{width:var(--tablet-chat-width);height:min(400px,max(210px,calc(100dvh - var(--chat-keyboard-offset,0px) - var(--tablet-chat-bottom) - var(--race-status-bottom,340px) - 16px)));max-height:calc(100dvh - var(--chat-keyboard-offset,0px) - var(--tablet-chat-bottom) - 16px)}
+ body>.room-community.in-race .room-chat header,body>.room-community.in-race .chat-personal,body>.room-community.in-race .room-chat form{flex-shrink:0}
+ body>.room-community.in-race .chat-messages{min-height:0}
+ body>.room-community.in-race .chat-notice-region{left:0;right:auto;width:var(--tablet-chat-width);max-height:max(0px,calc(100dvh - var(--chat-keyboard-offset,0px) - 182px - var(--race-status-bottom,340px)))}
  body:has(>.room-community.in-race.is-open) .floating-choice.choice-panel,
- body:has(>.room-community.in-race .chat-notice-region) .floating-choice.choice-panel{left:18px;transform:none;width:min(620px,calc(100% - 304px))}
+ body:has(>.room-community.in-race .chat-notice-region) .floating-choice.choice-panel{left:calc(max(18px,env(safe-area-inset-left)) + var(--tablet-chat-width) + 16px);transform:none;width:calc(100% - var(--tablet-chat-width) - max(18px,env(safe-area-inset-left)) - max(18px,env(safe-area-inset-right)) - 16px);max-height:min(68dvh,calc(100dvh - max(var(--race-minimap-bottom,300px),var(--race-status-bottom,340px)) - 38px))}
+ body:has(>.room-community.in-race.is-open) .floating-choice.choice-panel.character-choice-panel,
+ body:has(>.room-community.in-race .chat-notice-region) .floating-choice.choice-panel.character-choice-panel{max-height:min(68dvh,calc(100dvh - max(var(--race-minimap-bottom,300px),var(--race-status-bottom,340px)) - 38px))}
+ body:has(>.room-community.in-race.is-open) .floating-choice.choice-panel.is-collapsed,
+ body:has(>.room-community.in-race .chat-notice-region) .floating-choice.choice-panel.is-collapsed{max-height:none}
 }
 /* Short landscape viewports put the map alongside chat. */
 @media(min-width:1001px) and (max-height:570px){

@@ -573,7 +573,7 @@ function turnStartPower(s:GameState,r:Racer) {
   if(power==='hypnotist')ask(s,r,power,'要召唤哪名角色？',[...targetOptions(s,active(s).filter(x=>x.id!==r.id).map(x=>x.id)),{id:'skip',label:'不使用'}],{},true);
   if(power==='third-wheel'){
     const positions=[...new Set(active(s).map(x=>x.position))].filter(pos=>active(s).filter(x=>sharedTrackSpace(TRACKS[s.track],x.position,pos)).length===2);
-    ask(s,r,power,'要传送到哪一个双人格？',[...positions.map(pos=>({id:String(pos),label:`第${pos}格`})),{id:'skip',label:'不使用'}],{},true);
+    if(positions.length)ask(s,r,power,'要传送到哪一个双人格？',[...positions.map(pos=>({id:String(pos),label:`第${pos}格`})),{id:'skip',label:'不使用'}],{},true);
   }
   if(power==='mastermind'&&!r.flags.mindUsed&&r.flags.turnsTaken===1){r.flags.mindUsed=true;ask(s,r,power,'预测本场冠军',targetOptions(s,active(s).map(x=>x.id)),{});}
 }
