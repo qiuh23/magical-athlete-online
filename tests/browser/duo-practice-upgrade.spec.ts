@@ -5,6 +5,8 @@ import { resolveTasks } from '../../src/engine/index.js';
 import { CHARACTERS } from '../../src/shared/characters.js';
 import type { GameState, Room } from '../../src/shared/types.js';
 import { pawnWorldPoint } from '../../src/client/scene/camera.js';
+import { parseRoomCode } from '../../src/client/backends.js';
+import { enabledCharacterIds } from '../../src/shared/room-config.js';
 
 let application: ReturnType<typeof createApplication>, url: string;
 const output = 'docs/qa/duo-upgrade';
@@ -29,7 +31,7 @@ async function setup(browser: Browser, mobile = false, reducedMotion = true, low
   await host.getByLabel('房间人数上限').selectOption('2'); await host.getByLabel('每次操作时限').selectOption('0');
   await host.getByRole('button', { name: '创建房间，召集朋友' }).click();
   await expect(host.locator('.connection.is-online')).toBeVisible();
-  const code = host.url().split('/').at(-1)!;
+  const code = parseRoomCode(host.url().split('/').at(-1)!)!.code;
   await guest.goto(`${url}/room/${code}`); await guest.getByLabel('你的昵称').fill('朋友选手');
   await guest.getByRole('button', { name: '加入这场胡闹' }).click();
   await expect(guest.locator('.connection.is-online')).toBeVisible();
@@ -47,23 +49,101 @@ function publish(pair: Pair, change: (room: Room) => void) {
 const name = (id: string) => CHARACTERS.find(character => character.id === id)!.nameZh;
 async function chooseCard(page: Page, id: string) { await page.getByRole('button', { name: `选择${name(id)}`, exact: true }).click(); }
 
-test('duo UI locks either order, restores a locked choice, and allows a fresh order next race', async ({ browser }) => {
-  const pair = await setup(browser);
+async function duoActionsFit(page: Page) {
+  const layout = await page.locator('.duo-selection-action').evaluate(footer => {
+    const rect = footer.getBoundingClientRect();
+    const order = footer.querySelector('.selection-order')!.getBoundingClientRect();
+    const confirm = footer.querySelector('.selection-confirm')!.getBoundingClientRect();
+    const chat = document.querySelector('.room-community .chat-toggle')?.getBoundingClientRect();
+    const sequence = footer.querySelector('.selection-order ol')!.getBoundingClientRect();
+    const slots = Array.from(footer.querySelectorAll('.selection-order li')).map(slot => slot.getBoundingClientRect());
+    return {
+      x: rect.x, right: rect.right, y: rect.y, bottom: rect.bottom,
+      twoRows: order.bottom <= confirm.top,
+      overflow: document.documentElement.scrollWidth > innerWidth,
+      chatClear: !chat || rect.bottom <= chat.top || rect.top >= chat.bottom || rect.right <= chat.left || rect.left >= chat.right,
+      sequenceWidth: sequence.width, orderGap: slots[1]!.left - slots[0]!.right,
+      buttons: Array.from(footer.querySelectorAll('button')).map(button => {
+        const box = button.getBoundingClientRect();
+        return { width: box.width, height: box.height, reachable: button.contains(document.elementFromPoint(box.x + box.width / 2, box.y + box.height / 2)) };
+      }),
+    };
+  });
+  const viewport = page.viewportSize()!;
+  expect(layout.x).toBeGreaterThanOrEqual(0); expect(layout.right).toBeLessThanOrEqual(viewport.width);
+  expect(layout.y).toBeGreaterThanOrEqual(0); expect(layout.bottom).toBeLessThanOrEqual(viewport.height);
+  expect(layout.overflow).toBe(false); expect(layout.chatClear).toBe(true);
+  expect(layout.sequenceWidth).toBeLessThan(220);
+  expect(layout.orderGap).toBeGreaterThanOrEqual(30); expect(layout.orderGap).toBeLessThanOrEqual(40);
+  if (viewport.width <= 650) expect(layout.twoRows).toBe(true);
+  for (const button of layout.buttons) { expect(button.height).toBeGreaterThanOrEqual(44); expect(button.width).toBeGreaterThanOrEqual(44); expect(button.reachable).toBe(true); }
+}
+
+for (const viewport of [{ width: 1440, height: 1000 }, { width: 1100, height: 900 }, { width: 390, height: 844 }, { width: 320, height: 667 }]) {
+test(`duo UI locks either order, restores a locked choice, and allows a fresh order next race (${viewport.width}px)`, async ({ browser }, info) => {
+  const pair = await setup(browser, viewport.width <= 650);
+  await pair.host.setViewportSize(viewport);
+  if (viewport.width === 320) {
+    const session = await pair.host.context().newCDPSession(pair.host);
+    await session.send('Emulation.setSafeAreaInsetsOverride', { insets: { top: 0, right: 0, bottom: 34, left: 0 } });
+  }
+  const errors: string[] = []; pair.host.on('pageerror', error => errors.push(error.message));
   try {
     for (const reverse of [false, true]) {
       publish(pair, room => {
         room.game.phase = 'selection'; room.game.round = reverse ? 2 : 1; room.game.racers = []; room.game.queue = []; delete room.game.pending;
         room.game.players.forEach((player, index) => { player.hand = index ? ['coach', 'alchemist', 'romantic', 'hare'] : ['legs', 'genius', 'egg', 'banana']; player.selection = []; player.used = []; });
       });
-      await chooseCard(pair.host, 'legs'); await chooseCard(pair.host, 'genius');
+      const footer = pair.host.locator('.duo-selection-action');
+      const swap = footer.getByRole('button', { name: '交换行动顺序', exact: true });
+      const lock = footer.locator('.selection-confirm .button');
+      await expect(pair.host.locator('.selection-order')).toHaveCount(1);
+      await expect(footer.getByRole('region', { name: '本场行动顺序' })).toHaveCount(1);
+      await expect(swap).toBeDisabled(); await expect(lock).toBeDisabled();
+      await expect(footer.locator('li span')).toHaveText(['待选择', '待选择']);
+      await chooseCard(pair.host, 'legs');
+      await expect(swap).toBeDisabled(); await expect(lock).toBeDisabled();
+      await chooseCard(pair.host, 'genius');
+      await expect(swap).toBeEnabled(); await expect(lock).toBeEnabled();
+      await pair.host.getByRole('button', { name: `取消选择${name('genius')}`, exact: true }).click();
+      await expect(swap).toBeDisabled(); await expect(lock).toBeDisabled();
+      await chooseCard(pair.host, 'genius');
       if (reverse) await pair.host.getByRole('button', { name: '交换行动顺序', exact: true }).click();
       const expected = reverse ? ['genius', 'legs'] : ['legs', 'genius'];
-      await expect(pair.host.locator('.selection-order li').first()).toContainText(name(expected[0]!));
-      await pair.host.screenshot({ path: `${output}/order-${reverse ? 'reversed' : 'normal'}.png` });
+      await expect(footer.locator('li span')).toHaveText(expected.map(name));
+      // Scroll past every card: the footer stays reachable and the last card clears it.
+      await pair.host.locator('.duo-selection').evaluate(section => window.scrollTo(0, section.getBoundingClientRect().top + scrollY));
+      await duoActionsFit(pair.host);
+      if (viewport.width === 320) {
+        await expect(footer).toHaveCSS('bottom', '88px');
+        await pair.host.setViewportSize({ width: 568, height: 320 });
+        await pair.host.locator('.duo-selection').evaluate(section => window.scrollTo(0, section.getBoundingClientRect().top + scrollY));
+        await duoActionsFit(pair.host);
+        await pair.host.screenshot({ path: info.outputPath(`landscape-${reverse ? 'reversed' : 'normal'}.png`) });
+        await pair.host.setViewportSize(viewport);
+      }
+      const lastCard = pair.host.locator('.hand-selection .character-card').last();
+      await pair.host.locator('.duo-selection').evaluate(section => window.scrollTo(0, section.getBoundingClientRect().bottom + scrollY - innerHeight));
+      await expect.poll(async () => {
+        const card = await lastCard.boundingBox(), bar = await footer.boundingBox();
+        return !!card && !!bar && card.y + card.height <= bar.y;
+      }).toBe(true);
+      await duoActionsFit(pair.host);
+      await lastCard.locator('.detail-button').click();
+      await expect(pair.host.getByRole('dialog')).toBeVisible();
+      await pair.host.getByRole('button', { name: '关闭', exact: true }).click();
+      await pair.host.screenshot({ path: info.outputPath(`order-${reverse ? 'reversed' : 'normal'}.png`) });
       await pair.host.getByRole('button', { name: '锁定上场角色', exact: true }).click();
-      await expect(pair.host.getByRole('button', { name: '交换行动顺序' })).toBeDisabled();
-      await pair.host.reload(); await expect(pair.host.locator('.selection-order li').first()).toContainText(name(expected[0]!));
-      await expect(pair.host.getByRole('button', { name: '交换行动顺序' })).toBeDisabled();
+      await expect(swap).toBeDisabled(); await expect(lock).toBeDisabled();
+      await expect(footer.locator('.selection-order')).toContainText('已锁定');
+      expect(application.rooms.get(pair.code).game.players[0]!.selection).toEqual(expected);
+      await pair.host.reload();
+      await expect(footer.locator('li span')).toHaveText(expected.map(name));
+      await expect(swap).toBeDisabled(); await expect(lock).toBeDisabled();
+      await expect(pair.host.locator('.selection-order')).toHaveCount(1);
+      await pair.host.locator('.duo-selection').evaluate(section => window.scrollTo(0, section.getBoundingClientRect().top + scrollY));
+      await duoActionsFit(pair.host);
+      await pair.host.screenshot({ path: info.outputPath(`locked-${reverse ? 'reversed' : 'normal'}.png`) });
       await chooseCard(pair.guest, 'coach'); await chooseCard(pair.guest, 'alchemist');
       await pair.guest.getByRole('button', { name: '锁定上场角色', exact: true }).click();
       await expect(pair.host.getByTestId('board-3d')).toBeVisible();
@@ -71,8 +151,10 @@ test('duo UI locks either order, restores a locked choice, and allows a fresh or
       const own = game.baseTurnOrder!.map(id => game.racers.find(racer => racer.id === id)!).filter(racer => racer.playerId === pair.ids[0]);
       expect(own.map(racer => racer.characterId)).toEqual(expected);
     }
+    expect(errors).toEqual([]);
   } finally { await Promise.all(pair.contexts.map(context => context.close())); }
 });
+}
 
 test('all eight cross-player duel identities show both manual roll buttons and restore the responder', async ({ browser }) => {
   test.setTimeout(240_000);
@@ -117,14 +199,16 @@ test('all eight cross-player duel identities show both manual roll buttons and r
   } finally { await Promise.all(pair.contexts.map(context => context.close())); }
 });
 
-test('practice offers the full pool, supports inspection/reselection, stays private, and dissolves from exit', async ({ browser }) => {
+test('practice offers the enabled pool, supports inspection/reselection, stays private, and dissolves from exit', async ({ browser }, info) => {
   const context = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1 });
   const page = await context.newPage();
   try {
     await page.goto(url); await page.getByRole('tab', { name: '自己练习', exact: true }).click();
     await page.getByRole('button', { name: '开始自己练习', exact: true }).click();
-    await expect(page.locator('.practice-pool .character-card')).toHaveCount(CHARACTERS.length);
-    const code = page.url().split('/').at(-1)!;
+    await expect(page.locator('.connection.is-online')).toBeVisible();
+    const code = parseRoomCode(page.url().split('/').at(-1)!)!.code;
+    const room = application.rooms.get(code);
+    await expect(page.locator('.practice-pool .character-card')).toHaveCount(enabledCharacterIds(room.game.config, room.game.characterPool, true).length);
     expect(application.rooms.list().some(room => room.code === code)).toBe(false);
     await page.locator('.practice-pool .detail-button').first().click(); await expect(page.getByRole('dialog')).toBeVisible();
     await page.getByRole('button', { name: '关闭', exact: true }).click();
@@ -133,17 +217,20 @@ test('practice offers the full pool, supports inspection/reselection, stays priv
     await expect(page.getByRole('status').filter({ hasText: '已选 1 / 4' })).toBeVisible();
     await page.getByRole('button', { name: '重新选择', exact: true }).click();
     for (const id of ['genius', 'legs', 'gunk', 'rocket-scientist']) await chooseCard(page, id);
-    await page.screenshot({ path: `${output}/practice-pool-mobile.png`, fullPage: false });
+    await page.screenshot({ path: info.outputPath('practice-pool-mobile.png'), fullPage: false });
     await page.getByRole('button', { name: '确认练习阵容', exact: true }).click();
     expect(application.rooms.get(code).game.players[0]!.hand).toEqual(['genius', 'legs', 'gunk', 'rocket-scientist']);
     await page.reload(); expect(application.rooms.list().some(room => room.code === code)).toBe(false);
+    await expect(page.getByRole('button', { name: '锁定上场角色', exact: true })).toBeVisible();
+    await expect(page.locator('.sticky-action')).toHaveCount(1);
+    await expect(page.locator('.duo-selection, .selection-order')).toHaveCount(0);
     await chooseCard(page, 'legs'); await page.getByRole('button', { name: '锁定上场角色', exact: true }).click();
     await expect(page.getByTestId('board-3d')).toBeVisible();
     await expect(page.getByTestId('board-3d')).toHaveAttribute('data-phase', 'idle', { timeout: 20000 });
     await expect(page.getByTestId('board-3d')).toHaveAttribute('data-loaded-models', '1');
-    await page.screenshot({ path: `${output}/practice-model-mobile.png` });
+    await page.screenshot({ path: info.outputPath('practice-model-mobile.png') });
     await page.getByRole('button', { name: '退出房间', exact: true }).first().click();
-    await expect(page.getByRole('dialog')).toContainText('30 分钟');
+    await expect(page.getByRole('dialog')).toContainText('10 分钟');
     await page.getByRole('button', { name: '解散房间', exact: true }).click();
     await page.getByRole('button', { name: '确认结束', exact: true }).click();
     await expect(page.locator('[data-room-closed="true"]')).toBeVisible();
