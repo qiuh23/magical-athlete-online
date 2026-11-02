@@ -482,9 +482,27 @@ function Selection({ room, busy, act, onDetail }: { room: RoomView; busy: boolea
   useEffect(() => setPicked([]), [room.round]);
   const toggle = (id: string) => setPicked(previous => previous.includes(id) ? previous.filter(value => value !== id) : count === 1 ? [id] : previous.length < count ? [...previous, id] : previous);
   const ordered = self?.selected ? self.selection ?? [] : picked;
-  const orderPanel = count === 2 && self && <section className="selection-order" aria-label="本场行动顺序"><div><strong>本场行动顺序{self.selected ? ' · 已锁定' : ''}</strong><small>先完整处理第一位的回合，再轮到第二位；下一场重新选择。</small></div><ol>{[0, 1].map(index => <li key={index}><b>{index === 0 ? '先行动' : '后行动'}</b><span>{ordered[index] ? characterName(ordered[index]) : '待选择'}</span></li>)}</ol><Button secondary disabled={busy || self.selected || ordered.length !== 2} onClick={() => setPicked(previous => [...previous].reverse())}>交换行动顺序</Button></section>;
   if (room.role === 'spectator' || !self) return <><div className="turn-notice"><span className="secret-icon">?</span><span>选手正在秘密选择上场角色<small>你正在观战，角色将在所有选手锁定后一起揭示。</small></span><Countdown deadline={room.deadline} /></div><TrackPreview room={room} /><div className="selection-progress">{room.players.map(player => <span key={player.id} className={player.selected ? 'locked' : ''}><i style={{ background: player.color }} />{player.name}<strong>{player.selected ? '已锁定 ✓' : '思考中…'}</strong></span>)}</div></>;
-  return <><div className="turn-notice"><span className="secret-icon">?</span><span>{self.selected ? '你已锁定，等大家选好就揭示' : `秘密选择 ${count} 位未上场的运动员`}<small>其他玩家只能看到你是否选好，揭示前看不到角色。</small></span><Countdown deadline={room.deadline} /></div><TrackPreview room={room} /><div className="selection-progress">{room.players.map(player => <span key={player.id} className={player.selected ? 'locked' : ''}><i style={{ background: player.color }} />{player.name}<strong>{player.selected ? '已锁定 ✓' : '思考中…'}</strong></span>)}</div>{orderPanel}{controls}<div className="character-grid hand-selection">{filter(self.hand ?? []).map(id => <CharacterCard key={id} id={id} used={self.used.includes(id)} selected={self.selected ? self.selection?.includes(id) : picked.includes(id)} disabled={busy || self.selected} onChoose={() => toggle(id)} onDetail={onDetail} />)}</div>{!self.selected && <div className="sticky-action"><span>已选 {picked.length} / {count} 位 · 确认后统一揭示</span><Button disabled={busy || picked.length !== count} onClick={() => act({ type: 'select', characterIds: picked })}>锁定上场角色</Button></div>}</>;
+  const hand = <>{controls}<div className="character-grid hand-selection">{filter(self.hand ?? []).map(id => <CharacterCard key={id} id={id} used={self.used.includes(id)} selected={self.selected ? self.selection?.includes(id) : picked.includes(id)} disabled={busy || self.selected} onChoose={() => toggle(id)} onDetail={onDetail} />)}</div></>;
+  const lockButton = <Button disabled={busy || self.selected || picked.length !== count} onClick={() => act({ type: 'select', characterIds: picked })}>{self.selected ? '已锁定 · 等待其他玩家' : '锁定上场角色'}</Button>;
+  return <>
+    <div className="turn-notice"><span className="secret-icon">?</span><span>{self.selected ? '你已锁定，等大家选好就揭示' : `秘密选择 ${count} 位未上场的运动员`}<small>其他玩家只能看到你是否选好，揭示前看不到角色。</small></span><Countdown deadline={room.deadline} /></div>
+    <TrackPreview room={room} />
+    <div className="selection-progress">{room.players.map(player => <span key={player.id} className={player.selected ? 'locked' : ''}><i style={{ background: player.color }} />{player.name}<strong>{player.selected ? '已锁定 ✓' : '思考中…'}</strong></span>)}</div>
+    {count === 2 ? <div className="duo-selection">
+      {hand}
+      <div className="sticky-action duo-selection-action">
+        <section className="selection-order" aria-label="本场行动顺序">
+          <div className="selection-order-preview">
+            <strong>本场行动顺序{self.selected ? ' · 已锁定' : ''}</strong>
+            <ol aria-live="polite" aria-atomic="true">{[0, 1].map(index => <li key={index}><b>{index === 0 ? '先行动' : '后行动'}</b><span>{ordered[index] ? characterName(ordered[index]) : '待选择'}</span></li>)}</ol>
+          </div>
+          <Button secondary aria-label="交换行动顺序" disabled={busy || self.selected || ordered.length !== 2} onClick={() => setPicked(previous => [...previous].reverse())}>交换顺序</Button>
+        </section>
+        <div className="selection-confirm"><span>{self.selected ? '下一场重新选择' : `已选 ${picked.length} / 2 位 · 确认后统一揭示`}</span>{lockButton}</div>
+      </div>
+    </div> : <>{hand}{!self.selected && <div className="sticky-action"><span>已选 {picked.length} / {count} 位 · 确认后统一揭示</span>{lockButton}</div>}</>}
+  </>;
 }
 
 function Race({ room, busy, leavingBusy, canClose, act, onDetail, presentation, lowQuality, setLowQuality, reduceMotion, setReduceMotion, muted, setMuted, animationSpeed, setAnimationSpeed, online, onRename, onRules, onEnd, onLeave, onInvite }: { room: RoomView; busy: boolean; leavingBusy: boolean; canClose: boolean; act: (action: GameAction) => void; onDetail: ShowCharacter; presentation: UsePresentationResult; lowQuality: boolean; setLowQuality: (value: boolean) => void; reduceMotion: boolean; setReduceMotion: (value: boolean) => void; muted: boolean; setMuted: (value: boolean) => void; animationSpeed: number; setAnimationSpeed: (value: number) => void; online: boolean; onRename: () => void; onRules: () => void; onEnd: () => void; onLeave: () => void; onInvite: () => void }) {
