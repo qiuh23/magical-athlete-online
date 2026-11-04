@@ -12,6 +12,7 @@
     "dev": "tsx watch src/server/index.ts",
     "dev:client": "vite --host 127.0.0.1",
     "typecheck": "tsc --noEmit && tsc -p tsconfig.worker.json --noEmit",
+    "typecheck:release": "tsc -p tsconfig.release.json --noEmit && tsc -p tsconfig.worker.json --noEmit",
     "build": "node scripts/review-build-guard.mjs && node scripts/deploy/sync-backends.mjs && vite build && node scripts/build-info.mjs dist/client && tsc -p tsconfig.server.json && node scripts/build-browser.mjs",
     "start": "node dist/server/server/index.js",
     "test": "tsx --test tests/*.test.ts tests/host.test.mjs",

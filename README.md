@@ -87,7 +87,7 @@ pnpm dev:browser
 
 ## GitHub更新与网站同步
 
-代码仓库为私有的 [qiuh23/magical-athlete-online](https://github.com/qiuh23/magical-athlete-online)。GitHub Actions 执行类型、固定单元组、构建、Worker 打包预演与相关浏览器检查，默认包含 **一场八人联机检查**；纯部署收尾可使用受约束的 `deployment` 范围，避免重复整局。完整矩阵按需手动执行，最新远端结果见 Actions 页。
+代码仓库为私有的 [qiuh23/magical-athlete-online](https://github.com/qiuh23/magical-athlete-online)。默认 GitHub Actions 仅执行生产源码类型、必要发布/入口/协议/产物契约、构建和 Worker 打包预演，再由原链路校验已验证产物并成对发布。全量玩法单测、测试代码类型、浏览器、截图及八人整局在本地执行，需要远端复核时显式手动选择套件；默认发布不安装浏览器。完整选项和本地命令见 [自动发布说明](docs/automatic-deployment.md)，最新真实发布结果分别核对 Actions 与公网版本。
 
 3D 版本的[单场八人 CI 已通过](https://github.com/qiuh23/magical-athlete-online/actions/runs/39540261380)，约 1.6 分钟。按用户要求，用例总时限为 15 分钟，整个 CI 任务上限为 30 分钟。
 

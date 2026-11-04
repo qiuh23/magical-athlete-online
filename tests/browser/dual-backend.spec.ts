@@ -13,6 +13,10 @@ test.beforeAll(async () => {
   url = `http://127.0.0.1:${address.port}`;
 });
 test.afterAll(async () => application.close());
+test.afterEach(async ({ page }) => {
+  // Finish fixture responses before Playwright disposes the page/context.
+  await page.unrouteAll({ behavior: 'wait' });
+});
 
 // Route only the deployment-owned pages/probes. The browser still enforces its
 // real HTTPS/HTTP origin and storage boundaries; no remote service is contacted.
@@ -29,7 +33,14 @@ async function mockBackends(page: Page, state: {cloudflare:boolean;aliyun:boolea
       return state[id] ? route.fulfill({json:{ok:true,backendId:id,protocolVersion:PROTOCOL_VERSION,rulesVersion:BACKEND_RULES_VERSION}}) : route.abort('failed');
     }
     if (target.pathname === '/api/browser/rooms') return route.fulfill({json:{rooms:[],capacity:{used:0,limit:14}}});
-    return route.fulfill({response:await page.request.get(url + target.pathname + target.search)});
+    // APIResponse from page.request belongs to the closing browser context.
+    // Copy a native response completely before fulfilling the browser route.
+    const response = await fetch(url + target.pathname + target.search, { redirect: 'manual', signal: AbortSignal.timeout(15000) });
+    const body = Buffer.from(await response.arrayBuffer());
+    const headers = Object.fromEntries(response.headers);
+    // Native fetch already decodes the body; let fulfillment frame it again.
+    for (const header of ['content-encoding', 'content-length', 'transfer-encoding', 'connection', 'keep-alive']) delete headers[header];
+    return route.fulfill({ status: response.status, headers, body });
   });
   await page.routeWebSocket(/^(wss:\/\/cf|ws:\/\/ali)\.backend\.test\/api\/connectivity\/ws$/, ws => {
     const id = ws.url().includes('cf.backend') ? 'cloudflare' : 'aliyun';
@@ -108,13 +119,18 @@ test('当前入口失败仍允许切往另一入口，不因远端不可探测�
 test('本入口邀请等待初次探测完成，避免将检测中误报为连接失败', async ({page}) => {
   let finishProbe!:()=>void;
   const probeGate=new Promise<void>(resolve=>{finishProbe=resolve;});
-  await mockBackends(page,{cloudflare:true,aliyun:true,probeGate});
-  await page.goto(cfOrigin+'/room/C-XYZ678');
-  await page.getByLabel('你的昵称').fill('本入口访客');
-  const join=page.getByRole('button',{name:'加入这场胡闹',exact:true});
-  await expect(join).toBeDisabled();
-  await expect(page.getByRole('radio',{name:'Cloudflare',exact:true})).toContainText('检测中');
-  finishProbe();await expect(join).toBeEnabled();await expect(page.getByRole('alert')).toHaveCount(0);
+  try {
+    await mockBackends(page,{cloudflare:true,aliyun:true,probeGate});
+    await page.goto(cfOrigin+'/room/C-XYZ678');
+    await page.getByLabel('你的昵称').fill('本入口访客');
+    const join=page.getByRole('button',{name:'加入这场胡闹',exact:true});
+    await expect(join).toBeDisabled();
+    await expect(page.getByRole('radio',{name:'Cloudflare',exact:true})).toContainText('检测中');
+    finishProbe();await expect(join).toBeEnabled();await expect(page.getByRole('alert')).toHaveCount(0);
+  } finally {
+    // An assertion failure must also unblock the route-draining afterEach.
+    finishProbe();
+  }
 });
 
 test('未部署不能切换，已部署远端入口无需依赖当前页探测', async ({page}) => {
