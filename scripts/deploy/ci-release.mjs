@@ -7,7 +7,7 @@ import { readFileSync } from 'node:fs';
 const entryConfiguration=JSON.parse(readFileSync(new URL('../../deploy/entries.json',import.meta.url),'utf8'));
 export function exactEntryOrigin(value,{allowInsecureHttp=false}={}) {
   const url=new URL(value);
-  if(typeof value!=='string'||url.origin!==value||url.username||url.password||!(url.protocol==='https:'||(url.protocol==='http:'&&allowInsecureHttp===true)))throw Error('Deployment entries require exact HTTPS origins, or explicit legacy HTTP opt-in.');
+  if(typeof value!=='string'||url.origin!==value||url.username||url.password||url.hostname.includes('*')||!(url.protocol==='https:'||(url.protocol==='http:'&&allowInsecureHttp===true)))throw Error('Deployment entries require exact HTTPS origins, or explicit legacy HTTP opt-in.');
   return value;
 }
 export function deploymentSettings(target,entries=entryConfiguration) {
@@ -17,15 +17,27 @@ export function deploymentSettings(target,entries=entryConfiguration) {
   if(!entry||typeof entry.allowInsecureHttp!=='boolean')throw Error('Missing explicit deployment entry configuration.');
   const cloudflareOrigin=exactEntryOrigin(entry.cloudflareOrigin);
   const aliyunOrigin=exactEntryOrigin(entry.aliyunOrigin,{allowInsecureHttp:entry.allowInsecureHttp});
+  const legacyOrigins=entry.legacyOrigins??[];
+  if(!Array.isArray(legacyOrigins)||new Set(legacyOrigins).size!==legacyOrigins.length)throw Error('Legacy origins must be an explicit list of unique exact origins.');
+  for(const origin of legacyOrigins)exactEntryOrigin(origin,{allowInsecureHttp:true});
+  const publicOrigins=[...new Set([aliyunOrigin,...legacyOrigins])];
+  const other=entries[preview?'production':'preview'];
+  if(other&&[other.cloudflareOrigin,other.aliyunOrigin,...(Array.isArray(other.legacyOrigins)?other.legacyOrigins:[])].some(origin=>publicOrigins.includes(origin)))throw Error('Production and preview allowed origins must remain separate.');
   if(cloudflareOrigin===aliyunOrigin)throw Error('Independent backends must have independent origins.');
   if(entry.plannedAliyunOrigin)exactEntryOrigin(entry.plannedAliyunOrigin);
   if(entries.production?.cloudflareOrigin===entries.preview?.cloudflareOrigin||entries.production?.aliyunOrigin===entries.preview?.aliyunOrigin)throw Error('Preview origins must remain separate from production.');
   return {workerName:preview?'magical-athlete-preview':'magical-athlete',
-    cloudflareOrigin,aliyunOrigin,
+    cloudflareOrigin,aliyunOrigin,publicOrigins,
     quota:preview?1:14,username:preview?'athlete-preview-deploy':'athlete-deploy'};
 }
 export function deploymentRegistry(settings) {
   return {backends:[{id:'cloudflare',origin:'',transport:'worker',enabled:true},{id:'aliyun',origin:settings.aliyunOrigin,transport:'socketio',enabled:true,...(settings.aliyunOrigin.startsWith('http:')?{allowInsecureHttp:true}:{})}]};
+}
+/** Both checked-artifact releases and Workers Builds use this exact policy.
+ * Legacy pages may still own saved CF credentials; keep their exact Origin
+ * without making them new navigation targets or sharing browser identities. */
+export function workerVariables(settings,source={}) {
+  return {...source,DUAL_BACKEND_ENABLED:'true',MULTIPLAYER_ROOM_LIMIT:String(settings.quota),PUBLIC_ORIGINS:settings.publicOrigins.join(','),BACKENDS_CONFIG_JSON:JSON.stringify(deploymentRegistry(settings))};
 }
 /** Resolve same-origin entries before comparing, so Node can retain legacy IP
  * sessions with origin:"" while HTTPS uses the exact same application service. */
@@ -94,7 +106,7 @@ async function prepare(release) {
   await writeFile(resolve(directory,'assets/deployment.json'),JSON.stringify({target:release.target,commit:release.commit,runId:release.runId,...(release.prNumber?{prNumber:release.prNumber}:{})}));
   const config={...source,name:settings.workerName,main:resolve(directory,'worker/index.js'),
     assets:{...source.assets,directory:resolve(directory,'assets')},
-    vars:{...source.vars,DUAL_BACKEND_ENABLED:'true',MULTIPLAYER_ROOM_LIMIT:String(settings.quota),PUBLIC_ORIGINS:settings.aliyunOrigin,BACKENDS_CONFIG_JSON:JSON.stringify(registry)}};
+    vars:workerVariables(settings,source.vars)};
   delete config.$schema;
   await mkdir(tool,{recursive:true});
   await writeFile(resolve(tool,'package.json'),JSON.stringify({name:'trusted-worker-deployer',private:true}));

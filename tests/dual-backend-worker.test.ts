@@ -25,6 +25,24 @@ test('Worker cross-origin connectivity and preflight do not touch the room names
   assert.equal((await request('/api/connectivity/ws')).status,426);assert.equal(accesses,0);
 });
 
+test('the transitioned Worker admits new HTTPS and exact legacy HTTP while rejecting preview and near-match Origins',async()=>{
+  const {deploymentSettings,workerVariables}=await import(new URL('../scripts/deploy/ci-release.mjs',import.meta.url).href);
+  const entries={production:{cloudflareOrigin:'https://magical-athlete.qiuh23.workers.dev',aliyunOrigin:'https://athlete.magical-athlete-online.cn',allowInsecureHttp:false,legacyOrigins:['http://115.29.188.62']},preview:{cloudflareOrigin:'https://magical-athlete-preview.qiuh23.workers.dev',aliyunOrigin:'http://115.29.188.62:8080',allowInsecureHttp:true,legacyOrigins:[]}};
+  let accesses=0;
+  const env={...workerVariables(deploymentSettings('production',entries)),ROOMS:{get(){accesses++;throw Error('Origin probe must not allocate rooms');}},ASSETS:{fetch:()=>new Response('asset')}};
+  for(const origin of ['https://athlete.magical-athlete-online.cn','http://115.29.188.62']) {
+    const response=await worker.default.fetch(new Request('https://magical-athlete.qiuh23.workers.dev/api/connectivity',{headers:{Origin:origin}}),env);
+    assert.equal(response.status,200);assert.equal(response.headers.get('Access-Control-Allow-Origin'),origin);
+    const upgrade=await worker.default.fetch(new Request('https://magical-athlete.qiuh23.workers.dev/api/connectivity/ws',{headers:{Origin:origin}}),env);
+    assert.equal(upgrade.status,426,'approved Origin reaches the WebSocket protocol guard');
+  }
+  for(const origin of ['http://115.29.188.62:8080','https://magical-athlete-preview.qiuh23.workers.dev','https://athlete.magical-athlete-online.cn.evil.test','https://wizard.magical-athlete-online.cn','https://evil.test']) {
+    const response=await worker.default.fetch(new Request('https://magical-athlete.qiuh23.workers.dev/api/connectivity',{headers:{Origin:origin}}),env);
+    assert.equal(response.status,403);
+  }
+  assert.equal(accesses,0);
+});
+
 test('Worker dual quota is durable, idempotent and excludes solo reservations',async()=>{
   const storage=new Storage(),pending:Promise<unknown>[]=[];
   const ctx={storage,blockConcurrencyWhile(callback:()=>Promise<unknown>){const promise=callback();pending.push(promise);return promise;},setWebSocketAutoResponse(){}};

@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { backendEntryUrl, roomEntryUrl, spectatorInvite, validateBackendConfig } from '../src/client/backends.js';
-const {deploymentSettings,deploymentRegistry,validateDeployedRegistry}=await import(new URL('../scripts/deploy/ci-release.mjs',import.meta.url).href);
+const {deploymentSettings,deploymentRegistry,validateDeployedRegistry,workerVariables}=await import(new URL('../scripts/deploy/ci-release.mjs',import.meta.url).href);
 const {httpsGameDomain,renderHttpsSite}=await import(new URL('../scripts/deploy/render-https.mjs',import.meta.url).href);
 const entries=JSON.parse(readFileSync(new URL('../deploy/entries.json',import.meta.url),'utf8'));
 
@@ -42,6 +42,30 @@ test('HTTPS spectator invitations keep server and public role while discarding t
   assert.equal(spectatorInvite('?token=private&spectate=1&url=https://evil.example'),true);
   assert.equal(spectatorInvite('?spectate=0'),false);
   assert.equal(roomEntryUrl(target,'A-ABC234?token=private',true),target.origin+'/');
+});
+
+test('HTTPS activation preserves exact old-page Origins in both Worker release paths without mixing preview or navigation targets',()=>{
+  const transitioned=structuredClone(entries);
+  transitioned.production.aliyunOrigin=transitioned.production.plannedAliyunOrigin;
+  transitioned.production.allowInsecureHttp=false;
+  const settings=deploymentSettings('production',transitioned);
+  assert.deepEqual(settings.publicOrigins,['https://athlete.magical-athlete-online.cn','http://115.29.188.62']);
+  const variables=workerVariables(settings,{OTHER:'preserved',PUBLIC_ORIGINS:'stale'});
+  assert.equal(variables.OTHER,'preserved');
+  assert.equal(variables.PUBLIC_ORIGINS,'https://athlete.magical-athlete-online.cn,http://115.29.188.62');
+  assert.deepEqual(JSON.parse(variables.BACKENDS_CONFIG_JSON),deploymentRegistry(settings));
+  assert.equal(JSON.parse(variables.BACKENDS_CONFIG_JSON).backends[1].origin,settings.aliyunOrigin);
+  assert.deepEqual(deploymentSettings('preview',transitioned).publicOrigins,['http://115.29.188.62:8080']);
+  const source=JSON.parse(readFileSync(new URL('../wrangler.jsonc',import.meta.url),'utf8'));
+  assert.deepEqual(source.vars,workerVariables(deploymentSettings('production',entries),source.vars),'Workers Builds source configuration must match the same policy as checked-artifact prepare()');
+  for(const value of ['*','https://*.example.cn','https://cn.example/path','https://user:pass@cn.example','https://cn.example/?token=x','https://cn.example/#x','http://115.29.188.62:8080',entries.preview.cloudflareOrigin]) {
+    const bad=structuredClone(transitioned);bad.production.legacyOrigins=[value];
+    assert.throws(()=>deploymentSettings('production',bad));
+  }
+  for(const value of ['http://115.29.188.62',['http://115.29.188.62','http://115.29.188.62']]) {
+    const bad=structuredClone(transitioned);bad.production.legacyOrigins=value;
+    assert.throws(()=>deploymentSettings('production',bad),/Legacy origins/);
+  }
 });
 
 test('HTTPS vhost keeps ACME renewal, exact host/origin and realtime upgrades separate from IP and preview',()=>{

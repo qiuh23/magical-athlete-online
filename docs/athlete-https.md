@@ -10,6 +10,10 @@
 
 发布后现在会读取**两端** `/backends.json`，验证两条入口、transport 和 enabled 与受信配置一致，再检查版本及 HTTP／实时协议。Node 的空 `origin` 按本次验证的网页 origin 解析；错误、过期地址或 HTTPS 配置仍带临时 HTTP opt-in 会使验收失败，沿用原有成对回滚路径。此检查验证公开配置，不会接触房间身份。
 
+`production.legacyOrigins` 显式保留旧页面的精确 Origin，用于恢复历史上保存在旧 HTTP 页面中的 Cloudflare 房间身份；它不会把旧地址重新加入新用户的导航目标，也不会迁移浏览器凭据。HTTPS 切换后 Cloudflare 的 `PUBLIC_ORIGINS` 同时包含新游戏 HTTPS 与这些旧 Origin。生产与预览白名单保持独立，禁止通配符、路径、凭据和重复项。
+
+`sync-backends.mjs` 同时同步 `public/backends.json` 和 `wrangler.jsonc` 的受管变量；直接 Workers Builds 与已检查产物的 CI `prepare` 共用 `workerVariables()` 生成逻辑。因此下一次任一发布链都不会丢掉旧 HTTP Origin 或回退到另一份导航地址。正式启用仍须先完成公网验收，再修改生产 `aliyunOrigin`，最后开启大厅国内门禁。
+
 ## 合并后的人工上线顺序
 
 1. 按大厅说明先保存 Nginx 全部站点、`server.env`、版本指针和证书续期配置；运行现有 SQLite 在线备份并检查完整性。保留当前所有旧站点和数据。不要重新运行 bootstrap 覆盖已有主机设置。
