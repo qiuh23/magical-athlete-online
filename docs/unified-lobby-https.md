@@ -28,7 +28,9 @@
 
 服务器切换重建固定的目标大厅 URL 并进行顶层导航，不能仅在当前大厅下改变后端。当前大厅服务器从实际 origin/path 判定，优先于本地偏好；邀请仍高于本地偏好并固定目标游戏/服务器/观战位，跨大厅只转发这些公开字段。目标未开放时停留并说明状态，用户可以明确选择开放的 Cloudflare 入口；不会静默回退。相同入口不重定向，未知 origin 不接受 query 中提供的任意目标。
 
-大厅源码 `lobby/` 不依赖 CDN、外部字体、跨服健康探测或游戏 API。构建将同一份文件复制到 `dist/client/lobby`、`dist/browser/lobby`。CF Worker 的 `/` 仍为原运动会。国内 Nginx 根域仅将明确公开文件反代至现有 Node 的 `127.0.0.1:3000/lobby/`，无 CF 依赖，不增进程或后端；根域 `/api`、`/socket.io` 等返回404。这也避免 Nginx 无权读取 root:athlete 0750 release 而403，不给 www-data 增加读取环境/数据库的组权限。
+大厅源码 `lobby/` 不依赖 CDN、外部字体、跨服健康探测或游戏 API。构建将同一份文件复制到 `dist/client/lobby`、`dist/browser/lobby`。CF Worker 的 `/` 仍为原运动会。国内 Nginx **HTTPS 根域**仅将明确公开文件反代至现有 Node 的 `127.0.0.1:3000/lobby/`，无 CF 依赖，不增进程或后端；HTTPS 根域 `/api`、`/socket.io` 等返回404。这也避免 Nginx 无权读取 root:athlete 0750 release 而403，不给 www-data 增加读取环境/数据库的组权限。
+
+`http://magical-athlete-online.cn` 按可能已有原游戏身份保留：HTTP 根域除 ACME 路径外继续反代原运动会3000，保留 Host/Origin、API和Socket.IO，不重定向到新HTTPS大厅。它属于旧游戏入口，**不是国内大厅**。Node精确Origin白名单与CF受信legacyOrigins均须持久保留它；HTTP/IP/HTTPS浏览器身份分别独立，不自动迁移。
 
 国内游戏子域各自反代原3000/3002，预览仍是3001/8080。选择游戏时顶层导航到受信 origin，页面、API和实时连接一起切换。运动会实际发布地址由 `deploy/entries.json` 管理；构建和发布器据此同步 backends.json，发布后再对两端配置校验，防止写回旧IP。大厅表只负责导航，不暗中修改游戏部署配置。
 

@@ -7,7 +7,7 @@
   "vars": {
     "DUAL_BACKEND_ENABLED": "true",
     "MULTIPLAYER_ROOM_LIMIT": "14",
-    "PUBLIC_ORIGINS": "http://115.29.188.62",
+    "PUBLIC_ORIGINS": "http://115.29.188.62,http://magical-athlete-online.cn",
     "BACKENDS_CONFIG_JSON": "{\"backends\":[{\"id\":\"cloudflare\",\"origin\":\"\",\"transport\":\"worker\",\"enabled\":true},{\"id\":\"aliyun\",\"origin\":\"http://115.29.188.62\",\"transport\":\"socketio\",\"enabled\":true,\"allowInsecureHttp\":true}]}"
   },
   "assets": {

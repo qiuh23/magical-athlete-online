@@ -16,6 +16,14 @@ test('both lobby artifacts contain every referenced local asset and the domestic
     assert.ok(resourcePaths.includes('art/athlete.svg') && resourcePaths.includes('art/wizard.svg'), 'Both original game illustrations must be part of the shipped asset graph.');
     const files = new Set(['index.html', 'config.json', 'routing.mjs', ...resourcePaths]);
     const nginx = await readFile(new URL('../deploy/nginx-lobby.conf.template', import.meta.url), 'utf8');
+    const legacyHttp = nginx.slice(0, nginx.indexOf('listen 443 ssl;'));
+    assert.match(legacyHttp, /listen 80;/);
+    assert.match(legacyHttp, /location \^~ \/\.well-known\/acme-challenge\//);
+    assert.match(legacyHttp, /proxy_pass http:\/\/127\.0\.0\.1:3000;/, 'The old HTTP apex must retain the original game, API and Socket.IO authority.');
+    assert.match(legacyHttp, /proxy_set_header Host \$http_host;/);
+    assert.match(legacyHttp, /proxy_set_header Origin \$http_origin;/);
+    assert.match(legacyHttp, /proxy_set_header Upgrade \$http_upgrade;/);
+    assert.doesNotMatch(legacyHttp, /return 30[1278]|proxy_pass.*\/lobby\//, 'Only the HTTPS apex is the new lobby; never move old HTTP credentials with a redirect.');
     const publicLocation = nginx.match(/location ~ (\S+) \{/);
     assert.ok(publicLocation, 'Domestic lobby needs an explicit public-file route.');
     const allowed = new RegExp(publicLocation[1]);

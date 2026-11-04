@@ -49,10 +49,10 @@ test('HTTPS activation preserves exact old-page Origins in both Worker release p
   transitioned.production.aliyunOrigin=transitioned.production.plannedAliyunOrigin;
   transitioned.production.allowInsecureHttp=false;
   const settings=deploymentSettings('production',transitioned);
-  assert.deepEqual(settings.publicOrigins,['https://athlete.magical-athlete-online.cn','http://115.29.188.62']);
+  assert.deepEqual(settings.publicOrigins,['https://athlete.magical-athlete-online.cn','http://115.29.188.62','http://magical-athlete-online.cn']);
   const variables=workerVariables(settings,{OTHER:'preserved',PUBLIC_ORIGINS:'stale'});
   assert.equal(variables.OTHER,'preserved');
-  assert.equal(variables.PUBLIC_ORIGINS,'https://athlete.magical-athlete-online.cn,http://115.29.188.62');
+  assert.equal(variables.PUBLIC_ORIGINS,'https://athlete.magical-athlete-online.cn,http://115.29.188.62,http://magical-athlete-online.cn');
   assert.deepEqual(JSON.parse(variables.BACKENDS_CONFIG_JSON),deploymentRegistry(settings));
   assert.equal(JSON.parse(variables.BACKENDS_CONFIG_JSON).backends[1].origin,settings.aliyunOrigin);
   assert.deepEqual(deploymentSettings('preview',transitioned).publicOrigins,['http://115.29.188.62:8080']);

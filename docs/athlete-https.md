@@ -14,11 +14,13 @@
 
 `sync-backends.mjs` 同时同步 `public/backends.json` 和 `wrangler.jsonc` 的受管变量；直接 Workers Builds 与已检查产物的 CI `prepare` 共用 `workerVariables()` 生成逻辑。因此下一次任一发布链都不会丢掉旧 HTTP Origin 或回退到另一份导航地址。正式启用仍须先完成公网验收，再修改生产 `aliyunOrigin`，最后开启大厅国内门禁。
 
+旧 `http://magical-athlete-online.cn` 也按可能已有玩家身份保守保留：80 端口精确根域站点除 ACME 外继续反代原运动会 3000，Host、Origin 和 Socket.IO 升级头原样传递，**不跳转到 HTTPS 大厅**。只有 `https://magical-athlete-online.cn/` 是新大厅。Node 的 `PUBLIC_ORIGINS` 与 Cloudflare 的受信 `legacyOrigins` 均保留该精确 HTTP 根域，旧 IP 与8080预览仍分别保留；不得把 HTTP/HTTPS 根域视为共享浏览器身份。
+
 ## 合并后的人工上线顺序
 
 1. 按大厅说明先保存 Nginx 全部站点、`server.env`、版本指针和证书续期配置；运行现有 SQLite 在线备份并检查完整性。保留当前所有旧站点和数据。不要重新运行 bootstrap 覆盖已有主机设置。
 2. 将游戏子域直接解析到现有 ECS；仅在合并后按上线授权处理 80／443。3000 保持回环，不改变预览 8080／3001、巫师牌 3002 或其独立服务。
-3. 审查 `/etc/magical-athlete/server.env`：`PUBLIC_ORIGIN=https://athlete.magical-athlete-online.cn`，`PUBLIC_ORIGINS=https://magical-athlete.qiuh23.workers.dev,http://115.29.188.62`，保留既有精确白名单项及其他开关、配额。不能用 `*`。保留 Aliyun **空 origin** 的 Node registry，例如：
+3. 审查 `/etc/magical-athlete/server.env`：`PUBLIC_ORIGIN=https://athlete.magical-athlete-online.cn`，`PUBLIC_ORIGINS=https://magical-athlete.qiuh23.workers.dev,http://115.29.188.62,http://magical-athlete-online.cn`，保留既有精确白名单项及其他开关、配额。不能用 `*`。保留 Aliyun **空 origin** 的 Node registry，例如：
 
    ```ini
    BACKENDS_CONFIG_JSON='{"backends":[{"id":"cloudflare","origin":"https://magical-athlete.qiuh23.workers.dev","transport":"worker","enabled":true},{"id":"aliyun","origin":"","transport":"socketio","enabled":true}]}'

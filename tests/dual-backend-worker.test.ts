@@ -27,16 +27,16 @@ test('Worker cross-origin connectivity and preflight do not touch the room names
 
 test('the transitioned Worker admits new HTTPS and exact legacy HTTP while rejecting preview and near-match Origins',async()=>{
   const {deploymentSettings,workerVariables}=await import(new URL('../scripts/deploy/ci-release.mjs',import.meta.url).href);
-  const entries={production:{cloudflareOrigin:'https://magical-athlete.qiuh23.workers.dev',aliyunOrigin:'https://athlete.magical-athlete-online.cn',allowInsecureHttp:false,legacyOrigins:['http://115.29.188.62']},preview:{cloudflareOrigin:'https://magical-athlete-preview.qiuh23.workers.dev',aliyunOrigin:'http://115.29.188.62:8080',allowInsecureHttp:true,legacyOrigins:[]}};
+  const entries={production:{cloudflareOrigin:'https://magical-athlete.qiuh23.workers.dev',aliyunOrigin:'https://athlete.magical-athlete-online.cn',allowInsecureHttp:false,legacyOrigins:['http://115.29.188.62','http://magical-athlete-online.cn']},preview:{cloudflareOrigin:'https://magical-athlete-preview.qiuh23.workers.dev',aliyunOrigin:'http://115.29.188.62:8080',allowInsecureHttp:true,legacyOrigins:[]}};
   let accesses=0;
   const env={...workerVariables(deploymentSettings('production',entries)),ROOMS:{get(){accesses++;throw Error('Origin probe must not allocate rooms');}},ASSETS:{fetch:()=>new Response('asset')}};
-  for(const origin of ['https://athlete.magical-athlete-online.cn','http://115.29.188.62']) {
+  for(const origin of ['https://athlete.magical-athlete-online.cn','http://115.29.188.62','http://magical-athlete-online.cn']) {
     const response=await worker.default.fetch(new Request('https://magical-athlete.qiuh23.workers.dev/api/connectivity',{headers:{Origin:origin}}),env);
     assert.equal(response.status,200);assert.equal(response.headers.get('Access-Control-Allow-Origin'),origin);
     const upgrade=await worker.default.fetch(new Request('https://magical-athlete.qiuh23.workers.dev/api/connectivity/ws',{headers:{Origin:origin}}),env);
     assert.equal(upgrade.status,426,'approved Origin reaches the WebSocket protocol guard');
   }
-  for(const origin of ['http://115.29.188.62:8080','https://magical-athlete-preview.qiuh23.workers.dev','https://athlete.magical-athlete-online.cn.evil.test','https://wizard.magical-athlete-online.cn','https://evil.test']) {
+  for(const origin of ['http://115.29.188.62:8080','https://magical-athlete-preview.qiuh23.workers.dev','https://athlete.magical-athlete-online.cn.evil.test','https://wizard.magical-athlete-online.cn','https://magical-athlete-online.cn','https://evil.test']) {
     const response=await worker.default.fetch(new Request('https://magical-athlete.qiuh23.workers.dev/api/connectivity',{headers:{Origin:origin}}),env);
     assert.equal(response.status,403);
   }
