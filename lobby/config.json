@@ -1,5 +1,9 @@
 {
   "version": 1,
+  "lobbies": {
+    "aliyun": { "url": "https://magical-athlete-online.cn/", "enabled": false },
+    "cloudflare": { "url": "https://magical-athlete.qiuh23.workers.dev/lobby/", "enabled": true }
+  },
   "entries": {
     "athlete": {
       "aliyun": { "origin": "https://athlete.magical-athlete-online.cn", "enabled": false },
