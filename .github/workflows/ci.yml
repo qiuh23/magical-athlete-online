@@ -3,10 +3,11 @@ on:
   workflow_dispatch:
     inputs:
       browser_suite:
-        description: Browser checks to run
+        description: Explicit validation suite (release omits gameplay and browsers)
         type: choice
-        default: eight-only
+        default: release
         options:
+          - release
           - eight-only
           - ability-interactions
           - deployment
@@ -54,49 +55,67 @@ jobs:
         env:
           REQUESTED_SUITE: ${{ inputs.browser_suite }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
-      - run: pnpm typecheck
-      # Run the fast rule/protocol regressions once, instead of overlapping subsets.
-      - name: Validate rules, persistence, transports and deployment guards
+      - name: Typecheck production source and Worker
+        if: steps.validation.outputs.suite == 'release'
+        run: pnpm typecheck:release
+      - name: Typecheck source and all test suites on explicit request
+        if: github.event_name == 'workflow_dispatch' && steps.validation.outputs.suite != 'release'
+        run: pnpm typecheck
+      - name: Validate release, entry, protocol and artifact contracts
+        if: steps.validation.outputs.suite == 'release'
+        run: >-
+          pnpm exec tsx --test
+          tests/ci-validation-scope.test.ts tests/deployment-workflow.test.ts
+          tests/ci-installer.test.ts tests/build-info.test.ts
+          tests/deployment-info.test.ts tests/deployment-capacity.test.ts
+          tests/https-entries.test.ts tests/backends.test.ts
+          tests/lobby.test.ts tests/lobby-resources.test.ts
+          tests/dual-backend-worker.test.ts tests/dual-backend-server.test.ts
+          tests/network-backends.test.ts
+      - name: Validate the full gameplay and persistence unit suite on explicit request
+        if: github.event_name == 'workflow_dispatch' && steps.validation.outputs.suite != 'release'
         run: pnpm test
       - run: pnpm build
       - run: pnpm exec wrangler deploy --dry-run
-      - run: pnpm exec playwright install --with-deps chromium
-      # The automatic UI gate stays small; long visual matrices are manual.
+      - name: Install browsers only for explicit manual browser suites
+        if: github.event_name == 'workflow_dispatch' && steps.validation.outputs.suite != 'release'
+        run: pnpm exec playwright install --with-deps chromium
+      # Browser, gameplay and screenshot checks are local or explicit manual work.
       - name: Validate dice batches, choice details, event reasons and chat layout
-        if: steps.validation.outputs.suite != 'deployment'
+        if: github.event_name == 'workflow_dispatch' && steps.validation.outputs.suite != 'release' && steps.validation.outputs.suite != 'deployment'
         run: pnpm exec playwright test tests/browser/interaction-feedback.spec.ts tests/browser/chat-layout.spec.ts
         env:
           CI: true
       - name: Validate relay snapshot and playback diagnostic helpers
-        if: steps.validation.outputs.suite != 'deployment'
+        if: github.event_name == 'workflow_dispatch' && steps.validation.outputs.suite != 'release' && steps.validation.outputs.suite != 'deployment'
         run: pnpm exec playwright test -c playwright.relay.config.ts --grep "snapshot aggregation|playback skip|playback diagnostics"
         env:
           CI: true
       - name: Validate one eight-player race with recovery and privacy
-        if: steps.validation.outputs.suite == 'eight-only' || steps.validation.outputs.suite == 'all'
+        if: github.event_name == 'workflow_dispatch' && (steps.validation.outputs.suite == 'eight-only' || steps.validation.outputs.suite == 'all')
         run: pnpm exec playwright test -c playwright.relay.config.ts --grep "server authority 8 independent"
         env:
           CI: true
           RELAY_SMOKE: '1'
       - name: Validate server selection and independent backend sessions
-        if: steps.validation.outputs.suite == 'deployment' || steps.validation.outputs.suite == 'all'
+        if: github.event_name == 'workflow_dispatch' && (steps.validation.outputs.suite == 'deployment' || steps.validation.outputs.suite == 'all')
         run: |
           pnpm exec playwright test tests/browser/dual-backend.spec.ts tests/browser/home-entry.spec.ts
           pnpm exec playwright test -c playwright.dual.config.ts
         env:
           CI: true
       - name: Validate ability details and public reveals
-        if: steps.validation.outputs.suite == 'ability-interactions' || steps.validation.outputs.suite == 'all'
+        if: github.event_name == 'workflow_dispatch' && (steps.validation.outputs.suite == 'ability-interactions' || steps.validation.outputs.suite == 'all')
         run: pnpm exec playwright test tests/browser/egg-character-info.spec.ts tests/browser/ability-reveal-intro.spec.ts
         env:
           CI: true
       - name: Validate manual presentation and camera regressions
-        if: steps.validation.outputs.suite == 'all'
+        if: github.event_name == 'workflow_dispatch' && steps.validation.outputs.suite == 'all'
         run: pnpm exec playwright test tests/browser/presentation-sequence.spec.ts tests/browser/dice-readback.spec.ts tests/browser/card-background.spec.ts tests/browser/camera-choreography.spec.ts tests/browser/route-selection-preview.spec.ts
         env:
           CI: true
       - name: Preserve visual observations before later browser suites
-        if: always() && steps.validation.outputs.suite == 'all'
+        if: always() && github.event_name == 'workflow_dispatch' && steps.validation.outputs.suite == 'all'
         uses: actions/upload-artifact@v4
         with:
           name: visual-regressions
@@ -105,17 +124,17 @@ jobs:
             docs/qa/camera-choreography/
           retention-days: 7
       - name: Validate manual competition, event and room lifecycle flows
-        if: steps.validation.outputs.suite == 'all'
+        if: github.event_name == 'workflow_dispatch' && steps.validation.outputs.suite == 'all'
         run: pnpm exec playwright test tests/browser/competition.spec.ts tests/browser/special-events.spec.ts tests/browser/room-continuation.spec.ts
         env:
           CI: true
       - name: Validate manual map scenes and controls
-        if: steps.validation.outputs.suite == 'all'
+        if: github.event_name == 'workflow_dispatch' && steps.validation.outputs.suite == 'all'
         run: pnpm exec playwright test tests/browser/new-track-scenes.spec.ts tests/browser/whirly-model.spec.ts tests/browser/expansion-bridges.spec.ts tests/browser/expansion-movement.spec.ts tests/browser/expansion-low.spec.ts tests/browser/three-scene.spec.ts
         env:
           CI: true
       - name: Validate manual room directory and spectating
-        if: steps.validation.outputs.suite == 'all'
+        if: github.event_name == 'workflow_dispatch' && steps.validation.outputs.suite == 'all'
         run: pnpm exec playwright test -c playwright.relay.config.ts tests/relay-browser/room-directory.spec.ts --grep "directory:"
         env:
           CI: true
@@ -145,7 +164,7 @@ jobs:
           compression-level: 0
           retention-days: 1
       - uses: actions/upload-artifact@v4
-        if: failure() || cancelled()
+        if: (failure() || cancelled()) && github.event_name == 'workflow_dispatch' && steps.validation.outputs.suite != 'release'
         with:
           name: playwright-failures
           path: test-results/
