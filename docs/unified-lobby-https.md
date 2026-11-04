@@ -2,7 +2,7 @@
 
 ## 核实结果与边界
 
-**当前状态（2026-11-05）以 [部署核查记录](lobby-deployment-audit-2026-11-05.md) 为准。** 两个准备 PR 已合入 main，Cloudflare 两个游戏已出现新构建，阿里云仍是旧版本；国内新 HTTPS 大厅未验收。下面 2026-11-04 的主机/DNS/SHA是历史核查，不能当作当前发布结果。本 PR 只准备与本地验证改进，不以合并授权生产主机、DNS、证书或安全设置变更。
+**当前状态（2026-11-05）以 [部署核查记录](lobby-deployment-audit-2026-11-05.md) 顶部后续阶段为准。** 用户后来授权实际上线；三个国内域名可信TLS已过，国内大厅九项资源与运动会新域两玩家/观众、聊天准备和刷新专项通过，巫师牌真人/AI/观众专项也通过。本次据此持久切换游戏公开HTTPS origin并启用国内大厅三个门禁；合并后的自然发布、最终大厅双向/四游戏点击以及全部证书续期仍分别验收。下面旧日期的主机/DNS/SHA及未授权边界保留为历史记录，不代表当前状态。
 
 2026-11-04，用户确认备案域名 `magical-athlete-online.cn`；备案控制台截图确认完整网站号 **京ICP备2026075006号-1**。大厅页脚展示该号码，链接 `https://beian.miit.gov.cn/`。附件里的通知不作为执行线上操作的授权。
 
@@ -24,11 +24,13 @@
 | 胡闹运动会 | `https://athlete.magical-athlete-online.cn/` | `https://magical-athlete.qiuh23.workers.dev/` |
 | 巫师牌 | `https://wizard.magical-athlete-online.cn/` | `https://wizard-friends.qiuh23.workers.dev/` |
 
-国内三个 HTTPS 地址是已记录的部署方案，尚未通过本次公网验收。`lobby/config.json` 固定两大厅与四游戏的受信地址，国内大厅和游戏均为 `enabled:false`，界面显示“暂未开放”。游戏实际生效配置仍保留旧 HTTP IP，避免自动发布提前改换邀请目标。
+国内三个HTTPS地址已完成本次可信TLS和所列大厅/游戏专项验收。`lobby/config.json` 固定两大厅与四游戏受信地址，本次据验收结果将国内大厅和两个国内游戏项设为`enabled:true`；生产游戏registry改为新HTTPS。未开放的界面/导航拦截继续保留，可在故障回滚时显式关闭三个门禁，测试使用明确的关闭fixture覆盖该状态。
 
 服务器切换重建固定的目标大厅 URL 并进行顶层导航，不能仅在当前大厅下改变后端。当前大厅服务器从实际 origin/path 判定，优先于本地偏好；邀请仍高于本地偏好并固定目标游戏/服务器/观战位，跨大厅只转发这些公开字段。目标未开放时停留并说明状态，用户可以明确选择开放的 Cloudflare 入口；不会静默回退。相同入口不重定向，未知 origin 不接受 query 中提供的任意目标。
 
-大厅源码 `lobby/` 不依赖 CDN、外部字体、跨服健康探测或游戏 API。构建将同一份文件复制到 `dist/client/lobby`、`dist/browser/lobby`。CF Worker 的 `/` 仍为原运动会。国内 Nginx 根域仅将明确公开文件反代至现有 Node 的 `127.0.0.1:3000/lobby/`，无 CF 依赖，不增进程或后端；根域 `/api`、`/socket.io` 等返回404。这也避免 Nginx 无权读取 root:athlete 0750 release 而403，不给 www-data 增加读取环境/数据库的组权限。
+大厅源码 `lobby/` 不依赖 CDN、外部字体、跨服健康探测或游戏 API。构建将同一份文件复制到 `dist/client/lobby`、`dist/browser/lobby`。CF Worker 的 `/` 仍为原运动会。国内 Nginx **HTTPS 根域**仅将明确公开文件反代至现有 Node 的 `127.0.0.1:3000/lobby/`，无 CF 依赖，不增进程或后端；HTTPS 根域 `/api`、`/socket.io` 等返回404。这也避免 Nginx 无权读取 root:athlete 0750 release 而403，不给 www-data 增加读取环境/数据库的组权限。
+
+`http://magical-athlete-online.cn` 按可能已有原游戏身份保留：HTTP 根域除 ACME 路径外继续反代原运动会3000，保留 Host/Origin、API和Socket.IO，不重定向到新HTTPS大厅。它属于旧游戏入口，**不是国内大厅**。Node精确Origin白名单与CF受信legacyOrigins均须持久保留它；HTTP/IP/HTTPS浏览器身份分别独立，不自动迁移。
 
 国内游戏子域各自反代原3000/3002，预览仍是3001/8080。选择游戏时顶层导航到受信 origin，页面、API和实时连接一起切换。运动会实际发布地址由 `deploy/entries.json` 管理；构建和发布器据此同步 backends.json，发布后再对两端配置校验，防止写回旧IP。大厅表只负责导航，不暗中修改游戏部署配置。
 

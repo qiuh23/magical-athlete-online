@@ -12,10 +12,10 @@ const types: Record<string,string> = { '.html': 'text/html; charset=utf-8', '.mj
 // tested by this suite, and no request leaves the browser interception layer.
 async function sites(page: Page, active = false, extraOrigin?: string) {
   const config = JSON.parse(await readFile(resolve(directory, 'config.json'), 'utf8'));
-  if (active) {
-    config.lobbies.aliyun.enabled = true;
-    config.entries.athlete.aliyun.enabled = config.entries.wizard.aliyun.enabled = true;
-  }
+  // Exercise activation and rollback explicitly, independently of the current
+  // production flags. Disabled-server coverage remains after launch.
+  config.lobbies.aliyun.enabled = active;
+  config.entries.athlete.aliyun.enabled = config.entries.wizard.aliyun.enabled = active;
   await page.route('**/*', async route => {
     const url = new URL(route.request().url());
     const lobby = url.origin === new URL(cfLobby).origin && url.pathname.startsWith('/lobby/') ? cfLobby
