@@ -3,7 +3,7 @@ import { chatBatch } from '../shared/chat.js';
 import express from 'express';
 import { createServer } from 'node:http';
 import { Server } from 'socket.io';
-import { resolve } from 'node:path';
+import { resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { existsSync } from 'node:fs';
 import { z } from 'zod';
@@ -123,7 +123,9 @@ export function createApplication(dbPath=resolve(process.env.DATA_DIR??'data','r
   // Compiled entry is dist/server/server/index.js; dev entry is src/server/index.ts.
   const staticDir=existsSync(resolve('dist/client/index.html'))?resolve('dist/client'):clientDir;
   app.get('/backends.json',(_req,res)=>{res.setHeader('Cache-Control','no-store');const other=backendId==='aliyun'?'cloudflare':'aliyun';res.json(process.env.BACKENDS_CONFIG_JSON?JSON.parse(process.env.BACKENDS_CONFIG_JSON):{backends:[{id:backendId,origin:'',transport:'socketio',enabled:true},{id:other,origin:'',transport:other==='cloudflare'?'worker':'socketio',enabled:false}]});});
-  app.use(express.static(staticDir,{index:false,maxAge:'1h',setHeaders:(res,path)=>{if(path.endsWith('backends.json'))res.setHeader('Cache-Control','no-store');}}));
+  app.get(/^\/lobby$/,(req,res)=>{res.setHeader('Cache-Control','no-store');res.redirect(308,'/lobby/'+new URL(req.originalUrl,'http://localhost').search);});
+  app.get('/lobby/',(_req,res)=>{res.setHeader('Cache-Control','no-store');res.sendFile(resolve(staticDir,'lobby/index.html'));});
+  app.use(express.static(staticDir,{index:false,maxAge:'1h',setHeaders:(res,path)=>{if(path.endsWith('backends.json')||path.includes(`${sep}lobby${sep}`))res.setHeader('Cache-Control','no-store');}}));
   app.get('/{*path}',(_req,res)=>{if(existsSync(resolve(staticDir,'index.html')))res.sendFile(resolve(staticDir,'index.html'));else res.status(503).send('前端尚未构建。请运行 pnpm build。');});
   app.use((e:unknown,_req:express.Request,res:express.Response,_next:express.NextFunction)=>{res.status(400).json({error:e instanceof z.ZodError?e.issues[0]?.message:e instanceof Error?e.message:'请求失败。'});});
   return {app,http,io,rooms,store,close:async()=>{closing=true;clearInterval(timer);await new Promise<void>(r=>io.close(()=>r()));if(http.listening)await new Promise<void>(r=>http.close(()=>r()));store.close();}};

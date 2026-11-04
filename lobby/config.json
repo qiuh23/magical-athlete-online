@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "entries": {
+    "athlete": {
+      "aliyun": { "origin": "https://athlete.magical-athlete-online.cn", "enabled": false },
+      "cloudflare": { "origin": "https://magical-athlete.qiuh23.workers.dev", "enabled": true }
+    },
+    "wizard": {
+      "aliyun": { "origin": "https://wizard.magical-athlete-online.cn", "enabled": false },
+      "cloudflare": { "origin": "https://wizard-friends.qiuh23.workers.dev", "enabled": true }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+# Staged template only. Render the confirmed apex and review before installing.
+# No dependency on Cloudflare, no new process, no database permissions.
+# The release tree is intentionally root:athlete 0750. Serve only its public
+# lobby through the existing Node static handler; do not widen www-data access.
+server {
+    listen 80;
+    server_name __APEX_DOMAIN__;
+    location ^~ /.well-known/acme-challenge/ {
+        root /var/lib/letsencrypt;
+        try_files $uri =404;
+    }
+    location / { return 308 https://__APEX_DOMAIN__$request_uri; }
+}
+server {
+    listen 443 ssl;
+    server_name __APEX_DOMAIN__;
+    ssl_certificate /etc/letsencrypt/live/__APEX_DOMAIN__/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/__APEX_DOMAIN__/privkey.pem;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    add_header X-Content-Type-Options nosniff always;
+    add_header Referrer-Policy no-referrer always;
+    # Deliberately no HSTS includeSubDomains/preload during the HTTP transition.
+    location = / {
+        proxy_pass http://127.0.0.1:3000/lobby/;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_hide_header Cache-Control;
+        add_header Cache-Control "no-store" always;
+    }
+    # Explicit public-file allowlist; never expose game/API/Socket.IO at apex.
+    # Node sends correct JavaScript MIME for .mjs even if nginx mime.types omits it.
+    location ~ ^/(index\.html|config\.json|style\.css|app\.mjs|routing\.mjs|favicon\.svg)$ {
+        rewrite ^/(.*)$ /lobby/$1 break;
+        proxy_pass http://127.0.0.1:3000;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_hide_header Cache-Control;
+        add_header Cache-Control "no-store" always;
+    }
+    location / { return 404; }
+}

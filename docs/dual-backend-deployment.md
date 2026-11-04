@@ -63,13 +63,15 @@ Node 下载受阻时，不自动换第三方镜像。在可访问 nodejs.org 的
 
 ## 公开入口与 HTTPS
 
+2026-11-04 的统一大厅将根域名保留给大厅，游戏使用独立子域。当前迁移、旧入口过渡、证书续期和回滚以 [运动会 HTTPS 说明](athlete-https.md) 为准；以下命令只在合并后、完成前置检查再执行。
+
 公开开放是单独步骤。确认备案、必要资质、域名 DNS 直连、静态总配额和发布审批后，将服务器配置的 `PUBLIC_ACCESS_ENABLED=true`、`CONTROLLED_VALIDATION=false`。在云安全组仅新增 80/443，保持 3000 不对外开放。按用户授权执行：
 
 ```sh
-sudo env DOMAIN=实际备案域名 CERT_EMAIL=运维联系邮箱 ICP_CONFIRMED=true bash scripts/deploy/publish.sh
+sudo env DOMAIN=athlete.magical-athlete-online.cn CERT_EMAIL=运维联系邮箱 ICP_CONFIRMED=true bash scripts/deploy/publish.sh
 ```
 
-脚本安装 nginx 反向代理并申请 HTTPS，开启证书自动续期。代理透传 Upgrade/Origin，75 秒读写超时大于 Socket.IO 的 15 秒心跳 + 20 秒失联窗口；应用 HTTP API 和实时 Origin 白名单均包含两个入口的精确 origin，支持跨域预检。`PUBLIC_ORIGIN` 为国内入口，`PUBLIC_ORIGINS` 为逗号分隔的其他受信入口；Worker 对应设置 `PUBLIC_ORIGINS` 为国内入口。不要使用 `*`。
+脚本新增独立 nginx HTTPS 站点并通过 webroot 申请证书、配置续期钩子，保留现有 IP 和预览站点。代理透传 Upgrade/Origin，100 秒读写超时覆盖 Socket.IO 心跳窗口；应用 HTTP API 和实时 Origin 白名单均包含两个入口及保留旧入口的精确 origin，支持跨域预检。`PUBLIC_ORIGIN` 为国内 HTTPS 游戏入口，`PUBLIC_ORIGINS` 为逗号分隔的其他受信入口；Worker 对应设置 `PUBLIC_ORIGINS` 为国内入口。不要使用 `*`。
 
 完成 HTTPS、实时握手、必要资源直接加载、跨入口入房、重启持久化及国内真实网络实测后，再将两个入口的 `BACKENDS_CONFIG_JSON` 中 Aliyun 改为 `enabled:true`，按现有发布流程更新。尚未验证时继续显示“未部署/未开放”。
 

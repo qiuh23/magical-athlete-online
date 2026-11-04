@@ -1,5 +1,6 @@
-# Install only after filing/qualification and PUBLIC_ACCESS_ENABLED approval.
-# certbot --nginx adds HTTPS and redirects HTTP to HTTPS.
+# Legacy HTTP bootstrap example, retained for historical rollback reference.
+# Current publish.sh renders a separate game HTTPS vhost with render-https.mjs.
+# Do not install this over the existing IP site or the root-domain lobby.
 server {
     listen 80;
     server_name ${DOMAIN};

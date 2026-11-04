@@ -37,7 +37,7 @@ import { BROWSER_HOST_MODE, checkOwnedRoom, connectRoom, enterRoom, forgetClosed
 import { usePresentation, type UsePresentationResult } from './usePresentation.js';
 import { useRaceIntroReset } from './scene/useRaceIntro.js';
 import { BackendSelector, backendLabel, useBackendSelection } from './BackendSelector.js';
-import { backendEntryUrl, formatRoomCode, getBackend, parseRoomCode, roomEntryUrl, type BackendId } from './backends.js';
+import { backendEntryUrl, formatRoomCode, getBackend, parseRoomCode, roomEntryUrl, spectatorInvite, type BackendId } from './backends.js';
 const Board3D = lazy(() => import('./scene/Board3D.js').then(module => ({ default: module.Board3D })));
 
 const characters = CHARACTERS;
@@ -160,8 +160,8 @@ export function App() {
     catch (cause) { setError(cause instanceof Error ? cause.message : '操作未确认，请重新同步。'); return false; }
     finally { busyRef.current = false; setBusy(false); }
   }, [room, sound]);
-  const enter = (next: { identity: Identity; room: RoomView }) => { const route = formatRoomCode(next.room.code,next.identity.backendId??'cloudflare'); history.pushState({}, '', `/room/${route}`); setCode(route); setRoom(next.room); setIdentity(next.identity); setError(''); setConnection('connecting'); };
-  const resume = (saved: Identity) => { saveIdentity(saved); const route = formatRoomCode(saved.roomCode,saved.backendId??'cloudflare'); history.pushState({}, '', `/room/${route}`); setCode(route); setRoom(null); setIdentity(saved); setError(''); setConnection('connecting'); };
+  const enter = (next: { identity: Identity; room: RoomView }) => { const route = formatRoomCode(next.room.code,next.identity.backendId??'cloudflare'); history.pushState({}, '', `/room/${route}${next.identity.role==='spectator'?'?spectate=1':''}`); setCode(route); setRoom(next.room); setIdentity(next.identity); setError(''); setConnection('connecting'); };
+  const resume = (saved: Identity) => { saveIdentity(saved); const route = formatRoomCode(saved.roomCode,saved.backendId??'cloudflare'); history.pushState({}, '', `/room/${route}${saved.role==='spectator'?'?spectate=1':''}`); setCode(route); setRoom(null); setIdentity(saved); setError(''); setConnection('connecting'); };
   const copy = async (value: string, label: string) => { try { await navigator.clipboard.writeText(value); setNotice(`${label}已复制`); } catch { setCopyFallback(value); } };
   const home = () => { history.pushState({}, '', '/'); setCode(''); setIdentity(null); setRoom(null); setError(''); setEndRoom(false); setLeaving(false); setConnection('connecting'); setConnectionError(''); };
   const leave = async () => {
@@ -188,7 +188,7 @@ export function App() {
   const awayClosed = room?.closeReason === 'host-away' || connectionError.includes('保留期限');
   const spectator = room?.role === 'spectator';
   const externalCode = room ? formatRoomCode(room.code,identity?.backendId??room.backendId??'cloudflare') : code;
-  const invite = room ? roomEntryUrl(getBackend(identity?.backendId??room.backendId??'cloudflare'),room.code) : '';
+  const invite = room ? roomEntryUrl(getBackend(identity?.backendId??room.backendId??'cloudflare'),room.code,room.role==='spectator') : '';
   const visiblePhase = visibleRoom?.phase ?? room?.phase;
   const immersive = !closed && !!room && !!visiblePhase && ['race', 'results', 'finished'].includes(visiblePhase);
   useEffect(() => { document.documentElement.dataset.matchPaused = String(!!room?.pause); return () => { delete document.documentElement.dataset.matchPaused; }; }, [!!room?.pause]);
@@ -245,7 +245,7 @@ function Home({ code, onEnter, onResume, onHome, onDetail }: { code: string; onE
   const [error, setError] = useState('');
   const [mode, setMode] = useState<'create' | 'join' | 'practice' | 'ai'>(code ? 'join' : 'create');
   const [entryFocus, setEntryFocus] = useState(mode);
-  const [role, setRole] = useState<RoomRole>('player');
+  const [role, setRole] = useState<RoomRole>(()=>spectatorInvite()?'spectator':'player');
   const setupHeading = useRef<HTMLHeadingElement>(null);
   const draftKind=mode==='join'?'create':mode,roomConfig=configDrafts[draftKind];
   const setRoomConfig=(config:ReturnType<typeof legacyRoomConfig>)=>setConfigDrafts(previous=>({...previous,[draftKind]:config}));
@@ -280,7 +280,7 @@ function Home({ code, onEnter, onResume, onHome, onDetail }: { code: string; onE
       if (!targetBackend) throw new Error(targetCode ? '这是六位旧房间码，请先选择房间所属服务器。' : '请先选择可用服务器。');
       const saved = targetCode ? readIdentity(targetCode, selectedRole, targetBackend) : null;
       if (saved) { onResume(saved); return; }
-      const entry = backendEntryUrl(getBackend(targetBackend),targetCode??undefined);
+      const entry = backendEntryUrl(getBackend(targetBackend),targetCode??undefined,undefined,selectedRole==='spectator');
       if (entry) {
         if (pendingCreation) throw new Error('请先确认原服务器的建房请求，再切换入口。');
         location.assign(entry); return;
@@ -421,7 +421,7 @@ function Lobby({ room, busy, act, copy }: { room: RoomView; busy: boolean; act: 
   const ready = room.players.length >= (room.mode==='practice'?1:2) && room.players.every(player => player.ready && player.connected);
   const isHost = room.selfId === room.hostId;
   const externalCode = formatRoomCode(room.code,room.backendId??'cloudflare');
-  const invite = roomEntryUrl(getBackend(room.backendId??'cloudflare'),room.code);
+  const invite = roomEntryUrl(getBackend(room.backendId??'cloudflare'),room.code,room.role==='spectator');
   const [choosingMode,setChoosingMode] = useState(false);
   const [threePlayerMode,setThreePlayerMode] = useState<ThreePlayerMode>();
   useEffect(()=>{setChoosingMode(false);setThreePlayerMode(undefined);},[isHost,room.players.length,ready]);

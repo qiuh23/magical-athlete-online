@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="description" content="和朋友一起玩胡闹运动会与巫师牌。选择服务器，开启一局。">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
+  <title>一起玩 · 游戏大厅</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./app.mjs"></script>
+</head>
+<body>
+  <div class="page">
+    <header><a class="brand" href="./" aria-label="一起玩，返回大厅"><span class="brand-icon" aria-hidden="true">✳</span>一起玩<span class="brand-caption">游戏大厅</span></a><span class="header-note">和朋友，开一局。</span></header>
+    <main>
+      <div class="intro"><p class="eyebrow">GOOD GAMES, GOOD COMPANY</p><h1>朋友到齐，<br>快乐开场。</h1><p class="subtitle">选个服务器，再挑一款游戏。<br class="mobile-break">一起把今天玩得有意思。</p></div>
+      <section id="choices" aria-busy="true" aria-label="选择游戏入口">
+        <fieldset><legend><span class="step">1</span>选择服务器</legend><div class="server-options">
+          <label class="server"><input type="radio" name="server" value="aliyun" disabled><span><strong>国内服务器<span class="tag">阿里云</span></strong><small>中国内地访问优先选择</small></span><span class="check" aria-hidden="true"></span></label>
+          <label class="server"><input type="radio" name="server" value="cloudflare" disabled><span><strong>Cloudflare</strong><small>海外访问可选择此入口</small></span><span class="check" aria-hidden="true"></span></label>
+        </div></fieldset>
+        <div id="invitation" class="invitation" hidden><strong>已按邀请选择入口</strong><p id="invite-details"></p><p>邀请中的服务器优先于你的上次选择。</p><button id="clear-invite" type="button">返回游戏选择</button></div>
+        <div class="game-heading"><h2><span class="step">2</span>今天玩什么？</h2><span class="selection" aria-live="polite">当前：<strong id="current-server">读取中</strong></span></div>
+        <div class="games">
+          <a class="game athlete" data-game="athlete" aria-disabled="true" aria-label="胡闹运动会，进入游戏">
+            <div class="art track" aria-hidden="true"><span class="lane lane-one"></span><span class="lane lane-two"></span><span class="lane lane-three"></span><span class="runner">✦</span><span class="finish">GO!</span><span class="art-number">01</span></div>
+            <div class="game-content"><p class="game-type">掷骰 · 竞速 · 意外不断</p><h3>胡闹运动会</h3><p>各显神通，冲向终点。<br>下一秒，谁都有可能逆风翻盘。</p><span class="action">正在读取入口…</span></div>
+          </a>
+          <a class="game wizard" data-game="wizard" aria-disabled="true" aria-label="巫师牌，进入游戏">
+            <div class="art cards" aria-hidden="true"><span class="playing-card card-one">✧</span><span class="playing-card card-two">☾</span><span class="playing-card card-three">✳</span><span class="art-number">02</span></div>
+            <div class="game-content"><p class="game-type">预测 · 出牌 · 心有灵犀</p><h3>巫师牌</h3><p>算准每一墩，也猜猜朋友的心思。<br>手里的牌，藏着刚刚好的胜算。</p><span class="action">正在读取入口…</span></div>
+          </a>
+        </div>
+        <p id="status" class="status" role="status">正在读取游戏入口…</p>
+      </section>
+      <aside class="notice"><span aria-hidden="true">↗</span><p>进入后，游戏会在所选服务器打开。不同服务器的房间与身份独立；加入朋友的房间，请使用朋友发来的邀请链接。旧入口中的对局请继续从原链接恢复。</p></aside>
+      <noscript><p class="status">请启用 JavaScript 后选择服务器和游戏。</p></noscript>
+    </main>
+    <footer><span>和朋友一起，认真玩点开心的。</span><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备2026075006号-1</a></footer>
+  </div>
+</body>
+</html>
