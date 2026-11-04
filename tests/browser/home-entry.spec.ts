@@ -160,7 +160,8 @@ test('现有房间同时支持房间码和列表，以选手或观众身份加�
           const before = await page.evaluate(() => JSON.parse(sessionStorage.getItem('magical-athlete:route-identity:v1')!));
           expect(before.role).toBe('spectator');
           const playersBefore = application.rooms.get(roomCode).game.players.length;
-          const spectatorsBefore = application.rooms.get(roomCode).spectators.length;
+          const spectatorsBefore = application.rooms.get(roomCode).spectators?.length ?? 0;
+          expect(spectatorsBefore).toBeGreaterThan(0);
           await page.reload();
           await expect(page).toHaveURL(expectedURL);
           await expect(page.locator('.connection.is-online')).toBeVisible();
