@@ -9,6 +9,9 @@ const config = JSON.parse(readFileSync(new URL('../lobby/config.json', import.me
 const active = structuredClone(config);
 active.lobbies.aliyun.enabled = true;
 for (const game of ['athlete', 'wizard']) active.entries[game].aliyun.enabled = true;
+const blocked = structuredClone(config);
+blocked.lobbies.aliyun.enabled = false;
+for (const game of ['athlete', 'wizard']) blocked.entries[game].aliyun.enabled = false;
 
 test('大厅四个受信入口独立，待上线国内HTTPS不会提前开放', () => {
   const trusted = validateConfig(active);
@@ -19,9 +22,9 @@ test('大厅四个受信入口独立，待上线国内HTTPS不会提前开放', 
     assert.equal(url.pathname, '/');
     assert.equal(url.search, '');
   }
-  assert.equal(entryURL(validateConfig(config), 'athlete', 'aliyun'), null);
-  assert.equal(entryURL(validateConfig(config), 'wizard', 'aliyun'), null);
-  assert.equal(lobbyURL(validateConfig(config), 'aliyun'), null);
+  assert.equal(entryURL(validateConfig(blocked), 'athlete', 'aliyun'), null);
+  assert.equal(entryURL(validateConfig(blocked), 'wizard', 'aliyun'), null);
+  assert.equal(lobbyURL(validateConfig(blocked), 'aliyun'), null);
   const blockedLobby = structuredClone(active);
   blockedLobby.lobbies.aliyun.enabled = false;
   assert.equal(entryURL(validateConfig(blockedLobby), 'athlete', 'aliyun'), null);

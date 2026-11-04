@@ -23,7 +23,10 @@ test('one reviewed registry supplies builds and repeated releases without HTTPS 
   nodeRegistry.backends[1].origin='';
   validateDeployedRegistry(nodeRegistry,settings.aliyunOrigin,settings);
   validateDeployedRegistry(registry,settings.cloudflareOrigin,settings);
-  const stale=deploymentRegistry(deploymentSettings('production',entries));
+  const legacy=structuredClone(entries);
+  legacy.production.aliyunOrigin='http://115.29.188.62';
+  legacy.production.allowInsecureHttp=true;
+  const stale=deploymentRegistry(deploymentSettings('production',legacy));
   assert.throws(()=>validateDeployedRegistry(stale,settings.cloudflareOrigin,settings),/differs/);
   transitioned.production.aliyunOrigin='http://115.29.188.62';
   assert.throws(()=>deploymentSettings('production',transitioned),/HTTPS/);

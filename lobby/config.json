@@ -1,16 +1,16 @@
 {
   "version": 1,
   "lobbies": {
-    "aliyun": { "url": "https://magical-athlete-online.cn/", "enabled": false },
+    "aliyun": { "url": "https://magical-athlete-online.cn/", "enabled": true },
     "cloudflare": { "url": "https://magical-athlete.qiuh23.workers.dev/lobby/", "enabled": true }
   },
   "entries": {
     "athlete": {
-      "aliyun": { "origin": "https://athlete.magical-athlete-online.cn", "enabled": false },
+      "aliyun": { "origin": "https://athlete.magical-athlete-online.cn", "enabled": true },
       "cloudflare": { "origin": "https://magical-athlete.qiuh23.workers.dev", "enabled": true }
     },
     "wizard": {
-      "aliyun": { "origin": "https://wizard.magical-athlete-online.cn", "enabled": false },
+      "aliyun": { "origin": "https://wizard.magical-athlete-online.cn", "enabled": true },
       "cloudflare": { "origin": "https://wizard-friends.qiuh23.workers.dev", "enabled": true }
     }
   }

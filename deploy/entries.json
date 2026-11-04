@@ -1,8 +1,8 @@
 {
   "production": {
     "cloudflareOrigin": "https://magical-athlete.qiuh23.workers.dev",
-    "aliyunOrigin": "http://115.29.188.62",
-    "allowInsecureHttp": true,
+    "aliyunOrigin": "https://athlete.magical-athlete-online.cn",
+    "allowInsecureHttp": false,
     "legacyOrigins": ["http://115.29.188.62", "http://magical-athlete-online.cn"],
     "plannedAliyunOrigin": "https://athlete.magical-athlete-online.cn"
   },

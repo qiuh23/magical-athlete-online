@@ -1,12 +1,14 @@
 # 运动会 HTTPS 入口准备（2026-11-04）
 
+**2026-11-05后续状态：** 用户授权实际上线后，国内可信TLS、运动会两玩家/观众与刷新专项及大厅九资源已验收，本次源配置切换生产游戏HTTPS并开启国内大厅三个门禁。旧IP和HTTP根域保留原游戏，预览不变。最终自然发布和大厅点击、全部证书续期仍逐项记录，见[当前证据](lobby-deployment-audit-2026-11-05.md)顶部；以下最初准备阶段的未授权范围是历史记录。
+
 本次仅改代码和本地验证，未修改 ECS、DNS、安全组、证书、权限、已部署 Worker 或共享预览。统一大厅和网站备案信息见 [大厅上线说明](unified-lobby-https.md)。根域名用于大厅，运动会计划使用 `https://athlete.magical-athlete-online.cn`，反代仍是现有 `127.0.0.1:3000`；预览 `http://115.29.188.62:8080`／3001 保留。
 
 ## 发布配置不会被旧 HTTP 地址重新覆盖
 
 此前 `scripts/deploy/ci-release.mjs` 的 `deploymentSettings()` 写死正式 IP 和预览 IP，并在每次发布的 `prepare` 阶段重新生成 `backends.json` 与 Worker 变量。现在正式与预览地址统一来自受信 `deploy/entries.json`；`scripts/deploy/sync-backends.mjs` 从同一配置生成构建用 `public/backends.json`，Worker 发布同样调用 `deploymentRegistry()`。HTTPS 地址不会生成 `allowInsecureHttp:true`。
 
-为了让合并后的既有自动发布继续工作，当前 `production.aliyunOrigin` 仍为已使用的 HTTP IP；`plannedAliyunOrigin` 是待验收 HTTPS 子域，不是已开放声明。TLS 验收后，在一次审查过的配置提交中将 `aliyunOrigin` 改为该 HTTPS 地址，`allowInsecureHttp` 改为 false，运行同步脚本，并启用大厅的对应国内入口。预览地址不随正式迁移。不要再从旧脚本或临时 JSON 手工覆盖发布目录。
+最初准备PR保留HTTP IP以避免提前开放；本次已在可信TLS和游戏/大厅专项验收后，将 `production.aliyunOrigin` 持久改为 `https://athlete.magical-athlete-online.cn`、`allowInsecureHttp:false`，同步公开registry和Worker变量，并开启国内大厅门禁。预览地址不随正式迁移；旧HTTP只通过精确兼容入口和Origin继续恢复，不从旧脚本或临时JSON覆盖发布目录。
 
 发布后现在会读取**两端** `/backends.json`，验证两条入口、transport 和 enabled 与受信配置一致，再检查版本及 HTTP／实时协议。Node 的空 `origin` 按本次验证的网页 origin 解析；错误、过期地址或 HTTPS 配置仍带临时 HTTP opt-in 会使验收失败，沿用原有成对回滚路径。此检查验证公开配置，不会接触房间身份。
 
