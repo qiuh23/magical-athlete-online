@@ -150,11 +150,25 @@ test('现有房间同时支持房间码和列表，以选手或观众身份加�
           await expect(page.getByRole('radio', { name: /作为选手/ })).toBeChecked();
           await row.getByRole('button', { name: role === 'player' ? '加入房间' : '观战', exact: true }).click();
         }
-        await expect(page).toHaveURL(`${url}/room/${code}`);
+        const expectedURL = `${url}/room/${code}${role === 'spectator' ? '?spectate=1' : ''}`;
+        await expect(page).toHaveURL(expectedURL);
         await expect(page.locator('.connection.is-online')).toBeVisible();
         if (role === 'spectator') {
           await expect(page.locator('.spectator-badge')).toHaveText('正在观战');
           await expect(page.getByRole('button', { name: '我准备好了', exact: true })).toHaveCount(0);
+          const roomCode = code.replace(/^[CA]-/, '');
+          const before = await page.evaluate(() => JSON.parse(sessionStorage.getItem('magical-athlete:route-identity:v1')!));
+          expect(before.role).toBe('spectator');
+          const playersBefore = application.rooms.get(roomCode).game.players.length;
+          const spectatorsBefore = application.rooms.get(roomCode).spectators.length;
+          await page.reload();
+          await expect(page).toHaveURL(expectedURL);
+          await expect(page.locator('.connection.is-online')).toBeVisible();
+          await expect(page.locator('.spectator-badge')).toHaveText('正在观战');
+          await expect(page.getByRole('button', { name: '我准备好了', exact: true })).toHaveCount(0);
+          expect(await page.evaluate(() => JSON.parse(sessionStorage.getItem('magical-athlete:route-identity:v1')!))).toEqual(before);
+          expect(application.rooms.get(roomCode).game.players).toHaveLength(playersBefore);
+          expect(application.rooms.get(roomCode).spectators).toHaveLength(spectatorsBefore);
         } else {
           await expect(page.getByRole('button', { name: '我准备好了', exact: true })).toBeVisible();
         }
