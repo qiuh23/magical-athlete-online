@@ -50,13 +50,14 @@ export async function loadBackends(force=false):Promise<BackendDefinition[]> {
 export function backendUrl(backend:BackendDefinition, path:string):string { return new URL(path,backend.origin || pageOrigin()).toString(); }
 /** Always rebuild an entry from the trusted registry and a public code only.
  * Never copy the current query, fragment, credentials or an arbitrary URL. */
-export function roomEntryUrl(backend:BackendDefinition, code?:string):string {
+export function spectatorInvite(search=typeof location==='undefined'?'':location.search):boolean { return new URLSearchParams(search).get('spectate')==='1'; }
+export function roomEntryUrl(backend:BackendDefinition, code?:string, spectate=false):string {
   const parsed=code ? parseRoomCode(code) : null;
-  return backendUrl(backend,parsed ? `/room/${formatRoomCode(parsed.code,backend.id)}` : '/');
+  return backendUrl(backend,parsed ? `/room/${formatRoomCode(parsed.code,backend.id)}${spectate?'?spectate=1':''}` : '/');
 }
-export function backendEntryUrl(backend:BackendDefinition, code?:string, fromOrigin=pageOrigin()):string|null {
+export function backendEntryUrl(backend:BackendDefinition, code?:string, fromOrigin=pageOrigin(), spectate=false):string|null {
   if (!backend.enabled || new URL(backend.origin || fromOrigin).origin === new URL(fromOrigin).origin) return null;
-  return roomEntryUrl(backend,code);
+  return roomEntryUrl(backend,code,spectate);
 }
 export function currentBackendId():BackendId|undefined {
   return definitions.find(backend=>backend.enabled && new URL(backend.origin || pageOrigin()).origin === pageOrigin())?.id;

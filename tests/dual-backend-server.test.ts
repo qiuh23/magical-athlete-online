@@ -50,6 +50,10 @@ test('Node lightweight HTTP/realtime probes, CORS, private launch gate and authe
     const preflight=await fetch(origin+'/api/rooms',{method:'OPTIONS',headers:{Origin:'https://example.workers.dev','Access-Control-Request-Method':'POST','Access-Control-Request-Headers':'Content-Type'}});
     assert.equal(preflight.status,204);assert.equal(preflight.headers.get('Access-Control-Allow-Headers'),'Content-Type');
     assert.equal((await fetch(origin+'/api/connectivity',{headers:{Origin:'https://evil.example'}})).status,403);
+    for(const denied of ['http://game.example.cn','https://game.example.cn.evil.example','https://other.example.cn'])assert.equal((await fetch(origin+'/api/connectivity',{headers:{Origin:denied}})).status,403);
+    const lobbyRedirect=await fetch(origin+'/lobby?game=athlete&server=aliyun&room=A-ABC234&spectate=1',{redirect:'manual'});
+    assert.equal(lobbyRedirect.status,308);
+    assert.equal(lobbyRedirect.headers.get('Location'),'/lobby/?game=athlete&server=aliyun&room=A-ABC234&spectate=1');
     const health=await (await fetch(origin+'/api/health')).json() as {publicAccessEnabled:boolean;controlledValidation:boolean};assert.equal(health.publicAccessEnabled,false);assert.equal(health.controlledValidation,false);
     assert.equal((await fetch(origin+'/api/rooms',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:'公开拒绝',maxPlayers:2})})).status,503);
     const probe=io(origin,{auth:{probe:true},transports:['websocket'],reconnection:false,extraHeaders:{Origin:'https://example.workers.dev'}});

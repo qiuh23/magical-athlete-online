@@ -71,6 +71,31 @@ async function sendChat(page: Page, text: string) {
   await expect(page.getByRole('log', {name: '聊天记录'})).toContainText(text);
 }
 
+test('aliyun: spectator invitation retains its role across an entry switch, sharing and refresh',async({browser})=>{
+  const context=await browser.newContext();await configured(context);
+  try {
+    const created=await context.request.post(nodeOrigin+'/api/rooms',{data:{name:'观战测试房主',maxPlayers:2,timeoutSeconds:0}});
+    expect(created.status()).toBe(201);
+    const reply=await created.json(),route='/room/A-'+reply.identity.roomCode+'?spectate=1';
+    const page=await context.newPage();
+    await page.goto(workerOrigin+route);
+    await expect(page).toHaveURL(aliyunOrigin+route);
+    await expect(page.getByRole('radio',{name:'作为观战者'})).toBeChecked();
+    await page.getByLabel('你的昵称').fill('只看不占座');
+    await page.getByRole('button',{name:'进入房间观战',exact:true}).click();
+    await online(page);
+    const before=await page.evaluate(()=>JSON.parse(sessionStorage.getItem('magical-athlete:route-identity:v1')!));
+    expect(before.role).toBe('spectator');
+    await expect(page.locator('.selectable-link')).toHaveAttribute('href',aliyunOrigin+route);
+    await expect(page.getByRole('button',{name:'我准备好了',exact:true})).toHaveCount(0);
+    await expect(page.locator('.lobby-count')).toContainText('1');
+    await page.reload();await online(page);
+    await expect(page).toHaveURL(aliyunOrigin+route);
+    expect(await page.evaluate(()=>JSON.parse(sessionStorage.getItem('magical-athlete:route-identity:v1')!))).toEqual(before);
+    await expect(page.getByRole('button',{name:'我准备好了',exact:true})).toHaveCount(0);
+  } finally {await context.close();}
+});
+
 for (const backend of ['cloudflare', 'aliyun'] as const) {
   test(`${backend}: independent sessions create/join/action/chat/reconnect across webpage entries`, async ({browser}, testInfo) => {
     const contexts: BrowserContext[] = [], errors: string[] = [];

@@ -1,26 +1,62 @@
 #!/usr/bin/env bash
-# Deliberate public launch step, after account/payment/filing and quota checks.
-# DOMAIN=game.example.cn CERT_EMAIL=operator@example.cn ICP_CONFIRMED=true sudo -E bash scripts/deploy/publish.sh
+# After merge only: add the reviewed game subdomain without replacing IP/preview sites.
+# sudo env DOMAIN=athlete.magical-athlete-online.cn CERT_EMAIL=operator@example.cn ICP_CONFIRMED=true bash scripts/deploy/publish.sh
 set -euo pipefail
-[[ $EUID -eq 0 && ${ICP_CONFIRMED:-false} == true ]] || { echo 'Root and confirmed filing/qualification are required.' >&2; exit 1; }
-DOMAIN=${DOMAIN:?Set the filed domain}
+[[ $EUID -eq 0 && ${ICP_CONFIRMED:-false} == true ]] || { echo 'Root and confirmed filing are required.' >&2; exit 1; }
+export PATH=/opt/node/bin:$PATH
+DOMAIN=${DOMAIN:?Set the reviewed game subdomain}
 CERT_EMAIL=${CERT_EMAIL:?Set certificate contact email}
-[[ $DOMAIN =~ ^[A-Za-z0-9]([A-Za-z0-9.-]*[A-Za-z0-9])?$ ]] || { echo 'Invalid domain.' >&2; exit 1; }
-grep -qx 'PUBLIC_ACCESS_ENABLED=true' /etc/magical-athlete/server.env || { echo 'Review and enable public access in server.env first.' >&2; exit 1; }
-grep -qx 'CONTROLLED_VALIDATION=false' /etc/magical-athlete/server.env || { echo 'Disable the controlled validation application gate before HTTPS publication.' >&2; exit 1; }
-grep -qx 'DUAL_BACKEND_ENABLED=true' /etc/magical-athlete/server.env || { echo 'Dual-backend quota must be enabled first.' >&2; exit 1; }
-# Admission is static, so the first public launch must verify the original
-# server's reduced quota and grandfathered occupancy before opening this one.
 SOURCE_DIR=$(cd -- "$(dirname -- "$0")/../.." && pwd)
-bash "$SOURCE_DIR/scripts/deploy/check-dual-capacity.sh"
-export DOMAIN
-envsubst '${DOMAIN}' < "$SOURCE_DIR/deploy/nginx.conf.template" > /etc/nginx/sites-available/magical-athlete
-ln -sfn /etc/nginx/sites-available/magical-athlete /etc/nginx/sites-enabled/magical-athlete
-[[ ! -L /etc/nginx/sites-enabled/default ]] || unlink /etc/nginx/sites-enabled/default
+ENV_FILE=/etc/magical-athlete/server.env
+# Render/validate before any filesystem, service or certificate mutation.
+CONFIG=$(node "$SOURCE_DIR/scripts/deploy/render-https.mjs" "$DOMAIN")
+ACME_CONFIG=$(node "$SOURCE_DIR/scripts/deploy/render-https.mjs" "$DOMAIN" --acme-only)
+exec 8>/run/lock/magical-athlete-production.deploy.lock
+flock --wait 900 8
+for value in 'PUBLIC_ACCESS_ENABLED=true' 'CONTROLLED_VALIDATION=false' 'DUAL_BACKEND_ENABLED=true' 'HOST=127.0.0.1' 'PORT=3000' "PUBLIC_ORIGIN=https://$DOMAIN"; do
+    grep -Fqx "$value" "$ENV_FILE" || { echo 'Review the production env and preserve the exact legacy Origin before HTTPS publication.' >&2; exit 1; }
+done
+# Existing quota/capacity admission policy is unchanged.
+QUOTA_MAX=15
+if grep -Fqx 'SHARED_PREVIEW_ENABLED=true' "$ENV_FILE"; then QUOTA_MAX=14; fi
+CF_MAX_CAPACITY=$QUOTA_MAX bash "$SOURCE_DIR/scripts/deploy/check-dual-capacity.sh"
+exec 9>/run/lock/game-sites.configure.lock
+flock --wait 120 9
+TARGET=/etc/nginx/sites-available/magical-athlete-https
+LINK=/etc/nginx/sites-enabled/magical-athlete-https
+WORK=$(mktemp -d)
+HAD_TARGET=false
+HAD_LINK=false
+[[ ! -L $TARGET ]] || { echo 'HTTPS target must be a regular site file.' >&2; exit 1; }
+[[ ! -f $TARGET ]] || { cp -p -- "$TARGET" "$WORK/site"; HAD_TARGET=true; }
+[[ ! -e $LINK && ! -L $LINK ]] || { [[ -L $LINK && $(readlink "$LINK") == "$TARGET" ]] || { echo 'Unexpected HTTPS site link; inspect it manually.' >&2; exit 1; }; HAD_LINK=true; }
+SUCCESS=false
+finish() {
+    if [[ $SUCCESS != true ]]; then
+        if [[ $HAD_TARGET == true ]]; then cp -p -- "$WORK/site" "$TARGET"; else rm -f -- "$TARGET"; fi
+        if [[ $HAD_LINK != true ]]; then rm -f -- "$LINK"; fi
+        if nginx -t; then systemctl reload nginx; fi
+        echo 'The HTTPS site was restored; existing IP, preview, database and certificate files were retained.' >&2
+    fi
+    rm -rf -- "$WORK"
+}
+trap finish EXIT
+install -d -m 0755 /var/lib/letsencrypt/.well-known/acme-challenge
+if [[ -f /etc/letsencrypt/live/$DOMAIN/fullchain.pem && -f /etc/letsencrypt/live/$DOMAIN/privkey.pem ]]; then
+    printf '%s\n' "$CONFIG" > "$TARGET"
+else
+    printf '%s\n' "$ACME_CONFIG" > "$TARGET"
+fi
+ln -sfn "$TARGET" "$LINK"
 nginx -t
-systemctl enable --now nginx
+systemctl reload nginx
+certbot certonly --webroot -w /var/lib/letsencrypt --cert-name "$DOMAIN" --non-interactive --agree-tos --email "$CERT_EMAIL" -d "$DOMAIN" --deploy-hook 'nginx -t && systemctl reload nginx'
+printf '%s\n' "$CONFIG" > "$TARGET"
+nginx -t
 systemctl restart magical-athlete
-certbot --nginx --non-interactive --agree-tos --email "$CERT_EMAIL" --redirect -d "$DOMAIN"
+systemctl reload nginx
 systemctl enable --now certbot.timer
-curl --fail "https://$DOMAIN/api/connectivity"
-echo 'Verify two independent browsers, realtime, assets and persistence before marking Aliyun enabled in both runtime registries.'
+curl --fail --silent --show-error "https://$DOMAIN/api/connectivity"
+SUCCESS=true
+echo
+echo 'HTTPS vhost installed. Keep legacy IP/port entries; complete two-browser/WSS, assets, refresh, expiry and certbot renew --dry-run checks before switching the reviewed entry registry and lobby.'

@@ -2,14 +2,43 @@ import { appendFile, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { readFileSync } from 'node:fs';
 
-export function deploymentSettings(target) {
+const entryConfiguration=JSON.parse(readFileSync(new URL('../../deploy/entries.json',import.meta.url),'utf8'));
+export function exactEntryOrigin(value,{allowInsecureHttp=false}={}) {
+  const url=new URL(value);
+  if(typeof value!=='string'||url.origin!==value||url.username||url.password||!(url.protocol==='https:'||(url.protocol==='http:'&&allowInsecureHttp===true)))throw Error('Deployment entries require exact HTTPS origins, or explicit legacy HTTP opt-in.');
+  return value;
+}
+export function deploymentSettings(target,entries=entryConfiguration) {
   if(!['preview','production'].includes(target))throw Error('Unknown deployment target.');
   const preview=target==='preview';
+  const entry=entries[target];
+  if(!entry||typeof entry.allowInsecureHttp!=='boolean')throw Error('Missing explicit deployment entry configuration.');
+  const cloudflareOrigin=exactEntryOrigin(entry.cloudflareOrigin);
+  const aliyunOrigin=exactEntryOrigin(entry.aliyunOrigin,{allowInsecureHttp:entry.allowInsecureHttp});
+  if(cloudflareOrigin===aliyunOrigin)throw Error('Independent backends must have independent origins.');
+  if(entry.plannedAliyunOrigin)exactEntryOrigin(entry.plannedAliyunOrigin);
+  if(entries.production?.cloudflareOrigin===entries.preview?.cloudflareOrigin||entries.production?.aliyunOrigin===entries.preview?.aliyunOrigin)throw Error('Preview origins must remain separate from production.');
   return {workerName:preview?'magical-athlete-preview':'magical-athlete',
-    cloudflareOrigin:preview?'https://magical-athlete-preview.qiuh23.workers.dev':'https://magical-athlete.qiuh23.workers.dev',
-    aliyunOrigin:preview?'http://115.29.188.62:8080':'http://115.29.188.62',
+    cloudflareOrigin,aliyunOrigin,
     quota:preview?1:14,username:preview?'athlete-preview-deploy':'athlete-deploy'};
+}
+export function deploymentRegistry(settings) {
+  return {backends:[{id:'cloudflare',origin:'',transport:'worker',enabled:true},{id:'aliyun',origin:settings.aliyunOrigin,transport:'socketio',enabled:true,...(settings.aliyunOrigin.startsWith('http:')?{allowInsecureHttp:true}:{})}]};
+}
+/** Resolve same-origin entries before comparing, so Node can retain legacy IP
+ * sessions with origin:"" while HTTPS uses the exact same application service. */
+export function validateDeployedRegistry(value,origin,settings) {
+  if(!value||!Array.isArray(value.backends)||value.backends.length!==2)throw Error('Invalid deployed backend registry.');
+  for(const [id,expected,transport] of [['cloudflare',settings.cloudflareOrigin,'worker'],['aliyun',settings.aliyunOrigin,'socketio']]) {
+    const matches=value.backends.filter(item=>item?.id===id);
+    if(matches.length!==1)throw Error('Duplicated or missing deployed backend.');
+    const entry=matches[0];
+    const resolved=entry.origin===''?origin:entry.origin;
+    exactEntryOrigin(resolved,{allowInsecureHttp:entry.allowInsecureHttp===true||origin.startsWith('http:')&&entry.origin===''});
+    if(resolved!==expected||entry.enabled!==true||entry.transport!==transport||resolved.startsWith('https:')&&entry.allowInsecureHttp===true)throw Error(`Deployed ${id} entry differs from the trusted release configuration.`);
+  }
 }
 export function validateRelease(value,expected) {
   if(!value||value.target!==expected.target||value.commit!==expected.commit||value.runId!==expected.runId||(expected.target==='preview'?value.prNumber!==expected.prNumber:value.prNumber!==undefined))throw Error('Artifact deployment identity does not match the verified Checks run.');
@@ -60,7 +89,7 @@ async function prepare(release) {
   validateRelease(JSON.parse(await readFile(resolve(directory,'release.json'),'utf8')),release);
   validateRelease(JSON.parse(await readFile(resolve(directory,'assets/deployment.json'),'utf8')),release);
   const settings=deploymentSettings(release.target),source=JSON.parse(await readFile('wrangler.jsonc','utf8'));
-  const registry={backends:[{id:'cloudflare',origin:'',transport:'worker',enabled:true},{id:'aliyun',origin:settings.aliyunOrigin,transport:'socketio',enabled:true,allowInsecureHttp:true}]};
+  const registry=deploymentRegistry(settings);
   await writeFile(resolve(directory,'assets/backends.json'),JSON.stringify(registry));
   await writeFile(resolve(directory,'assets/deployment.json'),JSON.stringify({target:release.target,commit:release.commit,runId:release.runId,...(release.prNumber?{prNumber:release.prNumber}:{})}));
   const config={...source,name:settings.workerName,main:resolve(directory,'worker/index.js'),
@@ -116,6 +145,9 @@ async function verify(release) {
         const response=await fetch(`${origin}/deployment.json?run=${release.runId}`,{cache:'no-store',signal:AbortSignal.timeout(15_000)});
         if(!response.ok)throw Error(`Deployment metadata unavailable (${response.status}).`);
         validateRelease(await response.json(),release);
+        const registry=await fetch(`${origin}/backends.json`,{cache:'no-store',signal:AbortSignal.timeout(15_000)});
+        if(!registry.ok)throw Error('Deployed backend configuration is unavailable.');
+        validateDeployedRegistry(await registry.json(),origin,settings);
         return await connectivity(origin,backendId);
       }catch(error){last=error;await new Promise(resolve=>setTimeout(resolve,2000));}
     }throw last;

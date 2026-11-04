@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { backendEntryUrl, currentBackendId, getBackend, getBackends, loadBackends, parseRoomCode, probeBackends, readBackendPreference, saveBackendPreference, temporaryHttpPage, type BackendId, type BackendStatus } from './backends.js';
+import { backendEntryUrl, currentBackendId, getBackend, getBackends, loadBackends, parseRoomCode, probeBackends, readBackendPreference, saveBackendPreference, spectatorInvite, temporaryHttpPage, type BackendId, type BackendStatus } from './backends.js';
 import './backend-selector.css';
 
 export const backendLabel = (id?: BackendId) => id === 'aliyun' ? '阿里云内地' : 'Cloudflare';
@@ -18,7 +18,7 @@ export function useBackendSelection(code = '') {
       const backends = await loadBackends(true);
       if (current !== generation.current) return;
       const target = parseRoomCode(code)?.backendId;
-      const entry = target ? backendEntryUrl(getBackend(target),code) : null;
+      const entry = target ? backendEntryUrl(getBackend(target),code,undefined,spectatorInvite()) : null;
       if (entry) { location.replace(entry); return; }
       setStatuses(backends.map(backend => {
         const entryUrl = backendEntryUrl(backend);

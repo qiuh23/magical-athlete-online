@@ -38,6 +38,17 @@ test('runtime routing isolates credentials and retries uncertain creation on its
     await t.test('same six-digit codes retain independent identities, roles, route and closed markers',()=>{
       const first:Identity={roomCode:'ABC234',backendId:'cloudflare',playerId:'cf-player',token:'cf-token'},second:Identity={...first,backendId:'aliyun',playerId:'cn-player',token:'cn-token'};
       saveIdentity(first);saveIdentity(second);
+      const watcher:Identity={...first,playerId:'cf-spectator',token:'cf-spectator-token',role:'spectator'};
+      saveIdentity(watcher);saveIdentity(first);
+      const locationDescriptor=Object.getOwnPropertyDescriptor(globalThis,'location');
+      Object.defineProperty(globalThis,'location',{value:{search:'?spectate=1&token=ignored'},configurable:true});
+      try {
+        assert.equal(readRouteIdentity('C-ABC234')?.playerId,watcher.playerId,'spectator invitation takes precedence over a saved player route');
+        assert.equal(readRouteIdentity('A-ABC234'),null,'a spectator invite never reuses the other backend or player seat');
+      } finally {
+        if(locationDescriptor)Object.defineProperty(globalThis,'location',locationDescriptor);else Reflect.deleteProperty(globalThis,'location');
+      }
+      saveIdentity(second);
       assert.equal(readIdentity('C-ABC234')?.token,'cf-token');assert.equal(readIdentity('A-ABC234')?.token,'cn-token');
       assert.equal(readRouteIdentity('ABC234')?.backendId,'aliyun');assert.equal(readRouteIdentity('C-ABC234')?.backendId,'cloudflare');
       session.clear();assert.equal(readRouteIdentity('ABC234'),null,'two saved identities require explicit server choice');

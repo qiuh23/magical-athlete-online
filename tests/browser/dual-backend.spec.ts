@@ -82,6 +82,17 @@ test('跨入口邀请自动保留完整房间码，清除查询和片段且不�
   await expect(page).toHaveURL(cfOrigin+'/');
 });
 
+test('跨入口观战邀请保留公开观战状态，刷新后仍预选观战且不携带令牌', async ({page}) => {
+  await mockBackends(page,{cloudflare:true,aliyun:true});
+  await page.addInitScript(()=>localStorage.setItem('magical-athlete:backend-preference:v1','cloudflare'));
+  await page.goto(cfOrigin+'/room/A-XYZ678?spectate=1&token=private&url=https://attacker.example#secret');
+  await expect(page).toHaveURL(aliOrigin+'/room/A-XYZ678?spectate=1');
+  await expect(page.getByRole('radio',{name:'作为观战者'})).toBeChecked();
+  await page.reload();
+  await expect(page.getByRole('radio',{name:'作为观战者'})).toBeChecked();
+  await expect(page.getByRole('button',{name:'进入房间观战',exact:true})).toBeEnabled();
+});
+
 test('当前入口失败仍允许切往另一入口，不因远端不可探测而自动改选', async ({page}) => {
   await mockBackends(page,{cloudflare:false,aliyun:true});
   await page.goto(cfOrigin);

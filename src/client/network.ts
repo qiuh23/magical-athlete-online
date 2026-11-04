@@ -5,7 +5,7 @@ import type { ActionEnvelope, ActionReply, CharacterPool, ChatReply, ChatSend, G
 import { CommunityFeed, type CommunityState } from './community.js';
 import type { RelayJoinReply } from '../shared/relay.js';
 import { BrowserRelayConnection, prepareBrowserRoom } from './browser-connection.js';
-import { backendEntryUrl, backendUrl, formatRoomCode, getBackend, getBackends, httpEntryUrl, isBackendId, loadBackends, parseRoomCode, probeBackend, roomApiPrefix, type BackendId } from './backends.js';
+import { backendEntryUrl, backendUrl, formatRoomCode, getBackend, getBackends, httpEntryUrl, isBackendId, loadBackends, parseRoomCode, probeBackend, roomApiPrefix, spectatorInvite, type BackendId } from './backends.js';
 
 export const BROWSER_HOST_MODE = import.meta.env?.VITE_HOST_MODE === 'browser';
 export interface RoomConnection {
@@ -90,11 +90,14 @@ export function readRouteIdentity(code:string,backendId?:BackendId):Identity|nul
       if(candidates.length>1)return null;
       id=candidates[0];
     }
-    const target=roomTarget(code,id),identity=route?.code===target.code&&backendOf(route)===target.backendId?readIdentity(code,route.role,target.backendId):null;
+    const target=roomTarget(code,id);
+    // An explicit public spectator invitation must never consume a saved seat.
+    if(spectatorInvite())return readIdentity(code,'spectator',target.backendId);
+    const identity=route?.code===target.code&&backendOf(route)===target.backendId?readIdentity(code,route.role,target.backendId):null;
     if(identity&&identity.playerId===route?.playerId)return identity;
     const owned=ownedRecords().find(room=>sameRoom(room,target)),player=readIdentity(code,'player',target.backendId);
     return owned&&player?.playerId===owned.playerId?player:readIdentity(code,undefined,target.backendId);
-  }catch{return readIdentity(code,undefined,backendId);}
+  }catch{return readIdentity(code,spectatorInvite()?'spectator':undefined,backendId);}
 }
 export function forgetIdentity(code:string,identity=readIdentity(code)) {
   const target=roomTarget(code,identity?.backendId),key=identityKey(target.code,target.backendId);
