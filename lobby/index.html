@@ -13,24 +13,25 @@
 </head>
 <body>
   <div class="page">
-    <header><a class="brand" href="./" aria-label="一起玩，返回大厅"><span class="brand-icon" aria-hidden="true">✳</span>一起玩<span class="brand-caption">游戏大厅</span></a><span class="header-note">和朋友，开一局。</span></header>
+    <header><a class="brand" href="./" aria-label="一起玩，返回大厅"><span class="brand-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>一起玩<span class="brand-caption">游戏大厅</span></a><span class="header-note">好朋友，好对手。</span></header>
     <main>
-      <div class="intro"><p class="eyebrow">GOOD GAMES, GOOD COMPANY</p><h1>朋友到齐，<br>快乐开场。</h1><p class="subtitle">选个服务器，再挑一款游戏。<br class="mobile-break">一起把今天玩得有意思。</p></div>
+      <div class="intro"><div><p class="eyebrow">GOOD GAMES, GOOD COMPANY</p><h1>朋友到齐，快乐开场<span>。</span></h1></div><p class="subtitle">一场出人意料的竞速，或一局恰到好处的预测。<br class="mobile-break">选好服务器，和朋友坐到同一桌。</p></div>
       <section id="choices" aria-busy="true" aria-label="选择游戏入口">
         <fieldset><legend><span class="step">1</span>选择服务器</legend><div class="server-options">
-          <label class="server"><input type="radio" name="server" value="aliyun" disabled><span><strong>国内服务器<span class="tag">阿里云</span></strong><small>中国内地访问优先选择</small></span><span class="check" aria-hidden="true"></span></label>
-          <label class="server"><input type="radio" name="server" value="cloudflare" disabled><span><strong>Cloudflare</strong><small>海外访问可选择此入口</small></span><span class="check" aria-hidden="true"></span></label>
+          <label class="server"><input type="radio" name="server" value="aliyun" disabled><span><strong>国内服务器<span class="tag">阿里云</span></strong><small data-server-status="aliyun">正在确认开放状态…</small></span><span class="check" aria-hidden="true"></span></label>
+          <label class="server"><input type="radio" name="server" value="cloudflare" disabled><span><strong>Cloudflare<span class="tag">海外</span></strong><small data-server-status="cloudflare">正在读取入口…</small></span><span class="check" aria-hidden="true"></span></label>
         </div></fieldset>
+        <p id="server-message" class="server-message" role="status"></p>
         <div id="invitation" class="invitation" hidden><strong>已按邀请选择入口</strong><p id="invite-details"></p><p>邀请中的服务器优先于你的上次选择。</p><button id="clear-invite" type="button">返回游戏选择</button></div>
         <div class="game-heading"><h2><span class="step">2</span>今天玩什么？</h2><span class="selection" aria-live="polite">当前：<strong id="current-server">读取中</strong></span></div>
         <div class="games">
           <a class="game athlete" data-game="athlete" aria-disabled="true" aria-label="胡闹运动会，进入游戏">
-            <div class="art track" aria-hidden="true"><span class="lane lane-one"></span><span class="lane lane-two"></span><span class="lane lane-three"></span><span class="runner">✦</span><span class="finish">GO!</span><span class="art-number">01</span></div>
-            <div class="game-content"><p class="game-type">掷骰 · 竞速 · 意外不断</p><h3>胡闹运动会</h3><p>各显神通，冲向终点。<br>下一秒，谁都有可能逆风翻盘。</p><span class="action">正在读取入口…</span></div>
+            <div class="art track" aria-hidden="true"><img src="./art/athlete.svg" width="640" height="360" alt="" fetchpriority="high"><span class="art-number">01 / RACE CLUB</span><span class="art-caption">每一步，都有新变数。</span></div>
+            <div class="game-content"><p class="game-type">掷骰竞速 <span> / </span> 技能逆转</p><h3>胡闹运动会</h3><p>掷出下一步，各显神通。<br>落后的棋子，也能抢先冲线。</p><span class="action">正在读取入口…</span></div>
           </a>
           <a class="game wizard" data-game="wizard" aria-disabled="true" aria-label="巫师牌，进入游戏">
-            <div class="art cards" aria-hidden="true"><span class="playing-card card-one">✧</span><span class="playing-card card-two">☾</span><span class="playing-card card-three">✳</span><span class="art-number">02</span></div>
-            <div class="game-content"><p class="game-type">预测 · 出牌 · 心有灵犀</p><h3>巫师牌</h3><p>算准每一墩，也猜猜朋友的心思。<br>手里的牌，藏着刚刚好的胜算。</p><span class="action">正在读取入口…</span></div>
+            <div class="art cards" aria-hidden="true"><img src="./art/wizard.svg" width="640" height="360" alt=""><span class="art-number">02 / THE CARD ROOM</span><span class="art-caption">赢得刚刚好，才算高手。</span></div>
+            <div class="game-content"><p class="game-type">预测赢墩 <span> / </span> 跟色出牌</p><h3>巫师牌</h3><p>先预测，再出牌。<br>多赢一墩，也可能满盘皆输。</p><span class="action">正在读取入口…</span></div>
           </a>
         </div>
         <p id="status" class="status" role="status">正在读取游戏入口…</p>

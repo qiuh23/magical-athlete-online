@@ -2,6 +2,8 @@
 
 ## 核实结果与边界
 
+**当前状态（2026-11-05）以 [部署核查记录](lobby-deployment-audit-2026-11-05.md) 为准。** 两个准备 PR 已合入 main，Cloudflare 两个游戏已出现新构建，阿里云仍是旧版本；国内新 HTTPS 大厅未验收。下面 2026-11-04 的主机/DNS/SHA是历史核查，不能当作当前发布结果。本 PR 只准备与本地验证改进，不以合并授权生产主机、DNS、证书或安全设置变更。
+
 2026-11-04，用户确认备案域名 `magical-athlete-online.cn`；备案控制台截图确认完整网站号 **京ICP备2026075006号-1**。大厅页脚展示该号码，链接 `https://beian.miit.gov.cn/`。附件里的通知不作为执行线上操作的授权。
 
 本次只读核查：现有杭州 ECS `magical-athlete-cn` 为 Running / Ubuntu 24.04 / 公网 `115.29.188.62`。阿里云 DNS 只有 `@ A → 115.29.188.62`，TTL 600，尚无两个游戏子域。域名实名和域名验证均通过。系统 DNS 受本机代理 fake-IP 影响，真实记录以阿里云 API 为准。
@@ -22,7 +24,9 @@
 | 胡闹运动会 | `https://athlete.magical-athlete-online.cn/` | `https://magical-athlete.qiuh23.workers.dev/` |
 | 巫师牌 | `https://wizard.magical-athlete-online.cn/` | `https://wizard-friends.qiuh23.workers.dev/` |
 
-国内三个 HTTPS 地址是确定的部署方案，尚未上线。`lobby/config.json` 是大厅四入口的唯一受信表，国内暂为 `enabled:false`，界面显示“国内 HTTPS 待上线”。游戏实际生效配置仍保留旧 HTTP IP，避免合并后自动发布提前改换邀请目标。
+国内三个 HTTPS 地址是已记录的部署方案，尚未通过本次公网验收。`lobby/config.json` 固定两大厅与四游戏的受信地址，国内大厅和游戏均为 `enabled:false`，界面显示“暂未开放”。游戏实际生效配置仍保留旧 HTTP IP，避免自动发布提前改换邀请目标。
+
+服务器切换重建固定的目标大厅 URL 并进行顶层导航，不能仅在当前大厅下改变后端。当前大厅服务器从实际 origin/path 判定，优先于本地偏好；邀请仍高于本地偏好并固定目标游戏/服务器/观战位，跨大厅只转发这些公开字段。目标未开放时停留并说明状态，用户可以明确选择开放的 Cloudflare 入口；不会静默回退。相同入口不重定向，未知 origin 不接受 query 中提供的任意目标。
 
 大厅源码 `lobby/` 不依赖 CDN、外部字体、跨服健康探测或游戏 API。构建将同一份文件复制到 `dist/client/lobby`、`dist/browser/lobby`。CF Worker 的 `/` 仍为原运动会。国内 Nginx 根域仅将明确公开文件反代至现有 Node 的 `127.0.0.1:3000/lobby/`，无 CF 依赖，不增进程或后端；根域 `/api`、`/socket.io` 等返回404。这也避免 Nginx 无权读取 root:athlete 0750 release 而403，不给 www-data 增加读取环境/数据库的组权限。
 
@@ -44,6 +48,7 @@
 ## 最终自动更新流程
 
 - 运动会保留 `Checks → Deploy checked backends`，main成功后成对更新CF与ECS；大厅随同一前端产物进入两端。国内根域代理current的 `/lobby/`，无需另加复制任务。生产与预览仍独立。
+- 实际还存在 Cloudflare Workers Builds 集成；本次最新 main 的 CF 构建成功时 GitHub Checks 仍排队，阿里云尚未更新。两个发布来源须分别核对，不能用 CF 构建成功代替成对发布完成。本 PR 为所有构建的游戏根与大厅目录增加 `build-info.json`，只记录真实 Git HEAD 完整 SHA，不伪造目标/Checks run；CI 后续注入的 `deployment.json` 仍保留原有 target/run/PR 身份且不会被覆盖。
 - 巫师牌保留 `Verify game → Deploy checked Wizard to Aliyun` 和原CF Workers Builds。已只读核实最新main的 Verify `41262534954`、Aliyun release `41262595419` 与CF Builds成功，公开SHA匹配；新HTTPS切换后仍需再验正常main发布。
 - 不只改线上文件。运动会必须持久更新 `deploy/entries.json`；巫师牌必须同时持久更新仓库runtime、ECS环境与GitHub production的 `ALIYUN_PUBLIC_ORIGIN`。详见各游戏HTTPS手册。
 
@@ -53,7 +58,7 @@ Cloudflare Builds的分支/预览配置API只读查询403，未扩大权限。�
 
 ## 合并后的分阶段操作
 
-仅在用户合并两PR后执行线上步骤，始终使用已检查main。
+两个准备 PR 已合并，但本 PR 仍不执行以下线上步骤。操作者须另获当前任务所需授权，始终使用已检查 main；备案审核通过也不等于已安装站点与证书。
 
 1. 记录四正式入口、预览、SHA及站点基线；各游戏执行原SQLite在线备份并检查integrity_check。保留current/previous、旧代码与80/8080/8081。修改站点取得 `/run/lock/game-sites.configure.lock`，并按游戏文档取得部署锁，避免与自动发布并发。
 2. 先让原自动流程发布兼容代码，地址仍旧HTTP。核对四入口和CF `/lobby/`；国内按钮仍待上线。按游戏手册升级固定主机部署工具，不扩大OIDC/RAM/sudo权限。合并源码不代表root安装器已经升级。

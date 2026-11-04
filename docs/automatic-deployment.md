@@ -35,4 +35,4 @@ fork PR 可以运行无密钥检查并生成产物，但不自动获得预览云
 
 日常只需提交 PR，检查通过后在 `Deploy checked backends` 的运行摘要打开两个预览入口；合并到 `main` 后正式入口自动更新。无需自动合并。需要重新部署仍保有产物的成功检查时，可手动运行发布工作流并填写 Checks run ID；若产物已在成功发布后清理或已过期，先重新运行 Checks。手动发布仍核对当前 PR/main 和产物，不能借此发布旧提交。
 
-HTTP 公网与备案状态独立：当前阿里云使用临时 HTTP，ICP 仍在审核，HTTP 不豁免备案。备案通过后按 [HTTP 切换说明](http-transition.md) 统一调整受信配置及此处入口，再验证 HTTPS；不要把“Actions 成功”当作备案通过。
+HTTP 公网、备案与 HTTPS 上线状态独立：当前阿里云仍使用临时 HTTP；备案域名及网站号已确认，HTTPS 仍需按 [HTTP 切换说明](http-transition.md) 单独调整受信配置并完成实际验收。2026-11-05 核查还观察到 Cloudflare Workers Builds 在 GitHub Checks 排队时已发布新的大厅资源，而阿里云仍是旧版本；不能把一次合并、某个构建成功或 Cloudflare 发布当作两端发布完成。精确 SHA、运行记录与资源结果见 [本次审计](lobby-deployment-audit-2026-11-05.md)。

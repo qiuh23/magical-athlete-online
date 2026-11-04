@@ -11,6 +11,8 @@ OUTPUT=${5:?absolute output directory}
 [[ $COMMIT =~ ^[0-9a-f]{40}$ && $(git rev-parse HEAD) == "$COMMIT" && $RUN_ID =~ ^[1-9][0-9]*$ && $PR_NUMBER =~ ^[0-9]+$ && $OUTPUT == /* ]] || { echo 'Invalid build identity or output.' >&2; exit 1; }
 [[ $TARGET == production && $PR_NUMBER == 0 || $TARGET == preview && $PR_NUMBER != 0 ]] || { echo 'Invalid deployment target/PR.' >&2; exit 1; }
 [[ -f dist/client/index.html && -f dist/server/server/index.js && -f dist/browser/index.html ]] || { echo 'Checks must build both clients and server before packaging.' >&2; exit 1; }
+# Refuse to relabel a stale client/lobby as this Checks run's source commit.
+node scripts/build-info.mjs --check "$COMMIT" dist/client dist/browser dist/client/lobby dist/browser/lobby
 [[ ! -e $OUTPUT ]] || { echo 'Choose a fresh artifact directory.' >&2; exit 1; }
 mkdir -p "$OUTPUT/aliyun" "$OUTPUT/worker/assets" "$OUTPUT/worker/worker"
 WORK=$(mktemp -d)
