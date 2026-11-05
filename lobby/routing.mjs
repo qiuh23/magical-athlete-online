@@ -1,10 +1,15 @@
-export const games = ['athlete', 'wizard'];
+export const gameInfo = Object.freeze({
+  athlete: { name: '胡闹运动会', room: /^[A-Z2-9]{6}$/, watch: true },
+  wizard: { name: '巫师牌', room: /^[A-Z2-9]{8}$/, watch: true },
+  catan: { name: '卡坦岛好友桌', room: /^[A-HJ-NP-Z2-9]{6}$/, watch: false },
+});
+export const games = Object.keys(gameInfo);
 export const servers = ['aliyun', 'cloudflare'];
 const own = (object, key) => Object.prototype.hasOwnProperty.call(object, key);
 
 /** The same-origin deployment file is the only source of navigation origins. */
 export function validateConfig(value) {
-  if (value?.version !== 1 || !value.entries || Object.keys(value.entries).length !== 2) throw Error('大厅配置无效，请稍后刷新。');
+  if (value?.version !== 1 || !value.entries || Object.keys(value.entries).length !== games.length) throw Error('大厅配置无效，请稍后刷新。');
   if (!value.lobbies || Object.keys(value.lobbies).length !== 2) throw Error('大厅网址配置不完整。');
   const lobbies = {};
   for (const server of servers) {
@@ -27,6 +32,8 @@ export function validateConfig(value) {
       entries[game][server] = { origin: url.origin, enabled: item.enabled };
     }
   }
+  const origins = games.flatMap(game => servers.map(server => entries[game][server].origin));
+  if (new Set(origins).size !== origins.length) throw Error('每个游戏和服务器必须使用独立来源。');
   return { version: 1, lobbies, entries };
 }
 
@@ -66,11 +73,13 @@ export function readInvitation(search) {
   const game = params.get('game');
   const room = params.get('room')?.toUpperCase();
   if (!games.includes(game) || !room) throw Error('邀请链接缺少游戏或房间信息。请使用原始游戏邀请。');
-  const match = (game === 'athlete' ? /^([CA])-([A-Z2-9]{6})$/ : /^([CA])-([A-Z2-9]{8})$/).exec(room);
+  const match = /^([CA])-([A-Z2-9]+)$/.exec(room);
+  if (match && !gameInfo[game].room.test(match[2])) throw Error('邀请房间码无效。请使用原始游戏邀请。');
   if (!match) throw Error('邀请房间码无效。请使用包含服务器前缀的原始邀请。');
   const server = match[1] === 'A' ? 'aliyun' : 'cloudflare';
   if (params.has('server') && params.get('server') !== server) throw Error('邀请链接的服务器与房间码不一致。请使用原始游戏邀请。');
   if (params.has('watch') && !['0', '1'].includes(params.get('watch'))) throw Error('邀请链接的观战标记无效。');
+  if (params.get('watch') === '1' && !gameInfo[game].watch) throw Error('卡坦岛好友桌暂不支持观战，请向朋友索取加入邀请。');
   if (params.has('lobbyHop') && params.get('lobbyHop') !== '1') throw Error('邀请链接的大厅跳转标记无效。');
   return { game, server, room: match[2], watch: params.get('watch') === '1' };
 }
@@ -82,8 +91,7 @@ export function entryURL(config, game, server, invitation = null) {
   const url = new URL('/', entry.origin);
   if (invitation) {
     const prefix = server === 'aliyun' ? 'A' : 'C';
-    const pattern = game === 'athlete' ? /^[A-Z2-9]{6}$/ : /^[A-Z2-9]{8}$/;
-    if (!pattern.test(invitation.room) || typeof invitation.watch !== 'boolean') return null;
+    if (!gameInfo[game].room.test(invitation.room) || typeof invitation.watch !== 'boolean' || (invitation.watch && !gameInfo[game].watch)) return null;
     if (game === 'athlete') {
       url.pathname = `/room/${prefix}-${invitation.room}`;
       if (invitation.watch) url.searchParams.set('spectate', '1');

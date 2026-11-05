@@ -19,3 +19,7 @@ Source SHA-256 values:
 | `yellow-13.svg` | `astral-` | `20e65cbb0f2b95b1d020b4dc0dc692cba4e043c200cadd6d10a2115d216f0568` |
 
 These remain project assets; they are not represented as Kenney or CC0 artwork. No third-party illustration has been added. Keeping the two existing asset filenames preserves the domestic Nginx public-file allowlist.
+
+## Catan entry
+
+`catan.svg` is an original code-authored vector illustration for this lobby: hexagonal terrain, roads, settlements and resource cards, using the established soft green and warm paper palette. No external images or official CATAN artwork are included. The game remains attributed to [Jack15678/catan-friends](https://github.com/Jack15678/catan-friends); this illustration does not add a license to the upstream project.

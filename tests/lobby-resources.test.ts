@@ -13,7 +13,7 @@ test('both lobby artifacts contain every referenced local asset and the domestic
     await buildLobby(targets);
     const html = await readFile(new URL('../lobby/index.html', import.meta.url), 'utf8');
     const resourcePaths = [...html.matchAll(/<(?:script|link|img)\b[^>]*\b(?:src|href)="(\.\/[^"?#]+)"/g)].map(match => match[1].slice(2));
-    assert.ok(resourcePaths.includes('art/athlete.svg') && resourcePaths.includes('art/wizard.svg'), 'Both original game illustrations must be part of the shipped asset graph.');
+    assert.ok(resourcePaths.includes('art/athlete.svg') && resourcePaths.includes('art/wizard.svg') && resourcePaths.includes('art/catan.svg'), 'All three game illustrations must be part of the shipped asset graph.');
     const files = new Set(['index.html', 'config.json', 'routing.mjs', ...resourcePaths]);
     const nginx = await readFile(new URL('../deploy/nginx-lobby.conf.template', import.meta.url), 'utf8');
     const legacyHttp = nginx.slice(0, nginx.indexOf('listen 443 ssl;'));

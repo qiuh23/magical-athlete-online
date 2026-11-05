@@ -45,7 +45,7 @@ server {
     }
     # Explicit public-file allowlist; never expose game/API/Socket.IO at apex.
     # Node sends correct JavaScript MIME for .mjs even if nginx mime.types omits it.
-    location ~ ^/(index\.html|config\.json|build-info\.json|style\.css|app\.mjs|routing\.mjs|favicon\.svg|art/(athlete|wizard)\.svg)$ {
+    location ~ ^/(index\.html|config\.json|build-info\.json|style\.css|app\.mjs|routing\.mjs|favicon\.svg|art/(athlete|wizard|catan)\.svg)$ {
         rewrite ^/(.*)$ /lobby/$1 break;
         proxy_pass http://127.0.0.1:3000;
         proxy_set_header Host $http_host;
