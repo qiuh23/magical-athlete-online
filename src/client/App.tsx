@@ -19,7 +19,8 @@ import { EditionBadge, useCharacterFilter } from './CharacterFilters.js';
 import { CHARACTERS } from '../shared/characters.js';
 import { COPY_ABILITY_PROJECT_NOTES } from '../shared/character-info.js';
 import { enabledCharacterIds, legacyRoomConfig, legacyPoolForConfig, racersPerPlayer, roomConfigError, type ThreePlayerMode } from '../shared/room-config.js';
-import { configSummary, RoomConfigFields, RoomConfigPanel } from './RoomConfig.js';
+import { RoomConfigFields, RoomConfigPanel } from './RoomConfig.js';
+import type { CustomCompetitionDraft } from './CompetitionFields.js';
 import { matchRaceCount, presetCompetition } from '../shared/competition.js';
 import { MAPS_RULES_VERSION, SCHEDULE_RULES_VERSION, FAN_V3_RULES_VERSION } from '../shared/rules-versions.js';
 import { SECOND_WIND_PROJECT_NOTES } from '../shared/second-wind.js';
@@ -257,6 +258,7 @@ function Home({ code, onBackend, onBusy, onEnter, onResume, onHome, onDetail }: 
   const [timeoutSeconds, setTimeoutSeconds] = useState(120);
   const [aiCount, setAiCount] = useState(3);
   const [configDrafts, setConfigDrafts] = useState(() => Object.fromEntries((['create','practice','ai'] as const).map(kind=>[kind,{...legacyRoomConfig(kind==='practice'?'mixed':'original'),competition:presetCompetition()}])) as Record<'create'|'practice'|'ai', ReturnType<typeof legacyRoomConfig>>);
+  const [customCompetitionDrafts,setCustomCompetitionDrafts] = useState<Partial<Record<'create'|'practice'|'ai',CustomCompetitionDraft>>>({});
   const [configuring,setConfiguring] = useState(!!code);
   const creationRequest = useRef<{signature:string;id:string}|null>(null);
   const [busy, setBusy] = useState(false);
@@ -347,10 +349,9 @@ function Home({ code, onBackend, onBusy, onEnter, onResume, onHome, onDetail }: 
         {mode === 'join' && joinTarget?.backendId && <p className="target-backend-note" role="status">此房间属于 {backendLabel(joinTarget.backendId)}，将在对应入口加入。请用创建或加入时的入口恢复原身份。</p>}
         {ambiguousLegacy && <fieldset className="legacy-backend-choice"><legend>六位旧房间码所属服务器</legend>{servers.statuses.filter(status => status.backend.enabled).map(status => <label key={status.backend.id}><input type="radio" name="legacyBackend" checked={legacyBackend === status.backend.id} disabled={!['available','entry'].includes(status.state)} onChange={() => setLegacyBackend(status.backend.id)} />{backendLabel(status.backend.id)}</label>)}<p className="target-backend-note">请向房主确认服务器，避免进入另一端的同码房间。</p></fieldset>}
         {mode === 'create' && <label>房间可见性<select aria-label="房间可见性" value={roomConfig.visibility??'public'} onChange={e=>setRoomConfig({...roomConfig,visibility:e.target.value as 'public'|'private'})}><option value="public">公开 · 可从房间列表加入或观战</option><option value="private">私密 · 仅凭链接或房间码进入</option></select></label>}
-        {mode !== 'join' && <RoomConfigFields config={roomConfig} onChange={setRoomConfig} disabled={busy} players={mode==='practice'?1:mode==='ai'?aiCount+1:maxPlayers} practice={mode==='practice'} />}
+        {mode !== 'join' && <RoomConfigFields key={draftKind} config={roomConfig} onChange={setRoomConfig} disabled={busy} players={mode==='practice'?1:mode==='ai'?aiCount+1:maxPlayers} practice={mode==='practice'} customDraft={customCompetitionDrafts[draftKind]} onRememberCustom={draft=>setCustomCompetitionDrafts(previous=>({...previous,[draftKind]:draft}))} />}
         {error && <p className="form-error" role="alert">{error}</p>}
-        <div className="entry-submit">{mode!=='join'&&<p className="entry-submit-summary" role="status"><strong>当前设置</strong>{configSummary(roomConfig)}</p>}<Button type="submit" disabled={busy||servers.checking||(mode!=='join'&&(!!pendingCreation||!servers.available||!!roomConfigError(roomConfig,mode==='ai'?aiCount+1:mode==='practice'?1:maxPlayers,mode==='practice')))}>{busy ? '正在进入…' : mode === 'practice' ? '开始自己练习' : mode === 'ai' ? '开始人机对战' : mode === 'create' ? '创建房间，召集朋友' : role === 'spectator' ? '进入房间观战' : '加入这场胡闹'}<Icon kind="arrow" /></Button>
-        <p className="form-note room-lifetime-note">房主在线时保留；离开后{mode === 'practice' ? '练习保留 10 分钟' : '房间保留 30 分钟'}，可用原浏览器返回。</p></div>
+        <div className="entry-submit"><Button type="submit" disabled={busy||servers.checking||(mode!=='join'&&(!!pendingCreation||!servers.available||!!roomConfigError(roomConfig,mode==='ai'?aiCount+1:mode==='practice'?1:maxPlayers,mode==='practice')))}>{busy ? '正在进入…' : mode === 'practice' ? '开始自己练习' : mode === 'ai' ? '开始人机对战' : mode === 'create' ? '创建房间，召集朋友' : role === 'spectator' ? '进入房间观战' : '加入这场胡闹'}<Icon kind="arrow" /></Button></div>
         {mode === 'join' && code && roomDirectory}
       </form></div>}
     </section>

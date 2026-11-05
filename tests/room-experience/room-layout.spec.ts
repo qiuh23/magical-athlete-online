@@ -15,20 +15,20 @@ test.beforeEach(async({page})=>{
   await page.addInitScript(()=>{localStorage.setItem('magical-athlete:low-quality','true');localStorage.setItem('magical-athlete:reduced-motion','true');localStorage.setItem('magical-athlete:muted','true');localStorage.setItem('magical-athlete:animation-speed','4');});
 });
 
-test('建房草稿、展开状态、当前设置在连续旋转后保留，创建只提交一次',async({page,application},info)=>{
+test('建房草稿和可见玩法在连续旋转后保留，创建只提交一次',async({page,application},info)=>{
   const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
   await page.goto('/');await page.getByRole('tab',{name:'创建房间',exact:true}).click();
   await page.getByLabel('你的昵称').fill('旋转后仍是我');await page.getByLabel('房间人数上限').selectOption('2');
   await page.getByLabel('每次操作时限').selectOption('60');await page.getByLabel('房间可见性').selectOption('private');
-  await page.locator('.pack-settings>summary').click();await page.getByRole('checkbox',{name:'Extra Mile',exact:true}).check();
+  await page.getByRole('checkbox',{name:'Extra Mile',exact:true}).check();
   await landscapeCycle(page,page.locator('[data-landscape-control]').first());
   for(const [width,height] of sizes){
     await page.setViewportSize({width:width!,height:height!});await settle(page);
-    await expect(page.getByLabel('你的昵称')).toHaveValue('旋转后仍是我');await expect(page.locator('.pack-settings')).toHaveAttribute('open','');
+    await expect(page.getByLabel('你的昵称')).toHaveValue('旋转后仍是我');await expect(page.locator('.pack-settings')).toBeVisible();
     await expect(page.getByRole('checkbox',{name:'Extra Mile',exact:true})).toBeChecked();await fits(page);
   }
-  await expect(page.locator('.config-limitation')).toContainText('非官方粉丝扩展');
-  await page.locator('.pack-settings>summary').click();await page.setViewportSize({width:390,height:844});
+  await expect(page.locator('.pack-option').filter({has:page.getByRole('checkbox',{name:'Extra Mile',exact:true})})).toContainText('非官方');
+  await page.setViewportSize({width:390,height:844});
   await page.locator('.setup-heading h2').scrollIntoViewIfNeeded();await page.screenshot({path:info.outputPath('compact-setup.png')});
   let creates=0;page.on('request',request=>{if(request.method()==='POST'&&new URL(request.url()).pathname==='/api/rooms')creates++;});
   const button=page.getByRole('button',{name:'创建房间，召集朋友',exact:true});await button.click();
