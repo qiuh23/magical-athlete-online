@@ -1,0 +1,121 @@
+{
+  "phase": "after",
+  "results": [
+    {
+      "width": 1440,
+      "height": 900,
+      "overflow": false,
+      "cards": [
+        {
+          "bottom": 747.265625,
+          "button": {
+            "width": 117,
+            "height": 44
+          },
+          "href": "https://athlete.magical-athlete-online.cn/"
+        },
+        {
+          "bottom": 747.265625,
+          "button": {
+            "width": 117,
+            "height": 44
+          },
+          "href": "https://wizard.magical-athlete-online.cn/"
+        }
+      ]
+    },
+    {
+      "width": 1366,
+      "height": 768,
+      "overflow": false,
+      "cards": [
+        {
+          "bottom": 747.265625,
+          "button": {
+            "width": 117,
+            "height": 44
+          },
+          "href": "https://athlete.magical-athlete-online.cn/"
+        },
+        {
+          "bottom": 747.265625,
+          "button": {
+            "width": 117,
+            "height": 44
+          },
+          "href": "https://wizard.magical-athlete-online.cn/"
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "overflow": false,
+      "cards": [
+        {
+          "bottom": 738.171875,
+          "button": {
+            "width": 111,
+            "height": 44
+          },
+          "href": "https://athlete.magical-athlete-online.cn/"
+        },
+        {
+          "bottom": 1128,
+          "button": {
+            "width": 111,
+            "height": 44
+          },
+          "href": "https://wizard.magical-athlete-online.cn/"
+        }
+      ]
+    },
+    {
+      "width": 320,
+      "height": 720,
+      "overflow": false,
+      "cards": [
+        {
+          "bottom": 717.234375,
+          "button": {
+            "width": 111,
+            "height": 44
+          },
+          "href": "https://athlete.magical-athlete-online.cn/"
+        },
+        {
+          "bottom": 1090.1875,
+          "button": {
+            "width": 111,
+            "height": 44
+          },
+          "href": "https://wizard.magical-athlete-online.cn/"
+        }
+      ]
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "overflow": false,
+      "cards": [
+        {
+          "bottom": 654.515625,
+          "button": {
+            "width": 105,
+            "height": 44
+          },
+          "href": "https://athlete.magical-athlete-online.cn/"
+        },
+        {
+          "bottom": 654.515625,
+          "button": {
+            "width": 105,
+            "height": 44
+          },
+          "href": "https://wizard.magical-athlete-online.cn/"
+        }
+      ]
+    }
+  ],
+  "errors": []
+}
