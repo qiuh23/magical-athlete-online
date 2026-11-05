@@ -6,12 +6,13 @@
     "844x390"
   ],
   "errors": [],
-  "requests": 67,
+  "requests": 95,
   "checks": [
     "creation-in-flight blocks lobby navigation",
     "compact line status",
     "same-line lobby URLs",
-    "menu switch URLs",
+    "secondary direct server choice and clean URLs both directions",
+    "in-room direct switch cancel, confirm and Back preserve identity",
     "cancel keeps room",
     "confirm navigation and browser Back restore same identity",
     "foreign spectator invite ignores conflicting preference and removes private query",
