@@ -1,9 +1,56 @@
 import houseRules from '../../docs/house-rules.md?raw';
+import competitionRules from '../../public/rules/competition.md?raw';
+import eventRules from '../../public/rules/special-events.md?raw';
+import bridgeRules from '../../public/rules/bridges.md?raw';
+import wurstiiRules from '../../public/rules/wurstii-a.md?raw';
+import secondWindRules from '../../public/rules/second-wind-verification.md?raw';
+import { useId, useRef, useState } from 'react';
+import { TRACK_CATALOG } from '../shared/competition.js';
+import { RuleDocument } from './RuleDocument.js';
+import './rules-content.css';
 
 // Ship the actual public house rules with the app; players never need repository access.
 export function RulesContent({ browser = false }: { browser?: boolean }) {
+  const [section,setSection]=useState(0),[reference,setReference]=useState(''),id=useId(),panel=useRef<HTMLDivElement>(null);
+  const sections=['基础与操作','地图与计分','角色包与人数','特殊赛事'];
+  const playerCompetitionRules=competitionRules.slice(competitionRules.indexOf('## 当前可玩'),competitionRules.indexOf('## 来源与资料缺口'));
+  function selectSection(index:number){setSection(index);setReference('');panel.current?.closest('.modal-panel')?.scrollTo({top:0});}
+  function navigate(file:string){
+    const next=file==='special-events.md'?3:['wurstii-a.md','second-wind-verification.md'].includes(file)?2:1;
+    setSection(next);setReference(file);
+    requestAnimationFrame(()=>panel.current?.querySelector<HTMLElement>('[data-rule-reference="'+file+'"]')?.scrollIntoView({block:'start'}));
+  }
+  return <div className="rules-copy rules-menu">
+    <div className="rules-sections" role="tablist" aria-label="规则分类">{sections.map((name,index)=><button key={name} type="button" role="tab" id={`${id}-tab-${index}`} aria-controls={`${id}-content`} aria-selected={section===index} tabIndex={section===index?0:-1} onClick={()=>selectSection(index)} onKeyDown={event=>{
+      if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
+      event.preventDefault();const next=event.key==='Home'?0:event.key==='End'?sections.length-1:(index+(event.key==='ArrowRight'?1:-1)+sections.length)%sections.length;
+      selectSection(next);document.getElementById(`${id}-tab-${next}`)?.focus();
+    }}>{name}</button>)}</div>
+    <div ref={panel} id={`${id}-content`} role="tabpanel" aria-labelledby={`${id}-tab-${section}`}>
+      {section===0&&<CoreRulesContent browser={browser} />}
+      {section===1&&<><h3>七张地图</h3><dl className="map-rule-list">{Object.entries(TRACK_CATALOG).map(([map,info])=><div key={map}><dt>{info.name} · {info.kind}</dt><dd>{info.description}</dd></div>)}</dl><RuleDocument text={playerCompetitionRules} onNavigate={navigate} /><section data-rule-reference="bridges.md"><RuleDocument text={bridgeRules} onNavigate={navigate} /></section></>}
+      {section===2&&<>
+        <h3>角色包独立选择</h3><p>地图方案不会改变角色包开关。好友房与人机默认仅启用基础角色，练习默认启用基础角色和 Second Wind；三个粉丝包默认关闭。每张角色的完整技能、来源与网页裁定可在角色详情阅读。</p>
+        <ul className="pack-rule-list">
+          <li><strong>基础角色包 · 36 位</strong>：CMYK 基础角色与已采用 FAQ 裁定。<a href="https://www.cmyk.games/products/magical-athlete" target="_blank" rel="noreferrer">CMYK 原作</a></li>
+          <li><strong>Second Wind · 36 位</strong>：已对照官方规则书核对卡面；仍保留公开的网页差异，跨扩展组合待复核。美术与最初技能转录参考玩家图鉴。</li>
+          <li><strong>Extra Mile · 31 位 · 非官方</strong>：依作者网页 v13 与 PDF 卡面核对。Box 需要实体骰子入盒，网页版暂不可用；网页32人名单外的 Groundhogs Day 不导入。<a href="https://johnnlds.github.io/Magical-Athlete-Racers/?v=13" target="_blank" rel="noreferrer">作者图鉴</a></li>
+          <li><strong>Leaf’s Fan Expansion · 18 位 · 非官方</strong>：依作者 Printable Cards、Rulebook 与 PNG 原图核验。<a href="https://boardgamegeek.com/filepage/327878/leafs-fan-expansion-for-magical-athlete" target="_blank" rel="noreferrer">作者发布页</a></li>
+          <li><strong>Wurstii A · 30 位 · 非官方</strong>：采用作者自制角色的网页适配卡文；与其他包混用的平衡性待实战验证。</li>
+        </ul>
+        <h3>人数玩法与配置权限</h3><p>单人练习每场一位角色。两人每场每人双角色；实际入座三人时，房主开局前确认每人单角色或双角色，人数上限大于三人的房间也会确认。三人双角色与7–8人为非官方变体，平衡性尚未验证。</p><p>双角色按暗选时安排的顺序逐个完成回合，下一场由本场得分较少的玩家先行动，同分掷骰决定。黏液怪不减速同一玩家的另一位选手；其他能力仍按各自目标规则处理。</p><p>房主可在选秀前调整并保存，修改后全员重新准备。开始选秀锁定整局配置，完整对局结束后可修改下一局；非房主与观战者只能查看。创建按人数上限、开局按实际人数检查牌池；选秀和技能抽牌共用实体牌池，预留不足会提示增加角色包或减少人数、场数。</p>
+        <h3>方案切换与自定义</h3><p>三个快捷方案替换场数与地图轮换，保留角色包和特殊赛事开关、场次。自定义的场数和地图顺序会留作草稿，选择“自定义”可恢复；离开建房页返回首页或切换创建、练习、人机入口也保留本次草稿。地图依顺序循环，允许重复添加、上移、下移和移除。减少场数保留原地图与赛事场次；超出范围时需手动修正后再提交。</p>
+        <details open={reference==='second-wind-verification.md'||undefined} data-rule-reference="second-wind-verification.md"><summary>Second Wind：卡面核验与网页差异</summary><RuleDocument text={secondWindRules} onNavigate={navigate} /></details>
+        <details open={reference==='wurstii-a.md'||undefined} data-rule-reference="wurstii-a.md"><summary>Wurstii A：完整卡文与适配</summary><RuleDocument text={wurstiiRules} onNavigate={navigate} /></details>
+      </>}
+      {section===3&&<RuleDocument text={eventRules} onNavigate={navigate} />}
+    </div>
+  </div>;
+}
+
+function CoreRulesContent({ browser = false }: { browser?: boolean }) {
   const rules = houseRules.split(/\r?\n/).filter(line => line.startsWith('- ')).map(line => line.slice(2));
-  return <div className="rules-copy">
+  return <div className="core-rules">
     <p>默认参加四场经典赛；也可在赛前选择项目自定义的六场或八场。每人每场使用一位尚未出赛的角色，两人模式每人每场两位。实际入座三人时，房主在开局前选择每人单角色或双角色，人数上限大于三人的房间也会提示；三人双角色是本项目变体。总分决定胜负。</p>
     <ol>
       <li><strong>邀请与准备</strong>：创建房间，把网站链接和房间号发给朋友。朋友打开网站，输入昵称和房间号即可入座，全员准备后由房主开局。</li>
@@ -12,13 +59,7 @@ export function RulesContent({ browser = false }: { browser?: boolean }) {
       <li><strong>掷骰与技能</strong>：轮到选手时，系统先自动处理回合开始能力；有选择就先选技能，完成后再点击掷骰。有人需要做决定时，比赛会等待对应玩家；点击棋子或头像读取完整技能。</li>
       <li><strong>赛道与积分</strong>：默认经典四场依次为温和、狂野、温和、狂野；自定义赛程按所选列表循环。狂野星格得1分，OUPS格绊倒，箭头格按正负提示移动。各场冠亚军得分为3/1、4/2、5/3、6/4；第二位冲线后立即结束当场。全部场次总分相同共享胜利。六场奖励依次为3/1、4/2、4/2、5/3、5/3、6/4，八场为3/1、3/1、4/2、4/2、5/3、5/3、6/4、6/4。</li>
     </ol>
-    <h3>比赛方案与网页适配</h3>
-    <p>经典赛为四场、两图轮换。官方巡回沿用官方四图顺序，其中 Whirly World 使用六组传送的网页适配布局，不是原图完整复刻。扩展巡回为八场项目赛制，包含 Squiggle、Boardwalks、Bridges 三张非官方粉丝地图；六／八场均按总积分排名，最后一场不加倍，平衡性尚未验证。</p>
-    <p>自定义赛程可选择 Mild Mile、Wild Wilds、Twisty Twirl、Whirly World、Squiggle、Boardwalks 和 Bridges 七张地图，地图与角色包独立选择。Squiggle、Boardwalks 禁用依赖未标定弯道的角色，Bridges 禁用依赖第一弯道的角色；限制覆盖整局选秀、抽牌及复制，具体角色会在当前设置中提示。各地图效果、选秀方式、奖励表和来源见<a href="/rules/competition.md" target="_blank" rel="noreferrer">完整赛程与地图规则</a>。</p>
-    <h3>特殊赛事怎么用？</h3>
-    <p>在建房设置中开启「特殊赛事 · Thrilling Thirds」，再勾选适用场次，默认第 3 场。每个勾选场次在所有人选好上场角色后，系统从 36 项粉丝事件中自动抽取一项，为所有选手增加本场公共规则。赛场会展开显示事件效果；有选择时按提示操作，其余效果自动结算，本场结束后失效。没有勾选的场次照常进行。完整事件与网页适配见<a href="/rules/special-events.md" target="_blank" rel="noreferrer">特殊赛事规则</a>。</p>
-    <h3>角色包与房间交流</h3>
-    <p>建房时分别勾选基础角色包、Second Wind、Extra Mile、Leaf’s Fan Expansion 与 Wurstii A；练习可从已启用且已完成的角色中跨包选择本局场数所需的角色。三个粉丝扩展默认不勾选，Extra Mile 可用 31 名、Leaf 可用 18 名、Wurstii A 可用 30 名，均明确属于非官方粉丝扩展。Box 因实体骰子入盒规则尚无确定的数字化适配而隔离；网页32人名单外的 Groundhogs Day 不导入。选秀开始锁定全部场次配置；大厅修改设置后全员重新准备，完整对局结束后可以调整下一局。选人页面可按版本筛选，也可搜索中英文名称。Second Wind 当前按玩家图鉴的技能转录接入，官方逐卡复核尚未完成；详情中可查看规则参考与尚待确认的内容。本房间按所选赛程使用地图，具体逐场安排可在房间设置中查看。</p>
+    <h3>房间交流</h3>
     <p>左下角“聊天”供本房间选手和观战者交流；收起时新消息逐条从下方加入，旧消息向上移动；电脑最多 5 条、手机最多 3 条，每条停留约 8 秒后消退。未读数量保留，点击即可展开完整聊天记录。大厅、选秀、全部场次和重新连接共用最近 100 条记录，补齐历史不会冒泡。个人信息或比赛菜单可以修改昵称，每局所有场次合计一次；同名自动追加数字，历史聊天保留发送时昵称。</p>
     <h3>绊倒后还能做什么？</h3>
     <p>绊倒不会关闭角色能力。它影响的是下一次主移动：轮到该阶段时改为起身，不掷主移动骰，也不按骰子走格。若在本回合主移动开始前倒下，就在本回合用起身替代；已经开始的移动要先完整结算。</p>
@@ -44,7 +85,7 @@ export function RulesContent({ browser = false }: { browser?: boolean }) {
     <p>以下为项目公开约定，独立于官方规则；每位访客都可在此完整阅读。</p>
     <ul className="house-rules-list">{rules.map((rule, index) => <li key={index}>{rule}</li>)}</ul>
     <h3>关于规则来源</h3>
-    <p>原作依据 CMYK 更新版基础规则书与 IELLO 2026-08-28 v2.0 FAQ 核对。已读取更新版基础规则书镜像的主要移动、触发顺序、合盒和术语页；这份文件不是 Second Wind 完整规则书。Second Wind 来自玩家图鉴的技能转录及外形图，站主的 Interactions 不作为官方裁定。Extra Mile 使用作者网页 v13 与 PDF 卡面交叉核对；Witch Hazel 按 PDF 的单一目标卡文实现。Leaf 使用作者 Printable Cards、Rulebook 和 PNG 原图核验。角色详情公开来源及项目数字化裁定。</p>
+    <p>原作依据 CMYK 更新版基础规则书与 IELLO 2026-08-28 v2.0 FAQ 核对。Second Wind 另已对照官方规则书核对36张卡面，网页差异在“角色包与人数”中列明。玩家图鉴的 Interactions 不作为官方裁定。Extra Mile 使用作者网页 v13 与 PDF 卡面交叉核对；Witch Hazel 按 PDF 的单一目标卡文实现。Leaf 使用作者 Printable Cards、Rulebook 和 PNG 原图核验。角色详情公开来源及项目数字化裁定。</p>
     <p>这是非官方同好项目，中文角色名为本项目译名。<a href="https://iello.fr/athletes-de-compete-tatillon-repond-a-vos-questions/" target="_blank" rel="noreferrer">发行商现行 FAQ</a>和<a href="https://www.cmyk.games/products/magical-athlete" target="_blank" rel="noreferrer">CMYK 原作</a>可公开查看。</p>
   </div>;
 }

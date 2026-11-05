@@ -40,7 +40,7 @@ for (const mobile of [false, true]) {
     await page.getByLabel('你的昵称').fill('入口草稿同学');
     await page.getByLabel('房间人数上限').selectOption('2');
     await page.getByLabel('每次操作时限').selectOption('60');
-    await page.locator('.pack-settings > summary').click();
+
     await page.getByRole('checkbox', { includeHidden: true, name: 'Extra Mile', exact: true }).check();
     await noOverflow(page);
     await page.screenshot({ path: testInfo.outputPath('home-create.png'), fullPage: true });
@@ -51,7 +51,7 @@ for (const mobile of [false, true]) {
     await page.getByRole('tab', { name: '人机对战', exact: true }).click();
     await page.getByLabel('AI 人数', { exact: true }).selectOption('1');
     await expect(page.getByRole('checkbox', { includeHidden: true, name: 'Extra Mile', exact: true })).not.toBeChecked();
-    await page.locator('.pack-settings > summary').click();
+
     await page.getByRole('checkbox', { includeHidden: true, name: 'Second Wind', exact: true }).check();
     await page.getByRole('button', { name: '← 返回首页（保留设置）', exact: true }).click();
     await neutralHome(page);

@@ -1,38 +1,37 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
 import { CHARACTERS } from '../shared/characters.js';
-import { CHARACTER_PACK_IDS, legacyRoomConfig, characterResources, racersPerPlayer, roomConfigError, type RoomConfig, type CharacterPackId, type ThreePlayerMode } from '../shared/room-config.js';
+import { CHARACTER_PACK_IDS, legacyRoomConfig, characterResources, roomConfigError, type RoomConfig, type CharacterPackId, type ThreePlayerMode } from '../shared/room-config.js';
 import type { GameAction, RoomView } from '../shared/types.js';
 import './room-config.css';
-import { CompetitionFields, competitionSettingsError, competitionSummary } from './CompetitionFields.js';
+import { CompetitionFields, SpecialEventFields, competitionSettingsError, competitionSummary, type CustomCompetitionDraft } from './CompetitionFields.js';
 
-const PACK_INFO: Record<CharacterPackId,{ name:string; kind:string; description:string; source:string }> = {
-  original:{name:'基础角色包',kind:'原版',description:'CMYK 基础角色与已采用 FAQ 裁定。',source:'https://www.cmyk.games/products/magical-athlete'},
-  'second-wind':{name:'Second Wind',kind:'续作 · 部分规则待确认',description:'技能参考玩家图鉴，尚未逐张与官方规则核对。',source:'https://www.cmyk.games/products/magical-athlete'},
-  'extra-mile':{name:'Extra Mile',kind:'非官方粉丝扩展',description:'可用 31 位。Box 需要实体骰子入盒，网页版暂不可用。',source:'https://johnnlds.github.io/Magical-Athlete-Racers/?v=13'},
-  'leaf-fan':{name:'Leaf’s Fan Expansion',kind:'非官方粉丝扩展',description:'可用 18 位，角色能力与特殊规则可在详情查看。',source:'https://boardgamegeek.com/filepage/327878/leafs-fan-expansion-for-magical-athlete'},
-  wurstii:{name:'Wurstii A',kind:'非官方粉丝扩展',description:'可用 30 位；与其他角色包混用的平衡性尚待实战验证。',source:'/rules/wurstii-a.md'},
+const PACK_INFO: Record<CharacterPackId,{ name:string; shortName:string; kind:string }> = {
+  original:{name:'基础角色包',shortName:'基础角色',kind:'原版'},
+  'second-wind':{name:'Second Wind',shortName:'Second Wind',kind:'网页适配'},
+  'extra-mile':{name:'Extra Mile',shortName:'Extra Mile',kind:'非官方'},
+  'leaf-fan':{name:'Leaf’s Fan Expansion',shortName:'Leaf',kind:'非官方'},
+  wurstii:{name:'Wurstii A',shortName:'Wurstii A',kind:'非官方'},
 };
 export function packCount(id:CharacterPackId) { return CHARACTERS.filter(character=>(character.edition==='leaf'?'leaf-fan':character.edition??'original')===id).length; }
 export function configSummary(config:RoomConfig) { return competitionSummary(config); }
-export function RoomConfigFields({config,onChange,disabled=false,players=6,practice=false}:{config:RoomConfig;onChange:(config:RoomConfig)=>void;disabled?:boolean;players?:number;practice?:boolean}) {
+export function RoomConfigFields({config,onChange,disabled=false,players=6,practice=false,customDraft,onRememberCustom}:{config:RoomConfig;onChange:(config:RoomConfig)=>void;disabled?:boolean;players?:number;practice?:boolean;customDraft?:CustomCompetitionDraft;onRememberCustom?:(draft:CustomCompetitionDraft)=>void}) {
   const resources=characterResources(config,players,practice),error=roomConfigError(config,players,practice);
-  const packs=CHARACTER_PACK_IDS.filter(id=>config.characterPacks[id]);
+  const id=useId(),[localDraft,setLocalDraft]=useState<CustomCompetitionDraft>();
+  function remember(draft:CustomCompetitionDraft){setLocalDraft(draft);onRememberCustom?.(draft);}
   return <div className="room-config-fields"><div className="config-main">
-    <CompetitionFields config={config} onChange={onChange} disabled={disabled} />
-    <details className="config-disclosure pack-settings"><summary>角色包 <span>{packs.map(id=>PACK_INFO[id].name).join('、')||'尚未选择'}</span></summary>
-    <fieldset disabled={disabled}><legend>选择角色包</legend><p className="config-intro">与地图独立选择；粉丝扩展默认关闭。</p>
-      <div className="pack-options">{CHARACTER_PACK_IDS.map(id=><div key={id} className="pack-option"><label><input type="checkbox" aria-label={PACK_INFO[id].name} checked={config.characterPacks[id] === true} onChange={event=>onChange({...config,characterPacks:{...config.characterPacks,[id]:event.target.checked}})} /><span><strong>{PACK_INFO[id].name}<b>{packCount(id)} 位可用</b></strong><small>{PACK_INFO[id].kind}</small></span></label><p>{PACK_INFO[id].description} <a href={PACK_INFO[id].source} target="_blank" rel="noreferrer">来源 ↗</a></p></div>)}</div>
-      <p className="config-total">牌池 {resources.available} 位 · 选秀需 {resources.drafted} 位 · 技能预留 {resources.reserve} 位</p>
-    </fieldset></details>
-    {config.characterPacks['second-wind']&&<p className="config-limitation">Second Wind：部分技能尚未逐张与官方规则核对。</p>}
-    {packs.some(id=>!['original','second-wind'].includes(id))&&<p className="config-limitation">已启用非官方粉丝扩展{config.characterPacks.wurstii?'；Wurstii 与其他包混用的平衡性尚待实战验证':''}。</p>}
-    <details className="config-disclosure"><summary>人数玩法 <span>{practice?'单人练习':`${players} 人上限 · ${racersPerPlayer(players,config)===2?'每人双角色':'每人单角色'}`}</span></summary>
-    <fieldset disabled={disabled}><legend>人数与房规</legend>
-      {players===3&&!practice&&<label>三人玩法<select aria-label="三人玩法" value={config.threePlayerMode??'single'} onChange={event=>onChange({...config,threePlayerMode:event.target.value as ThreePlayerMode})}><option value="single">每人单角色 · 共3名选手</option><option value="double">每人双角色 · 共6名选手</option></select></label>}
-      <p>两人每场每人双角色；实际入座三人时，由房主在开局前选择单角色或双角色。双角色按自己安排的顺序行动，黏液怪不减速同玩家的另一位选手。三人双角色及 7–8 人为非官方变体，平衡性尚未验证。</p>
+    <CompetitionFields config={config} onChange={onChange} disabled={disabled} customDraft={customDraft??localDraft} onRememberCustom={remember} />
+    <fieldset className="pack-settings" disabled={disabled}><legend>角色包</legend>
+      <div className="pack-options">{CHARACTER_PACK_IDS.map(pack=><label key={pack} className="pack-option"><input type="checkbox" aria-label={PACK_INFO[pack].name} checked={config.characterPacks[pack] === true} onChange={event=>onChange({...config,characterPacks:{...config.characterPacks,[pack]:event.target.checked}})} /><span><strong>{PACK_INFO[pack].shortName}<b>{packCount(pack)}</b></strong><small>{PACK_INFO[pack].kind}</small></span></label>)}</div>
+      <p className={`config-total${resources.available<resources.required?' is-insufficient':''}`}>可用 {resources.available} · 需要 {resources.required}</p>
     </fieldset>
-    </details>
-    {(players>=7||players===3&&config.threePlayerMode==='double')&&!practice&&<p className="config-limitation">{players>=7?'7–8 人':'三人双角色'}为非官方变体，平衡性尚未验证。</p>}
+    <fieldset className="player-settings" disabled={disabled}><legend>人数玩法</legend>
+      {practice||players===2?<p className="player-mode-fixed">{practice?'单人练习 · 每场 1 位角色':'两人玩法 · 每人双角色'}</p>:<>
+        <div className="player-mode-heading"><strong>三人入座时</strong><span>开局前房主确认</span></div>
+        <div className="player-mode-options" role="radiogroup" aria-label="三人玩法">{(['single','double'] as ThreePlayerMode[]).map(mode=><label key={mode}><input type="radio" name={`${id}-three-player`} aria-label={mode==='single'?'三人单角色':'三人双角色'} checked={(config.threePlayerMode??'single')===mode} onChange={()=>onChange({...config,threePlayerMode:mode})} /><span>{mode==='single'?'每人单角色':'每人双角色'}{mode==='double'&&<small>非官方</small>}</span></label>)}</div>
+      </>}
+      {players>=7&&!practice&&<p className="config-limitation">7–8 人 · 非官方</p>}
+    </fieldset>
+    <SpecialEventFields config={config} onChange={onChange} disabled={disabled} />
   </div>{error&&!competitionSettingsError(config)&&<p role="alert" className="form-error">{error}</p>}</div>;
 }
 

@@ -1,0 +1,16 @@
+.rules-menu{min-width:0}
+.rules-sections{position:sticky;top:68px;z-index:1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-bottom:18px;padding-block:8px;background:var(--paper)}
+.rules-sections button{min-height:44px;padding:8px 6px;border:1px solid #7f9b83;border-radius:8px;background:#fffdf6;color:#254b39;font-size:13px;font-weight:750}
+.rules-sections button[aria-selected=true]{background:#315e49;color:#fffdf6;border-color:#315e49}
+.rules-menu [role=tabpanel]{min-width:0;overflow-wrap:anywhere}
+.rules-menu [data-rule-reference]{scroll-margin-top:180px}
+.rules-menu h4{font-size:15px;margin:20px 0 8px}
+.rules-menu details{margin-block:16px;border-top:1px solid #b7c7ad;padding-top:8px}
+.rules-menu summary{cursor:pointer;min-height:44px;align-content:center;font-weight:750}
+.rules-table-scroll{max-width:100%;overflow-x:auto;margin-block:16px}
+.rules-table-scroll table{border-collapse:collapse;width:100%;font-size:12px;line-height:1.6}
+.rules-table-scroll th,.rules-table-scroll td{border:1px solid #c6d1bd;padding:8px;text-align:left;min-width:65px;vertical-align:top}
+.rules-table-scroll th{background:#eaf0dc}
+.rules-crosslink{border:0;background:transparent;padding:3px 0;color:#285a47;font:inherit;text-decoration:underline;text-underline-offset:3px}
+.map-rule-list{display:grid;gap:12px;margin-block:16px}.map-rule-list dt{font-weight:750}.map-rule-list dd{margin:4px 0 0}
+@media(max-width:450px){.rules-sections{grid-template-columns:repeat(2,minmax(0,1fr))}}
