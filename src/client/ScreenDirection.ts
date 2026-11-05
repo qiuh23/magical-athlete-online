@@ -1,118 +1,158 @@
-// A display-only controller. It never replaces the game tree, reconnects or
-// submits an action. CSS remains responsible for the actual viewport layout.
-type LockableOrientation = ScreenOrientation & { lock?: (direction: 'landscape' | 'portrait') => Promise<void> };
+// Display only: never remount the game, reconnect, or submit a game action.
+// Layout follows the real viewport; no transformed page or synthetic coordinates.
+type LockableOrientation = ScreenOrientation & { lock?: (direction: 'landscape') => Promise<void> };
+type LandscapeSession = {
+  orientation: LockableOrientation;
+  fullscreen: Element | null;
+  owned: Element | null;
+  pending: boolean;
+  cancelled: boolean;
+  needsUnlock: boolean;
+  cleanup?: Promise<void>;
+};
+const MANUAL = '横屏：请关闭系统竖屏锁定后手动旋转手机。';
+const FAILED = '浏览器未能开启横屏，请关闭系统竖屏锁定后手动旋转手机。';
+const EXIT_FAILED = '请重试退出横屏，或使用浏览器的退出全屏操作。';
 
 export class ScreenDirection {
-  private dialog = document.createElement('dialog');
-  private busy = false;
-  private locked = false;
-  private ownedFullscreen: Element | null = null;
-  private generation = 0;
+  private session: LandscapeSession | null = null;
+  private unavailable = false;
+  private message = '';
   private disposed = false;
-  private trigger: HTMLElement | null = null;
+  private observer = new MutationObserver(records => {
+    // Menus may be recreated by the existing renderer. Only sync new controls,
+    // not every animation, countdown, chat message or text mutation.
+    if (records.some(record => [...record.addedNodes].some(node => node instanceof Element &&
+      (node.matches('[data-landscape-control]') || node.querySelector('[data-landscape-control]'))))) this.update();
+  });
 
   constructor() {
-    this.dialog.className = 'screen-direction';
-    this.dialog.id = 'screen-direction';
-    this.dialog.setAttribute('aria-labelledby', 'direction-title');
-    this.dialog.setAttribute('aria-describedby', 'direction-help');
-    this.dialog.innerHTML = `<header><h2 id="direction-title">屏幕方向</h2><button type="button" data-direction-close aria-label="关闭屏幕方向">×</button></header>
-      <p id="direction-help">横竖屏都能玩。手动旋转手机即可调整；若没有变化，请检查手机的自动旋转设置。</p>
-      <p data-direction-status role="status" aria-live="polite"></p>
-      <fieldset><legend>尝试锁定方向</legend>
-        <label><input type="checkbox" id="direction-fullscreen">全屏后尝试（会隐藏浏览器工具栏）</label>
-        <p>部分浏览器需要全屏才允许锁定。仅勾选后点击下方按钮，才会请求全屏。</p>
-        <div class="direction-actions"><button type="button" data-direction="landscape">尝试横屏</button><button type="button" data-direction="portrait">尝试竖屏</button></div>
-      </fieldset>
-      <button type="button" data-direction-reset>恢复自动旋转并退出本次全屏</button>`;
-    document.body.append(this.dialog);
-    this.dialog.querySelector('[data-direction-close]')!.addEventListener('click', () => this.dialog.close());
-    this.dialog.querySelector('[data-direction-reset]')!.addEventListener('click', () => void this.restore());
-    this.dialog.querySelectorAll<HTMLElement>('[data-direction]').forEach(button => {
-      button.addEventListener('click', () => void this.request(button.dataset.direction as 'landscape' | 'portrait'));
-    });
-    // Keep an underlying game menu/modal open and preserve its keyboard state.
-    this.dialog.addEventListener('keydown', event => event.stopPropagation());
-    this.dialog.addEventListener('pointerdown', event => event.stopPropagation());
-    this.dialog.addEventListener('click', event => event.stopPropagation());
-    this.dialog.addEventListener('close', () => { if (this.trigger?.isConnected) this.trigger.focus({ preventScroll: true }); });
-    document.addEventListener('click', this.open, true);
+    document.addEventListener('click', this.toggle, true);
     document.addEventListener('fullscreenchange', this.fullscreenChanged);
-    this.status(this.orientation()?.lock ? '方向锁定是否可用，取决于浏览器和手机设置。' : '此浏览器不支持方向锁定，请手动旋转手机，当前页面可继续使用。');
+    window.addEventListener('pagehide', this.pageHidden);
+    this.observer.observe(document.body, { childList: true, subtree: true });
     this.update();
   }
 
   private orientation() { return screen.orientation as LockableOrientation | undefined; }
-  private status(text: string) { this.dialog.querySelector('[data-direction-status]')!.textContent = text; }
-  private update() {
-    const supported = typeof this.orientation()?.lock === 'function';
-    this.dialog.querySelector('fieldset')!.disabled = this.busy || !supported;
-    this.dialog.querySelector<HTMLInputElement>('#direction-fullscreen')!.disabled = this.busy || !supported || !document.fullscreenEnabled || typeof document.documentElement.requestFullscreen !== 'function';
-    this.dialog.querySelector<HTMLButtonElement>('[data-direction-reset]')!.disabled = !this.busy && !this.locked && !this.ownedFullscreen;
+  private supported() {
+    return typeof this.orientation()?.lock === 'function' && typeof this.orientation()?.unlock === 'function' &&
+      (!!document.fullscreenElement || (document.fullscreenEnabled &&
+        typeof document.documentElement.requestFullscreen === 'function' && typeof document.exitFullscreen === 'function'));
   }
-  private open = (event: MouseEvent) => {
-    const trigger = (event.target as Element)?.closest<HTMLElement>('[data-screen-direction]');
-    if (!trigger || this.dialog.open) return;
-    event.preventDefault(); this.trigger = trigger;
-    this.dialog.showModal();
+  private update() {
+    if (this.disposed) return;
+    const available = !!this.session || (!this.unavailable && this.supported());
+    document.querySelectorAll<HTMLElement>('[data-landscape-control]').forEach(control => {
+      const button = control.querySelector<HTMLButtonElement>('[data-screen-direction]')!;
+      const hint = control.querySelector<HTMLElement>('[data-landscape-help]')!;
+      const label = this.session ? '退出横屏' : '横屏';
+      if (button.textContent !== label) button.textContent = label;
+      button.hidden = !available;
+      button.disabled = !!this.session?.cancelled && this.session.pending;
+      button.setAttribute('aria-pressed', String(!!this.session && !this.session.cancelled));
+      button.setAttribute('aria-busy', String(!!this.session?.pending || !!this.session?.cleanup));
+      const message = this.message || (!available ? MANUAL : '');
+      if (hint.textContent !== message) hint.textContent = message;
+      hint.hidden = !message;
+    });
+  }
+  private toggle = (event: MouseEvent) => {
+    const button = (event.target as Element)?.closest<HTMLButtonElement>('[data-screen-direction]');
+    if (!button || button.hidden || button.disabled) return;
+    event.preventDefault();
+    if (this.session) void this.restore();
+    else void this.enter();
   };
   private fullscreenChanged = () => {
-    if (this.ownedFullscreen && document.fullscreenElement !== this.ownedFullscreen) {
-      this.ownedFullscreen = null; this.generation++;
-      try { this.orientation()?.unlock(); } catch { /* Browser already released it. */ }
-      this.locked = false;
-      this.status('已退出全屏并恢复自动旋转，可手动旋转手机。'); this.update();
+    const session = this.session;
+    if (session?.fullscreen && document.fullscreenElement !== session.fullscreen && !session.cancelled) void this.restore();
+    else if (session?.cancelled && !session.pending && !session.cleanup && document.fullscreenElement !== session.fullscreen) {
+      // The browser can dismiss fullscreen after our own exit request failed.
+      if (this.message === EXIT_FAILED) this.message = '';
+      void this.release(session);
     }
+    else this.update();
   };
-  private async exitOwnedFullscreen() {
-    const owned = this.ownedFullscreen;
-    this.ownedFullscreen = null;
-    try { if (owned && document.fullscreenElement === owned) await document.exitFullscreen(); }
-    catch (error) { this.ownedFullscreen = owned; throw error; }
+  private pageHidden = () => { void this.restore(); };
+  private unlock(session: LandscapeSession) {
+    if (!session.needsUnlock) return;
+    session.needsUnlock = false;
+    try { session.orientation.unlock(); } catch { /* Exiting fullscreen also releases the browser lock. */ }
   }
-  private async request(direction: 'landscape' | 'portrait') {
-    if (this.busy || this.disposed) return;
-    const orientation = this.orientation();
-    if (typeof orientation?.lock !== 'function') {
-      this.status('此浏览器不支持方向锁定，请手动旋转手机，当前页面可继续使用。'); return;
-    }
-    this.busy = true;
-    const generation = ++this.generation;
-    this.status('正在尝试调整屏幕方向…'); this.update();
-    try {
-      if (this.dialog.querySelector<HTMLInputElement>('#direction-fullscreen')!.checked && !document.fullscreenElement) {
-        await document.documentElement.requestFullscreen();
-        this.ownedFullscreen = document.documentElement;
-        if (generation !== this.generation || this.disposed) { await this.exitOwnedFullscreen(); return; }
+  private release(session: LandscapeSession): Promise<void> {
+    if (session.cleanup) return session.cleanup;
+    session.cleanup = Promise.resolve().then(async () => {
+      this.unlock(session);
+      try {
+        // Never exit fullscreen that was already present before this click, or
+        // another element's fullscreen entered after our own was dismissed.
+        if (session.owned && document.fullscreenElement === session.owned) await document.exitFullscreen();
+        session.owned = null;
+      } catch {
+        if (document.fullscreenElement !== session.owned) session.owned = null;
+        else this.message = EXIT_FAILED;
       }
-      await orientation.lock(direction);
-      if (generation !== this.generation || this.disposed) { orientation.unlock(); await this.exitOwnedFullscreen(); return; }
-      this.locked = true;
-      this.status(`已请求锁定${direction === 'landscape' ? '横屏' : '竖屏'}。可用下方按钮恢复自动旋转。`);
+      this.unlock(session);
+    }).then(() => {
+      session.cleanup = undefined;
+      if (!session.pending && !session.owned && this.session === session) this.session = null;
+      this.update();
+    });
+    return session.cleanup;
+  }
+  private async enter() {
+    if (this.session || this.disposed || this.unavailable || !this.supported()) return;
+    const session: LandscapeSession = {
+      orientation: this.orientation()!, fullscreen: document.fullscreenElement, owned: null,
+      pending: true, cancelled: false, needsUnlock: false,
+    };
+    this.session = session;
+    this.message = '';
+    this.update();
+    try {
+      if (!session.fullscreen) {
+        // Called directly in the click gesture, before yielding to a promise.
+        await document.documentElement.requestFullscreen();
+        session.fullscreen = session.owned = document.documentElement;
+      }
+      if (session.cancelled || this.disposed) return;
+      if (document.fullscreenElement !== session.fullscreen) throw new Error('Fullscreen ended');
+      session.needsUnlock = true;
+      await session.orientation.lock!('landscape');
+      // A late resolution must be unlocked even if Exit was clicked meanwhile.
+      session.needsUnlock = true;
+      if (document.fullscreenElement !== session.fullscreen) session.cancelled = true;
     } catch {
-      try { orientation.unlock(); } catch { /* Unsupported or already released. */ }
-      this.locked = false;
-      try { await this.exitOwnedFullscreen(); } catch { /* A separate click can retry exiting. */ }
-      this.status(`未能锁定方向。请手动旋转手机；也可勾选全屏后重试，当前页面可继续使用。${this.ownedFullscreen?'如仍在全屏，请点击下方恢复按钮或用浏览器退出全屏。':''}`);
+      if (!session.cancelled && !this.disposed) {
+        this.unavailable = true;
+        this.message = FAILED;
+      }
+      session.cancelled = true;
     } finally {
-      this.busy = false; if (!this.disposed) this.update();
+      session.pending = false;
+      if (session.cancelled || this.disposed) {
+        // An earlier cancellation may have run before fullscreen/lock resolved.
+        if (session.cleanup) await session.cleanup;
+        await this.release(session);
+      }
+      this.update();
     }
   }
   private async restore() {
-    this.generation++;
-    try { this.orientation()?.unlock(); } catch { /* Also works without the API. */ }
-    this.locked = false;
-    try {
-      await this.exitOwnedFullscreen();
-      this.status('已恢复自动旋转。可手动旋转手机，继续游戏。');
-    } catch { this.ownedFullscreen = document.fullscreenElement; this.status('已解除方向锁定。请使用浏览器的退出全屏操作恢复正常显示。'); }
+    const session = this.session;
+    if (!session) return;
+    session.cancelled = true;
+    this.message = '';
     this.update();
+    await this.release(session);
   }
   destroy() {
     this.disposed = true;
-    document.removeEventListener('click', this.open, true);
+    this.observer.disconnect();
+    document.removeEventListener('click', this.toggle, true);
     document.removeEventListener('fullscreenchange', this.fullscreenChanged);
-    if (this.busy || this.locked || this.ownedFullscreen) void this.restore();
-    this.dialog.remove();
+    window.removeEventListener('pagehide', this.pageHidden);
+    void this.restore();
   }
 }
