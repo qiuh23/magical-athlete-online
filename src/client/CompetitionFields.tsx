@@ -33,7 +33,7 @@ export function CompetitionFields({config,onChange,disabled=false}:{config:RoomC
   function reorder(index:number,offset:number){const rotation=[...c.rotation];[rotation[index],rotation[index+offset]]=[rotation[index+offset]!,rotation[index]!];custom({rotation});}
   return <>
     <fieldset className="competition-settings" disabled={disabled}><legend>比赛方案与赛程</legend>
-      <p>按全部场次累计积分，同分共享胜利。可以直接使用经典赛，也可以展开「自定义赛程」选择地图与场数。</p>
+      <p>累计积分决定胜负，同分共享胜利。选一个方案即可开跑。</p>
       <div className="preset-grid">{(Object.keys(PRESETS) as Exclude<PresetId,'custom'>[]).filter(id=>!unavailableMaps(presetCompetition(id)).length).map(id=>{
         const preset=PRESETS[id];
         return <div key={id} className={`preset-card${c.preset===id?' is-selected':''}`}>
@@ -55,14 +55,14 @@ export function CompetitionFields({config,onChange,disabled=false}:{config:RoomC
       </details>
       {!!blocked.length&&<p className="project-rule" role="note">此赛程禁用：{blocked.map(id=>CHARACTERS.find(character=>character.id===id)?.nameZh??id).join('、')}。地图原规则未规定对应弯道，整局选秀、抽牌及复制均排除这些角色。</p>}
       {c.raceCount!==4&&<p className="project-rule">{c.raceCount} 场为项目自定义赛制：每人每场使用未出赛角色；每批按顺序和逆序各选一名，下批首选顺延。不是官方赛制，未获社区平衡性认证。最后一场不加倍。</p>}
-      <fieldset className="special-event-settings" disabled={disabled}><legend>特殊赛事 · Thrilling Thirds</legend>
+      <details className="config-disclosure event-settings"><summary>特殊赛事 <span>{c.thrillingThirds.enabled?`非官方粉丝事件 · 第 ${c.thrillingThirds.rounds.join('、')||'待选择'} 场`:'未开启'}</span></summary>
+      <fieldset className="special-event-settings" disabled={disabled}><legend>Thrilling Thirds · 非官方粉丝事件</legend>
         <label className="event-toggle"><input type="checkbox" checked={c.thrillingThirds.enabled} onChange={e=>change({...c,thrillingThirds:{enabled:e.target.checked,rounds:e.target.checked?[3]:[]}})} />启用 36 项粉丝事件（网页适配）</label>
-        <p>给指定场次增加一项所有选手共用的随机规则。例如「教练」事件会让主移动增加同格其他选手的数量。每场从 36 项中抽 1 项，不会同时开启全部事件。</p>
-        <ol className="event-instructions"><li>开启后默认用于第 3 场；可在下方勾选其他场次，至少选一场。</li><li>到达指定场次、所有人选定上场角色后，系统自动抽取并显示本场事件，无需手动抽牌。</li><li>照常比赛；需要选目标、猜骰或确认时，按屏幕提示操作，其余效果自动结算。本场结束后事件失效。</li></ol>
+        <p>指定场次选角结束后，从 36 项中随机抽取 1 项公共规则，本场结束后失效。默认第 3 场，至少选择一场。</p>
         {c.thrillingThirds.enabled?<><p className="event-status" role="status">{c.thrillingThirds.rounds.length?`已开启：第 ${c.thrillingThirds.rounds.join('、')} 场各抽取 1 项事件；其余场次照常进行。`:'请在下方至少勾选一场，才能保存或开始。'}</p><div className="event-rounds" role="group" aria-label="特殊赛事适用场次">{Array.from({length:c.raceCount},(_,i)=>i+1).map(round=><label key={round}><input type="checkbox" checked={c.thrillingThirds.rounds.includes(round)} onChange={e=>change({...c,thrillingThirds:{enabled:true,rounds:e.target.checked?[...c.thrillingThirds.rounds,round].sort((a,b)=>a-b):c.thrillingThirds.rounds.filter(n=>n!==round)}})} />第 {round} 场</label>)}</div></>:<p className="event-status" role="status">当前关闭：所有场次按原赛程进行，不抽取特殊事件。</p>}
         <p>原作者用于第三场；其他场次、独立事件签及扩展组合采用网页适配。<a href="/rules/special-events.md" target="_blank" rel="noreferrer">查看全部 36 项事件与适配规则 ↗</a></p>
-      </fieldset>
-      <h3>完整逐场安排</h3><SchedulePreview competition={c} />
+      </fieldset></details>
+      <details className="config-disclosure"><summary>逐场地图与积分 <span>{c.raceCount} 场</span></summary><SchedulePreview competition={c} /></details>
       <details className="source-details"><summary>来源与适配详情</summary><p>基础规则书第18页允许赛前约定地图，第19页为四场总分。6／8场为本项目规则。</p><a href="/rules/competition.md" target="_blank" rel="noreferrer">赛程来源、奖励表与适配规则 ↗</a></details>
     </fieldset>
   </>;

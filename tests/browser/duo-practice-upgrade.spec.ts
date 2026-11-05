@@ -27,16 +27,22 @@ async function setup(browser: Browser, mobile = false, reducedMotion = true, low
   }, { reduced: reducedMotion, low: lowQuality });
   const pages = await Promise.all(contexts.map(context => context.newPage()));
   const [host, guest] = pages as [Page, Page];
+  try {
   await host.goto(url);await host.getByRole('tab',{name:'创建房间',exact:true}).click(); await host.getByLabel('你的昵称').fill('房主选手');
   await host.getByLabel('房间人数上限').selectOption('2'); await host.getByLabel('每次操作时限').selectOption('0');
   await host.getByRole('button', { name: '创建房间，召集朋友' }).click();
   await expect(host.locator('.connection.is-online')).toBeVisible();
   const code = parseRoomCode(host.url().split('/').at(-1)!)!.code;
-  await guest.goto(`${url}/room/${code}`); await guest.getByLabel('你的昵称').fill('朋友选手');
+  await guest.goto(`${url}/room/${code}`);
+  // Wait for the initial route focus and connection check before typing.
+  await expect(guest.locator('.setup-heading h2')).toBeFocused();
+  await expect(guest.locator('.current-line')).toContainText('可用');
+  await guest.getByLabel('你的昵称').fill('朋友选手');
   await guest.getByRole('button', { name: '加入这场胡闹' }).click();
   await expect(guest.locator('.connection.is-online')).toBeVisible();
   const ids = application.rooms.get(code).game.players.map(player => player.id);
   return { contexts, pages, host, guest, code, ids };
+  } catch (error) { await Promise.all(contexts.map(context => context.close())); throw error; }
 }
 type Pair = Awaited<ReturnType<typeof setup>>;
 function publish(pair: Pair, change: (room: Room) => void) {
@@ -82,13 +88,23 @@ async function duoActionsFit(page: Page) {
 for (const viewport of [{ width: 1440, height: 1000 }, { width: 1100, height: 900 }, { width: 390, height: 844 }, { width: 320, height: 667 }]) {
 test(`duo UI locks either order, restores a locked choice, and allows a fresh order next race (${viewport.width}px)`, async ({ browser }, info) => {
   const pair = await setup(browser, viewport.width <= 650);
-  await pair.host.setViewportSize(viewport);
-  if (viewport.width === 320) {
-    const session = await pair.host.context().newCDPSession(pair.host);
-    await session.send('Emulation.setSafeAreaInsetsOverride', { insets: { top: 0, right: 0, bottom: 34, left: 0 } });
-  }
   const errors: string[] = []; pair.host.on('pageerror', error => errors.push(error.message));
   try {
+    await pair.host.setViewportSize(viewport);
+    if (viewport.width === 320) {
+      if (browser.browserType().name() === 'chromium') {
+        const session = await pair.host.context().newCDPSession(pair.host);
+        await session.send('Emulation.setSafeAreaInsetsOverride', { insets: { top: 0, right: 0, bottom: 34, left: 0 } });
+      } else {
+        // WebKit has no CDP. Substitute only the environment inset in the
+        // real stylesheet, keeping the production layout calculations intact.
+        await pair.host.route(/\/assets\/.*\.css$/, async route => {
+          const response = await route.fetch();
+          await route.fulfill({ response, body: (await response.text()).replaceAll('env(safe-area-inset-bottom)', '34px') });
+        });
+        await pair.host.reload(); await expect(pair.host.locator('.connection.is-online')).toBeVisible();
+      }
+    }
     for (const reverse of [false, true]) {
       publish(pair, room => {
         room.game.phase = 'selection'; room.game.round = reverse ? 2 : 1; room.game.racers = []; room.game.queue = []; delete room.game.pending;
@@ -219,7 +235,7 @@ test('practice offers the enabled pool, supports inspection/reselection, stays p
     for (const id of ['genius', 'legs', 'gunk', 'rocket-scientist']) await chooseCard(page, id);
     await page.screenshot({ path: info.outputPath('practice-pool-mobile.png'), fullPage: false });
     await page.getByRole('button', { name: '确认练习阵容', exact: true }).click();
-    expect(application.rooms.get(code).game.players[0]!.hand).toEqual(['genius', 'legs', 'gunk', 'rocket-scientist']);
+    await expect.poll(() => application.rooms.get(code).game.players[0]!.hand).toEqual(['genius', 'legs', 'gunk', 'rocket-scientist']);
     await page.reload(); expect(application.rooms.list().some(room => room.code === code)).toBe(false);
     await expect(page.getByRole('button', { name: '锁定上场角色', exact: true })).toBeVisible();
     await expect(page.locator('.sticky-action')).toHaveCount(1);

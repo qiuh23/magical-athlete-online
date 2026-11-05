@@ -7,5 +7,6 @@ import './immersive.css';
 import './community.css';
 import './home-entry.css';
 import './character-cards.css';
+import './room-experience.css';
 
 createRoot(document.getElementById('root')!).render(<React.StrictMode><DeploymentNotice /><App /></React.StrictMode>);
