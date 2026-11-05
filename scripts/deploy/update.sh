@@ -21,6 +21,9 @@ else
     [[ $(git rev-parse HEAD) == "$COMMIT" && -z $(git status --porcelain --untracked-files=no) ]] || { echo 'Checkout must be clean and match the requested commit.' >&2; exit 1; }
 fi
 BASE=$DEPLOY_BASE
+# Block the new release on low space, corrupt audit storage or a known audit
+# write failure. Do this before unpacking a bundle or switching any app pointer.
+bash "$SCRIPT_DIR/security-preflight.sh"
 # A checked build is identified by both its source and workflow run. Reusing
 # a same-commit directory would retain an older run's deployment.json/.ready.
 # Manual source deployments keep their existing forty-character directory.
@@ -54,9 +57,22 @@ mv -Tf "$BASE/current.next" "$BASE/current"
 systemctl enable "$DEPLOY_SERVICE"
 systemctl restart "$DEPLOY_SERVICE"
 for attempt in {1..20}; do
-    if curl --fail --silent "http://127.0.0.1:$DEPLOY_PORT/api/health" >/dev/null; then echo "Active $DEPLOY_TARGET commit: $COMMIT"; exit 0; fi
+    if curl --fail --silent "http://127.0.0.1:$DEPLOY_PORT/api/health" >/dev/null && curl --fail --silent "http://127.0.0.1:$DEPLOY_PORT/api/security/health" | python3 -c 'import json,sys; sys.exit(0 if json.load(sys.stdin).get("ok") is True else 1)'; then
+        if bash "$SCRIPT_DIR/security-maintenance.sh"; then
+            touch "$RELEASE/.security-aware"
+            echo "Active $DEPLOY_TARGET commit: $COMMIT"; exit 0
+        fi
+        break
+    fi
     sleep 1
 done
 echo 'Health check failed; restoring the previous release.' >&2
-if [[ -n $PREVIOUS ]]; then ln -sfn "$PREVIOUS" "$BASE/current.next"; mv -Tf "$BASE/current.next" "$BASE/current"; systemctl restart "$DEPLOY_SERVICE"; fi
+if [[ -n $PREVIOUS ]]; then
+    if [[ ! -f $PREVIOUS/.security-aware ]] && ! python3 "$SCRIPT_DIR/security-ops.py" rollback-check --database "$DEPLOY_DATA/security.sqlite"; then
+        systemctl stop "$DEPLOY_SERVICE"
+        logger -p daemon.err -t game-security 'Unsafe legacy fallback refused; game remains paused for forward repair.' || true
+        exit 1
+    fi
+    ln -sfn "$PREVIOUS" "$BASE/current.next"; mv -Tf "$BASE/current.next" "$BASE/current"; systemctl restart "$DEPLOY_SERVICE"
+fi
 exit 1

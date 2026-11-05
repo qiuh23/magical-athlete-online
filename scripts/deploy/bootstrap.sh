@@ -58,6 +58,7 @@ printf '%s\n' '#!/bin/sh' 'exec /bin/bash /usr/local/lib/magical-athlete-deploy/
 chmod 0750 /usr/local/sbin/magical-athlete-backup
 printf '%s\n' '#!/bin/sh' 'exec /usr/local/sbin/magical-athlete-backup' > /etc/cron.daily/magical-athlete-backup
 chmod 0750 /etc/cron.daily/magical-athlete-backup
+bash "$SOURCE_DIR/scripts/deploy/install-security.sh"
 systemctl daemon-reload
 echo 'Private initialization complete. Review /etc/magical-athlete/server.env; deploy a release next.'
 echo 'Cloud security group: allow SSH from your own IP only. Keep 80/443/3000 closed until approved.'

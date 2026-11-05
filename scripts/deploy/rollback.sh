@@ -10,6 +10,9 @@ BASE=$DEPLOY_BASE
 TARGET=$(readlink -f "$BASE/previous")
 [[ $TARGET == "$BASE/releases/"* && -f $TARGET/.ready ]] || { echo 'No validated previous release.' >&2; exit 1; }
 CURRENT=$(readlink -f "$BASE/current")
+if [[ ! -f $TARGET/.security-aware ]]; then
+    python3 "$SCRIPT_DIR/security-ops.py" rollback-check --database "$DEPLOY_DATA/security.sqlite"
+fi
 ln -sfn "$TARGET" "$BASE/current.next"
 mv -Tf "$BASE/current.next" "$BASE/current"
 systemctl restart "$DEPLOY_SERVICE"

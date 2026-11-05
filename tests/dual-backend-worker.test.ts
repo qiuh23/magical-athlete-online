@@ -46,7 +46,7 @@ test('the transitioned Worker admits new HTTPS and exact legacy HTTP while rejec
 test('Worker dual quota is durable, idempotent and excludes solo reservations',async()=>{
   const storage=new Storage(),pending:Promise<unknown>[]=[];
   const ctx={storage,blockConcurrencyWhile(callback:()=>Promise<unknown>){const promise=callback();pending.push(promise);return promise;},setWebSocketAutoResponse(){}};
-  const relay=new worker.RoomRelay(ctx,{DUAL_BACKEND_ENABLED:'true'});await Promise.all(pending);
+  const relay=new worker.RoomRelay(ctx,{DUAL_BACKEND_ENABLED:'true',SECURITY_TEST_NO_LEDGER:true});await Promise.all(pending);
   const reserve=(requestId:string,mode='multiplayer')=>relay.fetch(new Request('https://room.internal/directory/reserve',{method:'POST',body:JSON.stringify({requestId,request:'same settings',mode})}));
   const requestId=crypto.randomUUID(),first=await (await reserve(requestId)).json();
   assert.deepEqual(await (await reserve(requestId)).json(),first);

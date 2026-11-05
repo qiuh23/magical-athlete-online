@@ -8,6 +8,7 @@ import { TrackPreview } from './TrackPreview.js';
 import { lazy, Suspense, useCallback, useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import type { GameAction, Identity, PlayerView, Racer, RoomRole, RoomSummary, RoomView } from '../shared/types.js';
 import { RoomChat, RenameForm } from './RoomChat.js';
+import { STATIONMASTER_CONTACT } from '../shared/security.js';
 import { RoomContinuationNotice } from './RoomContinuation.js';
 import { RoomPauseControl, RoomPauseNotice } from './RoomPause.js';
 import './room-management.css';
@@ -99,7 +100,7 @@ function Icon({ kind, size = 22 }: { kind: 'dice' | 'flag' | 'copy' | 'sound' | 
 function Button({ children, secondary = false, className = '', ...props }: React.ButtonHTMLAttributes<HTMLButtonElement> & { secondary?: boolean }) {
   return <button className={`button ${secondary ? 'button-secondary' : ''} ${className}`} {...props}>{children}</button>;
 }
-function Footer() { return <footer className="footer"><span>非官方同好项目 · 中文角色名为本项目译名</span><a href="https://www.cmyk.games/products/magical-athlete" target="_blank" rel="noreferrer">认识 CMYK 原作 ↗</a></footer>; }
+function Footer() { return <footer className="footer"><span>非官方同好项目 · 中文角色名为本项目译名</span><a href="https://www.cmyk.games/products/magical-athlete" target="_blank" rel="noreferrer">认识 CMYK 原作 ↗</a><details><summary>隐私与举报</summary><p>昵称和最近100条聊天用于房间互动，随房间业务存档清理；不为六个月网络日志保存全部聊天。网络连接来源、时间、房间/成员编号和安全操作记录用于运行安全，保留至少六个日历月；站长处置及指定证据默认90天，依法保全可延长。站长可隐藏消息、处理昵称、限制聊天改名或关闭房间。请勿发布违法信息或他人个人资料。</p><p>举报请发送服务器、房间码、消息编号、时间和原因至 <a href={`mailto:${STATIONMASTER_CONTACT}`}>{STATIONMASTER_CONTACT}</a>。不要提供密码、令牌或证件。身份核验等适用要求仍待属地确认，当前浏览器重连凭据并非实名核验。</p></details></footer>; }
 
 export function App() {
   useEffect(() => { const direction = new ScreenDirection(); return () => direction.destroy(); }, []);
@@ -149,7 +150,7 @@ export function App() {
     saveIdentity(identity);
     setConnection('connecting'); setConnectionError('');
     let firstSnapshot=true;
-    const client = connectRoom(identity, (next) => { rememberOwnedRoom(next,identity,firstSnapshot);firstSnapshot=false;setRoom(previous => previous?.code === next.code && previous.backendId === next.backendId && previous.version > next.version ? previous : next); }, (state, message) => { if(state==='closed'||state==='expired')forgetClosedRoom(identity.roomCode,state,identity.backendId);if(state==='kicked')forgetIdentity(identity.roomCode,identity);setConnection(state); setConnectionError(message ?? ''); });
+    const client = connectRoom(identity, (next) => { rememberOwnedRoom(next,identity,firstSnapshot);firstSnapshot=false;setRoom(previous => previous?.code === next.code && previous.backendId === next.backendId && ((next.contentRevision??0)<(previous.contentRevision??0)||(previous.version > next.version&&(next.contentRevision??0)<=(previous.contentRevision??0))) ? previous : next); }, (state, message) => { if(state==='closed'||state==='expired')forgetClosedRoom(identity.roomCode,state,identity.backendId);if(state==='kicked')forgetIdentity(identity.roomCode,identity);setConnection(state); setConnectionError(message ?? ''); });
     socket.current = client;
     const unsubscribeCommunity = client.subscribeCommunity?.(setCommunity);
     const sync = () => { if (document.visibilityState === 'visible' && client.connected) client.emit('sync'); };

@@ -70,7 +70,7 @@ export class BrowserRelayConnection implements RoomConnection {
   }
   private communityRoster(meta: RelayMetadata) {
     const self = meta.members.find(member => member.id === this.identity.playerId);
-    this.community.update({name: self?.name ?? meta.spectators?.find(viewer => viewer.id === this.identity.playerId)?.name, renameRemaining: self ? self.renameUsed ? 0 : 1 : 0});
+    this.community.update({contentRevision:meta.contentRevision??0,name: self?.name ?? meta.spectators?.find(viewer => viewer.id === this.identity.playerId)?.name, renameRemaining: self ? self.renameUsed ? 0 : 1 : 0});
   }
   private readonly eventReplies=new Map<string,{resolve:(batch:PublicEventBatch)=>void;reject:(error:Error)=>void;timer:ReturnType<typeof setTimeout>}>();
   private readonly eventClient:PresentationEventClient;
@@ -249,7 +249,8 @@ export class BrowserRelayConnection implements RoomConnection {
       if (!message.online) void this.tryAuthority();
     } else if (message.type === 'snapshot') {
       if (message.room.selfId !== this.identity.playerId || message.room.code !== this.identity.roomCode) { this.fail('中继快照身份不匹配，已停止显示。'); return; }
-      if (this.latestRoom && message.room.version < this.latestRoom.version) return;
+      if (this.latestRoom && ((message.room.contentRevision??0)<(this.latestRoom.contentRevision??0)||(message.room.version < this.latestRoom.version&&(message.room.contentRevision??0)<=(this.latestRoom.contentRevision??0)))) return;
+      if(message.room.closedAt===undefined)this.community.update({contentRevision:message.room.contentRevision??0,messages:message.room.chat,latestId:message.room.chatLatestId,name:message.room.players.find(person=>person.id===this.identity.playerId)?.name??message.room.spectators?.find(person=>person.id===this.identity.playerId)?.name,renameRemaining:message.room.renameRemaining},'history');
       const snapshotRequestId = (message as typeof message & { requestId?: string }).requestId;
       if (snapshotRequestId && snapshotRequestId === this.syncRequestId) this.synchronized = true;
       this.latestRoom = { ...message.room, hosting: this.metadata?.authorityMode==='worker'?'worker':'browser', authorityId: this.metadata?.authorityId, authorityOnline: this.authorityOnline };

@@ -1,7 +1,7 @@
 export type GameMode = 'multiplayer' | 'practice' | 'ai';
 export type CharacterPool = 'original' | 'second-wind' | 'mixed' | 'wurstii' | 'all';
 export interface ChatSend { clientMessageId: string; text: string; }
-export interface ChatMessage { id: number; clientMessageId?: string; senderId?: string; senderName: string; text: string; sentAt: number; kind: 'player' | 'system'; }
+export interface ChatMessage { id: number; clientMessageId?: string; senderId?: string; senderName: string; text: string; sentAt: number; kind: 'player' | 'system'; hidden?:boolean; moderated?:boolean; }
 export interface ChatReply { ok: boolean; message?: ChatMessage; duplicate?: boolean; error?: string; }
 export interface RenameReply { ok: boolean; name?: string; remaining?: number; duplicate?: boolean; error?: string; }
 export interface ChatState { messages: ChatMessage[]; latestId: number; windows: Record<string, number[]>; }
@@ -74,6 +74,7 @@ export interface RoomView { presentationEvents?: GameEvent[]; mode?: GameMode; t
 export interface Identity { roomCode: string; playerId: string; token: string; role?: RoomRole; backendId?: import('./backend-protocol.js').BackendId; }
 export interface RoomSummary { backendId?: import('./backend-protocol.js').BackendId; }
 export interface RoomView { backendId?: import('./backend-protocol.js').BackendId; }
+export interface RoomView { contentRevision?:number; }
 export interface ActionReply { ok: boolean; error?: string; version?: number; duplicate?: boolean; }
 export interface RoomView { hosting?: 'browser' | 'local' | 'worker'; authorityId?: string; authorityOnline?: boolean; closedAt?: number; }
 export interface RoomView { baseTurnOrder?: string[]; hostLeftAt?: number; closeReason?: 'expired' | 'host-away' | 'dismissed'; }

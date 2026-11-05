@@ -74,3 +74,9 @@ body>.room-community.in-race .chat-notice-region{top:auto;bottom:calc(100% + 10p
 }
 
 .continuation-notice{position:fixed;top:8px;left:50%;transform:translateX(-50%);z-index:80;max-width:90vw;padding:9px 16px;border:2px solid var(--ink);border-radius:8px;background:var(--yellow);font-size:12px;text-align:center}
+/* Public safety notice remains readable inside the compact game footer. */
+.footer details{max-width:52rem;font-size:14px;line-height:1.6;text-align:left}
+.footer details summary{min-height:44px;display:list-item;padding:10px 0;cursor:pointer;font-weight:700}
+.footer details p{margin:8px 0;overflow-wrap:anywhere}
+.footer details a{font-size:14px}
+.chat-report{font-size:12px;line-height:1.6;padding:8px 12px;overflow-wrap:anywhere}

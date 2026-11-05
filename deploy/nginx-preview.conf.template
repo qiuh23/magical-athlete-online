@@ -2,6 +2,8 @@ server {
     listen 8080;
     server_name ${PUBLIC_IP};
     server_tokens off;
+    access_log /var/log/game-network/athlete-preview.log game_network;
+    error_log /dev/null emerg;
     client_max_body_size 16k;
     if ($host != "${PUBLIC_IP}") { return 421; }
     location / {

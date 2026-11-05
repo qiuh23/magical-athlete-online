@@ -1,6 +1,7 @@
 import type { ActionEnvelope,ActionReply,CharacterPool,ChatMessage,ChatReply,GameMode,Identity,Phase,PublicEventBatch,RenameReply,RoomView,Spectator } from './types.js';
 import type { RoomConfig } from './room-config.js';
 export interface RelayMetadata { config?:RoomConfig; configFrozen?:boolean; authorityMode?:'worker' }
+export interface RelayMetadata { contentRevision?:number; }
 export interface RelayMember { isAI?:boolean; id:string; name:string; seat:number; connected:boolean; renameUsed?:boolean }
 export interface RelayMetadata { characterPool?:CharacterPool; mode?:GameMode; code:string; authorityId:string; adminHostId:string; maxPlayers:number; timeoutSeconds:number; phase:Phase; createdAt:number; members:RelayMember[] }
 export interface RelayJoinReply { identity:Identity; room:RoomView; meta:RelayMetadata }
