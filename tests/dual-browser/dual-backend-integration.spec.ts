@@ -103,10 +103,8 @@ for (const backend of ['cloudflare', 'aliyun'] as const) {
       for (let i = 0; i < 2; i++) { const context = await browser.newContext(); contexts.push(context); await configured(context); }
       const host = await contexts[0]!.newPage(), guest = await contexts[1]!.newPage();
       for (const page of [host, guest]) page.on('pageerror', error => errors.push(error.message));
-      await host.goto(entryOrigin);
-      const server = host.getByRole('radio', {name: backend === 'cloudflare' ? 'Cloudflare' : '阿里云内地', exact: true});
-      await expect(server).toBeEnabled(); await server.click();
-      await expect(host).toHaveURL((backend === 'cloudflare' ? workerOrigin : aliyunOrigin)+'/');
+      await host.goto((backend === 'cloudflare' ? workerOrigin : aliyunOrigin)+'/');
+      await expect(host.locator('.current-line')).toContainText(backend==='cloudflare'?'Cloudflare':'阿里云内地');
       await host.getByRole('tab', {name: '创建房间', exact: true}).click();
       await host.getByLabel('你的昵称').fill(`房主${backend}`);
       await host.getByLabel('房间人数上限').selectOption('2');
@@ -150,10 +148,8 @@ for (const backend of ['cloudflare', 'aliyun'] as const) {
     try {
       const page = await context.newPage();
       for (const mode of ['practice', 'ai'] as const) {
-        await page.goto(entryOrigin);
-        const server = page.getByRole('radio', {name: backend === 'cloudflare' ? 'Cloudflare' : '阿里云内地', exact: true});
-        await expect(server).toBeEnabled(); await server.click();
-        await expect(page).toHaveURL((backend === 'cloudflare' ? workerOrigin : aliyunOrigin)+'/');
+        await page.goto((backend === 'cloudflare' ? workerOrigin : aliyunOrigin)+'/');
+        await expect(page.locator('.current-line')).toContainText(backend==='cloudflare'?'Cloudflare':'阿里云内地');
         await page.getByRole('tab', {name: mode === 'practice' ? '自己练习' : '人机对战', exact: true}).click();
         await page.getByLabel('你的昵称').fill(`冒烟${mode}`);
         if (mode === 'ai') await page.getByLabel('AI 人数', {exact: true}).selectOption('1');

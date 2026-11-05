@@ -54,7 +54,7 @@ test('共享预览标明 PR 和提交，手机布局保持可用', async ({page}
   await page.route('**/deployment.json',route=>route.fulfill({json:{target:'preview',commit:'a'.repeat(40),prNumber:23,runId:123}}));
   await page.goto(cfOrigin);
   await expect(page.getByRole('complementary',{name:'测试环境'})).toContainText('PR #23 · 提交 aaaaaaa');
-  await expect(page.getByRole('radio',{name:'阿里云内地',exact:true})).toBeEnabled();
+  await expect(page.locator('.current-line')).toContainText('Cloudflare');
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
 });
 
@@ -62,20 +62,23 @@ test('正式部署元数据不显示测试标记', async ({page}) => {
   await mockBackends(page,{cloudflare:true,aliyun:true});
   await page.route('**/deployment.json',route=>route.fulfill({json:{target:'production',commit:'a'.repeat(40),runId:123}}));
   await page.goto(cfOrigin);
-  await expect(page.getByRole('radio',{name:'Cloudflare',exact:true})).toBeEnabled();
+  await expect(page.locator('.current-line')).toContainText('可用');
   await expect(page.getByRole('complementary',{name:'测试环境'})).toHaveCount(0);
 });
 
-test('HTTPS 页仍可点击 HTTP 服务器，通过顶层跳转切服且不探测混合内容', async ({page}) => {
+test('游戏首页仅显示当前线路，切换服务器返回同线路统一大厅且不探测混合内容', async ({page}) => {
   await mockBackends(page,{cloudflare:true,aliyun:true});
   const insecureRequests:string[]=[];
   page.on('request',request=>{if(request.url().startsWith(aliOrigin))insecureRequests.push(request.url());});
   await page.goto(cfOrigin);
-  const ali=page.getByRole('radio',{name:'阿里云内地',exact:true});
-  await expect(ali).toBeEnabled(); await expect(ali).toContainText('切换入口');
-  await expect(ali).toContainText('未加密'); expect(insecureRequests).toEqual([]);
-  await ali.click(); await expect(page).toHaveURL(aliOrigin+'/');
-  await expect(ali).toHaveAttribute('aria-checked','true');
+  await expect(page.getByRole('radiogroup',{name:'服务器',exact:true})).toHaveCount(0);
+  await expect(page.locator('.current-line')).toContainText('Cloudflare');
+  await page.getByText('线路设置',{exact:true}).click();
+  await expect(page.getByRole('link',{name:'切换服务器',exact:true})).toHaveAttribute('href','https://magical-athlete.qiuh23.workers.dev/lobby/#choices');
+  expect(insecureRequests).toEqual([]);
+  await page.goto(aliOrigin);
+  await expect(page.locator('.current-line')).toContainText('阿里云内地');
+  await expect(page.getByRole('link',{name:'返回游戏大厅',exact:true})).toHaveAttribute('href','https://magical-athlete-online.cn/');
   await expect(page.getByText('临时 HTTP 连接未加密。请保留当前入口以恢复本机房间身份。')).toBeVisible();
 });
 
@@ -89,8 +92,7 @@ test('跨入口邀请自动保留完整房间码，清除查询和片段且不�
   await expect(page.getByRole('button',{name:'加入这场胡闹',exact:true})).toBeEnabled();
   expect(documents).toHaveLength(2);
   expect(documents[1]).not.toMatch(/private|secret|attacker/);
-  await page.getByRole('radio',{name:'Cloudflare',exact:true}).click();
-  await expect(page).toHaveURL(cfOrigin+'/');
+  await expect(page.getByRole('link',{name:'返回游戏大厅',exact:true})).toHaveAttribute('href','https://magical-athlete-online.cn/');
 });
 
 test('跨入口观战邀请保留公开观战状态，刷新后仍预选观战且不携带令牌', async ({page}) => {
@@ -104,16 +106,14 @@ test('跨入口观战邀请保留公开观战状态，刷新后仍预选观战�
   await expect(page.getByRole('button',{name:'进入房间观战',exact:true})).toBeEnabled();
 });
 
-test('当前入口失败仍允许切往另一入口，不因远端不可探测而自动改选', async ({page}) => {
+test('当前入口失败不自动改线，建房禁用而大厅导航保留', async ({page}) => {
   await mockBackends(page,{cloudflare:false,aliyun:true});
   await page.goto(cfOrigin);
-  const cf=page.getByRole('radio',{name:'Cloudflare',exact:true}),ali=page.getByRole('radio',{name:'阿里云内地',exact:true});
-  await expect(cf).toBeDisabled();await expect(cf).toContainText('暂不可用');
-  await expect(cf).toHaveAttribute('aria-checked','true');await expect(ali).toBeEnabled();
+  await expect(page.locator('.current-line')).toContainText('Cloudflare');
+  await expect(page.locator('.current-line')).toContainText('暂不可用');
   await page.getByRole('tab',{name:'创建房间',exact:true}).click();
   await expect(page.getByRole('button',{name:'创建房间，召集朋友',exact:true})).toBeDisabled();
-  await ali.click();await expect(page).toHaveURL(aliOrigin+'/');
-  await expect(ali).toHaveAttribute('aria-checked','true');
+  await expect(page.getByRole('link',{name:'返回游戏大厅',exact:true})).toHaveAttribute('href','https://magical-athlete.qiuh23.workers.dev/lobby/');
 });
 
 test('本入口邀请等待初次探测完成，避免将检测中误报为连接失败', async ({page}) => {
@@ -125,7 +125,7 @@ test('本入口邀请等待初次探测完成，避免将检测中误报为连�
     await page.getByLabel('你的昵称').fill('本入口访客');
     const join=page.getByRole('button',{name:'加入这场胡闹',exact:true});
     await expect(join).toBeDisabled();
-    await expect(page.getByRole('radio',{name:'Cloudflare',exact:true})).toContainText('检测中');
+    await expect(page.locator('.current-line')).toContainText('检测中');
     finishProbe();await expect(join).toBeEnabled();await expect(page.getByRole('alert')).toHaveCount(0);
   } finally {
     // An assertion failure must also unblock the route-draining afterEach.
@@ -133,36 +133,27 @@ test('本入口邀请等待初次探测完成，避免将检测中误报为连�
   }
 });
 
-test('未部署不能切换，已部署远端入口无需依赖当前页探测', async ({page}) => {
-  const state={cloudflare:false,aliyun:false,aliyunEnabled:false};await mockBackends(page,state);
+test('线路设置重新检测保留当前入口与本机状态', async ({page}) => {
+  const state={cloudflare:true,aliyun:false,aliyunEnabled:false};await mockBackends(page,state);
+  await page.addInitScript(()=>localStorage.setItem('magical-athlete:backend-preference:v1','aliyun'));
   await page.goto(cfOrigin);
-  const ali=page.getByRole('radio',{name:'阿里云内地',exact:true});
-  await expect(ali).toContainText('未部署');await expect(ali).toBeDisabled();
-  await expect(page.getByText('当前入口连接失败，暂时无法在线建房。请重新检测或切换入口。')).toBeVisible();
-  state.aliyunEnabled=true;await page.getByRole('button',{name:'重新检测',exact:true}).click();
-  await expect(ali).toContainText('切换入口');await expect(ali).toBeEnabled();
+  await expect(page.locator('.current-line')).toContainText('Cloudflare');
+  await expect(page.locator('.current-line')).toContainText('可用');
+  await page.evaluate(()=>{(window as unknown as {navigationSentinel:string}).navigationSentinel='retained';});
+  await page.getByText('线路设置',{exact:true}).click();
+  state.cloudflare=false;await page.getByRole('button',{name:'重新检测',exact:true}).click();
+  await expect(page.locator('.current-line')).toContainText('暂不可用');
+  await expect(page.locator('.current-line')).toContainText('Cloudflare');
+  expect(await page.evaluate(()=>(window as unknown as {navigationSentinel:string}).navigationSentinel)).toBe('retained');
+  await expect(page).toHaveURL(cfOrigin+'/');
 });
 
 test('HTTP 可达但本入口实时连接失败仍禁止建房', async ({page}) => {
   await mockBackends(page,{cloudflare:true,aliyun:true,realtime:{cloudflare:false,aliyun:true}});
   await page.goto(cfOrigin);
-  await expect(page.getByRole('radio',{name:'Cloudflare',exact:true})).toContainText('暂不可用');
-  await expect(page.getByRole('radio',{name:'Cloudflare',exact:true})).toBeDisabled();
-  await expect(page.getByRole('radio',{name:'阿里云内地',exact:true})).toBeEnabled();
-});
-
-test('当前入口优先于旧偏好，同服点击不刷新，重新检测不导航', async ({page}) => {
-  const state={cloudflare:true,aliyun:true};await mockBackends(page,state);
-  await page.addInitScript(()=>localStorage.setItem('magical-athlete:backend-preference:v1','aliyun'));
-  await page.goto(cfOrigin);
-  const cf=page.getByRole('radio',{name:'Cloudflare',exact:true});
-  await expect(cf).toHaveAttribute('aria-checked','true');await expect(cf).toBeEnabled();
-  await page.evaluate(()=>{(window as unknown as {navigationSentinel:string}).navigationSentinel='retained';});
-  await cf.click();
-  state.cloudflare=false;await page.getByRole('button',{name:'重新检测',exact:true}).click();
-  await expect(cf).toContainText('暂不可用');await expect(cf).toHaveAttribute('aria-checked','true');
-  expect(await page.evaluate(()=>(window as unknown as {navigationSentinel:string}).navigationSentinel)).toBe('retained');
-  await expect(page).toHaveURL(cfOrigin+'/');
+  await expect(page.locator('.current-line')).toContainText('暂不可用');
+  await page.getByRole('tab',{name:'创建房间',exact:true}).click();
+  await expect(page.getByRole('button',{name:'创建房间，召集朋友',exact:true})).toBeDisabled();
 });
 
 test('未确认建房请求禁止切服和邀请自动跳转，原回执保持原样', async ({page}) => {
@@ -171,7 +162,9 @@ test('未确认建房请求禁止切服和邀请自动跳转，原回执保持�
   await page.addInitScript(value=>sessionStorage.setItem('magical-athlete:pending-create:v1',JSON.stringify(value)),receipt);
   await page.goto(cfOrigin+'/room/A-XYZ678');
   await expect(page.getByRole('button',{name:'重试原服务器建房',exact:true})).toBeVisible();
-  await expect(page.getByRole('radio',{name:'阿里云内地',exact:true})).toBeDisabled();
+  await expect(page.getByRole('link',{name:'返回游戏大厅',exact:true})).toHaveAttribute('aria-disabled','true');
+  await page.getByText('线路设置',{exact:true}).click();
+  await expect(page.getByRole('link',{name:'切换服务器',exact:true})).toHaveAttribute('aria-disabled','true');
   await expect(page).toHaveURL(cfOrigin+'/room/A-XYZ678');
   expect(await page.evaluate(()=>JSON.parse(sessionStorage.getItem('magical-athlete:pending-create:v1')!))).toEqual(receipt);
 });
@@ -179,12 +172,12 @@ test('未确认建房请求禁止切服和邀请自动跳转，原回执保持�
 for(const viewport of [{width:1440,height:1000},{width:390,height:844}]) {
   test(`选服和旧码确认在 ${viewport.width}px 可操作`, async ({page}) => {
     await page.setViewportSize(viewport);await mockBackends(page,{cloudflare:true,aliyun:true});await page.goto(cfOrigin);
-    await expect(page.getByRole('radio',{name:'Cloudflare',exact:true})).toHaveAttribute('aria-checked','true');
+    await expect(page.locator('.current-line')).toContainText('Cloudflare');
     await expect(page.getByRole('tab',{selected:true})).toHaveCount(0);
     await expect(page.locator('#entry-form')).toHaveCount(0);
-    await expect(page.getByRole('radio',{name:'阿里云内地',exact:true})).toBeEnabled();
-    mkdirSync('docs/qa/server-entry-switch',{recursive:true});
-    await page.screenshot({path:`docs/qa/server-entry-switch/servers-${viewport.width}.png`,fullPage:true});
+    await expect(page.getByRole('link',{name:'返回游戏大厅',exact:true})).toBeVisible();
+    mkdirSync('.local/game-entry-tests',{recursive:true});
+    await page.screenshot({path:`.local/game-entry-tests/servers-${viewport.width}.png`,fullPage:true});
     await page.getByRole('tab',{name:'现有房间',exact:true}).click();
     await page.getByLabel('房间码',{exact:true}).fill('ABC234');
     await expect(page.getByRole('group',{name:'六位旧房间码所属服务器'})).toBeVisible();

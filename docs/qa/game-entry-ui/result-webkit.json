@@ -1,0 +1,20 @@
+{
+  "result": "passed",
+  "sizes": [
+    "1440x1000",
+    "390x844",
+    "844x390"
+  ],
+  "errors": [],
+  "requests": 67,
+  "checks": [
+    "creation-in-flight blocks lobby navigation",
+    "compact line status",
+    "same-line lobby URLs",
+    "menu switch URLs",
+    "cancel keeps room",
+    "confirm navigation and browser Back restore same identity",
+    "foreign spectator invite ignores conflicting preference and removes private query",
+    "spectator refresh"
+  ]
+}
