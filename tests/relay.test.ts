@@ -56,7 +56,7 @@ class Context {
   getWebSocketAutoResponseTimestamp(socket:Socket){return socket.lastAutoResponseAt;}
   async ready(){await Promise.all(this.pending);}
 }
-async function instance(storage=new Storage(),sockets:Socket[]=[]){const ctx=new Context(storage);ctx.sockets=sockets;const relay=new worker.RoomRelay(ctx,{});await ctx.ready();return {ctx,relay};}
+async function instance(storage=new Storage(),sockets:Socket[]=[]){const ctx=new Context(storage);ctx.sockets=sockets;const relay=new worker.RoomRelay(ctx,{SECURITY_TEST_NO_LEDGER:true});await ctx.ready();return {ctx,relay};}
 async function create(maxPlayers=8){
   const env=await instance();const response=await env.relay.fetch(new Request('https://room.internal/create/ABC234',{method:'POST',body:JSON.stringify({name:'同名',maxPlayers,timeoutSeconds:120})}));
   assert.equal(response.status,201);return {...env,created:await response.json() as RelayJoinReply};
@@ -198,7 +198,7 @@ test('relay expires unauthenticated sockets, pauses without authority, and clear
   const restored=await instance(env.ctx.storage,env.ctx.sockets);await restored.relay.alarm();assert.equal(env.ctx.storage.values.size,1);assert.equal(socket.closeCode,4410);assert.equal((await env.ctx.storage.get<any>('closed')).reason,'host-away');
 });
 test('worker rejects cross-origin access and oversized or invalid room parameters',async()=>{
-  const env={ASSETS:{fetch:()=>new Response('asset')},ROOMS:{}};
+  const env={ASSETS:{fetch:()=>new Response('asset')},ROOMS:{},SECURITY_TEST_NO_LEDGER:true};
   const post=(payload:unknown,origin='https://game.test')=>new Request('https://game.test/api/browser/rooms',{method:'POST',headers:{Origin:origin},body:JSON.stringify(payload)});
   assert.equal((await worker.default.fetch(post({name:'玩家'},'https://elsewhere.test'),env)).status,403);
   assert.equal((await worker.default.fetch(post({name:'玩家',maxPlayers:9}),env)).status,400);
@@ -456,6 +456,44 @@ async function namespace(){
   }})}};
   return {env,instances,hooks};
 }
+
+test('stationmaster independently hides Worker chat for online peers, resend, old-room restore and closure while keeping its separate ledger',async()=>{
+  const ns=await namespace();ns.env.SECURITY_ADMIN_TOKEN='test_admin_secret_0123456789_ABCDEF';
+  const response=await worker.default.fetch(new Request('https://game.test/api/browser/rooms',{method:'POST',body:JSON.stringify({name:'原房主昵称',maxPlayers:2})}),ns.env);
+  assert.equal(response.status,201);const created=await response.json() as RelayJoinReply,code=created.identity.roomCode,entry=ns.instances.get(code)!,env={...entry,created};
+  const socket=await authenticate(env);socket.clear();
+  const send=(requestId:string)=>entry.relay.webSocketMessage(socket,JSON.stringify({type:'chat-send',requestId,clientMessageId:'same-id',text:'指定隐藏原文'}));
+  await send('send-1');assert.equal(socket.sent.at(-2)?.result?.ok??socket.sent.at(-1)?.result?.ok,true);
+  const oldRoom=await entry.ctx.storage.get<any>('room');
+  const admin=(input:unknown,secret=ns.env.SECURITY_ADMIN_TOKEN)=>worker.default.fetch(new Request('https://game.test/api/stationmaster/rooms/'+code,{method:'POST',headers:{Authorization:'Bearer '+secret},body:JSON.stringify(input)}),ns.env);
+  assert.equal((await admin({action:'inspect'},created.identity.token)).status,401);
+  assert.equal((await admin({action:'hide-chat',seq:999,reason:'不存在'})).status,404);
+  assert.equal((await admin({action:'hide-chat',seq:1,reason:'人工举报确认'})).status,200);
+  assert.equal(socket.sent.filter(message=>message.type==='chat').at(-1).messages[0].hidden,true);
+  socket.clear();await send('send-2');assert.equal(socket.sent.at(-1).result.ok,false);assert.equal(JSON.stringify(socket.sent).includes('指定隐藏原文'),false);
+  // Restore a room snapshot taken before moderation: independent ledger still wins.
+  await entry.ctx.storage.put('room',oldRoom);entry.relay=new worker.RoomRelay(entry.ctx,ns.env);await entry.ctx.ready();
+  const inspection=await (await admin({action:'inspect'})).json();assert.equal(inspection.messages[0].hidden,true);assert.equal(JSON.stringify(inspection).includes('指定隐藏原文'),false);
+  assert.equal((await admin({action:'restrict-member',memberId:created.identity.playerId,reason:'重复滥用'})).status,200);
+  const ledger=ns.instances.get('security-ledger-v1')!,before=(await ledger.ctx.storage.list({prefix:'security:event:'})).size;
+  assert.equal((await admin({action:'close-room',reason:'人工关闭'})).status,200);assert.equal(await entry.ctx.storage.get('room'),undefined);assert.ok((await ledger.ctx.storage.list({prefix:'security:event:'})).size>before);
+  const evidence=[...(await ledger.ctx.storage.list<any>({prefix:'security:event:'})).values()].filter(row=>row.evidence);assert.equal(evidence.length,1);assert.equal(evidence[0]!.evidence.text,'指定隐藏原文');
+});
+
+test('Worker required ledger write failure blocks new publication; independent alarms purge expired batches while held evidence survives',async()=>{
+  const ns=await namespace();ns.env.SECURITY_ADMIN_TOKEN='test_admin_secret_0123456789_ABCDEF';
+  const request=()=>worker.default.fetch(new Request('https://game.test/api/browser/rooms',{method:'POST',body:JSON.stringify({name:'房主',maxPlayers:2})}),ns.env);
+  const created=await (await request()).json() as RelayJoinReply,entry=ns.instances.get(created.identity.roomCode)!,env={...entry,created},socket=await authenticate(env),ledger=ns.instances.get('security-ledger-v1')!;
+  let meta=await ledger.ctx.storage.get<any>('security-meta');ledger.ctx.storage.failPut='security:event:'+String(meta.next).padStart(16,'0');
+  assert.equal((await request()).status,503);assert.equal([...ns.instances.keys()].filter(code=>/^[A-Z2-9]{6}$/.test(code)).length,1);
+  meta=await ledger.ctx.storage.get<any>('security-meta');ledger.ctx.storage.failPut='security:event:'+String(meta.next).padStart(16,'0');
+  await entry.relay.webSocketMessage(socket,JSON.stringify({type:'chat-send',requestId:'blocked',clientMessageId:'blocked',text:'不应发布'}));assert.equal((await entry.ctx.storage.get<any>('room')).chat?.messages.length??0,0);assert.match(socket.sent.at(-1).message,/必要安全记录/);
+  const events=[...(await ledger.ctx.storage.list<any>({prefix:'security:event:'})).values()],id=events[0]!.id;
+  assert.equal((await ledger.relay.fetch(new Request('https://security.internal/security/hold',{method:'POST',body:JSON.stringify({id,held:true})}))).status,200);
+  const saved=Date.now;try{Date.now=()=>Date.UTC(2030,0,1);await ledger.relay.alarm();const remaining=await ledger.ctx.storage.list<any>({prefix:'security:event:'});assert.equal(remaining.size,1);assert.equal([...remaining.values()][0]!.held,true);
+    await ledger.relay.fetch(new Request('https://security.internal/security/hold',{method:'POST',body:JSON.stringify({id,held:false})}));await ledger.relay.alarm();assert.equal((await ledger.ctx.storage.list({prefix:'security:event:'})).size,0);
+  }finally{Date.now=saved;}
+});
 async function listedRooms(env:any){const response=await worker.default.fetch(new Request('https://game.test/api/browser/rooms'),env);assert.equal(response.status,200);return (await response.json()).rooms as import('../src/shared/types.js').RoomSummary[];}
 test('private worker rooms remain joinable by code and count against capacity without directory disclosure',async()=>{
   const ns=await namespace(),config={...legacyRoomConfig(),visibility:'private' as const};
@@ -991,7 +1029,7 @@ test('worker background rule exception persists a diagnostic pause instead of re
 test('worker refuses an insufficient independent role pool before reserving capacity or persisting a ghost room',async()=>{
   const ns=await namespace(),config=legacyRoomConfig();config.characterPacks.original=false;config.characterPacks['leaf-fan']=true;
   const response=await worker.default.fetch(new Request('https://game.test/api/browser/rooms',{method:'POST',headers:{'CF-Connecting-IP':'insufficient-role-pool'},body:JSON.stringify({name:'资料验证',maxPlayers:8,config,requestId:crypto.randomUUID()})}),ns.env);
-  assert.equal(response.status,400);assert.match((await response.json()).error,/选秀32名，技能抽牌预留23名/);assert.equal(ns.instances.size,0);
+  assert.equal(response.status,400);assert.match((await response.json()).error,/选秀32名，技能抽牌预留23名/);assert.deepEqual([...ns.instances.keys()],['security-ledger-v1']);
 });
 
 test('directory returns JSON 400 and 409 across a DO boundary that strips uncaught exception types',async()=>{

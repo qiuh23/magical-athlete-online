@@ -229,7 +229,8 @@ function resumeDeferred(state: PlaybackState): PlaybackState {
  * rematch/reset, or missing event window restores the authoritative board.
  */
 export function receiveRoom(state: PlaybackState, room: RoomView, options: { reconnect?: boolean } = {}): PlaybackState {
-  if (room.code !== state.roomCode || options.reconnect) return createPlayback(room);
+  if(room.code===state.roomCode&&(room.contentRevision??0)<(state.confirmed.contentRevision??0))return state;
+  if (room.code !== state.roomCode || options.reconnect || (room.contentRevision??0)>(state.confirmed.contentRevision??0)) return createPlayback(room);
   if (room.version < state.version) return state;
   if (state.deferredRooms?.length) {
     const last = state.deferredRooms.at(-1)!;

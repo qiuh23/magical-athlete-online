@@ -17,8 +17,9 @@ export class PresentationEventStream {
     this.acknowledged=Math.min(cursor,this.cursor);this.retained=this.retained.filter(event=>event.id>this.acknowledged);
   }
   receive(room:RoomView):{room?:RoomView;afterId?:number} {
+    if(this.latest?.code===room.code&&(room.contentRevision??0)<(this.latest.contentRevision??0))return{};
     const target=room.logs.at(-1)?.id??0;
-    if(!this.latest||room.code!==this.latest.code||(room.version>=this.latest.version&&target<this.cursor)){
+    if(!this.latest||room.code!==this.latest.code||(room.contentRevision??0)>(this.latest.contentRevision??0)||(room.version>=this.latest.version&&target<this.cursor)){
       this.reset();this.latest=room;this.cursor=target;this.acknowledged=target;
       return{room:{...room,presentationEvents:[...room.logs]}};
     }

@@ -220,7 +220,7 @@ function connectConfiguredRoom(identity: Identity, onSnapshot: (room: RoomView) 
   socket.on('chat', (payload: {messages: NonNullable<RoomView['chat']>; latestId: number}) => community.update(payload,'live'));
   socket.on('connect', () => { community.update({connected: true}); chatSync(); });
   socket.on('disconnect', () => community.update({connected: false}));
-  socket.on('snapshot', (room: RoomView) => community.update({messages: room.chat, latestId: room.chatLatestId, renameRemaining: room.renameRemaining, name: room.players.find(player => player.id === identity.playerId)?.name ?? room.spectators?.find(viewer => viewer.id === identity.playerId)?.name},'history'));
+  socket.on('snapshot', (room: RoomView) => community.update({contentRevision:room.contentRevision??0,messages: room.chat, latestId: room.chatLatestId, renameRemaining: room.renameRemaining, name: room.players.find(player => player.id === identity.playerId)?.name ?? room.spectators?.find(viewer => viewer.id === identity.playerId)?.name},'history'));
   let closed = false;
   let expired = false;
   let kicked = false;

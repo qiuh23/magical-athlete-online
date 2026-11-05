@@ -9,6 +9,8 @@ ACCESS_CIDRS=${ACCESS_CIDRS:?Set IPv4 /32 sources, or explicit 0.0.0.0/0 with PU
 PUBLIC_HTTP_ACCESS=${PUBLIC_HTTP_ACCESS:-false}
 [[ $PUBLIC_HTTP_ACCESS == true || $PUBLIC_HTTP_ACCESS == false ]] || { echo 'PUBLIC_HTTP_ACCESS must be true or false.' >&2; exit 1; }
 SOURCE_DIR=$(cd -- "$(dirname -- "$0")/../.." && pwd)
+[[ -f /etc/nginx/conf.d/game-network-log.conf ]] || { echo 'Run the reviewed install-security.sh migration before changing game vhosts.' >&2; exit 1; }
+bash "$SOURCE_DIR/scripts/deploy/security-preflight.sh"
 valid_ipv4() {
     [[ $1 =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]] || return 1
     local octet

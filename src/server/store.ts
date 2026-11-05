@@ -1,6 +1,8 @@
 import { DatabaseSync } from 'node:sqlite';
 import { mkdirSync } from 'node:fs';
 import { dirname } from 'node:path';
+import { join } from 'node:path';
+import { SecurityStore } from './security-store.js';
 import type { Room, ActionReply } from '../shared/types.js';
 import type { RoomClosure } from '../shared/room-lifecycle.js';
 import { roomExpiry } from '../shared/room-lifecycle.js';
@@ -10,7 +12,9 @@ export interface CreationReceipt<T=unknown> { request:string; result:T }
 /** Acknowledgement is sent only after this synchronous FULL transaction commits. */
 export class Store {
   readonly db: DatabaseSync;
+  readonly security:SecurityStore;
   constructor(path: string, readonly multiplayerLimit = MULTIPLAYER_ROOM_LIMIT) {
+    this.security=new SecurityStore(path===':memory:'?':memory:':process.env.SECURITY_DB_PATH??join(dirname(path),'security.sqlite'));
     if (path !== ':memory:') mkdirSync(dirname(path), { recursive: true });
     this.db = new DatabaseSync(path);
     this.db.exec(`PRAGMA journal_mode=WAL; PRAGMA synchronous=FULL; PRAGMA foreign_keys=ON; PRAGMA busy_timeout=5000;
@@ -76,5 +80,5 @@ export class Store {
     this.transaction(()=>{this.save(room);this.db.prepare('INSERT INTO member_receipts VALUES(?,?,?,?,?,?)').run(room.code,id,kind,requestId,request,JSON.stringify(result));});
   }
   transaction(fn: () => void): void { this.db.exec('BEGIN IMMEDIATE'); try { fn(); this.db.exec('COMMIT'); } catch(e) { this.db.exec('ROLLBACK'); throw e; } }
-  close(): void { this.db.close(); }
+  close(): void { this.db.close();this.security.close(); }
 }
