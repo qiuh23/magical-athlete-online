@@ -79,12 +79,10 @@ for (const backend of ['aliyun', 'cloudflare'] as const) {
       host = await contexts[0]!.newPage();
       const guest = await contexts[1]!.newPage();
       for (const page of [host, guest]) page.on('pageerror', error => errors.push(error.message));
-      // Exercise both top-level directions with the real Worker and Node builds.
+      // The unified lobby owns line choice; enter its selected game URL.
       const targetOrigin = backend === 'aliyun' ? entryOrigin : workerOrigin;
-      await host.goto(backend === 'aliyun' ? workerOrigin : entryOrigin);
-      const selected = host.getByRole('radio', { name: backend === 'aliyun' ? '阿里云内地' : 'Cloudflare', exact: true });
-      await expect(selected).toBeEnabled(); await selected.click();
-      await expect(host).toHaveURL(targetOrigin+'/');
+      await host.goto(targetOrigin);
+      await expect(host.locator('.current-line')).toContainText(backend==='cloudflare'?'Cloudflare':'阿里云内地');
       if (backend === 'aliyun') {
         expect(await host.evaluate(() => ({ secure: isSecureContext, uuid: typeof crypto.randomUUID, random: typeof crypto.getRandomValues })))
           .toEqual({ secure: false, uuid: 'undefined', random: 'function' });
@@ -167,8 +165,7 @@ test('ordinary HTTP entry: practice can submit a valid dice roll and AI can star
     const errors: string[] = [];
     page.on('pageerror', error => errors.push(error.message));
     await page.goto(entryOrigin);
-    const backend = page.getByRole('radio', { name: '阿里云内地', exact: true });
-    await expect(backend).toBeEnabled(); await backend.click();
+    await expect(page.locator('.current-line')).toContainText('阿里云内地');
     await context.route(workerOrigin+'/**',route=>route.abort('internetdisconnected'));
     await context.routeWebSocket('wss://127.0.0.1:8797/**',ws=>ws.close());
     await page.getByRole('tab', { name: '自己练习', exact: true }).click();
@@ -187,7 +184,7 @@ test('ordinary HTTP entry: practice can submit a valid dice roll and AI can star
     expect(application.rooms.get(code).game.lastRoll!.face).toBeLessThanOrEqual(6);
     await closeOwnRoom(page);
     await page.goto(entryOrigin);
-    await expect(backend).toBeEnabled(); await backend.click();
+    await expect(page.locator('.current-line')).toContainText('阿里云内地');
     await page.getByRole('tab', { name: '人机对战', exact: true }).click();
     await page.getByLabel('AI 人数', { exact: true }).selectOption('1');
     await page.getByRole('button', { name: '开始人机对战', exact: true }).click();

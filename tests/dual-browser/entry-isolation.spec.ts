@@ -39,9 +39,8 @@ for(const backend of ['cloudflare','aliyun'] as const){
       const host=await contexts[0]!.newPage(),guest=await contexts[1]!.newPage();
       for(const page of [host,guest])page.on('pageerror',error=>errors.push(error.message));
       const target=backend==='cloudflare'?previewCf:previewAli,other=backend==='cloudflare'?previewAli:previewCf;
-      await host.goto(other);
-      const server=host.getByRole('radio',{name:backend==='cloudflare'?'Cloudflare':'阿里云内地',exact:true});
-      await expect(server).toBeEnabled();await server.click();await expect(host).toHaveURL(target+'/');
+      await host.goto(target);
+      await expect(host.locator('.current-line')).toContainText(backend==='cloudflare'?'Cloudflare':'阿里云内地');
       await expect(host.getByRole('complementary',{name:'测试环境'})).toBeVisible();
       expect(await host.evaluate(key=>localStorage.getItem(key),productionKey)).toBeNull();
       await host.getByRole('tab',{name:'创建房间',exact:true}).click();

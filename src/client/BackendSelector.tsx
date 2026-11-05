@@ -50,20 +50,29 @@ export function useBackendSelection(code = '') {
   return { statuses, selected, checking, refresh, choose, available: statuses.some(status => status.backend.id === selected && status.state === 'available') };
 }
 
+export function ServerChoices({ statuses, current = currentBackendId(), disabled = false, onSelect }: {
+  statuses?: BackendStatus[]; current?: BackendId; disabled?: boolean; onSelect: (id: BackendId) => void;
+}) {
+  const options = statuses ?? getBackends().map(backend => ({ backend, state: backend.enabled ? 'entry' : 'undeployed' }));
+  return <div className="server-choices" role="group" aria-label="切换服务器"><span className="server-choices-heading">切换服务器</span>{options.map(({ backend, state }) => {
+    const active = backend.id === current;
+    const available = backend.enabled && ['available', 'entry'].includes(state) && !!backendEntryUrl(backend);
+    return <button key={backend.id} type="button" className="server-choice" data-current={active || undefined} aria-label={active ? `当前线路 ${backendLabel(backend.id)}` : `切换到${backendLabel(backend.id)}`} disabled={disabled || active || !available} onClick={() => onSelect(backend.id)}><span>{backendLabel(backend.id)}</span><small>{active ? '当前线路' : available ? '切换入口' : '暂不可用'}</small></button>;
+  })}</div>;
+}
+
 export function BackendSelector({ statuses, selected, checking, onSelect, onRefresh, disabled = false }: {
   statuses: BackendStatus[]; selected: BackendId | null; checking: boolean; onSelect: (id: BackendId) => void; onRefresh: () => void; disabled?: boolean;
 }) {
-  return <section className="backend-settings" aria-label="连接设置">
-    <div className="backend-heading"><div><h2>服务器</h2><p>创建房间前选择连接位置</p></div><button type="button" className="text-button" disabled={disabled || checking} onClick={onRefresh}>{checking ? '正在检测…' : '重新检测'}</button></div>
-    <div className="backend-options" role="radiogroup" aria-label="服务器">
-      {statuses.map(status => <div className="backend-choice" key={status.backend.id}><button type="button" role="radio" aria-checked={selected === status.backend.id} aria-label={backendLabel(status.backend.id)} className={`backend-option state-${status.state}`} disabled={disabled || !['available','entry'].includes(status.state)} onClick={() => onSelect(status.backend.id)}>
-        <span className="backend-name"><strong>{backendLabel(status.backend.id)}</strong><span className="backend-status">{statusLabels[status.state]}</span></span>
-        <span className="backend-detail">{status.state === 'entry' ? status.entryUrl?.startsWith('http:') ? '打开临时 HTTP 入口，连接未加密' : '点击切换网页与游戏服务器' : status.state === 'available' && status.latencyMs !== undefined ? `连接延迟 ${Math.round(status.latencyMs)} ms` : status.state === 'checking' ? '正在检测 API 与实时连接' : status.state === 'undeployed' ? '尚未部署或开放' : status.error || '连接失败'}</span>
-        {selected === status.backend.id && <span className="backend-selected">已选择</span>}
-      </button></div>)}
-    </div>
-    <p className="backend-help">选择服务器会打开对应网页入口；有国内玩家时建议选择阿里云内地。</p>
+  const current = statuses.find(status => status.backend.id === selected);
+  return <section className="backend-line" aria-label="连接设置">
+    <p className="current-line" role="status"><span aria-hidden="true">●</span> 当前线路 · {backendLabel(selected ?? currentBackendId())}<small>{checking ? '连接检测中' : current ? statusLabels[current.state] : '连接未确认'}</small></p>
+    <details className="line-settings"><summary>线路设置</summary><div className="line-settings-content">
+      <p>切换服务器会打开对应游戏入口；好友邀请直接进入所属线路。</p>
+      <ServerChoices statuses={statuses} current={selected ?? undefined} disabled={disabled || checking} onSelect={onSelect} />
+      <button type="button" className="text-button" disabled={disabled || checking} onClick={onRefresh}>{checking ? '正在检测…' : '重新检测'}</button>
+    </div></details>
     {temporaryHttpPage() && <p className="backend-help">临时 HTTP 连接未加密。请保留当前入口以恢复本机房间身份。</p>}
-    {!checking && !statuses.some(status => status.state === 'available') && <p className="backend-failure" role="status">当前入口连接失败，暂时无法在线建房。请重新检测或切换入口。</p>}
+    {!checking && !statuses.some(status => status.state === 'available') && <p className="backend-failure" role="status">当前线路连接失败，请在线路设置中重新检测或切换服务器。</p>}
   </section>;
 }
