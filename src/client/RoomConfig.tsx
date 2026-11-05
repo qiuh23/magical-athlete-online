@@ -3,7 +3,7 @@ import { CHARACTERS } from '../shared/characters.js';
 import { CHARACTER_PACK_IDS, legacyRoomConfig, characterResources, racersPerPlayer, roomConfigError, type RoomConfig, type CharacterPackId, type ThreePlayerMode } from '../shared/room-config.js';
 import type { GameAction, RoomView } from '../shared/types.js';
 import './room-config.css';
-import { CompetitionFields, competitionSummary } from './CompetitionFields.js';
+import { CompetitionFields, competitionSettingsError, competitionSummary } from './CompetitionFields.js';
 
 const PACK_INFO: Record<CharacterPackId,{ name:string; kind:string; description:string; source:string }> = {
   original:{name:'基础角色包',kind:'原版',description:'CMYK 基础角色与已采用 FAQ 裁定。',source:'https://www.cmyk.games/products/magical-athlete'},
@@ -33,7 +33,7 @@ export function RoomConfigFields({config,onChange,disabled=false,players=6,pract
     </fieldset>
     </details>
     {(players>=7||players===3&&config.threePlayerMode==='double')&&!practice&&<p className="config-limitation">{players>=7?'7–8 人':'三人双角色'}为非官方变体，平衡性尚未验证。</p>}
-  </div>{error&&<p role="alert" className="form-error">{error}</p>}</div>;
+  </div>{error&&!competitionSettingsError(config)&&<p role="alert" className="form-error">{error}</p>}</div>;
 }
 
 export function RoomConfigPanel({room,busy,act}:{room:RoomView;busy:boolean;act:(action:GameAction)=>void}) {
@@ -41,7 +41,7 @@ export function RoomConfigPanel({room,busy,act}:{room:RoomView;busy:boolean;act:
   const key=JSON.stringify(current);
   const [draft,setDraft]=useState(current);
   useEffect(()=>setDraft(current),[key]);
-  const canEdit=room.role!=='spectator'&&room.selfId===room.hostId&&['lobby','finished'].includes(room.phase);
+  const canEdit=room.role!=='spectator'&&room.selfId===room.hostId&&(room.phase==='finished'||room.phase==='lobby'&&!room.configFrozen);
   const changed=JSON.stringify(draft)!==key;
   return <details className="room-config-panel"><summary><strong>{room.phase==='finished'?'下一局角色包与玩法':'本房间角色包与玩法'}</strong><span>{configSummary(current)}</span><small>{CHARACTER_PACK_IDS.filter(id=>current.characterPacks[id]).map(id=>`${PACK_INFO[id].name}（${PACK_INFO[id].kind}）`).join('、')}</small></summary>{canEdit?<><RoomConfigFields config={draft} onChange={setDraft} disabled={busy} players={room.maxPlayers} practice={room.mode==='practice'} /><div className="config-actions"><button type="button" className="button" disabled={busy||!changed||!!roomConfigError(draft,room.maxPlayers,room.mode==='practice')} onClick={()=>act({type:'configure',config:draft})}>保存本房间设置</button><p>{room.phase==='lobby'?'修改后全员需要重新准备；开始选秀后锁定完整赛程。':'保存后下一局生效，上局结果保持可查。'}</p></div></>:<><p>{room.configFrozen?'本局配置已锁定至全部场次结束。':'房主可在开始选秀前调整设置，修改后所有人重新准备。'}</p><RoomConfigFields config={current} onChange={()=>{}} disabled players={['lobby','finished'].includes(room.phase)?room.maxPlayers:room.players.length} practice={room.mode==='practice'} /></>}</details>;
 }

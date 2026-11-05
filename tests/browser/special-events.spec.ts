@@ -9,9 +9,10 @@ test.afterAll(async()=>app.close());
 test('special event setup explains automatic events, validates rounds and saves the chosen settings',async({page},info)=>{
  await page.goto(url);await page.getByRole('tab',{name:'创建房间',exact:true}).click();
  await page.getByLabel('你的昵称').fill('特殊赛事设置');
- await expect(page.getByText(/规则待确认|尚未取得完整事件表|待开放内容/)).toHaveCount(0);
+ await expect(page.locator('.competition-settings').getByText(/规则待确认|尚未取得完整事件表|待开放内容/)).toHaveCount(0);
+ await page.locator('.schedule-settings > summary').click();await page.locator('.event-settings > summary').click();
  await expect(page.locator('.event-status')).toContainText('当前关闭');
- await expect(page.locator('.event-instructions')).toContainText('系统自动抽取');
+ await expect(page.locator('.special-event-settings')).toContainText('自动抽取');
  await page.getByRole('checkbox',{name:'启用 36 项粉丝事件（网页适配）'}).check();
  await expect(page.getByRole('checkbox',{name:'第 3 场',exact:true})).toBeChecked();
  await expect(page.locator('.config-main .schedule-preview li').nth(2)).toContainText('Thrilling Thirds');
@@ -22,6 +23,7 @@ test('special event setup explains automatic events, validates rounds and saves 
  await page.getByRole('checkbox',{name:'第 3 场',exact:true}).check();
  await page.getByRole('checkbox',{name:'第 1 场',exact:true}).check();
  await page.getByRole('button',{name:/返回首页（保留设置）/}).click();await page.getByRole('tab',{name:'创建房间',exact:true}).click();
+ await page.locator('.schedule-settings > summary').click();await page.locator('.event-settings > summary').click();
  await expect(page.getByRole('checkbox',{name:'第 1 场',exact:true})).toBeChecked();await expect(page.getByRole('checkbox',{name:'第 3 场',exact:true})).toBeChecked();
  await expect(page.locator('.event-status')).toContainText('第 1、3 场各抽取 1 项');
  await page.screenshot({path:info.outputPath('special-event-setup-desktop.png'),fullPage:true});
@@ -31,6 +33,7 @@ test('special event setup explains automatic events, validates rounds and saves 
  const code=page.url().split('/').at(-1)!.replace(/^[CA]-/,'');
  expect(app.rooms.get(code).game.config?.competition?.thrillingThirds).toEqual({enabled:true,rounds:[1,3]});
  await page.reload();await page.locator('.room-config-panel > summary').click();
+ await page.locator('.schedule-settings > summary').click();await page.locator('.event-settings > summary').click();
  await expect(page.locator('.event-status')).toContainText('第 1、3 场各抽取 1 项');
  await page.getByRole('checkbox',{name:'启用 36 项粉丝事件（网页适配）'}).uncheck();
  await expect(page.getByRole('group',{name:'特殊赛事适用场次'})).toHaveCount(0);
