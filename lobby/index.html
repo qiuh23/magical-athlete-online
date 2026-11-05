@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="description" content="和朋友一起玩胡闹运动会与巫师牌。选择服务器，开启一局。">
+  <meta name="description" content="胡闹运动会、巫师牌与筹备中的卡坦岛好友桌。选择服务器，和朋友开启一局。">
   <meta name="referrer" content="no-referrer">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
   <title>一起玩 · 游戏大厅</title>
@@ -15,7 +15,7 @@
   <div class="page">
     <header><a class="brand" href="./" aria-label="一起玩，返回大厅"><span class="brand-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>一起玩<span class="brand-caption">游戏大厅</span></a><span class="header-note">好朋友，好对手。</span></header>
     <main>
-      <div class="intro"><h1>朋友到齐，快乐开场。</h1><p class="subtitle">一场出人意料的竞速，一局恰到好处的预测。<br>选个游戏，和朋友坐到同一桌。</p></div>
+      <div class="intro"><h1>朋友到齐，快乐开场。</h1><p class="subtitle">竞速、预测牌局，还有一座等待开拓的小岛。<br>选个游戏，和朋友坐到同一桌。</p></div>
       <section id="choices" aria-busy="true" aria-label="选择游戏入口">
         <div class="server-panel"><fieldset aria-describedby="server-message"><legend>选择服务器</legend><div class="server-options">
           <label class="server"><input type="radio" name="server" value="aliyun" disabled><span><strong>国内服务器<span class="tag">阿里云</span></strong><small data-server-status="aliyun">正在确认开放状态…</small></span><span class="check" aria-hidden="true"></span></label>
@@ -40,6 +40,10 @@
           <a class="game wizard" data-game="wizard" aria-disabled="true" aria-label="巫师牌，进入游戏">
             <div class="art cards" aria-hidden="true"><img src="./art/wizard.svg" width="640" height="360" alt=""></div>
             <div class="game-content"><div class="game-title"><h3>巫师牌</h3><span class="game-type">预测赢墩 · 跟色出牌</span></div><p class="game-description">先预测自己能赢几墩，再跟色出牌。<br>预测准确才能得分，多赢、少赢都会扣分。</p><div class="game-footer"><span class="game-mode">个人练习 / 好友联机</span><span class="action">正在读取入口…</span></div></div>
+          </a>
+          <a class="game catan" data-game="catan" aria-disabled="true" aria-label="卡坦岛好友桌，未上线">
+            <div class="art island" aria-hidden="true"><img src="./art/catan.svg" width="640" height="360" alt=""></div>
+            <div class="game-content"><div class="game-title"><h3>卡坦岛好友桌</h3><span class="game-type">资源交易 · 岛屿建设</span></div><p class="game-description">收集资源、协商交易，铺路建造你的城镇。<br>和朋友在六角小岛上，争取关键的十分。</p><div class="game-footer"><span class="game-mode">3–4 人 / 电脑练习</span><span class="action">未上线 · 敬请期待</span></div></div>
           </a>
         </div>
         <p id="status" class="status" role="status">正在读取游戏入口…</p>

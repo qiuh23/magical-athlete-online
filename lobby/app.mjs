@@ -1,4 +1,4 @@
-import { validateConfig, readInvitation, entryURL, currentLobby, lobbyURL, savePreference } from './routing.mjs';
+import { gameInfo, validateConfig, readInvitation, entryURL, currentLobby, lobbyURL, savePreference } from './routing.mjs';
 
 const labels = { aliyun: '国内服务器（阿里云）', cloudflare: 'Cloudflare' };
 const status = document.querySelector('#status');
@@ -27,7 +27,7 @@ function render() {
     // Every game link belongs to this page's server. A cross-server invitation
     // first moves the whole page to its matching lobby below.
     const href = entryURL(config, game, current, invitation);
-    const gameName = game === 'athlete' ? '胡闹运动会' : '巫师牌';
+    const gameName = gameInfo[game].name;
     if (href) {
       link.href = href;
       link.removeAttribute('aria-disabled');
@@ -37,7 +37,7 @@ function render() {
     } else {
       link.removeAttribute('href');
       link.setAttribute('aria-disabled', 'true');
-      link.querySelector('.action').textContent = invitation && invitation.game !== game ? '邀请属于另一款游戏' : '暂未开放';
+      link.querySelector('.action').textContent = invitation && invitation.game !== game ? '邀请属于另一款游戏' : game === 'catan' ? '未上线 · 敬请期待' : '暂未开放';
       link.setAttribute('aria-label', `${gameName}，暂不可进入`);
     }
   }
@@ -75,7 +75,7 @@ try {
   }
   if (invitation) {
     document.querySelector('#invitation').hidden = false;
-    document.querySelector('#invite-details').textContent = `${invitation.game === 'athlete' ? '胡闹运动会' : '巫师牌'} · ${labels[invitation.server]} · ${invitation.server === 'aliyun' ? 'A' : 'C'}-${invitation.room} · ${invitation.watch ? '观战' : '加入房间'}`;
+    document.querySelector('#invite-details').textContent = `${gameInfo[invitation.game].name} · ${labels[invitation.server]} · ${invitation.server === 'aliyun' ? 'A' : 'C'}-${invitation.room} · ${invitation.watch ? '观战' : '加入房间'}`;
   }
   render();
   document.querySelector('#choices').removeAttribute('aria-busy');

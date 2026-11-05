@@ -3,19 +3,19 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 // Browser-native, dependency-free modules are also exercised by the build.
 // @ts-ignore JavaScript module tested directly.
-import { validateConfig, readInvitation, entryURL, readPreference, savePreference, currentLobby, lobbyURL } from '../lobby/routing.mjs';
+import { games, gameInfo, validateConfig, readInvitation, entryURL, readPreference, savePreference, currentLobby, lobbyURL } from '../lobby/routing.mjs';
 
 const config = JSON.parse(readFileSync(new URL('../lobby/config.json', import.meta.url), 'utf8'));
 const active = structuredClone(config);
 active.lobbies.aliyun.enabled = true;
-for (const game of ['athlete', 'wizard']) active.entries[game].aliyun.enabled = true;
+for (const game of games) for (const server of ['aliyun', 'cloudflare']) active.entries[game][server].enabled = true;
 const blocked = structuredClone(config);
 blocked.lobbies.aliyun.enabled = false;
-for (const game of ['athlete', 'wizard']) blocked.entries[game].aliyun.enabled = false;
+for (const game of games) blocked.entries[game].aliyun.enabled = false;
 
-test('大厅四个受信入口独立，待上线国内HTTPS不会提前开放', () => {
+test('大厅六个受信入口独立，待上线国内HTTPS不会提前开放', () => {
   const trusted = validateConfig(active);
-  for (const game of ['athlete', 'wizard']) for (const server of ['aliyun', 'cloudflare']) {
+  for (const game of games) for (const server of ['aliyun', 'cloudflare']) {
     const url = new URL(entryURL(trusted, game, server));
     assert.equal(url.origin, active.entries[game][server].origin);
     assert.equal(url.protocol, 'https:');
@@ -56,10 +56,10 @@ test('当前大厅由受信网页网址确定，偏好不会把同一网页改�
   }
 });
 
-test('四种游戏/服务器邀请保留房间与观战，丢弃令牌和任意跳转', () => {
-  for (const game of ['athlete', 'wizard']) for (const [server, prefix] of [['aliyun', 'A'], ['cloudflare', 'C']]) {
-    const code = game === 'athlete' ? 'ABC234' : 'ABCD2345';
-    for (const watch of [false, true]) {
+test('三款游戏/两种服务器邀请保留房间与受支持的观战，丢弃令牌和任意跳转', () => {
+  for (const game of games) for (const [server, prefix] of [['aliyun', 'A'], ['cloudflare', 'C']]) {
+    const code = game === 'wizard' ? 'ABCD2345' : 'ABC234';
+    for (const watch of gameInfo[game].watch ? [false, true] : [false]) {
       const invite = readInvitation(`?game=${game}&room=${prefix}-${code}&watch=${watch ? '1' : '0'}&token=secret&redirect=https://evil.test#private`);
       assert.equal(invite.server, server);
       const href = entryURL(active, game, server, invite);
@@ -107,4 +107,27 @@ test('偏好只是可选体验，邀请不受偏好影响，存储被禁用时�
   assert.equal(readInvitation('?game=athlete&room=A-ABC234').server, 'aliyun');
   assert.equal(readPreference(undefined), 'aliyun');
   assert.doesNotThrow(() => savePreference(undefined, 'cloudflare'));
+});
+
+
+test('卡坦岛在实际配置保持关闭，拒绝观战与错误长度/易混淆房码，邀请原服封闭失败', () => {
+  const production = validateConfig(config);
+  for (const [server,prefix] of [['aliyun','A'],['cloudflare','C']]) {
+    const invite = readInvitation(`?game=catan&room=${prefix}-ABC234&token=secret`);
+    assert.equal(entryURL(production, 'catan', server), null);
+    assert.equal(entryURL(production, 'catan', server, invite), null);
+    assert.equal(lobbyURL(production, server, invite), null);
+    const url = new URL(entryURL(active, 'catan', server, invite));
+    assert.equal(url.search, `?room=${prefix}-ABC234`);
+    assert.equal(url.hash, '');
+    assert.equal(entryURL(active, 'catan', server, {...invite,watch:true}), null);
+    assert.throws(() => readInvitation(`?game=catan&room=${prefix}-ABC234&watch=1`));
+  }
+  for (const code of ['ABCDEI','ABCO23','ABC23456']) assert.throws(() => readInvitation(`?game=catan&room=A-${code}`));
+  const extra = structuredClone(active); extra.entries.unknown=extra.entries.catan;
+  assert.throws(() => validateConfig(extra));
+  const aliased = structuredClone(active); aliased.entries.catan.aliyun.origin=aliased.entries.catan.cloudflare.origin;
+  assert.throws(() => validateConfig(aliased));
+  const missing = structuredClone(active); delete missing.entries.catan;
+  assert.throws(() => validateConfig(missing));
 });

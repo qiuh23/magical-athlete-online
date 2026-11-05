@@ -16,6 +16,7 @@ async function sites(page: Page, active = false, extraOrigin?: string) {
   // production flags. Disabled-server coverage remains after launch.
   config.lobbies.aliyun.enabled = active;
   config.entries.athlete.aliyun.enabled = config.entries.wizard.aliyun.enabled = active;
+  config.entries.catan.aliyun.enabled = config.entries.catan.cloudflare.enabled = active;
   await page.route('**/*', async route => {
     const url = new URL(route.request().url());
     const lobby = url.origin === new URL(cfLobby).origin && url.pathname.startsWith('/lobby/') ? cfLobby
@@ -71,7 +72,7 @@ test('320/390窄屏、横屏和桌面：当前Cloudflare明确，国内暂未开
   expect(external).toEqual([]); expect(errors).toEqual([]); expect(failures).toEqual([]);
 });
 
-test('双大厅切换真实改变整页网址，来源优先偏好；四游戏入口同服且刷新不跳回', async ({page}) => {
+test('双大厅切换真实改变整页网址，来源优先偏好；三款游戏六个入口同服且刷新不跳回', async ({page}) => {
   const config = await sites(page, true);
   await ready(page, cfLobby+'?token=secret&redirect=https://evil.test#private');
   await page.evaluate(() => localStorage.setItem('games-lobby:server:v1','aliyun'));
@@ -87,7 +88,7 @@ test('双大厅切换真实改变整页网址，来源优先偏好；四游戏�
   await expect(page).toHaveURL(cnLobby);
   await page.getByRole('radio',{name:'Cloudflare'}).check();
   await expect(page).toHaveURL(cfLobby);
-  for (const server of ['aliyun','cloudflare']) for (const game of ['athlete','wizard']) {
+  for (const server of ['aliyun','cloudflare']) for (const game of ['athlete','wizard','catan']) {
     await ready(page, server === 'aliyun' ? cnLobby : cfLobby);
     const href = config.entries[game][server].origin+'/';
     await expect(page.locator(`[data-game="${game}"]`)).toHaveAttribute('href',href);
@@ -99,8 +100,8 @@ test('双大厅切换真实改变整页网址，来源优先偏好；四游戏�
 
 test('邀请跨大厅只跳一次，游戏/服务器/观战高于偏好且不携带令牌，刷新恢复', async ({page}) => {
   await sites(page, true);
-  for (const game of ['athlete','wizard']) for (const [server,prefix] of [['aliyun','A'],['cloudflare','C']]) for (const watch of [false,true]) {
-    const code = game === 'athlete' ? 'ABC234' : 'ABCD2345';
+  for (const game of ['athlete','wizard','catan']) for (const [server,prefix] of [['aliyun','A'],['cloudflare','C']]) for (const watch of game === 'catan' ? [false] : [false,true]) {
+    const code = game === 'wizard' ? 'ABCD2345' : 'ABC234';
     const start = server === 'aliyun' ? cfLobby : cnLobby;
     const target = server === 'aliyun' ? cnLobby : cfLobby;
     await ready(page, start);
@@ -174,7 +175,7 @@ test('禁用存储仍可切换，冲突邀请/错误配置/非受信页面安全
   await expect(page.getByRole('alert')).toContainText('配置');
 });
 
-test('精致大厅在常见断点保留插画、独立标题和44px入口，桌面两卡完整位于首屏', async ({page}) => {
+test('精致大厅在常见断点保留插画、独立标题和44px入口，桌面三卡完整位于首屏', async ({page}) => {
   await sites(page, true);
   for (const [width,height] of [[1366,768],[320,720],[390,844],[600,960],[768,1024],[1024,768],[844,390]]) {
     await page.setViewportSize({width,height});
@@ -200,7 +201,7 @@ test('精致大厅在常见断点保留插画、独立标题和44px入口，桌�
       return {overflow:document.documentElement.scrollWidth > innerWidth,images,pairs,cards};
     });
     expect(layout.overflow, `${width}px must not overflow horizontally`).toBe(false);
-    expect(layout.images).toHaveLength(2);
+    expect(layout.images).toHaveLength(3);
     for (const image of layout.images) {
       expect(image.width).toBe(640);
       expect(image.height).toBe(360);
@@ -258,11 +259,48 @@ test('触屏直接轻点可见入口按钮，按当前大厅线路进入对应�
   try {
     const page = await context.newPage();
     const config = await sites(page, true);
-    for (const server of ['aliyun','cloudflare']) for (const game of ['athlete','wizard']) {
+    for (const server of ['aliyun','cloudflare']) for (const game of ['athlete','wizard','catan']) {
       await ready(page, server === 'aliyun' ? cnLobby : cfLobby);
       await page.locator(`[data-game="${game}"] .action`).tap();
       await expect(page).toHaveURL(config.entries[game][server].origin+'/');
       await expect(page.getByText('游戏入口测试替身')).toBeVisible();
     }
   } finally { await context.close(); }
+});
+
+
+test('卡坦岛未上线时两端都不能进入，观战邀请明确报错且不跳往其他服', async ({page}) => {
+  await sites(page);
+  for (const url of [cfLobby,cnLobby]) {
+    await ready(page,url);
+    await expect(page.locator('[data-game="catan"]')).not.toHaveAttribute('href');
+    await expect(page.locator('[data-game="catan"] .action')).toHaveText('未上线 · 敬请期待');
+  }
+  const invite=cfLobby+'?game=catan&room=A-ABC234';
+  await ready(page,invite);
+  await expect(page).toHaveURL(invite);
+  await expect(page.locator('#invite-details')).toContainText('卡坦岛好友桌');
+  await expect(page.locator('[data-game="catan"]')).not.toHaveAttribute('href');
+  await page.goto(cfLobby+'?game=catan&room=C-ABC234&watch=1');
+  await expect(page.getByRole('alert')).toContainText('暂不支持观战');
+  await expect(page.locator('[data-game="catan"]')).not.toHaveAttribute('href');
+});
+
+
+test('交付配置两大厅原游戏开放、卡坦岛关闭，桌面与手机截图', async ({page}) => {
+  await sites(page,true);
+  const release=JSON.parse(await readFile(resolve(directory,'config.json'),'utf8'));
+  await page.route('**/config.json',route=>route.fulfill({json:release}));
+  for (const [width,height] of [[1440,900],[390,844]]) {
+    await page.setViewportSize({width,height});
+    await ready(page,cnLobby);
+    await expect(page.locator('[data-game="athlete"]')).toHaveAttribute('href',release.entries.athlete.aliyun.origin+'/');
+    await expect(page.locator('[data-game="wizard"]')).toHaveAttribute('href',release.entries.wizard.aliyun.origin+'/');
+    await expect(page.locator('[data-game="catan"]')).not.toHaveAttribute('href');
+    await page.locator('[data-game="catan"] img').evaluate((image: HTMLImageElement)=>image.decode());
+    await page.screenshot({path:`.local/catan-lobby-${width}.png`,fullPage:true});
+    await page.getByRole('radio',{name:'Cloudflare'}).check();
+    await expect(page).toHaveURL(cfLobby);
+    await expect(page.locator('[data-game="catan"]')).not.toHaveAttribute('href');
+  }
 });
