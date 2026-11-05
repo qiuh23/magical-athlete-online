@@ -34,11 +34,11 @@
     "catan": {
       "aliyun": {
         "origin": "https://catan.magical-athlete-online.cn",
-        "enabled": false
+        "enabled": true
       },
       "cloudflare": {
         "origin": "https://catan-friends.qiuh23.workers.dev",
-        "enabled": false
+        "enabled": true
       }
     }
   }

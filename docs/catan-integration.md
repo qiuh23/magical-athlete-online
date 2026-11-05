@@ -1,5 +1,7 @@
 # 卡坦岛接入与上线门禁（2026-11-05）
 
+> 后续上线阶段：用户已明确批准合并 PR、双端部署及真实验收通过后启用入口。大厅 PR #52 与卡坦岛 PR #1 已合并并完成首次双端发布；独立 DNS、TLS、服务、OIDC/STS 发布身份、Cloudflare Worker 已核验。当前准备在验收完成后通过本次配置更新开放两服入口；下文“只准备代码/待授权”保留为初始阶段记录，不能覆盖这项后续授权。最终真实验收与回滚结果在合并本次启用配置前补充。
+
 本次只准备代码与 PR。两个大厅中的卡坦岛均为 `enabled:false`，显示“未上线 · 敬请期待”；没有合并、修改生产、创建线上测试房或购买服务。不可把本地验证当作生产验收。
 
 ## 本次改动
@@ -31,7 +33,7 @@
 - `npm run typecheck:release`、`npm run build` 通过；构建既有大包提示，不新增依赖。
 - `node --import tsx --test tests/lobby.test.ts tests/lobby-resources.test.ts`：7/7，含六个入口、卡坦岛关闭、服务器冲突/参数净化/错误配置、资源白名单、两份产物一致。
 - `playwright test tests/browser/lobby.spec.ts`：11/11，覆盖双大厅整页切换/刷新、模拟启用后的三游戏六入口/触屏、十种合法邀请组合、卡坦岛观战拒绝、存储受限、配置漂移终止循环以及 320–1440px 布局。
-- [桌面截图](qa/catan-lobby/desktop.png)、[手机截图](qa/catan-lobby/mobile.png) 是本地浏览器拦截生产形状 URL 的交付配置，原两个游戏开放、卡坦岛关闭。截图不是生产、真实手机或 Safari 验收。
+- [桌面截图](qa/catan-lobby/desktop.png)、[手机截图](qa/catan-lobby/mobile.png) 是本地浏览器拦截生产形状 URL 的启用配置，三个游戏均按本服入口开放；关闭状态继续用独立 fixture 测试。截图不是生产、真实手机或 Safari 验收。
 - 卡坦岛 Node/Worker 规则、网络、浏览器与持久化验证详见其 PR；生产环境须在授权后验证。
 
 ## 回滚
