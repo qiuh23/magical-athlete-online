@@ -173,3 +173,96 @@ test('禁用存储仍可切换，冲突邀请/错误配置/非受信页面安全
   await page.goto(cfLobby);
   await expect(page.getByRole('alert')).toContainText('配置');
 });
+
+test('精致大厅在常见断点保留插画、独立标题和44px入口，桌面两卡完整位于首屏', async ({page}) => {
+  await sites(page, true);
+  for (const [width,height] of [[1366,768],[320,720],[390,844],[600,960],[768,1024],[1024,768],[844,390]]) {
+    await page.setViewportSize({width,height});
+    await ready(page, cnLobby);
+    const layout = await page.evaluate(async () => {
+      const box = (element: Element) => {
+        const {left,top,right,bottom,width,height} = element.getBoundingClientRect();
+        return {left,top,right,bottom,width,height};
+      };
+      const images = await Promise.all([...document.querySelectorAll<HTMLImageElement>('.art > img')].map(async image => {
+        await image.decode();
+        return {width:image.naturalWidth,height:image.naturalHeight,box:box(image)};
+      }));
+      const pairs = [['.intro h1','.subtitle'],['.game-heading h2','.selection']].map(([a,b]) => [box(document.querySelector(a)!),box(document.querySelector(b)!)]);
+      const cards = [...document.querySelectorAll('.game')].map(card => {
+        const title = box(card.querySelector('h3')!);
+        const type = box(card.querySelector('.game-type')!);
+        const mode = box(card.querySelector('.game-mode')!);
+        const action = box(card.querySelector('.action')!);
+        pairs.push([title,type],[mode,action]);
+        return {card:box(card),title,type,action};
+      });
+      return {overflow:document.documentElement.scrollWidth > innerWidth,images,pairs,cards};
+    });
+    expect(layout.overflow, `${width}px must not overflow horizontally`).toBe(false);
+    expect(layout.images).toHaveLength(2);
+    for (const image of layout.images) {
+      expect(image.width).toBe(640);
+      expect(image.height).toBe(360);
+      expect(image.box.width).toBeGreaterThan(0);
+      expect(image.box.height).toBeGreaterThan(0);
+    }
+    for (const [a,b] of layout.pairs) {
+      const overlapWidth = Math.min(a.right,b.right)-Math.max(a.left,b.left);
+      const overlapHeight = Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top);
+      expect(overlapWidth > .5 && overlapHeight > .5, `${width}px text and controls must have separate space`).toBe(false);
+    }
+    for (const {card,title,type,action} of layout.cards) {
+      expect(action.height, `${width}px action must remain an easy tap target`).toBeGreaterThanOrEqual(44);
+      for (const child of [title,type,action]) {
+        expect(child.left).toBeGreaterThanOrEqual(card.left);
+        expect(child.right).toBeLessThanOrEqual(card.right);
+      }
+      if (width === 1366) {
+        expect(card.top).toBeGreaterThanOrEqual(0);
+        expect(card.bottom).toBeLessThanOrEqual(height);
+        expect(action.bottom).toBeLessThanOrEqual(height);
+      }
+    }
+  }
+});
+
+test('骰子局部动效响应悬停与键盘，移开复位并遵循减少动态效果设置', async ({page}) => {
+  await page.setViewportSize({width:1366,height:768});
+  await page.emulateMedia({reducedMotion:'no-preference'});
+  await sites(page, true);
+  await ready(page, cnLobby);
+  const card = page.locator('[data-game="athlete"]');
+  const die = card.locator('.die-body');
+  const transform = () => die.evaluate(element => getComputedStyle(element).transform);
+  expect(await transform()).toBe('none');
+  await card.hover();
+  await expect.poll(transform).not.toBe('none');
+  await page.mouse.move(0,0);
+  await expect.poll(transform).toBe('none');
+  await page.getByRole('radio',{name:'国内服务器'}).focus();
+  await page.keyboard.press('Tab');
+  await expect(card).toBeFocused();
+  await expect.poll(transform).not.toBe('none');
+  await page.emulateMedia({reducedMotion:'reduce'});
+  await expect.poll(transform).toBe('none');
+  expect(await die.evaluate(element => getComputedStyle(element).transitionDuration)).toBe('0s');
+  expect(await card.evaluate(element => getComputedStyle(element).transitionDuration)).toBe('0s');
+  await card.hover();
+  expect(await transform()).toBe('none');
+  expect(await card.evaluate(element => getComputedStyle(element).transform)).toBe('none');
+});
+
+test('触屏直接轻点可见入口按钮，按当前大厅线路进入对应游戏', async ({browser}) => {
+  const context = await browser.newContext({viewport:{width:390,height:844},hasTouch:true,isMobile:true});
+  try {
+    const page = await context.newPage();
+    const config = await sites(page, true);
+    for (const server of ['aliyun','cloudflare']) for (const game of ['athlete','wizard']) {
+      await ready(page, server === 'aliyun' ? cnLobby : cfLobby);
+      await page.locator(`[data-game="${game}"] .action`).tap();
+      await expect(page).toHaveURL(config.entries[game][server].origin+'/');
+      await expect(page.getByText('游戏入口测试替身')).toBeVisible();
+    }
+  } finally { await context.close(); }
+});
