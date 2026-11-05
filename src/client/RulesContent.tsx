@@ -12,7 +12,9 @@ export function RulesContent({ browser = false }: { browser?: boolean }) {
       <li><strong>掷骰与技能</strong>：轮到选手时，系统先自动处理回合开始能力；有选择就先选技能，完成后再点击掷骰。有人需要做决定时，比赛会等待对应玩家；点击棋子或头像读取完整技能。</li>
       <li><strong>赛道与积分</strong>：默认经典四场依次为温和、狂野、温和、狂野；自定义赛程按所选列表循环。狂野星格得1分，OUPS格绊倒，箭头格按正负提示移动。各场冠亚军得分为3/1、4/2、5/3、6/4；第二位冲线后立即结束当场。全部场次总分相同共享胜利。六场奖励依次为3/1、4/2、4/2、5/3、5/3、6/4，八场为3/1、3/1、4/2、4/2、5/3、5/3、6/4、6/4。</li>
     </ol>
-    <p>自定义赛程可选择 Mild Mile、Wild Wilds、Twisty Twirl、Squiggle、Boardwalks 和 Bridges 六张地图，地图与角色包独立选择。各地图效果及角色限制见<a href="/rules/competition.md" target="_blank" rel="noreferrer">赛程与地图规则</a>。</p>
+    <h3>比赛方案与网页适配</h3>
+    <p>经典赛为四场、两图轮换。官方巡回沿用官方四图顺序，其中 Whirly World 使用六组传送的网页适配布局，不是原图完整复刻。扩展巡回为八场项目赛制，包含 Squiggle、Boardwalks、Bridges 三张非官方粉丝地图；六／八场均按总积分排名，最后一场不加倍，平衡性尚未验证。</p>
+    <p>自定义赛程可选择 Mild Mile、Wild Wilds、Twisty Twirl、Whirly World、Squiggle、Boardwalks 和 Bridges 七张地图，地图与角色包独立选择。Squiggle、Boardwalks 禁用依赖未标定弯道的角色，Bridges 禁用依赖第一弯道的角色；限制覆盖整局选秀、抽牌及复制，具体角色会在当前设置中提示。各地图效果、选秀方式、奖励表和来源见<a href="/rules/competition.md" target="_blank" rel="noreferrer">完整赛程与地图规则</a>。</p>
     <h3>特殊赛事怎么用？</h3>
     <p>在建房设置中开启「特殊赛事 · Thrilling Thirds」，再勾选适用场次，默认第 3 场。每个勾选场次在所有人选好上场角色后，系统从 36 项粉丝事件中自动抽取一项，为所有选手增加本场公共规则。赛场会展开显示事件效果；有选择时按提示操作，其余效果自动结算，本场结束后失效。没有勾选的场次照常进行。完整事件与网页适配见<a href="/rules/special-events.md" target="_blank" rel="noreferrer">特殊赛事规则</a>。</p>
     <h3>角色包与房间交流</h3>

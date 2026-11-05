@@ -5,6 +5,9 @@ import { CHARACTER_BY_ID } from '../../src/shared/characters.js';
 import type { GameAction } from '../../src/shared/types.js';
 import { createGame, resolveTasks } from '../../src/engine/index.js';
 import { io } from 'socket.io-client';
+import { presetCompetition, expandedSchedule, REWARD_TIERS } from '../../src/shared/competition.js';
+import { legacyRoomConfig } from '../../src/shared/room-config.js';
+import { RACE_POINTS } from '../../src/shared/tracks.js';
 
 let app:ReturnType<typeof createApplication>,url:string;
 test.use({actionTimeout:20_000});
@@ -30,34 +33,38 @@ test('home shows only playable presets, preserves drafts, rejects invalid rotati
   await page.setViewportSize({width:1440,height:900});await page.goto(url);
   await expect(page.getByRole('checkbox')).toHaveCount(0);await page.screenshot({path:info.outputPath('home.png'),fullPage:true});
   await page.getByRole('tab',{name:'创建房间',exact:true}).click();
-  await expect(page.locator('.preset-select')).toHaveCount(3);
-  for(const name of ['经典赛','官方巡回','扩展巡回'])await expect(page.locator('.preset-select').filter({hasText:name})).toBeEnabled();
-  await expect(page.getByText(/社区锦标赛|规则待确认|待开放内容/)).toHaveCount(0);
+  await expect(page.getByRole('radio')).toHaveCount(3);
+  for(const name of ['经典赛','官方巡回','扩展巡回'])await expect(page.getByRole('radio',{name:new RegExp(name)})).toBeEnabled();
+  await expect(page.locator('.competition-settings').getByText(/社区锦标赛|待开放内容/)).toHaveCount(0);
   for(const [name,count] of [['官方巡回',4],['扩展巡回',8]] as const){
-    await page.locator('.preset-select').filter({hasText:name}).click();
-    await expect(page.locator('.preset-select').filter({hasText:name})).toHaveAttribute('aria-pressed','true');
+    await page.getByRole('radio',{name:new RegExp(name)}).check();
+    await expect(page.getByRole('radio',{name:new RegExp(name)})).toBeChecked();
     await expect(page.locator('.config-main .schedule-preview li')).toHaveCount(count);
     await expect(page.locator('.config-main .schedule-preview li').nth(3)).toContainText('Whirly World');
-    await expect(page.locator('.preset-select').filter({hasText:name})).toContainText('网页版布局');
+    await expect(page.locator('.preset-description')).toContainText('Whirly 为网页适配');
   }
-  await page.locator('.preset-select').filter({hasText:'经典赛'}).click();
+  await page.getByRole('radio',{name:/经典赛/}).check();
   await expect(page.locator('.config-main .schedule-preview li')).toHaveCount(4);
+  await page.locator('.pack-settings > summary').click();
   await page.getByRole('checkbox',{name:'Extra Mile',exact:true}).check();
-  await page.getByRole('button',{name:'修改经典赛赛程',exact:true}).click();
+  await page.locator('.schedule-settings > summary').click();
   await page.getByLabel('比赛场数').selectOption('8');
+  await page.locator('.map-library > summary').click();
   for(let i=0;i<6;i++)await page.getByRole('button',{name:'添加 Mild Mile',exact:true}).click();
   await expect(page.getByLabel('比赛场数')).toHaveValue('8');await expect(page.locator('.rotation-list li')).toHaveCount(8);
   await expect(page.getByRole('checkbox',{name:'Extra Mile',exact:true})).toBeChecked();
   await page.getByLabel('比赛场数').selectOption('4');await expect(page.locator('.rotation-list li')).toHaveCount(8);
-  await expect(page.locator('.config-summary')).toContainText('长度不能超过');
+  await expect(page.getByRole('alert')).toContainText('超过当前 4 场');
   await expect(page.getByRole('button',{name:'创建房间，召集朋友'})).toBeDisabled();
-  await page.getByRole('button',{name:'修改经典赛赛程',exact:true}).click();
+  await page.getByRole('radio',{name:/经典赛/}).check();
   await page.getByRole('button',{name:'移除第1项',exact:true}).click();await page.getByRole('button',{name:'移除第1项',exact:true}).click();
-  await expect(page.locator('.config-summary')).toContainText('不能为空');
+  await expect(page.getByRole('alert')).toContainText('不能为空');
   await page.getByRole('button',{name:'添加 Wild Wilds',exact:true}).click();await page.getByLabel('比赛场数').selectOption('6');
   await expect(page.locator('.config-main .schedule-preview li')).toHaveCount(6);
   await page.getByRole('button',{name:/返回首页（保留设置）/}).click();
   await page.getByRole('tab',{name:'创建房间',exact:true}).click();await expect(page.getByLabel('比赛场数')).toHaveValue('6');
+  await expect(page.locator('.schedule-settings')).not.toHaveAttribute('open','');
+  await page.locator('.schedule-settings > summary').click();
   await expect(page.locator('.rotation-list li')).toHaveCount(1);await page.screenshot({path:info.outputPath('setup-desktop.png'),fullPage:true});
   await page.setViewportSize({width:390,height:844});await page.screenshot({path:info.outputPath('setup-mobile.png'),fullPage:true});
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
@@ -65,15 +72,156 @@ test('home shows only playable presets, preserves drafts, rejects invalid rotati
   expect(errors).toEqual([]);
 });
 
-for(const [preset,name,count] of [['official','官方巡回',4],['extended','扩展巡回',8]] as const)test(`${preset} tour can be created from its card and restored`,async({page})=>{
+test('compact radios expose counts and limitations at phone, tablet and desktop sizes',async({page},info)=>{
+  await page.goto(url);await page.getByRole('tab',{name:'创建房间',exact:true}).click();
+  await expect(page.getByRole('radio',{name:'经典赛，4 场，2 张地图',exact:true})).toBeChecked();
+  await expect(page.getByRole('radio',{name:'官方巡回，4 场，4 张地图',exact:true})).toBeEnabled();
+  await expect(page.getByRole('radio',{name:'扩展巡回，8 场，7 张地图',exact:true})).toBeEnabled();
+  await expect(page.locator('.competition-settings > .preset-description')).toHaveCount(1);
+  await expect(page.locator('.schedule-settings')).not.toHaveAttribute('open','');
+  await expect(page.locator('.event-settings')).not.toHaveAttribute('open','');
+  await expect(page.locator('.schedule-preview-settings')).not.toHaveAttribute('open','');
+  await expect(page.getByRole('button',{name:/修改.*赛程/})).toHaveCount(0);
+  await expect(page.getByLabel('比赛场数')).not.toBeVisible();
+  for(const width of [320,360,390,430,768,1440]){
+    await page.setViewportSize({width,height:900});
+    for(const option of await page.locator('.preset-option').all()){
+      const box=await option.boundingBox();expect(box).toBeTruthy();expect(box!.height).toBeGreaterThanOrEqual(44);expect(box!.height).toBeLessThanOrEqual(54);
+    }
+    expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
+    const box=await page.locator('.competition-settings').boundingBox();expect(box!.height).toBeLessThan(370);
+    if(width===390||width===1440){
+      await page.locator('.competition-settings').evaluate(element=>element.scrollIntoView({block:'start'}));
+      await page.locator('.competition-settings').screenshot({path:info.outputPath(`picker-classic-${width}.png`)});
+    }
+  }
+  await page.setViewportSize({width:390,height:844});await page.getByRole('radio',{name:/扩展巡回/}).check();
+  await expect(page.locator('.preset-description')).toHaveText('含粉丝地图与项目赛制；Whirly 为网页适配。');
+  await expect(page.getByRole('note')).toContainText('当前地图禁用');
+  await page.locator('.competition-settings').evaluate(element=>element.scrollIntoView({block:'start'}));
+  await page.locator('.competition-settings').screenshot({path:info.outputPath('picker-extended-390.png')});
+  await page.getByRole('radio',{name:/官方巡回/}).check();await expect(page.locator('.preset-description')).toContainText('Whirly 为网页适配');
+  await expect(page.getByRole('note')).toHaveCount(0);
+  // Native radio arrow navigation changes the selection as well as focus.
+  await page.getByRole('radio',{name:/官方巡回/}).focus();await page.keyboard.press('ArrowLeft');
+  await expect(page.getByRole('radio',{name:/经典赛/})).toBeChecked();
+});
+
+test('shortening a match preserves maps and special-event rounds until explicitly repaired',async({page},info)=>{
+  await page.setViewportSize({width:390,height:844});await page.goto(url);
+  await page.getByRole('tab',{name:'创建房间',exact:true}).click();await page.getByLabel('你的昵称').fill('保留赛程');await page.getByLabel('房间人数上限').selectOption('3');
+  await page.getByRole('radio',{name:/扩展巡回/}).check();
+  await page.locator('.schedule-settings > summary').click();await page.locator('.event-settings > summary').click();
+  await page.getByRole('checkbox',{name:'启用 36 项粉丝事件（网页适配）'}).check();
+  await expect(page.locator('.competition-current')).toContainText('自定义积分赛');
+  await expect(page.getByRole('radio',{checked:true})).toHaveCount(0);
+  await page.getByRole('checkbox',{name:'第 8 场',exact:true}).check();
+  await page.getByLabel('比赛场数').selectOption('4');
+  await expect(page.locator('.rotation-list li')).toHaveCount(8);
+  await expect(page.getByRole('alert')).toContainText('地图轮换有 8 项');
+  await expect(page.getByRole('alert')).toContainText('特殊赛事的第 8 场超出当前 4 场');
+  await expect(page.getByRole('button',{name:'创建房间，召集朋友'})).toBeDisabled();
+  await page.locator('.schedule-settings > summary').click();await expect(page.getByRole('alert')).toBeVisible();
+  await page.locator('.schedule-settings > summary').click();
+  await expect(page.getByRole('checkbox',{name:'第 8 场（超出当前 4 场）',exact:true})).toBeChecked();
+  await page.locator('.competition-settings').screenshot({path:info.outputPath('incompatible-four-race-settings.png')});
+  // Returning to eight races restores the exact choices, without reconstruction.
+  await page.getByLabel('比赛场数').selectOption('8');await expect(page.getByRole('alert')).toHaveCount(0);
+  await expect(page.getByRole('checkbox',{name:'第 8 场',exact:true})).toBeChecked();
+  await page.getByLabel('比赛场数').selectOption('4');
+  for(let i=0;i<4;i++)await page.getByRole('button',{name:'移除第5项',exact:true}).click();
+  // The out-of-range control disappears as soon as it is unchecked.
+  await page.getByRole('checkbox',{name:'第 8 场（超出当前 4 场）',exact:true}).click();
+  await expect(page.getByRole('checkbox',{name:'第 8 场（超出当前 4 场）',exact:true})).toHaveCount(0);
+  await expect(page.getByRole('alert')).toHaveCount(0);
+  await page.getByRole('button',{name:'下移第1项',exact:true}).click();
+  await page.getByRole('button',{name:'创建房间，召集朋友'}).click();await expect(page).toHaveURL(/\/room\/[CA]-[A-Z2-9]{6}$/);
+  const code=page.url().split('/').at(-1)!.replace(/^[CA]-/,'');
+  const saved=app.rooms.get(code).game.config!;
+  expect(saved.competition).toEqual({...presetCompetition('official'),preset:'custom',rotation:['wild','mild','twisty-twirl','whirly-world'],thrillingThirds:{enabled:true,rounds:[3]}});
+  expect(saved.characterPacks).toEqual(legacyRoomConfig().characterPacks);
+});
+
+test('switching presets retains event choices and all character-pack switches',async({page})=>{
+  await page.goto(url);await page.getByRole('tab',{name:'创建房间',exact:true}).click();
+  await page.getByLabel('你的昵称').fill('独立开关');await page.getByLabel('房间人数上限').selectOption('3');
+  await page.locator('.pack-settings > summary').click();await page.getByRole('checkbox',{name:'Extra Mile',exact:true}).check();
+  await page.getByRole('radio',{name:/扩展巡回/}).check();await page.locator('.schedule-settings > summary').click();await page.locator('.event-settings > summary').click();
+  await page.getByRole('checkbox',{name:'启用 36 项粉丝事件（网页适配）'}).check();await page.getByRole('checkbox',{name:'第 8 场',exact:true}).check();
+  await page.getByRole('radio',{name:/官方巡回/}).check();
+  await expect(page.getByRole('alert')).toContainText('第 8 场超出当前 4 场');
+  await expect(page.getByRole('checkbox',{name:'第 8 场（超出当前 4 场）',exact:true})).toBeChecked();
+  await page.getByRole('radio',{name:/扩展巡回/}).check();await expect(page.getByRole('alert')).toHaveCount(0);
+  await expect(page.getByRole('checkbox',{name:'Extra Mile',exact:true})).toBeChecked();
+  for(const pack of ['Second Wind','Leaf’s Fan Expansion','Wurstii A'])await expect(page.getByRole('checkbox',{name:pack,exact:true})).not.toBeChecked();
+  await page.getByRole('button',{name:'创建房间，召集朋友'}).click();await expect(page).toHaveURL(/\/room\/[CA]-[A-Z2-9]{6}$/);
+  const code=page.url().split('/').at(-1)!.replace(/^[CA]-/,'');
+  expect(app.rooms.get(code).game.config!.competition).toEqual({...presetCompetition('extended'),thrillingThirds:{enabled:true,rounds:[3,8]}});
+  expect(app.rooms.get(code).game.config!.characterPacks).toEqual({...legacyRoomConfig().characterPacks,'extra-mile':true});
+});
+
+test('opening settings, previews and rules leaves the host preset and save state unchanged',async({page})=>{
+  const made=app.rooms.create('只看设置',3,0),code=made.identity.roomCode;
+  await page.addInitScript(identity=>localStorage.setItem(`magical-athlete:identity:${identity.roomCode}`,JSON.stringify(identity)),made.identity);
+  await page.goto(`${url}/room/${code}`);await expect(page.locator('.connection.is-online')).toBeVisible();
+  await page.locator('.room-config-panel > summary').click();const save=page.getByRole('button',{name:'保存本房间设置',exact:true});
+  await expect(save).toBeDisabled();
+  for(const selector of ['.schedule-settings','.event-settings','.schedule-preview-settings','.map-library'])await page.locator(`${selector} > summary`).click();
+  await expect(page.getByRole('radio',{name:/经典赛/})).toBeChecked();await expect(save).toBeDisabled();
+  await expect(page.locator('.schedule-preview li')).toHaveCount(4);
+  const rewards=await page.locator('.race-rewards').allTextContents();
+  expect(rewards.map(text=>text.match(/\d+/g)?.map(Number))).toEqual(REWARD_TIERS[4].map(tier=>[1,RACE_POINTS[tier]![0],2,RACE_POINTS[tier]![1]]));
+  await page.getByRole('button',{name:'怎么玩',exact:true}).click();
+  await expect(page.getByRole('link',{name:'完整赛程与地图规则',exact:true})).toHaveAttribute('href','/rules/competition.md');
+  await expect(page.locator('.rules-copy')).toContainText('不是原图完整复刻');
+  await page.getByRole('button',{name:'关闭',exact:true}).click();
+  await expect(page.getByRole('radio',{name:/经典赛/})).toBeChecked();await expect(save).toBeDisabled();
+  await page.getByRole('button',{name:'下移第1项',exact:true}).click();
+  await expect(page.locator('.competition-current')).toContainText('自定义积分赛');await expect(save).toBeEnabled();
+  await save.click();await expect.poll(()=>app.rooms.get(code).game.config?.competition?.rotation).toEqual(['wild','mild']);
+  expect(expandedSchedule(app.rooms.get(code).game.config!.competition!)).toEqual(['wild','mild','wild','mild']);
+});
+
+test('guest and spectator can inspect shared settings but cannot change them; a started host is locked',async({browser})=>{
+  const made=app.rooms.create('权限房主',3,0),code=made.identity.roomCode;
+  const guest=app.rooms.join(code,'普通玩家'),spectator=app.rooms.join(code,'观战玩家','spectator');
+  const contexts=await Promise.all([made,guest,spectator].map(()=>browser.newContext({viewport:{width:390,height:844}})));
+  try{
+    const pages:Page[]=[];
+    for(const [i,entry] of [made,guest,spectator].entries()){
+      const context=contexts[i]!;await context.addInitScript(identity=>{localStorage.setItem(`magical-athlete:identity:${identity.roomCode}${identity.role==='spectator'?':spectator':''}`,JSON.stringify(identity));localStorage.setItem('magical-athlete:low-quality','true');localStorage.setItem('magical-athlete:reduced-motion','true');},entry.identity);
+      const page=await context.newPage();pages.push(page);await page.goto(`${url}/room/${code}${entry.identity.role==='spectator'?'?spectate=1':''}`);await expect(page.locator('.connection.is-online')).toBeVisible();
+      await page.locator('.room-config-panel > summary').click();await page.locator('.schedule-settings > summary').click();await page.locator('.event-settings > summary').click();await page.locator('.map-library > summary').click();await page.locator('.schedule-preview-settings > summary').click();
+      for(const radio of await page.getByRole('radio').all())if(i===0)await expect(radio).toBeEnabled();else await expect(radio).toBeDisabled();
+      if(i!==0){
+        for(const control of await page.locator('.competition-settings :is(input,select,button)').all())await expect(control).toBeDisabled();
+        await expect(page.getByRole('button',{name:'保存本房间设置',exact:true})).toHaveCount(0);
+      }
+      await expect(page.locator('.schedule-preview li')).toHaveCount(4);
+    }
+    const room=app.rooms.get(code),before=structuredClone(room.game.config);
+    // Use an actual race phase to exercise the same shared component in the menu.
+    const game=createGame(room.game.players,73);game.config=room.game.config;game.phase='race';game.round=1;game.currentRacerId='r0';game.baseTurnOrder=['r0','r1'];game.flags.awaitRoll=true;
+    game.racers=game.players.map((p,i)=>({id:`r${i}`,playerId:p.id,characterId:'banana',position:i,tripped:false,finished:false,eliminated:false,flags:{}}));room.game=game;room.configFrozen=true;room.version++;app.store.save(room);
+    const host=pages[0]!;await host.reload();await expect(host.getByTestId('presentation-settings')).toBeVisible();await host.getByTestId('presentation-settings').click();
+    await host.locator('.room-config-panel > summary').click();await host.locator('.schedule-settings > summary').click();
+    await expect(host.getByText('本局配置已锁定至全部场次结束。', {exact:true})).toBeVisible();
+    for(const control of await host.locator('.competition-settings :is(input,select,button)').all())await expect(control).toBeDisabled();
+    await expect(host.getByRole('button',{name:'保存本房间设置',exact:true})).toHaveCount(0);
+    expect(app.rooms.get(code).game.config).toEqual(before);
+  }finally{await Promise.all(contexts.map(context=>context.close()));}
+});
+
+for(const [preset,name,count] of [['classic','经典赛',4],['official','官方巡回',4],['extended','扩展巡回',8]] as const)test(`${preset} tour can be created from its radio and restored`,async({page})=>{
   await page.goto(url);await page.getByRole('tab',{name:'创建房间',exact:true}).click();
   await page.getByLabel('你的昵称').fill('巡回测试');await page.getByLabel('房间人数上限').selectOption('3');
-  await page.locator('.preset-select').filter({hasText:name}).click();
+  await page.getByRole('radio',{name:new RegExp(name)}).check();
   await page.getByRole('button',{name:'创建房间，召集朋友'}).click();
   await expect(page).toHaveURL(/\/room\/[CA]-[A-Z2-9]{6}$/);
   const code=page.url().split('/').at(-1)!.replace(/^[CA]-/,'');
   const competition=app.rooms.get(code).game.config!.competition!;
-  expect(competition.preset).toBe(preset);expect(competition.raceCount).toBe(count);expect(competition.rotation[3]).toBe('whirly-world');
+  expect(competition).toEqual(presetCompetition(preset));expect(competition.raceCount).toBe(count);
+  expect(app.rooms.get(code).game.config!.characterPacks).toEqual(legacyRoomConfig().characterPacks);
   await page.reload();await expect(page.locator('.connection.is-online')).toBeVisible();
   await expect(page.locator('.room-config-panel > summary')).toContainText(name);
   expect(app.rooms.get(code).game.config!.competition).toEqual(competition);
@@ -88,7 +236,7 @@ for(const mode of ['practice','ai'] as const)test(`${mode} rematch returns to co
   },made.identity);
   await page.goto(`${url}/room/${code}`);await expect(page.locator('.connection.is-online')).toBeVisible();
   await page.locator('.room-config-panel > summary').click();
-  await page.getByRole('button',{name:'修改经典赛赛程',exact:true}).click();await page.getByLabel('比赛场数').selectOption('6');
+  await page.locator('.schedule-settings > summary').click();await page.getByLabel('比赛场数').selectOption('6');
   await page.getByRole('button',{name:'保存本房间设置',exact:true}).click();
   await expect.poll(()=>app.rooms.get(code).game.config?.competition?.raceCount).toBe(6);
   expect(app.rooms.get(code).game.matchPlan?.raceCount).toBe(4);
@@ -160,7 +308,7 @@ for(const [rounds,n] of [[4,2],[6,3],[8,2]] as const)test(`${n} independent brow
     }
     const host=pages[0]!;await host.goto(url);await host.getByRole('tab',{name:'创建房间',exact:true}).click();
     await host.getByLabel('你的昵称').fill('同名');await host.getByLabel('房间人数上限').selectOption(String(n));await host.getByLabel('每次操作时限').selectOption('0');
-    if(rounds!==4){await host.getByRole('button',{name:'修改经典赛赛程',exact:true}).click();await host.getByLabel('比赛场数').selectOption(String(rounds));await host.getByRole('button',{name:'添加 Mild Mile',exact:true}).click();}
+    if(rounds!==4){await host.locator('.schedule-settings > summary').click();await host.getByLabel('比赛场数').selectOption(String(rounds));await host.locator('.map-library > summary').click();await host.getByRole('button',{name:'添加 Mild Mile',exact:true}).click();}
     await host.getByLabel('房间可见性').selectOption('private');await host.getByRole('button',{name:'创建房间，召集朋友'}).click();await expect(host).toHaveURL(/\/room\/[CA]-[A-Z2-9]{6}$/);
     const code=host.url().split('/').at(-1)!.replace(/^[CA]-/,'');expect(app.rooms.list().some(r=>r.code===code)).toBe(false);
     for(const page of pages.slice(1)){await page.goto(`${url}/room/${code}`);await page.getByLabel('你的昵称').fill('同名');await page.getByRole('button',{name:'加入这场胡闹',exact:true}).click();await expect(page.getByRole('button',{name:'我准备好了',exact:true})).toBeVisible();}
@@ -169,7 +317,7 @@ for(const [rounds,n] of [[4,2],[6,3],[8,2]] as const)test(`${n} independent brow
     const ids=await Promise.all(pages.map(p=>p.evaluate(code=>JSON.parse(localStorage.getItem(`magical-athlete:identity:cloudflare:${code}`)!).playerId,code)));
     expect(new Set(ids).size).toBe(n);expect(new Set(lobby.game.players.map(p=>p.name)).size).toBe(n);
     for(const page of pages){await sync(page,app.rooms.get(code).version);await page.getByRole('button',{name:'我准备好了',exact:true}).click();await expect(page.getByRole('button',{name:'取消准备',exact:true})).toBeVisible();}
-    await host.locator('.room-config-panel > summary').click();await host.getByRole('checkbox',{name:'Extra Mile',exact:true}).check();await host.getByRole('button',{name:'保存本房间设置',exact:true}).click();
+    await host.locator('.room-config-panel > summary').click();await host.locator('.pack-settings > summary').click();await host.getByRole('checkbox',{name:'Extra Mile',exact:true}).check();await host.getByRole('button',{name:'保存本房间设置',exact:true}).click();
     for(const page of pages){await expect(page.getByRole('button',{name:'我准备好了',exact:true})).toBeVisible();await expect(page.locator('.room-config-panel > summary')).toContainText('2 个角色包');}
     // Return to the original-only fixture, verifying that a second edit also propagates.
     await host.getByRole('checkbox',{name:'Extra Mile',exact:true}).uncheck();await host.getByRole('button',{name:'保存本房间设置',exact:true}).click();await host.locator('.room-config-panel > summary').click();

@@ -149,11 +149,11 @@ test('crossing 13-14 reveals the actual Twist and its effect to both players and
 
 test('setup exposes real new-map thumbnails and the schedule character restriction', async ({ page }) => {
   await page.goto(url); await page.getByRole('tab', { name: '创建房间', exact: true }).click();
-  await page.getByRole('button', { name: '修改经典赛赛程', exact: true }).click();
+  await page.locator('.schedule-settings > summary').click();await page.locator('.map-library > summary').click();
   await page.getByRole('button', { name: '添加 Boardwalks', exact: true }).click();
   await expect(page.locator('.map-options svg[data-track="boardwalks"]')).toHaveAttribute('data-node-count', '59');
   await expect(page.locator('.rotation-list')).toContainText('Boardwalks');
-  await expect(page.getByRole('note').filter({ hasText: '此赛程禁用' })).toContainText('弯道');
+  await expect(page.getByRole('note').filter({ hasText: '当前地图禁用' })).toContainText('飞艇、葛洛斯、关系宝宝');
   await page.setViewportSize({ width: 390, height: 844 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
 });
