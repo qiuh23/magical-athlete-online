@@ -287,7 +287,7 @@ test('卡坦岛未上线时两端都不能进入，观战邀请明确报错且�
 });
 
 
-test('交付配置两大厅原游戏开放、卡坦岛关闭，桌面与手机截图', async ({page}) => {
+test('交付配置按本服开放状态展示卡坦岛，桌面与手机截图', async ({page}) => {
   await sites(page,true);
   const release=JSON.parse(await readFile(resolve(directory,'config.json'),'utf8'));
   await page.route('**/config.json',route=>route.fulfill({json:release}));
@@ -296,11 +296,13 @@ test('交付配置两大厅原游戏开放、卡坦岛关闭，桌面与手机�
     await ready(page,cnLobby);
     await expect(page.locator('[data-game="athlete"]')).toHaveAttribute('href',release.entries.athlete.aliyun.origin+'/');
     await expect(page.locator('[data-game="wizard"]')).toHaveAttribute('href',release.entries.wizard.aliyun.origin+'/');
-    await expect(page.locator('[data-game="catan"]')).not.toHaveAttribute('href');
+    if(release.entries.catan.aliyun.enabled) await expect(page.locator('[data-game="catan"]')).toHaveAttribute('href',release.entries.catan.aliyun.origin+'/');
+    else await expect(page.locator('[data-game="catan"]')).not.toHaveAttribute('href');
     await page.locator('[data-game="catan"] img').evaluate((image: HTMLImageElement)=>image.decode());
     await page.screenshot({path:`.local/catan-lobby-${width}.png`,fullPage:true});
     await page.getByRole('radio',{name:'Cloudflare'}).check();
     await expect(page).toHaveURL(cfLobby);
-    await expect(page.locator('[data-game="catan"]')).not.toHaveAttribute('href');
+    if(release.entries.catan.cloudflare.enabled) await expect(page.locator('[data-game="catan"]')).toHaveAttribute('href',release.entries.catan.cloudflare.origin+'/');
+    else await expect(page.locator('[data-game="catan"]')).not.toHaveAttribute('href');
   }
 });

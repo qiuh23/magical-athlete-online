@@ -110,8 +110,10 @@ test('偏好只是可选体验，邀请不受偏好影响，存储被禁用时�
 });
 
 
-test('卡坦岛在实际配置保持关闭，拒绝观战与错误长度/易混淆房码，邀请原服封闭失败', () => {
-  const production = validateConfig(config);
+test('卡坦岛关闭时不能进入，拒绝观战与错误长度/易混淆房码，邀请原服封闭失败', () => {
+  const closed = structuredClone(config);
+  for (const server of ['aliyun','cloudflare']) closed.entries.catan[server].enabled=false;
+  const production = validateConfig(closed);
   for (const [server,prefix] of [['aliyun','A'],['cloudflare','C']]) {
     const invite = readInvitation(`?game=catan&room=${prefix}-ABC234&token=secret`);
     assert.equal(entryURL(production, 'catan', server), null);
