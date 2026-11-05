@@ -90,9 +90,14 @@ export function RoomChat({ room, community, connection, immersive, onRename }: {
   }, [open, community.latestId]);
   useEffect(() => {
     const viewport = window.visualViewport;
-    const update = () => { document.documentElement.style.setProperty('--chat-keyboard-offset', `${Math.max(0, innerHeight - (viewport?.height ?? innerHeight) - (viewport?.offsetTop ?? 0))}px`); };
+    const update = () => {
+      const height=viewport?.height??innerHeight,offset=Math.max(0,innerHeight-height-(viewport?.offsetTop??0));
+      document.documentElement.style.setProperty('--chat-keyboard-offset',`${offset}px`);
+      document.documentElement.style.setProperty('--chat-viewport-height',`${height}px`);
+      document.documentElement.dataset.chatKeyboard=String(offset>80);
+    };
     viewport?.addEventListener('resize', update); viewport?.addEventListener('scroll',update); window.addEventListener('resize',update); update();
-    return () => { viewport?.removeEventListener('resize', update); viewport?.removeEventListener('scroll',update); window.removeEventListener('resize',update); document.documentElement.style.removeProperty('--chat-keyboard-offset'); };
+    return () => { viewport?.removeEventListener('resize', update); viewport?.removeEventListener('scroll',update); window.removeEventListener('resize',update); document.documentElement.style.removeProperty('--chat-keyboard-offset'); document.documentElement.style.removeProperty('--chat-viewport-height');delete document.documentElement.dataset.chatKeyboard; };
   }, []);
   const send = async (event: React.FormEvent) => {
     event.preventDefault();

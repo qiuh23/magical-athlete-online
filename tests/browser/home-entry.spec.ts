@@ -40,7 +40,8 @@ for (const mobile of [false, true]) {
     await page.getByLabel('你的昵称').fill('入口草稿同学');
     await page.getByLabel('房间人数上限').selectOption('2');
     await page.getByLabel('每次操作时限').selectOption('60');
-    await page.getByRole('checkbox', { name: 'Extra Mile', exact: true }).check();
+    await page.locator('.pack-settings > summary').click();
+    await page.getByRole('checkbox', { includeHidden: true, name: 'Extra Mile', exact: true }).check();
     await noOverflow(page);
     await page.screenshot({ path: testInfo.outputPath('home-create.png'), fullPage: true });
     await page.getByRole('button', { name: '← 返回首页（保留设置）', exact: true }).click();
@@ -49,8 +50,9 @@ for (const mobile of [false, true]) {
 
     await page.getByRole('tab', { name: '人机对战', exact: true }).click();
     await page.getByLabel('AI 人数', { exact: true }).selectOption('1');
-    await expect(page.getByRole('checkbox', { name: 'Extra Mile', exact: true })).not.toBeChecked();
-    await page.getByRole('checkbox', { name: 'Second Wind', exact: true }).check();
+    await expect(page.getByRole('checkbox', { includeHidden: true, name: 'Extra Mile', exact: true })).not.toBeChecked();
+    await page.locator('.pack-settings > summary').click();
+    await page.getByRole('checkbox', { includeHidden: true, name: 'Second Wind', exact: true }).check();
     await page.getByRole('button', { name: '← 返回首页（保留设置）', exact: true }).click();
     await neutralHome(page);
     await expect(page.getByRole('tab', { name: '人机对战', exact: true })).toBeFocused();
@@ -65,11 +67,11 @@ for (const mobile of [false, true]) {
     await expect(page.getByLabel('你的昵称')).toHaveValue('入口草稿同学');
     await expect(page.getByLabel('房间人数上限')).toHaveValue('2');
     await expect(page.getByLabel('每次操作时限')).toHaveValue('60');
-    await expect(page.getByRole('checkbox', { name: 'Extra Mile', exact: true })).toBeChecked();
-    await expect(page.getByRole('checkbox', { name: 'Second Wind', exact: true })).not.toBeChecked();
+    await expect(page.getByRole('checkbox', { includeHidden: true, name: 'Extra Mile', exact: true })).toBeChecked();
+    await expect(page.getByRole('checkbox', { includeHidden: true, name: 'Second Wind', exact: true })).not.toBeChecked();
     await page.getByRole('tab', { name: '人机对战', exact: true }).click();
     await expect(page.getByLabel('AI 人数', { exact: true })).toHaveValue('1');
-    await expect(page.getByRole('checkbox', { name: 'Second Wind', exact: true })).toBeChecked();
+    await expect(page.getByRole('checkbox', { includeHidden: true, name: 'Second Wind', exact: true })).toBeChecked();
 
     await page.getByRole('tab', { name: '现有房间', exact: true }).click();
     await page.getByLabel('房间码', { exact: true }).fill('ABC234');
