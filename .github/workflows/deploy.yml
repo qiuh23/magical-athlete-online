@@ -80,9 +80,8 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
-      - name: Deploy prebuilt Worker and assets
+      - name: Set up fixed Wrangler
         if: steps.current.outputs.deploy == 'true'
-        id: worker
         uses: cloudflare/wrangler-action@953926a2e2182532811c01a25e53647d93bf07c0 # v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -90,7 +89,15 @@ jobs:
           wranglerVersion: 4.151.3
           packageManager: npm
           workingDirectory: ${{ runner.temp }}/wrangler-tool
-          command: deploy --no-bundle --config wrangler.json
+          command: --version
+      - name: Deploy prebuilt Worker and assets
+        if: steps.current.outputs.deploy == 'true'
+        id: worker
+        run: node scripts/deploy/cloudflare-command.mjs deploy
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
       - name: Obtain target-scoped temporary Alibaba credentials
         if: steps.current.outputs.deploy == 'true'
         id: credentials
@@ -121,14 +128,11 @@ jobs:
           ALIYUN_INSTANCE_ID: ${{ vars.ALIYUN_INSTANCE_ID }}
       - name: Restore previous Cloudflare version on a partial failure
         if: always() && steps.previous.outputs.version != '' && (steps.worker.outcome == 'failure' || steps.credentials.outcome == 'failure' || steps.aliyun.outcome == 'failure' || steps.verify.outcome == 'failure')
-        uses: cloudflare/wrangler-action@953926a2e2182532811c01a25e53647d93bf07c0 # v4
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
-          wranglerVersion: 4.151.3
-          packageManager: npm
-          workingDirectory: ${{ runner.temp }}/wrangler-tool
-          command: rollback ${{ steps.previous.outputs.version }} --yes --config wrangler.json --message "Paired Alibaba deployment or verification failed"
+        run: node scripts/deploy/cloudflare-command.mjs rollback
+        env:
+          PREVIOUS_WORKER_VERSION: ${{ steps.previous.outputs.version }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
       - name: Remove consumed artifacts after successful verification
         if: steps.current.outputs.deploy == 'true' && steps.verify.outcome == 'success'
         continue-on-error: true

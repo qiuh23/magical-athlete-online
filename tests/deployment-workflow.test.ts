@@ -47,3 +47,22 @@ test('only GitHub artifact storage HTTPS redirects reach the ECS installer',()=>
   assert.equal(validateArtifactUrl(url),url);
   for(const invalid of ['http://productionresultssa14.blob.core.windows.net/file.zip','https://productionresultssa14.blob.core.windows.net:8443/file.zip','https://attacker.blob.core.windows.net/file.zip','https://productionresultssa14.blob.core.windows.net.attacker.example/file.zip','https://user:password@productionresultssa14.blob.core.windows.net/file.zip'])assert.throws(()=>validateArtifactUrl(invalid));
 });
+
+
+const {retryCloudflare}=await import('../scripts/deploy/cloudflare-retry.mjs');
+const {runCloudflareCommand}=await import('../scripts/deploy/cloudflare-command.mjs');
+test('Cloudflare GET retries transient responses, releases bodies and preserves final denial',async()=>{
+ let calls=0,cancelled=0;const delays:number[]=[];
+ const response=await retryCloudflare(async()=>++calls<3?{status:503,body:{cancel:async()=>{cancelled++;}}}:{status:200},{sleep:async(ms:number)=>{delays.push(ms);}});
+ assert.equal(response.status,200);assert.equal(calls,3);assert.equal(cancelled,2);assert.deepEqual(delays,[2000,4000]);
+ calls=0;assert.equal((await retryCloudflare(async()=>{calls++;return {status:403};},{sleep:async()=>{}})).status,403);assert.equal(calls,1);
+});
+test('fixed Worker command rechecks current main before a transient retry and stops obsolete builds',async()=>{
+ let checks=0,calls=0;const seen:string[][]=[];
+ await runCloudflareCommand('deploy',{directory:'.',sleep:async()=>{},checkCurrent:async()=>{checks++;},execute:(args:string[])=>{seen.push(args);calls++;return {status:calls<2?1:0,stdout:'',stderr:calls<2?'503 Service Unavailable':''};}});
+ assert.equal(checks,2);assert.equal(calls,2);assert.deepEqual(seen[0],seen[1]);
+ calls=0;await assert.rejects(()=>runCloudflareCommand('deploy',{directory:'.',sleep:async()=>{},checkCurrent:async()=>{if(calls)throw Error('superseded');},execute:()=>{calls++;return {status:1,stderr:'503'};}}),/superseded/);assert.equal(calls,1);
+});
+test('fixed Worker command never retries validation or permission errors',async()=>{
+ let calls=0;await assert.rejects(()=>runCloudflareCommand('deploy',{directory:'.',sleep:async()=>{},checkCurrent:async()=>{},execute:()=>{calls++;return {status:1,stderr:'Authentication error 403'};}}),/command failed/);assert.equal(calls,1);
+});
