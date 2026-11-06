@@ -13,16 +13,14 @@
 </head>
 <body>
   <div class="page">
-    <header><a class="brand" href="./" aria-label="一起玩，返回大厅"><span class="brand-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>一起玩<span class="brand-caption">游戏大厅</span></a><span class="header-note">好朋友，好对手。</span></header>
+    <header><a class="brand" href="./" aria-label="一起玩，返回大厅"><span class="brand-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>一起玩</a><span class="site-badge" aria-live="polite"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></svg><strong id="current-server">读取中</strong></span></header>
     <main>
-      <div class="intro"><h1>朋友到齐，快乐开场。</h1><p class="subtitle">竞速、预测牌局，还有一座等待开拓的小岛。<br>选个游戏，和朋友坐到同一桌。</p></div>
+      <h1>今天玩什么？</h1>
       <section id="choices" aria-busy="true" aria-label="选择游戏入口">
-        <p id="server-message" class="server-message" role="status"></p>
         <div id="invitation" class="invitation" hidden><strong>本站游戏邀请</strong><p id="invite-details"></p><p>邀请码仅在所属站点使用。</p><button id="clear-invite" type="button">返回游戏选择</button></div>
-        <div class="game-heading"><h2>今天玩什么？</h2><span class="selection" aria-live="polite"><span class="connection-dot" aria-hidden="true"></span>当前站点：<strong id="current-server">读取中</strong></span></div>
         <div class="games">
           <a class="game athlete" data-game="athlete" aria-disabled="true" aria-label="胡闹运动会，进入游戏">
-            <div class="art track" aria-hidden="true"><img src="./art/athlete.svg" width="640" height="360" alt="" fetchpriority="high"><svg class="art-motion" viewBox="0 0 640 360" preserveAspectRatio="xMidYMid slice" fill="none" focusable="false"><g id="foreground-die" transform="translate(496 266) rotate(-10)">
+            <div class="art track" aria-hidden="true"><img src="./art/athlete.svg" width="640" height="360" alt="" fetchpriority="high"><svg class="art-motion" viewBox="0 0 640 360" preserveAspectRatio="xMidYMid meet" fill="none" focusable="false"><g id="foreground-die" transform="translate(496 266) rotate(-10)">
 <ellipse cy="33" rx="35" ry="11" fill="#4f7c5b" opacity=".19"/><g class="die-body">
 <path d="M-33-15 0-34 34-15V24L1 43-33 24Z" fill="#e0dec3" stroke="#86a98b" stroke-width="1.2" stroke-linejoin="round"/>
 <path d="M-33-15 0-34 34-15 1 5Z" fill="#fffdef"/>
@@ -31,23 +29,23 @@
 <path d="M-27-13 0-28 28-13" stroke="#fffef5" stroke-width="2" stroke-linecap="round"/>
 <g fill="#38694f"><ellipse cx="-11" cy="-15" rx="3.5" ry="2.2"/><ellipse cx="12" cy="-15" rx="3.5" ry="2.2"/><ellipse cx="-23" cy="1" rx="2.8" ry="3.4" transform="rotate(-28 -23 1)"/><ellipse cx="-15" cy="13" rx="2.8" ry="3.4" transform="rotate(-28 -15 13)"/><ellipse cx="-7" cy="25" rx="2.8" ry="3.4" transform="rotate(-28 -7 25)"/><ellipse cx="11" cy="11" rx="2.8" ry="3.4" transform="rotate(28 11 11)"/><ellipse cx="24" cy="4" rx="2.8" ry="3.4" transform="rotate(28 24 4)"/><ellipse cx="11" cy="27" rx="2.8" ry="3.4" transform="rotate(28 11 27)"/><ellipse cx="24" cy="20" rx="2.8" ry="3.4" transform="rotate(28 24 20)"/></g>
 </g></g></svg></div>
-            <div class="game-content"><div class="game-title"><h3>胡闹运动会</h3><span class="game-type">掷骰竞速 · 技能逆转</span></div><p class="game-description">选好角色，和朋友在终点前争一次反超。</p><div class="game-footer"><span class="game-mode">个人练习 / 好友联机</span><span class="action">正在读取入口…</span></div></div>
+            <div class="game-content"><h3>胡闹运动会</h3><span class="action"><span class="action-label">读取中</span><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"/></svg></span></div>
           </a>
           <a class="game wizard" data-game="wizard" aria-disabled="true" aria-label="巫师牌，进入游戏">
             <div class="art cards" aria-hidden="true"><img src="./art/wizard.svg" width="640" height="360" alt=""></div>
-            <div class="game-content"><div class="game-title"><h3>巫师牌</h3><span class="game-type">预测赢墩 · 跟色出牌</span></div><p class="game-description">看准手里的牌，猜中属于你的胜利。</p><div class="game-footer"><span class="game-mode">个人练习 / 好友联机</span><span class="action">正在读取入口…</span></div></div>
+            <div class="game-content"><h3>巫师牌</h3><span class="action"><span class="action-label">读取中</span><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"/></svg></span></div>
           </a>
           <a class="game catan" data-game="catan" aria-disabled="true" aria-label="卡坦岛好友桌，正在读取入口">
             <div class="art island" aria-hidden="true"><img src="./art/catan.svg" width="640" height="360" alt=""></div>
-            <div class="game-content"><div class="game-title"><h3>卡坦岛好友桌</h3><span class="game-type">资源交易 · 岛屿建设</span></div><p class="game-description">建造、交易，和朋友开拓一座小岛。</p><div class="game-footer"><span class="game-mode">3–4 人 / 电脑练习</span><span class="action">正在读取入口…</span></div></div>
+            <div class="game-content"><h3>卡坦岛</h3><span class="action"><span class="action-label">读取中</span><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"/></svg></span></div>
           </a>
         </div>
         <p id="status" class="status" role="status">正在读取游戏入口…</p>
+        <button id="retry" type="button" hidden>刷新重试</button>
       </section>
-      <aside class="notice"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v.1"/></svg><p>和朋友同桌，请使用同一站点或打开房主提供的本站邀请链接。国内与海外的房间和身份独立，邀请码仅在所属站点使用。</p></aside>
       <noscript><p class="status">请启用 JavaScript 后选择游戏。</p></noscript>
     </main>
-    <footer><span>和朋友一起，认真玩点开心的。</span><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备2026075006号-1</a></footer>
+    <footer><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备2026075006号-1</a></footer>
   </div>
 </body>
 </html>

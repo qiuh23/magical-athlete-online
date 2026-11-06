@@ -1,0 +1,47 @@
+global: home-after/desktop fits
+global: home-after/portrait fits
+global: home-after/landscape fits
+global: home-after/narrow fits
+global: rules-after/desktop fits
+global: rules-after/portrait fits
+global: rules-after/landscape fits
+global: rules-after/narrow fits
+global: create-after/desktop fits
+global: create-after/portrait fits
+global: create-after/landscape fits
+global: create-after/narrow fits
+global: waiting-after/desktop fits
+global: waiting-after/portrait fits
+global: waiting-after/landscape fits
+global: waiting-after/narrow fits
+global: disconnected/reconnected
+global: foreign invitation and connection retry passed
+global: race/desktop no page scroll
+global: race/portrait no page scroll
+global: race/landscape no page scroll
+global: race/narrow no page scroll
+global: unsaved rename dismissal guarded
+global: flow, invite, full room, chat policy, close/cancel, reload, practice and results passed
+cn: home-after/desktop fits
+cn: home-after/portrait fits
+cn: home-after/landscape fits
+cn: home-after/narrow fits
+cn: rules-after/desktop fits
+cn: rules-after/portrait fits
+cn: rules-after/landscape fits
+cn: rules-after/narrow fits
+cn: create-after/desktop fits
+cn: create-after/portrait fits
+cn: create-after/landscape fits
+cn: create-after/narrow fits
+cn: waiting-after/desktop fits
+cn: waiting-after/portrait fits
+cn: waiting-after/landscape fits
+cn: waiting-after/narrow fits
+cn: disconnected/reconnected
+cn: foreign invitation and connection retry passed
+cn: race/desktop no page scroll
+cn: race/portrait no page scroll
+cn: race/landscape no page scroll
+cn: race/narrow no page scroll
+cn: flow, invite, full room, chat policy, close/cancel, reload, practice and results passed

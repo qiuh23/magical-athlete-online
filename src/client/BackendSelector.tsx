@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { backendEntryUrl, currentBackendId, getBackend, getBackends, loadBackends, parseRoomCode, probeBackends, readBackendPreference, saveBackendPreference, spectatorInvite, temporaryHttpPage, type BackendId, type BackendStatus } from './backends.js';
 import './backend-selector.css';
+import { Icon, IconButton } from './Icons.js';
 
 export const backendLabel = (id?: BackendId) => id === 'aliyun' ? '阿里云内地' : 'Cloudflare';
 const statusLabels = { checking: '检测中', available: '可用', entry: '切换入口', unavailable: '暂不可用', undeployed: '未部署' } as const;
@@ -53,5 +54,6 @@ export function BackendSelector({ statuses, selected, checking, onRefresh, disab
   statuses: BackendStatus[]; selected: BackendId | null; checking: boolean; onSelect: (id: BackendId) => void; onRefresh: () => void; disabled?: boolean;
 }) {
   const current = statuses.find(status => status.backend.id === selected);
-  return <section className="backend-line" aria-label="本站连接"><p className="current-line" role="status"><span aria-hidden="true">●</span>本站连接<small>{checking ? '连接检测中' : current ? statusLabels[current.state] : '连接未确认'}</small></p><button type="button" className="text-button" disabled={disabled || checking} onClick={onRefresh}>{checking ? '正在检测…' : '重新检测'}</button>{!checking && current?.state !== 'available' && <p role="status">本站连接失败，请重新检测。</p>}</section>;
+  const ready = !checking && current?.state === 'available';
+  return <section className={`backend-line${ready ? ' is-ready' : ''}`} aria-label="本站连接"><p className="current-line" role="status"><Icon kind="connection" size={18} />{checking ? '连接中…' : ready ? '已连接' : '连接失败'}</p>{!ready && <><IconButton icon="refresh" label="重新检测" disabled={disabled || checking} onClick={onRefresh} />{!checking && <p role="status">{current?.error || '无法连接赛场，请重试。'}</p>}</>}</section>;
 }
