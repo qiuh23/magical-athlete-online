@@ -1,0 +1,268 @@
+/* Compact race chrome. The room setup and its visible options keep their own
+   layout. Fixed regions share the measurements already maintained by chat. */
+.race-icon-button,.chat-toggle{display:inline-flex;align-items:center;justify-content:center;flex:none;width:44px;height:44px;min-width:44px;min-height:44px;padding:10px;border:1px solid #31596140;border-radius:13px;background:#fffaf0ee;color:#25464c;box-shadow:0 3px 12px #23494112;cursor:pointer}
+.race-icon-button:hover:not(:disabled),.chat-toggle:hover{background:#fff6dc;border-color:#537969}
+.race-icon-button:focus-visible,.chat-toggle:focus-visible,.race-event-chip:focus-visible,.scene-camera-toolbar summary:focus-visible,.floating-racer:focus-visible,.skip-animation:focus-visible{outline:3px solid #244f54;outline-offset:3px}
+.race-icon-button:disabled{cursor:default;opacity:.55}
+.chat-toggle{position:relative;width:48px;height:48px;border-radius:16px;padding:10px}
+.chat-unread{position:absolute;top:-7px;right:-7px;min-width:22px;height:22px;margin:0;padding:0 4px;border:2px solid #fffaf0;font-size:10px}
+.room-chat header button{display:grid;place-items:center;min-height:44px;min-width:44px}
+.immersive-race .race-hud-top{top:max(16px,env(safe-area-inset-top));left:max(18px,env(safe-area-inset-left));right:calc(max(20px,env(safe-area-inset-right)) + 268px);max-width:none;display:flex;align-items:center;flex-wrap:nowrap;gap:12px}
+.immersive-race .race-hud-buttons{display:flex;align-items:center;flex-wrap:nowrap;gap:4px;max-width:none}
+.immersive-race .room-pause-actions.is-compact{display:inline-flex}
+.immersive-race .room-pause-control.race-icon-button{width:44px;height:44px;padding:10px;border-color:#31596140;border-radius:13px;background:#fffaf0ee;color:#25464c}
+.immersive-race .room-pause-control.is-paused{background:#285e54;color:#fffaf0}
+.immersive-race .race-hud-top .race-match-label{position:static;display:flex;flex-direction:row;align-items:center;gap:8px;padding:0;max-width:none;white-space:nowrap;font-size:11px}
+.immersive-race .race-match-label>strong>span{display:inline;font-size:10px}
+.immersive-race .race-match-label .connection{display:flex;align-items:center;gap:4px;color:#315961}
+.immersive-race .race-match-label .connection:not(.is-online){color:#a64230}
+.immersive-race .scene-camera-toolbar{top:calc(max(16px,env(safe-area-inset-top)) + var(--race-hud-height,44px) + 10px);left:max(18px,env(safe-area-inset-left));right:auto;max-width:calc(100% - 310px);display:flex;align-items:flex-start;gap:4px;flex-wrap:nowrap}
+.immersive-race .scene-camera-toolbar .camera-home,.immersive-race .camera-options summary{display:grid;place-items:center;width:44px;height:44px;min-width:44px;min-height:44px;padding:10px;border:1px solid #31596140;border-radius:13px;background:#fffaf0ee;font-size:12px}
+.immersive-race .scene-camera-toolbar .camera-options{position:relative;inset:auto}
+.immersive-race .camera-settings-content{width:220px;padding:8px;border:1px solid #53796955;background:#fffaf0fa;border-radius:12px;margin-top:6px;box-shadow:0 6px 20px #23494120}
+.immersive-race .camera-settings-content label,.immersive-race .camera-settings-content small{position:static;display:flex;align-items:center;gap:6px;width:auto;white-space:normal;border:0;border-radius:0;box-shadow:none;background:none;padding:8px 2px;font-size:11px}
+.immersive-race .camera-settings-content small{font-size:10px;padding:2px}
+.immersive-race .camera-settings-content .scene-camera-modes{display:flex}
+.immersive-race .scene-camera-modes button{display:flex;align-items:center;justify-content:center;gap:4px;min-height:44px;flex:1;padding:8px;font-size:11px}
+.immersive-race .scene-camera-toolbar .camera-paused{position:static;font-size:10px;white-space:nowrap}
+.immersive-race .race-status-stack{position:absolute;z-index:38;top:calc(max(16px,env(safe-area-inset-top)) + var(--race-hud-height,44px) + var(--race-camera-height,44px) + 20px);left:max(18px,env(safe-area-inset-left));right:auto;display:flex;flex-direction:column;align-items:flex-start;gap:8px;width:min(300px,calc(100% - 310px));pointer-events:none}
+.immersive-race .race-status-stack>.race-status-pill{position:static;transform:none;display:flex;justify-content:flex-start;flex-wrap:wrap;max-width:100%;min-height:44px;white-space:normal;border-radius:14px;padding:4px 8px 4px 4px;gap:5px;pointer-events:auto;font-size:11px;line-height:1.4}
+.status-portrait{display:block;flex:none;width:32px;height:32px;background:#e7edda;border-radius:50%}
+.status-portrait>.avatar{width:32px;height:32px}
+.race-status-copy{min-width:0;overflow-wrap:anywhere}
+.immersive-race .race-status-pill .skip-animation{display:grid;place-items:center;min-width:44px;min-height:36px;padding:4px;border-left:1px solid #31596126;border-radius:0 9px 9px 0}
+.immersive-race .race-status-pill .countdown{font-size:11px;margin-left:0}
+.immersive-race .race-status-stack>.race-event-chips{position:static;display:flex;flex-direction:column;gap:4px;width:100%;max-height:140px;overflow:auto;pointer-events:auto;scrollbar-width:thin;font-size:11px}
+.race-event-chip{display:flex;align-items:center;gap:7px;flex:none;width:fit-content;max-width:100%;min-height:44px;padding:3px 9px 3px 4px;border:1px solid #53796945;border-radius:13px;background:#fffaf0e8;color:#315961;font:inherit;text-align:left;cursor:pointer;line-height:1.35}
+.race-event-chip>.event-art,.race-event-chip>svg{flex:none}
+.race-event-chip>span{min-width:0;overflow-wrap:anywhere;font-size:11px;font-weight:800}
+.race-event-chip b{display:block;font-size:10px;font-weight:600;margin-top:2px}
+.event-art{flex:none;color:#315951;overflow:visible}
+.race-fixed-faces{display:flex;flex-wrap:wrap;gap:4px;padding:4px;border-radius:10px;background:#fffaf0e8;font-size:10px}
+.race-fixed-faces>span{white-space:nowrap}.race-fixed-faces b{font-size:14px}
+.race-detail-content{padding:18px 24px 24px;overflow-wrap:anywhere}
+.race-detail-content .event-log{margin:0}.race-detail-content .event-log h2{font-size:15px}
+.race-track-details{display:grid;gap:14px;font-size:13px;line-height:1.75}
+.race-track-details .twist-card-panel{padding:12px 16px}
+.race-track-details .twist-card-list{padding:0}
+.race-track-details .event-art{float:left;margin:0 10px 6px 0}
+.race-track-details .special-event-detail{padding:12px 16px;border:1px solid #9272bd66;border-radius:14px;background:#f8f1ff}
+.race-track-details p{margin:8px 0}
+.race-menu-shortcuts{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.race-menu-shortcuts .button{font-size:12px;min-height:44px;gap:6px}
+.immersive-race .floating-racers{border:1px solid #31596126;background:#fffaf0dc;gap:5px;padding:6px 8px}
+.immersive-race .floating-racer.is-active:before{width:0;height:0;border-radius:0;background:none;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid #315961;left:calc(50% - 4px);top:-4px}
+.racer-state{position:absolute;top:-4px;right:-5px;display:grid;place-items:center;width:22px;height:22px;border:1px solid #31596166;border-radius:7px;background:#fff0c9;color:#315961}
+.immersive-race .floating-roll .race-roll-button:disabled{min-height:44px;min-width:136px;padding:8px 14px;border-radius:13px;font-size:12px;gap:7px}
+.immersive-race .roll-caption:empty{display:none}
+.last-roll-numbers{display:flex;align-items:center;gap:6px;font-size:12px}
+.last-roll-numbers>svg:nth-of-type(2){margin-left:5px}
+.immersive-race .scene-action-banner.race-moment{top:auto;bottom:max(128px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);display:flex;gap:10px;width:max-content;max-width:min(420px,calc(100% - 36px));max-height:150px;padding:10px 14px;border:1px solid #53796966;border-radius:18px;animation:none;pointer-events:none;box-shadow:0 7px 24px #23494120}
+.race-moment .skill-banner-avatar{width:46px;height:46px;border-radius:12px;pointer-events:auto}
+.race-moment .skill-banner-avatar>.avatar{width:46px;height:46px}
+.moment-illustration{display:grid;place-items:center;flex:none;width:54px;height:54px}
+.race-moment .moment-content{min-width:0}
+.race-moment .moment-content>small{font-size:10px;white-space:normal;line-height:1.3}
+.race-moment .moment-content>strong{display:flex;align-items:center;gap:6px;font-size:17px;white-space:normal;line-height:1.4;margin:3px 0}
+.race-moment .moment-content>strong>svg{flex:none}
+.moment-participants{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.moment-racer{display:inline-flex;align-items:center;gap:3px;line-height:1.1}
+.moment-racer>.avatar{width:24px;height:24px}
+.moment-racer>small{font-size:9px;white-space:nowrap}
+.moment-racer>b{padding:3px;border-radius:5px;background:#f7d585;font-size:13px;color:#294f49}
+.moment-more{font-size:10px;font-weight:800}
+.immersive-race>.ability-reveal-card{top:auto;bottom:128px;width:min(360px,calc(100% - 28px));max-height:260px;padding:12px 14px;border-width:1px;border-radius:18px;box-shadow:0 7px 24px #23494120}
+.ability-reveal-heading h2{font-size:16px;margin:2px 0 4px}
+.ability-reveal-heading small{font-size:10px}
+.ability-reveal-powers{margin:6px 0;gap:5px}
+.ability-reveal-powers button{font-size:12px;padding:4px 7px;min-height:44px}
+.ability-reveal-card .ability-reveal-powers .avatar{width:30px;height:30px}
+.ability-reveal-card .ability-reveal-duration{margin:4px 0;font-size:11px}
+.ability-reveal-detail{display:flex;align-items:center;gap:6px;min-height:44px;padding:5px 0;font-size:11px}
+
+@media(max-width:1366px) and (min-width:651px) and (min-height:571px){
+ .immersive-race .race-hud-top{flex-wrap:wrap;gap:7px 12px}
+ .immersive-race .race-status-stack{width:min(300px,calc(100% - 310px))}
+ .immersive-race .race-match-label>strong>span{display:none}
+}
+@media(max-width:650px){
+ .immersive-race .race-hud-top{top:max(10px,env(safe-area-inset-top));left:max(12px,env(safe-area-inset-left));right:max(12px,env(safe-area-inset-right));display:block;padding-bottom:22px}
+ .immersive-race .race-hud-buttons{gap:4px}
+ .immersive-race .race-hud-top .race-match-label{position:absolute;top:49px;left:2px;max-width:none;gap:7px;font-size:10px;line-height:14px}
+ .immersive-race .race-match-label>strong{display:block}
+ .immersive-race .race-match-label>strong>span{display:inline;font-size:9px}
+ .immersive-race .board-minimap{top:calc(max(10px,env(safe-area-inset-top)) + var(--race-hud-height,66px) + 8px);right:max(12px,env(safe-area-inset-right));width:128px;padding:7px}
+ .immersive-race .minimap-own-position small{display:none}
+ .immersive-race .scene-camera-toolbar{top:calc(max(10px,env(safe-area-inset-top)) + var(--race-hud-height,66px) + 8px);left:max(12px,env(safe-area-inset-left));max-width:calc(100% - 164px)}
+ .immersive-race .camera-settings-content{width:min(220px,calc(100vw - 164px));padding:5px}
+ .immersive-race .camera-settings-content .scene-camera-modes{flex-wrap:wrap}
+ .immersive-race .race-status-stack{top:calc(max(10px,env(safe-area-inset-top)) + var(--race-hud-height,66px) + var(--race-camera-height,44px) + 16px);left:max(12px,env(safe-area-inset-left));right:calc(max(12px,env(safe-area-inset-right)) + 140px);width:auto;gap:8px}
+ .immersive-race .race-status-stack>.race-status-pill{font-size:10px;gap:4px;padding-right:5px}
+ .immersive-race .race-status-stack>.race-event-chips{max-height:110px}
+ .race-event-chip{padding-right:6px;gap:4px}.race-event-chip>span{font-size:10px}
+ .race-event-chip>.event-art{width:32px;height:32px}
+ .immersive-race .scene-action-banner.race-moment,.immersive-race>.ability-reveal-card{bottom:calc(max(14px,env(safe-area-inset-bottom)) + 174px);max-width:calc(100% - 28px);max-height:160px;padding:9px 11px}
+ .race-moment .moment-content>strong{font-size:15px}.moment-illustration{width:46px;height:46px}.moment-illustration>.event-art{width:46px;height:46px}
+ .race-detail-content{padding:14px}
+ /* The public track already shows seats; remove duplicate map rows during a
+    throw so the physical dice have a clear, bounded reading area. */
+ .immersive-race:has(.dice-spotlight:not([hidden])) .minimap-own-positions,.immersive-race:has(.dice-spotlight:not([hidden])) .minimap-positions{display:none}
+ .immersive-race:has(.dice-spotlight:not([hidden])) .race-event-chips{max-height:44px}
+ .immersive-race .dice-spotlight{top:max(208px,calc(var(--race-minimap-bottom,180px) + 8px),calc(var(--race-status-bottom,190px) + 8px));bottom:174px;transform:translateX(-50%);height:auto;max-height:370px;width:min(310px,calc(100% - 28px))}
+ .immersive-race .dice-spotlight.has-reason{height:auto}
+ .immersive-race .dice-spotlight.is-multi,.immersive-race .dice-spotlight.is-duel{height:auto;width:min(342px,calc(100% - 28px))}
+}
+@media(orientation:landscape) and (min-width:480px) and (max-height:570px){
+ .immersive-race .race-hud-top{top:max(8px,env(safe-area-inset-top));left:12px;right:174px;gap:9px}
+ .immersive-race .race-hud-top .race-match-label{font-size:10px}
+ .immersive-race .race-match-label>strong>span{display:none}
+ .immersive-race .scene-camera-toolbar{top:62px;left:12px;max-width:170px}
+ .immersive-race .race-status-stack{top:116px;left:12px;right:auto;width:172px}
+ .immersive-race .race-status-stack>.race-event-chips{max-height:64px}
+ .immersive-race .board-minimap{top:8px;right:8px;width:148px}
+ .immersive-race .minimap-own-position small{display:none}
+ html[data-view="race"] .immersive-race .floating-racers{bottom:14px;left:72px;right:auto;max-width:calc(100% - 260px);width:max-content}
+ .immersive-race .floating-roll{bottom:14px;right:14px}
+ .immersive-race .scene-action-banner.race-moment,.immersive-race>.ability-reveal-card{left:196px;transform:none;top:auto;bottom:100px;width:calc(100% - 370px);max-width:360px;max-height:180px;padding:8px 10px}
+ .race-moment .moment-content>strong{font-size:15px}
+ .immersive-race .camera-settings-content{width:172px}
+ .immersive-race .camera-settings-content small{display:none}
+ .immersive-race .dice-spotlight{height:min(290px,calc(100dvh - 90px));width:260px}
+ .immersive-race .dice-spotlight.has-reason{height:calc(100dvh - 80px)}
+ .immersive-race .dice-spotlight.is-multi,.immersive-race .dice-spotlight.is-duel{height:calc(100dvh - 80px);width:310px}
+}
+@media(max-height:350px) and (min-width:651px){
+ .immersive-race .race-status-stack{top:62px;left:112px;width:172px}
+ .immersive-race .race-status-stack>.race-event-chips{max-height:44px}
+ .immersive-race .scene-action-banner.race-moment,.immersive-race>.ability-reveal-card{bottom:88px;max-height:124px}
+}
+
+.immersive-race .floating-racer-score{white-space:nowrap}
+.event-log .event-log-mark{display:flex;flex:none;flex-direction:column;align-items:center;width:36px;color:#315961;gap:3px}
+.event-log .event-log-mark small{font-size:9px}
+.event-log li>div>small{display:block}
+
+/* Choices are tokens, portraits and independently focusable detail controls. */
+.floating-choice .compact-choice-options{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px;margin-top:6px}
+.compact-choice-options>.choice-option{display:inline-flex;flex:0 1 auto;min-width:0}
+.compact-choice-options>.choice-number-option{position:relative;display:inline-flex;flex:none;align-items:stretch;background:#f1f2e6;border:1px solid #a6b69c;border-radius:13px;overflow:visible}
+.floating-choice .choice-number-button.button{position:relative;display:flex;flex-direction:column;justify-content:center;gap:1px;flex:none;width:44px;min-width:44px;min-height:48px;border:0;border-radius:12px;box-shadow:none;padding:5px;background:#315961;color:#fffaf0}
+.choice-number-button>b{font-size:23px;line-height:1.1}
+.choice-number-metrics{display:flex;flex-direction:column;justify-content:center;gap:2px;padding:3px 4px}
+.choice-number-metrics>small{display:flex;align-items:center;justify-content:center;gap:2px;font-size:10px;line-height:1.25;color:#315961;white-space:nowrap}
+.choice-number-retreat>span{font-size:9px}
+.choice-shared-cost{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:800;margin-top:6px;color:#315961}
+.choice-number-detail{display:grid;place-items:center;flex:none;width:44px;min-width:44px;min-height:48px;border:0;border-radius:0 12px 12px 0;background:transparent;color:#315961;padding:8px;cursor:pointer}
+.choice-number-detail:focus-visible,.choice-character-detail:focus-visible{outline:3px solid #244f54;outline-offset:2px}
+.floating-choice .compact-choice-options>.choice-character,.floating-choice .choice-offer{display:grid;grid-template-columns:32px minmax(0,1fr) 44px;gap:4px;flex:1 1 190px;padding:5px;border-radius:13px}
+.floating-choice .choice-character>.button{border:0;background:transparent;color:#315961;box-shadow:none;padding:5px;min-height:44px;min-width:0;font-size:12px}
+.floating-choice .choice-character .choice-character-detail{grid-column:3;grid-row:1;display:grid;place-items:center;width:44px;min-width:44px;min-height:44px;padding:8px;border:0;background:transparent;border-radius:10px;color:#315961}
+.floating-choice .choice-offer>strong{font-size:12px}
+.floating-choice .choice-power-icons{grid-column:2/-1;display:flex;align-items:center;gap:5px;padding:0;min-height:0;font-size:10px}
+.choice-power-icons:empty{display:none!important}
+.choice-power-icons .avatar{width:24px;height:24px}
+.choice-power-icons>strong{display:inline-flex;align-items:center;gap:3px;font-size:10px;color:#9d432e}
+.choice-related-racers{margin-top:6px}
+.choice-related-list{gap:5px;padding:0}
+.choice-related-list>.choice-related-character{display:flex;align-items:center;gap:4px;flex:none;width:auto;min-width:44px;min-height:44px;padding:4px 7px;border-radius:12px}
+.choice-related-character>.avatar{width:30px;height:30px}
+.choice-related-character>b{font-size:12px}
+.choice-related-character>svg{flex:none}
+.floating-choice .compact-dice-hint{display:inline-flex;align-items:center;justify-content:flex-start;gap:5px;min-height:40px;max-width:100%;padding:4px 7px;margin-top:6px;font-size:11px}
+.compact-dice-hint>.avatar{width:28px;height:28px}
+.compact-dice-hint>b{display:grid;place-items:center;min-width:22px;height:26px;border:1px solid #b79e5e;border-radius:6px;background:#fffaf0;font-size:17px}
+.compact-dice-hint>small{font-size:10px}
+.floating-choice .choice-collapse{display:grid;place-items:center;width:44px;min-width:44px;min-height:44px;padding:8px;margin:-4px -4px 3px 8px;border:0;background:transparent}
+.floating-choice .choice-operator{font-size:10px}
+.immersive-race .minimap-own-positions{display:flex;flex-wrap:wrap;gap:4px}
+.immersive-race .minimap-own-position{display:flex;align-items:center;gap:6px;flex:1 1 75px;min-height:44px;padding:4px 6px;min-width:0}
+.immersive-race .minimap-own-position>span{display:flex;align-items:center;gap:4px;min-width:0}
+.immersive-race .minimap-own-position strong{font-size:21px;line-height:1.1;white-space:nowrap}
+.immersive-race .minimap-own-position small{font-size:10px;white-space:nowrap}
+.immersive-race .minimap-own-avatar{display:grid;place-items:center;width:44px;height:44px;min-width:44px}
+.immersive-race .minimap-own-avatar>.avatar{width:30px;height:30px}
+
+@media(orientation:landscape) and (min-width:480px) and (max-height:570px){
+ html[data-view="race"] body .immersive-race .floating-choice.choice-panel{left:196px;right:172px;width:auto;transform:none;bottom:92px;max-height:calc(100dvh - 166px);padding:10px}
+ body:has(>.room-community.in-race.is-open) .immersive-race .floating-choice.choice-panel,
+ body:has(>.room-community.in-race .chat-notice-region) .immersive-race .floating-choice.choice-panel{left:250px}
+ body:has(>.room-community.in-race.is-open) .immersive-race .floating-racers,
+ body:has(>.room-community.in-race .chat-notice-region) .immersive-race .floating-racers{left:250px;max-width:calc(100% - 430px)}
+ html[data-view="race"] body .immersive-race .floating-choice.choice-panel.is-collapsed{max-height:90px}
+ .floating-choice .choice-number-button.button,.choice-number-detail{min-height:44px}
+ .floating-choice .choice-number-button>b{font-size:21px}
+ .floating-choice .compact-choice-options{gap:6px}
+ .floating-choice .choice-character{flex-basis:150px}
+}
+@media(max-width:650px){
+ .floating-choice .compact-choice-options>.choice-character{flex-basis:100%}
+ .immersive-race .minimap-own-position{gap:3px;min-height:44px;padding:3px 4px}
+ .immersive-race .minimap-own-position strong{font-size:17px}
+ .immersive-race .minimap-own-avatar>.avatar{width:26px;height:26px;min-width:26px}
+}
+.immersive-race .prediction-hud{max-width:min(420px,calc(100% - 36px));gap:5px}
+.prediction-hud .prediction-hud-title{display:grid;place-items:center;padding:5px;border-radius:10px}
+.prediction-hud .prediction-chip{gap:4px;padding:3px 5px}
+.prediction-hud .prediction-avatar{position:relative;display:grid;place-items:center;flex:none;width:44px;height:44px;border-radius:11px;overflow:visible}
+.prediction-hud .prediction-avatar>.avatar{width:32px;height:32px}
+.prediction-avatar>b{position:absolute;right:-2px;bottom:-1px;display:grid;place-items:center;min-width:16px;height:16px;border:1px solid #315961;border-radius:50%;background:#fffaf0;font-size:9px;line-height:1;color:#315961}
+.floating-choice .compact-route-dice{display:inline-flex;align-items:center;gap:6px;padding:5px 8px;min-height:40px}
+.compact-route-dice>b{font-size:21px}.compact-route-dice>svg:nth-of-type(2){margin-left:8px}
+.choice-actor-detail{float:left;display:grid;place-items:center;width:44px;min-width:44px;height:44px;padding:3px;margin:0 8px 3px 0;border:1px solid #a6b69c;border-radius:12px;background:#eef0dc;color:#315961;cursor:pointer}
+.choice-actor-detail>.avatar{width:34px;height:34px}
+.choice-actor-detail:focus-visible{outline:3px solid #244f54;outline-offset:2px}
+.immersive-race .room-pause-control.is-paused:hover:not(:disabled){background:#34796c}
+@media(orientation:landscape) and (min-width:480px) and (max-height:570px){
+ body>.room-community.in-race .chat-notice-region{width:228px;max-width:228px}
+}
+@media(orientation:landscape) and (min-width:480px) and (max-width:650px) and (max-height:570px){
+ .immersive-race .scene-action-banner.race-moment{display:block;gap:0;padding:8px;bottom:88px}
+ .race-moment .moment-illustration,.race-moment .skill-banner-avatar{position:absolute;top:8px;left:8px;width:40px;height:40px}
+ .race-moment .moment-illustration>.event-art{width:40px;height:40px}
+ .race-moment .moment-content>small,.race-moment .moment-content>strong{padding-left:46px}
+ .race-moment .moment-participants{margin-top:7px}
+ .race-moment .moment-racer>.avatar{width:20px;height:20px}
+ .race-moment .moment-racer>b{font-size:12px}
+ .immersive-race>.ability-reveal-card{bottom:88px;max-height:calc(100dvh - 150px)}
+}
+@media(orientation:landscape) and (min-width:480px) and (max-height:570px){
+ html[data-chat-keyboard="true"] .immersive-race .scene-camera-toolbar{display:none}
+ html[data-chat-keyboard="true"] .immersive-race .race-status-stack{top:8px;left:308px;right:132px;width:auto;max-height:44px}
+ html[data-chat-keyboard="true"] .immersive-race .race-event-chips{display:none}
+ html[data-chat-keyboard="true"] .immersive-race .board-minimap{top:8px;right:8px;width:110px}
+ html[data-chat-keyboard="true"] .immersive-race .minimap-own-positions,html[data-chat-keyboard="true"] .immersive-race .minimap-positions{display:none}
+ html[data-chat-keyboard="true"] body>.room-community.in-race .room-chat{height:min(210px,calc(var(--chat-viewport-height,100dvh) - 80px));max-height:calc(var(--chat-viewport-height,100dvh) - 80px)}
+ html[data-chat-keyboard="true"][data-view="race"] body .immersive-race .floating-choice.choice-panel{left:250px;right:132px;bottom:calc(var(--chat-keyboard-offset,0px) + 64px);max-height:calc(var(--chat-viewport-height,100dvh) - 128px);padding:8px}
+ html[data-chat-keyboard="true"][data-view="race"] body .immersive-race .floating-racers{left:250px;bottom:calc(var(--chat-keyboard-offset,0px) + 8px);max-width:calc(100% - 430px);padding:4px 6px}
+ html[data-chat-keyboard="true"] .immersive-race .floating-racer{width:32px;flex-basis:32px}
+ html[data-chat-keyboard="true"] .immersive-race .floating-avatar{width:28px;height:28px}
+ html[data-chat-keyboard="true"] .immersive-race .floating-avatar>.avatar{width:24px;height:24px}
+ html[data-chat-keyboard="true"] .immersive-race .floating-racer-score{font-size:9px;margin-top:2px}
+ html[data-chat-keyboard="true"][data-view="race"] .immersive-race .floating-roll{bottom:calc(var(--chat-keyboard-offset,0px) + 8px)}
+}
+/* Above a phone keyboard, keep a separate order strip, the decision and a
+   smaller composer. Reuse the existing visualViewport and ResizeObserver data. */
+@media(max-width:650px) and (orientation:portrait){
+ html[data-chat-keyboard="true"] body>.room-community.in-race .room-chat{height:180px;max-height:180px}
+ html[data-chat-keyboard="true"] .immersive-race .scene-camera-toolbar{display:none}
+ html[data-chat-keyboard="true"] .immersive-race .race-hud-top{padding-bottom:0}
+ html[data-chat-keyboard="true"] .immersive-race .race-hud-top .race-match-label{display:none}
+ html[data-chat-keyboard="true"] .immersive-race .board-minimap{top:124px;width:110px}
+ html[data-chat-keyboard="true"] .immersive-race .minimap-own-positions,html[data-chat-keyboard="true"] .immersive-race .minimap-positions{display:none}
+ html[data-chat-keyboard="true"] .immersive-race .race-status-stack{top:124px;left:12px;right:136px;max-height:96px;overflow:auto}
+ html[data-chat-keyboard="true"][data-view="race"] body .immersive-race .floating-racers{top:62px;bottom:auto;left:12px;right:12px;max-width:calc(100% - 24px);width:max-content;padding:4px 6px;gap:3px}
+ html[data-chat-keyboard="true"] .immersive-race .floating-avatar{width:30px;height:30px}
+ html[data-chat-keyboard="true"] .immersive-race .floating-avatar>.avatar{width:26px;height:26px}
+ html[data-chat-keyboard="true"] .immersive-race .floating-racer{width:34px;flex-basis:34px}
+ html[data-chat-keyboard="true"] .immersive-race .floating-racer-score{font-size:9px;margin-top:2px}
+ html[data-chat-keyboard="true"][data-view="race"] body .immersive-race .floating-choice.choice-panel{max-height:calc(100dvh - var(--chat-keyboard-offset,0px) - var(--race-chat-height,180px) - max(var(--race-minimap-bottom,210px),var(--race-status-bottom,210px)) - 42px);padding:9px}
+}
+@media(orientation:portrait) and (max-width:650px){
+ html[data-chat-compact="true"] body>.room-community.in-race .room-chat{height:124px;max-height:124px}
+ html[data-chat-compact="true"] .room-chat header{padding:3px 8px}
+ html[data-chat-compact="true"] .room-chat .chat-report{display:none}
+ html[data-chat-compact="true"] .race-hud-buttons>.race-icon-button:nth-child(n+2){display:none}
+ html[data-chat-compact="true"] .immersive-race .race-status-stack{top:10px;left:112px;right:12px;max-height:44px}
+ html[data-chat-compact="true"] .immersive-race .race-event-chips,html[data-chat-compact="true"] .immersive-race .board-minimap{display:none}
+ html[data-chat-compact="true"][data-view="race"] body .immersive-race .floating-choice.choice-panel{max-height:calc(var(--chat-viewport-height,100dvh) - var(--race-chat-height,124px) - 166px);padding:8px}
+}

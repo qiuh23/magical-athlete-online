@@ -61,6 +61,7 @@ async function rect(page: Page) {
 }
 async function stable(page: Page, before: Awaited<ReturnType<typeof rect>>, open: boolean) {
   await expect.poll(async () => Math.abs((await rect(page)).bottom - before.bottom)).toBeLessThan(1);
+  if (open) await expect.poll(async () => Math.abs((await rect(page)).height - before.height)).toBeLessThan(1);
   const after = await rect(page); expect(Math.abs(after.right - before.right)).toBeLessThan(1);
   // A stale top constraint would stretch this bottom-anchored portal into an
   // invisible overlay that intercepts clicks above its visible contents.
@@ -95,7 +96,7 @@ async function accessibleChoice(page: Page) {
   }), { message: 'skill choice must settle outside chat and the minimap' }).toEqual({ overlap: false, mapOverlap: false });
   const button = choice.locator('.choice-options .button').first(); await button.scrollIntoViewIfNeeded();
   expect(await button.evaluate(element => {
-    const box = element.getBoundingClientRect(); return element.contains(document.elementFromPoint(box.x + box.width / 2, box.y + box.height / 2));
+    const box = element.getBoundingClientRect(), panel = element.closest('.floating-choice')!.getBoundingClientRect(); return box.height >= 44 && box.top >= panel.top && box.bottom <= panel.bottom + 1 && element.contains(document.elementFromPoint(box.x + box.width / 2, box.y + box.height / 2));
   })).toBe(true);
 }
 
@@ -107,6 +108,7 @@ for (const [name, viewport] of [
   ['ipad-air-landscape', { width: 1180, height: 820 }],
   ['ipad-pro-landscape', { width: 1366, height: 1024 }],
   ['phone', { width: 390, height: 844 }],
+  ['small-phone', { width: 320, height: 667 }],
   ['landscape', { width: 900, height: 500 }],
 ] as const) {
   test(`race chat stays anchored across skill selection and option resizing on ${name}`, async ({ browser }) => {
@@ -132,16 +134,18 @@ for (const [name, viewport] of [
       await page.getByRole('button', { name: '发送', exact: true }).click();
       await expect(page.getByLabel('聊天消息', { exact: true })).toHaveValue('');
       await expect(page.getByRole('log')).toContainText('选择技能时聊天仍可发送'); await stable(page, opened, true);
-      if(!process.env.CI&&(name==='small-desktop'||name==='ipad-portrait')){mkdirSync('docs/qa/ipad-hud-skills', { recursive: true });await page.screenshot({ path: `docs/qa/ipad-hud-skills/chat-${name}.png` });}
-      if (name === 'phone'||name==='small-desktop') {
+      if(!process.env.CI&&(name==='phone'||name==='landscape'||name==='small-desktop'||name==='ipad-portrait')){mkdirSync('docs/qa/immersive-race-ui', { recursive: true });await page.screenshot({ path: `docs/qa/immersive-race-ui/chat-${name}.png` });}
+      if (name === 'phone'||name==='small-phone'||name==='landscape'||name==='small-desktop') {
         // Exercise the existing visualViewport keyboard bridge without assuming
         // that a desktop browser can display the operating system's phone keyboard.
-        await page.evaluate(() => {
-          Object.defineProperty(visualViewport!, 'height', { configurable: true, value: innerHeight - 300 });
+        const keyboardOffset = name === 'landscape' ? 180 : name === 'small-phone' ? 260 : 300;
+        await page.evaluate(offset => {
+          Object.defineProperty(visualViewport!, 'height', { configurable: true, value: innerHeight - offset });
           visualViewport!.dispatchEvent(new Event('resize'));
-        });
-        await expect.poll(() => page.evaluate(() => document.documentElement.style.getPropertyValue('--chat-keyboard-offset'))).toBe('300px');
+        }, keyboardOffset);
+        await expect.poll(() => page.evaluate(() => document.documentElement.style.getPropertyValue('--chat-keyboard-offset'))).toBe(`${keyboardOffset}px`);
         await accessibleChoice(page);
+        if (!process.env.CI && ['phone','small-phone','landscape'].includes(name)) await page.screenshot({ path: `docs/qa/immersive-race-ui/chat-keyboard-${name}.png` });
         await expect(page.getByLabel('聊天消息', { exact: true })).toBeVisible();
         expect(await page.getByLabel('聊天消息', { exact: true }).evaluate(element => {
           const box = element.getBoundingClientRect(); return box.top >= 0 && box.bottom <= visualViewport!.height&&element.contains(document.elementFromPoint(box.x+box.width/2,box.y+box.height/2));
@@ -163,7 +167,7 @@ for (const [name, viewport] of [
       expect(noticesOverlap).toEqual({map:false,skill:false});
       const action=page.getByTestId('skill-choice').locator('.choice-options .button').first();await action.scrollIntoViewIfNeeded();
       expect(await action.evaluate(element=>{const b=element.getBoundingClientRect();return element.contains(document.elementFromPoint(b.x+b.width/2,b.y+b.height/2));})).toBe(true);
-      if(!process.env.CI&&(name==='small-desktop'||name==='ipad-portrait'))await page.screenshot({path:`docs/qa/ipad-hud-skills/chat-notice-${name}.png`});
+      if(!process.env.CI&&(name==='phone'||name==='landscape'||name==='small-desktop'||name==='ipad-portrait'))await page.screenshot({path:`docs/qa/immersive-race-ui/chat-notice-${name}.png`});
       await page.getByRole('button',{name:/^房间聊天/}).click();await expect(page.getByTestId('chat-notice')).toHaveCount(0);
       await page.getByRole('button',{name:'收起聊天',exact:true}).click();
       choice(code, 'none'); await expect(page.getByTestId('skill-choice')).toHaveCount(0); await stable(page, closed, false);

@@ -1,3 +1,4 @@
+import { setCameraView } from './camera-controls.js';
 import { test, expect, type Browser, type BrowserContext, type Page } from '@playwright/test';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -148,7 +149,7 @@ test('toy diorama deterministic before/after: desktop and mobile, self/overview,
       await seed(room, ['coach', 'banana'], [0, 2]);
       await layout(room.host); await capture(room.host, `${device}-self`); await samplePerformance(room.host, device);
       await sameCamera(room.host, `${device}-self`);
-      await room.host.getByRole('button', { name: '总览', exact: true }).click();
+      await setCameraView(room.host, '总览');
       await expect(room.host.getByTestId('board-3d')).toHaveAttribute('data-camera-state', 'overview');
       await capture(room.host, `${device}-overview`);
       if (stage === 'after' && !mobile) {
@@ -209,7 +210,7 @@ test('refined skeletal toys load all new silhouettes and record actual move, ski
     for(let i=0;i<groups.length;i++) {
       await seed(room,groups[i]!,[2,3,4,5,6,7,8,9],0,true);
       await expect.poll(()=>room.host.evaluate(()=>window.__ART_QA_SCENE__!.stats().loadedModels)).toBe(8);
-      await room.host.getByRole('button',{name:'总览',exact:true}).click();
+      await setCameraView(room.host, '总览');
       await capture(room.host,`new-pack-${i}-overview`); await samplePerformance(room.host,`new-pack-${i}`);
       await room.host.getByRole('button',{name:'恢复默认视角',exact:true}).click();
       await capture(room.host,`new-pack-${i}-self`);
@@ -260,7 +261,7 @@ test('reference banana and first lane quality sample',async({browser})=>{
     await room.host.getByRole('button',{name:'恢复默认视角',exact:true}).click();await settle(room.host);
     await room.host.evaluate(()=>{const api=window.__ART_QA_SCENE__!,pose=api.getCamera();pose.target[0]!+=1.4;pose.target[1]=.65;pose.position=[pose.target[0]!+7,11.65,pose.target[2]!+15];pose.zoom=110;api.setCamera(pose);});
     await capture(room.host,'reference-banana-complete-start-gate');
-    await room.host.getByRole('button',{name:'总览',exact:true}).click();
+    await setCameraView(room.host, '总览');
     await capture(room.host,'reference-stadium-overview');expect(room.errors).toEqual([]);
   }finally{await Promise.all(room.contexts.map(c=>c.close()));}
 });

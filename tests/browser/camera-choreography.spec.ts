@@ -139,7 +139,9 @@ for (const compact of [false, true]) {
       await expect(board).toHaveAttribute('data-phase', 'idle', { timeout: 30000 });
       await saveEvidence(f.page, `nearby-skills-${device}`);
       // User camera intent still takes precedence throughout a new chain.
+      await f.page.getByLabel('镜头设置', { exact: true }).click();
       await f.page.getByRole('button', { name: '总览', exact: true }).click();
+      await f.page.getByLabel('镜头设置', { exact: true }).click();
       publish(f.code, game => { game.flags.testDice = [3]; game.queue = [{ kind: 'beginTurn', racerId: 'r0' }]; resolveTasks(game); });
       await f.page.getByTestId('roll-button').click();
       await expect(board).toHaveAttribute('data-phase', 'dice');

@@ -72,8 +72,8 @@ for (const phone of [false, true]) {
     try {
       const pending = app.rooms.get(f.room.code).game.pending!, version = app.rooms.get(f.room.code).version;
       const panel = owner.page.getByTestId('skill-choice');
-      await expect(panel.getByTestId('offered-character')).toContainText(card('sisyphus').ability);
-      for (const id of ['coach', 'legs', 'genius']) await expect(panel.locator(`[data-choice-power="${id}"]`)).toContainText(card(id).ability);
+      await expect(panel.getByTestId('offered-character')).toContainText(card('sisyphus').nameZh);
+      for (const id of ['coach', 'legs', 'genius']) await expect(panel.locator(`[data-choice-character="${id}"], [data-choice-power="${id}"]`).first()).toBeAttached();
       for (const peer of [other, watcher]) { await expect(peer.page.getByTestId('skill-choice')).toHaveCount(0); await expect(peer.page.getByTestId('offered-character')).toHaveCount(0); }
       await inspect(owner.page, 'sisyphus'); await inspect(owner.page, 'coach');
       expect(app.rooms.get(f.room.code).version).toBe(version); expect(app.rooms.get(f.room.code).game.pending!.id).toBe(pending.id);
@@ -90,14 +90,14 @@ for (const phone of [false, true]) {
       expect(app.rooms.get(f.room.code).version).toBe(version); expect(app.rooms.get(f.room.code).game.pending!.id).toBe(pending.id);
       await owner.page.screenshot({ path: `${output}/collapsed-${device}.png` });
       await panel.getByRole('button', { name: '展开选项', exact: true }).click();
-      await expect(panel.getByTestId('offered-character')).toContainText(card('sisyphus').ability);
-      await owner.page.reload(); await expect(owner.page.getByTestId('offered-character')).toContainText(card('sisyphus').ability);
+      await expect(panel.getByTestId('offered-character')).toContainText(card('sisyphus').nameZh);
+      await owner.page.reload(); await expect(owner.page.getByTestId('offered-character')).toContainText(card('sisyphus').nameZh); await inspect(owner.page, 'sisyphus');
       await expect(owner.page.getByTestId('board-3d')).toHaveAttribute('data-loaded-models', '4');
       await fits(owner.page);
       await panel.evaluate(element => { element.scrollTop = 0; });
       await owner.page.screenshot({ path: `${output}/swap-${device}.png` });
       await panel.getByRole('button', { name: pending.options.find(option => option.id === 'swap:r1')!.label, exact: true }).click();
-      await expect(other.page.getByTestId('offered-character')).toContainText(card('hypnotist').ability);
+      await expect(other.page.getByTestId('offered-character')).toContainText(card('hypnotist').nameZh); await inspect(other.page, 'hypnotist');
       expect(app.rooms.get(f.room.code).game.racers[1]!.characterId).toBe('legs');
       await other.page.getByTestId('skill-choice').getByRole('button', { name: '保留原角色', exact: true }).click();
       await expect.poll(() => app.rooms.get(f.room.code).game.racers[1]!.characterId).toBe('sisyphus');
@@ -127,7 +127,7 @@ for (const phone of [false, true]) {
         const version = app.rooms.get(f.room.code).version;
         const expected = kind === 'egg' ? ['genius', 'gunk', 'romantic'] : ['genius', 'romantic'];
         for (const id of expected) {
-          await expect(owner.page.getByTestId('skill-choice').locator(`[data-choice-power="${id}"]`)).toContainText(card(id).ability);
+          await expect(owner.page.getByTestId('skill-choice').locator(`[data-choice-character="${id}"]`)).toBeAttached();
           await inspect(owner.page, id);
         }
         expect(app.rooms.get(f.room.code).version).toBe(version); expect(app.rooms.get(f.room.code).game.pending!.id).toBe(pending.id);

@@ -1,3 +1,4 @@
+import { parseRoomCode } from '../../src/client/backends.js';
 import { test, expect, type Browser, type BrowserContext, type Page } from '@playwright/test';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { createApplication } from '../../src/server/index.js';
@@ -32,11 +33,10 @@ async function pair(browser: Browser, mobile = false) {
   await host.goto(url);await host.getByRole('tab',{name:'创建房间',exact:true}).click(); await host.getByLabel('你的昵称').fill('地图视角');
   await host.getByLabel('房间人数上限').selectOption('2'); await host.getByLabel('每次操作时限').selectOption('0');
   await host.getByRole('button', { name: '创建房间，召集朋友' }).click();
-  await expect(host.locator('.connection.is-online')).toBeVisible(); const code = host.url().split('/').at(-1)!;
+  await expect(host.locator('.connection.is-online')).toBeVisible(); const code = parseRoomCode(host.url().split('/').at(-1)!)!.code;
   await guest.goto(`${url}/room/${code}`); await guest.getByLabel('你的昵称').fill('连锁选手');
   await guest.getByRole('button', { name: '加入这场胡闹' }).click(); await expect(guest.locator('.connection.is-online')).toBeVisible();
-  const ids = await Promise.all(pages.map(page => page.evaluate(code => JSON.parse(localStorage.getItem(`magical-athlete:identity:${code}`)!).playerId as string, code)));
-  return { contexts, host, guest, code, ids, errors };
+  return { contexts, host, guest, code, errors };
 }
 type Pair = Awaited<ReturnType<typeof pair>>;
 
@@ -58,7 +58,7 @@ async function assertLayout(page: Page, width: number) {
   const metrics = await page.evaluate(() => {
     const rect = (element: Element) => { const box = element.getBoundingClientRect(); return { left: box.left, right: box.right, top: box.top, bottom: box.bottom, width: box.width, height: box.height }; };
     const minimap = document.querySelector('[data-testid="board-minimap"]')!, board = document.querySelector('[data-testid="board-3d"]')!;
-    return { minimap: rect(minimap), board: rect(board), width: innerWidth, height: innerHeight, scrollWidth: document.documentElement.scrollWidth, scrollHeight: document.documentElement.scrollHeight, controls: [...document.querySelectorAll('.scene-camera-toolbar button,.scene-camera-toolbar summary,.race-status-pill')].map(rect) };
+    return { minimap: rect(minimap), board: rect(board), width: innerWidth, height: innerHeight, scrollWidth: document.documentElement.scrollWidth, scrollHeight: document.documentElement.scrollHeight, controls: [...document.querySelectorAll('.scene-camera-toolbar>button,.scene-camera-toolbar summary,.race-status-pill')].map(rect) };
   });
   expect(metrics.minimap.width).toBe(width); expect(metrics.minimap.left).toBeGreaterThanOrEqual(0); expect(metrics.minimap.right).toBeLessThanOrEqual(metrics.width);
   expect(metrics.scrollWidth).toBeLessThanOrEqual(metrics.width + 1); expect(metrics.scrollHeight).toBeLessThanOrEqual(metrics.height + 1);
@@ -77,14 +77,14 @@ test('larger minimap separates my two racers, stays clear at 390/320px, and dist
     await seed(room, ['coach', 'centaur', 'alchemist', 'legs'], [24, 2, 4, 6], 1);
     await assertLayout(room.host, 252);
     await expect(room.host.getByTestId('minimap-own-position')).toHaveCount(2);
-    await expect(room.host.getByTestId('minimap-own-position').nth(0)).toContainText('你 · 第24格');
-    await expect(room.host.getByTestId('minimap-own-position').nth(1)).toContainText('你 · 第4格');
+    await expect(room.host.getByTestId('minimap-own-position').nth(0).locator('strong')).toHaveText('24');
+    await expect(room.host.getByTestId('minimap-own-position').nth(1).locator('strong')).toHaveText('4');
     await expect(room.host.locator('.minimap-own-avatar>b')).toHaveText(['A', 'B']);
     await expect(room.host.locator('.minimap-own-marker')).toHaveText(['A', 'B']);
     await expect(room.host.locator('.minimap-positions')).toContainText('2号'); await expect(room.host.locator('.minimap-positions')).toContainText('2格');
     await capture(room.host, 'minimap-desktop'); await room.host.screenshot({ path: 'docs/qa/minimap-desktop.png' });
     for (const viewport of [{ width: 390, height: 844 }, { width: 320, height: 667 }]) {
-      await room.host.setViewportSize(viewport); await assertLayout(room.host, 148);
+      await room.host.setViewportSize(viewport); await assertLayout(room.host, 128);
       await room.host.locator('summary[aria-label="镜头设置"]').click();
       const option = room.host.getByLabel('自动观看他人行动', { exact: true }); await expect(option).toBeChecked();
       const popup = await option.locator('..').boundingBox(); expect(popup!.x).toBeGreaterThanOrEqual(0); expect(popup!.x + popup!.width).toBeLessThanOrEqual(viewport.width);
@@ -94,8 +94,8 @@ test('larger minimap separates my two racers, stays clear at 390/320px, and dist
       if (viewport.width === 390) await room.host.screenshot({ path: 'docs/qa/minimap-mobile.png' });
     }
     await seed(room, ['coach', 'alchemist', 'legs', 'blimp', 'romantic', 'sisyphus', 'banana', 'skipper'], Array(8).fill(12), 0, true);
-    await assertLayout(room.host, 148); await expect(room.host.getByTestId('minimap-own-position')).toHaveCount(1);
-    await expect(room.host.getByTestId('minimap-own-position')).toContainText('你 · 第12格');
+    await assertLayout(room.host, 128); await expect(room.host.getByTestId('minimap-own-position')).toHaveCount(1);
+    await expect(room.host.getByTestId('minimap-own-position').locator('strong')).toHaveText('12');
     const markers = room.host.locator('[data-map-racer-id]'); await expect(markers).toHaveCount(8);
     expect(await markers.last().getAttribute('data-map-racer-id')).toBe('r0');
     const layout = await markers.evaluateAll(elements => elements.map(element => { const own = element.classList.contains('minimap-self'), target = element.querySelector('g[transform]')!, text = target.querySelector('text')!, circle = target.querySelector('circle:last-of-type')!; return { own, transform: target.getAttribute('transform'), text: text.textContent, radius: Number(circle.getAttribute('r')) }; }));
@@ -120,8 +120,8 @@ test('minimap follows the actual motion and centaur effects show readable causes
     await room.guest.getByRole('button', { name: '掷骰子', exact: true }).click();
     const title = room.host.getByTestId('skill-banner').locator('strong');
     await expect(title).toHaveText('后蹄踢击 → 后退2格');
-    await expect(room.host.getByTestId('skill-banner').locator('small')).toContainText('技能效果');
-    await assertLayout(room.host, 148);
+    await expect(room.host.getByTestId('skill-banner').locator('.moment-content>small')).toContainText('技能效果');
+    await assertLayout(room.host, 128);
     const geometry = await room.host.evaluate(() => { const map = document.querySelector('[data-testid="board-minimap"]')!.getBoundingClientRect(), banner = document.querySelector('[data-testid="skill-banner"]')!.getBoundingClientRect(); return { map: { left: map.left, right: map.right, top: map.top, bottom: map.bottom }, banner: { left: banner.left, right: banner.right, top: banner.top, bottom: banner.bottom } }; });
     expect(Math.min(geometry.map.right, geometry.banner.right) <= Math.max(geometry.map.left, geometry.banner.left) || Math.min(geometry.map.bottom, geometry.banner.bottom) <= Math.max(geometry.map.top, geometry.banner.top), JSON.stringify(geometry)).toBe(true);
     await capture(room.host, 'skill-move-reason-mobile'); await room.host.screenshot({ path: 'docs/qa/skill-move-reason.png' });

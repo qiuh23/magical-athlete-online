@@ -1,3 +1,4 @@
+import { setCameraView } from './camera-controls.js';
 import { test, expect, type Browser, type Page } from '@playwright/test';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { createApplication } from '../../src/server/index.js';
@@ -350,7 +351,7 @@ test('reduced motion demand rendering reaches move warp and swap destinations, s
       });
       const board = page.getByTestId('board-3d');
       await expect(board).toHaveAttribute('data-loaded-models', '4'); await expect(board).toHaveAttribute('data-model-fallbacks', '0');
-      await page.getByRole('button', { name: '自己', exact: true }).click();
+      await setCameraView(page, '自己');
       if (kind === 'move') {
         await page.getByTestId('presentation-settings').click(); await page.getByLabel('动画速度', { exact: true }).selectOption('1'); await page.getByRole('button', { name: '关闭', exact: true }).click();
       }

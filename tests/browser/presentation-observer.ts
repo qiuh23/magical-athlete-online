@@ -47,7 +47,7 @@ export async function observePresentation(page: Page) {
       const dice = board?.querySelector<HTMLElement>('.dice-spotlight');
       const avatar = dice?.querySelector('.dice-source-avatar');
       const banner = board?.querySelector('[data-testid="skill-banner"]');
-      const bannerAvatar = banner?.querySelector('.skill-banner-avatar');
+      const bannerAvatar = banner?.querySelector('.skill-banner-avatar,.moment-illustration');
       const positions = Object.fromEntries([...(board?.querySelectorAll('[data-testid="scene-racer"]') ?? [])].map(element => [element.getAttribute('data-racer-id')!, {
         position: Number(element.getAttribute('data-position')),
         target: Number(element.getAttribute('data-target-position')),

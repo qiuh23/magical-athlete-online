@@ -1,3 +1,4 @@
+import { setCameraView } from './camera-controls.js';
 import { test, expect } from '@playwright/test';
 import { createApplication } from '../../src/server/index.js';
 import { createGame, resolveTasks } from '../../src/engine/index.js';
@@ -41,7 +42,7 @@ for (const { track, reversed = false } of courses) test(`${track}${reversed ? ' 
   }
   for (const compact of [false, true]) {
     if (compact) await page.setViewportSize({ width: 390, height: 844 });
-    await board.getByRole('button', { name: '总览', exact: true }).click();
+    await setCameraView(board, '总览');
     await expect(board).toHaveAttribute('data-camera-state', 'overview');
     for (let i = 0; i < positions.length; i++) {
       const expected = boardPoint(positions[i]!, compact, track), label = board.locator(`.pawn-seat[data-racer-id="r${i}"]`);
@@ -77,7 +78,7 @@ for (const { track, reversed = false } of courses) test(`${track}${reversed ? ' 
       await page.getByTestId('whirly-rules').locator('summary').click();
     }
     await board.screenshot({ path: info.outputPath(`${track}-${compact ? 'mobile' : 'desktop'}.png`) });
-    await board.getByRole('button', { name: '自己', exact: true }).click();
+    await setCameraView(board, '自己');
     await expect(board).toHaveAttribute('data-camera-state', 'self');
     const ownPoint = boardPoint(positions[0]!, compact, track);
     await expect.poll(async () => Number(await board.getAttribute('data-camera-x'))).toBeCloseTo(ownPoint[0], 1);

@@ -6,6 +6,7 @@ import type { RoomConnection } from './network.js';
 import type { CommunityState } from './community.js';
 import { CHAT_NOTICE_CONFIG, ChatNoticeBubble, advanceChatNotices, appendChatNotices, type ChatNotice } from './chat-notices.js';
 import { STATIONMASTER_CONTACT } from '../shared/security.js';
+import { Icon } from './Icons.js';
 
 export function RoomChat({ room, community, connection, immersive, onRename }: { room: RoomView; community: CommunityState; connection: RoomConnection | null; immersive: boolean; onRename: () => void }) {
   const [open, setOpen] = useState(false), [text, setText] = useState(''), [sending, setSending] = useState(false), [error, setError] = useState('');
@@ -17,6 +18,7 @@ export function RoomChat({ room, community, connection, immersive, onRename }: {
   const [noticeLimit,setNoticeLimit]=useState(() => matchMedia(`(max-width:${CHAT_NOTICE_CONFIG.mobileBreakpoint}px)`).matches ? CHAT_NOTICE_CONFIG.mobileLimit : CHAT_NOTICE_CONFIG.desktopLimit);
   const noticeRegion=useRef<HTMLDivElement>(null),noticeRects=useRef(new Map<string,DOMRect>());
   const portal = useRef<HTMLElement>(null);
+  const toggle = useRef<HTMLButtonElement>(null), wasOpen = useRef(false);
   const noticed=useRef(community.liveRevision??0);
   const noticedMessage=useRef(community.liveMessages?.at(-1)?.id??0);
   const list = useRef<HTMLDivElement>(null), bottom = useRef(true), initial = useRef(true);
@@ -24,6 +26,7 @@ export function RoomChat({ room, community, connection, immersive, onRename }: {
   const unread = community.messages.filter(message => message.id > seen && message.senderId !== room.selfId).length;
   const markRead = () => { setSeen(community.latestId); try { sessionStorage.setItem(readKey, String(community.latestId)); } catch { /* Optional read marker. */ } };
   const scrollBottom = () => { if (list.current) list.current.scrollTop = list.current.scrollHeight; bottom.current = true; setNewBelow(false); markRead(); };
+  useEffect(() => { if (!open && wasOpen.current) toggle.current?.focus(); wasOpen.current = open; }, [open]);
   useLayoutEffect(()=>{
     if(!immersive)return;
     // Measure the fixed HUD and lazy scene controls. Choices never participate
@@ -96,9 +99,10 @@ export function RoomChat({ room, community, connection, immersive, onRename }: {
       document.documentElement.style.setProperty('--chat-keyboard-offset',`${offset}px`);
       document.documentElement.style.setProperty('--chat-viewport-height',`${height}px`);
       document.documentElement.dataset.chatKeyboard=String(offset>80);
+      document.documentElement.dataset.chatCompact=String(offset>80&&height<480);
     };
     viewport?.addEventListener('resize', update); viewport?.addEventListener('scroll',update); window.addEventListener('resize',update); update();
-    return () => { viewport?.removeEventListener('resize', update); viewport?.removeEventListener('scroll',update); window.removeEventListener('resize',update); document.documentElement.style.removeProperty('--chat-keyboard-offset'); document.documentElement.style.removeProperty('--chat-viewport-height');delete document.documentElement.dataset.chatKeyboard; };
+    return () => { viewport?.removeEventListener('resize', update); viewport?.removeEventListener('scroll',update); window.removeEventListener('resize',update); document.documentElement.style.removeProperty('--chat-keyboard-offset'); document.documentElement.style.removeProperty('--chat-viewport-height');delete document.documentElement.dataset.chatKeyboard;delete document.documentElement.dataset.chatCompact; };
   }, []);
   const send = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -119,9 +123,9 @@ export function RoomChat({ room, community, connection, immersive, onRename }: {
   // those turn fixed coordinates into page-local coordinates during scenes.
   return createPortal(<aside ref={portal} className={`room-community ${immersive ? 'in-race' : ''} ${open ? 'is-open' : ''}`} style={{'--chat-minimap-bottom':`${minimapBottom}px`} as CSSProperties} data-testid="room-community" onKeyDown={event => { event.stopPropagation(); if (event.key === 'Escape') setOpen(false); }}>
     {!open&&notices.length>0&&<div ref={noticeRegion} className="chat-notice-region" aria-live="polite" aria-relevant="additions" aria-label="新聊天消息">{notices.filter(notice=>!community.messages.find(message=>message.id===notice.message.id)?.hidden).map(notice=>{const current=community.messages.find(message=>message.id===notice.message.id);return <ChatNoticeBubble key={notice.message.id} notice={current?{...notice,message:current}:notice} onOpen={()=>setOpen(true)} />;})}</div>}
-    {!open && <button className="chat-toggle" aria-label={`房间聊天${unread ? `，${unread} 条未读` : ''}`} aria-expanded={false} onClick={() => setOpen(true)}>💬 聊天{unread > 0 && <b className="chat-unread">{unread}</b>}</button>}
-    {open && <section className="room-chat" aria-label="房间聊天" data-testid="room-chat">
-      <header><div><strong>房间聊天</strong><small>{community.connected ? '玩家与观战者 · 最近 100 条' : '连接中，消息将自动补齐'}</small></div><button aria-label="收起聊天" onClick={() => setOpen(false)}>−</button></header>
+    {!open && <button ref={toggle} type="button" className="chat-toggle" title="房间聊天" aria-label={`房间聊天${unread ? `，${unread} 条未读` : ''}`} aria-expanded={false} aria-controls="room-chat-panel" onClick={() => setOpen(true)}><Icon kind="chat" size={25} />{unread > 0 && <b className="chat-unread" aria-hidden="true">{unread > 99 ? '99+' : unread}</b>}</button>}
+    {open && <section className="room-chat" id="room-chat-panel" aria-label="房间聊天" data-testid="room-chat">
+      <header><div><strong>房间聊天</strong><small>{community.connected ? '玩家与观战者 · 最近 100 条' : '连接中，消息将自动补齐'}</small></div><button type="button" aria-label="收起聊天" onClick={() => setOpen(false)}><Icon kind="close" /></button></header>
       <p className="chat-report"><a href={`mailto:${STATIONMASTER_CONTACT}?subject=${encodeURIComponent('运动会举报 '+(room.backendId??'cloudflare')+' '+room.code)}`}>举报 / 联系站长</a> · 请提供服务器、房间码、消息编号和原因，勿发送密码或令牌。</p>
       <div className="chat-personal"><span>{community.name ?? room.players.find(player => player.id === room.selfId)?.name ?? room.spectators?.find(viewer => viewer.id === room.selfId)?.name}</span>{room.role !== 'spectator' && <button disabled={room.phase === 'lobby'} title={room.phase === 'lobby' ? '开局后可修改一次昵称' : undefined} onClick={onRename}>修改昵称 · {community.renameRemaining ?? room.renameRemaining ?? 1} 次</button>}</div>
       <div className="chat-messages" ref={list} role="log" aria-label="聊天记录" aria-live="polite" aria-relevant="additions" onScroll={() => { const el = list.current; bottom.current = !el || el.scrollHeight - el.scrollTop - el.clientHeight < 36; if (bottom.current) { setNewBelow(false); markRead(); } }}>
