@@ -1,3 +1,4 @@
+import { setCameraView } from './camera-controls.js';
 import { test, expect, type Browser, type BrowserContext, type Page } from '@playwright/test';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { createApplication } from '../../src/server/index.js';
@@ -122,7 +123,7 @@ test('toy diorama deterministic before/after: desktop and mobile, self/overview,
       await seed(room, ['coach', 'banana'], [0, 2]);
       await layout(room.host); await capture(room.host, `${device}-self`); await samplePerformance(room.host, device);
       await sameCamera(room.host, `${device}-self`);
-      await room.host.getByRole('button', { name: '总览', exact: true }).click();
+      await setCameraView(room.host, '总览');
       await expect(room.host.getByTestId('board-3d')).toHaveAttribute('data-camera-state', 'overview');
       await capture(room.host, `${device}-overview`);
       if (stage === 'after' && !mobile) {
@@ -214,7 +215,7 @@ test('eight racers use the extended start and receive a skippable one-time intro
     expect(targets).toEqual(Array.from({ length: 8 }, (_, index) => `r${index}`));
     writeFileSync(`${output}/toy-${stage}-start-intro-sequence.json`, JSON.stringify(records, null, 2));
     await capture(room.host, 'desktop-eight-start'); await layout(room.host);
-    await room.host.getByRole('button', { name: '总览', exact: true }).click();
+    await setCameraView(room.host, '总览');
     await capture(room.host, 'desktop-eight-start-overview');
     await room.host.reload(); await expect(room.host.locator('.connection.is-online')).toBeVisible();
     await expect(board).toHaveAttribute('data-camera-state', 'self');
@@ -248,7 +249,7 @@ test('mobile extended start keeps eight full-size racers visible and the real sk
     await capture(room.host, 'mobile-eight-start'); await layout(room.host);
     const returned = await room.host.evaluate(() => window.__ART_QA_SCENE__!.getCamera());
     expect(Math.atan2(returned.position[0]! - returned.target[0]!, returned.position[2]! - returned.target[2]!)).toBeCloseTo(0, 2);
-    await room.host.getByRole('button', { name: '总览', exact: true }).click();
+    await setCameraView(room.host, '总览');
     await capture(room.host, 'mobile-eight-start-overview'); expect(room.errors).toEqual([]);
   } finally { await Promise.all(room.contexts.map(context => context.close())); }
 });
@@ -259,7 +260,7 @@ test('wild spaces and confirmed score, trip, forward and backward effects remain
   try {
     await seed(room, ['coach', 'banana'], [6, 0], 1, false, 'wild', [1]);
     const board = room.host.getByTestId('board-3d');
-    await room.host.getByRole('button', { name: '总览', exact: true }).click(); await capture(room.host, 'wild-specials-overview');
+    await setCameraView(room.host, '总览'); await capture(room.host, 'wild-specials-overview');
     await room.host.getByRole('button', { name: '恢复默认视角', exact: true }).click();
     await room.guest.getByRole('button', { name: '掷骰子', exact: true }).click();
     await expect(board).toHaveAttribute('data-phase', 'score');
@@ -335,7 +336,7 @@ test('a failed GLB fetch preserves the running scene and retries into the real c
     await expect(board.locator('.board-webgl canvas')).toBeVisible();
     await expect(room.host.getByText('3D 场景暂时无法显示', { exact: true })).toHaveCount(0);
     expect(await room.host.evaluate(() => window.__ART_QA_SCENE__!.stats().loadedModels)).toBe(0);
-    await room.host.getByRole('button', { name: '总览', exact: true }).click();
+    await setCameraView(room.host, '总览');
     await expect(board).toHaveAttribute('data-camera-state', 'overview');
     await room.host.getByRole('button', { name: '恢复默认视角', exact: true }).click();
     await settle(room.host);

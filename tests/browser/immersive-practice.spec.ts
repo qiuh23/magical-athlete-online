@@ -1,3 +1,4 @@
+import { setCameraView } from './camera-controls.js';
 import { test, expect, type Browser, type BrowserContext, type Page } from '@playwright/test';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { createApplication } from '../../src/server/index.js';
@@ -138,14 +139,14 @@ test('immersive desktop follows a complete remote skill chain once and returns; 
     expect(engineMoves.some(event => event.before?.[0] === 4 && event.after?.[0] === 2)).toBe(true);
     await capture(room.host, 'desktop-chain-return');
 
-    await room.host.getByRole('button', { name: '总览', exact: true }).click();
+    await setCameraView(room.host, '总览');
     await expect(board).toHaveAttribute('data-camera-mode', 'overview');
     await seed(room, ['coach', 'centaur', 'alchemist', 'legs'], [24, 2, 4, 6], 1);
     await observeCamera(room.host); await room.guest.getByRole('button', { name: '掷骰子', exact: true }).click();
     await expect.poll(async () => (await samples(room.host)).some(sample => sample.phase !== 'idle')).toBe(true);
     await expect(board).toHaveAttribute('data-phase', 'idle');
     expect((await samples(room.host)).every(sample => sample.state === 'overview')).toBe(true);
-    await room.host.getByRole('button', { name: '自己', exact: true }).click();
+    await setCameraView(room.host, '自己');
     const canvas = board.locator('.board-webgl canvas'); const box = (await canvas.boundingBox())!;
     await room.host.mouse.move(box.x + box.width * .55, box.y + box.height * .65);
     await room.host.mouse.down(); await room.host.mouse.move(box.x + box.width * .65, box.y + box.height * .72, { steps: 12 }); await room.host.mouse.up();
@@ -209,7 +210,7 @@ test('immersive mobile fills the viewport; next-turn skill opens automatically a
     expect(roll.height).toBeGreaterThanOrEqual(44); expect(roll.y + roll.height).toBeLessThanOrEqual(844);
     // Keep a full wild-track visual reference as well as the mobile close-up.
     await room.host.setViewportSize({ width: 1440, height: 1000 });
-    await room.host.getByRole('button', { name: '总览', exact: true }).click();
+    await setCameraView(room.host, '总览');
     await expect(room.host.getByTestId('board-3d')).toHaveAttribute('data-camera-state', 'overview');
     await expect.poll(async () => Math.hypot(Number(await room.host.getByTestId('board-3d').getAttribute('data-camera-x')), Number(await room.host.getByTestId('board-3d').getAttribute('data-camera-z')))).toBeLessThan(.05);
     await room.host.screenshot({ path: `${output}/special-tiles-desktop.png` });

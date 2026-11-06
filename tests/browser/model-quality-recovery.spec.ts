@@ -1,3 +1,4 @@
+import { setCameraView } from './camera-controls.js';
 import { test, expect, type Browser, type Page } from '@playwright/test';
 import { createApplication } from '../../src/server/index.js';
 import { resolveTasks } from '../../src/engine/index.js';
@@ -49,7 +50,7 @@ test('economy model fetch failure keeps the game usable and automatically retrie
     await env.open();const board=env.page.getByTestId('board-3d');
     await expect(board.locator('.board-webgl canvas')).toBeVisible();await expect(board).toHaveAttribute('data-model-fallbacks','2');
     await expect(env.page.getByRole('button',{name:'掷骰子',exact:true})).toBeEnabled();
-    await env.page.getByRole('button',{name:'总览',exact:true}).click();await expect(board).toHaveAttribute('data-camera-state','overview');
+    await setCameraView(env.page, '总览');await expect(board).toHaveAttribute('data-camera-state','overview');
     const before=structuredClone(application.rooms.get(env.code).game);release();await loaded(env.page);
     expect(requests).toBeGreaterThanOrEqual(2);expect(application.rooms.get(env.code).game).toEqual(before);expect(env.errors).toEqual([]);
   }finally{release();await env.context.close();}

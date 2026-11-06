@@ -1,3 +1,4 @@
+import { parseRoomCode } from '../../src/client/backends.js';
 import { test, expect, type Page } from '@playwright/test';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { createApplication } from '../../src/server/index.js';
@@ -37,7 +38,7 @@ test('entry tour precedes pre-race effects and choice, then grants reveal once w
   const pages=await Promise.all(contexts.map(context=>context.newPage()));const [host,guest]=pages as [Page,Page];
   for(const page of pages)page.on('pageerror',error=>errors.push(error.message));
   try{
-    await host.goto(url);await host.getByRole('tab',{name:'创建房间',exact:true}).click();await host.getByLabel('你的昵称').fill('能力获得者');await host.getByLabel('房间人数上限').selectOption('2');await host.getByLabel('每次操作时限').selectOption('0');await host.getByRole('button',{name:'创建房间，召集朋友'}).click();await expect(host.locator('.connection.is-online')).toBeVisible();const code=host.url().split('/').at(-1)!;
+    await host.goto(url);await host.getByRole('tab',{name:'创建房间',exact:true}).click();await host.getByLabel('你的昵称').fill('能力获得者');await host.getByLabel('房间人数上限').selectOption('2');await host.getByLabel('每次操作时限').selectOption('0');await host.getByRole('button',{name:'创建房间，召集朋友'}).click();await expect(host.locator('.connection.is-online')).toBeVisible();const code=parseRoomCode(host.url().split('/').at(-1)!)!.code;
     await guest.goto(`${url}/room/${code}`);await guest.getByLabel('你的昵称').fill('手机朋友');await guest.getByRole('button',{name:'加入这场胡闹'}).click();await expect(guest.locator('.connection.is-online')).toBeVisible();
     const publish=(change:(room:Room)=>void)=>{const room=structuredClone(application.rooms.get(code));change(room);room.version++;room.deadline=null;application.rooms.rooms.set(code,room);application.store.save(room);for(const socket of application.io.sockets.sockets.values())if(socket.data.identity?.roomCode===code)socket.emit('snapshot',application.rooms.view(room,socket.data.identity.playerId));};
     publish(room=>{

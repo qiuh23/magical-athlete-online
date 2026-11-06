@@ -1,3 +1,4 @@
+import { setCameraView } from './camera-controls.js';
 import { writeFileSync } from 'node:fs';
 import { bridgeProfile } from '../../src/client/scene/bridges-layout.js';
 import { Vector3, Line3 } from 'three';
@@ -31,10 +32,10 @@ test('Bridges actual scene: all crossing pairs, desktop and narrow phone', async
   await page.setViewportSize({width:width!,height:height!});await page.goto(`${url}/room/${code}`);
   const board=page.getByTestId('board-3d');await expect(board).toBeVisible();await expect(board.locator('.scene-fallback')).toHaveCount(0);
   await expect(board).toHaveAttribute('data-loaded-models',/[1-9]/);
-  await board.getByRole('button',{name:'总览',exact:true}).click();await page.waitForTimeout(1500);
+  await setCameraView(board, '总览');await page.waitForTimeout(1500);
   await page.screenshot({path:`test-results/expansion-dioramas/bridges-overview-${width}.png`});
   for(let i=0;i<8;i++){const expected=boardPoint(positions[i]!,width!<600,'bridges');const label=board.locator(`[data-racer-id="r${i}"].pawn-seat`);await expect.poll(async()=>Number(await label.getAttribute('data-world-y'))).toBeCloseTo(expected[1]+.005,3);}
-  await board.getByRole('button',{name:'自己',exact:true}).click();await page.waitForTimeout(1500);
+  await setCameraView(board, '自己');await page.waitForTimeout(1500);
   await page.screenshot({path:`test-results/expansion-dioramas/bridges-self-${width}.png`});
  }
  expect(errors).toEqual([]);
@@ -72,7 +73,7 @@ test('Revolutionary standing, fall, recovery and crowded tile in the actual scen
  game.flags.awaitRoll=true;room.game=game;room.version++;app.store.save(room);
  await page.addInitScript(identity=>{localStorage.setItem(`magical-athlete:identity:${identity.roomCode}`,JSON.stringify(identity));localStorage.setItem('magical-athlete:muted','true');localStorage.setItem('magical-athlete:reduced-motion','false');},made.identity);
  await page.setViewportSize({width:390,height:844});await page.goto(`${url}/room/${code}`);const board=page.getByTestId('board-3d');await expect(board).toHaveAttribute('data-loaded-models','4');
- await board.getByRole('button',{name:'自己',exact:true}).click();await page.waitForTimeout(1800);await page.screenshot({path:'test-results/expansion-dioramas/revolutionary-game-standing.png'});
+ await setCameraView(board, '自己');await page.waitForTimeout(1800);await page.screenshot({path:'test-results/expansion-dioramas/revolutionary-game-standing.png'});
  const emit=()=>{room.version++;app.rooms.rooms.set(code,room);app.store.save(room);for(const socket of app.io.sockets.sockets.values())if(socket.data.identity?.roomCode===code)socket.emit('snapshot',app.rooms.view(room,socket.data.identity.playerId));};
  room.game.racers[0]!.tripped=true;room.game.logs.push({id:1,type:'trip',source:'r0',targets:['r0'],text:'验收：绊倒'});emit();
  await expect(board).toHaveAttribute('data-phase','trip');await page.waitForTimeout(450);await page.screenshot({path:'test-results/expansion-dioramas/revolutionary-game-fall.png'});await expect(board).toHaveAttribute('data-phase','idle');
@@ -86,5 +87,5 @@ for(const [upper,lower] of [[3,8],[10,13],[15,18],[20,23]])test(`readable crossi
  const room=app.rooms.get(code),game=createGame(room.game.players,731);game.phase='race';game.round=1;game.track='bridges';game.currentRacerId='r0';game.baseTurnOrder=['r0','r1'];
  game.racers=game.players.map((p,i)=>({id:`r${i}`,playerId:p.id,characterId:i?'coach':'leaf-revolutionary',position:(i?lower:upper)!,tripped:false,finished:false,eliminated:false,flags:{}}));room.game=game;room.version++;app.store.save(room);
  await page.addInitScript(identity=>{localStorage.setItem(`magical-athlete:identity:${identity.roomCode}`,JSON.stringify(identity));for(const key of ['muted','low-quality','reduced-motion'])localStorage.setItem(`magical-athlete:${key}`,'true')},made.identity);
- await page.setViewportSize({width:390,height:844});await page.goto(`${url}/room/${code}`);const board=page.getByTestId('board-3d');await expect(board).toHaveAttribute('data-loaded-models','2');await board.getByRole('button',{name:'自己',exact:true}).click();await page.waitForTimeout(1200);await page.screenshot({path:`test-results/expansion-dioramas/crossing-${upper}-${lower}.png`});
+ await page.setViewportSize({width:390,height:844});await page.goto(`${url}/room/${code}`);const board=page.getByTestId('board-3d');await expect(board).toHaveAttribute('data-loaded-models','2');await setCameraView(board, '自己');await page.waitForTimeout(1200);await page.screenshot({path:`test-results/expansion-dioramas/crossing-${upper}-${lower}.png`});
 });

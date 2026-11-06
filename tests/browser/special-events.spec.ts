@@ -47,16 +47,15 @@ test('three browsers submit secret guesses, refresh and see one event reward',as
  const room=app.rooms.get(code),s=createGame(room.game.players,41);s.phase='race';s.round=1;s.currentRacerId='r0';s.baseTurnOrder=['r0','r1','r2'];s.racers=s.players.map((p,i)=>({id:`r${i}`,playerId:p.id,characterId:'banana',position:2+i*8,finished:false,eliminated:false,tripped:false,flags:{}}));s.flags.thirds={id:'mastermind',round:1,held:{},extraCards:[]};s.scoreLedger=s.players.map(p=>({playerId:p.id,placement:0,map:0,skill:0,event:0,total:0}));s.queue=[{kind:'beginTurn',racerId:'r0'}];resolveTasks(s);s.flags.testDice=[4];room.game=s;room.version++;app.store.save(room);
  const contexts=await Promise.all([made,...peers].map(()=>browser.newContext()));const pages=await Promise.all(contexts.map(c=>c.newPage()));const errors:string[]=[];
  try{
-  for(const [i,page] of pages.entries()){page.on('pageerror',e=>errors.push(e.message));await page.addInitScript(identity=>{localStorage.setItem(`magical-athlete:identity:${identity.roomCode}`,JSON.stringify(identity));for(const key of ['reduced-motion','low-quality','muted'])localStorage.setItem(`magical-athlete:${key}`,'true');},[made,...peers][i]!.identity);await page.goto(`${url}/room/${code}`);await expect(page.getByTestId('special-event')).toContainText('特殊赛事');}
+  for(const [i,page] of pages.entries()){page.on('pageerror',e=>errors.push(e.message));await page.addInitScript(identity=>{localStorage.setItem(`magical-athlete:identity:${identity.roomCode}`,JSON.stringify(identity));for(const key of ['reduced-motion','low-quality','muted'])localStorage.setItem(`magical-athlete:${key}`,'true');},[made,...peers][i]!.identity);await page.goto(`${url}/room/${code}`);await expect(page.getByTestId('special-event')).toHaveAccessibleName(/特殊赛事/);}
   await pages[1]!.getByRole('region',{name:'待处理技能'}).getByRole('button',{name:'4',exact:true}).click();await pages[1]!.reload();
   await expect(pages[2]!.getByRole('region',{name:'待处理技能'})).toBeVisible();await pages[2]!.getByRole('region',{name:'待处理技能'}).getByRole('button',{name:'2',exact:true}).click();
   await expect(pages[0]!.getByTestId('roll-button')).toBeEnabled();await pages[0]!.getByTestId('roll-button').click();
   await expect.poll(()=>app.rooms.get(code).game.players[1]!.score).toBe(1);const scored=app.rooms.get(code);expect(scored.game.scoreLedger![1]!.event).toBe(1);expect(scored.game.racers[0]!.position).toBe(6);
   for(const page of pages)await expect.poll(async()=>Number(await page.locator('.game-shell').getAttribute('data-room-version'))).toBeGreaterThanOrEqual(scored.version);
   await pages[0]!.setViewportSize({width:390,height:844});
-  await expect(pages[0]!.getByTestId('special-event').getByText('本场生效；需要你选择时会自动提示，其余效果由系统结算。')).toBeVisible();
-  await pages[0]!.getByTestId('special-event').locator('summary').click();await expect(pages[0]!.getByTestId('special-event')).not.toHaveAttribute('open','');
-  await pages[0]!.getByTestId('special-event').locator('summary').click();
+  await pages[0]!.getByTestId('special-event').click();await expect(pages[0]!.getByRole('dialog',{name:'本场赛事与地图'})).toContainText('本场生效；需要你选择时会自动提示，其余效果由系统结算。');
+  await pages[0]!.getByRole('dialog').getByRole('button',{name:'关闭',exact:true}).click();
   await pages[0]!.screenshot({path:info.outputPath('event-mobile.png')});expect(await pages[0]!.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);expect(errors).toEqual([]);
  }finally{await Promise.all(contexts.map(c=>c.close()));}
 });

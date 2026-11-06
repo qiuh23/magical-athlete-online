@@ -36,18 +36,18 @@ test('tablet and mobile race controls stay separate for hosts and guests, includ
       const page = await context.newPage(); page.on('pageerror', error => errors.push(error.message));
       if (role === 'host') owner = page;
       await page.goto(`${url}/room/C-${code}`);
-      const status = page.getByTestId('animation-phase'), event = page.getByTestId('special-event'), summary = event.locator('summary');
+      const status = page.getByTestId('animation-phase'), event = page.getByTestId('special-event');
       await expect(status.locator('.countdown')).toBeVisible();
       await expect(page.getByTestId('board-minimap')).toBeVisible();
       const layout = async (tablet = false) => {
         await expect.poll(() => page.evaluate(() => {
           const status = document.querySelector('.race-status-pill')!.getBoundingClientRect();
-          const event = document.querySelector('[data-testid="special-event"] summary')!.getBoundingClientRect();
+          const event = document.querySelector('[data-testid="special-event"]')!.getBoundingClientRect();
           const map = document.querySelector('[data-testid="board-minimap"]')!.getBoundingClientRect();
           const overlap = (a: DOMRect, b: DOMRect) => Math.min(a.right, b.right) > Math.max(a.left, b.left) && Math.min(a.bottom, b.bottom) > Math.max(a.top, b.top);
           return { status: overlap(status, event), map: overlap(map, event), overflow: document.documentElement.scrollWidth > innerWidth + 1 };
         })).toEqual({ status: false, map: false, overflow: false });
-        expect(await summary.evaluate(element => {
+        expect(await event.evaluate(element => {
           const box = element.getBoundingClientRect(); return element.contains(document.elementFromPoint(box.x + box.width / 2, box.y + box.height / 2));
         })).toBe(true);
         if (tablet) {
@@ -62,7 +62,7 @@ test('tablet and mobile race controls stay separate for hosts and guests, includ
                 && Math.min(panel.box.bottom, other.box.bottom) > Math.max(panel.box.top, other.box.top)
                 ? [`${panel.name}/${other.name}`] : []));
           }), { message: 'tablet header, camera, status, event and minimap must have separate space' }).toEqual([]);
-          const controls = page.locator('.race-hud-buttons button, .scene-camera-toolbar button, .scene-camera-toolbar summary');
+          const controls = page.locator('.race-hud-buttons button:visible, .scene-camera-toolbar button:visible, .scene-camera-toolbar summary:visible');
           for (const control of await controls.all()) {
             await expect(control).toBeVisible();
             expect(await control.evaluate(element => {
@@ -78,14 +78,14 @@ test('tablet and mobile race controls stay separate for hosts and guests, includ
         { width: 1366, height: 1024 },
       ];
       const existing = role === 'host'
-        ? [{ width: 1440, height: 900 }, { width: 430, height: 844 }, { width: 390, height: 844 }, { width: 320, height: 667 }]
+        ? [{ width: 1440, height: 900 }, { width: 430, height: 844 }, { width: 390, height: 844 }, { width: 320, height: 667 }, { width: 844, height: 390 }, { width: 667, height: 375 }]
         : [{ width: 390, height: 844 }];
       for (const viewport of [...existing, ...tablets]) {
         const tablet = tablets.includes(viewport);
         await page.setViewportSize(viewport);
         await layout(tablet);
-        await summary.click(); await expect(event).not.toHaveAttribute('open', '');
-        await layout(tablet); await summary.click(); await expect(event).toHaveAttribute('open', '');
+        await event.click(); await expect(page.getByRole('dialog', { name: '本场赛事与地图' })).toContainText('同格其他选手');
+        await page.getByRole('button', { name: '关闭', exact: true }).click(); await expect(event).toBeFocused();
         await layout(tablet);
         if(tablet){
           const camera=page.locator('.camera-options');
@@ -96,14 +96,13 @@ test('tablet and mobile race controls stay separate for hosts and guests, includ
           }),'expanded camera settings must remain reachable').toBe(true);
           await camera.locator('summary').click();await expect(camera).not.toHaveAttribute('open','');await layout(tablet);
         }
-        if (!process.env.CI && (viewport.width === 768 || viewport.width === 1024)) {
-          mkdirSync('docs/qa/ipad-hud-skills', { recursive: true });
-          await page.screenshot({ path: `docs/qa/ipad-hud-skills/${role}-${viewport.width}.png` });
+        if (!process.env.CI && (role === 'host' && [1440, 390, 844, 768].includes(viewport.width))) {
+          mkdirSync('docs/qa/immersive-race-ui', { recursive: true });
+          await page.screenshot({ path: `docs/qa/immersive-race-ui/${role}-${viewport.width}.png` });
         }
       }
     }
     await owner!.setViewportSize({ width: 390, height: 844 });
-    await owner!.getByTestId('special-event').locator('summary').click();
     await owner!.getByTestId('roll-button').click(); await expect(owner!.getByTestId('skip-animation')).toBeVisible();
     await expect(owner!.locator('.dice-spotlight')).toHaveAttribute('data-up-face', '2');
     const status = (await owner!.getByTestId('animation-phase').boundingBox())!;

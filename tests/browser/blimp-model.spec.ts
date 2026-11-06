@@ -41,7 +41,8 @@ for (const phone of [false, true]) test(`Blender Blimp renders as a racer and ev
     expect(stats.loadedModelNames.filter((name: string) => name === 'toy_blimp')).toHaveLength(2);
     const point = pawnWorldPoint(game.racers[0]!, game.racers, 5, phone, 'mild');
     const target = [point[0], point[1] + .23, point[2]];
-    await page.getByTestId('special-event').locator('summary').click();
+    await page.getByTestId('special-event').click();
+    await page.getByRole('dialog').getByRole('button', {name:'关闭',exact:true}).click();
     for (const [view, offset] of [['front', [-4, 2, 7]], ['side', [-7, 1, 0]], ['rear', [4, 2, -7]]] as const) {
       await page.evaluate(({ target, offset, zoom }) => (window as any).__ART_QA_SCENE__.setCamera({ position: target.map((n, i) => n + offset[i]), target, zoom, up: [0, 1, 0] }), { target, offset, zoom: phone ? 330 : 520 });
       await page.screenshot({ path: `${output}/blimp-${device}-${view}.png` });

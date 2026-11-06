@@ -38,16 +38,16 @@ for (const phone of [false, true]) test(`opponent dice cues survive refresh and 
       await page.goto(`${url}/room/C-${code}`);
       const hint = page.getByTestId('choice-dice-hint'), choice = page.getByTestId('skill-choice');
       const face = kind === 'critic' ? '5 点' : '6 点';
-      await expect(hint).toContainText('1号 投骰选手的香蕉'); await expect(hint).toContainText(face);
-      await page.reload(); await expect(hint).toContainText(face);
-      await choice.getByRole('button', { name: '收起选项', exact: true }).click(); await expect(hint).toContainText(face);
-      await choice.getByRole('button', { name: '展开选项', exact: true }).click(); await expect(hint).toContainText(face);
+      await expect(hint).toHaveAttribute('aria-label', `1号 投骰选手的香蕉 · 刚才骰面 ${face}`); await expect(hint.locator('b')).toHaveText(face.split(' ')[0]!);
+      await page.reload(); await expect(hint.locator('b')).toHaveText(face.split(' ')[0]!);
+      await choice.getByRole('button', { name: '收起选项', exact: true }).click(); await expect(hint.locator('b')).toHaveText(face.split(' ')[0]!);
+      await choice.getByRole('button', { name: '展开选项', exact: true }).click(); await expect(hint.locator('b')).toHaveText(face.split(' ')[0]!);
       await expect(page.getByTestId('board-minimap')).toBeVisible();
       const related = page.getByTestId('choice-related-racers');
       await expect(related).toBeVisible();
       expect((await related.boundingBox())!.height).toBeLessThan(105);
       const target = related.locator('[data-related-racer="r0"]');
-      await expect(target).toContainText(CHARACTERS.find(card => card.id === 'banana')!.ability);
+      await expect(target).toHaveAttribute('title', /香蕉/);
       const version = app.rooms.get(code).version, pendingId = app.rooms.get(code).game.pending!.id;
       await target.click();
       const dialog = page.getByRole('dialog', { name: '香蕉', exact: true });
@@ -58,7 +58,7 @@ for (const phone of [false, true]) test(`opponent dice cues survive refresh and 
         await page.screenshot({ path: 'docs/qa/mobile-event-countdown/related-card-phone.png' });
       }
       await dialog.getByRole('button', { name: '关闭', exact: true }).click();
-      if (kind === 'fox') await expect(related.locator('[data-related-racer="r1"]')).toContainText(CHARACTERS.find(card => card.id === 'party-pooper')!.ability);
+      if (kind === 'fox') await expect(related.locator('[data-related-racer="r1"]')).toHaveAttribute('title', new RegExp(CHARACTERS.find(card => card.id === 'party-pooper')!.nameZh));
       const option = choice.locator('.choice-options .button').first();
       await option.scrollIntoViewIfNeeded();
       expect(await option.evaluate(element => {
