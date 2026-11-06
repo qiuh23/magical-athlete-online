@@ -21,6 +21,7 @@ export function RoomChat({ room, community, connection, immersive, onRename }: {
   const portal = useRef<HTMLElement>(null);
   const toggle = useRef<HTMLButtonElement>(null), wasOpen = useRef(false);
   const noticed=useRef(community.liveRevision??0);
+  // One coalesced preview stays next to the trigger; all messages remain in history.
   const noticedMessage=useRef(community.liveMessages?.at(-1)?.id??0);
   const list = useRef<HTMLDivElement>(null), bottom = useRef(true), initial = useRef(true);
   const retry = useRef<{ text: string; clientMessageId: string } | null>(null);
@@ -106,16 +107,16 @@ export function RoomChat({ room, community, connection, immersive, onRename }: {
   // A viewport overlay must not inherit any ancestor's transform/containment:
   // those turn fixed coordinates into page-local coordinates during scenes.
   return createPortal(<aside ref={portal} className={`room-community ${immersive ? 'in-race' : ''} ${open ? 'is-open' : ''}`} style={{'--chat-minimap-bottom':`${minimapBottom}px`} as CSSProperties} data-testid="room-community" onKeyDown={event => { event.stopPropagation(); if (event.key === 'Escape') setOpen(false); }}>
-    {!open&&notices.length>0&&<div ref={noticeRegion} className="chat-notice-region" aria-live="polite" aria-relevant="additions" aria-label="新聊天消息">{notices.filter(notice=>!community.messages.find(message=>message.id===notice.message.id)?.hidden).map(notice=>{const current=community.messages.find(message=>message.id===notice.message.id);return <ChatNoticeBubble key={notice.message.id} notice={current?{...notice,message:current}:notice} onOpen={()=>setOpen(true)} />;})}</div>}
+    {!open&&notices.length>0&&<div ref={noticeRegion} className="chat-notice-region" aria-live="polite" aria-relevant="additions" aria-label="新聊天消息">{notices.filter(notice=>!community.messages.find(message=>message.id===notice.message.id)?.hidden).slice(-1).map(notice=>{const current=community.messages.find(message=>message.id===notice.message.id);return <ChatNoticeBubble key={notice.message.id} notice={current?{...notice,message:current}:notice} onOpen={()=>setOpen(true)} />;})}</div>}
     {!open && <button ref={toggle} type="button" className="chat-toggle" title="房间聊天" aria-label={`房间聊天${unread ? `，${unread} 条未读` : ''}`} aria-expanded={false} aria-controls="room-chat-panel" onClick={() => setOpen(true)}><Icon kind="chat" size={25} />{unread > 0 && <b className="chat-unread" aria-hidden="true">{unread > 99 ? '99+' : unread}</b>}</button>}
     {open && <section className="room-chat" id="room-chat-panel" aria-label="房间聊天" data-testid="room-chat">
       <header><div><strong>房间聊天</strong><small>{community.connected ? '在线' : '连接中…'}</small></div><button type="button" aria-label="收起聊天" onClick={() => setOpen(false)}><Icon kind="close" /></button></header>
-      <details className="chat-report"><summary>举报 / 联系站长</summary><p><a href={`mailto:${STATIONMASTER_CONTACT}?subject=${encodeURIComponent('运动会举报 '+(room.backendId??'cloudflare')+' '+room.code)}`}>举报 / 联系站长</a> · 请提供服务器、房间码、消息编号和原因，勿发送密码或令牌。</p></details>
+      <details className="chat-report"><summary>举报 / 联系站长</summary><p><a href={`mailto:${STATIONMASTER_CONTACT}?subject=${encodeURIComponent('运动会举报 '+(room.backendId??'cloudflare')+' '+room.code)}`}>举报 / 联系站长</a> · 请提供服务器、房间码、发送者、时间和原因，勿发送密码或令牌。</p></details>
       <div className="chat-personal"><span>{community.name ?? room.players.find(player => player.id === room.selfId)?.name ?? room.spectators?.find(viewer => viewer.id === room.selfId)?.name}</span>{room.role !== 'spectator' && <button disabled={room.phase === 'lobby'} title={room.phase === 'lobby' ? '开局后可修改一次昵称' : undefined} onClick={onRename}>修改昵称 · {community.renameRemaining ?? room.renameRemaining ?? 1} 次</button>}</div>
       <div className="chat-messages" ref={list} role="log" aria-label="聊天记录" aria-live="polite" aria-relevant="additions" onScroll={() => { const el = list.current; bottom.current = !el || el.scrollHeight - el.scrollTop - el.clientHeight < 36; if (bottom.current) { setNewBelow(false); markRead(); } }}>
         {community.messages.length === 0 && <p className="chat-empty">暂无消息</p>}
         {community.messages.map(message => <article key={message.id} className={`chat-message ${message.kind === 'system' ? 'is-system' : ''} ${message.senderId === room.selfId ? 'is-self' : ''}`} data-message-id={message.id}>
-          <div><strong>{message.kind === 'system' ? '系统' : message.senderName}</strong><time dateTime={new Date(message.sentAt).toISOString()}>{new Date(message.sentAt).toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })} · #{message.id}</time></div><p>{message.text}</p>
+          <div><strong>{message.kind === 'system' ? '系统' : message.senderName}</strong><time dateTime={new Date(message.sentAt).toISOString()}>{new Date(message.sentAt).toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })}</time></div><p>{message.text}</p>
         </article>)}
       </div>
       {newBelow && <button className="chat-new" onClick={scrollBottom}>查看新消息 ↓</button>}
