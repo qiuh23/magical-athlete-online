@@ -80,3 +80,9 @@ body>.room-community.in-race .chat-notice-region{top:auto;bottom:calc(100% + 10p
 .footer details p{margin:8px 0;overflow-wrap:anywhere}
 .footer details a{font-size:14px}
 .chat-report{font-size:12px;line-height:1.6;padding:8px 12px;overflow-wrap:anywhere}
+
+/* A compact latest-message preview belongs to the same dock as its trigger. */
+body>.room-community .chat-notice-region{gap:0;padding:0;overflow:visible;max-height:none}
+body>.room-community .chat-notice{border-radius:12px;box-shadow:0 4px 14px #23494120}
+body>.room-community .chat-notice span{-webkit-line-clamp:2;line-height:1.4}
+body>.room-community:not(.in-race){left:max(12px,env(safe-area-inset-left));bottom:calc(max(12px,env(safe-area-inset-bottom)) + var(--chat-keyboard-offset,0px))}

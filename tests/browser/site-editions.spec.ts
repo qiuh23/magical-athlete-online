@@ -12,9 +12,9 @@ test.afterAll(async()=>{await application.close();for(const key of ['SITE_EDITIO
 test('domestic home ignores forged storage and URL policy and exposes only fixed names and same-site invitation errors',async({page})=>{
  await page.addInitScript(()=>{localStorage.setItem('magical-athlete:name','旧自由昵称绝不可公开');localStorage.setItem('magical-athlete:backend-preference:v1','cloudflare');localStorage.setItem('SITE_EDITION','global');});
  await page.goto(url+'/?SITE_EDITION=global&backend=cloudflare');
- await expect(page.locator('.current-line')).toContainText('可用');
+ await expect(page.locator('.current-line')).toContainText('已连接');
  const name=await page.locator('.fixed-nickname strong').innerText();expect(SITE_NICKNAMES.map(value=>value.name)).toContain(name);
- await page.getByRole('button',{name:'换一个',exact:true}).click();await expect(page.locator('.fixed-nickname strong')).not.toHaveText(name);
+ await page.getByRole('button',{name:'更换随机昵称',exact:true}).click();await expect(page.locator('.fixed-nickname strong')).not.toHaveText(name);
  await page.getByRole('tab',{name:'创建房间',exact:true}).click();await expect(page.locator('input[name="name"]')).toHaveCount(0);
  await expect(page.locator('.server-choices,input[name="server"],.room-chat')).toHaveCount(0);
  await expect(page.getByText('旧自由昵称绝不可公开',{exact:true})).toHaveCount(0);
@@ -34,8 +34,8 @@ test('domestic multiplayer, spectator, refresh and landscape race retain control
   const context=await browser.newContext({viewport:{width:844,height:390}});const page=await context.newPage();
   await context.addInitScript(identity=>{localStorage.setItem(`magical-athlete:identity:aliyun:${identity.roomCode}`,JSON.stringify({...identity,backendId:'aliyun'}));localStorage.setItem('magical-athlete:low-quality','true');localStorage.setItem('magical-athlete:reduced-motion','true');},identity);
   await page.goto(`${url}/room/A-${room.code}${role==='spectator'?'?spectate=1':''}`);await expect(page.getByTestId('board-3d')).toBeVisible();
-  await expect(page.locator('.room-chat,.chat-toggle,.chat-notice-bubble,input[name="name"]')).toHaveCount(0);
-  await expect(page.getByRole('button',{name:'换一个',exact:true})).toHaveCount(0);
+  await expect(page.locator('.room-chat,.room-community,.chat-toggle,.chat-notice,.chat-notice-region,input[name="name"]')).toHaveCount(0);
+  await expect(page.getByRole('button',{name:'更换随机昵称',exact:true})).toHaveCount(0);
   const geometry=await page.evaluate(()=>({width:document.documentElement.scrollWidth,viewport:innerWidth,hud:getComputedStyle(document.documentElement).getPropertyValue('--race-hud-height')}));expect(geometry.width).toBeLessThanOrEqual(geometry.viewport+1);expect(geometry.hud).not.toBe('');
   if(role==='host'){await expect(page.getByTestId('roll-button')).toBeEnabled();await page.getByTestId('roll-button').click();await expect.poll(()=>application.rooms.get(room.code).game.racers[0]!.position).toBeGreaterThan(0);}
   else await expect(page.getByText('观战中 · 赛况自动同步',{exact:true})).toBeVisible();
