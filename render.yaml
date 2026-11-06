@@ -7,6 +7,10 @@ services:
     healthCheckPath: /api/health
     numInstances: 1
     envVars:
+      - key: SITE_EDITION
+        value: cn
+      - key: BACKEND_ID
+        value: aliyun
       - key: NODE_ENV
         value: production
       - key: PORT

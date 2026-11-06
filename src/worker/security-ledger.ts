@@ -1,7 +1,7 @@
 import { SECURITY_UNAVAILABLE, networkExpiry, securityEvent, type SecurityEvent } from '../shared/security.js';
 
 export const SECURITY_OBJECT='security-ledger-v1';
-export interface SecurityEnvironment { ROOMS?:{idFromName(name:string):DurableObjectId;get(id:DurableObjectId):{fetch(input:Request):Promise<Response>}}; SECURITY_MAX_BYTES?:string; SECURITY_TEST_NO_LEDGER?:boolean; }
+export interface SecurityEnvironment { SITE_EDITION?:string; ROOMS?:{idFromName(name:string):DurableObjectId;get(id:DurableObjectId):{fetch(input:Request):Promise<Response>}}; SECURITY_MAX_BYTES?:string; SECURITY_TEST_NO_LEDGER?:boolean; }
 export interface ModerationState {hidden:number[];restricted:string[];names:string[];closed:boolean;expiresAt:number;eventIds:number[];bytes?:number;logThrough?:number;}
 const empty=():ModerationState=>({hidden:[],restricted:[],names:[],closed:false,expiresAt:0,eventIds:[]});
 export function mergeModeration(previous:ModerationState|undefined,next:ModerationState):ModerationState {
@@ -24,6 +24,7 @@ async function insertEntry(txn:DurableObjectTransaction,max:number,input:Omit<Se
   await txn.put('security-meta',{next:id+1,bytes:meta.bytes+bytes});if(await txn.getAlarm()===null)await txn.setAlarm(Date.now()+15*60_000);return entry;
 }
 export async function securityCall<T=unknown>(env:SecurityEnvironment,operation:string,input?:unknown):Promise<T|undefined> {
+  if(env.SITE_EDITION==='cn'){if(operation==='health')return {ok:true,enabled:false,warnings:[]} as T;if(operation==='state')return empty() as T;return undefined;}
   // Direct unit construction without a namespace is used by the legacy rule
   // tests. Every deployed Worker request requires ROOMS and always takes this path.
   if(!env.ROOMS||typeof env.ROOMS.idFromName!=='function'){if(env.SECURITY_TEST_NO_LEDGER===true)return undefined;throw Error(SECURITY_UNAVAILABLE);}

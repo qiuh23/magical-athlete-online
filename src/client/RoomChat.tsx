@@ -1,3 +1,4 @@
+import { useRaceHudGeometry } from './useRaceHudGeometry.js';
 import { randomId } from './random-id.js';
 import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from 'react';
 import { createPortal } from 'react-dom';
@@ -13,7 +14,7 @@ export function RoomChat({ room, community, connection, immersive, onRename }: {
   const readKey = `magical-athlete:chat-read:${room.backendId ?? 'cloudflare'}:${room.code}`;
   const [seen, setSeen] = useState(() => { try { return Number(sessionStorage.getItem(readKey)) || community.latestId; } catch { return community.latestId; } });
   const [newBelow, setNewBelow] = useState(false);
-  const [minimapBottom,setMinimapBottom]=useState(90);
+  const minimapBottom=useRaceHudGeometry(immersive,room.round);
   const [notices,setNotices]=useState<ChatNotice[]>([]);
   const [noticeLimit,setNoticeLimit]=useState(() => matchMedia(`(max-width:${CHAT_NOTICE_CONFIG.mobileBreakpoint}px)`).matches ? CHAT_NOTICE_CONFIG.mobileLimit : CHAT_NOTICE_CONFIG.desktopLimit);
   const noticeRegion=useRef<HTMLDivElement>(null),noticeRects=useRef(new Map<string,DOMRect>());
@@ -27,29 +28,6 @@ export function RoomChat({ room, community, connection, immersive, onRename }: {
   const markRead = () => { setSeen(community.latestId); try { sessionStorage.setItem(readKey, String(community.latestId)); } catch { /* Optional read marker. */ } };
   const scrollBottom = () => { if (list.current) list.current.scrollTop = list.current.scrollHeight; bottom.current = true; setNewBelow(false); markRead(); };
   useEffect(() => { if (!open && wasOpen.current) toggle.current?.focus(); wasOpen.current = open; }, [open]);
-  useLayoutEffect(()=>{
-    if(!immersive)return;
-    // Measure the fixed HUD and lazy scene controls. Choices never participate
-    // in these measurements, so mounting one cannot move the chat anchor.
-    let map:HTMLElement|null=null;
-    const hud=document.querySelector<HTMLElement>('.race-hud-top'),status=document.querySelector<HTMLElement>('.race-status-stack');
-    let camera:HTMLElement|null=null;
-    const update=()=>{
-      const style=document.documentElement.style;
-      if(hud)style.setProperty('--race-hud-height',`${Math.ceil(hud.getBoundingClientRect().height)}px`);
-      if(camera)style.setProperty('--race-camera-height',`${Math.ceil(camera.getBoundingClientRect().height)}px`);
-      if(status)style.setProperty('--race-status-bottom',`${Math.ceil(status.getBoundingClientRect().bottom)}px`);
-      if(map){const bottom=Math.ceil(map.getBoundingClientRect().bottom)+12;setMinimapBottom(bottom);style.setProperty('--race-minimap-bottom',`${bottom}px`);}
-    };
-    const observer=new ResizeObserver(update);
-    if(hud)observer.observe(hud);if(status)observer.observe(status);
-    const attach=()=>{map=document.querySelector<HTMLElement>('[data-testid="board-minimap"]');camera=document.querySelector<HTMLElement>('.scene-camera-toolbar');if(map&&camera){observer.observe(map);observer.observe(camera);update();return true;}return false;};
-    // The scene is lazy-loaded; stop observing DOM as soon as it is ready.
-    const mounting=new MutationObserver(()=>{if(attach())mounting.disconnect();});
-    if(!attach())mounting.observe(document.body,{childList:true,subtree:true});
-    window.addEventListener('resize',update);
-    return()=>{observer.disconnect();mounting.disconnect();window.removeEventListener('resize',update);for(const name of ['--race-minimap-bottom','--race-hud-height','--race-camera-height','--race-status-bottom'])document.documentElement.style.removeProperty(name);};
-  },[immersive,room.round]);
   useLayoutEffect(() => {
     if (!immersive || !portal.current) return;
     // Bottom sheets and live notices reserve their own space. Choices never

@@ -10,9 +10,9 @@ BASE=$DEPLOY_BASE
 TARGET=$(readlink -f "$BASE/previous")
 [[ $TARGET == "$BASE/releases/"* && -f $TARGET/.ready ]] || { echo 'No validated previous release.' >&2; exit 1; }
 CURRENT=$(readlink -f "$BASE/current")
-if [[ ! -f $TARGET/.security-aware ]]; then
-    python3 "$SCRIPT_DIR/security-ops.py" rollback-check --database "$DEPLOY_DATA/security.sqlite"
-fi
+node --input-type=module - "$TARGET/dist/client/site-edition.json" <<'SITE'
+import fs from 'node:fs';if(JSON.parse(fs.readFileSync(process.argv[2],'utf8')).siteEdition!=='cn')throw Error('Rollback target must preserve the mainland site policy.');
+SITE
 ln -sfn "$TARGET" "$BASE/current.next"
 mv -Tf "$BASE/current.next" "$BASE/current"
 systemctl restart "$DEPLOY_SERVICE"

@@ -9,55 +9,43 @@ const own = (object, key) => Object.prototype.hasOwnProperty.call(object, key);
 
 /** The same-origin deployment file is the only source of navigation origins. */
 export function validateConfig(value) {
-  if (value?.version !== 1 || !value.entries || Object.keys(value.entries).length !== games.length) throw Error('大厅配置无效，请稍后刷新。');
-  if (!value.lobbies || Object.keys(value.lobbies).length !== 2) throw Error('大厅网址配置不完整。');
-  const lobbies = {};
-  for (const server of servers) {
-    const item = value.lobbies[server];
-    if (!item || typeof item.url !== 'string' || typeof item.enabled !== 'boolean') throw Error('大厅网址配置无效。');
-    const url = new URL(item.url);
-    if (url.protocol !== 'https:' || url.username || url.password || url.search || url.hash || url.href !== item.url || !['/', '/lobby/'].includes(url.pathname)) throw Error('大厅必须使用精确的 HTTPS 网址。');
-    lobbies[server] = { url: url.href, enabled: item.enabled };
+  if(value?.version !== 2 || !['cn','global'].includes(value.siteEdition))throw Error('大厅站点配置无效。');
+  const server=value.siteEdition==='cn'?'aliyun':'cloudflare';
+  if(Object.keys(value.lobbies??{}).join()!==server)throw Error('大厅配置必须仅包含本站。');
+  const lobby=value.lobbies[server];
+  const url=new URL(lobby?.url);
+  if(url.protocol!=='https:'||url.username||url.password||url.search||url.hash||!['/','/lobby/'].includes(url.pathname)||lobby.enabled!==true)throw Error('大厅网址配置无效。');
+  if(Object.keys(value.entries??{}).length!==games.length)throw Error('游戏入口配置不完整。');
+  for(const game of games){
+    if(Object.keys(value.entries[game]??{}).join()!==server)throw Error('游戏入口必须仅包含本站。');
+    const entry=value.entries[game][server], origin=new URL(entry?.origin);
+    if(origin.protocol!=='https:'||origin.origin!==entry.origin||origin.username||origin.password||entry.enabled!==true)throw Error('游戏入口配置无效。');
   }
-  if (new URL(lobbies.aliyun.url).origin === new URL(lobbies.cloudflare.url).origin) throw Error('两个大厅必须使用独立来源。');
-  const entries = {};
-  for (const game of games) {
-    if (!own(value.entries, game) || Object.keys(value.entries[game] ?? {}).length !== 2) throw Error('游戏入口配置不完整。');
-    entries[game] = {};
-    for (const server of servers) {
-      const item = value.entries[game][server];
-      if (!item || typeof item.origin !== 'string' || typeof item.enabled !== 'boolean') throw Error('游戏入口配置无效。');
-      const url = new URL(item.origin);
-      if (url.protocol !== 'https:' || url.origin !== item.origin || url.username || url.password) throw Error('游戏入口必须使用精确的 HTTPS 来源。');
-      entries[game][server] = { origin: url.origin, enabled: item.enabled };
-    }
-  }
-  const origins = games.flatMap(game => servers.map(server => entries[game][server].origin));
-  if (new Set(origins).size !== origins.length) throw Error('每个游戏和服务器必须使用独立来源。');
-  return { version: 1, lobbies, entries };
+  const origins=games.map(game=>value.entries[game][server].origin);if(new Set(origins).size!==games.length)throw Error('每个游戏必须使用独立入口。');
+  return value;
 }
 
 /** The page owns the server. A preference must never relabel this deployment. */
 export function currentLobby(config, href) {
   const page = new URL(href);
   const path = page.pathname.endsWith('/') ? page.pathname : page.pathname + '/';
-  for (const server of servers) {
+  for (const server of Object.keys(config.lobbies)) {
     const lobby = new URL(config.lobbies[server].url);
     if (page.origin === lobby.origin && path === lobby.pathname) return server;
   }
   // Local static previews keep both layouts testable without real DNS/TLS.
-  if (['localhost', '127.0.0.1', '[::1]'].includes(page.hostname)) return path === '/lobby/' ? 'cloudflare' : path === '/' ? 'aliyun' : null;
+  if (['localhost', '127.0.0.1', '[::1]'].includes(page.hostname)) return Object.keys(config.lobbies)[0];
   return null;
 }
 
 export function lobbyURL(config, server, invitation = null) {
-  if (!servers.includes(server) || !config.lobbies[server].enabled || (invitation && invitation.server !== server)) return null;
+  if (!servers.includes(server) || !config.lobbies[server]?.enabled || (invitation && invitation.server !== server)) return null;
   const url = new URL(config.lobbies[server].url);
   if (invitation) {
     // Reuse the strict room/role checks; never copy query strings or fragments.
     if (!entryURL(config, invitation.game, server, invitation)) return null;
     url.searchParams.set('game', invitation.game);
-    url.searchParams.set('server', server);
+    // Server ownership is implicit in this independently built site.
     url.searchParams.set('room', `${server === 'aliyun' ? 'A' : 'C'}-${invitation.room}`);
     if (invitation.watch) url.searchParams.set('watch', '1');
     url.searchParams.set('lobbyHop', '1');
@@ -87,7 +75,7 @@ export function readInvitation(search) {
 export function entryURL(config, game, server, invitation = null) {
   if (!games.includes(game) || !servers.includes(server)) return null;
   const entry = config.entries[game][server];
-  if (!config.lobbies[server].enabled || !entry.enabled || (invitation && (invitation.game !== game || invitation.server !== server))) return null;
+  if (!config.lobbies[server]?.enabled || !entry?.enabled || (invitation && (invitation.game !== game || invitation.server !== server))) return null;
   const url = new URL('/', entry.origin);
   if (invitation) {
     const prefix = server === 'aliyun' ? 'A' : 'C';
@@ -103,13 +91,5 @@ export function entryURL(config, game, server, invitation = null) {
   return url.href;
 }
 
-export function readPreference(storage) {
-  try {
-    const value = storage.getItem('games-lobby:server:v1');
-    return servers.includes(value) ? value : 'aliyun';
-  } catch { return 'aliyun'; }
-}
-export function savePreference(storage, server) {
-  if (!servers.includes(server)) return;
-  try { storage.setItem('games-lobby:server:v1', server); } catch { /* Optional preference only. */ }
-}
+export function readPreference(_storage) { return null; }
+export function savePreference(_storage, _server) { /* Deployment owned. */ }

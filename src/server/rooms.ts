@@ -1,3 +1,4 @@
+import { assignFixedNickname, migrateCnRoom, requestedNickname, readSiteEdition, CN_COMMUNICATION_DISABLED, CN_NICKNAME_FIXED, type SiteEdition } from '../shared/site-policy.js';
 import { createHash, randomBytes, randomUUID, timingSafeEqual } from 'node:crypto';
 import { secureRandomSeed } from '../shared/random.js';
 import type { ActionEnvelope, ActionReply, CharacterPool, ChatReply, GameMode, Identity, Player, RenameReply, Room, RoomRole, RoomSummary, RoomView } from '../shared/types.js';
@@ -21,13 +22,15 @@ export class Rooms {
   readonly rooms = new Map<string, Room>();
   onExpired?: (code:string, expiresAt:number, reason?:RoomCloseReason) => void;
   onChanged?: (code:string) => void;
-  constructor(readonly store: Store, readonly defaultTimeout = 120, readonly now=Date.now) {
+  constructor(readonly store: Store, readonly defaultTimeout = 120, readonly now=Date.now, readonly siteEdition:SiteEdition=readSiteEdition(process.env.SITE_EDITION,process.env.NODE_ENV==='production')) {
+    if(siteEdition==='cn')store.security.enabled=false;
     const restoredAt=this.now();
     for(const room of store.load()) {
+      if(room.siteEdition&&room.siteEdition!==siteEdition)throw Error('存档站点策略与 SITE_EDITION 不匹配。');
       if(store.security.targets(room.code,'closed').size){store.closeRoom({code:room.code,closedAt:restoredAt,reason:'dismissed'});continue;}
       this.redact(room);
       room.game.rulesVersion??=LEGACY_RULES_VERSION;
-      const healed=deduplicateStoredNicknames([...room.game.players,...(room.spectators??[])]);
+      const healed=this.siteEdition==='cn'?[...room.game.players,...(room.spectators??[])]:deduplicateStoredNicknames([...room.game.players,...(room.spectators??[])]);
       room.game.players=room.game.players.map(player=>({...player,name:healed.find(member=>member.id===player.id)!.name}));
       room.spectators=room.spectators?.map(spectator=>({...spectator,name:healed.find(member=>member.id===spectator.id)!.name}));
       room.ownerId??=room.game.players.find(player=>player.seat===0)?.id??room.hostId;
@@ -45,9 +48,10 @@ export class Rooms {
   private redact(room:Room):Room {
     const security=this.store.security,names=security.targets(room.code,'name');
     room.chat=redactChat(room.chat,new Set([...security.targets(room.code,'hidden')].map(Number)),names);
-    for(const member of [...room.game.players,...(room.spectators??[])])if(names.has(member.id)){member.name='成员'+member.id.slice(0,8);if('renameUsed' in member)member.renameUsed=true;}
+    for(const member of [...room.game.players,...(room.spectators??[])])if(names.has(member.id)){if(this.siteEdition==='global')member.name='成员'+member.id.slice(0,8);if('renameUsed' in member)member.renameUsed=true;}
     const through=Math.max(0,...[...security.targets(room.code,'events')].map(Number));
     if(through)room.game.logs=room.game.logs.map(event=>event.id<=through?{...event,text:'[历史文字记录的昵称已由站长处理]'}:event);
+    if(this.siteEdition==='cn')migrateCnRoom(room);
     return room;
   }
   private publication(code:string,id:string,operation:string):void {
@@ -55,6 +59,7 @@ export class Rooms {
     this.store.security.append({kind:'security',operation,outcome:'authorized',roomCode:code,playerId:id});
   }
   moderate(code:string,input:ModerationAction):unknown {
+    if(this.siteEdition==='cn')throw Error('当前站点已停用交流处置和安全审计。');
     const original=this.get(code);
     if(input.action==='inspect')return {code:original.code,members:[...original.game.players,...(original.spectators??[])].map(({id,name})=>({id,name,restricted:this.store.security.isRestricted(original.code,id)})),messages:this.redact(structuredClone(original)).chat?.messages??[]};
     const target=input.action==='hide-chat'?String(input.seq):input.action==='close-room'?original.code:input.memberId;
@@ -102,7 +107,7 @@ export class Rooms {
   }
   player(name: string, seat: number): Player { return {id:randomUUID(),name,seat,color:PLAYER_COLORS[seat]!,ready:false,connected:false,score:0,hand:[],used:[],selection:[]}; }
   capacity(){return this.store.capacity(this.now());}
-  create(name: string, maxPlayers: number, timeoutSeconds?: number, mode:GameMode='multiplayer', aiCount=3, characterPool:CharacterPool='original', config?:RoomConfig, requestId?:string): {identity:Identity;room:RoomView} {
+  create(name: string, maxPlayers: number, timeoutSeconds?: number, mode:GameMode='multiplayer', aiCount=3, characterPool:CharacterPool='original', config?:RoomConfig, requestId?:string, nicknameId?:string): {identity:Identity;room:RoomView} {
     for(const code of this.rooms.keys())this.expire(code);
     if(this.rooms.size >= 500) throw Error('当前房间较多，请稍后重试。');
     let code: string; do { code = Array.from(randomBytes(6), b=>'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'[b % 31]).join(''); } while(this.rooms.has(code)||this.closed(code));
@@ -115,12 +120,14 @@ export class Rooms {
     if(config)characterPool=legacyPoolForConfig(rules);
     const request=JSON.stringify({name,maxPlayers,timeoutSeconds:timeoutSeconds??this.defaultTimeout,mode,aiCount,characterPool,config:rules});
     const prior=requestId?this.store.creationReceipt<{identity:Identity;room:RoomView}>(requestId):undefined;
-    if(prior){if(prior.request!==request)throw Error('同一建房请求编号不能用于不同设置。');const code=prior.result.identity.roomCode;if(this.store.security.targets(code,'name').size||this.store.security.targets(code,'closed').size){const room=this.get(code);return {...prior.result,room:this.view(room,prior.result.identity.playerId)};}return prior.result;}
-    const p = this.player(uniqueNickname(name,[]),0); const now=this.now();
+    if(prior){if(prior.request!==request)throw Error('同一建房请求编号不能用于不同设置。');const code=prior.result.identity.roomCode;if(this.siteEdition==='cn'||this.store.security.targets(code,'name').size||this.store.security.targets(code,'closed').size){const room=this.get(code);return {...prior.result,room:this.view(room,prior.result.identity.playerId)};}return prior.result;}
+    const fixedId=this.siteEdition==='cn'?requestedNickname(name,nicknameId):undefined;
+    const p = this.player(uniqueNickname(name,[]),0);if(this.siteEdition==='cn')Object.assign(p,assignFixedNickname([],fixedId)); const now=this.now();
     this.store.security.append({kind:'security',operation:'create',outcome:'authorized',roomCode:code,playerId:p.id});
     const players=[p,...Array.from({length:mode==='ai'?aiCount:0},(_,i)=>({...this.player(`电脑${i+1}`,i+1),isAI:true,ready:true,connected:true}))];
     for(let i=1;i<players.length;i++)players[i]!.name=uniqueNickname(players[i]!.name,players.slice(0,i).map(person=>person.name));
-    const room:Room = {mode,code,hostId:p.id,ownerId:p.id,hostLeftAt:now,createdAt:now,updatedAt:now,version:1,maxPlayers,timeoutSeconds:timeoutSeconds??this.defaultTimeout,deadline:null,game:createGame(players,secureRandomSeed(),mode,characterPool)};
+    if(this.siteEdition==='cn'){for(let i=1;i<players.length;i++)Object.assign(players[i]!,assignFixedNickname(players.slice(0,i)));}
+    const room:Room = {siteEdition:this.siteEdition,mode,code,hostId:p.id,ownerId:p.id,hostLeftAt:now,createdAt:now,updatedAt:now,version:1,maxPlayers,timeoutSeconds:timeoutSeconds??this.defaultTimeout,deadline:null,game:createGame(players,secureRandomSeed(),mode,characterPool)};
     room.game.config=rules;room.configFrozen=false;
     if(mode!=='multiplayer'){p.ready=true;room.game.players[0]!.ready=true;startGame(room.game);room.configFrozen=true;this.deadline(room);}
     const token = randomBytes(32).toString('base64url');
@@ -128,13 +135,15 @@ export class Rooms {
     if(result.identity.roomCode===code)this.rooms.set(code,room);
     return result;
   }
-  join(code: string, name: string,role:RoomRole='player'): {identity:Identity;room:RoomView} {
+  join(code: string, name: string,role:RoomRole='player',nicknameId?:string): {identity:Identity;room:RoomView} {
     const original=this.get(code); if(original.closedAt!==undefined) throw Error('房间已解散。请创建或加入其他房间。');
     this.store.security.append({kind:'security',operation:'join',outcome:'authorized',roomCode:original.code});
-    name=uniqueNickname(name,[...original.game.players,...(original.spectators??[])].map(person=>person.name));
+    const occupied=[...original.game.players,...(original.spectators??[])];
+    const fixed=this.siteEdition==='cn'?assignFixedNickname(occupied,requestedNickname(name,nicknameId)):undefined;
+    name=fixed?.name??uniqueNickname(name,occupied.map(person=>person.name));
     if(role==='spectator') {
       if((original.spectators?.length??0)>=MAX_SPECTATORS)throw Error('观战人数已满，请稍后再试。');
-      const room=structuredClone(original),spectator={id:randomUUID(),name,connected:false};
+      const room=structuredClone(original),spectator={id:randomUUID(),name,connected:false,...fixed};
       room.spectators=[...(room.spectators??[]),spectator];room.version++;room.updatedAt=Date.now();
       const token=randomBytes(32).toString('base64url');this.store.addIdentity(room,spectator.id,hash(token));this.rooms.set(room.code,room);
       return{identity:{roomCode:room.code,playerId:spectator.id,token,role},room:this.view(room,spectator.id)};
@@ -144,7 +153,7 @@ export class Rooms {
     if(original.game.phase!=='lobby') throw Error('比赛已经开始，席位已锁定。原玩家请使用原浏览器重连。');
     if(original.game.players.length >= original.maxPlayers) throw Error('房间已满。');
     const room=structuredClone(original);let seat=0;while(room.game.players.some(p=>p.seat===seat))seat++;
-    const p=this.player(name,seat); room.game.players.push(p);room.game.players.sort((a,b)=>a.seat-b.seat);room.version++; room.updatedAt=Date.now();
+    const p={...this.player(name,seat),...fixed}; room.game.players.push(p);room.game.players.sort((a,b)=>a.seat-b.seat);room.version++; room.updatedAt=Date.now();
     const token=randomBytes(32).toString('base64url'); this.store.addIdentity(room,p.id,hash(token)); this.rooms.set(room.code,room);
     return {identity:{roomCode:room.code,playerId:p.id,token,role},room:this.view(room,p.id)};
   }
@@ -192,6 +201,7 @@ export class Rooms {
     }catch(e){return{ok:false,error:e instanceof Error?e.message:'操作失败，请重试。',version:original.version};}
   }
   chat(code:string,id:string,input:unknown):ChatReply {
+    if(this.siteEdition==='cn')return {ok:false,error:CN_COMMUNICATION_DISABLED};
     try {
       const original=this.get(code),person=original.game.players.find(p=>p.id===id)??original.spectators?.find(p=>p.id===id);
       if(!person||('isAI' in person&&person.isAI))throw Error('只有当前房间内的真人成员可以聊天。');
@@ -205,10 +215,12 @@ export class Rooms {
     }catch(error){return{ok:false,error:error instanceof Error?error.message:'消息发送失败。'};}
   }
   chatHistory(code:string,id:string,afterId=0){
+    if(this.siteEdition==='cn')return {messages:[],latestId:0};
     const room=this.get(code);if(!room.game.players.some(p=>p.id===id)&&!room.spectators?.some(p=>p.id===id))throw Error('你不是当前房间成员。');
     return chatBatch(room.chat,afterId);
   }
   rename(code:string,id:string,requestId:unknown,name:unknown):RenameReply {
+    if(this.siteEdition==='cn')return {ok:false,error:CN_NICKNAME_FIXED};
     try {
       if(typeof requestId!=='string'||!/^[a-zA-Z0-9_-]{1,100}$/.test(requestId))throw Error('改名请求编号无效。');
       const original=this.get(code),player=original.game.players.find(p=>p.id===id);
@@ -254,6 +266,6 @@ export class Rooms {
     return updated;
   }
   view(room: Room, id: string): RoomView {
-    return {...projectRoom(this.redact(room),id,{authorityId:room.hostId,authorityOnline:true}),contentRevision:this.store.security.revision(room.code),hosting:'local'};
+    return {...projectRoom(this.redact(room),id,{authorityId:room.hostId,authorityOnline:true}),...(this.siteEdition==='cn'?{chat:[],chatLatestId:0,renameRemaining:0}:{}),contentRevision:this.store.security.revision(room.code),hosting:'local'};
   }
 }

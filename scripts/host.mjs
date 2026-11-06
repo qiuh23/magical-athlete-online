@@ -145,7 +145,7 @@ async function start() {
     mkdirSync(LOCAL, { recursive: true });
     const logPath = join(LOCAL, 'game-server.log'); const log = openSync(logPath, 'a');
     let child;
-    try { child = spawn(process.execPath, [ENTRY], { cwd: ROOT, detached: true, windowsHide: true, stdio: ['ignore', log, log], env: { ...process.env, NODE_ENV: 'production', HOST: '127.0.0.1', PORT: '3000', DATA_DIR: join(ROOT, 'data'), PUBLIC_ORIGIN: origin, TRUST_PROXY: '1', ACTION_TIMEOUT_SECONDS: process.env.ACTION_TIMEOUT_SECONDS ?? '120' } }); } finally { closeSync(log); }
+    try { child = spawn(process.execPath, [ENTRY], { cwd: ROOT, detached: true, windowsHide: true, stdio: ['ignore', log, log], env: { ...process.env, NODE_ENV: 'production', SITE_EDITION: 'cn', BACKEND_ID: 'aliyun', HOST: '127.0.0.1', PORT: '3000', DATA_DIR: join(ROOT, 'data'), PUBLIC_ORIGIN: origin, TRUST_PROXY: '1', ACTION_TIMEOUT_SECONDS: process.env.ACTION_TIMEOUT_SECONDS ?? '120' } }); } finally { closeSync(log); }
     let spawnError; child.once('error', error => { spawnError = error; });
     for (let i = 0; i < 30 && !spawnError && child.exitCode === null; i++) { if (await health()) break; await pause(200); }
     if (spawnError || !await health()) { try { child.kill(); } catch {} throw Error(`游戏服务启动失败，请查看 ${logPath}`); }

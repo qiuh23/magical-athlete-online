@@ -1,44 +1,9 @@
-# 临时 HTTP 入口与 HTTPS 切换
+# 国内 HTTP 与 HTTPS 入口
 
-临时入口从阿里云公网 IP 独立提供网页、资源、API 和 Socket.IO。首页选服通过顶层导航切换到目标服务器的网页入口，已位于目标 origin 时不刷新；Cloudflare HTTPS → 阿里云 HTTP 不尝试混合内容 API/WebSocket。新建和加入的身份保存在目标网页 origin，带前缀邀请从错误入口打开会自动跳转，仅保留公开房间码。原先保存在其他入口的旧身份继续在原入口恢复，不自动跨域迁移。具体行为与验证统一见[双后端接入](dual-backend-deployment.md)及[入口切换验收](qa/server-entry-switch/README.md)。后端地址仍只由 `/backends.json` 决定，邀请码不会指定任意 URL。
+当前站点策略见 [独立站点部署与验证](site-editions.md)，旧选择服务器与跨站自动跳转方案已替代。国内新游戏入口为 https://athlete.magical-athlete-online.cn/，大厅为 https://magical-athlete-online.cn/。备案号沿用已核实的京ICP备2026075006号-1。
 
-**HTTP 与 IP 不会免除中国内地网站的 ICP 备案要求。** 免费备案申请继续审核，不能把临时 HTTP 已可访问写成备案通过。HTTP 传输不加密，房间凭据、聊天和游戏操作可能被链路上的人读取或篡改。部署脚本默认只允许指定 IPv4 `/32`；在用户明确要求允许其他所有地址后，也支持显式开启公网 IPv4 HTTP 模式。
+旧 `http://115.29.188.62/`、`http://magical-athlete-online.cn/` 如保留服务，继续反代国内Node，必须执行 `SITE_EDITION=cn`、固定体育昵称和无交流策略。HTTP、IP、HTTPS的浏览器身份按各自Origin保留；旧身份不自动搬迁、不跳转海外、不跨站查询。精确同站旧Origin列入Node部署白名单，Worker只接受其本站Origin。
 
-## 受控开放
+源码中的 `publish-http.sh` 和 `publish.sh` 均要求可信server.env明确cn；保留原公网门禁、容量、ACME/TLS与Nginx配置校验。它们不会购买云资源。Node发布激活前检查国内产物marker，`disable-cn-audit.sh`关闭本游戏国内访问日志及审计cron，保留故障与游戏数据和历史私有记录。旧版不具备cn策略的产物不能用于回滚。
 
-1. 保留 Node 仅监听 `127.0.0.1:3000`，保留 `PUBLIC_ACCESS_ENABLED=false`。在 `/etc/magical-athlete/server.env` 设置 `CONTROLLED_VALIDATION=true`、`PUBLIC_ORIGIN=http://实例IP`、`DUAL_BACKEND_ENABLED=true`、`MULTIPLAYER_ROOM_LIMIT=15`；国内网页的运行时配置使用阿里云同源、Cloudflare 的实际 HTTPS origin。其他字段沿用现有服务器配置。
-2. 先将 Cloudflare 静态配额改为 15，确认存量真人房不超过 15，再开放阿里云 15；不能强制结束旧房。脚本会实际复核 Cloudflare 的配额和占用，失败时不开放。
-3. 使用本次明确批准的测试网络公网 IPv4，执行：
-
-   ```sh
-   sudo env PUBLIC_IP=实例公网IPv4 ACCESS_CIDRS=测试网络IPv4/32 HTTP_TRANSPORT_ACKNOWLEDGED=true bash scripts/deploy/publish-http.sh
-   ```
-
-   多个来源用逗号分隔，每项必须为单个 IPv4 `/32`。脚本验证配置、保留旧 nginx 文件、测试并重载 nginx，不修改云防火墙。云安全组仅为相同来源添加 TCP 80；3000 和公网 443 继续关闭。Nginx 再次限制相同来源并拒绝其他 Host，避免通过未备案域名打开此临时网页。
-4. 从允许的实际浏览器网络验证静态资源、建房、加入、操作、聊天和恢复。网络公网 IP 变化后需要同步更新安全组与 nginx 白名单。其他网络不可达是受控入口的预期限制，不能报告为国内全网已可用。
-
-如果内地实例无法直接访问 Cloudflare，默认的配额预检会失败并停止。可以由能访问 Cloudflare 的受信管理电脑实时读取 `/api/browser/rooms`，保存 `{ "origin": "实际Cloudflare的HTTPS来源", "capturedAt": "采集时的ISO时间", "capacity": { "used": 实际值, "limit": 实际值 } }`，立即通过已核验主机密钥的 SSH 上传，再在实例上以 root 安装为 `0600` 的普通文件。执行同一部署命令时追加 `CF_CAPACITY_FILE=/root/该文件.json`。必须保留 API 实际数值，不能手填较低占用或把采集时间延后；验证器检查文件非符号链接、属主和权限、精确来源、采集距今不超过五分钟（最多允许快三十秒），以及相同的 15 房间限制。文件过期后重新采集。该可选方式也适用于 HTTPS 发布，不会改变玩家日常访问阿里云的独立性。
-
-## 显式公网 HTTP 模式
-
-用户已明确允许所有其他地址时，将应用环境设置为 `PUBLIC_ACCESS_ENABLED=true`、`CONTROLLED_VALIDATION=false`，保留 Node 的 loopback 绑定、实际 HTTP `PUBLIC_ORIGIN` 和双端各 15 配额。执行：
-
-```sh
-sudo env PUBLIC_IP=实例公网IPv4 ACCESS_CIDRS=0.0.0.0/0 PUBLIC_HTTP_ACCESS=true HTTP_TRANSPORT_ACKNOWLEDGED=true bash scripts/deploy/publish-http.sh
-```
-
-只有显式 `PUBLIC_HTTP_ACCESS=true` 才接受 `0.0.0.0/0`；脚本还会验证应用的公网闸门已打开、受控闸门已关闭。云安全组的 TCP 80 同步允许该来源，SSH 仍保留管理地址限制，3000 和公网 443 仍关闭。Nginx 继续拒绝其他 Host，直接使用 IP 页面；不要把域名改成 HTTP 入口。配额与可信快照检查同样执行。此模式真实开放公网 HTTP，不能称为仅白名单验证，也不能称为备案豁免；备案审核状态独立记录。
-
-关闭任一种临时入口时先取消这些安全组 80 规则，将 `PUBLIC_ACCESS_ENABLED=false`、`CONTROLLED_VALIDATION=false` 并重启 `magical-athlete`；保留 SQLite 和备份。之后保持阿里云部署配置未开放，直到完成下一次明确部署。
-
-## 备案通过后切换
-
-完成备案及必要资格确认后，DNS 仍直接指向阿里云。将 `CONTROLLED_VALIDATION=false`、`PUBLIC_ACCESS_ENABLED=true`，`PUBLIC_ORIGIN` 改为实际 `https://域名`。使用原有 `publish.sh`：
-
-```sh
-sudo env DOMAIN=实际备案域名 CERT_EMAIL=运维邮箱 ICP_CONFIRMED=true bash scripts/deploy/publish.sh
-```
-
-它会以 HTTPS 站点配置替换临时 IP 配置并启用证书续期。届时安全组按公开 HTTPS 入口开放 80/443，更新两端受信 origin 白名单和 `/backends.json`，验证两个网页入口能互相跳转并在各自入口连接所属后端后再标为 HTTPS 正式可用。域名升级属于后续独立任务。
-
-服务进程、数据目录、配额和房间码保持一致，不需要迁移规则或 SQLite。HTTP IP 与 HTTPS 域名的浏览器存储彼此隔离；切换前让当前临时房间自然结束，或先完成经过验证的凭据迁移，不能把数据库仍在误认为新域名自动拥有旧页面本地身份。更新、代码回滚和备份继续使用 [既有部署流程](dual-backend-deployment.md)。
+预览继续使用独立8080/3001端口与数据库，生产3000端口不复用预览状态。发布后分别检查国内HTTPS、保留HTTP与预览的模式、完整SHA、同源实时连接、昵称迁移和重连。合并、本机构建或历史HTTP验收不能当作本次实际发布证明。

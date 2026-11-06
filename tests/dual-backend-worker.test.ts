@@ -16,27 +16,27 @@ class Storage {
   async transaction<T>(callback:(storage:Storage)=>Promise<T>){const before=structuredClone(this.values);try{return await callback(this);}catch(error){this.values=before;throw error;}}
 }
 
-test('Worker cross-origin connectivity and preflight do not touch the room namespace',async()=>{
-  let accesses=0;const env={PUBLIC_ORIGINS:'https://game.example.cn',ROOMS:{get(){accesses++;throw Error('Probe must not allocate a room');}},ASSETS:{fetch:()=>new Response('asset')}};
-  const request=(path:string,options:RequestInit={})=>worker.default.fetch(new Request('https://example.workers.dev'+path,{headers:{Origin:'https://game.example.cn'},...options}),env);
-  const probe=await request('/api/connectivity');assert.deepEqual(await probe.json(),connectivityInfo('cloudflare'));assert.equal(probe.headers.get('Access-Control-Allow-Origin'),'https://game.example.cn');
+test('Worker same-site connectivity and preflight do not touch the room namespace',async()=>{
+  let accesses=0;const env={SITE_EDITION:'global',PUBLIC_ORIGINS:'https://example.workers.dev',ROOMS:{get(){accesses++;throw Error('Probe must not allocate a room');}},ASSETS:{fetch:()=>Response.json({siteEdition:'global'})}};
+  const request=(path:string,options:RequestInit={})=>worker.default.fetch(new Request('https://example.workers.dev'+path,{headers:{Origin:'https://example.workers.dev'},...options}),env);
+  const probe=await request('/api/connectivity');assert.deepEqual(await probe.json(),{...connectivityInfo('cloudflare'),siteEdition:'global'});assert.equal(probe.headers.get('Access-Control-Allow-Origin'),'https://example.workers.dev');
   const preflight=await request('/api/browser/rooms',{method:'OPTIONS'});assert.equal(preflight.status,204);assert.match(preflight.headers.get('Access-Control-Allow-Methods')??'',/POST/);
   assert.equal((await request('/api/connectivity',{headers:{Origin:'https://evil.example'}})).status,403);
   assert.equal((await request('/api/connectivity/ws')).status,426);assert.equal(accesses,0);
 });
 
-test('the transitioned Worker admits new HTTPS and exact legacy HTTP while rejecting preview and near-match Origins',async()=>{
+test('the global Worker rejects mainland, legacy HTTP and preview Origins',async()=>{
   const {deploymentSettings,workerVariables}=await import(new URL('../scripts/deploy/ci-release.mjs',import.meta.url).href);
   const entries={production:{cloudflareOrigin:'https://magical-athlete.qiuh23.workers.dev',aliyunOrigin:'https://athlete.magical-athlete-online.cn',allowInsecureHttp:false,legacyOrigins:['http://115.29.188.62','http://magical-athlete-online.cn']},preview:{cloudflareOrigin:'https://magical-athlete-preview.qiuh23.workers.dev',aliyunOrigin:'http://115.29.188.62:8080',allowInsecureHttp:true,legacyOrigins:[]}};
   let accesses=0;
-  const env={...workerVariables(deploymentSettings('production',entries)),ROOMS:{get(){accesses++;throw Error('Origin probe must not allocate rooms');}},ASSETS:{fetch:()=>new Response('asset')}};
-  for(const origin of ['https://athlete.magical-athlete-online.cn','http://115.29.188.62','http://magical-athlete-online.cn']) {
+  const env={...workerVariables(deploymentSettings('production',entries)),ROOMS:{get(){accesses++;throw Error('Origin probe must not allocate rooms');}},ASSETS:{fetch:()=>Response.json({siteEdition:'global'})}};
+  for(const origin of ['https://magical-athlete.qiuh23.workers.dev']) {
     const response=await worker.default.fetch(new Request('https://magical-athlete.qiuh23.workers.dev/api/connectivity',{headers:{Origin:origin}}),env);
     assert.equal(response.status,200);assert.equal(response.headers.get('Access-Control-Allow-Origin'),origin);
     const upgrade=await worker.default.fetch(new Request('https://magical-athlete.qiuh23.workers.dev/api/connectivity/ws',{headers:{Origin:origin}}),env);
     assert.equal(upgrade.status,426,'approved Origin reaches the WebSocket protocol guard');
   }
-  for(const origin of ['http://115.29.188.62:8080','https://magical-athlete-preview.qiuh23.workers.dev','https://athlete.magical-athlete-online.cn.evil.test','https://wizard.magical-athlete-online.cn','https://magical-athlete-online.cn','https://evil.test']) {
+  for(const origin of ['https://athlete.magical-athlete-online.cn','http://115.29.188.62','http://magical-athlete-online.cn','http://115.29.188.62:8080','https://magical-athlete-preview.qiuh23.workers.dev','https://athlete.magical-athlete-online.cn.evil.test','https://wizard.magical-athlete-online.cn','https://magical-athlete-online.cn','https://evil.test']) {
     const response=await worker.default.fetch(new Request('https://magical-athlete.qiuh23.workers.dev/api/connectivity',{headers:{Origin:origin}}),env);
     assert.equal(response.status,403);
   }

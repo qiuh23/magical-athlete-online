@@ -6,69 +6,20 @@ const {deploymentSettings,deploymentRegistry,validateDeployedRegistry,workerVari
 const {httpsGameDomain,renderHttpsSite}=await import(new URL('../scripts/deploy/render-https.mjs',import.meta.url).href);
 const entries=JSON.parse(readFileSync(new URL('../deploy/entries.json',import.meta.url),'utf8'));
 
-test('one reviewed registry supplies builds and repeated releases without HTTPS falling back to legacy HTTP',()=>{
-  assert.deepEqual(JSON.parse(readFileSync(new URL('../public/backends.json',import.meta.url),'utf8')),deploymentRegistry(deploymentSettings('production',entries)));
-  const transitioned=structuredClone(entries);
-  transitioned.production.aliyunOrigin=transitioned.production.plannedAliyunOrigin;
-  transitioned.production.allowInsecureHttp=false;
-  const settings=deploymentSettings('production',transitioned);
-  const registry=deploymentRegistry(settings);
-  assert.equal(registry.backends[1].origin,'https://athlete.magical-athlete-online.cn');
-  assert.equal(registry.backends[1].allowInsecureHttp,undefined);
-  assert.deepEqual(deploymentRegistry(deploymentSettings('production',transitioned)),registry);
-  assert.equal(deploymentSettings('preview',transitioned).aliyunOrigin,entries.preview.aliyunOrigin);
-  validateBackendConfig(registry);
-  const nodeRegistry=structuredClone(registry);
-  nodeRegistry.backends[0].origin=settings.cloudflareOrigin;
-  nodeRegistry.backends[1].origin='';
-  validateDeployedRegistry(nodeRegistry,settings.aliyunOrigin,settings);
-  validateDeployedRegistry(registry,settings.cloudflareOrigin,settings);
-  const legacy=structuredClone(entries);
-  legacy.production.aliyunOrigin='http://115.29.188.62';
-  legacy.production.allowInsecureHttp=true;
-  const stale=deploymentRegistry(deploymentSettings('production',legacy));
-  assert.throws(()=>validateDeployedRegistry(stale,settings.cloudflareOrigin,settings),/differs/);
-  transitioned.production.aliyunOrigin='http://115.29.188.62';
-  assert.throws(()=>deploymentSettings('production',transitioned),/HTTPS/);
-  for(const invalid of ['https://cn.example/path','https://user:secret@cn.example','https://cn.example/?redirect=https://evil.example','*']) {
-    transitioned.production.aliyunOrigin=invalid;
-    assert.throws(()=>deploymentSettings('production',transitioned));
+test('release registries and worker policy stay within the trusted site and preview environment',()=>{
+ for(const target of ['production','preview']){
+  const settings=deploymentSettings(target,entries);
+  for(const [edition,origin,id] of [['global',settings.cloudflareOrigin,'cloudflare'],['cn',settings.aliyunOrigin,'aliyun']]){
+   const registry=deploymentRegistry(settings,edition);assert.equal(registry.siteEdition,edition);assert.equal(registry.backends.length,1);assert.equal(registry.backends[0].id,id);assert.equal(registry.backends[0].origin,'');
+   validateDeployedRegistry(registry,origin,settings);
+   assert.throws(()=>validateDeployedRegistry(registry,id==='cloudflare'?settings.aliyunOrigin:settings.cloudflareOrigin,settings));
   }
-});
-
-test('HTTPS spectator invitations keep server and public role while discarding tokens and arbitrary destinations',()=>{
-  const target={id:'aliyun' as const,label:'国内',origin:'https://athlete.magical-athlete-online.cn',transport:'socketio' as const,enabled:true};
-  const invitation=roomEntryUrl(target,'A-ABC234',true);
-  assert.equal(invitation,'https://athlete.magical-athlete-online.cn/room/A-ABC234?spectate=1');
-  assert.equal(backendEntryUrl(target,'A-ABC234','https://magical-athlete.qiuh23.workers.dev',true),invitation);
-  assert.equal(backendEntryUrl(target,'A-ABC234',target.origin,true),null);
-  assert.equal(spectatorInvite('?token=private&spectate=1&url=https://evil.example'),true);
-  assert.equal(spectatorInvite('?spectate=0'),false);
-  assert.equal(roomEntryUrl(target,'A-ABC234?token=private',true),target.origin+'/');
-});
-
-test('HTTPS activation preserves exact old-page Origins in both Worker release paths without mixing preview or navigation targets',()=>{
-  const transitioned=structuredClone(entries);
-  transitioned.production.aliyunOrigin=transitioned.production.plannedAliyunOrigin;
-  transitioned.production.allowInsecureHttp=false;
-  const settings=deploymentSettings('production',transitioned);
-  assert.deepEqual(settings.publicOrigins,['https://athlete.magical-athlete-online.cn','http://115.29.188.62','http://magical-athlete-online.cn']);
-  const variables=workerVariables(settings,{OTHER:'preserved',PUBLIC_ORIGINS:'stale'});
-  assert.equal(variables.OTHER,'preserved');
-  assert.equal(variables.PUBLIC_ORIGINS,'https://athlete.magical-athlete-online.cn,http://115.29.188.62,http://magical-athlete-online.cn');
-  assert.deepEqual(JSON.parse(variables.BACKENDS_CONFIG_JSON),deploymentRegistry(settings));
-  assert.equal(JSON.parse(variables.BACKENDS_CONFIG_JSON).backends[1].origin,settings.aliyunOrigin);
-  assert.deepEqual(deploymentSettings('preview',transitioned).publicOrigins,['http://115.29.188.62:8080']);
-  const source=JSON.parse(readFileSync(new URL('../wrangler.jsonc',import.meta.url),'utf8'));
-  assert.deepEqual(source.vars,workerVariables(deploymentSettings('production',entries),source.vars),'Workers Builds source configuration must match the same policy as checked-artifact prepare()');
-  for(const value of ['*','https://*.example.cn','https://cn.example/path','https://user:pass@cn.example','https://cn.example/?token=x','https://cn.example/#x','http://115.29.188.62:8080',entries.preview.cloudflareOrigin]) {
-    const bad=structuredClone(transitioned);bad.production.legacyOrigins=[value];
-    assert.throws(()=>deploymentSettings('production',bad));
-  }
-  for(const value of ['http://115.29.188.62',['http://115.29.188.62','http://115.29.188.62']]) {
-    const bad=structuredClone(transitioned);bad.production.legacyOrigins=value;
-    assert.throws(()=>deploymentSettings('production',bad),/Legacy origins/);
-  }
+  const vars=workerVariables(settings,{OTHER:'preserved'});assert.equal(vars.SITE_EDITION,'global');assert.equal(vars.PUBLIC_ORIGINS,settings.cloudflareOrigin);assert.equal(vars.OTHER,'preserved');
+ }
+ const source=JSON.parse(readFileSync(new URL('../wrangler.jsonc',import.meta.url),'utf8'));
+ assert.deepEqual(source.vars,workerVariables(deploymentSettings('production',entries),source.vars));
+ assert.deepEqual(JSON.parse(readFileSync(new URL('../public/backends.json',import.meta.url),'utf8')),deploymentRegistry(deploymentSettings('production',entries),'global'));
+ const unsafe=structuredClone(entries);unsafe.production.aliyunOrigin='http://115.29.188.62';assert.throws(()=>deploymentSettings('production',unsafe));
 });
 
 test('HTTPS vhost keeps ACME renewal, exact host/origin and realtime upgrades separate from IP and preview',()=>{
@@ -83,4 +34,14 @@ test('HTTPS vhost keeps ACME renewal, exact host/origin and realtime upgrades se
   assert.doesNotMatch(config,/default_server|8080|3001|115\.29\.188\.62|ssl_protocols.*TLSv1[ ;]/);
   assert.doesNotMatch(renderHttpsSite(domain,false),/ssl_certificate/);
   for(const value of ['*.example.cn','https://example.cn','example.cn;','127.0.0.1','example.cn:443','other.cn\nlisten 1234;'])assert.throws(()=>httpsGameDomain(value));
+});
+
+
+test('mainland templates and host migration stop new access audits while retaining fault and game recovery data',()=>{
+ for(const name of ['nginx-http.conf.template','nginx-preview.conf.template','nginx.conf.template','nginx-lobby.conf.template']){
+  const nginx=readFileSync(new URL('../deploy/'+name,import.meta.url),'utf8');assert.match(nginx,/access_log off;/);assert.doesNotMatch(nginx,/access_log \/var\/log\/game-network/);assert.match(nginx,/error_log \/var\/log\/nginx\/error\.log warn;/);
+ }
+ const migrate=readFileSync(new URL('../scripts/deploy/disable-cn-audit.sh',import.meta.url),'utf8');assert.match(migrate,/\/etc\/cron\.d\/game-network-rotation/);assert.doesNotMatch(migrate,/rm[^\n]*(?:security\.sqlite|rooms\.sqlite|game-network\/.*\.log)/);
+ for(const name of ['security-preflight.sh','security-maintenance.sh'])assert.match(readFileSync(new URL('../scripts/deploy/'+name,import.meta.url),'utf8'),/SITE_EDITION=cn/);
+ const rollback=readFileSync(new URL('../scripts/deploy/rollback.sh',import.meta.url),'utf8');assert.match(rollback,/site-edition\.json/);assert.match(rollback,/siteEdition!=='cn'/);
 });

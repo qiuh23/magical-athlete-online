@@ -7,8 +7,9 @@
   "vars": {
     "DUAL_BACKEND_ENABLED": "true",
     "MULTIPLAYER_ROOM_LIMIT": "14",
-    "PUBLIC_ORIGINS": "https://athlete.magical-athlete-online.cn,http://115.29.188.62,http://magical-athlete-online.cn",
-    "BACKENDS_CONFIG_JSON": "{\"backends\":[{\"id\":\"cloudflare\",\"origin\":\"\",\"transport\":\"worker\",\"enabled\":true},{\"id\":\"aliyun\",\"origin\":\"https://athlete.magical-athlete-online.cn\",\"transport\":\"socketio\",\"enabled\":true}]}"
+    "PUBLIC_ORIGINS": "https://magical-athlete.qiuh23.workers.dev",
+    "BACKENDS_CONFIG_JSON": "{\"siteEdition\":\"global\",\"backends\":[{\"id\":\"cloudflare\",\"origin\":\"\",\"transport\":\"worker\",\"enabled\":true}]}",
+    "SITE_EDITION": "global"
   },
   "assets": {
     "directory": "./dist/browser",

@@ -30,27 +30,16 @@ export function deploymentSettings(target,entries=entryConfiguration) {
     cloudflareOrigin,aliyunOrigin,publicOrigins,
     quota:preview?1:14,username:preview?'athlete-preview-deploy':'athlete-deploy'};
 }
-export function deploymentRegistry(settings) {
-  return {backends:[{id:'cloudflare',origin:'',transport:'worker',enabled:true},{id:'aliyun',origin:settings.aliyunOrigin,transport:'socketio',enabled:true,...(settings.aliyunOrigin.startsWith('http:')?{allowInsecureHttp:true}:{})}]};
+export function deploymentRegistry(_settings,siteEdition='global') {
+  if(!['cn','global'].includes(siteEdition))throw Error('Invalid site edition.');
+  return {siteEdition,backends:[{id:siteEdition==='cn'?'aliyun':'cloudflare',origin:'',transport:siteEdition==='cn'?'socketio':'worker',enabled:true}]};
 }
-/** Both checked-artifact releases and Workers Builds use this exact policy.
- * Legacy pages may still own saved CF credentials; keep their exact Origin
- * without making them new navigation targets or sharing browser identities. */
 export function workerVariables(settings,source={}) {
-  return {...source,DUAL_BACKEND_ENABLED:'true',MULTIPLAYER_ROOM_LIMIT:String(settings.quota),PUBLIC_ORIGINS:settings.publicOrigins.join(','),BACKENDS_CONFIG_JSON:JSON.stringify(deploymentRegistry(settings))};
+  return {...source,SITE_EDITION:'global',DUAL_BACKEND_ENABLED:'true',MULTIPLAYER_ROOM_LIMIT:String(settings.quota),PUBLIC_ORIGINS:settings.cloudflareOrigin,BACKENDS_CONFIG_JSON:JSON.stringify(deploymentRegistry(settings,'global'))};
 }
-/** Resolve same-origin entries before comparing, so Node can retain legacy IP
- * sessions with origin:"" while HTTPS uses the exact same application service. */
 export function validateDeployedRegistry(value,origin,settings) {
-  if(!value||!Array.isArray(value.backends)||value.backends.length!==2)throw Error('Invalid deployed backend registry.');
-  for(const [id,expected,transport] of [['cloudflare',settings.cloudflareOrigin,'worker'],['aliyun',settings.aliyunOrigin,'socketio']]) {
-    const matches=value.backends.filter(item=>item?.id===id);
-    if(matches.length!==1)throw Error('Duplicated or missing deployed backend.');
-    const entry=matches[0];
-    const resolved=entry.origin===''?origin:entry.origin;
-    exactEntryOrigin(resolved,{allowInsecureHttp:entry.allowInsecureHttp===true||origin.startsWith('http:')&&entry.origin===''});
-    if(resolved!==expected||entry.enabled!==true||entry.transport!==transport||resolved.startsWith('https:')&&entry.allowInsecureHttp===true)throw Error(`Deployed ${id} entry differs from the trusted release configuration.`);
-  }
+  const edition=origin===settings.cloudflareOrigin?'global':origin===settings.aliyunOrigin?'cn':null;
+  if(!edition||JSON.stringify(value)!==JSON.stringify(deploymentRegistry(settings,edition)))throw Error('Deployed site edition or same-site backend registry differs from the trusted release.');
 }
 export function validateRelease(value,expected) {
   if(!value||value.target!==expected.target||value.commit!==expected.commit||value.runId!==expected.runId||(expected.target==='preview'?value.prNumber!==expected.prNumber:value.prNumber!==undefined))throw Error('Artifact deployment identity does not match the verified Checks run.');
@@ -100,6 +89,7 @@ async function prepare(release) {
   const directory=resolve(process.env.WORKER_ARTIFACT_DIR),tool=resolve(process.env.WRANGLER_TOOL_DIR);
   validateRelease(JSON.parse(await readFile(resolve(directory,'release.json'),'utf8')),release);
   validateRelease(JSON.parse(await readFile(resolve(directory,'assets/deployment.json'),'utf8')),release);
+  if(JSON.parse(await readFile(resolve(directory,'assets/site-edition.json'),'utf8')).siteEdition!=='global')throw Error('Worker artifact must be the global build.');
   const settings=deploymentSettings(release.target),source=JSON.parse(await readFile('wrangler.jsonc','utf8'));
   const registry=deploymentRegistry(settings);
   await writeFile(resolve(directory,'assets/backends.json'),JSON.stringify(registry));
@@ -127,7 +117,7 @@ async function connectivity(origin,backendId) {
   const response=await fetch(`${origin}/api/connectivity`,{signal:AbortSignal.timeout(15_000)});
   if(!response.ok)throw Error(`Cannot verify ${backendId} HTTP (${response.status}).`);
   const http=await response.json();
-  if(http.ok!==true||http.backendId!==backendId||typeof http.protocolVersion!=='string'||typeof http.rulesVersion!=='string')throw Error('Invalid deployed protocol marker.');
+  if(http.siteEdition!==(backendId==='cloudflare'?'global':'cn')||http.ok!==true||http.backendId!==backendId||typeof http.protocolVersion!=='string'||typeof http.rulesVersion!=='string')throw Error('Invalid deployed protocol marker.');
   const url=new URL(backendId==='cloudflare'?'/api/connectivity/ws':'/socket.io/?EIO=4&transport=websocket',origin);url.protocol=url.protocol==='https:'?'wss:':'ws:';
   await new Promise((resolve,reject)=>{
     const socket=new WebSocket(url);let complete=false;
@@ -157,6 +147,8 @@ async function verify(release) {
         const response=await fetch(`${origin}/deployment.json?run=${release.runId}`,{cache:'no-store',signal:AbortSignal.timeout(15_000)});
         if(!response.ok)throw Error(`Deployment metadata unavailable (${response.status}).`);
         validateRelease(await response.json(),release);
+        const marker=await fetch(`${origin}/site-edition.json`,{cache:'no-store',signal:AbortSignal.timeout(15000)});
+        if(!marker.ok||(await marker.json()).siteEdition!==(backendId==='cloudflare'?'global':'cn'))throw Error('Deployed client site edition mismatch.');
         const registry=await fetch(`${origin}/backends.json`,{cache:'no-store',signal:AbortSignal.timeout(15_000)});
         if(!registry.ok)throw Error('Deployed backend configuration is unavailable.');
         validateDeployedRegistry(await registry.json(),origin,settings);

@@ -7,7 +7,7 @@ COPY . .
 RUN pnpm typecheck && pnpm test && pnpm build
 
 FROM node:24-bookworm-slim
-ENV NODE_ENV=production PORT=3000 HOST=0.0.0.0 DATA_DIR=/data
+ENV NODE_ENV=production SITE_EDITION=cn BACKEND_ID=aliyun PORT=3000 HOST=0.0.0.0 DATA_DIR=/data
 WORKDIR /app
 COPY --from=build /app/package.json /app/pnpm-lock.yaml /app/pnpm-workspace.yaml ./
 COPY --from=build /app/node_modules ./node_modules

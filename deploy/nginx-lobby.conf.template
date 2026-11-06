@@ -3,6 +3,8 @@
 # The release tree is intentionally root:athlete 0750. Serve only its public
 # lobby through the existing Node static handler; do not widen www-data access.
 server {
+    access_log off;
+    error_log /var/log/nginx/error.log warn;
     listen 80;
     server_name __APEX_DOMAIN__;
     location ^~ /.well-known/acme-challenge/ {
@@ -28,6 +30,8 @@ server {
     }
 }
 server {
+    access_log off;
+    error_log /var/log/nginx/error.log warn;
     listen 443 ssl;
     server_name __APEX_DOMAIN__;
     ssl_certificate /etc/letsencrypt/live/__APEX_DOMAIN__/fullchain.pem;

@@ -1,1 +1,1 @@
-{"backends":[{"id":"cloudflare","origin":"","transport":"worker","enabled":true},{"id":"aliyun","origin":"https://athlete.magical-athlete-online.cn","transport":"socketio","enabled":true}]}
+{"siteEdition":"global","backends":[{"id":"cloudflare","origin":"","transport":"worker","enabled":true}]}
