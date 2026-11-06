@@ -164,3 +164,7 @@ body:has(.home) .footer { color: #52634f; border-top: 1px solid #cbd7c6; font-si
   .home .entry-tabs small { font-size: 11px; }
 }
 @media (prefers-reduced-motion: reduce) { .home .entry-tabs button { transition: none; } }
+
+.fixed-nickname { display:flex; align-items:center; flex-wrap:wrap; gap:12px; margin:0 0 24px; padding:18px 22px; border-radius:18px; background:var(--paper,#fffdf7); border:1px solid #d9dfd0; }
+.fixed-nickname strong { font-size:22px; white-space:nowrap; }
+.fixed-nickname small { flex-basis:100%; color:#526354; }

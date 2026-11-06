@@ -13,8 +13,8 @@ export interface CreationReceipt<T=unknown> { request:string; result:T }
 export class Store {
   readonly db: DatabaseSync;
   readonly security:SecurityStore;
-  constructor(path: string, readonly multiplayerLimit = MULTIPLAYER_ROOM_LIMIT) {
-    this.security=new SecurityStore(path===':memory:'?':memory:':process.env.SECURITY_DB_PATH??join(dirname(path),'security.sqlite'));
+  constructor(path: string, readonly multiplayerLimit = MULTIPLAYER_ROOM_LIMIT, auditEnabled=process.env.SITE_EDITION!=='cn') {
+    this.security=new SecurityStore(!auditEnabled||path===':memory:'?':memory:':process.env.SECURITY_DB_PATH??join(dirname(path),'security.sqlite'),Date.now,auditEnabled);
     if (path !== ':memory:') mkdirSync(dirname(path), { recursive: true });
     this.db = new DatabaseSync(path);
     this.db.exec(`PRAGMA journal_mode=WAL; PRAGMA synchronous=FULL; PRAGMA foreign_keys=ON; PRAGMA busy_timeout=5000;

@@ -95,6 +95,7 @@ export function reconcileRoster(original: Room, meta: RelayMetadata, now: number
       room.game.players.push(memberPlayer(member)); changed = true;
     } else {
       if (p.seat !== member.seat || !!p.isAI!==!!member.isAI) throw Error('已加入成员的固定身份信息发生变化。');
+      if(member.nicknameId!==undefined){p.nicknameId=member.nicknameId;p.nicknameBadge=member.nicknameBadge;}
       if (p.name !== member.name) { p.name = member.name; changed = true; }
       if (!!p.renameUsed !== !!member.renameUsed) { p.renameUsed = !!member.renameUsed; changed = true; }
       if (p.connected !== (member.isAI||member.connected)) { p.connected = !!member.isAI||member.connected; changed = true; }

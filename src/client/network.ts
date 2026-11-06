@@ -1,3 +1,4 @@
+import { IS_CN_SITE, SITE_BACKEND_ID, FOREIGN_INVITATION_ERROR } from './site-edition.js';
 import { randomId } from './random-id.js';
 import { PresentationEventClient } from './presentation-events.js';
 import { io, type Socket } from 'socket.io-client';
@@ -30,10 +31,10 @@ const ROUTE_IDENTITY_KEY = 'magical-athlete:route-identity:v1';
 const CLOSED_ROOMS_KEY = 'magical-athlete:closed-rooms:v1';
 const PENDING_CREATE_KEY = 'magical-athlete:pending-create:v1';
 export const OWNED_ROOMS_CHANGED = 'magical-athlete:owned-rooms-changed';
-const backendOf = (identity:Pick<Identity,'backendId'>):BackendId => identity.backendId ?? 'cloudflare';
+const backendOf = (identity:Pick<Identity,'backendId'>):BackendId => identity.backendId ?? SITE_BACKEND_ID;
 function roomTarget(value:string, backendId?:BackendId):{code:string;backendId:BackendId} {
   const parsed=parseRoomCode(value);if(!parsed)throw Error('请输入完整房间码，例如 C-ABC234。');
-  return {code:parsed.code,backendId:parsed.backendId ?? backendId ?? 'cloudflare'};
+  return {code:parsed.code,backendId:parsed.backendId ?? backendId ?? SITE_BACKEND_ID};
 }
 function sameRoom(record:{code:string;backendId?:BackendId},target:{code:string;backendId:BackendId}) { return record.code === target.code && backendOf(record) === target.backendId; }
 export function wireIdentity(identity:Identity):Omit<Identity,'backendId'> { const {backendId:_,...wire}=identity;return wire; }
@@ -42,7 +43,7 @@ export interface OwnedRoom { code: string; backendId?:BackendId; playerId: strin
 function ownedRecords(): OwnedRoom[] {
   try {
     const records: unknown = JSON.parse(localStorage.getItem(OWNED_ROOMS_KEY) ?? '[]');
-    return Array.isArray(records) ? records.filter((r): r is OwnedRoom => !!r && typeof r === 'object' && /^[A-Z2-9]{6}$/.test(r.code) && (!r.backendId || isBackendId(r.backendId)) && typeof r.playerId === 'string' && Number.isFinite(r.createdAt) && Number.isFinite(r.lastVisitedAt)) : [];
+    return Array.isArray(records) ? records.filter((r): r is OwnedRoom => backendOf(r as OwnedRoom) === SITE_BACKEND_ID && !!r && typeof r === 'object' && /^[A-Z2-9]{6}$/.test(r.code) && (!r.backendId || isBackendId(r.backendId)) && typeof r.playerId === 'string' && Number.isFinite(r.createdAt) && Number.isFinite(r.lastVisitedAt)) : [];
   } catch { return []; }
 }
 function writeOwnedRooms(records: OwnedRoom[]) {
@@ -63,6 +64,7 @@ export function forgetClosedRoom(code:string,reason:'closed'|'expired'='closed',
   try { localStorage.setItem(CLOSED_ROOMS_KEY,JSON.stringify([{...target,reason},...closedRecords().filter(record=>!sameRoom(record,target))].slice(0,32)));for(const suffix of ['',':player',':spectator']){localStorage.removeItem(identityKey(target.code,target.backendId)+suffix);if(target.backendId==='cloudflare')localStorage.removeItem(`magical-athlete:identity:${target.code}${suffix}`);} }catch{/* Storage may be unavailable. */}
 }
 export function readIdentity(code:string,role?:RoomRole,backendId?:BackendId):Identity|null {
+  if((parseRoomCode(code)?.backendId ?? backendId ?? SITE_BACKEND_ID) !== SITE_BACKEND_ID)return null;
   const parsed=parseRoomCode(code);if(!parsed)return null;
   const target=roomTarget(code,backendId),key=identityKey(target.code,target.backendId);
   try {
@@ -84,9 +86,10 @@ export function readRouteIdentity(code:string,backendId?:BackendId):Identity|nul
   const parsed=parseRoomCode(code);if(!parsed)return null;
   try {
     const route=JSON.parse(sessionStorage.getItem(ROUTE_IDENTITY_KEY)??'null');
-    let id=parsed.backendId??backendId??(isBackendId(route?.backendId)&&route.code===parsed.code?route.backendId:undefined);
+    let id=parsed.backendId??backendId??SITE_BACKEND_ID;
+    if(id !== SITE_BACKEND_ID)return null;
     if(!id){
-      const candidates=(['cloudflare','aliyun'] as const).filter(candidate=>readIdentity(code,undefined,candidate));
+      const candidates=([SITE_BACKEND_ID] as const).filter(candidate=>readIdentity(code,undefined,candidate));
       if(candidates.length>1)return null;
       id=candidates[0];
     }
@@ -158,14 +161,14 @@ export async function leaveRoom(identity:Identity):Promise<void> {
   try {response=await fetch(`${prefix}/${encodeURIComponent(identity.roomCode)}/leave`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(wireIdentity(identity)),signal:AbortSignal.timeout(4000)});}catch{return;}
   const reply=await response.json().catch(()=>({}));if([401,404,410].includes(response.status)){forgetIdentity(identity.roomCode,identity);return;}if(!response.ok)throw Error(reply.error||'退出房间未确认，请重试。');if(!reply.retainIdentity)forgetIdentity(identity.roomCode,identity);
 }
-type EntryData={name:string;maxPlayers?:number;timeoutSeconds?:number;mode?:GameMode;aiCount?:number;role?:RoomRole;characterPool?:CharacterPool;config?:import('../shared/room-config.js').RoomConfig;requestId?:string;backendId?:BackendId};
+type EntryData={name:string;nicknameId?:string;maxPlayers?:number;timeoutSeconds?:number;mode?:GameMode;aiCount?:number;role?:RoomRole;characterPool?:CharacterPool;config?:import('../shared/room-config.js').RoomConfig;requestId?:string;backendId?:BackendId};
 interface PendingCreation {backendId:BackendId;requestId:string;creation:Omit<EntryData,'backendId'|'role'>}
-export function readPendingCreation():PendingCreation|null {try{const value=JSON.parse(sessionStorage.getItem(PENDING_CREATE_KEY)??'null');return value&&isBackendId(value.backendId)&&typeof value.requestId==='string'&&value.creation?value:null;}catch{return null;}}
+export function readPendingCreation():PendingCreation|null {try{const value=JSON.parse(sessionStorage.getItem(PENDING_CREATE_KEY)??'null');return value&&value.backendId===SITE_BACKEND_ID&&typeof value.requestId==='string'&&value.creation?value:null;}catch{return null;}}
 export async function enterRoom(code:string|null,data:EntryData):Promise<JoinReply> {
   await loadBackends();const parsed=code?parseRoomCode(code):null;if(code&&!parsed)throw Error('请输入完整房间码，例如 C-ABC234。');
   const enabled=getBackends().filter(backend=>backend.enabled);
-  if(code&&!parsed?.backendId&&!data.backendId&&enabled.length!==1)throw Error('六位旧房间码无法确定归属，请选择服务器。');
-  const id=parsed?.backendId??data.backendId??enabled[0]?.id;if(!id)throw Error('请先选择可用的服务器。');
+
+  const id=parsed?.backendId??data.backendId??SITE_BACKEND_ID;if(id !== SITE_BACKEND_ID)throw Error(FOREIGN_INVITATION_ERROR);
   const backend=getBackend(id);if(!backend.enabled)throw Error(`${backend.label}尚未部署或开放。`);
   if(httpEntryUrl(backend,code??undefined))throw Error(`${backend.label}使用临时 HTTP 入口，请打开入口后重试原房间。`);
   const pending=readPendingCreation();
@@ -173,10 +176,10 @@ export async function enterRoom(code:string|null,data:EntryData):Promise<JoinRep
   // rooms must be created at their server's own entry so reload can recover them.
   if(typeof location !== 'undefined' && backendEntryUrl(backend) && (code || pending?.backendId!==id))throw Error(`请先打开${backend.label}入口，再创建或加入房间。`);
   const {role,backendId:_,...creation}=data;
-  let body:unknown=code?{name:data.name,...(role?{role}:{})}:creation;
+  let body:unknown=code?{name:data.name,...(data.nicknameId?{nicknameId:data.nicknameId}:{}),...(role?{role}:{})}:creation;
   if(!code){
     if(pending&&pending.backendId!==id)throw Error(`原服务器${getBackend(pending.backendId).label}的建房结果尚未确认，请先在原服务器重试。`);
-    if(!pending && (await probeBackend(id)).state!=='available')throw Error(`${backend.label}连接失败，请重新检测或选择服务器。`);
+    if(!pending && (await probeBackend(id)).state!=='available')throw Error(`${backend.label}连接失败，请重新检测。`);
     const request=pending??{backendId:id,requestId:data.requestId??randomId(),creation};
     request.creation={...request.creation,requestId:request.requestId};body=request.creation;
     // This receipt survives reloads; uncertain requests must never move to another backend.
@@ -217,10 +220,12 @@ function connectConfiguredRoom(identity: Identity, onSnapshot: (room: RoomView) 
   const socket = io(backend.origin || (typeof location==='undefined' ? 'http://localhost' : location.origin), { auth: wireIdentity(identity), reconnection: true, reconnectionDelay: 800, reconnectionDelayMax: 5000, timeout: 10000 });
   const community = new CommunityFeed();
   const chatSync = () => { socket.timeout(6500).emit('chat-sync', {afterId: 0}, (error: Error | null, reply: {ok: boolean; messages?: RoomView['chat']; latestId?: number}) => { if (!error && reply.ok) community.update({messages: reply.messages, latestId: reply.latestId},'history'); }); };
+  if(!IS_CN_SITE){
   socket.on('chat', (payload: {messages: NonNullable<RoomView['chat']>; latestId: number}) => community.update(payload,'live'));
   socket.on('connect', () => { community.update({connected: true}); chatSync(); });
   socket.on('disconnect', () => community.update({connected: false}));
   socket.on('snapshot', (room: RoomView) => community.update({contentRevision:room.contentRevision??0,messages: room.chat, latestId: room.chatLatestId, renameRemaining: room.renameRemaining, name: room.players.find(player => player.id === identity.playerId)?.name ?? room.spectators?.find(viewer => viewer.id === identity.playerId)?.name},'history'));
+  }
   let closed = false;
   let expired = false;
   let kicked = false;

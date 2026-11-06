@@ -21,8 +21,12 @@ else
     [[ $(git rev-parse HEAD) == "$COMMIT" && -z $(git status --porcelain --untracked-files=no) ]] || { echo 'Checkout must be clean and match the requested commit.' >&2; exit 1; }
 fi
 BASE=$DEPLOY_BASE
+ENV_FILE=/etc/magical-athlete/server.env
+if [[ $DEPLOY_TARGET == preview ]]; then ENV_FILE=/etc/magical-athlete-preview/server.env; fi
+grep -Fqx 'SITE_EDITION=cn' "$ENV_FILE" || { echo 'Node deployment requires SITE_EDITION=cn.' >&2; exit 1; }
 # Block the new release on low space, corrupt audit storage or a known audit
 # write failure. Do this before unpacking a bundle or switching any app pointer.
+bash "$SCRIPT_DIR/disable-cn-audit.sh"
 bash "$SCRIPT_DIR/security-preflight.sh"
 # A checked build is identified by both its source and workflow run. Reusing
 # a same-commit directory would retain an older run's deployment.json/.ready.
@@ -45,6 +49,10 @@ if [[ ! -f $RELEASE/.ready ]]; then
         git archive "$COMMIT" | tar -x -C "$RELEASE"
         (cd "$RELEASE" && pnpm install --frozen-lockfile && pnpm typecheck && pnpm build)
     fi
+    node --input-type=module - "$RELEASE/dist/client" <<'SITE'
+import fs from 'node:fs';
+const dir=process.argv[2];for(const file of ['site-edition.json','backends.json','lobby/config.json'])if(JSON.parse(fs.readFileSync(`${dir}/${file}`,'utf8')).siteEdition!=='cn')throw Error('Node artifact must contain matching domestic assets and configuration.');
+SITE
     touch "$RELEASE/.ready"
     chown -R "root:$DEPLOY_GROUP" "$RELEASE"
     chmod -R g+rX,o-rwx "$RELEASE"
@@ -68,7 +76,10 @@ for attempt in {1..20}; do
 done
 echo 'Health check failed; restoring the previous release.' >&2
 if [[ -n $PREVIOUS ]]; then
-    if [[ ! -f $PREVIOUS/.security-aware ]] && ! python3 "$SCRIPT_DIR/security-ops.py" rollback-check --database "$DEPLOY_DATA/security.sqlite"; then
+    if ! node --input-type=module - "$PREVIOUS/dist/client/site-edition.json" <<'SITE'
+import fs from 'node:fs';if(JSON.parse(fs.readFileSync(process.argv[2],'utf8')).siteEdition!=='cn')throw Error('Legacy rollback would reopen mainland features.');
+SITE
+    then
         systemctl stop "$DEPLOY_SERVICE"
         logger -p daemon.err -t game-security 'Unsafe legacy fallback refused; game remains paused for forward repair.' || true
         exit 1

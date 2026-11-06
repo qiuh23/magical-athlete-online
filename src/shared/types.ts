@@ -6,6 +6,8 @@ export interface ChatReply { ok: boolean; message?: ChatMessage; duplicate?: boo
 export interface RenameReply { ok: boolean; name?: string; remaining?: number; duplicate?: boolean; error?: string; }
 export interface ChatState { messages: ChatMessage[]; latestId: number; windows: Record<string, number[]>; }
 export type RoomRole = 'player' | 'spectator';
+export interface Player { nicknameId?:string; nicknameBadge?:number }
+export interface Spectator { nicknameId?:string; nicknameBadge?:number }
 export interface Spectator { id: string; name: string; connected: boolean; }
 export interface RoomSummary { code: string; hostName: string; phase: Phase; playerCount: number; maxPlayers: number; spectatorCount: number; createdAt: number; expiresAt: number; authorityOnline: boolean; mode?: GameMode; }
 export type Phase = 'lobby' | 'draft' | 'selection' | 'race' | 'results' | 'finished' | 'paused';
@@ -113,3 +115,5 @@ export interface GameEvent { grantedPowerIds?: string[]; grantDuration?: PublicA
 export interface GameEvent { paths?: number[][]; }
 
 export interface RoomView { trackState?: { reversed:boolean; event?:ReturnType<ReturnType<typeof import('../engine/special-events.js').installThirds>['publicState']>; twist?: Omit<import('../engine/twist-cards.js').TwistState,'deck'|'swap'> }; }
+
+export interface Room { siteEdition?:import("./site-policy.js").SiteEdition; cnPolicyVersion?:1 }

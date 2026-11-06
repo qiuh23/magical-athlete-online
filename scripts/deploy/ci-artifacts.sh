@@ -13,6 +13,13 @@ OUTPUT=${5:?absolute output directory}
 [[ -f dist/client/index.html && -f dist/server/server/index.js && -f dist/browser/index.html ]] || { echo 'Checks must build both clients and server before packaging.' >&2; exit 1; }
 # Refuse to relabel a stale client/lobby as this Checks run's source commit.
 node scripts/build-info.mjs --check "$COMMIT" dist/client dist/browser dist/client/lobby dist/browser/lobby
+node --input-type=module <<'SITE'
+import fs from 'node:fs';
+for(const [directory,edition] of [['dist/client','cn'],['dist/browser','global']]){
+ const read=file=>JSON.parse(fs.readFileSync(`${directory}/${file}`,'utf8'));
+ if(read('site-edition.json').siteEdition!==edition||read('backends.json').siteEdition!==edition||read('lobby/config.json').siteEdition!==edition)throw Error('Client, lobby and deployment editions must match.');
+}
+SITE
 [[ ! -e $OUTPUT ]] || { echo 'Choose a fresh artifact directory.' >&2; exit 1; }
 mkdir -p "$OUTPUT/aliyun" "$OUTPUT/worker/assets" "$OUTPUT/worker/worker"
 WORK=$(mktemp -d)

@@ -12,8 +12,8 @@ export function renderHttpsSite(domain,tls=true) {
     listen 80;
     server_name ${domain};
     server_tokens off;
-    access_log /var/log/game-network/athlete-production.log game_network;
-    error_log /dev/null emerg;
+    access_log off;
+    error_log /var/log/nginx/error.log warn;
     location ^~ /.well-known/acme-challenge/ { root /var/lib/letsencrypt; }
     location / { return 308 https://${domain}$request_uri; }
 }
@@ -23,8 +23,8 @@ export function renderHttpsSite(domain,tls=true) {
     listen 443 ssl;
     server_name ${domain};
     server_tokens off;
-    access_log /var/log/game-network/athlete-production.log game_network;
-    error_log /dev/null emerg;
+    access_log off;
+    error_log /var/log/nginx/error.log warn;
     ssl_certificate /etc/letsencrypt/live/${domain}/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/${domain}/privkey.pem;
     ssl_protocols TLSv1.2 TLSv1.3;

@@ -29,7 +29,7 @@ for account in athlete-preview athlete-deploy athlete-preview-deploy; do
     id "$account" >/dev/null 2>&1 || useradd --system --no-create-home --shell /usr/sbin/nologin "$account"
 done
 install -d -o root -g root -m 0755 "$LIB"
-for file in ci-install.mjs unpack-ci-artifact.py extract-release.py target-paths.sh update.sh backup.sh rollback.sh security-preflight.sh security-maintenance.sh security-ops.py; do
+for file in ci-install.mjs unpack-ci-artifact.py extract-release.py target-paths.sh update.sh backup.sh rollback.sh security-preflight.sh security-maintenance.sh security-ops.py disable-cn-audit.sh; do
     install -o root -g root -m 0644 "$SOURCE_DIR/scripts/deploy/$file" "$LIB/$file"
 done
 install -o root -g root -m 0755 "$SOURCE_DIR/scripts/deploy/ci-install.sh" /usr/local/sbin/magical-athlete-ci-install
@@ -50,6 +50,7 @@ bash "$SOURCE_DIR/scripts/deploy/install-security.sh"
 if [[ ! -f /etc/magical-athlete-preview/server.env ]]; then
     cat > /etc/magical-athlete-preview/server.env <<EOF
 NODE_ENV=production
+SITE_EDITION=cn
 BACKEND_ID=aliyun
 HOST=127.0.0.1
 PORT=3001
@@ -60,8 +61,8 @@ MULTIPLAYER_ROOM_LIMIT=1
 PUBLIC_ACCESS_ENABLED=$PREVIEW_PUBLIC_ACCESS_ENABLED
 CONTROLLED_VALIDATION=false
 PUBLIC_ORIGIN=http://$PUBLIC_IP:8080
-PUBLIC_ORIGINS=$CLOUDFLARE_PREVIEW_ORIGIN
-BACKENDS_CONFIG_JSON='{"backends":[{"id":"cloudflare","origin":"$CLOUDFLARE_PREVIEW_ORIGIN","transport":"worker","enabled":true},{"id":"aliyun","origin":"","transport":"socketio","enabled":$PREVIEW_PUBLIC_ACCESS_ENABLED,"allowInsecureHttp":true}]}'
+PUBLIC_ORIGINS=http://$PUBLIC_IP:8080
+BACKENDS_CONFIG_JSON='{"siteEdition":"cn","backends":[{"id":"aliyun","origin":"","transport":"socketio","enabled":true}]}'
 EOF
     chown root:athlete-preview /etc/magical-athlete-preview/server.env
     chmod 0640 /etc/magical-athlete-preview/server.env

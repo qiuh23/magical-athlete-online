@@ -30,7 +30,7 @@ test('both lobby artifacts contain every referenced local asset and the domestic
     for (const path of files) {
       assert.ok(allowed.test('/' + path), `Domestic Nginx must serve ${path}.`);
       const source = await readFile(new URL('../lobby/' + path, import.meta.url));
-      for (const target of targets) assert.deepEqual(await readFile(join(target, path)), source, `${path} must be identical in both builds.`);
+      for (const target of targets) { if(path==='config.json'){const config=JSON.parse(await readFile(join(target,path),'utf8'));assert.equal(config.siteEdition,target.includes('browser')?'global':'cn');assert.equal(Object.keys(config.lobbies).length,1);}else assert.deepEqual(await readFile(join(target, path)), source, `${path} must be identical in both builds.`); }
     }
     assert.ok(allowed.test('/build-info.json'));
     for (const target of targets) await verifyBuildInfo(target, sourceRevision());

@@ -5,7 +5,7 @@ import { SECURITY_UNAVAILABLE, networkExpiry, securityEvent, type SecurityEvent 
 
 export class SecurityStore {
   readonly db:DatabaseSync; private failure=false; private warnings:string[]=[];private alertedAt=0;
-  constructor(readonly path:string,readonly now=Date.now) {
+  constructor(readonly path:string,readonly now=Date.now,public enabled=true) {
     if(path!==':memory:')mkdirSync(dirname(path),{recursive:true,mode:0o750});
     this.db=new DatabaseSync(path);
     this.db.exec(`PRAGMA journal_mode=WAL;PRAGMA synchronous=FULL;PRAGMA busy_timeout=5000;
@@ -28,10 +28,11 @@ export class SecurityStore {
     if(free<=reserve||bytes>=max)throw Error('Security capacity reserve reached');
   }
   append(input:Omit<SecurityEvent,'at'|'expiresAt'>):number {
+    if(!this.enabled)return 0;
     try{this.capacity();const event=securityEvent(input,this.now());const result=this.db.prepare('INSERT INTO security_events(at,expires_at,event) VALUES(?,?,?)').run(event.at,event.expiresAt,JSON.stringify(event));this.failure=false;return Number(result.lastInsertRowid);}
     catch{this.failure=true;if(Date.now()-this.alertedAt>=60000){this.alertedAt=Date.now();console.error('SECURITY_WRITE_FAILED: required publication blocked; inspect disk/storage (no request data logged).');}throw Error(SECURITY_UNAVAILABLE);}
   }
-  status(){try{this.capacity();this.db.prepare('UPDATE security_health SET at=? WHERE id=1').run(this.now());this.failure=false;}catch{this.failure=true;}return {ok:!this.failure,warnings:this.warnings};}
+  status(){if(!this.enabled)return {ok:true,enabled:false,warnings:[]};try{this.capacity();this.db.prepare('UPDATE security_health SET at=? WHERE id=1').run(this.now());this.failure=false;}catch{this.failure=true;}return {ok:!this.failure,warnings:this.warnings};}
   list(after=0,limit=100){return this.db.prepare('SELECT id,at,expires_at,held,event FROM security_events WHERE id>? ORDER BY id LIMIT ?').all(after,Math.max(1,Math.min(500,limit)));}
   hold(id:number,held:boolean,reason?:string):void {
     this.db.exec('BEGIN IMMEDIATE');try{
@@ -57,6 +58,7 @@ export class SecurityStore {
   closedAt(code:string):number|undefined{return (this.db.prepare("SELECT at FROM moderation WHERE room_code=? AND kind='closed'").get(code) as {at:number}|undefined)?.at;}
   isRestricted(code:string,id:string){return this.targets(code,'restricted').has(id)||this.targets(code,'name').has(id);}
   cleanup(limit=500,activeRooms:ReadonlySet<string>=new Set()):number {
+    if(!this.enabled)return 0;
     const batch=Math.max(1,Math.min(1000,limit)),now=this.now();
     const deleted=this.db.prepare('DELETE FROM security_events WHERE id IN (SELECT id FROM security_events WHERE held=0 AND expires_at<=? ORDER BY expires_at,id LIMIT ?)').run(now,batch).changes;
     this.db.prepare('DELETE FROM security_evidence WHERE id IN (SELECT id FROM security_evidence WHERE held=0 AND expires_at<=? LIMIT ?)').run(now,batch);

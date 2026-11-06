@@ -1,3 +1,4 @@
+import { IS_CN_SITE } from './site-edition.js';
 import type { ChatMessage } from '../shared/types.js';
 
 export interface CommunityState { messages: ChatMessage[]; latestId: number; connected: boolean; renameRemaining?: number; name?: string; liveRevision?: number; liveMessages?: ChatMessage[];contentRevision?:number; }
@@ -11,6 +12,7 @@ export class CommunityFeed {
     return () => { this.listeners.delete(listener); };
   };
   update(change: Partial<CommunityState>, source: 'update' | 'history' | 'live' = 'update') {
+    if(IS_CN_SITE){this.state={messages:[],latestId:0,connected:change.connected??this.state.connected};for(const listener of this.listeners)listener(this.state);return;}
     if(change.contentRevision!==undefined&&change.contentRevision<(this.state.contentRevision??0))return;
     if((this.state.contentRevision??0)>0&&change.contentRevision===undefined){change={...change};delete change.name;delete change.renameRemaining;}
     // The transport explicitly marks hydration. A reconnect backlog must never

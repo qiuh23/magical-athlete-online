@@ -1,5 +1,7 @@
 # GitHub 自动发布
 
+> 2026-11-06：本站独立策略以 [独立站点部署与验证](site-editions.md) 为准。旧服务器选择、跨站自动跳转、跨站Origin和国内聊天描述已被替代；下文既有公网证据只反映当时状态，不能作为本次发布证明。
+
 用户选择：PR 检查通过后更新测试入口，合并到 `main` 并检查通过后更新两个正式入口，不自动合并 PR。单台 ECS 上共用运行环境但隔离服务、数据和权限；没有另外购买服务器。
 
 | 环境 | Cloudflare | 阿里云 | 每端真人房配额 |
@@ -17,11 +19,11 @@
 
 完整玩法/浏览器检查应在本地运行；需要远端复核时显式手动运行 Checks 并选择 `all`、`eight-only`、`ability-interactions` 或 `deployment`，原入口保留，手动默认也是 release。手动 deployment 涉及 engine/shared 时仍保留原 eight-only 保护。手动检查不会生成自动发布候选，自动发布仍只接受当前 main push 或受信 PR 的成功产物。
 
-默认契约文件：`ci-validation-scope`、`deployment-workflow`、`ci-installer`、`build-info`、`deployment-info`、`deployment-capacity`、`https-entries`、`backends`、`lobby`、`lobby-resources`、`dual-backend-worker`、`dual-backend-server`、`network-backends`（均在 tests/，后缀 .test.ts）。覆盖固定受信入口、精确 Origin、HTTP/实时协议、身份隔离、源 SHA、包来源/解包边界与回滚契约，不跑完整比赛或浏览器。本地完整回归仍用 `pnpm typecheck`、`pnpm test` 及原 Playwright 配置。
+默认契约文件：`ci-validation-scope`、`deployment-workflow`、`ci-installer`、`build-info`、`deployment-info`、`deployment-capacity`、`https-entries`、`backends`、`lobby`、`lobby-resources`、`dual-backend-worker`、`dual-backend-server`、`network-backends`（均在 tests/，后缀 .test.ts）。覆盖固定受信入口、单站模式与精确同站 Origin、HTTP/实时协议、身份隔离、源 SHA、包来源/解包边界与回滚契约，不跑完整比赛或浏览器。本地完整回归仍用 `pnpm typecheck`、`pnpm test` 及原 Playwright 配置。
 
 ## 自动发布的唯一归属
 
-运动会的目标是仅保留 `Checks → Deploy checked backends` 成对发布 CF 与阿里云：同一已验证 Linux 产物/预编译 Worker、同一完整提交、同一受信发布器和失败回滚。此前还实际存在 Native Cloudflare Workers Builds 的 main 直接构建发布，曾在 GitHub 验证尚未完成时先更新 CF，造成重复构建与两端版本错位。原成对链的 e3 发布（Checks41867131447、release41869680169）已真实成功。
+运动会的目标是仅保留 `Checks → Deploy checked backends` 成对发布 CF 与阿里云：同一提交分别验证的国内 Linux 产物/海外预编译 Worker、同一完整提交、同一受信发布器和失败回滚。此前还实际存在 Native Cloudflare Workers Builds 的 main 直接构建发布，曾在 GitHub 验证尚未完成时先更新 CF，造成重复构建与两端版本错位。原成对链的 e3 发布（Checks41867131447、release41869680169）已真实成功。
 
 **2026-11-05 已在控制台关闭并刷新回读确认：** `magical-athlete` 生产设置的“禁用构建”从 0 改为 1、保存后整页刷新仍为 1。Git 仓库连接和 main 分支保留，原 `pnpm build` / `pnpm exec wrangler deploy` / 根目录 `/` 未改；没有删除 Worker、修改绑定或扩大令牌权限。后续运动会仅由原 GitHub 成对链发布，不能再用 Native Builds 提前更新 CF。需要回滚该开关时，可将它恢复为 0；恢复前先明确唯一生产发布所有者，避免再次双重发布。巫师牌的唯一 CF Builds 保持开启，其实际命令已只读核实为 `npm run build:cloudflare` / `npm run deploy:cloudflare`，与 GitHub 阿里云发布各有目标。
 
@@ -48,3 +50,5 @@ fork PR 可以运行无密钥检查并生成产物，但不自动获得预览云
 日常只需提交 PR，检查通过后在 `Deploy checked backends` 的运行摘要打开两个预览入口；合并到 `main` 后正式入口自动更新。无需自动合并。需要重新部署仍保有产物的成功检查时，可手动运行发布工作流并填写 Checks run ID；若产物已在成功发布后清理或已过期，先重新运行 Checks。手动发布仍核对当前 PR/main 和产物，不能借此发布旧提交。
 
 HTTP 公网、备案与 HTTPS 上线状态分别验收：国内新 HTTPS 大厅和两个游戏子域现已完成可信 TLS、资源及定向游戏/WSS 检查，旧 HTTP 地址兼容保留。2026-11-05 初查时曾观察到 Native Builds 在 GitHub Checks 排队时先更新 CF、阿里云仍旧版；该历史现象也是关闭重复触发的原因。新流程同样必须分别核对最终两端完整 SHA、配置、运行记录和资源，不能把合并或某个构建成功当作公网发布完成。实际证据与历史快照见 [本次审计](lobby-deployment-audit-2026-11-05.md)。
+
+当前构建使用 `scripts/build-sites.mjs`分别固定cn Node与global Worker，发布包不能共用同一站点配置。模式marker和本站registry均在打包、实例激活与发布后验证；生产/预览隔离不变。国内停止新增交流与访问安全审计，现有受信安装器须更新后才能使用新的停审计与模式校验流程；历史审计记录保留，游戏与故障数据继续保存。详情见 [独立站点部署与验证](site-editions.md)。

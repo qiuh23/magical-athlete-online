@@ -56,7 +56,7 @@ class Context {
   getWebSocketAutoResponseTimestamp(socket:Socket){return socket.lastAutoResponseAt;}
   async ready(){await Promise.all(this.pending);}
 }
-async function instance(storage=new Storage(),sockets:Socket[]=[]){const ctx=new Context(storage);ctx.sockets=sockets;const relay=new worker.RoomRelay(ctx,{SECURITY_TEST_NO_LEDGER:true});await ctx.ready();return {ctx,relay};}
+async function instance(storage=new Storage(),sockets:Socket[]=[],edition="global"){const ctx=new Context(storage);ctx.sockets=sockets;const relay=new worker.RoomRelay(ctx,{SECURITY_TEST_NO_LEDGER:true,SITE_EDITION:edition});await ctx.ready();return {ctx,relay};}
 async function create(maxPlayers=8){
   const env=await instance();const response=await env.relay.fetch(new Request('https://room.internal/create/ABC234',{method:'POST',body:JSON.stringify({name:'同名',maxPlayers,timeoutSeconds:120})}));
   assert.equal(response.status,201);return {...env,created:await response.json() as RelayJoinReply};
@@ -449,7 +449,7 @@ test('expired and missing room WebSocket upgrades deliver a terminal notice rath
 
 async function namespace(){
   const instances=new Map<string,{ctx:Context;relay:any}>(),hooks:{before?:(code:string,request:Request)=>Promise<void>;after?:(code:string,request:Request,response:Response)=>Promise<void>}={};
-  const env:any={ASSETS:{fetch:()=>new Response('asset')},ROOMS:{idFromName:(code:string)=>code,get:(code:string)=>({fetch:async(input:string|Request,init?:RequestInit)=>{
+  const env:any={SITE_EDITION:'global',ASSETS:{fetch:()=>Response.json({siteEdition:'global'})},ROOMS:{idFromName:(code:string)=>code,get:(code:string)=>({fetch:async(input:string|Request,init?:RequestInit)=>{
     const request=new Request(input,init);await hooks.before?.(code,request);
     let instance=instances.get(code);if(!instance){const ctx=new Context(),relay=new worker.RoomRelay(ctx,env);instance={ctx,relay};instances.set(code,instance);await ctx.ready();}
     const response=await instance.relay.fetch(request);await hooks.after?.(code,request,response);return response;
@@ -1301,3 +1301,35 @@ test('Worker four-hour paused expiry with no humans closes permanently, includin
   let {env,peers}=await continuationWorker(true);for(const peer of peers)await env.relay.webSocketClose(peer,1000,'离开',true);clock.now+=PAUSED_OWNER_AWAY_MS;await env.relay.alarm();assert.equal((await env.ctx.storage.get<any>('closed')).reason,'host-away');
   env={...await instance(env.ctx.storage),created:env.created};assert.equal((await authenticate(env)).closeCode,4410);assert.equal(await env.ctx.storage.get('room'),undefined);
 }));
+
+
+test('CN site policy blocks old chat receipts, phrases and emoji; migrates browser archives and worker state',async()=>{
+  const env=await instance(new Storage(),[],'cn');
+  const response=await env.relay.fetch(new Request('https://room.internal/create/ABC234',{method:'POST',body:JSON.stringify({name:'追风',nicknameId:'athlete-01',maxPlayers:8,timeoutSeconds:0,authorityMode:'worker'})}));
+  assert.equal(response.status,201);const created=await response.json() as RelayJoinReply;
+  const socket=connect(env.ctx);await env.relay.webSocketMessage(socket,JSON.stringify({type:'auth',identity:created.identity}));
+  const stored=await env.ctx.storage.get<any>('room');const rng=structuredClone(stored.serverRoom.game.randomStream),version=stored.serverRoom.version;
+  await env.ctx.storage.put('chat-receipt:'+created.identity.playerId+':old',{request:'secret',result:{ok:true,message:{id:1,text:'secret',senderName:'旧名字'}}});
+  for(const message of [{type:'chat-send',clientMessageId:'old',text:'secret'},{type:'chat-send',phraseId:'hello'},{type:'emoji-send',emojiId:'smile'},{type:'phrase-send',phraseId:'hello'}]){
+    await env.relay.webSocketMessage(socket,JSON.stringify({...message,requestId:crypto.randomUUID()}));
+    assert.equal(socket.sent.at(-1)?.message,'当前站点不提供玩家交流功能。');
+  }
+  stored.members[0].name='旧自由名字';delete stored.members[0].nicknameId;
+  stored.serverRoom.game.players[0].name='旧自由名字';delete stored.serverRoom.game.players[0].nicknameId;
+  stored.serverRoom.game.logs=[{id:1,type:'score',text:'旧别名得分',rollReason:'旧自由理由',faces:[2]}];stored.chat={messages:[{id:1,text:'旧聊天',senderName:'旧名字'}],latestId:1,windows:{}};
+  await env.ctx.storage.put('room',stored);
+  const restored=await instance(env.ctx.storage,[],'cn');const reconnect=connect(restored.ctx);await restored.relay.webSocketMessage(reconnect,JSON.stringify({type:'auth',identity:created.identity}));
+  await restored.relay.webSocketMessage(reconnect,JSON.stringify({type:'sync',requestId:'sync'}));
+  const view=reconnect.sent.filter(message=>message.type==='snapshot').at(-1)?.room as RoomView;
+  assert(view.players[0]!.nicknameId);assert.deepEqual(view.chat,[]);assert(!JSON.stringify(view).includes('旧'));assert(view.version>=version);
+  const recovered=await restored.ctx.storage.get<any>('room');assert.equal(recovered.siteEdition,'cn');assert.deepEqual(recovered.serverRoom.game.randomStream,rng);assert.deepEqual(recovered.serverRoom.game.logs[0].faces,[2]);
+});
+
+
+test('CN audit is disabled without a ledger; Worker refuses missing or mismatched trusted edition',async()=>{
+  const env={SITE_EDITION:'cn',ROOMS:{get(){throw Error('CN must not touch the audit ledger');}},ASSETS:{fetch:()=>Response.json({siteEdition:'cn'})}};
+  const status=await worker.default.fetch(new Request('https://game.test/api/security/health'),env);assert.equal(status.status,200);assert.equal((await status.json()).enabled,false);
+  const disabled=await worker.default.fetch(new Request('https://game.test/api/stationmaster/logs'),env);assert.equal(disabled.status,404);
+  const missing=await worker.default.fetch(new Request('https://game.test/'),{...env,SITE_EDITION:undefined});assert.equal(missing.status,503);assert.match((await missing.json()).error,/SITE_EDITION/);
+  const mismatch=await worker.default.fetch(new Request('https://game.test/'),{...env,SITE_EDITION:'global'});assert.equal(mismatch.status,503);assert.match((await mismatch.json()).error,/SITE_EDITION/);
+});

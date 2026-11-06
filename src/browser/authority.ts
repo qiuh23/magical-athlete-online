@@ -1,3 +1,4 @@
+import { migrateCnRoom } from '../shared/site-policy.js';
 import { publicEventBatch } from '../shared/public-events.js';
 import { secureRandomSeed, type RandomSeed } from '../shared/random.js';
 import { immediateRoomAction } from '../shared/automation.js';
@@ -9,6 +10,7 @@ import type { RelayMetadata } from '../shared/relay.js';
 
 export const AUTHORITY_DATABASE = 'magical-athlete-browser-authority-v1';
 const DATABASE_VERSION = 1;
+const cnEdition=()=>import.meta.env?.VITE_SITE_EDITION==='cn';
 interface StoredRoom { code: string; authorityId: string; room: Room }
 interface Receipt { code: string; playerId: string; actionId: string; request: string; result: ActionReply }
 export interface AuthorityOptions {
@@ -77,6 +79,7 @@ export class BrowserAuthority {
             if (!allowCreate || meta.phase!=='lobby') throw Error('主持设备没有这局的本地存档，无法恢复。请用创建房间的原浏览器，或创建新房间。');
             committed={code:meta.code,authorityId:meta.authorityId,room:createBrowserRoom(meta,(options.randomSeed ?? entropy)(),now)};
           }
+          if(cnEdition())migrateCnRoom(committed.room);
           store.put(committed);
         } catch(error) { failure=error; tx.abort(); } };
       });
@@ -102,6 +105,7 @@ export class BrowserAuthority {
       get.onsuccess=() => { try {
         const record=get.result as StoredRoom|undefined;
         if(!record||record.authorityId!==this.meta.authorityId)throw Error('主持存档缺失或身份不匹配。');
+        if(cnEdition())migrateCnRoom(record.room);
         work(record,receipts,save);
       } catch(error){failure=error;tx.abort();} };
     });

@@ -7,9 +7,9 @@ export PATH=/opt/node/bin:$PATH
 DOMAIN=${DOMAIN:?Set the reviewed game subdomain}
 CERT_EMAIL=${CERT_EMAIL:?Set certificate contact email}
 SOURCE_DIR=$(cd -- "$(dirname -- "$0")/../.." && pwd)
-[[ -f /etc/nginx/conf.d/game-network-log.conf ]] || { echo 'Run the reviewed install-security.sh migration before changing game vhosts.' >&2; exit 1; }
 bash "$SOURCE_DIR/scripts/deploy/security-preflight.sh"
 ENV_FILE=/etc/magical-athlete/server.env
+grep -Fqx 'SITE_EDITION=cn' "$ENV_FILE" || { echo 'Mainland and legacy HTTP entries require SITE_EDITION=cn.' >&2; exit 1; }
 # Render/validate before any filesystem, service or certificate mutation.
 CONFIG=$(node "$SOURCE_DIR/scripts/deploy/render-https.mjs" "$DOMAIN")
 ACME_CONFIG=$(node "$SOURCE_DIR/scripts/deploy/render-https.mjs" "$DOMAIN" --acme-only)

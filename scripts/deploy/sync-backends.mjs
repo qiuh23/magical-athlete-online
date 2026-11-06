@@ -2,11 +2,11 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
 import { deploymentRegistry, deploymentSettings, workerVariables } from './ci-release.mjs';
 
-export async function syncBackends(check=false) {
+export async function syncBackends(check=false,siteEdition=process.env.SITE_EDITION??'global') {
   const path=new URL('../../public/backends.json',import.meta.url);
   const workerPath=new URL('../../wrangler.jsonc',import.meta.url);
   const settings=deploymentSettings('production');
-  const registry=deploymentRegistry(settings);
+  const registry=deploymentRegistry(settings,siteEdition);
   const worker=JSON.parse(await readFile(workerPath,'utf8'));
   const variables=workerVariables(settings,worker.vars);
   if(check) {

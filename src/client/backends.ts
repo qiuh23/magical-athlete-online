@@ -1,3 +1,4 @@
+import { CLIENT_SITE_EDITION, SITE_BACKEND_ID, FOREIGN_INVITATION_ERROR } from './site-edition.js';
 import { io } from 'socket.io-client';
 import { PROTOCOL_VERSION, BACKEND_RULES_VERSION, type BackendId } from '../shared/backend-protocol.js';
 export type { BackendId } from '../shared/backend-protocol.js';
@@ -7,10 +8,7 @@ export interface BackendStatus { backend: BackendDefinition; state: 'checking' |
 const labels: Record<BackendId,string> = { cloudflare: 'Cloudflare', aliyun: '阿里云内地' };
 const preferenceKey = 'magical-athlete:backend-preference:v1';
 const pageOrigin = () => typeof location === 'undefined' ? 'http://localhost' : location.origin;
-let definitions: BackendDefinition[] = [
-  {id:'cloudflare',label:labels.cloudflare,origin:'',transport:import.meta.env?.VITE_HOST_MODE === 'browser' ? 'worker' : 'socketio',enabled:true},
-  {id:'aliyun',label:labels.aliyun,origin:'',transport:'socketio',enabled:false},
-];
+let definitions: BackendDefinition[] = [{id:SITE_BACKEND_ID,label:labels[SITE_BACKEND_ID],origin:'',transport:SITE_BACKEND_ID === 'cloudflare' && import.meta.env?.VITE_HOST_MODE === 'browser' ? 'worker' : 'socketio',enabled:true}];
 let loading: Promise<BackendDefinition[]> | undefined;
 export function isBackendId(value: unknown): value is BackendId { return value === 'cloudflare' || value === 'aliyun'; }
 export function parseRoomCode(value:string): {code:string;backendId?:BackendId} | null {
@@ -19,13 +17,14 @@ export function parseRoomCode(value:string): {code:string;backendId?:BackendId} 
 }
 export function formatRoomCode(code:string, backendId:BackendId):string { return `${backendId === 'cloudflare' ? 'C' : 'A'}-${parseRoomCode(code)?.code ?? code.toUpperCase()}`; }
 export function validateBackendConfig(value:unknown):BackendDefinition[] {
-  const input = value as {backends?:unknown};
-  if (!input || !Array.isArray(input.backends) || input.backends.length !== 2) throw Error('服务器部署配置无效。');
+  const input = value as {siteEdition?:unknown;backends?:unknown};
+  if (!input || !Array.isArray(input.backends) || input.backends.length !== 1 || input.siteEdition !== CLIENT_SITE_EDITION) throw Error('服务器部署配置无效。');
   const seen = new Set<BackendId>();
   const result = input.backends.map((entry:unknown):BackendDefinition => {
     const item = entry as Record<string,unknown>;
-    if (!item || !isBackendId(item.id) || seen.has(item.id) || typeof item.origin !== 'string' || !['worker','socketio'].includes(String(item.transport)) || typeof item.enabled !== 'boolean') throw Error('服务器部署配置无效。');
+    if (!item || item.id !== SITE_BACKEND_ID || !isBackendId(item.id) || seen.has(item.id) || typeof item.origin !== 'string' || !['worker','socketio'].includes(String(item.transport)) || typeof item.enabled !== 'boolean') throw Error('服务器部署配置无效。');
     seen.add(item.id);
+    if (item.origin !== '' && item.origin !== pageOrigin()) throw Error('本站 API 必须使用当前来源。');
     if (item.origin !== '') {
       const url = new URL(item.origin);
       if (url.username || url.password || url.search || url.hash || url.pathname !== '/' || (url.protocol !== 'https:' && !(url.protocol === 'http:' && (['localhost','127.0.0.1','[::1]'].includes(url.hostname) || item.allowInsecureHttp === true)))) throw Error('服务器地址必须是受信 HTTPS 来源；临时 HTTP 须在部署配置中明确启用。');
@@ -36,7 +35,7 @@ export function validateBackendConfig(value:unknown):BackendDefinition[] {
   return result;
 }
 export function getBackends():BackendDefinition[] { return definitions.map(backend => ({...backend})); }
-export function getBackend(id:BackendId):BackendDefinition { const backend = definitions.find(item => item.id === id); if (!backend) throw Error('服务器部署配置无效。'); return backend; }
+export function getBackend(id:BackendId):BackendDefinition { const backend = definitions.find(item => item.id === id); if (!backend) throw Error(FOREIGN_INVITATION_ERROR); return backend; }
 /** The deployment owns this same-origin file. Room links can never supply URLs. */
 export async function loadBackends(force=false):Promise<BackendDefinition[]> {
   if(force)loading=undefined;
@@ -47,33 +46,27 @@ export async function loadBackends(force=false):Promise<BackendDefinition[]> {
     return getBackends();
   })().catch(error => { loading = undefined; throw error; });
 }
-export function backendUrl(backend:BackendDefinition, path:string):string { return new URL(path,backend.origin || pageOrigin()).toString(); }
+export function backendUrl(backend:BackendDefinition, path:string):string { if(backend.id !== SITE_BACKEND_ID) throw Error(FOREIGN_INVITATION_ERROR); return new URL(path,pageOrigin()).toString(); }
 /** Always rebuild an entry from the trusted registry and a public code only.
  * Never copy the current query, fragment, credentials or an arbitrary URL. */
 export function spectatorInvite(search=typeof location==='undefined'?'':location.search):boolean { return new URLSearchParams(search).get('spectate')==='1'; }
 export function roomEntryUrl(backend:BackendDefinition, code?:string, spectate=false):string {
   const parsed=code ? parseRoomCode(code) : null;
+  if(parsed?.backendId && parsed.backendId !== SITE_BACKEND_ID)throw Error(FOREIGN_INVITATION_ERROR);
   return backendUrl(backend,parsed ? `/room/${formatRoomCode(parsed.code,backend.id)}${spectate?'?spectate=1':''}` : '/');
 }
-export function backendEntryUrl(backend:BackendDefinition, code?:string, fromOrigin=pageOrigin(), spectate=false):string|null {
-  if (!backend.enabled || new URL(backend.origin || fromOrigin).origin === new URL(fromOrigin).origin) return null;
-  return roomEntryUrl(backend,code,spectate);
+export function backendEntryUrl(backend:BackendDefinition, code?:string, _fromOrigin=pageOrigin(), _spectate=false):string|null {
+  if(backend.id !== SITE_BACKEND_ID || code && parseRoomCode(code)?.backendId && parseRoomCode(code)?.backendId !== SITE_BACKEND_ID) throw Error(FOREIGN_INVITATION_ERROR);
+  return null;
 }
-export function currentBackendId():BackendId|undefined {
-  return definitions.find(backend=>backend.enabled && new URL(backend.origin || pageOrigin()).origin === pageOrigin())?.id;
-}
+export function currentBackendId():BackendId { return SITE_BACKEND_ID; }
 /** HTTPS cannot fetch/ws a public HTTP origin. Only a deployment-owned entry
  * link may change pages; it carries a room code, never a token or endpoint. */
-export function httpEntryUrl(backend:BackendDefinition, code?:string, fromOrigin=pageOrigin()):string|null {
-  if (!backend.enabled || !fromOrigin.startsWith('https:') || !backend.origin.startsWith('http:')) return null;
-  if (['localhost','127.0.0.1','[::1]'].includes(new URL(backend.origin).hostname)) return null;
-  const parsed=code ? parseRoomCode(code) : typeof location === 'undefined' ? null : parseRoomCode(location.pathname.replace(/^\/room\//,''));
-  return roomEntryUrl(backend,parsed ? formatRoomCode(parsed.code,backend.id) : undefined);
-}
+export function httpEntryUrl(_backend:BackendDefinition, _code?:string, _fromOrigin=pageOrigin()):string|null { return null; }
 export function temporaryHttpPage():boolean { return pageOrigin().startsWith('http:') && !['localhost','127.0.0.1','[::1]'].includes(new URL(pageOrigin()).hostname); }
 export function roomApiPrefix(backend:BackendDefinition):string { return backendUrl(backend,backend.transport === 'worker' ? '/api/browser/rooms' : '/api/rooms'); }
-export function readBackendPreference():BackendId|null { try { const value = localStorage.getItem(preferenceKey); return isBackendId(value) ? value : null; } catch { return null; } }
-export function saveBackendPreference(id:BackendId):void { try { localStorage.setItem(preferenceKey,id); } catch { /* Optional preference. */ } }
+export function readBackendPreference():BackendId { return SITE_BACKEND_ID; }
+export function saveBackendPreference(_id:BackendId):void { /* Site selection is deployment owned. */ }
 function validProbe(value:unknown,id:BackendId):boolean { const item=value as Record<string,unknown>; return !!item && item.ok === true && item.backendId === id && item.protocolVersion === PROTOCOL_VERSION && item.rulesVersion === BACKEND_RULES_VERSION; }
 export async function probeBackend(id:BackendId):Promise<BackendStatus> {
   const backend=getBackend(id);
