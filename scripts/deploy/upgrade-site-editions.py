@@ -39,7 +39,7 @@ OLD_AUDIT_TASKS = tuple(Path(name) for name in (
     "/etc/cron.d/game-network-rotation", "/etc/logrotate.d/game-network",
 ))
 MANAGED_KEYS = (
-    "NODE_ENV", "SITE_EDITION", "BACKEND_ID", "PUBLIC_ORIGIN",
+    "NODE_ENV", "SITE_EDITION", "BACKEND_ID", "CONTROLLED_VALIDATION", "PUBLIC_ORIGIN",
     "PUBLIC_ORIGINS", "BACKENDS_CONFIG_JSON",
 )
 
@@ -70,7 +70,10 @@ def render_environment(text, target, entries):
         if current.get(key) != value:
             raise ValueError(target + " environment differs from the fixed existing layout: " + key)
     for key in ("PUBLIC_ACCESS_ENABLED", "CONTROLLED_VALIDATION"):
-        if current.get(key) not in ("true", "false"):
+        # The original server treats an absent controlled-validation gate as false.
+        # Preserve that legacy behavior without inferring or opening public access.
+        value = current.get(key, "false" if key == "CONTROLLED_VALIDATION" else None)
+        if value not in ("true", "false"):
             raise ValueError(target + " requires an explicit unchanged gate: " + key)
     quota = current.get("MULTIPLAYER_ROOM_LIMIT", "")
     if not quota.isdigit() or not 0 <= int(quota) <= (14 if target == "production" else 1):
@@ -83,6 +86,7 @@ def render_environment(text, target, entries):
     registry = {"siteEdition": "cn", "backends": [{"id": "aliyun", "origin": "", "transport": "socketio", "enabled": True}]}
     replacements = {
         "NODE_ENV": "production", "SITE_EDITION": "cn", "BACKEND_ID": "aliyun",
+        "CONTROLLED_VALIDATION": current.get("CONTROLLED_VALIDATION", "false"),
         "PUBLIC_ORIGIN": origin, "PUBLIC_ORIGINS": ",".join(origins),
         "BACKENDS_CONFIG_JSON": "'" + json.dumps(registry, separators=(",", ":")) + "'",
     }
