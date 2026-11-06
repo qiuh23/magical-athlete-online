@@ -17,7 +17,7 @@ sudo python3 /root/reviewed-source/scripts/deploy/upgrade-site-editions.py --com
 
 - 工具库 `/usr/local/lib/magical-athlete-deploy/`：`ci-install.mjs`、`unpack-ci-artifact.py`、`extract-release.py`、`target-paths.sh`、`update.sh`、`backup.sh`、`rollback.sh`、`security-preflight.sh`、`security-maintenance.sh`、`security-ops.py`、`disable-cn-audit.sh`；另更新固定入口 `/usr/local/sbin/magical-athlete-ci-install`。工具保持root所有，0644/入口0755。既有sudoers、账号、云角色与授权范围不变。
 - 生产与预览 `/etc/magical-athlete{,-preview}/server.env`：设置 `SITE_EDITION=cn`、`BACKEND_ID=aliyun`、`NODE_ENV=production` 和cn单条同源registry。生产origin为 `https://athlete.magical-athlete-online.cn`，保留 `http://115.29.188.62` 与 `http://magical-athlete-online.cn` 两个旧Origin；预览仅 `http://115.29.188.62:8080`。移除两个环境的海外Origin。
-- 精确保留既有 `PUBLIC_ACCESS_ENABLED`、`CONTROLLED_VALIDATION`、`SHARED_PREVIEW_ENABLED`、容量、secret、持久化目录和端口。既有生产quota14、预览quota1；路径或容量不匹配明确失败，不通过放宽门禁或增大额度完成升级。
+- 精确保留既有 `PUBLIC_ACCESS_ENABLED`、`CONTROLLED_VALIDATION`、`SHARED_PREVIEW_ENABLED`、容量、secret、持久化目录和端口。兼容旧环境缺少 `CONTROLLED_VALIDATION`：旧服务原本将缺失视为false，升级只将该行为明确写为 `CONTROLLED_VALIDATION=false`；已配置true或false均保持，空值或非法值仍拒绝。`PUBLIC_ACCESS_ENABLED` 必须原本明确配置，绝不推断或放宽。既有生产quota14、预览quota1；路径或容量不匹配明确失败，不通过放宽门禁或增大额度完成升级。
 - 只改四个精确Nginx文件 `magical-athlete`、`magical-athlete-https`、`magical-athlete-lobby`、`magical-athlete-preview`，每个server块显式关闭访问日志，保留故障日志与原代理/TLS/实时连接。不会匹配 `magical-athlete.before-http.*` 或修改未列出的站点。
 - 停用精确旧任务 `/etc/cron.d/magical-athlete-security`、`/etc/cron.d/wizard-friends-security`、`/etc/cron.d/game-network-rotation` 以及 `/etc/logrotate.d/game-network`。这是三款国内站共同停止访问/交流审计的一次性主机配置迁移；既有私有日志、数据库、审计归档、故障数据和游戏数据全部保留。巫师牌、卡坦岛的环境、工具库和vhost由各仓库对应升级步骤处理。
 

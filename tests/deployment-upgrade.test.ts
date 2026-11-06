@@ -33,6 +33,18 @@ for bad in [base.replace("PORT=3000","PORT=3001"),base.replace("DATA_DIR=/var/li
  else:raise AssertionError("unsafe existing environment was accepted")
 `));
 
+test('legacy missing controlled-validation gate becomes explicit false without opening public access',()=>run(String.raw`
+base="HOST=127.0.0.1\nPORT=3001\nDATA_DIR=/var/lib/magical-athlete-preview\nMULTIPLAYER_ROOM_LIMIT=1\nDUAL_BACKEND_ENABLED=true\nPUBLIC_ACCESS_ENABLED=false\n"
+upgraded=m.render_environment(base,"preview",entries);values=m.assignments(upgraded)
+assert values["CONTROLLED_VALIDATION"]=="false"
+assert values["PUBLIC_ACCESS_ENABLED"]=="false"
+assert m.render_environment(upgraded,"preview",entries)==upgraded
+for invalid in [base.replace("PUBLIC_ACCESS_ENABLED=false\n",""),base+"CONTROLLED_VALIDATION=\n",base+"CONTROLLED_VALIDATION=invalid\n"]:
+ try:m.render_environment(invalid,"preview",entries)
+ except ValueError:pass
+ else:raise AssertionError("invalid or missing public gate was accepted")
+`));
+
 test('every application vhost block stops access collection idempotently and keeps fault and realtime directives',()=>run(String.raw`
 text="server {\n    listen 80;\n    access_log /var/log/game-network/athlete.log game_network;\n    error_log /dev/null emerg;\n    location / { proxy_set_header Upgrade $http_upgrade; }\n}\nserver {\n    listen 443 ssl;\n    error_log /var/log/nginx/custom-fault.log warn;\n}\n"
 upgraded=m.render_vhost(text)
