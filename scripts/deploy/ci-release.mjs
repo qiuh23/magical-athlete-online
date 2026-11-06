@@ -1,3 +1,4 @@
+import {retryCloudflare} from './cloudflare-retry.mjs';
 import { appendFile, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
 import { resolve } from 'node:path';
@@ -106,7 +107,7 @@ async function prepare(release) {
 async function previous(release) {
   const settings=deploymentSettings(release.target),account=process.env.CLOUDFLARE_ACCOUNT_ID;
   if(!/^[0-9a-f]{32}$/i.test(account??'')||!process.env.CLOUDFLARE_API_TOKEN)throw Error('Missing scoped Cloudflare deployment credentials.');
-  const response=await fetch(`https://api.cloudflare.com/client/v4/accounts/${account}/workers/scripts/${settings.workerName}/deployments`,{headers:{Authorization:`Bearer ${process.env.CLOUDFLARE_API_TOKEN}`},signal:AbortSignal.timeout(20_000)});
+  const response=await retryCloudflare(()=>fetch(`https://api.cloudflare.com/client/v4/accounts/${account}/workers/scripts/${settings.workerName}/deployments`,{headers:{Authorization:`Bearer ${process.env.CLOUDFLARE_API_TOKEN}`},signal:AbortSignal.timeout(20_000)}));
   if(response.status===404&&release.target==='preview'){await output('version','');return;}
   if(!response.ok)throw Error(`Cannot record the previous Cloudflare deployment (${response.status}).`);
   const body=await response.json(),versions=body.result?.deployments?.[0]?.versions;

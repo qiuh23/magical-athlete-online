@@ -9,6 +9,8 @@
 
 `deploy/entries.json`保留受信生产和预览的发布目标，仅供构建与发布器使用。公开 `/backends.json` 只含本站所需地址，`origin:""` 表示当前页面源。`scripts/build-sites.mjs`固定生成两套互相匹配的产物，`scripts/build-lobby.mjs`从受信源注册表裁剪各站的三款游戏入口；浏览器参数与本地偏好不能切换站点。直接 `vite build` 缺少 `SITE_EDITION` 会失败，`VITE_SITE_EDITION` 由 Vite 配置从可信构建环境注入，外部同名 VITE 变量不能覆盖。
 
+已有主机可按 [幂等配置升级](host-site-edition-upgrade.md) 先检查并更新固定工具、既有环境及旧审计任务。此步骤不重启游戏，受检main发布后才核验实际版本。
+
 阿里云在合并发布前更新 `/etc/magical-athlete/server.env` 与 `/etc/magical-athlete-preview/server.env`：
 
 ```dotenv
