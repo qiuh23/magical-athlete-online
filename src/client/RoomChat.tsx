@@ -82,6 +82,12 @@ export function RoomChat({ room, community, connection, immersive, onRename }: {
     viewport?.addEventListener('resize', update); viewport?.addEventListener('scroll',update); window.addEventListener('resize',update); update();
     return () => { viewport?.removeEventListener('resize', update); viewport?.removeEventListener('scroll',update); window.removeEventListener('resize',update); document.documentElement.style.removeProperty('--chat-keyboard-offset'); document.documentElement.style.removeProperty('--chat-viewport-height');delete document.documentElement.dataset.chatKeyboard;delete document.documentElement.dataset.chatCompact; };
   }, []);
+  useEffect(() => {
+    if (!open) return;
+    const outside = (event: PointerEvent) => { if (event.target instanceof Node && !portal.current?.contains(event.target)) setOpen(false); };
+    document.addEventListener('pointerdown', outside);
+    return () => document.removeEventListener('pointerdown', outside);
+  }, [open]);
   const send = async (event: React.FormEvent) => {
     event.preventDefault();
     const value = text.trim();
@@ -103,11 +109,11 @@ export function RoomChat({ room, community, connection, immersive, onRename }: {
     {!open&&notices.length>0&&<div ref={noticeRegion} className="chat-notice-region" aria-live="polite" aria-relevant="additions" aria-label="新聊天消息">{notices.filter(notice=>!community.messages.find(message=>message.id===notice.message.id)?.hidden).map(notice=>{const current=community.messages.find(message=>message.id===notice.message.id);return <ChatNoticeBubble key={notice.message.id} notice={current?{...notice,message:current}:notice} onOpen={()=>setOpen(true)} />;})}</div>}
     {!open && <button ref={toggle} type="button" className="chat-toggle" title="房间聊天" aria-label={`房间聊天${unread ? `，${unread} 条未读` : ''}`} aria-expanded={false} aria-controls="room-chat-panel" onClick={() => setOpen(true)}><Icon kind="chat" size={25} />{unread > 0 && <b className="chat-unread" aria-hidden="true">{unread > 99 ? '99+' : unread}</b>}</button>}
     {open && <section className="room-chat" id="room-chat-panel" aria-label="房间聊天" data-testid="room-chat">
-      <header><div><strong>房间聊天</strong><small>{community.connected ? '玩家与观战者 · 最近 100 条' : '连接中，消息将自动补齐'}</small></div><button type="button" aria-label="收起聊天" onClick={() => setOpen(false)}><Icon kind="close" /></button></header>
-      <p className="chat-report"><a href={`mailto:${STATIONMASTER_CONTACT}?subject=${encodeURIComponent('运动会举报 '+(room.backendId??'cloudflare')+' '+room.code)}`}>举报 / 联系站长</a> · 请提供服务器、房间码、消息编号和原因，勿发送密码或令牌。</p>
+      <header><div><strong>房间聊天</strong><small>{community.connected ? '在线' : '连接中…'}</small></div><button type="button" aria-label="收起聊天" onClick={() => setOpen(false)}><Icon kind="close" /></button></header>
+      <details className="chat-report"><summary>举报 / 联系站长</summary><p><a href={`mailto:${STATIONMASTER_CONTACT}?subject=${encodeURIComponent('运动会举报 '+(room.backendId??'cloudflare')+' '+room.code)}`}>举报 / 联系站长</a> · 请提供服务器、房间码、消息编号和原因，勿发送密码或令牌。</p></details>
       <div className="chat-personal"><span>{community.name ?? room.players.find(player => player.id === room.selfId)?.name ?? room.spectators?.find(viewer => viewer.id === room.selfId)?.name}</span>{room.role !== 'spectator' && <button disabled={room.phase === 'lobby'} title={room.phase === 'lobby' ? '开局后可修改一次昵称' : undefined} onClick={onRename}>修改昵称 · {community.renameRemaining ?? room.renameRemaining ?? 1} 次</button>}</div>
       <div className="chat-messages" ref={list} role="log" aria-label="聊天记录" aria-live="polite" aria-relevant="additions" onScroll={() => { const el = list.current; bottom.current = !el || el.scrollHeight - el.scrollTop - el.clientHeight < 36; if (bottom.current) { setNewBelow(false); markRead(); } }}>
-        {community.messages.length === 0 && <p className="chat-empty">和房间里的朋友打个招呼吧。</p>}
+        {community.messages.length === 0 && <p className="chat-empty">暂无消息</p>}
         {community.messages.map(message => <article key={message.id} className={`chat-message ${message.kind === 'system' ? 'is-system' : ''} ${message.senderId === room.selfId ? 'is-self' : ''}`} data-message-id={message.id}>
           <div><strong>{message.kind === 'system' ? '系统' : message.senderName}</strong><time dateTime={new Date(message.sentAt).toISOString()}>{new Date(message.sentAt).toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })} · #{message.id}</time></div><p>{message.text}</p>
         </article>)}
@@ -124,7 +130,7 @@ export function RenameForm({ room, community, connection, onSuccess }: { room: R
   const [name, setName] = useState(current), [busy, setBusy] = useState(false), [error, setError] = useState('');
   const request = useRef<{ requestId: string; name: string } | null>(null);
   const remaining = community.renameRemaining ?? room.renameRemaining ?? 1;
-  return <form className="rename-form" onSubmit={async event => {
+  return <form className="rename-form" data-unsaved={name !== current} data-submitting={busy} onSubmit={async event => {
     event.preventDefault(); if (busy || !remaining || !connection?.rename) return;
     setBusy(true); setError('');
     const trimmed = name.trim();

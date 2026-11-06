@@ -9,9 +9,10 @@ export function RoomPauseControl({ room, busy, act, compact = false }: { room: R
   const descriptionId = useId();
   const paused = !!room.pause;
   const host = room.role !== 'spectator' && room.hostId === room.selfId;
+  if (room.phase === 'lobby') return null;
   if (!host) return compact ? null : <span className="room-pause-hint" title="房主可以暂停选卡与比赛，恢复后接着进行">Ⅱ {paused ? '比赛已暂停' : '房主可暂停'}</span>;
   return <div className={`room-pause-actions${compact ? ' is-compact' : ''}`}>
-    <button type="button" className={`room-pause-control${compact ? ' race-icon-button' : ''}${paused ? ' is-paused' : ''}`} aria-label={paused ? '恢复比赛' : '暂停比赛'} aria-describedby={descriptionId} aria-pressed={paused} disabled={busy || !canPausePhase(room.phase) || (!!room.continuation && room.continuation.stage !== 'playing')} title={room.phase === 'lobby' ? '开局后可暂停选卡与比赛' : paused ? '从当前选卡、技能选择或动画继续' : '暂停所有人的选卡、操作与动画'} onClick={() => act({ type: paused ? 'resume' : 'pause' })}><Icon kind={paused ? 'play' : 'pause'} />{!compact && (paused ? '恢复比赛' : '暂停比赛')}</button>
+    <button type="button" className={`room-pause-control${compact ? ' race-icon-button' : ''}${paused ? ' is-paused' : ''}`} aria-label={paused ? '恢复比赛' : '暂停比赛'} aria-describedby={descriptionId} aria-pressed={paused} disabled={busy || !canPausePhase(room.phase) || (!!room.continuation && room.continuation.stage !== 'playing')} title={paused ? '从当前选卡、技能选择或动画继续' : '暂停所有人的选卡、操作与动画'} onClick={() => act({ type: paused ? 'resume' : 'pause' })}><Icon kind={paused ? 'play' : 'pause'} />{!compact && (paused ? '恢复比赛' : '暂停比赛')}</button>
     <span id={descriptionId} className={compact ? 'sr-only' : 'room-pause-description'}><span>操作、计时与动画{paused ? '已暂停' : '将暂停'}</span><span>暂停后离线保留 {room.mode === 'practice' ? '10 分钟' : room.mode === 'ai' ? '30 分钟' : '4 小时'}</span></span>
   </div>;
 }

@@ -50,7 +50,7 @@ export function CompetitionFields({config,onChange,disabled=false,customDraft,on
       const preset=PRESETS[presetId],maps=new Set(preset.rotation).size;
       return <label key={presetId} className={`preset-option${c.preset===presetId?' is-selected':''}`}>
         <input type="radio" name={`${id}-preset`} aria-label={`${preset.name}，${preset.raceCount} 场，${maps} 张地图`} checked={c.preset===presetId} onChange={()=>choosePreset(presetId)} />
-        <span><strong>{preset.name}</strong><small>{preset.raceCount} 场 · {maps} 图{presetId==='extended'?' · 非官方':''}</small></span>
+        <TrackThumbnail id={preset.rotation[0]!} /><span><strong>{preset.name}</strong><small>{preset.raceCount} 场 · {maps} 图{presetId==='extended'?' · 非官方':''}</small></span>
       </label>;
     })}<label className={`preset-option${c.preset==='custom'?' is-selected':''}`}>
       <input type="radio" name={`${id}-preset`} aria-label="自定义积分赛" checked={c.preset==='custom'} onChange={()=>change({...c,...customDraft,preset:'custom'})} />
@@ -68,11 +68,11 @@ export function CompetitionFields({config,onChange,disabled=false,customDraft,on
         <TrackThumbnail id={map} /><strong>{TRACK_CATALOG[map].name}</strong><span className="map-card-meta"><span id={`${id}-${map}-state`}>{count?`✓ 已添加 ×${count}`:'+ 添加'}</span>{tag&&<small>{tag}</small>}</span>
       </button>;
     })}</div>
-    <div className="rotation-heading"><h3>地图顺序</h3><span>依序循环 · 可重复添加</span></div>
+    {c.preset==='custom'&&<><div className="rotation-heading"><h3>地图顺序</h3></div>
     <ol className="rotation-list" aria-label="地图轮换顺序">{c.rotation.map((map,i)=><li key={i}>
       <span><b>{i+1}</b>{TRACK_CATALOG[map].name}{!TRACK_CATALOG[map].available&&'（待开放）'}</span>
       <div><button type="button" aria-label={`上移第${i+1}项`} disabled={disabled||i===0} onClick={()=>reorder(i,-1)}>↑</button><button type="button" aria-label={`下移第${i+1}项`} disabled={disabled||i===c.rotation.length-1} onClick={()=>reorder(i,1)}>↓</button><button type="button" aria-label={`移除第${i+1}项`} onClick={()=>custom({rotation:c.rotation.filter((_,j)=>i!==j)})}>×</button></div>
-    </li>)}</ol>
+    </li>)}</ol></>}
     {!!blocked.length&&<p className="competition-limitation" role="note">整局禁用：{blocked.map(value=>CHARACTERS.find(character=>character.id===value)?.nameZh??value).join('、')}</p>}
   </fieldset></>;
 }
@@ -83,7 +83,7 @@ export function SpecialEventFields({config,onChange,disabled=false}:FieldsProps)
   const eventRounds=[...new Set([...Array.from({length:c.raceCount},(_,i)=>i+1),...c.thrillingThirds.rounds])].sort((a,b)=>a-b);
   function change(thrillingThirds:CompetitionConfig['thrillingThirds']){if(!disabled)onChange({...config,competition:{...c,preset:'custom',thrillingThirds}});}
   return <fieldset className="special-event-settings" disabled={disabled}><legend>特殊赛事 <span className="config-tag">非官方 · 网页适配</span></legend>
-    <label className="event-toggle"><input type="checkbox" aria-label="启用特殊赛事" checked={c.thrillingThirds.enabled} onChange={event=>change({enabled:event.target.checked,rounds:event.target.checked?[3]:[]})} /><strong>启用特殊赛事</strong><span>Thrilling Thirds</span></label>
+    <label className="event-toggle"><input type="checkbox" aria-label="启用特殊赛事" checked={c.thrillingThirds.enabled} onChange={event=>change({enabled:event.target.checked,rounds:event.target.checked?[3]:[]})} /><strong>启用特殊赛事</strong></label>
     {c.thrillingThirds.enabled&&<p className="event-round-label">适用场次</p>}
     {c.thrillingThirds.enabled&&<div className="event-rounds" role="group" aria-label="特殊赛事适用场次">{eventRounds.map(round=><label key={round} className={round>c.raceCount?'event-round-outside':undefined}><input type="checkbox" checked={c.thrillingThirds.rounds.includes(round)} onChange={event=>change({enabled:true,rounds:event.target.checked?[...c.thrillingThirds.rounds,round].sort((a,b)=>a-b):c.thrillingThirds.rounds.filter(n=>n!==round)})} />第 {round} 场{round>c.raceCount&&`（超出当前 ${c.raceCount} 场）`}</label>)}</div>}
     {c.thrillingThirds.enabled&&!c.thrillingThirds.rounds.length&&<p className="form-error competition-error" role="alert">请选择至少一场特殊赛事。</p>}

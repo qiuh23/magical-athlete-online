@@ -9,5 +9,6 @@ import './home-entry.css';
 import './character-cards.css';
 import './room-experience.css';
 import './race-ui.css';
+import './visual-first.css';
 
 createRoot(document.getElementById('root')!).render(<React.StrictMode><DeploymentNotice /><App /></React.StrictMode>);

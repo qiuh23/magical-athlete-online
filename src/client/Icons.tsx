@@ -1,6 +1,9 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
 const paths = {
+  back: <><path d="M21 12H4m6-7-7 7 7 7" /></>,
+  refresh: <><path d="M20 8a8 8 0 1 0 0 8M20 3v5h-5" /></>,
+  eye: <><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7Z" /><circle cx="12" cy="12" r="3" /></>,
   dice: <><rect x="3" y="3" width="18" height="18" rx="4" /><circle cx="8" cy="8" r="1" /><circle cx="16" cy="8" r="1" /><circle cx="12" cy="12" r="1" /><circle cx="8" cy="16" r="1" /><circle cx="16" cy="16" r="1" /></>,
   flag: <><path d="M5 22V3m0 1c5-5 9 5 15 0v11c-6 5-10-5-15 0" /><path d="M10 3v10m5-8v10" /></>,
   copy: <><rect x="8" y="8" width="12" height="13" rx="2" /><path d="M15 4H5v12" /></>,
