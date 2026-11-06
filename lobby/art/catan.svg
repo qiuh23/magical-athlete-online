@@ -1,53 +1,79 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360" fill="none">
-<defs><linearGradient id="sea" x2="640" y2="360" gradientUnits="userSpaceOnUse"><stop stop-color="#daebe3"/><stop offset="1" stop-color="#9bc4b7"/></linearGradient><linearGradient id="land" y2="1"><stop stop-color="#faf2d6"/><stop offset="1" stop-color="#e4cb94"/></linearGradient></defs>
-<path fill="url(#sea)" d="M0 0h640v360H0z"/><circle cx="550" cy="60" r="100" fill="#edf3dc" opacity=".55"/>
-<g stroke="#eaf4e9" stroke-width="2" opacity=".8"><path d="M20 245q25-10 50 0t50 0M494 264q25-10 50 0t50 0M30 104q25-10 50 0M492 130q25-10 50 0t50 0M426 325q25-10 50 0"/></g>
-<ellipse cx="316" cy="234" rx="225" ry="81" fill="#4e806e" opacity=".19"/>
-<g transform="translate(320 174) scale(1 .66)">
-<path d="M-235-65-177-167-60-167 0-202 116-202 177-167 235-65 235 65 177 167 60 167 0 202-116 202-177 167-235 65Z" fill="#b39965" transform="translate(0 13)"/>
-<path d="M-235-65-177-167-60-167 0-202 116-202 177-167 235-65 235 65 177 167 60 167 0 202-116 202-177 167-235 65Z" fill="url(#land)"/>
-<polygon points="-38.9,-112.0 -77.0,-90.0 -115.1,-112.0 -115.1,-156.0 -77.0,-178.0 -38.9,-156.0" fill="#91a89b" stroke="#f7eac7" stroke-width="3"/>
-<circle cx="-77.0" cy="-134" r="11" fill="#f7e9c8" stroke="#a38550"/><circle cx="-77.0" cy="-134" r="2.5" fill="#a66e3b"/>
-<polygon points="38.1,-112.0 0.0,-90.0 -38.1,-112.0 -38.1,-156.0 -0.0,-178.0 38.1,-156.0" fill="#e6d59a" stroke="#f7eac7" stroke-width="3"/>
-<path d="M-17.0 -122l17-33 20 33Z" fill="#6d8177"/><path d="M-6.0 -139l6-16 9 16Z" fill="#e4e7d5"/>
-<polygon points="115.1,-112.0 77.0,-90.0 38.9,-112.0 38.9,-156.0 77.0,-178.0 115.1,-156.0" fill="#73986a" stroke="#f7eac7" stroke-width="3"/>
-<path d="M63.0 -122l14-30 14 30Z" fill="#426c50"/><path d="M78.0 -119l12-25 12 25Z" fill="#507d58"/>
-<polygon points="-77.4,-45.0 -115.5,-23.0 -153.6,-45.0 -153.6,-89.0 -115.5,-111.0 -77.4,-89.0" fill="#e2bd64" stroke="#f7eac7" stroke-width="3"/>
-<path d="M-132.5 -55l17-33 20 33Z" fill="#6d8177"/><path d="M-121.5 -72l6-16 9 16Z" fill="#e4e7d5"/>
-<polygon points="-0.4,-45.0 -38.5,-23.0 -76.6,-45.0 -76.6,-89.0 -38.5,-111.0 -0.4,-89.0" fill="#9fb57e" stroke="#f7eac7" stroke-width="3"/>
-<circle cx="-38.5" cy="-67" r="11" fill="#f7e9c8" stroke="#a38550"/><circle cx="-38.5" cy="-67" r="2.5" fill="#a66e3b"/>
-<polygon points="76.6,-45.0 38.5,-23.0 0.4,-45.0 0.4,-89.0 38.5,-111.0 76.6,-89.0" fill="#bc7c57" stroke="#f7eac7" stroke-width="3"/>
-<path d="M24.5 -55l14-30 14 30Z" fill="#426c50"/><path d="M39.5 -52l12-25 12 25Z" fill="#507d58"/>
-<polygon points="153.6,-45.0 115.5,-23.0 77.4,-45.0 77.4,-89.0 115.5,-111.0 153.6,-89.0" fill="#91a89b" stroke="#f7eac7" stroke-width="3"/>
-<path d="M98.5 -55l17-33 20 33Z" fill="#6d8177"/><path d="M109.5 -72l6-16 9 16Z" fill="#e4e7d5"/>
-<polygon points="-115.9,22.0 -154.0,44.0 -192.1,22.0 -192.1,-22.0 -154.0,-44.0 -115.9,-22.0" fill="#91a89b" stroke="#f7eac7" stroke-width="3"/>
-<circle cx="-154.0" cy="0" r="11" fill="#f7e9c8" stroke="#a38550"/><circle cx="-154.0" cy="0" r="2.5" fill="#a66e3b"/>
-<polygon points="-38.9,22.0 -77.0,44.0 -115.1,22.0 -115.1,-22.0 -77.0,-44.0 -38.9,-22.0" fill="#e6d59a" stroke="#f7eac7" stroke-width="3"/>
-<circle cx="-77.0" cy="0" r="11" fill="#f7e9c8" stroke="#a38550"/><circle cx="-77.0" cy="0" r="2.5" fill="#a66e3b"/>
-<polygon points="38.1,22.0 0.0,44.0 -38.1,22.0 -38.1,-22.0 -0.0,-44.0 38.1,-22.0" fill="#73986a" stroke="#f7eac7" stroke-width="3"/>
-<path d="M-14.0 12l14-30 14 30Z" fill="#426c50"/><path d="M1.0 15l12-25 12 25Z" fill="#507d58"/>
-<polygon points="115.1,22.0 77.0,44.0 38.9,22.0 38.9,-22.0 77.0,-44.0 115.1,-22.0" fill="#e2bd64" stroke="#f7eac7" stroke-width="3"/>
-<circle cx="77.0" cy="0" r="11" fill="#f7e9c8" stroke="#a38550"/><circle cx="77.0" cy="0" r="2.5" fill="#a66e3b"/>
-<polygon points="192.1,22.0 154.0,44.0 115.9,22.0 115.9,-22.0 154.0,-44.0 192.1,-22.0" fill="#9fb57e" stroke="#f7eac7" stroke-width="3"/>
-<circle cx="154.0" cy="0" r="11" fill="#f7e9c8" stroke="#a38550"/><circle cx="154.0" cy="0" r="2.5" fill="#a66e3b"/>
-<polygon points="-77.4,89.0 -115.5,111.0 -153.6,89.0 -153.6,45.0 -115.5,23.0 -77.4,45.0" fill="#9fb57e" stroke="#f7eac7" stroke-width="3"/>
-<path d="M-132.5 79l17-33 20 33Z" fill="#6d8177"/><path d="M-121.5 62l6-16 9 16Z" fill="#e4e7d5"/>
-<polygon points="-0.4,89.0 -38.5,111.0 -76.6,89.0 -76.6,45.0 -38.5,23.0 -0.4,45.0" fill="#bc7c57" stroke="#f7eac7" stroke-width="3"/>
-<path d="M-52.5 79l14-30 14 30Z" fill="#426c50"/><path d="M-37.5 82l12-25 12 25Z" fill="#507d58"/>
-<polygon points="76.6,89.0 38.5,111.0 0.4,89.0 0.4,45.0 38.5,23.0 76.6,45.0" fill="#91a89b" stroke="#f7eac7" stroke-width="3"/>
-<circle cx="38.5" cy="67" r="11" fill="#f7e9c8" stroke="#a38550"/><circle cx="38.5" cy="67" r="2.5" fill="#a66e3b"/>
-<polygon points="153.6,89.0 115.5,111.0 77.4,89.0 77.4,45.0 115.5,23.0 153.6,45.0" fill="#e6d59a" stroke="#f7eac7" stroke-width="3"/>
-<path d="M98.5 79l17-33 20 33Z" fill="#6d8177"/><path d="M109.5 62l6-16 9 16Z" fill="#e4e7d5"/>
-<polygon points="-38.9,156.0 -77.0,178.0 -115.1,156.0 -115.1,112.0 -77.0,90.0 -38.9,112.0" fill="#73986a" stroke="#f7eac7" stroke-width="3"/>
-<path d="M-91.0 146l14-30 14 30Z" fill="#426c50"/><path d="M-76.0 149l12-25 12 25Z" fill="#507d58"/>
-<polygon points="38.1,156.0 0.0,178.0 -38.1,156.0 -38.1,112.0 -0.0,90.0 38.1,112.0" fill="#e2bd64" stroke="#f7eac7" stroke-width="3"/>
-<path d="M-17.0 146l17-33 20 33Z" fill="#6d8177"/><path d="M-6.0 129l6-16 9 16Z" fill="#e4e7d5"/>
-<polygon points="115.1,156.0 77.0,178.0 38.9,156.0 38.9,112.0 77.0,90.0 115.1,112.0" fill="#9fb57e" stroke="#f7eac7" stroke-width="3"/>
-<circle cx="77.0" cy="134" r="11" fill="#f7e9c8" stroke="#a38550"/><circle cx="77.0" cy="134" r="2.5" fill="#a66e3b"/>
-</g>
-<g stroke-linecap="round" stroke-linejoin="round"><path d="m199 193 59 22 63-23 63 23" stroke="#734b31" stroke-width="9"/><path d="m199 190 59 22 63-23 63 23" stroke="#bf7c49" stroke-width="6"/>
-<g transform="translate(258 203)"><path d="M-15 0 0-15 16 0V20H-15Z" fill="#b8653c"/><path d="M-20 0 0-21 21 0" stroke="#874b33" stroke-width="5"/><path d="M-14 2 1-12V20H-14" fill="#d9925b"/><path d="M-3 10H4v10H-3" fill="#704c31"/></g>
-<g transform="translate(382 206)"><path d="M-16-4h32v28h-32z" fill="#f2dc9f"/><path d="m-21-4 21-19 21 19Z" fill="#617f62"/><path d="M-6 11H3v13h-9" fill="#64765a"/><path d="M11-24h15v48H11Z" fill="#d7bb7a"/><path d="M8-24 19-36 30-24Z" fill="#617f62"/></g></g>
-<g transform="translate(515 285) rotate(10)"><ellipse cy="19" rx="40" ry="10" fill="#507e6a" opacity=".2"/><rect x="-31" y="-29" width="60" height="43" rx="8" fill="#fff8df" stroke="#b4b995"/><g fill="#51755c"><circle cx="-16" cy="-17" r="4"/><circle cy="-7" r="4"/><circle cx="16" cy="3" r="4"/></g></g>
-<g transform="translate(92 285) rotate(-13)"><path d="M-24-16h50v31h-50z" fill="#f2d489" stroke="#b39256"/><path d="m-19-9 40 0m-40 8h40m-40 8h40" stroke="#c2a160"/><path d="M-15-20h50V9h-50Z" fill="#edf1d3" stroke="#9ba97f"/><path d="m-5 2 10-17 10 17Z" fill="#76956d"/></g>
+<title>卡坦岛：六角小岛上的建造与交易</title>
+<desc>同一六角网格与投影中的十九块地形：森林木材、红砖丘陵、羊群牧场、金色麦田、灰色矿山。数字牌位于各地块内，道路贴合边线，房屋落在交点，三个码头标有三比一。原创大厅插图，不是游戏内地图。</desc>
+<defs>
+  <linearGradient id="sea" x2="640" y2="360" gradientUnits="userSpaceOnUse"><stop stop-color="#d2e9e3"/><stop offset="1" stop-color="#92beb4"/></linearGradient>
+  <g id="wood"><path d="M-10 3V18M9 0v19" stroke="#675f3c" stroke-width="4"/><path d="M-27 7-10-24 7 7Z" fill="#365e46"/><path d="M-7 10 10-19 27 10Z" fill="#477655"/><path d="M-23 0-10-24 3 0Z" fill="#518466"/></g>
+  <g id="brick" stroke="#a45941" stroke-width="1.4" stroke-linejoin="round"><path d="M-24 4h25v13h-25Z" fill="#f2be8e"/><path d="M3 4h23v13H3Z" fill="#d88a61"/><path d="M-13-11h26V2h-26Z" fill="#edaa7d"/><path d="m-13-11 8-7h26l-8 7Z" fill="#f5c49a"/><path d="m13-11 8-7v13l-8 7Z" fill="#ae6046"/></g>
+  <g id="sheep"><path d="M-13 9v10M0 11v8M13 6v12" stroke="#5b6b4c" stroke-width="3.5" stroke-linecap="round"/><path d="M-22 0c-4-8 3-16 11-13 3-10 17-9 20-2 11-4 18 5 13 12 4 10-6 17-13 13-8 6-17 1-18-3-10 4-19-1-17-7Z" fill="#fff6db"/><ellipse cx="18" cy="1" rx="8" ry="10" fill="#5e7050"/><path d="m15-6-5-4m14 4 5-3" stroke="#5e7050" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="-1" r="1.3" fill="#fff8dd"/></g>
+  <g id="wheat" stroke="#8b6c2e" stroke-width="1.8" stroke-linecap="round"><path d="M-15 19V-13M0 18v-35M15 19V-13"/><g fill="#f9e5a0" stroke="#bd913d" stroke-width=".8"><path d="M0-21C-10-13-8-7 0-7 8-7 10-13 0-21Zm-2 16C-16-13-17-3-2 2Zm4 0C16-13 17-3 2 2ZM-2 6C-16-2-17 8-2 13Zm4 0C16-2 17 8 2 13ZM-15-17c-8 6-6 11 0 11 6 0 8-5 0-11Zm-2 13c-12-7-13 2 0 6Zm4 0c12-7 13 2 0 6Zm28-13c-8 6-6 11 0 11 6 0 8-5 0-11ZM13-4C1-11 0-2 13 2Zm4 0c12-7 13 2 0 6Z"/></g></g>
+  <g id="ore" stroke="#657f7c" stroke-width="1" stroke-linejoin="round"><path d="m-28 13 14-28 15 28Z" fill="#6e8784"/><path d="m-8 14 16-37 22 37Z" fill="#e0e3d5"/><path d="M8-23 8 14h22Z" fill="#899d99"/><path d="m-14-15 4 9h-9Z" fill="#b6c9bc"/><path d="m-14 14 8-10 11 10Z" fill="#526f6c"/></g>
+  <g id="desert"><path d="M-28 13Q-13-5 5 7T30 10M-19-4Q-4-16 17-6" stroke="#be9d62" stroke-width="3" stroke-linecap="round"/></g>
+</defs>
+<path fill="url(#sea)" d="M0 0h640v360H0z"/>
+<circle cx="562" cy="48" r="94" fill="#edf3dc" opacity=".35"/>
+<g stroke="#edf8ed" stroke-width="2" stroke-linecap="round" opacity=".72"><path d="M24 120q22-9 44 0m468-8q28-10 55 0M30 251q25-10 50 0m448-18q25-10 50 0M222 323q27-8 54 0m94-2q24-8 48 0"/></g>
+<ellipse cx="326" cy="242" rx="211" ry="63" fill="#426c60" opacity=".16"/>
+<g transform="translate(320 168) scale(1 .68)">
+    <polygon points="-114.32 -110 -114.32 -154 -76.21 -176 -38.11 -154 0 -176 38.11 -154 76.21 -176 114.32 -154 114.32 -110 152.42 -88 152.42 -44 190.53 -22 190.53 22 152.42 44 152.42 88 114.32 110 114.32 154 76.21 176 38.11 154 0 176 -38.11 154 -76.21 176 -114.32 154 -114.32 110 -152.42 88 -152.42 44 -190.53 22 -190.53 -22 -152.42 -44 -152.42 -88" fill="#a78c5b" stroke="#a78c5b" stroke-width="22" stroke-linejoin="round" transform="translate(0 13)"/>
+    <polygon points="-114.32 -110 -114.32 -154 -76.21 -176 -38.11 -154 0 -176 38.11 -154 76.21 -176 114.32 -154 114.32 -110 152.42 -88 152.42 -44 190.53 -22 190.53 22 152.42 44 152.42 88 114.32 110 114.32 154 76.21 176 38.11 154 0 176 -38.11 154 -76.21 176 -114.32 154 -114.32 110 -152.42 88 -152.42 44 -190.53 22 -190.53 -22 -152.42 -44 -152.42 -88" fill="#f3ddb0" stroke="#f3ddb0" stroke-width="22" stroke-linejoin="round"/>
+    <g data-resource="ore" data-hex="0,-2"><polygon points="-38.11 -154 -38.11 -110 -76.21 -88 -114.32 -110 -114.32 -154 -76.21 -176" fill="#a5b7b4" stroke="#f6e8c6" stroke-width="2.4" stroke-linejoin="round"/><use href="#ore" transform="translate(-76.21 -142)"/><g transform="translate(-76.21 -112)"><circle r="12" fill="#fff2d4" stroke="#a18658" stroke-width="1"/><text y="5" text-anchor="middle" font-family="Georgia,serif" font-weight="bold" font-size="17" fill="#4a4937">10</text></g></g>
+<g data-resource="sheep" data-hex="1,-2"><polygon points="38.11 -154 38.11 -110 0 -88 -38.11 -110 -38.11 -154 0 -176" fill="#b2c98b" stroke="#f6e8c6" stroke-width="2.4" stroke-linejoin="round"/><use href="#sheep" transform="translate(0 -142)"/><g transform="translate(0 -112)"><circle r="12" fill="#fff2d4" stroke="#a18658" stroke-width="1"/><text y="5" text-anchor="middle" font-family="Georgia,serif" font-weight="bold" font-size="17" fill="#4a4937">2</text></g></g>
+<g data-resource="wood" data-hex="2,-2"><polygon points="114.32 -154 114.32 -110 76.21 -88 38.11 -110 38.11 -154 76.21 -176" fill="#719b7b" stroke="#f6e8c6" stroke-width="2.4" stroke-linejoin="round"/><use href="#wood" transform="translate(76.21 -142)"/><g transform="translate(76.21 -112)"><circle r="12" fill="#fff2d4" stroke="#a18658" stroke-width="1"/><text y="5" text-anchor="middle" font-family="Georgia,serif" font-weight="bold" font-size="17" fill="#4a4937">9</text></g></g>
+<g data-resource="wheat" data-hex="-1,-1"><polygon points="-76.21 -88 -76.21 -44 -114.32 -22 -152.42 -44 -152.42 -88 -114.32 -110" fill="#e1c36c" stroke="#f6e8c6" stroke-width="2.4" stroke-linejoin="round"/><use href="#wheat" transform="translate(-114.32 -76)"/><g transform="translate(-114.32 -46)"><circle r="12" fill="#fff2d4" stroke="#a18658" stroke-width="1"/><text y="5" text-anchor="middle" font-family="Georgia,serif" font-weight="bold" font-size="17" fill="#4a4937">12</text></g></g>
+<g data-resource="wood" data-hex="0,-1"><polygon points="0 -88 0 -44 -38.11 -22 -76.21 -44 -76.21 -88 -38.11 -110" fill="#719b7b" stroke="#f6e8c6" stroke-width="2.4" stroke-linejoin="round"/><use href="#wood" transform="translate(-38.11 -76)"/><g transform="translate(-38.11 -46)"><circle r="12" fill="#fff2d4" stroke="#a18658" stroke-width="1"/><text y="5" text-anchor="middle" font-family="Georgia,serif" font-weight="bold" font-size="17" fill="#a34230">6</text></g></g>
+<g data-resource="brick" data-hex="1,-1"><polygon points="76.21 -88 76.21 -44 38.11 -22 0 -44 0 -88 38.11 -110" fill="#cd9270" stroke="#f6e8c6" stroke-width="2.4" stroke-linejoin="round"/><use href="#brick" transform="translate(38.11 -76)"/><g transform="translate(38.11 -46)"><circle r="12" fill="#fff2d4" stroke="#a18658" stroke-width="1"/><text y="5" text-anchor="middle" font-family="Georgia,serif" font-weight="bold" font-size="17" fill="#4a4937">4</text></g></g>
+<g data-resource="wheat" data-hex="2,-1"><polygon points="152.42 -88 152.42 -44 114.32 -22 76.21 -44 76.21 -88 114.32 -110" fill="#e1c36c" stroke="#f6e8c6" stroke-width="2.4" stroke-linejoin="round"/><use href="#wheat" transform="translate(114.32 -76)"/><g transform="translate(114.32 -46)"><circle r="12" fill="#fff2d4" stroke="#a18658" stroke-width="1"/><text y="5" text-anchor="middle" font-family="Georgia,serif" font-weight="bold" font-size="17" fill="#4a4937">10</text></g></g>
+<g data-resource="brick" data-hex="-2,0"><polygon points="-114.32 -22 -114.32 22 -152.42 44 -190.53 22 -190.53 -22 -152.42 -44" fill="#cd9270" stroke="#f6e8c6" stroke-width="2.4" stroke-linejoin="round"/><use href="#brick" transform="translate(-152.42 -10)"/><g transform="translate(-152.42 20)"><circle r="12" fill="#fff2d4" stroke="#a18658" stroke-width="1"/><text y="5" text-anchor="middle" font-family="Georgia,serif" font-weight="bold" font-size="17" fill="#4a4937">9</text></g></g>
+<g data-resource="sheep" data-hex="-1,0"><polygon points="-38.11 -22 -38.11 22 -76.21 44 -114.32 22 -114.32 -22 -76.21 -44" fill="#b2c98b" stroke="#f6e8c6" stroke-width="2.4" stroke-linejoin="round"/><use href="#sheep" transform="translate(-76.21 -10)"/><g transform="translate(-76.21 20)"><circle r="12" fill="#fff2d4" stroke="#a18658" stroke-width="1"/><text y="5" text-anchor="middle" font-family="Georgia,serif" font-weight="bold" font-size="17" fill="#4a4937">11</text></g></g>
+<g data-resource="desert" data-hex="0,0"><polygon points="38.11 -22 38.11 22 0 44 -38.11 22 -38.11 -22 0 -44" fill="#e4cc99" stroke="#f6e8c6" stroke-width="2.4" stroke-linejoin="round"/><use href="#desert" transform="translate(0 -10)"/></g>
+<g data-resource="ore" data-hex="1,0"><polygon points="114.32 -22 114.32 22 76.21 44 38.11 22 38.11 -22 76.21 -44" fill="#a5b7b4" stroke="#f6e8c6" stroke-width="2.4" stroke-linejoin="round"/><use href="#ore" transform="translate(76.21 -10)"/><g transform="translate(76.21 20)"><circle r="12" fill="#fff2d4" stroke="#a18658" stroke-width="1"/><text y="5" text-anchor="middle" font-family="Georgia,serif" font-weight="bold" font-size="17" fill="#a34230">8</text></g></g>
+<g data-resource="wood" data-hex="2,0"><polygon points="190.53 -22 190.53 22 152.42 44 114.32 22 114.32 -22 152.42 -44" fill="#719b7b" stroke="#f6e8c6" stroke-width="2.4" stroke-linejoin="round"/><use href="#wood" transform="translate(152.42 -10)"/><g transform="translate(152.42 20)"><circle r="12" fill="#fff2d4" stroke="#a18658" stroke-width="1"/><text y="5" text-anchor="middle" font-family="Georgia,serif" font-weight="bold" font-size="17" fill="#4a4937">5</text></g></g>
+<g data-resource="wheat" data-hex="-2,1"><polygon points="-76.21 44 -76.21 88 -114.32 110 -152.42 88 -152.42 44 -114.32 22" fill="#e1c36c" stroke="#f6e8c6" stroke-width="2.4" stroke-linejoin="round"/><use href="#wheat" transform="translate(-114.32 56)"/><g transform="translate(-114.32 86)"><circle r="12" fill="#fff2d4" stroke="#a18658" stroke-width="1"/><text y="5" text-anchor="middle" font-family="Georgia,serif" font-weight="bold" font-size="17" fill="#a34230">6</text></g></g>
+<g data-resource="sheep" data-hex="-1,1"><polygon points="0 44 0 88 -38.11 110 -76.21 88 -76.21 44 -38.11 22" fill="#b2c98b" stroke="#f6e8c6" stroke-width="2.4" stroke-linejoin="round"/><use href="#sheep" transform="translate(-38.11 56)"/><g transform="translate(-38.11 86)"><circle r="12" fill="#fff2d4" stroke="#a18658" stroke-width="1"/><text y="5" text-anchor="middle" font-family="Georgia,serif" font-weight="bold" font-size="17" fill="#4a4937">3</text></g></g>
+<g data-resource="brick" data-hex="0,1"><polygon points="76.21 44 76.21 88 38.11 110 0 88 0 44 38.11 22" fill="#cd9270" stroke="#f6e8c6" stroke-width="2.4" stroke-linejoin="round"/><use href="#brick" transform="translate(38.11 56)"/><g transform="translate(38.11 86)"><circle r="12" fill="#fff2d4" stroke="#a18658" stroke-width="1"/><text y="5" text-anchor="middle" font-family="Georgia,serif" font-weight="bold" font-size="17" fill="#a34230">8</text></g></g>
+<g data-resource="sheep" data-hex="1,1"><polygon points="152.42 44 152.42 88 114.32 110 76.21 88 76.21 44 114.32 22" fill="#b2c98b" stroke="#f6e8c6" stroke-width="2.4" stroke-linejoin="round"/><use href="#sheep" transform="translate(114.32 56)"/><g transform="translate(114.32 86)"><circle r="12" fill="#fff2d4" stroke="#a18658" stroke-width="1"/><text y="5" text-anchor="middle" font-family="Georgia,serif" font-weight="bold" font-size="17" fill="#4a4937">4</text></g></g>
+<g data-resource="ore" data-hex="-2,2"><polygon points="-38.11 110 -38.11 154 -76.21 176 -114.32 154 -114.32 110 -76.21 88" fill="#a5b7b4" stroke="#f6e8c6" stroke-width="2.4" stroke-linejoin="round"/><use href="#ore" transform="translate(-76.21 122)"/><g transform="translate(-76.21 152)"><circle r="12" fill="#fff2d4" stroke="#a18658" stroke-width="1"/><text y="5" text-anchor="middle" font-family="Georgia,serif" font-weight="bold" font-size="17" fill="#4a4937">3</text></g></g>
+<g data-resource="wood" data-hex="-1,2"><polygon points="38.11 110 38.11 154 0 176 -38.11 154 -38.11 110 0 88" fill="#719b7b" stroke="#f6e8c6" stroke-width="2.4" stroke-linejoin="round"/><use href="#wood" transform="translate(0 122)"/><g transform="translate(0 152)"><circle r="12" fill="#fff2d4" stroke="#a18658" stroke-width="1"/><text y="5" text-anchor="middle" font-family="Georgia,serif" font-weight="bold" font-size="17" fill="#4a4937">5</text></g></g>
+<g data-resource="wheat" data-hex="0,2"><polygon points="114.32 110 114.32 154 76.21 176 38.11 154 38.11 110 76.21 88" fill="#e1c36c" stroke="#f6e8c6" stroke-width="2.4" stroke-linejoin="round"/><use href="#wheat" transform="translate(76.21 122)"/><g transform="translate(76.21 152)"><circle r="12" fill="#fff2d4" stroke="#a18658" stroke-width="1"/><text y="5" text-anchor="middle" font-family="Georgia,serif" font-weight="bold" font-size="17" fill="#4a4937">11</text></g></g>
+    <g data-port="3:1"><path d="M-19.05 -165 -23.98 -207.72" stroke="#597e75" stroke-width="12"/><path d="M-19.05 -165 -23.98 -207.72" stroke="#e5c591" stroke-width="8"/><g transform="translate(-23.98 -207.72)"><circle r="19" fill="#f7e6bf" stroke="#8c9e86" stroke-width="1.8"/><text y="5" font-family="Georgia,serif" font-weight="bold" font-size="16" text-anchor="middle" fill="#3a6056">3:1</text></g></g>
+<g data-port="3:1"><path d="M-171.47 33 -213.7 41.13" stroke="#597e75" stroke-width="12"/><path d="M-171.47 33 -213.7 41.13" stroke="#e5c591" stroke-width="8"/><g transform="translate(-213.7 41.13)"><circle r="19" fill="#f7e6bf" stroke="#8c9e86" stroke-width="1.8"/><text y="5" font-family="Georgia,serif" font-weight="bold" font-size="16" text-anchor="middle" fill="#3a6056">3:1</text></g></g>
+<g data-port="3:1"><path d="M-57.16 165 -71.23 205.63" stroke="#597e75" stroke-width="12"/><path d="M-57.16 165 -71.23 205.63" stroke="#e5c591" stroke-width="8"/><g transform="translate(-71.23 205.63)"><circle r="19" fill="#f7e6bf" stroke="#8c9e86" stroke-width="1.8"/><text y="5" font-family="Georgia,serif" font-weight="bold" font-size="16" text-anchor="middle" fill="#3a6056">3:1</text></g></g>
+    <g data-road="red" data-start="-38.11 110" data-end="-76.21 88"><path d="M-38.11 110 -76.21 88" stroke="#743e32" stroke-width="9" stroke-linecap="round"/><path d="M-38.11 110 -76.21 88" stroke="#db805c" stroke-width="5" stroke-linecap="round"/></g>
+<g data-road="red" data-start="-76.21 88" data-end="-76.21 44"><path d="M-76.21 88 -76.21 44" stroke="#743e32" stroke-width="9" stroke-linecap="round"/><path d="M-76.21 88 -76.21 44" stroke="#db805c" stroke-width="5" stroke-linecap="round"/></g>
+<g data-road="red" data-start="-76.21 44" data-end="-38.11 22"><path d="M-76.21 44 -38.11 22" stroke="#743e32" stroke-width="9" stroke-linecap="round"/><path d="M-76.21 44 -38.11 22" stroke="#db805c" stroke-width="5" stroke-linecap="round"/></g>
+<g data-road="red" data-start="-38.11 22" data-end="0 44"><path d="M-38.11 22 0 44" stroke="#743e32" stroke-width="9" stroke-linecap="round"/><path d="M-38.11 22 0 44" stroke="#db805c" stroke-width="5" stroke-linecap="round"/></g>
+<g data-road="blue" data-start="114.32 -22" data-end="114.32 22"><path d="M114.32 -22 114.32 22" stroke="#2c5668" stroke-width="9" stroke-linecap="round"/><path d="M114.32 -22 114.32 22" stroke="#72a9b7" stroke-width="5" stroke-linecap="round"/></g>
+<g data-road="blue" data-start="114.32 22" data-end="76.21 44"><path d="M114.32 22 76.21 44" stroke="#2c5668" stroke-width="9" stroke-linecap="round"/><path d="M114.32 22 76.21 44" stroke="#72a9b7" stroke-width="5" stroke-linecap="round"/></g>
+<g data-road="blue" data-start="76.21 44" data-end="38.11 22"><path d="M76.21 44 38.11 22" stroke="#2c5668" stroke-width="9" stroke-linecap="round"/><path d="M76.21 44 38.11 22" stroke="#72a9b7" stroke-width="5" stroke-linecap="round"/></g>
+  </g>
+<g data-building="blue" data-anchor="114.32 22">
+    <ellipse cx="434.32" cy="185.96" rx="17" ry="7" fill="#304c35" opacity=".16"/>
+    <path d="M424.32 177.52 444.32 177.52 444.32 188.4 424.32 188.4Z" fill="#2d4e5e"/>
+    <path d="M424.32 188.4 444.32 188.4 444.32 171.4 434.32 160.4 424.32 171.4Z" fill="#4e808e"/>
+    <path d="M444.32 188.4 444.32 177.52 444.32 160.52 444.32 171.4Z" fill="#315d70"/>
+    <path d="M421.32 172.76 434.32 158.76 434.32 145.16 421.32 159.16Z" fill="#91bdc4"/>
+    <path d="M434.32 158.76 447.32 172.76 447.32 159.16 434.32 145.16Z" fill="#2d4e5e"/>
+    <path d="M432.32 188.4 438.32 188.4 438.32 178.4 432.32 178.4Z" fill="#2d4e5e"/>
+  </g>
+<g data-building="red" data-anchor="0 44">
+    <ellipse cx="320" cy="200.92" rx="17" ry="7" fill="#304c35" opacity=".16"/>
+    <path d="M310 192.48 330 192.48 330 203.36 310 203.36Z" fill="#783c35"/>
+    <path d="M310 203.36 330 203.36 330 186.36 320 175.36 310 186.36Z" fill="#c9654d"/>
+    <path d="M330 203.36 330 192.48 330 175.48 330 186.36Z" fill="#9b4439"/>
+    <path d="M307 187.72 320 173.72 320 160.12 307 174.12Z" fill="#f3a078"/>
+    <path d="M320 173.72 333 187.72 333 174.12 320 160.12Z" fill="#783c35"/>
+    <path d="M318 203.36 324 203.36 324 193.36 318 193.36Z" fill="#783c35"/>
+  </g>
+<g data-building="red" data-anchor="-76.21 88">
+    <ellipse cx="243.79" cy="230.84" rx="17" ry="7" fill="#304c35" opacity=".16"/>
+    <path d="M233.79 222.4 253.79 222.4 253.79 233.28 233.79 233.28Z" fill="#783c35"/>
+    <path d="M233.79 233.28 253.79 233.28 253.79 216.28 243.79 205.28 233.79 216.28Z" fill="#c9654d"/>
+    <path d="M253.79 233.28 253.79 222.4 253.79 205.4 253.79 216.28Z" fill="#9b4439"/>
+    <path d="M230.79 217.64 243.79 203.64 243.79 190.04 230.79 204.04Z" fill="#f3a078"/>
+    <path d="M243.79 203.64 256.79 217.64 256.79 204.04 243.79 190.04Z" fill="#783c35"/>
+    <path d="M241.79 233.28 247.79 233.28 247.79 223.28 241.79 223.28Z" fill="#783c35"/>
+  </g>
+<g transform="translate(532 285) rotate(10)"><ellipse cy="18" rx="32" ry="10" fill="#426c60" opacity=".16"/><rect x="-25" y="-26" width="50" height="44" rx="9" fill="#c5cfb1"/><rect x="-25" y="-30" width="50" height="42" rx="9" fill="#fff4d8" stroke="#96a68c"/><g fill="#42695b"><circle cx="-12" cy="-18" r="3.6"/><circle cy="-9" r="3.6"/><circle cx="12" r="3.6"/></g></g>
+<g transform="translate(91 275) rotate(-13)"><rect x="-24" y="-26" width="43" height="56" rx="5" fill="#e6c27f" stroke="#a58f5c"/><rect x="-15" y="-32" width="43" height="56" rx="5" fill="#f4e9c9" stroke="#8aa184"/><path d="M-10 16V-24h33v40Z" fill="#80a280"/><use href="#wood" transform="translate(6 -4) scale(.5)"/></g>
 </svg>
