@@ -48,14 +48,57 @@ async function run(command,args,env){
   });
 }
 
+// Download retries happen before extraction or release activation. Never include the
+// signed source URL or the underlying fetch error in logs.
+export async function downloadArtifact(request,zip,{fetchImpl=fetch,maxAttempts=3,attemptTimeoutMs=180_000,idleTimeoutMs=30_000,sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms)),progress=message=>console.log(message)}={}){
+  const maximum=512*1024*1024;
+  for(let attempt=1;attempt<=maxAttempts;attempt++){
+    let bytes=0,idleTimer,reason='network',retryable=true;
+    const controller=new AbortController();
+    const abort=kind=>{reason=kind;controller.abort();};
+    const resetIdle=()=>{clearTimeout(idleTimer);idleTimer=setTimeout(()=>abort('idle-timeout'),idleTimeoutMs);idleTimer.unref?.();};
+    const totalTimer=setTimeout(()=>abort('attempt-timeout'),attemptTimeoutMs);totalTimer.unref?.();
+    let lastProgress=Date.now();
+    progress(`Deployment stage: download-start attempt=${attempt}`);
+    try{
+      resetIdle();
+      const response=await fetchImpl(request.artifactUrl,{redirect:'error',signal:controller.signal});
+      if(!response.ok||!response.body){
+        await response.body?.cancel();reason=`http-${response.status}`;
+        retryable=response.status===429||response.status>=500;
+        throw Error('Artifact response unavailable.');
+      }
+      if(Number(response.headers.get('content-length'))>maximum){reason='size-limit';retryable=false;await response.body.cancel();throw Error('Artifact too large.');}
+      const digest=createHash('sha256');
+      const limit=new Transform({transform(chunk,_encoding,callback){
+        bytes+=chunk.length;resetIdle();
+        if(bytes>maximum){reason='size-limit';retryable=false;callback(Error('Artifact too large.'));return;}
+        digest.update(chunk);
+        if(Date.now()-lastProgress>=30_000){progress(`Deployment stage: download-progress attempt=${attempt} bytes=${bytes}`);lastProgress=Date.now();}
+        callback(null,chunk);
+      }});
+      await pipeline(response.body,limit,createWriteStream(zip,{mode:0o600}),{signal:controller.signal});
+      if(digest.digest('hex')!==request.artifactSha256){reason='sha256-mismatch';retryable=false;throw Error('Artifact digest mismatch.');}
+      progress(`Deployment stage: download-verified bytes=${bytes}`);
+      return;
+    }catch{
+      progress(`Deployment stage: download-failed attempt=${attempt} bytes=${bytes} reason=${reason}`);
+      if(!retryable||attempt===maxAttempts)throw Error(`Artifact download failed (${reason}; attempt ${attempt}/${maxAttempts}); no release was activated.`);
+    }finally{clearTimeout(idleTimer);clearTimeout(totalTimer);}
+    await sleep(2000*attempt);
+  }
+}
+
 export async function install(encoded,sudoUser,locked=false){
   if(process.getuid?.()!==0)throw Error('The deployment installer must be run through its constrained sudo entrypoint.');
   const request=validateRequest(encoded,sudoUser);
   const environment={PATH:'/opt/node/bin:/usr/sbin:/usr/bin:/sbin:/bin',HOME:'/root',LANG:'C.UTF-8',DEPLOY_TARGET:request.target,DEPLOY_BUILD_ID:String(request.runId),DEPLOY_LOCK_HELD:'true',SUDO_USER:sudoUser};
   if(!locked){
-    await run('/usr/bin/flock',['--wait','900',`/run/lock/magical-athlete-${request.target}.deploy.lock`,'/opt/node/bin/node',fileURLToPath(import.meta.url),'--locked',encoded],environment);
+    console.log('Deployment stage: lock-wait');
+    await run('/usr/bin/flock',['--wait','60',`/run/lock/magical-athlete-${request.target}.deploy.lock`,'/opt/node/bin/node',fileURLToPath(import.meta.url),'--locked',encoded],environment);
     return;
   }
+  console.log('Deployment stage: lock-acquired');
   const stateDirectory='/var/lib/magical-athlete-deploy-state';
   await mkdir(stateDirectory,{recursive:true,mode:0o700});
   const statePath=join(stateDirectory,`${request.target}.json`);
@@ -78,21 +121,16 @@ export async function install(encoded,sudoUser,locked=false){
   }
   const work=await mkdtemp(join(tmpdir(),'magical-athlete-deploy-'));
   try{
-    const response=await fetch(request.artifactUrl,{redirect:'error',signal:AbortSignal.timeout(900_000)});
-    if(!response.ok||!response.body)throw Error('Unable to download the GitHub Actions artifact.');
-    const maximum=512*1024*1024;
-    if(Number(response.headers.get('content-length'))>maximum)throw Error('Artifact exceeds the deployment size limit.');
-    let bytes=0;
-    const digest=createHash('sha256');
-    const limit=new Transform({transform(chunk,_encoding,callback){bytes+=chunk.length;if(bytes>maximum){callback(Error('Artifact exceeds the deployment size limit.'));return;}digest.update(chunk);callback(null,chunk);}});
     const zip=join(work,'artifact.zip');
-    await pipeline(response.body,limit,createWriteStream(zip,{mode:0o600}));
-    if(digest.digest('hex')!==request.artifactSha256)throw Error('GitHub artifact ZIP SHA256 mismatch.');
+    await downloadArtifact(request,zip);
+    console.log('Deployment stage: unpack-start');
     await run('/usr/bin/python3',[join(directory,'unpack-ci-artifact.py'),zip,work,Buffer.from(JSON.stringify(request)).toString('base64')],environment);
+    console.log('Deployment stage: install-start');
     await run('/bin/bash',[join(directory,'update.sh'),request.commit,join(work,'aliyun.tar.gz')],environment);
     const nextState=`${statePath}.next-${process.pid}`;
     await writeFile(nextState,JSON.stringify({target:request.target,commit:request.commit,runId:request.runId,...(request.prNumber?{prNumber:request.prNumber}:{}),deployedAt:new Date().toISOString()}),{mode:0o600});
     await rename(nextState,statePath);
+    console.log('Deployment stage: active-complete');
     console.log(`Deployed ${request.target} ${request.commit} from workflow run ${request.runId}.`);
   }finally{await rm(work,{recursive:true,force:true});}
 }

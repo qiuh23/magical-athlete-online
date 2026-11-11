@@ -94,7 +94,9 @@ async function clearEffect(page: Page, room: Room) {
   delete room.pause; publish(room);
   await expect(page.getByTestId('room-pause-notice')).toHaveCount(0);
   const skip = page.getByTestId('skip-animation');
-  if (await skip.isVisible()) await skip.click();
+  // A short beat may finish naturally after resuming. Activate only the skip
+  // button that still exists, instead of waiting for an already removed one.
+  await skip.evaluateAll(buttons => (buttons[0] as HTMLButtonElement | undefined)?.click());
   await expect(page.getByTestId('board-3d')).toHaveAttribute('data-phase', 'idle');
 }
 
@@ -104,7 +106,7 @@ test('confirmed totals match the trophy through gains, deductions, controller sw
   try {
     const verify = async (expected: string[]) => {
       for (const { page } of clients) {
-        await expect(page.locator('.floating-racer-score')).toHaveText(expected);
+        await expect.poll(() => page.locator('.floating-racer').evaluateAll(elements => elements.map(element => `${element.querySelector('.racer-seat')!.textContent}号${element.querySelector('.floating-racer-score')!.textContent}`))).toEqual(expected);
         await page.getByRole('button', { name: '累计积分', exact: true }).click();
         await expect(page.locator('.scoreboard>div>div>b')).toHaveText([...f.room.game.players].sort((a, b) => b.score - a.score).map(player => `${player.score}分`));
         await page.getByRole('button', { name: '关闭', exact: true }).click();

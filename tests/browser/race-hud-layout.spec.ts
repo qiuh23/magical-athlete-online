@@ -94,7 +94,12 @@ test('tablet and mobile race controls stay separate for hosts and guests, includ
           expect(await camera.locator('input').evaluate(element=>{
             const box=element.getBoundingClientRect();return element.contains(document.elementFromPoint(box.x+box.width/2,box.y+box.height/2));
           }),'expanded camera settings must remain reachable').toBe(true);
-          await camera.locator('summary').click();await expect(camera).not.toHaveAttribute('open','');await layout(tablet);
+          await page.keyboard.press('Escape');await expect(camera).not.toHaveAttribute('open','');
+          await expect(camera.locator('summary')).toBeFocused();
+          await camera.locator('summary').click();await expect(camera).toHaveAttribute('open','');
+          // This blank viewport corner is outside the HUD and the 3D pawns.
+          await page.mouse.click(2,2);
+          await expect(camera).not.toHaveAttribute('open','');await layout(tablet);
         }
         if (!process.env.CI && (role === 'host' && [1440, 390, 844, 768].includes(viewport.width))) {
           mkdirSync('docs/qa/immersive-race-ui', { recursive: true });

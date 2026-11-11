@@ -66,3 +66,11 @@ test('fixed Worker command rechecks current main before a transient retry and st
 test('fixed Worker command never retries validation or permission errors',async()=>{
  let calls=0;await assert.rejects(()=>runCloudflareCommand('deploy',{directory:'.',sleep:async()=>{},checkCurrent:async()=>{},execute:()=>{calls++;return {status:1,stderr:'Authentication error 403'};}}),/command failed/);assert.equal(calls,1);
 });
+
+const {safeInvocationDiagnostics}=await import(new URL('../scripts/deploy/ci-release.mjs',import.meta.url).href);
+test('cloud assistant diagnostics expose only fixed installer stages, never raw output or signed URLs',()=>{
+  const lines=['secret=private-value','Deployment stage: lock-acquired','Deployment stage: download-failed attempt=1 bytes=123 reason=idle-timeout','Deployment stage: download-start attempt=2','Deployment stage: install-start https://signed.example/secret','Deployment stage: download-failed attempt=2 bytes=0 reason=http-403'];
+  assert.deepEqual(safeInvocationDiagnostics({Output:Buffer.from(lines.join('\n')).toString('base64')}),[lines[1],lines[2],lines[3],lines[5]]);
+  assert.deepEqual(safeInvocationDiagnostics({Output:''}),[]);
+  assert.deepEqual(safeInvocationDiagnostics({Output:123}),[]);
+});

@@ -11,9 +11,16 @@ function render() {
     const action=invitation?(invitation.watch?'观战':'加入房间'):'进入';
     if(href){link.href=href;link.removeAttribute('aria-disabled');link.querySelector('.action-label').textContent=action;link.setAttribute('aria-label',`${gameInfo[game].name}，${action}`);}
     else{link.removeAttribute('href');link.setAttribute('aria-disabled','true');link.querySelector('.action-label').textContent='其他游戏';link.setAttribute('aria-label',`${gameInfo[game].name}，邀请属于另一款游戏`);}
+    link.classList.toggle('invited',Boolean(invitation&&href));
   }
 }
-document.querySelector('#clear-invite').addEventListener('click',()=>{invitation=null;history.replaceState(null,'',location.pathname);document.querySelector('#invitation').hidden=true;status.textContent='';render();});
+document.querySelector('#clear-invite').addEventListener('click',()=>{
+  invitation=null;history.replaceState(null,'',location.pathname);
+  document.querySelector('#invitation').hidden=true;
+  document.querySelector('#retry').hidden=true;
+  status.textContent='';status.setAttribute('role','status');
+  render();links[0].focus();
+});
 document.querySelector('#retry').addEventListener('click',()=>location.reload());
 try{
   const response=await fetch(new URL('./config.json',import.meta.url),{cache:'no-store',credentials:'same-origin',redirect:'error',signal:AbortSignal.timeout(8000)});
@@ -22,6 +29,14 @@ try{
   if(!current)throw Error('当前网址不在本站大厅配置中。');
   invitation=readInvitation(location.search);
   if(invitation&&invitation.server!==current)throw Error(foreign);
-  if(invitation){document.querySelector('#invitation').hidden=false;document.querySelector('#invite-details').textContent=`${gameInfo[invitation.game].name} · ${invitation.room}`;}
+  if(invitation){document.querySelector('#invitation').hidden=false;document.querySelector('#invite-details').textContent=`${gameInfo[invitation.game].name} · ${invitation.room} · ${invitation.watch?'观战':'加入房间'}`;}
   render();status.textContent='';document.querySelector('#choices').removeAttribute('aria-busy');
-}catch(error){status.textContent=error instanceof Error?error.message:'游戏入口暂不可用，请刷新重试。';status.setAttribute('role','alert');document.querySelector('#choices').removeAttribute('aria-busy');document.querySelector('#retry').hidden=false;}
+}catch(error){
+  status.textContent=error instanceof Error?error.message:'游戏入口暂不可用，请刷新重试。';
+  status.setAttribute('role','alert');document.querySelector('#choices').removeAttribute('aria-busy');
+  if(config&&current){
+    document.querySelector('#invitation').hidden=false;
+    document.querySelector('#invite-title').textContent='邀请暂不可用';
+    document.querySelector('#invite-details').textContent='';
+  }else document.querySelector('#retry').hidden=false;
+}

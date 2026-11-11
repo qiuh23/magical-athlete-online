@@ -93,8 +93,9 @@ async function accessibleChoice(page: Page) {
     const chat = document.querySelector('[data-testid="room-chat"]')!.getBoundingClientRect();
     const skill = document.querySelector('[data-testid="skill-choice"]')!.getBoundingClientRect();
     const map=document.querySelector('[data-testid="board-minimap"]')!.getBoundingClientRect();
-    return { overlap: Math.min(chat.right, skill.right) > Math.max(chat.left, skill.left) && Math.min(chat.bottom, skill.bottom) > Math.max(chat.top, skill.top), mapOverlap:Math.min(map.right,skill.right)>Math.max(map.left,skill.left)&&Math.min(map.bottom,skill.bottom)>Math.max(map.top,skill.top) };
-  }), { message: 'skill choice must settle outside chat and the minimap' }).toEqual({ overlap: false, mapOverlap: false });
+    const order=document.querySelector('.floating-racers')!.getBoundingClientRect();
+    return { overlap: Math.min(chat.right, skill.right) > Math.max(chat.left, skill.left) && Math.min(chat.bottom, skill.bottom) > Math.max(chat.top, skill.top), mapOverlap:Math.min(map.right,skill.right)>Math.max(map.left,skill.left)&&Math.min(map.bottom,skill.bottom)>Math.max(map.top,skill.top), orderOverlap:Math.min(order.right,skill.right)>Math.max(order.left,skill.left)&&Math.min(order.bottom,skill.bottom)>Math.max(order.top,skill.top) };
+  }), { message: 'skill choice must settle outside chat, cumulative scores and the minimap' }).toEqual({ overlap: false, mapOverlap: false, orderOverlap:false });
   const button = choice.locator('.choice-options .button').first(); await button.scrollIntoViewIfNeeded();
   expect(await button.evaluate(element => {
     const box = element.getBoundingClientRect(), panel = element.closest('.floating-choice')!.getBoundingClientRect(); return box.height >= 44 && box.top >= panel.top && box.bottom <= panel.bottom + 1 && element.contains(document.elementFromPoint(box.x + box.width / 2, box.y + box.height / 2));
@@ -111,6 +112,7 @@ for (const [name, viewport] of [
   ['phone', { width: 390, height: 844 }],
   ['small-phone', { width: 320, height: 667 }],
   ['landscape', { width: 900, height: 500 }],
+  ['phone-landscape', { width: 844, height: 390 }],
 ] as const) {
   test(`race chat stays anchored across skill selection and option resizing on ${name}`, async ({ browser }) => {
     const session = await fixture(browser, viewport); const { page, code } = session;
@@ -136,10 +138,10 @@ for (const [name, viewport] of [
       await expect(page.getByLabel('聊天消息', { exact: true })).toHaveValue('');
       await expect(page.getByRole('log')).toContainText('选择技能时聊天仍可发送'); await stable(page, opened, true);
       if(!process.env.CI&&(name==='phone'||name==='landscape'||name==='small-desktop'||name==='ipad-portrait')){mkdirSync('docs/qa/immersive-race-ui', { recursive: true }); mkdirSync('docs/qa/chat-polish', { recursive: true });await page.screenshot({ path: `docs/qa/chat-polish/${process.env.CHAT_POLISH_STAGE || 'after'}-${name}-history.png` });}
-      if (name === 'phone'||name==='small-phone'||name==='landscape'||name==='small-desktop') {
+      if (name === 'phone'||name==='small-phone'||name==='landscape'||name==='phone-landscape'||name==='small-desktop') {
         // Exercise the existing visualViewport keyboard bridge without assuming
         // that a desktop browser can display the operating system's phone keyboard.
-        const keyboardOffset = name === 'landscape' ? 180 : name === 'small-phone' ? 260 : 300;
+        const keyboardOffset = name === 'landscape'||name==='phone-landscape' ? 180 : name === 'small-phone' ? 260 : 300;
         await page.evaluate(offset => {
           Object.defineProperty(visualViewport!, 'height', { configurable: true, value: innerHeight - offset });
           visualViewport!.dispatchEvent(new Event('resize'));
