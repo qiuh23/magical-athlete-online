@@ -50,7 +50,11 @@ async function fits(page: Page) {
   expect(bounds!.x).toBeGreaterThanOrEqual(0); expect(bounds!.x + bounds!.width).toBeLessThanOrEqual(page.viewportSize()!.width + 1);
   await expect(panel).toHaveClass(/character-choice-panel/);
   const scrolls = await panel.evaluate(element => element.scrollHeight > element.clientHeight + 1);
-  if (scrolls) expect(bounds!.height).toBeGreaterThan(page.viewportSize()!.height * .44);
+  if (scrolls) {
+    expect(bounds!.height).toBeGreaterThanOrEqual(120);
+    const order = (await page.locator('.floating-racers').boundingBox())!;
+    expect(bounds!.y + bounds!.height).toBeLessThan(order.y);
+  }
 }
 async function inspect(page: Page, id: string) {
   await page.getByTestId('skill-choice').getByRole('button', { name: `查看${card(id).nameZh}详情`, exact: true }).click();

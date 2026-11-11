@@ -57,28 +57,28 @@
 .immersive-race .roll-caption:empty{display:none}
 .last-roll-numbers{display:flex;align-items:center;gap:6px;font-size:12px}
 .last-roll-numbers>svg:nth-of-type(2){margin-left:5px}
-.immersive-race .scene-action-banner.race-moment{top:auto;bottom:max(128px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);display:flex;gap:10px;width:max-content;max-width:min(420px,calc(100% - 36px));max-height:150px;padding:10px 14px;border:1px solid #53796966;border-radius:18px;animation:none;pointer-events:none;box-shadow:0 7px 24px #23494120}
-.race-moment .skill-banner-avatar{width:46px;height:46px;border-radius:12px;pointer-events:auto}
-.race-moment .skill-banner-avatar>.avatar{width:46px;height:46px}
-.moment-illustration{display:grid;place-items:center;flex:none;width:54px;height:54px}
-.race-moment .moment-content{min-width:0}
-.race-moment .moment-content>small{font-size:10px;white-space:normal;line-height:1.3}
-.race-moment .moment-content>strong{display:flex;align-items:center;gap:6px;font-size:17px;white-space:normal;line-height:1.4;margin:3px 0}
-.race-moment .moment-content>strong>svg{flex:none}
-.moment-participants{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
-.moment-racer{display:inline-flex;align-items:center;gap:3px;line-height:1.1}
-.moment-racer>.avatar{width:24px;height:24px}
-.moment-racer>small{font-size:9px;white-space:nowrap}
-.moment-racer>b{padding:3px;border-radius:5px;background:#f7d585;font-size:13px;color:#294f49}
-.moment-more{font-size:10px;font-weight:800}
-.immersive-race>.ability-reveal-card{top:auto;bottom:128px;width:min(360px,calc(100% - 28px));max-height:260px;padding:12px 14px;border-width:1px;border-radius:18px;box-shadow:0 7px 24px #23494120}
-.ability-reveal-heading h2{font-size:16px;margin:2px 0 4px}
-.ability-reveal-heading small{font-size:10px}
-.ability-reveal-powers{margin:6px 0;gap:5px}
-.ability-reveal-powers button{font-size:12px;padding:4px 7px;min-height:44px}
-.ability-reveal-card .ability-reveal-powers .avatar{width:30px;height:30px}
-.ability-reveal-card .ability-reveal-duration{margin:4px 0;font-size:11px}
-.ability-reveal-detail{display:flex;align-items:center;gap:6px;min-height:44px;padding:5px 0;font-size:11px}
+/* Independent cards avoid the legacy scene banner's broad text selectors. */
+.immersive-race .race-moment,.immersive-race>.ability-reveal-card{position:absolute;z-index:29;top:auto;bottom:max(128px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);width:max-content;max-width:min(360px,calc(100% - 36px));padding:12px 14px;border:1px solid #53796966;border-radius:16px;background:#fffaf3f2;box-shadow:0 7px 24px #23494120;color:#254f48;backdrop-filter:blur(12px)}
+.immersive-race .race-moment{pointer-events:none}
+.moment-heading{display:flex;align-items:baseline;flex-wrap:wrap;gap:3px 8px;margin-bottom:9px;overflow-wrap:anywhere}
+.moment-heading>strong{font-size:16px;line-height:1.35;color:#254f48}
+.moment-heading>small{font-size:11px;line-height:1.4;color:#5a766c;font-weight:650}
+.moment-participants{display:flex;align-items:flex-start;gap:8px;min-width:0}
+.moment-participants>svg{flex:none;margin-top:10px;color:#6f897b}
+.moment-racer,.moment-origin{display:flex;flex-direction:column;align-items:center;gap:4px;flex:none;min-width:44px;max-width:100%;margin:0;padding:0;border:0;background:none;color:inherit;font:inherit;text-align:center}
+.moment-racer{cursor:pointer;pointer-events:auto;border-radius:8px}
+.moment-racer:focus-visible,.ability-reveal-card button:focus-visible{outline:3px solid #244f54;outline-offset:3px}
+.moment-racer>.avatar,.moment-origin>.avatar,.moment-origin>.event-art{display:block;flex:none;width:36px;height:36px}
+.moment-origin{width:48px}
+.moment-origin>svg:not(.avatar):not(.event-art){height:36px}
+.moment-racer>small,.moment-origin>small{font-size:10px;line-height:1.25;font-weight:700;overflow-wrap:anywhere}
+.moment-targets{display:flex;align-items:flex-start;flex-wrap:wrap;gap:6px;min-width:0}
+.moment-number{display:inline-flex;align-items:baseline;justify-content:center;gap:2px;padding:4px 5px;border-radius:7px;background:#f7df9b;color:#294f49;font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap;line-height:1.15}
+.moment-number>small{font-size:9px;font-weight:600}
+.moment-self-result{margin-top:7px}
+.moment-more{align-self:center;border:1px solid #53796930;border-radius:7px;padding:4px;font-size:10px;font-weight:750;white-space:nowrap}
+.immersive-race>.ability-reveal-card{width:min(360px,calc(100% - 36px));max-height:260px;overflow:auto;pointer-events:auto}
+.racer-state{font-size:9px;font-weight:850;line-height:1;white-space:nowrap}
 
 @media(max-width:1366px) and (min-width:651px) and (min-height:571px){
  .immersive-race .race-hud-top{flex-wrap:wrap;gap:7px 12px}
@@ -101,8 +101,8 @@
  .immersive-race .race-status-stack>.race-event-chips{max-height:110px}
  .race-event-chip{padding-right:6px;gap:4px}.race-event-chip>span{font-size:10px}
  .race-event-chip>.event-art{width:32px;height:32px}
- .immersive-race .scene-action-banner.race-moment,.immersive-race>.ability-reveal-card{bottom:calc(max(14px,env(safe-area-inset-bottom)) + 174px);max-width:calc(100% - 28px);max-height:160px;padding:9px 11px}
- .race-moment .moment-content>strong{font-size:15px}.moment-illustration{width:46px;height:46px}.moment-illustration>.event-art{width:46px;height:46px}
+ .immersive-race .race-moment,.immersive-race>.ability-reveal-card{bottom:calc(max(14px,env(safe-area-inset-bottom)) + 174px);max-width:calc(100% - 28px);max-height:160px;padding:9px 11px}
+ .moment-heading>strong{font-size:15px}
  .race-detail-content{padding:14px}
  /* The public track already shows seats; remove duplicate map rows during a
     throw so the physical dice have a clear, bounded reading area. */
@@ -123,8 +123,8 @@
  .immersive-race .minimap-own-position small{display:none}
  html[data-view="race"] .immersive-race .floating-racers{bottom:14px;left:72px;right:auto;max-width:calc(100% - 260px);width:max-content}
  .immersive-race .floating-roll{bottom:14px;right:14px}
- .immersive-race .scene-action-banner.race-moment,.immersive-race>.ability-reveal-card{left:196px;transform:none;top:auto;bottom:100px;width:calc(100% - 370px);max-width:360px;max-height:180px;padding:8px 10px}
- .race-moment .moment-content>strong{font-size:15px}
+ .immersive-race .race-moment,.immersive-race>.ability-reveal-card{left:196px;transform:none;top:auto;bottom:100px;width:calc(100% - 370px);max-width:360px;max-height:180px;padding:8px 10px}
+ .moment-heading>strong{font-size:15px}
  .immersive-race .camera-settings-content{width:172px}
  .immersive-race .camera-settings-content small{display:none}
  .immersive-race .dice-spotlight{height:min(290px,calc(100dvh - 90px));width:260px}
@@ -134,7 +134,7 @@
 @media(max-height:350px) and (min-width:651px){
  .immersive-race .race-status-stack{top:62px;left:112px;width:172px}
  .immersive-race .race-status-stack>.race-event-chips{max-height:44px}
- .immersive-race .scene-action-banner.race-moment,.immersive-race>.ability-reveal-card{bottom:88px;max-height:124px}
+ .immersive-race .race-moment,.immersive-race>.ability-reveal-card{bottom:88px;max-height:124px}
 }
 
 .immersive-race .floating-racer-score{white-space:nowrap}
@@ -216,15 +216,18 @@
  body>.room-community.in-race .chat-notice-region{width:228px;max-width:228px}
 }
 @media(orientation:landscape) and (min-width:480px) and (max-width:650px) and (max-height:570px){
- .immersive-race .scene-action-banner.race-moment{display:block;gap:0;padding:8px;bottom:88px}
- .race-moment .moment-illustration,.race-moment .skill-banner-avatar{position:absolute;top:8px;left:8px;width:40px;height:40px}
- .race-moment .moment-illustration>.event-art{width:40px;height:40px}
- .race-moment .moment-content>small,.race-moment .moment-content>strong{padding-left:46px}
- .race-moment .moment-participants{margin-top:7px}
- .race-moment .moment-racer>.avatar{width:20px;height:20px}
- .race-moment .moment-racer>b{font-size:12px}
+ .immersive-race .race-moment{bottom:88px;padding:9px}
+ .moment-heading{margin-bottom:7px}
+ .moment-participants{gap:6px}
+ .moment-racer,.moment-origin{min-width:40px}
+ .moment-origin{width:40px}
+ .moment-racer>.avatar,.moment-origin>.avatar,.moment-origin>.event-art{width:32px;height:32px}
+ .moment-participants>svg{margin-top:8px}
+ .moment-number{font-size:12px;padding:4px}
+ .moment-targets{gap:4px}
  .immersive-race>.ability-reveal-card{bottom:88px;max-height:calc(100dvh - 150px)}
 }
+
 @media(orientation:landscape) and (min-width:480px) and (max-height:570px){
  html[data-chat-keyboard="true"] .immersive-race .scene-camera-toolbar{display:none}
  html[data-chat-keyboard="true"] .immersive-race .race-status-stack{top:8px;left:308px;right:132px;width:auto;max-height:44px}
@@ -265,4 +268,51 @@
  html[data-chat-compact="true"] .immersive-race .race-status-stack{top:10px;left:112px;right:12px;max-height:44px}
  html[data-chat-compact="true"] .immersive-race .race-event-chips,html[data-chat-compact="true"] .immersive-race .board-minimap{display:none}
  html[data-chat-compact="true"][data-view="race"] body .immersive-race .floating-choice.choice-panel{max-height:calc(var(--chat-viewport-height,100dvh) - var(--race-chat-height,124px) - 166px);padding:8px}
+}
+
+.floating-choice.choice-panel{bottom:max(128px,env(safe-area-inset-bottom));border-width:1px;border-color:#53796966;background:#fffaf3f5;border-radius:16px;box-shadow:0 7px 24px #23494120}
+.floating-choice .choice-heading{display:grid;grid-template-columns:44px minmax(0,1fr) 44px;align-items:center;gap:4px 8px}
+.floating-choice.choice-panel>.choice-heading{padding-left:0}
+.floating-choice .choice-heading>.choice-collapse{grid-column:3;grid-row:1/3;align-self:start;margin:0;float:none}
+.floating-choice .choice-heading>.choice-actor-detail,.floating-choice .choice-heading>.burst{grid-column:1;grid-row:1/3;margin:0;float:none}
+.floating-choice .choice-heading>h2{grid-column:2;grid-row:1;font-size:16px;line-height:1.4;overflow-wrap:anywhere}
+.floating-choice .choice-heading>.choice-operator{grid-column:2;grid-row:2;font-size:11px;color:#5a766c}
+.floating-choice .choice-heading>p{grid-column:1/-1}
+@media(max-width:650px) and (orientation:portrait){
+ html[data-view="race"] body .immersive-race .floating-choice.choice-panel{bottom:calc(max(14px,env(safe-area-inset-bottom)) + 174px);max-height:max(120px,calc(100dvh - max(var(--race-minimap-bottom,220px),var(--race-status-bottom,180px)) - 200px))}
+ html[data-view="race"]:not([data-chat-keyboard="true"]) body:has(.floating-choice.is-collapsed) .immersive-race .floating-racers{bottom:calc(max(12px,env(safe-area-inset-bottom)) + 87px)}
+}
+@media(max-width:350px) and (orientation:portrait){
+ /* Keep the first target row visible between the map and the order strip. */
+ html[data-view="race"] body .immersive-race .floating-choice.choice-panel{padding:8px}
+ .floating-choice .choice-heading>h2{font-size:13px;grid-row:1}
+ .floating-choice .choice-heading>.choice-operator{display:none}
+ .floating-choice .choice-heading>.choice-actor-detail,.floating-choice .choice-heading>.burst,.floating-choice .choice-heading>.choice-collapse{grid-row:1}
+ .floating-choice .compact-choice-options{gap:6px}
+ .floating-choice .compact-choice-options>.choice-character{flex-basis:calc((100% - 6px)/2);grid-template-columns:24px minmax(0,1fr) 44px;gap:2px;padding:3px}
+ .floating-choice .compact-choice-options>.choice-character>.avatar{width:24px;height:24px}
+ .immersive-race>.ability-reveal-card{padding:8px}
+ .ability-reveal-heading h2{font-size:14px}
+ .ability-reveal-heading small{font-size:10px}
+ .ability-reveal-flow{gap:6px;margin-top:6px}
+ .ability-reveal-recipient{width:36px}
+ .ability-reveal-recipient>.avatar,.ability-reveal-powers .avatar{width:32px;height:32px}
+ .ability-reveal-powers:has(button:nth-child(2)){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));flex:1}
+ .ability-reveal-powers button{flex-direction:row;min-width:0;padding:3px;gap:3px}
+ .ability-reveal-powers strong{font-size:10px;line-height:1.2}
+ .ability-reveal-card .ability-reveal-duration{margin-top:6px;font-size:10px}
+}
+@media(orientation:landscape) and (min-width:480px) and (max-width:650px) and (max-height:570px){
+ .floating-choice .choice-heading>.choice-actor-detail,.floating-choice .choice-heading>.burst{grid-row:1}
+ .floating-choice .choice-heading>.choice-collapse{grid-row:1}
+ .floating-choice .choice-heading>.choice-operator{grid-row:1}
+ .floating-choice .choice-heading>h2{grid-column:1/-1;grid-row:2;font-size:14px}
+ .ability-reveal-heading h2{font-size:14px}
+ .ability-reveal-flow{gap:6px}
+ .ability-reveal-flow>svg{margin-top:10px}
+ .ability-reveal-recipient{width:36px;min-height:38px}
+ .ability-reveal-recipient>.avatar,.ability-reveal-powers .avatar{width:32px;height:32px}
+ .ability-reveal-powers:has(button:nth-child(2)){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));flex:1}
+ .ability-reveal-powers button{min-width:0;padding:3px;gap:3px}
+ .ability-reveal-powers strong{font-size:10px;line-height:1.2}
 }

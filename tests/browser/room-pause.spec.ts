@@ -41,7 +41,7 @@ test('draft and secret selection pause for host, mobile guest and spectator, ret
   const clients=await Promise.all([connect(browser,host.identity),connect(browser,guest.identity,true),connect(browser,watch.identity,true)]);
   try{
     const [owner,other,spectator]=clients.map(c=>c.page) as [Page,Page,Page];
-    await expect(owner.getByRole('button',{name:'暂停比赛',exact:true})).toBeDisabled();expect(await other.getByRole('button',{name:'暂停比赛',exact:true}).count()).toBe(0);
+    await expect(owner.getByRole('button',{name:'暂停比赛',exact:true})).toHaveCount(0);expect(await other.getByRole('button',{name:'暂停比赛',exact:true}).count()).toBe(0);
     const room=app.rooms.get(code);room.game.players.forEach(p=>{p.ready=true;p.connected=true;});command(code,host.identity.playerId,{type:'start',threePlayerMode:'single'});publish(app.rooms.get(code));
     await expect(owner.getByRole('button',{name:'暂停比赛',exact:true})).toBeEnabled();await pause(owner);
     for(const page of [other,spectator])await expect(page.getByTestId('room-pause-notice')).toBeVisible();

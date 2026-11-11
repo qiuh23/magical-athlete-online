@@ -42,7 +42,7 @@ export function raceCue(beat: PresentationBeat, room: RoomView) {
   const rank = event?.text.match(/获得第(\d+)名，[+＋-]\d+分$/)?.[1];
   const marker = event?.type === 'event-marker' || event?.type === 'twist-monster';
   const icon: IconKind = beat.cause?.endsWith('flip-flop') ? 'swap' : marker ? 'move' : beat.kind === 'finish' ? 'flag' : ['move', 'warp', 'swap', 'trip', 'recover', 'score', 'eliminate', 'dice'].includes(beat.kind) ? beat.kind as IconKind : 'skill';
-  const title = beat.kind === 'move' ? `${cause && beat.cause !== 'main' ? `${cause} → ` : ''}${motion}`
+  const title = beat.kind === 'move' ? motion
     : beat.kind === 'warp' ? beat.cause?.endsWith('flip-flop') ? '交换位置' : '传送' : beat.kind === 'swap' ? '交换位置'
     : beat.kind === 'trip' ? '绊倒' : beat.kind === 'recover' ? event?.text.includes('代替主移动') || event?.text.includes('跳过主移动') ? '起身 · 跳过主移动' : '立即起身'
     : beat.kind === 'score' ? amount ? `${amount}分` : '积分变化'

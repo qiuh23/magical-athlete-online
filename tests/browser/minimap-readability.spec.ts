@@ -32,10 +32,10 @@ async function pair(browser: Browser, mobile = false) {
   const [host, guest] = pages as [Page, Page];
   await host.goto(url);await host.getByRole('tab',{name:'创建房间',exact:true}).click(); await host.getByLabel('你的昵称').fill('地图视角');
   await host.getByLabel('房间人数上限').selectOption('2'); await host.getByLabel('每次操作时限').selectOption('0');
-  await host.getByRole('button', { name: '创建房间，召集朋友' }).click();
+  await host.getByRole('button', { name: '创建房间', exact: true }).click();
   await expect(host.locator('.connection.is-online')).toBeVisible(); const code = parseRoomCode(host.url().split('/').at(-1)!)!.code;
   await guest.goto(`${url}/room/${code}`); await guest.getByLabel('你的昵称').fill('连锁选手');
-  await guest.getByRole('button', { name: '加入这场胡闹' }).click(); await expect(guest.locator('.connection.is-online')).toBeVisible();
+  await guest.getByRole('button', { name: '加入', exact: true }).click(); await expect(guest.locator('.connection.is-online')).toBeVisible();
   return { contexts, host, guest, code, errors };
 }
 type Pair = Awaited<ReturnType<typeof pair>>;
@@ -119,8 +119,8 @@ test('minimap follows the actual motion and centaur effects show readable causes
     });
     await room.guest.getByRole('button', { name: '掷骰子', exact: true }).click();
     const title = room.host.getByTestId('skill-banner').locator('strong');
-    await expect(title).toHaveText('后蹄踢击 → 后退2格');
-    await expect(room.host.getByTestId('skill-banner').locator('.moment-content>small')).toContainText('技能效果');
+    await expect(title).toHaveText('后退2格');
+    await expect(room.host.getByTestId('skill-banner').locator('.moment-heading>small')).toHaveText('后蹄踢击');
     await assertLayout(room.host, 128);
     const geometry = await room.host.evaluate(() => { const map = document.querySelector('[data-testid="board-minimap"]')!.getBoundingClientRect(), banner = document.querySelector('[data-testid="skill-banner"]')!.getBoundingClientRect(); return { map: { left: map.left, right: map.right, top: map.top, bottom: map.bottom }, banner: { left: banner.left, right: banner.right, top: banner.top, bottom: banner.bottom } }; });
     expect(Math.min(geometry.map.right, geometry.banner.right) <= Math.max(geometry.map.left, geometry.banner.left) || Math.min(geometry.map.bottom, geometry.banner.bottom) <= Math.max(geometry.map.top, geometry.banner.top), JSON.stringify(geometry)).toBe(true);
@@ -134,7 +134,9 @@ test('minimap follows the actual motion and centaur effects show readable causes
     expect(records.some(sample => sample.phase === 'move' && sample.positions.r2 === 3)).toBe(true);
     const skillEvents = [...new Set(records.filter(sample => sample.phase === 'skill').map(sample => sample.events))]; expect(skillEvents.length).toBeGreaterThanOrEqual(2);
     for (const event of skillEvents) { const begin = records.findIndex(sample => sample.events === event), after = records.findIndex((sample, index) => index > begin && sample.events !== event); expect(after).toBeGreaterThan(begin); expect(records[after]!.at - records[begin]!.at).toBeGreaterThanOrEqual(900); }
-    expect(records.filter(sample => sample.headline === '后蹄踢击 → 后退2格').every(sample => /→/.test(sample.banner))).toBe(true);
+    const kicks = records.filter(sample => sample.headline === '后退2格');
+    expect(kicks.length).toBeGreaterThan(0);
+    expect(kicks.every(sample => sample.banner.includes('后蹄踢击') && sample.banner.includes('-2格'))).toBe(true);
     expect(application.rooms.get(room.code).game.racers.map(racer => racer.position)).toEqual([24, 8, 2, 4]);
     expect(room.errors).toEqual([]);
   } finally { await Promise.all(room.contexts.map(context => context.close())); }
