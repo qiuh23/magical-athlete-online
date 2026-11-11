@@ -16,7 +16,7 @@ class MemoryStorage implements Storage {
 const owner:Identity={backendId:'cloudflare',roomCode:'ABC234',playerId:'owner',token:'owner-secret',role:'player'};
 const view=(overrides:Partial<RoomView>={}):Pick<RoomView,'code'|'hostId'|'ownerId'|'mode'|'phase'|'createdAt'|'hostLeftAt'|'expiresAt'|'closedAt'>=>({code:owner.roomCode,hostId:'owner',ownerId:'owner',mode:'multiplayer',phase:'race',createdAt:1000,...overrides});
 const savedFetch=globalThis.fetch,previousLocal=Object.getOwnPropertyDescriptor(globalThis,'localStorage'),previousSession=Object.getOwnPropertyDescriptor(globalThis,'sessionStorage');
-beforeEach(async()=>{Object.defineProperty(globalThis,'localStorage',{configurable:true,value:new MemoryStorage()});Object.defineProperty(globalThis,'sessionStorage',{configurable:true,value:new MemoryStorage()});globalThis.fetch=async()=>new Response(JSON.stringify({backends:[{id:'cloudflare',origin:'',transport:'socketio',enabled:true},{id:'aliyun',origin:'',transport:'socketio',enabled:false}]}));await loadBackends();});
+beforeEach(async()=>{Object.defineProperty(globalThis,'localStorage',{configurable:true,value:new MemoryStorage()});Object.defineProperty(globalThis,'sessionStorage',{configurable:true,value:new MemoryStorage()});globalThis.fetch=async()=>new Response(JSON.stringify({siteEdition:'global',backends:[{id:'cloudflare',origin:'',transport:'socketio',enabled:true}]}));await loadBackends(true);});
 afterEach(()=>{globalThis.fetch=savedFetch;if(previousLocal)Object.defineProperty(globalThis,'localStorage',previousLocal);else delete (globalThis as any).localStorage;if(previousSession)Object.defineProperty(globalThis,'sessionStorage',previousSession);else delete (globalThis as any).sessionStorage;});
 function status(reply:Record<string,unknown>,code=200){globalThis.fetch=async()=>new Response(JSON.stringify(reply),{status:code,headers:{'Content-Type':'application/json'}});}
 
@@ -71,8 +71,8 @@ test('a verified live authority response clears a previous non-secret closure ma
   assert(await checkOwnedRoom(owner));assert.equal(readClosedRoom(owner.roomCode),null);assert.deepEqual(ownedRoomCandidates(),[owner]);
 });
 
-test('disabled backend recovery and leave never send credentials to the page origin',async()=>{
+test('foreign-site recovery and leave never send credentials to the page origin',async()=>{
   let requests=0;globalThis.fetch=async()=>{requests++;throw Error('credentials must not be sent');};
   const identity:Identity={...owner,backendId:'aliyun'};
-  await assert.rejects(checkOwnedRoom(identity),/尚未部署或开放/);await leaveRoom(identity);assert.equal(requests,0);
+  await assert.rejects(checkOwnedRoom(identity),/此邀请不属于当前站点/);await assert.rejects(leaveRoom(identity),/此邀请不属于当前站点/);assert.equal(requests,0);
 });

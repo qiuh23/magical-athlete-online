@@ -1,0 +1,268 @@
+{
+  "seed": 13004,
+  "actions": 183,
+  "plan": {
+    "version": "points-v1",
+    "trackVersion": "expanded-tracks-2026-10-23",
+    "raceCount": 4,
+    "races": [
+      {
+        "round": 1,
+        "map": "mild",
+        "rewards": [
+          3,
+          1
+        ],
+        "specialEvent": null
+      },
+      {
+        "round": 2,
+        "map": "wild",
+        "rewards": [
+          4,
+          2
+        ],
+        "specialEvent": null
+      },
+      {
+        "round": 3,
+        "map": "mild",
+        "rewards": [
+          5,
+          3
+        ],
+        "specialEvent": null
+      },
+      {
+        "round": 4,
+        "map": "wild",
+        "rewards": [
+          6,
+          4
+        ],
+        "specialEvent": null
+      }
+    ]
+  },
+  "results": [
+    {
+      "round": 1,
+      "placements": [
+        {
+          "racerId": "8c229012-18de-4f90-a307-14da015a7949:1:1",
+          "playerId": "8c229012-18de-4f90-a307-14da015a7949",
+          "characterId": "third-wheel",
+          "rank": 1,
+          "points": 3
+        },
+        {
+          "racerId": "82236cd5-e341-423a-a23d-a5851e10ef46:1:0",
+          "playerId": "82236cd5-e341-423a-a23d-a5851e10ef46",
+          "characterId": "legs",
+          "rank": 2,
+          "points": 1
+        }
+      ],
+      "scores": [
+        {
+          "playerId": "82236cd5-e341-423a-a23d-a5851e10ef46",
+          "placement": 1,
+          "map": 0,
+          "skill": 0,
+          "event": 0,
+          "total": 1
+        },
+        {
+          "playerId": "8c229012-18de-4f90-a307-14da015a7949",
+          "placement": 3,
+          "map": 0,
+          "skill": 0,
+          "event": 0,
+          "total": 3
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "placements": [
+        {
+          "racerId": "82236cd5-e341-423a-a23d-a5851e10ef46:2:1",
+          "playerId": "82236cd5-e341-423a-a23d-a5851e10ef46",
+          "characterId": "copycat",
+          "rank": 1,
+          "points": 4
+        },
+        {
+          "racerId": "82236cd5-e341-423a-a23d-a5851e10ef46:2:0",
+          "playerId": "82236cd5-e341-423a-a23d-a5851e10ef46",
+          "characterId": "hypnotist",
+          "rank": 2,
+          "points": 2
+        }
+      ],
+      "scores": [
+        {
+          "playerId": "82236cd5-e341-423a-a23d-a5851e10ef46",
+          "placement": 6,
+          "map": 0,
+          "skill": 0,
+          "event": 0,
+          "total": 6
+        },
+        {
+          "playerId": "8c229012-18de-4f90-a307-14da015a7949",
+          "placement": 0,
+          "map": 3,
+          "skill": 0,
+          "event": 0,
+          "total": 3
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "placements": [
+        {
+          "racerId": "8c229012-18de-4f90-a307-14da015a7949:3:0",
+          "playerId": "8c229012-18de-4f90-a307-14da015a7949",
+          "characterId": "dicemonger",
+          "rank": 1,
+          "points": 5
+        },
+        {
+          "racerId": "8c229012-18de-4f90-a307-14da015a7949:3:1",
+          "playerId": "8c229012-18de-4f90-a307-14da015a7949",
+          "characterId": "egg",
+          "rank": 2,
+          "points": 3
+        }
+      ],
+      "scores": [
+        {
+          "playerId": "82236cd5-e341-423a-a23d-a5851e10ef46",
+          "placement": 0,
+          "map": 0,
+          "skill": 0,
+          "event": 0,
+          "total": 0
+        },
+        {
+          "playerId": "8c229012-18de-4f90-a307-14da015a7949",
+          "placement": 8,
+          "map": 0,
+          "skill": 0,
+          "event": 0,
+          "total": 8
+        }
+      ]
+    },
+    {
+      "round": 4,
+      "placements": [
+        {
+          "racerId": "82236cd5-e341-423a-a23d-a5851e10ef46:4:0",
+          "playerId": "82236cd5-e341-423a-a23d-a5851e10ef46",
+          "characterId": "leaptoad",
+          "rank": 1,
+          "points": 6
+        },
+        {
+          "racerId": "8c229012-18de-4f90-a307-14da015a7949:4:0",
+          "playerId": "8c229012-18de-4f90-a307-14da015a7949",
+          "characterId": "mastermind",
+          "rank": 2,
+          "points": 4
+        }
+      ],
+      "scores": [
+        {
+          "playerId": "82236cd5-e341-423a-a23d-a5851e10ef46",
+          "placement": 6,
+          "map": 0,
+          "skill": 0,
+          "event": 0,
+          "total": 6
+        },
+        {
+          "playerId": "8c229012-18de-4f90-a307-14da015a7949",
+          "placement": 4,
+          "map": 1,
+          "skill": 0,
+          "event": 0,
+          "total": 5
+        }
+      ]
+    }
+  ],
+  "players": [
+    {
+      "id": "82236cd5-e341-423a-a23d-a5851e10ef46",
+      "name": "同名",
+      "score": 13,
+      "used": [
+        "legs",
+        "rocket-scientist",
+        "hypnotist",
+        "copycat",
+        "duelist",
+        "lackey",
+        "leaptoad",
+        "scoocher"
+      ]
+    },
+    {
+      "id": "8c229012-18de-4f90-a307-14da015a7949",
+      "name": "同名1",
+      "score": 19,
+      "used": [
+        "alchemist",
+        "third-wheel",
+        "banana",
+        "centaur",
+        "dicemonger",
+        "egg",
+        "mastermind",
+        "mouth"
+      ]
+    }
+  ],
+  "observations": [
+    {
+      "round": 1,
+      "track": "mild",
+      "stats": {
+        "heap": 24500000,
+        "canvases": 2,
+        "resources": 14
+      }
+    },
+    {
+      "round": 2,
+      "track": "wild",
+      "stats": {
+        "heap": 24500000,
+        "canvases": 2,
+        "resources": 13
+      }
+    },
+    {
+      "round": 3,
+      "track": "mild",
+      "stats": {
+        "heap": 24500000,
+        "canvases": 2,
+        "resources": 13
+      }
+    },
+    {
+      "round": 4,
+      "track": "wild",
+      "stats": {
+        "heap": 24500000,
+        "canvases": 2,
+        "resources": 13
+      }
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,19 @@
+{
+  "result": "passed",
+  "checks": [
+    "cn: 4 viewports, three game entries, invite isolation, invalid invite recovery, keyboard focus",
+    "global: 4 viewports, three game entries, invite isolation, invalid invite recovery, keyboard focus"
+  ],
+  "screenshots": [
+    "/Users/qiuhao/Documents/GAME/magical-athlete-ui-unification/output/playwright/ui-unification/lobby/cn-desktop.png",
+    "/Users/qiuhao/Documents/GAME/magical-athlete-ui-unification/output/playwright/ui-unification/lobby/cn-portrait.png",
+    "/Users/qiuhao/Documents/GAME/magical-athlete-ui-unification/output/playwright/ui-unification/lobby/cn-landscape.png",
+    "/Users/qiuhao/Documents/GAME/magical-athlete-ui-unification/output/playwright/ui-unification/lobby/cn-narrow.png",
+    "/Users/qiuhao/Documents/GAME/magical-athlete-ui-unification/output/playwright/ui-unification/lobby/global-desktop.png",
+    "/Users/qiuhao/Documents/GAME/magical-athlete-ui-unification/output/playwright/ui-unification/lobby/global-portrait.png",
+    "/Users/qiuhao/Documents/GAME/magical-athlete-ui-unification/output/playwright/ui-unification/lobby/global-landscape.png",
+    "/Users/qiuhao/Documents/GAME/magical-athlete-ui-unification/output/playwright/ui-unification/lobby/global-narrow.png"
+  ],
+  "errors": [],
+  "limits": "Local static UI and intercepted game navigations; no production room or TLS verification."
+}

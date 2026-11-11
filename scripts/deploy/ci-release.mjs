@@ -63,6 +63,12 @@ function aliyun(command,args) {
   try{return JSON.parse(execFileSync('aliyun',['ecs',command,'--region',process.env.ALIYUN_REGION_ID,'--RegionId',process.env.ALIYUN_REGION_ID,...args],{encoding:'utf8',stdio:['ignore','pipe','pipe'],timeout:45_000,maxBuffer:2*1024*1024}));}
   catch{throw Error(`Aliyun ${command} failed; credentials and command payload were withheld from logs.`);}
 }
+export function safeInvocationDiagnostics(row){
+  if(typeof row?.Output!=='string'||row.Output.length>3_000_000)return [];
+  const decoded=Buffer.from(row.Output,'base64').toString('utf8');
+  // Whitelist our fixed markers; the rest can contain signed URLs or host data.
+  return decoded.split(/\r?\n/).filter(line=>/^Deployment stage: (?:lock-wait|lock-acquired|unpack-start|install-start|active-complete|download-start attempt=[1-3]|download-progress attempt=[1-3] bytes=[0-9]+|download-verified bytes=[0-9]+|download-failed attempt=[1-3] bytes=[0-9]+ reason=(?:network|idle-timeout|attempt-timeout|size-limit|sha256-mismatch|http-[0-9]{3}))$/.test(line)).slice(-12);
+}
 export async function invokeAliyun(release,action='install') {
   const settings=deploymentSettings(release.target);
   if(!/^cn-[a-z0-9-]+$/.test(process.env.ALIYUN_REGION_ID??'')||!/^i-[a-z0-9]+$/.test(process.env.ALIYUN_INSTANCE_ID??''))throw Error('Missing fixed Alibaba deployment region/instance.');
@@ -82,7 +88,12 @@ export async function invokeAliyun(release,action='install') {
     if(!row)continue;
     const status=row.InvocationStatus;
     if(status==='Success'&&row.ExitCode===0){console.log(`Alibaba ${release.target} ${action} completed for ${release.commit}.`);return;}
-    if(['Failed','Timeout','Cancelled','Stopped','Terminated','Invalid'].includes(status))throw Error(`Alibaba ${action} failed (${status}, exit ${row.ExitCode??'unknown'}; invocation ${started.InvokeId}).`);
+    if(['Failed','Timeout','Cancelled','Stopped','Terminated','Invalid'].includes(status)){
+      const diagnostics=safeInvocationDiagnostics(row);
+      if(diagnostics.length)console.log(diagnostics.join('\n'));
+      else console.log('No installer stage markers returned; inspect the Cloud Assistant invocation privately.');
+      throw Error(`Alibaba ${action} failed (${status}, exit ${row.ExitCode??'unknown'}; invocation ${started.InvokeId}).`);
+    }
   }
   throw Error(`Alibaba ${action} result timed out; inspect invocation ${started.InvokeId} before retrying the same build.`);
 }

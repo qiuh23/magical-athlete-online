@@ -27,24 +27,31 @@ async function neutralHome(page: Page) {
   await noOverflow(page);
 }
 
-for (const mobile of [false, true]) {
-  test(`首页入口先保持未选择，展开与返回保留各模式草稿 ${mobile ? '手机' : '桌面'}`, async ({ page }, testInfo) => {
-    await page.setViewportSize(mobile ? { width: 390, height: 844 } : { width: 1440, height: 1000 });
+for (const [name, viewport] of [
+  ['桌面', { width: 1440, height: 1000 }],
+  ['手机', { width: 390, height: 844 }],
+  ['手机横屏', { width: 844, height: 390 }],
+] as const) {
+  test(`首页入口先保持未选择，展开与返回保留各模式草稿 ${name}`, async ({ page }, testInfo) => {
+    await page.setViewportSize(viewport);
     await page.goto(url);
     await neutralHome(page);
+    await expect(page.getByLabel('你的昵称')).toBeVisible();
+    expect(await page.getByLabel('你的昵称').evaluate(element => (element as HTMLInputElement).form)).toBeNull();
     await page.screenshot({ path: testInfo.outputPath('home-initial.png'), fullPage: true });
 
     await page.getByRole('tab', { name: '创建房间', exact: true }).click();
     await expect(page.getByRole('tab', { name: '创建房间', exact: true })).toHaveAttribute('aria-selected', 'true');
     await expect(page.getByRole('tabpanel', { name: '创建房间', exact: true })).toHaveAttribute('id', 'entry-content');
     await page.getByLabel('你的昵称').fill('入口草稿同学');
+    expect(await page.getByLabel('你的昵称').evaluate(element => (element as HTMLInputElement).form?.id)).toBe('entry-form');
     await page.getByLabel('房间人数上限').selectOption('2');
     await page.getByLabel('每次操作时限').selectOption('60');
 
     await page.getByRole('checkbox', { includeHidden: true, name: 'Extra Mile', exact: true }).check();
     await noOverflow(page);
     await page.screenshot({ path: testInfo.outputPath('home-create.png'), fullPage: true });
-    await page.getByRole('button', { name: '← 返回首页（保留设置）', exact: true }).click();
+    await page.getByRole('button', { name: '返回首页，保留设置', exact: true }).click();
     await neutralHome(page);
     await expect(page.getByRole('tab', { name: '创建房间', exact: true })).toBeFocused();
 
@@ -53,13 +60,13 @@ for (const mobile of [false, true]) {
     await expect(page.getByRole('checkbox', { includeHidden: true, name: 'Extra Mile', exact: true })).not.toBeChecked();
 
     await page.getByRole('checkbox', { includeHidden: true, name: 'Second Wind', exact: true }).check();
-    await page.getByRole('button', { name: '← 返回首页（保留设置）', exact: true }).click();
+    await page.getByRole('button', { name: '返回首页，保留设置', exact: true }).click();
     await neutralHome(page);
     await expect(page.getByRole('tab', { name: '人机对战', exact: true })).toBeFocused();
 
     await page.getByRole('tab', { name: '自己练习', exact: true }).click();
     await expect(page.getByRole('button', { name: '开始自己练习', exact: true })).toBeVisible();
-    await page.getByRole('button', { name: '← 返回首页（保留设置）', exact: true }).click();
+    await page.getByRole('button', { name: '返回首页，保留设置', exact: true }).click();
     await neutralHome(page);
     await expect(page.getByRole('tab', { name: '自己练习', exact: true })).toBeFocused();
 
@@ -73,16 +80,16 @@ for (const mobile of [false, true]) {
     await expect(page.getByLabel('AI 人数', { exact: true })).toHaveValue('1');
     await expect(page.getByRole('checkbox', { includeHidden: true, name: 'Second Wind', exact: true })).toBeChecked();
 
-    await page.getByRole('tab', { name: '现有房间', exact: true }).click();
+    await page.getByRole('tab', { name: '加入房间', exact: true }).click();
     await page.getByLabel('房间码', { exact: true }).fill('ABC234');
-    await page.getByRole('radio', { name: /作为观战者/ }).check();
-    await page.getByRole('button', { name: '← 返回首页（保留设置）', exact: true }).click();
+    await page.getByRole('radio', { name: '观战', exact: true }).check();
+    await page.getByRole('button', { name: '返回首页，保留设置', exact: true }).click();
     await neutralHome(page);
-    await expect(page.getByRole('tab', { name: '现有房间', exact: true })).toBeFocused();
-    await page.getByRole('tab', { name: '现有房间', exact: true }).click();
+    await expect(page.getByRole('tab', { name: '加入房间', exact: true })).toBeFocused();
+    await page.getByRole('tab', { name: '加入房间', exact: true }).click();
     await expect(page.getByLabel('房间码', { exact: true })).toHaveValue('ABC234');
-    await expect(page.getByRole('radio', { name: /作为观战者/ })).toBeChecked();
-    await expect(page.getByRole('button', { name: '进入房间观战', exact: true })).toBeVisible();
+    await expect(page.getByRole('radio', { name: '观战', exact: true })).toBeChecked();
+    await expect(page.getByRole('button', { name: '观战', exact: true })).toBeVisible();
     await expect(page.getByRole('region', { name: '现有房间', exact: true })).toBeVisible();
     await noOverflow(page);
     await page.screenshot({ path: testInfo.outputPath('home-existing-rooms.png'), fullPage: true });
@@ -91,9 +98,17 @@ for (const mobile of [false, true]) {
 
 test('键盘移动入口焦点不自动展开，确认后进入面板并可返回原入口', async ({ page }) => {
   await page.goto(url);
+  const rules = page.getByRole('button', { name: '规则', exact: true });
+  await rules.click();
+  await expect(page.getByRole('dialog', { name: '怎么玩' })).toBeVisible();
+  await page.getByRole('dialog', { name: '怎么玩' }).getByRole('heading', { name: '怎么玩', exact: true }).click();
+  await expect(page.getByRole('dialog', { name: '怎么玩' })).toBeVisible();
+  await page.locator('.modal-backdrop').click({ position: { x: 4, y: 4 } });
+  await expect(page.getByRole('dialog', { name: '怎么玩' })).toHaveCount(0);
+  await expect(rules).toBeFocused();
   await page.getByRole('tab', { name: '创建房间', exact: true }).focus();
   for (const [key, name] of [
-    ['ArrowRight', '现有房间'],
+    ['ArrowRight', '加入房间'],
     ['ArrowLeft', '创建房间'],
     ['ArrowLeft', '人机对战'],
     ['Home', '创建房间'],
@@ -107,7 +122,7 @@ test('键盘移动入口焦点不自动展开，确认后进入面板并可返�
   await expect(page.getByRole('tab', { name: '人机对战', exact: true })).toHaveAttribute('aria-selected', 'true');
   await expect(page.getByRole('tabpanel', { name: '人机对战', exact: true })).toHaveAttribute('id', 'entry-content');
   await expect(page.locator('.setup-heading h2')).toBeFocused();
-  await page.getByRole('button', { name: '← 返回首页（保留设置）', exact: true }).click();
+  await page.getByRole('button', { name: '返回首页，保留设置', exact: true }).click();
   await neutralHome(page);
   await expect(page.getByRole('tab', { name: '人机对战', exact: true })).toBeFocused();
 });
@@ -128,7 +143,7 @@ test('现有房间同时支持房间码和列表，以选手或观众身份加�
     await host.getByLabel('你的昵称').fill('入口房主');
     await host.getByLabel('房间人数上限').selectOption('6');
     await host.getByLabel('每次操作时限').selectOption('0');
-    await host.getByRole('button', { name: '创建房间，召集朋友', exact: true }).click();
+    await host.getByRole('button', { name: '创建房间', exact: true }).click();
     await expect(host.locator('.connection.is-online')).toBeVisible();
     const code = host.url().split('/').at(-1)!;
 
@@ -136,12 +151,12 @@ test('现有房间同时支持房间码和列表，以选手或观众身份加�
       for (const role of ['player', 'spectator'] as const) {
         const page = await makePage(role === 'spectator');
         await page.goto(url);
-        await page.getByRole('tab', { name: '现有房间', exact: true }).click();
+        await page.getByRole('tab', { name: '加入房间', exact: true }).click();
         await page.getByLabel('你的昵称').fill(`${via === 'code' ? '房间码' : '列表'}${role === 'player' ? '选手' : '观众'}`);
         if (via === 'code') {
           await page.getByLabel('房间码', { exact: true }).fill(code);
-          if (role === 'spectator') await page.getByRole('radio', { name: /作为观战者/ }).check();
-          await page.getByRole('button', { name: role === 'player' ? '加入这场胡闹' : '进入房间观战', exact: true }).click();
+          if (role === 'spectator') await page.getByRole('radio', { name: '观战', exact: true }).check();
+          await page.locator('.entry-submit').getByRole('button', { name: role === 'player' ? '加入' : '观战', exact: true }).click();
         } else {
           const row = page.getByTestId(`directory-room-${code}`);
           await expect(row).toBeVisible();
@@ -149,7 +164,7 @@ test('现有房间同时支持房间码和列表，以选手或观众身份加�
           await page.screenshot({ path: testInfo.outputPath(`directory-${role}.png`), fullPage: true });
           // Each row has explicit actions; the spectator action must work even
           // while the manual room-code form retains its default player role.
-          await expect(page.getByRole('radio', { name: /作为选手/ })).toBeChecked();
+          await expect(page.getByRole('radio', { name: '参赛', exact: true })).toBeChecked();
           await row.getByRole('button', { name: role === 'player' ? '加入房间' : '观战', exact: true }).click();
         }
         const expectedURL = `${url}/room/${code}${role === 'spectator' ? '?spectate=1' : ''}`;
@@ -188,22 +203,22 @@ test('邀请链接直接展开现有房间，返回首页后可保留昵称重�
   const { room } = application.rooms.create('邀请房主', 6, 0);
   await page.goto(`${url}/room/${room.code}`);
   await expect(page.locator('#entry-form')).toBeVisible();
-  await expect(page.getByRole('tab', { name: '现有房间', exact: true })).toHaveAttribute('aria-selected', 'true');
+  await expect(page.getByRole('tab', { name: '加入房间', exact: true })).toHaveAttribute('aria-selected', 'true');
   await expect(page.getByRole('tab', { selected: true })).toHaveCount(1);
-  await expect(page.getByRole('tabpanel', { name: '现有房间', exact: true })).toHaveAttribute('id', 'entry-content');
+  await expect(page.getByRole('tabpanel', { name: '加入房间', exact: true })).toHaveAttribute('id', 'entry-content');
   await expect(page.locator('.setup-heading h2')).toBeFocused();
   await expect(page.getByLabel('房间码', { exact: true })).toHaveValue(room.code);
-  await expect(page.getByRole('radio', { name: /作为选手/ })).toBeChecked();
+  await expect(page.getByRole('radio', { name: '参赛', exact: true })).toBeChecked();
   await page.getByLabel('你的昵称').fill('邀请观众');
-  await page.getByRole('button', { name: '← 返回首页（保留设置）', exact: true }).click();
+  await page.getByRole('button', { name: '返回首页，保留设置', exact: true }).click();
   await expect(page).toHaveURL(`${url}/`);
   await neutralHome(page);
-  await expect(page.getByRole('tab', { name: '现有房间', exact: true })).toBeFocused();
-  await page.getByRole('tab', { name: '现有房间', exact: true }).click();
+  await expect(page.getByRole('tab', { name: '加入房间', exact: true })).toBeFocused();
+  await page.getByRole('tab', { name: '加入房间', exact: true }).click();
   await expect(page.getByLabel('你的昵称')).toHaveValue('邀请观众');
   await page.getByLabel('房间码', { exact: true }).fill(room.code);
-  await page.getByRole('radio', { name: /作为观战者/ }).check();
-  await page.getByRole('button', { name: '进入房间观战', exact: true }).click();
+  await page.getByRole('radio', { name: '观战', exact: true }).check();
+  await page.locator('.entry-submit').getByRole('button', { name: '观战', exact: true }).click();
   await expect(page.locator('.connection.is-online')).toBeVisible();
   await expect(page.locator('.spectator-badge')).toHaveText('正在观战');
   expect(application.rooms.get(room.code).game.players).toHaveLength(1);

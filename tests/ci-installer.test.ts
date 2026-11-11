@@ -69,3 +69,45 @@ test('release extraction rejects parent traversal, external symlinks and unexpec
     }
   }finally{rmSync(work,{recursive:true,force:true});}
 });
+
+const {downloadArtifact}=await import(new URL('../scripts/deploy/ci-install.mjs',import.meta.url).href);
+const {createHash}=await import('node:crypto');
+test('artifact download retries a broken body from zero and verifies the complete SHA',async()=>{
+  const work=mkdtempSync(join(tmpdir(),'athlete-download-retry-'));
+  const bytes=Buffer.from('complete checked release'),artifactSha256=createHash('sha256').update(bytes).digest('hex');
+  const progress:string[]=[];let calls=0;
+  try{
+    const zip=join(work,'artifact.zip');
+    await downloadArtifact({...request,artifactSha256},zip,{sleep:async()=>{},progress:(line:string)=>progress.push(line),fetchImpl:async()=>{
+      calls++;
+      if(calls===1)return new Response(new ReadableStream({start(controller){controller.enqueue(Buffer.from('partial release'));controller.error(Error('secret signed URL'));}}));
+      return new Response(bytes);
+    }});
+    assert.equal(calls,2);assert.deepEqual(readFileSync(zip),bytes);
+    assert.ok(progress.some(line=>line==='Deployment stage: download-start attempt=2'));
+    assert.ok(progress.every(line=>!line.includes('secret')&&!line.includes(request.artifactUrl)));
+  }finally{rmSync(work,{recursive:true,force:true});}
+});
+
+test('artifact permissions, size and digest failures never retry or activate a release',async()=>{
+  const work=mkdtempSync(join(tmpdir(),'athlete-download-denial-'));
+  try{
+    for(const response of [()=>new Response('denied',{status:403}),()=>new Response('wrong digest'),()=>new Response('x',{headers:{'content-length':String(513*1024*1024)}})]){
+      let calls=0;
+      await assert.rejects(()=>downloadArtifact(request,join(work,'artifact.zip'),{sleep:async()=>{},progress:()=>{},fetchImpl:async()=>{calls++;return response();}}),/no release was activated/);
+      assert.equal(calls,1);
+    }
+  }finally{rmSync(work,{recursive:true,force:true});}
+});
+
+test('stalled transfers abort within their idle budget and exhaust bounded retries without leaking URLs',async()=>{
+  const work=mkdtempSync(join(tmpdir(),'athlete-download-stall-'));
+  let calls=0,aborted=0;
+  try{
+    await assert.rejects(()=>downloadArtifact(request,join(work,'artifact.zip'),{maxAttempts:2,idleTimeoutMs:10,attemptTimeoutMs:100,sleep:async()=>{},progress:()=>{},fetchImpl:async(_url:string,{signal}:{signal:AbortSignal})=>{
+      calls++;
+      return new Response(new ReadableStream({start(controller){signal.addEventListener('abort',()=>{aborted++;controller.error(Error(request.artifactUrl));});}}));
+    }}),/idle-timeout; attempt 2\/2/);
+    assert.equal(calls,2);assert.equal(aborted,2);
+  }finally{rmSync(work,{recursive:true,force:true});}
+});

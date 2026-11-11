@@ -23,8 +23,8 @@ export function RaceOrder({ room, racers, order, activeId, onDetail }: {
     return <button type="button" className={`floating-racer ${activeId === racer.id ? 'is-active' : ''} ${owner.id === room.selfId ? 'is-self' : ''}`} key={racer.id} data-racer-id={racer.id} style={{ '--racer-color': owner.color } as CSSProperties}
       aria-label={`${name}，基础顺序${index + 1}，${owner.seat + 1}号${owner.id === room.selfId ? '你' : owner.name}，累计${owner.score}分${status ? `，${status}` : ''}，查看技能`}
       title={name} onClick={() => onDetail(racer.characterId, racer.id)}>
-      <span className="floating-avatar"><Avatar id={racer.characterId} />{owner.id === room.selfId && <i>你</i>}{status && <span className="racer-state" title={status} aria-label={status}>{racer.eliminated ? '出局' : racer.finished ? racer.rank ? `${racer.rank}名` : <Icon kind="flag" size={16} /> : <Icon kind="trip" size={16} />}</span>}</span>
-      <span className="floating-racer-score"><b>{owner.seat + 1}号</b><span>{owner.score}<small>分</small></span></span>
+      <span className="floating-avatar"><Avatar id={racer.characterId} /><b className="racer-seat" aria-hidden="true">{owner.seat + 1}</b>{owner.id === room.selfId && <i>你</i>}{status && <span className="racer-state" title={status} aria-label={status}>{racer.eliminated ? '出局' : racer.finished ? racer.rank ? `${racer.rank}名` : <Icon kind="flag" size={16} /> : <Icon kind="trip" size={16} />}</span>}</span>
+      <span className="floating-racer-score"><span>{owner.score}<small>分</small></span></span>
     </button>;
   })}</div>;
 }

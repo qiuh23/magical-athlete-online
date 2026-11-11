@@ -11,13 +11,13 @@
   <link rel="stylesheet" href="./style.css">
   <script type="module" src="./app.mjs"></script>
 </head>
-<body>
+<body data-game-theme="lobby">
   <div class="page">
     <header><a class="brand" href="./" aria-label="一起玩，返回大厅"><span class="brand-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>一起玩</a><span class="site-badge" aria-live="polite"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></svg><strong id="current-server">读取中</strong></span></header>
     <main>
       <h1>今天玩什么？</h1>
       <section id="choices" aria-busy="true" aria-label="选择游戏入口">
-        <div id="invitation" class="invitation" hidden><strong>本站游戏邀请</strong><p id="invite-details"></p><p>邀请码仅在所属站点使用。</p><button id="clear-invite" type="button">返回游戏选择</button></div>
+        <div id="invitation" class="invitation" hidden><div><strong id="invite-title">朋友的邀请</strong><p id="invite-details"></p></div><button id="clear-invite" type="button">返回游戏选择</button></div>
         <div class="games">
           <a class="game athlete" data-game="athlete" aria-disabled="true" aria-label="胡闹运动会，进入游戏">
             <div class="art track" aria-hidden="true"><img src="./art/athlete.svg" width="640" height="360" alt="" fetchpriority="high"><svg class="art-motion" viewBox="0 0 640 360" preserveAspectRatio="xMidYMid meet" fill="none" focusable="false"><g id="foreground-die" transform="translate(496 266) rotate(-10)">
@@ -29,15 +29,15 @@
 <path d="M-27-13 0-28 28-13" stroke="#fffef5" stroke-width="2" stroke-linecap="round"/>
 <g fill="#38694f"><ellipse cx="-11" cy="-15" rx="3.5" ry="2.2"/><ellipse cx="12" cy="-15" rx="3.5" ry="2.2"/><ellipse cx="-23" cy="1" rx="2.8" ry="3.4" transform="rotate(-28 -23 1)"/><ellipse cx="-15" cy="13" rx="2.8" ry="3.4" transform="rotate(-28 -15 13)"/><ellipse cx="-7" cy="25" rx="2.8" ry="3.4" transform="rotate(-28 -7 25)"/><ellipse cx="11" cy="11" rx="2.8" ry="3.4" transform="rotate(28 11 11)"/><ellipse cx="24" cy="4" rx="2.8" ry="3.4" transform="rotate(28 24 4)"/><ellipse cx="11" cy="27" rx="2.8" ry="3.4" transform="rotate(28 11 27)"/><ellipse cx="24" cy="20" rx="2.8" ry="3.4" transform="rotate(28 24 20)"/></g>
 </g></g></svg></div>
-            <div class="game-content"><h3>胡闹运动会</h3><span class="action"><span class="action-label">读取中</span><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"/></svg></span></div>
+            <div class="game-content"><h2>胡闹运动会</h2><span class="action"><span class="action-label">读取中</span><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"/></svg></span></div>
           </a>
           <a class="game wizard" data-game="wizard" aria-disabled="true" aria-label="巫师牌，进入游戏">
             <div class="art cards" aria-hidden="true"><img src="./art/wizard.svg" width="640" height="360" alt=""></div>
-            <div class="game-content"><h3>巫师牌</h3><span class="action"><span class="action-label">读取中</span><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"/></svg></span></div>
+            <div class="game-content"><h2>巫师牌</h2><span class="action"><span class="action-label">读取中</span><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"/></svg></span></div>
           </a>
           <a class="game catan" data-game="catan" aria-disabled="true" aria-label="卡坦岛好友桌，正在读取入口">
             <div class="art island" aria-hidden="true"><img src="./art/catan.svg" width="640" height="360" alt=""></div>
-            <div class="game-content"><h3>卡坦岛</h3><span class="action"><span class="action-label">读取中</span><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"/></svg></span></div>
+            <div class="game-content"><h2>卡坦岛</h2><span class="action"><span class="action-label">读取中</span><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"/></svg></span></div>
           </a>
         </div>
         <p id="status" class="status" role="status">正在读取游戏入口…</p>

@@ -33,10 +33,29 @@ export function RoomChat({ room, community, connection, immersive, onRename }: {
     if (!immersive || !portal.current) return;
     // Bottom sheets and live notices reserve their own space. Choices never
     // participate in this measurement, so resizing a choice cannot move chat.
-    const update = () => document.documentElement.style.setProperty('--race-chat-height', `${Math.ceil(portal.current!.getBoundingClientRect().height)}px`);
-    const observer = new ResizeObserver(update); observer.observe(portal.current); update();
-    return () => { observer.disconnect(); document.documentElement.style.removeProperty('--race-chat-height'); };
-  }, [immersive, open, notices.length]);
+    const root = document.documentElement, order = document.querySelector<HTMLElement>('.floating-racers');
+    const map = document.querySelector<HTMLElement>('[data-testid="board-minimap"]'), status = document.querySelector<HTMLElement>('.race-status-stack');
+    root.dataset.raceChatOpen = String(open);
+    const update = () => {
+      root.style.setProperty('--race-chat-height', `${Math.ceil(portal.current!.getBoundingClientRect().height)}px`);
+      if (order) root.style.setProperty('--race-chat-order-height', `${Math.ceil(order.getBoundingClientRect().height)}px`);
+      // Read after the order-height update: the compact map/status row follows
+      // that strip, and position changes need not trigger ResizeObserver.
+      const bottom = Math.max(...[order, map, status].map(element => element?.getBoundingClientRect().bottom ?? 0));
+      root.style.setProperty('--race-chat-clear-top', `${Math.ceil(bottom) + 12}px`);
+    };
+    let frame = 0;
+    const resized = () => { cancelAnimationFrame(frame); frame = requestAnimationFrame(update); };
+    const observer = new ResizeObserver(update);
+    for (const element of [portal.current, order, map, status]) if (element) observer.observe(element);
+    window.visualViewport?.addEventListener('resize', resized); window.addEventListener('resize', resized); update();
+    return () => {
+      observer.disconnect(); cancelAnimationFrame(frame);
+      window.visualViewport?.removeEventListener('resize', resized); window.removeEventListener('resize', resized);
+      delete root.dataset.raceChatOpen;
+      for (const name of ['--race-chat-height', '--race-chat-order-height', '--race-chat-clear-top']) root.style.removeProperty(name);
+    };
+  }, [immersive, open, notices.length, minimapBottom, room.round]);
   useEffect(()=>{
     const revision=community.liveRevision??0;
     if(open||!community.connected)setNotices([]);
@@ -85,7 +104,11 @@ export function RoomChat({ room, community, connection, immersive, onRename }: {
   }, []);
   useEffect(() => {
     if (!open) return;
-    const outside = (event: PointerEvent) => { if (event.target instanceof Node && !portal.current?.contains(event.target)) setOpen(false); };
+    const outside = (event: PointerEvent) => {
+      if (!(event.target instanceof Node)) return;
+      if (!portal.current?.contains(event.target)) setOpen(false);
+      else for (const details of portal.current.querySelectorAll<HTMLDetailsElement>('.chat-report[open]')) if (!details.contains(event.target)) details.open = false;
+    };
     document.addEventListener('pointerdown', outside);
     return () => document.removeEventListener('pointerdown', outside);
   }, [open]);

@@ -42,7 +42,7 @@ const paths = {
 
 export type IconKind = keyof typeof paths;
 export function Icon({ kind, size = 22 }: { kind: IconKind; size?: number }) {
-  return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">{paths[kind]}</svg>;
+  return <svg className="ui-icon" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">{paths[kind]}</svg>;
 }
 
 export function IconButton({ icon, label, className = '', onClick, ...props }: ButtonHTMLAttributes<HTMLButtonElement> & { icon: IconKind; label: string }) {
