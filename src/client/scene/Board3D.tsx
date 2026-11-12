@@ -12,7 +12,8 @@ import { ToyCharacter } from './ToyCharacter.js';
 import { DioramaStadium } from './DioramaStadium.js';
 import { WhirlyStadium } from './WhirlyStadium.js';
 import { CameraRig } from './CameraRig.js';
-import { StudioLighting, AdaptiveQuality, PawnContact } from './StudioLighting.js';
+import { AdaptiveQuality, PawnContact } from './StudioLighting.js';
+import { StudioLightingV7, type AthleteLightMode } from './StudioLightingV7.js';
 import { RaceEffects } from './RaceEffects.js';
 import { boardPoint, TILE, trackConnections, trackNodeIds, trackSvgLayout, trackMovementDistance, routeChoice } from './math.js';
 import { RouteChoices, RouteButtons } from './RouteChoices.js';
@@ -37,6 +38,8 @@ export interface ScenePlayback {
 interface Props extends ScenePlayback {
   room: RoomView;
   lowQuality: boolean;
+  /** Deterministic visual preset. No local clock or multiplayer protocol change. */
+  appearanceMode?: AthleteLightMode;
   reducedMotion: boolean;
   muted: boolean;
   onDetail: (id: string, racerId?: string) => void;
@@ -61,7 +64,7 @@ class SceneBoundary extends Component<{ children: ReactNode; resetKey: number; r
   render() { return this.state.failed ? <div className="scene-fallback" role="status"><strong>3D 场景暂时无法显示</strong><p>选手位置与操作仍可在下方查看。</p><button onClick={this.props.retry}>重新载入 3D</button></div> : this.props.children; }
 }
 
-export function Board3D({ clock = wallPresentationClock, paused = false, room, racers, beat, queue, startedAt, durationMs, lowQuality, reducedMotion, muted, onDetail, onSkipIntro, onIntroReady, onDiceSettled, introReady = true, onChooseRoute, choiceBusy = false }: Props) {
+export function Board3D({ clock = wallPresentationClock, paused = false, room, racers, beat, queue, startedAt, durationMs, lowQuality, reducedMotion, muted, onDetail, onSkipIntro, onIntroReady, onDiceSettled, introReady = true, appearanceMode = 'day', onChooseRoute, choiceBusy = false }: Props) {
   const [automaticLow, setAutomaticLow] = useState(false);
   lowQuality = lowQuality || automaticLow;
   const spectator = room.role === 'spectator';
@@ -111,8 +114,9 @@ export function Board3D({ clock = wallPresentationClock, paused = false, room, r
   const intro = {focus:beat?.kind==='intro'?introFocus(racers,introIndex,reducedMotion):undefined,racer:beat?.kind==='intro'&&!reducedMotion?racers[introIndex]:undefined,index:introIndex,total:racers.length,reducedMotion,skip:()=>{if(beat?.kind==='intro')onSkipIntro?.();}};
   const idleFocus = autoWatch && heldFocus && heldFocus.chainId !== dismissedChain ? idleFollowFocus(room, racers, heldFocus) : ownFocus(room, racers);
   const focus: CameraFocus = route && choosing ? choosing : cameraMode === 'overview' ? { state: 'overview', ids: active ? [active] : [], positions: [] } : choosing ?? (manualCamera ? { state: 'manual', ids: [], positions: [] } : intro.focus ?? (action && action.chainId !== dismissedChain && (autoWatch || myAction) ? shot!.focus : idleFocus));
+  const showTallDecor = focus.state === 'overview' && cameraMode === 'overview' && beat?.kind !== 'intro' && !choosing && !route;
   const returnSelf = () => { intro.skip(); setCameraMode('self'); setManualCamera(false); setDismissedChain(action?.chainId ?? heldFocus?.chainId ?? 'manual-self'); setCameraReset(value => value + 1); };
-  return <section ref={root} className={`board-scene ${compact ? 'compact-scene' : ''}`} data-testid="board-3d" data-track={room.track} data-node-count={trackNodeIds(room.track).length} data-twist-boundary={TRACKS[room.track].twistBoundary?`${TRACKS[room.track].twistBoundary!.before}-${TRACKS[room.track].twistBoundary!.after}`:undefined} data-neutral-monster={room.trackState?.twist?.monster&&!room.trackState.twist.monster.racerId&&!room.trackState.twist.monster.finished?room.trackState.twist.monster.position:undefined} data-twist-chips={room.trackState?.twist?.chips?.join(',')} data-special-event={room.trackState?.event?.id} data-event-marker={room.trackState?.event?.npc?.position} data-trampolines={room.trackState?.event?.trampolines?.join(',')} data-phase={beat?.kind ?? 'idle'} data-intro-ready={String(introReady)} data-event-ids={beat?.events.map(e => e.id).join(',') ?? ''} data-motion-count={beat?.motions.length ?? 0} data-renderer="react-three-fiber" data-playback-paused={String(paused)} data-frameloop={paused ? 'demand' : beat && beat.kind!=='intro' && !dice && !reducedMotion ? 'always' : 'demand'} data-camera-mode={cameraMode} data-camera-state={focus.state} data-camera-target-ids={focus.ids.join(',')} data-camera-chain-id={focus.chainId ?? ''} data-camera-positions={focus.positions.join(',')} data-camera-piece={focus.piece} data-camera-shot={shot?.keys.join(',')} aria-label={`${TRACKS[room.track].name}立体棋盘`}>
+  return <section ref={root} className={`board-scene ${compact ? 'compact-scene' : ''}`} data-testid="board-3d" data-track={room.track} data-appearance-mode={appearanceMode} data-tall-decor={String(showTallDecor)} data-node-count={trackNodeIds(room.track).length} data-twist-boundary={TRACKS[room.track].twistBoundary?`${TRACKS[room.track].twistBoundary!.before}-${TRACKS[room.track].twistBoundary!.after}`:undefined} data-neutral-monster={room.trackState?.twist?.monster&&!room.trackState.twist.monster.racerId&&!room.trackState.twist.monster.finished?room.trackState.twist.monster.position:undefined} data-twist-chips={room.trackState?.twist?.chips?.join(',')} data-special-event={room.trackState?.event?.id} data-event-marker={room.trackState?.event?.npc?.position} data-trampolines={room.trackState?.event?.trampolines?.join(',')} data-phase={beat?.kind ?? 'idle'} data-intro-ready={String(introReady)} data-event-ids={beat?.events.map(e => e.id).join(',') ?? ''} data-motion-count={beat?.motions.length ?? 0} data-renderer="react-three-fiber" data-playback-paused={String(paused)} data-frameloop={paused ? 'demand' : beat && beat.kind!=='intro' && !dice && !reducedMotion ? 'always' : 'demand'} data-camera-mode={cameraMode} data-camera-state={focus.state} data-camera-target-ids={focus.ids.join(',')} data-camera-chain-id={focus.chainId ?? ''} data-camera-positions={focus.positions.join(',')} data-camera-piece={focus.piece} data-camera-shot={shot?.keys.join(',')} aria-label={`${TRACKS[room.track].name}立体棋盘`}>
     <div className="scene-camera-toolbar">
       <IconButton icon="focus" label="恢复默认视角" className="camera-home" onClick={returnSelf} />
       <details className="camera-options"><summary aria-label="镜头设置" title="镜头设置"><Icon kind="camera" /></summary><div className="camera-settings-content">
@@ -130,13 +134,13 @@ export function Board3D({ clock = wallPresentationClock, paused = false, room, r
     <PredictionHud room={room} racers={racers} choosing={!!choosing} onDetail={onDetail} />
     {!beat && !queue?.length && <PublicDiceSummary room={room} racers={racers} onDetail={onDetail} />}
     <SceneBoundary resetKey={resetKey} retry={() => setResetKey(n => n + 1)}>
-      <Canvas className="board-webgl" key={resetKey} frameloop={paused ? 'demand' : beat && beat.kind!=='intro' && !dice && !reducedMotion ? 'always' : 'demand'} orthographic shadows={!lowQuality} dpr={lowQuality ? 1 : [1, compact ? 1.25 : 1.5]} camera={{ position: [3, 16, 16], near: .1, far: 100, zoom: 35 }} gl={{ antialias: !lowQuality, alpha: false, powerPreference: 'high-performance' }} onCreated={({ gl }) => { gl.setClearColor('#c7dfd3'); gl.outputColorSpace = THREE.SRGBColorSpace; gl.toneMapping = THREE.ACESFilmicToneMapping; gl.toneMappingExposure = 1.1; gl.shadowMap.type = THREE.PCFShadowMap; gl.domElement.addEventListener('webglcontextlost', event => { event.preventDefault(); setLost(true); }); gl.domElement.addEventListener('webglcontextrestored', () => setLost(false)); }}>
-        <StudioLighting compact={compact} lowQuality={lowQuality} />
+      <Canvas className="board-webgl" key={resetKey} frameloop={paused ? 'demand' : beat && beat.kind!=='intro' && !dice && !reducedMotion ? 'always' : 'demand'} orthographic shadows={!lowQuality} dpr={lowQuality ? 1 : [1, compact ? 1.25 : 1.5]} camera={{ position: [3, 16, 16], near: .1, far: 100, zoom: 35 }} gl={{ antialias: !lowQuality, alpha: false, powerPreference: 'high-performance' }} onCreated={({ gl }) => { gl.setClearColor('#c7dfd3'); gl.outputColorSpace = THREE.SRGBColorSpace; gl.toneMapping = THREE.ACESFilmicToneMapping; gl.shadowMap.type = THREE.PCFShadowMap; gl.domElement.addEventListener('webglcontextlost', event => { event.preventDefault(); setLost(true); }); gl.domElement.addEventListener('webglcontextrestored', () => setLost(false)); }}>
+        <StudioLightingV7 compact={compact} lowQuality={lowQuality} mode={appearanceMode} />
         <AdaptiveQuality lowQuality={lowQuality} onSlow={() => setAutomaticLow(true)} root={root} />
         <CameraRig paused={paused} track={room.track} racers={racers} compact={compact} reset={cameraReset} focus={focus} reducedMotion={reducedMotion} onManual={() => { intro.skip(); setManualCamera(true); }} root={root} />
         {room.track === 'whirly-world'
-          ? <WhirlyStadium compact={compact} lowQuality={lowQuality} fallback={<DioramaStadium compact={compact} track={room.track} lowQuality={lowQuality} beat={beat} racers={racers} />} />
-          : <DioramaStadium compact={compact} track={room.track} reversed={room.trackState?.reversed} lowQuality={lowQuality} beat={beat} racers={racers} />}
+          ? <WhirlyStadium compact={compact} lowQuality={lowQuality} fallback={<DioramaStadium compact={compact} track={room.track} lowQuality={lowQuality} beat={beat} racers={racers} showTallDecor={showTallDecor} />} />
+          : <DioramaStadium compact={compact} track={room.track} reversed={room.trackState?.reversed} lowQuality={lowQuality} beat={beat} racers={racers} showTallDecor={showTallDecor} />}
         {route && <RouteChoices {...{ route, compact }} track={room.track} buttons={routeButtons} />}
         <Suspense fallback={null}><TwistPieces {...{ room, compact, lowQuality, reducedMotion }} />{racers.filter(r => !r.eliminated || beat?.kind === 'eliminate' && beat.targets.includes(r.id)).map(racer => <Pawn paused={paused} clock={clock} key={racer.id} racer={racer} racers={racers} room={room} compact={compact} beat={beat} startedAt={startedAt} durationMs={durationMs} lowQuality={lowQuality} reducedMotion={reducedMotion} active={active === racer.id} onDetail={onDetail} labels={labels} />)}</Suspense>
         <RaceEffects clock={clock} track={room.track} reversed={room.trackState?.reversed} {...{ beat, racers, compact, startedAt, durationMs, reducedMotion, lowQuality }} />
@@ -187,7 +191,8 @@ function PerformanceProbe({ root }: { root: React.RefObject<HTMLElement | null> 
       let loaded = 0, fallbacks = 0;
       scene.traverse(object => { if (object.name.startsWith('toy_')) loaded++; if (object.name === 'procedural-racer-fallback') fallbacks++; });
       root.current.dataset.loadedModels = String(loaded); root.current.dataset.modelFallbacks = String(fallbacks);
-      root.current.dataset.trackModel = scene.getObjectByName('track_whirly_world') ? 'whirly-world' : 'procedural';
+      root.current.dataset.trackModel = scene.getObjectByName('track_whirly_world') ? 'whirly-world' : scene.getObjectByName('stadium-v9-models') ? 'stadium-v9' : 'procedural';
+      root.current.dataset.stadiumTallCount = String(['athlete_scoreboard','athlete_bunting'].filter(name => scene.getObjectByName(name)).length);
     };
     reportModels();
     const modelReport = setInterval(reportModels, 500);
@@ -196,6 +201,9 @@ function PerformanceProbe({ root }: { root: React.RefObject<HTMLElement | null> 
       if (root.current) {
         root.current.dataset.drawCalls = String(gl.info.render.calls); root.current.dataset.triangles = String(gl.info.render.triangles);
         root.current.dataset.renderFrameCount = String(++frameCount.current);
+        root.current.dataset.geometries = String(gl.info.memory.geometries);
+        root.current.dataset.textures = String(gl.info.memory.textures);
+        root.current.dataset.programs = String(gl.info.programs?.length ?? 0);
       }
     };
     return () => { clearInterval(modelReport); scene.onAfterRender = previous; };

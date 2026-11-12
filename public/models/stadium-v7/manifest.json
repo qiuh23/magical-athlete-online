@@ -1,0 +1,1368 @@
+{
+  "blender": "4.3.2",
+  "source": "https://github.com/qiuh23/magical-athlete-online/blob/main/src/client/scene/DioramaStadium.tsx",
+  "source_blob_sha": "21675d1cc1e844c8bb2ae68efa177c416800dc99",
+  "assets": [
+    {
+      "id": "athlete_bleachers",
+      "file": "athlete_bleachers.glb",
+      "triangles": 7200,
+      "mesh_primitives": 5,
+      "materials": [
+        "cream",
+        "mint",
+        "ink",
+        "coral",
+        "gold"
+      ],
+      "nodes": [
+        "athlete_bleachers__cream",
+        "athlete_bleachers__mint",
+        "athlete_bleachers__ink",
+        "athlete_bleachers__coral",
+        "athlete_bleachers__gold"
+      ],
+      "dimensions_xyz_gltf": [
+        5.5,
+        0.955,
+        1.5
+      ],
+      "pivot": "ground datum at origin; +Y up; front +Z; corner rail origin is arc center",
+      "bytes": 353792,
+      "material_factors": {
+        "coral": {
+          "baseColorFactor": [
+            0.8549926280975342,
+            0.18782077729701996,
+            0.1119324266910553,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "cream": {
+          "baseColorFactor": [
+            0.8962693810462952,
+            0.7681511640548706,
+            0.5520114302635193,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "gold": {
+          "baseColorFactor": [
+            0.8468732237815857,
+            0.5028864741325378,
+            0.09084171056747437,
+            1
+          ],
+          "metallicFactor": 0.550000011920929,
+          "roughnessFactor": 0.30000001192092896
+        },
+        "ink": {
+          "baseColorFactor": [
+            0.021219009533524513,
+            0.1119324266910553,
+            0.09084171056747437,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "mint": {
+          "baseColorFactor": [
+            0.23074005544185638,
+            0.5647115111351013,
+            0.43965718150138855,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        }
+      },
+      "sha256": "ebb0e33254466f0fe2e0ac5ee7efa6f8e3335ebc822454c4f2c9de92757279ea",
+      "pbr_revision": "V7 named nonmetal matte roughness capped .48; all colors and geometry retained"
+    },
+    {
+      "id": "athlete_podium",
+      "file": "athlete_podium.glb",
+      "triangles": 1952,
+      "mesh_primitives": 5,
+      "materials": [
+        "cream",
+        "mint",
+        "ink",
+        "coral",
+        "gold"
+      ],
+      "nodes": [
+        "athlete_podium__cream",
+        "athlete_podium__mint",
+        "athlete_podium__ink",
+        "athlete_podium__coral",
+        "athlete_podium__gold"
+      ],
+      "dimensions_xyz_gltf": [
+        2.28,
+        1.408,
+        1.1475
+      ],
+      "pivot": "ground datum at origin; +Y up; front +Z; corner rail origin is arc center",
+      "bytes": 100260,
+      "material_factors": {
+        "coral": {
+          "baseColorFactor": [
+            0.8549926280975342,
+            0.18782077729701996,
+            0.1119324266910553,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "cream": {
+          "baseColorFactor": [
+            0.8962693810462952,
+            0.7681511640548706,
+            0.5520114302635193,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "gold": {
+          "baseColorFactor": [
+            0.8468732237815857,
+            0.5028864741325378,
+            0.09084171056747437,
+            1
+          ],
+          "metallicFactor": 0.550000011920929,
+          "roughnessFactor": 0.30000001192092896
+        },
+        "ink": {
+          "baseColorFactor": [
+            0.021219009533524513,
+            0.1119324266910553,
+            0.09084171056747437,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "mint": {
+          "baseColorFactor": [
+            0.23074005544185638,
+            0.5647115111351013,
+            0.43965718150138855,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        }
+      },
+      "sha256": "e91d607b803de66c90b06a0159932978da97aff5256dc8b30ae57ba6095cea33",
+      "pbr_revision": "V7 named nonmetal matte roughness capped .48; all colors and geometry retained"
+    },
+    {
+      "id": "athlete_finish_gate",
+      "file": "athlete_finish_gate.glb",
+      "triangles": 2448,
+      "mesh_primitives": 4,
+      "materials": [
+        "cream",
+        "ink",
+        "coral",
+        "gold"
+      ],
+      "nodes": [
+        "athlete_finish_gate__cream",
+        "athlete_finish_gate__ink",
+        "athlete_finish_gate__coral",
+        "athlete_finish_gate__gold"
+      ],
+      "dimensions_xyz_gltf": [
+        2.9,
+        2.59,
+        0.68
+      ],
+      "pivot": "ground datum at origin; +Y up; front +Z; corner rail origin is arc center",
+      "bytes": 124608,
+      "material_factors": {
+        "coral": {
+          "baseColorFactor": [
+            0.8549926280975342,
+            0.18782077729701996,
+            0.1119324266910553,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "cream": {
+          "baseColorFactor": [
+            0.8962693810462952,
+            0.7681511640548706,
+            0.5520114302635193,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "gold": {
+          "baseColorFactor": [
+            0.8468732237815857,
+            0.5028864741325378,
+            0.09084171056747437,
+            1
+          ],
+          "metallicFactor": 0.550000011920929,
+          "roughnessFactor": 0.30000001192092896
+        },
+        "ink": {
+          "baseColorFactor": [
+            0.021219009533524513,
+            0.1119324266910553,
+            0.09084171056747437,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        }
+      },
+      "sha256": "08d7b3deef8ec7dd48dbf61e95c52592c19fe1fc60a02b517c8be3fc3138952d",
+      "pbr_revision": "V7 named nonmetal matte roughness capped .48; all colors and geometry retained"
+    },
+    {
+      "id": "athlete_pennant",
+      "file": "athlete_pennant.glb",
+      "triangles": 380,
+      "mesh_primitives": 4,
+      "materials": [
+        "cream",
+        "ink",
+        "coral",
+        "gold"
+      ],
+      "nodes": [
+        "athlete_pennant__cream",
+        "athlete_pennant__ink",
+        "athlete_pennant__coral",
+        "athlete_pennant__gold"
+      ],
+      "dimensions_xyz_gltf": [
+        0.66,
+        0.94,
+        0.32
+      ],
+      "pivot": "ground datum at origin; +Y up; front +Z; corner rail origin is arc center",
+      "bytes": 18424,
+      "material_factors": {
+        "coral": {
+          "baseColorFactor": [
+            0.8549926280975342,
+            0.18782077729701996,
+            0.1119324266910553,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "cream": {
+          "baseColorFactor": [
+            0.8962693810462952,
+            0.7681511640548706,
+            0.5520114302635193,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "gold": {
+          "baseColorFactor": [
+            0.8468732237815857,
+            0.5028864741325378,
+            0.09084171056747437,
+            1
+          ],
+          "metallicFactor": 0.550000011920929,
+          "roughnessFactor": 0.30000001192092896
+        },
+        "ink": {
+          "baseColorFactor": [
+            0.021219009533524513,
+            0.1119324266910553,
+            0.09084171056747437,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        }
+      },
+      "sha256": "1135de146562e9e77895139e9eb1fc40dc7424d875f018d7c978bf4a0db89bd8",
+      "pbr_revision": "V7 named nonmetal matte roughness capped .48; all colors and geometry retained"
+    },
+    {
+      "id": "athlete_start_gate",
+      "file": "athlete_start_gate.glb",
+      "triangles": 3432,
+      "mesh_primitives": 4,
+      "materials": [
+        "cream",
+        "mint",
+        "ink",
+        "gold"
+      ],
+      "nodes": [
+        "athlete_start_gate__cream",
+        "athlete_start_gate__mint",
+        "athlete_start_gate__ink",
+        "athlete_start_gate__gold"
+      ],
+      "dimensions_xyz_gltf": [
+        7.72,
+        2.64,
+        0.68
+      ],
+      "pivot": "ground datum at origin; +Y up; front +Z; corner rail origin is arc center",
+      "bytes": 191880,
+      "material_factors": {
+        "cream": {
+          "baseColorFactor": [
+            0.8962693810462952,
+            0.7681511640548706,
+            0.5520114302635193,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "gold": {
+          "baseColorFactor": [
+            0.8468732237815857,
+            0.5028864741325378,
+            0.09084171056747437,
+            1
+          ],
+          "metallicFactor": 0.550000011920929,
+          "roughnessFactor": 0.30000001192092896
+        },
+        "ink": {
+          "baseColorFactor": [
+            0.021219009533524513,
+            0.1119324266910553,
+            0.09084171056747437,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "mint": {
+          "baseColorFactor": [
+            0.23074005544185638,
+            0.5647115111351013,
+            0.43965718150138855,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        }
+      },
+      "sha256": "3bf9028d481a8aa574678eb8eb87ee3be4baaebd11d2d1179e9a10e0ff15e2bd",
+      "pbr_revision": "V7 named nonmetal matte roughness capped .48; all colors and geometry retained"
+    },
+    {
+      "id": "athlete_rail_straight",
+      "file": "athlete_rail_straight.glb",
+      "triangles": 964,
+      "mesh_primitives": 4,
+      "materials": [
+        "cream",
+        "mint",
+        "ink",
+        "gold"
+      ],
+      "nodes": [
+        "athlete_rail_straight__cream",
+        "athlete_rail_straight__mint",
+        "athlete_rail_straight__ink",
+        "athlete_rail_straight__gold"
+      ],
+      "dimensions_xyz_gltf": [
+        2.08,
+        0.715,
+        0.25
+      ],
+      "pivot": "ground datum at origin; +Y up; front +Z; corner rail origin is arc center",
+      "bytes": 42144,
+      "material_factors": {
+        "cream": {
+          "baseColorFactor": [
+            0.8962693810462952,
+            0.7681511640548706,
+            0.5520114302635193,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "gold": {
+          "baseColorFactor": [
+            0.8468732237815857,
+            0.5028864741325378,
+            0.09084171056747437,
+            1
+          ],
+          "metallicFactor": 0.550000011920929,
+          "roughnessFactor": 0.30000001192092896
+        },
+        "ink": {
+          "baseColorFactor": [
+            0.021219009533524513,
+            0.1119324266910553,
+            0.09084171056747437,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "mint": {
+          "baseColorFactor": [
+            0.23074005544185638,
+            0.5647115111351013,
+            0.43965718150138855,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        }
+      },
+      "sha256": "505dbf2bdb887d945f16761901653c20058534c41552ee1c925a82c756978c45",
+      "pbr_revision": "V7 named nonmetal matte roughness capped .48; all colors and geometry retained"
+    },
+    {
+      "id": "athlete_rail_corner",
+      "file": "athlete_rail_corner.glb",
+      "triangles": 840,
+      "mesh_primitives": 3,
+      "materials": [
+        "cream",
+        "ink",
+        "gold"
+      ],
+      "nodes": [
+        "athlete_rail_corner__cream",
+        "athlete_rail_corner__ink",
+        "athlete_rail_corner__gold"
+      ],
+      "dimensions_xyz_gltf": [
+        1.0,
+        0.715,
+        1.0
+      ],
+      "pivot": "ground datum at origin; +Y up; front +Z; corner rail origin is arc center",
+      "bytes": 38340,
+      "material_factors": {
+        "cream": {
+          "baseColorFactor": [
+            0.8962693810462952,
+            0.7681511640548706,
+            0.5520114302635193,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "gold": {
+          "baseColorFactor": [
+            0.8468732237815857,
+            0.5028864741325378,
+            0.09084171056747437,
+            1
+          ],
+          "metallicFactor": 0.550000011920929,
+          "roughnessFactor": 0.30000001192092896
+        },
+        "ink": {
+          "baseColorFactor": [
+            0.021219009533524513,
+            0.1119324266910553,
+            0.09084171056747437,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        }
+      },
+      "sha256": "22dc9b7468ca2e6968ac352fb212a01580b7fb280327072e39f9f97f449bc826",
+      "pbr_revision": "V7 named nonmetal matte roughness capped .48; all colors and geometry retained"
+    },
+    {
+      "id": "athlete_bunting",
+      "file": "athlete_bunting.glb",
+      "triangles": 920,
+      "mesh_primitives": 5,
+      "materials": [
+        "cream",
+        "mint",
+        "ink",
+        "coral",
+        "gold"
+      ],
+      "nodes": [
+        "athlete_bunting__cream",
+        "athlete_bunting__mint",
+        "athlete_bunting__ink",
+        "athlete_bunting__coral",
+        "athlete_bunting__gold"
+      ],
+      "dimensions_xyz_gltf": [
+        3.28,
+        1.715,
+        0.28
+      ],
+      "pivot": "ground datum at origin; +Y up; front +Z; corner rail origin is arc center",
+      "bytes": 41208,
+      "material_factors": {
+        "coral": {
+          "baseColorFactor": [
+            0.8549926280975342,
+            0.18782077729701996,
+            0.1119324266910553,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "cream": {
+          "baseColorFactor": [
+            0.8962693810462952,
+            0.7681511640548706,
+            0.5520114302635193,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "gold": {
+          "baseColorFactor": [
+            0.8468732237815857,
+            0.5028864741325378,
+            0.09084171056747437,
+            1
+          ],
+          "metallicFactor": 0.550000011920929,
+          "roughnessFactor": 0.30000001192092896
+        },
+        "ink": {
+          "baseColorFactor": [
+            0.021219009533524513,
+            0.1119324266910553,
+            0.09084171056747437,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "mint": {
+          "baseColorFactor": [
+            0.23074005544185638,
+            0.5647115111351013,
+            0.43965718150138855,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        }
+      },
+      "sha256": "d3989d31d4cb5599341cebe899036f18b0d2db118eb3e35a67dbaff8c5de9203",
+      "pbr_revision": "V7 named nonmetal matte roughness capped .48; all colors and geometry retained"
+    },
+    {
+      "id": "athlete_scoreboard",
+      "file": "athlete_scoreboard.glb",
+      "triangles": 1624,
+      "mesh_primitives": 4,
+      "materials": [
+        "cream",
+        "mint",
+        "ink",
+        "gold"
+      ],
+      "nodes": [
+        "athlete_scoreboard__cream",
+        "athlete_scoreboard__mint",
+        "athlete_scoreboard__ink",
+        "athlete_scoreboard__gold"
+      ],
+      "dimensions_xyz_gltf": [
+        2.72,
+        2.105,
+        0.65
+      ],
+      "pivot": "ground datum at origin; +Y up; front +Z; corner rail origin is arc center",
+      "bytes": 65540,
+      "material_factors": {
+        "cream": {
+          "baseColorFactor": [
+            0.8962693810462952,
+            0.7681511640548706,
+            0.5520114302635193,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "gold": {
+          "baseColorFactor": [
+            0.8468732237815857,
+            0.5028864741325378,
+            0.09084171056747437,
+            1
+          ],
+          "metallicFactor": 0.550000011920929,
+          "roughnessFactor": 0.30000001192092896
+        },
+        "ink": {
+          "baseColorFactor": [
+            0.021219009533524513,
+            0.1119324266910553,
+            0.09084171056747437,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "mint": {
+          "baseColorFactor": [
+            0.23074005544185638,
+            0.5647115111351013,
+            0.43965718150138855,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        }
+      },
+      "sha256": "72f7abebffa864027bf39c1812b877f33365b4536ff2161b9af94b5e82f2c52b",
+      "pbr_revision": "V7 named nonmetal matte roughness capped .48; all colors and geometry retained"
+    },
+    {
+      "id": "athlete_planter",
+      "file": "athlete_planter.glb",
+      "triangles": 3576,
+      "mesh_primitives": 5,
+      "materials": [
+        "cream",
+        "mint",
+        "ink",
+        "coral",
+        "gold"
+      ],
+      "nodes": [
+        "athlete_planter__cream",
+        "athlete_planter__mint",
+        "athlete_planter__ink",
+        "athlete_planter__coral",
+        "athlete_planter__gold"
+      ],
+      "dimensions_xyz_gltf": [
+        2.05,
+        0.805,
+        0.57
+      ],
+      "pivot": "ground datum at origin; +Y up; front +Z; corner rail origin is arc center",
+      "bytes": 121112,
+      "material_factors": {
+        "coral": {
+          "baseColorFactor": [
+            0.8549926280975342,
+            0.18782077729701996,
+            0.1119324266910553,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "cream": {
+          "baseColorFactor": [
+            0.8962693810462952,
+            0.7681511640548706,
+            0.5520114302635193,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "gold": {
+          "baseColorFactor": [
+            0.8468732237815857,
+            0.5028864741325378,
+            0.09084171056747437,
+            1
+          ],
+          "metallicFactor": 0.550000011920929,
+          "roughnessFactor": 0.30000001192092896
+        },
+        "ink": {
+          "baseColorFactor": [
+            0.021219009533524513,
+            0.1119324266910553,
+            0.09084171056747437,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "mint": {
+          "baseColorFactor": [
+            0.23074005544185638,
+            0.5647115111351013,
+            0.43965718150138855,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        }
+      },
+      "sha256": "f706b413f2744bfc05b6dd9b19a453e1594e7ef6c70f0bddc9e5e7b4332dc1fe",
+      "pbr_revision": "V7 named nonmetal matte roughness capped .48; all colors and geometry retained"
+    },
+    {
+      "id": "athlete_topiary",
+      "file": "athlete_topiary.glb",
+      "triangles": 1056,
+      "mesh_primitives": 4,
+      "materials": [
+        "cream",
+        "mint",
+        "ink",
+        "gold"
+      ],
+      "nodes": [
+        "athlete_topiary__cream",
+        "athlete_topiary__mint",
+        "athlete_topiary__ink",
+        "athlete_topiary__gold"
+      ],
+      "dimensions_xyz_gltf": [
+        0.94,
+        1.417,
+        0.74
+      ],
+      "pivot": "ground datum at origin; +Y up; front +Z; corner rail origin is arc center",
+      "bytes": 36696,
+      "material_factors": {
+        "cream": {
+          "baseColorFactor": [
+            0.8962693810462952,
+            0.7681511640548706,
+            0.5520114302635193,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "gold": {
+          "baseColorFactor": [
+            0.8468732237815857,
+            0.5028864741325378,
+            0.09084171056747437,
+            1
+          ],
+          "metallicFactor": 0.550000011920929,
+          "roughnessFactor": 0.30000001192092896
+        },
+        "ink": {
+          "baseColorFactor": [
+            0.021219009533524513,
+            0.1119324266910553,
+            0.09084171056747437,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "mint": {
+          "baseColorFactor": [
+            0.23074005544185638,
+            0.5647115111351013,
+            0.43965718150138855,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        }
+      },
+      "sha256": "934655249edbab40f4a6f2ebc4a9c159f07c6bb4417f8e303886b8dfe5e4df69",
+      "pbr_revision": "V7 named nonmetal matte roughness capped .48; all colors and geometry retained"
+    },
+    {
+      "id": "athlete_officials_kiosk",
+      "file": "athlete_officials_kiosk.glb",
+      "triangles": 1456,
+      "mesh_primitives": 4,
+      "materials": [
+        "cream",
+        "mint",
+        "ink",
+        "coral"
+      ],
+      "nodes": [
+        "athlete_officials_kiosk__cream",
+        "athlete_officials_kiosk__mint",
+        "athlete_officials_kiosk__ink",
+        "athlete_officials_kiosk__coral"
+      ],
+      "dimensions_xyz_gltf": [
+        1.62,
+        1.74,
+        1.055
+      ],
+      "pivot": "ground datum at origin; +Y up; front +Z; corner rail origin is arc center",
+      "bytes": 74856,
+      "material_factors": {
+        "coral": {
+          "baseColorFactor": [
+            0.8549926280975342,
+            0.18782077729701996,
+            0.1119324266910553,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "cream": {
+          "baseColorFactor": [
+            0.8962693810462952,
+            0.7681511640548706,
+            0.5520114302635193,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "ink": {
+          "baseColorFactor": [
+            0.021219009533524513,
+            0.1119324266910553,
+            0.09084171056747437,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "mint": {
+          "baseColorFactor": [
+            0.23074005544185638,
+            0.5647115111351013,
+            0.43965718150138855,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        }
+      },
+      "sha256": "14dc284be1cc94c0cf314c51b5da312999c214f731b0a81634e387c50da1457b",
+      "pbr_revision": "V7 named nonmetal matte roughness capped .48; all colors and geometry retained"
+    },
+    {
+      "id": "athlete_tile_neutral",
+      "file": "athlete_tile_neutral.glb",
+      "triangles": 1816,
+      "mesh_primitives": 4,
+      "materials": [
+        "cream",
+        "ink",
+        "line",
+        "tile_surface_neutral"
+      ],
+      "nodes": [
+        "athlete_tile_neutral__cream",
+        "athlete_tile_neutral__ink",
+        "athlete_tile_neutral__line",
+        "athlete_tile_neutral__surface_neutral"
+      ],
+      "dimensions_xyz_gltf": [
+        2.045,
+        0.197,
+        2.045
+      ],
+      "pivot": "ground datum at origin; +Y up; front +Z; corner rail origin is arc center",
+      "bytes": 96740,
+      "material_factors": {
+        "cream": {
+          "baseColorFactor": [
+            0.8962693810462952,
+            0.7681511640548706,
+            0.5520114302635193,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "ink": {
+          "baseColorFactor": [
+            0.021219009533524513,
+            0.1119324266910553,
+            0.09084171056747437,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "line": {
+          "baseColorFactor": [
+            0.5711248517036438,
+            0.672443151473999,
+            0.5647115111351013,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "tile_surface_neutral": {
+          "baseColorFactor": [
+            0.8962693810462952,
+            0.7681511640548706,
+            0.5520114302635193,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        }
+      },
+      "sha256": "652ae6d1f3985ec3b8d285fe857e74c0705940a73b6edbe20a2db3dc43227723",
+      "pbr_revision": "V7 named nonmetal matte roughness capped .48; all colors and geometry retained"
+    },
+    {
+      "id": "athlete_tile_mint",
+      "file": "athlete_tile_mint.glb",
+      "triangles": 1960,
+      "mesh_primitives": 4,
+      "materials": [
+        "cream",
+        "ink",
+        "line",
+        "tile_surface_mint"
+      ],
+      "nodes": [
+        "athlete_tile_mint__cream",
+        "athlete_tile_mint__ink",
+        "athlete_tile_mint__line",
+        "athlete_tile_mint__surface_mint"
+      ],
+      "dimensions_xyz_gltf": [
+        2.045,
+        0.197,
+        2.045
+      ],
+      "pivot": "ground datum at origin; +Y up; front +Z; corner rail origin is arc center",
+      "bytes": 106808,
+      "material_factors": {
+        "cream": {
+          "baseColorFactor": [
+            0.8962693810462952,
+            0.7681511640548706,
+            0.5520114302635193,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "ink": {
+          "baseColorFactor": [
+            0.021219009533524513,
+            0.1119324266910553,
+            0.09084171056747437,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "line": {
+          "baseColorFactor": [
+            0.5711248517036438,
+            0.672443151473999,
+            0.5647115111351013,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "tile_surface_mint": {
+          "baseColorFactor": [
+            0.23074005544185638,
+            0.5647115111351013,
+            0.43965718150138855,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        }
+      },
+      "sha256": "c09d587aefa3065127a7f991108fc762a8c52e13fbcc4d942c9ba2617b1f9739",
+      "pbr_revision": "V7 named nonmetal matte roughness capped .48; all colors and geometry retained"
+    },
+    {
+      "id": "athlete_tile_coral",
+      "file": "athlete_tile_coral.glb",
+      "triangles": 1960,
+      "mesh_primitives": 4,
+      "materials": [
+        "cream",
+        "ink",
+        "line",
+        "tile_surface_coral"
+      ],
+      "nodes": [
+        "athlete_tile_coral__cream",
+        "athlete_tile_coral__ink",
+        "athlete_tile_coral__line",
+        "athlete_tile_coral__surface_coral"
+      ],
+      "dimensions_xyz_gltf": [
+        2.045,
+        0.197,
+        2.045
+      ],
+      "pivot": "ground datum at origin; +Y up; front +Z; corner rail origin is arc center",
+      "bytes": 106812,
+      "material_factors": {
+        "cream": {
+          "baseColorFactor": [
+            0.8962693810462952,
+            0.7681511640548706,
+            0.5520114302635193,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "ink": {
+          "baseColorFactor": [
+            0.021219009533524513,
+            0.1119324266910553,
+            0.09084171056747437,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "line": {
+          "baseColorFactor": [
+            0.5711248517036438,
+            0.672443151473999,
+            0.5647115111351013,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "tile_surface_coral": {
+          "baseColorFactor": [
+            0.8549926280975342,
+            0.18782077729701996,
+            0.1119324266910553,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        }
+      },
+      "sha256": "3472d8b6a333087f6c2b2796c3a7fb200a97f8692838b1b88fb8ca48c68c677f",
+      "pbr_revision": "V7 named nonmetal matte roughness capped .48; all colors and geometry retained"
+    },
+    {
+      "id": "athlete_tile_gold",
+      "file": "athlete_tile_gold.glb",
+      "triangles": 1960,
+      "mesh_primitives": 4,
+      "materials": [
+        "cream",
+        "ink",
+        "line",
+        "tile_surface_gold"
+      ],
+      "nodes": [
+        "athlete_tile_gold__cream",
+        "athlete_tile_gold__ink",
+        "athlete_tile_gold__line",
+        "athlete_tile_gold__surface_gold"
+      ],
+      "dimensions_xyz_gltf": [
+        2.045,
+        0.197,
+        2.045
+      ],
+      "pivot": "ground datum at origin; +Y up; front +Z; corner rail origin is arc center",
+      "bytes": 106804,
+      "material_factors": {
+        "cream": {
+          "baseColorFactor": [
+            0.8962693810462952,
+            0.7681511640548706,
+            0.5520114302635193,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "ink": {
+          "baseColorFactor": [
+            0.021219009533524513,
+            0.1119324266910553,
+            0.09084171056747437,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "line": {
+          "baseColorFactor": [
+            0.5711248517036438,
+            0.672443151473999,
+            0.5647115111351013,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "tile_surface_gold": {
+          "baseColorFactor": [
+            0.8468732237815857,
+            0.5028864741325378,
+            0.09084171056747437,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        }
+      },
+      "sha256": "28240513daab7bb3bc56484a2c0eb5a257d55eddd425f1d52a7c530261d7983e",
+      "pbr_revision": "V7 named nonmetal matte roughness capped .48; all colors and geometry retained"
+    },
+    {
+      "id": "athlete_start_platform",
+      "file": "athlete_start_platform.glb",
+      "triangles": 2128,
+      "mesh_primitives": 4,
+      "materials": [
+        "cream",
+        "ink",
+        "line",
+        "tile_surface_mint"
+      ],
+      "nodes": [
+        "athlete_start_platform__cream",
+        "athlete_start_platform__ink",
+        "athlete_start_platform__line",
+        "athlete_start_platform__surface_mint"
+      ],
+      "dimensions_xyz_gltf": [
+        8.195,
+        0.197,
+        2.65
+      ],
+      "pivot": "ground datum at origin; +Y up; front +Z; corner rail origin is arc center",
+      "bytes": 121436,
+      "material_factors": {
+        "cream": {
+          "baseColorFactor": [
+            0.8962693810462952,
+            0.7681511640548706,
+            0.5520114302635193,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "ink": {
+          "baseColorFactor": [
+            0.021219009533524513,
+            0.1119324266910553,
+            0.09084171056747437,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "line": {
+          "baseColorFactor": [
+            0.5711248517036438,
+            0.672443151473999,
+            0.5647115111351013,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "tile_surface_mint": {
+          "baseColorFactor": [
+            0.23074005544185638,
+            0.5647115111351013,
+            0.43965718150138855,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        }
+      },
+      "sha256": "5a8c1701b3cbd1caa9165ebaf57407848570d984c86906a99b853c709524f7f4",
+      "pbr_revision": "V7 named nonmetal matte roughness capped .48; all colors and geometry retained"
+    },
+    {
+      "id": "athlete_spectators_strip",
+      "file": "athlete_spectators_strip.glb",
+      "triangles": 7848,
+      "mesh_primitives": 4,
+      "materials": [
+        "cream",
+        "mint",
+        "ink",
+        "coral"
+      ],
+      "nodes": [
+        "athlete_spectators_strip__cream",
+        "athlete_spectators_strip__mint",
+        "athlete_spectators_strip__ink",
+        "athlete_spectators_strip__coral"
+      ],
+      "dimensions_xyz_gltf": [
+        5.12,
+        1.155,
+        1.127
+      ],
+      "pivot": "ground datum at origin; +Y up; front +Z; corner rail origin is arc center",
+      "bytes": 292092,
+      "material_factors": {
+        "coral": {
+          "baseColorFactor": [
+            0.8549926280975342,
+            0.18782077729701996,
+            0.1119324266910553,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "cream": {
+          "baseColorFactor": [
+            0.8962693810462952,
+            0.7681511640548706,
+            0.5520114302635193,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "ink": {
+          "baseColorFactor": [
+            0.021219009533524513,
+            0.1119324266910553,
+            0.09084171056747437,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "mint": {
+          "baseColorFactor": [
+            0.23074005544185638,
+            0.5647115111351013,
+            0.43965718150138855,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        }
+      },
+      "sha256": "b100952a24cc7624d3f3939c45ef57da92d70c5488909f039f35dbecc060b4a6",
+      "pbr_revision": "V7 named nonmetal matte roughness capped .48; all colors and geometry retained"
+    },
+    {
+      "id": "athlete_infield_plan",
+      "file": "athlete_infield_plan.glb",
+      "triangles": 4740,
+      "mesh_primitives": 5,
+      "materials": [
+        "cream",
+        "turf",
+        "turf_light",
+        "paving",
+        "paving_dark"
+      ],
+      "nodes": [
+        "athlete_infield_plan__cream",
+        "athlete_infield_plan__turf",
+        "athlete_infield_plan__turf_light",
+        "athlete_infield_plan__paving",
+        "athlete_infield_plan__paving_dark"
+      ],
+      "dimensions_xyz_gltf": [
+        29.0,
+        0.09,
+        3.4
+      ],
+      "pivot": "ground datum at origin; +Y up; front +Z; corner rail origin is arc center",
+      "bytes": 282596,
+      "material_factors": {
+        "cream": {
+          "baseColorFactor": [
+            0.8962693810462952,
+            0.7681511640548706,
+            0.5520114302635193,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "paving": {
+          "baseColorFactor": [
+            0.6444796919822693,
+            0.5583403706550598,
+            0.38132601976394653,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "paving_dark": {
+          "baseColorFactor": [
+            0.38132601976394653,
+            0.423267662525177,
+            0.33716362714767456,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "turf": {
+          "baseColorFactor": [
+            0.12477181851863861,
+            0.3277781009674072,
+            0.19806931912899017,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        },
+        "turf_light": {
+          "baseColorFactor": [
+            0.17144110798835754,
+            0.3915724754333496,
+            0.25015828013420105,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.48
+        }
+      },
+      "sha256": "30d270b36baf1c9ee0035de4852113e8a787b27ba589e50e440ff1f0ddca0f0f",
+      "pbr_revision": "V7 named nonmetal matte roughness capped .48; all colors and geometry retained"
+    }
+  ],
+  "version": "V7",
+  "pbr_validation": "pbr_validation_v7.json"
+}

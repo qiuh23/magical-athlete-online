@@ -9,6 +9,8 @@ import { BOARD_CENTER_SPAN, boardPoint, TILE } from './math.js';
 import { specialTileTexture } from './tile-art.js';
 import { CarnivalDetails } from './CarnivalDetails.js';
 import { TopologyStadium } from './TopologyStadium.js';
+import { StadiumAssets, StadiumModel, StadiumDecor } from './stadium/StadiumAssets.js';
+import { isClassicStadium, stadiumTileAsset, type StadiumModels } from './stadium/models.js';
 
 const C = { mint: '#84c6b1', darkMint: '#438674', cream: '#f3e3c4', coral: '#ee785e', ink: '#285e55', wood: '#cda77b', gold: '#edbc55' };
 const WIDTH = BOARD_CENTER_SPAN.width + TILE * 1.95;
@@ -127,7 +129,7 @@ function printTexture(index: number, reversed = false) {
 }
 
 /** Reused geometry, shallow moulded caps and printed ink; the route remains the engine's route. */
-export function DioramaTile({ index, track, reversed = false, triggered, kit, lowQuality }: { index: number; track: RoomView['track']; reversed?: boolean; triggered: boolean; kit: Kit; lowQuality: boolean }) {
+export function DioramaTile({ index, track, reversed = false, triggered, kit, lowQuality, models }: { index: number; track: RoomView['track']; reversed?: boolean; triggered: boolean; kit: Kit; lowQuality: boolean; models?: StadiumModels }) {
   const special = TRACKS[track].specials[index];
   const point = boardPoint(index, false);
   const next = boardPoint(index + Math.sign(special?.move ?? 1), false);
@@ -140,16 +142,18 @@ export function DioramaTile({ index, track, reversed = false, triggered, kit, lo
   useFrame(({ clock }) => { top.emissiveIntensity = triggered ? .16 + Math.sin(clock.elapsedTime * 8) * .09 : 0; });
   const extended = index === 0, center = extended ? -START_EXTENSION / 2 : 0;
   return <group position={point}>
-    <mesh geometry={extended ? kit.startTop : kit.top} material={top} position={[center, -.0225, 0]} receiveShadow dispose={null} />
+    {models ? <StadiumModel source={models[stadiumTileAsset(index, track)]} position={[center, -.195, 0]} triggered={triggered}
+      surfaceColor={index === 0 || index === 30 || (special?.kind === 'arrow' && (special.move ?? 0) < 0) ? color : undefined} />
+      : <mesh geometry={extended ? kit.startTop : kit.top} material={top} position={[center, -.0225, 0]} receiveShadow dispose={null} />}
     <mesh rotation={[-Math.PI / 2, 0, 0]} position={[center, .012, 0]}>
       <planeGeometry args={[extended ? 1.91 + START_EXTENSION : 1.91, extended ? 2.57 : 1.91]} />
       <meshBasicMaterial map={texture} transparent toneMapped={false} depthWrite={false} polygonOffset polygonOffsetFactor={-1} polygonOffsetUnits={-4} />
     </mesh>
-    {special && <mesh geometry={kit.box} material={special.kind === 'trip' ? kit.coral : special.kind === 'star' ? kit.gold : (special.move ?? 0) < 0 ? kit.ink : kit.mint} position={[.79, .025, 0]} scale={[.065, .045, .7]} dispose={null} />}
+    {special && !models && <mesh geometry={kit.box} material={special.kind === 'trip' ? kit.coral : special.kind === 'star' ? kit.gold : (special.move ?? 0) < 0 ? kit.ink : kit.mint} position={[.79, .025, 0]} scale={[.065, .045, .7]} dispose={null} />}
   </group>;
 }
 
-function Sign({ text, position, width, kit, coral = false }: { text: string; position: [number, number, number]; width: number; kit: Kit; coral?: boolean }) {
+function Sign({ text, position, width, kit, coral = false, faceOnly = false }: { text: string; position: [number, number, number]; width: number; kit: Kit; coral?: boolean; faceOnly?: boolean }) {
   const texture = useMemo(() => {
     const canvas = document.createElement('canvas'); canvas.width = Math.round(width / .4 * 128); canvas.height = 128;
     const ctx = canvas.getContext('2d')!; ctx.fillStyle = C.cream; ctx.font = '900 66px "Microsoft YaHei",sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(text, canvas.width / 2, 66);
@@ -157,7 +161,7 @@ function Sign({ text, position, width, kit, coral = false }: { text: string; pos
   }, [text, width]);
   useEffect(() => () => texture.dispose(), [texture]);
   return <group position={position}>
-    <Box kit={kit} position={[0, 0, 0]} scale={[width, .48, .18]} material={coral ? kit.coral : kit.ink} />
+    {!faceOnly && <Box kit={kit} position={[0, 0, 0]} scale={[width, .48, .18]} material={coral ? kit.coral : kit.ink} />}
     <mesh position={[0, 0, .096]}><planeGeometry args={[width * .9, .4]} /><meshBasicMaterial map={texture} transparent depthWrite={false} toneMapped={false} /></mesh>
   </group>;
 }
@@ -272,13 +276,13 @@ function LawnDetails({lowQuality,kit}:{lowQuality:boolean;kit:Kit}) {
   </group>;
 }
 
-export function DioramaStadium({ compact, track, reversed = false, lowQuality, beat, racers }: { compact: boolean; track: RoomView['track']; reversed?: boolean; lowQuality: boolean; beat?: PresentationBeat; racers: Racer[] }) {
+export function DioramaStadium({ compact, track, reversed = false, lowQuality, beat, racers, showTallDecor = false }: { compact: boolean; track: RoomView['track']; reversed?: boolean; lowQuality: boolean; beat?: PresentationBeat; racers: Racer[]; showTallDecor?: boolean }) {
   const triggered = new Set(beat?.motions.map(motion => motion.to) ?? []);
   if (beat && ['score', 'trip'].includes(beat.kind)) for (const racer of racers) if (beat.targets.includes(racer.id) || beat.source === racer.id) triggered.add(racer.position);
   if (TRACKS[track].nodes) return <TopologyStadium {...{ track, compact, triggered, lowQuality }} />;
-  return <ClassicDiorama {...{compact,track,reversed,lowQuality,triggered}}/>;
+  return <ClassicDiorama {...{compact,track,reversed,lowQuality,triggered,showTallDecor}}/>;
 }
-function ClassicDiorama({compact,track,reversed,lowQuality,triggered}:{compact:boolean;track:RoomView['track'];reversed:boolean;lowQuality:boolean;triggered:Set<number>}) {
+function ClassicDiorama({compact,track,reversed,lowQuality,triggered,showTallDecor}:{compact:boolean;track:RoomView['track'];reversed:boolean;lowQuality:boolean;triggered:Set<number>;showTallDecor:boolean}) {
   const kit=useKit(lowQuality);
   return <group rotation={[0, compact ? -Math.PI / 2 : 0, 0]}>
     <mesh rotation={[-Math.PI/2,0,0]} position={[.12,-.923,0]}><planeGeometry args={[WIDTH*1.07,DEPTH*1.21]}/><meshBasicMaterial map={kit.baseContact} transparent depthWrite={false} toneMapped={false}/></mesh>
@@ -286,13 +290,38 @@ function ClassicDiorama({compact,track,reversed,lowQuality,triggered}:{compact:b
     <mesh geometry={kit.band} position={[0, -.265, 0]} material={kit.dark} castShadow receiveShadow dispose={null} />
     <mesh geometry={kit.deck} position={[0, -.07, 0]} material={kit.plastic} receiveShadow dispose={null} />
     <Box kit={kit} position={[0, .11, 0]} scale={[WIDTH - .55, .08, DEPTH-.55]} material={kit.turf} shadow={false} />
-    <Box kit={kit} position={[-7.7,.154,0]} scale={[3.25,.022,1.87]} material={kit.turfShade} shadow={false}/>
-    <Box kit={kit} position={[2.4,.154,-.05]} scale={[6.15,.022,2.08]} material={kit.turfShade} shadow={false}/>
     <mesh geometry={kit.course} material={kit.dark} position={[0,.19,0]} receiveShadow castShadow dispose={null}/>
-    <LawnDetails lowQuality={lowQuality} kit={kit}/>
-    {track==='twisty-twirl'&&<CarnivalDetails lowQuality={lowQuality} reversed={reversed}/>}
-    {Array.from({ length: 31 }, (_, index) => <DioramaTile key={index} {...{ index, track, reversed, kit, lowQuality }} triggered={triggered.has(index)} />)}
-    <Gate kit={kit} reversed={reversed} /><Gate finish kit={kit} reversed={reversed} /><CourseDetails kit={kit} lowQuality={lowQuality} />
-    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -.925, 0]} receiveShadow><planeGeometry args={[240, 240]} /><meshStandardMaterial color="#e3dcca" roughness={1} /></mesh>
+    {isClassicStadium(track) && !lowQuality
+      ? <StadiumAssets fallback={<ClassicContents {...{kit,track,reversed,lowQuality,triggered,showTallDecor}} />}>
+          {models => <ClassicContents {...{kit,track,reversed,lowQuality,triggered,showTallDecor,models}} />}
+        </StadiumAssets>
+      : <ClassicContents {...{kit,track,reversed,lowQuality,triggered,showTallDecor}} />}
+    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -.925, 0]} receiveShadow><planeGeometry args={isClassicStadium(track) ? [WIDTH, DEPTH] : [240, 240]} /><meshStandardMaterial color="#e3dcca" roughness={1} /></mesh>
   </group>;
+}
+
+
+function ClassicContents({kit,track,reversed,lowQuality,triggered,showTallDecor,models}: {
+  kit:Kit; track:RoomView['track']; reversed:boolean; lowQuality:boolean; triggered:Set<number>; showTallDecor:boolean; models?:StadiumModels;
+}) {
+  return <>
+    {models ? <>
+      <StadiumDecor models={models} showTallDecor={showTallDecor}/>
+      {[false,true].map(finish => {
+        const point=boardPoint(finish?30:0,false), isFinish=finish!==reversed;
+        const position:[number,number,number]=[point[0]-(finish?0:START_EXTENSION/2),-.12,point[2]-1.52];
+        return <group key={String(finish)} position={position}>
+          <StadiumModel source={models[finish?'athlete_finish_gate':'athlete_start_gate']} gateReversed={reversed}/>
+          <Sign kit={kit} faceOnly text={isFinish?reversed?'FINISH · 终点':'FINISH':finish?'START':'胡闹运动会 · START'} position={[0,2.17,.025]} width={finish?2.55:7.35}/>
+        </group>;
+      })}
+    </> : <>
+      <Box kit={kit} position={[-7.7,.154,0]} scale={[3.25,.022,1.87]} material={kit.turfShade} shadow={false}/>
+      <Box kit={kit} position={[2.4,.154,-.05]} scale={[6.15,.022,2.08]} material={kit.turfShade} shadow={false}/>
+      <LawnDetails lowQuality={lowQuality} kit={kit}/>
+      <Gate kit={kit} reversed={reversed}/><Gate finish kit={kit} reversed={reversed}/><CourseDetails kit={kit} lowQuality={lowQuality}/>
+    </>}
+    {track==='twisty-twirl' && <CarnivalDetails lowQuality={lowQuality} reversed={reversed}/>}
+    {Array.from({length:31},(_,index)=><DioramaTile key={index} {...{index,track,reversed,kit,lowQuality,models}} triggered={triggered.has(index)}/>)}
+  </>;
 }
