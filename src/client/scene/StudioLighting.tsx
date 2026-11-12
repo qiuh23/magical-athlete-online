@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useRef } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
-import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
 /** Subtle grounding survives the economy tier without another render pass. */
 export function PawnContact() {
@@ -16,31 +15,6 @@ export function PawnContact() {
   return <mesh rotation={[-Math.PI / 2, 0, 0]} position={[.035, .009, -.025]}>
     <planeGeometry args={[.9, .9]} /><meshBasicMaterial map={texture} transparent depthWrite={false} toneMapped={false} />
   </mesh>;
-}
-
-/** Small locally generated studio environment: no HDR download or post-processing passes. */
-export function StudioLighting({ compact, lowQuality }: { compact: boolean; lowQuality: boolean }) {
-  const { gl, scene, invalidate } = useThree();
-  useEffect(() => {
-    // PMREM is a synchronous six-face capture plus GGX filtering. Economy
-    // clients (including software WebGL) must not pay that cost on reconnect.
-    if (lowQuality) return;
-    const generator = new THREE.PMREMGenerator(gl), studio = new RoomEnvironment();
-    const environment = generator.fromScene(studio, .06);
-    const previous = scene.environment, previousIntensity = scene.environmentIntensity;
-    scene.environment = environment.texture; scene.environmentIntensity = .32;
-    studio.dispose(); generator.dispose(); invalidate();
-    return () => { scene.environment = previous; scene.environmentIntensity = previousIntensity; environment.dispose(); };
-  }, [gl, scene, invalidate, lowQuality]);
-  return <>
-    <ambientLight intensity={.16} />
-    <hemisphereLight args={['#fff7e7', '#80a89a', .48]} />
-    <directionalLight color="#fff0d4" position={[-9, 18, 10]} intensity={2.8} castShadow={!lowQuality}
-      shadow-mapSize={compact ? [1024, 1024] : [2048, 2048]} shadow-camera-left={-21} shadow-camera-right={21}
-      shadow-camera-top={21} shadow-camera-bottom={-21} shadow-camera-near={.5} shadow-camera-far={65}
-      shadow-normalBias={.018} shadow-bias={-.00012} shadow-radius={2.5} shadow-intensity={.72} />
-    <directionalLight color="#d8f1ed" position={[8, 8, -7]} intensity={.65} />
-  </>;
 }
 
 /** Only sustained animation load can downgrade; idle demand frames are not a frame-rate measurement. */

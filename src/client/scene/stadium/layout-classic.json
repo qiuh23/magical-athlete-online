@@ -1,0 +1,762 @@
+{
+  "basis": "Three.js Y-up; inside existing compact rotation group",
+  "placements": [
+    {
+      "asset": "athlete_bleachers.glb",
+      "position": [
+        2.4000000953674316,
+        0.23399999737739563,
+        -0.05000000074505806
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": null
+    },
+    {
+      "asset": "athlete_bunting.glb",
+      "position": [
+        -1.7000000476837158,
+        0.2199999988079071,
+        -1.5800000429153442
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": null
+    },
+    {
+      "asset": "athlete_finish_gate.glb",
+      "position": [
+        -15.375,
+        -0.11999999731779099,
+        1.5549999475479126
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": null
+    },
+    {
+      "asset": "athlete_infield_plan.glb",
+      "position": [
+        0.0,
+        0.15000000596046448,
+        -0.0
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": null
+    },
+    {
+      "asset": "athlete_officials_kiosk.glb",
+      "position": [
+        -11.800000190734863,
+        0.23399999737739563,
+        -0.10000000149011612
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": null
+    },
+    {
+      "asset": "athlete_pennant.glb",
+      "position": [
+        -12.199999809265137,
+        0.15000000596046448,
+        4.75
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": null
+    },
+    {
+      "asset": "athlete_pennant.glb",
+      "position": [
+        -12.199999809265137,
+        0.15000000596046448,
+        -4.75
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": null
+    },
+    {
+      "asset": "athlete_pennant.glb",
+      "position": [
+        -3.200000047683716,
+        0.15000000596046448,
+        4.75
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": null
+    },
+    {
+      "asset": "athlete_pennant.glb",
+      "position": [
+        -3.200000047683716,
+        0.15000000596046448,
+        -4.75
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": null
+    },
+    {
+      "asset": "athlete_pennant.glb",
+      "position": [
+        6.300000190734863,
+        0.15000000596046448,
+        4.75
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": null
+    },
+    {
+      "asset": "athlete_pennant.glb",
+      "position": [
+        6.300000190734863,
+        0.15000000596046448,
+        -4.75
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": null
+    },
+    {
+      "asset": "athlete_pennant.glb",
+      "position": [
+        12.199999809265137,
+        0.15000000596046448,
+        4.75
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": null
+    },
+    {
+      "asset": "athlete_pennant.glb",
+      "position": [
+        12.199999809265137,
+        0.15000000596046448,
+        -4.75
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": null
+    },
+    {
+      "asset": "athlete_planter.glb",
+      "position": [
+        -3.799999952316284,
+        0.23999999463558197,
+        -0.3499999940395355
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": null
+    },
+    {
+      "asset": "athlete_planter.glb",
+      "position": [
+        11.699999809265137,
+        0.23999999463558197,
+        -0.3499999940395355
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": null
+    },
+    {
+      "asset": "athlete_podium.glb",
+      "position": [
+        -7.699999809265137,
+        0.23399999737739563,
+        -0.10000000149011612
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": null
+    },
+    {
+      "asset": "athlete_rail_straight.glb",
+      "position": [
+        -14.0,
+        0.15000000596046448,
+        4.920000076293945
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": null
+    },
+    {
+      "asset": "athlete_rail_straight.glb",
+      "position": [
+        -14.0,
+        0.15000000596046448,
+        -4.920000076293945
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": null
+    },
+    {
+      "asset": "athlete_rail_straight.glb",
+      "position": [
+        -10.0,
+        0.15000000596046448,
+        4.920000076293945
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": null
+    },
+    {
+      "asset": "athlete_rail_straight.glb",
+      "position": [
+        -10.0,
+        0.15000000596046448,
+        -4.920000076293945
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": null
+    },
+    {
+      "asset": "athlete_rail_straight.glb",
+      "position": [
+        -6.0,
+        0.15000000596046448,
+        4.920000076293945
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": null
+    },
+    {
+      "asset": "athlete_rail_straight.glb",
+      "position": [
+        -6.0,
+        0.15000000596046448,
+        -4.920000076293945
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": null
+    },
+    {
+      "asset": "athlete_rail_straight.glb",
+      "position": [
+        -2.0,
+        0.15000000596046448,
+        4.920000076293945
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": null
+    },
+    {
+      "asset": "athlete_rail_straight.glb",
+      "position": [
+        -2.0,
+        0.15000000596046448,
+        -4.920000076293945
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": null
+    },
+    {
+      "asset": "athlete_rail_straight.glb",
+      "position": [
+        2.0,
+        0.15000000596046448,
+        4.920000076293945
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": null
+    },
+    {
+      "asset": "athlete_rail_straight.glb",
+      "position": [
+        2.0,
+        0.15000000596046448,
+        -4.920000076293945
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": null
+    },
+    {
+      "asset": "athlete_rail_straight.glb",
+      "position": [
+        6.0,
+        0.15000000596046448,
+        4.920000076293945
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": null
+    },
+    {
+      "asset": "athlete_rail_straight.glb",
+      "position": [
+        6.0,
+        0.15000000596046448,
+        -4.920000076293945
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": null
+    },
+    {
+      "asset": "athlete_rail_straight.glb",
+      "position": [
+        10.0,
+        0.15000000596046448,
+        4.920000076293945
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": null
+    },
+    {
+      "asset": "athlete_rail_straight.glb",
+      "position": [
+        10.0,
+        0.15000000596046448,
+        -4.920000076293945
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": null
+    },
+    {
+      "asset": "athlete_rail_straight.glb",
+      "position": [
+        14.0,
+        0.15000000596046448,
+        4.920000076293945
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": null
+    },
+    {
+      "asset": "athlete_rail_straight.glb",
+      "position": [
+        14.0,
+        0.15000000596046448,
+        -4.920000076293945
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": null
+    },
+    {
+      "asset": "athlete_scoreboard.glb",
+      "position": [
+        8.300000190734863,
+        0.23399999737739563,
+        -0.30000001192092896
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": null
+    },
+    {
+      "asset": "athlete_spectators_strip.glb",
+      "position": [
+        2.4000000953674316,
+        0.23399999737739563,
+        -0.05000000074505806
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": null
+    },
+    {
+      "asset": "athlete_start_gate.glb",
+      "position": [
+        -12.300000190734863,
+        -0.11999999731779099,
+        -4.59499979019165
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": null
+    },
+    {
+      "asset": "athlete_start_platform.glb",
+      "position": [
+        -12.300000190734863,
+        0.02500000037252903,
+        -3.075000047683716
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": 0
+    },
+    {
+      "asset": "athlete_tile_coral.glb",
+      "position": [
+        1.024999976158142,
+        0.02500000037252903,
+        -3.075000047683716
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": 5
+    },
+    {
+      "asset": "athlete_tile_coral.glb",
+      "position": [
+        11.274999618530273,
+        0.02500000037252903,
+        3.075000047683716
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": 17
+    },
+    {
+      "asset": "athlete_tile_coral.glb",
+      "position": [
+        -7.175000190734863,
+        0.02500000037252903,
+        3.075000047683716
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": 26
+    },
+    {
+      "asset": "athlete_tile_coral.glb",
+      "position": [
+        -15.375,
+        0.02500000037252903,
+        3.075000047683716
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": 30
+    },
+    {
+      "asset": "athlete_tile_gold.glb",
+      "position": [
+        -7.175000190734863,
+        0.02500000037252903,
+        -3.075000047683716
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": 1
+    },
+    {
+      "asset": "athlete_tile_gold.glb",
+      "position": [
+        15.375,
+        0.02500000037252903,
+        -1.024999976158142
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": 13
+    },
+    {
+      "asset": "athlete_tile_mint.glb",
+      "position": [
+        5.125,
+        0.02500000037252903,
+        -3.075000047683716
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": 7
+    },
+    {
+      "asset": "athlete_tile_mint.glb",
+      "position": [
+        13.324999809265137,
+        0.02500000037252903,
+        -3.075000047683716
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": 11
+    },
+    {
+      "asset": "athlete_tile_mint.glb",
+      "position": [
+        13.324999809265137,
+        0.02500000037252903,
+        3.075000047683716
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": 16
+    },
+    {
+      "asset": "athlete_tile_mint.glb",
+      "position": [
+        -1.024999976158142,
+        0.02500000037252903,
+        3.075000047683716
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": 23
+    },
+    {
+      "asset": "athlete_tile_mint.glb",
+      "position": [
+        -3.075000047683716,
+        0.02500000037252903,
+        3.075000047683716
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": 24
+    },
+    {
+      "asset": "athlete_tile_neutral.glb",
+      "position": [
+        -5.125,
+        0.02500000037252903,
+        -3.075000047683716
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": 2
+    },
+    {
+      "asset": "athlete_tile_neutral.glb",
+      "position": [
+        -3.075000047683716,
+        0.02500000037252903,
+        -3.075000047683716
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": 3
+    },
+    {
+      "asset": "athlete_tile_neutral.glb",
+      "position": [
+        -1.024999976158142,
+        0.02500000037252903,
+        -3.075000047683716
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": 4
+    },
+    {
+      "asset": "athlete_tile_neutral.glb",
+      "position": [
+        3.075000047683716,
+        0.02500000037252903,
+        -3.075000047683716
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": 6
+    },
+    {
+      "asset": "athlete_tile_neutral.glb",
+      "position": [
+        7.175000190734863,
+        0.02500000037252903,
+        -3.075000047683716
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": 8
+    },
+    {
+      "asset": "athlete_tile_neutral.glb",
+      "position": [
+        9.225000381469727,
+        0.02500000037252903,
+        -3.075000047683716
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": 9
+    },
+    {
+      "asset": "athlete_tile_neutral.glb",
+      "position": [
+        11.274999618530273,
+        0.02500000037252903,
+        -3.075000047683716
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": 10
+    },
+    {
+      "asset": "athlete_tile_neutral.glb",
+      "position": [
+        15.375,
+        0.02500000037252903,
+        -3.075000047683716
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": 12
+    },
+    {
+      "asset": "athlete_tile_neutral.glb",
+      "position": [
+        15.375,
+        0.02500000037252903,
+        1.024999976158142
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": 14
+    },
+    {
+      "asset": "athlete_tile_neutral.glb",
+      "position": [
+        15.375,
+        0.02500000037252903,
+        3.075000047683716
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": 15
+    },
+    {
+      "asset": "athlete_tile_neutral.glb",
+      "position": [
+        9.225000381469727,
+        0.02500000037252903,
+        3.075000047683716
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": 18
+    },
+    {
+      "asset": "athlete_tile_neutral.glb",
+      "position": [
+        7.175000190734863,
+        0.02500000037252903,
+        3.075000047683716
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": 19
+    },
+    {
+      "asset": "athlete_tile_neutral.glb",
+      "position": [
+        5.125,
+        0.02500000037252903,
+        3.075000047683716
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": 20
+    },
+    {
+      "asset": "athlete_tile_neutral.glb",
+      "position": [
+        3.075000047683716,
+        0.02500000037252903,
+        3.075000047683716
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": 21
+    },
+    {
+      "asset": "athlete_tile_neutral.glb",
+      "position": [
+        1.024999976158142,
+        0.02500000037252903,
+        3.075000047683716
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": 22
+    },
+    {
+      "asset": "athlete_tile_neutral.glb",
+      "position": [
+        -5.125,
+        0.02500000037252903,
+        3.075000047683716
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": 25
+    },
+    {
+      "asset": "athlete_tile_neutral.glb",
+      "position": [
+        -9.225000381469727,
+        0.02500000037252903,
+        3.075000047683716
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": 27
+    },
+    {
+      "asset": "athlete_tile_neutral.glb",
+      "position": [
+        -11.274999618530273,
+        0.02500000037252903,
+        3.075000047683716
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": 28
+    },
+    {
+      "asset": "athlete_tile_neutral.glb",
+      "position": [
+        -13.324999809265137,
+        0.02500000037252903,
+        3.075000047683716
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": 29
+    },
+    {
+      "asset": "athlete_topiary.glb",
+      "position": [
+        -14.399999618530273,
+        0.1899999976158142,
+        -0.30000001192092896
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": null
+    },
+    {
+      "asset": "athlete_topiary.glb",
+      "position": [
+        13.5,
+        0.1899999976158142,
+        -0.30000001192092896
+      ],
+      "rotationY": 0.0,
+      "scope": "classic U only",
+      "trackIndex": null
+    }
+  ],
+  "preview_track": "wild",
+  "reserved_track_centers": "math.ts boardPoint; no gameplay occupancy changed",
+  "tallDecor": {
+    "assets": [
+      "athlete_scoreboard.glb",
+      "athlete_bunting.glb"
+    ],
+    "visibility": "overview only until live-camera occlusion testing; hide during self/action follow, target choice and intro"
+  }
+}
