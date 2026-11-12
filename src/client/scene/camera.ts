@@ -1,3 +1,4 @@
+import { activeMechanismLayout } from './mechanisms/layout.js';
 import type { Racer, RoomView } from '../../shared/types.js';
 import { TRACKS, type TrackId } from '../../shared/tracks.js';
 import type { PresentationBeat } from '../presentation.js';
@@ -153,18 +154,19 @@ export function cameraFrame(positions: number[], compact: boolean, width: number
   });
   const minX = Math.min(...points.map(point => point[0])), maxX = Math.max(...points.map(point => point[0]));
   const minZ = Math.min(...points.map(point => point[2])), maxZ = Math.max(...points.map(point => point[2]));
-  const mapBounds = TRACKS[track].nodes ? boardBounds(track, compact) : undefined;
+  const candidate=activeMechanismLayout(track).lift>0;
+  const mapBounds = TRACKS[track].nodes || candidate ? boardBounds(track, compact) : undefined;
   const x = overview ? mapBounds?.x ?? 0 : (minX + maxX) / 2, z = overview ? mapBounds?.z ?? 0 : (minZ + maxZ) / 2;
-  const y = track === 'bridges' && !overview ? (Math.min(...points.map(p => p[1])) + Math.max(...points.map(p => p[1]))) / 2 - .22 : 0;
+  const y = candidate ? activeMechanismLayout(track).lift : track === 'bridges' && !overview ? (Math.min(...points.map(p => p[1])) + Math.max(...points.map(p => p[1]))) / 2 - .22 : 0;
   const bounds: { x: number; y: number }[] = [];
-  if (overview && track === 'whirly-world') {
+  if (overview && track === 'whirly-world' && !candidate) {
     const { min, max } = WHIRLY_MODEL_BOUNDS;
     for (const bx of [min[0], max[0]]) for (const bz of [min[2], max[2]]) for (const by of [min[1], Math.max(max[1], 2.9)]) {
       bounds.push(cameraProject(compact ? [-bz, by, bx] : [bx, by, bz], compact, closeUp));
     }
   } else if (overview && mapBounds) {
     for (const bx of [mapBounds.minX - TILE, mapBounds.maxX + TILE]) for (const bz of [mapBounds.minZ - TILE, mapBounds.maxZ + TILE]) for (const by of [-1.1, mapBounds.top + 2.9]) {
-      bounds.push(cameraProject([bx - x, by, bz - z], compact, closeUp));
+      bounds.push(cameraProject([bx - x, by-y, bz - z], compact, closeUp));
     }
   } else if (overview) {
     // The stadium rotates with the compact track; do not fold or shorten its route.
@@ -175,7 +177,7 @@ export function cameraFrame(positions: number[], compact: boolean, width: number
     }
   } else {
     // Include enlarged pawns, all occupied offsets and both ends of a confirmed move.
-    const padding = closeUp ? .9 : TILE * .67;
+    const padding = candidate && !closeUp ? 2.5 : closeUp ? .9 : TILE * .67;
     for (const point of points) for (const dx of [-padding, padding]) for (const dz of [-padding, padding]) for (const by of closeUp ? [-.3, 2.65] : [-.9, 2.9]) {
       bounds.push(cameraProject([point[0] - x + dx, point[1] - .22 + by - y, point[2] - z + dz], compact, closeUp));
     }
@@ -190,7 +192,7 @@ export function cameraFrame(positions: number[], compact: boolean, width: number
   // Whirly's tall phone overview must clear the minimap and its rule toggle.
   const verticalMargin = compact ? overview && track === 'whirly-world' ? 380 : 235 : 190;
   const usableHeight = Math.max(180, height - verticalMargin);
-  return { x, y, z, zoom: Math.max(3, Math.min(MAX_CAMERA_ZOOM, usableWidth / spanX, usableHeight / spanY)) };
+  return { x, y, z, zoom: Math.max(candidate?.5:3, Math.min(MAX_CAMERA_ZOOM, usableWidth / spanX, usableHeight / spanY)) };
 }
 
 /** A full-size two-by-four lineup on the extended start platform. */

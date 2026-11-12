@@ -1,0 +1,608 @@
+{
+  "method": "51 poses, exact exported triangles including morph positions versus full approved MOD25 and 2 m wide real edge roads. Surface crossings, not continuous or containment proof. Actor meshes excluded.",
+  "maps": [
+    {
+      "track": "wild",
+      "spacing": 2.05,
+      "samples": 51,
+      "hits": [
+        {
+          "node": 7,
+          "kind": "punch",
+          "part": "PUNCH_ROOT__teal_fixed_batch",
+          "targetNode": 7,
+          "targetPart": "MOD_25_axle_fastener",
+          "progress": 0
+        },
+        {
+          "node": 7,
+          "kind": "punch",
+          "part": "PUNCH_ROOT__teal_fixed_batch",
+          "targetNode": 7,
+          "targetPart": "MOD_25_corner_strut",
+          "progress": 0
+        },
+        {
+          "node": 7,
+          "kind": "punch",
+          "part": "PUNCH_ROOT__teal_fixed_batch",
+          "targetNode": 7,
+          "targetPart": "MOD_25_side_lower_rail",
+          "progress": 0
+        },
+        {
+          "node": 7,
+          "kind": "punch",
+          "part": "PUNCH_ROOT__teal_fixed_batch",
+          "targetNode": 7,
+          "targetPart": "MOD_25_side_upper_rail",
+          "progress": 0
+        },
+        {
+          "node": 11,
+          "kind": "punch",
+          "part": "PUNCH_ROOT__teal_fixed_batch",
+          "targetNode": 11,
+          "targetPart": "MOD_25_axle_fastener",
+          "progress": 0
+        },
+        {
+          "node": 11,
+          "kind": "punch",
+          "part": "PUNCH_ROOT__teal_fixed_batch",
+          "targetNode": 11,
+          "targetPart": "MOD_25_corner_strut",
+          "progress": 0
+        },
+        {
+          "node": 11,
+          "kind": "punch",
+          "part": "PUNCH_ROOT__teal_fixed_batch",
+          "targetNode": 11,
+          "targetPart": "MOD_25_side_lower_rail",
+          "progress": 0
+        },
+        {
+          "node": 11,
+          "kind": "punch",
+          "part": "PUNCH_ROOT__teal_fixed_batch",
+          "targetNode": 11,
+          "targetPart": "MOD_25_side_upper_rail",
+          "progress": 0
+        },
+        {
+          "node": 16,
+          "kind": "punch",
+          "part": "PUNCH_ROOT__teal_fixed_batch",
+          "targetNode": 16,
+          "targetPart": "MOD_25_axle_fastener",
+          "progress": 0
+        },
+        {
+          "node": 16,
+          "kind": "punch",
+          "part": "PUNCH_ROOT__teal_fixed_batch",
+          "targetNode": 16,
+          "targetPart": "MOD_25_corner_strut",
+          "progress": 0
+        },
+        {
+          "node": 16,
+          "kind": "punch",
+          "part": "PUNCH_ROOT__teal_fixed_batch",
+          "targetNode": 16,
+          "targetPart": "MOD_25_side_lower_rail",
+          "progress": 0
+        },
+        {
+          "node": 16,
+          "kind": "punch",
+          "part": "PUNCH_ROOT__teal_fixed_batch",
+          "targetNode": 16,
+          "targetPart": "MOD_25_side_upper_rail",
+          "progress": 0
+        },
+        {
+          "node": 23,
+          "kind": "punch",
+          "part": "PUNCH_ROOT__teal_fixed_batch",
+          "targetNode": 23,
+          "targetPart": "MOD_25_axle_fastener",
+          "progress": 0
+        },
+        {
+          "node": 23,
+          "kind": "punch",
+          "part": "PUNCH_ROOT__teal_fixed_batch",
+          "targetNode": 23,
+          "targetPart": "MOD_25_corner_strut",
+          "progress": 0
+        },
+        {
+          "node": 23,
+          "kind": "punch",
+          "part": "PUNCH_ROOT__teal_fixed_batch",
+          "targetNode": 23,
+          "targetPart": "MOD_25_side_lower_rail",
+          "progress": 0
+        },
+        {
+          "node": 23,
+          "kind": "punch",
+          "part": "PUNCH_ROOT__teal_fixed_batch",
+          "targetNode": 23,
+          "targetPart": "MOD_25_side_upper_rail",
+          "progress": 0
+        },
+        {
+          "node": 24,
+          "kind": "punch",
+          "part": "PUNCH_ROOT__teal_fixed_batch",
+          "targetNode": 24,
+          "targetPart": "MOD_25_axle_fastener",
+          "progress": 0
+        },
+        {
+          "node": 24,
+          "kind": "punch",
+          "part": "PUNCH_ROOT__teal_fixed_batch",
+          "targetNode": 24,
+          "targetPart": "MOD_25_corner_strut",
+          "progress": 0
+        },
+        {
+          "node": 24,
+          "kind": "punch",
+          "part": "PUNCH_ROOT__teal_fixed_batch",
+          "targetNode": 24,
+          "targetPart": "MOD_25_side_lower_rail",
+          "progress": 0
+        },
+        {
+          "node": 24,
+          "kind": "punch",
+          "part": "PUNCH_ROOT__teal_fixed_batch",
+          "targetNode": 24,
+          "targetPart": "MOD_25_side_upper_rail",
+          "progress": 0
+        }
+      ]
+    },
+    {
+      "track": "whirly-world",
+      "spacing": 2.05,
+      "samples": 51,
+      "hits": []
+    },
+    {
+      "track": "squiggle",
+      "spacing": 2.05,
+      "samples": 51,
+      "hits": [
+        {
+          "node": 1,
+          "kind": "gain",
+          "part": "GAIN_CABINET",
+          "targetNode": 1,
+          "targetPart": "MOD_25_axle_fastener003",
+          "progress": 0
+        },
+        {
+          "node": 1,
+          "kind": "gain",
+          "part": "GAIN_CABINET",
+          "targetNode": 1,
+          "targetPart": "MOD_25_cap",
+          "progress": 0
+        },
+        {
+          "node": 1,
+          "kind": "gain",
+          "part": "GAIN_CABINET",
+          "targetNode": 1,
+          "targetPart": "MOD_25_corner_strut003",
+          "progress": 0
+        },
+        {
+          "node": 1,
+          "kind": "gain",
+          "part": "GAIN_CABINET",
+          "targetNode": 1,
+          "targetPart": "MOD_25_diagonal_rib001",
+          "progress": 0
+        },
+        {
+          "node": 1,
+          "kind": "gain",
+          "part": "GAIN_CABINET",
+          "targetNode": 1,
+          "targetPart": "MOD_25_index_back",
+          "progress": 0
+        },
+        {
+          "node": 1,
+          "kind": "gain",
+          "part": "GAIN_CABINET",
+          "targetNode": 1,
+          "targetPart": "MOD_25_index_bracket",
+          "progress": 0
+        },
+        {
+          "node": 1,
+          "kind": "gain",
+          "part": "GAIN_CABINET",
+          "targetNode": 1,
+          "targetPart": "MOD_25_side_upper_rail001",
+          "progress": 0
+        },
+        {
+          "node": 1,
+          "kind": "gain",
+          "part": "GAIN_COLUMN",
+          "targetNode": 1,
+          "targetPart": "MOD_25_axle_fastener003",
+          "progress": 0
+        },
+        {
+          "node": 1,
+          "kind": "gain",
+          "part": "GAIN_COLUMN",
+          "targetNode": 1,
+          "targetPart": "MOD_25_corner_strut003",
+          "progress": 0
+        },
+        {
+          "node": 1,
+          "kind": "gain",
+          "part": "GAIN_COLUMN",
+          "targetNode": 1,
+          "targetPart": "MOD_25_side_lower_rail001",
+          "progress": 0
+        },
+        {
+          "node": 8,
+          "kind": "gain",
+          "part": "GAIN_CABINET",
+          "targetNode": 8,
+          "targetPart": "MOD_25_axle_fastener001",
+          "progress": 0
+        },
+        {
+          "node": 8,
+          "kind": "gain",
+          "part": "GAIN_CABINET",
+          "targetNode": 8,
+          "targetPart": "MOD_25_cap",
+          "progress": 0
+        },
+        {
+          "node": 8,
+          "kind": "gain",
+          "part": "GAIN_CABINET",
+          "targetNode": 8,
+          "targetPart": "MOD_25_corner_strut001",
+          "progress": 0
+        },
+        {
+          "node": 8,
+          "kind": "gain",
+          "part": "GAIN_CABINET",
+          "targetNode": 8,
+          "targetPart": "MOD_25_diagonal_rib",
+          "progress": 0
+        },
+        {
+          "node": 8,
+          "kind": "gain",
+          "part": "GAIN_CABINET",
+          "targetNode": 8,
+          "targetPart": "MOD_25_side_upper_rail",
+          "progress": 0
+        },
+        {
+          "node": 8,
+          "kind": "gain",
+          "part": "GAIN_COLUMN",
+          "targetNode": 8,
+          "targetPart": "MOD_25_axle_fastener001",
+          "progress": 0
+        },
+        {
+          "node": 8,
+          "kind": "gain",
+          "part": "GAIN_COLUMN",
+          "targetNode": 8,
+          "targetPart": "MOD_25_belly",
+          "progress": 0
+        },
+        {
+          "node": 8,
+          "kind": "gain",
+          "part": "GAIN_COLUMN",
+          "targetNode": 8,
+          "targetPart": "MOD_25_corner_strut001",
+          "progress": 0
+        },
+        {
+          "node": 8,
+          "kind": "gain",
+          "part": "GAIN_COLUMN",
+          "targetNode": 8,
+          "targetPart": "MOD_25_side_lower_rail",
+          "progress": 0
+        },
+        {
+          "node": 17,
+          "kind": "trip",
+          "part": "TRIP_FIXED_BEARING",
+          "targetNode": 17,
+          "targetPart": "MOD_25_side_upper_rail",
+          "progress": 0
+        },
+        {
+          "node": 17,
+          "kind": "trip",
+          "part": "TRIP_FIXED_COLUMN",
+          "targetNode": 17,
+          "targetPart": "MOD_25_belly",
+          "progress": 0
+        },
+        {
+          "node": 17,
+          "kind": "trip",
+          "part": "TRIP_FIXED_COLUMN",
+          "targetNode": 17,
+          "targetPart": "MOD_25_corner_strut001",
+          "progress": 0
+        },
+        {
+          "node": 17,
+          "kind": "trip",
+          "part": "TRIP_FIXED_COLUMN",
+          "targetNode": 17,
+          "targetPart": "MOD_25_side_lower_rail",
+          "progress": 0
+        },
+        {
+          "node": 17,
+          "kind": "trip",
+          "part": "TRIP_FIXED_MOTOR",
+          "targetNode": 17,
+          "targetPart": "MOD_25_belly",
+          "progress": 0
+        },
+        {
+          "node": 17,
+          "kind": "trip",
+          "part": "TRIP_FIXED_MOTOR",
+          "targetNode": 17,
+          "targetPart": "MOD_25_corner_strut001",
+          "progress": 0
+        },
+        {
+          "node": 17,
+          "kind": "trip",
+          "part": "TRIP_FIXED_MOTOR",
+          "targetNode": 17,
+          "targetPart": "MOD_25_diagonal_rib",
+          "progress": 0
+        },
+        {
+          "node": 17,
+          "kind": "trip",
+          "part": "TRIP_FIXED_MOTOR",
+          "targetNode": 17,
+          "targetPart": "MOD_25_side_lower_rail",
+          "progress": 0
+        },
+        {
+          "node": 19,
+          "kind": "gain",
+          "part": "GAIN_CABINET",
+          "targetNode": 19,
+          "targetPart": "MOD_25_cap",
+          "progress": 0
+        },
+        {
+          "node": 21,
+          "kind": "gain",
+          "part": "GAIN_CABINET",
+          "targetNode": 21,
+          "targetPart": "MOD_25_cap",
+          "progress": 0
+        },
+        {
+          "node": 21,
+          "kind": "gain",
+          "part": "GAIN_CABINET",
+          "targetNode": 21,
+          "targetPart": "MOD_25_corner_strut003",
+          "progress": 0
+        },
+        {
+          "node": 21,
+          "kind": "gain",
+          "part": "GAIN_CABINET",
+          "targetNode": 21,
+          "targetPart": "MOD_25_side_upper_rail001",
+          "progress": 0
+        },
+        {
+          "node": 21,
+          "kind": "gain",
+          "part": "GAIN_COLUMN",
+          "targetNode": 21,
+          "targetPart": "MOD_25_side_lower_rail001",
+          "progress": 0
+        }
+      ]
+    },
+    {
+      "track": "boardwalks",
+      "spacing": 2.3,
+      "samples": 51,
+      "hits": [
+        {
+          "node": 9,
+          "kind": "punch",
+          "part": "PUNCH_ROOT__teal_fixed_batch",
+          "targetNode": 9,
+          "targetPart": "MOD_25_axle_fastener003",
+          "progress": 0
+        },
+        {
+          "node": 9,
+          "kind": "punch",
+          "part": "PUNCH_ROOT__teal_fixed_batch",
+          "targetNode": 9,
+          "targetPart": "MOD_25_corner_strut003",
+          "progress": 0
+        },
+        {
+          "node": 9,
+          "kind": "punch",
+          "part": "PUNCH_ROOT__teal_fixed_batch",
+          "targetNode": 9,
+          "targetPart": "MOD_25_side_lower_rail001",
+          "progress": 0
+        },
+        {
+          "node": 9,
+          "kind": "punch",
+          "part": "PUNCH_ROOT__teal_fixed_batch",
+          "targetNode": 9,
+          "targetPart": "MOD_25_side_upper_rail001",
+          "progress": 0
+        },
+        {
+          "node": 18,
+          "kind": "punch",
+          "part": "PUNCH_ROOT__teal_fixed_batch",
+          "targetNode": 18,
+          "targetPart": "MOD_25_axle_fastener",
+          "progress": 0
+        },
+        {
+          "node": 18,
+          "kind": "punch",
+          "part": "PUNCH_ROOT__teal_fixed_batch",
+          "targetNode": 18,
+          "targetPart": "MOD_25_corner_strut",
+          "progress": 0
+        },
+        {
+          "node": 18,
+          "kind": "punch",
+          "part": "PUNCH_ROOT__teal_fixed_batch",
+          "targetNode": 18,
+          "targetPart": "MOD_25_side_lower_rail",
+          "progress": 0
+        },
+        {
+          "node": 18,
+          "kind": "punch",
+          "part": "PUNCH_ROOT__teal_fixed_batch",
+          "targetNode": 18,
+          "targetPart": "MOD_25_side_upper_rail",
+          "progress": 0
+        },
+        {
+          "node": 46,
+          "kind": "punch",
+          "part": "PUNCH_ROOT__teal_fixed_batch",
+          "targetNode": 46,
+          "targetPart": "MOD_25_axle_fastener",
+          "progress": 0
+        },
+        {
+          "node": 46,
+          "kind": "punch",
+          "part": "PUNCH_ROOT__teal_fixed_batch",
+          "targetNode": 46,
+          "targetPart": "MOD_25_corner_strut",
+          "progress": 0
+        },
+        {
+          "node": 46,
+          "kind": "punch",
+          "part": "PUNCH_ROOT__teal_fixed_batch",
+          "targetNode": 46,
+          "targetPart": "MOD_25_side_lower_rail",
+          "progress": 0
+        },
+        {
+          "node": 46,
+          "kind": "punch",
+          "part": "PUNCH_ROOT__teal_fixed_batch",
+          "targetNode": 46,
+          "targetPart": "MOD_25_side_upper_rail",
+          "progress": 0
+        },
+        {
+          "node": 47,
+          "kind": "gain",
+          "part": "GAIN_CABINET",
+          "targetNode": 47,
+          "targetPart": "MOD_25_axle_fastener001",
+          "progress": 0
+        },
+        {
+          "node": 47,
+          "kind": "gain",
+          "part": "GAIN_CABINET",
+          "targetNode": 47,
+          "targetPart": "MOD_25_corner_strut001",
+          "progress": 0
+        },
+        {
+          "node": 47,
+          "kind": "gain",
+          "part": "GAIN_CABINET",
+          "targetNode": 47,
+          "targetPart": "MOD_25_side_upper_rail",
+          "progress": 0
+        },
+        {
+          "node": 49,
+          "kind": "gain",
+          "part": "GAIN_CABINET",
+          "targetNode": 49,
+          "targetPart": "MOD_25_axle_fastener002",
+          "progress": 0
+        },
+        {
+          "node": 49,
+          "kind": "gain",
+          "part": "GAIN_CABINET",
+          "targetNode": 49,
+          "targetPart": "MOD_25_corner_strut002",
+          "progress": 0
+        },
+        {
+          "node": 49,
+          "kind": "gain",
+          "part": "GAIN_CABINET",
+          "targetNode": 49,
+          "targetPart": "MOD_25_index_back",
+          "progress": 0
+        },
+        {
+          "node": 49,
+          "kind": "gain",
+          "part": "GAIN_CABINET",
+          "targetNode": 49,
+          "targetPart": "MOD_25_index_bracket",
+          "progress": 0
+        },
+        {
+          "node": 49,
+          "kind": "gain",
+          "part": "GAIN_CABINET",
+          "targetNode": 49,
+          "targetPart": "MOD_25_side_upper_rail001",
+          "progress": 0
+        }
+      ]
+    }
+  ]
+}

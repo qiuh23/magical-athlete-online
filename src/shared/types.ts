@@ -117,3 +117,6 @@ export interface GameEvent { paths?: number[][]; }
 export interface RoomView { trackState?: { reversed:boolean; event?:ReturnType<ReturnType<typeof import('../engine/special-events.js').installThirds>['publicState']>; twist?: Omit<import('../engine/twist-cards.js').TwistState,'deck'|'swap'> }; }
 
 export interface Room { siteEdition?:import("./site-policy.js").SiteEdition; cnPolicyVersion?:1 }
+
+/** Optional presentation metadata; scores are clamped by authority before logging. */
+export interface GameEvent { scoreDelta?: number; boardPosition?: number; }

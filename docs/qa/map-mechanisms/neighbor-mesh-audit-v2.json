@@ -1,0 +1,41 @@
+{
+  "method": "Exact Three GLB triangles including morph-deformed vertices. Each mechanism at 51 source poses versus every other idle mechanism; Wild24 additionally actual prepare/fire profiles and held READY target; Wild5 actual full/economy trip profiles and held aim target. Surface intersections only, not continuous/containment or actor collision proof. Models/placements loaded once at process start.",
+  "maps": [
+    {
+      "track": "wild",
+      "placements": 10,
+      "idleTargetMeshes": 154,
+      "movingMeshSamples": 9027,
+      "samples": 714,
+      "testedBroadphasePairs": 6,
+      "hits": []
+    },
+    {
+      "track": "whirly-world",
+      "placements": 12,
+      "idleTargetMeshes": 228,
+      "movingMeshSamples": 11628,
+      "samples": 612,
+      "testedBroadphasePairs": 0,
+      "hits": []
+    },
+    {
+      "track": "squiggle",
+      "placements": 13,
+      "idleTargetMeshes": 166,
+      "movingMeshSamples": 8466,
+      "samples": 663,
+      "testedBroadphasePairs": 0,
+      "hits": []
+    },
+    {
+      "track": "boardwalks",
+      "placements": 19,
+      "idleTargetMeshes": 238,
+      "movingMeshSamples": 12138,
+      "samples": 969,
+      "testedBroadphasePairs": 0,
+      "hits": []
+    }
+  ]
+}

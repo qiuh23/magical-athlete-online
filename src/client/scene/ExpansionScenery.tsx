@@ -2,11 +2,11 @@ import { useEffect, useMemo } from 'react';
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
-import type { TrackId } from '../../shared/tracks.js';
+import { TRACKS, type TrackId } from '../../shared/tracks.js';
 import { boardBounds, boardPoint, TILE, trackConnections, trackNodeIds } from './math.js';
 import { expansionOutline, expansionTileSize, sceneryPockets } from './expansion-layout.js';
 
-const palette={cream:'#f2e3c5',dark:'#42786b',mint:'#87bdae',wood:'#c7a479',grass:'#99b96c',leaf:'#638848',coral:'#e99279',gold:'#edc56c',water:'#84b8bb',waterLight:'#b2d7cd',purple:'#aa91be'};
+export const palette={cream:'#f2e3c5',dark:'#42786b',mint:'#87bdae',wood:'#c7a479',grass:'#99b96c',leaf:'#638848',coral:'#e99279',gold:'#edc56c',water:'#84b8bb',waterLight:'#b2d7cd',purple:'#aa91be'};
 type Paint=keyof typeof palette;
 function surfaceStamp(wood=false) {
  const c=document.createElement('canvas');c.width=c.height=128;const ctx=c.getContext('2d')!;ctx.fillStyle='#eee6d5';ctx.fillRect(0,0,128,128);
@@ -16,7 +16,7 @@ function surfaceStamp(wood=false) {
  const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.colorSpace=THREE.SRGBColorSpace;return t;
 }
 /** Merged static kit: repeat geometry/materials never become hundreds of draws. */
-function sceneryGeometry(track:TrackId,low:boolean) {
+export function sceneryGeometry(track:TrackId,low:boolean) {
  const buckets=new Map<Paint,THREE.BufferGeometry[]>();const box=new RoundedBoxGeometry(1,1,1,1,.07),sphere=new THREE.IcosahedronGeometry(1,1),cyl=new THREE.CylinderGeometry(1,1,1,12);
  const add=(paint:Paint,g:THREE.BufferGeometry,p:number[],s:number[],angle=0)=>{const copy=g.clone();copy.applyMatrix4(new THREE.Matrix4().compose(new THREE.Vector3(...p),new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,1,0),angle),new THREE.Vector3(...s)));if(copy.index){const flat=copy.toNonIndexed();copy.dispose();(buckets.get(paint)??buckets.set(paint,[]).get(paint)!).push(flat)}else(buckets.get(paint)??buckets.set(paint,[]).get(paint)!).push(copy)};
  const block=(paint:Paint,p:number[],s:number[],a=0)=>add(paint,box,p,s,a);
@@ -60,7 +60,7 @@ function sceneryGeometry(track:TrackId,low:boolean) {
 function CourseBanners({track}:{track:TrackId}) {
  const textures=useMemo(()=>[0,30].map(id=>{
  const c=document.createElement('canvas');c.width=id===0?1024:256;c.height=96;const ctx=c.getContext('2d')!;ctx.fillStyle='#fff8df';ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='bold 60px sans-serif';
- const title=track==='squiggle'?'GARDEN':track==='boardwalks'?'BOARDWALKS':'BRIDGES';ctx.fillText(id===0?`${title} · START`:'FINISH',c.width/2,48);const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;return t;
+ const title=track==='squiggle'?'GARDEN':track==='boardwalks'?'BOARDWALKS':track==='bridges'?'BRIDGES':TRACKS[track].name;ctx.fillText(id===0?`${title} · START`:'FINISH',c.width/2,48);const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;return t;
  }),[track]);
  useEffect(()=>()=>textures.forEach(t=>t.dispose()),[textures]);
  return <>{[0,30].map((id,i)=>{const p=boardPoint(id,false,track);return <mesh key={id} position={[p[0]-(id===0?TILE*1.5:0),1.9,p[2]-1.435]}><planeGeometry args={[id===0?6.1:2,.27]}/><meshBasicMaterial map={textures[i]} transparent depthWrite={false} toneMapped={false}/></mesh>})}</>;

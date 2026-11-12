@@ -1,0 +1,29 @@
+{
+  "method": "51 poses per phase (Wild24 prepare/fire, Wild5 actual actuator/economy maximum stroke; others original source clip), exact exported triangles including morph positions versus full approved MOD25 and 2 m wide real edge roads. Surface crossings, not continuous or containment proof. Actor meshes excluded.",
+  "maps": [
+    {
+      "track": "wild",
+      "spacing": 2.05,
+      "samples": 51,
+      "hits": []
+    },
+    {
+      "track": "whirly-world",
+      "spacing": 2.05,
+      "samples": 51,
+      "hits": []
+    },
+    {
+      "track": "squiggle",
+      "spacing": 2.05,
+      "samples": 51,
+      "hits": []
+    },
+    {
+      "track": "boardwalks",
+      "spacing": 2.3,
+      "samples": 51,
+      "hits": []
+    }
+  ]
+}

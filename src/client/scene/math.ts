@@ -1,3 +1,4 @@
+import { transformBoardPoint } from './mechanisms/layout.js';
 import { TRACKS, type TrackId } from '../../shared/tracks.js';
 import type { RoomView } from '../../shared/types.js';
 
@@ -20,12 +21,12 @@ export function boardPoint(position: number, compact: boolean, track: TrackId = 
   if (nodes) {
     const point = nodes[position] ?? nodes[0]!;
     const x = point.x * TILE, z = point.z * TILE, y = .22 + (point.y ?? 0) * TILE;
-    return compact ? [-z, y, x] : [x, y, z];
+    return transformBoardPoint(compact ? [-z, y, x] : [x, y, z], track);
   }
   const index = Number.isFinite(position) ? Math.max(0, Math.min(TRACK_FINISH, position)) : 0;
   const x = (index <= TRACK_FIRST_CORNER ? index : index <= TRACK_SECOND_CORNER ? TRACK_FIRST_CORNER : TRACK_FIRST_CORNER - (index - TRACK_SECOND_CORNER)) - centerTrackX;
   const z = (index <= TRACK_FIRST_CORNER ? 0 : index <= TRACK_SECOND_CORNER ? index - TRACK_FIRST_CORNER : farStraight) - farStraight / 2;
-  return compact ? [-z * TILE, .22, x * TILE] : [x * TILE, .22, z * TILE];
+  return transformBoardPoint(compact ? [-z * TILE, .22, x * TILE] : [x * TILE, .22, z * TILE], track);
 }
 
 export function trackNodeIds(track: TrackId): number[] {

@@ -1,0 +1,79 @@
+{
+  "method": "Actual GLB articulated transform application vs independent solver samples, normalized650/850/1700ms. Fixed mount and source-cache invariance. NOT a collision, visual readability, speed, phone or production certificate.",
+  "assetSha256": "2f331432d72ef78d33c2aadd355885f25ca9f670d4d7f37b36e0c27b6db1046f",
+  "cachedSourceUnchanged": true,
+  "results": [
+    {
+      "track": "wild",
+      "node": 5,
+      "layout": "desktop",
+      "count": 1,
+      "slot": 0,
+      "checkedJointPoses": 249,
+      "maxJointDifference": 4.85722573273506e-17,
+      "rootFixed": true,
+      "productionApproved": false,
+      "unverified": [
+        "self-local-domains",
+        "soft-depth",
+        "neighbour-map",
+        "old-down",
+        "mobile-runtime"
+      ]
+    },
+    {
+      "track": "wild",
+      "node": 17,
+      "layout": "desktop",
+      "count": 1,
+      "slot": 0,
+      "checkedJointPoses": 249,
+      "maxJointDifference": 3.469446951953614e-17,
+      "rootFixed": true,
+      "productionApproved": false,
+      "unverified": [
+        "self-local-domains",
+        "soft-depth",
+        "neighbour-map",
+        "old-down",
+        "mobile-runtime"
+      ]
+    },
+    {
+      "track": "wild",
+      "node": 5,
+      "layout": "desktop",
+      "count": 2,
+      "slot": 0,
+      "checkedJointPoses": 249,
+      "maxJointDifference": 6.938893903907228e-17,
+      "rootFixed": true,
+      "productionApproved": false,
+      "unverified": [
+        "self-local-domains",
+        "soft-depth",
+        "neighbour-map",
+        "old-down",
+        "mobile-runtime"
+      ]
+    },
+    {
+      "track": "wild",
+      "node": 5,
+      "layout": "desktop",
+      "count": 2,
+      "slot": 1,
+      "checkedJointPoses": 249,
+      "maxJointDifference": 6.938893903907228e-17,
+      "rootFixed": true,
+      "productionApproved": false,
+      "unverified": [
+        "self-local-domains",
+        "soft-depth",
+        "neighbour-map",
+        "old-down",
+        "mobile-runtime"
+      ]
+    }
+  ]
+}

@@ -80,6 +80,18 @@ jobs:
       - name: Install browsers only for explicit manual browser suites
         if: github.event_name == 'workflow_dispatch' && steps.validation.outputs.suite != 'release'
         run: pnpm exec playwright install --with-deps chromium
+      - name: Validate actual map mechanisms and HUD screenshots
+        if: github.event_name == 'workflow_dispatch' && steps.validation.outputs.suite == 'all'
+        run: pnpm exec playwright test -c playwright.mechanisms.config.ts
+        env:
+          CI: true
+      - name: Preserve mechanism screenshots before other browser suites
+        if: always() && github.event_name == 'workflow_dispatch' && steps.validation.outputs.suite == 'all'
+        uses: actions/upload-artifact@v4
+        with:
+          name: mechanism-screenshots
+          path: test-results/map-mechanisms/
+          retention-days: 7
       # Browser, gameplay and screenshot checks are local or explicit manual work.
       - name: Validate dice batches, choice details, event reasons and chat layout
         if: github.event_name == 'workflow_dispatch' && steps.validation.outputs.suite != 'release' && steps.validation.outputs.suite != 'deployment'

@@ -1,0 +1,72 @@
+{
+  "scope": {
+    "track": "wild",
+    "node": 5,
+    "compact": false,
+    "incoming_path": [
+      4,
+      5
+    ],
+    "incoming_slot": [
+      -0.45,
+      0
+    ],
+    "old_down_slot": [
+      0.45,
+      0
+    ],
+    "occupants": 2,
+    "character": "banana",
+    "motionEnabled": false,
+    "no_form_or_mount": true
+  },
+  "root_three_position": [
+    -1.145512985522207,
+    0,
+    0.5544870144777929
+  ],
+  "root_yaw": 0.7853981633974483,
+  "pivot_three": [
+    0,
+    0.22,
+    1.7
+  ],
+  "pad_yaw": 0,
+  "idle_rotor": 0.7853981633974483,
+  "aim_rotor": 1.044169055361146,
+  "reach_full": 0.4365,
+  "reach_economy": 0.4475,
+  "phase": {
+    "aim": [
+      0,
+      0.08
+    ],
+    "extend": [
+      0.08,
+      0.16
+    ],
+    "retract": [
+      0.16,
+      0.3
+    ],
+    "reset": [
+      0.34,
+      0.5
+    ]
+  },
+  "resident_reflow": {
+    "finish": 0.35,
+    "start_scale": 1.65,
+    "end_scale": 1.14,
+    "start_x": 0,
+    "end_x": 0.45,
+    "preserve_down": true
+  },
+  "native_fall_extent_outside_pad_m": 0.3041172,
+  "mesh_assets": {
+    "public/models/mechanisms/trip_joint.glb": "70c96cc02f6db99d9ec8650a81f519a39c526d8485231d632ce2908879165641",
+    "public/models/mechanisms/approved_soft_track_tile.glb": "3b5710744f0b33d6460ed68d56bc90c4af4850eee19a757d4db49542cea2b583",
+    "public/models/banana/banana.glb": "25bad0ab653cceb00f9d93b0013e7bc0ffee913c764d2b9f99803adce4e5372d",
+    "public/models/banana/banana-economy.glb": "eb5c77d8709fb3f55fa716f9bda68944b88169cccdbcc1d3aad2a0b396f6113b"
+  }
+}

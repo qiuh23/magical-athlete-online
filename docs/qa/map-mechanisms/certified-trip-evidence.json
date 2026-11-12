@@ -1,0 +1,1617 @@
+{
+  "version": "trip-common-manifest-v3-static-fit",
+  "releaseStatus": "offline-discrete-geometry-candidate",
+  "productionApproved": false,
+  "domain": {
+    "id": "trip-telescopic-v1-synchronized-frozen-403",
+    "rig": "trip-telescopic-v1",
+    "yawMin": 0,
+    "yawMax": 6.283185307179586,
+    "stageMin": 0,
+    "stageMax": 0.37,
+    "headHeightMin": 0.16,
+    "headHeightMax": 0.24,
+    "driver": "synchronized-five-stage",
+    "softLimitM": 0.002
+  },
+  "initialPose": {
+    "rig": "trip-telescopic-v1",
+    "yaw": 0,
+    "stages": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "headHeight": 0.2
+  },
+  "authorEvidence": {
+    "trip_telescopic_v1.glb": "2f331432d72ef78d33c2aadd355885f25ca9f670d4d7f37b36e0c27b6db1046f",
+    "joint_contract.json": "f8d32b0e874bdff8d92b32bb53e3f7a9adea9f92d758c53d4eaf73d9f9ddaabe",
+    "self_collision_report.json": "569e9c2e8d842a090e37d46b21585a98024b6c8bd899e857e6eaeca5eaf25265",
+    "roundtrip_report.json": "e1db8d7c4331e15fd9b84ae79a01ac0382a501dff87f6cdb5b97c3eedc142ce2",
+    "solid_fit_report.json": "873152e955ec119dfd7721a8b326ac63ee1cf66f86d33e00aa2f598bed84697d"
+  },
+  "authorEvidenceHashEncoding": "Raw file SHA256",
+  "rigSha256": "2f331432d72ef78d33c2aadd355885f25ca9f670d4d7f37b36e0c27b6db1046f",
+  "selfEvidence": {
+    "scope": "Frozen author 403 finite self samples plus synchronized nested-stage clearance/domain; matching exact rig. Fixed authored bonds and shaft shoulder/socket contacts inherited in bounded authored assembly.",
+    "notContinuous": true
+  },
+  "preconditions": {
+    "singleTarget": true,
+    "occupancyCount": 1,
+    "standingAtBeatStart": true,
+    "staticBind": true,
+    "reflowFinished": true,
+    "standingQuaternion": [
+      0,
+      0,
+      0,
+      1
+    ],
+    "scale": 1.65,
+    "nearbyOtherActorsAbsentRadiusM": 6,
+    "neighborDevicesAtRecordedIdle": true,
+    "exactLayoutGeometryAndMountFingerprint": true,
+    "allStagesZeroAtStart": true,
+    "initialYaw": 0,
+    "initialHeadHeight": 0.2,
+    "notLate": true
+  },
+  "lifecycle": "Complete trajectory returns to fixed park after supported fall; no instant reset. End park checked against down target. Cancel/seek/late/scope changes require separate audited retract or cue-only; no future old-down target retrigger.",
+  "method": "Actual triangles + dual-BVH surface checks, bidirectional closed-part containment, disjoint closed convex hull cover for open parts, finite time sampling. Soft depth is sampled actual contained-vertex depth, not exact maximum. No continuous collision, performance or WebGL claim.",
+  "timing": {
+    "minDurationMs": 650,
+    "firstTrajectoryNormalizedEnd": 0.8,
+    "fallStart": 0.32,
+    "fallEnd": 0.8,
+    "returnToPark": [
+      0.8,
+      1
+    ],
+    "multiTarget": "not released; cue-only"
+  },
+  "sources": {
+    "src/client/scene/mechanisms/static-support.ts": {
+      "sha256": "317b0f68059016f251c4207aa0ca9010de640abe4941e98158d3153e489d2c4d",
+      "bytes": 1576,
+      "kind": "source"
+    },
+    "src/client/scene/mechanisms/placements.ts": {
+      "sha256": "63b3d29d3fdf635de95bcad2209f0a2fcb1057fa6a03e782c47d187b072e97d0",
+      "bytes": 2204,
+      "kind": "source"
+    },
+    "src/client/scene/mechanisms/layout.ts": {
+      "sha256": "e6705c25bf366f822565a26ef4303594390f3ba168fa5b5a02807dbd82791dbe",
+      "bytes": 2074,
+      "kind": "source"
+    },
+    "src/client/scene/mechanisms/MechanismCourse.tsx": {
+      "sha256": "b644cc0635841db36fd61e2faf4ad37c9f223eee805fd69e3f646ac74cc11477",
+      "bytes": 8607,
+      "kind": "source"
+    },
+    "src/client/scene/mechanisms/models.ts": {
+      "sha256": "6dcb80fdb9e53dbb48c66e002c8f65a11260de49c38172062e56d79544ccc6f3",
+      "bytes": 3352,
+      "kind": "source"
+    },
+    "src/client/scene/mechanisms/down-pose.ts": {
+      "sha256": "f7be8565afb7a41ba71b6ba45779e7f055fa1f64d64345dd973999b08a25b3f9",
+      "bytes": 5606,
+      "kind": "source"
+    },
+    "src/client/scene/math.ts": {
+      "sha256": "54b1c1f92c222ba8864aebf9cc7f4e5b3dbd83cf0fd7856fdb93323187ffc8c3",
+      "bytes": 5701,
+      "kind": "source"
+    },
+    "src/client/scene/camera.ts": {
+      "sha256": "9d8a74799bd08344595590d589b7135e2c9f02ec50786386aa4feec01890f2a2",
+      "bytes": 20761,
+      "kind": "source"
+    },
+    "src/client/scene/ExpansionScenery.tsx": {
+      "sha256": "4c37174a10e601f6ca7a347ccf34e9c3224378445655525506b11d7bf4ff7af3",
+      "bytes": 8754,
+      "kind": "source"
+    },
+    "src/client/scene/expansion-layout.ts": {
+      "sha256": "4f83573cf63f8e565fd8955389359c79beabad43205bdd6444caa18da4889c53",
+      "bytes": 3536,
+      "kind": "source"
+    },
+    "src/client/scene/stadium/models.ts": {
+      "sha256": "ce72b00f6bb50e327de7716f4fabb26f423dcecd2a2e77f3d45f370f25b78ef2",
+      "bytes": 3588,
+      "kind": "source"
+    },
+    "src/client/scene/stadium/layout-classic.json": {
+      "sha256": "70bd09b6ac7c2708be4c02b40969b309e16e2a0559ba676d7584ee9fce86c8ec",
+      "bytes": 16838,
+      "kind": "source"
+    },
+    "src/client/scene/ToyCharacter.tsx": {
+      "sha256": "5c5a607d934325f3108baeb440416508d6296e5b16f5f8277260c93c784dfda0",
+      "bytes": 10302,
+      "kind": "source"
+    },
+    "src/client/scene/pawn-materials.ts": {
+      "sha256": "1e31753d38b74a7cf9b835924167c1d700962087e55ab13bed2f099a58db79a0",
+      "bytes": 4277,
+      "kind": "source"
+    },
+    "public/models/mechanisms/trip_telescopic_v1.2f331432.glb": {
+      "sha256": "2f331432d72ef78d33c2aadd355885f25ca9f670d4d7f37b36e0c27b6db1046f",
+      "bytes": 134288
+    },
+    "public/models/mechanisms/approved_soft_track_tile.glb": {
+      "sha256": "7ca87e14c06e410144d2e5fbd66303605c2a442f4fae7c0928a62c5eef28c659",
+      "bytes": 377420
+    },
+    "public/models/mechanisms/gain_joint_action.glb": {
+      "sha256": "fcb164ad50bb52d22fa0b3aa66f63d515d40c9fef372060997ae3d62fa0a1fde",
+      "bytes": 185552
+    },
+    "public/models/mechanisms/trip_joint.glb": {
+      "sha256": "70c96cc02f6db99d9ec8650a81f519a39c526d8485231d632ce2908879165641",
+      "bytes": 108676
+    },
+    "public/models/mechanisms/punch_outboard_joint.glb": {
+      "sha256": "ff8a8d4431fd08d4cc0111133ad9f0af1ea8abf3197131f5f6c6dfba0d6fa956",
+      "bytes": 380660
+    },
+    "public/models/stadium-v7/athlete_bleachers.glb": {
+      "sha256": "ebb0e33254466f0fe2e0ac5ee7efa6f8e3335ebc822454c4f2c9de92757279ea",
+      "bytes": 353792
+    },
+    "public/models/stadium-v7/athlete_bunting.glb": {
+      "sha256": "d3989d31d4cb5599341cebe899036f18b0d2db118eb3e35a67dbaff8c5de9203",
+      "bytes": 41208
+    },
+    "public/models/stadium-v7/athlete_infield_plan.glb": {
+      "sha256": "30d270b36baf1c9ee0035de4852113e8a787b27ba589e50e440ff1f0ddca0f0f",
+      "bytes": 282596
+    },
+    "public/models/stadium-v7/athlete_officials_kiosk.glb": {
+      "sha256": "14dc284be1cc94c0cf314c51b5da312999c214f731b0a81634e387c50da1457b",
+      "bytes": 74856
+    },
+    "public/models/stadium-v7/athlete_planter.glb": {
+      "sha256": "f706b413f2744bfc05b6dd9b19a453e1594e7ef6c70f0bddc9e5e7b4332dc1fe",
+      "bytes": 121112
+    },
+    "public/models/stadium-v7/athlete_podium.glb": {
+      "sha256": "e91d607b803de66c90b06a0159932978da97aff5256dc8b30ae57ba6095cea33",
+      "bytes": 100260
+    },
+    "public/models/stadium-v7/athlete_scoreboard.glb": {
+      "sha256": "72f7abebffa864027bf39c1812b877f33365b4536ff2161b9af94b5e82f2c52b",
+      "bytes": 65540
+    },
+    "public/models/stadium-v7/athlete_spectators_strip.glb": {
+      "sha256": "b100952a24cc7624d3f3939c45ef57da92d70c5488909f039f35dbecc060b4a6",
+      "bytes": 292092
+    },
+    "public/models/stadium-v7/athlete_topiary.glb": {
+      "sha256": "934655249edbab40f4a6f2ebc4a9c159f07c6bb4417f8e303886b8dfe5e4df69",
+      "bytes": 36696
+    },
+    "public/models/mechanisms/loss_joint_action.glb": {
+      "sha256": "0323a384103f271627786c5c8ef3ba98ac1b488a03e2096c26617442250df0f6",
+      "bytes": 136796
+    },
+    "public/models/banana/banana.glb": {
+      "sha256": "25bad0ab653cceb00f9d93b0013e7bc0ffee913c764d2b9f99803adce4e5372d",
+      "bytes": 44512
+    },
+    "public/models/wurstii/wurstii-frogger.glb": {
+      "sha256": "86abb2396306b5b7706c84b8db3ce78f6edd5a76a8b5441f8cce88165cc9ce55",
+      "bytes": 44244
+    },
+    "public/models/toy-racers.glb": {
+      "sha256": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2",
+      "bytes": 1962520
+    },
+    "public/models/leaf/leaf-race-car.glb": {
+      "sha256": "18fad093516a2ff2f655a129be9fbd12c1365731775dff95296917f3e037612e",
+      "bytes": 43728
+    },
+    "public/models/second-wind/bite-mark-were.glb": {
+      "sha256": "420adfdb1540c95fd1c0777a5a128979e41fbcdb347b564b474dfc66475122f5",
+      "bytes": 60952
+    },
+    "public/models/second-wind/hog-knight-hog.glb": {
+      "sha256": "b5aca1fdb6d814028f6db99ce1f086cce9283e5c7de16375431b73d32e9ae1bd",
+      "bytes": 85852
+    },
+    "src/client/scene/mechanisms/actor-snapshot.ts": {
+      "sha256": "208f282018b2050425e42ed483b1a2cb3804023113fc20ae3bb36d3b74ad53a5",
+      "bytes": 2607,
+      "kind": "source"
+    },
+    "src/client/scene/mechanisms/contact-plan.ts": {
+      "sha256": "055cdea8c606a15a7d9c9254ee09826eebf6e7ddaa1d350c0a06c003522b3944",
+      "bytes": 8714,
+      "kind": "source"
+    }
+  },
+  "changedInputs": [],
+  "baselineSummary": {
+    "total": 84,
+    "passed": 48,
+    "singlePassed": 24,
+    "singleTotal": 28,
+    "twoPassed": 24,
+    "twoTotal": 56
+  },
+  "representativeSummary": {
+    "total": 90,
+    "passed": 63
+  },
+  "rejected": [],
+  "previousManifestDigest": "72e83a7f27b08c221d15ea240acab8db8ccdeef5a11080b0c0fe3e44095dfd65",
+  "staticAmendment": {
+    "report": "static-adapter-amendment.json",
+    "digest": "7e6e0ed6e6fcd8276644464a900a50d417e94844c91a4d7c7013318497a1aa65",
+    "passedFixtures": 54,
+    "affectedFixtures": 0,
+    "newContactScopeAdded": false
+  },
+  "geometryFingerprintMethod": "Production actor-snapshot.ts: Int32 micron transformed actor-local Float32 positions and original triangle indices, render order base/cap/hog/main; offline BVH hash retained separately.",
+  "fixtures": [
+    {
+      "key": "wild/17/desktop/banana:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.00034973471676468914,
+        "nearQueries": 148,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "wild/26/desktop/banana:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.00034973471676468914,
+        "nearQueries": 148,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "wild/17/compact/banana:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.00034973471676468914,
+        "nearQueries": 148,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "wild/26/compact/banana:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.00034973471676468914,
+        "nearQueries": 148,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "squiggle/5/desktop/banana:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.00026276320950496937,
+        "nearQueries": 390,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "squiggle/26/desktop/banana:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.00034973471676468914,
+        "nearQueries": 148,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "squiggle/5/compact/banana:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.00026276320950315826,
+        "nearQueries": 390,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "squiggle/26/compact/banana:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.0003497347167638018,
+        "nearQueries": 148,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "boardwalks/6/desktop/banana:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.0003497347167638018,
+        "nearQueries": 148,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "boardwalks/10/desktop/banana:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.0003497347167643564,
+        "nearQueries": 148,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "boardwalks/16/desktop/banana:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.0003497347167638152,
+        "nearQueries": 148,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "boardwalks/19/desktop/banana:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.00034973471676468914,
+        "nearQueries": 148,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "boardwalks/20/desktop/banana:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.00034973471676468914,
+        "nearQueries": 148,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "boardwalks/21/desktop/banana:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.00034973471676468914,
+        "nearQueries": 148,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "boardwalks/22/desktop/banana:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.00034973471676735796,
+        "nearQueries": 148,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "boardwalks/23/desktop/banana:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.0003497347167673714,
+        "nearQueries": 189,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "boardwalks/6/compact/banana:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.0003497347167638018,
+        "nearQueries": 148,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "boardwalks/10/compact/banana:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.0003497347167643564,
+        "nearQueries": 148,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "boardwalks/16/compact/banana:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.0003497347167638152,
+        "nearQueries": 148,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "boardwalks/19/compact/banana:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.00034973471676468914,
+        "nearQueries": 148,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "boardwalks/20/compact/banana:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.0003497347167638018,
+        "nearQueries": 148,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "boardwalks/21/compact/banana:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.0003497347167638018,
+        "nearQueries": 148,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "boardwalks/22/compact/banana:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.0003497347167673849,
+        "nearQueries": 148,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "boardwalks/23/compact/banana:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.0003497347167673714,
+        "nearQueries": 189,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "wild/17/desktop/wurstii-frogger:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.00034973471676468914,
+        "nearQueries": 148,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "wild/17/compact/wurstii-frogger:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.00034973471676468914,
+        "nearQueries": 175,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "squiggle/26/desktop/wurstii-frogger:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.00034973471676468914,
+        "nearQueries": 148,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "squiggle/26/compact/wurstii-frogger:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.0003497347167638018,
+        "nearQueries": 175,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "boardwalks/22/desktop/wurstii-frogger:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.00034973471676735796,
+        "nearQueries": 175,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "boardwalks/22/compact/wurstii-frogger:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.0003497347167673849,
+        "nearQueries": 148,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "wild/17/desktop/coach:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.00034973471676468914,
+        "nearQueries": 148,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "wild/17/compact/coach:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.00034973471676468914,
+        "nearQueries": 168,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "squiggle/26/desktop/coach:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.00034973471676468914,
+        "nearQueries": 148,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "squiggle/26/compact/coach:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.0003497347167638018,
+        "nearQueries": 168,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "boardwalks/22/desktop/coach:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.00034973471676735796,
+        "nearQueries": 174,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "boardwalks/22/compact/coach:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.0003497347167673849,
+        "nearQueries": 148,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "wild/17/desktop/leaf-race-car:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.00034973471676468914,
+        "nearQueries": 162,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "wild/17/compact/leaf-race-car:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.00034973471676468914,
+        "nearQueries": 148,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "squiggle/26/desktop/leaf-race-car:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.00034973471676468914,
+        "nearQueries": 162,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "squiggle/26/compact/leaf-race-car:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.0003497347167638018,
+        "nearQueries": 148,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "boardwalks/22/desktop/leaf-race-car:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.00034973471676735796,
+        "nearQueries": 148,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "boardwalks/22/compact/leaf-race-car:false:normal:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.0003497347167673849,
+        "nearQueries": 162,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "wild/17/desktop/bite-mark:false:were-mouth:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.00034973471676468914,
+        "nearQueries": 148,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "wild/17/compact/bite-mark:false:were-mouth:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.00034973471676468914,
+        "nearQueries": 148,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "squiggle/26/desktop/bite-mark:false:were-mouth:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.00034973471676468914,
+        "nearQueries": 148,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "squiggle/26/compact/bite-mark:false:were-mouth:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.0003497347167638018,
+        "nearQueries": 148,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "boardwalks/22/desktop/bite-mark:false:were-mouth:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.00034973471676735796,
+        "nearQueries": 148,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "boardwalks/22/compact/bite-mark:false:were-mouth:false",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.0003497347167673849,
+        "nearQueries": 148,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "wild/17/desktop/banana:false:normal:true",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.00034973471676468914,
+        "nearQueries": 160,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "wild/17/compact/banana:false:normal:true",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.00034973471676468914,
+        "nearQueries": 148,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "squiggle/26/desktop/banana:false:normal:true",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.00034973471676468914,
+        "nearQueries": 160,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "squiggle/26/compact/banana:false:normal:true",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.0003497347167638018,
+        "nearQueries": 148,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "boardwalks/22/desktop/banana:false:normal:true",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.00034973471676735796,
+        "nearQueries": 148,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    },
+    {
+      "key": "boardwalks/22/compact/banana:false:normal:true",
+      "audit": {
+        "pass": true,
+        "category": "sampled-clear",
+        "sampleCount": 41,
+        "softSamples": 1,
+        "maxSoftDepth": 0.0003497347167673849,
+        "nearQueries": 160,
+        "selfEvidence": "reuse-frozen-author-domain; no redundant per-frame internal audit"
+      },
+      "returnAudit": {
+        "pass": true,
+        "category": "park-return-clear",
+        "sampleCount": 21
+      },
+      "evidenceProvenance": {
+        "self": "authorEvidence plus generated joint domain/phase interlock validator",
+        "bystanders": "empty under explicit nearby-actor precondition; multi-actor cases not released",
+        "targetTarget": "only one target",
+        "geometry": "full actual loaded Pawn including common base/cap, .164 statue offset, form and mount",
+        "map": "actual displayed geometry; 12 new Trip anchors, wild:5 and squiggle:17 old rigs, old Punch, current Gain placement/bleachers helper; Wild5 fixed foot adapter and Squiggle17 support-bottom adapter verified in static-adapter-amendment.json",
+        "floor": "all actual vertices supported by current down-pose.ts bound"
+      }
+    }
+  ]
+}

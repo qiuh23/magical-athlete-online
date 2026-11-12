@@ -1,0 +1,342 @@
+{
+  "method": "Three OrthographicCamera NDC versus Blender world_to_camera_view, same target/direction/zoom, sensor AUTO and ortho_scale=max(width,height)/zoom",
+  "max_ndc_xy_error": 1.653746031449188e-06,
+  "checks": [
+    {
+      "track": "wild",
+      "width": 1280,
+      "height": 900,
+      "overview": true,
+      "max_ndc_xy_error": 1.5497207633614398e-06
+    },
+    {
+      "track": "wild",
+      "width": 1280,
+      "height": 900,
+      "overview": true,
+      "max_ndc_xy_error": 1.653746031449188e-06
+    },
+    {
+      "track": "wild",
+      "width": 1280,
+      "height": 900,
+      "overview": true,
+      "max_ndc_xy_error": 1.5874740298543744e-06
+    },
+    {
+      "track": "wild",
+      "width": 1280,
+      "height": 900,
+      "overview": true,
+      "max_ndc_xy_error": 1.5496715025514751e-06
+    },
+    {
+      "track": "wild",
+      "width": 1280,
+      "height": 900,
+      "overview": true,
+      "max_ndc_xy_error": 1.5549115432861305e-06
+    },
+    {
+      "track": "wild",
+      "width": 1280,
+      "height": 900,
+      "overview": true,
+      "max_ndc_xy_error": 1.5098201308141879e-06
+    },
+    {
+      "track": "wild",
+      "width": 390,
+      "height": 844,
+      "overview": true,
+      "max_ndc_xy_error": 2.3841857830777928e-07
+    },
+    {
+      "track": "wild",
+      "width": 390,
+      "height": 844,
+      "overview": true,
+      "max_ndc_xy_error": 2.276748196083922e-07
+    },
+    {
+      "track": "wild",
+      "width": 390,
+      "height": 844,
+      "overview": true,
+      "max_ndc_xy_error": 2.903629713335576e-07
+    },
+    {
+      "track": "wild",
+      "width": 390,
+      "height": 844,
+      "overview": true,
+      "max_ndc_xy_error": 2.3841857830777928e-07
+    },
+    {
+      "track": "wild",
+      "width": 390,
+      "height": 844,
+      "overview": true,
+      "max_ndc_xy_error": 2.715128781666243e-07
+    },
+    {
+      "track": "wild",
+      "width": 390,
+      "height": 844,
+      "overview": true,
+      "max_ndc_xy_error": 2.2386406739460796e-07
+    },
+    {
+      "track": "wild",
+      "width": 844,
+      "height": 390,
+      "overview": true,
+      "max_ndc_xy_error": 1.311302184402764e-06
+    },
+    {
+      "track": "wild",
+      "width": 844,
+      "height": 390,
+      "overview": true,
+      "max_ndc_xy_error": 1.3720073250844678e-06
+    },
+    {
+      "track": "wild",
+      "width": 844,
+      "height": 390,
+      "overview": true,
+      "max_ndc_xy_error": 1.3150156454727613e-06
+    },
+    {
+      "track": "wild",
+      "width": 844,
+      "height": 390,
+      "overview": true,
+      "max_ndc_xy_error": 1.2514642643967483e-06
+    },
+    {
+      "track": "wild",
+      "width": 844,
+      "height": 390,
+      "overview": true,
+      "max_ndc_xy_error": 1.2279217293173494e-06
+    },
+    {
+      "track": "wild",
+      "width": 844,
+      "height": 390,
+      "overview": true,
+      "max_ndc_xy_error": 1.2707881704571156e-06
+    },
+    {
+      "track": "wild",
+      "width": 390,
+      "height": 844,
+      "overview": false,
+      "max_ndc_xy_error": 4.768371568187319e-07
+    },
+    {
+      "track": "wild",
+      "width": 390,
+      "height": 844,
+      "overview": false,
+      "max_ndc_xy_error": 5.914811835872058e-07
+    },
+    {
+      "track": "wild",
+      "width": 390,
+      "height": 844,
+      "overview": false,
+      "max_ndc_xy_error": 3.266896657638796e-07
+    },
+    {
+      "track": "wild",
+      "width": 390,
+      "height": 844,
+      "overview": false,
+      "max_ndc_xy_error": 4.768371568187319e-07
+    },
+    {
+      "track": "wild",
+      "width": 390,
+      "height": 844,
+      "overview": false,
+      "max_ndc_xy_error": 4.540315416828866e-07
+    },
+    {
+      "track": "wild",
+      "width": 390,
+      "height": 844,
+      "overview": false,
+      "max_ndc_xy_error": 4.593188621115907e-07
+    },
+    {
+      "track": "boardwalks",
+      "width": 1280,
+      "height": 900,
+      "overview": true,
+      "max_ndc_xy_error": 8.344650264541858e-07
+    },
+    {
+      "track": "boardwalks",
+      "width": 1280,
+      "height": 900,
+      "overview": true,
+      "max_ndc_xy_error": 8.344030370532884e-07
+    },
+    {
+      "track": "boardwalks",
+      "width": 1280,
+      "height": 900,
+      "overview": true,
+      "max_ndc_xy_error": 7.50104408697716e-07
+    },
+    {
+      "track": "boardwalks",
+      "width": 1280,
+      "height": 900,
+      "overview": true,
+      "max_ndc_xy_error": 7.862342176019263e-07
+    },
+    {
+      "track": "boardwalks",
+      "width": 1280,
+      "height": 900,
+      "overview": true,
+      "max_ndc_xy_error": 7.331383176378825e-07
+    },
+    {
+      "track": "boardwalks",
+      "width": 1280,
+      "height": 900,
+      "overview": true,
+      "max_ndc_xy_error": 7.929049531778254e-07
+    },
+    {
+      "track": "boardwalks",
+      "width": 390,
+      "height": 844,
+      "overview": true,
+      "max_ndc_xy_error": 1.1920928920822397e-07
+    },
+    {
+      "track": "boardwalks",
+      "width": 390,
+      "height": 844,
+      "overview": true,
+      "max_ndc_xy_error": 7.362973997171451e-08
+    },
+    {
+      "track": "boardwalks",
+      "width": 390,
+      "height": 844,
+      "overview": true,
+      "max_ndc_xy_error": 1.3191899084219472e-07
+    },
+    {
+      "track": "boardwalks",
+      "width": 390,
+      "height": 844,
+      "overview": true,
+      "max_ndc_xy_error": 1.1920928920822397e-07
+    },
+    {
+      "track": "boardwalks",
+      "width": 390,
+      "height": 844,
+      "overview": true,
+      "max_ndc_xy_error": 1.5976644075765822e-07
+    },
+    {
+      "track": "boardwalks",
+      "width": 390,
+      "height": 844,
+      "overview": true,
+      "max_ndc_xy_error": 1.5828914171414632e-07
+    },
+    {
+      "track": "boardwalks",
+      "width": 844,
+      "height": 390,
+      "overview": true,
+      "max_ndc_xy_error": 7.152557369215523e-07
+    },
+    {
+      "track": "boardwalks",
+      "width": 844,
+      "height": 390,
+      "overview": true,
+      "max_ndc_xy_error": 8.265362874682047e-07
+    },
+    {
+      "track": "boardwalks",
+      "width": 844,
+      "height": 390,
+      "overview": true,
+      "max_ndc_xy_error": 7.009147108549829e-07
+    },
+    {
+      "track": "boardwalks",
+      "width": 844,
+      "height": 390,
+      "overview": true,
+      "max_ndc_xy_error": 7.304466142247709e-07
+    },
+    {
+      "track": "boardwalks",
+      "width": 844,
+      "height": 390,
+      "overview": true,
+      "max_ndc_xy_error": 7.108355343232731e-07
+    },
+    {
+      "track": "boardwalks",
+      "width": 844,
+      "height": 390,
+      "overview": true,
+      "max_ndc_xy_error": 7.26155564765435e-07
+    },
+    {
+      "track": "boardwalks",
+      "width": 390,
+      "height": 844,
+      "overview": false,
+      "max_ndc_xy_error": 9.536743137693108e-07
+    },
+    {
+      "track": "boardwalks",
+      "width": 390,
+      "height": 844,
+      "overview": false,
+      "max_ndc_xy_error": 1.150622377377175e-06
+    },
+    {
+      "track": "boardwalks",
+      "width": 390,
+      "height": 844,
+      "overview": false,
+      "max_ndc_xy_error": 1.030478281371927e-06
+    },
+    {
+      "track": "boardwalks",
+      "width": 390,
+      "height": 844,
+      "overview": false,
+      "max_ndc_xy_error": 9.536743137693108e-07
+    },
+    {
+      "track": "boardwalks",
+      "width": 390,
+      "height": 844,
+      "overview": false,
+      "max_ndc_xy_error": 9.308686984010883e-07
+    },
+    {
+      "track": "boardwalks",
+      "width": 390,
+      "height": 844,
+      "overview": false,
+      "max_ndc_xy_error": 9.361560192044927e-07
+    }
+  ]
+}

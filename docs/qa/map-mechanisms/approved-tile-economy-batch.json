@@ -1,0 +1,56 @@
+{
+  "method": "Original world-evaluated indexed triangles and attributes compared in material/traversal order to exported-and-reloaded static batches. No decimation. Original absent UVs filled with zero; every existing UV, normalized normal direction and material PBR field preserved. Source-part index/vertex ranges retained in GLB extras for collision decomposition.",
+  "source": {
+    "bytes": 253648,
+    "sha256": "cb12cd2693f66e3bc572710c08dac690192de274958ea5e3633ca3af6fe149f2",
+    "meshes": 37
+  },
+  "output": {
+    "bytes": 303488,
+    "sha256": "0d73be354867c51328be51b9b1028b97d0ed465530c002ee39448fe9b46f7355",
+    "meshes": 5
+  },
+  "triangles": 4712,
+  "materials": [
+    {
+      "material": "Craft_MOD_copper_latch",
+      "triangles": 1888,
+      "positionError": 5.862683405410962e-8,
+      "normalError": 2.236396901000859e-8,
+      "uvError": 0,
+      "materialExact": true
+    },
+    {
+      "material": "Craft_MOD_chassis_dark",
+      "triangles": 376,
+      "positionError": 5.960464477539063e-8,
+      "normalError": 2.236587126613898e-8,
+      "uvError": 0,
+      "materialExact": true
+    },
+    {
+      "material": "Craft_MOD_ocean_shell",
+      "triangles": 1728,
+      "positionError": 5.960464477539063e-8,
+      "normalError": 2.5816622839514025e-8,
+      "uvError": 0,
+      "materialExact": true
+    },
+    {
+      "material": "Craft_MOD_inlaid_mark",
+      "triangles": 532,
+      "positionError": 2.9802322387695312e-8,
+      "normalError": 2.8160286325018546e-8,
+      "uvError": 0,
+      "materialExact": true
+    },
+    {
+      "material": "Craft_MOD_rubber_tread",
+      "triangles": 188,
+      "positionError": 1.1641532182693481e-10,
+      "normalError": 2.5823239990785396e-8,
+      "uvError": 0,
+      "materialExact": true
+    }
+  ]
+}

@@ -179,7 +179,7 @@ function dispatch(s:GameState,r:Racer,power:string,run:()=>void){ if(!hasPower(s
 function points(s: GameState, r: Racer, delta: number, cause: string, category?:'event') {
   const p = owner(s,r); const previous = p.score; p.score = Math.max(0,p.score+delta);if(p.score>previous)fanTrackIncome(s,r,p.score-previous);
   const entry=s.scoreLedger?.find(entry=>entry.playerId===p.id);if(entry){entry[category??(cause==='赛道星格'?'map':'skill')]+=p.score-previous;entry.total+=p.score-previous;}
-  log(s, 'score', `${p.name} ${p.score >= previous ? '+' : ''}${p.score-previous}分（${cause}）`, { source:r.id });
+  log(s, 'score', `${p.name} ${p.score >= previous ? '+' : ''}${p.score-previous}分（${cause}）`, { source:r.id, scoreDelta:p.score-previous, ...(cause==='赛道星格'?{cause:'track-star',boardPosition:r.position}:{}) });
 }
 function ask(s: GameState, r: Racer, kind: string, title: string, options: {id:string;label:string}[], context: Record<string,any>, optional = false) {
   if (!options.length) return;

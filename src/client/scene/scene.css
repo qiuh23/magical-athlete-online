@@ -121,3 +121,8 @@
    their captions clear of the nearby models being shown together. */
 .board-scene[data-camera-state="action"][data-camera-shot*=","] .scene-action-banner{top:auto;bottom:140px}
 @media(max-width:650px){.board-scene[data-camera-state="action"][data-camera-shot*=","] .scene-action-banner{top:auto;bottom:180px}}
+
+.mechanism-load-error { position:absolute; z-index:12; top:5rem; right:1rem; max-width:18rem; padding:.6rem .8rem; border-radius:.7rem; color:#7d3323; background:#fff5df; font-size:.8rem; }
+.mechanism-load-error button { margin-left:.5rem; }
+
+.mechanism-focus-node{position:absolute;left:0;top:0;display:grid;place-items:center;min-width:28px;height:22px;padding:0 3px;box-sizing:border-box;border:1px solid #dfbd70;border-radius:5px;background:#173f37ed;color:#fff5cf;font:800 14px/20px sans-serif;pointer-events:none;visibility:hidden;text-shadow:none}

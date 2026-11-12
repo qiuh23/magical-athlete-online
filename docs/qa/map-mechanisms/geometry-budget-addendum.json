@@ -1,0 +1,55 @@
+{
+  "method": "Arithmetic addendum to geometry-budget.json, unculled submitted vertices including zero-scale slots. Still excludes its listed Board/Pawn/decor/HUD objects; not whole-scene WebGL or FPS. New Trip idle batches replace old idle batches, and active clone is excluded from idle batch.",
+  "newTrip": {
+    "trianglesPerMount": 4410,
+    "primitiveBatches": 19,
+    "byteLength": 134288
+  },
+  "replacementDeltaPerMount": 2294,
+  "scoreFlowMaxTriangles": {
+    "full": 256,
+    "economy": 128
+  },
+  "maps": [
+    {
+      "track": "wild",
+      "newTripMounts": 2,
+      "extraSubmittedTriangles": 4588,
+      "extraFullShadowTriangles": 4588,
+      "extraEconomyShadowTriangles": 0,
+      "extraIdlePrimitiveDraws": 10,
+      "activeNewTripExtraDrawUpperBound": 19,
+      "scoreFlowExtraDrawUpperBound": 1
+    },
+    {
+      "track": "squiggle",
+      "newTripMounts": 2,
+      "extraSubmittedTriangles": 4628,
+      "extraFullShadowTriangles": 4628,
+      "extraEconomyShadowTriangles": 0,
+      "extraIdlePrimitiveDraws": 11,
+      "activeNewTripExtraDrawUpperBound": 19,
+      "scoreFlowExtraDrawUpperBound": 1
+    },
+    {
+      "track": "boardwalks",
+      "newTripMounts": 8,
+      "extraSubmittedTriangles": 18352,
+      "extraFullShadowTriangles": 18352,
+      "extraEconomyShadowTriangles": 0,
+      "extraIdlePrimitiveDraws": 10,
+      "activeNewTripExtraDrawUpperBound": 19,
+      "scoreFlowExtraDrawUpperBound": 1
+    },
+    {
+      "track": "whirly-world",
+      "newTripMounts": 0,
+      "extraSubmittedTriangles": 0,
+      "extraFullShadowTriangles": 0,
+      "extraEconomyShadowTriangles": 0,
+      "extraIdlePrimitiveDraws": 0,
+      "activeNewTripExtraDrawUpperBound": 0,
+      "scoreFlowExtraDrawUpperBound": 1
+    }
+  ]
+}
