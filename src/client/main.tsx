@@ -1,3 +1,4 @@
+import { registerAssetCache } from './assets/register-cache.js';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { App } from './App.js';
@@ -11,5 +12,7 @@ import './room-experience.css';
 import './race-ui.css';
 import './visual-first.css';
 import './ui-theme.css';
+
+void registerAssetCache();
 
 createRoot(document.getElementById('root')!).render(<React.StrictMode><DeploymentNotice /><App /></React.StrictMode>);
