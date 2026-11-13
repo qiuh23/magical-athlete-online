@@ -29,7 +29,7 @@ import { TwistPieces } from './TwistPieces.js';
 import { DiceSpotlight } from './DiceSpotlight.js';
 import { SceneBoundary } from './SceneBoundary.js';
 import { pawnRoute, strideLift, strideProgress } from './pawn-motion.js';
-import { pawnFallPose } from './pawn-fall.js';
+import { displayTripFallProgress, pawnFallPose } from './pawn-fall.js';
 import {warpResidentLayout,warpTransitionMode,warpTransitionOpacity,warpNeedsOpacity} from './mechanisms/warp-layout.js';
 import { MechanismLayer, clearMechanismCache } from './mechanisms/MechanismLayer.js';
 import { CertifiedTripController,needsCertifiedBind,certifiedTripMount } from './mechanisms/certified-trip.js';
@@ -429,6 +429,7 @@ function Pawn({ r1,r1Enabled,physicalContacts,certified,trip,sculptureReaders,pu
   }), room.track === 'bridges' || beat?.cause === 'track-arrow') : undefined, [motion, compact, room.track, beat?.cause, offset.x, offset.z, endOffset.x, endOffset.z]);
   const walkPoint = useMemo(() => new THREE.Vector3(), []);
   const affected = beat?.targets.includes(racer.id) || beat?.source === racer.id;
+  const displayTrip=environmentEnabled()&&mechanismsEnabled()&&mechanismActions(room.track,beat,racers).some(a=>a.anchor.kind==='trip'&&a.targets.includes(racer.id));
   const punchWind=environmentEnabled()&&mechanismsEnabled()&&mechanismActions(room.track,beat,racers).some(a=>a.anchor.kind==='punch'&&a.targets.includes(racer.id));
   useFrame(() => {
     if (!root.current || !body.current) return;
@@ -457,7 +458,7 @@ function Pawn({ r1,r1Enabled,physicalContacts,certified,trip,sculptureReaders,pu
     if(warpMode==='single-resident-reflow'){const reflow=warpResidentLayout(room.track,compact,beat,racer,racers,t);if(reflow){x=from[0]+reflow.x;z=from[2]+reflow.z;scale=reflow.scale;}}
     const fallPhase = pawnFallPhase(beat, racer);
     if(trip.plan?.kind==='entry'&&trip.plan.oldId===racer.id){const reflow=residentReflow(trip.progress);x=from[0]+reflow.x;scale=reflow.scale;}
-    const fall = fallPhase ? pawnFallPose(trip.plan?.kind==='trip'&&trip.involves(racer.id)?trip.progress:t, fallPhase, reducedMotion) : undefined;
+    const fall = fallPhase ? pawnFallPose(trip.plan?.kind==='trip'&&trip.involves(racer.id)?trip.progress:displayTrip?displayTripFallProgress(t):t, fallPhase, reducedMotion) : undefined;
     if (fall) { tilt = fall.tilt; swing = 0; }
     if (affected && beat?.kind === 'skill' && !reducedMotion && !r1.protects(racer.id) && !punch.protects(racer.id) && !trip.protects(racer.id) && !certified.protects(racer.id)) { y += Math.sin(t * Math.PI) * .3; swing += Math.sin(t * Math.PI * 2) * .18; }
     if (beat?.targets.includes(racer.id) && beat.kind === 'eliminate') scale *= 1 - ease(t);
@@ -473,7 +474,7 @@ function Pawn({ r1,r1Enabled,physicalContacts,certified,trip,sculptureReaders,pu
   return <group ref={root} position={[from[0] + offset.x, from[1] + .005, from[2] + offset.z]} scale={offset.scale} onClick={e => { e.stopPropagation(); if (e.delta <= 5) onDetail(racer.characterId, racer.id); }}>
     <PawnContact />
     <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, .018, 0]}><ringGeometry args={[.31, active ? .43 : .38, 24]} /><meshBasicMaterial color={active ? '#ffda27' : color} side={THREE.DoubleSide} /></mesh>
-    <group ref={body} position={[0, 0, 0]}><ToyCharacter paused={paused} characterId={racer.characterId} color={color} lowQuality={modelQuality} form={typeof racer.flags.form === 'string' ? racer.flags.form : undefined} mount={typeof racer.flags.hogOwnerId === 'string'} motionEnabled={!certifiedBind&&!r1Bind&&!r1.protects(racer.id)&&!warpBind&&!trip.protects(racer.id)&&!punch.protects(racer.id)&&!reducedMotion && (!racer.tripped || pawnFallPhase(beat, racer) === 'recover')} animation={affected ? pawnFallPhase(beat, racer) === 'trip' ? 'fall' : pawnFallPhase(beat, racer) === 'recover' ? 'recover' : beat?.kind === 'move' ? 'move' : ['skill','dice','duel-dice','score','finish'].includes(beat?.kind ?? '') ? 'skill' : 'idle' : 'idle'} /></group>
+    <group ref={body} position={[0, 0, 0]}><ToyCharacter paused={paused} characterId={racer.characterId} color={color} lowQuality={modelQuality} form={typeof racer.flags.form === 'string' ? racer.flags.form : undefined} mount={typeof racer.flags.hogOwnerId === 'string'} motionEnabled={!displayTrip&&!certifiedBind&&!r1Bind&&!r1.protects(racer.id)&&!warpBind&&!trip.protects(racer.id)&&!punch.protects(racer.id)&&!reducedMotion && (!racer.tripped || pawnFallPhase(beat, racer) === 'recover')} animation={affected ? pawnFallPhase(beat, racer) === 'trip' ? 'fall' : pawnFallPhase(beat, racer) === 'recover' ? 'recover' : beat?.kind === 'move' ? 'move' : ['skill','dice','duel-dice','score','finish'].includes(beat?.kind ?? '') ? 'skill' : 'idle' : 'idle'} /></group>
     {active && <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, .023, 0]}><ringGeometry args={[.46, .49, 32]} /><meshBasicMaterial color="#fff8da" side={THREE.DoubleSide} /></mesh>}
   </group>;
 }

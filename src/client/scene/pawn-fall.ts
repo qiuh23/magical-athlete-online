@@ -18,3 +18,8 @@ export function pawnFallPose(progress: number, phase: 'trip' | 'recover' | 'down
     ? Math.sin((t - .65) / .21 * Math.PI) * .028 : 0;
   return { tilt, lift: support + contact };
 }
+
+/** The outboard trip demonstration peaks at 0.5. Only then does its target
+ * lose balance; the pawn is down before the cabinet finishes returning to rest.
+ * Certified contact plans keep their own audited contact/fall phases. */
+export function displayTripFallProgress(t:number){return clamp01((t-.5)/.42);}

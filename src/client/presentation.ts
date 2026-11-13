@@ -104,6 +104,14 @@ function eventMotion(event: GameEvent, kind: PresentationKind): PresentationMoti
   });
 }
 
+/** Only authoritative fixed-tile effects receive the mechanism staging window. */
+export function isMechanismBeat(beat: Pick<PresentationBeat, 'events'>): boolean {
+  return beat.events.some(event => event.type === 'trip' && event.source === 'track'
+    || event.type === 'move' && event.cause === 'track-arrow'
+    || event.type === 'warp' && event.cause === 'track-whirl'
+    || event.type === 'score' && (event.cause === 'track-star' || /[（(]赛道星格[）)]/.test(event.text)));
+}
+
 function beatForEvent(event: GameEvent, room: RoomView): PresentationBeat | undefined {
   let kind: PresentationKind;
   const abilityReveal = abilityRevealForEvent(event, room);
@@ -124,7 +132,7 @@ function beatForEvent(event: GameEvent, room: RoomView): PresentationBeat | unde
   if (kind === 'dice' && face === undefined && !batch) return undefined;
   const motions = eventMotion(event, kind);
   const longest = motions.reduce((steps, motion) => Math.max(steps, Math.max(0,motion.path.length-1)), 0);
-  const durationMs = kind === 'dice' ? batch ? 3600 : 2500 : kind === 'duel-dice' ? 3000 : kind === 'skill' ? 1800 : kind === 'move' ? Math.min(2200, Math.max(800, 280 + Math.max(1, longest) * 240)) : kind === 'swap' || kind === 'warp' || kind === 'finish' ? 1100 : 850;
+  const durationMs = isMechanismBeat({events:[event]}) ? Math.max(1600, kind === 'move' ? Math.min(2200, 280 + Math.max(1, longest) * 240) : 0) : kind === 'dice' ? batch ? 3600 : 2500 : kind === 'duel-dice' ? 3000 : kind === 'skill' ? 1800 : kind === 'move' ? Math.min(2200, Math.max(800, 280 + Math.max(1, longest) * 240)) : kind === 'swap' || kind === 'warp' || kind === 'finish' ? 1100 : 850;
   const boundary = eventsOf(room).findLast(log => log.id <= event.id && (log.type === 'turn' || log.type === 'reveal'));
   // Compatibility for saved public events that predate explicit stage actors.
   const npc=event.cause==='thirds-npc'?room.trackState?.event?.npc:undefined;
@@ -332,5 +340,5 @@ export function beatDuration(beat: PresentationBeat, options: PresentationOption
   const duration = Math.round((options.reducedMotion ? REDUCED_MOTION_MS[beat.kind] : beat.durationMs) / speed);
   // Speed controls shorten motion, not the minimum time to understand a skill.
   const minimum = beat.abilityReveal ? 3000 : beat.kind === 'dice' && (beat.faces?.length??0)>1 ? 2200 : beat.events.some(event => event.type === 'ability-dice') ? 1800 : beat.kind === 'skill' || beat.kind === 'duel-dice' ? 1500 : 0;
-  return Math.max(minimum, diceResultReadMs(beat), duration);
+  return Math.max(minimum, diceResultReadMs(beat), !options.reducedMotion && isMechanismBeat(beat) ? 1000 : 0, duration);
 }

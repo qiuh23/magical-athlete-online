@@ -1,3 +1,4 @@
+import { useRacetrackPreload } from './useRacetrackPreload.js';
 import {useSceneLightingClock} from './useSceneLightingClock.js';
 import type {RoomLightingClock} from './scene-lighting-clock.js';
 import { useRaceHudGeometry } from './useRaceHudGeometry.js';
@@ -138,6 +139,7 @@ export function App() {
   const [muted, setMuted] = useState(() => setting('muted', true));
   const [reduceMotion, setReduceMotion] = useState(() => setting('reduced-motion', matchMedia('(prefers-reduced-motion: reduce)').matches));
   const [lowQuality, setLowQuality] = useState(() => setting('low-quality', false));
+  useRacetrackPreload(room, lowQuality);
   const [animationSpeed, setAnimationSpeed] = useState(() => { try { return [1, 2, 4].includes(Number(localStorage.getItem('magical-athlete:animation-speed'))) ? Number(localStorage.getItem('magical-athlete:animation-speed')) : 1; } catch { return 1; } });
   useEffect(() => { try { localStorage.setItem('magical-athlete:low-quality', String(lowQuality)); localStorage.setItem('magical-athlete:animation-speed', String(animationSpeed)); } catch { /* Optional local preferences. */ } }, [lowQuality, animationSpeed]);
   const soundRef = useRef<AudioContext | null>(null);

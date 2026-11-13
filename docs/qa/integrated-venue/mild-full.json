@@ -29,7 +29,7 @@
     "src/client/scene/environment/FullCoverageMechanismLayer.tsx": "c19b744467d6e2fda32a475ef0a19c86ac988c527a475c718b321e3ec7b8a645",
     "src/client/scene/environment/force-presentation.ts": "32f2f58c8119e870d08a7d33f5061f54c2d187b8620670b28baa18261b5ef643",
     "src/client/scene/environment/RevalidatedMechanismLayer.tsx": "7327cb3112bc0912ec7598489816680c220a4dba4ffc73c955f7c7a91660fcbd",
-    "src/client/scene/Board3D.tsx": "478c4557d6b3c31c98a9d0597ab5931a5b152e4c6c898efc17173bba6bbdeb2a",
+    "src/client/scene/Board3D.tsx": "d6d0414a6abe85af115fb42f3774a3df2fd2b52ba7f2f27c6d33f071fb695187",
     "src/client/scene/mechanisms/models.ts": "6dcb80fdb9e53dbb48c66e002c8f65a11260de49c38172062e56d79544ccc6f3",
     "src/client/scene/mechanisms/placements.ts": "63b3d29d3fdf635de95bcad2209f0a2fcb1057fa6a03e782c47d187b072e97d0",
     "src/client/scene/mechanisms/layout.ts": "e6705c25bf366f822565a26ef4303594390f3ba168fa5b5a02807dbd82791dbe",

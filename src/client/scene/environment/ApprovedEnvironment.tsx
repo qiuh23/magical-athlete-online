@@ -20,7 +20,8 @@ class EnvironmentBoundary extends Component<{ children: ReactNode; onFailure: ()
   componentDidCatch() { this.props.onFailure(); }
   render() { return this.state.failed ? null : this.props.children; }
 }
-/** No preloading or hidden mount while candidate is off. The gameplay route is
+/** Optional pre-race warming shares these exact cache groups; no hidden mount.
+ * No preloading while candidate is off. The gameplay route is
  * outside this boundary, so load failures keep the old scene and all rules. */
 export function ApprovedEnvironment(props: Props) {
   return <EnvironmentBoundary onFailure={props.onFailure}><Suspense fallback={null}><EnvironmentAssets {...props} /></Suspense></EnvironmentBoundary>;
