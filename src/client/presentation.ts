@@ -337,8 +337,12 @@ export function beatCompletionTime(beat:PresentationBeat,startedAt:number,durati
 export function beatDuration(beat: PresentationBeat, options: PresentationOptions = {}): number {
   if (beat.kind === 'intro') return options.reducedMotion ? 1000 : beat.naturalDurationMs ?? beat.durationMs;
   const speed = Math.max(0.5, Math.min(8, Number.isFinite(options.speed) ? options.speed! : 1));
-  const duration = Math.round((options.reducedMotion ? REDUCED_MOTION_MS[beat.kind] : beat.durationMs) / speed);
+  const mechanism = isMechanismBeat(beat);
+  // One shared duration slows hardware, targets, effects and completion together.
+  // Apply after queue pacing so longer mechanism motion cannot compress unrelated
+  // beats. A 25% longer cycle is 20% slower, with no separate idle delay.
+  const duration = Math.round((options.reducedMotion ? REDUCED_MOTION_MS[beat.kind] : beat.durationMs * (mechanism ? 1.25 : 1)) / speed);
   // Speed controls shorten motion, not the minimum time to understand a skill.
   const minimum = beat.abilityReveal ? 3000 : beat.kind === 'dice' && (beat.faces?.length??0)>1 ? 2200 : beat.events.some(event => event.type === 'ability-dice') ? 1800 : beat.kind === 'skill' || beat.kind === 'duel-dice' ? 1500 : 0;
-  return Math.max(minimum, diceResultReadMs(beat), !options.reducedMotion && isMechanismBeat(beat) ? 1000 : 0, duration);
+  return Math.max(minimum, diceResultReadMs(beat), !options.reducedMotion && mechanism ? 1000 : 0, duration);
 }

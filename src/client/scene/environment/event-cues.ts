@@ -43,7 +43,7 @@ export function buildEnvironmentEventCueGeometry(cues: EventCue[]) {
   const root = new Group(); root.name = 'environment-non-contact-events';
   const lines = cues.map(cue => {
     const geometry = new BufferGeometry().setFromPoints(cue.points), material = new LineDashedMaterial({ color: colors[cue.action.anchor.kind], dashSize: .10, gapSize: .08, transparent: true, opacity: .8, depthWrite: false, toneMapped: false });
-    const line = new Line(geometry, material); line.computeLineDistances(); line.raycast = () => {}; line.name = `event-cue:${cue.action.anchor.kind}:${cue.targetId}`; line.visible = false; root.add(line); return line;
+    const line = new Line(geometry, material); line.computeLineDistances(); line.raycast = () => {}; line.name = `event-cue:${cue.action.anchor.kind}:${cue.targetId}`;line.userData.trip=cue.action.anchor.kind==='trip'; line.visible = false; root.add(line); return line;
   });
   const labels = cues.filter(cue => cue.action.scoreDelta !== undefined).map(cue => {
     const mesh = new Mesh(new PlaneGeometry(.8, .34), new MeshBasicMaterial({ transparent: true, depthWrite: false, toneMapped: false }));
@@ -61,7 +61,7 @@ export function buildEnvironmentEventCueGeometry(cues: EventCue[]) {
     let count = 0;
     for(const item of wind){const u=punchWindTravel(progress,item.index);item.mesh.visible=!reduced&&u>0&&u<1;if(item.mesh.visible){item.mesh.quaternion.setFromUnitVectors(new Vector3(0,0,1),item.cue.impulse!.to.clone().sub(item.cue.impulse!.from).normalize());item.mesh.position.lerpVectors(item.cue.impulse!.from,item.cue.impulse!.to,u);item.mesh.scale.setScalar(.8+u*.6);}}
     for(const item of impulses){const direction=item.cue.impulse!.to.clone().sub(item.cue.impulse!.from),length=direction.length();direction.normalize();item.plume.quaternion.setFromUnitVectors(new Vector3(0,1,0),direction);item.impact.quaternion.setFromUnitVectors(new Vector3(0,0,1),direction);const u=punchWindTravel(progress);item.plume.visible=!reduced&&progress>.22&&progress<.456;if(item.plume.visible){item.plume.position.lerpVectors(item.cue.impulse!.from,item.cue.impulse!.to,u*.5);item.plume.scale.set(1,length*Math.max(.02,u),1);}const hit=(progress-.40)/.13;item.impact.visible=!reduced&&hit>0&&hit<1;item.impact.position.copy(item.cue.impulse!.to);item.impact.scale.setScalar(.6+Math.max(0,hit)*1.3);}
-    lines.forEach(line => { line.visible = reduced || progress > 0 && progress < 1; });
+    lines.forEach(line => { line.visible = !line.userData.trip&&(reduced || progress > 0 && progress < 1); });
     labels.forEach(({mesh}) => { mesh.visible = reduced || progress < 1; });
     if (!reduced) for (const cue of cues) for (let i = 0; i < cue.count; i++) {
       const sample = scoreFlowSample(progress, i, cue.count); if (!sample) continue;

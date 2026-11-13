@@ -86,10 +86,11 @@ test('punch presentation changes timing only and follows the authoritative path 
  }
 });
 
-test('Pawn registers current geometry for feedback without making geometry identity a hardware condition',()=>{
+test('Pawn supplies current geometry for sweep planning without a character identity gate',()=>{
  const pawn=nodes(ast,ts.isFunctionDeclaration).find(n=>n.name?.text==='Pawn')!;
  const bindings=nodes(pawn,ts.isCallExpression).filter(n=>n.expression.getText(ast)==='actorBounds.bind');assert.equal(bindings.length,1);assert.deepEqual(bindings[0]!.arguments.map(n=>n.getText(ast)),['racer.id','body.current']);
  const display=nodes(ast,ts.isJsxSelfClosingElement).find(n=>n.tagName.getText(ast)==='FullCoverageMechanismLayer')!;
- assert.doesNotMatch(display.getText(ast),/characterId|hash|fingerprint|certified|actorBounds/);
+ assert.doesNotMatch(display.getText(ast),/characterId|hash|fingerprint|certified/);
+ assert.ok(attr(display,'actorBounds'),'the sweep must inspect current geometry instead of using a role whitelist');
  const cues=nodes(ast,ts.isJsxSelfClosingElement).find(n=>n.tagName.getText(ast)==='EnvironmentEventCues')!;assert.ok(attr(cues,'actorBounds'));assert.ok(attr(cues,'outlets'));
 });

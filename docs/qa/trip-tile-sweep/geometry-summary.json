@@ -1,0 +1,140 @@
+{
+  "generatedAt": "2026-11-13T10:20:43.136523+00:00",
+  "baseline": "2690d066e055146f12a6d808d42e074eac04a9fa",
+  "query": "?environment=1&mechanisms=1",
+  "wild5DesktopBoardPoint": [
+    1.0250000000000012,
+    1.65,
+    -3.0750000000000037
+  ],
+  "runtimeMatrix": {
+    "scenarios": 140,
+    "failures": 0,
+    "loadFailures": 0,
+    "configurations": {
+      "single": 108,
+      "two-targets": 8,
+      "eight-targets": 8,
+      "bystanders": 8,
+      "eight-crowded": 8
+    },
+    "initialAndFinalSourceHashesMatch": true,
+    "authorizedFootContacts": 204,
+    "fallbackPlans": 0,
+    "fullReturnAt99Percent": true,
+    "allTargetsDownAt94Percent": true
+  },
+  "roster": {
+    "selectableCharacters": 151,
+    "rigs": [
+      "wild:5",
+      "wild:17"
+    ],
+    "scenarios": 302,
+    "failures": 0,
+    "loadFailures": 0,
+    "layout": "desktop",
+    "quality": "standard",
+    "occupancy": "single",
+    "scope": "Original model geometry projected into the same confirmed trip fixture; not all role-specific trigger or ability rules."
+  },
+  "plannerTimingContainerOnlyMs": {
+    "count": 148,
+    "median": 3.324038999999175,
+    "maximum": 51.43194200002472,
+    "limitation": "Synchronous function timing in this container, including lazy index construction; not browser FPS or a universal worst-case guarantee."
+  },
+  "pauseAndKeyChecks": [
+    {
+      "anchor": "wild:5",
+      "sharedPauseDeviceDelta": 0,
+      "sharedPausePawnChanged": false,
+      "sharedResumeDeviceDelta": 0.4342907323416658,
+      "fastDuration": 1000,
+      "pauseDeviceDelta": 0,
+      "movingClockPausePawnChanged": true,
+      "newKeyParkDelta": 0,
+      "reducedDeviceDelta": 0,
+      "reducedTilt": -1.5707963267948966,
+      "afterReducedMotionDelta": 1.6096825328430897
+    },
+    {
+      "anchor": "wild:17",
+      "sharedPauseDeviceDelta": 0,
+      "sharedPausePawnChanged": false,
+      "sharedResumeDeviceDelta": 0.4279748518686759,
+      "fastDuration": 1000,
+      "pauseDeviceDelta": 0,
+      "movingClockPausePawnChanged": true,
+      "newKeyParkDelta": 0,
+      "reducedDeviceDelta": 0,
+      "reducedTilt": -1.5707963267948966,
+      "afterReducedMotionDelta": 1.8324670217143542
+    }
+  ],
+  "pausedQualityAndRepeatChecks": [
+    {
+      "anchor": "wild:5",
+      "switchDeviceDelta": 0,
+      "switchPawnChanged": false,
+      "waitDeviceDelta": 0,
+      "waitPawnChanged": false,
+      "duplicateDeviceDelta": 0,
+      "planRetained": true,
+      "planDataRetained": true,
+      "plannerCalls": 1,
+      "tilt": -0.1587184936586838,
+      "resumedTilt": -0.8835687310008259,
+      "resumedDeviceDelta": 0.21040537946404114
+    },
+    {
+      "anchor": "wild:17",
+      "switchDeviceDelta": 0,
+      "switchPawnChanged": false,
+      "waitDeviceDelta": 0,
+      "waitPawnChanged": false,
+      "duplicateDeviceDelta": 0,
+      "planRetained": true,
+      "planDataRetained": true,
+      "plannerCalls": 1,
+      "tilt": -0.16710544944387157,
+      "resumedTilt": -0.8936288583477114,
+      "resumedDeviceDelta": 0.20683235616032114
+    }
+  ],
+  "markerChecks": [
+    {
+      "ordinaryVisible": true,
+      "trackBeforeVisible": false,
+      "trackAfterVisible": true
+    }
+  ],
+  "sourceHashes": {
+    "src/client/scene/Board3D.tsx": "f1960b6fbccd75e9537f0e4c7da986d1af09d413386743611ef7670d14ff73a8",
+    "src/client/scene/RaceEffects.tsx": "b05d1d3aa22f62b26ef1432e97f4105915395a77863b6708826a4bd24055c469",
+    "src/client/scene/environment/event-cues.ts": "bfe6412d9ca3f92856efd2cc8233995d8003ad80546a156cceb88703a086529a",
+    "src/client/scene/environment/FullCoverageMechanismLayer.tsx": "964232ab4d654b270cc84989bac3660a0eb899d0008dcccd0ccd9950cdc8439f",
+    "src/client/scene/environment/full-coverage.ts": "ac0dddebf50c481c2419a96ce594ca4bda24f32b2c9b5d609681890d0f8f4b67",
+    "src/client/scene/mechanisms/actor-bounds.ts": "45031f3b56a1c075e731f18d152a4071c74d5db99a8ff38a2252db495203ba06",
+    "src/client/scene/environment/trip-sweep.ts": "a0d3d5883231c3d11348628184f526fd6b10e86e23358de2e74caf861c858801",
+    "src/client/scene/mechanisms/triangle-contact-index.ts": "40f34daf02188eaf8601af5c4908f1e4855eea762835c7b81d8e1034142c4c8e",
+    "src/client/scene/mechanisms/playback.ts": "7e21e7e335de1d42234ee4ca2f81de6f21c226ec659fc359f3f4fd8965392104",
+    "src/client/scene/ToyCharacter.tsx": "5c5a607d934325f3108baeb440416508d6296e5b16f5f8277260c93c784dfda0",
+    "src/client/scene/MechanismToyCharacter.tsx": "3c5275b2220b3107e7a4ab42f0719895d633180ceaea4f3a0f4bd4be035ebc5f",
+    "src/client/scene/mechanisms/trip-sweep-layout.ts": "50235832bfe83491dffeaba0d6a0483cc9862e9d418ccac4ae741874fcf20df8",
+    "src/client/scene/toy-presentation.ts": "bcc7947d5a446c020fe342982a542175866902925740842b3942427ed8141452",
+    "src/client/scene/pawn-fall.ts": "8bae1d81a25aa34a42764da0851c0ef8da4ea6fedcfc02af6ff76fa79deb3859",
+    "src/client/presentation.ts": "46320043862afa37c66218718463e300692dd4e9a77bd7e0f8834709e719e2f1",
+    "scripts/recovery/verify-trip-sweep-geometry.cjs": "71a14ae08b6fafb9ecc73b8a419ee606a1f8f2c092dac749e4bcca91bec0dc86"
+  },
+  "limitations": [
+    "201 discrete poses plus local refinement are not continuous collision certification.",
+    "No browser/GPU or real mobile pixel verification.",
+    "No complete scenery, audience, floor, other-machine or pawn-vs-pawn fall collision certification.",
+    "Roster-only checks use sparse contact-boundary poses and selected return poses.",
+    "The report hit.point fields are device triangle centroids for context, not claimed exact contact coordinates."
+  ],
+  "captureVsMountedMaximumVertexDeltaSceneUnits": 8.881784197001252e-16,
+  "plannedSolidsVsActualRenderedBoxMaximumBoundsDeltaSceneUnits": 6.398831715103717e-09,
+  "coordinateUnits": "Scene units; not calibrated physical metres."
+}

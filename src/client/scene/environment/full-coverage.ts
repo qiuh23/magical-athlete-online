@@ -1,8 +1,10 @@
+import {createTripSweepRig,sampleTripSweep,type TripSweepPlan} from './trip-sweep.js';
+import {boardPoint} from '../math.js';
 import {Box3,BoxGeometry,Group,InstancedMesh,Matrix4,Mesh,MeshStandardMaterial,Object3D,Vector3,type AnimationClip} from 'three';
 import type {TrackId} from '../../../shared/tracks.js';
 import {mechanismPlacements,type MechanismPlacement} from '../mechanisms/placements.js';
 import {createMechanismInstance,MECHANISM_URLS} from '../mechanisms/models.js';
-import {createTelescopicTripInstance,telescopicTripPose} from '../mechanisms/telescopic-trip.js';
+import {createTelescopicTripInstance} from '../mechanisms/telescopic-trip.js';
 import {CERTIFIED_TRIP_URL} from '../mechanisms/certified-trip.js';
 import {SCENE_MECHANISMS} from './scene-mechanisms.js';
 import {PARKED_FALLBACKS} from './parked-fallbacks/visibility.js';
@@ -15,6 +17,7 @@ import type {MechanismAction,MechanismKind} from '../mechanisms/events.js';
 export type DisplayVariant=MechanismKind|'telescopic-trip'|'punch-r1';
 export const DISPLAY_URLS:Record<DisplayVariant,string>={...MECHANISM_URLS,'telescopic-trip':CERTIFIED_TRIP_URL,'punch-r1':R1_ASSET};
 export function displayContactCompatible(anchor:string){return !['wild:23','wild:24','boardwalks:19','boardwalks:23'].includes(anchor);}
+export function displayTripParkHeight(placement:DisplayPlacement,track:TrackId,compact:boolean){const tile=new Vector3(...boardPoint(placement.anchor.node,compact,track)).applyMatrix4(placement.matrix.clone().invert());return Math.max(tile.y+.30,-1.175);}
 export interface DisplayPlacement extends MechanismPlacement {variant:DisplayVariant;foundationBottom:number}
 /** Visual coverage is independent of actor readiness, occupancy and physical
  * admission. Existing published mounts and art remain authoritative inputs. */
@@ -34,17 +37,18 @@ export function fullCoveragePlacements(track:TrackId,compact=false):DisplayPlace
 const clampUnit=(value:number)=>Number.isFinite(value)?Math.max(0,Math.min(1,value)):0;
 const smoothUnit=(value:number)=>{const t=clampUnit(value);return t*t*(3-2*t);};
 const motionWindow=(t:number,riseStart:number,riseEnd:number,fallStart:number,fallEnd:number)=>smoothUnit((t-riseStart)/(riseEnd-riseStart))*(1-smoothUnit((t-fallStart)/(fallEnd-fallStart)));
-/** A complete non-contact cycle uses the real authored joints and a fixed root.
- * Positive local Z is the cabinet/outboard side. Native punch/trip/gain clips
- * swing towards the lane, so these display cycles articulate in the opposite
- * direction. World-space clearance still belongs to the placement consumer.
- * motionScale changes joint travel only, never the model or its foundation. */
-export function createDisplayMechanism(variant:DisplayVariant,source:Group,clip:AnimationClip|undefined,low=false,anchor=''){
- if(variant==='telescopic-trip'){
-  const model=createTelescopicTripInstance(source,low);
-  return{object:model.object,dispose:model.dispose,sample(t:number,active=false,motionScale=1){
-   t=active?clampUnit(t):0;const scale=clampUnit(motionScale),aim=Math.PI/3*scale*motionWindow(t,0,.20,.76,1),reach=.55*scale*motionWindow(t,.20,.44,.58,.76);
-   model.sample(telescopicTripPose(aim>0?Math.PI*2-aim:0,reach,.20));
+/** Trip uses a visible single-arm sweep adapter and a geometry-derived plan.
+ * Other categories keep their non-contact outboard cycle. All roots and fixed
+ * foundations stay stationary, and cached authored assets are never changed. */
+export function createDisplayMechanism(variant:DisplayVariant,source:Group,clip:AnimationClip|undefined,low=false,anchor='',tripHeight=.22){
+ if(variant==='telescopic-trip'||variant==='trip'){
+  const model=variant==='telescopic-trip'?createTelescopicTripInstance(source,low):createMechanismInstance(source,clip!,low);
+  if('sampleTripPose' in model)model.sample(0);if(anchor==='wild:5'&&variant==='trip')model.fitWild5Foot();
+  const sweep=createTripSweepRig(model.object,tripHeight,low);
+  return{object:model.object,sweep,dispose(){sweep.dispose();model.dispose();},sample(t:number,active=false,motionScale=1,plan?:TripSweepPlan){
+   t=active?clampUnit(t):0;
+   if(plan)sweep.sample(sampleTripSweep(plan,t));
+   else{sweep.sample({yaw:-Math.PI/3*clampUnit(motionScale)*motionWindow(t,0,.20,.76,1),reach:.46+.55*clampUnit(motionScale)*motionWindow(t,.20,.44,.58,.76),height:tripHeight});}
   }};
  }
  if(variant==='punch-r1'){
@@ -71,8 +75,7 @@ export function createDisplayMechanism(variant:DisplayVariant,source:Group,clip:
   if(variant==='punch'){
    const aim=Math.PI/3*scale*motionWindow(t,0,.08,.40,.76),stroke=scale*punchWindStroke(t);
    model.samplePunchPose({boom:-aim,counter:aim,slider:.35+.35*stroke,spring:stroke,route:0});
-  }else if(variant==='trip'){
-   model.sampleTripPose({angle:-Math.PI/3*scale*motionWindow(t,0,.20,.76,1),reach:.55*scale*motionWindow(t,.20,.44,.58,.76)});
+
   }else if(shoulder&&elbow){
    const lift=scale*motionWindow(t,.02,.38,.60,.94);
    shoulder.rotation.copy(base.get(shoulder)!);shoulder.rotation.x+=65*Math.PI/180*lift;
