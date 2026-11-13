@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { CanvasTexture, SRGBColorSpace } from 'three';
+import { CanvasTexture, SRGBColorSpace, type Vector3 } from 'three';
+import type {MechanismActorBounds} from '../mechanisms/actor-bounds.js';
 import type { Racer } from '../../../shared/types.js';
 import type { TrackId } from '../../../shared/tracks.js';
 import type { PresentationBeat } from '../../presentation.js';
@@ -9,7 +10,7 @@ import { MechanismPlayback } from '../mechanisms/playback.js';
 import { buildEnvironmentEventCueGeometry, environmentEventCues } from './event-cues.js';
 
 /** Separate from every physical rig so pending/failed scenery can still explain events. */
-export function EnvironmentEventCues({track,beat,racers,compact,lowQuality,paused,reducedMotion,clock,startedAt,durationMs}:{track:TrackId;beat?:PresentationBeat;racers:Racer[];compact:boolean;lowQuality:boolean;paused:boolean;reducedMotion:boolean;clock:PresentationClock;startedAt:number;durationMs:number}) {
+export function EnvironmentEventCues({track,beat,racers,compact,lowQuality,paused,reducedMotion,clock,startedAt,durationMs,outlets,actorBounds}:{track:TrackId;beat?:PresentationBeat;racers:Racer[];compact:boolean;lowQuality:boolean;paused:boolean;reducedMotion:boolean;clock:PresentationClock;startedAt:number;durationMs:number;outlets?:ReadonlyMap<string,Vector3>;actorBounds?:MechanismActorBounds}) {
   const cues=useMemo(()=>environmentEventCues(track,beat,racers,compact,lowQuality),[track,beat,racers,compact,lowQuality]);
   const playback=useMemo(()=>new MechanismPlayback(),[]);
   const [kit,setKit]=useState<ReturnType<typeof buildEnvironmentEventCueGeometry>>();
@@ -24,6 +25,14 @@ export function EnvironmentEventCues({track,beat,racers,compact,lowQuality,pause
   },[cues]);
   useFrame(({camera})=>{
     if(!kit)return;
+    // Resolve the actual glove and visible body, including crowd placement,
+    // mounted/changed forms and already-down poses. This is non-contact visual
+    // feedback, never an actor-identity gate on the mechanical cycle.
+    for(const cue of cues)if(cue.impulse){
+      const outlet=outlets?.get(cue.action.anchor.id);
+      if(outlet)cue.impulse.from.copy(outlet);
+      if(actorBounds)cue.impulse.to.copy(actorBounds.surface(cue.targetId,cue.impulse.from,cue.impulse.to));
+    }
     kit.sample(playback.sample(beat?.key??'',clock.now(),startedAt,durationMs,paused,reducedMotion),reducedMotion);
     kit.labels.forEach(({mesh})=>mesh.quaternion.copy(camera.quaternion));
   });

@@ -43,9 +43,9 @@ test('new environment cannot consume old contact certificates while loading, rea
   const board = readFileSync('src/client/scene/Board3D.tsx', 'utf8');
   for (const name of ['certified', 'trip', 'punch']) assert.match(board, new RegExp(`${name}\\.enter\\([^;]*physicalContacts`));
   assert.match(board, /physicalContacts && <MechanismLayer/); assert.match(board, /physicalContacts&&<CertifiedTripLayer/);
-  assert.match(board, /if\(!environmentCandidate\)controller.restore/); assert.match(board, /const certifiedBind=certified instanceof SceneMechanismController\|\|physicalContacts&&/);
-  assert.match(board, /sceneMechanisms&&certified instanceof SceneMechanismController/);
-  assert.match(board, /environmentCandidate&&mechanismCandidate\?new SceneMechanismController\(contactScope\):new GuardedCertifiedTripController/);
+  assert.match(board, /if\(!environmentCandidate\)controller.restore/); assert.match(board, /const certifiedBind=physicalContacts&&/);
+  assert.doesNotMatch(board, /SceneMechanismController|RevalidatedTripLayer|R1PunchLayer/);
+  assert.match(board, /environmentCandidate&&<FullCoverageMechanismLayer/);
   assert.match(board, /environmentReady = environmentCandidate && environmentLoad === 'ready'/);
 });
 

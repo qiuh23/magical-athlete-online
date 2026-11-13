@@ -1,0 +1,134 @@
+{
+  "verifiedAt": "2026-11-13T08:57:51.226372+00:00",
+  "scope": "Actual mounted React/R3F components with no-op renderer; offline Cycles images. Not browser gameplay, GPU performance or full-venue collision certification.",
+  "rosterProjection": {
+    "characters": 151,
+    "anchors": 54,
+    "comparisons": 8154,
+    "result": "pass"
+  },
+  "mountedAssetCoverage": {
+    "characters": [
+      "banana",
+      "coach",
+      "blimp",
+      "centaur",
+      "kraken",
+      "hotel",
+      "hog-knight-mounted",
+      "bite-mark-were"
+    ],
+    "cases": 1728,
+    "anchors": 54,
+    "layouts": [
+      "desktop",
+      "compact"
+    ],
+    "quality": [
+      "standard",
+      "economy"
+    ],
+    "checks": [
+      "original GLBs loaded without fallback",
+      "one actual fixed-foot mesh per anchor including idle instances",
+      "mesh world matrices or morph weights change",
+      "currently mounted paused holder identity and pose remain stable"
+    ],
+    "result": "pass"
+  },
+  "actualPawnBoundaries": [
+    {
+      "anchor": "wild:5",
+      "actualPawns": 8,
+      "alreadyDown": 1,
+      "targetMoved": true,
+      "residentRootBodyUnchanged": true,
+      "replay": true,
+      "reducedMotion": true
+    },
+    {
+      "anchor": "wild:17",
+      "actualPawns": 8,
+      "alreadyDown": 1,
+      "targetMoved": true,
+      "residentRootBodyUnchanged": true,
+      "replay": true,
+      "reducedMotion": true
+    },
+    {
+      "anchor": "wild:23",
+      "actualPawns": 8,
+      "alreadyDown": 1,
+      "targetMoved": true,
+      "residentRootBodyUnchanged": true,
+      "replay": true,
+      "reducedMotion": true
+    },
+    {
+      "anchor": "wild:24",
+      "actualPawns": 8,
+      "alreadyDown": 1,
+      "targetMoved": true,
+      "residentRootBodyUnchanged": true,
+      "replay": true,
+      "reducedMotion": true
+    }
+  ],
+  "images": {
+    "kind": "Offline evaluated runtime GLBs with neutral staging; actors held at a reference pose",
+    "frames": 24,
+    "files": [
+      "offline-punch-before-mid-after.jpg",
+      "offline-motion-contact-sheet.jpg"
+    ],
+    "sourceHashesBeforeLifecycleOnlyFix": {
+      "src/client/scene/Board3D.tsx": "13e816b2e32db45ed43c46e2bac644d3a13e85d170603abb8dd8aaaa0b408dec",
+      "src/client/scene/environment/FullCoverageMechanismLayer.tsx": "e6945919116fb08d0f5547cfa54f23d3c66b17f37989d5124c4156e7b46ac4d7",
+      "src/client/scene/environment/full-coverage.ts": "475d955be43565d1523b59136d6230102d06373a0f0998b78d1af06e50f63393",
+      "src/client/scene/environment/event-cues.ts": "d48bfa0e511e6e03c227af34549c4c731029f53e9dce93264dd7abd5f3ddea92",
+      "src/client/scene/mechanisms/actor-bounds.ts": "f5cd7f0dc53427704d0dbd3a5cc941720ba8f8ec5f891fb258d90345b58890c5",
+      "scripts/recovery/verify-mechanism-motion.cjs": "f70004d6d6653a19cb59a28e40e3219484c103e55625b323b0be0d259c762f83"
+    },
+    "lifecycleChangeCheck": "All 1,728 sampled numerical pose records exactly match the prior image-generation revision; final lifecycle-only changes do not alter device pose output."
+  },
+  "browser": {
+    "result": "not executed",
+    "blockers": [
+      "Installed Chromium aborts before launch: process_singleton socket() Operation not permitted",
+      "Tool cloud browser cannot reach local Vite: ERR_CONNECTION_REFUSED"
+    ],
+    "suite": "playwright.motion.config.ts"
+  },
+  "sourceHashes": {
+    "src/client/scene/Board3D.tsx": "13e816b2e32db45ed43c46e2bac644d3a13e85d170603abb8dd8aaaa0b408dec",
+    "src/client/scene/environment/FullCoverageMechanismLayer.tsx": "e6945919116fb08d0f5547cfa54f23d3c66b17f37989d5124c4156e7b46ac4d7",
+    "src/client/scene/environment/full-coverage.ts": "475d955be43565d1523b59136d6230102d06373a0f0998b78d1af06e50f63393",
+    "src/client/scene/environment/event-cues.ts": "d48bfa0e511e6e03c227af34549c4c731029f53e9dce93264dd7abd5f3ddea92",
+    "src/client/scene/mechanisms/actor-bounds.ts": "f5cd7f0dc53427704d0dbd3a5cc941720ba8f8ec5f891fb258d90345b58890c5",
+    "scripts/recovery/verify-mechanism-motion.cjs": "b389ac631f637e468a5ba8cb32a1dc837f6d919075e2eedb01547bed4c63c3f2"
+  },
+  "sourceHashesStableDuringRun": true,
+  "mountedLifecycle": {
+    "cases": 16,
+    "scenarios": 8,
+    "quality": [
+      "standard",
+      "economy"
+    ],
+    "updates": [
+      "outlets Map only",
+      "onReady callback only",
+      "both together"
+    ],
+    "checks": [
+      "same current scene holder retained",
+      "paused mesh world pose retained",
+      "old registries cleaned and new registry populated",
+      "zero geometry/material/instance disposal",
+      "zero AnimationMixer stopAllAction/uncacheRoot",
+      "same mounted model resumes movement"
+    ],
+    "totalDisposalCalls": 0,
+    "result": "pass"
+  }
+}

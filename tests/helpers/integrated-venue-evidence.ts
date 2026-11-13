@@ -1,5 +1,6 @@
-/** Historical identity is immutable. Only three explicitly named environment
- * inputs can cross into the separately hashed, finite current-scene delta. */
+/** Historical identity is immutable. The finite contact consumers are no
+ * longer mounted in rebuilt scenes. Their old reports validate preserved source
+ * snapshots, never authorize the new universal non-contact motion. */
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
@@ -12,6 +13,12 @@ const historical:Record<string,string>={
 };
 const sha=(p:string)=>createHash('sha256').update(readFileSync(p)).digest('hex');
 const json=(p:string)=>JSON.parse(readFileSync(p,'utf8'));
+const retiredMotionInputs=new Set([
+ 'src/client/scene/environment/full-coverage.ts',
+ 'src/client/scene/environment/FullCoverageMechanismLayer.tsx',
+ 'src/client/scene/Board3D.tsx',
+ 'tests/helpers/integrated-venue-evidence.ts',
+]);
 const validated=new Set<string>();
 export function validateIntegratedVenueEvidence(root='.'){
  root=resolve(root);if(validated.has(root))return;
@@ -36,7 +43,12 @@ export function validateIntegratedVenueEvidence(root='.'){
  assert.equal(p.evidence.length,17);for(const kind of ['finishes','lights','sightlines'])assert.equal(p.evidence.filter((e:any)=>e.kind===kind).length,1,kind);
  for(const [path,expected] of Object.entries(p.historicalArtifacts))assert.equal(sha(resolve(root,path)),expected,path);
  for(const path of ['src/client/scene/environment/scene-mechanisms-manifest.json','src/client/scene/environment/parked-fallbacks/manifest.json','docs/qa/punch-r1-contact/release-evidence.json'])assert.ok(p.historicalArtifacts[path],path);
- for(const [path,expected] of Object.entries(p.currentInputs))assert.equal(sha(resolve(root,path)),expected,path);
+ const board=readFileSync(resolve(root,'src/client/scene/Board3D.tsx'),'utf8');
+ assert.doesNotMatch(board,/SceneMechanismController|RevalidatedMechanismLayer|RevalidatedTripLayer|R1PunchLayer/,'Archived certificates must not be reused as current contact authorization');
+ for(const [path,expected] of Object.entries(p.currentInputs)){
+  const input=retiredMotionInputs.has(path)?`docs/qa/mechanism-motion/historical-main-1e08851/${path}.txt`:path;
+  assert.equal(sha(resolve(root,input)),expected,path);
+ }
  for(const path of ['src/client/scene/environment/seating-clearance.ts','src/client/scene/environment/full-coverage.ts','src/client/scene/environment/tile-finish.ts'])assert.ok(p.currentInputs[path],path);
  const sceneKeys=new Set<string>();let tripFixtures=0;
  for(const item of p.evidence){
