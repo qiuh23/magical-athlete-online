@@ -1,0 +1,23 @@
+{
+  "sourceSha256": "a285acf20b000cd2f61bd45847ee4cc1044e1ad570d1178c5e256dcbae5e6e97",
+  "images": [
+    {
+      "image": 0,
+      "kind": "color",
+      "width": 512,
+      "height": 128,
+      "encodedBytes": 62604,
+      "pixelParity": "exact (glTF normal green-channel convention applied)",
+      "sha256": "3854a4b6cdf981720941921af61a623704fe2784f2342720133dd3b0525cf6c8"
+    },
+    {
+      "image": 1,
+      "kind": "normal",
+      "width": 512,
+      "height": 128,
+      "encodedBytes": 102440,
+      "pixelParity": "exact (glTF normal green-channel convention applied)",
+      "sha256": "7942e276360f9e28e33d1bb03ad7a6764c7daff0c839cc3486f4db7d83f6ae0a"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "fileName": "wild-24-air-punch-review-v2.mp4",
+    "frames": 31,
+    "durationSeconds": 2.066666666666667,
+    "subjectRegion": [
+      0,
+      0,
+      768,
+      576
+    ],
+    "subjectFramesPixelIdentical": true,
+    "caption": "OFFLINE ACTION REVIEW / 31 sampled poses / not real-time gameplay",
+    "sha256": "5484aee759ee64b820a96db03259ca5fa267870c8206d2b8405883987a5bed13",
+    "bytes": 566062
+  },
+  {
+    "fileName": "boardwalks-50-air-punch-review-v2.mp4",
+    "frames": 31,
+    "durationSeconds": 2.066666666666667,
+    "subjectRegion": [
+      0,
+      0,
+      768,
+      576
+    ],
+    "subjectFramesPixelIdentical": true,
+    "caption": "OFFLINE ACTION REVIEW / 31 sampled poses / not real-time gameplay",
+    "sha256": "893e4159fb319155ba7bd0f46df866b010318f2dae4be0dc45803c1caeaeffc6",
+    "bytes": 451365
+  }
+]

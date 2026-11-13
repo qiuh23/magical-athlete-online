@@ -1,0 +1,81 @@
+{
+  "scope": "Actual unchanged cameraFrame parameters, not live device pixel acceptance.",
+  "comparisons": [
+    {
+      "track": "mild",
+      "width": 390,
+      "height": 844,
+      "before": {
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "zoom": 23.294520075248535
+      },
+      "after": {
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "zoom": 23.294520075248535
+      },
+      "zoomRatio": 1,
+      "trackScaleChangePercent": 0
+    },
+    {
+      "track": "mild",
+      "width": 1280,
+      "height": 900,
+      "before": {
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "zoom": 32.92779597007113
+      },
+      "after": {
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "zoom": 32.92779597007113
+      },
+      "zoomRatio": 1,
+      "trackScaleChangePercent": 0
+    },
+    {
+      "track": "whirly-world",
+      "width": 1280,
+      "height": 900,
+      "before": {
+        "x": 0,
+        "y": 1.43,
+        "z": 0,
+        "zoom": 33.03458882186592
+      },
+      "after": {
+        "x": 0,
+        "y": 1.43,
+        "z": 0,
+        "zoom": 33.03458882186592
+      },
+      "zoomRatio": 1,
+      "trackScaleChangePercent": 0
+    },
+    {
+      "track": "squiggle",
+      "width": 1280,
+      "height": 900,
+      "before": {
+        "x": -4.1449199034382165,
+        "y": 1.43,
+        "z": 0.17256772636100193,
+        "zoom": 23.874840723201444
+      },
+      "after": {
+        "x": -4.1449199034382165,
+        "y": 1.43,
+        "z": 0.17256772636100193,
+        "zoom": 23.874840723201444
+      },
+      "zoomRatio": 1,
+      "trackScaleChangePercent": 0
+    }
+  ]
+}

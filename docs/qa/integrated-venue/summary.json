@@ -1,0 +1,145 @@
+{
+  "scope": "Per-map finite support addition observations; runtime manifests untouched.",
+  "summaries": [
+    {
+      "track": "mild",
+      "lowQuality": false,
+      "geometryHash": "a7761559b29b66b415c4c8a0b7e5fe6637fd95a76a6df4985090d9bc43729ee4",
+      "report": "docs/qa/integrated-venue/mild-full.json",
+      "failures": 0,
+      "review": 0,
+      "retainedReview": 0,
+      "retainedBlocked": 0
+    },
+    {
+      "track": "mild",
+      "lowQuality": true,
+      "geometryHash": "0f50ca225ad03373a7bc4ad088d59be510e63d8fe2fd4cebde74ff32ec50e6de",
+      "report": "docs/qa/integrated-venue/mild-economy.json",
+      "failures": 0,
+      "review": 0,
+      "retainedReview": 0,
+      "retainedBlocked": 0
+    },
+    {
+      "track": "twisty-twirl",
+      "lowQuality": false,
+      "geometryHash": "d97785e29c35aa77ed72e50e7c278bceb0771a896030d6fb983432d2a8409d3a",
+      "report": "docs/qa/integrated-venue/twisty-twirl-full.json",
+      "failures": 0,
+      "review": 0,
+      "retainedReview": 0,
+      "retainedBlocked": 0
+    },
+    {
+      "track": "twisty-twirl",
+      "lowQuality": true,
+      "geometryHash": "00118949eaae1b489c489bebd24f68a93c5551b598f6fe4130c67f40d9f72d7c",
+      "report": "docs/qa/integrated-venue/twisty-twirl-economy.json",
+      "failures": 0,
+      "review": 0,
+      "retainedReview": 0,
+      "retainedBlocked": 0
+    },
+    {
+      "track": "bridges",
+      "lowQuality": false,
+      "geometryHash": "c7e7ba7b06dc16f09c4923f5a8531525cb52e08e362c5b6b3e9156b474e5ada0",
+      "report": "docs/qa/integrated-venue/bridges-full.json",
+      "failures": 0,
+      "review": 0,
+      "retainedReview": 0,
+      "retainedBlocked": 0
+    },
+    {
+      "track": "bridges",
+      "lowQuality": true,
+      "geometryHash": "82c30321f4636d831f644e00fbd2f102d62619200f8f8065906bb9e4c3451dee",
+      "report": "docs/qa/integrated-venue/bridges-economy.json",
+      "failures": 0,
+      "review": 0,
+      "retainedReview": 0,
+      "retainedBlocked": 0
+    },
+    {
+      "track": "squiggle",
+      "lowQuality": false,
+      "geometryHash": "f6e5d4612893fcc9e83a78449ba8b4dd327b469af6f4cdfb59c8b8f14ff6903a",
+      "report": "docs/qa/integrated-venue/squiggle-full.json",
+      "failures": 0,
+      "review": 0,
+      "retainedReview": 0,
+      "retainedBlocked": 0
+    },
+    {
+      "track": "squiggle",
+      "lowQuality": true,
+      "geometryHash": "f3b4fb8104d6fead798b23dfd6cb642ba752c371f89ca5a59932521d2be5c9b4",
+      "report": "docs/qa/integrated-venue/squiggle-economy.json",
+      "failures": 0,
+      "review": 0,
+      "retainedReview": 0,
+      "retainedBlocked": 0
+    },
+    {
+      "track": "boardwalks",
+      "lowQuality": false,
+      "geometryHash": "1a633047408d787b5d6c317fa40018e962e03f7c450e7436730cb317ca0af2cd",
+      "report": "docs/qa/integrated-venue/boardwalks-full.json",
+      "failures": 0,
+      "review": 0,
+      "retainedReview": 0,
+      "retainedBlocked": 0
+    },
+    {
+      "track": "boardwalks",
+      "lowQuality": true,
+      "geometryHash": "60223c2b623cc8bb217c5e7b80130d65430608a6672d939c42cb0beee8b652d4",
+      "report": "docs/qa/integrated-venue/boardwalks-economy.json",
+      "failures": 0,
+      "review": 0,
+      "retainedReview": 0,
+      "retainedBlocked": 0
+    },
+    {
+      "track": "whirly-world",
+      "lowQuality": false,
+      "geometryHash": "83982297d3da983de730bc6a66a3fdb338f981d5c523a1cde668cf72d5a37a08",
+      "report": "docs/qa/integrated-venue/whirly-world-full.json",
+      "failures": 0,
+      "review": 0,
+      "retainedReview": 0,
+      "retainedBlocked": 0
+    },
+    {
+      "track": "whirly-world",
+      "lowQuality": true,
+      "geometryHash": "2bc610d488c4eabea6dd6dd8cb160834c486b0c66ab7f4f49a957346c83cdfb3",
+      "report": "docs/qa/integrated-venue/whirly-world-economy.json",
+      "failures": 0,
+      "review": 0,
+      "retainedReview": 0,
+      "retainedBlocked": 0
+    },
+    {
+      "track": "wild",
+      "lowQuality": false,
+      "geometryHash": "630ab7c910d8c0542292c93cba47db7cebd3d423c1a77884f2a22ebe568a98b7",
+      "report": "docs/qa/integrated-venue/wild-full.json",
+      "failures": 0,
+      "review": 0,
+      "retainedReview": 0,
+      "retainedBlocked": 0
+    },
+    {
+      "track": "wild",
+      "lowQuality": true,
+      "geometryHash": "faaee36636275461d9ac57d6259bee70818e905c8953719804b8e42f2d52ae92",
+      "report": "docs/qa/integrated-venue/wild-economy.json",
+      "failures": 0,
+      "review": 0,
+      "retainedReview": 0,
+      "retainedBlocked": 0
+    }
+  ]
+}

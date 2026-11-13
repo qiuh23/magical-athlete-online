@@ -1,0 +1,2673 @@
+{
+  "scope": "Preserved failed pre-repair observations. Not a current pass or certificate.",
+  "reports": [
+    {
+      "track": "whirly-world",
+      "lowQuality": false,
+      "geometryHash": "96adaf6477fdb1fd0954c3ab54da5b769b488d6b7931da1dc59d72dd5499d1be",
+      "auditProtocolSHA256": "44e00915504374aaa18b75a3d93818641feee67976d57dd50250c40ee869fac2",
+      "inputs": {
+        "lighting/src/client/scene/environment/floodlights.ts": "3427fb25de0cad0b570b1779009d07e9dee28dc763e5701d9511043995f1276c",
+        "lighting/src/client/scene/environment/floodlight-edge-mounts.json": "5d80a3cc843cfa91b43f0193f0092b455cd421289f5f3de2e79dbdc2309bbb7e",
+        "lighting/src/client/scene/DioramaStadium.tsx": "907e6d3c08d89701cd013c9d888c662589f828e7f13381703d0c3635ff5dde54",
+        "lighting/src/client/scene/TopologyStadium.tsx": "8d3b192c1dc69140b38c6bcf915d6345f593317d7f67e5dcd3cbdef181f55392",
+        "lighting/src/client/scene/BridgesStructure.tsx": "bfc9ac3f8c908e2e142125f7b3a7d40001bb99cd288c9d0c3cb4a0e23aea8285",
+        "lighting/src/client/scene/environment/RebuiltScenery.tsx": "4167b813188018e64045679ad0dbc73d7bbd405318913ddafac5a22b5b3b6102",
+        "lighting/src/client/scene/environment/deck-runtime.ts": "df5bc46852148969bd15ce336568077e1bc32cd9979d40e1dc3551e2c27eb865",
+        "lighting/docs/qa/floodlight-rows/reference-envelopes.json": "15e008208dbbb606eb2efc7a53fe7c69970c21cef30f36bf40d4b51a7a48c6b5",
+        "lighting/src/client/scene/environment/runtime.ts": "b3f7952b028e67b02725a5d593a84355c9d3e25d626873bdc2b62cb255df1ced",
+        "lighting/src/client/scene/environment/layout.ts": "3f0ed451fc0b933e393394ce9fc2441e1eb31e6ffc64716f7993d07c09a72bd3",
+        "lighting/src/client/scene/environment/seating.ts": "f665762f332c639d9adfc087810b923a450b524b9fa3a8361120ac7e22d34012",
+        "lighting/docs/qa/floodlight-rows/display-envelopes-0.json": "bed2e038dcbb9ec04f7c955ccd6dfdf8a017be86b4190d3c33ff18a25f00f824",
+        "lighting/docs/qa/floodlight-rows/display-envelopes-1.json": "855f90b469674c8d7f2623ba17aee3125a82140cdba30cef64c215878be144d8",
+        "lighting/docs/qa/floodlight-rows/display-envelope-inputs.json": "096fc2498f2b37ca14b1ffe29a8519cd1135009cf99652b9057e161a6e92d361",
+        "lighting/scripts/recovery/audit-integrated-venue-foundations.ts": "44e00915504374aaa18b75a3d93818641feee67976d57dd50250c40ee869fac2",
+        "lighting/src/client/scene/environment/full-coverage.ts": "55bcc9e706fc16bac9696adaae4dd3fa3a59a383c5dae73c7b115f6469eca11a",
+        "lighting/src/client/scene/environment/FullCoverageMechanismLayer.tsx": "c19b744467d6e2fda32a475ef0a19c86ac988c527a475c718b321e3ec7b8a645",
+        "lighting/src/client/scene/environment/force-presentation.ts": "32f2f58c8119e870d08a7d33f5061f54c2d187b8620670b28baa18261b5ef643",
+        "lighting/src/client/scene/environment/RevalidatedMechanismLayer.tsx": "7327cb3112bc0912ec7598489816680c220a4dba4ffc73c955f7c7a91660fcbd",
+        "lighting/src/client/scene/Board3D.tsx": "478c4557d6b3c31c98a9d0597ab5931a5b152e4c6c898efc17173bba6bbdeb2a",
+        "lighting/src/client/scene/mechanisms/models.ts": "6dcb80fdb9e53dbb48c66e002c8f65a11260de49c38172062e56d79544ccc6f3",
+        "lighting/src/client/scene/mechanisms/placements.ts": "63b3d29d3fdf635de95bcad2209f0a2fcb1057fa6a03e782c47d187b072e97d0",
+        "lighting/src/client/scene/mechanisms/layout.ts": "e6705c25bf366f822565a26ef4303594390f3ba168fa5b5a02807dbd82791dbe",
+        "lighting/src/client/scene/math.ts": "54b1c1f92c222ba8864aebf9cc7f4e5b3dbd83cf0fd7856fdb93323187ffc8c3",
+        "lighting/scripts/recovery/scene-collision.ts": "73519904299b6d5fdd575829f0aca32ccf486016764b10a80965350d6fa5be2d",
+        "lighting/public/models/environment-rebuilt-v2/tree_elm_rebuilt_lod2.glb": "7de3c13954b48a0eb3f2763baaa5c16980a079c5ab5995a955f2a3a89456db58",
+        "lighting/public/models/environment-rebuilt-v2/tree_maple_rebuilt_lod2.glb": "1bd23283396913472077482436d1493a81fe7ee8ff1edf7105886ca28643df1c",
+        "lighting/public/models/environment-rebuilt-v2/tree_sapling_rebuilt_lod2.glb": "913f328637d1b23bba8603a4cbf48028e0fb957abd3033c31bef0ebab3583f40",
+        "lighting/public/models/environment-rebuilt-v2/start_gate.glb": "76ca081e1fe1407d6b574b3aaee1ff409dff90e838dd0e251a4fdc00bb97831c",
+        "lighting/public/models/environment-rebuilt-v2/finish_gate.glb": "c51312cac07f0743d1ca2377dae8355bfdbeabbcc9044e7d2d9765ac5012eb54",
+        "lighting/public/models/environment-rebuilt-v2/bleachers.glb": "af4d188c511ddf34dcdb6575f543c7baf0a8f6572c2def5a8cf115c8a422e967",
+        "lighting/public/models/environment-rebuilt-v2/spectators.glb": "b60a7ddb7fdca1993f589e1f48617e5d314456045428f952d9f0ec5e7a198a66",
+        "lighting/public/models/environment-rebuilt-v2/grandstand_rostrum.glb": "3891481f58a453a70d56bb6d36c55d5cce5c02a7cfcd2df9261f2bd6f44b475f",
+        "lighting/public/models/environment-rebuilt-v2/squiggle_base.glb": "94b8d55dc02c8034838090102e1e6771e6dc4bf16b5402db25074cddf10f4793",
+        "lighting/public/models/environment-rebuilt-v2/squiggle_landscape_reexport_v1.glb": "e4dfa74a8e9a1b5e6a58c22fd615b2cdbe5cc2af5a16f427596618f320ff1d08",
+        "lighting/public/models/environment-rebuilt-v2/squiggle_furniture.glb": "ffffbfca78e8d7a5da8a77d87d817d477eb1e6510560a96ec5c15e9c00e27596",
+        "lighting/public/models/floodlights-rebuilt-v3/base.glb": "1104dfa5c5dbc4181448e43d84559f24bbb2b92334cf2ae3cd64e93466389309",
+        "lighting/public/models/floodlights-rebuilt-v3/pole.glb": "cbd7f2ee910e5a62ecba3bb229d5585082ca154a6a0b36d44e9ce01cffb46bcd",
+        "lighting/public/models/floodlights-rebuilt-v3/yoke.glb": "04b130d8b4d2e12c14974b0485cb025eb364bbfcf2ba88f255db8c6eafad691e",
+        "lighting/public/models/floodlights-rebuilt-v3/housing.glb": "0b4d0ccb58bc8a7fb4dec5efd4d531cf6dfd80945b5f71163b3cb4fa8fbeaf3a",
+        "lighting/public/models/floodlights-rebuilt-v3/lenses.glb": "28cc5396e6e9c9f2b42a05d1a0976131654f92b2b426e5381963c3d6dd5efb32",
+        "lighting/public/models/mechanisms/approved_soft_track_tile.glb": "7ca87e14c06e410144d2e5fbd66303605c2a442f4fae7c0928a62c5eef28c659",
+        "lighting/public/models/mechanisms/gain_joint_action.glb": "fcb164ad50bb52d22fa0b3aa66f63d515d40c9fef372060997ae3d62fa0a1fde",
+        "lighting/public/models/mechanisms/trip_telescopic_v1.2f331432.glb": "2f331432d72ef78d33c2aadd355885f25ca9f670d4d7f37b36e0c27b6db1046f",
+        "lighting/public/models/mechanisms/loss_joint_action.glb": "0323a384103f271627786c5c8ef3ba98ac1b488a03e2096c26617442250df0f6",
+        "lighting/public/models/mechanisms/punch_outboard_joint.glb": "ff8a8d4431fd08d4cc0111133ad9f0af1ea8abf3197131f5f6c6dfba0d6fa956",
+        "lighting/public/models/mechanisms/trip_joint.glb": "70c96cc02f6db99d9ec8650a81f519a39c526d8485231d632ce2908879165641",
+        "lighting/public/models/mechanisms/approved_soft_track_tile_economy.glb": "0d73be354867c51328be51b9b1028b97d0ed465530c002ee39448fe9b46f7355",
+        "lighting/public/models/environment-rebuilt-v2/boardwalks_base.glb": "f842becc1cfdce6c1d050f6ebec23c3463b796ee348d27c56215be600e3728e2",
+        "lighting/public/models/environment-rebuilt-v2/boardwalks_landscape_reexport_v1.glb": "60bf7edcac36fc300b06b3dd942c77d90003f4ea1b01987b57f69c048e7c687a",
+        "lighting/public/models/environment-rebuilt-v2/boardwalks_furniture.glb": "004404c2b23631801e0d2f5765af812a48793ce36b23be0998a24865d7fe7823",
+        "lighting/public/models/environment-rebuilt-v2/bridges_base.glb": "43024a1c49c108aeb487b4b797b3c6bb8864538bf54d0ba3b698bf852e0368fe",
+        "lighting/public/models/environment-rebuilt-v2/bridges_landscape_reexport_v1.glb": "c3d74563b29aa8cb10605dbb5312cfdfc83dc79625db19e4b769b4c9f79be1fb",
+        "lighting/public/models/environment-rebuilt-v2/bridges_furniture.glb": "70e78bf169d74dc55302e7d69db21500e4329078a62532e7765f61a5d5867f61",
+        "lighting/public/models/environment-rebuilt-v2/podium.glb": "daac91ddfa81acd44013d6560e57cdccf39f87dd867d0737d3ebca190dec890f",
+        "lighting/public/models/environment-rebuilt-v2/officials_kiosk.glb": "f68de4cb4eac921518e8dfa78307b435cfd78ff8c0d20235ab1b242d726ab887",
+        "lighting/public/models/environment-rebuilt-v2/scoreboard.glb": "019c4166ff445c5aff8ee74ebd9215d74a9efea9aa3746fb88cbdd9c81d7b549",
+        "lighting/public/models/environment-rebuilt-v2/official_rostrum.glb": "ba867c174143cba8c7a2cb1ae8c749f698edec9447e42c67e3777de418ee04d4",
+        "lighting/public/models/environment-rebuilt-v2/podium_plinth.glb": "df3165332120872f50ad1ffb325a52f302a98756d3b71967b28918403ddb3f69",
+        "lighting/public/models/mechanisms/warp_joint_action.glb": "bd5122db40a1c86889ee423787d818f278765d0e48ce30cca9f2fcea935a1b19"
+      },
+      "failures": [
+        {
+          "anchor": "whirly-world:12",
+          "scope": "static",
+          "a": "support:whirly-world:12:coverage-footprint-plinth",
+          "b": "world:seating-joinery:cream",
+          "kind": "surface",
+          "crossings": 52,
+          "bounds": [
+            [
+              16.5799999535084,
+              0.10399999645352365,
+              -3.9199999690055884
+            ],
+            [
+              17.46999999880793,
+              0.14999999105930328,
+              -2.230000030994419
+            ]
+          ],
+          "aBounds": [
+            [
+              16.5799999535084,
+              0.10399999645352365,
+              -3.9199999690055884
+            ],
+            [
+              17.46999999880793,
+              0.19999997493624688,
+              -2.230000030994419
+            ]
+          ],
+          "bBounds": [
+            [
+              -17.040000915527344,
+              -0.20000000298023224,
+              -8.25
+            ],
+            [
+              20.700000762939453,
+              1.3839999437332153,
+              3.18999981880188
+            ]
+          ],
+          "contactPointCount": 139,
+          "contactBounds": [
+            [
+              16.5799999535084,
+              0.10399999645352363,
+              -3.9199999690055884
+            ],
+            [
+              17.46999999880793,
+              0.14999999105930328,
+              -2.230000030994419
+            ]
+          ],
+          "allowed": false,
+          "reason": ""
+        }
+      ],
+      "review": [],
+      "retainedDomains": [
+        {
+          "key": "motion:whirly-world:3",
+          "anchor": "whirly-world:3",
+          "status": "actual-envelope-volume-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 4,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "motion:whirly-world:5",
+          "anchor": "whirly-world:5",
+          "status": "actual-envelope-volume-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 4,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "motion:whirly-world:7",
+          "anchor": "whirly-world:7",
+          "status": "actual-envelope-volume-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 4,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "motion:whirly-world:10",
+          "anchor": "whirly-world:10",
+          "status": "actual-envelope-volume-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 4,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "motion:whirly-world:12",
+          "anchor": "whirly-world:12",
+          "status": "blocked-actual-legacy-support-collision",
+          "fixedSupportHits": [
+            {
+              "a": "legacy-support:device-foundation",
+              "b": "world:seating-joinery:cream",
+              "kind": "surface",
+              "crossings": 52,
+              "bounds": [
+                [
+                  16.580000007152577,
+                  0.10399999794363968,
+                  -3.9200000286102332
+                ],
+                [
+                  17.469999992847463,
+                  0.14999999105930328,
+                  -2.2299999713897742
+                ]
+              ],
+              "aBounds": [
+                [
+                  16.580000007152577,
+                  0.10399999794363968,
+                  -3.9200000286102332
+                ],
+                [
+                  17.469999992847463,
+                  0.1999999987781047,
+                  -2.2299999713897742
+                ]
+              ],
+              "bBounds": [
+                [
+                  -17.040000915527344,
+                  -0.20000000298023224,
+                  -8.25
+                ],
+                [
+                  20.700000762939453,
+                  1.3839999437332153,
+                  3.18999981880188
+                ]
+              ],
+              "contactBounds": [
+                [
+                  16.580000007152577,
+                  0.10399999794363968,
+                  -3.9200000286102332
+                ],
+                [
+                  17.469999992847463,
+                  0.14999999105930328,
+                  -2.2299999713897742
+                ]
+              ]
+            }
+          ],
+          "broadPairs": 4,
+          "overlapping": [
+            {
+              "part": "world:seating-joinery:cream",
+              "bounds": [
+                [
+                  -17.040000915527344,
+                  -0.20000000298023224,
+                  -8.25
+                ],
+                [
+                  20.700000762939453,
+                  1.3839999437332153,
+                  3.18999981880188
+                ]
+              ]
+            }
+          ],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "motion:whirly-world:15",
+          "anchor": "whirly-world:15",
+          "status": "aabb-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 0,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "motion:whirly-world:18",
+          "anchor": "whirly-world:18",
+          "status": "aabb-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 0,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "motion:whirly-world:20",
+          "anchor": "whirly-world:20",
+          "status": "aabb-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 0,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "motion:whirly-world:22",
+          "anchor": "whirly-world:22",
+          "status": "aabb-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 0,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "motion:whirly-world:23",
+          "anchor": "whirly-world:23",
+          "status": "aabb-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 0,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "motion:whirly-world:24",
+          "anchor": "whirly-world:24",
+          "status": "aabb-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 0,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "motion:whirly-world:27",
+          "anchor": "whirly-world:27",
+          "status": "aabb-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 0,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        }
+      ]
+    },
+    {
+      "track": "wild",
+      "lowQuality": false,
+      "geometryHash": "035094c75b4532356970c7d29fdf1aa421586c832515b64e1eb5cfa35c5ff0b8",
+      "auditProtocolSHA256": "44e00915504374aaa18b75a3d93818641feee67976d57dd50250c40ee869fac2",
+      "inputs": {
+        "lighting/src/client/scene/environment/floodlights.ts": "3427fb25de0cad0b570b1779009d07e9dee28dc763e5701d9511043995f1276c",
+        "lighting/src/client/scene/environment/floodlight-edge-mounts.json": "5d80a3cc843cfa91b43f0193f0092b455cd421289f5f3de2e79dbdc2309bbb7e",
+        "lighting/src/client/scene/DioramaStadium.tsx": "907e6d3c08d89701cd013c9d888c662589f828e7f13381703d0c3635ff5dde54",
+        "lighting/src/client/scene/TopologyStadium.tsx": "8d3b192c1dc69140b38c6bcf915d6345f593317d7f67e5dcd3cbdef181f55392",
+        "lighting/src/client/scene/BridgesStructure.tsx": "bfc9ac3f8c908e2e142125f7b3a7d40001bb99cd288c9d0c3cb4a0e23aea8285",
+        "lighting/src/client/scene/environment/RebuiltScenery.tsx": "4167b813188018e64045679ad0dbc73d7bbd405318913ddafac5a22b5b3b6102",
+        "lighting/src/client/scene/environment/deck-runtime.ts": "df5bc46852148969bd15ce336568077e1bc32cd9979d40e1dc3551e2c27eb865",
+        "lighting/docs/qa/floodlight-rows/reference-envelopes.json": "15e008208dbbb606eb2efc7a53fe7c69970c21cef30f36bf40d4b51a7a48c6b5",
+        "lighting/src/client/scene/environment/runtime.ts": "b3f7952b028e67b02725a5d593a84355c9d3e25d626873bdc2b62cb255df1ced",
+        "lighting/src/client/scene/environment/layout.ts": "3f0ed451fc0b933e393394ce9fc2441e1eb31e6ffc64716f7993d07c09a72bd3",
+        "lighting/src/client/scene/environment/seating.ts": "f665762f332c639d9adfc087810b923a450b524b9fa3a8361120ac7e22d34012",
+        "lighting/docs/qa/floodlight-rows/display-envelopes-0.json": "bed2e038dcbb9ec04f7c955ccd6dfdf8a017be86b4190d3c33ff18a25f00f824",
+        "lighting/docs/qa/floodlight-rows/display-envelopes-1.json": "855f90b469674c8d7f2623ba17aee3125a82140cdba30cef64c215878be144d8",
+        "lighting/docs/qa/floodlight-rows/display-envelope-inputs.json": "096fc2498f2b37ca14b1ffe29a8519cd1135009cf99652b9057e161a6e92d361",
+        "lighting/scripts/recovery/audit-integrated-venue-foundations.ts": "44e00915504374aaa18b75a3d93818641feee67976d57dd50250c40ee869fac2",
+        "lighting/src/client/scene/environment/full-coverage.ts": "55bcc9e706fc16bac9696adaae4dd3fa3a59a383c5dae73c7b115f6469eca11a",
+        "lighting/src/client/scene/environment/FullCoverageMechanismLayer.tsx": "c19b744467d6e2fda32a475ef0a19c86ac988c527a475c718b321e3ec7b8a645",
+        "lighting/src/client/scene/environment/force-presentation.ts": "32f2f58c8119e870d08a7d33f5061f54c2d187b8620670b28baa18261b5ef643",
+        "lighting/src/client/scene/environment/RevalidatedMechanismLayer.tsx": "7327cb3112bc0912ec7598489816680c220a4dba4ffc73c955f7c7a91660fcbd",
+        "lighting/src/client/scene/Board3D.tsx": "478c4557d6b3c31c98a9d0597ab5931a5b152e4c6c898efc17173bba6bbdeb2a",
+        "lighting/src/client/scene/mechanisms/models.ts": "6dcb80fdb9e53dbb48c66e002c8f65a11260de49c38172062e56d79544ccc6f3",
+        "lighting/src/client/scene/mechanisms/placements.ts": "63b3d29d3fdf635de95bcad2209f0a2fcb1057fa6a03e782c47d187b072e97d0",
+        "lighting/src/client/scene/mechanisms/layout.ts": "e6705c25bf366f822565a26ef4303594390f3ba168fa5b5a02807dbd82791dbe",
+        "lighting/src/client/scene/math.ts": "54b1c1f92c222ba8864aebf9cc7f4e5b3dbd83cf0fd7856fdb93323187ffc8c3",
+        "lighting/scripts/recovery/scene-collision.ts": "73519904299b6d5fdd575829f0aca32ccf486016764b10a80965350d6fa5be2d",
+        "lighting/public/models/environment-rebuilt-v2/tree_elm_rebuilt_lod2.glb": "7de3c13954b48a0eb3f2763baaa5c16980a079c5ab5995a955f2a3a89456db58",
+        "lighting/public/models/environment-rebuilt-v2/tree_maple_rebuilt_lod2.glb": "1bd23283396913472077482436d1493a81fe7ee8ff1edf7105886ca28643df1c",
+        "lighting/public/models/environment-rebuilt-v2/tree_sapling_rebuilt_lod2.glb": "913f328637d1b23bba8603a4cbf48028e0fb957abd3033c31bef0ebab3583f40",
+        "lighting/public/models/environment-rebuilt-v2/start_gate.glb": "76ca081e1fe1407d6b574b3aaee1ff409dff90e838dd0e251a4fdc00bb97831c",
+        "lighting/public/models/environment-rebuilt-v2/finish_gate.glb": "c51312cac07f0743d1ca2377dae8355bfdbeabbcc9044e7d2d9765ac5012eb54",
+        "lighting/public/models/environment-rebuilt-v2/bleachers.glb": "af4d188c511ddf34dcdb6575f543c7baf0a8f6572c2def5a8cf115c8a422e967",
+        "lighting/public/models/environment-rebuilt-v2/spectators.glb": "b60a7ddb7fdca1993f589e1f48617e5d314456045428f952d9f0ec5e7a198a66",
+        "lighting/public/models/environment-rebuilt-v2/grandstand_rostrum.glb": "3891481f58a453a70d56bb6d36c55d5cce5c02a7cfcd2df9261f2bd6f44b475f",
+        "lighting/public/models/environment-rebuilt-v2/squiggle_base.glb": "94b8d55dc02c8034838090102e1e6771e6dc4bf16b5402db25074cddf10f4793",
+        "lighting/public/models/environment-rebuilt-v2/squiggle_landscape_reexport_v1.glb": "e4dfa74a8e9a1b5e6a58c22fd615b2cdbe5cc2af5a16f427596618f320ff1d08",
+        "lighting/public/models/environment-rebuilt-v2/squiggle_furniture.glb": "ffffbfca78e8d7a5da8a77d87d817d477eb1e6510560a96ec5c15e9c00e27596",
+        "lighting/public/models/floodlights-rebuilt-v3/base.glb": "1104dfa5c5dbc4181448e43d84559f24bbb2b92334cf2ae3cd64e93466389309",
+        "lighting/public/models/floodlights-rebuilt-v3/pole.glb": "cbd7f2ee910e5a62ecba3bb229d5585082ca154a6a0b36d44e9ce01cffb46bcd",
+        "lighting/public/models/floodlights-rebuilt-v3/yoke.glb": "04b130d8b4d2e12c14974b0485cb025eb364bbfcf2ba88f255db8c6eafad691e",
+        "lighting/public/models/floodlights-rebuilt-v3/housing.glb": "0b4d0ccb58bc8a7fb4dec5efd4d531cf6dfd80945b5f71163b3cb4fa8fbeaf3a",
+        "lighting/public/models/floodlights-rebuilt-v3/lenses.glb": "28cc5396e6e9c9f2b42a05d1a0976131654f92b2b426e5381963c3d6dd5efb32",
+        "lighting/public/models/mechanisms/approved_soft_track_tile.glb": "7ca87e14c06e410144d2e5fbd66303605c2a442f4fae7c0928a62c5eef28c659",
+        "lighting/public/models/mechanisms/gain_joint_action.glb": "fcb164ad50bb52d22fa0b3aa66f63d515d40c9fef372060997ae3d62fa0a1fde",
+        "lighting/public/models/mechanisms/trip_telescopic_v1.2f331432.glb": "2f331432d72ef78d33c2aadd355885f25ca9f670d4d7f37b36e0c27b6db1046f",
+        "lighting/public/models/mechanisms/loss_joint_action.glb": "0323a384103f271627786c5c8ef3ba98ac1b488a03e2096c26617442250df0f6",
+        "lighting/public/models/mechanisms/punch_outboard_joint.glb": "ff8a8d4431fd08d4cc0111133ad9f0af1ea8abf3197131f5f6c6dfba0d6fa956",
+        "lighting/public/models/mechanisms/trip_joint.glb": "70c96cc02f6db99d9ec8650a81f519a39c526d8485231d632ce2908879165641",
+        "lighting/public/models/mechanisms/approved_soft_track_tile_economy.glb": "0d73be354867c51328be51b9b1028b97d0ed465530c002ee39448fe9b46f7355",
+        "lighting/public/models/environment-rebuilt-v2/boardwalks_base.glb": "f842becc1cfdce6c1d050f6ebec23c3463b796ee348d27c56215be600e3728e2",
+        "lighting/public/models/environment-rebuilt-v2/boardwalks_landscape_reexport_v1.glb": "60bf7edcac36fc300b06b3dd942c77d90003f4ea1b01987b57f69c048e7c687a",
+        "lighting/public/models/environment-rebuilt-v2/boardwalks_furniture.glb": "004404c2b23631801e0d2f5765af812a48793ce36b23be0998a24865d7fe7823",
+        "lighting/public/models/environment-rebuilt-v2/bridges_base.glb": "43024a1c49c108aeb487b4b797b3c6bb8864538bf54d0ba3b698bf852e0368fe",
+        "lighting/public/models/environment-rebuilt-v2/bridges_landscape_reexport_v1.glb": "c3d74563b29aa8cb10605dbb5312cfdfc83dc79625db19e4b769b4c9f79be1fb",
+        "lighting/public/models/environment-rebuilt-v2/bridges_furniture.glb": "70e78bf169d74dc55302e7d69db21500e4329078a62532e7765f61a5d5867f61",
+        "lighting/public/models/environment-rebuilt-v2/podium.glb": "daac91ddfa81acd44013d6560e57cdccf39f87dd867d0737d3ebca190dec890f",
+        "lighting/public/models/environment-rebuilt-v2/officials_kiosk.glb": "f68de4cb4eac921518e8dfa78307b435cfd78ff8c0d20235ab1b242d726ab887",
+        "lighting/public/models/environment-rebuilt-v2/scoreboard.glb": "019c4166ff445c5aff8ee74ebd9215d74a9efea9aa3746fb88cbdd9c81d7b549",
+        "lighting/public/models/environment-rebuilt-v2/official_rostrum.glb": "ba867c174143cba8c7a2cb1ae8c749f698edec9447e42c67e3777de418ee04d4",
+        "lighting/public/models/environment-rebuilt-v2/podium_plinth.glb": "df3165332120872f50ad1ffb325a52f302a98756d3b71967b28918403ddb3f69",
+        "lighting/public/models/mechanisms/warp_joint_action.glb": "bd5122db40a1c86889ee423787d818f278765d0e48ce30cca9f2fcea935a1b19",
+        "lighting/public/models/mechanisms/punch-rebuild-r1.glb": "aef0b2f39adcbb29eaa3f449e22804093f5efe02e1d0113ca35500cd75cb25b6"
+      },
+      "failures": [
+        {
+          "anchor": "wild:13",
+          "scope": "static",
+          "a": "support:wild:13:coverage-footprint-plinth",
+          "b": "world:seating-joinery:cream",
+          "kind": "surface",
+          "crossings": 27,
+          "bounds": [
+            [
+              17.75,
+              0.10400000479817373,
+              -1.869999969005586
+            ],
+            [
+              18.319999998807926,
+              0.14999999105930328,
+              -0.18000003099441653
+            ]
+          ],
+          "aBounds": [
+            [
+              17.429999953508396,
+              0.10400000479817373,
+              -1.869999969005586
+            ],
+            [
+              18.319999998807926,
+              0.19999997583031637,
+              -0.18000003099441653
+            ]
+          ],
+          "bBounds": [
+            [
+              -17.040000915527344,
+              -0.20000000298023224,
+              -8.25
+            ],
+            [
+              21.049999237060547,
+              1.3839999437332153,
+              3.18999981880188
+            ]
+          ],
+          "contactPointCount": 40,
+          "contactBounds": [
+            [
+              17.75,
+              0.10400000479817373,
+              -1.869999969005586
+            ],
+            [
+              18.319999998807926,
+              0.14999999105930328,
+              -0.18000003099441653
+            ]
+          ],
+          "allowed": false,
+          "reason": ""
+        },
+        {
+          "anchor": "wild:13",
+          "scope": "static",
+          "a": "support:wild:13:coverage-footprint-plinth",
+          "b": "world:seating-joinery:gold",
+          "kind": "surface",
+          "crossings": 48,
+          "bounds": [
+            [
+              18.27750015258789,
+              0.1599999964237213,
+              -1.869999969005586
+            ],
+            [
+              18.319999998807926,
+              0.17800000309944153,
+              -0.18000003099441653
+            ]
+          ],
+          "aBounds": [
+            [
+              17.429999953508396,
+              0.10400000479817373,
+              -1.869999969005586
+            ],
+            [
+              18.319999998807926,
+              0.19999997583031637,
+              -0.18000003099441653
+            ]
+          ],
+          "bBounds": [
+            [
+              -8.630000114440918,
+              0.1599999964237213,
+              -7.650568962097168
+            ],
+            [
+              19.957500457763672,
+              1.3980000019073486,
+              2.6599998474121094
+            ]
+          ],
+          "contactPointCount": 88,
+          "contactBounds": [
+            [
+              18.27750015258789,
+              0.1599999964237213,
+              -1.869999969005586
+            ],
+            [
+              18.319999998807926,
+              0.17800000309944153,
+              -0.18000003099441653
+            ]
+          ],
+          "allowed": false,
+          "reason": ""
+        },
+        {
+          "anchor": "wild:13",
+          "scope": "static",
+          "a": "support:wild:13:wild13-ground-tongue",
+          "b": "world:seating-joinery:cream",
+          "kind": "surface",
+          "crossings": 18,
+          "bounds": [
+            [
+              17.75,
+              -0.19500000596046463,
+              -1.5250000000000012
+            ],
+            [
+              17.782549088988453,
+              0.10500000596046433,
+              -0.5250000000000012
+            ]
+          ],
+          "aBounds": [
+            [
+              16.224999976158163,
+              -0.19500000596046463,
+              -1.5250000000000012
+            ],
+            [
+              18.42500002384188,
+              0.10500000596046433,
+              -0.5250000000000011
+            ]
+          ],
+          "bBounds": [
+            [
+              -17.040000915527344,
+              -0.20000000298023224,
+              -8.25
+            ],
+            [
+              21.049999237060547,
+              1.3839999437332153,
+              3.18999981880188
+            ]
+          ],
+          "contactPointCount": 24,
+          "contactBounds": [
+            [
+              17.75,
+              -0.19500000596046463,
+              -1.5250000000000012
+            ],
+            [
+              17.782549088988453,
+              0.10500000596046433,
+              -0.5250000000000012
+            ]
+          ],
+          "allowed": false,
+          "reason": ""
+        },
+        {
+          "anchor": "wild:16",
+          "scope": "static",
+          "a": "support:wild:16:coverage-footprint-plinth",
+          "b": "light:floodlight-fixed-foundations:3",
+          "kind": "surface",
+          "crossings": 11,
+          "bounds": [
+            [
+              12.414999961853027,
+              0.020000002384185755,
+              5.275000095367432
+            ],
+            [
+              13.18000009357931,
+              0.054999977350234985,
+              5.395000071287866
+            ]
+          ],
+          "aBounds": [
+            [
+              12.309999909997003,
+              0.020000002384185755,
+              4.554999799490686
+            ],
+            [
+              13.18000009357931,
+              0.19999994993209835,
+              5.395000071287866
+            ]
+          ],
+          "bBounds": [
+            [
+              12.414999961853027,
+              -0.8400000035762787,
+              5.275000095367432
+            ],
+            [
+              13.414999961853027,
+              0.054999977350234985,
+              6.275000095367432
+            ]
+          ],
+          "contactPointCount": 15,
+          "contactBounds": [
+            [
+              12.414999961853027,
+              0.020000002384185755,
+              5.275000095367432
+            ],
+            [
+              13.18000009357931,
+              0.054999977350234985,
+              5.395000071287866
+            ]
+          ],
+          "allowed": false,
+          "reason": ""
+        },
+        {
+          "anchor": "wild:16",
+          "scope": "static",
+          "a": "support:wild:16:wild16-ground-extension",
+          "b": "light:floodlight-fixed-foundations:3",
+          "kind": "surface",
+          "crossings": 11,
+          "bounds": [
+            [
+              12.414999961853027,
+              -0.26000000059604655,
+              5.275000095367432
+            ],
+            [
+              13.295000011920946,
+              0.02000000059604634,
+              5.4750000238418615
+            ]
+          ],
+          "aBounds": [
+            [
+              12.194999988079088,
+              -0.26000000059604655,
+              3.2749999761581456
+            ],
+            [
+              13.295000011920946,
+              0.02000000059604634,
+              5.4750000238418615
+            ]
+          ],
+          "bBounds": [
+            [
+              12.414999961853027,
+              -0.8400000035762787,
+              5.275000095367432
+            ],
+            [
+              13.414999961853027,
+              0.054999977350234985,
+              6.275000095367432
+            ]
+          ],
+          "contactPointCount": 12,
+          "contactBounds": [
+            [
+              12.414999961853027,
+              -0.26000000059604655,
+              5.275000095367432
+            ],
+            [
+              13.295000011920946,
+              0.02000000059604634,
+              5.4750000238418615
+            ]
+          ],
+          "allowed": false,
+          "reason": ""
+        }
+      ],
+      "review": [
+        {
+          "anchor": "wild:13",
+          "scope": "static",
+          "a": "support:wild:13:wild13-ground-tongue",
+          "b": "world:ground:dark",
+          "kind": "surface",
+          "crossings": 19,
+          "bounds": [
+            [
+              16.224999976158163,
+              -0.19500000596046463,
+              -1.5250000000000012
+            ],
+            [
+              17.25470358866431,
+              -0.17999999225139618,
+              -0.5250000000000012
+            ]
+          ],
+          "aBounds": [
+            [
+              16.224999976158163,
+              -0.19500000596046463,
+              -1.5250000000000012
+            ],
+            [
+              18.42500002384188,
+              0.10500000596046433,
+              -0.5250000000000011
+            ]
+          ],
+          "bBounds": [
+            [
+              -17.274999618530273,
+              -0.3700000047683716,
+              -4.974999904632568
+            ],
+            [
+              17.274999618530273,
+              -0.17999999225139618,
+              4.974999904632568
+            ]
+          ],
+          "contactPointCount": 28,
+          "contactBounds": [
+            [
+              16.224999976158163,
+              -0.19500000596046463,
+              -1.5250000000000012
+            ],
+            [
+              17.25470358866431,
+              -0.17999999225139618,
+              -0.5250000000000012
+            ]
+          ],
+          "allowed": false,
+          "reason": ""
+        },
+        {
+          "anchor": "wild:13",
+          "scope": "static",
+          "a": "support:wild:13:wild13-ground-tongue",
+          "b": "world:ground:cream",
+          "kind": "surface",
+          "crossings": 27,
+          "bounds": [
+            [
+              16.224999976158163,
+              -0.19500000596046463,
+              -1.5250000000000012
+            ],
+            [
+              17.165000915527344,
+              0.019999999552965164,
+              -0.5250000000000012
+            ]
+          ],
+          "aBounds": [
+            [
+              16.224999976158163,
+              -0.19500000596046463,
+              -1.5250000000000012
+            ],
+            [
+              18.42500002384188,
+              0.10500000596046433,
+              -0.5250000000000011
+            ]
+          ],
+          "bBounds": [
+            [
+              -17.165000915527344,
+              -0.25,
+              -4.864999771118164
+            ],
+            [
+              17.165000915527344,
+              0.019999999552965164,
+              4.864999771118164
+            ]
+          ],
+          "contactPointCount": 40,
+          "contactBounds": [
+            [
+              16.224999976158163,
+              -0.19500000596046463,
+              -1.5250000000000012
+            ],
+            [
+              17.165000915527344,
+              0.019999999552965164,
+              -0.5250000000000012
+            ]
+          ],
+          "allowed": false,
+          "reason": ""
+        },
+        {
+          "anchor": "wild:13",
+          "scope": "static",
+          "a": "support:wild:13:wild13-ground-tongue",
+          "b": "world:ground:grass",
+          "kind": "surface",
+          "crossings": 42,
+          "bounds": [
+            [
+              16.224999976158163,
+              -0.054999999701976776,
+              -1.5250000000000012
+            ],
+            [
+              16.864999771118164,
+              0.10499999672174454,
+              -0.5250000000000004
+            ]
+          ],
+          "aBounds": [
+            [
+              16.224999976158163,
+              -0.19500000596046463,
+              -1.5250000000000012
+            ],
+            [
+              18.42500002384188,
+              0.10500000596046433,
+              -0.5250000000000011
+            ]
+          ],
+          "bBounds": [
+            [
+              -16.864999771118164,
+              -0.054999999701976776,
+              -4.565000057220459
+            ],
+            [
+              16.864999771118164,
+              0.10499999672174454,
+              4.565000057220459
+            ]
+          ],
+          "contactPointCount": 72,
+          "contactBounds": [
+            [
+              16.224999976158163,
+              -0.054999999701976776,
+              -1.5250000000000012
+            ],
+            [
+              16.864999771118164,
+              0.10499999672174454,
+              -0.5250000000000012
+            ]
+          ],
+          "allowed": false,
+          "reason": ""
+        },
+        {
+          "anchor": "wild:16",
+          "scope": "static",
+          "a": "support:wild:16:coverage-footprint-plinth",
+          "b": "world:ground:grass",
+          "kind": "surface",
+          "crossings": 11,
+          "bounds": [
+            [
+              12.309999909997003,
+              0.020000002384185755,
+              4.554999799490686
+            ],
+            [
+              13.180000093579313,
+              0.07224479040265203,
+              4.565000057220459
+            ]
+          ],
+          "aBounds": [
+            [
+              12.309999909997003,
+              0.020000002384185755,
+              4.554999799490686
+            ],
+            [
+              13.18000009357931,
+              0.19999994993209835,
+              5.395000071287866
+            ]
+          ],
+          "bBounds": [
+            [
+              -16.864999771118164,
+              -0.054999999701976776,
+              -4.565000057220459
+            ],
+            [
+              16.864999771118164,
+              0.10499999672174454,
+              4.565000057220459
+            ]
+          ],
+          "contactPointCount": 12,
+          "contactBounds": [
+            [
+              12.309999909997003,
+              0.020000002384185755,
+              4.554999799490686
+            ],
+            [
+              13.18000009357931,
+              0.07224479040265194,
+              4.565000057220459
+            ]
+          ],
+          "allowed": false,
+          "reason": ""
+        },
+        {
+          "anchor": "wild:16",
+          "scope": "static",
+          "a": "support:wild:16:wild16-ground-extension",
+          "b": "world:ground:dark",
+          "kind": "surface",
+          "crossings": 25,
+          "bounds": [
+            [
+              12.194999988079088,
+              -0.26000000059604655,
+              3.2749999761581456
+            ],
+            [
+              13.295000011920946,
+              -0.17999999225139618,
+              4.974999904632568
+            ]
+          ],
+          "aBounds": [
+            [
+              12.194999988079088,
+              -0.26000000059604655,
+              3.2749999761581456
+            ],
+            [
+              13.295000011920946,
+              0.02000000059604634,
+              5.4750000238418615
+            ]
+          ],
+          "bBounds": [
+            [
+              -17.274999618530273,
+              -0.3700000047683716,
+              -4.974999904632568
+            ],
+            [
+              17.274999618530273,
+              -0.17999999225139618,
+              4.974999904632568
+            ]
+          ],
+          "contactPointCount": 36,
+          "contactBounds": [
+            [
+              12.194999988079088,
+              -0.26000000059604655,
+              3.2749999761581456
+            ],
+            [
+              13.295000011920946,
+              -0.17999999225139618,
+              4.974999904632568
+            ]
+          ],
+          "allowed": false,
+          "reason": ""
+        },
+        {
+          "anchor": "wild:16",
+          "scope": "static",
+          "a": "support:wild:16:wild16-ground-extension",
+          "b": "world:ground:cream",
+          "kind": "surface",
+          "crossings": 44,
+          "bounds": [
+            [
+              12.194999988079088,
+              -0.25,
+              3.2749999761581456
+            ],
+            [
+              13.295000011920946,
+              0.019999999552965164,
+              4.864999771118164
+            ]
+          ],
+          "aBounds": [
+            [
+              12.194999988079088,
+              -0.26000000059604655,
+              3.2749999761581456
+            ],
+            [
+              13.295000011920946,
+              0.02000000059604634,
+              5.4750000238418615
+            ]
+          ],
+          "bBounds": [
+            [
+              -17.165000915527344,
+              -0.25,
+              -4.864999771118164
+            ],
+            [
+              17.165000915527344,
+              0.019999999552965164,
+              4.864999771118164
+            ]
+          ],
+          "contactPointCount": 72,
+          "contactBounds": [
+            [
+              12.194999988079088,
+              -0.25,
+              3.2749999761581456
+            ],
+            [
+              13.295000011920946,
+              0.019999999552965164,
+              4.864999771118164
+            ]
+          ],
+          "allowed": false,
+          "reason": ""
+        },
+        {
+          "anchor": "wild:16",
+          "scope": "static",
+          "a": "support:wild:16:wild16-ground-extension",
+          "b": "world:ground:grass",
+          "kind": "surface",
+          "crossings": 25,
+          "bounds": [
+            [
+              12.194999988079088,
+              -0.054999999701976776,
+              3.2749999761581456
+            ],
+            [
+              13.295000011920946,
+              0.02000000059604634,
+              4.565000057220459
+            ]
+          ],
+          "aBounds": [
+            [
+              12.194999988079088,
+              -0.26000000059604655,
+              3.2749999761581456
+            ],
+            [
+              13.295000011920946,
+              0.02000000059604634,
+              5.4750000238418615
+            ]
+          ],
+          "bBounds": [
+            [
+              -16.864999771118164,
+              -0.054999999701976776,
+              -4.565000057220459
+            ],
+            [
+              16.864999771118164,
+              0.10499999672174454,
+              4.565000057220459
+            ]
+          ],
+          "contactPointCount": 41,
+          "contactBounds": [
+            [
+              12.194999988079086,
+              -0.054999999701976776,
+              3.2749999761581456
+            ],
+            [
+              13.295000011920946,
+              0.02000000059604634,
+              4.565000057220459
+            ]
+          ],
+          "allowed": false,
+          "reason": ""
+        },
+        {
+          "anchor": "wild:24",
+          "scope": "static",
+          "a": "support:wild:24:wild24-ground-extension",
+          "b": "world:ground:cream",
+          "kind": "surface",
+          "crossings": 25,
+          "bounds": [
+            [
+              -4.705000000000004,
+              -0.054999998211860746,
+              3.0750000476837194
+            ],
+            [
+              -3.7050000000000036,
+              0.019999999552965164,
+              4.864999771118164
+            ]
+          ],
+          "aBounds": [
+            [
+              -4.705000000000004,
+              -0.054999998211860746,
+              3.0750000476837194
+            ],
+            [
+              -3.7050000000000036,
+              0.10499999821186057,
+              5.174999952316288
+            ]
+          ],
+          "bBounds": [
+            [
+              -17.165000915527344,
+              -0.25,
+              -4.864999771118164
+            ],
+            [
+              17.165000915527344,
+              0.019999999552965164,
+              4.864999771118164
+            ]
+          ],
+          "contactPointCount": 45,
+          "contactBounds": [
+            [
+              -4.705000000000005,
+              -0.054999998211860746,
+              3.075000047683719
+            ],
+            [
+              -3.7050000000000036,
+              0.019999999552965164,
+              4.864999771118164
+            ]
+          ],
+          "allowed": false,
+          "reason": ""
+        },
+        {
+          "anchor": "wild:24",
+          "scope": "static",
+          "a": "support:wild:24:wild24-ground-extension",
+          "b": "world:ground:grass",
+          "kind": "surface",
+          "crossings": 35,
+          "bounds": [
+            [
+              -4.705000000000005,
+              -0.054999998211860746,
+              3.0750000476837194
+            ],
+            [
+              -3.705,
+              0.10499999672174454,
+              4.565000057220459
+            ]
+          ],
+          "aBounds": [
+            [
+              -4.705000000000004,
+              -0.054999998211860746,
+              3.0750000476837194
+            ],
+            [
+              -3.7050000000000036,
+              0.10499999821186057,
+              5.174999952316288
+            ]
+          ],
+          "bBounds": [
+            [
+              -16.864999771118164,
+              -0.054999999701976776,
+              -4.565000057220459
+            ],
+            [
+              16.864999771118164,
+              0.10499999672174454,
+              4.565000057220459
+            ]
+          ],
+          "contactPointCount": 94,
+          "contactBounds": [
+            [
+              -4.705000000000005,
+              -0.054999999701976776,
+              3.0750000476837194
+            ],
+            [
+              -3.7050000000000036,
+              0.10499999672174454,
+              4.565000057220459
+            ]
+          ],
+          "allowed": false,
+          "reason": ""
+        }
+      ],
+      "retainedDomains": [
+        {
+          "key": "motion:wild:1",
+          "anchor": "wild:1",
+          "status": "actual-envelope-volume-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 4,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "motion:wild:13",
+          "anchor": "wild:13",
+          "status": "blocked-actual-legacy-support-collision",
+          "fixedSupportHits": [
+            {
+              "a": "legacy-support:device-foundation",
+              "b": "world:seating-joinery:cream",
+              "kind": "surface",
+              "crossings": 27,
+              "bounds": [
+                [
+                  17.75,
+                  0.10400000628828998,
+                  -1.870000028610231
+                ],
+                [
+                  18.31999999284746,
+                  0.14999999105930328,
+                  -0.17999997138977175
+                ]
+              ],
+              "aBounds": [
+                [
+                  17.430000007152575,
+                  0.10400000628828998,
+                  -1.8700000286102307
+                ],
+                [
+                  18.31999999284746,
+                  0.1999999996721744,
+                  -0.17999997138977175
+                ]
+              ],
+              "bBounds": [
+                [
+                  -17.040000915527344,
+                  -0.20000000298023224,
+                  -8.25
+                ],
+                [
+                  21.049999237060547,
+                  1.3839999437332153,
+                  3.18999981880188
+                ]
+              ],
+              "contactBounds": [
+                [
+                  17.75,
+                  0.10400000628828998,
+                  -1.870000028610231
+                ],
+                [
+                  18.31999999284746,
+                  0.14999999105930328,
+                  -0.17999997138977175
+                ]
+              ]
+            },
+            {
+              "a": "legacy-support:device-foundation",
+              "b": "world:seating-joinery:gold",
+              "kind": "surface",
+              "crossings": 48,
+              "bounds": [
+                [
+                  18.27750015258789,
+                  0.1599999964237213,
+                  -1.8700000286102307
+                ],
+                [
+                  18.31999999284746,
+                  0.17800000309944153,
+                  -0.17999997138977153
+                ]
+              ],
+              "aBounds": [
+                [
+                  17.430000007152575,
+                  0.10400000628828998,
+                  -1.8700000286102307
+                ],
+                [
+                  18.31999999284746,
+                  0.1999999996721744,
+                  -0.17999997138977175
+                ]
+              ],
+              "bBounds": [
+                [
+                  -8.630000114440918,
+                  0.1599999964237213,
+                  -7.650568962097168
+                ],
+                [
+                  19.957500457763672,
+                  1.3980000019073486,
+                  2.6599998474121094
+                ]
+              ],
+              "contactBounds": [
+                [
+                  18.27750015258789,
+                  0.1599999964237213,
+                  -1.870000028610231
+                ],
+                [
+                  18.31999999284746,
+                  0.17800000309944153,
+                  -0.17999997138977175
+                ]
+              ]
+            },
+            {
+              "a": "legacy-support:wild13-ground-tongue",
+              "b": "world:seating-joinery:cream",
+              "kind": "surface",
+              "crossings": 18,
+              "bounds": [
+                [
+                  17.75,
+                  -0.19500000596046463,
+                  -1.5250000000000012
+                ],
+                [
+                  17.782549088988453,
+                  0.10500000596046433,
+                  -0.5250000000000012
+                ]
+              ],
+              "aBounds": [
+                [
+                  16.224999976158163,
+                  -0.19500000596046463,
+                  -1.5250000000000012
+                ],
+                [
+                  18.42500002384188,
+                  0.10500000596046433,
+                  -0.5250000000000011
+                ]
+              ],
+              "bBounds": [
+                [
+                  -17.040000915527344,
+                  -0.20000000298023224,
+                  -8.25
+                ],
+                [
+                  21.049999237060547,
+                  1.3839999437332153,
+                  3.18999981880188
+                ]
+              ],
+              "contactBounds": [
+                [
+                  17.75,
+                  -0.19500000596046463,
+                  -1.5250000000000012
+                ],
+                [
+                  17.782549088988453,
+                  0.10500000596046433,
+                  -0.5250000000000012
+                ]
+              ]
+            }
+          ],
+          "broadPairs": 4,
+          "overlapping": [
+            {
+              "part": "world:seating-joinery:cream",
+              "bounds": [
+                [
+                  -17.040000915527344,
+                  -0.20000000298023224,
+                  -8.25
+                ],
+                [
+                  21.049999237060547,
+                  1.3839999437332153,
+                  3.18999981880188
+                ]
+              ]
+            },
+            {
+              "part": "world:seating-joinery:gold",
+              "bounds": [
+                [
+                  -8.630000114440918,
+                  0.1599999964237213,
+                  -7.650568962097168
+                ],
+                [
+                  19.957500457763672,
+                  1.3980000019073486,
+                  2.6599998474121094
+                ]
+              ]
+            }
+          ],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "motion:wild:17",
+          "anchor": "wild:17",
+          "status": "aabb-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 0,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "motion:wild:26",
+          "anchor": "wild:26",
+          "status": "aabb-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 0,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "trip:wild/17/desktop/banana:false:normal:false",
+          "anchor": "wild:17",
+          "status": "actual-envelope-volume-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 4,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "trip:wild/26/desktop/banana:false:normal:false",
+          "anchor": "wild:26",
+          "status": "actual-envelope-volume-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 4,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "trip:wild/17/compact/banana:false:normal:false",
+          "anchor": "wild:17",
+          "status": "actual-envelope-volume-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 4,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "trip:wild/26/compact/banana:false:normal:false",
+          "anchor": "wild:26",
+          "status": "actual-envelope-volume-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 4,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        }
+      ]
+    },
+    {
+      "track": "boardwalks",
+      "lowQuality": false,
+      "geometryHash": "2f24b530dc3b993333be2978adbe77b767f7abeb000ff5843494d40a8ac3ae05",
+      "auditProtocolSHA256": "44e00915504374aaa18b75a3d93818641feee67976d57dd50250c40ee869fac2",
+      "inputs": {
+        "lighting/src/client/scene/environment/floodlights.ts": "3427fb25de0cad0b570b1779009d07e9dee28dc763e5701d9511043995f1276c",
+        "lighting/src/client/scene/environment/floodlight-edge-mounts.json": "5d80a3cc843cfa91b43f0193f0092b455cd421289f5f3de2e79dbdc2309bbb7e",
+        "lighting/src/client/scene/DioramaStadium.tsx": "907e6d3c08d89701cd013c9d888c662589f828e7f13381703d0c3635ff5dde54",
+        "lighting/src/client/scene/TopologyStadium.tsx": "8d3b192c1dc69140b38c6bcf915d6345f593317d7f67e5dcd3cbdef181f55392",
+        "lighting/src/client/scene/BridgesStructure.tsx": "bfc9ac3f8c908e2e142125f7b3a7d40001bb99cd288c9d0c3cb4a0e23aea8285",
+        "lighting/src/client/scene/environment/RebuiltScenery.tsx": "4167b813188018e64045679ad0dbc73d7bbd405318913ddafac5a22b5b3b6102",
+        "lighting/src/client/scene/environment/deck-runtime.ts": "df5bc46852148969bd15ce336568077e1bc32cd9979d40e1dc3551e2c27eb865",
+        "lighting/docs/qa/floodlight-rows/reference-envelopes.json": "15e008208dbbb606eb2efc7a53fe7c69970c21cef30f36bf40d4b51a7a48c6b5",
+        "lighting/src/client/scene/environment/runtime.ts": "b3f7952b028e67b02725a5d593a84355c9d3e25d626873bdc2b62cb255df1ced",
+        "lighting/src/client/scene/environment/layout.ts": "3f0ed451fc0b933e393394ce9fc2441e1eb31e6ffc64716f7993d07c09a72bd3",
+        "lighting/src/client/scene/environment/seating.ts": "f665762f332c639d9adfc087810b923a450b524b9fa3a8361120ac7e22d34012",
+        "lighting/docs/qa/floodlight-rows/display-envelopes-0.json": "bed2e038dcbb9ec04f7c955ccd6dfdf8a017be86b4190d3c33ff18a25f00f824",
+        "lighting/docs/qa/floodlight-rows/display-envelopes-1.json": "855f90b469674c8d7f2623ba17aee3125a82140cdba30cef64c215878be144d8",
+        "lighting/docs/qa/floodlight-rows/display-envelope-inputs.json": "096fc2498f2b37ca14b1ffe29a8519cd1135009cf99652b9057e161a6e92d361",
+        "lighting/scripts/recovery/audit-integrated-venue-foundations.ts": "44e00915504374aaa18b75a3d93818641feee67976d57dd50250c40ee869fac2",
+        "lighting/src/client/scene/environment/full-coverage.ts": "55bcc9e706fc16bac9696adaae4dd3fa3a59a383c5dae73c7b115f6469eca11a",
+        "lighting/src/client/scene/environment/FullCoverageMechanismLayer.tsx": "c19b744467d6e2fda32a475ef0a19c86ac988c527a475c718b321e3ec7b8a645",
+        "lighting/src/client/scene/environment/force-presentation.ts": "32f2f58c8119e870d08a7d33f5061f54c2d187b8620670b28baa18261b5ef643",
+        "lighting/src/client/scene/environment/RevalidatedMechanismLayer.tsx": "7327cb3112bc0912ec7598489816680c220a4dba4ffc73c955f7c7a91660fcbd",
+        "lighting/src/client/scene/Board3D.tsx": "478c4557d6b3c31c98a9d0597ab5931a5b152e4c6c898efc17173bba6bbdeb2a",
+        "lighting/src/client/scene/mechanisms/models.ts": "6dcb80fdb9e53dbb48c66e002c8f65a11260de49c38172062e56d79544ccc6f3",
+        "lighting/src/client/scene/mechanisms/placements.ts": "63b3d29d3fdf635de95bcad2209f0a2fcb1057fa6a03e782c47d187b072e97d0",
+        "lighting/src/client/scene/mechanisms/layout.ts": "e6705c25bf366f822565a26ef4303594390f3ba168fa5b5a02807dbd82791dbe",
+        "lighting/src/client/scene/math.ts": "54b1c1f92c222ba8864aebf9cc7f4e5b3dbd83cf0fd7856fdb93323187ffc8c3",
+        "lighting/scripts/recovery/scene-collision.ts": "73519904299b6d5fdd575829f0aca32ccf486016764b10a80965350d6fa5be2d",
+        "lighting/public/models/environment-rebuilt-v2/tree_elm_rebuilt_lod2.glb": "7de3c13954b48a0eb3f2763baaa5c16980a079c5ab5995a955f2a3a89456db58",
+        "lighting/public/models/environment-rebuilt-v2/tree_maple_rebuilt_lod2.glb": "1bd23283396913472077482436d1493a81fe7ee8ff1edf7105886ca28643df1c",
+        "lighting/public/models/environment-rebuilt-v2/tree_sapling_rebuilt_lod2.glb": "913f328637d1b23bba8603a4cbf48028e0fb957abd3033c31bef0ebab3583f40",
+        "lighting/public/models/environment-rebuilt-v2/start_gate.glb": "76ca081e1fe1407d6b574b3aaee1ff409dff90e838dd0e251a4fdc00bb97831c",
+        "lighting/public/models/environment-rebuilt-v2/finish_gate.glb": "c51312cac07f0743d1ca2377dae8355bfdbeabbcc9044e7d2d9765ac5012eb54",
+        "lighting/public/models/environment-rebuilt-v2/bleachers.glb": "af4d188c511ddf34dcdb6575f543c7baf0a8f6572c2def5a8cf115c8a422e967",
+        "lighting/public/models/environment-rebuilt-v2/spectators.glb": "b60a7ddb7fdca1993f589e1f48617e5d314456045428f952d9f0ec5e7a198a66",
+        "lighting/public/models/environment-rebuilt-v2/grandstand_rostrum.glb": "3891481f58a453a70d56bb6d36c55d5cce5c02a7cfcd2df9261f2bd6f44b475f",
+        "lighting/public/models/environment-rebuilt-v2/squiggle_base.glb": "94b8d55dc02c8034838090102e1e6771e6dc4bf16b5402db25074cddf10f4793",
+        "lighting/public/models/environment-rebuilt-v2/squiggle_landscape_reexport_v1.glb": "e4dfa74a8e9a1b5e6a58c22fd615b2cdbe5cc2af5a16f427596618f320ff1d08",
+        "lighting/public/models/environment-rebuilt-v2/squiggle_furniture.glb": "ffffbfca78e8d7a5da8a77d87d817d477eb1e6510560a96ec5c15e9c00e27596",
+        "lighting/public/models/floodlights-rebuilt-v3/base.glb": "1104dfa5c5dbc4181448e43d84559f24bbb2b92334cf2ae3cd64e93466389309",
+        "lighting/public/models/floodlights-rebuilt-v3/pole.glb": "cbd7f2ee910e5a62ecba3bb229d5585082ca154a6a0b36d44e9ce01cffb46bcd",
+        "lighting/public/models/floodlights-rebuilt-v3/yoke.glb": "04b130d8b4d2e12c14974b0485cb025eb364bbfcf2ba88f255db8c6eafad691e",
+        "lighting/public/models/floodlights-rebuilt-v3/housing.glb": "0b4d0ccb58bc8a7fb4dec5efd4d531cf6dfd80945b5f71163b3cb4fa8fbeaf3a",
+        "lighting/public/models/floodlights-rebuilt-v3/lenses.glb": "28cc5396e6e9c9f2b42a05d1a0976131654f92b2b426e5381963c3d6dd5efb32",
+        "lighting/public/models/mechanisms/approved_soft_track_tile.glb": "7ca87e14c06e410144d2e5fbd66303605c2a442f4fae7c0928a62c5eef28c659",
+        "lighting/public/models/mechanisms/gain_joint_action.glb": "fcb164ad50bb52d22fa0b3aa66f63d515d40c9fef372060997ae3d62fa0a1fde",
+        "lighting/public/models/mechanisms/trip_telescopic_v1.2f331432.glb": "2f331432d72ef78d33c2aadd355885f25ca9f670d4d7f37b36e0c27b6db1046f",
+        "lighting/public/models/mechanisms/loss_joint_action.glb": "0323a384103f271627786c5c8ef3ba98ac1b488a03e2096c26617442250df0f6",
+        "lighting/public/models/mechanisms/punch_outboard_joint.glb": "ff8a8d4431fd08d4cc0111133ad9f0af1ea8abf3197131f5f6c6dfba0d6fa956",
+        "lighting/public/models/mechanisms/trip_joint.glb": "70c96cc02f6db99d9ec8650a81f519a39c526d8485231d632ce2908879165641",
+        "lighting/public/models/mechanisms/approved_soft_track_tile_economy.glb": "0d73be354867c51328be51b9b1028b97d0ed465530c002ee39448fe9b46f7355",
+        "lighting/public/models/environment-rebuilt-v2/boardwalks_base.glb": "f842becc1cfdce6c1d050f6ebec23c3463b796ee348d27c56215be600e3728e2",
+        "lighting/public/models/environment-rebuilt-v2/boardwalks_landscape_reexport_v1.glb": "60bf7edcac36fc300b06b3dd942c77d90003f4ea1b01987b57f69c048e7c687a",
+        "lighting/public/models/environment-rebuilt-v2/boardwalks_furniture.glb": "004404c2b23631801e0d2f5765af812a48793ce36b23be0998a24865d7fe7823"
+      },
+      "failures": [
+        {
+          "anchor": "boardwalks:21",
+          "other": "boardwalks:23",
+          "scope": "other-foundation",
+          "a": "support:boardwalks:21:coverage-footprint-plinth",
+          "b": "support:boardwalks:23:coverage-footprint-plinth",
+          "kind": "surface",
+          "crossings": 24,
+          "bounds": [
+            [
+              21.46666666666666,
+              -0.0009999868571757276,
+              -3.481111068195766
+            ],
+            [
+              22.136666623751317,
+              0.19999997344613085,
+              -2.815555534097882
+            ]
+          ],
+          "aBounds": [
+            [
+              20.796666709582006,
+              -0.0009999868571757276,
+              -3.6555555674764832
+            ],
+            [
+              22.136666623751317,
+              0.19999997344613085,
+              -2.815555534097882
+            ]
+          ],
+          "bBounds": [
+            [
+              22.043333311875653,
+              -0.0009999868571757276,
+              -3.481111068195766
+            ],
+            [
+              22.883333345254254,
+              0.19999997344613085,
+              -2.1411111540264547
+            ]
+          ],
+          "contactPointCount": 25,
+          "contactBounds": [
+            [
+              22.043333311875653,
+              -0.0009999868571757276,
+              -3.481111068195766
+            ],
+            [
+              22.136666623751317,
+              0.19999997344613085,
+              -2.815555534097882
+            ]
+          ],
+          "allowed": false,
+          "reason": ""
+        },
+        {
+          "anchor": "boardwalks:23",
+          "other": "boardwalks:21",
+          "scope": "other-foundation",
+          "a": "support:boardwalks:23:coverage-footprint-plinth",
+          "b": "support:boardwalks:21:coverage-footprint-plinth",
+          "kind": "surface",
+          "crossings": 24,
+          "bounds": [
+            [
+              22.043333311875653,
+              -0.0009999868571757276,
+              -3.481111068195766
+            ],
+            [
+              22.463333328564953,
+              0.19999997344613085,
+              -2.8111111111111104
+            ]
+          ],
+          "aBounds": [
+            [
+              22.043333311875653,
+              -0.0009999868571757276,
+              -3.481111068195766
+            ],
+            [
+              22.883333345254254,
+              0.19999997344613085,
+              -2.1411111540264547
+            ]
+          ],
+          "bBounds": [
+            [
+              20.796666709582006,
+              -0.0009999868571757276,
+              -3.6555555674764832
+            ],
+            [
+              22.136666623751317,
+              0.19999997344613085,
+              -2.815555534097882
+            ]
+          ],
+          "contactPointCount": 25,
+          "contactBounds": [
+            [
+              22.043333311875653,
+              -0.0009999868571757276,
+              -3.481111068195766
+            ],
+            [
+              22.136666623751317,
+              0.19999997344613085,
+              -2.815555534097882
+            ]
+          ],
+          "allowed": false,
+          "reason": ""
+        }
+      ],
+      "review": [],
+      "retainedDomains": [
+        {
+          "key": "motion:boardwalks:1",
+          "anchor": "boardwalks:1",
+          "status": "aabb-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 0,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "motion:boardwalks:6",
+          "anchor": "boardwalks:6",
+          "status": "aabb-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 0,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "motion:boardwalks:10",
+          "anchor": "boardwalks:10",
+          "status": "actual-envelope-volume-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 4,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "motion:boardwalks:16",
+          "anchor": "boardwalks:16",
+          "status": "actual-envelope-volume-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 4,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "motion:boardwalks:19",
+          "status": "excluded-moved-anchor"
+        },
+        {
+          "key": "motion:boardwalks:20",
+          "anchor": "boardwalks:20",
+          "status": "actual-envelope-volume-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 4,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "motion:boardwalks:21",
+          "anchor": "boardwalks:21",
+          "status": "blocked-actual-legacy-support-collision",
+          "fixedSupportHits": [
+            {
+              "a": "legacy-support:device-foundation",
+              "b": "support:boardwalks:23:coverage-footprint-plinth",
+              "kind": "surface",
+              "crossings": 13,
+              "bounds": [
+                [
+                  22.043333311875653,
+                  -0.0009999868571757276,
+                  -3.481111068195766
+                ],
+                [
+                  22.136666683355962,
+                  0.19999997344613085,
+                  -2.815555568668576
+                ]
+              ],
+              "aBounds": [
+                [
+                  20.79666664997736,
+                  -0.0009999890923499954,
+                  -3.6555555424425323
+                ],
+                [
+                  22.136666683355962,
+                  0.20000000101327897,
+                  -2.815555568668576
+                ]
+              ],
+              "bBounds": [
+                [
+                  22.043333311875653,
+                  -0.0009999868571757276,
+                  -3.481111068195766
+                ],
+                [
+                  22.883333345254254,
+                  0.19999997344613085,
+                  -2.1411111540264547
+                ]
+              ],
+              "contactBounds": [
+                [
+                  22.043333311875653,
+                  -0.0009999868571757276,
+                  -3.481111068195766
+                ],
+                [
+                  22.136666683355962,
+                  0.19999997344613085,
+                  -2.815555568668576
+                ]
+              ]
+            }
+          ],
+          "broadPairs": 5,
+          "overlapping": [
+            {
+              "part": "support:boardwalks:23:coverage-footprint-plinth",
+              "bounds": [
+                [
+                  22.043333311875653,
+                  -0.0009999868571757276,
+                  -3.481111068195766
+                ],
+                [
+                  22.883333345254254,
+                  0.19999997344613085,
+                  -2.1411111540264547
+                ]
+              ]
+            }
+          ],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "motion:boardwalks:22",
+          "anchor": "boardwalks:22",
+          "status": "actual-envelope-volume-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 4,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "motion:boardwalks:23",
+          "status": "excluded-moved-anchor"
+        },
+        {
+          "key": "motion:boardwalks:37",
+          "anchor": "boardwalks:37",
+          "status": "actual-envelope-volume-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 4,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "motion:boardwalks:47",
+          "anchor": "boardwalks:47",
+          "status": "aabb-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 0,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "motion:boardwalks:49",
+          "anchor": "boardwalks:49",
+          "status": "actual-envelope-volume-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 4,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "trip:boardwalks/6/desktop/banana:false:normal:false",
+          "anchor": "boardwalks:6",
+          "status": "aabb-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 0,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "trip:boardwalks/10/desktop/banana:false:normal:false",
+          "anchor": "boardwalks:10",
+          "status": "actual-envelope-volume-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 4,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "trip:boardwalks/16/desktop/banana:false:normal:false",
+          "anchor": "boardwalks:16",
+          "status": "actual-envelope-volume-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 4,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "trip:boardwalks/19/desktop/banana:false:normal:false",
+          "status": "excluded-moved-anchor"
+        },
+        {
+          "key": "trip:boardwalks/20/desktop/banana:false:normal:false",
+          "anchor": "boardwalks:20",
+          "status": "actual-envelope-volume-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 4,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "trip:boardwalks/21/desktop/banana:false:normal:false",
+          "anchor": "boardwalks:21",
+          "status": "actual-envelope-volume-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 4,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "trip:boardwalks/22/desktop/banana:false:normal:false",
+          "anchor": "boardwalks:22",
+          "status": "actual-envelope-volume-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 4,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "trip:boardwalks/23/desktop/banana:false:normal:false",
+          "status": "excluded-moved-anchor"
+        },
+        {
+          "key": "trip:boardwalks/6/compact/banana:false:normal:false",
+          "anchor": "boardwalks:6",
+          "status": "aabb-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 0,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "trip:boardwalks/10/compact/banana:false:normal:false",
+          "anchor": "boardwalks:10",
+          "status": "actual-envelope-volume-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 4,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "trip:boardwalks/16/compact/banana:false:normal:false",
+          "anchor": "boardwalks:16",
+          "status": "actual-envelope-volume-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 4,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "trip:boardwalks/19/compact/banana:false:normal:false",
+          "status": "excluded-moved-anchor"
+        },
+        {
+          "key": "trip:boardwalks/20/compact/banana:false:normal:false",
+          "anchor": "boardwalks:20",
+          "status": "actual-envelope-volume-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 4,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "trip:boardwalks/21/compact/banana:false:normal:false",
+          "anchor": "boardwalks:21",
+          "status": "actual-envelope-volume-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 4,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "trip:boardwalks/22/compact/banana:false:normal:false",
+          "anchor": "boardwalks:22",
+          "status": "actual-envelope-volume-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 4,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "trip:boardwalks/23/compact/banana:false:normal:false",
+          "status": "excluded-moved-anchor"
+        }
+      ]
+    },
+    {
+      "track": "squiggle",
+      "lowQuality": false,
+      "geometryHash": "efc16dc17fde08fcd6d3a612f176e132eba149ed548ac8997c751c366bb05f0a",
+      "auditProtocolSHA256": "44e00915504374aaa18b75a3d93818641feee67976d57dd50250c40ee869fac2",
+      "inputs": {
+        "lighting/src/client/scene/environment/floodlights.ts": "3427fb25de0cad0b570b1779009d07e9dee28dc763e5701d9511043995f1276c",
+        "lighting/src/client/scene/environment/floodlight-edge-mounts.json": "5d80a3cc843cfa91b43f0193f0092b455cd421289f5f3de2e79dbdc2309bbb7e",
+        "lighting/src/client/scene/DioramaStadium.tsx": "907e6d3c08d89701cd013c9d888c662589f828e7f13381703d0c3635ff5dde54",
+        "lighting/src/client/scene/TopologyStadium.tsx": "8d3b192c1dc69140b38c6bcf915d6345f593317d7f67e5dcd3cbdef181f55392",
+        "lighting/src/client/scene/BridgesStructure.tsx": "bfc9ac3f8c908e2e142125f7b3a7d40001bb99cd288c9d0c3cb4a0e23aea8285",
+        "lighting/src/client/scene/environment/RebuiltScenery.tsx": "4167b813188018e64045679ad0dbc73d7bbd405318913ddafac5a22b5b3b6102",
+        "lighting/src/client/scene/environment/deck-runtime.ts": "df5bc46852148969bd15ce336568077e1bc32cd9979d40e1dc3551e2c27eb865",
+        "lighting/docs/qa/floodlight-rows/reference-envelopes.json": "15e008208dbbb606eb2efc7a53fe7c69970c21cef30f36bf40d4b51a7a48c6b5",
+        "lighting/src/client/scene/environment/runtime.ts": "b3f7952b028e67b02725a5d593a84355c9d3e25d626873bdc2b62cb255df1ced",
+        "lighting/src/client/scene/environment/layout.ts": "3f0ed451fc0b933e393394ce9fc2441e1eb31e6ffc64716f7993d07c09a72bd3",
+        "lighting/src/client/scene/environment/seating.ts": "f665762f332c639d9adfc087810b923a450b524b9fa3a8361120ac7e22d34012",
+        "lighting/docs/qa/floodlight-rows/display-envelopes-0.json": "bed2e038dcbb9ec04f7c955ccd6dfdf8a017be86b4190d3c33ff18a25f00f824",
+        "lighting/docs/qa/floodlight-rows/display-envelopes-1.json": "855f90b469674c8d7f2623ba17aee3125a82140cdba30cef64c215878be144d8",
+        "lighting/docs/qa/floodlight-rows/display-envelope-inputs.json": "096fc2498f2b37ca14b1ffe29a8519cd1135009cf99652b9057e161a6e92d361",
+        "lighting/scripts/recovery/audit-integrated-venue-foundations.ts": "44e00915504374aaa18b75a3d93818641feee67976d57dd50250c40ee869fac2",
+        "lighting/src/client/scene/environment/full-coverage.ts": "55bcc9e706fc16bac9696adaae4dd3fa3a59a383c5dae73c7b115f6469eca11a",
+        "lighting/src/client/scene/environment/FullCoverageMechanismLayer.tsx": "c19b744467d6e2fda32a475ef0a19c86ac988c527a475c718b321e3ec7b8a645",
+        "lighting/src/client/scene/environment/force-presentation.ts": "32f2f58c8119e870d08a7d33f5061f54c2d187b8620670b28baa18261b5ef643",
+        "lighting/src/client/scene/environment/RevalidatedMechanismLayer.tsx": "7327cb3112bc0912ec7598489816680c220a4dba4ffc73c955f7c7a91660fcbd",
+        "lighting/src/client/scene/Board3D.tsx": "478c4557d6b3c31c98a9d0597ab5931a5b152e4c6c898efc17173bba6bbdeb2a",
+        "lighting/src/client/scene/mechanisms/models.ts": "6dcb80fdb9e53dbb48c66e002c8f65a11260de49c38172062e56d79544ccc6f3",
+        "lighting/src/client/scene/mechanisms/placements.ts": "63b3d29d3fdf635de95bcad2209f0a2fcb1057fa6a03e782c47d187b072e97d0",
+        "lighting/src/client/scene/mechanisms/layout.ts": "e6705c25bf366f822565a26ef4303594390f3ba168fa5b5a02807dbd82791dbe",
+        "lighting/src/client/scene/math.ts": "54b1c1f92c222ba8864aebf9cc7f4e5b3dbd83cf0fd7856fdb93323187ffc8c3",
+        "lighting/scripts/recovery/scene-collision.ts": "73519904299b6d5fdd575829f0aca32ccf486016764b10a80965350d6fa5be2d",
+        "lighting/public/models/environment-rebuilt-v2/tree_elm_rebuilt_lod2.glb": "7de3c13954b48a0eb3f2763baaa5c16980a079c5ab5995a955f2a3a89456db58",
+        "lighting/public/models/environment-rebuilt-v2/tree_maple_rebuilt_lod2.glb": "1bd23283396913472077482436d1493a81fe7ee8ff1edf7105886ca28643df1c",
+        "lighting/public/models/environment-rebuilt-v2/tree_sapling_rebuilt_lod2.glb": "913f328637d1b23bba8603a4cbf48028e0fb957abd3033c31bef0ebab3583f40",
+        "lighting/public/models/environment-rebuilt-v2/start_gate.glb": "76ca081e1fe1407d6b574b3aaee1ff409dff90e838dd0e251a4fdc00bb97831c",
+        "lighting/public/models/environment-rebuilt-v2/finish_gate.glb": "c51312cac07f0743d1ca2377dae8355bfdbeabbcc9044e7d2d9765ac5012eb54",
+        "lighting/public/models/environment-rebuilt-v2/bleachers.glb": "af4d188c511ddf34dcdb6575f543c7baf0a8f6572c2def5a8cf115c8a422e967",
+        "lighting/public/models/environment-rebuilt-v2/spectators.glb": "b60a7ddb7fdca1993f589e1f48617e5d314456045428f952d9f0ec5e7a198a66",
+        "lighting/public/models/environment-rebuilt-v2/grandstand_rostrum.glb": "3891481f58a453a70d56bb6d36c55d5cce5c02a7cfcd2df9261f2bd6f44b475f",
+        "lighting/public/models/environment-rebuilt-v2/squiggle_base.glb": "94b8d55dc02c8034838090102e1e6771e6dc4bf16b5402db25074cddf10f4793",
+        "lighting/public/models/environment-rebuilt-v2/squiggle_landscape_reexport_v1.glb": "e4dfa74a8e9a1b5e6a58c22fd615b2cdbe5cc2af5a16f427596618f320ff1d08",
+        "lighting/public/models/environment-rebuilt-v2/squiggle_furniture.glb": "ffffbfca78e8d7a5da8a77d87d817d477eb1e6510560a96ec5c15e9c00e27596",
+        "lighting/public/models/floodlights-rebuilt-v3/base.glb": "1104dfa5c5dbc4181448e43d84559f24bbb2b92334cf2ae3cd64e93466389309",
+        "lighting/public/models/floodlights-rebuilt-v3/pole.glb": "cbd7f2ee910e5a62ecba3bb229d5585082ca154a6a0b36d44e9ce01cffb46bcd",
+        "lighting/public/models/floodlights-rebuilt-v3/yoke.glb": "04b130d8b4d2e12c14974b0485cb025eb364bbfcf2ba88f255db8c6eafad691e",
+        "lighting/public/models/floodlights-rebuilt-v3/housing.glb": "0b4d0ccb58bc8a7fb4dec5efd4d531cf6dfd80945b5f71163b3cb4fa8fbeaf3a",
+        "lighting/public/models/floodlights-rebuilt-v3/lenses.glb": "28cc5396e6e9c9f2b42a05d1a0976131654f92b2b426e5381963c3d6dd5efb32",
+        "lighting/public/models/mechanisms/approved_soft_track_tile.glb": "7ca87e14c06e410144d2e5fbd66303605c2a442f4fae7c0928a62c5eef28c659",
+        "lighting/public/models/mechanisms/gain_joint_action.glb": "fcb164ad50bb52d22fa0b3aa66f63d515d40c9fef372060997ae3d62fa0a1fde",
+        "lighting/public/models/mechanisms/trip_telescopic_v1.2f331432.glb": "2f331432d72ef78d33c2aadd355885f25ca9f670d4d7f37b36e0c27b6db1046f",
+        "lighting/public/models/mechanisms/loss_joint_action.glb": "0323a384103f271627786c5c8ef3ba98ac1b488a03e2096c26617442250df0f6",
+        "lighting/public/models/mechanisms/punch_outboard_joint.glb": "ff8a8d4431fd08d4cc0111133ad9f0af1ea8abf3197131f5f6c6dfba0d6fa956",
+        "lighting/public/models/mechanisms/trip_joint.glb": "70c96cc02f6db99d9ec8650a81f519a39c526d8485231d632ce2908879165641"
+      },
+      "failures": [
+        {
+          "anchor": "squiggle:21",
+          "scope": "static",
+          "a": "support:squiggle:21:coverage-footprint-plinth",
+          "b": "world:seating-joinery:cream",
+          "kind": "surface",
+          "crossings": 29,
+          "bounds": [
+            [
+              9.936626593537904,
+              -0.0009999868571757276,
+              -6.342317383780435
+            ],
+            [
+              11.615548245516331,
+              0.14999999105930326,
+              -4.898782517651817
+            ]
+          ],
+          "aBounds": [
+            [
+              9.936626593537904,
+              -0.0009999868571757276,
+              -6.342317383780435
+            ],
+            [
+              11.615548245516331,
+              0.19999997344613085,
+              -4.442676257976447
+            ]
+          ],
+          "bBounds": [
+            [
+              -15.068523406982422,
+              -0.20000000298023224,
+              -9.504396438598633
+            ],
+            [
+              24.175386428833008,
+              1.3839999437332153,
+              6.597894191741943
+            ]
+          ],
+          "contactPointCount": 46,
+          "contactBounds": [
+            [
+              9.936626593537904,
+              -0.0009999868571757276,
+              -6.342317383780436
+            ],
+            [
+              11.61554824551633,
+              0.14999999105930328,
+              -4.898782517651816
+            ]
+          ],
+          "allowed": false,
+          "reason": ""
+        },
+        {
+          "anchor": "squiggle:21",
+          "scope": "static",
+          "a": "support:squiggle:21:coverage-footprint-plinth",
+          "b": "world:seating-joinery:gold",
+          "kind": "surface",
+          "crossings": 44,
+          "bounds": [
+            [
+              10.621709248956934,
+              0.15999999642372129,
+              -6.342317383780435
+            ],
+            [
+              10.705653475495904,
+              0.1780000030994415,
+              -6.2988875467627246
+            ]
+          ],
+          "aBounds": [
+            [
+              9.936626593537904,
+              -0.0009999868571757276,
+              -6.342317383780435
+            ],
+            [
+              11.615548245516331,
+              0.19999997344613085,
+              -4.442676257976447
+            ]
+          ],
+          "bBounds": [
+            [
+              -14.99277114868164,
+              0.1599999964237213,
+              -8.332513809204102
+            ],
+            [
+              22.982887268066406,
+              1.3980000019073486,
+              6.082894325256348
+            ]
+          ],
+          "contactPointCount": 99,
+          "contactBounds": [
+            [
+              10.621709248956932,
+              0.1599999964237213,
+              -6.342317383780435
+            ],
+            [
+              10.705653475495904,
+              0.17800000309944153,
+              -6.298887546762724
+            ]
+          ],
+          "allowed": false,
+          "reason": ""
+        },
+        {
+          "anchor": "squiggle:28",
+          "scope": "static",
+          "a": "support:squiggle:28:coverage-footprint-plinth",
+          "b": "world:seating-joinery:cream",
+          "kind": "surface",
+          "crossings": 35,
+          "bounds": [
+            [
+              18.725385665893555,
+              -0.0009999868571757276,
+              2.6728942394256583
+            ],
+            [
+              19.39737848931243,
+              0.14999999105930328,
+              3.239263381720718
+            ]
+          ],
+          "aBounds": [
+            [
+              18.41182171841975,
+              -0.0009999868571757276,
+              1.4081059232051367
+            ],
+            [
+              19.61442329452157,
+              0.19999997344613085,
+              3.239263381720718
+            ]
+          ],
+          "bBounds": [
+            [
+              -15.068523406982422,
+              -0.20000000298023224,
+              -9.504396438598633
+            ],
+            [
+              24.175386428833008,
+              1.3839999437332153,
+              6.597894191741943
+            ]
+          ],
+          "contactPointCount": 176,
+          "contactBounds": [
+            [
+              18.725385665893555,
+              -0.0009999868571757276,
+              2.672894239425659
+            ],
+            [
+              19.39737848931243,
+              0.14999999105930328,
+              3.239263381720718
+            ]
+          ],
+          "allowed": false,
+          "reason": ""
+        },
+        {
+          "anchor": "squiggle:29",
+          "scope": "static",
+          "a": "support:squiggle:29:coverage-footprint-plinth",
+          "b": "world:seating-joinery:cream",
+          "kind": "surface",
+          "crossings": 37,
+          "bounds": [
+            [
+              19.975385665893555,
+              -0.0009999868571757276,
+              -0.05210580304265
+            ],
+            [
+              20.80869484738426,
+              0.14999999105930328,
+              0.9891419863803892
+            ]
+          ],
+          "aBounds": [
+            [
+              19.728678840573302,
+              -0.0009999868571757276,
+              -0.8420154721351918
+            ],
+            [
+              20.931280416675122,
+              0.19999997344613085,
+              0.9891419863803892
+            ]
+          ],
+          "bBounds": [
+            [
+              -15.068523406982422,
+              -0.20000000298023224,
+              -9.504396438598633
+            ],
+            [
+              24.175386428833008,
+              1.3839999437332153,
+              6.597894191741943
+            ]
+          ],
+          "contactPointCount": 187,
+          "contactBounds": [
+            [
+              19.975385665893555,
+              -0.0009999868571757553,
+              -0.05210580304265022
+            ],
+            [
+              20.80869484738426,
+              0.14999999105930328,
+              0.9891419863803887
+            ]
+          ],
+          "allowed": false,
+          "reason": ""
+        }
+      ],
+      "review": [],
+      "retainedDomains": [
+        {
+          "key": "motion:squiggle:1",
+          "anchor": "squiggle:1",
+          "status": "aabb-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 0,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "motion:squiggle:5",
+          "anchor": "squiggle:5",
+          "status": "aabb-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 0,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "motion:squiggle:6",
+          "anchor": "squiggle:6",
+          "status": "actual-envelope-volume-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 4,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "motion:squiggle:8",
+          "anchor": "squiggle:8",
+          "status": "actual-envelope-volume-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 4,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "motion:squiggle:13",
+          "anchor": "squiggle:13",
+          "status": "actual-envelope-volume-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 4,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "motion:squiggle:19",
+          "anchor": "squiggle:19",
+          "status": "actual-envelope-volume-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 4,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "motion:squiggle:21",
+          "anchor": "squiggle:21",
+          "status": "blocked-actual-legacy-support-collision",
+          "fixedSupportHits": [
+            {
+              "a": "legacy-support:device-foundation",
+              "b": "world:seating-joinery:cream",
+              "kind": "surface",
+              "crossings": 29,
+              "bounds": [
+                [
+                  9.936626605026845,
+                  -0.0009999890923499954,
+                  -6.34231743002843
+                ],
+                [
+                  11.615548273674953,
+                  0.14999999105930328,
+                  -4.898782509972065
+                ]
+              ],
+              "aBounds": [
+                [
+                  9.936626605026845,
+                  -0.0009999890923499954,
+                  -6.34231743002843
+                ],
+                [
+                  11.615548273674953,
+                  0.20000000101327897,
+                  -4.4426762382201055
+                ]
+              ],
+              "bBounds": [
+                [
+                  -15.068523406982422,
+                  -0.20000000298023224,
+                  -9.504396438598633
+                ],
+                [
+                  24.175386428833008,
+                  1.3839999437332153,
+                  6.597894191741943
+                ]
+              ],
+              "contactBounds": [
+                [
+                  9.936626605026845,
+                  -0.000999989092350004,
+                  -6.342317430028429
+                ],
+                [
+                  11.615548273674953,
+                  0.14999999105930328,
+                  -4.898782509972065
+                ]
+              ]
+            },
+            {
+              "a": "legacy-support:device-foundation",
+              "b": "world:seating-joinery:gold",
+              "kind": "surface",
+              "crossings": 44,
+              "bounds": [
+                [
+                  10.621709153164963,
+                  0.1599999964237213,
+                  -6.34231743002843
+                ],
+                [
+                  10.705653467921568,
+                  0.17800000309944153,
+                  -6.298887547369967
+                ]
+              ],
+              "aBounds": [
+                [
+                  9.936626605026845,
+                  -0.0009999890923499954,
+                  -6.34231743002843
+                ],
+                [
+                  11.615548273674953,
+                  0.20000000101327897,
+                  -4.4426762382201055
+                ]
+              ],
+              "bBounds": [
+                [
+                  -14.99277114868164,
+                  0.1599999964237213,
+                  -8.332513809204102
+                ],
+                [
+                  22.982887268066406,
+                  1.3980000019073486,
+                  6.082894325256348
+                ]
+              ],
+              "contactBounds": [
+                [
+                  10.62170915316496,
+                  0.1599999964237213,
+                  -6.342317430028431
+                ],
+                [
+                  10.70565346792157,
+                  0.17800000309944153,
+                  -6.298887547369966
+                ]
+              ]
+            }
+          ],
+          "broadPairs": 4,
+          "overlapping": [
+            {
+              "part": "world:seating-joinery:cream",
+              "bounds": [
+                [
+                  -15.068523406982422,
+                  -0.20000000298023224,
+                  -9.504396438598633
+                ],
+                [
+                  24.175386428833008,
+                  1.3839999437332153,
+                  6.597894191741943
+                ]
+              ]
+            },
+            {
+              "part": "world:seating-joinery:gold",
+              "bounds": [
+                [
+                  -14.99277114868164,
+                  0.1599999964237213,
+                  -8.332513809204102
+                ],
+                [
+                  22.982887268066406,
+                  1.3980000019073486,
+                  6.082894325256348
+                ]
+              ]
+            }
+          ],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "motion:squiggle:23",
+          "anchor": "squiggle:23",
+          "status": "actual-envelope-volume-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 4,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "motion:squiggle:26",
+          "anchor": "squiggle:26",
+          "status": "actual-envelope-volume-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 3,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "motion:squiggle:28",
+          "anchor": "squiggle:28",
+          "status": "blocked-actual-legacy-support-collision",
+          "fixedSupportHits": [
+            {
+              "a": "legacy-support:device-foundation",
+              "b": "world:seating-joinery:cream",
+              "kind": "surface",
+              "crossings": 35,
+              "bounds": [
+                [
+                  18.72538566589356,
+                  -0.0009999890923499954,
+                  2.6728942394256587
+                ],
+                [
+                  19.39737848323519,
+                  0.14999999105930328,
+                  3.2392634390172472
+                ]
+              ],
+              "aBounds": [
+                [
+                  18.411821759404877,
+                  -0.0009999890923499954,
+                  1.408105875211239
+                ],
+                [
+                  19.614423300303923,
+                  0.20000000101327897,
+                  3.2392634390172472
+                ]
+              ],
+              "bBounds": [
+                [
+                  -15.068523406982422,
+                  -0.20000000298023224,
+                  -9.504396438598633
+                ],
+                [
+                  24.175386428833008,
+                  1.3839999437332153,
+                  6.597894191741943
+                ]
+              ],
+              "contactBounds": [
+                [
+                  18.725385665893555,
+                  -0.0009999890923499954,
+                  2.672894239425659
+                ],
+                [
+                  19.397378483235197,
+                  0.14999999105930328,
+                  3.2392634390172472
+                ]
+              ]
+            }
+          ],
+          "broadPairs": 4,
+          "overlapping": [
+            {
+              "part": "world:seating-joinery:cream",
+              "bounds": [
+                [
+                  -15.068523406982422,
+                  -0.20000000298023224,
+                  -9.504396438598633
+                ],
+                [
+                  24.175386428833008,
+                  1.3839999437332153,
+                  6.597894191741943
+                ]
+              ]
+            }
+          ],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "motion:squiggle:29",
+          "anchor": "squiggle:29",
+          "status": "blocked-actual-legacy-support-collision",
+          "fixedSupportHits": [
+            {
+              "a": "legacy-support:device-foundation",
+              "b": "world:seating-joinery:cream",
+              "kind": "surface",
+              "crossings": 37,
+              "bounds": [
+                [
+                  19.975385665893555,
+                  -0.0009999890923499954,
+                  -0.05210580304265017
+                ],
+                [
+                  20.80869484130702,
+                  0.14999999105930328,
+                  0.9891420436769185
+                ]
+              ],
+              "aBounds": [
+                [
+                  19.72867888155843,
+                  -0.0009999890923499954,
+                  -0.8420155201290898
+                ],
+                [
+                  20.931280422457476,
+                  0.20000000101327897,
+                  0.9891420436769185
+                ]
+              ],
+              "bBounds": [
+                [
+                  -15.068523406982422,
+                  -0.20000000298023224,
+                  -9.504396438598633
+                ],
+                [
+                  24.175386428833008,
+                  1.3839999437332153,
+                  6.597894191741943
+                ]
+              ],
+              "contactBounds": [
+                [
+                  19.975385665893555,
+                  -0.0009999890923499954,
+                  -0.05210580304265022
+                ],
+                [
+                  20.80869484130702,
+                  0.14999999105930328,
+                  0.9891420436769187
+                ]
+              ]
+            }
+          ],
+          "broadPairs": 4,
+          "overlapping": [
+            {
+              "part": "world:seating-joinery:cream",
+              "bounds": [
+                [
+                  -15.068523406982422,
+                  -0.20000000298023224,
+                  -9.504396438598633
+                ],
+                [
+                  24.175386428833008,
+                  1.3839999437332153,
+                  6.597894191741943
+                ]
+              ]
+            }
+          ],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "trip:squiggle/5/desktop/banana:false:normal:false",
+          "anchor": "squiggle:5",
+          "status": "actual-envelope-volume-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 4,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "trip:squiggle/26/desktop/banana:false:normal:false",
+          "anchor": "squiggle:26",
+          "status": "actual-envelope-volume-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 4,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "trip:squiggle/5/compact/banana:false:normal:false",
+          "anchor": "squiggle:5",
+          "status": "actual-envelope-volume-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 4,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        },
+        {
+          "key": "trip:squiggle/26/compact/banana:false:normal:false",
+          "anchor": "squiggle:26",
+          "status": "actual-envelope-volume-excluded",
+          "fixedSupportHits": [],
+          "broadPairs": 4,
+          "overlapping": [],
+          "sameAnchorDisplayHidden": true
+        }
+      ]
+    }
+  ]
+}

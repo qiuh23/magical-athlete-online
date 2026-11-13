@@ -1,0 +1,220 @@
+{
+  "schema": "integrated-venue-finite-delta-v1",
+  "scope": "Immutable historical proofs remain historical. Current additions are linked only by finite actual-mesh delta evidence; no new actor, continuous-time, all-character or current R1 contact authorization. Retained Trip scope excludes moved Boardwalk19/23. Fixed structural interfaces remain explicit contacts.",
+  "historicalR1CurrentContactAuthorization": false,
+  "excludedContactAnchors": [
+    "wild:23",
+    "wild:24",
+    "boardwalks:19",
+    "boardwalks:23"
+  ],
+  "retainedTripFixtures": 20,
+  "sourceDelta": {
+    "src/client/scene/environment/runtime.ts": {
+      "historicalSHA256": "74918a8d2df75f27004619fcac7f8a5531c4da586af65c29f399e3211b6e32e7",
+      "historicalSnapshot": "docs/qa/integrated-venue/historical-inputs/runtime.ts.txt",
+      "currentSHA256": "b3f7952b028e67b02725a5d593a84355c9d3e25d626873bdc2b62cb255df1ced"
+    },
+    "src/client/scene/environment/layout.ts": {
+      "historicalSHA256": "9dd7d51090293ff1fdb4cea733d63c695e4d1c90a83a346e77cb2f2120e1780e",
+      "historicalSnapshot": "docs/qa/integrated-venue/historical-inputs/layout.ts.txt",
+      "currentSHA256": "3f0ed451fc0b933e393394ce9fc2441e1eb31e6ffc64716f7993d07c09a72bd3"
+    },
+    "src/client/scene/environment/floodlights.ts": {
+      "historicalSHA256": "d62641418c9eebd3f40d04bdaacffa60c83c4cdc4b9af8d36293c36a0615d0df",
+      "historicalSnapshot": "docs/qa/integrated-venue/historical-inputs/floodlights.ts.txt",
+      "currentSHA256": "3abfc8180b154df684bf24782cc61280360b4891a89c020bcbd8d3d8ff399c6f"
+    }
+  },
+  "historicalArtifacts": {
+    "src/client/scene/environment/scene-mechanisms-manifest.json": "95f7d262a34c66d711d3c6ee16dfe4a7e041e120a96e6095990a179681da1705",
+    "src/client/scene/environment/parked-fallbacks/manifest.json": "e512144445bde520e9e75c7f684674863bea6e91d625ae0db73cf1c1c7b446a2",
+    "docs/qa/punch-r1-contact/release-evidence.json": "015de96de01b9658682e79eea24ca5683609cdc19b9c1a8b4162bb0a6033696d",
+    "docs/qa/floodlight-rows/reference-envelopes.json": "15e008208dbbb606eb2efc7a53fe7c69970c21cef30f36bf40d4b51a7a48c6b5",
+    "docs/qa/floodlight-rows/display-envelope-inputs.json": "096fc2498f2b37ca14b1ffe29a8519cd1135009cf99652b9057e161a6e92d361",
+    "docs/qa/floodlight-rows/display-envelopes-0.json": "bed2e038dcbb9ec04f7c955ccd6dfdf8a017be86b4190d3c33ff18a25f00f824",
+    "docs/qa/floodlight-rows/display-envelopes-1.json": "855f90b469674c8d7f2623ba17aee3125a82140cdba30cef64c215878be144d8"
+  },
+  "currentInputs": {
+    "src/client/scene/environment/tile-finish.ts": "8a22398c7edfb07af91df55e2159f5295cd1c491694bcaee58558aea758b9bc4",
+    "src/client/scene/environment/stadium-turf.ts": "a285acf20b000cd2f61bd45847ee4cc1044e1ad570d1178c5e256dcbae5e6e97",
+    "src/client/scene/environment/floodlights.ts": "3abfc8180b154df684bf24782cc61280360b4891a89c020bcbd8d3d8ff399c6f",
+    "src/client/scene/environment/floodlight-edge-mounts.json": "5d80a3cc843cfa91b43f0193f0092b455cd421289f5f3de2e79dbdc2309bbb7e",
+    "src/client/scene/DioramaStadium.tsx": "907e6d3c08d89701cd013c9d888c662589f828e7f13381703d0c3635ff5dde54",
+    "src/client/scene/TopologyStadium.tsx": "8d3b192c1dc69140b38c6bcf915d6345f593317d7f67e5dcd3cbdef181f55392",
+    "src/client/scene/BridgesStructure.tsx": "bfc9ac3f8c908e2e142125f7b3a7d40001bb99cd288c9d0c3cb4a0e23aea8285",
+    "src/client/scene/environment/RebuiltScenery.tsx": "4167b813188018e64045679ad0dbc73d7bbd405318913ddafac5a22b5b3b6102",
+    "src/client/scene/environment/deck-runtime.ts": "df5bc46852148969bd15ce336568077e1bc32cd9979d40e1dc3551e2c27eb865",
+    "docs/qa/floodlight-rows/reference-envelopes.json": "15e008208dbbb606eb2efc7a53fe7c69970c21cef30f36bf40d4b51a7a48c6b5",
+    "src/client/scene/environment/runtime.ts": "b3f7952b028e67b02725a5d593a84355c9d3e25d626873bdc2b62cb255df1ced",
+    "src/client/scene/environment/layout.ts": "3f0ed451fc0b933e393394ce9fc2441e1eb31e6ffc64716f7993d07c09a72bd3",
+    "src/client/scene/environment/seating.ts": "2c1a10b8c809ab252d6e74f1657026b76210c4fdf91cdfa25d850422f5392f84",
+    "docs/qa/floodlight-rows/display-envelopes-0.json": "bed2e038dcbb9ec04f7c955ccd6dfdf8a017be86b4190d3c33ff18a25f00f824",
+    "docs/qa/floodlight-rows/display-envelopes-1.json": "855f90b469674c8d7f2623ba17aee3125a82140cdba30cef64c215878be144d8",
+    "docs/qa/floodlight-rows/display-envelope-inputs.json": "096fc2498f2b37ca14b1ffe29a8519cd1135009cf99652b9057e161a6e92d361",
+    "scripts/recovery/audit-integrated-venue-foundations.ts": "f7f67241d80f6cbabf53e5cd70c16f0ddb7f7ad1f71260776670245434db3eb3",
+    "src/client/scene/environment/seating-clearance.ts": "392e9d644cef1ea80671e331565d47aca1bcdfd60c76fbbe3d807e1ccd4edf09",
+    "src/client/scene/environment/parked-fallbacks/geometry.ts": "d88b88cf3ca1ff2e6e4c3e19047219e252bb555527c7cb71b4c586e904336877",
+    "src/client/scene/environment/parked-fallbacks/manifest.json": "e512144445bde520e9e75c7f684674863bea6e91d625ae0db73cf1c1c7b446a2",
+    "src/client/scene/environment/full-coverage.ts": "0af606b15a897b9f915c666a3c4958e98e452b6aa70d212e3bddd502096089e9",
+    "src/client/scene/environment/FullCoverageMechanismLayer.tsx": "c19b744467d6e2fda32a475ef0a19c86ac988c527a475c718b321e3ec7b8a645",
+    "src/client/scene/environment/force-presentation.ts": "32f2f58c8119e870d08a7d33f5061f54c2d187b8620670b28baa18261b5ef643",
+    "src/client/scene/environment/RevalidatedMechanismLayer.tsx": "7327cb3112bc0912ec7598489816680c220a4dba4ffc73c955f7c7a91660fcbd",
+    "src/client/scene/Board3D.tsx": "478c4557d6b3c31c98a9d0597ab5931a5b152e4c6c898efc17173bba6bbdeb2a",
+    "src/client/scene/mechanisms/models.ts": "6dcb80fdb9e53dbb48c66e002c8f65a11260de49c38172062e56d79544ccc6f3",
+    "src/client/scene/mechanisms/placements.ts": "63b3d29d3fdf635de95bcad2209f0a2fcb1057fa6a03e782c47d187b072e97d0",
+    "src/client/scene/mechanisms/layout.ts": "e6705c25bf366f822565a26ef4303594390f3ba168fa5b5a02807dbd82791dbe",
+    "src/client/scene/math.ts": "54b1c1f92c222ba8864aebf9cc7f4e5b3dbd83cf0fd7856fdb93323187ffc8c3",
+    "scripts/recovery/scene-collision.ts": "73519904299b6d5fdd575829f0aca32ccf486016764b10a80965350d6fa5be2d",
+    "docs/qa/integrated-venue/display-source-baseline.ts.txt": "55bcc9e706fc16bac9696adaae4dd3fa3a59a383c5dae73c7b115f6469eca11a",
+    "docs/qa/integrated-venue/display-placement-baseline.json": "668b024494038bb10e269de976553f5c37003cca764b1b686dedcda4e44ea134",
+    "docs/qa/athlete-release/full-special-coverage/support-repair/envelopes/display-envelope-inputs.json": "870456a3852b7506e3a3af6f57a4d5a262201d71dcf3abf9cc45f088bfe5f852",
+    "docs/qa/athlete-release/full-special-coverage/support-repair/envelopes/display-envelopes-0.json": "8292c4291ee1a9944774713c1cf4a61b1bd65689e6612a61c39de3f605e8dc71",
+    "docs/qa/athlete-release/full-special-coverage/support-repair/envelopes/display-envelopes-1.json": "6b2672619bcac67bb48d2bfa1723df2f58d463a74026904a0798ea7d773e3d4a",
+    "docs/qa/integrated-venue/fixed-interface-specs.json": "a5d94cc4bcfa8783e71a5592bcc8aa104a04b588dadd516fadafd111284aed03",
+    "public/models/environment-rebuilt-v2/tree_elm_rebuilt_lod2.glb": "7de3c13954b48a0eb3f2763baaa5c16980a079c5ab5995a955f2a3a89456db58",
+    "public/models/environment-rebuilt-v2/tree_maple_rebuilt_lod2.glb": "1bd23283396913472077482436d1493a81fe7ee8ff1edf7105886ca28643df1c",
+    "public/models/environment-rebuilt-v2/tree_sapling_rebuilt_lod2.glb": "913f328637d1b23bba8603a4cbf48028e0fb957abd3033c31bef0ebab3583f40",
+    "public/models/environment-rebuilt-v2/start_gate.glb": "76ca081e1fe1407d6b574b3aaee1ff409dff90e838dd0e251a4fdc00bb97831c",
+    "public/models/environment-rebuilt-v2/finish_gate.glb": "c51312cac07f0743d1ca2377dae8355bfdbeabbcc9044e7d2d9765ac5012eb54",
+    "public/models/environment-rebuilt-v2/bleachers.glb": "af4d188c511ddf34dcdb6575f543c7baf0a8f6572c2def5a8cf115c8a422e967",
+    "public/models/environment-rebuilt-v2/spectators.glb": "b60a7ddb7fdca1993f589e1f48617e5d314456045428f952d9f0ec5e7a198a66",
+    "public/models/environment-rebuilt-v2/grandstand_rostrum.glb": "3891481f58a453a70d56bb6d36c55d5cce5c02a7cfcd2df9261f2bd6f44b475f",
+    "public/models/environment-rebuilt-v2/podium.glb": "daac91ddfa81acd44013d6560e57cdccf39f87dd867d0737d3ebca190dec890f",
+    "public/models/environment-rebuilt-v2/officials_kiosk.glb": "f68de4cb4eac921518e8dfa78307b435cfd78ff8c0d20235ab1b242d726ab887",
+    "public/models/environment-rebuilt-v2/scoreboard.glb": "019c4166ff445c5aff8ee74ebd9215d74a9efea9aa3746fb88cbdd9c81d7b549",
+    "public/models/environment-rebuilt-v2/official_rostrum.glb": "ba867c174143cba8c7a2cb1ae8c749f698edec9447e42c67e3777de418ee04d4",
+    "public/models/environment-rebuilt-v2/podium_plinth.glb": "df3165332120872f50ad1ffb325a52f302a98756d3b71967b28918403ddb3f69",
+    "public/models/floodlights-rebuilt-v3/base.glb": "1104dfa5c5dbc4181448e43d84559f24bbb2b92334cf2ae3cd64e93466389309",
+    "public/models/floodlights-rebuilt-v3/pole.glb": "cbd7f2ee910e5a62ecba3bb229d5585082ca154a6a0b36d44e9ce01cffb46bcd",
+    "public/models/floodlights-rebuilt-v3/yoke.glb": "04b130d8b4d2e12c14974b0485cb025eb364bbfcf2ba88f255db8c6eafad691e",
+    "public/models/floodlights-rebuilt-v3/housing.glb": "0b4d0ccb58bc8a7fb4dec5efd4d531cf6dfd80945b5f71163b3cb4fa8fbeaf3a",
+    "public/models/floodlights-rebuilt-v3/lenses.glb": "28cc5396e6e9c9f2b42a05d1a0976131654f92b2b426e5381963c3d6dd5efb32",
+    "public/models/stadium-v7/athlete_start_platform.glb": "5a8c1701b3cbd1caa9165ebaf57407848570d984c86906a99b853c709524f7f4",
+    "public/models/stadium-v7/athlete_tile_neutral.glb": "652ae6d1f3985ec3b8d285fe857e74c0705940a73b6edbe20a2db3dc43227723",
+    "public/models/stadium-v7/athlete_tile_coral.glb": "3472d8b6a333087f6c2b2796c3a7fb200a97f8692838b1b88fb8ca48c68c677f",
+    "public/models/environment-rebuilt-v2/bridges_base.glb": "43024a1c49c108aeb487b4b797b3c6bb8864538bf54d0ba3b698bf852e0368fe",
+    "public/models/environment-rebuilt-v2/bridges_landscape_reexport_v1.glb": "c3d74563b29aa8cb10605dbb5312cfdfc83dc79625db19e4b769b4c9f79be1fb",
+    "public/models/environment-rebuilt-v2/bridges_furniture.glb": "70e78bf169d74dc55302e7d69db21500e4329078a62532e7765f61a5d5867f61",
+    "public/models/environment-rebuilt-v2/squiggle_base.glb": "94b8d55dc02c8034838090102e1e6771e6dc4bf16b5402db25074cddf10f4793",
+    "public/models/environment-rebuilt-v2/squiggle_landscape_reexport_v1.glb": "e4dfa74a8e9a1b5e6a58c22fd615b2cdbe5cc2af5a16f427596618f320ff1d08",
+    "public/models/environment-rebuilt-v2/squiggle_furniture.glb": "ffffbfca78e8d7a5da8a77d87d817d477eb1e6510560a96ec5c15e9c00e27596",
+    "public/models/mechanisms/approved_soft_track_tile.glb": "7ca87e14c06e410144d2e5fbd66303605c2a442f4fae7c0928a62c5eef28c659",
+    "public/models/mechanisms/gain_joint_action.glb": "fcb164ad50bb52d22fa0b3aa66f63d515d40c9fef372060997ae3d62fa0a1fde",
+    "public/models/mechanisms/trip_telescopic_v1.2f331432.glb": "2f331432d72ef78d33c2aadd355885f25ca9f670d4d7f37b36e0c27b6db1046f",
+    "public/models/mechanisms/loss_joint_action.glb": "0323a384103f271627786c5c8ef3ba98ac1b488a03e2096c26617442250df0f6",
+    "public/models/mechanisms/punch_outboard_joint.glb": "ff8a8d4431fd08d4cc0111133ad9f0af1ea8abf3197131f5f6c6dfba0d6fa956",
+    "public/models/mechanisms/trip_joint.glb": "70c96cc02f6db99d9ec8650a81f519a39c526d8485231d632ce2908879165641",
+    "public/models/mechanisms/approved_soft_track_tile_economy.glb": "0d73be354867c51328be51b9b1028b97d0ed465530c002ee39448fe9b46f7355",
+    "public/models/environment-rebuilt-v2/boardwalks_base.glb": "f842becc1cfdce6c1d050f6ebec23c3463b796ee348d27c56215be600e3728e2",
+    "public/models/environment-rebuilt-v2/boardwalks_landscape_reexport_v1.glb": "60bf7edcac36fc300b06b3dd942c77d90003f4ea1b01987b57f69c048e7c687a",
+    "public/models/environment-rebuilt-v2/boardwalks_furniture.glb": "004404c2b23631801e0d2f5765af812a48793ce36b23be0998a24865d7fe7823",
+    "public/models/mechanisms/warp_joint_action.glb": "bd5122db40a1c86889ee423787d818f278765d0e48ce30cca9f2fcea935a1b19",
+    "public/models/mechanisms/punch-rebuild-r1.glb": "aef0b2f39adcbb29eaa3f449e22804093f5efe02e1d0113ca35500cd75cb25b6",
+    "src/client/scene/environment/scene-mechanisms-manifest.json": "95f7d262a34c66d711d3c6ee16dfe4a7e041e120a96e6095990a179681da1705",
+    "public/models/banana/banana.glb": "25bad0ab653cceb00f9d93b0013e7bc0ffee913c764d2b9f99803adce4e5372d",
+    "scripts/recovery/audit-integrated-venue-finishes.ts": "65e24960a40a449d75263cea855528178afc0586669711e979fc23d57b39f0ca",
+    "src/client/scene/mechanisms/telescopic-trip.ts": "b4b4a7e829aa6c4eddb3d77685c1631558172a3c622c3cfbed1e66c9f87cfb68",
+    "src/client/scene/mechanisms/contact-plan.ts": "055cdea8c606a15a7d9c9254ee09826eebf6e7ddaa1d350c0a06c003522b3944",
+    "src/client/scene/mechanisms/down-pose.ts": "f7be8565afb7a41ba71b6ba45779e7f055fa1f64d64345dd973999b08a25b3f9",
+    "src/client/scene/mechanisms/actor-snapshot.ts": "208f282018b2050425e42ed483b1a2cb3804023113fc20ae3bb36d3b74ad53a5",
+    "src/client/scene/pawn-materials.ts": "1e31753d38b74a7cf9b835924167c1d700962087e55ab13bed2f099a58db79a0",
+    "src/client/scene/toy-model-instance.ts": "074aee2aa46f0f1f4b0202b600e58124e70743c7bbfbf963d50f140587956bb7",
+    "scripts/recovery/audit-integrated-venue-light-joints.ts": "528b719cb87df37c39291d8ad8756e63a5c9ef9e438cf02511b6f9acc354f36b",
+    "scripts/recovery/audit-floodlight-row-sightlines.ts": "718d864a9c9449def8e6bf63a3120abfcdc2a5c2323302712a5a902aaa8a25e3",
+    "src/client/scene/camera.ts": "9d8a74799bd08344595590d589b7135e2c9f02ec50786386aa4feec01890f2a2",
+    "src/client/scene/CameraRig.tsx": "0e438b8011f9b4089308d539e4244aae157eb067e05a2db2445b5eafcfc616a1",
+    "scripts/recovery/audit-integrated-venue-evidence.ts": "e7019c4be6ac493ff2ba6528ff3707501680c8e427f7883259c78ac6de362faf",
+    "tests/helpers/integrated-venue-evidence.ts": "e494c2f9e521599aff0ea96aa4ac9cec97e1778c94c613b79f811f946994b7c6",
+    "tests/scene-mechanisms.test.ts": "0deec20b3bce6daa26e6cc06e751bbcb3c15a39714753478ba40c46225c9ce5f",
+    "tests/parked-scene-fallbacks.test.ts": "1d17d9003cac23371cdff50fcf417251fba85fc4a0aec71d8ac24af46c0c374f",
+    "tests/punch-r1-evidence.test.ts": "f00524bc4bbe45951b339f1e586dc12ebdc6d06c028823d7afec3950b9a35dfe"
+  },
+  "evidence": [
+    {
+      "kind": "foundations",
+      "path": "docs/qa/integrated-venue/mild-full.json",
+      "sha256": "b98dae86dafbaa2073d0533764525b36d3570ccd72cf28c8fb86b8b2f64c582d"
+    },
+    {
+      "kind": "foundations",
+      "path": "docs/qa/integrated-venue/mild-economy.json",
+      "sha256": "7422e2e5f8230fad4eeb3d8614bc15ba2f5b8c533c6a4ab81f7409d624a2a85f"
+    },
+    {
+      "kind": "foundations",
+      "path": "docs/qa/integrated-venue/twisty-twirl-full.json",
+      "sha256": "1f84b6bcc40b3b41219d1c3711c4527a8711405377051efb093b001f28891590"
+    },
+    {
+      "kind": "foundations",
+      "path": "docs/qa/integrated-venue/twisty-twirl-economy.json",
+      "sha256": "4d0449dcb20ccc570b25ba95121c238f1ce57b76b42d8b3c69554d261fd47597"
+    },
+    {
+      "kind": "foundations",
+      "path": "docs/qa/integrated-venue/bridges-full.json",
+      "sha256": "fb3b39a682365ef36baacfcdb2ce521c68fc9d376cfdcbba68a1d5745fb61e08"
+    },
+    {
+      "kind": "foundations",
+      "path": "docs/qa/integrated-venue/bridges-economy.json",
+      "sha256": "82f7d276e6833599d1950309b5a1861e056badfd3391c93873681c89a56faceb"
+    },
+    {
+      "kind": "foundations",
+      "path": "docs/qa/integrated-venue/squiggle-full.json",
+      "sha256": "4e336a095d950907bd674b199f11f21f8b356ca8b5157da8cca8016dd8485753"
+    },
+    {
+      "kind": "foundations",
+      "path": "docs/qa/integrated-venue/squiggle-economy.json",
+      "sha256": "6a8252cdade099d5d8a53f8c6685d59d331a9d6a65d62300c637bfa6057a1f50"
+    },
+    {
+      "kind": "foundations",
+      "path": "docs/qa/integrated-venue/boardwalks-full.json",
+      "sha256": "4a162456438725159f49ba3f4b63bb1f53beb66328d2bd3312e7355ffd32b8a2"
+    },
+    {
+      "kind": "foundations",
+      "path": "docs/qa/integrated-venue/boardwalks-economy.json",
+      "sha256": "b4ef67c6f14855deb7bfc7da7e141721a832793a1db37b48894fe20315fe857b"
+    },
+    {
+      "kind": "foundations",
+      "path": "docs/qa/integrated-venue/whirly-world-full.json",
+      "sha256": "034b4beb31f3beae7afadebf4876004d89cbca2598b78be7f417ce95229fff11"
+    },
+    {
+      "kind": "foundations",
+      "path": "docs/qa/integrated-venue/whirly-world-economy.json",
+      "sha256": "6fea08e4962bee8572d25b30cfef52027a53d120d708a483e1e6958a9c9ef251"
+    },
+    {
+      "kind": "foundations",
+      "path": "docs/qa/integrated-venue/wild-full.json",
+      "sha256": "8974c6464cf180d783dd4bdf4f81542a3b7d6d62fa1bbd4f9097230594fe507d"
+    },
+    {
+      "kind": "foundations",
+      "path": "docs/qa/integrated-venue/wild-economy.json",
+      "sha256": "9fd6e02815cdfe34b3516c0db93a8155c019c4b3a288719b81acc67a2b967f16"
+    },
+    {
+      "kind": "finishes",
+      "path": "docs/qa/integrated-venue/retained-finishes.json",
+      "sha256": "c34515cad7d8de0a6899587730bd3df13776d59051fb4fb4a2fcc2d76d3e957a"
+    },
+    {
+      "kind": "lights",
+      "path": "docs/qa/integrated-venue/light-joints/observation.json",
+      "sha256": "3f4cca8b45ef077e25b63c0aeb2ebd2ee72c15a65aa6fc6ceb86aa113dba4aba"
+    },
+    {
+      "kind": "sightlines",
+      "path": "docs/qa/integrated-venue/light-joints/sightline-observation.json",
+      "sha256": "f075ad11e99eeaded4df1ef1892e77ba84b44b77ccaf1a6a47ed7aeb73b701c6"
+    }
+  ]
+}

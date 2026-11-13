@@ -1,0 +1,2130 @@
+{
+  "scope": "All existing public/models GLBs retain byte-exact content-addressed URLs in both local builds. Not a live cache/network test.",
+  "count": 354,
+  "rows": [
+    {
+      "product": "client",
+      "logical": "/models/banana/banana-economy.glb",
+      "sha256": "eb5c77d8709fb3f55fa716f9bda68944b88169cccdbcc1d3aad2a0b396f6113b",
+      "bytes": 38272
+    },
+    {
+      "product": "client",
+      "logical": "/models/banana/banana.glb",
+      "sha256": "25bad0ab653cceb00f9d93b0013e7bc0ffee913c764d2b9f99803adce4e5372d",
+      "bytes": 44512
+    },
+    {
+      "product": "client",
+      "logical": "/models/environment-rebuilt-v2/bleachers.glb",
+      "sha256": "af4d188c511ddf34dcdb6575f543c7baf0a8f6572c2def5a8cf115c8a422e967",
+      "bytes": 262336
+    },
+    {
+      "product": "client",
+      "logical": "/models/environment-rebuilt-v2/boardwalks_base.glb",
+      "sha256": "f842becc1cfdce6c1d050f6ebec23c3463b796ee348d27c56215be600e3728e2",
+      "bytes": 73856
+    },
+    {
+      "product": "client",
+      "logical": "/models/environment-rebuilt-v2/boardwalks_furniture.glb",
+      "sha256": "004404c2b23631801e0d2f5765af812a48793ce36b23be0998a24865d7fe7823",
+      "bytes": 115144
+    },
+    {
+      "product": "client",
+      "logical": "/models/environment-rebuilt-v2/boardwalks_landscape_reexport_v1.glb",
+      "sha256": "60bf7edcac36fc300b06b3dd942c77d90003f4ea1b01987b57f69c048e7c687a",
+      "bytes": 612284
+    },
+    {
+      "product": "client",
+      "logical": "/models/environment-rebuilt-v2/bridges_base.glb",
+      "sha256": "43024a1c49c108aeb487b4b797b3c6bb8864538bf54d0ba3b698bf852e0368fe",
+      "bytes": 80072
+    },
+    {
+      "product": "client",
+      "logical": "/models/environment-rebuilt-v2/bridges_furniture.glb",
+      "sha256": "70e78bf169d74dc55302e7d69db21500e4329078a62532e7765f61a5d5867f61",
+      "bytes": 116240
+    },
+    {
+      "product": "client",
+      "logical": "/models/environment-rebuilt-v2/bridges_landscape_reexport_v1.glb",
+      "sha256": "c3d74563b29aa8cb10605dbb5312cfdfc83dc79625db19e4b769b4c9f79be1fb",
+      "bytes": 833112
+    },
+    {
+      "product": "client",
+      "logical": "/models/environment-rebuilt-v2/finish_gate.glb",
+      "sha256": "c51312cac07f0743d1ca2377dae8355bfdbeabbcc9044e7d2d9765ac5012eb54",
+      "bytes": 92452
+    },
+    {
+      "product": "client",
+      "logical": "/models/environment-rebuilt-v2/grandstand_rostrum.glb",
+      "sha256": "3891481f58a453a70d56bb6d36c55d5cce5c02a7cfcd2df9261f2bd6f44b475f",
+      "bytes": 42756
+    },
+    {
+      "product": "client",
+      "logical": "/models/environment-rebuilt-v2/official_rostrum.glb",
+      "sha256": "ba867c174143cba8c7a2cb1ae8c749f698edec9447e42c67e3777de418ee04d4",
+      "bytes": 8000
+    },
+    {
+      "product": "client",
+      "logical": "/models/environment-rebuilt-v2/officials_kiosk.glb",
+      "sha256": "f68de4cb4eac921518e8dfa78307b435cfd78ff8c0d20235ab1b242d726ab887",
+      "bytes": 56444
+    },
+    {
+      "product": "client",
+      "logical": "/models/environment-rebuilt-v2/podium.glb",
+      "sha256": "daac91ddfa81acd44013d6560e57cdccf39f87dd867d0737d3ebca190dec890f",
+      "bytes": 74384
+    },
+    {
+      "product": "client",
+      "logical": "/models/environment-rebuilt-v2/podium_plinth.glb",
+      "sha256": "df3165332120872f50ad1ffb325a52f302a98756d3b71967b28918403ddb3f69",
+      "bytes": 9160
+    },
+    {
+      "product": "client",
+      "logical": "/models/environment-rebuilt-v2/scoreboard.glb",
+      "sha256": "019c4166ff445c5aff8ee74ebd9215d74a9efea9aa3746fb88cbdd9c81d7b549",
+      "bytes": 47320
+    },
+    {
+      "product": "client",
+      "logical": "/models/environment-rebuilt-v2/spectators.glb",
+      "sha256": "b60a7ddb7fdca1993f589e1f48617e5d314456045428f952d9f0ec5e7a198a66",
+      "bytes": 204692
+    },
+    {
+      "product": "client",
+      "logical": "/models/environment-rebuilt-v2/squiggle_base.glb",
+      "sha256": "94b8d55dc02c8034838090102e1e6771e6dc4bf16b5402db25074cddf10f4793",
+      "bytes": 80068
+    },
+    {
+      "product": "client",
+      "logical": "/models/environment-rebuilt-v2/squiggle_furniture.glb",
+      "sha256": "ffffbfca78e8d7a5da8a77d87d817d477eb1e6510560a96ec5c15e9c00e27596",
+      "bytes": 105164
+    },
+    {
+      "product": "client",
+      "logical": "/models/environment-rebuilt-v2/squiggle_landscape_reexport_v1.glb",
+      "sha256": "e4dfa74a8e9a1b5e6a58c22fd615b2cdbe5cc2af5a16f427596618f320ff1d08",
+      "bytes": 544892
+    },
+    {
+      "product": "client",
+      "logical": "/models/environment-rebuilt-v2/start_gate.glb",
+      "sha256": "76ca081e1fe1407d6b574b3aaee1ff409dff90e838dd0e251a4fdc00bb97831c",
+      "bytes": 144496
+    },
+    {
+      "product": "client",
+      "logical": "/models/environment-rebuilt-v2/tree_elm_rebuilt_lod2.glb",
+      "sha256": "7de3c13954b48a0eb3f2763baaa5c16980a079c5ab5995a955f2a3a89456db58",
+      "bytes": 334352
+    },
+    {
+      "product": "client",
+      "logical": "/models/environment-rebuilt-v2/tree_maple_rebuilt_lod2.glb",
+      "sha256": "1bd23283396913472077482436d1493a81fe7ee8ff1edf7105886ca28643df1c",
+      "bytes": 353572
+    },
+    {
+      "product": "client",
+      "logical": "/models/environment-rebuilt-v2/tree_sapling_rebuilt_lod2.glb",
+      "sha256": "913f328637d1b23bba8603a4cbf48028e0fb957abd3033c31bef0ebab3583f40",
+      "bytes": 189424
+    },
+    {
+      "product": "client",
+      "logical": "/models/extra-mile/extra-mile-broken-clock.glb",
+      "sha256": "ba1db9fe479ae2cc2283a0b381d940c826a362f1cc637cb8e50ef1239112baa8",
+      "bytes": 48180
+    },
+    {
+      "product": "client",
+      "logical": "/models/extra-mile/extra-mile-cletus.glb",
+      "sha256": "468fc0ecc379ade6cc178f80ca873538b97a27a861c9460430f95b73efa5dcc8",
+      "bytes": 51536
+    },
+    {
+      "product": "client",
+      "logical": "/models/extra-mile/extra-mile-doc-paradox.glb",
+      "sha256": "6b09041f554f1a8654d8590077bc7401f6ae2c1c1a569b3096932f8fdabdf95f",
+      "bytes": 65448
+    },
+    {
+      "product": "client",
+      "logical": "/models/extra-mile/extra-mile-doctor-dice.glb",
+      "sha256": "eeb1a778c9b0684a8d677ae2b93163e4a038390888fe54cac3737167012368ac",
+      "bytes": 50344
+    },
+    {
+      "product": "client",
+      "logical": "/models/extra-mile/extra-mile-dom-and-gary.glb",
+      "sha256": "dbe6af6beb502a10716fa3dc4576eb658507b3e28f0103e86faa8bd78a33e7d2",
+      "bytes": 59912
+    },
+    {
+      "product": "client",
+      "logical": "/models/extra-mile/extra-mile-echo.glb",
+      "sha256": "d622cade5b96438a25530f48f28d9627d4be34cb3248a44744e7c875db30bba4",
+      "bytes": 37436
+    },
+    {
+      "product": "client",
+      "logical": "/models/extra-mile/extra-mile-gingy.glb",
+      "sha256": "e4d9a9279d6da7fc08f388c5e1a8ea390d95f0e891ecff4db44fba86c4a6a35c",
+      "bytes": 64452
+    },
+    {
+      "product": "client",
+      "logical": "/models/extra-mile/extra-mile-gluebert.glb",
+      "sha256": "b650f60f8481af52dc254120e51214b9ba4bd46e718d87a51d203a2e85acccf4",
+      "bytes": 35248
+    },
+    {
+      "product": "client",
+      "logical": "/models/extra-mile/extra-mile-heads.glb",
+      "sha256": "ae09d3ac3b357a1aefbdc0c7f22e851d4a9ca8c88fdaafe11de437eb1c358129",
+      "bytes": 46384
+    },
+    {
+      "product": "client",
+      "logical": "/models/extra-mile/extra-mile-honey-pot.glb",
+      "sha256": "8c5c7d637e9876d114aa476b43f2efbae949bd0504d97964e756dd221dd92ede",
+      "bytes": 62652
+    },
+    {
+      "product": "client",
+      "logical": "/models/extra-mile/extra-mile-king-pete.glb",
+      "sha256": "2abbeb4582e7408bb9f04fb368d73b6fa6d281329e164e18993ddad7a8caf359",
+      "bytes": 63912
+    },
+    {
+      "product": "client",
+      "logical": "/models/extra-mile/extra-mile-lazy-bones.glb",
+      "sha256": "a8ae3b7fd60bf717a6453ae7ad012edcb34eb4be234e5bccb6224a97276afe4b",
+      "bytes": 49068
+    },
+    {
+      "product": "client",
+      "logical": "/models/extra-mile/extra-mile-marksman.glb",
+      "sha256": "15064dc54c9f592697b16eb3c7982ee4e891feeb0325cd543bfc3d1af37949ac",
+      "bytes": 41940
+    },
+    {
+      "product": "client",
+      "logical": "/models/extra-mile/extra-mile-moneybags.glb",
+      "sha256": "0c9922ee2912032fd3fe1e1ef61d2f54bd904ac3d1a74ab71099c0ac3136200a",
+      "bytes": 54260
+    },
+    {
+      "product": "client",
+      "logical": "/models/extra-mile/extra-mile-mr-fox.glb",
+      "sha256": "922c8f9726db685978fdf8f081f4eeada41cb5662a41897940e1e260f390246e",
+      "bytes": 57476
+    },
+    {
+      "product": "client",
+      "logical": "/models/extra-mile/extra-mile-oddball.glb",
+      "sha256": "2c415a558c3e5b327eaf30152e7bd84c72de0b57c6a33dd2a09af4a755233a25",
+      "bytes": 52560
+    },
+    {
+      "product": "client",
+      "logical": "/models/extra-mile/extra-mile-pooh.glb",
+      "sha256": "c7007af9179e607f735d0a7cafbe778eff10d5d7c07e072c6a41156decc5c191",
+      "bytes": 46288
+    },
+    {
+      "product": "client",
+      "logical": "/models/extra-mile/extra-mile-robin-hood.glb",
+      "sha256": "a7e547d9a9b3da60bfec9ad78193569bc4426acb4dba725bb25f2d7a8c0203a0",
+      "bytes": 66276
+    },
+    {
+      "product": "client",
+      "logical": "/models/extra-mile/extra-mile-saint-nick.glb",
+      "sha256": "8c5a8bda1cfc6196a6710245846eb3413b00432c1ed86cf72ffd55fe791d8ef4",
+      "bytes": 60820
+    },
+    {
+      "product": "client",
+      "logical": "/models/extra-mile/extra-mile-school-bully.glb",
+      "sha256": "40b1df04656b7e64a7741d45bffd58f9723a8f865ac4a69019f7c77f960ba840",
+      "bytes": 52460
+    },
+    {
+      "product": "client",
+      "logical": "/models/extra-mile/extra-mile-scout.glb",
+      "sha256": "82ecc84087f0d75b27d4a60b14753ee5c373b7713e0e68a10c5237222d6733cb",
+      "bytes": 58356
+    },
+    {
+      "product": "client",
+      "logical": "/models/extra-mile/extra-mile-shuffler.glb",
+      "sha256": "0c522b6488c81a53e28037f8595e9d2efac58e8b5ae94954a7e979923c805a91",
+      "bytes": 42040
+    },
+    {
+      "product": "client",
+      "logical": "/models/extra-mile/extra-mile-silly-goose.glb",
+      "sha256": "7e466e82a5f912fdf688f4a0e0af0bc5a329fd22471afd8fbd2682da2cc5982b",
+      "bytes": 41820
+    },
+    {
+      "product": "client",
+      "logical": "/models/extra-mile/extra-mile-snake-eyes.glb",
+      "sha256": "e912b5a11b98203d0cad6353e708e0f3f493af18ce70458ddf80f817fe4e55b3",
+      "bytes": 41656
+    },
+    {
+      "product": "client",
+      "logical": "/models/extra-mile/extra-mile-snub.glb",
+      "sha256": "36617a6f6b2f6118d570b0d7530db8446d11e2172c946b530927b0f0c8b59ae9",
+      "bytes": 50540
+    },
+    {
+      "product": "client",
+      "logical": "/models/extra-mile/extra-mile-terrible-toddler.glb",
+      "sha256": "1ac24c794182e7320ff893bc90b34b4f596be79a64764775666386ff1ac92081",
+      "bytes": 39136
+    },
+    {
+      "product": "client",
+      "logical": "/models/extra-mile/extra-mile-thief.glb",
+      "sha256": "6718a49f4a1a7ec1afaa3b81f581c22fa5439452d7d6bff0579d781b9b71e2d1",
+      "bytes": 54500
+    },
+    {
+      "product": "client",
+      "logical": "/models/extra-mile/extra-mile-toll-troll.glb",
+      "sha256": "3f1b988d69fe8dab6211a93cab25726893bd0e4d3081e42fc5c2b303ab444925",
+      "bytes": 50028
+    },
+    {
+      "product": "client",
+      "logical": "/models/extra-mile/extra-mile-totally-fair-ref.glb",
+      "sha256": "38418bf916ac490489b41d349a4f9ec7ed4300ebc88819495b8dd09f5cd4ce60",
+      "bytes": 56128
+    },
+    {
+      "product": "client",
+      "logical": "/models/extra-mile/extra-mile-whisper.glb",
+      "sha256": "7a9c33c99199d78a577946161a7ab760811579ee515dc540ecacc1346e7eaef1",
+      "bytes": 39052
+    },
+    {
+      "product": "client",
+      "logical": "/models/extra-mile/extra-mile-witch-hazel.glb",
+      "sha256": "e76e6f3522cecb1a856e2a9f7f29bbb9ae9eb9c5c5df1476c7a1ede772666e04",
+      "bytes": 47976
+    },
+    {
+      "product": "client",
+      "logical": "/models/floodlights-rebuilt-v3/base.glb",
+      "sha256": "1104dfa5c5dbc4181448e43d84559f24bbb2b92334cf2ae3cd64e93466389309",
+      "bytes": 12348
+    },
+    {
+      "product": "client",
+      "logical": "/models/floodlights-rebuilt-v3/housing.glb",
+      "sha256": "0b4d0ccb58bc8a7fb4dec5efd4d531cf6dfd80945b5f71163b3cb4fa8fbeaf3a",
+      "bytes": 29464
+    },
+    {
+      "product": "client",
+      "logical": "/models/floodlights-rebuilt-v3/lenses.glb",
+      "sha256": "28cc5396e6e9c9f2b42a05d1a0976131654f92b2b426e5381963c3d6dd5efb32",
+      "bytes": 2520
+    },
+    {
+      "product": "client",
+      "logical": "/models/floodlights-rebuilt-v3/pole.glb",
+      "sha256": "cbd7f2ee910e5a62ecba3bb229d5585082ca154a6a0b36d44e9ce01cffb46bcd",
+      "bytes": 2464
+    },
+    {
+      "product": "client",
+      "logical": "/models/floodlights-rebuilt-v3/yoke.glb",
+      "sha256": "04b130d8b4d2e12c14974b0485cb025eb364bbfcf2ba88f255db8c6eafad691e",
+      "bytes": 11092
+    },
+    {
+      "product": "client",
+      "logical": "/models/leaf/leaf-catfish.glb",
+      "sha256": "b0446b22c71e5d56eb52fbe5e72f2b6147b8999b63c3197d059f863f0b63c390",
+      "bytes": 59676
+    },
+    {
+      "product": "client",
+      "logical": "/models/leaf/leaf-crash-dummy.glb",
+      "sha256": "5574b659d73304dce6f6112451052c14b87757119d95fb6854ef89696b5cf5dd",
+      "bytes": 54460
+    },
+    {
+      "product": "client",
+      "logical": "/models/leaf/leaf-dark-horse.glb",
+      "sha256": "2d8e9d5567fd56137894dcac32572b6adf6a1c38aa313201f839dd5b9ec010b1",
+      "bytes": 47968
+    },
+    {
+      "product": "client",
+      "logical": "/models/leaf/leaf-filmmaker.glb",
+      "sha256": "b7b43e5859962f6c75a3634d9bce4bf9f42a2c6269f2e2d1f929e18ab6e66c30",
+      "bytes": 58088
+    },
+    {
+      "product": "client",
+      "logical": "/models/leaf/leaf-kangaroo.glb",
+      "sha256": "293ef3bbd966e399ad10dceba78594c309faacba9b9717ffd0e224234600e3a1",
+      "bytes": 47544
+    },
+    {
+      "product": "client",
+      "logical": "/models/leaf/leaf-loan-shark.glb",
+      "sha256": "50c648e8d041dd121455fd89e7f1d3361f684656ffa60d606b60085094fe7863",
+      "bytes": 44208
+    },
+    {
+      "product": "client",
+      "logical": "/models/leaf/leaf-lonely-wolf.glb",
+      "sha256": "15dbdb2849cf4fa1cfad3c2c4ce1f75c5fb1bd4953d5a3c42b697df9ca0034be",
+      "bytes": 40652
+    },
+    {
+      "product": "client",
+      "logical": "/models/leaf/leaf-nepo-baby.glb",
+      "sha256": "c80bcb2779ace2a6f3dde0cdc1402db8d8031bbf761c7d46d07a25a35988f061",
+      "bytes": 63828
+    },
+    {
+      "product": "client",
+      "logical": "/models/leaf/leaf-philanthropist.glb",
+      "sha256": "bb53d6301b21ca0c59006060abf45d74618bf172524aae00ce64283a4c290ff6",
+      "bytes": 51176
+    },
+    {
+      "product": "client",
+      "logical": "/models/leaf/leaf-race-car.glb",
+      "sha256": "18fad093516a2ff2f655a129be9fbd12c1365731775dff95296917f3e037612e",
+      "bytes": 43728
+    },
+    {
+      "product": "client",
+      "logical": "/models/leaf/leaf-revolutionary.glb",
+      "sha256": "8f3a61c2bf226fcde1d777670ef2f9245dd6bbe6ad9fed5e4d5e8a3b548cf6e6",
+      "bytes": 69072
+    },
+    {
+      "product": "client",
+      "logical": "/models/leaf/leaf-sole-survivor.glb",
+      "sha256": "4858ade83ef40d507c94eb449dc521295944291d5a83f9a3dcb40c1ca6486ca0",
+      "bytes": 52444
+    },
+    {
+      "product": "client",
+      "logical": "/models/leaf/leaf-sore-loser.glb",
+      "sha256": "305ddb96578b3d066f941f18294c305863a3ef5c20f3db6bd9b44e6c0c6c67f4",
+      "bytes": 46248
+    },
+    {
+      "product": "client",
+      "logical": "/models/leaf/leaf-spiteful-spirit.glb",
+      "sha256": "c513922a9595f86e4caaeebfee6af3f740c2b626dd207eeb9d837ea11b47e132",
+      "bytes": 35912
+    },
+    {
+      "product": "client",
+      "logical": "/models/leaf/leaf-thespian.glb",
+      "sha256": "0dfd5f80118ea47f0f7f0a9c6873d12e161532c2bd6323c64d256e0e586a080b",
+      "bytes": 57104
+    },
+    {
+      "product": "client",
+      "logical": "/models/leaf/leaf-toucan.glb",
+      "sha256": "3393de2dba4b4ef6fe513b46764a9657a4da956c23b60edab78cecfcc4238e0b",
+      "bytes": 45580
+    },
+    {
+      "product": "client",
+      "logical": "/models/leaf/leaf-triangle-man.glb",
+      "sha256": "f54a7bb83c7c4376821b55a1af11e0615ffa34e93c3c711ef14bf8123554845f",
+      "bytes": 36252
+    },
+    {
+      "product": "client",
+      "logical": "/models/leaf/leaf-zombie.glb",
+      "sha256": "78668fd2743825f3d7c980ac3064274380ed101090a558e0d96245b119b4c6e2",
+      "bytes": 54084
+    },
+    {
+      "product": "client",
+      "logical": "/models/mechanisms/approved_soft_track_tile.glb",
+      "sha256": "7ca87e14c06e410144d2e5fbd66303605c2a442f4fae7c0928a62c5eef28c659",
+      "bytes": 377420
+    },
+    {
+      "product": "client",
+      "logical": "/models/mechanisms/approved_soft_track_tile_economy.glb",
+      "sha256": "0d73be354867c51328be51b9b1028b97d0ed465530c002ee39448fe9b46f7355",
+      "bytes": 303488
+    },
+    {
+      "product": "client",
+      "logical": "/models/mechanisms/gain_joint_action.glb",
+      "sha256": "fcb164ad50bb52d22fa0b3aa66f63d515d40c9fef372060997ae3d62fa0a1fde",
+      "bytes": 185552
+    },
+    {
+      "product": "client",
+      "logical": "/models/mechanisms/loss_joint_action.glb",
+      "sha256": "0323a384103f271627786c5c8ef3ba98ac1b488a03e2096c26617442250df0f6",
+      "bytes": 136796
+    },
+    {
+      "product": "client",
+      "logical": "/models/mechanisms/punch-rebuild-r1.glb",
+      "sha256": "aef0b2f39adcbb29eaa3f449e22804093f5efe02e1d0113ca35500cd75cb25b6",
+      "bytes": 474808
+    },
+    {
+      "product": "client",
+      "logical": "/models/mechanisms/punch_outboard_joint.glb",
+      "sha256": "ff8a8d4431fd08d4cc0111133ad9f0af1ea8abf3197131f5f6c6dfba0d6fa956",
+      "bytes": 380660
+    },
+    {
+      "product": "client",
+      "logical": "/models/mechanisms/trip_joint.glb",
+      "sha256": "70c96cc02f6db99d9ec8650a81f519a39c526d8485231d632ce2908879165641",
+      "bytes": 108676
+    },
+    {
+      "product": "client",
+      "logical": "/models/mechanisms/trip_telescopic_v1.2f331432.glb",
+      "sha256": "2f331432d72ef78d33c2aadd355885f25ca9f670d4d7f37b36e0c27b6db1046f",
+      "bytes": 134288
+    },
+    {
+      "product": "client",
+      "logical": "/models/mechanisms/warp_joint_action.glb",
+      "sha256": "bd5122db40a1c86889ee423787d818f278765d0e48ce30cca9f2fcea935a1b19",
+      "bytes": 226048
+    },
+    {
+      "product": "client",
+      "logical": "/models/second-wind/bite-mark-were.glb",
+      "sha256": "420adfdb1540c95fd1c0777a5a128979e41fbcdb347b564b474dfc66475122f5",
+      "bytes": 60952
+    },
+    {
+      "product": "client",
+      "logical": "/models/second-wind/bite-mark.glb",
+      "sha256": "9e5ae2a4d87cf193a17c9e64bcf658b19057abcd7396c83e5271997e3fc27e47",
+      "bytes": 82360
+    },
+    {
+      "product": "client",
+      "logical": "/models/second-wind/blunderdog.glb",
+      "sha256": "e594780f71ea90ea5ae1e99205768e5e6f959cad2bfc8adfa300f5ca84e561fd",
+      "bytes": 54772
+    },
+    {
+      "product": "client",
+      "logical": "/models/second-wind/cheatah.glb",
+      "sha256": "3f5df0366256aa2b84428211741cecb3c363e46ce9a3cc1d609a4c93006b8bc0",
+      "bytes": 63204
+    },
+    {
+      "product": "client",
+      "logical": "/models/second-wind/critic.glb",
+      "sha256": "c0b6d667ba55137e6dca629ac5fec8124e427d6e8d3d3cf13269cca68ba89202",
+      "bytes": 56092
+    },
+    {
+      "product": "client",
+      "logical": "/models/second-wind/diva.glb",
+      "sha256": "1799347378ef26d37727d105e4a63df35ff93f59bc6020c7aae2ff38c1dea6c4",
+      "bytes": 40028
+    },
+    {
+      "product": "client",
+      "logical": "/models/second-wind/doppelgangster.glb",
+      "sha256": "6fa60b4154babd705ea7c85d1944b7a47a927d1cee8236708b02c8f3939a15fd",
+      "bytes": 77708
+    },
+    {
+      "product": "client",
+      "logical": "/models/second-wind/gloth.glb",
+      "sha256": "6caa5e5e43a9406c17825294a8406602817fb5a694db5a4eac09cf5ffcee805f",
+      "bytes": 46428
+    },
+    {
+      "product": "client",
+      "logical": "/models/second-wind/hog-knight-hog.glb",
+      "sha256": "b5aca1fdb6d814028f6db99ce1f086cce9283e5c7de16375431b73d32e9ae1bd",
+      "bytes": 85852
+    },
+    {
+      "product": "client",
+      "logical": "/models/second-wind/hog-knight.glb",
+      "sha256": "c712119a7a82b968f48f896ce9465d2e4883025e3a141a576d9e612fdfeb8a2d",
+      "bytes": 65496
+    },
+    {
+      "product": "client",
+      "logical": "/models/second-wind/hopfrog.glb",
+      "sha256": "1ae468437570730d8712e4e7903d05368347c2d7c9517476c20e5b809ee6ccdc",
+      "bytes": 36544
+    },
+    {
+      "product": "client",
+      "logical": "/models/second-wind/hotel.glb",
+      "sha256": "bdfa6f6c9c1a7eac7f68c644f0bff2e6de9f62570b6a6ea13dc76953365667b5",
+      "bytes": 39480
+    },
+    {
+      "product": "client",
+      "logical": "/models/second-wind/icarus.glb",
+      "sha256": "10c74b9c47b218330f8491ff577ffd36c7e7137006a11194c5af9a490bf3cf1b",
+      "bytes": 72904
+    },
+    {
+      "product": "client",
+      "logical": "/models/second-wind/kingtripper.glb",
+      "sha256": "552544444bad4d614873800abef7adf3ffeae542ce613899020f7c66c56d1c90",
+      "bytes": 68112
+    },
+    {
+      "product": "client",
+      "logical": "/models/second-wind/kraken.glb",
+      "sha256": "6215fae70882e7026c8a3c7933259808863e446325d4ade6d3e3590232509689",
+      "bytes": 94768
+    },
+    {
+      "product": "client",
+      "logical": "/models/second-wind/le-saboteur.glb",
+      "sha256": "c3b96c8252cbc3e7a53e2ae86775fbe9a034dc27b0f2e98c312a361cf2c0d0b2",
+      "bytes": 61052
+    },
+    {
+      "product": "client",
+      "logical": "/models/second-wind/magical-athlete.glb",
+      "sha256": "77eb9908209b8b2af0a360aff78b437d135a043aa87af3072b1ba01695688a91",
+      "bytes": 47004
+    },
+    {
+      "product": "client",
+      "logical": "/models/second-wind/mole.glb",
+      "sha256": "83df021f2038a5d7e541c56de6dedabcc94cc134689ceba4b4a27729cb6bb86f",
+      "bytes": 44776
+    },
+    {
+      "product": "client",
+      "logical": "/models/second-wind/mr-dice-guy.glb",
+      "sha256": "60de8dad8b8e04983f4d929efe346a4adb5d8628db81763fb970bafebb4633ec",
+      "bytes": 58732
+    },
+    {
+      "product": "client",
+      "logical": "/models/second-wind/mush.glb",
+      "sha256": "a26c7cbd77f9c46163f2c2c60bfc608ddf2b15ff9b64da8f134d0f5373cfae36",
+      "bytes": 71560
+    },
+    {
+      "product": "client",
+      "logical": "/models/second-wind/nemesis.glb",
+      "sha256": "740556a629ab8d0d34598a0d72830afad9cb5cd0065de9ee48905813f530f583",
+      "bytes": 53616
+    },
+    {
+      "product": "client",
+      "logical": "/models/second-wind/nepo-baby.glb",
+      "sha256": "fdc76ed7ca286894a4d2438333b6cfd4fa3bef04f536ae659626e2d9a7433a62",
+      "bytes": 49272
+    },
+    {
+      "product": "client",
+      "logical": "/models/second-wind/null.glb",
+      "sha256": "758e7c0348b0a2aad5b730ab6ed8826312760948eda4b4c922e91c224acac290",
+      "bytes": 40468
+    },
+    {
+      "product": "client",
+      "logical": "/models/second-wind/overtaker.glb",
+      "sha256": "f4b198f42d57be9b2f92cfdcfa23b6e4c3fbb300c94c75acbcfbdd54aae1f1d9",
+      "bytes": 59908
+    },
+    {
+      "product": "client",
+      "logical": "/models/second-wind/party-pooper.glb",
+      "sha256": "912d951d04bc86ab2b8d29c3b31d163f03261ed256a2ef6afb638bc740839509",
+      "bytes": 66440
+    },
+    {
+      "product": "client",
+      "logical": "/models/second-wind/penguin.glb",
+      "sha256": "3d8125de9e6cfcb45f8ba934238ada2675223ea114c6b5b488327a717f749b9e",
+      "bytes": 45612
+    },
+    {
+      "product": "client",
+      "logical": "/models/second-wind/re-runner.glb",
+      "sha256": "680bc5c52450e0e7701b6b2c1889596b4446e239b14de292950a8b36b72c4163",
+      "bytes": 49504
+    },
+    {
+      "product": "client",
+      "logical": "/models/second-wind/show-off.glb",
+      "sha256": "55109463c47bb39f1a9b6e1edb543dfdc00d0a264b996644765ad43e698d5085",
+      "bytes": 58064
+    },
+    {
+      "product": "client",
+      "logical": "/models/second-wind/soulmate.glb",
+      "sha256": "0841b04018a0c33bb22b4a4aa3fc5c019bf564ec7445437953bfdae390c8e215",
+      "bytes": 42464
+    },
+    {
+      "product": "client",
+      "logical": "/models/second-wind/speed-demon.glb",
+      "sha256": "6b1bfbc5d332cd8bdc0a2808ec687c5096c218a1d308a5f02e5b5b4ec22933a2",
+      "bytes": 73860
+    },
+    {
+      "product": "client",
+      "logical": "/models/second-wind/spoilsport.glb",
+      "sha256": "8bd676a93787bed8698d3f9e21fa422c049bd8fba66bd3c69112e400c8a45523",
+      "bytes": 73392
+    },
+    {
+      "product": "client",
+      "logical": "/models/second-wind/stepdad.glb",
+      "sha256": "ef912588135c61eb023aa5032be87aec454f43c339642791da20e8c3ff165676",
+      "bytes": 52352
+    },
+    {
+      "product": "client",
+      "logical": "/models/second-wind/streaker.glb",
+      "sha256": "e167ddbf5d5a3a6859bfac11551b875e3b247806eb2fed15b6754dbe4a73f201",
+      "bytes": 39244
+    },
+    {
+      "product": "client",
+      "logical": "/models/second-wind/stunner.glb",
+      "sha256": "9d298dde1be3aa2f619247c72b5b5ed59379a4055dfc6a826ae8647dadeeaf12",
+      "bytes": 70732
+    },
+    {
+      "product": "client",
+      "logical": "/models/second-wind/switcharoo.glb",
+      "sha256": "9037c56508bfd1833123c22e775ae7b23c564a0719070956e9ad2c39f1a41ded",
+      "bytes": 58644
+    },
+    {
+      "product": "client",
+      "logical": "/models/second-wind/tail.glb",
+      "sha256": "b2f6164a4c241999cf60917f36cd470f4f5f89c419c169a971a701062828ba14",
+      "bytes": 32400
+    },
+    {
+      "product": "client",
+      "logical": "/models/second-wind/the-hose.glb",
+      "sha256": "4bd1c88f363b8251ba5504d453028ad1826fe2fd0b7bbf06549c90b481582473",
+      "bytes": 78156
+    },
+    {
+      "product": "client",
+      "logical": "/models/second-wind/understudy.glb",
+      "sha256": "7dd93a43282ce07b9e5473e14e0db8327e7c6d1b32420c99feaa9f7f8e2f903c",
+      "bytes": 55964
+    },
+    {
+      "product": "client",
+      "logical": "/models/stadium-v7/athlete_bleachers.glb",
+      "sha256": "ebb0e33254466f0fe2e0ac5ee7efa6f8e3335ebc822454c4f2c9de92757279ea",
+      "bytes": 353792
+    },
+    {
+      "product": "client",
+      "logical": "/models/stadium-v7/athlete_bunting.glb",
+      "sha256": "d3989d31d4cb5599341cebe899036f18b0d2db118eb3e35a67dbaff8c5de9203",
+      "bytes": 41208
+    },
+    {
+      "product": "client",
+      "logical": "/models/stadium-v7/athlete_finish_gate.glb",
+      "sha256": "08d7b3deef8ec7dd48dbf61e95c52592c19fe1fc60a02b517c8be3fc3138952d",
+      "bytes": 124608
+    },
+    {
+      "product": "client",
+      "logical": "/models/stadium-v7/athlete_infield_plan.glb",
+      "sha256": "30d270b36baf1c9ee0035de4852113e8a787b27ba589e50e440ff1f0ddca0f0f",
+      "bytes": 282596
+    },
+    {
+      "product": "client",
+      "logical": "/models/stadium-v7/athlete_officials_kiosk.glb",
+      "sha256": "14dc284be1cc94c0cf314c51b5da312999c214f731b0a81634e387c50da1457b",
+      "bytes": 74856
+    },
+    {
+      "product": "client",
+      "logical": "/models/stadium-v7/athlete_pennant.glb",
+      "sha256": "1135de146562e9e77895139e9eb1fc40dc7424d875f018d7c978bf4a0db89bd8",
+      "bytes": 18424
+    },
+    {
+      "product": "client",
+      "logical": "/models/stadium-v7/athlete_planter.glb",
+      "sha256": "f706b413f2744bfc05b6dd9b19a453e1594e7ef6c70f0bddc9e5e7b4332dc1fe",
+      "bytes": 121112
+    },
+    {
+      "product": "client",
+      "logical": "/models/stadium-v7/athlete_podium.glb",
+      "sha256": "e91d607b803de66c90b06a0159932978da97aff5256dc8b30ae57ba6095cea33",
+      "bytes": 100260
+    },
+    {
+      "product": "client",
+      "logical": "/models/stadium-v7/athlete_rail_corner.glb",
+      "sha256": "22dc9b7468ca2e6968ac352fb212a01580b7fb280327072e39f9f97f449bc826",
+      "bytes": 38340
+    },
+    {
+      "product": "client",
+      "logical": "/models/stadium-v7/athlete_rail_straight.glb",
+      "sha256": "505dbf2bdb887d945f16761901653c20058534c41552ee1c925a82c756978c45",
+      "bytes": 42144
+    },
+    {
+      "product": "client",
+      "logical": "/models/stadium-v7/athlete_scoreboard.glb",
+      "sha256": "72f7abebffa864027bf39c1812b877f33365b4536ff2161b9af94b5e82f2c52b",
+      "bytes": 65540
+    },
+    {
+      "product": "client",
+      "logical": "/models/stadium-v7/athlete_spectators_strip.glb",
+      "sha256": "b100952a24cc7624d3f3939c45ef57da92d70c5488909f039f35dbecc060b4a6",
+      "bytes": 292092
+    },
+    {
+      "product": "client",
+      "logical": "/models/stadium-v7/athlete_start_gate.glb",
+      "sha256": "3bf9028d481a8aa574678eb8eb87ee3be4baaebd11d2d1179e9a10e0ff15e2bd",
+      "bytes": 191880
+    },
+    {
+      "product": "client",
+      "logical": "/models/stadium-v7/athlete_start_platform.glb",
+      "sha256": "5a8c1701b3cbd1caa9165ebaf57407848570d984c86906a99b853c709524f7f4",
+      "bytes": 121436
+    },
+    {
+      "product": "client",
+      "logical": "/models/stadium-v7/athlete_tile_coral.glb",
+      "sha256": "3472d8b6a333087f6c2b2796c3a7fb200a97f8692838b1b88fb8ca48c68c677f",
+      "bytes": 106812
+    },
+    {
+      "product": "client",
+      "logical": "/models/stadium-v7/athlete_tile_gold.glb",
+      "sha256": "28240513daab7bb3bc56484a2c0eb5a257d55eddd425f1d52a7c530261d7983e",
+      "bytes": 106804
+    },
+    {
+      "product": "client",
+      "logical": "/models/stadium-v7/athlete_tile_mint.glb",
+      "sha256": "c09d587aefa3065127a7f991108fc762a8c52e13fbcc4d942c9ba2617b1f9739",
+      "bytes": 106808
+    },
+    {
+      "product": "client",
+      "logical": "/models/stadium-v7/athlete_tile_neutral.glb",
+      "sha256": "652ae6d1f3985ec3b8d285fe857e74c0705940a73b6edbe20a2db3dc43227723",
+      "bytes": 96740
+    },
+    {
+      "product": "client",
+      "logical": "/models/stadium-v7/athlete_topiary.glb",
+      "sha256": "934655249edbab40f4a6f2ebc4a9c159f07c6bb4417f8e303886b8dfe5e4df69",
+      "bytes": 36696
+    },
+    {
+      "product": "client",
+      "logical": "/models/toy-racers-economy.glb",
+      "sha256": "e601a32432d8394eb24e13f78d4183bc8b160c6c6fb2c47db161c373d3b04bd1",
+      "bytes": 1082256
+    },
+    {
+      "product": "client",
+      "logical": "/models/toy-racers.glb",
+      "sha256": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2",
+      "bytes": 1962520
+    },
+    {
+      "product": "client",
+      "logical": "/models/tracks/whirly-world.glb",
+      "sha256": "8e9b8f21773256526032f36d69722791fa8457af663549c2b1266ffbeabf8d9e",
+      "bytes": 1970972
+    },
+    {
+      "product": "client",
+      "logical": "/models/wurstii/wurstii-bart-simpson.glb",
+      "sha256": "3d6775702f98bb032c668c5cc520569a8a58c0c40737b2f30ce7d0cd1d2dbba2",
+      "bytes": 53664
+    },
+    {
+      "product": "client",
+      "logical": "/models/wurstii/wurstii-bucky-ohare.glb",
+      "sha256": "edd4ea9698645e6ef530af3b528e779713d8c71d1322c7c3c7dbc50aab82753c",
+      "bytes": 56932
+    },
+    {
+      "product": "client",
+      "logical": "/models/wurstii/wurstii-bullet-bill.glb",
+      "sha256": "3ee33fa67ca98eb29369cb3ecd0e2dce0461b6d735495971739165d7ba5a0014",
+      "bytes": 57696
+    },
+    {
+      "product": "client",
+      "logical": "/models/wurstii/wurstii-burt.glb",
+      "sha256": "a97fc8fdb9ce3d09552e27b94e449616fbe39b73abf35d98ed0601a0cb49bd21",
+      "bytes": 56480
+    },
+    {
+      "product": "client",
+      "logical": "/models/wurstii/wurstii-chip-n-dale.glb",
+      "sha256": "eea0efebb96ec7d145001ecc90dffa62d30ae63648369d0e4ffe64f24e18aa98",
+      "bytes": 59196
+    },
+    {
+      "product": "client",
+      "logical": "/models/wurstii/wurstii-diddy-kong.glb",
+      "sha256": "0204e761b9539dd8adaaf23293336be9c5ae946f260fea61f435b569802a06de",
+      "bytes": 63896
+    },
+    {
+      "product": "client",
+      "logical": "/models/wurstii/wurstii-dixie-kong.glb",
+      "sha256": "67ad21b7757d1a8deabe99d43abbdb355cca81e32d5e24d1cf55b264e5208833",
+      "bytes": 67480
+    },
+    {
+      "product": "client",
+      "logical": "/models/wurstii/wurstii-dr-wily.glb",
+      "sha256": "d9ca8851bdb6c75332fb9f8ac5cb2bf52cb5178c392b385718ff4f0aa2cdea29",
+      "bytes": 51868
+    },
+    {
+      "product": "client",
+      "logical": "/models/wurstii/wurstii-dry-bones.glb",
+      "sha256": "d684ecb8cc500ffd662c751772468f93147ff514e72448168f5e4d3a2aafc802",
+      "bytes": 53692
+    },
+    {
+      "product": "client",
+      "logical": "/models/wurstii/wurstii-eric.glb",
+      "sha256": "47d607087ed5dfc0911fb1ad529e64fc318e3a5d67f3306f7e07f463601a3fce",
+      "bytes": 62148
+    },
+    {
+      "product": "client",
+      "logical": "/models/wurstii/wurstii-falco-lombardi.glb",
+      "sha256": "89e321449655c9704b76a44ce32b0ab0adc836f595bf6394e1acaeb9dbec6254",
+      "bytes": 49188
+    },
+    {
+      "product": "client",
+      "logical": "/models/wurstii/wurstii-fluffin-puffins.glb",
+      "sha256": "de4dbde332841d439abc4cdc958f832a306f329473e71b4832870931ff34aabd",
+      "bytes": 76272
+    },
+    {
+      "product": "client",
+      "logical": "/models/wurstii/wurstii-frogger.glb",
+      "sha256": "86abb2396306b5b7706c84b8db3ce78f6edd5a76a8b5441f8cce88165cc9ce55",
+      "bytes": 44244
+    },
+    {
+      "product": "client",
+      "logical": "/models/wurstii/wurstii-hoagie.glb",
+      "sha256": "d3bbcd17c4075d032c7920449901f66157252db6970ece3cd3024003f5edd70b",
+      "bytes": 55268
+    },
+    {
+      "product": "client",
+      "logical": "/models/wurstii/wurstii-jason-vorhees.glb",
+      "sha256": "dc7666348b3643f97bc8bfebc0b571e9871dd9fff149376554d8ac02ffdc8eb1",
+      "bytes": 50656
+    },
+    {
+      "product": "client",
+      "logical": "/models/wurstii/wurstii-knuckles.glb",
+      "sha256": "42446c3d37391bd28ec01227280a9b23393e69826fa57d442c2004d7376c46a0",
+      "bytes": 54124
+    },
+    {
+      "product": "client",
+      "logical": "/models/wurstii/wurstii-lakitu.glb",
+      "sha256": "96b39ce999e79ba13097a497e985ab5169a4f8d3ae09dd3c81d067d1b78769d7",
+      "bytes": 64740
+    },
+    {
+      "product": "client",
+      "logical": "/models/wurstii/wurstii-lizzie.glb",
+      "sha256": "dc623db06f04851a0f272a687b59354e91a92be50ccd7a07ece655cd56b8a549",
+      "bytes": 48716
+    },
+    {
+      "product": "client",
+      "logical": "/models/wurstii/wurstii-magikarp.glb",
+      "sha256": "ea85fe278315828b753152cbfd398a4882bfa9cf9711b0370ab929e44631a69b",
+      "bytes": 45460
+    },
+    {
+      "product": "client",
+      "logical": "/models/wurstii/wurstii-mario.glb",
+      "sha256": "e9669253ddb76c7875af88682a2ea4f1f67e1eb8cfbf94baf3b09433e9e2f7b7",
+      "bytes": 76784
+    },
+    {
+      "product": "client",
+      "logical": "/models/wurstii/wurstii-mr-game-and-watch.glb",
+      "sha256": "5e50a5524bcfcf27fb04e5851930b51ab253a41d436ac01981cda1f4c4d1390b",
+      "bytes": 37340
+    },
+    {
+      "product": "client",
+      "logical": "/models/wurstii/wurstii-olaf.glb",
+      "sha256": "72138bae87c7d437c0954205ae3cd155d5c5ebfd740b235a57b2f83846beabb8",
+      "bytes": 67036
+    },
+    {
+      "product": "client",
+      "logical": "/models/wurstii/wurstii-piranha-plant.glb",
+      "sha256": "b90034896112dc34c27b25870ddcff274830f67e677a497f8dad8ef4921306d4",
+      "bytes": 48640
+    },
+    {
+      "product": "client",
+      "logical": "/models/wurstii/wurstii-pitfall-harry.glb",
+      "sha256": "0ca6ab8895fdeb7fb2ff7420927d363f9b3b754694a3953e8588905bbf670882",
+      "bytes": 53596
+    },
+    {
+      "product": "client",
+      "logical": "/models/wurstii/wurstii-rockford.glb",
+      "sha256": "684148bf8965b51ce5689edb2426658c8bf3f386b2055f0e0f68e7dbcc0925e4",
+      "bytes": 54584
+    },
+    {
+      "product": "client",
+      "logical": "/models/wurstii/wurstii-rollercoaster-tycoon-guest.glb",
+      "sha256": "d9f29af65d1cb8f81db888643c79a5c5c9721f48e9ae6ad88f634bdafe622e2d",
+      "bytes": 51728
+    },
+    {
+      "product": "client",
+      "logical": "/models/wurstii/wurstii-simon-belmont.glb",
+      "sha256": "1e0500461b3b83495be2e004dc78fa9018cfd56c1bd8e31a9e13792ec3ed4532",
+      "bytes": 53540
+    },
+    {
+      "product": "client",
+      "logical": "/models/wurstii/wurstii-spot.glb",
+      "sha256": "4bef917c23b24727988223526d8d8e6cab31ed32975ada6c7f65720ba2b80997",
+      "bytes": 42956
+    },
+    {
+      "product": "client",
+      "logical": "/models/wurstii/wurstii-tails.glb",
+      "sha256": "0cf92c404a29486a28508c4a52b94eb8cc2f25d92003c21d687536fd98459dc3",
+      "bytes": 57144
+    },
+    {
+      "product": "client",
+      "logical": "/models/wurstii/wurstii-yoshi.glb",
+      "sha256": "720fca7a55b4556049b818aa4cc5901a4fe0ae65299a60ea9852044a786a28b1",
+      "bytes": 54488
+    },
+    {
+      "product": "browser",
+      "logical": "/models/banana/banana-economy.glb",
+      "sha256": "eb5c77d8709fb3f55fa716f9bda68944b88169cccdbcc1d3aad2a0b396f6113b",
+      "bytes": 38272
+    },
+    {
+      "product": "browser",
+      "logical": "/models/banana/banana.glb",
+      "sha256": "25bad0ab653cceb00f9d93b0013e7bc0ffee913c764d2b9f99803adce4e5372d",
+      "bytes": 44512
+    },
+    {
+      "product": "browser",
+      "logical": "/models/environment-rebuilt-v2/bleachers.glb",
+      "sha256": "af4d188c511ddf34dcdb6575f543c7baf0a8f6572c2def5a8cf115c8a422e967",
+      "bytes": 262336
+    },
+    {
+      "product": "browser",
+      "logical": "/models/environment-rebuilt-v2/boardwalks_base.glb",
+      "sha256": "f842becc1cfdce6c1d050f6ebec23c3463b796ee348d27c56215be600e3728e2",
+      "bytes": 73856
+    },
+    {
+      "product": "browser",
+      "logical": "/models/environment-rebuilt-v2/boardwalks_furniture.glb",
+      "sha256": "004404c2b23631801e0d2f5765af812a48793ce36b23be0998a24865d7fe7823",
+      "bytes": 115144
+    },
+    {
+      "product": "browser",
+      "logical": "/models/environment-rebuilt-v2/boardwalks_landscape_reexport_v1.glb",
+      "sha256": "60bf7edcac36fc300b06b3dd942c77d90003f4ea1b01987b57f69c048e7c687a",
+      "bytes": 612284
+    },
+    {
+      "product": "browser",
+      "logical": "/models/environment-rebuilt-v2/bridges_base.glb",
+      "sha256": "43024a1c49c108aeb487b4b797b3c6bb8864538bf54d0ba3b698bf852e0368fe",
+      "bytes": 80072
+    },
+    {
+      "product": "browser",
+      "logical": "/models/environment-rebuilt-v2/bridges_furniture.glb",
+      "sha256": "70e78bf169d74dc55302e7d69db21500e4329078a62532e7765f61a5d5867f61",
+      "bytes": 116240
+    },
+    {
+      "product": "browser",
+      "logical": "/models/environment-rebuilt-v2/bridges_landscape_reexport_v1.glb",
+      "sha256": "c3d74563b29aa8cb10605dbb5312cfdfc83dc79625db19e4b769b4c9f79be1fb",
+      "bytes": 833112
+    },
+    {
+      "product": "browser",
+      "logical": "/models/environment-rebuilt-v2/finish_gate.glb",
+      "sha256": "c51312cac07f0743d1ca2377dae8355bfdbeabbcc9044e7d2d9765ac5012eb54",
+      "bytes": 92452
+    },
+    {
+      "product": "browser",
+      "logical": "/models/environment-rebuilt-v2/grandstand_rostrum.glb",
+      "sha256": "3891481f58a453a70d56bb6d36c55d5cce5c02a7cfcd2df9261f2bd6f44b475f",
+      "bytes": 42756
+    },
+    {
+      "product": "browser",
+      "logical": "/models/environment-rebuilt-v2/official_rostrum.glb",
+      "sha256": "ba867c174143cba8c7a2cb1ae8c749f698edec9447e42c67e3777de418ee04d4",
+      "bytes": 8000
+    },
+    {
+      "product": "browser",
+      "logical": "/models/environment-rebuilt-v2/officials_kiosk.glb",
+      "sha256": "f68de4cb4eac921518e8dfa78307b435cfd78ff8c0d20235ab1b242d726ab887",
+      "bytes": 56444
+    },
+    {
+      "product": "browser",
+      "logical": "/models/environment-rebuilt-v2/podium.glb",
+      "sha256": "daac91ddfa81acd44013d6560e57cdccf39f87dd867d0737d3ebca190dec890f",
+      "bytes": 74384
+    },
+    {
+      "product": "browser",
+      "logical": "/models/environment-rebuilt-v2/podium_plinth.glb",
+      "sha256": "df3165332120872f50ad1ffb325a52f302a98756d3b71967b28918403ddb3f69",
+      "bytes": 9160
+    },
+    {
+      "product": "browser",
+      "logical": "/models/environment-rebuilt-v2/scoreboard.glb",
+      "sha256": "019c4166ff445c5aff8ee74ebd9215d74a9efea9aa3746fb88cbdd9c81d7b549",
+      "bytes": 47320
+    },
+    {
+      "product": "browser",
+      "logical": "/models/environment-rebuilt-v2/spectators.glb",
+      "sha256": "b60a7ddb7fdca1993f589e1f48617e5d314456045428f952d9f0ec5e7a198a66",
+      "bytes": 204692
+    },
+    {
+      "product": "browser",
+      "logical": "/models/environment-rebuilt-v2/squiggle_base.glb",
+      "sha256": "94b8d55dc02c8034838090102e1e6771e6dc4bf16b5402db25074cddf10f4793",
+      "bytes": 80068
+    },
+    {
+      "product": "browser",
+      "logical": "/models/environment-rebuilt-v2/squiggle_furniture.glb",
+      "sha256": "ffffbfca78e8d7a5da8a77d87d817d477eb1e6510560a96ec5c15e9c00e27596",
+      "bytes": 105164
+    },
+    {
+      "product": "browser",
+      "logical": "/models/environment-rebuilt-v2/squiggle_landscape_reexport_v1.glb",
+      "sha256": "e4dfa74a8e9a1b5e6a58c22fd615b2cdbe5cc2af5a16f427596618f320ff1d08",
+      "bytes": 544892
+    },
+    {
+      "product": "browser",
+      "logical": "/models/environment-rebuilt-v2/start_gate.glb",
+      "sha256": "76ca081e1fe1407d6b574b3aaee1ff409dff90e838dd0e251a4fdc00bb97831c",
+      "bytes": 144496
+    },
+    {
+      "product": "browser",
+      "logical": "/models/environment-rebuilt-v2/tree_elm_rebuilt_lod2.glb",
+      "sha256": "7de3c13954b48a0eb3f2763baaa5c16980a079c5ab5995a955f2a3a89456db58",
+      "bytes": 334352
+    },
+    {
+      "product": "browser",
+      "logical": "/models/environment-rebuilt-v2/tree_maple_rebuilt_lod2.glb",
+      "sha256": "1bd23283396913472077482436d1493a81fe7ee8ff1edf7105886ca28643df1c",
+      "bytes": 353572
+    },
+    {
+      "product": "browser",
+      "logical": "/models/environment-rebuilt-v2/tree_sapling_rebuilt_lod2.glb",
+      "sha256": "913f328637d1b23bba8603a4cbf48028e0fb957abd3033c31bef0ebab3583f40",
+      "bytes": 189424
+    },
+    {
+      "product": "browser",
+      "logical": "/models/extra-mile/extra-mile-broken-clock.glb",
+      "sha256": "ba1db9fe479ae2cc2283a0b381d940c826a362f1cc637cb8e50ef1239112baa8",
+      "bytes": 48180
+    },
+    {
+      "product": "browser",
+      "logical": "/models/extra-mile/extra-mile-cletus.glb",
+      "sha256": "468fc0ecc379ade6cc178f80ca873538b97a27a861c9460430f95b73efa5dcc8",
+      "bytes": 51536
+    },
+    {
+      "product": "browser",
+      "logical": "/models/extra-mile/extra-mile-doc-paradox.glb",
+      "sha256": "6b09041f554f1a8654d8590077bc7401f6ae2c1c1a569b3096932f8fdabdf95f",
+      "bytes": 65448
+    },
+    {
+      "product": "browser",
+      "logical": "/models/extra-mile/extra-mile-doctor-dice.glb",
+      "sha256": "eeb1a778c9b0684a8d677ae2b93163e4a038390888fe54cac3737167012368ac",
+      "bytes": 50344
+    },
+    {
+      "product": "browser",
+      "logical": "/models/extra-mile/extra-mile-dom-and-gary.glb",
+      "sha256": "dbe6af6beb502a10716fa3dc4576eb658507b3e28f0103e86faa8bd78a33e7d2",
+      "bytes": 59912
+    },
+    {
+      "product": "browser",
+      "logical": "/models/extra-mile/extra-mile-echo.glb",
+      "sha256": "d622cade5b96438a25530f48f28d9627d4be34cb3248a44744e7c875db30bba4",
+      "bytes": 37436
+    },
+    {
+      "product": "browser",
+      "logical": "/models/extra-mile/extra-mile-gingy.glb",
+      "sha256": "e4d9a9279d6da7fc08f388c5e1a8ea390d95f0e891ecff4db44fba86c4a6a35c",
+      "bytes": 64452
+    },
+    {
+      "product": "browser",
+      "logical": "/models/extra-mile/extra-mile-gluebert.glb",
+      "sha256": "b650f60f8481af52dc254120e51214b9ba4bd46e718d87a51d203a2e85acccf4",
+      "bytes": 35248
+    },
+    {
+      "product": "browser",
+      "logical": "/models/extra-mile/extra-mile-heads.glb",
+      "sha256": "ae09d3ac3b357a1aefbdc0c7f22e851d4a9ca8c88fdaafe11de437eb1c358129",
+      "bytes": 46384
+    },
+    {
+      "product": "browser",
+      "logical": "/models/extra-mile/extra-mile-honey-pot.glb",
+      "sha256": "8c5c7d637e9876d114aa476b43f2efbae949bd0504d97964e756dd221dd92ede",
+      "bytes": 62652
+    },
+    {
+      "product": "browser",
+      "logical": "/models/extra-mile/extra-mile-king-pete.glb",
+      "sha256": "2abbeb4582e7408bb9f04fb368d73b6fa6d281329e164e18993ddad7a8caf359",
+      "bytes": 63912
+    },
+    {
+      "product": "browser",
+      "logical": "/models/extra-mile/extra-mile-lazy-bones.glb",
+      "sha256": "a8ae3b7fd60bf717a6453ae7ad012edcb34eb4be234e5bccb6224a97276afe4b",
+      "bytes": 49068
+    },
+    {
+      "product": "browser",
+      "logical": "/models/extra-mile/extra-mile-marksman.glb",
+      "sha256": "15064dc54c9f592697b16eb3c7982ee4e891feeb0325cd543bfc3d1af37949ac",
+      "bytes": 41940
+    },
+    {
+      "product": "browser",
+      "logical": "/models/extra-mile/extra-mile-moneybags.glb",
+      "sha256": "0c9922ee2912032fd3fe1e1ef61d2f54bd904ac3d1a74ab71099c0ac3136200a",
+      "bytes": 54260
+    },
+    {
+      "product": "browser",
+      "logical": "/models/extra-mile/extra-mile-mr-fox.glb",
+      "sha256": "922c8f9726db685978fdf8f081f4eeada41cb5662a41897940e1e260f390246e",
+      "bytes": 57476
+    },
+    {
+      "product": "browser",
+      "logical": "/models/extra-mile/extra-mile-oddball.glb",
+      "sha256": "2c415a558c3e5b327eaf30152e7bd84c72de0b57c6a33dd2a09af4a755233a25",
+      "bytes": 52560
+    },
+    {
+      "product": "browser",
+      "logical": "/models/extra-mile/extra-mile-pooh.glb",
+      "sha256": "c7007af9179e607f735d0a7cafbe778eff10d5d7c07e072c6a41156decc5c191",
+      "bytes": 46288
+    },
+    {
+      "product": "browser",
+      "logical": "/models/extra-mile/extra-mile-robin-hood.glb",
+      "sha256": "a7e547d9a9b3da60bfec9ad78193569bc4426acb4dba725bb25f2d7a8c0203a0",
+      "bytes": 66276
+    },
+    {
+      "product": "browser",
+      "logical": "/models/extra-mile/extra-mile-saint-nick.glb",
+      "sha256": "8c5a8bda1cfc6196a6710245846eb3413b00432c1ed86cf72ffd55fe791d8ef4",
+      "bytes": 60820
+    },
+    {
+      "product": "browser",
+      "logical": "/models/extra-mile/extra-mile-school-bully.glb",
+      "sha256": "40b1df04656b7e64a7741d45bffd58f9723a8f865ac4a69019f7c77f960ba840",
+      "bytes": 52460
+    },
+    {
+      "product": "browser",
+      "logical": "/models/extra-mile/extra-mile-scout.glb",
+      "sha256": "82ecc84087f0d75b27d4a60b14753ee5c373b7713e0e68a10c5237222d6733cb",
+      "bytes": 58356
+    },
+    {
+      "product": "browser",
+      "logical": "/models/extra-mile/extra-mile-shuffler.glb",
+      "sha256": "0c522b6488c81a53e28037f8595e9d2efac58e8b5ae94954a7e979923c805a91",
+      "bytes": 42040
+    },
+    {
+      "product": "browser",
+      "logical": "/models/extra-mile/extra-mile-silly-goose.glb",
+      "sha256": "7e466e82a5f912fdf688f4a0e0af0bc5a329fd22471afd8fbd2682da2cc5982b",
+      "bytes": 41820
+    },
+    {
+      "product": "browser",
+      "logical": "/models/extra-mile/extra-mile-snake-eyes.glb",
+      "sha256": "e912b5a11b98203d0cad6353e708e0f3f493af18ce70458ddf80f817fe4e55b3",
+      "bytes": 41656
+    },
+    {
+      "product": "browser",
+      "logical": "/models/extra-mile/extra-mile-snub.glb",
+      "sha256": "36617a6f6b2f6118d570b0d7530db8446d11e2172c946b530927b0f0c8b59ae9",
+      "bytes": 50540
+    },
+    {
+      "product": "browser",
+      "logical": "/models/extra-mile/extra-mile-terrible-toddler.glb",
+      "sha256": "1ac24c794182e7320ff893bc90b34b4f596be79a64764775666386ff1ac92081",
+      "bytes": 39136
+    },
+    {
+      "product": "browser",
+      "logical": "/models/extra-mile/extra-mile-thief.glb",
+      "sha256": "6718a49f4a1a7ec1afaa3b81f581c22fa5439452d7d6bff0579d781b9b71e2d1",
+      "bytes": 54500
+    },
+    {
+      "product": "browser",
+      "logical": "/models/extra-mile/extra-mile-toll-troll.glb",
+      "sha256": "3f1b988d69fe8dab6211a93cab25726893bd0e4d3081e42fc5c2b303ab444925",
+      "bytes": 50028
+    },
+    {
+      "product": "browser",
+      "logical": "/models/extra-mile/extra-mile-totally-fair-ref.glb",
+      "sha256": "38418bf916ac490489b41d349a4f9ec7ed4300ebc88819495b8dd09f5cd4ce60",
+      "bytes": 56128
+    },
+    {
+      "product": "browser",
+      "logical": "/models/extra-mile/extra-mile-whisper.glb",
+      "sha256": "7a9c33c99199d78a577946161a7ab760811579ee515dc540ecacc1346e7eaef1",
+      "bytes": 39052
+    },
+    {
+      "product": "browser",
+      "logical": "/models/extra-mile/extra-mile-witch-hazel.glb",
+      "sha256": "e76e6f3522cecb1a856e2a9f7f29bbb9ae9eb9c5c5df1476c7a1ede772666e04",
+      "bytes": 47976
+    },
+    {
+      "product": "browser",
+      "logical": "/models/floodlights-rebuilt-v3/base.glb",
+      "sha256": "1104dfa5c5dbc4181448e43d84559f24bbb2b92334cf2ae3cd64e93466389309",
+      "bytes": 12348
+    },
+    {
+      "product": "browser",
+      "logical": "/models/floodlights-rebuilt-v3/housing.glb",
+      "sha256": "0b4d0ccb58bc8a7fb4dec5efd4d531cf6dfd80945b5f71163b3cb4fa8fbeaf3a",
+      "bytes": 29464
+    },
+    {
+      "product": "browser",
+      "logical": "/models/floodlights-rebuilt-v3/lenses.glb",
+      "sha256": "28cc5396e6e9c9f2b42a05d1a0976131654f92b2b426e5381963c3d6dd5efb32",
+      "bytes": 2520
+    },
+    {
+      "product": "browser",
+      "logical": "/models/floodlights-rebuilt-v3/pole.glb",
+      "sha256": "cbd7f2ee910e5a62ecba3bb229d5585082ca154a6a0b36d44e9ce01cffb46bcd",
+      "bytes": 2464
+    },
+    {
+      "product": "browser",
+      "logical": "/models/floodlights-rebuilt-v3/yoke.glb",
+      "sha256": "04b130d8b4d2e12c14974b0485cb025eb364bbfcf2ba88f255db8c6eafad691e",
+      "bytes": 11092
+    },
+    {
+      "product": "browser",
+      "logical": "/models/leaf/leaf-catfish.glb",
+      "sha256": "b0446b22c71e5d56eb52fbe5e72f2b6147b8999b63c3197d059f863f0b63c390",
+      "bytes": 59676
+    },
+    {
+      "product": "browser",
+      "logical": "/models/leaf/leaf-crash-dummy.glb",
+      "sha256": "5574b659d73304dce6f6112451052c14b87757119d95fb6854ef89696b5cf5dd",
+      "bytes": 54460
+    },
+    {
+      "product": "browser",
+      "logical": "/models/leaf/leaf-dark-horse.glb",
+      "sha256": "2d8e9d5567fd56137894dcac32572b6adf6a1c38aa313201f839dd5b9ec010b1",
+      "bytes": 47968
+    },
+    {
+      "product": "browser",
+      "logical": "/models/leaf/leaf-filmmaker.glb",
+      "sha256": "b7b43e5859962f6c75a3634d9bce4bf9f42a2c6269f2e2d1f929e18ab6e66c30",
+      "bytes": 58088
+    },
+    {
+      "product": "browser",
+      "logical": "/models/leaf/leaf-kangaroo.glb",
+      "sha256": "293ef3bbd966e399ad10dceba78594c309faacba9b9717ffd0e224234600e3a1",
+      "bytes": 47544
+    },
+    {
+      "product": "browser",
+      "logical": "/models/leaf/leaf-loan-shark.glb",
+      "sha256": "50c648e8d041dd121455fd89e7f1d3361f684656ffa60d606b60085094fe7863",
+      "bytes": 44208
+    },
+    {
+      "product": "browser",
+      "logical": "/models/leaf/leaf-lonely-wolf.glb",
+      "sha256": "15dbdb2849cf4fa1cfad3c2c4ce1f75c5fb1bd4953d5a3c42b697df9ca0034be",
+      "bytes": 40652
+    },
+    {
+      "product": "browser",
+      "logical": "/models/leaf/leaf-nepo-baby.glb",
+      "sha256": "c80bcb2779ace2a6f3dde0cdc1402db8d8031bbf761c7d46d07a25a35988f061",
+      "bytes": 63828
+    },
+    {
+      "product": "browser",
+      "logical": "/models/leaf/leaf-philanthropist.glb",
+      "sha256": "bb53d6301b21ca0c59006060abf45d74618bf172524aae00ce64283a4c290ff6",
+      "bytes": 51176
+    },
+    {
+      "product": "browser",
+      "logical": "/models/leaf/leaf-race-car.glb",
+      "sha256": "18fad093516a2ff2f655a129be9fbd12c1365731775dff95296917f3e037612e",
+      "bytes": 43728
+    },
+    {
+      "product": "browser",
+      "logical": "/models/leaf/leaf-revolutionary.glb",
+      "sha256": "8f3a61c2bf226fcde1d777670ef2f9245dd6bbe6ad9fed5e4d5e8a3b548cf6e6",
+      "bytes": 69072
+    },
+    {
+      "product": "browser",
+      "logical": "/models/leaf/leaf-sole-survivor.glb",
+      "sha256": "4858ade83ef40d507c94eb449dc521295944291d5a83f9a3dcb40c1ca6486ca0",
+      "bytes": 52444
+    },
+    {
+      "product": "browser",
+      "logical": "/models/leaf/leaf-sore-loser.glb",
+      "sha256": "305ddb96578b3d066f941f18294c305863a3ef5c20f3db6bd9b44e6c0c6c67f4",
+      "bytes": 46248
+    },
+    {
+      "product": "browser",
+      "logical": "/models/leaf/leaf-spiteful-spirit.glb",
+      "sha256": "c513922a9595f86e4caaeebfee6af3f740c2b626dd207eeb9d837ea11b47e132",
+      "bytes": 35912
+    },
+    {
+      "product": "browser",
+      "logical": "/models/leaf/leaf-thespian.glb",
+      "sha256": "0dfd5f80118ea47f0f7f0a9c6873d12e161532c2bd6323c64d256e0e586a080b",
+      "bytes": 57104
+    },
+    {
+      "product": "browser",
+      "logical": "/models/leaf/leaf-toucan.glb",
+      "sha256": "3393de2dba4b4ef6fe513b46764a9657a4da956c23b60edab78cecfcc4238e0b",
+      "bytes": 45580
+    },
+    {
+      "product": "browser",
+      "logical": "/models/leaf/leaf-triangle-man.glb",
+      "sha256": "f54a7bb83c7c4376821b55a1af11e0615ffa34e93c3c711ef14bf8123554845f",
+      "bytes": 36252
+    },
+    {
+      "product": "browser",
+      "logical": "/models/leaf/leaf-zombie.glb",
+      "sha256": "78668fd2743825f3d7c980ac3064274380ed101090a558e0d96245b119b4c6e2",
+      "bytes": 54084
+    },
+    {
+      "product": "browser",
+      "logical": "/models/mechanisms/approved_soft_track_tile.glb",
+      "sha256": "7ca87e14c06e410144d2e5fbd66303605c2a442f4fae7c0928a62c5eef28c659",
+      "bytes": 377420
+    },
+    {
+      "product": "browser",
+      "logical": "/models/mechanisms/approved_soft_track_tile_economy.glb",
+      "sha256": "0d73be354867c51328be51b9b1028b97d0ed465530c002ee39448fe9b46f7355",
+      "bytes": 303488
+    },
+    {
+      "product": "browser",
+      "logical": "/models/mechanisms/gain_joint_action.glb",
+      "sha256": "fcb164ad50bb52d22fa0b3aa66f63d515d40c9fef372060997ae3d62fa0a1fde",
+      "bytes": 185552
+    },
+    {
+      "product": "browser",
+      "logical": "/models/mechanisms/loss_joint_action.glb",
+      "sha256": "0323a384103f271627786c5c8ef3ba98ac1b488a03e2096c26617442250df0f6",
+      "bytes": 136796
+    },
+    {
+      "product": "browser",
+      "logical": "/models/mechanisms/punch-rebuild-r1.glb",
+      "sha256": "aef0b2f39adcbb29eaa3f449e22804093f5efe02e1d0113ca35500cd75cb25b6",
+      "bytes": 474808
+    },
+    {
+      "product": "browser",
+      "logical": "/models/mechanisms/punch_outboard_joint.glb",
+      "sha256": "ff8a8d4431fd08d4cc0111133ad9f0af1ea8abf3197131f5f6c6dfba0d6fa956",
+      "bytes": 380660
+    },
+    {
+      "product": "browser",
+      "logical": "/models/mechanisms/trip_joint.glb",
+      "sha256": "70c96cc02f6db99d9ec8650a81f519a39c526d8485231d632ce2908879165641",
+      "bytes": 108676
+    },
+    {
+      "product": "browser",
+      "logical": "/models/mechanisms/trip_telescopic_v1.2f331432.glb",
+      "sha256": "2f331432d72ef78d33c2aadd355885f25ca9f670d4d7f37b36e0c27b6db1046f",
+      "bytes": 134288
+    },
+    {
+      "product": "browser",
+      "logical": "/models/mechanisms/warp_joint_action.glb",
+      "sha256": "bd5122db40a1c86889ee423787d818f278765d0e48ce30cca9f2fcea935a1b19",
+      "bytes": 226048
+    },
+    {
+      "product": "browser",
+      "logical": "/models/second-wind/bite-mark-were.glb",
+      "sha256": "420adfdb1540c95fd1c0777a5a128979e41fbcdb347b564b474dfc66475122f5",
+      "bytes": 60952
+    },
+    {
+      "product": "browser",
+      "logical": "/models/second-wind/bite-mark.glb",
+      "sha256": "9e5ae2a4d87cf193a17c9e64bcf658b19057abcd7396c83e5271997e3fc27e47",
+      "bytes": 82360
+    },
+    {
+      "product": "browser",
+      "logical": "/models/second-wind/blunderdog.glb",
+      "sha256": "e594780f71ea90ea5ae1e99205768e5e6f959cad2bfc8adfa300f5ca84e561fd",
+      "bytes": 54772
+    },
+    {
+      "product": "browser",
+      "logical": "/models/second-wind/cheatah.glb",
+      "sha256": "3f5df0366256aa2b84428211741cecb3c363e46ce9a3cc1d609a4c93006b8bc0",
+      "bytes": 63204
+    },
+    {
+      "product": "browser",
+      "logical": "/models/second-wind/critic.glb",
+      "sha256": "c0b6d667ba55137e6dca629ac5fec8124e427d6e8d3d3cf13269cca68ba89202",
+      "bytes": 56092
+    },
+    {
+      "product": "browser",
+      "logical": "/models/second-wind/diva.glb",
+      "sha256": "1799347378ef26d37727d105e4a63df35ff93f59bc6020c7aae2ff38c1dea6c4",
+      "bytes": 40028
+    },
+    {
+      "product": "browser",
+      "logical": "/models/second-wind/doppelgangster.glb",
+      "sha256": "6fa60b4154babd705ea7c85d1944b7a47a927d1cee8236708b02c8f3939a15fd",
+      "bytes": 77708
+    },
+    {
+      "product": "browser",
+      "logical": "/models/second-wind/gloth.glb",
+      "sha256": "6caa5e5e43a9406c17825294a8406602817fb5a694db5a4eac09cf5ffcee805f",
+      "bytes": 46428
+    },
+    {
+      "product": "browser",
+      "logical": "/models/second-wind/hog-knight-hog.glb",
+      "sha256": "b5aca1fdb6d814028f6db99ce1f086cce9283e5c7de16375431b73d32e9ae1bd",
+      "bytes": 85852
+    },
+    {
+      "product": "browser",
+      "logical": "/models/second-wind/hog-knight.glb",
+      "sha256": "c712119a7a82b968f48f896ce9465d2e4883025e3a141a576d9e612fdfeb8a2d",
+      "bytes": 65496
+    },
+    {
+      "product": "browser",
+      "logical": "/models/second-wind/hopfrog.glb",
+      "sha256": "1ae468437570730d8712e4e7903d05368347c2d7c9517476c20e5b809ee6ccdc",
+      "bytes": 36544
+    },
+    {
+      "product": "browser",
+      "logical": "/models/second-wind/hotel.glb",
+      "sha256": "bdfa6f6c9c1a7eac7f68c644f0bff2e6de9f62570b6a6ea13dc76953365667b5",
+      "bytes": 39480
+    },
+    {
+      "product": "browser",
+      "logical": "/models/second-wind/icarus.glb",
+      "sha256": "10c74b9c47b218330f8491ff577ffd36c7e7137006a11194c5af9a490bf3cf1b",
+      "bytes": 72904
+    },
+    {
+      "product": "browser",
+      "logical": "/models/second-wind/kingtripper.glb",
+      "sha256": "552544444bad4d614873800abef7adf3ffeae542ce613899020f7c66c56d1c90",
+      "bytes": 68112
+    },
+    {
+      "product": "browser",
+      "logical": "/models/second-wind/kraken.glb",
+      "sha256": "6215fae70882e7026c8a3c7933259808863e446325d4ade6d3e3590232509689",
+      "bytes": 94768
+    },
+    {
+      "product": "browser",
+      "logical": "/models/second-wind/le-saboteur.glb",
+      "sha256": "c3b96c8252cbc3e7a53e2ae86775fbe9a034dc27b0f2e98c312a361cf2c0d0b2",
+      "bytes": 61052
+    },
+    {
+      "product": "browser",
+      "logical": "/models/second-wind/magical-athlete.glb",
+      "sha256": "77eb9908209b8b2af0a360aff78b437d135a043aa87af3072b1ba01695688a91",
+      "bytes": 47004
+    },
+    {
+      "product": "browser",
+      "logical": "/models/second-wind/mole.glb",
+      "sha256": "83df021f2038a5d7e541c56de6dedabcc94cc134689ceba4b4a27729cb6bb86f",
+      "bytes": 44776
+    },
+    {
+      "product": "browser",
+      "logical": "/models/second-wind/mr-dice-guy.glb",
+      "sha256": "60de8dad8b8e04983f4d929efe346a4adb5d8628db81763fb970bafebb4633ec",
+      "bytes": 58732
+    },
+    {
+      "product": "browser",
+      "logical": "/models/second-wind/mush.glb",
+      "sha256": "a26c7cbd77f9c46163f2c2c60bfc608ddf2b15ff9b64da8f134d0f5373cfae36",
+      "bytes": 71560
+    },
+    {
+      "product": "browser",
+      "logical": "/models/second-wind/nemesis.glb",
+      "sha256": "740556a629ab8d0d34598a0d72830afad9cb5cd0065de9ee48905813f530f583",
+      "bytes": 53616
+    },
+    {
+      "product": "browser",
+      "logical": "/models/second-wind/nepo-baby.glb",
+      "sha256": "fdc76ed7ca286894a4d2438333b6cfd4fa3bef04f536ae659626e2d9a7433a62",
+      "bytes": 49272
+    },
+    {
+      "product": "browser",
+      "logical": "/models/second-wind/null.glb",
+      "sha256": "758e7c0348b0a2aad5b730ab6ed8826312760948eda4b4c922e91c224acac290",
+      "bytes": 40468
+    },
+    {
+      "product": "browser",
+      "logical": "/models/second-wind/overtaker.glb",
+      "sha256": "f4b198f42d57be9b2f92cfdcfa23b6e4c3fbb300c94c75acbcfbdd54aae1f1d9",
+      "bytes": 59908
+    },
+    {
+      "product": "browser",
+      "logical": "/models/second-wind/party-pooper.glb",
+      "sha256": "912d951d04bc86ab2b8d29c3b31d163f03261ed256a2ef6afb638bc740839509",
+      "bytes": 66440
+    },
+    {
+      "product": "browser",
+      "logical": "/models/second-wind/penguin.glb",
+      "sha256": "3d8125de9e6cfcb45f8ba934238ada2675223ea114c6b5b488327a717f749b9e",
+      "bytes": 45612
+    },
+    {
+      "product": "browser",
+      "logical": "/models/second-wind/re-runner.glb",
+      "sha256": "680bc5c52450e0e7701b6b2c1889596b4446e239b14de292950a8b36b72c4163",
+      "bytes": 49504
+    },
+    {
+      "product": "browser",
+      "logical": "/models/second-wind/show-off.glb",
+      "sha256": "55109463c47bb39f1a9b6e1edb543dfdc00d0a264b996644765ad43e698d5085",
+      "bytes": 58064
+    },
+    {
+      "product": "browser",
+      "logical": "/models/second-wind/soulmate.glb",
+      "sha256": "0841b04018a0c33bb22b4a4aa3fc5c019bf564ec7445437953bfdae390c8e215",
+      "bytes": 42464
+    },
+    {
+      "product": "browser",
+      "logical": "/models/second-wind/speed-demon.glb",
+      "sha256": "6b1bfbc5d332cd8bdc0a2808ec687c5096c218a1d308a5f02e5b5b4ec22933a2",
+      "bytes": 73860
+    },
+    {
+      "product": "browser",
+      "logical": "/models/second-wind/spoilsport.glb",
+      "sha256": "8bd676a93787bed8698d3f9e21fa422c049bd8fba66bd3c69112e400c8a45523",
+      "bytes": 73392
+    },
+    {
+      "product": "browser",
+      "logical": "/models/second-wind/stepdad.glb",
+      "sha256": "ef912588135c61eb023aa5032be87aec454f43c339642791da20e8c3ff165676",
+      "bytes": 52352
+    },
+    {
+      "product": "browser",
+      "logical": "/models/second-wind/streaker.glb",
+      "sha256": "e167ddbf5d5a3a6859bfac11551b875e3b247806eb2fed15b6754dbe4a73f201",
+      "bytes": 39244
+    },
+    {
+      "product": "browser",
+      "logical": "/models/second-wind/stunner.glb",
+      "sha256": "9d298dde1be3aa2f619247c72b5b5ed59379a4055dfc6a826ae8647dadeeaf12",
+      "bytes": 70732
+    },
+    {
+      "product": "browser",
+      "logical": "/models/second-wind/switcharoo.glb",
+      "sha256": "9037c56508bfd1833123c22e775ae7b23c564a0719070956e9ad2c39f1a41ded",
+      "bytes": 58644
+    },
+    {
+      "product": "browser",
+      "logical": "/models/second-wind/tail.glb",
+      "sha256": "b2f6164a4c241999cf60917f36cd470f4f5f89c419c169a971a701062828ba14",
+      "bytes": 32400
+    },
+    {
+      "product": "browser",
+      "logical": "/models/second-wind/the-hose.glb",
+      "sha256": "4bd1c88f363b8251ba5504d453028ad1826fe2fd0b7bbf06549c90b481582473",
+      "bytes": 78156
+    },
+    {
+      "product": "browser",
+      "logical": "/models/second-wind/understudy.glb",
+      "sha256": "7dd93a43282ce07b9e5473e14e0db8327e7c6d1b32420c99feaa9f7f8e2f903c",
+      "bytes": 55964
+    },
+    {
+      "product": "browser",
+      "logical": "/models/stadium-v7/athlete_bleachers.glb",
+      "sha256": "ebb0e33254466f0fe2e0ac5ee7efa6f8e3335ebc822454c4f2c9de92757279ea",
+      "bytes": 353792
+    },
+    {
+      "product": "browser",
+      "logical": "/models/stadium-v7/athlete_bunting.glb",
+      "sha256": "d3989d31d4cb5599341cebe899036f18b0d2db118eb3e35a67dbaff8c5de9203",
+      "bytes": 41208
+    },
+    {
+      "product": "browser",
+      "logical": "/models/stadium-v7/athlete_finish_gate.glb",
+      "sha256": "08d7b3deef8ec7dd48dbf61e95c52592c19fe1fc60a02b517c8be3fc3138952d",
+      "bytes": 124608
+    },
+    {
+      "product": "browser",
+      "logical": "/models/stadium-v7/athlete_infield_plan.glb",
+      "sha256": "30d270b36baf1c9ee0035de4852113e8a787b27ba589e50e440ff1f0ddca0f0f",
+      "bytes": 282596
+    },
+    {
+      "product": "browser",
+      "logical": "/models/stadium-v7/athlete_officials_kiosk.glb",
+      "sha256": "14dc284be1cc94c0cf314c51b5da312999c214f731b0a81634e387c50da1457b",
+      "bytes": 74856
+    },
+    {
+      "product": "browser",
+      "logical": "/models/stadium-v7/athlete_pennant.glb",
+      "sha256": "1135de146562e9e77895139e9eb1fc40dc7424d875f018d7c978bf4a0db89bd8",
+      "bytes": 18424
+    },
+    {
+      "product": "browser",
+      "logical": "/models/stadium-v7/athlete_planter.glb",
+      "sha256": "f706b413f2744bfc05b6dd9b19a453e1594e7ef6c70f0bddc9e5e7b4332dc1fe",
+      "bytes": 121112
+    },
+    {
+      "product": "browser",
+      "logical": "/models/stadium-v7/athlete_podium.glb",
+      "sha256": "e91d607b803de66c90b06a0159932978da97aff5256dc8b30ae57ba6095cea33",
+      "bytes": 100260
+    },
+    {
+      "product": "browser",
+      "logical": "/models/stadium-v7/athlete_rail_corner.glb",
+      "sha256": "22dc9b7468ca2e6968ac352fb212a01580b7fb280327072e39f9f97f449bc826",
+      "bytes": 38340
+    },
+    {
+      "product": "browser",
+      "logical": "/models/stadium-v7/athlete_rail_straight.glb",
+      "sha256": "505dbf2bdb887d945f16761901653c20058534c41552ee1c925a82c756978c45",
+      "bytes": 42144
+    },
+    {
+      "product": "browser",
+      "logical": "/models/stadium-v7/athlete_scoreboard.glb",
+      "sha256": "72f7abebffa864027bf39c1812b877f33365b4536ff2161b9af94b5e82f2c52b",
+      "bytes": 65540
+    },
+    {
+      "product": "browser",
+      "logical": "/models/stadium-v7/athlete_spectators_strip.glb",
+      "sha256": "b100952a24cc7624d3f3939c45ef57da92d70c5488909f039f35dbecc060b4a6",
+      "bytes": 292092
+    },
+    {
+      "product": "browser",
+      "logical": "/models/stadium-v7/athlete_start_gate.glb",
+      "sha256": "3bf9028d481a8aa574678eb8eb87ee3be4baaebd11d2d1179e9a10e0ff15e2bd",
+      "bytes": 191880
+    },
+    {
+      "product": "browser",
+      "logical": "/models/stadium-v7/athlete_start_platform.glb",
+      "sha256": "5a8c1701b3cbd1caa9165ebaf57407848570d984c86906a99b853c709524f7f4",
+      "bytes": 121436
+    },
+    {
+      "product": "browser",
+      "logical": "/models/stadium-v7/athlete_tile_coral.glb",
+      "sha256": "3472d8b6a333087f6c2b2796c3a7fb200a97f8692838b1b88fb8ca48c68c677f",
+      "bytes": 106812
+    },
+    {
+      "product": "browser",
+      "logical": "/models/stadium-v7/athlete_tile_gold.glb",
+      "sha256": "28240513daab7bb3bc56484a2c0eb5a257d55eddd425f1d52a7c530261d7983e",
+      "bytes": 106804
+    },
+    {
+      "product": "browser",
+      "logical": "/models/stadium-v7/athlete_tile_mint.glb",
+      "sha256": "c09d587aefa3065127a7f991108fc762a8c52e13fbcc4d942c9ba2617b1f9739",
+      "bytes": 106808
+    },
+    {
+      "product": "browser",
+      "logical": "/models/stadium-v7/athlete_tile_neutral.glb",
+      "sha256": "652ae6d1f3985ec3b8d285fe857e74c0705940a73b6edbe20a2db3dc43227723",
+      "bytes": 96740
+    },
+    {
+      "product": "browser",
+      "logical": "/models/stadium-v7/athlete_topiary.glb",
+      "sha256": "934655249edbab40f4a6f2ebc4a9c159f07c6bb4417f8e303886b8dfe5e4df69",
+      "bytes": 36696
+    },
+    {
+      "product": "browser",
+      "logical": "/models/toy-racers-economy.glb",
+      "sha256": "e601a32432d8394eb24e13f78d4183bc8b160c6c6fb2c47db161c373d3b04bd1",
+      "bytes": 1082256
+    },
+    {
+      "product": "browser",
+      "logical": "/models/toy-racers.glb",
+      "sha256": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2",
+      "bytes": 1962520
+    },
+    {
+      "product": "browser",
+      "logical": "/models/tracks/whirly-world.glb",
+      "sha256": "8e9b8f21773256526032f36d69722791fa8457af663549c2b1266ffbeabf8d9e",
+      "bytes": 1970972
+    },
+    {
+      "product": "browser",
+      "logical": "/models/wurstii/wurstii-bart-simpson.glb",
+      "sha256": "3d6775702f98bb032c668c5cc520569a8a58c0c40737b2f30ce7d0cd1d2dbba2",
+      "bytes": 53664
+    },
+    {
+      "product": "browser",
+      "logical": "/models/wurstii/wurstii-bucky-ohare.glb",
+      "sha256": "edd4ea9698645e6ef530af3b528e779713d8c71d1322c7c3c7dbc50aab82753c",
+      "bytes": 56932
+    },
+    {
+      "product": "browser",
+      "logical": "/models/wurstii/wurstii-bullet-bill.glb",
+      "sha256": "3ee33fa67ca98eb29369cb3ecd0e2dce0461b6d735495971739165d7ba5a0014",
+      "bytes": 57696
+    },
+    {
+      "product": "browser",
+      "logical": "/models/wurstii/wurstii-burt.glb",
+      "sha256": "a97fc8fdb9ce3d09552e27b94e449616fbe39b73abf35d98ed0601a0cb49bd21",
+      "bytes": 56480
+    },
+    {
+      "product": "browser",
+      "logical": "/models/wurstii/wurstii-chip-n-dale.glb",
+      "sha256": "eea0efebb96ec7d145001ecc90dffa62d30ae63648369d0e4ffe64f24e18aa98",
+      "bytes": 59196
+    },
+    {
+      "product": "browser",
+      "logical": "/models/wurstii/wurstii-diddy-kong.glb",
+      "sha256": "0204e761b9539dd8adaaf23293336be9c5ae946f260fea61f435b569802a06de",
+      "bytes": 63896
+    },
+    {
+      "product": "browser",
+      "logical": "/models/wurstii/wurstii-dixie-kong.glb",
+      "sha256": "67ad21b7757d1a8deabe99d43abbdb355cca81e32d5e24d1cf55b264e5208833",
+      "bytes": 67480
+    },
+    {
+      "product": "browser",
+      "logical": "/models/wurstii/wurstii-dr-wily.glb",
+      "sha256": "d9ca8851bdb6c75332fb9f8ac5cb2bf52cb5178c392b385718ff4f0aa2cdea29",
+      "bytes": 51868
+    },
+    {
+      "product": "browser",
+      "logical": "/models/wurstii/wurstii-dry-bones.glb",
+      "sha256": "d684ecb8cc500ffd662c751772468f93147ff514e72448168f5e4d3a2aafc802",
+      "bytes": 53692
+    },
+    {
+      "product": "browser",
+      "logical": "/models/wurstii/wurstii-eric.glb",
+      "sha256": "47d607087ed5dfc0911fb1ad529e64fc318e3a5d67f3306f7e07f463601a3fce",
+      "bytes": 62148
+    },
+    {
+      "product": "browser",
+      "logical": "/models/wurstii/wurstii-falco-lombardi.glb",
+      "sha256": "89e321449655c9704b76a44ce32b0ab0adc836f595bf6394e1acaeb9dbec6254",
+      "bytes": 49188
+    },
+    {
+      "product": "browser",
+      "logical": "/models/wurstii/wurstii-fluffin-puffins.glb",
+      "sha256": "de4dbde332841d439abc4cdc958f832a306f329473e71b4832870931ff34aabd",
+      "bytes": 76272
+    },
+    {
+      "product": "browser",
+      "logical": "/models/wurstii/wurstii-frogger.glb",
+      "sha256": "86abb2396306b5b7706c84b8db3ce78f6edd5a76a8b5441f8cce88165cc9ce55",
+      "bytes": 44244
+    },
+    {
+      "product": "browser",
+      "logical": "/models/wurstii/wurstii-hoagie.glb",
+      "sha256": "d3bbcd17c4075d032c7920449901f66157252db6970ece3cd3024003f5edd70b",
+      "bytes": 55268
+    },
+    {
+      "product": "browser",
+      "logical": "/models/wurstii/wurstii-jason-vorhees.glb",
+      "sha256": "dc7666348b3643f97bc8bfebc0b571e9871dd9fff149376554d8ac02ffdc8eb1",
+      "bytes": 50656
+    },
+    {
+      "product": "browser",
+      "logical": "/models/wurstii/wurstii-knuckles.glb",
+      "sha256": "42446c3d37391bd28ec01227280a9b23393e69826fa57d442c2004d7376c46a0",
+      "bytes": 54124
+    },
+    {
+      "product": "browser",
+      "logical": "/models/wurstii/wurstii-lakitu.glb",
+      "sha256": "96b39ce999e79ba13097a497e985ab5169a4f8d3ae09dd3c81d067d1b78769d7",
+      "bytes": 64740
+    },
+    {
+      "product": "browser",
+      "logical": "/models/wurstii/wurstii-lizzie.glb",
+      "sha256": "dc623db06f04851a0f272a687b59354e91a92be50ccd7a07ece655cd56b8a549",
+      "bytes": 48716
+    },
+    {
+      "product": "browser",
+      "logical": "/models/wurstii/wurstii-magikarp.glb",
+      "sha256": "ea85fe278315828b753152cbfd398a4882bfa9cf9711b0370ab929e44631a69b",
+      "bytes": 45460
+    },
+    {
+      "product": "browser",
+      "logical": "/models/wurstii/wurstii-mario.glb",
+      "sha256": "e9669253ddb76c7875af88682a2ea4f1f67e1eb8cfbf94baf3b09433e9e2f7b7",
+      "bytes": 76784
+    },
+    {
+      "product": "browser",
+      "logical": "/models/wurstii/wurstii-mr-game-and-watch.glb",
+      "sha256": "5e50a5524bcfcf27fb04e5851930b51ab253a41d436ac01981cda1f4c4d1390b",
+      "bytes": 37340
+    },
+    {
+      "product": "browser",
+      "logical": "/models/wurstii/wurstii-olaf.glb",
+      "sha256": "72138bae87c7d437c0954205ae3cd155d5c5ebfd740b235a57b2f83846beabb8",
+      "bytes": 67036
+    },
+    {
+      "product": "browser",
+      "logical": "/models/wurstii/wurstii-piranha-plant.glb",
+      "sha256": "b90034896112dc34c27b25870ddcff274830f67e677a497f8dad8ef4921306d4",
+      "bytes": 48640
+    },
+    {
+      "product": "browser",
+      "logical": "/models/wurstii/wurstii-pitfall-harry.glb",
+      "sha256": "0ca6ab8895fdeb7fb2ff7420927d363f9b3b754694a3953e8588905bbf670882",
+      "bytes": 53596
+    },
+    {
+      "product": "browser",
+      "logical": "/models/wurstii/wurstii-rockford.glb",
+      "sha256": "684148bf8965b51ce5689edb2426658c8bf3f386b2055f0e0f68e7dbcc0925e4",
+      "bytes": 54584
+    },
+    {
+      "product": "browser",
+      "logical": "/models/wurstii/wurstii-rollercoaster-tycoon-guest.glb",
+      "sha256": "d9f29af65d1cb8f81db888643c79a5c5c9721f48e9ae6ad88f634bdafe622e2d",
+      "bytes": 51728
+    },
+    {
+      "product": "browser",
+      "logical": "/models/wurstii/wurstii-simon-belmont.glb",
+      "sha256": "1e0500461b3b83495be2e004dc78fa9018cfd56c1bd8e31a9e13792ec3ed4532",
+      "bytes": 53540
+    },
+    {
+      "product": "browser",
+      "logical": "/models/wurstii/wurstii-spot.glb",
+      "sha256": "4bef917c23b24727988223526d8d8e6cab31ed32975ada6c7f65720ba2b80997",
+      "bytes": 42956
+    },
+    {
+      "product": "browser",
+      "logical": "/models/wurstii/wurstii-tails.glb",
+      "sha256": "0cf92c404a29486a28508c4a52b94eb8cc2f25d92003c21d687536fd98459dc3",
+      "bytes": 57144
+    },
+    {
+      "product": "browser",
+      "logical": "/models/wurstii/wurstii-yoshi.glb",
+      "sha256": "720fca7a55b4556049b818aa4cc5901a4fe0ae65299a60ea9852044a786a28b1",
+      "bytes": 54488
+    }
+  ]
+}

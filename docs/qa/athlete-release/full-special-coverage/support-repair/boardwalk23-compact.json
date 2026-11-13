@@ -1,0 +1,42 @@
+[
+  {
+    "anchor": "boardwalks:23",
+    "kind": "trip",
+    "bounds": [
+      [
+        1.4611111349529677,
+        0.19999997466802588,
+        22.06333332260449
+      ],
+      [
+        2.761111087269252,
+        2.1549999952316283,
+        22.863333334525418
+      ]
+    ],
+    "occupancyOverlaps": [
+      {
+        "node": 23,
+        "count": 1,
+        "slot": "0",
+        "down": true,
+        "actualTriangleHit": null
+      },
+      {
+        "node": 23,
+        "count": 8,
+        "slot": "0",
+        "down": true,
+        "actualTriangleHit": null
+      },
+      {
+        "node": 23,
+        "count": 8,
+        "slot": "1",
+        "down": true,
+        "actualTriangleHit": null
+      }
+    ],
+    "runningSweptAabb": []
+  }
+]

@@ -1,0 +1,1764 @@
+{
+  "scope": "Measured layout input only. No new collision, ground attachment, mechanism authorization or load-bearing certificate.",
+  "output": "src/client/scene/environment/floodlight-edge-mounts.json",
+  "sha256": "5d80a3cc843cfa91b43f0193f0092b455cd421289f5f3de2e79dbdc2309bbb7e",
+  "coordinateContract": "XYZ corners: X and Z divided by referenceScale, Y unchanged. Multiply XZ by the matching referenceScale to recover actual sampled standard-layout coordinates. Physical x offsets +/-0.15m, inset15mm toward terrain, y=-.55/- .35. Fixture order negative-Z row columns0..3, positive-Z row columns0..3. Corner order bottom-left, bottom-right, top-left, top-right. Coordinates are certified only as these measured inputs; arbitrary spacing needs new ray sampling.",
+  "inputs": {
+    "public/models/environment-rebuilt-v2/tree_elm_rebuilt_lod2.glb": "7de3c13954b48a0eb3f2763baaa5c16980a079c5ab5995a955f2a3a89456db58",
+    "public/models/environment-rebuilt-v2/tree_maple_rebuilt_lod2.glb": "1bd23283396913472077482436d1493a81fe7ee8ff1edf7105886ca28643df1c",
+    "public/models/environment-rebuilt-v2/tree_sapling_rebuilt_lod2.glb": "913f328637d1b23bba8603a4cbf48028e0fb957abd3033c31bef0ebab3583f40",
+    "public/models/environment-rebuilt-v2/start_gate.glb": "76ca081e1fe1407d6b574b3aaee1ff409dff90e838dd0e251a4fdc00bb97831c",
+    "public/models/environment-rebuilt-v2/finish_gate.glb": "c51312cac07f0743d1ca2377dae8355bfdbeabbcc9044e7d2d9765ac5012eb54",
+    "public/models/environment-rebuilt-v2/bleachers.glb": "af4d188c511ddf34dcdb6575f543c7baf0a8f6572c2def5a8cf115c8a422e967",
+    "public/models/environment-rebuilt-v2/spectators.glb": "b60a7ddb7fdca1993f589e1f48617e5d314456045428f952d9f0ec5e7a198a66",
+    "public/models/environment-rebuilt-v2/grandstand_rostrum.glb": "3891481f58a453a70d56bb6d36c55d5cce5c02a7cfcd2df9261f2bd6f44b475f",
+    "public/models/environment-rebuilt-v2/squiggle_base.glb": "94b8d55dc02c8034838090102e1e6771e6dc4bf16b5402db25074cddf10f4793",
+    "public/models/environment-rebuilt-v2/squiggle_landscape_reexport_v1.glb": "e4dfa74a8e9a1b5e6a58c22fd615b2cdbe5cc2af5a16f427596618f320ff1d08",
+    "public/models/environment-rebuilt-v2/squiggle_furniture.glb": "ffffbfca78e8d7a5da8a77d87d817d477eb1e6510560a96ec5c15e9c00e27596",
+    "public/models/environment-rebuilt-v2/boardwalks_base.glb": "f842becc1cfdce6c1d050f6ebec23c3463b796ee348d27c56215be600e3728e2",
+    "public/models/environment-rebuilt-v2/boardwalks_landscape_reexport_v1.glb": "60bf7edcac36fc300b06b3dd942c77d90003f4ea1b01987b57f69c048e7c687a",
+    "public/models/environment-rebuilt-v2/boardwalks_furniture.glb": "004404c2b23631801e0d2f5765af812a48793ce36b23be0998a24865d7fe7823",
+    "public/models/environment-rebuilt-v2/bridges_base.glb": "43024a1c49c108aeb487b4b797b3c6bb8864538bf54d0ba3b698bf852e0368fe",
+    "public/models/environment-rebuilt-v2/bridges_landscape_reexport_v1.glb": "c3d74563b29aa8cb10605dbb5312cfdfc83dc79625db19e4b769b4c9f79be1fb",
+    "public/models/environment-rebuilt-v2/bridges_furniture.glb": "70e78bf169d74dc55302e7d69db21500e4329078a62532e7765f61a5d5867f61",
+    "scripts/recovery/export-floodlight-edge-mounts.ts": "ec6c6a763ccfc3c22bb53934736fd84c111b98f9dc98b337fe0c5595735442e1",
+    "scripts/recovery/scene-collision.ts": "73519904299b6d5fdd575829f0aca32ccf486016764b10a80965350d6fa5be2d",
+    "src/client/scene/environment/layout.ts": "3f0ed451fc0b933e393394ce9fc2441e1eb31e6ffc64716f7993d07c09a72bd3",
+    "src/client/scene/environment/runtime.ts": "b3f7952b028e67b02725a5d593a84355c9d3e25d626873bdc2b62cb255df1ced",
+    "src/client/scene/environment/source-layout.json": "a164eb51517c58bdb88f53cc2be7178ce6ec14572ffdd63f6422b97f89cff2d4",
+    "src/client/scene/mechanisms/layout.ts": "e6705c25bf366f822565a26ef4303594390f3ba168fa5b5a02807dbd82791dbe",
+    "src/client/scene/math.ts": "54b1c1f92c222ba8864aebf9cc7f4e5b3dbd83cf0fd7856fdb93323187ffc8c3",
+    "src/shared/tracks.ts": "6717002165c922b62d34554527ca250f3968fb24df8ccac7e39cb7fede558630",
+    "src/shared/leaf-tracks.ts": "77ae9861e7f6429d24f4c1aa12cf7f749400c2056b5ced09a28f916f9ead0fb0"
+  },
+  "measured": [
+    {
+      "track": "squiggle",
+      "fixture": 0,
+      "side": -1,
+      "sourceScale": 1.2121830534626532,
+      "target": "squiggle_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -17.194169197223516,
+        -0.55,
+        -6.926222907879648
+      ],
+      "inner": [
+        -17.194169197223516,
+        -0.55,
+        -6.911222907879648
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "squiggle",
+      "fixture": 0,
+      "side": -1,
+      "sourceScale": 1.2121830534626532,
+      "target": "squiggle_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -16.89416919722352,
+        -0.55,
+        -6.918407702798234
+      ],
+      "inner": [
+        -16.89416919722352,
+        -0.55,
+        -6.903407702798234
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "squiggle",
+      "fixture": 0,
+      "side": -1,
+      "sourceScale": 1.2121830534626532,
+      "target": "squiggle_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -17.194169197223516,
+        -0.35,
+        -6.926222907879648
+      ],
+      "inner": [
+        -17.194169197223516,
+        -0.35,
+        -6.911222907879648
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "squiggle",
+      "fixture": 0,
+      "side": -1,
+      "sourceScale": 1.2121830534626532,
+      "target": "squiggle_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -16.89416919722352,
+        -0.35,
+        -6.91840770279822
+      ],
+      "inner": [
+        -16.89416919722352,
+        -0.35,
+        -6.90340770279822
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "squiggle",
+      "fixture": 1,
+      "side": -1,
+      "sourceScale": 1.2121830534626532,
+      "target": "squiggle_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -6.5446696680333165,
+        -0.55,
+        -6.648185589052915
+      ],
+      "inner": [
+        -6.5446696680333165,
+        -0.55,
+        -6.633185589052915
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "squiggle",
+      "fixture": 1,
+      "side": -1,
+      "sourceScale": 1.2121830534626532,
+      "target": "squiggle_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -6.244669668033316,
+        -0.55,
+        -6.640352685259359
+      ],
+      "inner": [
+        -6.244669668033316,
+        -0.55,
+        -6.625352685259359
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "squiggle",
+      "fixture": 1,
+      "side": -1,
+      "sourceScale": 1.2121830534626532,
+      "target": "squiggle_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -6.5446696680333165,
+        -0.35,
+        -6.648185589052929
+      ],
+      "inner": [
+        -6.5446696680333165,
+        -0.35,
+        -6.633185589052929
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "squiggle",
+      "fixture": 1,
+      "side": -1,
+      "sourceScale": 1.2121830534626532,
+      "target": "squiggle_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -6.244669668033316,
+        -0.35,
+        -6.640352685259344
+      ],
+      "inner": [
+        -6.244669668033316,
+        -0.35,
+        -6.625352685259345
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "squiggle",
+      "fixture": 2,
+      "side": -1,
+      "sourceScale": 1.2121830534626532,
+      "target": "squiggle_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        4.104829861156885,
+        -0.55,
+        -6.370130571514025
+      ],
+      "inner": [
+        4.104829861156885,
+        -0.55,
+        -6.355130571514025
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "squiggle",
+      "fixture": 2,
+      "side": -1,
+      "sourceScale": 1.2121830534626532,
+      "target": "squiggle_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        4.404829861156886,
+        -0.55,
+        -6.362297667720512
+      ],
+      "inner": [
+        4.404829861156886,
+        -0.55,
+        -6.347297667720512
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "squiggle",
+      "fixture": 2,
+      "side": -1,
+      "sourceScale": 1.2121830534626532,
+      "target": "squiggle_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        4.104829861156885,
+        -0.35,
+        -6.370130571514039
+      ],
+      "inner": [
+        4.104829861156885,
+        -0.35,
+        -6.35513057151404
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "squiggle",
+      "fixture": 2,
+      "side": -1,
+      "sourceScale": 1.2121830534626532,
+      "target": "squiggle_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        4.404829861156886,
+        -0.35,
+        -6.362297667720497
+      ],
+      "inner": [
+        4.404829861156886,
+        -0.35,
+        -6.347297667720498
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "squiggle",
+      "fixture": 3,
+      "side": -1,
+      "sourceScale": 1.2121830534626532,
+      "target": "squiggle_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        14.75432939034709,
+        -0.55,
+        -5.722815828099925
+      ],
+      "inner": [
+        14.75432939034709,
+        -0.55,
+        -5.707815828099926
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "squiggle",
+      "fixture": 3,
+      "side": -1,
+      "sourceScale": 1.2121830534626532,
+      "target": "squiggle_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        15.05432939034709,
+        -0.55,
+        -5.686994926012474
+      ],
+      "inner": [
+        15.05432939034709,
+        -0.55,
+        -5.6719949260124745
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "squiggle",
+      "fixture": 3,
+      "side": -1,
+      "sourceScale": 1.2121830534626532,
+      "target": "squiggle_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        14.75432939034709,
+        -0.35,
+        -5.722815828099925
+      ],
+      "inner": [
+        14.75432939034709,
+        -0.35,
+        -5.707815828099926
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "squiggle",
+      "fixture": 3,
+      "side": -1,
+      "sourceScale": 1.2121830534626532,
+      "target": "squiggle_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        15.05432939034709,
+        -0.35,
+        -5.68699492601246
+      ],
+      "inner": [
+        15.05432939034709,
+        -0.35,
+        -5.67199492601246
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "squiggle",
+      "fixture": 4,
+      "side": 1,
+      "sourceScale": 1.2121830534626532,
+      "target": "squiggle_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -17.194169197223516,
+        -0.55,
+        5.956365511814852
+      ],
+      "inner": [
+        -17.194169197223516,
+        -0.55,
+        5.941365511814852
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "squiggle",
+      "fixture": 4,
+      "side": 1,
+      "sourceScale": 1.2121830534626532,
+      "target": "squiggle_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -16.89416919722352,
+        -0.55,
+        6.160777300803559
+      ],
+      "inner": [
+        -16.89416919722352,
+        -0.55,
+        6.14577730080356
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "squiggle",
+      "fixture": 4,
+      "side": 1,
+      "sourceScale": 1.2121830534626532,
+      "target": "squiggle_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -17.194169197223516,
+        -0.35,
+        5.9563655118148375
+      ],
+      "inner": [
+        -17.194169197223516,
+        -0.35,
+        5.941365511814838
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "squiggle",
+      "fixture": 4,
+      "side": 1,
+      "sourceScale": 1.2121830534626532,
+      "target": "squiggle_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -16.89416919722352,
+        -0.35,
+        6.160777300803559
+      ],
+      "inner": [
+        -16.89416919722352,
+        -0.35,
+        6.14577730080356
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "squiggle",
+      "fixture": 5,
+      "side": 1,
+      "sourceScale": 1.2121830534626532,
+      "target": "squiggle_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -6.5446696680333165,
+        -0.55,
+        7.191338838416314
+      ],
+      "inner": [
+        -6.5446696680333165,
+        -0.55,
+        7.1763388384163145
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "squiggle",
+      "fixture": 5,
+      "side": 1,
+      "sourceScale": 1.2121830534626532,
+      "target": "squiggle_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -6.244669668033316,
+        -0.55,
+        7.197192491951327
+      ],
+      "inner": [
+        -6.244669668033316,
+        -0.55,
+        7.182192491951327
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "squiggle",
+      "fixture": 5,
+      "side": 1,
+      "sourceScale": 1.2121830534626532,
+      "target": "squiggle_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -6.5446696680333165,
+        -0.35,
+        7.191338838416314
+      ],
+      "inner": [
+        -6.5446696680333165,
+        -0.35,
+        7.1763388384163145
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "squiggle",
+      "fixture": 5,
+      "side": 1,
+      "sourceScale": 1.2121830534626532,
+      "target": "squiggle_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -6.244669668033316,
+        -0.35,
+        7.1971924919513555
+      ],
+      "inner": [
+        -6.244669668033316,
+        -0.35,
+        7.182192491951356
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "squiggle",
+      "fixture": 6,
+      "side": 1,
+      "sourceScale": 1.2121830534626532,
+      "target": "squiggle_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        4.104829861156885,
+        -0.55,
+        7.289934158325195
+      ],
+      "inner": [
+        4.104829861156885,
+        -0.55,
+        7.274934158325196
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "squiggle",
+      "fixture": 6,
+      "side": 1,
+      "sourceScale": 1.2121830534626532,
+      "target": "squiggle_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        4.404829861156886,
+        -0.55,
+        7.289934158325195
+      ],
+      "inner": [
+        4.404829861156886,
+        -0.55,
+        7.274934158325196
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "squiggle",
+      "fixture": 6,
+      "side": 1,
+      "sourceScale": 1.2121830534626532,
+      "target": "squiggle_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        4.104829861156885,
+        -0.35,
+        7.2899341583252095
+      ],
+      "inner": [
+        4.104829861156885,
+        -0.35,
+        7.27493415832521
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "squiggle",
+      "fixture": 6,
+      "side": 1,
+      "sourceScale": 1.2121830534626532,
+      "target": "squiggle_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        4.404829861156886,
+        -0.35,
+        7.2899341583252095
+      ],
+      "inner": [
+        4.404829861156886,
+        -0.35,
+        7.27493415832521
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "squiggle",
+      "fixture": 7,
+      "side": 1,
+      "sourceScale": 1.2121830534626532,
+      "target": "squiggle_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        14.75432939034709,
+        -0.55,
+        7.2899341583252095
+      ],
+      "inner": [
+        14.75432939034709,
+        -0.55,
+        7.27493415832521
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "squiggle",
+      "fixture": 7,
+      "side": 1,
+      "sourceScale": 1.2121830534626532,
+      "target": "squiggle_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        15.05432939034709,
+        -0.55,
+        7.289934158325195
+      ],
+      "inner": [
+        15.05432939034709,
+        -0.55,
+        7.274934158325196
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "squiggle",
+      "fixture": 7,
+      "side": 1,
+      "sourceScale": 1.2121830534626532,
+      "target": "squiggle_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        14.75432939034709,
+        -0.35,
+        7.2899341583252095
+      ],
+      "inner": [
+        14.75432939034709,
+        -0.35,
+        7.27493415832521
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "squiggle",
+      "fixture": 7,
+      "side": 1,
+      "sourceScale": 1.2121830534626532,
+      "target": "squiggle_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        15.05432939034709,
+        -0.35,
+        7.289934158325195
+      ],
+      "inner": [
+        15.05432939034709,
+        -0.35,
+        7.274934158325196
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "boardwalks",
+      "fixture": 0,
+      "side": -1,
+      "sourceScale": 1.9945799457994575,
+      "target": "boardwalks_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -27.213333333333324,
+        -0.55,
+        -14.036835125343842
+      ],
+      "inner": [
+        -27.213333333333324,
+        -0.55,
+        -14.021835125343841
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "boardwalks",
+      "fixture": 0,
+      "side": -1,
+      "sourceScale": 1.9945799457994575,
+      "target": "boardwalks_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -26.913333333333327,
+        -0.55,
+        -14.030697028633199
+      ],
+      "inner": [
+        -26.913333333333327,
+        -0.55,
+        -14.015697028633198
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "boardwalks",
+      "fixture": 0,
+      "side": -1,
+      "sourceScale": 1.9945799457994575,
+      "target": "boardwalks_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -27.213333333333324,
+        -0.35,
+        -14.036835125343814
+      ],
+      "inner": [
+        -27.213333333333324,
+        -0.35,
+        -14.021835125343813
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "boardwalks",
+      "fixture": 0,
+      "side": -1,
+      "sourceScale": 1.9945799457994575,
+      "target": "boardwalks_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -26.913333333333327,
+        -0.35,
+        -14.030697028633199
+      ],
+      "inner": [
+        -26.913333333333327,
+        -0.35,
+        -14.015697028633198
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "boardwalks",
+      "fixture": 1,
+      "side": -1,
+      "sourceScale": 1.9945799457994575,
+      "target": "boardwalks_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -8.787777777777775,
+        -0.55,
+        -13.659842318854302
+      ],
+      "inner": [
+        -8.787777777777775,
+        -0.55,
+        -13.644842318854302
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "boardwalks",
+      "fixture": 1,
+      "side": -1,
+      "sourceScale": 1.9945799457994575,
+      "target": "boardwalks_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -8.487777777777774,
+        -0.55,
+        -13.653704222143688
+      ],
+      "inner": [
+        -8.487777777777774,
+        -0.55,
+        -13.638704222143687
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "boardwalks",
+      "fixture": 1,
+      "side": -1,
+      "sourceScale": 1.9945799457994575,
+      "target": "boardwalks_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -8.787777777777775,
+        -0.35,
+        -13.659842318854302
+      ],
+      "inner": [
+        -8.787777777777775,
+        -0.35,
+        -13.644842318854302
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "boardwalks",
+      "fixture": 1,
+      "side": -1,
+      "sourceScale": 1.9945799457994575,
+      "target": "boardwalks_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -8.487777777777774,
+        -0.35,
+        -13.653704222143702
+      ],
+      "inner": [
+        -8.487777777777774,
+        -0.35,
+        -13.638704222143701
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "boardwalks",
+      "fixture": 2,
+      "side": -1,
+      "sourceScale": 1.9945799457994575,
+      "target": "boardwalks_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        9.637777777777776,
+        -0.55,
+        -13.282849512364791
+      ],
+      "inner": [
+        9.637777777777776,
+        -0.55,
+        -13.26784951236479
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "boardwalks",
+      "fixture": 2,
+      "side": -1,
+      "sourceScale": 1.9945799457994575,
+      "target": "boardwalks_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        9.937777777777777,
+        -0.55,
+        -13.27671141565419
+      ],
+      "inner": [
+        9.937777777777777,
+        -0.55,
+        -13.26171141565419
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "boardwalks",
+      "fixture": 2,
+      "side": -1,
+      "sourceScale": 1.9945799457994575,
+      "target": "boardwalks_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        9.637777777777776,
+        -0.35,
+        -13.282849512364777
+      ],
+      "inner": [
+        9.637777777777776,
+        -0.35,
+        -13.267849512364776
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "boardwalks",
+      "fixture": 2,
+      "side": -1,
+      "sourceScale": 1.9945799457994575,
+      "target": "boardwalks_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        9.937777777777777,
+        -0.35,
+        -13.276711415654177
+      ],
+      "inner": [
+        9.937777777777777,
+        -0.35,
+        -13.261711415654176
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "boardwalks",
+      "fixture": 3,
+      "side": -1,
+      "sourceScale": 1.9945799457994575,
+      "target": "boardwalks_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        28.063333333333333,
+        -0.55,
+        -12.8971090253183
+      ],
+      "inner": [
+        28.063333333333333,
+        -0.55,
+        -12.8821090253183
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "boardwalks",
+      "fixture": 3,
+      "side": -1,
+      "sourceScale": 1.9945799457994575,
+      "target": "boardwalks_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        28.36333333333333,
+        -0.55,
+        -12.890587263601574
+      ],
+      "inner": [
+        28.36333333333333,
+        -0.55,
+        -12.875587263601574
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "boardwalks",
+      "fixture": 3,
+      "side": -1,
+      "sourceScale": 1.9945799457994575,
+      "target": "boardwalks_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        28.063333333333333,
+        -0.35,
+        -12.8971090253183
+      ],
+      "inner": [
+        28.063333333333333,
+        -0.35,
+        -12.8821090253183
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "boardwalks",
+      "fixture": 3,
+      "side": -1,
+      "sourceScale": 1.9945799457994575,
+      "target": "boardwalks_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        28.36333333333333,
+        -0.35,
+        -12.890587263601574
+      ],
+      "inner": [
+        28.36333333333333,
+        -0.35,
+        -12.875587263601574
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "boardwalks",
+      "fixture": 4,
+      "side": 1,
+      "sourceScale": 1.9945799457994575,
+      "target": "boardwalks_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -27.213333333333324,
+        -0.55,
+        12.790244102478027
+      ],
+      "inner": [
+        -27.213333333333324,
+        -0.55,
+        12.775244102478027
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "boardwalks",
+      "fixture": 4,
+      "side": 1,
+      "sourceScale": 1.9945799457994575,
+      "target": "boardwalks_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -26.913333333333327,
+        -0.55,
+        12.790244102478027
+      ],
+      "inner": [
+        -26.913333333333327,
+        -0.55,
+        12.775244102478027
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "boardwalks",
+      "fixture": 4,
+      "side": 1,
+      "sourceScale": 1.9945799457994575,
+      "target": "boardwalks_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -27.213333333333324,
+        -0.35,
+        12.790244102478027
+      ],
+      "inner": [
+        -27.213333333333324,
+        -0.35,
+        12.775244102478027
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "boardwalks",
+      "fixture": 4,
+      "side": 1,
+      "sourceScale": 1.9945799457994575,
+      "target": "boardwalks_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -26.913333333333327,
+        -0.35,
+        12.790244102478027
+      ],
+      "inner": [
+        -26.913333333333327,
+        -0.35,
+        12.775244102478027
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "boardwalks",
+      "fixture": 5,
+      "side": 1,
+      "sourceScale": 1.9945799457994575,
+      "target": "boardwalks_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -8.787777777777775,
+        -0.55,
+        12.790244102478013
+      ],
+      "inner": [
+        -8.787777777777775,
+        -0.55,
+        12.775244102478013
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "boardwalks",
+      "fixture": 5,
+      "side": 1,
+      "sourceScale": 1.9945799457994575,
+      "target": "boardwalks_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -8.487777777777774,
+        -0.55,
+        12.790244102478013
+      ],
+      "inner": [
+        -8.487777777777774,
+        -0.55,
+        12.775244102478013
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "boardwalks",
+      "fixture": 5,
+      "side": 1,
+      "sourceScale": 1.9945799457994575,
+      "target": "boardwalks_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -8.787777777777775,
+        -0.35,
+        12.790244102478027
+      ],
+      "inner": [
+        -8.787777777777775,
+        -0.35,
+        12.775244102478027
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "boardwalks",
+      "fixture": 5,
+      "side": 1,
+      "sourceScale": 1.9945799457994575,
+      "target": "boardwalks_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -8.487777777777774,
+        -0.35,
+        12.790244102478027
+      ],
+      "inner": [
+        -8.487777777777774,
+        -0.35,
+        12.775244102478027
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "boardwalks",
+      "fixture": 6,
+      "side": 1,
+      "sourceScale": 1.9945799457994575,
+      "target": "boardwalks_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        9.637777777777776,
+        -0.55,
+        12.790244102478013
+      ],
+      "inner": [
+        9.637777777777776,
+        -0.55,
+        12.775244102478013
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "boardwalks",
+      "fixture": 6,
+      "side": 1,
+      "sourceScale": 1.9945799457994575,
+      "target": "boardwalks_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        9.937777777777777,
+        -0.55,
+        12.790244102478013
+      ],
+      "inner": [
+        9.937777777777777,
+        -0.55,
+        12.775244102478013
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "boardwalks",
+      "fixture": 6,
+      "side": 1,
+      "sourceScale": 1.9945799457994575,
+      "target": "boardwalks_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        9.637777777777776,
+        -0.35,
+        12.790244102478027
+      ],
+      "inner": [
+        9.637777777777776,
+        -0.35,
+        12.775244102478027
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "boardwalks",
+      "fixture": 6,
+      "side": 1,
+      "sourceScale": 1.9945799457994575,
+      "target": "boardwalks_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        9.937777777777777,
+        -0.35,
+        12.790244102478027
+      ],
+      "inner": [
+        9.937777777777777,
+        -0.35,
+        12.775244102478027
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "boardwalks",
+      "fixture": 7,
+      "side": 1,
+      "sourceScale": 1.9945799457994575,
+      "target": "boardwalks_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        28.063333333333333,
+        -0.55,
+        12.510471423615272
+      ],
+      "inner": [
+        28.063333333333333,
+        -0.55,
+        12.495471423615271
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "boardwalks",
+      "fixture": 7,
+      "side": 1,
+      "sourceScale": 1.9945799457994575,
+      "target": "boardwalks_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        28.36333333333333,
+        -0.55,
+        12.503804765079337
+      ],
+      "inner": [
+        28.36333333333333,
+        -0.55,
+        12.488804765079337
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "boardwalks",
+      "fixture": 7,
+      "side": 1,
+      "sourceScale": 1.9945799457994575,
+      "target": "boardwalks_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        28.063333333333333,
+        -0.35,
+        12.510471423615286
+      ],
+      "inner": [
+        28.063333333333333,
+        -0.35,
+        12.495471423615285
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "boardwalks",
+      "fixture": 7,
+      "side": 1,
+      "sourceScale": 1.9945799457994575,
+      "target": "boardwalks_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        28.36333333333333,
+        -0.35,
+        12.503804765079337
+      ],
+      "inner": [
+        28.36333333333333,
+        -0.35,
+        12.488804765079337
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "bridges",
+      "fixture": 0,
+      "side": -1,
+      "sourceScale": 1,
+      "target": "bridges_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -22.793808,
+        -0.55,
+        -8.118686777428763
+      ],
+      "inner": [
+        -22.793808,
+        -0.55,
+        -8.103686777428763
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "bridges",
+      "fixture": 0,
+      "side": -1,
+      "sourceScale": 1,
+      "target": "bridges_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -22.493808,
+        -0.55,
+        -8.130217904646457
+      ],
+      "inner": [
+        -22.493808,
+        -0.55,
+        -8.115217904646457
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "bridges",
+      "fixture": 0,
+      "side": -1,
+      "sourceScale": 1,
+      "target": "bridges_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -22.793808,
+        -0.35,
+        -8.118686777428763
+      ],
+      "inner": [
+        -22.793808,
+        -0.35,
+        -8.103686777428763
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "bridges",
+      "fixture": 0,
+      "side": -1,
+      "sourceScale": 1,
+      "target": "bridges_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -22.493808,
+        -0.35,
+        -8.130217904646457
+      ],
+      "inner": [
+        -22.493808,
+        -0.35,
+        -8.115217904646457
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "bridges",
+      "fixture": 1,
+      "side": -1,
+      "sourceScale": 1,
+      "target": "bridges_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -8.599936000000001,
+        -0.55,
+        -8.653038559508644
+      ],
+      "inner": [
+        -8.599936000000001,
+        -0.55,
+        -8.638038559508644
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "bridges",
+      "fixture": 1,
+      "side": -1,
+      "sourceScale": 1,
+      "target": "bridges_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -8.299936,
+        -0.55,
+        -8.65509692440149
+      ],
+      "inner": [
+        -8.299936,
+        -0.55,
+        -8.64009692440149
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "bridges",
+      "fixture": 1,
+      "side": -1,
+      "sourceScale": 1,
+      "target": "bridges_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -8.599936000000001,
+        -0.35,
+        -8.653038559508644
+      ],
+      "inner": [
+        -8.599936000000001,
+        -0.35,
+        -8.638038559508644
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "bridges",
+      "fixture": 1,
+      "side": -1,
+      "sourceScale": 1,
+      "target": "bridges_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -8.299936,
+        -0.35,
+        -8.65509692440149
+      ],
+      "inner": [
+        -8.299936,
+        -0.35,
+        -8.64009692440149
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "bridges",
+      "fixture": 2,
+      "side": -1,
+      "sourceScale": 1,
+      "target": "bridges_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        5.593936000000001,
+        -0.55,
+        -8.54831360864516
+      ],
+      "inner": [
+        5.593936000000001,
+        -0.55,
+        -8.533313608645159
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "bridges",
+      "fixture": 2,
+      "side": -1,
+      "sourceScale": 1,
+      "target": "bridges_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        5.893936000000002,
+        -0.55,
+        -8.545352631408463
+      ],
+      "inner": [
+        5.893936000000002,
+        -0.55,
+        -8.530352631408462
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "bridges",
+      "fixture": 2,
+      "side": -1,
+      "sourceScale": 1,
+      "target": "bridges_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        5.593936000000001,
+        -0.35,
+        -8.548313608645145
+      ],
+      "inner": [
+        5.593936000000001,
+        -0.35,
+        -8.533313608645145
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "bridges",
+      "fixture": 2,
+      "side": -1,
+      "sourceScale": 1,
+      "target": "bridges_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        5.893936000000002,
+        -0.35,
+        -8.545352631408477
+      ],
+      "inner": [
+        5.893936000000002,
+        -0.35,
+        -8.530352631408476
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "bridges",
+      "fixture": 3,
+      "side": -1,
+      "sourceScale": 1,
+      "target": "bridges_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        19.78780800000001,
+        -0.55,
+        -7.627386119954792
+      ],
+      "inner": [
+        19.78780800000001,
+        -0.55,
+        -7.612386119954793
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "bridges",
+      "fixture": 3,
+      "side": -1,
+      "sourceScale": 1,
+      "target": "bridges_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        20.087808000000006,
+        -0.55,
+        -7.589698765349354
+      ],
+      "inner": [
+        20.087808000000006,
+        -0.55,
+        -7.574698765349354
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "bridges",
+      "fixture": 3,
+      "side": -1,
+      "sourceScale": 1,
+      "target": "bridges_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        19.78780800000001,
+        -0.35,
+        -7.627386119954792
+      ],
+      "inner": [
+        19.78780800000001,
+        -0.35,
+        -7.612386119954793
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "bridges",
+      "fixture": 3,
+      "side": -1,
+      "sourceScale": 1,
+      "target": "bridges_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        20.087808000000006,
+        -0.35,
+        -7.589698765349354
+      ],
+      "inner": [
+        20.087808000000006,
+        -0.35,
+        -7.574698765349354
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "bridges",
+      "fixture": 4,
+      "side": 1,
+      "sourceScale": 1,
+      "target": "bridges_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -22.793808,
+        -0.55,
+        2.4457375194763387
+      ],
+      "inner": [
+        -22.793808,
+        -0.55,
+        2.4307375194763385
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "bridges",
+      "fixture": 4,
+      "side": 1,
+      "sourceScale": 1,
+      "target": "bridges_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -22.493808,
+        -0.55,
+        2.610440769657231
+      ],
+      "inner": [
+        -22.493808,
+        -0.55,
+        2.595440769657231
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "bridges",
+      "fixture": 4,
+      "side": 1,
+      "sourceScale": 1,
+      "target": "bridges_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -22.793808,
+        -0.35,
+        2.4457375194763387
+      ],
+      "inner": [
+        -22.793808,
+        -0.35,
+        2.4307375194763385
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "bridges",
+      "fixture": 4,
+      "side": 1,
+      "sourceScale": 1,
+      "target": "bridges_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -22.493808,
+        -0.35,
+        2.610440769657245
+      ],
+      "inner": [
+        -22.493808,
+        -0.35,
+        2.595440769657245
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "bridges",
+      "fixture": 5,
+      "side": 1,
+      "sourceScale": 1,
+      "target": "bridges_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -8.599936000000001,
+        -0.55,
+        7.024829222696724
+      ],
+      "inner": [
+        -8.599936000000001,
+        -0.55,
+        7.009829222696724
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "bridges",
+      "fixture": 5,
+      "side": 1,
+      "sourceScale": 1,
+      "target": "bridges_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -8.299936,
+        -0.55,
+        7.066133567208283
+      ],
+      "inner": [
+        -8.299936,
+        -0.55,
+        7.051133567208283
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "bridges",
+      "fixture": 5,
+      "side": 1,
+      "sourceScale": 1,
+      "target": "bridges_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -8.599936000000001,
+        -0.35,
+        7.0248292226967095
+      ],
+      "inner": [
+        -8.599936000000001,
+        -0.35,
+        7.00982922269671
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "bridges",
+      "fixture": 5,
+      "side": 1,
+      "sourceScale": 1,
+      "target": "bridges_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        -8.299936,
+        -0.35,
+        7.066133567208269
+      ],
+      "inner": [
+        -8.299936,
+        -0.35,
+        7.051133567208269
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "bridges",
+      "fixture": 6,
+      "side": 1,
+      "sourceScale": 1,
+      "target": "bridges_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        5.593936000000001,
+        -0.55,
+        7.663000106811523
+      ],
+      "inner": [
+        5.593936000000001,
+        -0.55,
+        7.648000106811524
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "bridges",
+      "fixture": 6,
+      "side": 1,
+      "sourceScale": 1,
+      "target": "bridges_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        5.893936000000002,
+        -0.55,
+        7.663000106811538
+      ],
+      "inner": [
+        5.893936000000002,
+        -0.55,
+        7.648000106811538
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "bridges",
+      "fixture": 6,
+      "side": 1,
+      "sourceScale": 1,
+      "target": "bridges_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        5.593936000000001,
+        -0.35,
+        7.663000106811523
+      ],
+      "inner": [
+        5.593936000000001,
+        -0.35,
+        7.648000106811524
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "bridges",
+      "fixture": 6,
+      "side": 1,
+      "sourceScale": 1,
+      "target": "bridges_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        5.893936000000002,
+        -0.35,
+        7.663000106811523
+      ],
+      "inner": [
+        5.893936000000002,
+        -0.35,
+        7.648000106811524
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "bridges",
+      "fixture": 7,
+      "side": 1,
+      "sourceScale": 1,
+      "target": "bridges_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        19.78780800000001,
+        -0.55,
+        6.09442841294576
+      ],
+      "inner": [
+        19.78780800000001,
+        -0.55,
+        6.07942841294576
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "bridges",
+      "fixture": 7,
+      "side": 1,
+      "sourceScale": 1,
+      "target": "bridges_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        20.087808000000006,
+        -0.55,
+        5.972553443636571
+      ],
+      "inner": [
+        20.087808000000006,
+        -0.55,
+        5.957553443636571
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "bridges",
+      "fixture": 7,
+      "side": 1,
+      "sourceScale": 1,
+      "target": "bridges_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        19.78780800000001,
+        -0.35,
+        6.094428412945732
+      ],
+      "inner": [
+        19.78780800000001,
+        -0.35,
+        6.079428412945732
+      ],
+      "inset": 0.015
+    },
+    {
+      "track": "bridges",
+      "fixture": 7,
+      "side": 1,
+      "sourceScale": 1,
+      "target": "bridges_base:BASE_sculpted_silhouette_NEW_V2",
+      "surface": [
+        20.087808000000006,
+        -0.35,
+        5.972553443636571
+      ],
+      "inner": [
+        20.087808000000006,
+        -0.35,
+        5.957553443636571
+      ],
+      "inset": 0.015
+    }
+  ]
+}

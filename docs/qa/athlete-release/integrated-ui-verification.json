@@ -1,0 +1,148 @@
+{
+  "commit": "102dca024e4b7d685380a1c1db7ae9ab86067660",
+  "source": "git archive of committed integration candidate, no source implementation changes",
+  "builds": {
+    "vite_cn": "passed",
+    "tsc_server": "passed"
+  },
+  "browser": "Cloud Chromium browser; HTML/CSS/Canvas2D path",
+  "actual_game_viewport": [
+    1180,
+    757
+  ],
+  "mobile_frame_viewports": [
+    [
+      390,
+      844
+    ],
+    [
+      320,
+      568
+    ],
+    [
+      844,
+      390
+    ]
+  ],
+  "full_game_verified": false,
+  "webgl_verified": false,
+  "phone_game_verified": false,
+  "preview_stopped": true,
+  "ui_source_manifest": "Embedded uiFiles array below",
+  "ui_source_count": 25,
+  "verifiedActions": [
+    "Real local practice entered race; menu/explicit quality/night option, minimap character detail and renderer retry usable",
+    "Actual die6 moved position0 to6; idle retained one main renderer-error layer and no inactive dice-error layer",
+    "Three static real-client mobile viewports had no horizontal overflow, rules dialogs within viewport and visible controls hit-testable",
+    "Separate actual-component QualitySuggestion fixture:keep does not lower or repeat; only explicit lower changes quality; critical dice state hides; short screens omit"
+  ],
+  "uiFiles": [
+    {
+      "path": "src/client/main.tsx",
+      "sha256": "5d7f69dbb10d8a17054e065a4a8997d8d9e21c4f97a116b899f20db0b3986184"
+    },
+    {
+      "path": "src/client/App.tsx",
+      "sha256": "09b600cdd61a371009b83d0b89cb47e49579483f771796dac5e6eaa7efd8bf85"
+    },
+    {
+      "path": "src/client/QualitySuggestion.tsx",
+      "sha256": "0d731bcf5c91cd4d42133abd2cab9473994fafce70042ff060dbfa249c5f5bc2"
+    },
+    {
+      "path": "src/client/useRaceHudGeometry.ts",
+      "sha256": "4ae10fb1f459198c7463fd1793853fe01c70fadc9628d09d66b6b7b0992e8f25"
+    },
+    {
+      "path": "src/client/ability-reveal.css",
+      "sha256": "883e39442695b9ba4f5f7f39c1510a157290ad344758cbd31c9e8bb27be7e219"
+    },
+    {
+      "path": "src/client/backend-selector.css",
+      "sha256": "b4f0b778f0d7959b3e586fbdb58498cea417f64bd4f1a3751514d416460adfb2"
+    },
+    {
+      "path": "src/client/character-cards.css",
+      "sha256": "c0e2c1766b204ffaba69aea1faf9c1abd0cbde42bffc8f4b9d6ea045ca53d361"
+    },
+    {
+      "path": "src/client/character-details.css",
+      "sha256": "3b0c8e097bf013bf9167a20824bfbae9a9b8756715f0fd76bb2a5513d8806cde"
+    },
+    {
+      "path": "src/client/community.css",
+      "sha256": "96c572c295314b8a188adca21260eda2269913eb0d9e574780bf175a86115b39"
+    },
+    {
+      "path": "src/client/deployment-notice.css",
+      "sha256": "708abff71d5ece380a449d0012258a3ac457ad26d60ecf5778ad997f7e9b3f2e"
+    },
+    {
+      "path": "src/client/home-entry.css",
+      "sha256": "99005456818659e4c0b780f4334663fac1ae5baa9df3adf4f4ac69fec66e7699"
+    },
+    {
+      "path": "src/client/immersive.css",
+      "sha256": "d610094c3584b909cd8d3e19177f258b4445331b22c5c6ffdd07a36e3b2692ed"
+    },
+    {
+      "path": "src/client/quality-suggestion.css",
+      "sha256": "35a4d8779c93b2ed895ce2953e075d63c8f83d0277ba82783b0d5d1865226c66"
+    },
+    {
+      "path": "src/client/race-ui.css",
+      "sha256": "f33934f6047b9c7b6fcbca45050a2af95c00a997bab2d24d6f3abf212342da28"
+    },
+    {
+      "path": "src/client/room-config.css",
+      "sha256": "b4a056c04cf4dafe040c4d8e686c60f8401832405aed09a3486e1fd8108beb71"
+    },
+    {
+      "path": "src/client/room-experience.css",
+      "sha256": "c33d0a54271408f8151a3a7bd0abb91d9ad220024ca8fa75f63163f2e92cfef2"
+    },
+    {
+      "path": "src/client/room-management.css",
+      "sha256": "b6c21fbfcfa6a701e9ceff94b239e5c26d70801ca5185fff0156777f91b8355d"
+    },
+    {
+      "path": "src/client/room-pause.css",
+      "sha256": "245fe593c90af22713f12fd9e9e2316d17d41a34cb44d2febe833e64cea5db89"
+    },
+    {
+      "path": "src/client/rules-content.css",
+      "sha256": "73bcaa89f2ea8b7268372fa25d5b6782667bf3a1e545f51e6c67f87424df994d"
+    },
+    {
+      "path": "src/client/scene/scene.css",
+      "sha256": "9a61aab6bdba1984c821d3f679616d67109a96a0e6e512ed19fb9a6cdd962357"
+    },
+    {
+      "path": "src/client/screen-direction.css",
+      "sha256": "ae50e3e54091cf444d6a2b28c2eae3f532c60ba0e3770ceff8cf4acb5cdcfe25"
+    },
+    {
+      "path": "src/client/styles.css",
+      "sha256": "51d56254d3bdc81533cd3f824f246c43dd4d019c48207b090198a41eaf2c5100"
+    },
+    {
+      "path": "src/client/track-preview.css",
+      "sha256": "7e20877950ea0bb76403b21497318242680f790f4773edb211431591c52b8da5"
+    },
+    {
+      "path": "src/client/ui-theme.css",
+      "sha256": "802fd8e072f3102595a691aa9a7f285689085768bde388aadff79b871756a695"
+    },
+    {
+      "path": "src/client/visual-first.css",
+      "sha256": "9976d88dde0f4d9faa745177f93117ab2c9f076123f3fb5530b0d7e53400dbce"
+    }
+  ],
+  "currentUiInputComparison": "All25 hashes match integrated candidate after static-geometry repairs",
+  "limitations": [
+    "No complete phone race or multiplayer acceptance",
+    "No normal WebGL pixels, actual phone GPU/FPS or real slow-frame trigger verification",
+    "QualitySuggestion fixture manually supplies the observation event and uses representative surrounding controls; it is not the complete game"
+  ],
+  "verificationScope": "Official-browser DOM: actual desktop practice game, mobile-size static real client, and separately labelled real-component suggestion fixture. No full-phone-game or WebGL acceptance."
+}

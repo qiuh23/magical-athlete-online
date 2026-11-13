@@ -1,0 +1,647 @@
+{
+  "scope": "54 finite display envelopes. Only Boardwalk23 recomputed at 51 poses in both layouts; 53 inherited only after identical mounts, sampler and model inputs were verified. No new actor/contact authorization.",
+  "sources": {
+    "src/client/scene/environment/full-coverage.ts": "0af606b15a897b9f915c666a3c4958e98e452b6aa70d212e3bddd502096089e9",
+    "src/client/scene/environment/force-presentation.ts": "32f2f58c8119e870d08a7d33f5061f54c2d187b8620670b28baa18261b5ef643"
+  },
+  "snapshots": {
+    "display-envelopes-0.json": "8292c4291ee1a9944774713c1cf4a61b1bd65689e6612a61c39de3f605e8dc71",
+    "display-envelopes-1.json": "6b2672619bcac67bb48d2bfa1723df2f58d463a74026904a0798ea7d773e3d4a"
+  },
+  "inheritance": {
+    "baselineSources": {
+      "src/client/scene/environment/full-coverage.ts": "55bcc9e706fc16bac9696adaae4dd3fa3a59a383c5dae73c7b115f6469eca11a",
+      "src/client/scene/environment/force-presentation.ts": "32f2f58c8119e870d08a7d33f5061f54c2d187b8620670b28baa18261b5ef643"
+    },
+    "baselineSnapshots": {
+      "display-envelopes-0.json": "bed2e038dcbb9ec04f7c955ccd6dfdf8a017be86b4190d3c33ff18a25f00f824",
+      "display-envelopes-1.json": "855f90b469674c8d7f2623ba17aee3125a82140cdba30cef64c215878be144d8"
+    },
+    "samplerSHA256": "49c5ead5fdf64a68fde3d648bb5c7ca8c8c631150d3d8cc571a664f67d48ad90",
+    "sameInputs": {
+      "src/client/scene/environment/force-presentation.ts": "32f2f58c8119e870d08a7d33f5061f54c2d187b8620670b28baa18261b5ef643",
+      "src/client/scene/environment/scene-mechanisms.ts": "771663ecd9ef6f562567dee3063fe4be932e1ed79d46c4ef95b1c2e6adb85f1e",
+      "src/client/scene/environment/parked-fallbacks/visibility.ts": "a9e0b79f0aa09a0e513e49ac3db99f97b622c82ca5a6146fbea4fbf06a998640",
+      "src/client/scene/environment/parked-fallbacks/manifest.json": "e512144445bde520e9e75c7f684674863bea6e91d625ae0db73cf1c1c7b446a2",
+      "src/client/scene/mechanisms/models.ts": "6dcb80fdb9e53dbb48c66e002c8f65a11260de49c38172062e56d79544ccc6f3",
+      "src/client/scene/mechanisms/placements.ts": "63b3d29d3fdf635de95bcad2209f0a2fcb1057fa6a03e782c47d187b072e97d0",
+      "src/client/scene/mechanisms/layout.ts": "e6705c25bf366f822565a26ef4303594390f3ba168fa5b5a02807dbd82791dbe",
+      "src/client/scene/mechanisms/events.ts": "76c2c5a643f5b856c5f28caeee8a3851e1427b563c7ba62bcc5d17dfc5cb9f3b",
+      "src/client/scene/mechanisms/telescopic-trip.ts": "b4b4a7e829aa6c4eddb3d77685c1631558172a3c622c3cfbed1e66c9f87cfb68",
+      "src/client/scene/mechanisms/certified-trip.ts": "c7c80549677061f82cc96775fcdbe62d97431f84cc0b42a26fabef6d30d1e5e5",
+      "src/client/scene/mechanisms/punch-r1/plan.ts": "5909ce091d938c7228d935281e243b62c8ff4f4ae24f3533b9f7e27b7e14085e",
+      "src/client/scene/mechanisms/punch-r1/support.ts": "58ba352910257ae72f3443592823ade845303dece705520b45125915e88eddca",
+      "art/mechanisms/punch-rebuild-r1/driver.ts": "60654d9ac97e2fdfb0c356ed7de34992c69ec76779d954e4ba6bba2b1ac1ed7c",
+      "src/client/scene/math.ts": "54b1c1f92c222ba8864aebf9cc7f4e5b3dbd83cf0fd7856fdb93323187ffc8c3",
+      "src/shared/tracks.ts": "6717002165c922b62d34554527ca250f3968fb24df8ccac7e39cb7fede558630",
+      "public/models/mechanisms/punch_outboard_joint.glb": "ff8a8d4431fd08d4cc0111133ad9f0af1ea8abf3197131f5f6c6dfba0d6fa956",
+      "public/models/mechanisms/trip_joint.glb": "70c96cc02f6db99d9ec8650a81f519a39c526d8485231d632ce2908879165641",
+      "public/models/mechanisms/gain_joint_action.glb": "fcb164ad50bb52d22fa0b3aa66f63d515d40c9fef372060997ae3d62fa0a1fde",
+      "public/models/mechanisms/loss_joint_action.glb": "0323a384103f271627786c5c8ef3ba98ac1b488a03e2096c26617442250df0f6",
+      "public/models/mechanisms/warp_joint_action.glb": "bd5122db40a1c86889ee423787d818f278765d0e48ce30cca9f2fcea935a1b19",
+      "public/models/mechanisms/trip_telescopic_v1.2f331432.glb": "2f331432d72ef78d33c2aadd355885f25ca9f670d4d7f37b36e0c27b6db1046f",
+      "public/models/mechanisms/punch-rebuild-r1.glb": "aef0b2f39adcbb29eaa3f449e22804093f5efe02e1d0113ca35500cd75cb25b6"
+    },
+    "mountChecks": [
+      {
+        "anchor": "squiggle:1",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "squiggle:5",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "squiggle:6",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "squiggle:8",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "squiggle:13",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "squiggle:14",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "squiggle:17",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "squiggle:19",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "squiggle:21",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "squiggle:23",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "squiggle:26",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "squiggle:28",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "squiggle:29",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "boardwalks:1",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "boardwalks:6",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "boardwalks:9",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "boardwalks:10",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "boardwalks:16",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "boardwalks:18",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "boardwalks:19",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "boardwalks:20",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "boardwalks:21",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "boardwalks:22",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "boardwalks:23",
+        "compact": false,
+        "unchanged": false
+      },
+      {
+        "anchor": "boardwalks:32",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "boardwalks:37",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "boardwalks:46",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "boardwalks:47",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "boardwalks:48",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "boardwalks:49",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "boardwalks:50",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "boardwalks:56",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "whirly-world:3",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "whirly-world:5",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "whirly-world:7",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "whirly-world:10",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "whirly-world:12",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "whirly-world:15",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "whirly-world:18",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "whirly-world:20",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "whirly-world:22",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "whirly-world:23",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "whirly-world:24",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "whirly-world:27",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "wild:1",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "wild:5",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "wild:7",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "wild:11",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "wild:13",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "wild:16",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "wild:17",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "wild:23",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "wild:24",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "wild:26",
+        "compact": false,
+        "unchanged": true
+      },
+      {
+        "anchor": "squiggle:1",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "squiggle:5",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "squiggle:6",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "squiggle:8",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "squiggle:13",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "squiggle:14",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "squiggle:17",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "squiggle:19",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "squiggle:21",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "squiggle:23",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "squiggle:26",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "squiggle:28",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "squiggle:29",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "boardwalks:1",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "boardwalks:6",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "boardwalks:9",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "boardwalks:10",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "boardwalks:16",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "boardwalks:18",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "boardwalks:19",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "boardwalks:20",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "boardwalks:21",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "boardwalks:22",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "boardwalks:23",
+        "compact": true,
+        "unchanged": false
+      },
+      {
+        "anchor": "boardwalks:32",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "boardwalks:37",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "boardwalks:46",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "boardwalks:47",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "boardwalks:48",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "boardwalks:49",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "boardwalks:50",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "boardwalks:56",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "whirly-world:3",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "whirly-world:5",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "whirly-world:7",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "whirly-world:10",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "whirly-world:12",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "whirly-world:15",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "whirly-world:18",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "whirly-world:20",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "whirly-world:22",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "whirly-world:23",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "whirly-world:24",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "whirly-world:27",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "wild:1",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "wild:5",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "wild:7",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "wild:11",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "wild:13",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "wild:16",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "wild:17",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "wild:23",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "wild:24",
+        "compact": true,
+        "unchanged": true
+      },
+      {
+        "anchor": "wild:26",
+        "compact": true,
+        "unchanged": true
+      }
+    ],
+    "inheritedAnchors": [
+      "squiggle:1",
+      "squiggle:5",
+      "squiggle:6",
+      "squiggle:8",
+      "squiggle:13",
+      "squiggle:14",
+      "squiggle:17",
+      "squiggle:19",
+      "squiggle:21",
+      "squiggle:23",
+      "squiggle:26",
+      "squiggle:28",
+      "squiggle:29",
+      "boardwalks:1",
+      "boardwalks:6",
+      "boardwalks:9",
+      "boardwalks:10",
+      "boardwalks:16",
+      "boardwalks:18",
+      "boardwalks:19",
+      "boardwalks:20",
+      "boardwalks:21",
+      "boardwalks:22",
+      "boardwalks:32",
+      "boardwalks:37",
+      "boardwalks:46",
+      "boardwalks:47",
+      "boardwalks:48",
+      "boardwalks:49",
+      "boardwalks:50",
+      "boardwalks:56",
+      "whirly-world:3",
+      "whirly-world:5",
+      "whirly-world:7",
+      "whirly-world:10",
+      "whirly-world:12",
+      "whirly-world:15",
+      "whirly-world:18",
+      "whirly-world:20",
+      "whirly-world:22",
+      "whirly-world:23",
+      "whirly-world:24",
+      "whirly-world:27",
+      "wild:1",
+      "wild:5",
+      "wild:7",
+      "wild:11",
+      "wild:13",
+      "wild:16",
+      "wild:17",
+      "wild:23",
+      "wild:24",
+      "wild:26"
+    ],
+    "recomputedAnchors": [
+      "boardwalks:23"
+    ],
+    "posesPerAnchor": 51
+  }
+}

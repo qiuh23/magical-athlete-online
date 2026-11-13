@@ -1,0 +1,7477 @@
+{
+  "scope": "Targeted historical-domain replay ONLY against newly added tile finishes. Does not repeat actor searches or prior full-scene collision audits. Distinguishes molded solid parts from zero-thickness graphics (surface color planes and alpha label atlas), whose intersections are rendering-layer observations and not permission to change body/contact geometry.",
+  "excluded": [
+    "wild:23",
+    "wild:24",
+    "boardwalks:19",
+    "boardwalks:23"
+  ],
+  "inputs": {
+    "src/client/scene/environment/scene-mechanisms-manifest.json": "95f7d262a34c66d711d3c6ee16dfe4a7e041e120a96e6095990a179681da1705",
+    "public/models/banana/banana.glb": "25bad0ab653cceb00f9d93b0013e7bc0ffee913c764d2b9f99803adce4e5372d",
+    "public/models/mechanisms/trip_telescopic_v1.2f331432.glb": "2f331432d72ef78d33c2aadd355885f25ca9f670d4d7f37b36e0c27b6db1046f",
+    "public/models/mechanisms/gain_joint_action.glb": "fcb164ad50bb52d22fa0b3aa66f63d515d40c9fef372060997ae3d62fa0a1fde",
+    "public/models/mechanisms/loss_joint_action.glb": "0323a384103f271627786c5c8ef3ba98ac1b488a03e2096c26617442250df0f6",
+    "public/models/mechanisms/warp_joint_action.glb": "bd5122db40a1c86889ee423787d818f278765d0e48ce30cca9f2fcea935a1b19",
+    "scripts/recovery/audit-integrated-venue-finishes.ts": "65e24960a40a449d75263cea855528178afc0586669711e979fc23d57b39f0ca",
+    "scripts/recovery/scene-collision.ts": "73519904299b6d5fdd575829f0aca32ccf486016764b10a80965350d6fa5be2d",
+    "src/client/scene/environment/tile-finish.ts": "8a22398c7edfb07af91df55e2159f5295cd1c491694bcaee58558aea758b9bc4",
+    "src/client/scene/mechanisms/models.ts": "6dcb80fdb9e53dbb48c66e002c8f65a11260de49c38172062e56d79544ccc6f3",
+    "src/client/scene/mechanisms/placements.ts": "63b3d29d3fdf635de95bcad2209f0a2fcb1057fa6a03e782c47d187b072e97d0",
+    "src/client/scene/mechanisms/telescopic-trip.ts": "b4b4a7e829aa6c4eddb3d77685c1631558172a3c622c3cfbed1e66c9f87cfb68",
+    "src/client/scene/mechanisms/contact-plan.ts": "055cdea8c606a15a7d9c9254ee09826eebf6e7ddaa1d350c0a06c003522b3944",
+    "src/client/scene/mechanisms/down-pose.ts": "f7be8565afb7a41ba71b6ba45779e7f055fa1f64d64345dd973999b08a25b3f9",
+    "src/client/scene/mechanisms/actor-snapshot.ts": "208f282018b2050425e42ed483b1a2cb3804023113fc20ae3bb36d3b74ad53a5",
+    "src/client/scene/pawn-materials.ts": "1e31753d38b74a7cf9b835924167c1d700962087e55ab13bed2f099a58db79a0",
+    "src/client/scene/toy-model-instance.ts": "074aee2aa46f0f1f4b0202b600e58124e70743c7bbfbf963d50f140587956bb7",
+    "src/client/scene/math.ts": "54b1c1f92c222ba8864aebf9cc7f4e5b3dbd83cf0fd7856fdb93323187ffc8c3"
+  },
+  "reports": [
+    {
+      "scope": "old-hardware-only",
+      "anchor": "squiggle:1",
+      "samples": 51
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "squiggle:1",
+      "samples": 1,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-hardware-only",
+      "anchor": "squiggle:5",
+      "samples": 1
+    },
+    {
+      "scope": "old-hardware-only",
+      "anchor": "squiggle:6",
+      "samples": 51
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "squiggle:6",
+      "samples": 1,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-hardware-only",
+      "anchor": "squiggle:8",
+      "samples": 51
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "squiggle:8",
+      "samples": 1,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-hardware-only",
+      "anchor": "squiggle:13",
+      "samples": 51
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "squiggle:13",
+      "samples": 1,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-hardware-only",
+      "anchor": "squiggle:19",
+      "samples": 51
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "squiggle:19",
+      "samples": 1,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-hardware-only",
+      "anchor": "squiggle:21",
+      "samples": 51
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "squiggle:21",
+      "samples": 1,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-hardware-only",
+      "anchor": "squiggle:23",
+      "samples": 51
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "squiggle:23",
+      "samples": 1,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-hardware-only",
+      "anchor": "squiggle:26",
+      "samples": 1
+    },
+    {
+      "scope": "old-hardware-only",
+      "anchor": "squiggle:28",
+      "samples": 51
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "squiggle:28",
+      "samples": 1,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-hardware-only",
+      "anchor": "squiggle:29",
+      "samples": 51
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "squiggle:29",
+      "samples": 1,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "squiggle/5/desktop/banana:false:normal:false",
+      "samples": 103,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "squiggle/26/desktop/banana:false:normal:false",
+      "samples": 103,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "squiggle/5/compact/banana:false:normal:false",
+      "samples": 103,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "squiggle/26/compact/banana:false:normal:false",
+      "samples": 103,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-hardware-only",
+      "anchor": "boardwalks:1",
+      "samples": 51
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "boardwalks:1",
+      "samples": 1,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-hardware-only",
+      "anchor": "boardwalks:6",
+      "samples": 1
+    },
+    {
+      "scope": "old-hardware-only",
+      "anchor": "boardwalks:10",
+      "samples": 1
+    },
+    {
+      "scope": "old-hardware-only",
+      "anchor": "boardwalks:16",
+      "samples": 1
+    },
+    {
+      "scope": "old-hardware-only",
+      "anchor": "boardwalks:20",
+      "samples": 1
+    },
+    {
+      "scope": "old-hardware-only",
+      "anchor": "boardwalks:21",
+      "samples": 1
+    },
+    {
+      "scope": "old-hardware-only",
+      "anchor": "boardwalks:22",
+      "samples": 1
+    },
+    {
+      "scope": "old-hardware-only",
+      "anchor": "boardwalks:37",
+      "samples": 51
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "boardwalks:37",
+      "samples": 1,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-hardware-only",
+      "anchor": "boardwalks:47",
+      "samples": 51
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "boardwalks:47",
+      "samples": 1,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-hardware-only",
+      "anchor": "boardwalks:49",
+      "samples": 51
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "boardwalks:49",
+      "samples": 1,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/6/desktop/banana:false:normal:false",
+      "samples": 103,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/10/desktop/banana:false:normal:false",
+      "samples": 103,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/16/desktop/banana:false:normal:false",
+      "samples": 103,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/20/desktop/banana:false:normal:false",
+      "samples": 103,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/21/desktop/banana:false:normal:false",
+      "samples": 103,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/22/desktop/banana:false:normal:false",
+      "samples": 103,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/6/compact/banana:false:normal:false",
+      "samples": 103,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/10/compact/banana:false:normal:false",
+      "samples": 103,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/16/compact/banana:false:normal:false",
+      "samples": 103,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/20/compact/banana:false:normal:false",
+      "samples": 103,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/21/compact/banana:false:normal:false",
+      "samples": 103,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/22/compact/banana:false:normal:false",
+      "samples": 103,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-hardware-only",
+      "anchor": "whirly-world:3",
+      "samples": 51
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "whirly-world:3",
+      "samples": 1,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-hardware-only",
+      "anchor": "whirly-world:5",
+      "samples": 51
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "whirly-world:5",
+      "samples": 1,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-hardware-only",
+      "anchor": "whirly-world:7",
+      "samples": 51
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "whirly-world:7",
+      "samples": 1,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-hardware-only",
+      "anchor": "whirly-world:10",
+      "samples": 51
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "whirly-world:10",
+      "samples": 1,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-hardware-only",
+      "anchor": "whirly-world:12",
+      "samples": 51
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "whirly-world:12",
+      "samples": 1,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-hardware-only",
+      "anchor": "whirly-world:15",
+      "samples": 51
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "whirly-world:15",
+      "samples": 1,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-hardware-only",
+      "anchor": "whirly-world:18",
+      "samples": 51
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "whirly-world:18",
+      "samples": 1,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-hardware-only",
+      "anchor": "whirly-world:20",
+      "samples": 51
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "whirly-world:20",
+      "samples": 1,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-hardware-only",
+      "anchor": "whirly-world:22",
+      "samples": 51
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "whirly-world:22",
+      "samples": 1,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-hardware-only",
+      "anchor": "whirly-world:23",
+      "samples": 51
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "whirly-world:23",
+      "samples": 1,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-hardware-only",
+      "anchor": "whirly-world:24",
+      "samples": 51
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "whirly-world:24",
+      "samples": 1,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-hardware-only",
+      "anchor": "whirly-world:27",
+      "samples": 51
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "whirly-world:27",
+      "samples": 1,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-hardware-only",
+      "anchor": "wild:1",
+      "samples": 51
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "wild:1",
+      "samples": 1,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-hardware-only",
+      "anchor": "wild:13",
+      "samples": 51
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "wild:13",
+      "samples": 1,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-hardware-only",
+      "anchor": "wild:17",
+      "samples": 1
+    },
+    {
+      "scope": "old-hardware-only",
+      "anchor": "wild:26",
+      "samples": 1
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "wild/17/desktop/banana:false:normal:false",
+      "samples": 103,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "wild/26/desktop/banana:false:normal:false",
+      "samples": 103,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "wild/17/compact/banana:false:normal:false",
+      "samples": 103,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "wild/26/compact/banana:false:normal:false",
+      "samples": 103,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037"
+    }
+  ],
+  "solidHits": [],
+  "decalIntersections": [
+    {
+      "scope": "old-standing-banana",
+      "anchor": "squiggle:1",
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:1",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          -18.135635014051143,
+          1.6569999456405642,
+          -5.089514901159338
+        ],
+        [
+          -17.20623534468221,
+          1.6569999456405644,
+          -4.1601152317904075
+        ]
+      ],
+      "aBounds": [
+        [
+          -18.215435201003164,
+          1.6549999999999998,
+          -5.169315088111358
+        ],
+        [
+          -17.12643515773019,
+          1.844750003442168,
+          -4.080315044838387
+        ]
+      ],
+      "bBounds": [
+        [
+          -18.550934672355652,
+          1.6569999456405637,
+          -5.504814982414246
+        ],
+        [
+          -16.790934681892395,
+          1.6569999456405642,
+          -3.7448149919509888
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "squiggle:1",
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          -17.940170206803483,
+          1.675999999046326,
+          -5.13421507987139
+        ],
+        [
+          -17.401700157232945,
+          1.675999999046326,
+          -5.054815292358398
+        ]
+      ],
+      "aBounds": [
+        [
+          -18.215435201003164,
+          1.6549999999999998,
+          -5.169315088111358
+        ],
+        [
+          -17.12643515773019,
+          1.844750003442168,
+          -4.080315044838387
+        ]
+      ],
+      "bBounds": [
+        [
+          -20.79688262939453,
+          1.6759999990463257,
+          -5.512869358062744
+        ],
+        [
+          18.65704345703125,
+          1.6759999990463257,
+          4.678004741668701
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "squiggle:6",
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:6",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          -13.924982490842677,
+          1.6569999456405642,
+          4.36719650342361
+        ],
+        [
+          -12.995582821473747,
+          1.6569999456405644,
+          5.29659617279254
+        ]
+      ],
+      "aBounds": [
+        [
+          -14.004782677794697,
+          1.6549999999999998,
+          4.28739631647159
+        ],
+        [
+          -12.915782634521726,
+          1.844750003442168,
+          5.376396359744561
+        ]
+      ],
+      "bBounds": [
+        [
+          -14.340282320976257,
+          1.6569999456405637,
+          3.9518963098526
+        ],
+        [
+          -12.580282330513,
+          1.6569999456405642,
+          5.711896300315857
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "squiggle:6",
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          -13.72951815864824,
+          1.675999999046326,
+          4.322496324711558
+        ],
+        [
+          -13.19104715897143,
+          1.675999999046326,
+          4.4018964767456055
+        ]
+      ],
+      "aBounds": [
+        [
+          -14.004782677794697,
+          1.6549999999999998,
+          4.28739631647159
+        ],
+        [
+          -12.915782634521726,
+          1.844750003442168,
+          5.376396359744561
+        ]
+      ],
+      "bBounds": [
+        [
+          -20.79688262939453,
+          1.6759999990463257,
+          -5.512869358062744
+        ],
+        [
+          18.65704345703125,
+          1.6759999990463257,
+          4.678004741668701
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "squiggle:8",
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:8",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          -9.64530287708981,
+          1.6569999456405642,
+          3.1247088736243906
+        ],
+        [
+          -8.71590320772088,
+          1.6569999456405644,
+          4.054108542993321
+        ]
+      ],
+      "aBounds": [
+        [
+          -9.72510306404183,
+          1.6549999999999998,
+          3.04490868667237
+        ],
+        [
+          -8.636103020768859,
+          1.844750003442168,
+          4.133908729945342
+        ]
+      ],
+      "bBounds": [
+        [
+          -10.060603022575378,
+          1.6569999456405637,
+          2.7094086408615112
+        ],
+        [
+          -8.300603032112122,
+          1.6569999456405642,
+          4.469408631324768
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "squiggle:8",
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          -9.44983849381952,
+          1.675999999046326,
+          3.0800086949123395
+        ],
+        [
+          -8.911367596294397,
+          1.675999999046326,
+          3.159408807754517
+        ]
+      ],
+      "aBounds": [
+        [
+          -9.72510306404183,
+          1.6549999999999998,
+          3.04490868667237
+        ],
+        [
+          -8.636103020768859,
+          1.844750003442168,
+          4.133908729945342
+        ]
+      ],
+      "bBounds": [
+        [
+          -20.79688262939453,
+          1.6759999990463257,
+          -5.512869358062744
+        ],
+        [
+          18.65704345703125,
+          1.6759999990463257,
+          4.678004741668701
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "squiggle:13",
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:13",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          -3.2257834564605083,
+          1.6569999456405642,
+          -2.535512551016498
+        ],
+        [
+          -2.296383787091578,
+          1.6569999456405644,
+          -1.6061128816475676
+        ]
+      ],
+      "aBounds": [
+        [
+          -3.3055836434125294,
+          1.6549999999999998,
+          -2.6153127379685186
+        ],
+        [
+          -2.216583600139557,
+          1.844750003442168,
+          -1.5263126946955463
+        ]
+      ],
+      "bBounds": [
+        [
+          -3.641083598136902,
+          1.6569999456405637,
+          -2.9508126974105835
+        ],
+        [
+          -1.881083607673645,
+          1.6569999456405642,
+          -1.1908127069473267
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "squiggle:13",
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          -3.030318875035026,
+          1.675999999046326,
+          -2.580212729728549
+        ],
+        [
+          -2.4918483738202175,
+          1.675999999046326,
+          -2.5008127689361572
+        ]
+      ],
+      "aBounds": [
+        [
+          -3.3055836434125294,
+          1.6549999999999998,
+          -2.6153127379685186
+        ],
+        [
+          -2.216583600139557,
+          1.844750003442168,
+          -1.5263126946955463
+        ]
+      ],
+      "bBounds": [
+        [
+          -20.79688262939453,
+          1.6759999990463257,
+          -5.512869358062744
+        ],
+        [
+          18.65704345703125,
+          1.6759999990463257,
+          4.678004741668701
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "squiggle:19",
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:19",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          4.98844031832322,
+          1.6569999456405642,
+          -1.9832958266612895
+        ],
+        [
+          5.91783998769215,
+          1.6569999456405644,
+          -1.053896157292359
+        ]
+      ],
+      "aBounds": [
+        [
+          4.908640131371199,
+          1.6549999999999998,
+          -2.06309601361331
+        ],
+        [
+          5.997640174644171,
+          1.844750003442168,
+          -0.9740959703403379
+        ]
+      ],
+      "bBounds": [
+        [
+          4.573140263557434,
+          1.6569999456405637,
+          -2.398595929145813
+        ],
+        [
+          6.333140254020691,
+          1.6569999456405642,
+          -0.6385959386825562
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "squiggle:19",
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          5.1839048425246315,
+          1.675999999046326,
+          -2.027996005373341
+        ],
+        [
+          5.722375458187561,
+          1.675999999046326,
+          -1.948596000671387
+        ]
+      ],
+      "aBounds": [
+        [
+          4.908640131371199,
+          1.6549999999999998,
+          -2.06309601361331
+        ],
+        [
+          5.997640174644171,
+          1.844750003442168,
+          -0.9740959703403379
+        ]
+      ],
+      "bBounds": [
+        [
+          -20.79688262939453,
+          1.6759999990463257,
+          -5.512869358062744
+        ],
+        [
+          18.65704345703125,
+          1.6759999990463257,
+          4.678004741668701
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "squiggle:21",
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:21",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          8.23271357391007,
+          1.6569999456405642,
+          -4.468271086259728
+        ],
+        [
+          9.162113243279,
+          1.6569999456405644,
+          -3.538871416890798
+        ]
+      ],
+      "aBounds": [
+        [
+          8.15291338695805,
+          1.6549999999999998,
+          -4.5480712732117485
+        ],
+        [
+          9.24191343023102,
+          1.844750003442168,
+          -3.4590712299387767
+        ]
+      ],
+      "bBounds": [
+        [
+          7.8174134492874146,
+          1.6569999456405637,
+          -4.883571028709412
+        ],
+        [
+          9.577413439750671,
+          1.6569999456405642,
+          -3.123571038246155
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "squiggle:21",
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          8.428178200263186,
+          1.675999999046326,
+          -4.51297126497178
+        ],
+        [
+          8.966648611622743,
+          1.675999999046326,
+          -4.4335713386535645
+        ]
+      ],
+      "aBounds": [
+        [
+          8.15291338695805,
+          1.6549999999999998,
+          -4.5480712732117485
+        ],
+        [
+          9.24191343023102,
+          1.844750003442168,
+          -3.4590712299387767
+        ]
+      ],
+      "bBounds": [
+        [
+          -20.79688262939453,
+          1.6759999990463257,
+          -5.512869358062744
+        ],
+        [
+          18.65704345703125,
+          1.6759999990463257,
+          4.678004741668701
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "squiggle:23",
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:23",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          10.303526290242102,
+          1.6569999456405642,
+          -0.18859147250686115
+        ],
+        [
+          11.232925959611032,
+          1.6569999456405644,
+          0.7408081968620691
+        ]
+      ],
+      "aBounds": [
+        [
+          10.223726103290081,
+          1.6549999999999998,
+          -0.2683916594588817
+        ],
+        [
+          11.312726146563053,
+          1.844750003442168,
+          0.8206083838140903
+        ]
+      ],
+      "bBounds": [
+        [
+          9.888225674629211,
+          1.6569999456405637,
+          -0.6038916409015656
+        ],
+        [
+          11.648225665092468,
+          1.6569999456405642,
+          1.1561083495616913
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "squiggle:23",
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          10.498990803241472,
+          1.675999999046326,
+          -0.23329165121891243
+        ],
+        [
+          11.03746144130848,
+          1.675999999046326,
+          -0.1538916379213333
+        ]
+      ],
+      "aBounds": [
+        [
+          10.223726103290081,
+          1.6549999999999998,
+          -0.2683916594588817
+        ],
+        [
+          11.312726146563053,
+          1.844750003442168,
+          0.8206083838140903
+        ]
+      ],
+      "bBounds": [
+        [
+          -20.79688262939453,
+          1.6759999990463257,
+          -5.512869358062744
+        ],
+        [
+          18.65704345703125,
+          1.6759999990463257,
+          4.678004741668701
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "squiggle:28",
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:28",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          16.930126982504603,
+          1.6569999456405642,
+          1.537085791103166
+        ],
+        [
+          17.859526651873537,
+          1.6569999456405644,
+          2.466485460472096
+        ]
+      ],
+      "aBounds": [
+        [
+          16.850326795552583,
+          1.6549999999999998,
+          1.4572856041511453
+        ],
+        [
+          17.939326838825558,
+          1.844750003442168,
+          2.5462856474241176
+        ]
+      ],
+      "bBounds": [
+        [
+          16.514826893806458,
+          1.6569999456405637,
+          1.1217855215072632
+        ],
+        [
+          18.274826884269714,
+          1.6569999456405642,
+          2.88178551197052
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "squiggle:28",
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          17.125591569133253,
+          1.675999999046326,
+          1.4923856123911148
+        ],
+        [
+          17.664062059941735,
+          1.675999999046326,
+          1.571785569190979
+        ]
+      ],
+      "aBounds": [
+        [
+          16.850326795552583,
+          1.6549999999999998,
+          1.4572856041511453
+        ],
+        [
+          17.939326838825558,
+          1.844750003442168,
+          2.5462856474241176
+        ]
+      ],
+      "bBounds": [
+        [
+          -20.79688262939453,
+          1.6759999990463257,
+          -5.512869358062744
+        ],
+        [
+          18.65704345703125,
+          1.6759999990463257,
+          4.678004741668701
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "squiggle:29",
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:29",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          17.413316616315413,
+          1.6569999456405642,
+          -0.878862377950872
+        ],
+        [
+          18.342716285684347,
+          1.6569999456405644,
+          0.05053729141805835
+        ]
+      ],
+      "aBounds": [
+        [
+          17.333516429363392,
+          1.6549999999999998,
+          -0.9586625649028925
+        ],
+        [
+          18.422516472636367,
+          1.844750003442168,
+          0.13033747837007958
+        ]
+      ],
+      "bBounds": [
+        [
+          16.998015522956848,
+          1.6569999456405637,
+          -1.294162541627884
+        ],
+        [
+          18.758015513420105,
+          1.6569999456405642,
+          0.4658374488353729
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "squiggle:29",
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          17.608781103746992,
+          1.675999999046326,
+          -0.9235625566629232
+        ],
+        [
+          18.14725179294958,
+          1.675999999046326,
+          -0.8441625237464904
+        ]
+      ],
+      "aBounds": [
+        [
+          17.333516429363392,
+          1.6549999999999998,
+          -0.9586625649028925
+        ],
+        [
+          18.422516472636367,
+          1.844750003442168,
+          0.13033747837007958
+        ]
+      ],
+      "bBounds": [
+        [
+          -20.79688262939453,
+          1.6759999990463257,
+          -5.512869358062744
+        ],
+        [
+          18.65704345703125,
+          1.6759999990463257,
+          4.678004741668701
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "squiggle/5/desktop/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:5",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          -15.374546442273047,
+          1.6569999456405635,
+          2.9176325519932385
+        ],
+        [
+          -14.445156672908219,
+          1.6569999456405637,
+          3.847022321358067
+        ]
+      ],
+      "aBounds": [
+        [
+          -15.454351579227119,
+          1.6550016499999998,
+          2.837827415039167
+        ],
+        [
+          -14.365351535954147,
+          1.844751653442168,
+          3.926827458312139
+        ]
+      ],
+      "bBounds": [
+        [
+          -15.789852023124695,
+          1.6569999456405637,
+          2.5023273229599
+        ],
+        [
+          -14.029852032661438,
+          1.6569999456405642,
+          4.262327313423157
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "squiggle/5/desktop/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          -15.179084261471997,
+          1.6759999990463252,
+          2.872929073279649
+        ],
+        [
+          -14.640618859011797,
+          1.6759999990463252,
+          2.9523274898529057
+        ]
+      ],
+      "aBounds": [
+        [
+          -15.454351579227119,
+          1.6550016499999998,
+          2.837827415039167
+        ],
+        [
+          -14.365351535954147,
+          1.844751653442168,
+          3.926827458312139
+        ]
+      ],
+      "bBounds": [
+        [
+          -20.79688262939453,
+          1.6759999990463257,
+          -5.512869358062744
+        ],
+        [
+          18.65704345703125,
+          1.6759999990463257,
+          4.678004741668701
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "squiggle/5/desktop/banana:false:normal:false",
+      "mode": "down",
+      "t": 1,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:5",
+      "kind": "surface",
+      "crossings": 16,
+      "bounds": [
+        [
+          -14.846566356386191,
+          1.6569999456405637,
+          3.2876712965194614
+        ],
+        [
+          -14.768125526781986,
+          1.656999945640564,
+          3.4498471839157614
+        ]
+      ],
+      "aBounds": [
+        [
+          -14.989591731096615,
+          1.5839301423804102,
+          2.7518732832405015
+        ],
+        [
+          -14.641984717911138,
+          2.805756656366908,
+          3.9880142470812747
+        ]
+      ],
+      "bBounds": [
+        [
+          -15.789852023124695,
+          1.6569999456405637,
+          2.5023273229599
+        ],
+        [
+          -14.029852032661438,
+          1.6569999456405642,
+          4.262327313423157
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "squiggle/5/desktop/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:5",
+      "kind": "surface",
+      "crossings": 16,
+      "bounds": [
+        [
+          -14.846566356386191,
+          1.6569999456405637,
+          3.2876712965194614
+        ],
+        [
+          -14.768125526781986,
+          1.656999945640564,
+          3.4498471839157614
+        ]
+      ],
+      "aBounds": [
+        [
+          -14.989591731096615,
+          1.5839301423804102,
+          2.7518732832405015
+        ],
+        [
+          -14.641984717911138,
+          2.805756656366908,
+          3.9880142470812747
+        ]
+      ],
+      "bBounds": [
+        [
+          -15.789852023124695,
+          1.6569999456405637,
+          2.5023273229599
+        ],
+        [
+          -14.029852032661438,
+          1.6569999456405642,
+          4.262327313423157
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "squiggle/5/desktop/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0.86,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 2,
+      "bounds": [
+        [
+          -14.761249350561046,
+          1.6759999990463255,
+          2.9520220368531596
+        ],
+        [
+          -14.759222270428015,
+          1.6759999990463255,
+          2.9523274898529053
+        ]
+      ],
+      "aBounds": [
+        [
+          -15.45272290398433,
+          1.641981749815215,
+          2.8355413450989957
+        ],
+        [
+          -14.351244459582503,
+          1.933265812609737,
+          3.9270418774545304
+        ]
+      ],
+      "bBounds": [
+        [
+          -20.79688262939453,
+          1.6759999990463257,
+          -5.512869358062744
+        ],
+        [
+          18.65704345703125,
+          1.6759999990463257,
+          4.678004741668701
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "squiggle/26/desktop/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:26",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          13.89293994855301,
+          1.6569999456405635,
+          4.6433098156032635
+        ],
+        [
+          14.822329717917839,
+          1.6569999456405637,
+          5.572699584968093
+        ]
+      ],
+      "aBounds": [
+        [
+          13.813134811598939,
+          1.6550016499999998,
+          4.563504678649193
+        ],
+        [
+          14.90213485487191,
+          1.844751653442168,
+          5.652504721922164
+        ]
+      ],
+      "bBounds": [
+        [
+          13.47763454914093,
+          1.6569999456405637,
+          4.228004574775696
+        ],
+        [
+          15.237634539604187,
+          1.6569999456405642,
+          5.988004565238953
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "squiggle/26/desktop/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          14.088402144724602,
+          1.6759999990463252,
+          4.598606336889675
+        ],
+        [
+          14.626867516443724,
+          1.6759999990463252,
+          4.678004741668702
+        ]
+      ],
+      "aBounds": [
+        [
+          13.813134811598939,
+          1.6550016499999998,
+          4.563504678649193
+        ],
+        [
+          14.90213485487191,
+          1.844751653442168,
+          5.652504721922164
+        ]
+      ],
+      "bBounds": [
+        [
+          -20.79688262939453,
+          1.6759999990463257,
+          -5.512869358062744
+        ],
+        [
+          18.65704345703125,
+          1.6759999990463257,
+          4.678004741668701
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "squiggle/26/desktop/banana:false:normal:false",
+      "mode": "down",
+      "t": 1,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:26",
+      "kind": "surface",
+      "crossings": 14,
+      "bounds": [
+        [
+          14.262978693079232,
+          1.656999945640564,
+          4.966278669477032
+        ],
+        [
+          14.425154580475532,
+          1.656999945640564,
+          5.044719499081236
+        ]
+      ],
+      "aBounds": [
+        [
+          13.727180679800277,
+          1.5839301423804129,
+          4.840137860606187
+        ],
+        [
+          14.963321643641045,
+          2.8057566563669054,
+          5.187744873791657
+        ]
+      ],
+      "bBounds": [
+        [
+          13.47763454914093,
+          1.6569999456405637,
+          4.228004574775696
+        ],
+        [
+          15.237634539604187,
+          1.6569999456405642,
+          5.988004565238953
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "squiggle/26/desktop/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:26",
+      "kind": "surface",
+      "crossings": 14,
+      "bounds": [
+        [
+          14.262978693079232,
+          1.656999945640564,
+          4.966278669477032
+        ],
+        [
+          14.425154580475532,
+          1.656999945640564,
+          5.044719499081236
+        ]
+      ],
+      "aBounds": [
+        [
+          13.727180679800277,
+          1.5839301423804129,
+          4.840137860606187
+        ],
+        [
+          14.963321643641045,
+          2.8057566563669054,
+          5.187744873791657
+        ]
+      ],
+      "bBounds": [
+        [
+          13.47763454914093,
+          1.6569999456405637,
+          4.228004574775696
+        ],
+        [
+          15.237634539604187,
+          1.6569999456405642,
+          5.988004565238953
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "squiggle/26/desktop/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0.48,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 3,
+      "bounds": [
+        [
+          14.339968871044283,
+          1.6759999990463266,
+          4.673767851011662
+        ],
+        [
+          14.388884671613077,
+          1.6759999990463266,
+          4.678004741668701
+        ]
+      ],
+      "aBounds": [
+        [
+          13.774810356610553,
+          1.5640159577917205,
+          4.576325543952907
+        ],
+        [
+          14.922141031752364,
+          2.5954038271223987,
+          5.500542706662395
+        ]
+      ],
+      "bBounds": [
+        [
+          -20.79688262939453,
+          1.6759999990463257,
+          -5.512869358062744
+        ],
+        [
+          18.65704345703125,
+          1.6759999990463257,
+          4.678004741668701
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "squiggle/5/compact/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:5",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          -15.374546442273047,
+          1.6569999456405635,
+          2.9176325519932376
+        ],
+        [
+          -14.445156672908219,
+          1.6569999456405637,
+          3.8470223213580663
+        ]
+      ],
+      "aBounds": [
+        [
+          -15.454351579227119,
+          1.6550016499999998,
+          2.837827415039166
+        ],
+        [
+          -14.365351535954147,
+          1.844751653442168,
+          3.9268274583121383
+        ]
+      ],
+      "bBounds": [
+        [
+          -15.789852023124695,
+          1.6569999456405637,
+          2.5023273229599
+        ],
+        [
+          -14.029852032661438,
+          1.6569999456405642,
+          4.262327313423157
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "squiggle/5/compact/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          -15.179084261472,
+          1.6759999990463252,
+          2.872929073279648
+        ],
+        [
+          -14.640618859011795,
+          1.6759999990463252,
+          2.9523274898529057
+        ]
+      ],
+      "aBounds": [
+        [
+          -15.454351579227119,
+          1.6550016499999998,
+          2.837827415039166
+        ],
+        [
+          -14.365351535954147,
+          1.844751653442168,
+          3.9268274583121383
+        ]
+      ],
+      "bBounds": [
+        [
+          -20.79688262939453,
+          1.6759999990463257,
+          -5.512869358062744
+        ],
+        [
+          18.65704345703125,
+          1.6759999990463257,
+          4.678004741668701
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "squiggle/5/compact/banana:false:normal:false",
+      "mode": "down",
+      "t": 1,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:5",
+      "kind": "surface",
+      "crossings": 16,
+      "bounds": [
+        [
+          -14.846566356386191,
+          1.656999945640564,
+          3.2876712965194606
+        ],
+        [
+          -14.768125526781986,
+          1.656999945640564,
+          3.44984718391576
+        ]
+      ],
+      "aBounds": [
+        [
+          -14.989591731096615,
+          1.5839301423804102,
+          2.7518732832405006
+        ],
+        [
+          -14.641984717911138,
+          2.805756656366908,
+          3.988014247081274
+        ]
+      ],
+      "bBounds": [
+        [
+          -15.789852023124695,
+          1.6569999456405637,
+          2.5023273229599
+        ],
+        [
+          -14.029852032661438,
+          1.6569999456405642,
+          4.262327313423157
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "squiggle/5/compact/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:5",
+      "kind": "surface",
+      "crossings": 16,
+      "bounds": [
+        [
+          -14.846566356386191,
+          1.656999945640564,
+          3.2876712965194606
+        ],
+        [
+          -14.768125526781986,
+          1.656999945640564,
+          3.44984718391576
+        ]
+      ],
+      "aBounds": [
+        [
+          -14.989591731096615,
+          1.5839301423804102,
+          2.7518732832405006
+        ],
+        [
+          -14.641984717911138,
+          2.805756656366908,
+          3.988014247081274
+        ]
+      ],
+      "bBounds": [
+        [
+          -15.789852023124695,
+          1.6569999456405637,
+          2.5023273229599
+        ],
+        [
+          -14.029852032661438,
+          1.6569999456405642,
+          4.262327313423157
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "squiggle/5/compact/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0.86,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 2,
+      "bounds": [
+        [
+          -14.761249350561046,
+          1.6759999990463255,
+          2.952022036853159
+        ],
+        [
+          -14.759222270428012,
+          1.6759999990463255,
+          2.9523274898529053
+        ]
+      ],
+      "aBounds": [
+        [
+          -15.45272290398433,
+          1.641981749815215,
+          2.8355413450989944
+        ],
+        [
+          -14.351244459582503,
+          1.933265812609737,
+          3.9270418774545295
+        ]
+      ],
+      "bBounds": [
+        [
+          -20.79688262939453,
+          1.6759999990463257,
+          -5.512869358062744
+        ],
+        [
+          18.65704345703125,
+          1.6759999990463257,
+          4.678004741668701
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "squiggle/26/compact/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:26",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          13.89293994855301,
+          1.6569999456405635,
+          4.643309815603264
+        ],
+        [
+          14.822329717917839,
+          1.6569999456405637,
+          5.572699584968094
+        ]
+      ],
+      "aBounds": [
+        [
+          13.813134811598939,
+          1.6550016499999998,
+          4.563504678649194
+        ],
+        [
+          14.90213485487191,
+          1.844751653442168,
+          5.652504721922165
+        ]
+      ],
+      "bBounds": [
+        [
+          13.47763454914093,
+          1.6569999456405637,
+          4.228004574775696
+        ],
+        [
+          15.237634539604187,
+          1.6569999456405642,
+          5.988004565238953
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "squiggle/26/compact/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          14.088402144724604,
+          1.6759999990463252,
+          4.5986063368896755
+        ],
+        [
+          14.626867516443722,
+          1.6759999990463252,
+          4.678004741668701
+        ]
+      ],
+      "aBounds": [
+        [
+          13.813134811598939,
+          1.6550016499999998,
+          4.563504678649194
+        ],
+        [
+          14.90213485487191,
+          1.844751653442168,
+          5.652504721922165
+        ]
+      ],
+      "bBounds": [
+        [
+          -20.79688262939453,
+          1.6759999990463257,
+          -5.512869358062744
+        ],
+        [
+          18.65704345703125,
+          1.6759999990463257,
+          4.678004741668701
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "squiggle/26/compact/banana:false:normal:false",
+      "mode": "down",
+      "t": 1,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:26",
+      "kind": "surface",
+      "crossings": 16,
+      "bounds": [
+        [
+          14.290115085995316,
+          1.6569999456405642,
+          4.966278669477032
+        ],
+        [
+          14.452290973391618,
+          1.6569999456405644,
+          5.044719499081238
+        ]
+      ],
+      "aBounds": [
+        [
+          13.751948022829804,
+          1.5839301423804129,
+          4.840137860606188
+        ],
+        [
+          14.988088986670572,
+          2.8057566563669054,
+          5.187744873791658
+        ]
+      ],
+      "bBounds": [
+        [
+          13.47763454914093,
+          1.6569999456405637,
+          4.228004574775696
+        ],
+        [
+          15.237634539604187,
+          1.6569999456405642,
+          5.988004565238953
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "squiggle/26/compact/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:26",
+      "kind": "surface",
+      "crossings": 16,
+      "bounds": [
+        [
+          14.290115085995316,
+          1.6569999456405642,
+          4.966278669477032
+        ],
+        [
+          14.452290973391618,
+          1.6569999456405644,
+          5.044719499081238
+        ]
+      ],
+      "aBounds": [
+        [
+          13.751948022829804,
+          1.5839301423804129,
+          4.840137860606188
+        ],
+        [
+          14.988088986670572,
+          2.8057566563669054,
+          5.187744873791658
+        ]
+      ],
+      "bBounds": [
+        [
+          13.47763454914093,
+          1.6569999456405637,
+          4.228004574775696
+        ],
+        [
+          15.237634539604187,
+          1.6569999456405642,
+          5.988004565238953
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "squiggle/26/compact/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0.48,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 3,
+      "bounds": [
+        [
+          14.32638499485778,
+          1.6759999990463257,
+          4.673767851011664
+        ],
+        [
+          14.375300795426554,
+          1.675999999046326,
+          4.678004741668701
+        ]
+      ],
+      "aBounds": [
+        [
+          13.793128634718485,
+          1.5640159577917205,
+          4.576325543952908
+        ],
+        [
+          14.940459309860296,
+          2.5954038271223987,
+          5.5005427066623955
+        ]
+      ],
+      "bBounds": [
+        [
+          -20.79688262939453,
+          1.6759999990463257,
+          -5.512869358062744
+        ],
+        [
+          18.65704345703125,
+          1.6759999990463257,
+          4.678004741668701
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "boardwalks:1",
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:1",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          -32.792477612462235,
+          1.6569999456405642,
+          -6.725810945795574
+        ],
+        [
+          -31.8630779430933,
+          1.6569999456405644,
+          -5.796411276426644
+        ]
+      ],
+      "aBounds": [
+        [
+          -32.872277799414256,
+          1.6549999999999998,
+          -6.805611132747595
+        ],
+        [
+          -31.78327775614128,
+          1.844750003442168,
+          -5.716611089474624
+        ]
+      ],
+      "bBounds": [
+        [
+          -33.20777785778046,
+          1.6569999456405637,
+          -7.141111254692078
+        ],
+        [
+          -31.4477778673172,
+          1.6569999456405642,
+          -5.381111264228821
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "boardwalks:1",
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          -32.597013129972645,
+          1.675999999046326,
+          -6.770511124507626
+        ],
+        [
+          -32.058542430886085,
+          1.675999999046326,
+          -6.691111087799072
+        ]
+      ],
+      "aBounds": [
+        [
+          -32.872277799414256,
+          1.6549999999999998,
+          -6.805611132747595
+        ],
+        [
+          -31.78327775614128,
+          1.844750003442168,
+          -5.716611089474624
+        ]
+      ],
+      "bBounds": [
+        [
+          -33.037776947021484,
+          1.6759999990463257,
+          -11.227777481079102
+        ],
+        [
+          34.18777847290039,
+          1.6759999990463257,
+          8.770000457763672
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "boardwalks:37",
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:37",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          4.390855720871089,
+          1.6569999456405642,
+          -0.8480331680177986
+        ],
+        [
+          5.320255390240019,
+          1.6569999456405644,
+          0.0813665013511316
+        ]
+      ],
+      "aBounds": [
+        [
+          4.311055533919069,
+          1.6549999999999998,
+          -0.9278333549698192
+        ],
+        [
+          5.40005557719204,
+          1.844750003442168,
+          0.16116668830315284
+        ]
+      ],
+      "bBounds": [
+        [
+          3.9755555391311646,
+          1.6569999456405637,
+          -1.2633333206176758
+        ],
+        [
+          5.735555529594421,
+          1.6569999456405642,
+          0.49666666984558105
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "boardwalks:37",
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          4.586320232705812,
+          1.675999999046326,
+          -0.8927333467298499
+        ],
+        [
+          5.124790873102114,
+          1.675999999046326,
+          -0.8133333325386046
+        ]
+      ],
+      "aBounds": [
+        [
+          4.311055533919069,
+          1.6549999999999998,
+          -0.9278333549698192
+        ],
+        [
+          5.40005557719204,
+          1.844750003442168,
+          0.16116668830315284
+        ]
+      ],
+      "bBounds": [
+        [
+          -33.037776947021484,
+          1.6759999990463257,
+          -11.227777481079102
+        ],
+        [
+          34.18777847290039,
+          1.6759999990463257,
+          8.770000457763672
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "boardwalks:47",
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:47",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          19.46863349864886,
+          1.6569999456405642,
+          8.096411276426643
+        ],
+        [
+          20.398033168017793,
+          1.6569999456405644,
+          9.025810945795573
+        ]
+      ],
+      "aBounds": [
+        [
+          19.38883331169684,
+          1.6549999999999998,
+          8.016611089474623
+        ],
+        [
+          20.477833354969814,
+          1.844750003442168,
+          9.105611132747594
+        ]
+      ],
+      "bBounds": [
+        [
+          19.053332448005676,
+          1.6569999456405637,
+          7.681111454963684
+        ],
+        [
+          20.813332438468933,
+          1.6569999456405642,
+          9.441111445426941
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "boardwalks:47",
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          19.664097967328964,
+          1.675999999046326,
+          8.051711097714591
+        ],
+        [
+          20.20256869403449,
+          1.675999999046326,
+          8.131111145019531
+        ]
+      ],
+      "aBounds": [
+        [
+          19.38883331169684,
+          1.6549999999999998,
+          8.016611089474623
+        ],
+        [
+          20.477833354969814,
+          1.844750003442168,
+          9.105611132747594
+        ]
+      ],
+      "bBounds": [
+        [
+          -33.037776947021484,
+          1.6759999990463257,
+          -11.227777481079102
+        ],
+        [
+          34.18777847290039,
+          1.6759999990463257,
+          8.770000457763672
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "boardwalks:49",
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:49",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          19.724189054204416,
+          1.6569999456405642,
+          0.0464112764266455
+        ],
+        [
+          20.65358872357335,
+          1.6569999456405644,
+          0.9758109457955757
+        ]
+      ],
+      "aBounds": [
+        [
+          19.644388867252395,
+          1.6549999999999998,
+          -0.03338891052537507
+        ],
+        [
+          20.73338891052537,
+          1.844750003442168,
+          1.055611132747597
+        ]
+      ],
+      "bBounds": [
+        [
+          19.30888855457306,
+          1.6569999456405637,
+          -0.36888885498046875
+        ],
+        [
+          21.068888545036316,
+          1.6569999456405642,
+          1.391111135482788
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "boardwalks:49",
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          19.919653567549553,
+          1.675999999046326,
+          0.001711097714594212
+        ],
+        [
+          20.45812420492503,
+          1.675999999046326,
+          0.0811111107468605
+        ]
+      ],
+      "aBounds": [
+        [
+          19.644388867252395,
+          1.6549999999999998,
+          -0.03338891052537507
+        ],
+        [
+          20.73338891052537,
+          1.844750003442168,
+          1.055611132747597
+        ]
+      ],
+      "bBounds": [
+        [
+          -33.037776947021484,
+          1.6759999990463257,
+          -11.227777481079102
+        ],
+        [
+          34.18777847290039,
+          1.6759999990463257,
+          8.770000457763672
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/6/desktop/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:6",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          -27.29802821801574,
+          1.6569999456405635,
+          8.735305115317583
+        ],
+        [
+          -26.36863844865091,
+          1.6569999456405637,
+          9.664694884682412
+        ]
+      ],
+      "aBounds": [
+        [
+          -27.377833354969813,
+          1.6550016499999998,
+          8.655499978363512
+        ],
+        [
+          -26.288833311696838,
+          1.844751653442168,
+          9.744500021636483
+        ]
+      ],
+      "bBounds": [
+        [
+          -27.71333396434784,
+          1.6569999456405637,
+          8.319999814033508
+        ],
+        [
+          -25.953333973884583,
+          1.6569999456405642,
+          10.079999804496765
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/6/desktop/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          -27.102566564482128,
+          1.6759999990463252,
+          8.690601636603994
+        ],
+        [
+          -26.564100107487242,
+          1.6759999990463252,
+          8.770000457763672
+        ]
+      ],
+      "aBounds": [
+        [
+          -27.377833354969813,
+          1.6550016499999998,
+          8.655499978363512
+        ],
+        [
+          -26.288833311696838,
+          1.844751653442168,
+          9.744500021636483
+        ]
+      ],
+      "bBounds": [
+        [
+          -33.037776947021484,
+          1.6759999990463257,
+          -11.227777481079102
+        ],
+        [
+          34.18777847290039,
+          1.6759999990463257,
+          8.770000457763672
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/6/desktop/banana:false:normal:false",
+      "mode": "down",
+      "t": 1,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:6",
+      "kind": "surface",
+      "crossings": 14,
+      "bounds": [
+        [
+          -26.927989473489518,
+          1.656999945640564,
+          9.058273969191351
+        ],
+        [
+          -26.765813586093216,
+          1.656999945640564,
+          9.136714798795557
+        ]
+      ],
+      "aBounds": [
+        [
+          -27.463787486768478,
+          1.5839301423804097,
+          8.932133160320502
+        ],
+        [
+          -26.227646522927703,
+          2.8057566563669085,
+          9.27974017350598
+        ]
+      ],
+      "bBounds": [
+        [
+          -27.71333396434784,
+          1.6569999456405637,
+          8.319999814033508
+        ],
+        [
+          -25.953333973884583,
+          1.6569999456405642,
+          10.079999804496765
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/6/desktop/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:6",
+      "kind": "surface",
+      "crossings": 14,
+      "bounds": [
+        [
+          -26.927989473489518,
+          1.656999945640564,
+          9.058273969191351
+        ],
+        [
+          -26.765813586093216,
+          1.656999945640564,
+          9.136714798795557
+        ]
+      ],
+      "aBounds": [
+        [
+          -27.463787486768478,
+          1.5839301423804097,
+          8.932133160320502
+        ],
+        [
+          -26.227646522927703,
+          2.8057566563669085,
+          9.27974017350598
+        ]
+      ],
+      "bBounds": [
+        [
+          -27.71333396434784,
+          1.6569999456405637,
+          8.319999814033508
+        ],
+        [
+          -25.953333973884583,
+          1.6569999456405642,
+          10.079999804496765
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/6/desktop/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0.48,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 3,
+      "bounds": [
+        [
+          -26.851002458249813,
+          1.6759999990463244,
+          8.765763150725983
+        ],
+        [
+          -26.802081850478167,
+          1.6759999990463244,
+          8.770000457763672
+        ]
+      ],
+      "aBounds": [
+        [
+          -27.4161578099582,
+          1.5640159577917179,
+          8.668320843667225
+        ],
+        [
+          -26.268827134816384,
+          2.5954038271224005,
+          9.592538006376715
+        ]
+      ],
+      "bBounds": [
+        [
+          -33.037776947021484,
+          1.6759999990463257,
+          -11.227777481079102
+        ],
+        [
+          34.18777847290039,
+          1.6759999990463257,
+          8.770000457763672
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/10/desktop/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:10",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          -18.3535837735713,
+          1.6569999456405635,
+          -1.4869171069046367
+        ],
+        [
+          -17.42419400420647,
+          1.6569999456405637,
+          -0.5575273375398078
+        ]
+      ],
+      "aBounds": [
+        [
+          -18.433388910525373,
+          1.6550016499999998,
+          -1.5667222438587078
+        ],
+        [
+          -17.3443888672524,
+          1.844751653442168,
+          -0.4777222005857359
+        ]
+      ],
+      "bBounds": [
+        [
+          -18.76888930797577,
+          1.6569999456405637,
+          -1.9022222757339478
+        ],
+        [
+          -17.008889317512512,
+          1.6569999456405642,
+          -0.14222228527069092
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/10/desktop/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          -18.158121515873074,
+          1.6759999990463252,
+          -1.5316205856182257
+        ],
+        [
+          -17.619656267207198,
+          1.6759999990463252,
+          -1.452222228050232
+        ]
+      ],
+      "aBounds": [
+        [
+          -18.433388910525373,
+          1.6550016499999998,
+          -1.5667222438587078
+        ],
+        [
+          -17.3443888672524,
+          1.844751653442168,
+          -0.4777222005857359
+        ]
+      ],
+      "bBounds": [
+        [
+          -33.037776947021484,
+          1.6759999990463257,
+          -11.227777481079102
+        ],
+        [
+          34.18777847290039,
+          1.6759999990463257,
+          8.770000457763672
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/10/desktop/banana:false:normal:false",
+      "mode": "down",
+      "t": 1,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:10",
+      "kind": "surface",
+      "crossings": 14,
+      "bounds": [
+        [
+          -17.983545029045082,
+          1.656999945640565,
+          -1.163948253030873
+        ],
+        [
+          -17.82136914164877,
+          1.6569999456405653,
+          -1.0855074234266584
+        ]
+      ],
+      "aBounds": [
+        [
+          -18.519343042324035,
+          1.5839301423804104,
+          -1.2900890619017162
+        ],
+        [
+          -17.283202078483264,
+          2.805756656366907,
+          -0.9424820487162409
+        ]
+      ],
+      "bBounds": [
+        [
+          -18.76888930797577,
+          1.6569999456405637,
+          -1.9022222757339478
+        ],
+        [
+          -17.008889317512512,
+          1.6569999456405642,
+          -0.14222228527069092
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/10/desktop/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:10",
+      "kind": "surface",
+      "crossings": 14,
+      "bounds": [
+        [
+          -17.983545029045082,
+          1.656999945640565,
+          -1.163948253030873
+        ],
+        [
+          -17.82136914164877,
+          1.6569999456405653,
+          -1.0855074234266584
+        ]
+      ],
+      "aBounds": [
+        [
+          -18.519343042324035,
+          1.5839301423804104,
+          -1.2900890619017162
+        ],
+        [
+          -17.283202078483264,
+          2.805756656366907,
+          -0.9424820487162409
+        ]
+      ],
+      "bBounds": [
+        [
+          -18.76888930797577,
+          1.6569999456405637,
+          -1.9022222757339478
+        ],
+        [
+          -17.008889317512512,
+          1.6569999456405642,
+          -0.14222228527069092
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/10/desktop/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0.48,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 3,
+      "bounds": [
+        [
+          -17.90655449247659,
+          1.6759999990463257,
+          -1.4564590714962375
+        ],
+        [
+          -17.85763923696918,
+          1.6759999990463257,
+          -1.4522222280502315
+        ]
+      ],
+      "aBounds": [
+        [
+          -18.471713365513757,
+          1.5640159577917192,
+          -1.5539013785549938
+        ],
+        [
+          -17.324382690371948,
+          2.5954038271224,
+          -0.6296842158455049
+        ]
+      ],
+      "bBounds": [
+        [
+          -33.037776947021484,
+          1.6759999990463257,
+          -11.227777481079102
+        ],
+        [
+          34.18777847290039,
+          1.6759999990463257,
+          8.770000457763672
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/16/desktop/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:16",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          0.1741940042064743,
+          1.6569999456405635,
+          -5.192472662460191
+        ],
+        [
+          1.1035837735713032,
+          1.6569999456405637,
+          -4.263082893095362
+        ]
+      ],
+      "aBounds": [
+        [
+          0.0943888672524027,
+          1.6550016499999998,
+          -5.272277799414262
+        ],
+        [
+          1.1833889105253748,
+          1.844751653442168,
+          -4.18327775614129
+        ]
+      ],
+      "bBounds": [
+        [
+          -0.24111109972000122,
+          1.6569999456405637,
+          -5.607777953147888
+        ],
+        [
+          1.5188888907432556,
+          1.6569999456405642,
+          -3.8477779626846313
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/16/desktop/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          0.36965626535707197,
+          1.6759999990463252,
+          -5.23717614117378
+        ],
+        [
+          0.9081215071182067,
+          1.6759999990463252,
+          -5.157777786254883
+        ]
+      ],
+      "aBounds": [
+        [
+          0.0943888672524027,
+          1.6550016499999998,
+          -5.272277799414262
+        ],
+        [
+          1.1833889105253748,
+          1.844751653442168,
+          -4.18327775614129
+        ]
+      ],
+      "bBounds": [
+        [
+          -33.037776947021484,
+          1.6759999990463257,
+          -11.227777481079102
+        ],
+        [
+          34.18777847290039,
+          1.6759999990463257,
+          8.770000457763672
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/16/desktop/banana:false:normal:false",
+      "mode": "down",
+      "t": 1,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:16",
+      "kind": "surface",
+      "crossings": 14,
+      "bounds": [
+        [
+          0.5442327487326963,
+          1.6569999456405637,
+          -4.869503808586423
+        ],
+        [
+          0.706408636128996,
+          1.656999945640564,
+          -4.791062978982219
+        ]
+      ],
+      "aBounds": [
+        [
+          0.008434735453740627,
+          1.5839301423804129,
+          -4.995644617457267
+        ],
+        [
+          1.244575699294508,
+          2.8057566563669054,
+          -4.648037604271798
+        ]
+      ],
+      "bBounds": [
+        [
+          -0.24111109972000122,
+          1.6569999456405637,
+          -5.607777953147888
+        ],
+        [
+          1.5188888907432556,
+          1.6569999456405642,
+          -3.8477779626846313
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/16/desktop/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:16",
+      "kind": "surface",
+      "crossings": 14,
+      "bounds": [
+        [
+          0.5442327487326963,
+          1.6569999456405637,
+          -4.869503808586423
+        ],
+        [
+          0.706408636128996,
+          1.656999945640564,
+          -4.791062978982219
+        ]
+      ],
+      "aBounds": [
+        [
+          0.008434735453740627,
+          1.5839301423804129,
+          -4.995644617457267
+        ],
+        [
+          1.244575699294508,
+          2.8057566563669054,
+          -4.648037604271798
+        ]
+      ],
+      "bBounds": [
+        [
+          -0.24111109972000122,
+          1.6569999456405637,
+          -5.607777953147888
+        ],
+        [
+          1.5188888907432556,
+          1.6569999456405642,
+          -3.8477779626846313
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/16/desktop/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0.48,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 3,
+      "bounds": [
+        [
+          0.6212233054230797,
+          1.6759999990463255,
+          -5.162014627051791
+        ],
+        [
+          0.6701385303460945,
+          1.6759999990463257,
+          -5.157777786254884
+        ]
+      ],
+      "aBounds": [
+        [
+          0.056064412264016705,
+          1.5640159577917205,
+          -5.259456934110547
+        ],
+        [
+          1.2033950874058275,
+          2.5954038271223987,
+          -4.33523977140106
+        ]
+      ],
+      "bBounds": [
+        [
+          -33.037776947021484,
+          1.6759999990463257,
+          -11.227777481079102
+        ],
+        [
+          34.18777847290039,
+          1.6759999990463257,
+          8.770000457763672
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/20/desktop/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:20",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          17.168638448650913,
+          1.6569999456405635,
+          -5.320250440237969
+        ],
+        [
+          18.098028218015745,
+          1.6569999456405637,
+          -4.39086067087314
+        ]
+      ],
+      "aBounds": [
+        [
+          17.088833311696842,
+          1.6550016499999998,
+          -5.40005557719204
+        ],
+        [
+          18.177833354969817,
+          1.844751653442168,
+          -4.311055533919069
+        ]
+      ],
+      "bBounds": [
+        [
+          16.75333321094513,
+          1.6569999456405637,
+          -5.735555529594421
+        ],
+        [
+          18.513333201408386,
+          1.6569999456405642,
+          -3.9755555391311646
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/20/desktop/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          17.364100447421453,
+          1.6759999990463252,
+          -5.364953918951558
+        ],
+        [
+          17.902566213942613,
+          1.6759999990463252,
+          -5.285555362701416
+        ]
+      ],
+      "aBounds": [
+        [
+          17.088833311696842,
+          1.6550016499999998,
+          -5.40005557719204
+        ],
+        [
+          18.177833354969817,
+          1.844751653442168,
+          -4.311055533919069
+        ]
+      ],
+      "bBounds": [
+        [
+          -33.037776947021484,
+          1.6759999990463257,
+          -11.227777481079102
+        ],
+        [
+          34.18777847290039,
+          1.6759999990463257,
+          8.770000457763672
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/20/desktop/banana:false:normal:false",
+      "mode": "down",
+      "t": 1,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:20",
+      "kind": "surface",
+      "crossings": 14,
+      "bounds": [
+        [
+          17.538677193177136,
+          1.6569999456405644,
+          -4.997281586364203
+        ],
+        [
+          17.700853080573438,
+          1.6569999456405646,
+          -4.918840756759995
+        ]
+      ],
+      "aBounds": [
+        [
+          17.00287917989818,
+          1.5839301423804129,
+          -5.123422395235046
+        ],
+        [
+          18.239020143738948,
+          2.8057566563669054,
+          -4.775815382049576
+        ]
+      ],
+      "bBounds": [
+        [
+          16.75333321094513,
+          1.6569999456405637,
+          -5.735555529594421
+        ],
+        [
+          18.513333201408386,
+          1.6569999456405642,
+          -3.9755555391311646
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/20/desktop/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:20",
+      "kind": "surface",
+      "crossings": 14,
+      "bounds": [
+        [
+          17.538677193177136,
+          1.6569999456405644,
+          -4.997281586364203
+        ],
+        [
+          17.700853080573438,
+          1.6569999456405646,
+          -4.918840756759995
+        ]
+      ],
+      "aBounds": [
+        [
+          17.00287917989818,
+          1.5839301423804129,
+          -5.123422395235046
+        ],
+        [
+          18.239020143738948,
+          2.8057566563669054,
+          -4.775815382049576
+        ]
+      ],
+      "bBounds": [
+        [
+          16.75333321094513,
+          1.6569999456405637,
+          -5.735555529594421
+        ],
+        [
+          18.513333201408386,
+          1.6569999456405642,
+          -3.9755555391311646
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/20/desktop/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0.48,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 3,
+      "bounds": [
+        [
+          17.615666220604734,
+          1.6759999990463261,
+          -5.28979240482957
+        ],
+        [
+          17.664583769939647,
+          1.6759999990463261,
+          -5.285555362701416
+        ]
+      ],
+      "aBounds": [
+        [
+          17.050508856708458,
+          1.5640159577917205,
+          -5.3872347118883255
+        ],
+        [
+          18.197839531850267,
+          2.5954038271223987,
+          -4.463017549178838
+        ]
+      ],
+      "bBounds": [
+        [
+          -33.037776947021484,
+          1.6759999990463257,
+          -11.227777481079102
+        ],
+        [
+          34.18777847290039,
+          1.6759999990463257,
+          8.770000457763672
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/21/desktop/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:21",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          21.001971781984246,
+          1.6569999456405635,
+          -5.320250440237969
+        ],
+        [
+          21.931361551349077,
+          1.6569999456405637,
+          -4.39086067087314
+        ]
+      ],
+      "aBounds": [
+        [
+          20.922166645030174,
+          1.6550016499999998,
+          -5.40005557719204
+        ],
+        [
+          22.01116668830315,
+          1.844751653442168,
+          -4.311055533919069
+        ]
+      ],
+      "bBounds": [
+        [
+          20.58666718006134,
+          1.6569999456405637,
+          -5.735555529594421
+        ],
+        [
+          22.346667170524597,
+          1.6569999456405642,
+          -3.9755555391311646
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/21/desktop/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          21.197433780754785,
+          1.6759999990463252,
+          -5.364953918951558
+        ],
+        [
+          21.735899547275945,
+          1.6759999990463252,
+          -5.285555362701416
+        ]
+      ],
+      "aBounds": [
+        [
+          20.922166645030174,
+          1.6550016499999998,
+          -5.40005557719204
+        ],
+        [
+          22.01116668830315,
+          1.844751653442168,
+          -4.311055533919069
+        ]
+      ],
+      "bBounds": [
+        [
+          -33.037776947021484,
+          1.6759999990463257,
+          -11.227777481079102
+        ],
+        [
+          34.18777847290039,
+          1.6759999990463257,
+          8.770000457763672
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/21/desktop/banana:false:normal:false",
+      "mode": "down",
+      "t": 1,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:21",
+      "kind": "surface",
+      "crossings": 14,
+      "bounds": [
+        [
+          21.37201052651047,
+          1.6569999456405642,
+          -4.997281586364202
+        ],
+        [
+          21.53418641390677,
+          1.6569999456405644,
+          -4.918840756759995
+        ]
+      ],
+      "aBounds": [
+        [
+          20.836212513231512,
+          1.5839301423804129,
+          -5.123422395235046
+        ],
+        [
+          22.07235347707228,
+          2.8057566563669054,
+          -4.775815382049576
+        ]
+      ],
+      "bBounds": [
+        [
+          20.58666718006134,
+          1.6569999456405637,
+          -5.735555529594421
+        ],
+        [
+          22.346667170524597,
+          1.6569999456405642,
+          -3.9755555391311646
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/21/desktop/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:21",
+      "kind": "surface",
+      "crossings": 14,
+      "bounds": [
+        [
+          21.37201052651047,
+          1.6569999456405642,
+          -4.997281586364202
+        ],
+        [
+          21.53418641390677,
+          1.6569999456405644,
+          -4.918840756759995
+        ]
+      ],
+      "aBounds": [
+        [
+          20.836212513231512,
+          1.5839301423804129,
+          -5.123422395235046
+        ],
+        [
+          22.07235347707228,
+          2.8057566563669054,
+          -4.775815382049576
+        ]
+      ],
+      "bBounds": [
+        [
+          20.58666718006134,
+          1.6569999456405637,
+          -5.735555529594421
+        ],
+        [
+          22.346667170524597,
+          1.6569999456405642,
+          -3.9755555391311646
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/21/desktop/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0.48,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 3,
+      "bounds": [
+        [
+          21.44899955393806,
+          1.6759999990463266,
+          -5.289792404829571
+        ],
+        [
+          21.497917103272982,
+          1.6759999990463266,
+          -5.285555362701416
+        ]
+      ],
+      "aBounds": [
+        [
+          20.88384219004179,
+          1.5640159577917205,
+          -5.3872347118883255
+        ],
+        [
+          22.0311728651836,
+          2.5954038271223987,
+          -4.463017549178838
+        ]
+      ],
+      "bBounds": [
+        [
+          -33.037776947021484,
+          1.6759999990463257,
+          -11.227777481079102
+        ],
+        [
+          34.18777847290039,
+          1.6759999990463257,
+          8.770000457763672
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/22/desktop/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:22",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          24.06863844865091,
+          1.6569999456405635,
+          -5.575805995793525
+        ],
+        [
+          24.99802821801574,
+          1.6569999456405637,
+          -4.646416226428696
+        ]
+      ],
+      "aBounds": [
+        [
+          23.988833311696837,
+          1.6550016499999998,
+          -5.6556111327475955
+        ],
+        [
+          25.077833354969812,
+          1.844751653442168,
+          -4.566611089474624
+        ]
+      ],
+      "bBounds": [
+        [
+          23.653332829475403,
+          1.6569999456405637,
+          -5.991111159324646
+        ],
+        [
+          25.41333281993866,
+          1.6569999456405642,
+          -4.231111168861389
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/22/desktop/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          24.264100544087785,
+          1.6759999990463252,
+          -5.620509474507114
+        ],
+        [
+          24.802566117276303,
+          1.6759999990463252,
+          -5.541110992431641
+        ]
+      ],
+      "aBounds": [
+        [
+          23.988833311696837,
+          1.6550016499999998,
+          -5.6556111327475955
+        ],
+        [
+          25.077833354969812,
+          1.844751653442168,
+          -4.566611089474624
+        ]
+      ],
+      "bBounds": [
+        [
+          -33.037776947021484,
+          1.6759999990463257,
+          -11.227777481079102
+        ],
+        [
+          34.18777847290039,
+          1.6759999990463257,
+          8.770000457763672
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/22/desktop/banana:false:normal:false",
+      "mode": "down",
+      "t": 1,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:22",
+      "kind": "surface",
+      "crossings": 16,
+      "bounds": [
+        [
+          24.39160730252468,
+          1.656999945640564,
+          -5.178630858351218
+        ],
+        [
+          24.470048132128884,
+          1.6569999456405642,
+          -5.016454970954922
+        ]
+      ],
+      "aBounds": [
+        [
+          24.265466493653822,
+          1.5839301423804053,
+          -5.716797921516736
+        ],
+        [
+          24.613073506839314,
+          2.8057566563669147,
+          -4.480656957675952
+        ]
+      ],
+      "bBounds": [
+        [
+          23.653332829475403,
+          1.6569999456405637,
+          -5.991111159324646
+        ],
+        [
+          25.41333281993866,
+          1.6569999456405642,
+          -4.231111168861389
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/22/desktop/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:22",
+      "kind": "surface",
+      "crossings": 16,
+      "bounds": [
+        [
+          24.39160730252468,
+          1.656999945640564,
+          -5.178630858351218
+        ],
+        [
+          24.470048132128884,
+          1.6569999456405642,
+          -5.016454970954922
+        ]
+      ],
+      "aBounds": [
+        [
+          24.265466493653822,
+          1.5839301423804053,
+          -5.716797921516736
+        ],
+        [
+          24.613073506839314,
+          2.8057566563669147,
+          -4.480656957675952
+        ]
+      ],
+      "bBounds": [
+        [
+          23.653332829475403,
+          1.6569999456405637,
+          -5.991111159324646
+        ],
+        [
+          25.41333281993866,
+          1.6569999456405642,
+          -4.231111168861389
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/22/desktop/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0.9,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 5,
+      "bounds": [
+        [
+          24.32356708113707,
+          1.675999999046326,
+          -5.564850461053937
+        ],
+        [
+          24.498778804398544,
+          1.675999999046326,
+          -5.5411109924316415
+        ]
+      ],
+      "aBounds": [
+        [
+          23.981011189311904,
+          1.6481768965608488,
+          -5.655670304369171
+        ],
+        [
+          25.077383901837685,
+          1.8914648120857256,
+          -4.565462944384307
+        ]
+      ],
+      "bBounds": [
+        [
+          -33.037776947021484,
+          1.6759999990463257,
+          -11.227777481079102
+        ],
+        [
+          34.18777847290039,
+          1.6759999990463257,
+          8.770000457763672
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/6/compact/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:6",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          -27.29802821801574,
+          1.6569999456405635,
+          8.735305115317582
+        ],
+        [
+          -26.36863844865091,
+          1.6569999456405637,
+          9.66469488468241
+        ]
+      ],
+      "aBounds": [
+        [
+          -27.377833354969813,
+          1.6550016499999998,
+          8.65549997836351
+        ],
+        [
+          -26.288833311696838,
+          1.844751653442168,
+          9.744500021636481
+        ]
+      ],
+      "bBounds": [
+        [
+          -27.71333396434784,
+          1.6569999456405637,
+          8.319999814033508
+        ],
+        [
+          -25.953333973884583,
+          1.6569999456405642,
+          10.079999804496765
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/6/compact/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          -27.102566564482128,
+          1.6759999990463252,
+          8.690601636603992
+        ],
+        [
+          -26.564100107487242,
+          1.6759999990463252,
+          8.77000045776367
+        ]
+      ],
+      "aBounds": [
+        [
+          -27.377833354969813,
+          1.6550016499999998,
+          8.65549997836351
+        ],
+        [
+          -26.288833311696838,
+          1.844751653442168,
+          9.744500021636481
+        ]
+      ],
+      "bBounds": [
+        [
+          -33.037776947021484,
+          1.6759999990463257,
+          -11.227777481079102
+        ],
+        [
+          34.18777847290039,
+          1.6759999990463257,
+          8.770000457763672
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/6/compact/banana:false:normal:false",
+      "mode": "down",
+      "t": 1,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:6",
+      "kind": "surface",
+      "crossings": 16,
+      "bounds": [
+        [
+          -26.900853080573437,
+          1.6569999456405644,
+          9.058273969191347
+        ],
+        [
+          -26.738677193177132,
+          1.6569999456405646,
+          9.136714798795557
+        ]
+      ],
+      "aBounds": [
+        [
+          -27.439020143738947,
+          1.5839301423804097,
+          8.9321331603205
+        ],
+        [
+          -26.202879179898172,
+          2.8057566563669085,
+          9.279740173505978
+        ]
+      ],
+      "bBounds": [
+        [
+          -27.71333396434784,
+          1.6569999456405637,
+          8.319999814033508
+        ],
+        [
+          -25.953333973884583,
+          1.6569999456405642,
+          10.079999804496765
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/6/compact/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:6",
+      "kind": "surface",
+      "crossings": 16,
+      "bounds": [
+        [
+          -26.900853080573437,
+          1.6569999456405644,
+          9.058273969191347
+        ],
+        [
+          -26.738677193177132,
+          1.6569999456405646,
+          9.136714798795557
+        ]
+      ],
+      "aBounds": [
+        [
+          -27.439020143738947,
+          1.5839301423804097,
+          8.9321331603205
+        ],
+        [
+          -26.202879179898172,
+          2.8057566563669085,
+          9.279740173505978
+        ]
+      ],
+      "bBounds": [
+        [
+          -27.71333396434784,
+          1.6569999456405637,
+          8.319999814033508
+        ],
+        [
+          -25.953333973884583,
+          1.6569999456405642,
+          10.079999804496765
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/6/compact/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0.48,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 3,
+      "bounds": [
+        [
+          -26.864584816188497,
+          1.6759999990463252,
+          8.76576315072598
+        ],
+        [
+          -26.815664208416806,
+          1.6759999990463252,
+          8.770000457763674
+        ]
+      ],
+      "aBounds": [
+        [
+          -27.397839531850266,
+          1.5640159577917179,
+          8.668320843667223
+        ],
+        [
+          -26.25050885670845,
+          2.5954038271224005,
+          9.592538006376714
+        ]
+      ],
+      "bBounds": [
+        [
+          -33.037776947021484,
+          1.6759999990463257,
+          -11.227777481079102
+        ],
+        [
+          34.18777847290039,
+          1.6759999990463257,
+          8.770000457763672
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/10/compact/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:10",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          -18.3535837735713,
+          1.6569999456405635,
+          -1.4869171069046376
+        ],
+        [
+          -17.42419400420647,
+          1.6569999456405637,
+          -0.5575273375398089
+        ]
+      ],
+      "aBounds": [
+        [
+          -18.433388910525373,
+          1.6550016499999998,
+          -1.5667222438587092
+        ],
+        [
+          -17.3443888672524,
+          1.844751653442168,
+          -0.477722200585737
+        ]
+      ],
+      "bBounds": [
+        [
+          -18.76888930797577,
+          1.6569999456405637,
+          -1.9022222757339478
+        ],
+        [
+          -17.008889317512512,
+          1.6569999456405642,
+          -0.14222228527069092
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/10/compact/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          -18.158121515873077,
+          1.6759999990463252,
+          -1.531620585618227
+        ],
+        [
+          -17.619656267207194,
+          1.6759999990463252,
+          -1.452222228050232
+        ]
+      ],
+      "aBounds": [
+        [
+          -18.433388910525373,
+          1.6550016499999998,
+          -1.5667222438587092
+        ],
+        [
+          -17.3443888672524,
+          1.844751653442168,
+          -0.477722200585737
+        ]
+      ],
+      "bBounds": [
+        [
+          -33.037776947021484,
+          1.6759999990463257,
+          -11.227777481079102
+        ],
+        [
+          34.18777847290039,
+          1.6759999990463257,
+          8.770000457763672
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/10/compact/banana:false:normal:false",
+      "mode": "down",
+      "t": 1,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:10",
+      "kind": "surface",
+      "crossings": 16,
+      "bounds": [
+        [
+          -17.95640863612899,
+          1.656999945640563,
+          -1.163948253030869
+        ],
+        [
+          -17.794232748732696,
+          1.6569999456405633,
+          -1.0855074234266655
+        ]
+      ],
+      "aBounds": [
+        [
+          -18.494575699294508,
+          1.5839301423804104,
+          -1.2900890619017173
+        ],
+        [
+          -17.258434735453736,
+          2.805756656366907,
+          -0.9424820487162419
+        ]
+      ],
+      "bBounds": [
+        [
+          -18.76888930797577,
+          1.6569999456405637,
+          -1.9022222757339478
+        ],
+        [
+          -17.008889317512512,
+          1.6569999456405642,
+          -0.14222228527069092
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/10/compact/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:10",
+      "kind": "surface",
+      "crossings": 16,
+      "bounds": [
+        [
+          -17.95640863612899,
+          1.656999945640563,
+          -1.163948253030869
+        ],
+        [
+          -17.794232748732696,
+          1.6569999456405633,
+          -1.0855074234266655
+        ]
+      ],
+      "aBounds": [
+        [
+          -18.494575699294508,
+          1.5839301423804104,
+          -1.2900890619017173
+        ],
+        [
+          -17.258434735453736,
+          2.805756656366907,
+          -0.9424820487162419
+        ]
+      ],
+      "bBounds": [
+        [
+          -18.76888930797577,
+          1.6569999456405637,
+          -1.9022222757339478
+        ],
+        [
+          -17.008889317512512,
+          1.6569999456405642,
+          -0.14222228527069092
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/10/compact/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0.48,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 3,
+      "bounds": [
+        [
+          -17.92013854080859,
+          1.6759999990463252,
+          -1.456459071496238
+        ],
+        [
+          -17.871223285301177,
+          1.6759999990463252,
+          -1.4522222280502315
+        ]
+      ],
+      "aBounds": [
+        [
+          -18.453395087405823,
+          1.5640159577917192,
+          -1.5539013785549949
+        ],
+        [
+          -17.306064412264014,
+          2.5954038271224,
+          -0.629684215845506
+        ]
+      ],
+      "bBounds": [
+        [
+          -33.037776947021484,
+          1.6759999990463257,
+          -11.227777481079102
+        ],
+        [
+          34.18777847290039,
+          1.6759999990463257,
+          8.770000457763672
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/16/compact/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:16",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          0.17419400420647463,
+          1.6569999456405635,
+          -5.192472662460191
+        ],
+        [
+          1.1035837735713034,
+          1.6569999456405637,
+          -4.263082893095362
+        ]
+      ],
+      "aBounds": [
+        [
+          0.09438886725240303,
+          1.6550016499999998,
+          -5.272277799414262
+        ],
+        [
+          1.183388910525375,
+          1.844751653442168,
+          -4.18327775614129
+        ]
+      ],
+      "bBounds": [
+        [
+          -0.24111109972000122,
+          1.6569999456405637,
+          -5.607777953147888
+        ],
+        [
+          1.5188888907432556,
+          1.6569999456405642,
+          -3.8477779626846313
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/16/compact/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          0.3696562653570723,
+          1.6759999990463252,
+          -5.23717614117378
+        ],
+        [
+          0.9081215071182074,
+          1.6759999990463252,
+          -5.157777786254883
+        ]
+      ],
+      "aBounds": [
+        [
+          0.09438886725240303,
+          1.6550016499999998,
+          -5.272277799414262
+        ],
+        [
+          1.183388910525375,
+          1.844751653442168,
+          -4.18327775614129
+        ]
+      ],
+      "bBounds": [
+        [
+          -33.037776947021484,
+          1.6759999990463257,
+          -11.227777481079102
+        ],
+        [
+          34.18777847290039,
+          1.6759999990463257,
+          8.770000457763672
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/16/compact/banana:false:normal:false",
+      "mode": "down",
+      "t": 1,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:16",
+      "kind": "surface",
+      "crossings": 16,
+      "bounds": [
+        [
+          0.5713691416487815,
+          1.6569999456405637,
+          -4.869503808586423
+        ],
+        [
+          0.733545029045082,
+          1.656999945640564,
+          -4.791062978982218
+        ]
+      ],
+      "aBounds": [
+        [
+          0.033202078483269726,
+          1.5839301423804129,
+          -4.995644617457267
+        ],
+        [
+          1.2693430423240373,
+          2.8057566563669054,
+          -4.648037604271798
+        ]
+      ],
+      "bBounds": [
+        [
+          -0.24111109972000122,
+          1.6569999456405637,
+          -5.607777953147888
+        ],
+        [
+          1.5188888907432556,
+          1.6569999456405642,
+          -3.8477779626846313
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/16/compact/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:16",
+      "kind": "surface",
+      "crossings": 16,
+      "bounds": [
+        [
+          0.5713691416487815,
+          1.6569999456405637,
+          -4.869503808586423
+        ],
+        [
+          0.733545029045082,
+          1.656999945640564,
+          -4.791062978982218
+        ]
+      ],
+      "aBounds": [
+        [
+          0.033202078483269726,
+          1.5839301423804129,
+          -4.995644617457267
+        ],
+        [
+          1.2693430423240373,
+          2.8057566563669054,
+          -4.648037604271798
+        ]
+      ],
+      "bBounds": [
+        [
+          -0.24111109972000122,
+          1.6569999456405637,
+          -5.607777953147888
+        ],
+        [
+          1.5188888907432556,
+          1.6569999456405642,
+          -3.8477779626846313
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/16/compact/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0.48,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 3,
+      "bounds": [
+        [
+          0.607639247431678,
+          1.6759999990463263,
+          -5.162014627051793
+        ],
+        [
+          0.656554472354709,
+          1.6759999990463266,
+          -5.157777786254883
+        ]
+      ],
+      "aBounds": [
+        [
+          0.07438269037195022,
+          1.5640159577917205,
+          -5.259456934110547
+        ],
+        [
+          1.221713365513761,
+          2.5954038271223987,
+          -4.33523977140106
+        ]
+      ],
+      "bBounds": [
+        [
+          -33.037776947021484,
+          1.6759999990463257,
+          -11.227777481079102
+        ],
+        [
+          34.18777847290039,
+          1.6759999990463257,
+          8.770000457763672
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/20/compact/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:20",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          17.168638448650913,
+          1.6569999456405635,
+          -5.3202504402379684
+        ],
+        [
+          18.098028218015745,
+          1.6569999456405637,
+          -4.390860670873139
+        ]
+      ],
+      "aBounds": [
+        [
+          17.088833311696842,
+          1.6550016499999998,
+          -5.400055577192039
+        ],
+        [
+          18.177833354969817,
+          1.844751653442168,
+          -4.311055533919068
+        ]
+      ],
+      "bBounds": [
+        [
+          16.75333321094513,
+          1.6569999456405637,
+          -5.735555529594421
+        ],
+        [
+          18.513333201408386,
+          1.6569999456405642,
+          -3.9755555391311646
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/20/compact/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          17.364100447421453,
+          1.6759999990463252,
+          -5.364953918951557
+        ],
+        [
+          17.902566213942613,
+          1.6759999990463252,
+          -5.285555362701415
+        ]
+      ],
+      "aBounds": [
+        [
+          17.088833311696842,
+          1.6550016499999998,
+          -5.400055577192039
+        ],
+        [
+          18.177833354969817,
+          1.844751653442168,
+          -4.311055533919068
+        ]
+      ],
+      "bBounds": [
+        [
+          -33.037776947021484,
+          1.6759999990463257,
+          -11.227777481079102
+        ],
+        [
+          34.18777847290039,
+          1.6759999990463257,
+          8.770000457763672
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/20/compact/banana:false:normal:false",
+      "mode": "down",
+      "t": 1,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:20",
+      "kind": "surface",
+      "crossings": 16,
+      "bounds": [
+        [
+          17.56581358609322,
+          1.656999945640564,
+          -4.9972815863642
+        ],
+        [
+          17.727989473489522,
+          1.656999945640564,
+          -4.918840756759996
+        ]
+      ],
+      "aBounds": [
+        [
+          17.02764652292771,
+          1.5839301423804129,
+          -5.123422395235045
+        ],
+        [
+          18.26378748676848,
+          2.8057566563669054,
+          -4.775815382049575
+        ]
+      ],
+      "bBounds": [
+        [
+          16.75333321094513,
+          1.6569999456405637,
+          -5.735555529594421
+        ],
+        [
+          18.513333201408386,
+          1.6569999456405642,
+          -3.9755555391311646
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/20/compact/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:20",
+      "kind": "surface",
+      "crossings": 16,
+      "bounds": [
+        [
+          17.56581358609322,
+          1.656999945640564,
+          -4.9972815863642
+        ],
+        [
+          17.727989473489522,
+          1.656999945640564,
+          -4.918840756759996
+        ]
+      ],
+      "aBounds": [
+        [
+          17.02764652292771,
+          1.5839301423804129,
+          -5.123422395235045
+        ],
+        [
+          18.26378748676848,
+          2.8057566563669054,
+          -4.775815382049575
+        ]
+      ],
+      "bBounds": [
+        [
+          16.75333321094513,
+          1.6569999456405637,
+          -5.735555529594421
+        ],
+        [
+          18.513333201408386,
+          1.6569999456405642,
+          -3.9755555391311646
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/20/compact/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0.48,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 3,
+      "bounds": [
+        [
+          17.602082896727012,
+          1.6759999990463263,
+          -5.289792404829569
+        ],
+        [
+          17.65100044606193,
+          1.6759999990463266,
+          -5.285555362701415
+        ]
+      ],
+      "aBounds": [
+        [
+          17.06882713481639,
+          1.5640159577917205,
+          -5.387234711888325
+        ],
+        [
+          18.2161578099582,
+          2.5954038271223987,
+          -4.463017549178837
+        ]
+      ],
+      "bBounds": [
+        [
+          -33.037776947021484,
+          1.6759999990463257,
+          -11.227777481079102
+        ],
+        [
+          34.18777847290039,
+          1.6759999990463257,
+          8.770000457763672
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/21/compact/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:21",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          21.001971781984246,
+          1.6569999456405635,
+          -5.3202504402379684
+        ],
+        [
+          21.931361551349077,
+          1.6569999456405637,
+          -4.390860670873139
+        ]
+      ],
+      "aBounds": [
+        [
+          20.922166645030174,
+          1.6550016499999998,
+          -5.400055577192039
+        ],
+        [
+          22.01116668830315,
+          1.844751653442168,
+          -4.311055533919068
+        ]
+      ],
+      "bBounds": [
+        [
+          20.58666718006134,
+          1.6569999456405637,
+          -5.735555529594421
+        ],
+        [
+          22.346667170524597,
+          1.6569999456405642,
+          -3.9755555391311646
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/21/compact/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          21.197433780754785,
+          1.6759999990463252,
+          -5.364953918951557
+        ],
+        [
+          21.73589954727594,
+          1.6759999990463252,
+          -5.285555362701416
+        ]
+      ],
+      "aBounds": [
+        [
+          20.922166645030174,
+          1.6550016499999998,
+          -5.400055577192039
+        ],
+        [
+          22.01116668830315,
+          1.844751653442168,
+          -4.311055533919068
+        ]
+      ],
+      "bBounds": [
+        [
+          -33.037776947021484,
+          1.6759999990463257,
+          -11.227777481079102
+        ],
+        [
+          34.18777847290039,
+          1.6759999990463257,
+          8.770000457763672
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/21/compact/banana:false:normal:false",
+      "mode": "down",
+      "t": 1,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:21",
+      "kind": "surface",
+      "crossings": 16,
+      "bounds": [
+        [
+          21.399146919426553,
+          1.656999945640564,
+          -4.997281586364201
+        ],
+        [
+          21.561322806822854,
+          1.6569999456405644,
+          -4.9188407567599945
+        ]
+      ],
+      "aBounds": [
+        [
+          20.860979856261043,
+          1.5839301423804129,
+          -5.123422395235045
+        ],
+        [
+          22.09712082010181,
+          2.8057566563669054,
+          -4.775815382049575
+        ]
+      ],
+      "bBounds": [
+        [
+          20.58666718006134,
+          1.6569999456405637,
+          -5.735555529594421
+        ],
+        [
+          22.346667170524597,
+          1.6569999456405642,
+          -3.9755555391311646
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/21/compact/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:21",
+      "kind": "surface",
+      "crossings": 16,
+      "bounds": [
+        [
+          21.399146919426553,
+          1.656999945640564,
+          -4.997281586364201
+        ],
+        [
+          21.561322806822854,
+          1.6569999456405644,
+          -4.9188407567599945
+        ]
+      ],
+      "aBounds": [
+        [
+          20.860979856261043,
+          1.5839301423804129,
+          -5.123422395235045
+        ],
+        [
+          22.09712082010181,
+          2.8057566563669054,
+          -4.775815382049575
+        ]
+      ],
+      "bBounds": [
+        [
+          20.58666718006134,
+          1.6569999456405637,
+          -5.735555529594421
+        ],
+        [
+          22.346667170524597,
+          1.6569999456405642,
+          -3.9755555391311646
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/21/compact/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0.48,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 3,
+      "bounds": [
+        [
+          21.43541623006035,
+          1.6759999990463257,
+          -5.289792404829569
+        ],
+        [
+          21.484333779395246,
+          1.6759999990463257,
+          -5.285555362701417
+        ]
+      ],
+      "aBounds": [
+        [
+          20.902160468149724,
+          1.5640159577917205,
+          -5.387234711888325
+        ],
+        [
+          22.049491143291533,
+          2.5954038271223987,
+          -4.463017549178837
+        ]
+      ],
+      "bBounds": [
+        [
+          -33.037776947021484,
+          1.6759999990463257,
+          -11.227777481079102
+        ],
+        [
+          34.18777847290039,
+          1.6759999990463257,
+          8.770000457763672
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/22/compact/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:22",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          24.06863844865091,
+          1.6569999456405635,
+          -5.575805995793523
+        ],
+        [
+          24.99802821801574,
+          1.6569999456405637,
+          -4.646416226428694
+        ]
+      ],
+      "aBounds": [
+        [
+          23.988833311696837,
+          1.6550016499999998,
+          -5.655611132747594
+        ],
+        [
+          25.077833354969812,
+          1.844751653442168,
+          -4.566611089474622
+        ]
+      ],
+      "bBounds": [
+        [
+          23.653332829475403,
+          1.6569999456405637,
+          -5.991111159324646
+        ],
+        [
+          25.41333281993866,
+          1.6569999456405642,
+          -4.231111168861389
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/22/compact/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          24.26410054408779,
+          1.6759999990463252,
+          -5.620509474507112
+        ],
+        [
+          24.802566117276303,
+          1.6759999990463252,
+          -5.5411109924316415
+        ]
+      ],
+      "aBounds": [
+        [
+          23.988833311696837,
+          1.6550016499999998,
+          -5.655611132747594
+        ],
+        [
+          25.077833354969812,
+          1.844751653442168,
+          -4.566611089474622
+        ]
+      ],
+      "bBounds": [
+        [
+          -33.037776947021484,
+          1.6759999990463257,
+          -11.227777481079102
+        ],
+        [
+          34.18777847290039,
+          1.6759999990463257,
+          8.770000457763672
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/22/compact/banana:false:normal:false",
+      "mode": "down",
+      "t": 1,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:22",
+      "kind": "surface",
+      "crossings": 16,
+      "bounds": [
+        [
+          24.39160730252468,
+          1.656999945640564,
+          -5.178630858351216
+        ],
+        [
+          24.470048132128884,
+          1.656999945640564,
+          -5.016454970954921
+        ]
+      ],
+      "aBounds": [
+        [
+          24.265466493653822,
+          1.5839301423804053,
+          -5.716797921516735
+        ],
+        [
+          24.613073506839314,
+          2.805756656366915,
+          -4.48065695767595
+        ]
+      ],
+      "bBounds": [
+        [
+          23.653332829475403,
+          1.6569999456405637,
+          -5.991111159324646
+        ],
+        [
+          25.41333281993866,
+          1.6569999456405642,
+          -4.231111168861389
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/22/compact/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:22",
+      "kind": "surface",
+      "crossings": 16,
+      "bounds": [
+        [
+          24.39160730252468,
+          1.656999945640564,
+          -5.178630858351216
+        ],
+        [
+          24.470048132128884,
+          1.656999945640564,
+          -5.016454970954921
+        ]
+      ],
+      "aBounds": [
+        [
+          24.265466493653822,
+          1.5839301423804053,
+          -5.716797921516735
+        ],
+        [
+          24.613073506839314,
+          2.805756656366915,
+          -4.48065695767595
+        ]
+      ],
+      "bBounds": [
+        [
+          23.653332829475403,
+          1.6569999456405637,
+          -5.991111159324646
+        ],
+        [
+          25.41333281993866,
+          1.6569999456405642,
+          -4.231111168861389
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "boardwalks/22/compact/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0.9,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 5,
+      "bounds": [
+        [
+          24.32356708113707,
+          1.6759999990463261,
+          -5.564850461053936
+        ],
+        [
+          24.49877880439855,
+          1.6759999990463261,
+          -5.5411109924316415
+        ]
+      ],
+      "aBounds": [
+        [
+          23.981011189311904,
+          1.6481768965608488,
+          -5.65567030436917
+        ],
+        [
+          25.077383901837685,
+          1.8914648120857256,
+          -4.565462944384305
+        ]
+      ],
+      "bBounds": [
+        [
+          -33.037776947021484,
+          1.6759999990463257,
+          -11.227777481079102
+        ],
+        [
+          34.18777847290039,
+          1.6759999990463257,
+          8.770000457763672
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "whirly-world:3",
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:3",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          -3.539699834684469,
+          1.6569999456405642,
+          -3.5396998346844692
+        ],
+        [
+          -2.6103001653155387,
+          1.6569999456405644,
+          -2.610300165315539
+        ]
+      ],
+      "aBounds": [
+        [
+          -3.61950002163649,
+          1.6549999999999998,
+          -3.61950002163649
+        ],
+        [
+          -2.5304999783635176,
+          1.844750003442168,
+          -2.5304999783635176
+        ]
+      ],
+      "bBounds": [
+        [
+          -3.9550000429153442,
+          1.6569999456405637,
+          -3.9550000429153442
+        ],
+        [
+          -2.1950000524520874,
+          1.6569999456405642,
+          -2.1950000524520874
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "whirly-world:3",
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          -3.34423517267169,
+          1.675999999046326,
+          -3.5844000133965204
+        ],
+        [
+          -2.805764832631445,
+          1.675999999046326,
+          -3.505000114440919
+        ]
+      ],
+      "aBounds": [
+        [
+          -3.61950002163649,
+          1.6549999999999998,
+          -3.61950002163649
+        ],
+        [
+          -2.5304999783635176,
+          1.844750003442168,
+          -2.5304999783635176
+        ]
+      ],
+      "bBounds": [
+        [
+          -16.084999084472656,
+          1.6759999990463257,
+          -3.825000047683716
+        ],
+        [
+          16.084999084472656,
+          1.6759999990463257,
+          2.6449999809265137
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "whirly-world:5",
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:5",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          0.5603001653155361,
+          1.6569999456405642,
+          -3.5396998346844692
+        ],
+        [
+          1.4896998346844663,
+          1.6569999456405644,
+          -2.610300165315539
+        ]
+      ],
+      "aBounds": [
+        [
+          0.4804999783635152,
+          1.6549999999999998,
+          -3.61950002163649
+        ],
+        [
+          1.5695000216364874,
+          1.844750003442168,
+          -2.5304999783635176
+        ]
+      ],
+      "bBounds": [
+        [
+          0.14499998092651367,
+          1.6569999456405637,
+          -3.9550000429153442
+        ],
+        [
+          1.9049999713897705,
+          1.6569999456405642,
+          -2.1950000524520874
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "whirly-world:5",
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          0.7557648273283148,
+          1.675999999046326,
+          -3.5844000133965204
+        ],
+        [
+          1.29423516736856,
+          1.675999999046326,
+          -3.505000114440919
+        ]
+      ],
+      "aBounds": [
+        [
+          0.4804999783635152,
+          1.6549999999999998,
+          -3.61950002163649
+        ],
+        [
+          1.5695000216364874,
+          1.844750003442168,
+          -2.5304999783635176
+        ]
+      ],
+      "bBounds": [
+        [
+          -16.084999084472656,
+          1.6759999990463257,
+          -3.825000047683716
+        ],
+        [
+          16.084999084472656,
+          1.6759999990463257,
+          2.6449999809265137
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "whirly-world:7",
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:7",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          4.660300165315542,
+          1.6569999456405642,
+          -3.5396998346844692
+        ],
+        [
+          5.589699834684472,
+          1.6569999456405644,
+          -2.610300165315539
+        ]
+      ],
+      "aBounds": [
+        [
+          4.580499978363521,
+          1.6549999999999998,
+          -3.61950002163649
+        ],
+        [
+          5.669500021636493,
+          1.844750003442168,
+          -2.5304999783635176
+        ]
+      ],
+      "bBounds": [
+        [
+          4.245000004768372,
+          1.6569999456405637,
+          -3.9550000429153442
+        ],
+        [
+          6.004999995231628,
+          1.6569999456405642,
+          -2.1950000524520874
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "whirly-world:7",
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          4.85576482732832,
+          1.675999999046326,
+          -3.5844000133965204
+        ],
+        [
+          5.394235167368566,
+          1.675999999046326,
+          -3.505000114440919
+        ]
+      ],
+      "aBounds": [
+        [
+          4.580499978363521,
+          1.6549999999999998,
+          -3.61950002163649
+        ],
+        [
+          5.669500021636493,
+          1.844750003442168,
+          -2.5304999783635176
+        ]
+      ],
+      "bBounds": [
+        [
+          -16.084999084472656,
+          1.6759999990463257,
+          -3.825000047683716
+        ],
+        [
+          16.084999084472656,
+          1.6759999990463257,
+          2.6449999809265137
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "whirly-world:10",
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:10",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          10.810300165315548,
+          1.6569999456405642,
+          -3.5396998346844692
+        ],
+        [
+          11.739699834684478,
+          1.6569999456405644,
+          -2.610300165315539
+        ]
+      ],
+      "aBounds": [
+        [
+          10.730499978363527,
+          1.6549999999999998,
+          -3.61950002163649
+        ],
+        [
+          11.819500021636498,
+          1.844750003442168,
+          -2.5304999783635176
+        ]
+      ],
+      "bBounds": [
+        [
+          10.394999623298645,
+          1.6569999456405637,
+          -3.9550000429153442
+        ],
+        [
+          12.154999613761902,
+          1.6569999456405642,
+          -2.1950000524520874
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "whirly-world:10",
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          11.005764827328326,
+          1.675999999046326,
+          -3.5844000133965204
+        ],
+        [
+          11.544235167368571,
+          1.675999999046326,
+          -3.505000114440919
+        ]
+      ],
+      "aBounds": [
+        [
+          10.730499978363527,
+          1.6549999999999998,
+          -3.61950002163649
+        ],
+        [
+          11.819500021636498,
+          1.844750003442168,
+          -2.5304999783635176
+        ]
+      ],
+      "bBounds": [
+        [
+          -16.084999084472656,
+          1.6759999990463257,
+          -3.825000047683716
+        ],
+        [
+          16.084999084472656,
+          1.6759999990463257,
+          2.6449999809265137
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "whirly-world:12",
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:12",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          14.910300165315554,
+          1.6569999456405642,
+          -3.5396998346844692
+        ],
+        [
+          15.839699834684485,
+          1.6569999456405644,
+          -2.610300165315539
+        ]
+      ],
+      "aBounds": [
+        [
+          14.830499978363534,
+          1.6549999999999998,
+          -3.61950002163649
+        ],
+        [
+          15.919500021636505,
+          1.844750003442168,
+          -2.5304999783635176
+        ]
+      ],
+      "bBounds": [
+        [
+          14.495000004768372,
+          1.6569999456405637,
+          -3.9550000429153442
+        ],
+        [
+          16.25499999523163,
+          1.6569999456405642,
+          -2.1950000524520874
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "whirly-world:12",
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          15.105764827328333,
+          1.675999999046326,
+          -3.5844000133965204
+        ],
+        [
+          15.644235167368578,
+          1.675999999046326,
+          -3.505000114440919
+        ]
+      ],
+      "aBounds": [
+        [
+          14.830499978363534,
+          1.6549999999999998,
+          -3.61950002163649
+        ],
+        [
+          15.919500021636505,
+          1.844750003442168,
+          -2.5304999783635176
+        ]
+      ],
+      "bBounds": [
+        [
+          -16.084999084472656,
+          1.6759999990463257,
+          -3.825000047683716
+        ],
+        [
+          16.084999084472656,
+          1.6759999990463257,
+          2.6449999809265137
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "whirly-world:15",
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:15",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          14.910300165315554,
+          1.6569999456405642,
+          2.610300165315538
+        ],
+        [
+          15.839699834684485,
+          1.6569999456405644,
+          3.5396998346844684
+        ]
+      ],
+      "aBounds": [
+        [
+          14.830499978363534,
+          1.6549999999999998,
+          2.5304999783635176
+        ],
+        [
+          15.919500021636505,
+          1.844750003442168,
+          3.61950002163649
+        ]
+      ],
+      "bBounds": [
+        [
+          14.495000004768372,
+          1.6569999456405637,
+          2.1950000524520874
+        ],
+        [
+          16.25499999523163,
+          1.6569999456405642,
+          3.9550000429153442
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "whirly-world:15",
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          15.10576470304305,
+          1.675999999046326,
+          2.565599986603487
+        ],
+        [
+          15.644235291653816,
+          1.675999999046326,
+          2.644999980926514
+        ]
+      ],
+      "aBounds": [
+        [
+          14.830499978363534,
+          1.6549999999999998,
+          2.5304999783635176
+        ],
+        [
+          15.919500021636505,
+          1.844750003442168,
+          3.61950002163649
+        ]
+      ],
+      "bBounds": [
+        [
+          -16.084999084472656,
+          1.6759999990463257,
+          -3.825000047683716
+        ],
+        [
+          16.084999084472656,
+          1.6759999990463257,
+          2.6449999809265137
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "whirly-world:18",
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:18",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          8.760300165315547,
+          1.6569999456405642,
+          2.610300165315538
+        ],
+        [
+          9.689699834684477,
+          1.6569999456405644,
+          3.5396998346844684
+        ]
+      ],
+      "aBounds": [
+        [
+          8.680499978363526,
+          1.6549999999999998,
+          2.5304999783635176
+        ],
+        [
+          9.769500021636498,
+          1.844750003442168,
+          3.61950002163649
+        ]
+      ],
+      "bBounds": [
+        [
+          8.345000386238098,
+          1.6569999456405637,
+          2.1950000524520874
+        ],
+        [
+          10.105000376701355,
+          1.6569999456405642,
+          3.9550000429153442
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "whirly-world:18",
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          8.955764703043043,
+          1.675999999046326,
+          2.565599986603487
+        ],
+        [
+          9.494235291653808,
+          1.675999999046326,
+          2.644999980926514
+        ]
+      ],
+      "aBounds": [
+        [
+          8.680499978363526,
+          1.6549999999999998,
+          2.5304999783635176
+        ],
+        [
+          9.769500021636498,
+          1.844750003442168,
+          3.61950002163649
+        ]
+      ],
+      "bBounds": [
+        [
+          -16.084999084472656,
+          1.6759999990463257,
+          -3.825000047683716
+        ],
+        [
+          16.084999084472656,
+          1.6759999990463257,
+          2.6449999809265137
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "whirly-world:20",
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:20",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          4.660300165315542,
+          1.6569999456405642,
+          2.610300165315538
+        ],
+        [
+          5.589699834684472,
+          1.6569999456405644,
+          3.5396998346844684
+        ]
+      ],
+      "aBounds": [
+        [
+          4.580499978363521,
+          1.6549999999999998,
+          2.5304999783635176
+        ],
+        [
+          5.669500021636493,
+          1.844750003442168,
+          3.61950002163649
+        ]
+      ],
+      "bBounds": [
+        [
+          4.245000004768372,
+          1.6569999456405637,
+          2.1950000524520874
+        ],
+        [
+          6.004999995231628,
+          1.6569999456405642,
+          3.9550000429153442
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "whirly-world:20",
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          4.855764703043038,
+          1.675999999046326,
+          2.565599986603487
+        ],
+        [
+          5.394235291653803,
+          1.675999999046326,
+          2.644999980926514
+        ]
+      ],
+      "aBounds": [
+        [
+          4.580499978363521,
+          1.6549999999999998,
+          2.5304999783635176
+        ],
+        [
+          5.669500021636493,
+          1.844750003442168,
+          3.61950002163649
+        ]
+      ],
+      "bBounds": [
+        [
+          -16.084999084472656,
+          1.6759999990463257,
+          -3.825000047683716
+        ],
+        [
+          16.084999084472656,
+          1.6759999990463257,
+          2.6449999809265137
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "whirly-world:22",
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:22",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          0.5603001653155361,
+          1.6569999456405642,
+          2.610300165315538
+        ],
+        [
+          1.4896998346844663,
+          1.6569999456405644,
+          3.5396998346844684
+        ]
+      ],
+      "aBounds": [
+        [
+          0.4804999783635152,
+          1.6549999999999998,
+          2.5304999783635176
+        ],
+        [
+          1.5695000216364874,
+          1.844750003442168,
+          3.61950002163649
+        ]
+      ],
+      "bBounds": [
+        [
+          0.14499998092651367,
+          1.6569999456405637,
+          2.1950000524520874
+        ],
+        [
+          1.9049999713897705,
+          1.6569999456405642,
+          3.9550000429153442
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "whirly-world:22",
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          0.7557647030430319,
+          1.675999999046326,
+          2.565599986603487
+        ],
+        [
+          1.294235291653798,
+          1.675999999046326,
+          2.644999980926514
+        ]
+      ],
+      "aBounds": [
+        [
+          0.4804999783635152,
+          1.6549999999999998,
+          2.5304999783635176
+        ],
+        [
+          1.5695000216364874,
+          1.844750003442168,
+          3.61950002163649
+        ]
+      ],
+      "bBounds": [
+        [
+          -16.084999084472656,
+          1.6759999990463257,
+          -3.825000047683716
+        ],
+        [
+          16.084999084472656,
+          1.6759999990463257,
+          2.6449999809265137
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "whirly-world:23",
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:23",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          -1.4896998346844663,
+          1.6569999456405642,
+          2.610300165315538
+        ],
+        [
+          -0.5603001653155361,
+          1.6569999456405644,
+          3.5396998346844684
+        ]
+      ],
+      "aBounds": [
+        [
+          -1.5695000216364874,
+          1.6549999999999998,
+          2.5304999783635176
+        ],
+        [
+          -0.4804999783635152,
+          1.844750003442168,
+          3.61950002163649
+        ]
+      ],
+      "bBounds": [
+        [
+          -1.9049999713897705,
+          1.6569999456405637,
+          2.1950000524520874
+        ],
+        [
+          -0.14499998092651367,
+          1.6569999456405642,
+          3.9550000429153442
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "whirly-world:23",
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          -1.2942352969569706,
+          1.675999999046326,
+          2.565599986603487
+        ],
+        [
+          -0.7557647083462047,
+          1.675999999046326,
+          2.644999980926514
+        ]
+      ],
+      "aBounds": [
+        [
+          -1.5695000216364874,
+          1.6549999999999998,
+          2.5304999783635176
+        ],
+        [
+          -0.4804999783635152,
+          1.844750003442168,
+          3.61950002163649
+        ]
+      ],
+      "bBounds": [
+        [
+          -16.084999084472656,
+          1.6759999990463257,
+          -3.825000047683716
+        ],
+        [
+          16.084999084472656,
+          1.6759999990463257,
+          2.6449999809265137
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "whirly-world:24",
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:24",
+      "kind": "surface",
+      "crossings": 49,
+      "bounds": [
+        [
+          -3.539699834684469,
+          1.6569999456405642,
+          2.610300165315538
+        ],
+        [
+          -2.6103001653155387,
+          1.6569999456405644,
+          3.5396998346844684
+        ]
+      ],
+      "aBounds": [
+        [
+          -3.61950002163649,
+          1.6549999999999998,
+          2.5304999783635176
+        ],
+        [
+          -2.5304999783635176,
+          1.844750003442168,
+          3.61950002163649
+        ]
+      ],
+      "bBounds": [
+        [
+          -3.9550000429153442,
+          1.6569999456405637,
+          2.1950000524520874
+        ],
+        [
+          -2.1950000524520874,
+          1.6569999456405642,
+          3.9550000429153442
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "whirly-world:24",
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          -3.344235296956973,
+          1.675999999046326,
+          2.565599986603487
+        ],
+        [
+          -2.8057647083462074,
+          1.675999999046326,
+          2.644999980926514
+        ]
+      ],
+      "aBounds": [
+        [
+          -3.61950002163649,
+          1.6549999999999998,
+          2.5304999783635176
+        ],
+        [
+          -2.5304999783635176,
+          1.844750003442168,
+          3.61950002163649
+        ]
+      ],
+      "bBounds": [
+        [
+          -16.084999084472656,
+          1.6759999990463257,
+          -3.825000047683716
+        ],
+        [
+          16.084999084472656,
+          1.6759999990463257,
+          2.6449999809265137
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "whirly-world:27",
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:27",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          -9.689699834684477,
+          1.6569999456405642,
+          2.610300165315538
+        ],
+        [
+          -8.760300165315547,
+          1.6569999456405644,
+          3.5396998346844684
+        ]
+      ],
+      "aBounds": [
+        [
+          -9.769500021636498,
+          1.6549999999999998,
+          2.5304999783635176
+        ],
+        [
+          -8.680499978363526,
+          1.844750003442168,
+          3.61950002163649
+        ]
+      ],
+      "bBounds": [
+        [
+          -10.105000376701355,
+          1.6569999456405637,
+          2.1950000524520874
+        ],
+        [
+          -8.345000386238098,
+          1.6569999456405642,
+          3.9550000429153442
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "whirly-world:27",
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          -9.494235296956981,
+          1.675999999046326,
+          2.565599986603487
+        ],
+        [
+          -8.955764708346216,
+          1.675999999046326,
+          2.644999980926514
+        ]
+      ],
+      "aBounds": [
+        [
+          -9.769500021636498,
+          1.6549999999999998,
+          2.5304999783635176
+        ],
+        [
+          -8.680499978363526,
+          1.844750003442168,
+          3.61950002163649
+        ]
+      ],
+      "bBounds": [
+        [
+          -16.084999084472656,
+          1.6759999990463257,
+          -3.825000047683716
+        ],
+        [
+          16.084999084472656,
+          1.6759999990463257,
+          2.6449999809265137
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "wild:1",
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:1",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          -7.639699834684474,
+          1.6569999456405642,
+          -3.5396998346844692
+        ],
+        [
+          -6.710300165315544,
+          1.6569999456405644,
+          -2.610300165315539
+        ]
+      ],
+      "aBounds": [
+        [
+          -7.719500021636494,
+          1.6549999999999998,
+          -3.61950002163649
+        ],
+        [
+          -6.630499978363523,
+          1.844750003442168,
+          -2.5304999783635176
+        ]
+      ],
+      "bBounds": [
+        [
+          -8.055000185966492,
+          1.6569999456405637,
+          -3.9550000429153442
+        ],
+        [
+          -6.295000195503235,
+          1.6569999456405642,
+          -2.1950000524520874
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "wild:1",
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          -7.4442351726716955,
+          1.675999999046326,
+          -3.5844000133965204
+        ],
+        [
+          -6.90576483263145,
+          1.675999999046326,
+          -3.505000114440919
+        ]
+      ],
+      "aBounds": [
+        [
+          -7.719500021636494,
+          1.6549999999999998,
+          -3.61950002163649
+        ],
+        [
+          -6.630499978363523,
+          1.844750003442168,
+          -2.5304999783635176
+        ]
+      ],
+      "bBounds": [
+        [
+          -16.084999084472656,
+          1.6759999990463257,
+          -3.825000047683716
+        ],
+        [
+          16.084999084472656,
+          1.6759999990463257,
+          2.6449999809265137
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "wild:13",
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:13",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          14.910300165315554,
+          1.6569999456405642,
+          -1.4896998346844668
+        ],
+        [
+          15.839699834684485,
+          1.6569999456405644,
+          -0.5603001653155364
+        ]
+      ],
+      "aBounds": [
+        [
+          14.830499978363534,
+          1.6549999999999998,
+          -1.5695000216364874
+        ],
+        [
+          15.919500021636505,
+          1.844750003442168,
+          -0.4804999783635152
+        ]
+      ],
+      "bBounds": [
+        [
+          14.495000004768372,
+          1.6569999456405637,
+          -1.9049999713897705
+        ],
+        [
+          16.25499999523163,
+          1.6569999456405642,
+          -0.14499998092651367
+        ]
+      ]
+    },
+    {
+      "scope": "old-standing-banana",
+      "anchor": "wild:13",
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          15.105764734114366,
+          1.675999999046326,
+          -1.5344000133965179
+        ],
+        [
+          15.64423526058251,
+          1.675999999046326,
+          -1.4550000429153442
+        ]
+      ],
+      "aBounds": [
+        [
+          14.830499978363534,
+          1.6549999999999998,
+          -1.5695000216364874
+        ],
+        [
+          15.919500021636505,
+          1.844750003442168,
+          -0.4804999783635152
+        ]
+      ],
+      "bBounds": [
+        [
+          -16.084999084472656,
+          1.6759999990463257,
+          -3.825000047683716
+        ],
+        [
+          16.084999084472656,
+          1.6759999990463257,
+          2.6449999809265137
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "wild/17/desktop/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:17",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          10.810305115317599,
+          1.6569999456405635,
+          2.610305115317589
+        ],
+        [
+          11.739694884682427,
+          1.6569999456405637,
+          3.539694884682418
+        ]
+      ],
+      "aBounds": [
+        [
+          10.730499978363527,
+          1.6550016499999998,
+          2.5304999783635176
+        ],
+        [
+          11.819500021636498,
+          1.844751653442168,
+          3.61950002163649
+        ]
+      ],
+      "bBounds": [
+        [
+          10.394999623298645,
+          1.6569999456405637,
+          2.1950000524520874
+        ],
+        [
+          12.154999613761902,
+          1.6569999456405642,
+          3.9550000429153442
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "wild/17/desktop/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          11.005767390277674,
+          1.6759999990463252,
+          2.5656016366039998
+        ],
+        [
+          11.544232604419857,
+          1.6759999990463252,
+          2.644999980926514
+        ]
+      ],
+      "aBounds": [
+        [
+          10.730499978363527,
+          1.6550016499999998,
+          2.5304999783635176
+        ],
+        [
+          11.819500021636498,
+          1.844751653442168,
+          3.61950002163649
+        ]
+      ],
+      "bBounds": [
+        [
+          -16.084999084472656,
+          1.6759999990463257,
+          -3.825000047683716
+        ],
+        [
+          16.084999084472656,
+          1.6759999990463257,
+          2.6449999809265137
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "wild/17/desktop/banana:false:normal:false",
+      "mode": "down",
+      "t": 1,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:17",
+      "kind": "surface",
+      "crossings": 14,
+      "bounds": [
+        [
+          11.18034385984382,
+          1.6569999456405637,
+          2.9332739691913563
+        ],
+        [
+          11.342519747240122,
+          1.656999945640564,
+          3.0117147987955626
+        ]
+      ],
+      "aBounds": [
+        [
+          10.644545846564863,
+          1.5839301423804109,
+          2.80713316032051
+        ],
+        [
+          11.880686810405633,
+          2.8057566563669067,
+          3.1547401735059846
+        ]
+      ],
+      "bBounds": [
+        [
+          10.394999623298645,
+          1.6569999456405637,
+          2.1950000524520874
+        ],
+        [
+          12.154999613761902,
+          1.6569999456405642,
+          3.9550000429153442
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "wild/17/desktop/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:17",
+      "kind": "surface",
+      "crossings": 14,
+      "bounds": [
+        [
+          11.18034385984382,
+          1.6569999456405637,
+          2.9332739691913563
+        ],
+        [
+          11.342519747240122,
+          1.656999945640564,
+          3.0117147987955626
+        ]
+      ],
+      "aBounds": [
+        [
+          10.644545846564863,
+          1.5839301423804109,
+          2.80713316032051
+        ],
+        [
+          11.880686810405633,
+          2.8057566563669067,
+          3.1547401735059846
+        ]
+      ],
+      "bBounds": [
+        [
+          10.394999623298645,
+          1.6569999456405637,
+          2.1950000524520874
+        ],
+        [
+          12.154999613761902,
+          1.6569999456405642,
+          3.9550000429153442
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "wild/17/desktop/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0.48,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 3,
+      "bounds": [
+        [
+          11.257334497021732,
+          1.6759999990463257,
+          2.6407631507259883
+        ],
+        [
+          11.306249599607257,
+          1.6759999990463257,
+          2.6449999809265137
+        ]
+      ],
+      "aBounds": [
+        [
+          10.69217552337514,
+          1.5640159577917194,
+          2.543320843667232
+        ],
+        [
+          11.839506198516952,
+          2.5954038271224,
+          3.4675380063767207
+        ]
+      ],
+      "bBounds": [
+        [
+          -16.084999084472656,
+          1.6759999990463257,
+          -3.825000047683716
+        ],
+        [
+          16.084999084472656,
+          1.6759999990463257,
+          2.6449999809265137
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "wild/26/desktop/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:26",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          -7.639694884682423,
+          1.6569999456405635,
+          2.610305115317589
+        ],
+        [
+          -6.7103051153175945,
+          1.6569999456405637,
+          3.539694884682418
+        ]
+      ],
+      "aBounds": [
+        [
+          -7.719500021636494,
+          1.6550016499999998,
+          2.5304999783635176
+        ],
+        [
+          -6.630499978363523,
+          1.844751653442168,
+          3.61950002163649
+        ]
+      ],
+      "bBounds": [
+        [
+          -8.055000185966492,
+          1.6569999456405637,
+          2.1950000524520874
+        ],
+        [
+          -6.295000195503235,
+          1.6569999456405642,
+          3.9550000429153442
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "wild/26/desktop/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          -7.444232609722347,
+          1.6759999990463252,
+          2.5656016366039998
+        ],
+        [
+          -6.905767395580164,
+          1.6759999990463252,
+          2.644999980926514
+        ]
+      ],
+      "aBounds": [
+        [
+          -7.719500021636494,
+          1.6550016499999998,
+          2.5304999783635176
+        ],
+        [
+          -6.630499978363523,
+          1.844751653442168,
+          3.61950002163649
+        ]
+      ],
+      "bBounds": [
+        [
+          -16.084999084472656,
+          1.6759999990463257,
+          -3.825000047683716
+        ],
+        [
+          16.084999084472656,
+          1.6759999990463257,
+          2.6449999809265137
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "wild/26/desktop/banana:false:normal:false",
+      "mode": "down",
+      "t": 1,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:26",
+      "kind": "surface",
+      "crossings": 14,
+      "bounds": [
+        [
+          -7.2696561401562025,
+          1.6569999456405637,
+          2.933273969191356
+        ],
+        [
+          -7.107480252759899,
+          1.656999945640564,
+          3.011714798795563
+        ]
+      ],
+      "aBounds": [
+        [
+          -7.805454153435159,
+          1.583930142380411,
+          2.8071331603205105
+        ],
+        [
+          -6.569313189594388,
+          2.8057566563669063,
+          3.1547401735059837
+        ]
+      ],
+      "bBounds": [
+        [
+          -8.055000185966492,
+          1.6569999456405637,
+          2.1950000524520874
+        ],
+        [
+          -6.295000195503235,
+          1.6569999456405642,
+          3.9550000429153442
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "wild/26/desktop/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:26",
+      "kind": "surface",
+      "crossings": 14,
+      "bounds": [
+        [
+          -7.2696561401562025,
+          1.6569999456405637,
+          2.933273969191356
+        ],
+        [
+          -7.107480252759899,
+          1.656999945640564,
+          3.011714798795563
+        ]
+      ],
+      "aBounds": [
+        [
+          -7.805454153435159,
+          1.583930142380411,
+          2.8071331603205105
+        ],
+        [
+          -6.569313189594388,
+          2.8057566563669063,
+          3.1547401735059837
+        ]
+      ],
+      "bBounds": [
+        [
+          -8.055000185966492,
+          1.6569999456405637,
+          2.1950000524520874
+        ],
+        [
+          -6.295000195503235,
+          1.6569999456405642,
+          3.9550000429153442
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "wild/26/desktop/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0.48,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 3,
+      "bounds": [
+        [
+          -7.192665502978287,
+          1.6759999990463252,
+          2.6407631507259888
+        ],
+        [
+          -7.143750400392763,
+          1.6759999990463252,
+          2.6449999809265137
+        ]
+      ],
+      "aBounds": [
+        [
+          -7.757824476624881,
+          1.5640159577917196,
+          2.5433208436672325
+        ],
+        [
+          -6.610493801483069,
+          2.5954038271223996,
+          3.4675380063767203
+        ]
+      ],
+      "bBounds": [
+        [
+          -16.084999084472656,
+          1.6759999990463257,
+          -3.825000047683716
+        ],
+        [
+          16.084999084472656,
+          1.6759999990463257,
+          2.6449999809265137
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "wild/17/compact/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:17",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          10.810305115317599,
+          1.6569999456405635,
+          2.61030511531759
+        ],
+        [
+          11.739694884682427,
+          1.6569999456405637,
+          3.5396948846824188
+        ]
+      ],
+      "aBounds": [
+        [
+          10.730499978363527,
+          1.6550016499999998,
+          2.5304999783635185
+        ],
+        [
+          11.819500021636498,
+          1.844751653442168,
+          3.6195000216364908
+        ]
+      ],
+      "bBounds": [
+        [
+          10.394999623298645,
+          1.6569999456405637,
+          2.1950000524520874
+        ],
+        [
+          12.154999613761902,
+          1.6569999456405642,
+          3.9550000429153442
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "wild/17/compact/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          11.005767390277676,
+          1.6759999990463252,
+          2.5656016366040006
+        ],
+        [
+          11.544232604419856,
+          1.6759999990463252,
+          2.6449999809265137
+        ]
+      ],
+      "aBounds": [
+        [
+          10.730499978363527,
+          1.6550016499999998,
+          2.5304999783635185
+        ],
+        [
+          11.819500021636498,
+          1.844751653442168,
+          3.6195000216364908
+        ]
+      ],
+      "bBounds": [
+        [
+          -16.084999084472656,
+          1.6759999990463257,
+          -3.825000047683716
+        ],
+        [
+          16.084999084472656,
+          1.6759999990463257,
+          2.6449999809265137
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "wild/17/compact/banana:false:normal:false",
+      "mode": "down",
+      "t": 1,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:17",
+      "kind": "surface",
+      "crossings": 16,
+      "bounds": [
+        [
+          11.207480252759904,
+          1.656999945640564,
+          2.9332739691913567
+        ],
+        [
+          11.369656140156206,
+          1.656999945640564,
+          3.011714798795564
+        ]
+      ],
+      "aBounds": [
+        [
+          10.669313189594392,
+          1.5839301423804109,
+          2.807133160320511
+        ],
+        [
+          11.905454153435162,
+          2.8057566563669067,
+          3.1547401735059855
+        ]
+      ],
+      "bBounds": [
+        [
+          10.394999623298645,
+          1.6569999456405637,
+          2.1950000524520874
+        ],
+        [
+          12.154999613761902,
+          1.6569999456405642,
+          3.9550000429153442
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "wild/17/compact/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:17",
+      "kind": "surface",
+      "crossings": 16,
+      "bounds": [
+        [
+          11.207480252759904,
+          1.656999945640564,
+          2.9332739691913567
+        ],
+        [
+          11.369656140156206,
+          1.656999945640564,
+          3.011714798795564
+        ]
+      ],
+      "aBounds": [
+        [
+          10.669313189594392,
+          1.5839301423804109,
+          2.807133160320511
+        ],
+        [
+          11.905454153435162,
+          2.8057566563669067,
+          3.1547401735059855
+        ]
+      ],
+      "bBounds": [
+        [
+          10.394999623298645,
+          1.6569999456405637,
+          2.1950000524520874
+        ],
+        [
+          12.154999613761902,
+          1.6569999456405642,
+          3.9550000429153442
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "wild/17/compact/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0.48,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 3,
+      "bounds": [
+        [
+          11.243750400392772,
+          1.6759999990463252,
+          2.6407631507259897
+        ],
+        [
+          11.292665502978284,
+          1.6759999990463255,
+          2.6449999809265137
+        ]
+      ],
+      "aBounds": [
+        [
+          10.710493801483073,
+          1.5640159577917194,
+          2.543320843667233
+        ],
+        [
+          11.857824476624886,
+          2.5954038271224,
+          3.4675380063767216
+        ]
+      ],
+      "bBounds": [
+        [
+          -16.084999084472656,
+          1.6759999990463257,
+          -3.825000047683716
+        ],
+        [
+          16.084999084472656,
+          1.6759999990463257,
+          2.6449999809265137
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "wild/26/compact/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:26",
+      "kind": "surface",
+      "crossings": 50,
+      "bounds": [
+        [
+          -7.639694884682423,
+          1.6569999456405635,
+          2.6103051153175887
+        ],
+        [
+          -6.7103051153175945,
+          1.6569999456405637,
+          3.5396948846824174
+        ]
+      ],
+      "aBounds": [
+        [
+          -7.719500021636494,
+          1.6550016499999998,
+          2.530499978363517
+        ],
+        [
+          -6.630499978363523,
+          1.844751653442168,
+          3.6195000216364894
+        ]
+      ],
+      "bBounds": [
+        [
+          -8.055000185966492,
+          1.6569999456405637,
+          2.1950000524520874
+        ],
+        [
+          -6.295000195503235,
+          1.6569999456405642,
+          3.9550000429153442
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "wild/26/compact/banana:false:normal:false",
+      "mode": "fall",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 10,
+      "bounds": [
+        [
+          -7.444232609722348,
+          1.6759999990463252,
+          2.5656016366039993
+        ],
+        [
+          -6.905767395580163,
+          1.6759999990463252,
+          2.644999980926514
+        ]
+      ],
+      "aBounds": [
+        [
+          -7.719500021636494,
+          1.6550016499999998,
+          2.530499978363517
+        ],
+        [
+          -6.630499978363523,
+          1.844751653442168,
+          3.6195000216364894
+        ]
+      ],
+      "bBounds": [
+        [
+          -16.084999084472656,
+          1.6759999990463257,
+          -3.825000047683716
+        ],
+        [
+          16.084999084472656,
+          1.6759999990463257,
+          2.6449999809265137
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "wild/26/compact/banana:false:normal:false",
+      "mode": "down",
+      "t": 1,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:26",
+      "kind": "surface",
+      "crossings": 16,
+      "bounds": [
+        [
+          -7.2425197472401175,
+          1.656999945640564,
+          2.933273969191356
+        ],
+        [
+          -7.080343859843816,
+          1.6569999456405642,
+          3.0117147987955626
+        ]
+      ],
+      "aBounds": [
+        [
+          -7.780686810405629,
+          1.5839301423804115,
+          2.80713316032051
+        ],
+        [
+          -6.5445458465648585,
+          2.8057566563669067,
+          3.1547401735059832
+        ]
+      ],
+      "bBounds": [
+        [
+          -8.055000185966492,
+          1.6569999456405637,
+          2.1950000524520874
+        ],
+        [
+          -6.295000195503235,
+          1.6569999456405642,
+          3.9550000429153442
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "wild/26/compact/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0,
+      "a": "actor:part0",
+      "b": "finish:complete-running-surfaces:26",
+      "kind": "surface",
+      "crossings": 16,
+      "bounds": [
+        [
+          -7.2425197472401175,
+          1.656999945640564,
+          2.933273969191356
+        ],
+        [
+          -7.080343859843816,
+          1.6569999456405642,
+          3.0117147987955626
+        ]
+      ],
+      "aBounds": [
+        [
+          -7.780686810405629,
+          1.5839301423804115,
+          2.80713316032051
+        ],
+        [
+          -6.5445458465648585,
+          2.8057566563669067,
+          3.1547401735059832
+        ]
+      ],
+      "bBounds": [
+        [
+          -8.055000185966492,
+          1.6569999456405637,
+          2.1950000524520874
+        ],
+        [
+          -6.295000195503235,
+          1.6569999456405642,
+          3.9550000429153442
+        ]
+      ]
+    },
+    {
+      "scope": "old-trip-finite",
+      "fixture": "wild/26/compact/banana:false:normal:false",
+      "mode": "recover",
+      "t": 0.48,
+      "a": "actor:part0",
+      "b": "finish:inlaid-cell-numbers-and-results",
+      "kind": "surface",
+      "crossings": 3,
+      "bounds": [
+        [
+          -7.206249599607255,
+          1.6759999990463252,
+          2.6407631507259883
+        ],
+        [
+          -7.1573344970217265,
+          1.6759999990463255,
+          2.6449999809265137
+        ]
+      ],
+      "aBounds": [
+        [
+          -7.739506198516948,
+          1.5640159577917196,
+          2.5433208436672317
+        ],
+        [
+          -6.592175523375136,
+          2.5954038271223996,
+          3.46753800637672
+        ]
+      ],
+      "bBounds": [
+        [
+          -16.084999084472656,
+          1.6759999990463257,
+          -3.825000047683716
+        ],
+        [
+          16.084999084472656,
+          1.6759999990463257,
+          2.6449999809265137
+        ]
+      ]
+    }
+  ]
+}

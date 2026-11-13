@@ -1,0 +1,509 @@
+{
+  "scope": "Explicit fixed structural joints, not moving-part contact permission. Wild16 bounded fixed foundation engagement reviewed within the recorded geometry limits; Wild13 original identical tongue/ground interface retained. Exact meshes, transforms and clipped bounds must match.",
+  "interfaces": [
+    {
+      "anchor": "wild:13",
+      "a": "support:wild:13:wild13-ground-tongue",
+      "b": "world:ground:dark",
+      "aIdentity": {
+        "positionSHA256": "ca60e8ef95e65691f44b2f2f6ced7c8accfc4da6654c6119f24ad617b933d5de",
+        "indexSHA256": "b3a91ef747bd71bcafa12aca718d0c9dc0a9cb421bdff02755f5bcc87e623306",
+        "matrix": [
+          6.123233995736766e-17,
+          0,
+          -1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          6.123233995736766e-17,
+          0,
+          17.32500000000002,
+          -0.04500000000000015,
+          -1.0250000000000012,
+          1
+        ]
+      },
+      "bIdentity": {
+        "positionSHA256": "21752802d8b044e876220331082b665fcde039c92be4249dc0d541e5cd184426",
+        "indexSHA256": "6c427d2cee54b29e0586954482867f526e3dc5cd21db1b69dabce0721c966382",
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "contactBounds": [
+        [
+          16.224999976158163,
+          -0.19500000596046463,
+          -1.5250000000000012
+        ],
+        [
+          17.25470358866431,
+          -0.17999999225139618,
+          -0.5250000000000012
+        ]
+      ],
+      "maximumBoundsToleranceM": 2e-06,
+      "classification": "bounded fixed structural interface"
+    },
+    {
+      "anchor": "wild:13",
+      "a": "support:wild:13:wild13-ground-tongue",
+      "b": "world:ground:cream",
+      "aIdentity": {
+        "positionSHA256": "ca60e8ef95e65691f44b2f2f6ced7c8accfc4da6654c6119f24ad617b933d5de",
+        "indexSHA256": "b3a91ef747bd71bcafa12aca718d0c9dc0a9cb421bdff02755f5bcc87e623306",
+        "matrix": [
+          6.123233995736766e-17,
+          0,
+          -1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          6.123233995736766e-17,
+          0,
+          17.32500000000002,
+          -0.04500000000000015,
+          -1.0250000000000012,
+          1
+        ]
+      },
+      "bIdentity": {
+        "positionSHA256": "91943f2b92101b0b8bad599ac111626229625febbc8c3dfaf714a3323c933de8",
+        "indexSHA256": "c1c6a116108e152c78e49f2ae8c7081e7b9b51edd954c7ba9916563431018f15",
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "contactBounds": [
+        [
+          16.224999976158163,
+          -0.19500000596046463,
+          -1.5250000000000012
+        ],
+        [
+          17.165000915527344,
+          0.019999999552965164,
+          -0.5250000000000012
+        ]
+      ],
+      "maximumBoundsToleranceM": 2e-06,
+      "classification": "bounded fixed structural interface"
+    },
+    {
+      "anchor": "wild:13",
+      "a": "support:wild:13:wild13-ground-tongue",
+      "b": "world:ground:grass",
+      "aIdentity": {
+        "positionSHA256": "ca60e8ef95e65691f44b2f2f6ced7c8accfc4da6654c6119f24ad617b933d5de",
+        "indexSHA256": "b3a91ef747bd71bcafa12aca718d0c9dc0a9cb421bdff02755f5bcc87e623306",
+        "matrix": [
+          6.123233995736766e-17,
+          0,
+          -1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          6.123233995736766e-17,
+          0,
+          17.32500000000002,
+          -0.04500000000000015,
+          -1.0250000000000012,
+          1
+        ]
+      },
+      "bIdentity": {
+        "positionSHA256": "490d2f4a5fc66552bc841117e55e01bb27cf2a5510071bbb8f6dc2138b435f13",
+        "indexSHA256": "8e720b680399e7f2bf7c017df896c7bfa5b8e919ebafd25867c971782a1bb983",
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "contactBounds": [
+        [
+          16.224999976158163,
+          -0.054999999701976776,
+          -1.5250000000000012
+        ],
+        [
+          16.864999771118164,
+          0.10499999672174454,
+          -0.5250000000000012
+        ]
+      ],
+      "maximumBoundsToleranceM": 2e-06,
+      "classification": "bounded fixed structural interface"
+    },
+    {
+      "anchor": "wild:16",
+      "a": "support:wild:16:coverage-footprint-plinth",
+      "b": "world:ground:grass",
+      "aIdentity": {
+        "positionSHA256": "292f4e1da3c83647515c49919d7015f39514d1fb796183457c1c37fe0f6060a0",
+        "indexSHA256": "1d8de134313d11c25650c8d23b7a53ac22ff1bf3786d70a750c29cb336a0145b",
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          12.745000001788156,
+          0.10999997615814205,
+          4.974999935389276,
+          1
+        ]
+      },
+      "bIdentity": {
+        "positionSHA256": "490d2f4a5fc66552bc841117e55e01bb27cf2a5510071bbb8f6dc2138b435f13",
+        "indexSHA256": "8e720b680399e7f2bf7c017df896c7bfa5b8e919ebafd25867c971782a1bb983",
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "contactBounds": [
+        [
+          12.309999909997003,
+          0.020000002384185755,
+          4.554999799490686
+        ],
+        [
+          13.18000009357931,
+          0.07224479040265194,
+          4.565000057220459
+        ]
+      ],
+      "maximumBoundsToleranceM": 2e-06,
+      "classification": "bounded fixed structural interface"
+    },
+    {
+      "anchor": "wild:16",
+      "a": "support:wild:16:wild16-ground-extension",
+      "b": "world:ground:dark",
+      "aIdentity": {
+        "positionSHA256": "0feb6c95f6f2c51b7a03067076bc0280c1d7a7dc4854803f295e0fc1830f0ff9",
+        "indexSHA256": "b3a91ef747bd71bcafa12aca718d0c9dc0a9cb421bdff02755f5bcc87e623306",
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          12.745000000000017,
+          -0.1200000000000001,
+          4.3750000000000036,
+          1
+        ]
+      },
+      "bIdentity": {
+        "positionSHA256": "21752802d8b044e876220331082b665fcde039c92be4249dc0d541e5cd184426",
+        "indexSHA256": "6c427d2cee54b29e0586954482867f526e3dc5cd21db1b69dabce0721c966382",
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "contactBounds": [
+        [
+          12.194999988079088,
+          -0.26000000059604655,
+          3.2749999761581456
+        ],
+        [
+          13.295000011920946,
+          -0.17999999225139618,
+          4.974999904632568
+        ]
+      ],
+      "maximumBoundsToleranceM": 2e-06,
+      "classification": "bounded fixed structural interface"
+    },
+    {
+      "anchor": "wild:16",
+      "a": "support:wild:16:wild16-ground-extension",
+      "b": "world:ground:cream",
+      "aIdentity": {
+        "positionSHA256": "0feb6c95f6f2c51b7a03067076bc0280c1d7a7dc4854803f295e0fc1830f0ff9",
+        "indexSHA256": "b3a91ef747bd71bcafa12aca718d0c9dc0a9cb421bdff02755f5bcc87e623306",
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          12.745000000000017,
+          -0.1200000000000001,
+          4.3750000000000036,
+          1
+        ]
+      },
+      "bIdentity": {
+        "positionSHA256": "91943f2b92101b0b8bad599ac111626229625febbc8c3dfaf714a3323c933de8",
+        "indexSHA256": "c1c6a116108e152c78e49f2ae8c7081e7b9b51edd954c7ba9916563431018f15",
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "contactBounds": [
+        [
+          12.194999988079088,
+          -0.25,
+          3.2749999761581456
+        ],
+        [
+          13.295000011920946,
+          0.019999999552965164,
+          4.864999771118164
+        ]
+      ],
+      "maximumBoundsToleranceM": 2e-06,
+      "classification": "bounded fixed structural interface"
+    },
+    {
+      "anchor": "wild:16",
+      "a": "support:wild:16:wild16-ground-extension",
+      "b": "world:ground:grass",
+      "aIdentity": {
+        "positionSHA256": "0feb6c95f6f2c51b7a03067076bc0280c1d7a7dc4854803f295e0fc1830f0ff9",
+        "indexSHA256": "b3a91ef747bd71bcafa12aca718d0c9dc0a9cb421bdff02755f5bcc87e623306",
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          12.745000000000017,
+          -0.1200000000000001,
+          4.3750000000000036,
+          1
+        ]
+      },
+      "bIdentity": {
+        "positionSHA256": "490d2f4a5fc66552bc841117e55e01bb27cf2a5510071bbb8f6dc2138b435f13",
+        "indexSHA256": "8e720b680399e7f2bf7c017df896c7bfa5b8e919ebafd25867c971782a1bb983",
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "contactBounds": [
+        [
+          12.194999988079086,
+          -0.054999999701976776,
+          3.2749999761581456
+        ],
+        [
+          13.295000011920946,
+          0.02000000059604634,
+          4.565000057220459
+        ]
+      ],
+      "maximumBoundsToleranceM": 2e-06,
+      "classification": "bounded fixed structural interface"
+    },
+    {
+      "anchor": "wild:24",
+      "a": "support:wild:24:wild24-ground-extension",
+      "b": "world:ground:grass",
+      "aIdentity": {
+        "positionSHA256": "6068e0e6da15edb9071df647752f7ac64e339d5b190742daa9db46a1f3acf77f",
+        "indexSHA256": "b3a91ef747bd71bcafa12aca718d0c9dc0a9cb421bdff02755f5bcc87e623306",
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          -4.204999998211864,
+          0.062000000000000055,
+          5.4699999717879955,
+          1
+        ]
+      },
+      "bIdentity": {
+        "positionSHA256": "490d2f4a5fc66552bc841117e55e01bb27cf2a5510071bbb8f6dc2138b435f13",
+        "indexSHA256": "8e720b680399e7f2bf7c017df896c7bfa5b8e919ebafd25867c971782a1bb983",
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "contactBounds": [
+        [
+          -4.704999998211864,
+          0.02000000056624418,
+          4.565000000398225
+        ],
+        [
+          -3.704999998211864,
+          0.05500009768820468,
+          4.565000057220459
+        ]
+      ],
+      "maximumBoundsToleranceM": 2e-06,
+      "classification": "New fixed vertical side joint at Z=4.565; measured depth<0.000001m, not an embedded-volume exemption"
+    }
+  ]
+}

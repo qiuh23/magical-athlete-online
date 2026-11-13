@@ -1,6 +1,7 @@
 import {useSceneLightingClock} from './useSceneLightingClock.js';
 import type {RoomLightingClock} from './scene-lighting-clock.js';
 import { useRaceHudGeometry } from './useRaceHudGeometry.js';
+import { QualitySuggestion, useQualitySuggestion } from './QualitySuggestion.js';
 import { IS_CN_SITE, SITE_BACKEND_ID, FOREIGN_INVITATION_ERROR, randomNickname } from './site-edition.js';
 import { randomId } from './random-id.js';
 import { TRACKS } from '../shared/tracks.js';
@@ -563,10 +564,11 @@ function Race({ lightingClock,lightingRunning,room, busy, leavingBusy, canClose,
   const choiceTitle = pendingChoice?.title.startsWith(choicePrefix) && choicePrefix ? pendingChoice.title.slice(choicePrefix.length) : pendingChoice?.title;
   const characterChoice = !!offeredCharacter || !!pendingChoice?.options.some(option => option.characterId || findCharacter(option.id) || room.racers.some(racer => racer.id === option.id));
   const canRoll = !busy && !playing && sameStage && mine && !room.pending && !room.waitingFor && (!room.turnStage || room.turnStage === 'roll');
+  const qualitySuggestion = useQualitySuggestion({ enabled: !lowQuality && !reduceMotion && online && showing.phase === 'race', blocked: !!racePanel || !!pendingChoice || !!room.pending || presentation.paused || beat?.kind === 'dice' || beat?.kind === 'duel-dice' || beat?.kind === 'intro' || !!beat?.abilityReveal, setLowQuality });
   const actorName = active ? characterName(active.characterId) : '选手';
   const status = room.pause ? '比赛已暂停 · 等待房主恢复' : playing ? `${playbackRacer ? characterName(playbackRacer.characterId) + ' · ' : ''}${playbackLabel}` : pendingPrompt(room) ? pendingPrompt(room) : room.turnStage === 'starting' ? `${actorName} · 正在处理回合开始技能` : mine ? `${actorName} · 轮到你了，掷骰出发` : `${player?.name ?? '选手'}的${actorName}正在行动`;
   return <section className="immersive-race" data-testid="immersive-race">
-    <Suspense fallback={<div className="scene-loading">立体赛场正在就位…</div>}><Board3D lightingClock={lightingClock} lightingRunning={lightingRunning} appearanceMode={appearanceMode} clock={presentation.clock} paused={presentation.paused} room={showing} racers={presentation.racers} beat={beat} queue={presentation.state?.queue} startedAt={presentation.startedAt} durationMs={presentation.durationMs} lowQuality={lowQuality} reducedMotion={reduceMotion} muted={muted} onDetail={onDetail} onSkipIntro={presentation.skip} onIntroReady={presentation.startIntro} onDiceSettled={presentation.onDiceSettled} introReady={presentation.introReady} choiceBusy={busy} onChooseRoute={pendingChoice ? optionId => act({ type: 'choose', choiceId: pendingChoice.id, optionId }) : undefined} /></Suspense>
+    <Suspense fallback={<div className="scene-loading">立体赛场正在就位…</div>}><Board3D lightingClock={lightingClock} lightingRunning={lightingRunning} appearanceMode={appearanceMode} clock={presentation.clock} paused={presentation.paused} room={showing} racers={presentation.racers} beat={beat} queue={presentation.state?.queue} startedAt={presentation.startedAt} durationMs={presentation.durationMs} lowQuality={lowQuality} onQualitySuggestion={qualitySuggestion.onSuggestion} reducedMotion={reduceMotion} muted={muted} onDetail={onDetail} onSkipIntro={presentation.skip} onIntroReady={presentation.startIntro} onDiceSettled={presentation.onDiceSettled} introReady={presentation.introReady} choiceBusy={busy} onChooseRoute={pendingChoice ? optionId => act({ type: 'choose', choiceId: pendingChoice.id, optionId }) : undefined} /></Suspense>
     {beat?.abilityReveal && <AbilityReveal key={beat.key} reveal={beat.abilityReveal} onDetail={onDetail} />}
     <div className="race-hud-top">
       <nav className="race-hud-buttons" aria-label="比赛工具">
@@ -578,6 +580,7 @@ function Race({ lightingClock,lightingRunning,room, busy, leavingBusy, canClose,
         <RoomPauseControl room={room} busy={leavingBusy || !online} act={act} compact />
       </nav>
       <div className="race-match-label"><strong>{spectator && '观战 · '}{showing.round} / {matchRaceCount(room)} <span>· {TRACKS[showing.track].name}</span></strong><span className={`connection ${online ? 'is-online' : ''}`} aria-label={online ? '已连接' : '正在重连'} title={online ? '已连接' : '正在重连'}><Icon kind="connection" size={15} />{!online && '重连中'}</span></div>
+      {qualitySuggestion.visible && <QualitySuggestion onLower={qualitySuggestion.lower} onDismiss={qualitySuggestion.dismiss} />}
     </div>
     <div className="race-status-stack">
       {showing.phase === 'race' && <div className={`race-status-pill ${canRoll ? 'is-mine' : ''}`} role="status" data-testid="animation-phase">{(playing ? playbackRacer : active) && <span className="status-portrait"><Avatar id={(playing ? playbackRacer : active)!.characterId} /></span>}<span className="race-status-copy" title={status}>{room.pause ? '已暂停' : playing ? playbackLabel : (room.pending ? room.pending.playerId === room.selfId ? '你来选' : `${(room.players.find(player => player.id === room.pending!.playerId)?.seat ?? 0) + 1}号选择` : room.waitingFor ? '等待选择' : undefined) || (room.turnStage === 'starting' ? '回合开始技能' : mine ? '轮到你' : `${player ? `${player.seat + 1}号` : ''}行动中`)}</span><Countdown deadline={room.deadline} />{playing && <button className="skip-animation" data-testid="skip-animation" disabled={presentation.paused} onClick={presentation.skip} aria-label="跳过动画" title="跳过动画"><Icon kind="skip" size={18} /></button>}</div>}

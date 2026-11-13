@@ -1,0 +1,75 @@
+{
+  "scope": "Local complete special display candidate; finite verification only. No remote publication, final venue certificate, full-character contact, browser pixels or phone FPS claim.",
+  "fullSuite": {
+    "command": "node --import tsx --test tests/*.test.ts tests/host.test.mjs",
+    "tests": 1651,
+    "passed": 1651,
+    "failed": 0,
+    "durationMs": 40008.474278
+  },
+  "types": {
+    "full": "passed",
+    "worker": "passed"
+  },
+  "build": {
+    "cn": "passed",
+    "global": "passed",
+    "warnings": [
+      "Large JavaScript chunk warning; not a measured phone performance result."
+    ]
+  },
+  "componentHarness": {
+    "command": "node --import tsx scripts/recovery/review-full-coverage-components.cjs",
+    "actualAuthoredHardwareChecks": 216,
+    "ownershipLifecycle": "passed",
+    "categoryFailureIsolation": "passed",
+    "cacheClearRetry": "passed",
+    "renderer": "no-op; no GPU"
+  },
+  "geometry": {
+    "anchors": 54,
+    "displayPosesPerAnchor": 51,
+    "layouts": 2,
+    "actor": "Original banana sculpture and base only",
+    "occupancyCounts": [
+      1,
+      8
+    ],
+    "occupancyPoses": [
+      "standing",
+      "legacy down"
+    ],
+    "actualActorTriangleHits": 0,
+    "routeFollowupAnchors": [
+      "squiggle:14",
+      "squiggle:17",
+      "squiggle:21",
+      "squiggle:28",
+      "boardwalks:50"
+    ],
+    "routeActorSamplesPerLayout": 820,
+    "routeActualTriangleHits": 0
+  },
+  "disabledOldContactMounts": [
+    "wild:23",
+    "wild:24",
+    "boardwalks:19",
+    "boardwalks:23"
+  ],
+  "historicalContactScopeNotClaimedNow": {
+    "r1Trajectories": 12,
+    "movedTripFixtures": 4
+  },
+  "limitations": [
+    "All-character collision and full motion forms not proven.",
+    "Continuous-time collision not proven.",
+    "Final integrated venue and new seating/lamps require joint regression.",
+    "Offline source-sampled previews use neutral ground and light, not game WebGL.",
+    "No physical-contact gates or certificates broadened."
+  ],
+  "resolvedDuringVerification": [
+    "First full run: 1648/1651; two old R1 source contract assertions and source identity needed explicit update for the intended fixed-base non-contact design. After updating the two assertions and refreshing content identity: 1651/1651.",
+    "Independent review caught a transient dispose() typo; corrected and the full suite passes.",
+    "Late actor-hash display disappearance fixed using actual mounted hardware ownership."
+  ]
+}

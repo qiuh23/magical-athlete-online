@@ -1,0 +1,95 @@
+{
+  "scope": "Optional player-approved quality suggestion only. Default/stored quality, lighting source, geometry, mechanisms, DPR and render scheduling remain unchanged. Local integration artifact, not a release.",
+  "detection": {
+    "meaning": "Observed spacing of foreground continuous animation callbacks, not GPU execution time or measured render cost.",
+    "threshold": "Three consecutive sample windows, each at least 800 ms and eight callbacks, each with at least 75% intervals longer than 40 ms. Healthy windows reset the slow-window streak.",
+    "shortAnimationReason": "presentation.ts normally uses 650-2200 ms non-dice beats, so valid windows may accumulate across short animation bursts. Demand callbacks and the first always callback after demand are never samples.",
+    "expiry": "Reset after 10 seconds without a valid always sample or 30 seconds since the evidence window began.",
+    "interruptions": "Mount/scope/enabled changes settle for 3 seconds. Blur/focus/visibility/window or visual-viewport resize or changed canvas dimensions/DPR clear evidence and settle for 2 seconds. Invalid, nonpositive or greater-than-200-ms deltas clear evidence and settle for 2 seconds. Hidden, unfocused, economy, reduced motion, paused, loading or unavailable WebGL scenes cannot suggest.",
+    "originalRegression": "The unchanged real-source AdaptiveQuality test replays 90 demand callbacks at 50 ms, with no slow classification and no automatic quality change. New monitor tests also exclude 10 Hz demand."
+  },
+  "interaction": {
+    "persistenceKey": "magical-athlete:quality-suggestion-seen",
+    "recordedWhen": "First actual display, before any choice. Refusal, close, ignore, refresh, reconnect and later rounds do not repeat. With denied storage, module memory prevents repetition within the same page only.",
+    "onlyWriter": "The explicit lower-quality button calls the existing App setLowQuality(true); existing App persistence remains unchanged.",
+    "dismissal": "12 seconds, decline, close, foreground loss, resize, critical choice/dice/intro/ability UI, menu opening, low-motion/economy selection or scene unavailability. Never changes quality on dismissal.",
+    "layout": "Bounded-width child of the measured HUD, no modal, backdrop, focus grab or absolute/fixed overlay. Viewports shorter than 600 px omit this optional prompt; the normal menu quality control remains available."
+  },
+  "officialBrowserDomFixture": {
+    "method": "Actual QualitySuggestion component/hook and complete game CSS with the actual HUD measurement hook; representative HUD, camera, minimap, status, dice and board-action DOM. Callback deliberately supplied by a QA button. This is not the complete game or a WebGL performance test.",
+    "viewports": [
+      {
+        "width": 390,
+        "height": 844,
+        "hintBounds": {
+          "x": 12,
+          "y": 80,
+          "width": 190,
+          "height": 73.390625
+        },
+        "overlappingProtectedControls": []
+      },
+      {
+        "width": 360,
+        "height": 740,
+        "hintBounds": {
+          "x": 12,
+          "y": 80,
+          "width": 190,
+          "height": 73.390625
+        },
+        "overlappingProtectedControls": []
+      },
+      {
+        "width": 1440,
+        "height": 900,
+        "hintBounds": {
+          "x": 385.390625,
+          "y": 16,
+          "width": 250,
+          "height": 73.390625
+        },
+        "overlappingProtectedControls": []
+      },
+      {
+        "width": 844,
+        "height": 390,
+        "hintShown": false
+      }
+    ],
+    "verifiedActions": [
+      "Mobile lower button sets low-quality state true",
+      "Mobile keep-high button preserves false",
+      "Previously shown hint stays absent after fixture reload",
+      "Board action remains clickable while hint is shown",
+      "Dice button remains clickable and critical-action state removes hint"
+    ],
+    "limitations": [
+      "No real iOS/Android device or mobile browser engine exercised",
+      "No complete-game WebGL or device FPS certification",
+      "The long desktop inspection reached a no-write result for the lower button; timeout/dismissed-handler protection was not instrumented. A fresh short mobile interaction verified explicit acceptance. Desktop geometry, not desktop acceptance timing, is certified here."
+    ],
+    "previewCleanup": "sites-preview stop and status both confirmed stopped"
+  },
+  "checks": {
+    "targetedQualityTests": {
+      "passed": 15,
+      "failed": 0
+    },
+    "typecheck": "passed",
+    "workerTypecheck": "passed",
+    "cnBuild": "passed",
+    "globalBuild": "passed",
+    "fullTests": {
+      "passed": 1653,
+      "failed": 0
+    },
+    "diffCheck": "passed"
+  },
+  "verificationLimits": [
+    "Builds emit the existing greater-than-500-kB chunk warning",
+    "Local Chromium launch was blocked by sandbox sockets; it was not retried with changed security flags. Official-browser DOM testing completed instead.",
+    "Conservative false-negative boundary: if a detected but not yet shown suggestion is cancelled by focus loss or a shallow viewport, that mounted monitor does not retry. A future scene remount may monitor again if no hint was ever displayed. This avoids intrusive repeated prompting.",
+    "The final visualViewport keyboard guard was covered by actual-source callbacks and hook interaction tests, not a real on-screen mobile keyboard."
+  ]
+}

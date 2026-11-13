@@ -24,7 +24,7 @@ async function sources(track: TrackId) {
 
 test('environment is explicit default-off, only current map and rebuilt LOD2 are requested', () => {
   assert.equal(environmentEnabled(''), false); assert.equal(environmentEnabled('?mechanisms=1'), false); assert.equal(environmentEnabled('?environment=1'), true);
-  assert.equal(COMMON_ASSETS.length, 5);
+  assert.equal(COMMON_ASSETS.length, 8);
   for (const track of tracks) {
     const names = environmentAssets(track); assert.equal(new Set(names).size, names.length);
     assert.equal(names.filter(n => n.startsWith('tree_')).length, 3);
@@ -60,7 +60,7 @@ test('source anchors retain real seven-map topology and crown geometry across la
   }
   assert.equal(trackNodeIds('boardwalks').length, 59); assert.equal(trackConnections('boardwalks').length, 61);
   assert.deepEqual(TRACKS['twisty-twirl'].twistBoundary, { before: 13, after: 14 });
-  assert.equal(venuePlacements(1.43)[0]!.position[2], .22); assert.equal(venuePlacements(1.43)[1]!.position[2], .22);
+  assert.deepEqual(venuePlacements(1.43).map(p=>p.asset),['podium','officials_kiosk','scoreboard']);
   assert.ok(venuePlacements(0).every(p => p.position[1]! >= .15));
 });
 

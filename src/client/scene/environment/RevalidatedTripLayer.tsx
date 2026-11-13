@@ -2,7 +2,7 @@ import {SCENE_MECHANISMS,SceneMechanismController} from './scene-mechanisms.js';
 import {Component,Suspense,useEffect,useMemo,type ReactNode,type RefObject} from 'react';
 import {useFrame} from '@react-three/fiber';
 import {useGLTF} from '@react-three/drei';
-import {Group,Mesh,InstancedMesh,Matrix4,Vector3} from 'three';
+import {Group} from 'three';
 import type {Racer} from '../../../shared/types.js';
 import type {TrackId} from '../../../shared/tracks.js';
 import type {PresentationBeat} from '../../presentation.js';
@@ -17,15 +17,15 @@ export function RevalidatedTripLayer(props:Props){return <Boundary key={props.tr
 function Loaded({racers,controller,track,compact,lowQuality,paused,reducedMotion,beat,clock,startedAt,durationMs,root}:Props){
  const {scene}=useGLTF(CERTIFIED_TRIP_URL),playback=useMemo(()=>new MechanismPlayback(),[]);
  const activeAnchor=controller.active?.anchorId;
- const batch=useMemo(()=>{const group=new Group(),placements=mechanismPlacements(track,compact).filter(p=>p.anchor.kind==='trip'&&SCENE_MECHANISMS.approved.some(a=>a.anchor===p.anchor.id)&&SCENE_MECHANISMS.fixtures.some(f=>f.key.startsWith(`${track}/${p.anchor.node}/`))),idle=placements.filter(p=>p.anchor.id!==activeAnchor),model=createTelescopicTripInstance(scene,lowQuality),meshes:InstancedMesh[]=[],idleParts:{mesh:InstancedMesh;local:Matrix4}[]=[];
- model.sample(controller.pose('__park__'));
- model.object.traverse(n=>{if(!(n instanceof Mesh)||!idle.length)return;const mesh=new InstancedMesh(n.geometry,n.material,idle.length);mesh.name=`certified-trip-idle:${n.name}`;mesh.castShadow=mesh.receiveShadow=!lowQuality;mesh.raycast=()=>{};idle.forEach((p,i)=>mesh.setMatrixAt(i,new Matrix4().multiplyMatrices(p.matrix,n.matrixWorld)));mesh.computeBoundingSphere();group.add(mesh);meshes.push(mesh);idleParts.push({mesh,local:n.matrixWorld.clone()});});
- const instances=placements.filter(p=>p.anchor.id===activeAnchor).map(p=>{const instance=createTelescopicTripInstance(scene,lowQuality),holder=new Group();holder.name=`certified-trip:${p.anchor.id}`;holder.position.fromArray(p.position);holder.rotation.y=p.yaw;holder.add(instance.object);group.add(holder);instance.sample(controller.pose(p.anchor.id));return{anchor:p.anchor.id,model:instance,holder};});
- return{group,instances,idle,idleParts,visibility:new Map<string,boolean>(),matrix:new Matrix4(),zero:new Vector3(0,0,0),dispose(){model.dispose();instances.forEach(m=>m.model.dispose());meshes.forEach(m=>m.dispose());}};},[scene,track,compact,lowQuality,controller,activeAnchor]);
- useEffect(()=>{controller.ready=true;return()=>{controller.ready=false;batch.dispose();};},[controller,batch]);
+ const batch=useMemo(()=>{const group=new Group(),placements=mechanismPlacements(track,compact).filter(p=>p.anchor.kind==='trip'&&SCENE_MECHANISMS.approved.some(a=>a.anchor===p.anchor.id)&&SCENE_MECHANISMS.fixtures.some(f=>f.key.startsWith(`${track}/${p.anchor.node}/`)));
+  // Validate the loaded joint structure even while no contact is admitted.
+  const probe=createTelescopicTripInstance(scene,lowQuality);probe.sample(controller.pose('__park__'));
+  const instances=placements.filter(p=>p.anchor.id===activeAnchor).map(p=>{const model=createTelescopicTripInstance(scene,lowQuality),holder=new Group();holder.name=`certified-trip:${p.anchor.id}`;holder.position.fromArray(p.position);holder.rotation.y=p.yaw;holder.add(model.object);group.add(holder);model.sample(controller.pose(p.anchor.id));return{anchor:p.anchor.id,model,holder};});
+  return{group,instances,dispose(){probe.dispose();instances.forEach(m=>m.model.dispose());}};
+ },[scene,track,compact,lowQuality,controller,activeAnchor]);
+ useEffect(()=>{controller.ready=true;return()=>{controller.ready=false;batch.instances.forEach(i=>controller.renderedHardware.delete(i.anchor));batch.dispose();};},[controller,batch]);
  useFrame(()=>{const t=playback.sample(beat?.key??'',clock.now(),startedAt,durationMs,paused,reducedMotion);const active=controller.active,actor=active&&controller.actors.get(active.racerId);controller.sample(t,!active||!!actor?.ready&&actor.staticBind&&actor.hash===active.fixture.actor.runtimeGeometryFingerprint);
-  for(const item of batch.instances){item.holder.visible=!controller.disabled.has(item.anchor)&&controller.hardwareVisible(item.anchor,track,compact,racers,beat);item.model.sample(controller.pose(item.anchor));}
-  batch.idle.forEach((p,i)=>{const visible=controller.parkVisible(track,p.anchor.node,compact,racers,beat)&&controller.hardwareVisible(p.anchor.id,track,compact,racers,beat);if(batch.visibility.get(p.anchor.id)===visible)return;batch.visibility.set(p.anchor.id,visible);for(const part of batch.idleParts){batch.matrix.multiplyMatrices(p.matrix,part.local);if(!visible)batch.matrix.scale(batch.zero);part.mesh.setMatrixAt(i,batch.matrix);part.mesh.instanceMatrix.needsUpdate=true;}});
+  for(const item of batch.instances){item.holder.visible=!controller.disabled.has(item.anchor)&&controller.hardwareVisible(item.anchor,track,compact,racers,beat);if(item.holder.visible)controller.renderedHardware.add(item.anchor);else controller.renderedHardware.delete(item.anchor);item.model.sample(controller.pose(item.anchor));}
   if(root.current){root.current.dataset.certifiedTrip=controller.active?.fixture.key??controller.reason;root.current.dataset.certifiedTripProgress=controller.progress.toFixed(4);}
  },-1);
  return <primitive object={batch.group} dispose={null}/>;

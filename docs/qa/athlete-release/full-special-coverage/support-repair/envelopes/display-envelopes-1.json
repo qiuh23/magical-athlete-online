@@ -1,0 +1,1310 @@
+[
+  {
+    "anchor": "squiggle:1",
+    "kind": "gain",
+    "bounds": [
+      [
+        6.226151236256028,
+        0.19999997466802588,
+        -17.774911026997923
+      ],
+      [
+        7.642876515196141,
+        3.962783349262896,
+        -15.78938554095242
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "squiggle:5",
+    "kind": "trip",
+    "bounds": [
+      [
+        -4.413920298119681,
+        0.19999997466802588,
+        -17.017846539187012
+      ],
+      [
+        -2.982827220424407,
+        2.1549999952316283,
+        -15.97960089385422
+      ]
+    ],
+    "occupancyOverlaps": [
+      {
+        "node": 5,
+        "count": 1,
+        "slot": "0",
+        "down": true,
+        "actualTriangleHit": null
+      },
+      {
+        "node": 5,
+        "count": 8,
+        "slot": "0",
+        "down": true,
+        "actualTriangleHit": null
+      },
+      {
+        "node": 5,
+        "count": 8,
+        "slot": "1",
+        "down": true,
+        "actualTriangleHit": null
+      },
+      {
+        "node": 5,
+        "count": 8,
+        "slot": "3",
+        "down": true,
+        "actualTriangleHit": null
+      },
+      {
+        "node": 5,
+        "count": 8,
+        "slot": "4",
+        "down": true,
+        "actualTriangleHit": null
+      }
+    ],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "squiggle:6",
+    "kind": "loss",
+    "bounds": [
+      [
+        -7.209908973836215,
+        0.19999997466802588,
+        -14.285282644237283
+      ],
+      [
+        -5.953958440123817,
+        3.5280103815356822,
+        -12.63528266807914
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "squiggle:8",
+    "kind": "gain",
+    "bounds": [
+      [
+        -6.24105912089967,
+        0.19999997466802588,
+        -8.296719582780899
+      ],
+      [
+        -4.3122863402566844,
+        3.962783349262896,
+        -6.52895262981453
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "squiggle:13",
+    "kind": "loss",
+    "bounds": [
+      [
+        1.5006505091840225,
+        0.19999997466802588,
+        -1.7581267894287602
+      ],
+      [
+        3.2847729768306344,
+        3.5280103815356822,
+        -0.33121867103293057
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "squiggle:14",
+    "kind": "punch",
+    "bounds": [
+      [
+        -2.0007588655173945,
+        0.1999999523162841,
+        -4.796842151199641
+      ],
+      [
+        0.08967799891232753,
+        3.0599999291449786,
+        -3.137519721931343
+      ]
+    ],
+    "occupancyOverlaps": [
+      {
+        "node": 14,
+        "count": 1,
+        "slot": "0",
+        "down": true,
+        "actualTriangleHit": null
+      },
+      {
+        "node": 14,
+        "count": 8,
+        "slot": "0",
+        "down": false,
+        "actualTriangleHit": null
+      },
+      {
+        "node": 14,
+        "count": 8,
+        "slot": "1",
+        "down": false,
+        "actualTriangleHit": null
+      },
+      {
+        "node": 14,
+        "count": 8,
+        "slot": "2",
+        "down": false,
+        "actualTriangleHit": null
+      },
+      {
+        "node": 14,
+        "count": 8,
+        "slot": "0",
+        "down": true,
+        "actualTriangleHit": null
+      },
+      {
+        "node": 14,
+        "count": 8,
+        "slot": "1",
+        "down": true,
+        "actualTriangleHit": null
+      },
+      {
+        "node": 14,
+        "count": 8,
+        "slot": "2",
+        "down": true,
+        "actualTriangleHit": null
+      },
+      {
+        "node": 14,
+        "count": 8,
+        "slot": "3",
+        "down": true,
+        "actualTriangleHit": null
+      },
+      {
+        "node": 14,
+        "count": 8,
+        "slot": "4",
+        "down": true,
+        "actualTriangleHit": null
+      },
+      {
+        "node": 14,
+        "count": 8,
+        "slot": "5",
+        "down": true,
+        "actualTriangleHit": null
+      }
+    ],
+    "runningSweptAabb": [
+      [
+        13,
+        14
+      ]
+    ]
+  },
+  {
+    "anchor": "squiggle:17",
+    "kind": "trip",
+    "bounds": [
+      [
+        -5.699125062842016,
+        0.19999997466802588,
+        3.7267491637576056
+      ],
+      [
+        -4.311708086654259,
+        1.999999964237213,
+        5.449116124398774
+      ]
+    ],
+    "occupancyOverlaps": [
+      {
+        "node": 17,
+        "count": 8,
+        "slot": "3",
+        "down": false,
+        "actualTriangleHit": null
+      },
+      {
+        "node": 17,
+        "count": 8,
+        "slot": "6",
+        "down": false,
+        "actualTriangleHit": null
+      },
+      {
+        "node": 17,
+        "count": 8,
+        "slot": "6",
+        "down": true,
+        "actualTriangleHit": null
+      }
+    ],
+    "runningSweptAabb": [
+      [
+        16,
+        17
+      ]
+    ]
+  },
+  {
+    "anchor": "squiggle:19",
+    "kind": "gain",
+    "bounds": [
+      [
+        1.4146201443455808,
+        0.19999997466802588,
+        2.4350787042864166
+      ],
+      [
+        3.40014563039108,
+        3.962783349262896,
+        3.85180398322653
+      ]
+    ],
+    "occupancyOverlaps": [
+      {
+        "node": 19,
+        "count": 1,
+        "slot": "0",
+        "down": true,
+        "actualTriangleHit": null
+      },
+      {
+        "node": 19,
+        "count": 8,
+        "slot": "1",
+        "down": true,
+        "actualTriangleHit": null
+      },
+      {
+        "node": 19,
+        "count": 8,
+        "slot": "2",
+        "down": true,
+        "actualTriangleHit": null
+      }
+    ],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "squiggle:21",
+    "kind": "gain",
+    "bounds": [
+      [
+        4.4704170449844876,
+        0.19999997466802588,
+        9.799875496944614
+      ],
+      [
+        6.314576596772395,
+        3.962783349262896,
+        11.587807450285847
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": [
+      [
+        21,
+        22
+      ]
+    ]
+  },
+  {
+    "anchor": "squiggle:23",
+    "kind": "loss",
+    "bounds": [
+      [
+        -0.8462705693256143,
+        0.19999997466802588,
+        11.771182957273851
+      ],
+      [
+        0.9378518983209974,
+        3.5280103815356822,
+        13.19809107566968
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "squiggle:26",
+    "kind": "trip",
+    "bounds": [
+      [
+        -7.128004711014515,
+        0.19999997466802588,
+        13.707634857077283
+      ],
+      [
+        -6.328004699093586,
+        2.1549999952316283,
+        15.007634809393567
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "squiggle:28",
+    "kind": "loss",
+    "bounds": [
+      [
+        -3.215745886286233,
+        0.19999997466802588,
+        18.397783649536354
+      ],
+      [
+        -1.4316234186396215,
+        3.5280103815356822,
+        19.824691767932183
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": [
+      [
+        28,
+        29
+      ]
+    ]
+  },
+  {
+    "anchor": "squiggle:29",
+    "kind": "gain",
+    "bounds": [
+      [
+        -0.9656244909459043,
+        0.19999997466802588,
+        19.75219635942332
+      ],
+      [
+        0.9482976060430218,
+        3.962783349262896,
+        20.907762897825105
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "boardwalks:1",
+    "kind": "gain",
+    "bounds": [
+      [
+        5.436111123032038,
+        0.19999997466802588,
+        -30.390474479789138
+      ],
+      [
+        7.281111077136462,
+        3.962783349262896,
+        -29.402777789698696
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "boardwalks:6",
+    "kind": "trip",
+    "bounds": [
+      [
+        -11.220000010728834,
+        0.19999997466802588,
+        -27.483333309491467
+      ],
+      [
+        -10.419999998807905,
+        2.1549999952316283,
+        -26.183333357175183
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "boardwalks:9",
+    "kind": "punch",
+    "bounds": [
+      [
+        2.027221990412743,
+        0.1999999523162841,
+        -22.72222229404581
+      ],
+      [
+        3.3222222858398647,
+        3.0599999291449786,
+        -20.7022222412957
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "boardwalks:10",
+    "kind": "trip",
+    "bounds": [
+      [
+        -0.9977777885066141,
+        0.19999997466802588,
+        -18.538888865047028
+      ],
+      [
+        -0.19777777658568513,
+        2.1549999952316283,
+        -17.238888912730744
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "boardwalks:16",
+    "kind": "trip",
+    "bounds": [
+      [
+        2.70777776704894,
+        0.19999997466802588,
+        -0.01111108726925325
+      ],
+      [
+        3.507777778969869,
+        2.1549999952316283,
+        1.288888865047031
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "boardwalks:18",
+    "kind": "punch",
+    "bounds": [
+      [
+        2.4277777141601327,
+        0.1999999523162841,
+        8.435555574629038
+      ],
+      [
+        3.7227780095872545,
+        3.0599999291449786,
+        10.45555562737915
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "boardwalks:19",
+    "kind": "trip",
+    "bounds": [
+      [
+        6.525555554363462,
+        0.19999997466802588,
+        13.022222246064077
+      ],
+      [
+        7.3255555662843905,
+        2.1549999952316283,
+        14.322222198380361
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "boardwalks:20",
+    "kind": "trip",
+    "bounds": [
+      [
+        2.8355555448267182,
+        0.19999997466802588,
+        16.983333357175187
+      ],
+      [
+        3.635555556747647,
+        2.1549999952316283,
+        18.28333330949147
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "boardwalks:21",
+    "kind": "trip",
+    "bounds": [
+      [
+        2.8355555448267182,
+        0.19999997466802588,
+        20.81666669050852
+      ],
+      [
+        3.635555556747647,
+        2.1549999952316283,
+        22.116666642824804
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "boardwalks:22",
+    "kind": "trip",
+    "bounds": [
+      [
+        4.461111134952968,
+        0.19999997466802588,
+        25.75333333214123
+      ],
+      [
+        5.761111087269252,
+        2.1549999952316283,
+        26.55333334406216
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "boardwalks:23",
+    "kind": "trip",
+    "bounds": [
+      [
+        1.4611111349529677,
+        0.19999997466802588,
+        22.06333332260449
+      ],
+      [
+        2.761111087269252,
+        2.1549999952316283,
+        22.863333334525418
+      ]
+    ],
+    "occupancyOverlaps": [
+      {
+        "node": 23,
+        "count": 1,
+        "slot": "0",
+        "down": true,
+        "actualTriangleHit": null
+      },
+      {
+        "node": 23,
+        "count": 8,
+        "slot": "0",
+        "down": true,
+        "actualTriangleHit": null
+      },
+      {
+        "node": 23,
+        "count": 8,
+        "slot": "1",
+        "down": true,
+        "actualTriangleHit": null
+      }
+    ],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "boardwalks:32",
+    "kind": "punch",
+    "bounds": [
+      [
+        9.60726531008837,
+        0.1999999523162841,
+        -27.504932404517817
+      ],
+      [
+        11.266587739356668,
+        3.0599999291449786,
+        -25.414495540088097
+      ]
+    ],
+    "occupancyOverlaps": [
+      {
+        "node": 32,
+        "count": 8,
+        "slot": "2",
+        "down": false,
+        "actualTriangleHit": null
+      },
+      {
+        "node": 32,
+        "count": 8,
+        "slot": "5",
+        "down": false,
+        "actualTriangleHit": null
+      },
+      {
+        "node": 32,
+        "count": 8,
+        "slot": "2",
+        "down": true,
+        "actualTriangleHit": null
+      },
+      {
+        "node": 32,
+        "count": 8,
+        "slot": "5",
+        "down": true,
+        "actualTriangleHit": null
+      }
+    ],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "boardwalks:37",
+    "kind": "gain",
+    "bounds": [
+      [
+        -0.4416666547457379,
+        0.19999997466802588,
+        6.792858853544185
+      ],
+      [
+        1.4033332993586856,
+        3.962783349262896,
+        7.780555543634625
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "boardwalks:46",
+    "kind": "punch",
+    "bounds": [
+      [
+        -11.244444508062086,
+        0.1999999523162841,
+        14.824444463517926
+      ],
+      [
+        -9.949444212634964,
+        3.0599999291449786,
+        16.844444516268037
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "boardwalks:47",
+    "kind": "gain",
+    "bounds": [
+      [
+        -11.590857557936333,
+        0.19999997466802588,
+        19.528997899899025
+      ],
+      [
+        -10.28268203515941,
+        3.962783349262896,
+        21.44291999688795
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "boardwalks:48",
+    "kind": "punch",
+    "bounds": [
+      [
+        -5.364444425370955,
+        0.1999999523162841,
+        21.193888657079405
+      ],
+      [
+        -3.3444443726208446,
+        3.0599999291449786,
+        22.488888952506528
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "boardwalks:49",
+    "kind": "gain",
+    "bounds": [
+      [
+        1.210459812937192,
+        0.19999997466802588,
+        18.679302225334258
+      ],
+      [
+        2.5186353357141145,
+        3.962783349262896,
+        20.593224322323184
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "boardwalks:50",
+    "kind": "punch",
+    "bounds": [
+      [
+        9.990598643421704,
+        0.1999999523162841,
+        8.145067595482168
+      ],
+      [
+        11.649921072690002,
+        3.0599999291449786,
+        10.23550445991189
+      ]
+    ],
+    "occupancyOverlaps": [
+      {
+        "node": 50,
+        "count": 8,
+        "slot": "2",
+        "down": false,
+        "actualTriangleHit": null
+      },
+      {
+        "node": 50,
+        "count": 8,
+        "slot": "5",
+        "down": false,
+        "actualTriangleHit": null
+      },
+      {
+        "node": 50,
+        "count": 8,
+        "slot": "2",
+        "down": true,
+        "actualTriangleHit": null
+      },
+      {
+        "node": 50,
+        "count": 8,
+        "slot": "5",
+        "down": true,
+        "actualTriangleHit": null
+      }
+    ],
+    "runningSweptAabb": [
+      [
+        50,
+        51
+      ]
+    ]
+  },
+  {
+    "anchor": "boardwalks:56",
+    "kind": "punch",
+    "bounds": [
+      [
+        8.292273317865883,
+        0.1999999523162841,
+        33.88504308786614
+      ],
+      [
+        10.382710182295606,
+        3.0599999291449786,
+        35.54436551713444
+      ]
+    ],
+    "occupancyOverlaps": [
+      {
+        "node": 56,
+        "count": 8,
+        "slot": "6",
+        "down": false,
+        "actualTriangleHit": null
+      },
+      {
+        "node": 56,
+        "count": 8,
+        "slot": "7",
+        "down": false,
+        "actualTriangleHit": null
+      }
+    ],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "whirly-world:3",
+    "kind": "warp",
+    "bounds": [
+      [
+        0.8549999713897742,
+        0.19999997466802588,
+        -3.8999999880790748
+      ],
+      [
+        1.9935084206413254,
+        3.1700001359259486,
+        -2.2500000119209327
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "whirly-world:5",
+    "kind": "warp",
+    "bounds": [
+      [
+        0.8549999713897742,
+        0.19999997466802588,
+        0.2000000119209302
+      ],
+      [
+        1.9935084206413254,
+        3.1700001359259486,
+        1.8499999880790723
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "whirly-world:7",
+    "kind": "warp",
+    "bounds": [
+      [
+        0.8549999713897742,
+        0.19999997466802588,
+        4.300000011920936
+      ],
+      [
+        1.9935084206413254,
+        3.1700001359259486,
+        5.949999988079078
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "whirly-world:10",
+    "kind": "warp",
+    "bounds": [
+      [
+        0.8549999713897742,
+        0.19999997466802588,
+        10.450000011920942
+      ],
+      [
+        1.9935084206413254,
+        3.1700001359259486,
+        12.099999988079084
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "whirly-world:12",
+    "kind": "warp",
+    "bounds": [
+      [
+        2.2500000119209327,
+        0.19999997466802588,
+        16.4564915793587
+      ],
+      [
+        3.8999999880790748,
+        3.1700001359259486,
+        17.59500002861025
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "whirly-world:15",
+    "kind": "warp",
+    "bounds": [
+      [
+        -5.295000028610233,
+        0.19999997466802588,
+        14.550000011920948
+      ],
+      [
+        -4.156491579358682,
+        3.1700001359259486,
+        16.199999988079092
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "whirly-world:18",
+    "kind": "warp",
+    "bounds": [
+      [
+        -5.295000028610233,
+        0.19999997466802588,
+        8.400000011920941
+      ],
+      [
+        -4.156491579358682,
+        3.1700001359259486,
+        10.049999988079083
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "whirly-world:20",
+    "kind": "warp",
+    "bounds": [
+      [
+        -5.295000028610233,
+        0.19999997466802588,
+        4.300000011920936
+      ],
+      [
+        -4.156491579358682,
+        3.1700001359259486,
+        5.949999988079078
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "whirly-world:22",
+    "kind": "warp",
+    "bounds": [
+      [
+        -5.295000028610233,
+        0.19999997466802588,
+        0.2000000119209302
+      ],
+      [
+        -4.156491579358682,
+        3.1700001359259486,
+        1.8499999880790723
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "whirly-world:23",
+    "kind": "warp",
+    "bounds": [
+      [
+        -5.295000028610233,
+        0.19999997466802588,
+        -1.8499999880790723
+      ],
+      [
+        -4.156491579358682,
+        3.1700001359259486,
+        -0.2000000119209302
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "whirly-world:24",
+    "kind": "warp",
+    "bounds": [
+      [
+        -5.295000028610233,
+        0.19999997466802588,
+        -3.8999999880790748
+      ],
+      [
+        -4.156491579358682,
+        3.1700001359259486,
+        -2.2500000119209327
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "whirly-world:27",
+    "kind": "warp",
+    "bounds": [
+      [
+        -5.295000028610233,
+        0.19999997466802588,
+        -10.049999988079083
+      ],
+      [
+        -4.156491579358682,
+        3.1700001359259486,
+        -8.400000011920941
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "wild:1",
+    "kind": "gain",
+    "bounds": [
+      [
+        0.15000001192093254,
+        0.19999997466802588,
+        -7.99999998807908
+      ],
+      [
+        1.1376967020113722,
+        3.962783349262896,
+        -6.155000033974656
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "wild:5",
+    "kind": "trip",
+    "bounds": [
+      [
+        0.6325378890042281,
+        0.23500000089406958,
+        0.2825378957921356
+      ],
+      [
+        2.1811016959700447,
+        1.999999964237213,
+        1.8997961299551434
+      ]
+    ],
+    "occupancyOverlaps": [
+      {
+        "node": 5,
+        "count": 8,
+        "slot": "0",
+        "down": false,
+        "actualTriangleHit": null
+      },
+      {
+        "node": 5,
+        "count": 8,
+        "slot": "3",
+        "down": false,
+        "actualTriangleHit": null
+      },
+      {
+        "node": 5,
+        "count": 8,
+        "slot": "0",
+        "down": true,
+        "actualTriangleHit": null
+      },
+      {
+        "node": 5,
+        "count": 8,
+        "slot": "3",
+        "down": true,
+        "actualTriangleHit": null
+      }
+    ],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "wild:7",
+    "kind": "punch",
+    "bounds": [
+      [
+        0.7749999363823599,
+        0.1999999523162841,
+        4.105000019073493
+      ],
+      [
+        2.0700002318094817,
+        3.0599999291449786,
+        6.125000071823604
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "wild:11",
+    "kind": "punch",
+    "bounds": [
+      [
+        0.7749999363823603,
+        0.1999999523162841,
+        12.305000019073503
+      ],
+      [
+        2.070000231809482,
+        3.0599999291449786,
+        14.325000071823615
+      ]
+    ],
+    "occupancyOverlaps": [
+      {
+        "node": 13,
+        "count": 1,
+        "slot": "0",
+        "down": true,
+        "actualTriangleHit": null
+      },
+      {
+        "node": 13,
+        "count": 8,
+        "slot": "1",
+        "down": true,
+        "actualTriangleHit": null
+      },
+      {
+        "node": 13,
+        "count": 8,
+        "slot": "2",
+        "down": true,
+        "actualTriangleHit": null
+      },
+      {
+        "node": 13,
+        "count": 8,
+        "slot": "4",
+        "down": true,
+        "actualTriangleHit": null
+      },
+      {
+        "node": 13,
+        "count": 8,
+        "slot": "5",
+        "down": true,
+        "actualTriangleHit": null
+      }
+    ],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "wild:13",
+    "kind": "gain",
+    "bounds": [
+      [
+        0.2000000119209302,
+        0.19999997466802588,
+        17.31230329798865
+      ],
+      [
+        2.0449999660253537,
+        3.962783349262896,
+        18.29999998807909
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "wild:16",
+    "kind": "punch",
+    "bounds": [
+      [
+        -5.375000063617648,
+        0.1999999523162841,
+        12.305000019073503
+      ],
+      [
+        -4.079999768190526,
+        3.0599999291449786,
+        14.325000071823615
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "wild:17",
+    "kind": "trip",
+    "bounds": [
+      [
+        -5.09500001072884,
+        0.19999997466802588,
+        10.62500002384187
+      ],
+      [
+        -4.294999998807911,
+        2.1549999952316283,
+        11.924999976158155
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "wild:23",
+    "kind": "punch",
+    "bounds": [
+      [
+        -2.080000270990756,
+        0.1999999523162841,
+        -0.7650000181794181
+      ],
+      [
+        0.06500006361764044,
+        3.0599999291449786,
+        0.545000025629996
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "wild:24",
+    "kind": "punch",
+    "bounds": [
+      [
+        -6.325000063617648,
+        0.1999999523162841,
+        -4.645000025630001
+      ],
+      [
+        -4.179999729009252,
+        3.0599999291449786,
+        -3.3349999818205864
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  },
+  {
+    "anchor": "wild:26",
+    "kind": "trip",
+    "bounds": [
+      [
+        -5.09500001072884,
+        0.19999997466802588,
+        -7.824999976158151
+      ],
+      [
+        -4.294999998807911,
+        2.1549999952316283,
+        -6.525000023841867
+      ]
+    ],
+    "occupancyOverlaps": [],
+    "runningSweptAabb": []
+  }
+]

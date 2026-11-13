@@ -1,0 +1,692 @@
+{
+  "version": "punch-r1-finite-contact-v1",
+  "productionApproved": true,
+  "sceneHash": "fe59f86d2d14fe3da7a43240f65c0b7fa9a79886a2a9200501a5b5e0c4e9feb8",
+  "scope": "12 exact single-standing-target trajectories only; banana full/economy and Coach full; Wild23 forward and24 backward; desktop/compact; 650ms minimum; static bind and isolated path. Unknown inputs cue-only. Not a browser/continuous-time/all-role certificate.",
+  "fixtures": [
+    {
+      "character": "banana",
+      "node": 23,
+      "compact": false,
+      "lowQuality": false,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037",
+      "path": [
+        23,
+        24,
+        25
+      ],
+      "mount": [
+        -1,
+        0,
+        1.2246467991473532e-16,
+        0,
+        0,
+        1,
+        0,
+        0,
+        -1.2246467991473532e-16,
+        0,
+        -1,
+        0,
+        -0.4750000000000012,
+        1.65,
+        3.4350000000000036,
+        1
+      ],
+      "solution": {
+        "pose": {
+          "boomYaw": 1.4835298641951802,
+          "headYaw": 0,
+          "reach": 0.15,
+          "stroke": 0
+        },
+        "contactStroke": 0.03588897909907346,
+        "targetPoint": [
+          0.18919727139505005,
+          1.3007054622313636,
+          0.38226217335181534
+        ],
+        "fistPoint": [
+          0.1533082922959766,
+          1.3007054622313636,
+          0.38226217335181534
+        ],
+        "actorPart": "banana_sculpt",
+        "actorTriangle": 3089,
+        "softTriangle": 740,
+        "rigVersion": "punch-rebuild-r1"
+      },
+      "solutionSignature": "[\"punch-rebuild-r1\",1.48353,0,0.15,0,0.035889,0.189197,1.300705,0.382262,0.153308,1.300705,0.382262,\"banana_sculpt\",3089,740]",
+      "sceneHash": "fe59f86d2d14fe3da7a43240f65c0b7fa9a79886a2a9200501a5b5e0c4e9feb8",
+      "foundationBottom": 0.10399999672174455,
+      "foundationCenterBottom": 0.10399999672174454
+    },
+    {
+      "character": "banana",
+      "node": 23,
+      "compact": false,
+      "lowQuality": true,
+      "actorHash": "17dce985f674958cddc1dbaabf05322ecc0c68b65812e7146fe37822022c49fc",
+      "path": [
+        23,
+        24,
+        25
+      ],
+      "mount": [
+        -1,
+        0,
+        1.2246467991473532e-16,
+        0,
+        0,
+        1,
+        0,
+        0,
+        -1.2246467991473532e-16,
+        0,
+        -1,
+        0,
+        -0.4750000000000012,
+        1.65,
+        3.4350000000000036,
+        1
+      ],
+      "solution": {
+        "pose": {
+          "boomYaw": 1.4835298641951802,
+          "headYaw": 0,
+          "reach": 0.15,
+          "stroke": 0
+        },
+        "contactStroke": 0.035812994110303586,
+        "targetPoint": [
+          0.19020149941281952,
+          1.2903527019094059,
+          0.365049547546785
+        ],
+        "fistPoint": [
+          0.15438850530251594,
+          1.2903527019094059,
+          0.365049547546785
+        ],
+        "actorPart": "banana_sculpt",
+        "actorTriangle": 2037,
+        "softTriangle": 733,
+        "rigVersion": "punch-rebuild-r1"
+      },
+      "solutionSignature": "[\"punch-rebuild-r1\",1.48353,0,0.15,0,0.035813,0.190201,1.290353,0.36505,0.154389,1.290353,0.36505,\"banana_sculpt\",2037,733]",
+      "sceneHash": "fe59f86d2d14fe3da7a43240f65c0b7fa9a79886a2a9200501a5b5e0c4e9feb8",
+      "foundationBottom": 0.10399999672174455,
+      "foundationCenterBottom": 0.10399999672174454
+    },
+    {
+      "character": "banana",
+      "node": 23,
+      "compact": true,
+      "lowQuality": false,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037",
+      "path": [
+        23,
+        24,
+        25
+      ],
+      "mount": [
+        6.123233995736766e-17,
+        0,
+        -1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        6.123233995736766e-17,
+        0,
+        -3.4350000000000036,
+        1.65,
+        -0.4750000000000012,
+        1
+      ],
+      "solution": {
+        "pose": {
+          "boomYaw": 1.3962634015954636,
+          "headYaw": 6.123233995736766e-17,
+          "reach": 0.15,
+          "stroke": 0
+        },
+        "contactStroke": 0.13843999364314535,
+        "targetPoint": [
+          0.36572545519258026,
+          1.2592944185593469,
+          0.5663896085139659
+        ],
+        "fistPoint": [
+          0.2272854615494349,
+          1.2592944185593469,
+          0.5663896085139659
+        ],
+        "actorPart": "banana_sculpt",
+        "actorTriangle": 2449,
+        "softTriangle": 153,
+        "rigVersion": "punch-rebuild-r1"
+      },
+      "solutionSignature": "[\"punch-rebuild-r1\",1.396263,0,0.15,0,0.13844,0.365725,1.259294,0.56639,0.227285,1.259294,0.56639,\"banana_sculpt\",2449,153]",
+      "sceneHash": "fe59f86d2d14fe3da7a43240f65c0b7fa9a79886a2a9200501a5b5e0c4e9feb8",
+      "foundationBottom": 0.10399999672174455,
+      "foundationCenterBottom": 0.10399999672174454
+    },
+    {
+      "character": "banana",
+      "node": 23,
+      "compact": true,
+      "lowQuality": true,
+      "actorHash": "17dce985f674958cddc1dbaabf05322ecc0c68b65812e7146fe37822022c49fc",
+      "path": [
+        23,
+        24,
+        25
+      ],
+      "mount": [
+        6.123233995736766e-17,
+        0,
+        -1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        6.123233995736766e-17,
+        0,
+        -3.4350000000000036,
+        1.65,
+        -0.4750000000000012,
+        1
+      ],
+      "solution": {
+        "pose": {
+          "boomYaw": 1.3962634015954636,
+          "headYaw": 6.123233995736766e-17,
+          "reach": 0.15,
+          "stroke": 0
+        },
+        "contactStroke": 0.13839332242632146,
+        "targetPoint": [
+          0.36567878397575637,
+          1.2592944185593469,
+          0.5663896085139659
+        ],
+        "fistPoint": [
+          0.2272854615494349,
+          1.2592944185593469,
+          0.5663896085139659
+        ],
+        "actorPart": "banana_sculpt",
+        "actorTriangle": 1708,
+        "softTriangle": 153,
+        "rigVersion": "punch-rebuild-r1"
+      },
+      "solutionSignature": "[\"punch-rebuild-r1\",1.396263,0,0.15,0,0.138393,0.365679,1.259294,0.56639,0.227285,1.259294,0.56639,\"banana_sculpt\",1708,153]",
+      "sceneHash": "fe59f86d2d14fe3da7a43240f65c0b7fa9a79886a2a9200501a5b5e0c4e9feb8",
+      "foundationBottom": 0.10399999672174455,
+      "foundationCenterBottom": 0.10399999672174454
+    },
+    {
+      "character": "banana",
+      "node": 24,
+      "compact": false,
+      "lowQuality": false,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037",
+      "path": [
+        24,
+        23,
+        22
+      ],
+      "mount": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        -3.6250000000000036,
+        1.65,
+        2.8250000000000037,
+        1
+      ],
+      "solution": {
+        "pose": {
+          "boomYaw": 1.3962634015954636,
+          "headYaw": 0,
+          "reach": 0.15,
+          "stroke": 0
+        },
+        "contactStroke": 0.30474425392251253,
+        "targetPoint": [
+          0.4659234765190787,
+          1.0633945120112323,
+          0.2701920140092855
+        ],
+        "fistPoint": [
+          0.1611792225965662,
+          1.0633945120112323,
+          0.2701920140092855
+        ],
+        "actorPart": "banana_sculpt",
+        "actorTriangle": 2968,
+        "softTriangle": 600,
+        "rigVersion": "punch-rebuild-r1"
+      },
+      "solutionSignature": "[\"punch-rebuild-r1\",1.396263,0,0.15,0,0.304744,0.465923,1.063395,0.270192,0.161179,1.063395,0.270192,\"banana_sculpt\",2968,600]",
+      "sceneHash": "fe59f86d2d14fe3da7a43240f65c0b7fa9a79886a2a9200501a5b5e0c4e9feb8",
+      "foundationBottom": 0.10399999672174455,
+      "foundationCenterBottom": 0.018999999552965136
+    },
+    {
+      "character": "banana",
+      "node": 24,
+      "compact": false,
+      "lowQuality": true,
+      "actorHash": "17dce985f674958cddc1dbaabf05322ecc0c68b65812e7146fe37822022c49fc",
+      "path": [
+        24,
+        23,
+        22
+      ],
+      "mount": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        -3.6250000000000036,
+        1.65,
+        2.8250000000000037,
+        1
+      ],
+      "solution": {
+        "pose": {
+          "boomYaw": 1.3962634015954636,
+          "headYaw": 0,
+          "reach": 0.15,
+          "stroke": 0
+        },
+        "contactStroke": 0.30474334125354485,
+        "targetPoint": [
+          0.46592256385011105,
+          1.0633945120112323,
+          0.2701920140092855
+        ],
+        "fistPoint": [
+          0.1611792225965662,
+          1.0633945120112323,
+          0.2701920140092855
+        ],
+        "actorPart": "banana_sculpt",
+        "actorTriangle": 1985,
+        "softTriangle": 600,
+        "rigVersion": "punch-rebuild-r1"
+      },
+      "solutionSignature": "[\"punch-rebuild-r1\",1.396263,0,0.15,0,0.304743,0.465923,1.063395,0.270192,0.161179,1.063395,0.270192,\"banana_sculpt\",1985,600]",
+      "sceneHash": "fe59f86d2d14fe3da7a43240f65c0b7fa9a79886a2a9200501a5b5e0c4e9feb8",
+      "foundationBottom": 0.10399999672174455,
+      "foundationCenterBottom": 0.018999999552965136
+    },
+    {
+      "character": "banana",
+      "node": 24,
+      "compact": true,
+      "lowQuality": false,
+      "actorHash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037",
+      "path": [
+        24,
+        23,
+        22
+      ],
+      "mount": [
+        6.123233995736766e-17,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        -1,
+        0,
+        6.123233995736766e-17,
+        0,
+        -2.8250000000000037,
+        1.65,
+        -3.6250000000000036,
+        1
+      ],
+      "solution": {
+        "pose": {
+          "boomYaw": 1.3962634015954636,
+          "headYaw": 0,
+          "reach": 0.15,
+          "stroke": 0
+        },
+        "contactStroke": 0.13533005840870677,
+        "targetPoint": [
+          0.37513079284144674,
+          1.2592944209435324,
+          0.09673482090132485
+        ],
+        "fistPoint": [
+          0.23980073443273997,
+          1.2592944209435324,
+          0.09673482090132485
+        ],
+        "actorPart": "banana_sculpt",
+        "actorTriangle": 3028,
+        "softTriangle": 1613,
+        "rigVersion": "punch-rebuild-r1"
+      },
+      "solutionSignature": "[\"punch-rebuild-r1\",1.396263,0,0.15,0,0.13533,0.375131,1.259294,0.096735,0.239801,1.259294,0.096735,\"banana_sculpt\",3028,1613]",
+      "sceneHash": "fe59f86d2d14fe3da7a43240f65c0b7fa9a79886a2a9200501a5b5e0c4e9feb8",
+      "foundationBottom": 0.10399999672174455,
+      "foundationCenterBottom": 0.018999999552965136
+    },
+    {
+      "character": "banana",
+      "node": 24,
+      "compact": true,
+      "lowQuality": true,
+      "actorHash": "17dce985f674958cddc1dbaabf05322ecc0c68b65812e7146fe37822022c49fc",
+      "path": [
+        24,
+        23,
+        22
+      ],
+      "mount": [
+        6.123233995736766e-17,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        -1,
+        0,
+        6.123233995736766e-17,
+        0,
+        -2.8250000000000037,
+        1.65,
+        -3.6250000000000036,
+        1
+      ],
+      "solution": {
+        "pose": {
+          "boomYaw": 1.3962634015954636,
+          "headYaw": 0,
+          "reach": 0.15,
+          "stroke": 0
+        },
+        "contactStroke": 0.13552782388480644,
+        "targetPoint": [
+          0.3753285583175464,
+          1.2592944209435324,
+          0.09673482090132485
+        ],
+        "fistPoint": [
+          0.23980073443273997,
+          1.2592944209435324,
+          0.09673482090132485
+        ],
+        "actorPart": "banana_sculpt",
+        "actorTriangle": 2031,
+        "softTriangle": 1613,
+        "rigVersion": "punch-rebuild-r1"
+      },
+      "solutionSignature": "[\"punch-rebuild-r1\",1.396263,0,0.15,0,0.135528,0.375329,1.259294,0.096735,0.239801,1.259294,0.096735,\"banana_sculpt\",2031,1613]",
+      "sceneHash": "fe59f86d2d14fe3da7a43240f65c0b7fa9a79886a2a9200501a5b5e0c4e9feb8",
+      "foundationBottom": 0.10399999672174455,
+      "foundationCenterBottom": 0.018999999552965136
+    },
+    {
+      "character": "coach",
+      "node": 23,
+      "compact": false,
+      "lowQuality": false,
+      "actorHash": "17f1597ad1d19391c38e49adf75b08860ab01543f21b8c45a9b26abd91c6bb45",
+      "path": [
+        23,
+        24,
+        25
+      ],
+      "mount": [
+        -1,
+        0,
+        1.2246467991473532e-16,
+        0,
+        0,
+        1,
+        0,
+        0,
+        -1.2246467991473532e-16,
+        0,
+        -1,
+        0,
+        -0.4750000000000012,
+        1.65,
+        3.4350000000000036,
+        1
+      ],
+      "solution": {
+        "pose": {
+          "boomYaw": 1.3962634015954636,
+          "headYaw": 0,
+          "reach": 0,
+          "stroke": 0
+        },
+        "contactStroke": 0.041352844663323174,
+        "targetPoint": [
+          0.14607871874385028,
+          1.030004515275257,
+          0.2832801290365397
+        ],
+        "fistPoint": [
+          0.10472587408052711,
+          1.030004515275257,
+          0.2832801290365397
+        ],
+        "actorPart": "coach_sculpt",
+        "actorTriangle": 6920,
+        "softTriangle": 539,
+        "rigVersion": "punch-rebuild-r1"
+      },
+      "solutionSignature": "[\"punch-rebuild-r1\",1.396263,0,0,0,0.041353,0.146079,1.030005,0.28328,0.104726,1.030005,0.28328,\"coach_sculpt\",6920,539]",
+      "sceneHash": "fe59f86d2d14fe3da7a43240f65c0b7fa9a79886a2a9200501a5b5e0c4e9feb8",
+      "foundationBottom": 0.10399999672174455,
+      "foundationCenterBottom": 0.10399999672174454
+    },
+    {
+      "character": "coach",
+      "node": 23,
+      "compact": true,
+      "lowQuality": false,
+      "actorHash": "17f1597ad1d19391c38e49adf75b08860ab01543f21b8c45a9b26abd91c6bb45",
+      "path": [
+        23,
+        24,
+        25
+      ],
+      "mount": [
+        6.123233995736766e-17,
+        0,
+        -1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        6.123233995736766e-17,
+        0,
+        -3.4350000000000036,
+        1.65,
+        -0.4750000000000012,
+        1
+      ],
+      "solution": {
+        "pose": {
+          "boomYaw": 1.5707963267948966,
+          "headYaw": 6.123233995736766e-17,
+          "reach": 0.15,
+          "stroke": 0
+        },
+        "contactStroke": 0.08367286320256276,
+        "targetPoint": [
+          0.1285272271236642,
+          1.3565684754423377,
+          0.37619078436482056
+        ],
+        "fistPoint": [
+          0.04485436392110146,
+          1.3565684754423377,
+          0.37619078436482056
+        ],
+        "actorPart": "coach_sculpt",
+        "actorTriangle": 1258,
+        "softTriangle": 748,
+        "rigVersion": "punch-rebuild-r1"
+      },
+      "solutionSignature": "[\"punch-rebuild-r1\",1.570796,0,0.15,0,0.083673,0.128527,1.356568,0.376191,0.044854,1.356568,0.376191,\"coach_sculpt\",1258,748]",
+      "sceneHash": "fe59f86d2d14fe3da7a43240f65c0b7fa9a79886a2a9200501a5b5e0c4e9feb8",
+      "foundationBottom": 0.10399999672174455,
+      "foundationCenterBottom": 0.10399999672174454
+    },
+    {
+      "character": "coach",
+      "node": 24,
+      "compact": false,
+      "lowQuality": false,
+      "actorHash": "17f1597ad1d19391c38e49adf75b08860ab01543f21b8c45a9b26abd91c6bb45",
+      "path": [
+        24,
+        23,
+        22
+      ],
+      "mount": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        -3.6250000000000036,
+        1.65,
+        2.8250000000000037,
+        1
+      ],
+      "solution": {
+        "pose": {
+          "boomYaw": 1.5707963267948966,
+          "headYaw": 0,
+          "reach": 0.15,
+          "stroke": 0
+        },
+        "contactStroke": 0.09246575025321303,
+        "targetPoint": [
+          0.07394078974737556,
+          1.0643806827579274,
+          0.4573162560569508
+        ],
+        "fistPoint": [
+          -0.01852496050583748,
+          1.0643806827579274,
+          0.4573162560569508
+        ],
+        "actorPart": "coach_sculpt",
+        "actorTriangle": 5890,
+        "softTriangle": 507,
+        "rigVersion": "punch-rebuild-r1"
+      },
+      "solutionSignature": "[\"punch-rebuild-r1\",1.570796,0,0.15,0,0.092466,0.073941,1.064381,0.457316,-0.018525,1.064381,0.457316,\"coach_sculpt\",5890,507]",
+      "sceneHash": "fe59f86d2d14fe3da7a43240f65c0b7fa9a79886a2a9200501a5b5e0c4e9feb8",
+      "foundationBottom": 0.10399999672174455,
+      "foundationCenterBottom": 0.018999999552965136
+    },
+    {
+      "character": "coach",
+      "node": 24,
+      "compact": true,
+      "lowQuality": false,
+      "actorHash": "17f1597ad1d19391c38e49adf75b08860ab01543f21b8c45a9b26abd91c6bb45",
+      "path": [
+        24,
+        23,
+        22
+      ],
+      "mount": [
+        6.123233995736766e-17,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        -1,
+        0,
+        6.123233995736766e-17,
+        0,
+        -2.8250000000000037,
+        1.65,
+        -3.6250000000000036,
+        1
+      ],
+      "solution": {
+        "pose": {
+          "boomYaw": 1.3962634015954636,
+          "headYaw": 0,
+          "reach": 0.15,
+          "stroke": 0
+        },
+        "contactStroke": 0.1246501135437047,
+        "targetPoint": [
+          0.36445084797644467,
+          1.3007054622313636,
+          0.25364907435083317
+        ],
+        "fistPoint": [
+          0.23980073443273997,
+          1.3007054622313636,
+          0.25364907435083317
+        ],
+        "actorPart": "coach_sculpt",
+        "actorTriangle": 771,
+        "softTriangle": 1182,
+        "rigVersion": "punch-rebuild-r1"
+      },
+      "solutionSignature": "[\"punch-rebuild-r1\",1.396263,0,0.15,0,0.12465,0.364451,1.300705,0.253649,0.239801,1.300705,0.253649,\"coach_sculpt\",771,1182]",
+      "sceneHash": "fe59f86d2d14fe3da7a43240f65c0b7fa9a79886a2a9200501a5b5e0c4e9feb8",
+      "foundationBottom": 0.10399999672174455,
+      "foundationCenterBottom": 0.018999999552965136
+    }
+  ]
+}

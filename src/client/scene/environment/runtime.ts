@@ -1,4 +1,5 @@
 import { Box3, BoxGeometry, BufferGeometry, Group, InstancedMesh, Matrix4, Mesh, MeshBasicMaterial, MeshStandardMaterial, PlaneGeometry, Vector3, type Material } from 'three';
+import { buildStadiumSeating } from './seating.js';
 import type { TrackId } from '../../../shared/tracks.js';
 import { environmentTrees, environmentVenueOffset, furnitureAnchors, gatePlacements, isNaturalMap, venuePlacements, type EnvironmentOptions } from './layout.js';
 
@@ -51,6 +52,7 @@ export function remapEnvironmentGeometry(mesh: Mesh, track: TrackId, part: 'base
 /** Exact same concrete entities feed rendering and offline scene audits. None
  * are exempt from collision review because they are decorative or camera-hidden. */
 export function buildEnvironmentGeometry(track: TrackId, models: EnvironmentModels, options: EnvironmentOptions): EnvironmentGeometry {
+  let seating: ReturnType<typeof buildStadiumSeating> | undefined;
   const root = new Group(); root.name = `rebuilt-environment:${track}`;
   const geometries: BufferGeometry[] = [], materials: Material[] = [], batches: EnvironmentTreeBatch[] = [], trees: EnvironmentTree[] = [], signs:EnvironmentGeometry['signs']=[];
   const source = (name: string) => { const model = models[name]; if (!model) throw Error(`Missing environment asset ${name}`); model.updateMatrixWorld(true); return model; };
@@ -79,15 +81,16 @@ export function buildEnvironmentGeometry(track: TrackId, models: EnvironmentMode
     } else {
       for (const p of venuePlacements(options.lift)) { const offset=environmentVenueOffset(track,p.asset); add(p.asset, new Matrix4().makeTranslation(p.position[0]! * options.scale+offset.x, p.position[1]!+offset.y, p.position[2]! * options.scale+offset.z)); }
       if (options.lift) {
-        for (const [asset, x, z] of [['grandstand_rostrum', 2.4, -.05], ['official_rostrum', -11.8, -.1], ['podium_plinth', -7.7, -.1]] as const) {
+        for (const [asset, x, z] of [['official_rostrum', -11.8, -.1], ['podium_plinth', -7.7, -.1]] as const) {
           // Source support already occupies high-deck WORLD coordinates.
-          source(asset).traverse(node => { if (!(node instanceof Mesh)) return; const geometry = node.geometry.clone().applyMatrix4(node.matrixWorld); const offset=environmentVenueOffset(track,asset); geometry.translate(x * (options.scale - 1)+offset.x, offset.y, z * (options.scale - 1) + (asset === 'grandstand_rostrum' ? .27 * options.scale : 0)+offset.z); geometries.push(geometry); const mesh = mark(new Mesh(geometry, node.material), 'facility'); mesh.name = asset; root.add(mesh); });
+          source(asset).traverse(node => { if (!(node instanceof Mesh)) return; const geometry = node.geometry.clone().applyMatrix4(node.matrixWorld); const offset=environmentVenueOffset(track,asset); geometry.translate(x * (options.scale - 1)+offset.x, offset.y, z * (options.scale - 1)+offset.z); geometries.push(geometry); const mesh = mark(new Mesh(geometry, node.material), 'facility'); mesh.name = asset; root.add(mesh); });
         }
       }
-      for (const [name, x, z, w, d] of [['grandstand', 2.4, .22, 5.65, 1.73], ['official', -11.8, -.1, 1.84, 1.3], ['podium', -7.7, -.1, 2.65, 1.5]] as const) {
+      for (const [name, x, z, w, d] of [['official', -11.8, -.1, 1.84, 1.3], ['podium', -7.7, -.1, 2.65, 1.5]] as const) {
         const offset=environmentVenueOffset(track,name); support(`${name}-${options.lift ? 'ground-contact' : 'low-plinth'}`, [x * options.scale+offset.x, (options.lift ? .145 : .192)+offset.y, z * options.scale+offset.z], [w, options.lift ? .19 : .084, d]);
       }
     }
+    seating = buildStadiumSeating(track, models, options); root.add(seating.root);
     for (const p of gatePlacements(track, options)) {
       add(p.asset, new Matrix4().makeTranslation(...p.position));
       // The source gates have no lettering. These opaque labels cover the
@@ -115,9 +118,9 @@ export function buildEnvironmentGeometry(track: TrackId, models: EnvironmentMode
       });
     }
     root.updateMatrixWorld(true);
-  } catch (error) { batches.forEach(b => b.mesh.dispose()); geometries.forEach(g => g.dispose()); materials.forEach(m => m.dispose()); throw error; }
+  } catch (error) { seating?.dispose(); batches.forEach(b => b.mesh.dispose()); geometries.forEach(g => g.dispose()); materials.forEach(m => m.dispose()); throw error; }
   let disposed = false;
-  return { root, trees, batches, signs, dispose() { if (disposed) return; disposed = true; batches.forEach(b => b.mesh.dispose()); geometries.forEach(g => g.dispose()); materials.forEach(m => m.dispose()); } };
+  return { root, trees, batches, signs, dispose() { if (disposed) return; disposed = true; seating?.dispose(); batches.forEach(b => b.mesh.dispose()); geometries.forEach(g => g.dispose()); materials.forEach(m => m.dispose()); } };
 }
 
 /** Repack visible instances and lower count, rather than zero-scale matrices

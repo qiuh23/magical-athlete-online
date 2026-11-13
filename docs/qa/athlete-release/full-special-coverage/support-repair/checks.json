@@ -1,0 +1,67 @@
+{
+  "scope": "Only Wild24 support and Boardwalk23 fixed mount/support repair. Finite static/pose evidence, not a broadened contact certificate or final future venue audit.",
+  "runtimeSourceSHA256": "0af606b15a897b9f915c666a3c4958e98e452b6aa70d212e3bddd502096089e9",
+  "tests": {
+    "targetedPassed": 14,
+    "fullPassed": 1654,
+    "fullFailed": 0,
+    "fullDurationMs": 43079.270499,
+    "fullTypecheck": "passed",
+    "workerTypecheck": "passed",
+    "cnBuild": "passed",
+    "globalBuild": "passed",
+    "postBuildSourceIdentity": "passed"
+  },
+  "worldDelta": {
+    "qualityModes": [
+      "full",
+      "economy"
+    ],
+    "nonAbutmentContacts": 0,
+    "plinthDownProbesPerAnchor": 5,
+    "allProbesSupported": true,
+    "sharedPlaneContactToleranceMeters": 2e-05
+  },
+  "boardwalk23": {
+    "localShift": [
+      0.7,
+      0,
+      0.45
+    ],
+    "foundationBottom": 0,
+    "displayPoseSamples": 51,
+    "layouts": [
+      "desktop",
+      "compact"
+    ],
+    "nodeActorCounts": [
+      1,
+      8
+    ],
+    "nodeActorPoses": [
+      "standing",
+      "legacy down"
+    ],
+    "actorModel": "original banana only",
+    "actualTriangleHits": 0,
+    "conservativeRunningRouteCandidates": 0,
+    "otherHardwareEnvelopesIntersecting": 0,
+    "oldContactAllowed": false
+  },
+  "wild24": {
+    "rootChanged": false,
+    "upperBoundsDescription": "Z4.565..6.375, Y.02...104",
+    "lowerBoundsDescription": "Z4.865..6.375, Y-.18...02",
+    "oldContactAllowed": false
+  },
+  "rejectedAlternative": "Boardwalk23 inward world +X 0.12 m was rejected due to a compact single already-down banana bearing collision. It was not committed.",
+  "envelopeInheritance": "53 unchanged mounts plus byte-identical sampler/model inputs verified; only Boardwalk23 re-sampled. Original floodlight-rows snapshots remain historical; new chain is support-repair/envelopes.",
+  "excluded": [
+    "All-character motion envelopes",
+    "Continuous collision",
+    "Subsequent lamp/stand/terrain edits",
+    "Real WebGL pixels or phone FPS"
+  ],
+  "newDownloads": 0,
+  "runtimeChange": "Static foundation geometry and fixed Boardwalk23 mount only. No actions, GLBs, rules, lighting or seating source changed."
+}

@@ -1,0 +1,4548 @@
+{
+  "scope": "Actual old physical and new display foundation geometry against seating. No pair exceptions. Finite bank support probes. Not a full integrated-world/contact certificate.",
+  "sourceHashes": {
+    "src/client/scene/environment/seating.ts": "2c1a10b8c809ab252d6e74f1657026b76210c4fdf91cdfa25d850422f5392f84",
+    "src/client/scene/environment/seating-clearance.ts": "392e9d644cef1ea80671e331565d47aca1bcdfd60c76fbbe3d807e1ccd4edf09"
+  },
+  "integratedSupportSHA256": "55bcc9e706fc16bac9696adaae4dd3fa3a59a383c5dae73c7b115f6469eca11a",
+  "reports": [
+    {
+      "track": "squiggle",
+      "lowQuality": false,
+      "cuts": [
+        {
+          "anchor": "squiggle:21",
+          "center": [
+            10.7760874393509,
+            -5.392496834124268
+          ],
+          "yaw": 2.1598449493429825,
+          "width": 1.72,
+          "depth": 0.92
+        },
+        {
+          "anchor": "squiggle:28",
+          "center": [
+            19.013122529854403,
+            2.323684657114243
+          ],
+          "yaw": 1.3744467859455345,
+          "width": 1.72,
+          "depth": 0.92
+        },
+        {
+          "anchor": "squiggle:29",
+          "center": [
+            20.329979652007957,
+            0.07356326177391437
+          ],
+          "yaw": 1.3744467859455345,
+          "width": 1.72,
+          "depth": 0.92
+        }
+      ],
+      "supports": [
+        {
+          "anchor": "squiggle:21",
+          "mode": "legacy",
+          "name": "squiggle:21:legacy:device-foundation",
+          "bounds": [
+            [
+              9.936626605026845,
+              -0.0009999890923499954,
+              -6.34231743002843
+            ],
+            [
+              11.615548273674953,
+              0.20000000101327897,
+              -4.4426762382201055
+            ]
+          ]
+        },
+        {
+          "anchor": "squiggle:21",
+          "mode": "display",
+          "name": "squiggle:21:display:coverage-footprint-plinth",
+          "bounds": [
+            [
+              9.936626593537904,
+              -0.0009999868571757276,
+              -6.342317383780435
+            ],
+            [
+              11.615548245516331,
+              0.19999997344613085,
+              -4.442676257976447
+            ]
+          ]
+        },
+        {
+          "anchor": "squiggle:28",
+          "mode": "legacy",
+          "name": "squiggle:28:legacy:device-foundation",
+          "bounds": [
+            [
+              18.411821759404877,
+              -0.0009999890923499954,
+              1.408105875211239
+            ],
+            [
+              19.614423300303923,
+              0.20000000101327897,
+              3.2392634390172472
+            ]
+          ]
+        },
+        {
+          "anchor": "squiggle:28",
+          "mode": "display",
+          "name": "squiggle:28:display:coverage-footprint-plinth",
+          "bounds": [
+            [
+              18.41182171841975,
+              -0.0009999868571757276,
+              1.4081059232051367
+            ],
+            [
+              19.61442329452157,
+              0.19999997344613085,
+              3.239263381720718
+            ]
+          ]
+        },
+        {
+          "anchor": "squiggle:29",
+          "mode": "legacy",
+          "name": "squiggle:29:legacy:device-foundation",
+          "bounds": [
+            [
+              19.72867888155843,
+              -0.0009999890923499954,
+              -0.8420155201290898
+            ],
+            [
+              20.931280422457476,
+              0.20000000101327897,
+              0.9891420436769185
+            ]
+          ]
+        },
+        {
+          "anchor": "squiggle:29",
+          "mode": "display",
+          "name": "squiggle:29:display:coverage-footprint-plinth",
+          "bounds": [
+            [
+              19.728678840573302,
+              -0.0009999868571757276,
+              -0.8420154721351918
+            ],
+            [
+              20.931280416675122,
+              0.19999997344613085,
+              0.9891419863803892
+            ]
+          ]
+        }
+      ],
+      "hits": [],
+      "supportsUnderBank": [
+        {
+          "bay": "squiggle:stand:0",
+          "probes": [
+            {
+              "point": [
+                -14.212939075398445,
+                0,
+                -7.990298699524153
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                -14.179944025175699,
+                0,
+                -6.8907936624002675
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                -9.215188906653507,
+                0,
+                -8.140276200536633
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                -9.18219385643076,
+                0,
+                -7.040771163412746
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            }
+          ]
+        },
+        {
+          "bay": "squiggle:stand:1",
+          "probes": [
+            {
+              "point": [
+                -3.566721087047135,
+                0,
+                -7.823098320775919
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                -3.566721087047135,
+                0,
+                -6.723098320775919
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                1.4332789129528651,
+                0,
+                -7.823098320775919
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                1.4332789129528651,
+                0,
+                -6.723098320775919
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            }
+          ]
+        },
+        {
+          "bay": "squiggle:stand:2",
+          "probes": [
+            {
+              "point": [
+                7.128194938281458,
+                0,
+                -8.263562604857823
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                7.040288774915368,
+                0,
+                -7.16708072792494
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                12.112203469794554,
+                0,
+                -7.863989135011959
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                12.024297306428466,
+                0,
+                -6.767507258079077
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            }
+          ]
+        },
+        {
+          "bay": "squiggle:stand:3",
+          "probes": [
+            {
+              "point": [
+                22.975386489059083,
+                0,
+                0.772894244349164
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                21.875386489059082,
+                0,
+                0.772894244349164
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                22.975386489059083,
+                0,
+                5.772894244349164
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                21.875386489059082,
+                0,
+                5.772894244349164
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            }
+          ]
+        }
+      ],
+      "parts": [
+        {
+          "name": "seating:bleachers:athlete_bleachers__coral001_NEW_V2:0",
+          "triangles": 1944,
+          "closedComponents": 18,
+          "components": 18
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__coral001_NEW_V2:1",
+          "triangles": 1944,
+          "closedComponents": 18,
+          "components": 18
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__coral001_NEW_V2:2",
+          "triangles": 1944,
+          "closedComponents": 18,
+          "components": 18
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__coral001_NEW_V2:3",
+          "triangles": 1944,
+          "closedComponents": 18,
+          "components": 18
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__cream001_NEW_V2:0",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__cream001_NEW_V2:1",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__cream001_NEW_V2:2",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__cream001_NEW_V2:3",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__gold001_NEW_V2:0",
+          "triangles": 144,
+          "closedComponents": 4,
+          "components": 4
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__gold001_NEW_V2:1",
+          "triangles": 144,
+          "closedComponents": 4,
+          "components": 4
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__gold001_NEW_V2:2",
+          "triangles": 144,
+          "closedComponents": 4,
+          "components": 4
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__gold001_NEW_V2:3",
+          "triangles": 144,
+          "closedComponents": 4,
+          "components": 4
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__ink001_NEW_V2:0",
+          "triangles": 900,
+          "closedComponents": 11,
+          "components": 11
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__ink001_NEW_V2:1",
+          "triangles": 900,
+          "closedComponents": 11,
+          "components": 11
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__ink001_NEW_V2:2",
+          "triangles": 900,
+          "closedComponents": 11,
+          "components": 11
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__ink001_NEW_V2:3",
+          "triangles": 900,
+          "closedComponents": 11,
+          "components": 11
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__mint001_NEW_V2:0",
+          "triangles": 3888,
+          "closedComponents": 36,
+          "components": 36
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__mint001_NEW_V2:1",
+          "triangles": 3888,
+          "closedComponents": 36,
+          "components": 36
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__mint001_NEW_V2:2",
+          "triangles": 3888,
+          "closedComponents": 36,
+          "components": 36
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__mint001_NEW_V2:3",
+          "triangles": 3888,
+          "closedComponents": 36,
+          "components": 36
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__coral001_NEW_V2:0",
+          "triangles": 996,
+          "closedComponents": 15,
+          "components": 15
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__coral001_NEW_V2:1",
+          "triangles": 996,
+          "closedComponents": 15,
+          "components": 15
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__coral001_NEW_V2:2",
+          "triangles": 996,
+          "closedComponents": 15,
+          "components": 15
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__coral001_NEW_V2:3",
+          "triangles": 996,
+          "closedComponents": 15,
+          "components": 15
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__cream001_NEW_V2:0",
+          "triangles": 4536,
+          "closedComponents": 27,
+          "components": 27
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__cream001_NEW_V2:1",
+          "triangles": 4536,
+          "closedComponents": 27,
+          "components": 27
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__cream001_NEW_V2:2",
+          "triangles": 4536,
+          "closedComponents": 27,
+          "components": 27
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__cream001_NEW_V2:3",
+          "triangles": 4536,
+          "closedComponents": 27,
+          "components": 27
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__ink001_NEW_V2:0",
+          "triangles": 1992,
+          "closedComponents": 30,
+          "components": 30
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__ink001_NEW_V2:1",
+          "triangles": 1992,
+          "closedComponents": 30,
+          "components": 30
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__ink001_NEW_V2:2",
+          "triangles": 1992,
+          "closedComponents": 30,
+          "components": 30
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__ink001_NEW_V2:3",
+          "triangles": 1992,
+          "closedComponents": 30,
+          "components": 30
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__mint001_NEW_V2:0",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__mint001_NEW_V2:1",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__mint001_NEW_V2:2",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__mint001_NEW_V2:3",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset_NEW_V2:0",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset_NEW_V2:1",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset_NEW_V2:2",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset_NEW_V2:3",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset001_NEW_V2:0",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset001_NEW_V2:1",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset001_NEW_V2:2",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset001_NEW_V2:3",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset002_NEW_V2:0",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset002_NEW_V2:1",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset002_NEW_V2:2",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset002_NEW_V2:3",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset003_NEW_V2:0",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset003_NEW_V2:1",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset003_NEW_V2:2",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset003_NEW_V2:3",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_structural_rostrum_NEW_V2:0",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_structural_rostrum_NEW_V2:1",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_structural_rostrum_NEW_V2:2",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_structural_rostrum_NEW_V2:3",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating-joinery:wood",
+          "triangles": 1500,
+          "closedComponents": 5,
+          "components": 5
+        },
+        {
+          "name": "seating-joinery:stone",
+          "triangles": 9900,
+          "closedComponents": 33,
+          "components": 33
+        },
+        {
+          "name": "seating-joinery:cream",
+          "triangles": 4792,
+          "closedComponents": 9,
+          "components": 9
+        },
+        {
+          "name": "seating-joinery:gold",
+          "triangles": 10600,
+          "closedComponents": 33,
+          "components": 33
+        },
+        {
+          "name": "seating-joinery:ink",
+          "triangles": 12000,
+          "closedComponents": 40,
+          "components": 40
+        }
+      ],
+      "changes": [
+        {
+          "name": "seating-joinery:wood",
+          "beforeVolume": 29.663657923792783,
+          "afterVolume": 29.663657923792783,
+          "removedVolume": 0,
+          "beforeTriangles": 1500,
+          "afterTriangles": 1500
+        },
+        {
+          "name": "seating-joinery:stone",
+          "beforeVolume": 17.565323639541766,
+          "afterVolume": 17.565323639541766,
+          "removedVolume": 0,
+          "beforeTriangles": 9900,
+          "afterTriangles": 9900
+        },
+        {
+          "name": "seating-joinery:cream",
+          "beforeVolume": 40.78493137283185,
+          "afterVolume": 39.96179380925484,
+          "removedVolume": 0.8231375635770064,
+          "beforeTriangles": 2700,
+          "afterTriangles": 4792
+        },
+        {
+          "name": "seating-joinery:gold",
+          "beforeVolume": 0.023747607192107247,
+          "afterVolume": 0.023681870657110273,
+          "removedVolume": 0.00006573653499697407,
+          "beforeTriangles": 9600,
+          "afterTriangles": 10600
+        },
+        {
+          "name": "seating-joinery:ink",
+          "beforeVolume": 0.15476122366253597,
+          "afterVolume": 0.15476122366253597,
+          "removedVolume": 0,
+          "beforeTriangles": 12000,
+          "afterTriangles": 12000
+        }
+      ]
+    },
+    {
+      "track": "squiggle",
+      "lowQuality": true,
+      "cuts": [
+        {
+          "anchor": "squiggle:21",
+          "center": [
+            10.7760874393509,
+            -5.392496834124268
+          ],
+          "yaw": 2.1598449493429825,
+          "width": 1.72,
+          "depth": 0.92
+        },
+        {
+          "anchor": "squiggle:28",
+          "center": [
+            19.013122529854403,
+            2.323684657114243
+          ],
+          "yaw": 1.3744467859455345,
+          "width": 1.72,
+          "depth": 0.92
+        },
+        {
+          "anchor": "squiggle:29",
+          "center": [
+            20.329979652007957,
+            0.07356326177391437
+          ],
+          "yaw": 1.3744467859455345,
+          "width": 1.72,
+          "depth": 0.92
+        }
+      ],
+      "supports": [
+        {
+          "anchor": "squiggle:21",
+          "mode": "legacy",
+          "name": "squiggle:21:legacy:device-foundation",
+          "bounds": [
+            [
+              9.936626605026845,
+              -0.0009999890923499954,
+              -6.34231743002843
+            ],
+            [
+              11.615548273674953,
+              0.20000000101327897,
+              -4.4426762382201055
+            ]
+          ]
+        },
+        {
+          "anchor": "squiggle:21",
+          "mode": "display",
+          "name": "squiggle:21:display:coverage-footprint-plinth",
+          "bounds": [
+            [
+              9.936626593537904,
+              -0.0009999868571757276,
+              -6.342317383780435
+            ],
+            [
+              11.615548245516331,
+              0.19999997344613085,
+              -4.442676257976447
+            ]
+          ]
+        },
+        {
+          "anchor": "squiggle:28",
+          "mode": "legacy",
+          "name": "squiggle:28:legacy:device-foundation",
+          "bounds": [
+            [
+              18.411821759404877,
+              -0.0009999890923499954,
+              1.408105875211239
+            ],
+            [
+              19.614423300303923,
+              0.20000000101327897,
+              3.2392634390172472
+            ]
+          ]
+        },
+        {
+          "anchor": "squiggle:28",
+          "mode": "display",
+          "name": "squiggle:28:display:coverage-footprint-plinth",
+          "bounds": [
+            [
+              18.41182171841975,
+              -0.0009999868571757276,
+              1.4081059232051367
+            ],
+            [
+              19.61442329452157,
+              0.19999997344613085,
+              3.239263381720718
+            ]
+          ]
+        },
+        {
+          "anchor": "squiggle:29",
+          "mode": "legacy",
+          "name": "squiggle:29:legacy:device-foundation",
+          "bounds": [
+            [
+              19.72867888155843,
+              -0.0009999890923499954,
+              -0.8420155201290898
+            ],
+            [
+              20.931280422457476,
+              0.20000000101327897,
+              0.9891420436769185
+            ]
+          ]
+        },
+        {
+          "anchor": "squiggle:29",
+          "mode": "display",
+          "name": "squiggle:29:display:coverage-footprint-plinth",
+          "bounds": [
+            [
+              19.728678840573302,
+              -0.0009999868571757276,
+              -0.8420154721351918
+            ],
+            [
+              20.931280416675122,
+              0.19999997344613085,
+              0.9891419863803892
+            ]
+          ]
+        }
+      ],
+      "hits": [],
+      "supportsUnderBank": [
+        {
+          "bay": "squiggle:stand:0",
+          "probes": [
+            {
+              "point": [
+                -14.212939075398445,
+                0,
+                -7.990298699524153
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                -14.179944025175699,
+                0,
+                -6.8907936624002675
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                -9.215188906653507,
+                0,
+                -8.140276200536633
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                -9.18219385643076,
+                0,
+                -7.040771163412746
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            }
+          ]
+        },
+        {
+          "bay": "squiggle:stand:1",
+          "probes": [
+            {
+              "point": [
+                -3.566721087047135,
+                0,
+                -7.823098320775919
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                -3.566721087047135,
+                0,
+                -6.723098320775919
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                1.4332789129528651,
+                0,
+                -7.823098320775919
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                1.4332789129528651,
+                0,
+                -6.723098320775919
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            }
+          ]
+        },
+        {
+          "bay": "squiggle:stand:2",
+          "probes": [
+            {
+              "point": [
+                7.128194938281458,
+                0,
+                -8.263562604857823
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                7.040288774915368,
+                0,
+                -7.16708072792494
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                12.112203469794554,
+                0,
+                -7.863989135011959
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                12.024297306428466,
+                0,
+                -6.767507258079077
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            }
+          ]
+        },
+        {
+          "bay": "squiggle:stand:3",
+          "probes": [
+            {
+              "point": [
+                22.975386489059083,
+                0,
+                0.772894244349164
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                21.875386489059082,
+                0,
+                0.772894244349164
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                22.975386489059083,
+                0,
+                5.772894244349164
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                21.875386489059082,
+                0,
+                5.772894244349164
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            }
+          ]
+        }
+      ],
+      "parts": [
+        {
+          "name": "seating:bleachers:athlete_bleachers__coral001_NEW_V2:0",
+          "triangles": 1944,
+          "closedComponents": 18,
+          "components": 18
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__coral001_NEW_V2:1",
+          "triangles": 1944,
+          "closedComponents": 18,
+          "components": 18
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__coral001_NEW_V2:2",
+          "triangles": 1944,
+          "closedComponents": 18,
+          "components": 18
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__coral001_NEW_V2:3",
+          "triangles": 1944,
+          "closedComponents": 18,
+          "components": 18
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__cream001_NEW_V2:0",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__cream001_NEW_V2:1",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__cream001_NEW_V2:2",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__cream001_NEW_V2:3",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__gold001_NEW_V2:0",
+          "triangles": 144,
+          "closedComponents": 4,
+          "components": 4
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__gold001_NEW_V2:1",
+          "triangles": 144,
+          "closedComponents": 4,
+          "components": 4
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__gold001_NEW_V2:2",
+          "triangles": 144,
+          "closedComponents": 4,
+          "components": 4
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__gold001_NEW_V2:3",
+          "triangles": 144,
+          "closedComponents": 4,
+          "components": 4
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__ink001_NEW_V2:0",
+          "triangles": 900,
+          "closedComponents": 11,
+          "components": 11
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__ink001_NEW_V2:1",
+          "triangles": 900,
+          "closedComponents": 11,
+          "components": 11
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__ink001_NEW_V2:2",
+          "triangles": 900,
+          "closedComponents": 11,
+          "components": 11
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__ink001_NEW_V2:3",
+          "triangles": 900,
+          "closedComponents": 11,
+          "components": 11
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__mint001_NEW_V2:0",
+          "triangles": 3888,
+          "closedComponents": 36,
+          "components": 36
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__mint001_NEW_V2:1",
+          "triangles": 3888,
+          "closedComponents": 36,
+          "components": 36
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__mint001_NEW_V2:2",
+          "triangles": 3888,
+          "closedComponents": 36,
+          "components": 36
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__mint001_NEW_V2:3",
+          "triangles": 3888,
+          "closedComponents": 36,
+          "components": 36
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__coral001_NEW_V2:0",
+          "triangles": 996,
+          "closedComponents": 15,
+          "components": 15
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__coral001_NEW_V2:1",
+          "triangles": 996,
+          "closedComponents": 15,
+          "components": 15
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__coral001_NEW_V2:2",
+          "triangles": 996,
+          "closedComponents": 15,
+          "components": 15
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__coral001_NEW_V2:3",
+          "triangles": 996,
+          "closedComponents": 15,
+          "components": 15
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__cream001_NEW_V2:0",
+          "triangles": 4536,
+          "closedComponents": 27,
+          "components": 27
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__cream001_NEW_V2:1",
+          "triangles": 4536,
+          "closedComponents": 27,
+          "components": 27
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__cream001_NEW_V2:2",
+          "triangles": 4536,
+          "closedComponents": 27,
+          "components": 27
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__cream001_NEW_V2:3",
+          "triangles": 4536,
+          "closedComponents": 27,
+          "components": 27
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__ink001_NEW_V2:0",
+          "triangles": 1992,
+          "closedComponents": 30,
+          "components": 30
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__ink001_NEW_V2:1",
+          "triangles": 1992,
+          "closedComponents": 30,
+          "components": 30
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__ink001_NEW_V2:2",
+          "triangles": 1992,
+          "closedComponents": 30,
+          "components": 30
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__ink001_NEW_V2:3",
+          "triangles": 1992,
+          "closedComponents": 30,
+          "components": 30
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__mint001_NEW_V2:0",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__mint001_NEW_V2:1",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__mint001_NEW_V2:2",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__mint001_NEW_V2:3",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset_NEW_V2:0",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset_NEW_V2:1",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset_NEW_V2:2",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset_NEW_V2:3",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset001_NEW_V2:0",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset001_NEW_V2:1",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset001_NEW_V2:2",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset001_NEW_V2:3",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset002_NEW_V2:0",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset002_NEW_V2:1",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset002_NEW_V2:2",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset002_NEW_V2:3",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset003_NEW_V2:0",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset003_NEW_V2:1",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset003_NEW_V2:2",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset003_NEW_V2:3",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_structural_rostrum_NEW_V2:0",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_structural_rostrum_NEW_V2:1",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_structural_rostrum_NEW_V2:2",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_structural_rostrum_NEW_V2:3",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating-joinery:wood",
+          "triangles": 1500,
+          "closedComponents": 5,
+          "components": 5
+        },
+        {
+          "name": "seating-joinery:stone",
+          "triangles": 9900,
+          "closedComponents": 33,
+          "components": 33
+        },
+        {
+          "name": "seating-joinery:cream",
+          "triangles": 4792,
+          "closedComponents": 9,
+          "components": 9
+        },
+        {
+          "name": "seating-joinery:gold",
+          "triangles": 10600,
+          "closedComponents": 33,
+          "components": 33
+        },
+        {
+          "name": "seating-joinery:ink",
+          "triangles": 12000,
+          "closedComponents": 40,
+          "components": 40
+        }
+      ],
+      "changes": [
+        {
+          "name": "seating-joinery:wood",
+          "beforeVolume": 29.663657923792783,
+          "afterVolume": 29.663657923792783,
+          "removedVolume": 0,
+          "beforeTriangles": 1500,
+          "afterTriangles": 1500
+        },
+        {
+          "name": "seating-joinery:stone",
+          "beforeVolume": 17.565323639541766,
+          "afterVolume": 17.565323639541766,
+          "removedVolume": 0,
+          "beforeTriangles": 9900,
+          "afterTriangles": 9900
+        },
+        {
+          "name": "seating-joinery:cream",
+          "beforeVolume": 40.78493137283185,
+          "afterVolume": 39.96179380925484,
+          "removedVolume": 0.8231375635770064,
+          "beforeTriangles": 2700,
+          "afterTriangles": 4792
+        },
+        {
+          "name": "seating-joinery:gold",
+          "beforeVolume": 0.023747607192107247,
+          "afterVolume": 0.023681870657110273,
+          "removedVolume": 0.00006573653499697407,
+          "beforeTriangles": 9600,
+          "afterTriangles": 10600
+        },
+        {
+          "name": "seating-joinery:ink",
+          "beforeVolume": 0.15476122366253597,
+          "afterVolume": 0.15476122366253597,
+          "removedVolume": 0,
+          "beforeTriangles": 12000,
+          "afterTriangles": 12000
+        }
+      ]
+    },
+    {
+      "track": "whirly-world",
+      "lowQuality": false,
+      "cuts": [
+        {
+          "anchor": "whirly-world:12",
+          "center": [
+            17.02500000000002,
+            -3.075000000000004
+          ],
+          "yaw": 1.5707963267948966,
+          "width": 1.72,
+          "depth": 0.92
+        }
+      ],
+      "supports": [
+        {
+          "anchor": "whirly-world:12",
+          "mode": "legacy",
+          "name": "whirly-world:12:legacy:device-foundation",
+          "bounds": [
+            [
+              16.580000007152577,
+              0.10399999794363968,
+              -3.9200000286102332
+            ],
+            [
+              17.469999992847463,
+              0.1999999987781047,
+              -2.2299999713897742
+            ]
+          ]
+        },
+        {
+          "anchor": "whirly-world:12",
+          "mode": "display",
+          "name": "whirly-world:12:display:coverage-footprint-plinth",
+          "bounds": [
+            [
+              16.5799999535084,
+              0.10399999645352365,
+              -3.9199999690055884
+            ],
+            [
+              17.46999999880793,
+              0.19999997493624688,
+              -2.230000030994419
+            ]
+          ]
+        }
+      ],
+      "hits": [],
+      "supportsUnderBank": [
+        {
+          "bay": "whirly-world:stand:0",
+          "probes": [
+            {
+              "point": [
+                -7.850000000000007,
+                0,
+                -6.800000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                -7.850000000000007,
+                0,
+                -5.700000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                -2.8500000000000068,
+                0,
+                -6.800000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                -2.8500000000000068,
+                0,
+                -5.700000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            }
+          ]
+        },
+        {
+          "bay": "whirly-world:stand:1",
+          "probes": [
+            {
+              "point": [
+                -1.3499999999999985,
+                0,
+                -6.800000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                -1.3499999999999985,
+                0,
+                -5.700000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                3.6500000000000012,
+                0,
+                -6.800000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                3.6500000000000012,
+                0,
+                -5.700000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            }
+          ]
+        },
+        {
+          "bay": "whirly-world:stand:2",
+          "probes": [
+            {
+              "point": [
+                5.15000000000001,
+                0,
+                -6.800000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                5.15000000000001,
+                0,
+                -5.700000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                10.15000000000001,
+                0,
+                -6.800000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                10.15000000000001,
+                0,
+                -5.700000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            }
+          ]
+        },
+        {
+          "bay": "whirly-world:stand:3",
+          "probes": [
+            {
+              "point": [
+                11.62419489084974,
+                0,
+                -7.41423558567244
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                11.299122663522265,
+                0,
+                -6.363365447634274
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                16.40087733647777,
+                0,
+                -5.936634552365743
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                16.075805109150295,
+                0,
+                -4.885764414327577
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            }
+          ]
+        },
+        {
+          "bay": "whirly-world:stand:4",
+          "probes": [
+            {
+              "point": [
+                19.600000000000026,
+                0,
+                -2.6500000000000004
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                18.500000000000025,
+                0,
+                -2.6500000000000004
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                19.600000000000026,
+                0,
+                2.3499999999999996
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                18.500000000000025,
+                0,
+                2.3499999999999996
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            }
+          ]
+        }
+      ],
+      "parts": [
+        {
+          "name": "seating:bleachers:athlete_bleachers__coral001_NEW_V2:0",
+          "triangles": 1944,
+          "closedComponents": 18,
+          "components": 18
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__coral001_NEW_V2:1",
+          "triangles": 1944,
+          "closedComponents": 18,
+          "components": 18
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__coral001_NEW_V2:2",
+          "triangles": 1944,
+          "closedComponents": 18,
+          "components": 18
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__coral001_NEW_V2:3",
+          "triangles": 1944,
+          "closedComponents": 18,
+          "components": 18
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__coral001_NEW_V2:4",
+          "triangles": 1944,
+          "closedComponents": 18,
+          "components": 18
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__cream001_NEW_V2:0",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__cream001_NEW_V2:1",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__cream001_NEW_V2:2",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__cream001_NEW_V2:3",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__cream001_NEW_V2:4",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__gold001_NEW_V2:0",
+          "triangles": 144,
+          "closedComponents": 4,
+          "components": 4
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__gold001_NEW_V2:1",
+          "triangles": 144,
+          "closedComponents": 4,
+          "components": 4
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__gold001_NEW_V2:2",
+          "triangles": 144,
+          "closedComponents": 4,
+          "components": 4
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__gold001_NEW_V2:3",
+          "triangles": 144,
+          "closedComponents": 4,
+          "components": 4
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__gold001_NEW_V2:4",
+          "triangles": 144,
+          "closedComponents": 4,
+          "components": 4
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__ink001_NEW_V2:0",
+          "triangles": 900,
+          "closedComponents": 11,
+          "components": 11
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__ink001_NEW_V2:1",
+          "triangles": 900,
+          "closedComponents": 11,
+          "components": 11
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__ink001_NEW_V2:2",
+          "triangles": 900,
+          "closedComponents": 11,
+          "components": 11
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__ink001_NEW_V2:3",
+          "triangles": 900,
+          "closedComponents": 11,
+          "components": 11
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__ink001_NEW_V2:4",
+          "triangles": 900,
+          "closedComponents": 11,
+          "components": 11
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__mint001_NEW_V2:0",
+          "triangles": 3888,
+          "closedComponents": 36,
+          "components": 36
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__mint001_NEW_V2:1",
+          "triangles": 3888,
+          "closedComponents": 36,
+          "components": 36
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__mint001_NEW_V2:2",
+          "triangles": 3888,
+          "closedComponents": 36,
+          "components": 36
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__mint001_NEW_V2:3",
+          "triangles": 3888,
+          "closedComponents": 36,
+          "components": 36
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__mint001_NEW_V2:4",
+          "triangles": 3888,
+          "closedComponents": 36,
+          "components": 36
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__coral001_NEW_V2:0",
+          "triangles": 996,
+          "closedComponents": 15,
+          "components": 15
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__coral001_NEW_V2:1",
+          "triangles": 996,
+          "closedComponents": 15,
+          "components": 15
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__coral001_NEW_V2:2",
+          "triangles": 996,
+          "closedComponents": 15,
+          "components": 15
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__coral001_NEW_V2:3",
+          "triangles": 996,
+          "closedComponents": 15,
+          "components": 15
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__coral001_NEW_V2:4",
+          "triangles": 996,
+          "closedComponents": 15,
+          "components": 15
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__cream001_NEW_V2:0",
+          "triangles": 4536,
+          "closedComponents": 27,
+          "components": 27
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__cream001_NEW_V2:1",
+          "triangles": 4536,
+          "closedComponents": 27,
+          "components": 27
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__cream001_NEW_V2:2",
+          "triangles": 4536,
+          "closedComponents": 27,
+          "components": 27
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__cream001_NEW_V2:3",
+          "triangles": 4536,
+          "closedComponents": 27,
+          "components": 27
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__cream001_NEW_V2:4",
+          "triangles": 4536,
+          "closedComponents": 27,
+          "components": 27
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__ink001_NEW_V2:0",
+          "triangles": 1992,
+          "closedComponents": 30,
+          "components": 30
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__ink001_NEW_V2:1",
+          "triangles": 1992,
+          "closedComponents": 30,
+          "components": 30
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__ink001_NEW_V2:2",
+          "triangles": 1992,
+          "closedComponents": 30,
+          "components": 30
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__ink001_NEW_V2:3",
+          "triangles": 1992,
+          "closedComponents": 30,
+          "components": 30
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__ink001_NEW_V2:4",
+          "triangles": 1992,
+          "closedComponents": 30,
+          "components": 30
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__mint001_NEW_V2:0",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__mint001_NEW_V2:1",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__mint001_NEW_V2:2",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__mint001_NEW_V2:3",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__mint001_NEW_V2:4",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset_NEW_V2:0",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset_NEW_V2:1",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset_NEW_V2:2",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset_NEW_V2:3",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset_NEW_V2:4",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset001_NEW_V2:0",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset001_NEW_V2:1",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset001_NEW_V2:2",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset001_NEW_V2:3",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset001_NEW_V2:4",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset002_NEW_V2:0",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset002_NEW_V2:1",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset002_NEW_V2:2",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset002_NEW_V2:3",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset002_NEW_V2:4",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset003_NEW_V2:0",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset003_NEW_V2:1",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset003_NEW_V2:2",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset003_NEW_V2:3",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset003_NEW_V2:4",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_structural_rostrum_NEW_V2:0",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_structural_rostrum_NEW_V2:1",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_structural_rostrum_NEW_V2:2",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_structural_rostrum_NEW_V2:3",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_structural_rostrum_NEW_V2:4",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating-joinery:wood",
+          "triangles": 900,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating-joinery:stone",
+          "triangles": 11400,
+          "closedComponents": 38,
+          "components": 38
+        },
+        {
+          "name": "seating-joinery:cream",
+          "triangles": 3968,
+          "closedComponents": 8,
+          "components": 8
+        },
+        {
+          "name": "seating-joinery:gold",
+          "triangles": 12000,
+          "closedComponents": 40,
+          "components": 40
+        },
+        {
+          "name": "seating-joinery:ink",
+          "triangles": 15000,
+          "closedComponents": 50,
+          "components": 50
+        }
+      ],
+      "changes": [
+        {
+          "name": "seating-joinery:wood",
+          "beforeVolume": 78.06250004975335,
+          "afterVolume": 78.06250004975335,
+          "removedVolume": 0,
+          "beforeTriangles": 900,
+          "afterTriangles": 900
+        },
+        {
+          "name": "seating-joinery:stone",
+          "beforeVolume": 22.14151421890744,
+          "afterVolume": 22.14151421890744,
+          "removedVolume": 0,
+          "beforeTriangles": 11400,
+          "afterTriangles": 11400
+        },
+        {
+          "name": "seating-joinery:cream",
+          "beforeVolume": 51.66241350014291,
+          "afterVolume": 51.33715505389809,
+          "removedVolume": 0.32525844624482403,
+          "beforeTriangles": 2400,
+          "afterTriangles": 3968
+        },
+        {
+          "name": "seating-joinery:gold",
+          "beforeVolume": 0.029684576726212237,
+          "afterVolume": 0.029684576726212237,
+          "removedVolume": 0,
+          "beforeTriangles": 12000,
+          "afterTriangles": 12000
+        },
+        {
+          "name": "seating-joinery:ink",
+          "beforeVolume": 0.19345205036004415,
+          "afterVolume": 0.19345205036004415,
+          "removedVolume": 0,
+          "beforeTriangles": 15000,
+          "afterTriangles": 15000
+        }
+      ]
+    },
+    {
+      "track": "whirly-world",
+      "lowQuality": true,
+      "cuts": [
+        {
+          "anchor": "whirly-world:12",
+          "center": [
+            17.02500000000002,
+            -3.075000000000004
+          ],
+          "yaw": 1.5707963267948966,
+          "width": 1.72,
+          "depth": 0.92
+        }
+      ],
+      "supports": [
+        {
+          "anchor": "whirly-world:12",
+          "mode": "legacy",
+          "name": "whirly-world:12:legacy:device-foundation",
+          "bounds": [
+            [
+              16.580000007152577,
+              0.10399999794363968,
+              -3.9200000286102332
+            ],
+            [
+              17.469999992847463,
+              0.1999999987781047,
+              -2.2299999713897742
+            ]
+          ]
+        },
+        {
+          "anchor": "whirly-world:12",
+          "mode": "display",
+          "name": "whirly-world:12:display:coverage-footprint-plinth",
+          "bounds": [
+            [
+              16.5799999535084,
+              0.10399999645352365,
+              -3.9199999690055884
+            ],
+            [
+              17.46999999880793,
+              0.19999997493624688,
+              -2.230000030994419
+            ]
+          ]
+        }
+      ],
+      "hits": [],
+      "supportsUnderBank": [
+        {
+          "bay": "whirly-world:stand:0",
+          "probes": [
+            {
+              "point": [
+                -7.850000000000007,
+                0,
+                -6.800000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                -7.850000000000007,
+                0,
+                -5.700000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                -2.8500000000000068,
+                0,
+                -6.800000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                -2.8500000000000068,
+                0,
+                -5.700000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            }
+          ]
+        },
+        {
+          "bay": "whirly-world:stand:1",
+          "probes": [
+            {
+              "point": [
+                -1.3499999999999985,
+                0,
+                -6.800000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                -1.3499999999999985,
+                0,
+                -5.700000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                3.6500000000000012,
+                0,
+                -6.800000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                3.6500000000000012,
+                0,
+                -5.700000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            }
+          ]
+        },
+        {
+          "bay": "whirly-world:stand:2",
+          "probes": [
+            {
+              "point": [
+                5.15000000000001,
+                0,
+                -6.800000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                5.15000000000001,
+                0,
+                -5.700000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                10.15000000000001,
+                0,
+                -6.800000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                10.15000000000001,
+                0,
+                -5.700000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            }
+          ]
+        },
+        {
+          "bay": "whirly-world:stand:3",
+          "probes": [
+            {
+              "point": [
+                11.62419489084974,
+                0,
+                -7.41423558567244
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                11.299122663522265,
+                0,
+                -6.363365447634274
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                16.40087733647777,
+                0,
+                -5.936634552365743
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                16.075805109150295,
+                0,
+                -4.885764414327577
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            }
+          ]
+        },
+        {
+          "bay": "whirly-world:stand:4",
+          "probes": [
+            {
+              "point": [
+                19.600000000000026,
+                0,
+                -2.6500000000000004
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                18.500000000000025,
+                0,
+                -2.6500000000000004
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                19.600000000000026,
+                0,
+                2.3499999999999996
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                18.500000000000025,
+                0,
+                2.3499999999999996
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            }
+          ]
+        }
+      ],
+      "parts": [
+        {
+          "name": "seating:bleachers:athlete_bleachers__coral001_NEW_V2:0",
+          "triangles": 1944,
+          "closedComponents": 18,
+          "components": 18
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__coral001_NEW_V2:1",
+          "triangles": 1944,
+          "closedComponents": 18,
+          "components": 18
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__coral001_NEW_V2:2",
+          "triangles": 1944,
+          "closedComponents": 18,
+          "components": 18
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__coral001_NEW_V2:3",
+          "triangles": 1944,
+          "closedComponents": 18,
+          "components": 18
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__coral001_NEW_V2:4",
+          "triangles": 1944,
+          "closedComponents": 18,
+          "components": 18
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__cream001_NEW_V2:0",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__cream001_NEW_V2:1",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__cream001_NEW_V2:2",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__cream001_NEW_V2:3",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__cream001_NEW_V2:4",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__gold001_NEW_V2:0",
+          "triangles": 144,
+          "closedComponents": 4,
+          "components": 4
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__gold001_NEW_V2:1",
+          "triangles": 144,
+          "closedComponents": 4,
+          "components": 4
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__gold001_NEW_V2:2",
+          "triangles": 144,
+          "closedComponents": 4,
+          "components": 4
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__gold001_NEW_V2:3",
+          "triangles": 144,
+          "closedComponents": 4,
+          "components": 4
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__gold001_NEW_V2:4",
+          "triangles": 144,
+          "closedComponents": 4,
+          "components": 4
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__ink001_NEW_V2:0",
+          "triangles": 900,
+          "closedComponents": 11,
+          "components": 11
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__ink001_NEW_V2:1",
+          "triangles": 900,
+          "closedComponents": 11,
+          "components": 11
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__ink001_NEW_V2:2",
+          "triangles": 900,
+          "closedComponents": 11,
+          "components": 11
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__ink001_NEW_V2:3",
+          "triangles": 900,
+          "closedComponents": 11,
+          "components": 11
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__ink001_NEW_V2:4",
+          "triangles": 900,
+          "closedComponents": 11,
+          "components": 11
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__mint001_NEW_V2:0",
+          "triangles": 3888,
+          "closedComponents": 36,
+          "components": 36
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__mint001_NEW_V2:1",
+          "triangles": 3888,
+          "closedComponents": 36,
+          "components": 36
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__mint001_NEW_V2:2",
+          "triangles": 3888,
+          "closedComponents": 36,
+          "components": 36
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__mint001_NEW_V2:3",
+          "triangles": 3888,
+          "closedComponents": 36,
+          "components": 36
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__mint001_NEW_V2:4",
+          "triangles": 3888,
+          "closedComponents": 36,
+          "components": 36
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__coral001_NEW_V2:0",
+          "triangles": 996,
+          "closedComponents": 15,
+          "components": 15
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__coral001_NEW_V2:1",
+          "triangles": 996,
+          "closedComponents": 15,
+          "components": 15
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__coral001_NEW_V2:2",
+          "triangles": 996,
+          "closedComponents": 15,
+          "components": 15
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__coral001_NEW_V2:3",
+          "triangles": 996,
+          "closedComponents": 15,
+          "components": 15
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__coral001_NEW_V2:4",
+          "triangles": 996,
+          "closedComponents": 15,
+          "components": 15
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__cream001_NEW_V2:0",
+          "triangles": 4536,
+          "closedComponents": 27,
+          "components": 27
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__cream001_NEW_V2:1",
+          "triangles": 4536,
+          "closedComponents": 27,
+          "components": 27
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__cream001_NEW_V2:2",
+          "triangles": 4536,
+          "closedComponents": 27,
+          "components": 27
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__cream001_NEW_V2:3",
+          "triangles": 4536,
+          "closedComponents": 27,
+          "components": 27
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__cream001_NEW_V2:4",
+          "triangles": 4536,
+          "closedComponents": 27,
+          "components": 27
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__ink001_NEW_V2:0",
+          "triangles": 1992,
+          "closedComponents": 30,
+          "components": 30
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__ink001_NEW_V2:1",
+          "triangles": 1992,
+          "closedComponents": 30,
+          "components": 30
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__ink001_NEW_V2:2",
+          "triangles": 1992,
+          "closedComponents": 30,
+          "components": 30
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__ink001_NEW_V2:3",
+          "triangles": 1992,
+          "closedComponents": 30,
+          "components": 30
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__ink001_NEW_V2:4",
+          "triangles": 1992,
+          "closedComponents": 30,
+          "components": 30
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__mint001_NEW_V2:0",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__mint001_NEW_V2:1",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__mint001_NEW_V2:2",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__mint001_NEW_V2:3",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__mint001_NEW_V2:4",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset_NEW_V2:0",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset_NEW_V2:1",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset_NEW_V2:2",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset_NEW_V2:3",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset_NEW_V2:4",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset001_NEW_V2:0",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset001_NEW_V2:1",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset001_NEW_V2:2",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset001_NEW_V2:3",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset001_NEW_V2:4",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset002_NEW_V2:0",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset002_NEW_V2:1",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset002_NEW_V2:2",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset002_NEW_V2:3",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset002_NEW_V2:4",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset003_NEW_V2:0",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset003_NEW_V2:1",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset003_NEW_V2:2",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset003_NEW_V2:3",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset003_NEW_V2:4",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_structural_rostrum_NEW_V2:0",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_structural_rostrum_NEW_V2:1",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_structural_rostrum_NEW_V2:2",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_structural_rostrum_NEW_V2:3",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_structural_rostrum_NEW_V2:4",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating-joinery:wood",
+          "triangles": 900,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating-joinery:stone",
+          "triangles": 11400,
+          "closedComponents": 38,
+          "components": 38
+        },
+        {
+          "name": "seating-joinery:cream",
+          "triangles": 3968,
+          "closedComponents": 8,
+          "components": 8
+        },
+        {
+          "name": "seating-joinery:gold",
+          "triangles": 12000,
+          "closedComponents": 40,
+          "components": 40
+        },
+        {
+          "name": "seating-joinery:ink",
+          "triangles": 15000,
+          "closedComponents": 50,
+          "components": 50
+        }
+      ],
+      "changes": [
+        {
+          "name": "seating-joinery:wood",
+          "beforeVolume": 78.06250004975335,
+          "afterVolume": 78.06250004975335,
+          "removedVolume": 0,
+          "beforeTriangles": 900,
+          "afterTriangles": 900
+        },
+        {
+          "name": "seating-joinery:stone",
+          "beforeVolume": 22.14151421890744,
+          "afterVolume": 22.14151421890744,
+          "removedVolume": 0,
+          "beforeTriangles": 11400,
+          "afterTriangles": 11400
+        },
+        {
+          "name": "seating-joinery:cream",
+          "beforeVolume": 51.66241350014291,
+          "afterVolume": 51.33715505389809,
+          "removedVolume": 0.32525844624482403,
+          "beforeTriangles": 2400,
+          "afterTriangles": 3968
+        },
+        {
+          "name": "seating-joinery:gold",
+          "beforeVolume": 0.029684576726212237,
+          "afterVolume": 0.029684576726212237,
+          "removedVolume": 0,
+          "beforeTriangles": 12000,
+          "afterTriangles": 12000
+        },
+        {
+          "name": "seating-joinery:ink",
+          "beforeVolume": 0.19345205036004415,
+          "afterVolume": 0.19345205036004415,
+          "removedVolume": 0,
+          "beforeTriangles": 15000,
+          "afterTriangles": 15000
+        }
+      ]
+    },
+    {
+      "track": "wild",
+      "lowQuality": false,
+      "cuts": [
+        {
+          "anchor": "wild:13",
+          "center": [
+            17.87500000000002,
+            -1.025000000000001
+          ],
+          "yaw": 1.5707963267948966,
+          "width": 1.72,
+          "depth": 0.92
+        },
+        {
+          "anchor": "wild:13",
+          "center": [
+            17.32500000000002,
+            -1.025000000000001
+          ],
+          "yaw": 1.5707963267948966,
+          "width": 1.03,
+          "depth": 2.23
+        }
+      ],
+      "supports": [
+        {
+          "anchor": "wild:13",
+          "mode": "legacy",
+          "name": "wild:13:legacy:device-foundation",
+          "bounds": [
+            [
+              17.430000007152575,
+              0.10400000628828998,
+              -1.8700000286102307
+            ],
+            [
+              18.31999999284746,
+              0.1999999996721744,
+              -0.17999997138977175
+            ]
+          ]
+        },
+        {
+          "anchor": "wild:13",
+          "mode": "legacy",
+          "name": "wild:13:legacy:wild13-ground-tongue",
+          "bounds": [
+            [
+              16.224999976158163,
+              -0.19500000596046463,
+              -1.5250000000000012
+            ],
+            [
+              18.42500002384188,
+              0.10500000596046433,
+              -0.5250000000000011
+            ]
+          ]
+        },
+        {
+          "anchor": "wild:13",
+          "mode": "display",
+          "name": "wild:13:display:coverage-footprint-plinth",
+          "bounds": [
+            [
+              17.429999953508396,
+              0.10400000479817373,
+              -1.869999969005586
+            ],
+            [
+              18.319999998807926,
+              0.19999997583031637,
+              -0.18000003099441653
+            ]
+          ]
+        },
+        {
+          "anchor": "wild:13",
+          "mode": "display",
+          "name": "wild:13:display:wild13-ground-tongue",
+          "bounds": [
+            [
+              16.224999976158163,
+              -0.19500000596046463,
+              -1.5250000000000012
+            ],
+            [
+              18.42500002384188,
+              0.10500000596046433,
+              -0.5250000000000011
+            ]
+          ]
+        }
+      ],
+      "hits": [],
+      "supportsUnderBank": [
+        {
+          "bay": "wild:stand:0",
+          "probes": [
+            {
+              "point": [
+                -7.850000000000007,
+                0,
+                -6.800000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                -7.850000000000007,
+                0,
+                -5.700000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                -2.8500000000000068,
+                0,
+                -6.800000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                -2.8500000000000068,
+                0,
+                -5.700000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            }
+          ]
+        },
+        {
+          "bay": "wild:stand:1",
+          "probes": [
+            {
+              "point": [
+                -1.3499999999999985,
+                0,
+                -6.800000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                -1.3499999999999985,
+                0,
+                -5.700000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                3.6500000000000012,
+                0,
+                -6.800000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                3.6500000000000012,
+                0,
+                -5.700000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            }
+          ]
+        },
+        {
+          "bay": "wild:stand:2",
+          "probes": [
+            {
+              "point": [
+                5.15000000000001,
+                0,
+                -6.800000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                5.15000000000001,
+                0,
+                -5.700000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                10.15000000000001,
+                0,
+                -6.800000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                10.15000000000001,
+                0,
+                -5.700000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            }
+          ]
+        },
+        {
+          "bay": "wild:stand:3",
+          "probes": [
+            {
+              "point": [
+                11.62419489084974,
+                0,
+                -7.41423558567244
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                11.299122663522265,
+                0,
+                -6.363365447634274
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                16.40087733647777,
+                0,
+                -5.936634552365743
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                16.075805109150295,
+                0,
+                -4.885764414327577
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            }
+          ]
+        },
+        {
+          "bay": "wild:stand:4",
+          "probes": [
+            {
+              "point": [
+                19.950000000000024,
+                0,
+                -2.6500000000000004
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                18.850000000000023,
+                0,
+                -2.6500000000000004
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                19.950000000000024,
+                0,
+                2.3499999999999996
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                18.850000000000023,
+                0,
+                2.3499999999999996
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            }
+          ]
+        }
+      ],
+      "parts": [
+        {
+          "name": "seating:bleachers:athlete_bleachers__coral001_NEW_V2:0",
+          "triangles": 1944,
+          "closedComponents": 18,
+          "components": 18
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__coral001_NEW_V2:1",
+          "triangles": 1944,
+          "closedComponents": 18,
+          "components": 18
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__coral001_NEW_V2:2",
+          "triangles": 1944,
+          "closedComponents": 18,
+          "components": 18
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__coral001_NEW_V2:3",
+          "triangles": 1944,
+          "closedComponents": 18,
+          "components": 18
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__coral001_NEW_V2:4",
+          "triangles": 1944,
+          "closedComponents": 18,
+          "components": 18
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__cream001_NEW_V2:0",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__cream001_NEW_V2:1",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__cream001_NEW_V2:2",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__cream001_NEW_V2:3",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__cream001_NEW_V2:4",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__gold001_NEW_V2:0",
+          "triangles": 144,
+          "closedComponents": 4,
+          "components": 4
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__gold001_NEW_V2:1",
+          "triangles": 144,
+          "closedComponents": 4,
+          "components": 4
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__gold001_NEW_V2:2",
+          "triangles": 144,
+          "closedComponents": 4,
+          "components": 4
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__gold001_NEW_V2:3",
+          "triangles": 144,
+          "closedComponents": 4,
+          "components": 4
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__gold001_NEW_V2:4",
+          "triangles": 144,
+          "closedComponents": 4,
+          "components": 4
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__ink001_NEW_V2:0",
+          "triangles": 900,
+          "closedComponents": 11,
+          "components": 11
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__ink001_NEW_V2:1",
+          "triangles": 900,
+          "closedComponents": 11,
+          "components": 11
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__ink001_NEW_V2:2",
+          "triangles": 900,
+          "closedComponents": 11,
+          "components": 11
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__ink001_NEW_V2:3",
+          "triangles": 900,
+          "closedComponents": 11,
+          "components": 11
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__ink001_NEW_V2:4",
+          "triangles": 900,
+          "closedComponents": 11,
+          "components": 11
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__mint001_NEW_V2:0",
+          "triangles": 3888,
+          "closedComponents": 36,
+          "components": 36
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__mint001_NEW_V2:1",
+          "triangles": 3888,
+          "closedComponents": 36,
+          "components": 36
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__mint001_NEW_V2:2",
+          "triangles": 3888,
+          "closedComponents": 36,
+          "components": 36
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__mint001_NEW_V2:3",
+          "triangles": 3888,
+          "closedComponents": 36,
+          "components": 36
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__mint001_NEW_V2:4",
+          "triangles": 3888,
+          "closedComponents": 36,
+          "components": 36
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__coral001_NEW_V2:0",
+          "triangles": 996,
+          "closedComponents": 15,
+          "components": 15
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__coral001_NEW_V2:1",
+          "triangles": 996,
+          "closedComponents": 15,
+          "components": 15
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__coral001_NEW_V2:2",
+          "triangles": 996,
+          "closedComponents": 15,
+          "components": 15
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__coral001_NEW_V2:3",
+          "triangles": 996,
+          "closedComponents": 15,
+          "components": 15
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__coral001_NEW_V2:4",
+          "triangles": 996,
+          "closedComponents": 15,
+          "components": 15
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__cream001_NEW_V2:0",
+          "triangles": 4536,
+          "closedComponents": 27,
+          "components": 27
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__cream001_NEW_V2:1",
+          "triangles": 4536,
+          "closedComponents": 27,
+          "components": 27
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__cream001_NEW_V2:2",
+          "triangles": 4536,
+          "closedComponents": 27,
+          "components": 27
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__cream001_NEW_V2:3",
+          "triangles": 4536,
+          "closedComponents": 27,
+          "components": 27
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__cream001_NEW_V2:4",
+          "triangles": 4536,
+          "closedComponents": 27,
+          "components": 27
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__ink001_NEW_V2:0",
+          "triangles": 1992,
+          "closedComponents": 30,
+          "components": 30
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__ink001_NEW_V2:1",
+          "triangles": 1992,
+          "closedComponents": 30,
+          "components": 30
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__ink001_NEW_V2:2",
+          "triangles": 1992,
+          "closedComponents": 30,
+          "components": 30
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__ink001_NEW_V2:3",
+          "triangles": 1992,
+          "closedComponents": 30,
+          "components": 30
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__ink001_NEW_V2:4",
+          "triangles": 1992,
+          "closedComponents": 30,
+          "components": 30
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__mint001_NEW_V2:0",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__mint001_NEW_V2:1",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__mint001_NEW_V2:2",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__mint001_NEW_V2:3",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__mint001_NEW_V2:4",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset_NEW_V2:0",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset_NEW_V2:1",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset_NEW_V2:2",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset_NEW_V2:3",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset_NEW_V2:4",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset001_NEW_V2:0",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset001_NEW_V2:1",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset001_NEW_V2:2",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset001_NEW_V2:3",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset001_NEW_V2:4",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset002_NEW_V2:0",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset002_NEW_V2:1",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset002_NEW_V2:2",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset002_NEW_V2:3",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset002_NEW_V2:4",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset003_NEW_V2:0",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset003_NEW_V2:1",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset003_NEW_V2:2",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset003_NEW_V2:3",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset003_NEW_V2:4",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_structural_rostrum_NEW_V2:0",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_structural_rostrum_NEW_V2:1",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_structural_rostrum_NEW_V2:2",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_structural_rostrum_NEW_V2:3",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_structural_rostrum_NEW_V2:4",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating-joinery:wood",
+          "triangles": 900,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating-joinery:stone",
+          "triangles": 11400,
+          "closedComponents": 38,
+          "components": 38
+        },
+        {
+          "name": "seating-joinery:cream",
+          "triangles": 3486,
+          "closedComponents": 8,
+          "components": 8
+        },
+        {
+          "name": "seating-joinery:gold",
+          "triangles": 12840,
+          "closedComponents": 41,
+          "components": 41
+        },
+        {
+          "name": "seating-joinery:ink",
+          "triangles": 15000,
+          "closedComponents": 50,
+          "components": 50
+        }
+      ],
+      "changes": [
+        {
+          "name": "seating-joinery:wood",
+          "beforeVolume": 78.58848497477814,
+          "afterVolume": 78.58848497477814,
+          "removedVolume": 0,
+          "beforeTriangles": 900,
+          "afterTriangles": 900
+        },
+        {
+          "name": "seating-joinery:stone",
+          "beforeVolume": 22.23951040752972,
+          "afterVolume": 22.23951040752972,
+          "removedVolume": 0,
+          "beforeTriangles": 11400,
+          "afterTriangles": 11400
+        },
+        {
+          "name": "seating-joinery:cream",
+          "beforeVolume": 52.00332961954365,
+          "afterVolume": 51.61481097909665,
+          "removedVolume": 0.38851864044699624,
+          "beforeTriangles": 2400,
+          "afterTriangles": 3486
+        },
+        {
+          "name": "seating-joinery:gold",
+          "beforeVolume": 0.02968456669836504,
+          "afterVolume": 0.028293475100393706,
+          "removedVolume": 0.0013910915979713327,
+          "beforeTriangles": 12000,
+          "afterTriangles": 12840
+        },
+        {
+          "name": "seating-joinery:ink",
+          "beforeVolume": 0.1934519644016869,
+          "afterVolume": 0.1934519644016869,
+          "removedVolume": 0,
+          "beforeTriangles": 15000,
+          "afterTriangles": 15000
+        }
+      ]
+    },
+    {
+      "track": "wild",
+      "lowQuality": true,
+      "cuts": [
+        {
+          "anchor": "wild:13",
+          "center": [
+            17.87500000000002,
+            -1.025000000000001
+          ],
+          "yaw": 1.5707963267948966,
+          "width": 1.72,
+          "depth": 0.92
+        },
+        {
+          "anchor": "wild:13",
+          "center": [
+            17.32500000000002,
+            -1.025000000000001
+          ],
+          "yaw": 1.5707963267948966,
+          "width": 1.03,
+          "depth": 2.23
+        }
+      ],
+      "supports": [
+        {
+          "anchor": "wild:13",
+          "mode": "legacy",
+          "name": "wild:13:legacy:device-foundation",
+          "bounds": [
+            [
+              17.430000007152575,
+              0.10400000628828998,
+              -1.8700000286102307
+            ],
+            [
+              18.31999999284746,
+              0.1999999996721744,
+              -0.17999997138977175
+            ]
+          ]
+        },
+        {
+          "anchor": "wild:13",
+          "mode": "legacy",
+          "name": "wild:13:legacy:wild13-ground-tongue",
+          "bounds": [
+            [
+              16.224999976158163,
+              -0.19500000596046463,
+              -1.5250000000000012
+            ],
+            [
+              18.42500002384188,
+              0.10500000596046433,
+              -0.5250000000000011
+            ]
+          ]
+        },
+        {
+          "anchor": "wild:13",
+          "mode": "display",
+          "name": "wild:13:display:coverage-footprint-plinth",
+          "bounds": [
+            [
+              17.429999953508396,
+              0.10400000479817373,
+              -1.869999969005586
+            ],
+            [
+              18.319999998807926,
+              0.19999997583031637,
+              -0.18000003099441653
+            ]
+          ]
+        },
+        {
+          "anchor": "wild:13",
+          "mode": "display",
+          "name": "wild:13:display:wild13-ground-tongue",
+          "bounds": [
+            [
+              16.224999976158163,
+              -0.19500000596046463,
+              -1.5250000000000012
+            ],
+            [
+              18.42500002384188,
+              0.10500000596046433,
+              -0.5250000000000011
+            ]
+          ]
+        }
+      ],
+      "hits": [],
+      "supportsUnderBank": [
+        {
+          "bay": "wild:stand:0",
+          "probes": [
+            {
+              "point": [
+                -7.850000000000007,
+                0,
+                -6.800000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                -7.850000000000007,
+                0,
+                -5.700000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                -2.8500000000000068,
+                0,
+                -6.800000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                -2.8500000000000068,
+                0,
+                -5.700000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            }
+          ]
+        },
+        {
+          "bay": "wild:stand:1",
+          "probes": [
+            {
+              "point": [
+                -1.3499999999999985,
+                0,
+                -6.800000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                -1.3499999999999985,
+                0,
+                -5.700000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                3.6500000000000012,
+                0,
+                -6.800000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                3.6500000000000012,
+                0,
+                -5.700000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            }
+          ]
+        },
+        {
+          "bay": "wild:stand:2",
+          "probes": [
+            {
+              "point": [
+                5.15000000000001,
+                0,
+                -6.800000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                5.15000000000001,
+                0,
+                -5.700000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                10.15000000000001,
+                0,
+                -6.800000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                10.15000000000001,
+                0,
+                -5.700000000000008
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            }
+          ]
+        },
+        {
+          "bay": "wild:stand:3",
+          "probes": [
+            {
+              "point": [
+                11.62419489084974,
+                0,
+                -7.41423558567244
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                11.299122663522265,
+                0,
+                -6.363365447634274
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                16.40087733647777,
+                0,
+                -5.936634552365743
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                16.075805109150295,
+                0,
+                -4.885764414327577
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            }
+          ]
+        },
+        {
+          "bay": "wild:stand:4",
+          "probes": [
+            {
+              "point": [
+                19.950000000000024,
+                0,
+                -2.6500000000000004
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                18.850000000000023,
+                0,
+                -2.6500000000000004
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                19.950000000000024,
+                0,
+                2.3499999999999996
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            },
+            {
+              "point": [
+                18.850000000000023,
+                0,
+                2.3499999999999996
+              ],
+              "height": 0.14999999105930328,
+              "pass": true
+            }
+          ]
+        }
+      ],
+      "parts": [
+        {
+          "name": "seating:bleachers:athlete_bleachers__coral001_NEW_V2:0",
+          "triangles": 1944,
+          "closedComponents": 18,
+          "components": 18
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__coral001_NEW_V2:1",
+          "triangles": 1944,
+          "closedComponents": 18,
+          "components": 18
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__coral001_NEW_V2:2",
+          "triangles": 1944,
+          "closedComponents": 18,
+          "components": 18
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__coral001_NEW_V2:3",
+          "triangles": 1944,
+          "closedComponents": 18,
+          "components": 18
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__coral001_NEW_V2:4",
+          "triangles": 1944,
+          "closedComponents": 18,
+          "components": 18
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__cream001_NEW_V2:0",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__cream001_NEW_V2:1",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__cream001_NEW_V2:2",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__cream001_NEW_V2:3",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__cream001_NEW_V2:4",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__gold001_NEW_V2:0",
+          "triangles": 144,
+          "closedComponents": 4,
+          "components": 4
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__gold001_NEW_V2:1",
+          "triangles": 144,
+          "closedComponents": 4,
+          "components": 4
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__gold001_NEW_V2:2",
+          "triangles": 144,
+          "closedComponents": 4,
+          "components": 4
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__gold001_NEW_V2:3",
+          "triangles": 144,
+          "closedComponents": 4,
+          "components": 4
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__gold001_NEW_V2:4",
+          "triangles": 144,
+          "closedComponents": 4,
+          "components": 4
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__ink001_NEW_V2:0",
+          "triangles": 900,
+          "closedComponents": 11,
+          "components": 11
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__ink001_NEW_V2:1",
+          "triangles": 900,
+          "closedComponents": 11,
+          "components": 11
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__ink001_NEW_V2:2",
+          "triangles": 900,
+          "closedComponents": 11,
+          "components": 11
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__ink001_NEW_V2:3",
+          "triangles": 900,
+          "closedComponents": 11,
+          "components": 11
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__ink001_NEW_V2:4",
+          "triangles": 900,
+          "closedComponents": 11,
+          "components": 11
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__mint001_NEW_V2:0",
+          "triangles": 3888,
+          "closedComponents": 36,
+          "components": 36
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__mint001_NEW_V2:1",
+          "triangles": 3888,
+          "closedComponents": 36,
+          "components": 36
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__mint001_NEW_V2:2",
+          "triangles": 3888,
+          "closedComponents": 36,
+          "components": 36
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__mint001_NEW_V2:3",
+          "triangles": 3888,
+          "closedComponents": 36,
+          "components": 36
+        },
+        {
+          "name": "seating:bleachers:athlete_bleachers__mint001_NEW_V2:4",
+          "triangles": 3888,
+          "closedComponents": 36,
+          "components": 36
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__coral001_NEW_V2:0",
+          "triangles": 996,
+          "closedComponents": 15,
+          "components": 15
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__coral001_NEW_V2:1",
+          "triangles": 996,
+          "closedComponents": 15,
+          "components": 15
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__coral001_NEW_V2:2",
+          "triangles": 996,
+          "closedComponents": 15,
+          "components": 15
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__coral001_NEW_V2:3",
+          "triangles": 996,
+          "closedComponents": 15,
+          "components": 15
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__coral001_NEW_V2:4",
+          "triangles": 996,
+          "closedComponents": 15,
+          "components": 15
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__cream001_NEW_V2:0",
+          "triangles": 4536,
+          "closedComponents": 27,
+          "components": 27
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__cream001_NEW_V2:1",
+          "triangles": 4536,
+          "closedComponents": 27,
+          "components": 27
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__cream001_NEW_V2:2",
+          "triangles": 4536,
+          "closedComponents": 27,
+          "components": 27
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__cream001_NEW_V2:3",
+          "triangles": 4536,
+          "closedComponents": 27,
+          "components": 27
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__cream001_NEW_V2:4",
+          "triangles": 4536,
+          "closedComponents": 27,
+          "components": 27
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__ink001_NEW_V2:0",
+          "triangles": 1992,
+          "closedComponents": 30,
+          "components": 30
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__ink001_NEW_V2:1",
+          "triangles": 1992,
+          "closedComponents": 30,
+          "components": 30
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__ink001_NEW_V2:2",
+          "triangles": 1992,
+          "closedComponents": 30,
+          "components": 30
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__ink001_NEW_V2:3",
+          "triangles": 1992,
+          "closedComponents": 30,
+          "components": 30
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__ink001_NEW_V2:4",
+          "triangles": 1992,
+          "closedComponents": 30,
+          "components": 30
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__mint001_NEW_V2:0",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__mint001_NEW_V2:1",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__mint001_NEW_V2:2",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__mint001_NEW_V2:3",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:spectators:athlete_spectators_strip__mint001_NEW_V2:4",
+          "triangles": 324,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset_NEW_V2:0",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset_NEW_V2:1",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset_NEW_V2:2",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset_NEW_V2:3",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset_NEW_V2:4",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset001_NEW_V2:0",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset001_NEW_V2:1",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset001_NEW_V2:2",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset001_NEW_V2:3",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset001_NEW_V2:4",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset002_NEW_V2:0",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset002_NEW_V2:1",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset002_NEW_V2:2",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset002_NEW_V2:3",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset002_NEW_V2:4",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset003_NEW_V2:0",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset003_NEW_V2:1",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset003_NEW_V2:2",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset003_NEW_V2:3",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_arch_inset003_NEW_V2:4",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_structural_rostrum_NEW_V2:0",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_structural_rostrum_NEW_V2:1",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_structural_rostrum_NEW_V2:2",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_structural_rostrum_NEW_V2:3",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating:grandstand_rostrum:FIT_grandstand_structural_rostrum_NEW_V2:4",
+          "triangles": 188,
+          "closedComponents": 1,
+          "components": 1
+        },
+        {
+          "name": "seating-joinery:wood",
+          "triangles": 900,
+          "closedComponents": 3,
+          "components": 3
+        },
+        {
+          "name": "seating-joinery:stone",
+          "triangles": 11400,
+          "closedComponents": 38,
+          "components": 38
+        },
+        {
+          "name": "seating-joinery:cream",
+          "triangles": 3486,
+          "closedComponents": 8,
+          "components": 8
+        },
+        {
+          "name": "seating-joinery:gold",
+          "triangles": 12840,
+          "closedComponents": 41,
+          "components": 41
+        },
+        {
+          "name": "seating-joinery:ink",
+          "triangles": 15000,
+          "closedComponents": 50,
+          "components": 50
+        }
+      ],
+      "changes": [
+        {
+          "name": "seating-joinery:wood",
+          "beforeVolume": 78.58848497477814,
+          "afterVolume": 78.58848497477814,
+          "removedVolume": 0,
+          "beforeTriangles": 900,
+          "afterTriangles": 900
+        },
+        {
+          "name": "seating-joinery:stone",
+          "beforeVolume": 22.23951040752972,
+          "afterVolume": 22.23951040752972,
+          "removedVolume": 0,
+          "beforeTriangles": 11400,
+          "afterTriangles": 11400
+        },
+        {
+          "name": "seating-joinery:cream",
+          "beforeVolume": 52.00332961954365,
+          "afterVolume": 51.61481097909665,
+          "removedVolume": 0.38851864044699624,
+          "beforeTriangles": 2400,
+          "afterTriangles": 3486
+        },
+        {
+          "name": "seating-joinery:gold",
+          "beforeVolume": 0.02968456669836504,
+          "afterVolume": 0.028293475100393706,
+          "removedVolume": 0.0013910915979713327,
+          "beforeTriangles": 12000,
+          "afterTriangles": 12840
+        },
+        {
+          "name": "seating-joinery:ink",
+          "beforeVolume": 0.1934519644016869,
+          "afterVolume": 0.1934519644016869,
+          "removedVolume": 0,
+          "beforeTriangles": 15000,
+          "afterTriangles": 15000
+        }
+      ]
+    }
+  ]
+}

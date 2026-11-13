@@ -9,7 +9,7 @@ import {automaticLightPhase,type RoomLightingClock} from '../../scene-lighting-c
 import {scheduleLightingFrames,lightingFrameDelay} from './lighting-demand.js';
 import { createSkyEnvironment, SKY_SOURCE_DIRECTIONS } from '../sky-environment.mjs';
 import { activeMechanismLayout } from '../mechanisms/layout.js';
-import { FLOODLIGHT_ASSETS, floodlightUrl, buildFloodlightGeometry, venueSpotPhotometry } from './floodlights.js';
+import { FLOODLIGHT_ASSETS, floodlightUrl, buildFloodlightGeometry, venueSpotPhotometry, VENUE_LIGHT_BUDGET } from './floodlights.js';
 import { createVenueLightingState, stepVenueLighting, applyVenueSpotState } from './venue-lighting-state.js';
 import type { EnvironmentModels } from './runtime.js';
 const URLS=FLOODLIGHT_ASSETS.map(floodlightUrl);
@@ -69,10 +69,10 @@ function VenueFixtures({track,compact,lowQuality,factor,onReady}:{track:TrackId;
   const [kit,setKit]=useState<{geometry:ReturnType<typeof buildFloodlightGeometry>;spots:{light:THREE.SpotLight;intensity:number}[]}>();
   useEffect(()=>{
     const geometry=buildFloodlightGeometry(track,models,options),spots=geometry.layout.filter(lamp=>lamp.active).map((lamp,i)=>{
-      const photo=venueSpotPhotometry(lamp.receiver,lamp.target),light=new THREE.SpotLight('#ffe0a8',0,photo.distance,photo.angle,photo.penumbra,photo.decay);light.visible=false;light.name=`local-spot:${lamp.id}`;light.position.copy(lamp.receiver);light.target.position.copy(lamp.target);light.castShadow=!lowQuality&&i===0;light.shadow.mapSize.set(compact?512:1024,compact?512:1024);light.shadow.camera.near=.15;light.shadow.camera.far=photo.distance;light.shadow.normalBias=.018;light.shadow.bias=-.00008;geometry.root.add(light,light.target);return{light,intensity:photo.intensity};
+      const photo=venueSpotPhotometry(lamp.receiver,lamp.target,lowQuality),light=new THREE.SpotLight('#ffe0a8',0,photo.distance,photo.angle,photo.penumbra,photo.decay);light.visible=false;light.name=`local-spot:${lamp.id}`;light.position.copy(lamp.receiver);light.target.position.copy(lamp.target);light.castShadow=i<VENUE_LIGHT_BUDGET[lowQuality?'economy':'full'].shadows;light.shadow.mapSize.set(1024,1024);light.shadow.camera.near=.15;light.shadow.camera.far=photo.distance;light.shadow.normalBias=.018;light.shadow.bias=-.00008;geometry.root.add(light,light.target);return{light,intensity:photo.intensity};
     });setKit({geometry,spots});onReady(true);invalidate();
     return()=>{onReady(false);spots.forEach(({light})=>light.dispose());geometry.dispose();};
-  },[track,models,options,compact,lowQuality,onReady,invalidate]);
+  },[track,models,options,lowQuality,onReady,invalidate]);
   useFrame(()=>{if(!kit)return;kit.geometry.setNightFactor(factor.current.nightFactor);for(const spot of kit.spots)applyVenueSpotState(spot.light,spot.intensity,factor.current.nightFactor);},-1);
   return kit?<group rotation={[0,compact?-Math.PI/2:0,0]}><primitive object={kit.geometry.root} dispose={null}/></group>:null;
 }
