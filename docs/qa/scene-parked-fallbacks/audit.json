@@ -1,0 +1,2210 @@
+{
+  "scope": "Actual static triangles and closed-component containment, native fixed park only. New footprint-derived terrain solids. No actor contact or inherited certificate. 51 samples only for overlapping approved non-Trip action envelopes; other envelope overlaps held. Candidate-pair clashes conservative: all candidates present. Desktop scene checked; compact requires matching global rigid rotation.",
+  "hashes": {
+    "src/client/scene/environment/scene-mechanisms-manifest.json": "95f7d262a34c66d711d3c6ee16dfe4a7e041e120a96e6095990a179681da1705",
+    "docs/qa/punch-r1-contact/mount-envelope.json": "d4b8bd521a1e58ffde10ae15c4f2021db1dc6fb809b9d3ca02c5dcf52ec5507d",
+    "public/models/mechanisms/punch_outboard_joint.glb": "ff8a8d4431fd08d4cc0111133ad9f0af1ea8abf3197131f5f6c6dfba0d6fa956",
+    "public/models/mechanisms/trip_joint.glb": "70c96cc02f6db99d9ec8650a81f519a39c526d8485231d632ce2908879165641",
+    "public/models/mechanisms/gain_joint_action.glb": "fcb164ad50bb52d22fa0b3aa66f63d515d40c9fef372060997ae3d62fa0a1fde",
+    "public/models/mechanisms/loss_joint_action.glb": "0323a384103f271627786c5c8ef3ba98ac1b488a03e2096c26617442250df0f6",
+    "public/models/mechanisms/warp_joint_action.glb": "bd5122db40a1c86889ee423787d818f278765d0e48ce30cca9f2fcea935a1b19",
+    "public/models/mechanisms/approved_soft_track_tile.glb": "7ca87e14c06e410144d2e5fbd66303605c2a442f4fae7c0928a62c5eef28c659",
+    "public/models/mechanisms/trip_telescopic_v1.2f331432.glb": "2f331432d72ef78d33c2aadd355885f25ca9f670d4d7f37b36e0c27b6db1046f",
+    "art/mechanisms/punch-rebuild-r1/punch-rebuild-r1.glb": "aef0b2f39adcbb29eaa3f449e22804093f5efe02e1d0113ca35500cd75cb25b6",
+    "public/models/environment-rebuilt-v2/tree_elm_rebuilt_lod2.glb": "7de3c13954b48a0eb3f2763baaa5c16980a079c5ab5995a955f2a3a89456db58",
+    "public/models/environment-rebuilt-v2/tree_maple_rebuilt_lod2.glb": "1bd23283396913472077482436d1493a81fe7ee8ff1edf7105886ca28643df1c",
+    "public/models/environment-rebuilt-v2/tree_sapling_rebuilt_lod2.glb": "913f328637d1b23bba8603a4cbf48028e0fb957abd3033c31bef0ebab3583f40",
+    "public/models/environment-rebuilt-v2/start_gate.glb": "76ca081e1fe1407d6b574b3aaee1ff409dff90e838dd0e251a4fdc00bb97831c",
+    "public/models/environment-rebuilt-v2/finish_gate.glb": "c51312cac07f0743d1ca2377dae8355bfdbeabbcc9044e7d2d9765ac5012eb54",
+    "public/models/environment-rebuilt-v2/squiggle_base.glb": "94b8d55dc02c8034838090102e1e6771e6dc4bf16b5402db25074cddf10f4793",
+    "public/models/environment-rebuilt-v2/squiggle_landscape_reexport_v1.glb": "e4dfa74a8e9a1b5e6a58c22fd615b2cdbe5cc2af5a16f427596618f320ff1d08",
+    "public/models/environment-rebuilt-v2/squiggle_furniture.glb": "ffffbfca78e8d7a5da8a77d87d817d477eb1e6510560a96ec5c15e9c00e27596",
+    "public/models/environment-rebuilt-v2/boardwalks_base.glb": "f842becc1cfdce6c1d050f6ebec23c3463b796ee348d27c56215be600e3728e2",
+    "public/models/environment-rebuilt-v2/boardwalks_landscape_reexport_v1.glb": "60bf7edcac36fc300b06b3dd942c77d90003f4ea1b01987b57f69c048e7c687a",
+    "public/models/environment-rebuilt-v2/boardwalks_furniture.glb": "004404c2b23631801e0d2f5765af812a48793ce36b23be0998a24865d7fe7823",
+    "public/models/environment-rebuilt-v2/bridges_base.glb": "43024a1c49c108aeb487b4b797b3c6bb8864538bf54d0ba3b698bf852e0368fe",
+    "public/models/environment-rebuilt-v2/bridges_landscape_reexport_v1.glb": "c3d74563b29aa8cb10605dbb5312cfdfc83dc79625db19e4b769b4c9f79be1fb",
+    "public/models/environment-rebuilt-v2/bridges_furniture.glb": "70e78bf169d74dc55302e7d69db21500e4329078a62532e7765f61a5d5867f61",
+    "public/models/environment-rebuilt-v2/bleachers.glb": "af4d188c511ddf34dcdb6575f543c7baf0a8f6572c2def5a8cf115c8a422e967",
+    "public/models/environment-rebuilt-v2/spectators.glb": "b60a7ddb7fdca1993f589e1f48617e5d314456045428f952d9f0ec5e7a198a66",
+    "public/models/environment-rebuilt-v2/podium.glb": "daac91ddfa81acd44013d6560e57cdccf39f87dd867d0737d3ebca190dec890f",
+    "public/models/environment-rebuilt-v2/officials_kiosk.glb": "f68de4cb4eac921518e8dfa78307b435cfd78ff8c0d20235ab1b242d726ab887",
+    "public/models/environment-rebuilt-v2/scoreboard.glb": "019c4166ff445c5aff8ee74ebd9215d74a9efea9aa3746fb88cbdd9c81d7b549",
+    "public/models/environment-rebuilt-v2/grandstand_rostrum.glb": "3891481f58a453a70d56bb6d36c55d5cce5c02a7cfcd2df9261f2bd6f44b475f",
+    "public/models/environment-rebuilt-v2/official_rostrum.glb": "ba867c174143cba8c7a2cb1ae8c749f698edec9447e42c67e3777de418ee04d4",
+    "public/models/environment-rebuilt-v2/podium_plinth.glb": "df3165332120872f50ad1ffb325a52f302a98756d3b71967b28918403ddb3f69",
+    "public/models/floodlights-rebuilt-v3/base.glb": "1104dfa5c5dbc4181448e43d84559f24bbb2b92334cf2ae3cd64e93466389309",
+    "public/models/floodlights-rebuilt-v3/pole.glb": "cbd7f2ee910e5a62ecba3bb229d5585082ca154a6a0b36d44e9ce01cffb46bcd",
+    "public/models/floodlights-rebuilt-v3/yoke.glb": "04b130d8b4d2e12c14974b0485cb025eb364bbfcf2ba88f255db8c6eafad691e",
+    "public/models/floodlights-rebuilt-v3/housing.glb": "0b4d0ccb58bc8a7fb4dec5efd4d531cf6dfd80945b5f71163b3cb4fa8fbeaf3a",
+    "public/models/floodlights-rebuilt-v3/lenses.glb": "28cc5396e6e9c9f2b42a05d1a0976131654f92b2b426e5381963c3d6dd5efb32",
+    "src/client/scene/mechanisms/punch-r1/support.ts": "58ba352910257ae72f3443592823ade845303dece705520b45125915e88eddca",
+    "src/client/scene/environment/parked-fallbacks/geometry.ts": "d88b88cf3ca1ff2e6e4c3e19047219e252bb555527c7cb71b4c586e904336877",
+    "scripts/recovery/audit-parked-fallbacks.ts": "73c830c29a12ce8468fbf963e30c72b93e05498c0065951db9c367e2abbfe05d",
+    "scripts/recovery/scene-collision.ts": "73519904299b6d5fdd575829f0aca32ccf486016764b10a80965350d6fa5be2d",
+    "src/client/scene/mechanisms/models.ts": "6dcb80fdb9e53dbb48c66e002c8f65a11260de49c38172062e56d79544ccc6f3",
+    "src/client/scene/mechanisms/static-support.ts": "317b0f68059016f251c4207aa0ca9010de640abe4941e98158d3153e489d2c4d",
+    "src/client/scene/mechanisms/placements.ts": "63b3d29d3fdf635de95bcad2209f0a2fcb1057fa6a03e782c47d187b072e97d0",
+    "src/client/scene/environment/runtime.ts": "74918a8d2df75f27004619fcac7f8a5531c4da586af65c29f399e3211b6e32e7",
+    "src/client/scene/environment/deck-runtime.ts": "df5bc46852148969bd15ce336568077e1bc32cd9979d40e1dc3551e2c27eb865",
+    "src/client/scene/environment/floodlights.ts": "d62641418c9eebd3f40d04bdaacffa60c83c4cdc4b9af8d36293c36a0615d0df"
+  },
+  "reports": [
+    {
+      "anchor": "squiggle:14",
+      "kind": "punch",
+      "park": {
+        "sample": 0
+      },
+      "mount": [
+        0.1950903220161283,
+        0,
+        0.9807852804032304,
+        0,
+        0,
+        1,
+        0,
+        0,
+        -0.9807852804032304,
+        0,
+        0.1950903220161283,
+        0,
+        -2.3469210785096366,
+        1.65,
+        0.6902709054440108,
+        1
+      ],
+      "foot": [
+        [
+          -0.9949999794572336,
+          -1.4500000476837158,
+          1.4999999272025553
+        ],
+        [
+          -0.1650000169664877,
+          -1.4150000214576721,
+          2.2999999435759833
+        ]
+      ],
+      "terrainProbeHeights": [
+        1.1920929132713809e-8,
+        1.1920929132713809e-8,
+        1.1920929132713809e-8,
+        1.1920929132713809e-8,
+        1.1920929132713809e-8
+      ],
+      "supportSolid": true,
+      "flatTerrain": true,
+      "foundation": {
+        "matrix": [
+          0.1950903220161283,
+          0,
+          0.9807852804032304,
+          0,
+          0,
+          1,
+          0,
+          0,
+          -0.9807852804032304,
+          0,
+          0.1950903220161283,
+          0,
+          -4.323565434327026,
+          0.09949998211860667,
+          0.49208704378963347,
+          1
+        ],
+        "size": [
+          0.8299999624907459,
+          0.20099994039535496,
+          0.800000016373428
+        ],
+        "bottom": -0.0009999880790708673,
+        "top": 0.1999999523162841
+      },
+      "envelope": [
+        [
+          -4.796842151199641,
+          -0.000999990582466026,
+          -0.08967799891232775
+        ],
+        [
+          -3.1531269488554625,
+          3.0599999291449786,
+          1.9222960372392
+        ]
+      ],
+      "hits": [],
+      "supportContacts": [
+        {
+          "mode": "static",
+          "a": "fallback-foundation:squiggle:14:footprint-solid",
+          "b": "scene:squiggle_base:BASE_infield_surface_NEW_V2",
+          "kind": "surface",
+          "crossings": 8,
+          "bounds": [
+            [
+              -4.796842034342987,
+              1.1920929132713809e-8,
+              0.007025030637322793
+            ],
+            [
+              -3.8502888343110655,
+              1.1920929132713809e-8,
+              0.9771490569419441
+            ]
+          ],
+          "aBounds": [
+            [
+              -4.796842034342987,
+              -0.000999990582466026,
+              0.007025030637322793
+            ],
+            [
+              -3.8502888343110655,
+              0.19999995481967936,
+              0.9771490569419441
+            ]
+          ],
+          "bBounds": [
+            [
+              -29.723739624023438,
+              -0.07999996840953827,
+              -6.944798469543457
+            ],
+            [
+              20.12897491455078,
+              1.1920929132713809e-8,
+              7.289934158325195
+            ]
+          ],
+          "allowed": true
+        },
+        {
+          "mode": "foot-interface",
+          "a": "park:squiggle:14:PUNCH_ROOT__teal_fixed_batch",
+          "b": "fallback-foundation:squiggle:14:footprint-solid",
+          "kind": "surface",
+          "crossings": 18,
+          "bounds": [
+            [
+              -4.755686397426405,
+              0.19999995481967958,
+              0.04818068192495267
+            ],
+            [
+              -3.8914444654135014,
+              0.19999995481967958,
+              0.9359934348839936
+            ]
+          ],
+          "aBounds": [
+            [
+              -4.796842151199641,
+              0.1999999523162841,
+              0.007024928151717513
+            ],
+            [
+              -3.850288717454416,
+              1.9099999904632567,
+              0.9771491594275503
+            ]
+          ],
+          "bBounds": [
+            [
+              -4.796842034342987,
+              -0.000999990582466026,
+              0.007025030637322793
+            ],
+            [
+              -3.8502888343110655,
+              0.19999995481967936,
+              0.9771490569419441
+            ]
+          ],
+          "allowed": true
+        }
+      ],
+      "motionChecks": [],
+      "status": "supported-park-only"
+    },
+    {
+      "anchor": "squiggle:17",
+      "kind": "trip",
+      "park": {
+        "sample": 0
+      },
+      "mount": [
+        0.8314696123025452,
+        0,
+        -0.5555702330196022,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0.5555702330196022,
+        0,
+        0.8314696123025452,
+        0,
+        3.589408708308856,
+        1.65,
+        3.6584357988532576,
+        1
+      ],
+      "foot": [
+        [
+          -0.6499999761581421,
+          -1.450000025331974,
+          1.219999998807907
+        ],
+        [
+          0.6499999761581421,
+          -1.2500000223517418,
+          2.020000010728836
+        ]
+      ],
+      "terrainProbeHeights": [
+        1.1920929160469385e-8,
+        1.1920929104958233e-8,
+        1.1920929104958233e-8,
+        1.1920929160469385e-8,
+        1.1920929104958233e-8
+      ],
+      "supportSolid": true,
+      "flatTerrain": true,
+      "foundation": {
+        "matrix": [
+          0.8314696123025452,
+          0,
+          -0.5555702330196022,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0.5555702330196022,
+          0,
+          0.8314696123025452,
+          0,
+          4.489432488449777,
+          0.09949999329447756,
+          5.005416574748137,
+          1
+        ],
+        "size": [
+          1.2999999523162842,
+          0.20099996274709672,
+          0.800000011920929
+        ],
+        "bottom": -0.0009999880790708396,
+        "top": 0.19999997466802588
+      },
+      "envelope": [
+        [
+          3.7267491637576056,
+          -0.0009999868571757276,
+          4.311708086654259
+        ],
+        [
+          5.401440900031936,
+          1.999999964237213,
+          5.699125062842016
+        ]
+      ],
+      "hits": [],
+      "supportContacts": [
+        {
+          "mode": "static",
+          "a": "park:squiggle:17:TRIP_FIXED_FOOT",
+          "b": "scene:deck:trimmedSupports:0",
+          "kind": "surface",
+          "crossings": 16,
+          "bounds": [
+            [
+              4.392042702908506,
+              0.3999999761581421,
+              4.501439051780839
+            ],
+            [
+              4.586705483496189,
+              0.3999999776482581,
+              4.661769270851757
+            ]
+          ],
+          "aBounds": [
+            [
+              3.7267491637576056,
+              0.19999997466802588,
+              4.311708086654259
+            ],
+            [
+              5.252115813141949,
+              0.3999999776482581,
+              5.699125062842016
+            ]
+          ],
+          "bBounds": [
+            [
+              4.352111540734768,
+              0.3999999761581421,
+              4.415102601051331
+            ],
+            [
+              4.586705483496189,
+              1.5,
+              4.661769270896912
+            ]
+          ],
+          "allowed": true
+        },
+        {
+          "mode": "static",
+          "a": "fallback-foundation:squiggle:17:footprint-solid",
+          "b": "scene:squiggle_base:BASE_infield_surface_NEW_V2",
+          "kind": "surface",
+          "crossings": 12,
+          "bounds": [
+            [
+              3.7267491637576056,
+              1.1920929132713809e-8,
+              4.311708086654259
+            ],
+            [
+              5.252115813141949,
+              1.1920929132713809e-8,
+              5.699125062842016
+            ]
+          ],
+          "aBounds": [
+            [
+              3.7267491637576056,
+              -0.0009999868571757276,
+              4.311708086654259
+            ],
+            [
+              5.252115813141949,
+              0.19999997344613085,
+              5.699125062842016
+            ]
+          ],
+          "bBounds": [
+            [
+              -29.723739624023438,
+              -0.07999996840953827,
+              -6.944798469543457
+            ],
+            [
+              20.12897491455078,
+              1.1920929132713809e-8,
+              7.289934158325195
+            ]
+          ],
+          "allowed": true
+        }
+      ],
+      "motionChecks": [],
+      "status": "supported-park-only"
+    },
+    {
+      "anchor": "boardwalks:9",
+      "kind": "punch",
+      "park": {
+        "sample": 0
+      },
+      "mount": [
+        -1,
+        0,
+        -1.2246467991473532e-16,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1.2246467991473532e-16,
+        0,
+        -1,
+        0,
+        -21.722222222222214,
+        1.65,
+        -1.022222222222222,
+        1
+      ],
+      "foot": [
+        [
+          -0.9949999794572336,
+          -1.4500000476837158,
+          1.4999999272025553
+        ],
+        [
+          -0.1650000169664877,
+          -1.4150000214576721,
+          2.2999999435759833
+        ]
+      ],
+      "terrainProbeHeights": [
+        1.1920929132713809e-8,
+        1.1920929132713809e-8,
+        1.1920929132713809e-8,
+        1.1920929132713809e-8,
+        1.1920929132713809e-8
+      ],
+      "supportSolid": true,
+      "flatTerrain": true,
+      "foundation": {
+        "matrix": [
+          -1,
+          0,
+          -1.2246467991473532e-16,
+          0,
+          0,
+          1,
+          0,
+          0,
+          1.2246467991473532e-16,
+          0,
+          -1,
+          0,
+          -21.142222224010354,
+          0.09949998211860667,
+          -2.9222221576114915,
+          1
+        ],
+        "size": [
+          0.8299999624907459,
+          0.20099994039535496,
+          0.800000016373428
+        ],
+        "bottom": -0.0009999880790708673,
+        "top": 0.1999999523162841
+      },
+      "envelope": [
+        [
+          -22.642222288085346,
+          -0.000999990582466026,
+          -3.3222222858398665
+        ],
+        [
+          -20.7022222412957,
+          3.0599999291449786,
+          -2.0272219904127446
+        ]
+      ],
+      "hits": [],
+      "supportContacts": [
+        {
+          "mode": "static",
+          "a": "fallback-foundation:boardwalks:9:footprint-solid",
+          "b": "scene:boardwalks_base:BASE_infield_surface_NEW_V2",
+          "kind": "surface",
+          "crossings": 8,
+          "bounds": [
+            [
+              -21.557222215665703,
+              1.1920929132713809e-8,
+              -3.322222163571956
+            ],
+            [
+              -20.727222232355004,
+              1.1920929132713809e-8,
+              -2.522222151651027
+            ]
+          ],
+          "aBounds": [
+            [
+              -21.557222215665703,
+              -0.000999990582466026,
+              -3.322222163571956
+            ],
+            [
+              -20.727222232355004,
+              0.19999995481967936,
+              -2.522222151651027
+            ]
+          ],
+          "bBounds": [
+            [
+              -48.184688568115234,
+              -0.07999996840953827,
+              -14.068021774291992
+            ],
+            [
+              37.068023681640625,
+              1.1920929132713809e-8,
+              12.790244102478027
+            ]
+          ],
+          "allowed": true
+        },
+        {
+          "mode": "foot-interface",
+          "a": "park:boardwalks:9:PUNCH_ROOT__teal_fixed_batch",
+          "b": "fallback-foundation:boardwalks:9:footprint-solid",
+          "kind": "surface",
+          "crossings": 18,
+          "bounds": [
+            [
+              -21.522222247991298,
+              0.19999995481967936,
+              -3.2872221787314535
+            ],
+            [
+              -20.762222229831732,
+              0.19999995481967936,
+              -2.557222136491529
+            ]
+          ],
+          "aBounds": [
+            [
+              -21.55722232076752,
+              0.1999999523162841,
+              -3.3222222858398665
+            ],
+            [
+              -20.72722212725319,
+              1.9099999904632567,
+              -2.522222029383121
+            ]
+          ],
+          "bBounds": [
+            [
+              -21.557222215665703,
+              -0.000999990582466026,
+              -3.322222163571956
+            ],
+            [
+              -20.727222232355004,
+              0.19999995481967936,
+              -2.522222151651027
+            ]
+          ],
+          "allowed": true
+        }
+      ],
+      "motionChecks": [],
+      "status": "supported-park-only"
+    },
+    {
+      "anchor": "boardwalks:18",
+      "kind": "punch",
+      "park": {
+        "sample": 0
+      },
+      "mount": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        9.455555555555552,
+        1.65,
+        -4.727777777777776,
+        1
+      ],
+      "foot": [
+        [
+          -0.9949999794572336,
+          -1.4500000476837158,
+          1.4999999272025553
+        ],
+        [
+          -0.1650000169664877,
+          -1.4150000214576721,
+          2.2999999435759833
+        ]
+      ],
+      "terrainProbeHeights": [
+        1.1920929132713809e-8,
+        1.1920929132713809e-8,
+        1.1920929132713809e-8,
+        1.1920929132713809e-8,
+        1.1920929132713809e-8
+      ],
+      "supportSolid": true,
+      "flatTerrain": true,
+      "foundation": {
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          8.875555557343692,
+          0.09949998211860667,
+          -2.8277778423885067,
+          1
+        ],
+        "size": [
+          0.8299999624907459,
+          0.20099994039535496,
+          0.800000016373428
+        ],
+        "bottom": -0.0009999880790708673,
+        "top": 0.1999999523162841
+      },
+      "envelope": [
+        [
+          8.435555574629038,
+          -0.000999990582466026,
+          -3.7227780095872536
+        ],
+        [
+          10.375555621418684,
+          3.0599999291449786,
+          -2.4277777141601318
+        ]
+      ],
+      "hits": [],
+      "supportContacts": [
+        {
+          "mode": "static",
+          "a": "fallback-foundation:boardwalks:18:footprint-solid",
+          "b": "scene:boardwalks_base:BASE_infield_surface_NEW_V2",
+          "kind": "surface",
+          "crossings": 8,
+          "bounds": [
+            [
+              8.460555565688342,
+              1.1920929132713809e-8,
+              -3.227777848348971
+            ],
+            [
+              9.290555548999041,
+              1.1920929132713809e-8,
+              -2.4277778364280422
+            ]
+          ],
+          "aBounds": [
+            [
+              8.460555565688342,
+              -0.000999990582466026,
+              -3.227777848348971
+            ],
+            [
+              9.290555548999041,
+              0.19999995481967936,
+              -2.4277778364280422
+            ]
+          ],
+          "bBounds": [
+            [
+              -48.184688568115234,
+              -0.07999996840953827,
+              -14.068021774291992
+            ],
+            [
+              37.068023681640625,
+              1.1920929132713809e-8,
+              12.790244102478027
+            ]
+          ],
+          "allowed": true
+        },
+        {
+          "mode": "foot-interface",
+          "a": "park:boardwalks:18:PUNCH_ROOT__teal_fixed_batch",
+          "b": "fallback-foundation:boardwalks:18:footprint-solid",
+          "kind": "surface",
+          "crossings": 18,
+          "bounds": [
+            [
+              8.49555556316507,
+              0.19999995481967936,
+              -3.192777863508469
+            ],
+            [
+              9.255555581324636,
+              0.19999995481967936,
+              -2.4627778212685447
+            ]
+          ],
+          "aBounds": [
+            [
+              8.460555460586527,
+              0.1999999523162841,
+              -3.227777970616877
+            ],
+            [
+              9.290555654100856,
+              1.9099999904632567,
+              -2.4277777141601318
+            ]
+          ],
+          "bBounds": [
+            [
+              8.460555565688342,
+              -0.000999990582466026,
+              -3.227777848348971
+            ],
+            [
+              9.290555548999041,
+              0.19999995481967936,
+              -2.4277778364280422
+            ]
+          ],
+          "allowed": true
+        }
+      ],
+      "motionChecks": [],
+      "status": "supported-park-only"
+    },
+    {
+      "anchor": "boardwalks:32",
+      "kind": "punch",
+      "park": {
+        "sample": 0
+      },
+      "mount": [
+        -0.9807852804032304,
+        0,
+        0.19509032201612836,
+        0,
+        0,
+        1,
+        0,
+        0,
+        -0.19509032201612836,
+        0,
+        -0.9807852804032304,
+        0,
+        -26.194444444444436,
+        1.65,
+        -8.816666666666665,
+        1
+      ],
+      "foot": [
+        [
+          -0.9949999794572336,
+          -1.4500000476837158,
+          1.4999999272025553
+        ],
+        [
+          -0.1650000169664877,
+          -1.4150000214576721,
+          2.2999999435759833
+        ]
+      ],
+      "terrainProbeHeights": [
+        1.1920929104958233e-8,
+        1.1920929132713809e-8,
+        1.1920929132713809e-8,
+        1.1920929132713809e-8,
+        1.1920929104958233e-8
+      ],
+      "supportSolid": true,
+      "flatTerrain": true,
+      "foundation": {
+        "matrix": [
+          -0.9807852804032304,
+          0,
+          0.19509032201612836,
+          0,
+          0,
+          1,
+          0,
+          0,
+          -0.19509032201612836,
+          0,
+          -0.9807852804032304,
+          0,
+          -25.996260582790057,
+          0.09949998211860667,
+          -10.793311022484055,
+          1
+        ],
+        "size": [
+          0.8299999624907459,
+          0.20099994039535496,
+          0.800000016373428
+        ],
+        "bottom": -0.0009999880790708673,
+        "top": 0.1999999523162841
+      },
+      "envelope": [
+        [
+          -27.426469576239622,
+          -0.000999990582466026,
+          -11.26658773935667
+        ],
+        [
+          -25.414495540088097,
+          3.0599999291449786,
+          -9.62287253701249
+        ]
+      ],
+      "hits": [],
+      "supportContacts": [
+        {
+          "mode": "static",
+          "a": "fallback-foundation:boardwalks:32:footprint-solid",
+          "b": "scene:boardwalks_base:BASE_infield_surface_NEW_V2",
+          "kind": "surface",
+          "crossings": 8,
+          "bounds": [
+            [
+              -26.48132259594237,
+              1.1920929118836021e-8,
+              -11.266587622500015
+            ],
+            [
+              -25.511198569637745,
+              1.1920929132713809e-8,
+              -10.320034422468094
+            ]
+          ],
+          "aBounds": [
+            [
+              -26.48132259594237,
+              -0.000999990582466026,
+              -11.266587622500015
+            ],
+            [
+              -25.511198569637745,
+              0.19999995481967936,
+              -10.320034422468094
+            ]
+          ],
+          "bBounds": [
+            [
+              -48.184688568115234,
+              -0.07999996840953827,
+              -14.068021774291992
+            ],
+            [
+              37.068023681640625,
+              1.1920929132713809e-8,
+              12.790244102478027
+            ]
+          ],
+          "allowed": true
+        },
+        {
+          "mode": "foot-interface",
+          "a": "park:boardwalks:32:PUNCH_ROOT__teal_fixed_batch",
+          "b": "fallback-foundation:boardwalks:32:footprint-solid",
+          "kind": "surface",
+          "crossings": 18,
+          "bounds": [
+            [
+              -26.44016697388442,
+              0.19999995481967958,
+              -11.225431985583434
+            ],
+            [
+              -25.552354220925377,
+              0.19999995481967958,
+              -10.36119005357053
+            ]
+          ],
+          "aBounds": [
+            [
+              -26.481322698427977,
+              0.1999999523162841,
+              -11.26658773935667
+            ],
+            [
+              -25.511198467152145,
+              1.9099999904632567,
+              -10.320034305611443
+            ]
+          ],
+          "bBounds": [
+            [
+              -26.48132259594237,
+              -0.000999990582466026,
+              -11.266587622500015
+            ],
+            [
+              -25.511198569637745,
+              0.19999995481967936,
+              -10.320034422468094
+            ]
+          ],
+          "allowed": true
+        }
+      ],
+      "motionChecks": [],
+      "status": "supported-park-only"
+    },
+    {
+      "anchor": "boardwalks:46",
+      "kind": "punch",
+      "park": {
+        "sample": 0
+      },
+      "mount": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        15.84444444444444,
+        1.65,
+        8.944444444444443,
+        1
+      ],
+      "foot": [
+        [
+          -0.9949999794572336,
+          -1.4500000476837158,
+          1.4999999272025553
+        ],
+        [
+          -0.1650000169664877,
+          -1.4150000214576721,
+          2.2999999435759833
+        ]
+      ],
+      "terrainProbeHeights": [
+        1.1920929132713809e-8,
+        1.1920929104958233e-8,
+        1.1920929160469385e-8,
+        1.1920929132713809e-8,
+        1.1920929132713809e-8
+      ],
+      "supportSolid": true,
+      "flatTerrain": true,
+      "foundation": {
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          15.264444446232579,
+          0.09949998211860667,
+          10.844444379833712,
+          1
+        ],
+        "size": [
+          0.8299999624907459,
+          0.20099994039535493,
+          0.800000016373428
+        ],
+        "bottom": -0.0009999880790708396,
+        "top": 0.1999999523162841
+      },
+      "envelope": [
+        [
+          14.824444463517926,
+          -0.000999990582466026,
+          9.949444212634965
+        ],
+        [
+          16.764444510307573,
+          3.0599999291449786,
+          11.244444508062088
+        ]
+      ],
+      "hits": [],
+      "supportContacts": [
+        {
+          "mode": "static",
+          "a": "fallback-foundation:boardwalks:46:footprint-solid",
+          "b": "scene:boardwalks_base:BASE_infield_surface_NEW_V2",
+          "kind": "surface",
+          "crossings": 8,
+          "bounds": [
+            [
+              14.84944445457723,
+              1.1920929132713809e-8,
+              10.444444373873248
+            ],
+            [
+              15.679444437887929,
+              1.1920929132713809e-8,
+              11.244444385794177
+            ]
+          ],
+          "aBounds": [
+            [
+              14.84944445457723,
+              -0.000999990582466026,
+              10.444444373873248
+            ],
+            [
+              15.679444437887929,
+              0.19999995481967936,
+              11.244444385794177
+            ]
+          ],
+          "bBounds": [
+            [
+              -48.184688568115234,
+              -0.07999996840953827,
+              -14.068021774291992
+            ],
+            [
+              37.068023681640625,
+              1.1920929132713809e-8,
+              12.790244102478027
+            ]
+          ],
+          "allowed": true
+        },
+        {
+          "mode": "foot-interface",
+          "a": "park:boardwalks:46:PUNCH_ROOT__teal_fixed_batch",
+          "b": "fallback-foundation:boardwalks:46:footprint-solid",
+          "kind": "surface",
+          "crossings": 18,
+          "bounds": [
+            [
+              14.884444452053957,
+              0.19999995481967936,
+              10.47944435871375
+            ],
+            [
+              15.644444470213523,
+              0.19999995481967936,
+              11.209444400953675
+            ]
+          ],
+          "aBounds": [
+            [
+              14.849444349475414,
+              0.1999999523162841,
+              10.444444251605342
+            ],
+            [
+              15.679444542989744,
+              1.9099999904632567,
+              11.244444508062088
+            ]
+          ],
+          "bBounds": [
+            [
+              14.84944445457723,
+              -0.000999990582466026,
+              10.444444373873248
+            ],
+            [
+              15.679444437887929,
+              0.19999995481967936,
+              11.244444385794177
+            ]
+          ],
+          "allowed": true
+        }
+      ],
+      "motionChecks": [],
+      "status": "supported-park-only"
+    },
+    {
+      "anchor": "boardwalks:48",
+      "kind": "punch",
+      "park": {
+        "sample": 0
+      },
+      "mount": [
+        6.123233995736766e-17,
+        0,
+        -1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        6.123233995736766e-17,
+        0,
+        20.188888888888883,
+        1.65,
+        4.344444444444442,
+        1
+      ],
+      "foot": [
+        [
+          -0.9949999794572336,
+          -1.4500000476837158,
+          1.4999999272025553
+        ],
+        [
+          -0.1650000169664877,
+          -1.4150000214576721,
+          2.2999999435759833
+        ]
+      ],
+      "terrainProbeHeights": [
+        1.1920929104958233e-8,
+        1.1920929104958233e-8,
+        1.1920929132713809e-8,
+        1.1920929104958233e-8,
+        1.1920929104958233e-8
+      ],
+      "supportSolid": true,
+      "flatTerrain": true,
+      "foundation": {
+        "matrix": [
+          6.123233995736766e-17,
+          0,
+          -1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          6.123233995736766e-17,
+          0,
+          22.08888882427815,
+          0.09949998211860667,
+          4.924444442656303,
+          1
+        ],
+        "size": [
+          0.8299999624907459,
+          0.20099994039535496,
+          0.800000016373428
+        ],
+        "bottom": -0.0009999880790708673,
+        "top": 0.1999999523162841
+      },
+      "envelope": [
+        [
+          21.193888657079405,
+          -0.000999990582466026,
+          3.4244443785813097
+        ],
+        [
+          22.488888952506528,
+          3.0599999291449786,
+          5.364444425370956
+        ]
+      ],
+      "hits": [],
+      "supportContacts": [
+        {
+          "mode": "static",
+          "a": "fallback-foundation:boardwalks:48:footprint-solid",
+          "b": "scene:boardwalks_base:BASE_infield_surface_NEW_V2",
+          "kind": "surface",
+          "crossings": 8,
+          "bounds": [
+            [
+              21.688888818317686,
+              1.1920929132713809e-8,
+              4.509444451000953
+            ],
+            [
+              22.488888830238615,
+              1.1920929132713809e-8,
+              5.339444434311653
+            ]
+          ],
+          "aBounds": [
+            [
+              21.688888818317686,
+              -0.000999990582466026,
+              4.509444451000953
+            ],
+            [
+              22.488888830238615,
+              0.19999995481967936,
+              5.339444434311653
+            ]
+          ],
+          "bBounds": [
+            [
+              -48.184688568115234,
+              -0.07999996840953827,
+              -14.068021774291992
+            ],
+            [
+              37.068023681640625,
+              1.1920929132713809e-8,
+              12.790244102478027
+            ]
+          ],
+          "allowed": true
+        },
+        {
+          "mode": "foot-interface",
+          "a": "park:boardwalks:48:PUNCH_ROOT__teal_fixed_batch",
+          "b": "fallback-foundation:boardwalks:48:footprint-solid",
+          "kind": "surface",
+          "crossings": 18,
+          "bounds": [
+            [
+              21.72388880315819,
+              0.19999995481967936,
+              4.54444441867536
+            ],
+            [
+              22.453888845398115,
+              0.19999995481967936,
+              5.304444436834924
+            ]
+          ],
+          "aBounds": [
+            [
+              21.68888869604978,
+              0.1999999523162841,
+              4.509444345899139
+            ],
+            [
+              22.488888952506528,
+              1.9099999904632567,
+              5.339444539413467
+            ]
+          ],
+          "bBounds": [
+            [
+              21.688888818317686,
+              -0.000999990582466026,
+              4.509444451000953
+            ],
+            [
+              22.488888830238615,
+              0.19999995481967936,
+              5.339444434311653
+            ]
+          ],
+          "allowed": true
+        }
+      ],
+      "motionChecks": [],
+      "status": "supported-park-only"
+    },
+    {
+      "anchor": "boardwalks:50",
+      "kind": "punch",
+      "park": {
+        "sample": 0
+      },
+      "mount": [
+        -0.9807852804032304,
+        0,
+        0.19509032201612836,
+        0,
+        0,
+        1,
+        0,
+        0,
+        -0.19509032201612836,
+        0,
+        -0.9807852804032304,
+        0,
+        9.455555555555552,
+        1.65,
+        -9.199999999999998,
+        1
+      ],
+      "foot": [
+        [
+          -0.9949999794572336,
+          -1.4500000476837158,
+          1.4999999272025553
+        ],
+        [
+          -0.1650000169664877,
+          -1.4150000214576721,
+          2.2999999435759833
+        ]
+      ],
+      "terrainProbeHeights": [
+        1.1920929132713809e-8,
+        1.1920929132713809e-8,
+        1.1920929160469385e-8,
+        1.1920929132713809e-8,
+        1.1920929160469385e-8
+      ],
+      "supportSolid": true,
+      "flatTerrain": true,
+      "foundation": {
+        "matrix": [
+          -0.9807852804032304,
+          0,
+          0.19509032201612836,
+          0,
+          0,
+          1,
+          0,
+          0,
+          -0.19509032201612836,
+          0,
+          -0.9807852804032304,
+          0,
+          9.653739417209929,
+          0.09949998211860667,
+          -11.176644355817388,
+          1
+        ],
+        "size": [
+          0.8299999624907459,
+          0.20099994039535493,
+          0.800000016373428
+        ],
+        "bottom": -0.0009999880790708396,
+        "top": 0.1999999523162841
+      },
+      "envelope": [
+        [
+          8.223530423760362,
+          -0.000999990582466026,
+          -11.649921072690002
+        ],
+        [
+          10.23550445991189,
+          3.0599999291449786,
+          -10.006205870345823
+        ]
+      ],
+      "hits": [],
+      "supportContacts": [
+        {
+          "mode": "static",
+          "a": "fallback-foundation:boardwalks:50:footprint-solid",
+          "b": "scene:boardwalks_base:BASE_infield_surface_NEW_V2",
+          "kind": "surface",
+          "crossings": 8,
+          "bounds": [
+            [
+              9.168677404057618,
+              1.1920929118836021e-8,
+              -11.649920955833348
+            ],
+            [
+              10.13880143036224,
+              1.1920929132713809e-8,
+              -10.703367755801427
+            ]
+          ],
+          "aBounds": [
+            [
+              9.168677404057618,
+              -0.000999990582466026,
+              -11.649920955833348
+            ],
+            [
+              10.13880143036224,
+              0.19999995481967936,
+              -10.703367755801427
+            ]
+          ],
+          "bBounds": [
+            [
+              -48.184688568115234,
+              -0.07999996840953827,
+              -14.068021774291992
+            ],
+            [
+              37.068023681640625,
+              1.1920929132713809e-8,
+              12.790244102478027
+            ]
+          ],
+          "allowed": true
+        },
+        {
+          "mode": "foot-interface",
+          "a": "park:boardwalks:50:PUNCH_ROOT__teal_fixed_batch",
+          "b": "fallback-foundation:boardwalks:50:footprint-solid",
+          "kind": "surface",
+          "crossings": 18,
+          "bounds": [
+            [
+              9.209833026115568,
+              0.19999995481967958,
+              -11.608765318916767
+            ],
+            [
+              10.09764577907461,
+              0.19999995481967958,
+              -10.744523386903863
+            ]
+          ],
+          "aBounds": [
+            [
+              9.168677301572012,
+              0.1999999523162841,
+              -11.649921072690002
+            ],
+            [
+              10.138801532847845,
+              1.9099999904632567,
+              -10.703367638944776
+            ]
+          ],
+          "bBounds": [
+            [
+              9.168677404057618,
+              -0.000999990582466026,
+              -11.649920955833348
+            ],
+            [
+              10.13880143036224,
+              0.19999995481967936,
+              -10.703367755801427
+            ]
+          ],
+          "allowed": true
+        }
+      ],
+      "motionChecks": [],
+      "status": "supported-park-only"
+    },
+    {
+      "anchor": "boardwalks:56",
+      "kind": "punch",
+      "park": {
+        "sample": 0
+      },
+      "mount": [
+        -0.1950903220161282,
+        0,
+        -0.9807852804032304,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0.9807852804032304,
+        0,
+        -0.1950903220161282,
+        0,
+        33.094444444444434,
+        1.65,
+        -9.07222222222222,
+        1
+      ],
+      "foot": [
+        [
+          -0.9949999794572336,
+          -1.4500000476837158,
+          1.4999999272025553
+        ],
+        [
+          -0.1650000169664877,
+          -1.4150000214576721,
+          2.2999999435759833
+        ]
+      ],
+      "terrainProbeHeights": [
+        1.1920929132713809e-8,
+        1.1920929132713809e-8,
+        1.1920929132713809e-8,
+        1.1920929132713809e-8,
+        1.1920929132713809e-8
+      ],
+      "supportSolid": true,
+      "flatTerrain": true,
+      "foundation": {
+        "matrix": [
+          -0.1950903220161282,
+          0,
+          -0.9807852804032304,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0.9807852804032304,
+          0,
+          -0.1950903220161282,
+          0,
+          35.071088800261826,
+          0.09949998211860667,
+          -8.874038360567841,
+          1
+        ],
+        "size": [
+          0.8299999624907459,
+          0.20099994039535496,
+          0.800000016373428
+        ],
+        "bottom": -0.0009999880790708673,
+        "top": 0.1999999523162841
+      },
+      "envelope": [
+        [
+          33.900650314790255,
+          -0.000999990582466026,
+          -10.30424735401741
+        ],
+        [
+          35.54436551713444,
+          3.0599999291449786,
+          -8.292273317865881
+        ]
+      ],
+      "hits": [],
+      "supportContacts": [
+        {
+          "mode": "static",
+          "a": "fallback-foundation:boardwalks:56:footprint-solid",
+          "b": "scene:boardwalks_base:BASE_infield_surface_NEW_V2",
+          "kind": "surface",
+          "crossings": 8,
+          "bounds": [
+            [
+              34.59781220024587,
+              1.1920929132713809e-8,
+              -9.359100373720151
+            ],
+            [
+              35.54436540027778,
+              1.1920929132713809e-8,
+              -8.38897634741553
+            ]
+          ],
+          "aBounds": [
+            [
+              34.59781220024587,
+              -0.000999990582466026,
+              -9.359100373720151
+            ],
+            [
+              35.54436540027778,
+              0.19999995481967936,
+              -8.38897634741553
+            ]
+          ],
+          "bBounds": [
+            [
+              -48.184688568115234,
+              -0.07999996840953827,
+              -14.068021774291992
+            ],
+            [
+              37.068023681640625,
+              1.1920929132713809e-8,
+              12.790244102478027
+            ]
+          ],
+          "allowed": true
+        },
+        {
+          "mode": "foot-interface",
+          "a": "park:boardwalks:56:PUNCH_ROOT__teal_fixed_batch",
+          "b": "fallback-foundation:boardwalks:56:footprint-solid",
+          "kind": "surface",
+          "crossings": 18,
+          "bounds": [
+            [
+              34.6389678313483,
+              0.19999995481967936,
+              -9.3179447516622
+            ],
+            [
+              35.503209763361205,
+              0.19999995481967936,
+              -8.43013199870316
+            ]
+          ],
+          "aBounds": [
+            [
+              34.597812083389215,
+              0.1999999523162841,
+              -9.359100476205757
+            ],
+            [
+              35.54436551713444,
+              1.9099999904632567,
+              -8.388976244929925
+            ]
+          ],
+          "bBounds": [
+            [
+              34.59781220024587,
+              -0.000999990582466026,
+              -9.359100373720151
+            ],
+            [
+              35.54436540027778,
+              0.19999995481967936,
+              -8.38897634741553
+            ]
+          ],
+          "allowed": true
+        }
+      ],
+      "motionChecks": [],
+      "status": "supported-park-only"
+    },
+    {
+      "anchor": "wild:5",
+      "kind": "trip",
+      "park": {
+        "angle": 0.7853981633974483,
+        "reach": 0,
+        "adapter": "fitWild5Foot"
+      },
+      "mount": [
+        0.7071067811865476,
+        0,
+        -0.7071067811865475,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0.7071067811865475,
+        0,
+        0.7071067811865476,
+        0,
+        -0.12051298549999867,
+        1.65,
+        -2.5205129855000035,
+        1
+      ],
+      "foot": [
+        [
+          -0.6499999761581421,
+          -1.4149999991059303,
+          1.219999998807907
+        ],
+        [
+          0.6499999761581421,
+          -1.2500000223517418,
+          2.020000010728836
+        ]
+      ],
+      "terrainProbeHeights": [
+        0.10499999672174454,
+        0.10499999672174454,
+        0.10499999672174457,
+        0.10499999672174457,
+        0.10499999672174454
+      ],
+      "supportSolid": true,
+      "flatTerrain": true,
+      "foundation": {
+        "matrix": [
+          0.7071067811865476,
+          0,
+          -0.7071067811865475,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0.7071067811865475,
+          0,
+          0.7071067811865476,
+          0,
+          1.0250000033939561,
+          0.16949999880790712,
+          -1.3749999966060484,
+          1
+        ],
+        "size": [
+          1.179999952316284,
+          0.13100000417232502,
+          0.6800000119209288
+        ],
+        "bottom": 0.10399999672174456,
+        "top": 0.23500000089406958
+      },
+      "envelope": [
+        [
+          0.28253789579213584,
+          0.10400000017881394,
+          -2.384999987069305
+        ],
+        [
+          1.7674621109957764,
+          1.999999964237213,
+          -0.6325378890042281
+        ]
+      ],
+      "hits": [],
+      "supportContacts": [
+        {
+          "mode": "static",
+          "a": "fallback-foundation:wild:5:footprint-solid",
+          "b": "scene:ground:grass",
+          "kind": "surface",
+          "crossings": 10,
+          "bounds": [
+            [
+              0.36739071290626935,
+              0.10499999672174454,
+              -2.0326092870937353
+            ],
+            [
+              1.6826092938816428,
+              0.10499999672174454,
+              -0.7173907061183618
+            ]
+          ],
+          "aBounds": [
+            [
+              0.36739071290626935,
+              0.10400000017881394,
+              -2.0326092870937353
+            ],
+            [
+              1.6826092938816428,
+              0.23499999743700029,
+              -0.7173907061183618
+            ]
+          ],
+          "bBounds": [
+            [
+              -16.864999771118164,
+              -0.054999999701976776,
+              -4.565000057220459
+            ],
+            [
+              16.864999771118164,
+              0.10499999672174454,
+              4.565000057220459
+            ]
+          ],
+          "allowed": true
+        }
+      ],
+      "motionChecks": [],
+      "status": "supported-park-only"
+    },
+    {
+      "anchor": "wild:7",
+      "kind": "punch",
+      "park": {
+        "sample": 0
+      },
+      "mount": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        5.125000000000007,
+        1.65,
+        -3.0750000000000037,
+        1
+      ],
+      "foot": [
+        [
+          -0.9949999794572336,
+          -1.4500000476837158,
+          1.4999999272025553
+        ],
+        [
+          -0.1650000169664877,
+          -1.4150000214576721,
+          2.2999999435759833
+        ]
+      ],
+      "terrainProbeHeights": [
+        0.10499999672174454,
+        0.10499999672174454,
+        0.10499999672174454,
+        0.10499999672174454,
+        0.10499999672174454
+      ],
+      "supportSolid": true,
+      "flatTerrain": true,
+      "foundation": {
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          4.5450000017881464,
+          0.15199997451901437,
+          -1.1750000646107344,
+          1
+        ],
+        "size": [
+          0.8299999624907459,
+          0.09599995559453955,
+          0.800000016373428
+        ],
+        "bottom": 0.10399999672174454,
+        "top": 0.1999999523162841
+      },
+      "envelope": [
+        [
+          4.105000019073493,
+          0.10399999645352365,
+          -2.0700002318094812
+        ],
+        [
+          6.04500006586314,
+          3.0599999291449786,
+          -0.7749999363823594
+        ]
+      ],
+      "hits": [],
+      "supportContacts": [
+        {
+          "mode": "static",
+          "a": "fallback-foundation:wild:7:footprint-solid",
+          "b": "scene:ground:grass",
+          "kind": "surface",
+          "crossings": 10,
+          "bounds": [
+            [
+              4.130000010132797,
+              0.10499999672174454,
+              -1.5750000705711988
+            ],
+            [
+              4.959999993443498,
+              0.10499999672174454,
+              -0.7750000586502699
+            ]
+          ],
+          "aBounds": [
+            [
+              4.130000010132797,
+              0.10399999645352365,
+              -1.5750000705711988
+            ],
+            [
+              4.959999993443496,
+              0.1999999525845051,
+              -0.7750000586502699
+            ]
+          ],
+          "bBounds": [
+            [
+              -16.864999771118164,
+              -0.054999999701976776,
+              -4.565000057220459
+            ],
+            [
+              16.864999771118164,
+              0.10499999672174454,
+              4.565000057220459
+            ]
+          ],
+          "allowed": true
+        },
+        {
+          "mode": "foot-interface",
+          "a": "park:wild:7:PUNCH_ROOT__teal_fixed_batch",
+          "b": "fallback-foundation:wild:7:footprint-solid",
+          "kind": "surface",
+          "crossings": 18,
+          "bounds": [
+            [
+              4.165000015963962,
+              0.1999999525845051,
+              -1.5400000773762599
+            ],
+            [
+              4.9250000174146535,
+              0.1999999525845051,
+              -0.8100000518452091
+            ]
+          ],
+          "aBounds": [
+            [
+              4.129999905030982,
+              0.1999999523162841,
+              -1.5750001928391049
+            ],
+            [
+              4.9600000985453105,
+              1.9099999904632567,
+              -0.7749999363823594
+            ]
+          ],
+          "bBounds": [
+            [
+              4.130000010132797,
+              0.10399999645352365,
+              -1.5750000705711988
+            ],
+            [
+              4.959999993443496,
+              0.1999999525845051,
+              -0.7750000586502699
+            ]
+          ],
+          "allowed": true
+        }
+      ],
+      "motionChecks": [],
+      "status": "supported-park-only"
+    },
+    {
+      "anchor": "wild:11",
+      "kind": "punch",
+      "park": {
+        "sample": 0
+      },
+      "mount": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        13.325000000000017,
+        1.65,
+        -3.0750000000000037,
+        1
+      ],
+      "foot": [
+        [
+          -0.9949999794572336,
+          -1.4500000476837158,
+          1.4999999272025553
+        ],
+        [
+          -0.1650000169664877,
+          -1.4150000214576721,
+          2.2999999435759833
+        ]
+      ],
+      "terrainProbeHeights": [
+        0.10499999672174454,
+        0.10499999672174454,
+        0.10499999672174454,
+        0.10499999672174454,
+        0.10499999672174454
+      ],
+      "supportSolid": true,
+      "flatTerrain": true,
+      "foundation": {
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          12.745000001788156,
+          0.15199997451901437,
+          -1.1750000646107344,
+          1
+        ],
+        "size": [
+          0.8299999624907459,
+          0.09599995559453955,
+          0.800000016373428
+        ],
+        "bottom": 0.10399999672174454,
+        "top": 0.1999999523162841
+      },
+      "envelope": [
+        [
+          12.305000019073503,
+          0.10399999645352365,
+          -2.0700002318094812
+        ],
+        [
+          14.245000065863149,
+          3.0599999291449786,
+          -0.7749999363823594
+        ]
+      ],
+      "hits": [],
+      "supportContacts": [
+        {
+          "mode": "static",
+          "a": "fallback-foundation:wild:11:footprint-solid",
+          "b": "scene:ground:grass",
+          "kind": "surface",
+          "crossings": 8,
+          "bounds": [
+            [
+              12.330000010132807,
+              0.10499999672174454,
+              -1.5750000705711988
+            ],
+            [
+              13.159999993443506,
+              0.10499999672174454,
+              -0.7750000586502699
+            ]
+          ],
+          "aBounds": [
+            [
+              12.330000010132807,
+              0.10399999645352365,
+              -1.5750000705711988
+            ],
+            [
+              13.159999993443506,
+              0.1999999525845051,
+              -0.7750000586502699
+            ]
+          ],
+          "bBounds": [
+            [
+              -16.864999771118164,
+              -0.054999999701976776,
+              -4.565000057220459
+            ],
+            [
+              16.864999771118164,
+              0.10499999672174454,
+              4.565000057220459
+            ]
+          ],
+          "allowed": true
+        },
+        {
+          "mode": "foot-interface",
+          "a": "park:wild:11:PUNCH_ROOT__teal_fixed_batch",
+          "b": "fallback-foundation:wild:11:footprint-solid",
+          "kind": "surface",
+          "crossings": 18,
+          "bounds": [
+            [
+              12.365000015963972,
+              0.1999999525845051,
+              -1.5400000773762599
+            ],
+            [
+              13.125000017414663,
+              0.1999999525845051,
+              -0.8100000518452091
+            ]
+          ],
+          "aBounds": [
+            [
+              12.329999905030991,
+              0.1999999523162841,
+              -1.5750001928391049
+            ],
+            [
+              13.160000098545321,
+              1.9099999904632567,
+              -0.7749999363823594
+            ]
+          ],
+          "bBounds": [
+            [
+              12.330000010132807,
+              0.10399999645352365,
+              -1.5750000705711988
+            ],
+            [
+              13.159999993443506,
+              0.1999999525845051,
+              -0.7750000586502699
+            ]
+          ],
+          "allowed": true
+        }
+      ],
+      "motionChecks": [],
+      "status": "supported-park-only"
+    },
+    {
+      "anchor": "wild:16",
+      "kind": "punch",
+      "park": {
+        "sample": 0
+      },
+      "mount": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        13.325000000000017,
+        1.65,
+        3.0750000000000037,
+        1
+      ],
+      "foot": [
+        [
+          -0.9949999794572336,
+          -1.4500000476837158,
+          1.4999999272025553
+        ],
+        [
+          -0.1650000169664877,
+          -1.4150000214576721,
+          2.2999999435759833
+        ]
+      ],
+      "terrainProbeHeights": [
+        0.019999999552965164,
+        null,
+        0.019999999552965164,
+        null,
+        null
+      ],
+      "supportSolid": false,
+      "flatTerrain": false,
+      "envelope": [
+        [
+          12.305000019073503,
+          0.1999999523162841,
+          4.079999768190526
+        ],
+        [
+          14.245000065863149,
+          3.0599999291449786,
+          5.375000063617648
+        ]
+      ],
+      "hits": [],
+      "supportContacts": [],
+      "motionChecks": [],
+      "status": "blocked-support"
+    }
+  ]
+}

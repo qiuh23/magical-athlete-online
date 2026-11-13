@@ -1,0 +1,295 @@
+{
+  "version": "NEW_floodlights_rebuilt_v3",
+  "status": "new_reference_informed_geometry_not_recovered_original_bytes",
+  "historical_certificate_inherited": false,
+  "blender_version": "4.3.2",
+  "reference": {
+    "file": "胡闹运动会_场边射灯_夜间赛道预览.png",
+    "sha256": "57a482a14f79e59b665c9046caac941713052c34e3138dafee08c99b343ca7ae",
+    "role": "Visually viewed design reference only; no recovered geometry"
+  },
+  "style_source": {
+    "file": "environment-rebuilt-v2/scoreboard.glb",
+    "sha256": "019c4166ff445c5aff8ee74ebd9215d74a9efea9aa3746fb88cbdd9c81d7b549",
+    "role": "Source facility PBR palette and meter scale; no geometry copied",
+    "source_ink_linear_rgb": [
+      0.021219009533524513,
+      0.1119324266910553,
+      0.09084171056747437
+    ],
+    "new_metal_color": "source ink multiplied by 0.40",
+    "source_scoreboard_height": 2.105
+  },
+  "source_blend": {
+    "file": "floodlights-reference-rebuilt-v3.blend",
+    "sha256": "af85310cac4af7b40b518f8e2fc28d30e25544bca3390b6ac7a6dbd1f25bc694",
+    "objects": 5,
+    "script_autorun": false,
+    "embedded_text_scripts": 0,
+    "drivers": 0
+  },
+  "exporter": {
+    "file": "scripts/recovery/export-floodlights-v3.py",
+    "sha256": "f22c017fecb2161a401c0c0fe29bf16feb9eab39d6a950d3496a0687ae378843"
+  },
+  "assets": [
+    {
+      "name": "base",
+      "file": "base.glb",
+      "identity": "NEW_reference_informed_floodlight_v3",
+      "historical_original": false,
+      "bytes": 12348,
+      "sha256": "1104dfa5c5dbc4181448e43d84559f24bbb2b92334cf2ae3cd64e93466389309",
+      "triangles": 200,
+      "bounds_y_up": [
+        [
+          -0.3499999940395355,
+          0.0,
+          -0.32499998807907104
+        ],
+        [
+          0.3499999940395355,
+          0.20000000298023224,
+          0.32499998807907104
+        ]
+      ],
+      "materials": [
+        {
+          "name": "NEW_FL3_source_ink_darkened_0_40",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              0.00848760362714529,
+              0.04477297142148018,
+              0.03633668273687363,
+              1
+            ],
+            "metallicFactor": 0.2199999988079071,
+            "roughnessFactor": 0.47999998927116394
+          }
+        },
+        {
+          "name": "NEW_FL3_muted_fastener",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              0.07500000298023224,
+              0.0949999988079071,
+              0.09000000357627869,
+              1
+            ],
+            "metallicFactor": 0.44999998807907104,
+            "roughnessFactor": 0.4000000059604645
+          }
+        }
+      ],
+      "mesh_count": 1,
+      "primitives": 2,
+      "nodes": [
+        {
+          "mesh": 0,
+          "name": "NEW_FL3_base"
+        }
+      ]
+    },
+    {
+      "name": "pole",
+      "file": "pole.glb",
+      "identity": "NEW_reference_informed_floodlight_v3",
+      "historical_original": false,
+      "bytes": 2464,
+      "sha256": "cbd7f2ee910e5a62ecba3bb229d5585082ca154a6a0b36d44e9ce01cffb46bcd",
+      "triangles": 28,
+      "bounds_y_up": [
+        [
+          -0.057500001043081284,
+          0.0,
+          -0.057500001043081284
+        ],
+        [
+          0.057500001043081284,
+          1.0,
+          0.057500001043081284
+        ]
+      ],
+      "materials": [
+        {
+          "name": "NEW_FL3_source_ink_darkened_0_40",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              0.00848760362714529,
+              0.04477297142148018,
+              0.03633668273687363,
+              1
+            ],
+            "metallicFactor": 0.2199999988079071,
+            "roughnessFactor": 0.47999998927116394
+          }
+        }
+      ],
+      "mesh_count": 1,
+      "primitives": 1,
+      "nodes": [
+        {
+          "mesh": 0,
+          "name": "NEW_FL3_pole"
+        }
+      ]
+    },
+    {
+      "name": "yoke",
+      "file": "yoke.glb",
+      "identity": "NEW_reference_informed_floodlight_v3",
+      "historical_original": false,
+      "bytes": 11092,
+      "sha256": "04b130d8b4d2e12c14974b0485cb025eb364bbfcf2ba88f255db8c6eafad691e",
+      "triangles": 252,
+      "bounds_y_up": [
+        [
+          -0.38999998569488525,
+          -0.10499999672174454,
+          -0.10499998927116394
+        ],
+        [
+          0.38999998569488525,
+          0.1850000023841858,
+          0.1599999964237213
+        ]
+      ],
+      "materials": [
+        {
+          "name": "NEW_FL3_source_ink_darkened_0_40",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              0.00848760362714529,
+              0.04477297142148018,
+              0.03633668273687363,
+              1
+            ],
+            "metallicFactor": 0.2199999988079071,
+            "roughnessFactor": 0.47999998927116394
+          }
+        }
+      ],
+      "mesh_count": 1,
+      "primitives": 1,
+      "nodes": [
+        {
+          "mesh": 0,
+          "name": "NEW_FL3_yoke"
+        }
+      ]
+    },
+    {
+      "name": "housing",
+      "file": "housing.glb",
+      "identity": "NEW_reference_informed_floodlight_v3",
+      "historical_original": false,
+      "bytes": 29464,
+      "sha256": "0b4d0ccb58bc8a7fb4dec5efd4d531cf6dfd80945b5f71163b3cb4fa8fbeaf3a",
+      "triangles": 488,
+      "bounds_y_up": [
+        [
+          -0.6200000047683716,
+          -0.040000006556510925,
+          -0.1599999964237213
+        ],
+        [
+          0.6200000047683716,
+          0.3199999928474426,
+          0.06000000238418579
+        ]
+      ],
+      "materials": [
+        {
+          "name": "NEW_FL3_housing_charcoal_teal",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              0.00800000037997961,
+              0.017999999225139618,
+              0.019999999552965164,
+              1
+            ],
+            "metallicFactor": 0.18000000715255737,
+            "roughnessFactor": 0.47999998927116394
+          }
+        }
+      ],
+      "mesh_count": 1,
+      "primitives": 1,
+      "nodes": [
+        {
+          "mesh": 0,
+          "name": "NEW_FL3_housing"
+        }
+      ]
+    },
+    {
+      "name": "lenses",
+      "file": "lenses.glb",
+      "identity": "NEW_reference_informed_floodlight_v3",
+      "historical_original": false,
+      "bytes": 2520,
+      "sha256": "28cc5396e6e9c9f2b42a05d1a0976131654f92b2b426e5381963c3d6dd5efb32",
+      "triangles": 24,
+      "bounds_y_up": [
+        [
+          -0.5850000381469727,
+          -0.004999995231628418,
+          -0.14500001072883606
+        ],
+        [
+          0.5850000381469727,
+          0.2849999964237213,
+          -0.12700000405311584
+        ]
+      ],
+      "materials": [
+        {
+          "emissiveFactor": [
+            0.1599999964237213,
+            0.17000000178813934,
+            0.17000000178813934
+          ],
+          "name": "NEW_FL3_white_diffuser",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              0.9100000262260437,
+              0.9399999976158142,
+              0.9300000071525574,
+              1
+            ],
+            "metallicFactor": 0,
+            "roughnessFactor": 0.3400000035762787
+          }
+        }
+      ],
+      "mesh_count": 1,
+      "primitives": 1,
+      "nodes": [
+        {
+          "mesh": 0,
+          "name": "NEW_FL3_lenses"
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "triangles": 992,
+    "bytes": 57888,
+    "primitives": 6
+  },
+  "contract_file": "coordinate-contract.json",
+  "notes": [
+    "Original five fl_* templates remain missing.",
+    "New files never inherit old geometry, collision, visual, performance or runtime certificates.",
+    "No external resources, textures, animations, cameras, lights, transparency or fake beam geometry in any GLB.",
+    "Reference does not specify dimensions: the explicit contract is a new integration choice.",
+    "Authored component .blend is unassembled: all five components keep their runtime origin for inspection."
+  ],
+  "publication_metadata": {
+    "scope": "Public source provenance retains filenames and content hashes. Private recovery-service identities are omitted. Existing exporter hashes describe the script used for the retained GLB bytes; the public script differs only in provenance metadata output.",
+    "public_exporter": {
+      "file": "scripts/recovery/export-floodlights-v3.py",
+      "sha256": "88563d747606b2cf6c024cc7e085f02e71f2d05076e713ecb5870ca8af532912"
+    }
+  }
+}

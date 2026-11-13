@@ -1,0 +1,464 @@
+{
+  "scope": "Actor-only provisional replay; not production or environment authorization",
+  "reports": [
+    {
+      "character": "coach",
+      "node": 23,
+      "compact": false,
+      "lowQuality": false,
+      "hash": "17f1597ad1d19391c38e49adf75b08860ab01543f21b8c45a9b26abd91c6bb45",
+      "solution": {
+        "pose": {
+          "boomYaw": 1.3962634015954636,
+          "headYaw": 0,
+          "reach": 0,
+          "stroke": 0
+        },
+        "contactStroke": 0.041352844663323174,
+        "targetPoint": [
+          0.14607871874385028,
+          1.030004515275257,
+          0.2832801290365397
+        ],
+        "fistPoint": [
+          0.10472587408052711,
+          1.030004515275257,
+          0.2832801290365397
+        ],
+        "actorPart": "coach_sculpt",
+        "actorTriangle": 6920,
+        "softTriangle": 539,
+        "rigVersion": "punch-rebuild-r1"
+      },
+      "productionApproved": false,
+      "hard": [],
+      "soft": [
+        {
+          "t": 0.3875,
+          "kind": "surface",
+          "translationToSeparate": 0.000086212158203125
+        },
+        {
+          "t": 0.39,
+          "kind": "surface",
+          "translationToSeparate": 0.0012447357177734378
+        },
+        {
+          "t": 0.3925,
+          "kind": "surface",
+          "translationToSeparate": 0.00236358642578125
+        },
+        {
+          "t": 0.395,
+          "kind": "surface",
+          "translationToSeparate": 0.003438949584960937
+        },
+        {
+          "t": 0.3975,
+          "kind": "surface",
+          "translationToSeparate": 0.004466819763183595
+        },
+        {
+          "t": 0.4,
+          "kind": "surface",
+          "translationToSeparate": 0.005443191528320313
+        },
+        {
+          "t": 0.4025,
+          "kind": "surface",
+          "translationToSeparate": 0.006364250183105469
+        },
+        {
+          "t": 0.405,
+          "kind": "surface",
+          "translationToSeparate": 0.007225990295410156
+        },
+        {
+          "t": 0.4075,
+          "kind": "surface",
+          "translationToSeparate": 0.00802440643310547
+        },
+        {
+          "t": 0.41,
+          "kind": "surface",
+          "translationToSeparate": 0.008755683898925781
+        },
+        {
+          "t": 0.4125,
+          "kind": "surface",
+          "translationToSeparate": 0.00941562652587891
+        },
+        {
+          "t": 0.415,
+          "kind": "surface",
+          "translationToSeparate": 0.010000419616699223
+        },
+        {
+          "t": 0.4175,
+          "kind": "surface",
+          "translationToSeparate": 0.010506057739257812
+        },
+        {
+          "t": 0.42,
+          "kind": "surface",
+          "translationToSeparate": 0.010928726196289063
+        },
+        {
+          "t": 0.4225,
+          "kind": "surface",
+          "translationToSeparate": 0.011264419555664063
+        },
+        {
+          "t": 0.425,
+          "kind": "surface",
+          "translationToSeparate": 0.011508941650390625
+        },
+        {
+          "t": 0.4275,
+          "kind": "surface",
+          "translationToSeparate": 0.011658668518066406
+        },
+        {
+          "t": 0.43,
+          "kind": "surface",
+          "translationToSeparate": 0.01170940399169922
+        },
+        {
+          "t": 0.4325,
+          "kind": "surface",
+          "translationToSeparate": 0.011162376403808596
+        },
+        {
+          "t": 0.435,
+          "kind": "surface",
+          "translationToSeparate": 0.00953235626220703
+        },
+        {
+          "t": 0.4375,
+          "kind": "surface",
+          "translationToSeparate": 0.006836509704589844
+        },
+        {
+          "t": 0.44,
+          "kind": "surface",
+          "translationToSeparate": 0.0030925750732421877
+        }
+      ],
+      "samples": 401,
+      "signature": "[\"punch-rebuild-r1\",1.396263,0,0,0,0.041353,0.146079,1.030005,0.28328,0.104726,1.030005,0.28328,\"coach_sculpt\",6920,539]"
+    },
+    {
+      "character": "coach",
+      "node": 23,
+      "compact": true,
+      "lowQuality": false,
+      "hash": "17f1597ad1d19391c38e49adf75b08860ab01543f21b8c45a9b26abd91c6bb45",
+      "solution": {
+        "pose": {
+          "boomYaw": 1.5707963267948966,
+          "headYaw": 6.123233995736766e-17,
+          "reach": 0.15,
+          "stroke": 0
+        },
+        "contactStroke": 0.08367286320256276,
+        "targetPoint": [
+          0.1285272271236642,
+          1.3565684754423377,
+          0.37619078436482056
+        ],
+        "fistPoint": [
+          0.04485436392110146,
+          1.3565684754423377,
+          0.37619078436482056
+        ],
+        "actorPart": "coach_sculpt",
+        "actorTriangle": 1258,
+        "softTriangle": 748,
+        "rigVersion": "punch-rebuild-r1"
+      },
+      "productionApproved": false,
+      "hard": [],
+      "soft": [
+        {
+          "t": 0.41,
+          "kind": "surface",
+          "translationToSeparate": 0.0007631301879882813
+        },
+        {
+          "t": 0.4125,
+          "kind": "surface",
+          "translationToSeparate": 0.002025604248046875
+        },
+        {
+          "t": 0.415,
+          "kind": "surface",
+          "translationToSeparate": 0.0031442642211914062
+        },
+        {
+          "t": 0.4175,
+          "kind": "surface",
+          "translationToSeparate": 0.004111671447753907
+        },
+        {
+          "t": 0.42,
+          "kind": "surface",
+          "translationToSeparate": 0.004920196533203126
+        },
+        {
+          "t": 0.4225,
+          "kind": "surface",
+          "translationToSeparate": 0.005562210083007814
+        },
+        {
+          "t": 0.425,
+          "kind": "surface",
+          "translationToSeparate": 0.00603008270263672
+        },
+        {
+          "t": 0.4275,
+          "kind": "surface",
+          "translationToSeparate": 0.006316375732421875
+        },
+        {
+          "t": 0.43,
+          "kind": "surface",
+          "translationToSeparate": 0.006413650512695313
+        },
+        {
+          "t": 0.4325,
+          "kind": "surface",
+          "translationToSeparate": 0.005826377868652344
+        },
+        {
+          "t": 0.435,
+          "kind": "surface",
+          "translationToSeparate": 0.004077529907226563
+        },
+        {
+          "t": 0.4375,
+          "kind": "surface",
+          "translationToSeparate": 0.0011846542358398438
+        }
+      ],
+      "samples": 401,
+      "signature": "[\"punch-rebuild-r1\",1.570796,0,0.15,0,0.083673,0.128527,1.356568,0.376191,0.044854,1.356568,0.376191,\"coach_sculpt\",1258,748]"
+    },
+    {
+      "character": "coach",
+      "node": 24,
+      "compact": false,
+      "lowQuality": false,
+      "hash": "17f1597ad1d19391c38e49adf75b08860ab01543f21b8c45a9b26abd91c6bb45",
+      "solution": {
+        "pose": {
+          "boomYaw": 1.5707963267948966,
+          "headYaw": 0,
+          "reach": 0.15,
+          "stroke": 0
+        },
+        "contactStroke": 0.09246575025321303,
+        "targetPoint": [
+          0.07394078974737556,
+          1.0643806827579274,
+          0.4573162560569508
+        ],
+        "fistPoint": [
+          -0.01852496050583748,
+          1.0643806827579274,
+          0.4573162560569508
+        ],
+        "actorPart": "coach_sculpt",
+        "actorTriangle": 5890,
+        "softTriangle": 507,
+        "rigVersion": "punch-rebuild-r1"
+      },
+      "productionApproved": false,
+      "hard": [],
+      "soft": [
+        {
+          "t": 0.4,
+          "kind": "surface",
+          "translationToSeparate": 0.0017572402954101564
+        },
+        {
+          "t": 0.4025,
+          "kind": "surface",
+          "translationToSeparate": 0.0036939620971679684
+        },
+        {
+          "t": 0.405,
+          "kind": "surface",
+          "translationToSeparate": 0.005505943298339844
+        },
+        {
+          "t": 0.4075,
+          "kind": "surface",
+          "translationToSeparate": 0.007184791564941407
+        },
+        {
+          "t": 0.41,
+          "kind": "surface",
+          "translationToSeparate": 0.00872211456298828
+        },
+        {
+          "t": 0.4125,
+          "kind": "surface",
+          "translationToSeparate": 0.01010990142822266
+        },
+        {
+          "t": 0.415,
+          "kind": "surface",
+          "translationToSeparate": 0.011339569091796876
+        },
+        {
+          "t": 0.4175,
+          "kind": "surface",
+          "translationToSeparate": 0.012402915954589845
+        },
+        {
+          "t": 0.42,
+          "kind": "surface",
+          "translationToSeparate": 0.013291549682617188
+        },
+        {
+          "t": 0.4225,
+          "kind": "surface",
+          "translationToSeparate": 0.013997268676757813
+        },
+        {
+          "t": 0.425,
+          "kind": "surface",
+          "translationToSeparate": 0.014511489868164062
+        },
+        {
+          "t": 0.4275,
+          "kind": "surface",
+          "translationToSeparate": 0.014826202392578123
+        },
+        {
+          "t": 0.43,
+          "kind": "surface",
+          "translationToSeparate": 0.014933013916015623
+        },
+        {
+          "t": 0.4325,
+          "kind": "surface",
+          "translationToSeparate": 0.014337730407714844
+        },
+        {
+          "t": 0.435,
+          "kind": "surface",
+          "translationToSeparate": 0.012564659118652344
+        },
+        {
+          "t": 0.4375,
+          "kind": "surface",
+          "translationToSeparate": 0.009634399414062501
+        },
+        {
+          "t": 0.44,
+          "kind": "surface",
+          "translationToSeparate": 0.005566787719726563
+        },
+        {
+          "t": 0.4425,
+          "kind": "surface",
+          "translationToSeparate": 0.0003828048706054688
+        }
+      ],
+      "samples": 401,
+      "signature": "[\"punch-rebuild-r1\",1.570796,0,0.15,0,0.092466,0.073941,1.064381,0.457316,-0.018525,1.064381,0.457316,\"coach_sculpt\",5890,507]"
+    },
+    {
+      "character": "coach",
+      "node": 24,
+      "compact": true,
+      "lowQuality": false,
+      "hash": "17f1597ad1d19391c38e49adf75b08860ab01543f21b8c45a9b26abd91c6bb45",
+      "solution": {
+        "pose": {
+          "boomYaw": 1.3962634015954636,
+          "headYaw": 0,
+          "reach": 0.15,
+          "stroke": 0
+        },
+        "contactStroke": 0.1246501135437047,
+        "targetPoint": [
+          0.36445084797644467,
+          1.3007054622313636,
+          0.25364907435083317
+        ],
+        "fistPoint": [
+          0.23980073443273997,
+          1.3007054622313636,
+          0.25364907435083317
+        ],
+        "actorPart": "coach_sculpt",
+        "actorTriangle": 771,
+        "softTriangle": 1182,
+        "rigVersion": "punch-rebuild-r1"
+      },
+      "productionApproved": false,
+      "hard": [],
+      "soft": [
+        {
+          "t": 0.4125,
+          "kind": "surface",
+          "translationToSeparate": 0.00012722015380859378
+        },
+        {
+          "t": 0.415,
+          "kind": "surface",
+          "translationToSeparate": 0.0017629623413085937
+        },
+        {
+          "t": 0.4175,
+          "kind": "surface",
+          "translationToSeparate": 0.003177452087402344
+        },
+        {
+          "t": 0.42,
+          "kind": "surface",
+          "translationToSeparate": 0.004359436035156251
+        },
+        {
+          "t": 0.4225,
+          "kind": "surface",
+          "translationToSeparate": 0.005298233032226563
+        },
+        {
+          "t": 0.425,
+          "kind": "surface",
+          "translationToSeparate": 0.005982398986816406
+        },
+        {
+          "t": 0.4275,
+          "kind": "surface",
+          "translationToSeparate": 0.00640106201171875
+        },
+        {
+          "t": 0.43,
+          "kind": "surface",
+          "translationToSeparate": 0.006542968750000001
+        },
+        {
+          "t": 0.4325,
+          "kind": "surface",
+          "translationToSeparate": 0.005917167663574219
+        },
+        {
+          "t": 0.435,
+          "kind": "surface",
+          "translationToSeparate": 0.00405406951904297
+        },
+        {
+          "t": 0.4375,
+          "kind": "surface",
+          "translationToSeparate": 0.0009754180908203125
+        }
+      ],
+      "samples": 401,
+      "signature": "[\"punch-rebuild-r1\",1.396263,0,0.15,0,0.12465,0.364451,1.300705,0.253649,0.239801,1.300705,0.253649,\"coach_sculpt\",771,1182]"
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "rig": "punch-rebuild-r1",
+  "productionApproved": false,
+  "source": "public/models/mechanisms/punch_outboard_joint.glb",
+  "sourceSHA256": "ff8a8d4431fd08d4cc0111133ad9f0af1ea8abf3197131f5f6c6dfba0d6fa956",
+  "coordinateSystem": "GLB Three Y-up; Blender Z-up; [x,z,-y]",
+  "root": "PUNCH_ROOT",
+  "rootPolicy": "Never move/scale root as part of any action",
+  "fixedSupportRepair": {
+    "part": "PUNCH_ROOT__teal_fixed_batch",
+    "change": "72 split vertices / 24 unique original pillar cap positions Z .26 -> .24; bracket top remains .26",
+    "reason": "Remove inherited coplanar cap/bracket surface artifact; preserves bonded support"
+  },
+  "joints": {
+    "PUNCH_BOOM_Z": "local Three Y = boomYaw",
+    "PUNCH_COUNTER_YAW": "local Three Y = headYaw-boomYaw",
+    "PUNCH_R1_TELESCOPE_1": "local X=reach/2",
+    "PUNCH_R1_TELESCOPE_2": "local X=reach/2",
+    "PUNCH_SLIDER_X": "local X=.35+stroke",
+    "PUNCH_SPRING": "morph[0]=stroke/.35"
+  },
+  "proposedDomain": {
+    "boomYaw": [
+      0.5235987755982988,
+      1.5707963267948966
+    ],
+    "headYaw": [
+      0,
+      0.5235987755982988
+    ],
+    "reachM": [
+      0,
+      0.3
+    ],
+    "strokeM": [
+      0,
+      0.35
+    ]
+  },
+  "park": {
+    "boomYaw": 1.0471975511965976,
+    "headYaw": 0.2617993877991494,
+    "reach": 0,
+    "stroke": 0
+  },
+  "phasePolicy": "Any boom/head/telescope change requires stroke=0. Any boom/head aiming additionally requires reach=0. Retract stroke before changing aim. No shortest-angle choice or root chasing. Game contact remains disabled.",
+  "geometry": {
+    "outer": [
+      0.02,
+      0.5,
+      0.2,
+      0.18,
+      0.012
+    ],
+    "middle": [
+      0.24,
+      0.64,
+      0.15,
+      0.13,
+      0.01
+    ],
+    "inner": [
+      0.4,
+      0.71,
+      0.1,
+      0.08,
+      0.008
+    ],
+    "stageDisplacement": "each reach/2",
+    "minAxialOverlapM": 0.09,
+    "minCrossSectionGapM": 0.013,
+    "guideApertureGapM": 0.003,
+    "stageStopsM": [
+      0,
+      0.15
+    ]
+  },
+  "missingOriginalCapabilities": [
+    "No recovered adjustable-v1 source or 31-plan data",
+    "No height adjustment",
+    "No all-angle 360-degree workspace",
+    "No runtime contact/controller integration",
+    "No actor/map collision certificate"
+  ]
+}

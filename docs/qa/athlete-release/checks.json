@@ -1,0 +1,100 @@
+{
+  "schema": 1,
+  "node": "24.22.1",
+  "runtimeSourceCheckpoint": "8af01bb58f076a8893c490a901849ef8aec63e08",
+  "checkpointMeaning": "Local provenance only; final source-manifest aggregate and Git tree are authoritative identities. Public commit metadata may differ.",
+  "checks": [
+    {
+      "name": "full-node-tests",
+      "status": "passed",
+      "result": "1630 tests; 1630 passed; 0 failed; 0 skipped",
+      "logName": "final-frozen-full-tests.log",
+      "logSHA256": "eabf36c2483e48ee02cd7bda36613cb20ca7647e5be67461a5d5d2c4b0966bb9"
+    },
+    {
+      "name": "dual-client-worker-types",
+      "status": "passed",
+      "result": "Main/client/tests and worker TypeScript configurations both passed.",
+      "logName": "final-frozen-types.log",
+      "logSHA256": "d0478b2d987d700ee97e68240498c7124471c14d6dbc0a169a9d62fb916d4963"
+    },
+    {
+      "name": "dual-build",
+      "status": "passed",
+      "result": "Both client/server and browser products built; existing large-chunk warnings retained",
+      "logName": "final-frozen-double-build.log",
+      "logSHA256": "864fedf881877c4d0b9493db4be0e20ff3611146ae0cb8d77c88a32a2dc5b1ab"
+    },
+    {
+      "name": "worker-local-dry-run",
+      "status": "passed",
+      "result": "Official wrangler deploy --dry-run completed with writable local XDG_CONFIG_HOME; no authentication or deploy",
+      "logName": "final-frozen-worker-dry-run.log",
+      "logSHA256": "a14cf3ec4d123a5d62dceea7551b549391a56fd0d701f1d1b1fddd017ea36b75"
+    },
+    {
+      "name": "combined-r1-world",
+      "status": "passed",
+      "result": "All 12 fixtures x 101 world times returned zero unexpected hardware/actor hits",
+      "logName": "final-r1-world.log",
+      "logSHA256": "be4fb81f4467a98240f5e334b2baf1e8605784663fa13a57e687294212d01b8b"
+    },
+    {
+      "name": "combined-r1-proof-tests",
+      "status": "passed",
+      "result": "29 passed",
+      "logName": "final-combined-evidence-tests.log",
+      "logSHA256": "ad02bc798865e2dc74c7a95a3a249a0676858e9aa33cb2fddabaed2274da9ff5"
+    },
+    {
+      "name": "cancelled-layer-frame-regressions",
+      "status": "passed",
+      "result": "27 passed, includes same-beat subsequent samples and explicit legacy fallback",
+      "logName": "cancelled-pose-frame-tests.log",
+      "logSHA256": "8358e7eb541d88dabcc1cffc67ebb5d700b60ee10acb3c62e17517e62e5ab4fd"
+    }
+  ],
+  "assetOutputs": {
+    "environment": 44,
+    "lamps": 10,
+    "r1": 2,
+    "total": 56,
+    "method": "Exact source bytes and SHA-256 asset URLs in both products"
+  },
+  "retainedFailures": [
+    {
+      "name": "stale direct-controller assertion",
+      "status": "fixed",
+      "result": "First final full run 1628/1629; old test expected direct legacy controller construction, updated to the stricter tested adapter. Original failing log retained privately."
+    },
+    {
+      "name": "same-beat retime and later Layer samples",
+      "status": "fixed",
+      "result": "Independent review reproduced surviving active Trip and then progressing/rewinding cancelled fall. New outer guard cancels and freezes same-beat progress, including restored speed and legacy path; prior strict source remains unchanged."
+    },
+    {
+      "name": "initial dry-run config path",
+      "status": "resolved environment path",
+      "result": "Default config directory was absent; official XDG_CONFIG_HOME points to a writable temporary directory for local compile. No credentials were added."
+    }
+  ],
+  "notPerformed": [
+    "Actual Three/WebGL rendering in a browser",
+    "True-phone GPU/render/readability or FPS tests",
+    "Full Playwright E2E suite",
+    "Continuous-time or arbitrary-role/crowd collision proof",
+    "Remote publish, merge or deployment"
+  ],
+  "independentDeltaReviews": [
+    {
+      "scope": "New scene and explicit legacy same-beat timing cancellation through subsequent actual Layer samples; no reauthorization or pose rewind; next down/recovery valid",
+      "testsPassed": 18,
+      "sourceCheckpoint": "8af01bb58f076a8893c490a901849ef8aec63e08"
+    },
+    {
+      "scope": "Actual Board/Pawn r1 shared position, single transform, bind/cleanup, readiness/failure and clock contract",
+      "testsPassed": 11,
+      "sourceCheckpoint": "8af01bb58f076a8893c490a901849ef8aec63e08"
+    }
+  ]
+}

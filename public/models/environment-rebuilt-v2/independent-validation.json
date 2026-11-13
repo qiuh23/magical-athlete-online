@@ -1,0 +1,1427 @@
+{
+  "scope": "New v2 assets only. No historical certificates or FPS claims.",
+  "pass": true,
+  "validator_sha256": "018849d3cf62d429bf0ad7c59ead297530d46ddd5290bb32879f2d3542c45e8a",
+  "assets": [
+    {
+      "name": "squiggle_base",
+      "pass": true,
+      "triangles": 2028,
+      "primitives": 3,
+      "materials": 3,
+      "vertices": 3054,
+      "bounds_y_up": [
+        [
+          -24.52083396911621,
+          -1.2599999904632568,
+          -5.729166507720947
+        ],
+        [
+          16.60555648803711,
+          -0.699999988079071,
+          6.013888835906982
+        ]
+      ],
+      "geometry_corner_error_max": 0.0,
+      "vertex_color_error_max": 0.0,
+      "pbr_error_max": 0.0,
+      "alpha_modes": [
+        "OPAQUE"
+      ],
+      "vertex_alpha_range": [
+        1.0,
+        1.0
+      ],
+      "external_resources": 0,
+      "images": 0,
+      "primitive_details": [
+        {
+          "material": "GROVE_natural_grass",
+          "triangles": 676,
+          "vertices": 1018,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "Craft_MOD_chassis_dark",
+          "triangles": 676,
+          "vertices": 1018,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "Craft_mint_vinyl",
+          "triangles": 676,
+          "vertices": 1018,
+          "has_vertex_colors": false
+        }
+      ],
+      "source_blend_sha256_matches": true,
+      "source_bounds_delta_max": 0.0
+    },
+    {
+      "name": "squiggle_furniture",
+      "pass": true,
+      "triangles": 2696,
+      "primitives": 8,
+      "materials": 8,
+      "vertices": 3389,
+      "bounds_y_up": [
+        [
+          -16.34583282470703,
+          -0.5799999833106995,
+          -2.869166612625122
+        ],
+        [
+          2.379166603088379,
+          0.23000000417232513,
+          0.5308332443237305
+        ]
+      ],
+      "geometry_corner_error_max": 0.0,
+      "vertex_color_error_max": 0.0,
+      "pbr_error_max": 0.0,
+      "alpha_modes": [
+        "OPAQUE"
+      ],
+      "vertex_alpha_range": [
+        1.0,
+        1.0
+      ],
+      "external_resources": 0,
+      "images": 0,
+      "primitive_details": [
+        {
+          "material": "Craft_MOD_chassis_dark",
+          "triangles": 260,
+          "vertices": 342,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "Craft_MOD_copper_latch",
+          "triangles": 864,
+          "vertices": 1127,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "Craft_MOD_sage_shell",
+          "triangles": 216,
+          "vertices": 296,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "Craft_coral_vinyl",
+          "triangles": 108,
+          "vertices": 104,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "Craft_mint_vinyl",
+          "triangles": 216,
+          "vertices": 258,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "Craft_ochre_vinyl",
+          "triangles": 692,
+          "vertices": 804,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "REFINED_bench_wood",
+          "triangles": 324,
+          "vertices": 428,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "REFINED_warm_path",
+          "triangles": 16,
+          "vertices": 30,
+          "has_vertex_colors": false
+        }
+      ],
+      "source_blend_sha256_matches": true,
+      "source_bounds_delta_max": 0.0
+    },
+    {
+      "name": "tree_elm_rebuilt_lod2",
+      "pass": true,
+      "triangles": 3927,
+      "primitives": 2,
+      "materials": 2,
+      "vertices": 8568,
+      "bounds_y_up": [
+        [
+          -1.4040768146514893,
+          -0.023990437388420105,
+          -1.5035244226455688
+        ],
+        [
+          1.5658767223358154,
+          4.234600067138672,
+          1.4907010793685913
+        ]
+      ],
+      "geometry_corner_error_max": 0.0,
+      "vertex_color_error_max": 0.0,
+      "pbr_error_max": 0.0,
+      "alpha_modes": [
+        "OPAQUE"
+      ],
+      "vertex_alpha_range": [
+        1.0,
+        1.0
+      ],
+      "external_resources": 0,
+      "images": 0,
+      "primitive_details": [
+        {
+          "material": "NEW_v2_bark_source_vertex_color",
+          "triangles": 1470,
+          "vertices": 1197,
+          "has_vertex_colors": true
+        },
+        {
+          "material": "NEW_v2_leaves_source_vertex_color",
+          "triangles": 2457,
+          "vertices": 7371,
+          "has_vertex_colors": true
+        }
+      ],
+      "source_blend_sha256_matches": true,
+      "source_bounds_delta_max": 0.06619298458099365
+    },
+    {
+      "name": "tree_maple_rebuilt_lod2",
+      "pass": true,
+      "triangles": 3924,
+      "primitives": 2,
+      "materials": 2,
+      "vertices": 9102,
+      "bounds_y_up": [
+        [
+          -1.4158976078033447,
+          -0.023990437388420105,
+          -1.6063026189804077
+        ],
+        [
+          1.6318447589874268,
+          3.588592052459717,
+          1.3709635734558105
+        ]
+      ],
+      "geometry_corner_error_max": 0.0,
+      "vertex_color_error_max": 0.0,
+      "pbr_error_max": 0.0,
+      "alpha_modes": [
+        "OPAQUE"
+      ],
+      "vertex_alpha_range": [
+        1.0,
+        1.0
+      ],
+      "external_resources": 0,
+      "images": 0,
+      "primitive_details": [
+        {
+          "material": "NEW_v2_bark_source_vertex_color.001",
+          "triangles": 1224,
+          "vertices": 1002,
+          "has_vertex_colors": true
+        },
+        {
+          "material": "NEW_v2_leaves_source_vertex_color.001",
+          "triangles": 2700,
+          "vertices": 8100,
+          "has_vertex_colors": true
+        }
+      ],
+      "source_blend_sha256_matches": true,
+      "source_bounds_delta_max": 0.0780799388885498
+    },
+    {
+      "name": "tree_sapling_rebuilt_lod2",
+      "pass": true,
+      "triangles": 2224,
+      "primitives": 2,
+      "materials": 2,
+      "vertices": 4826,
+      "bounds_y_up": [
+        [
+          -0.8628181219100952,
+          -0.016825534403324127,
+          -0.7646277546882629
+        ],
+        [
+          0.9539444446563721,
+          2.2703640460968018,
+          0.7104723453521729
+        ]
+      ],
+      "geometry_corner_error_max": 0.0,
+      "vertex_color_error_max": 0.0,
+      "pbr_error_max": 0.0,
+      "alpha_modes": [
+        "OPAQUE"
+      ],
+      "vertex_alpha_range": [
+        1.0,
+        1.0
+      ],
+      "external_resources": 0,
+      "images": 0,
+      "primitive_details": [
+        {
+          "material": "NEW_v2_bark_source_vertex_color.002",
+          "triangles": 847,
+          "vertices": 695,
+          "has_vertex_colors": true
+        },
+        {
+          "material": "NEW_v2_leaves_source_vertex_color.002",
+          "triangles": 1377,
+          "vertices": 4131,
+          "has_vertex_colors": true
+        }
+      ],
+      "source_blend_sha256_matches": true,
+      "source_bounds_delta_max": 0.045226335525512695
+    },
+    {
+      "name": "boardwalks_base",
+      "pass": true,
+      "triangles": 1872,
+      "primitives": 3,
+      "materials": 3,
+      "vertices": 2808,
+      "bounds_y_up": [
+        [
+          -24.157812118530273,
+          -1.2599999904632568,
+          -7.053124904632568
+        ],
+        [
+          18.584375381469727,
+          -0.699999988079071,
+          6.412499904632568
+        ]
+      ],
+      "geometry_corner_error_max": 0.0,
+      "vertex_color_error_max": 0.0,
+      "pbr_error_max": 0.0,
+      "alpha_modes": [
+        "OPAQUE"
+      ],
+      "vertex_alpha_range": [
+        1.0,
+        1.0
+      ],
+      "external_resources": 0,
+      "images": 0,
+      "primitive_details": [
+        {
+          "material": "REFINED_sheltered_water",
+          "triangles": 624,
+          "vertices": 936,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "Craft_MOD_chassis_dark",
+          "triangles": 624,
+          "vertices": 936,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "Craft_mint_vinyl",
+          "triangles": 624,
+          "vertices": 936,
+          "has_vertex_colors": false
+        }
+      ],
+      "source_blend_sha256_matches": true,
+      "source_bounds_delta_max": 0.0
+    },
+    {
+      "name": "boardwalks_furniture",
+      "pass": true,
+      "triangles": 2696,
+      "primitives": 8,
+      "materials": 8,
+      "vertices": 3805,
+      "bounds_y_up": [
+        [
+          -20.18281364440918,
+          -0.5799999833106995,
+          -1.3781249523162842
+        ],
+        [
+          -8.457812309265137,
+          0.23000000417232513,
+          3.976875066757202
+        ]
+      ],
+      "geometry_corner_error_max": 0.0,
+      "vertex_color_error_max": 0.0,
+      "pbr_error_max": 0.0,
+      "alpha_modes": [
+        "OPAQUE"
+      ],
+      "vertex_alpha_range": [
+        1.0,
+        1.0
+      ],
+      "external_resources": 0,
+      "images": 0,
+      "primitive_details": [
+        {
+          "material": "Craft_MOD_chassis_dark",
+          "triangles": 260,
+          "vertices": 329,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "Craft_MOD_copper_latch",
+          "triangles": 864,
+          "vertices": 1489,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "Craft_MOD_sage_shell",
+          "triangles": 216,
+          "vertices": 301,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "Craft_coral_vinyl",
+          "triangles": 108,
+          "vertices": 100,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "Craft_mint_vinyl",
+          "triangles": 216,
+          "vertices": 251,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "Craft_ochre_vinyl",
+          "triangles": 692,
+          "vertices": 922,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "REFINED_bench_wood",
+          "triangles": 324,
+          "vertices": 383,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "REFINED_warm_path",
+          "triangles": 16,
+          "vertices": 30,
+          "has_vertex_colors": false
+        }
+      ],
+      "source_blend_sha256_matches": true,
+      "source_bounds_delta_max": 0.0
+    },
+    {
+      "name": "bridges_base",
+      "pass": true,
+      "triangles": 2028,
+      "primitives": 3,
+      "materials": 3,
+      "vertices": 3054,
+      "bounds_y_up": [
+        [
+          -34.649200439453125,
+          -1.2599999904632568,
+          -8.655200004577637
+        ],
+        [
+          25.79319953918457,
+          -0.699999988079071,
+          7.663000106811523
+        ]
+      ],
+      "geometry_corner_error_max": 0.0,
+      "vertex_color_error_max": 0.0,
+      "pbr_error_max": 0.0,
+      "alpha_modes": [
+        "OPAQUE"
+      ],
+      "vertex_alpha_range": [
+        1.0,
+        1.0
+      ],
+      "external_resources": 0,
+      "images": 0,
+      "primitive_details": [
+        {
+          "material": "GROVE_natural_grass",
+          "triangles": 676,
+          "vertices": 1018,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "Craft_MOD_chassis_dark",
+          "triangles": 676,
+          "vertices": 1018,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "Craft_mint_vinyl",
+          "triangles": 676,
+          "vertices": 1018,
+          "has_vertex_colors": false
+        }
+      ],
+      "source_blend_sha256_matches": true,
+      "source_bounds_delta_max": 0.0
+    },
+    {
+      "name": "bridges_furniture",
+      "pass": true,
+      "triangles": 2696,
+      "primitives": 8,
+      "materials": 8,
+      "vertices": 3850,
+      "bounds_y_up": [
+        [
+          -23.989200592041016,
+          -0.5799999833106995,
+          -2.9802000522613525
+        ],
+        [
+          -5.224200248718262,
+          0.23000000417232513,
+          -0.4251999855041504
+        ]
+      ],
+      "geometry_corner_error_max": 0.0,
+      "vertex_color_error_max": 0.0,
+      "pbr_error_max": 0.0,
+      "alpha_modes": [
+        "OPAQUE"
+      ],
+      "vertex_alpha_range": [
+        1.0,
+        1.0
+      ],
+      "external_resources": 0,
+      "images": 0,
+      "primitive_details": [
+        {
+          "material": "Craft_MOD_chassis_dark",
+          "triangles": 260,
+          "vertices": 326,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "Craft_MOD_copper_latch",
+          "triangles": 864,
+          "vertices": 1395,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "Craft_MOD_sage_shell",
+          "triangles": 216,
+          "vertices": 246,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "Craft_coral_vinyl",
+          "triangles": 108,
+          "vertices": 120,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "Craft_mint_vinyl",
+          "triangles": 216,
+          "vertices": 239,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "Craft_ochre_vinyl",
+          "triangles": 692,
+          "vertices": 1092,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "REFINED_bench_wood",
+          "triangles": 324,
+          "vertices": 402,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "REFINED_warm_path",
+          "triangles": 16,
+          "vertices": 30,
+          "has_vertex_colors": false
+        }
+      ],
+      "source_blend_sha256_matches": true,
+      "source_bounds_delta_max": 0.0
+    },
+    {
+      "name": "bleachers",
+      "pass": true,
+      "triangles": 7200,
+      "primitives": 5,
+      "materials": 5,
+      "vertices": 8938,
+      "bounds_y_up": [
+        [
+          -2.75,
+          0.0,
+          -0.75
+        ],
+        [
+          2.75,
+          0.9549999833106995,
+          0.75
+        ]
+      ],
+      "geometry_corner_error_max": 0.0,
+      "vertex_color_error_max": 0.0,
+      "pbr_error_max": 0.0,
+      "alpha_modes": [
+        "OPAQUE"
+      ],
+      "vertex_alpha_range": [
+        1.0,
+        1.0
+      ],
+      "external_resources": 0,
+      "images": 0,
+      "primitive_details": [
+        {
+          "material": "coral",
+          "triangles": 1944,
+          "vertices": 2483,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "cream",
+          "triangles": 324,
+          "vertices": 360,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "gold",
+          "triangles": 144,
+          "vertices": 160,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "ink",
+          "triangles": 900,
+          "vertices": 937,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "mint",
+          "triangles": 3888,
+          "vertices": 4998,
+          "has_vertex_colors": false
+        }
+      ],
+      "source_blend_sha256_matches": true,
+      "source_bounds_delta_max": 0.0
+    },
+    {
+      "name": "spectators",
+      "pass": true,
+      "triangles": 7848,
+      "primitives": 4,
+      "materials": 4,
+      "vertices": 6408,
+      "bounds_y_up": [
+        [
+          -2.559999942779541,
+          0.0,
+          -0.4750000238418579
+        ],
+        [
+          2.559999942779541,
+          1.1549999713897705,
+          0.6520000100135803
+        ]
+      ],
+      "geometry_corner_error_max": 0.0,
+      "vertex_color_error_max": 0.0,
+      "pbr_error_max": 0.0,
+      "alpha_modes": [
+        "OPAQUE"
+      ],
+      "vertex_alpha_range": [
+        1.0,
+        1.0
+      ],
+      "external_resources": 0,
+      "images": 0,
+      "primitive_details": [
+        {
+          "material": "coral",
+          "triangles": 996,
+          "vertices": 1244,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "cream",
+          "triangles": 4536,
+          "vertices": 2322,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "ink",
+          "triangles": 1992,
+          "vertices": 2443,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "mint",
+          "triangles": 324,
+          "vertices": 399,
+          "has_vertex_colors": false
+        }
+      ],
+      "source_blend_sha256_matches": true,
+      "source_bounds_delta_max": 0.0
+    },
+    {
+      "name": "podium",
+      "pass": true,
+      "triangles": 1952,
+      "primitives": 5,
+      "materials": 5,
+      "vertices": 2419,
+      "bounds_y_up": [
+        [
+          -1.1399999856948853,
+          0.0,
+          -0.5699999928474426
+        ],
+        [
+          1.1399999856948853,
+          1.4079999923706055,
+          0.5774999856948853
+        ]
+      ],
+      "geometry_corner_error_max": 0.0,
+      "vertex_color_error_max": 0.0,
+      "pbr_error_max": 0.0,
+      "alpha_modes": [
+        "OPAQUE"
+      ],
+      "vertex_alpha_range": [
+        1.0,
+        1.0
+      ],
+      "external_resources": 0,
+      "images": 0,
+      "primitive_details": [
+        {
+          "material": "coral",
+          "triangles": 108,
+          "vertices": 145,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "cream",
+          "triangles": 324,
+          "vertices": 369,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "gold",
+          "triangles": 520,
+          "vertices": 784,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "ink",
+          "triangles": 784,
+          "vertices": 887,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "mint",
+          "triangles": 216,
+          "vertices": 234,
+          "has_vertex_colors": false
+        }
+      ],
+      "source_blend_sha256_matches": true,
+      "source_bounds_delta_max": 0.0
+    },
+    {
+      "name": "officials_kiosk",
+      "pass": true,
+      "triangles": 1456,
+      "primitives": 4,
+      "materials": 4,
+      "vertices": 1830,
+      "bounds_y_up": [
+        [
+          -0.8100000023841858,
+          0.0,
+          -0.5400000214576721
+        ],
+        [
+          0.8100000023841858,
+          1.7400000095367432,
+          0.5149999856948853
+        ]
+      ],
+      "geometry_corner_error_max": 0.0,
+      "vertex_color_error_max": 0.0,
+      "pbr_error_max": 0.0,
+      "alpha_modes": [
+        "OPAQUE"
+      ],
+      "vertex_alpha_range": [
+        1.0,
+        1.0
+      ],
+      "external_resources": 0,
+      "images": 0,
+      "primitive_details": [
+        {
+          "material": "coral",
+          "triangles": 844,
+          "vertices": 1203,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "cream",
+          "triangles": 324,
+          "vertices": 307,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "ink",
+          "triangles": 180,
+          "vertices": 212,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "mint",
+          "triangles": 108,
+          "vertices": 108,
+          "has_vertex_colors": false
+        }
+      ],
+      "source_blend_sha256_matches": true,
+      "source_bounds_delta_max": 0.0
+    },
+    {
+      "name": "scoreboard",
+      "pass": true,
+      "triangles": 1624,
+      "primitives": 4,
+      "materials": 4,
+      "vertices": 1409,
+      "bounds_y_up": [
+        [
+          -1.3600000143051147,
+          0.0,
+          -0.32499998807907104
+        ],
+        [
+          1.3600000143051147,
+          2.1050000190734863,
+          0.32499998807907104
+        ]
+      ],
+      "geometry_corner_error_max": 0.0,
+      "vertex_color_error_max": 0.0,
+      "pbr_error_max": 0.0,
+      "alpha_modes": [
+        "OPAQUE"
+      ],
+      "vertex_alpha_range": [
+        1.0,
+        1.0
+      ],
+      "external_resources": 0,
+      "images": 0,
+      "primitive_details": [
+        {
+          "material": "cream",
+          "triangles": 196,
+          "vertices": 222,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "gold",
+          "triangles": 672,
+          "vertices": 344,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "ink",
+          "triangles": 324,
+          "vertices": 352,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "mint",
+          "triangles": 432,
+          "vertices": 491,
+          "has_vertex_colors": false
+        }
+      ],
+      "source_blend_sha256_matches": true,
+      "source_bounds_delta_max": 0.0
+    },
+    {
+      "name": "start_gate",
+      "pass": true,
+      "triangles": 3432,
+      "primitives": 4,
+      "materials": 4,
+      "vertices": 5005,
+      "bounds_y_up": [
+        [
+          -3.859999895095825,
+          0.0,
+          -0.3400000035762787
+        ],
+        [
+          3.859999895095825,
+          2.640000104904175,
+          0.3400000035762787
+        ]
+      ],
+      "geometry_corner_error_max": 0.0,
+      "vertex_color_error_max": 0.0,
+      "pbr_error_max": 0.0,
+      "alpha_modes": [
+        "OPAQUE"
+      ],
+      "vertex_alpha_range": [
+        1.0,
+        1.0
+      ],
+      "external_resources": 0,
+      "images": 0,
+      "primitive_details": [
+        {
+          "material": "cream",
+          "triangles": 1092,
+          "vertices": 1895,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "gold",
+          "triangles": 1008,
+          "vertices": 946,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "ink",
+          "triangles": 1212,
+          "vertices": 2036,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "mint",
+          "triangles": 120,
+          "vertices": 128,
+          "has_vertex_colors": false
+        }
+      ],
+      "source_blend_sha256_matches": true,
+      "source_bounds_delta_max": 0.0
+    },
+    {
+      "name": "finish_gate",
+      "pass": true,
+      "triangles": 2448,
+      "primitives": 4,
+      "materials": 4,
+      "vertices": 3082,
+      "bounds_y_up": [
+        [
+          -1.4500000476837158,
+          0.0,
+          -0.3400000035762787
+        ],
+        [
+          1.4499999284744263,
+          2.5900001525878906,
+          0.3400000035762787
+        ]
+      ],
+      "geometry_corner_error_max": 0.0,
+      "vertex_color_error_max": 0.0,
+      "pbr_error_max": 0.0,
+      "alpha_modes": [
+        "OPAQUE"
+      ],
+      "vertex_alpha_range": [
+        1.0,
+        1.0
+      ],
+      "external_resources": 0,
+      "images": 0,
+      "primitive_details": [
+        {
+          "material": "coral",
+          "triangles": 228,
+          "vertices": 224,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "cream",
+          "triangles": 1152,
+          "vertices": 1592,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "gold",
+          "triangles": 336,
+          "vertices": 172,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "ink",
+          "triangles": 732,
+          "vertices": 1094,
+          "has_vertex_colors": false
+        }
+      ],
+      "source_blend_sha256_matches": true,
+      "source_bounds_delta_max": 0.0
+    },
+    {
+      "name": "grandstand_rostrum",
+      "pass": true,
+      "triangles": 940,
+      "primitives": 5,
+      "materials": 2,
+      "vertices": 1376,
+      "bounds_y_up": [
+        [
+          -0.4249999523162842,
+          0.24000000953674316,
+          -0.9000000357627869
+        ],
+        [
+          5.225000381469727,
+          1.4199999570846558,
+          0.8274999856948853
+        ]
+      ],
+      "geometry_corner_error_max": 0.0,
+      "vertex_color_error_max": 0.0,
+      "pbr_error_max": 0.0,
+      "alpha_modes": [
+        "OPAQUE"
+      ],
+      "vertex_alpha_range": [
+        1.0,
+        1.0
+      ],
+      "external_resources": 0,
+      "images": 0,
+      "primitive_details": [
+        {
+          "material": "Craft_molded_rubber.001",
+          "triangles": 188,
+          "vertices": 271,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "Craft_molded_rubber.001",
+          "triangles": 188,
+          "vertices": 277,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "Craft_molded_rubber.001",
+          "triangles": 188,
+          "vertices": 276,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "Craft_molded_rubber.001",
+          "triangles": 188,
+          "vertices": 274,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "Craft_mint_vinyl.001",
+          "triangles": 188,
+          "vertices": 278,
+          "has_vertex_colors": false
+        }
+      ],
+      "source_blend_sha256_matches": true,
+      "source_bounds_delta_max": 0.0
+    },
+    {
+      "name": "official_rostrum",
+      "pass": true,
+      "triangles": 188,
+      "primitives": 1,
+      "materials": 1,
+      "vertices": 239,
+      "bounds_y_up": [
+        [
+          -12.720000267028809,
+          0.22999998927116394,
+          -0.75
+        ],
+        [
+          -10.880000114440918,
+          1.0299999713897705,
+          0.5499999523162842
+        ]
+      ],
+      "geometry_corner_error_max": 0.0,
+      "vertex_color_error_max": 0.0,
+      "pbr_error_max": 0.0,
+      "alpha_modes": [
+        "OPAQUE"
+      ],
+      "vertex_alpha_range": [
+        1.0,
+        1.0
+      ],
+      "external_resources": 0,
+      "images": 0,
+      "primitive_details": [
+        {
+          "material": "Craft_mint_vinyl.001",
+          "triangles": 188,
+          "vertices": 239,
+          "has_vertex_colors": false
+        }
+      ],
+      "source_blend_sha256_matches": true,
+      "source_bounds_delta_max": 0.0
+    },
+    {
+      "name": "podium_plinth",
+      "pass": true,
+      "triangles": 188,
+      "primitives": 1,
+      "materials": 1,
+      "vertices": 287,
+      "bounds_y_up": [
+        [
+          -9.024999618530273,
+          0.23500001430511475,
+          -0.8500000238418579
+        ],
+        [
+          -6.375,
+          0.48500001430511475,
+          0.6499999761581421
+        ]
+      ],
+      "geometry_corner_error_max": 0.0,
+      "vertex_color_error_max": 0.0,
+      "pbr_error_max": 0.0,
+      "alpha_modes": [
+        "OPAQUE"
+      ],
+      "vertex_alpha_range": [
+        1.0,
+        1.0
+      ],
+      "external_resources": 0,
+      "images": 0,
+      "primitive_details": [
+        {
+          "material": "Craft_woven_binding.001",
+          "triangles": 188,
+          "vertices": 287,
+          "has_vertex_colors": false
+        }
+      ],
+      "source_blend_sha256_matches": true,
+      "source_bounds_delta_max": 0.0
+    },
+    {
+      "name": "squiggle_landscape_reexport_v1",
+      "pass": true,
+      "triangles": 11872,
+      "primitives": 6,
+      "materials": 6,
+      "vertices": 18656,
+      "bounds_y_up": [
+        [
+          -17.336444854736328,
+          -0.6919999718666077,
+          -4.122769832611084
+        ],
+        [
+          12.503422737121582,
+          -0.11773332953453064,
+          2.9636104106903076
+        ]
+      ],
+      "geometry_corner_error_max": 1.911302655318256e-06,
+      "vertex_color_error_max": 0.0,
+      "pbr_error_max": 0.0,
+      "alpha_modes": [
+        "OPAQUE"
+      ],
+      "vertex_alpha_range": [
+        1.0,
+        1.0
+      ],
+      "external_resources": 0,
+      "images": 0,
+      "primitive_details": [
+        {
+          "material": "Craft_coral_vinyl",
+          "triangles": 180,
+          "vertices": 540,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "Craft_ochre_vinyl",
+          "triangles": 240,
+          "vertices": 720,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "REFINED_deep_moss",
+          "triangles": 3360,
+          "vertices": 4933,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "REFINED_meadow",
+          "triangles": 780,
+          "vertices": 1198,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "REFINED_reed_leaf",
+          "triangles": 6912,
+          "vertices": 10065,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "REFINED_stone",
+          "triangles": 400,
+          "vertices": 1200,
+          "has_vertex_colors": false
+        }
+      ],
+      "source_blend_sha256_matches": true,
+      "source_bounds_delta_max": 0.0
+    },
+    {
+      "name": "boardwalks_landscape_reexport_v1",
+      "pass": true,
+      "triangles": 13524,
+      "primitives": 7,
+      "materials": 7,
+      "vertices": 21563,
+      "bounds_y_up": [
+        [
+          -21.28725242614746,
+          -0.7350000143051147,
+          -3.7682347297668457
+        ],
+        [
+          15.425210952758789,
+          -0.07636517286300659,
+          5.402874946594238
+        ]
+      ],
+      "geometry_corner_error_max": 1.966106438405579e-06,
+      "vertex_color_error_max": 0.0,
+      "pbr_error_max": 0.0,
+      "alpha_modes": [
+        "OPAQUE"
+      ],
+      "vertex_alpha_range": [
+        1.0,
+        1.0
+      ],
+      "external_resources": 0,
+      "images": 0,
+      "primitive_details": [
+        {
+          "material": "MAP_silver_ripples",
+          "triangles": 1080,
+          "vertices": 1978,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "MAP_warm_grey_stone",
+          "triangles": 280,
+          "vertices": 840,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "REFINED_bench_wood",
+          "triangles": 560,
+          "vertices": 960,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "REFINED_deep_moss",
+          "triangles": 1248,
+          "vertices": 1920,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "REFINED_earth_bank",
+          "triangles": 1092,
+          "vertices": 1680,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "REFINED_meadow",
+          "triangles": 624,
+          "vertices": 960,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "REFINED_reed_leaf",
+          "triangles": 8640,
+          "vertices": 13225,
+          "has_vertex_colors": false
+        }
+      ],
+      "source_blend_sha256_matches": true,
+      "source_bounds_delta_max": 0.0
+    },
+    {
+      "name": "bridges_landscape_reexport_v1",
+      "pass": true,
+      "triangles": 17208,
+      "primitives": 5,
+      "materials": 5,
+      "vertices": 29441,
+      "bounds_y_up": [
+        [
+          -25.63872718811035,
+          -0.6919999718666077,
+          -4.607288360595703
+        ],
+        [
+          22.20338249206543,
+          -0.11127915978431702,
+          6.551602363586426
+        ]
+      ],
+      "geometry_corner_error_max": 3.843257623971883e-06,
+      "vertex_color_error_max": 0.0,
+      "pbr_error_max": 0.0,
+      "alpha_modes": [
+        "OPAQUE"
+      ],
+      "vertex_alpha_range": [
+        1.0,
+        1.0
+      ],
+      "external_resources": 0,
+      "images": 0,
+      "primitive_details": [
+        {
+          "material": "REFINED_deep_moss",
+          "triangles": 1872,
+          "vertices": 2880,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "REFINED_meadow",
+          "triangles": 1248,
+          "vertices": 1920,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "REFINED_reed_leaf",
+          "triangles": 12960,
+          "vertices": 21785,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "REFINED_sheltered_water",
+          "triangles": 368,
+          "vertices": 576,
+          "has_vertex_colors": false
+        },
+        {
+          "material": "REFINED_stone",
+          "triangles": 760,
+          "vertices": 2280,
+          "has_vertex_colors": false
+        }
+      ],
+      "source_blend_sha256_matches": true,
+      "source_bounds_delta_max": 7.450580596923828e-08
+    }
+  ],
+  "layout": [
+    {
+      "track": "squiggle",
+      "trees": 14,
+      "pockets": 7,
+      "source_pockets_exact_match": true,
+      "source_matrix_error_max": 0.0,
+      "pass": true
+    },
+    {
+      "track": "boardwalks",
+      "trees": 10,
+      "pockets": 4,
+      "source_pockets_exact_match": true,
+      "source_matrix_error_max": 0.0,
+      "pass": true
+    },
+    {
+      "track": "bridges",
+      "trees": 27,
+      "pockets": 12,
+      "source_pockets_exact_match": true,
+      "source_matrix_error_max": 0.0,
+      "pass": true
+    },
+    {
+      "track": "mild",
+      "trees": 6,
+      "pockets": 0,
+      "source_pockets_exact_match": true,
+      "source_matrix_error_max": 0.0,
+      "pass": true
+    },
+    {
+      "track": "twisty-twirl",
+      "trees": 6,
+      "pockets": 0,
+      "source_pockets_exact_match": true,
+      "source_matrix_error_max": 0.0,
+      "pass": true
+    },
+    {
+      "track": "whirly-world",
+      "trees": 6,
+      "pockets": 0,
+      "source_pockets_exact_match": true,
+      "source_matrix_error_max": 0.0,
+      "pass": true
+    },
+    {
+      "track": "wild",
+      "trees": 6,
+      "pockets": 0,
+      "source_pockets_exact_match": true,
+      "source_matrix_error_max": 0.0,
+      "pass": true
+    }
+  ],
+  "totals": {
+    "assets": 22,
+    "bytes": 4380220,
+    "triangles": 93971,
+    "primitives": 94
+  }
+}

@@ -1,0 +1,178 @@
+{
+  "scope": "Final fixed center support plus all 12 r1 motion envelopes versus actual frozen non-Punch hardware and actor motion envelopes. XZ/3D disjoint exclusion, not narrow-phase overlap approval. Original non-Punch reports remain unchanged historical inputs.",
+  "inputs": {
+    "src/client/scene/environment/scene-mechanisms-manifest.json": "95f7d262a34c66d711d3c6ee16dfe4a7e041e120a96e6095990a179681da1705",
+    "src/client/scene/mechanisms/punch-r1/support.ts": "58ba352910257ae72f3443592823ade845303dece705520b45125915e88eddca",
+    "docs/qa/punch-r1-contact/mount-envelope.json": "d4b8bd521a1e58ffde10ae15c4f2021db1dc6fb809b9d3ca02c5dcf52ec5507d"
+  },
+  "rows": [
+    {
+      "node": 23,
+      "compact": false,
+      "other": "wild:1",
+      "disjoint": true,
+      "xzSeparated": true
+    },
+    {
+      "node": 23,
+      "compact": false,
+      "other": "wild:13",
+      "disjoint": true,
+      "xzSeparated": true
+    },
+    {
+      "node": 23,
+      "compact": false,
+      "other": "wild:17",
+      "disjoint": true,
+      "xzSeparated": true
+    },
+    {
+      "node": 23,
+      "compact": false,
+      "other": "wild:26",
+      "disjoint": true,
+      "xzSeparated": true
+    },
+    {
+      "node": 23,
+      "compact": false,
+      "other": "wild/17/desktop/banana:false:normal:false",
+      "disjoint": true,
+      "xzSeparated": true
+    },
+    {
+      "node": 23,
+      "compact": false,
+      "other": "wild/26/desktop/banana:false:normal:false",
+      "disjoint": true,
+      "xzSeparated": true
+    },
+    {
+      "node": 23,
+      "compact": true,
+      "other": "wild:1",
+      "disjoint": true,
+      "xzSeparated": true
+    },
+    {
+      "node": 23,
+      "compact": true,
+      "other": "wild:13",
+      "disjoint": true,
+      "xzSeparated": true
+    },
+    {
+      "node": 23,
+      "compact": true,
+      "other": "wild:17",
+      "disjoint": true,
+      "xzSeparated": true
+    },
+    {
+      "node": 23,
+      "compact": true,
+      "other": "wild:26",
+      "disjoint": true,
+      "xzSeparated": true
+    },
+    {
+      "node": 23,
+      "compact": true,
+      "other": "wild/17/compact/banana:false:normal:false",
+      "disjoint": true,
+      "xzSeparated": true
+    },
+    {
+      "node": 23,
+      "compact": true,
+      "other": "wild/26/compact/banana:false:normal:false",
+      "disjoint": true,
+      "xzSeparated": true
+    },
+    {
+      "node": 24,
+      "compact": false,
+      "other": "wild:1",
+      "disjoint": true,
+      "xzSeparated": true
+    },
+    {
+      "node": 24,
+      "compact": false,
+      "other": "wild:13",
+      "disjoint": true,
+      "xzSeparated": true
+    },
+    {
+      "node": 24,
+      "compact": false,
+      "other": "wild:17",
+      "disjoint": true,
+      "xzSeparated": true
+    },
+    {
+      "node": 24,
+      "compact": false,
+      "other": "wild:26",
+      "disjoint": true,
+      "xzSeparated": true
+    },
+    {
+      "node": 24,
+      "compact": false,
+      "other": "wild/17/desktop/banana:false:normal:false",
+      "disjoint": true,
+      "xzSeparated": true
+    },
+    {
+      "node": 24,
+      "compact": false,
+      "other": "wild/26/desktop/banana:false:normal:false",
+      "disjoint": true,
+      "xzSeparated": true
+    },
+    {
+      "node": 24,
+      "compact": true,
+      "other": "wild:1",
+      "disjoint": true,
+      "xzSeparated": true
+    },
+    {
+      "node": 24,
+      "compact": true,
+      "other": "wild:13",
+      "disjoint": true,
+      "xzSeparated": true
+    },
+    {
+      "node": 24,
+      "compact": true,
+      "other": "wild:17",
+      "disjoint": true,
+      "xzSeparated": true
+    },
+    {
+      "node": 24,
+      "compact": true,
+      "other": "wild:26",
+      "disjoint": true,
+      "xzSeparated": true
+    },
+    {
+      "node": 24,
+      "compact": true,
+      "other": "wild/17/compact/banana:false:normal:false",
+      "disjoint": true,
+      "xzSeparated": true
+    },
+    {
+      "node": 24,
+      "compact": true,
+      "other": "wild/26/compact/banana:false:normal:false",
+      "disjoint": true,
+      "xzSeparated": true
+    }
+  ]
+}

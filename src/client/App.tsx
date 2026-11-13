@@ -1,3 +1,5 @@
+import {useSceneLightingClock} from './useSceneLightingClock.js';
+import type {RoomLightingClock} from './scene-lighting-clock.js';
 import { useRaceHudGeometry } from './useRaceHudGeometry.js';
 import { IS_CN_SITE, SITE_BACKEND_ID, FOREIGN_INVITATION_ERROR, randomNickname } from './site-edition.js';
 import { randomId } from './random-id.js';
@@ -48,6 +50,9 @@ import { useRaceIntroReset } from './scene/useRaceIntro.js';
 import { BackendSelector, ServerChoices, backendLabel, useBackendSelection } from './BackendSelector.js';
 import { gameLobbyURL } from './game-lobby.js';
 import { backendEntryUrl, currentBackendId, formatRoomCode, getBackend, parseRoomCode, roomEntryUrl, spectatorInvite, type BackendId } from './backends.js';
+import { SCENE_APPEARANCES, sceneAppearance } from './scene-appearance.js';
+import { prepareSceneEntry, sceneEntryPath } from './scene-entry.js';
+prepareSceneEntry();
 const Board3D = lazy(() => import('./scene/Board3D.js').then(module => ({ default: module.Board3D })));
 
 const characters = CHARACTERS;
@@ -147,7 +152,7 @@ export function App() {
     } catch { /* Browser audio may be unavailable; play never depends on sound. */ }
   }, [muted]);
   useEffect(() => { document.documentElement.dataset.motion = reduceMotion ? 'reduce' : 'full'; try { localStorage.setItem('magical-athlete:reduced-motion', String(reduceMotion)); localStorage.setItem('magical-athlete:muted', String(muted)); } catch { /* Preferences are optional. */ } }, [reduceMotion, muted]);
-  useEffect(() => { const pop = () => { const next = currentCode(); setCode(next); setIdentity(readRouteIdentity(next)); setRoom(null); setError(''); setEndRoom(false); setLobbyNavigation(null); setConnection(routeClosedStatus(next)??'connecting'); }; addEventListener('popstate', pop); return () => removeEventListener('popstate', pop); }, []);
+  useEffect(() => { const pop = () => { prepareSceneEntry(); const next = currentCode(); setCode(next); setIdentity(readRouteIdentity(next)); setRoom(null); setError(''); setEndRoom(false); setLobbyNavigation(null); setConnection(routeClosedStatus(next)??'connecting'); }; addEventListener('popstate', pop); return () => removeEventListener('popstate', pop); }, []);
   useEffect(() => {
     if (!identity) return;
     saveIdentity(identity);
@@ -171,10 +176,10 @@ export function App() {
     catch (cause) { setError(cause instanceof Error ? cause.message : '操作未确认，请重新同步。'); return false; }
     finally { busyRef.current = false; setBusy(false); }
   }, [room, sound]);
-  const enter = (next: { identity: Identity; room: RoomView }) => { const route = formatRoomCode(next.room.code,next.identity.backendId??'cloudflare'); history.pushState({}, '', `/room/${route}${next.identity.role==='spectator'?'?spectate=1':''}`); setCode(route); setRoom(next.room); setIdentity(next.identity); setError(''); setConnection('connecting'); };
-  const resume = (saved: Identity) => { saveIdentity(saved); const route = formatRoomCode(saved.roomCode,saved.backendId??'cloudflare'); history.pushState({}, '', `/room/${route}${saved.role==='spectator'?'?spectate=1':''}`); setCode(route); setRoom(null); setIdentity(saved); setError(''); setConnection('connecting'); };
+  const enter = (next: { identity: Identity; room: RoomView }) => { const route = formatRoomCode(next.room.code,next.identity.backendId??'cloudflare'); history.pushState({}, '', sceneEntryPath(`/room/${route}${next.identity.role==='spectator'?'?spectate=1':''}`, location.search)); setCode(route); setRoom(next.room); setIdentity(next.identity); setError(''); setConnection('connecting'); };
+  const resume = (saved: Identity) => { saveIdentity(saved); const route = formatRoomCode(saved.roomCode,saved.backendId??'cloudflare'); history.pushState({}, '', sceneEntryPath(`/room/${route}${saved.role==='spectator'?'?spectate=1':''}`, location.search)); setCode(route); setRoom(null); setIdentity(saved); setError(''); setConnection('connecting'); };
   const copy = async (value: string, label: string) => { try { await navigator.clipboard.writeText(value); setNotice(`${label}已复制`); } catch { setCopyFallback(value); } };
-  const home = () => { history.pushState({}, '', '/'); setCode(''); setIdentity(null); setRoom(null); setError(''); setEndRoom(false); setLeaving(false); setLobbyNavigation(null); setConnection('connecting'); setConnectionError(''); };
+  const home = () => { history.pushState({}, '', sceneEntryPath('/', location.search)); setCode(''); setIdentity(null); setRoom(null); setError(''); setEndRoom(false); setLeaving(false); setLobbyNavigation(null); setConnection('connecting'); setConnectionError(''); };
   const leave = async () => {
     if (!identity || busyRef.current) return;
     busyRef.current = true; setBusy(true); setError('');
@@ -192,6 +197,7 @@ export function App() {
   const canCloseRoom = !!(socket.current?.connected || socket.current?.canClose);
   const presentation = usePresentation(room, { speed: animationSpeed, reducedMotion: reduceMotion, reconnect: !online });
   useEffect(()=>{const cursor=presentation.state?.eventCursor;if(cursor!==undefined)socket.current?.acknowledgeEvents?.(cursor);},[presentation.state?.eventCursor]);
+  const lighting=useSceneLightingClock(room,presentation.clock,online,identity?.backendId??entryBackend??currentBackendId());
   const visibleRoom = presentation.displayRoom ?? room;
   const expired = connection === 'expired';
   const kicked = connection === 'kicked';
@@ -224,7 +230,7 @@ export function App() {
         {visiblePhase === 'lobby' ? <Lobby room={room} busy={busy || !online} act={act} copy={copy} /> : <>
           {visiblePhase === 'draft' && <Draft room={visibleRoom ?? room} busy={busy || !online || !!room.pause} act={act} onDetail={showCharacter} />}
           {visiblePhase === 'selection' && <Selection room={visibleRoom ?? room} busy={busy || !online || !!room.pause} act={act} onDetail={showCharacter} />}
-          {visiblePhase && ['race', 'results', 'finished'].includes(visiblePhase) && <Race room={room} busy={busy || !online} leavingBusy={busy} canClose={canCloseRoom} act={act} onDetail={showCharacter} presentation={presentation} lowQuality={lowQuality} setLowQuality={setLowQuality} reduceMotion={reduceMotion} setReduceMotion={setReduceMotion} muted={muted} setMuted={setMuted} animationSpeed={animationSpeed} setAnimationSpeed={setAnimationSpeed} online={online} onRename={() => setRenameOpen(true)} onRules={() => setRules(true)} onEnd={() => setEndRoom(true)} onLeave={requestLeave} onInvite={() => void copy(invite, '邀请链接')} onLobby={requestLobby} onServer={requestServer} />}
+          {visiblePhase && ['race', 'results', 'finished'].includes(visiblePhase) && <Race lightingClock={lighting.clock} lightingRunning={lighting.running} room={room} busy={busy || !online} leavingBusy={busy} canClose={canCloseRoom} act={act} onDetail={showCharacter} presentation={presentation} lowQuality={lowQuality} setLowQuality={setLowQuality} reduceMotion={reduceMotion} setReduceMotion={setReduceMotion} muted={muted} setMuted={setMuted} animationSpeed={animationSpeed} setAnimationSpeed={setAnimationSpeed} online={online} onRename={() => setRenameOpen(true)} onRules={() => setRules(true)} onEnd={() => setEndRoom(true)} onLeave={requestLeave} onInvite={() => void copy(invite, '邀请链接')} onLobby={requestLobby} onServer={requestServer} />}
           {visiblePhase === 'paused' && <div className="paper-panel"><h2>比赛已保存</h2><p>需要处理规则状态后继续，当前对局与所有分数均已保留。</p><p>{room.rulesStatus}</p><Button secondary onClick={() => socket.current?.emit('sync')}>重新同步</Button></div>}
           {!immersive && <><div className="below-game"><Scoreboard room={room} /><EventLog room={room} /></div><MyTeam room={room} onDetail={showCharacter} /></>}
         </>}
@@ -526,8 +532,10 @@ function Selection({ room, busy, act, onDetail }: { room: RoomView; busy: boolea
   </>;
 }
 
-function Race({ room, busy, leavingBusy, canClose, act, onDetail, presentation, lowQuality, setLowQuality, reduceMotion, setReduceMotion, muted, setMuted, animationSpeed, setAnimationSpeed, online, onRename, onRules, onEnd, onLeave, onInvite, onLobby, onServer }: { room: RoomView; busy: boolean; leavingBusy: boolean; canClose: boolean; act: (action: GameAction) => void; onDetail: ShowCharacter; presentation: UsePresentationResult; lowQuality: boolean; setLowQuality: (value: boolean) => void; reduceMotion: boolean; setReduceMotion: (value: boolean) => void; muted: boolean; setMuted: (value: boolean) => void; animationSpeed: number; setAnimationSpeed: (value: number) => void; online: boolean; onRename: () => void; onRules: () => void; onEnd: () => void; onLeave: () => void; onInvite: () => void; onLobby: () => void; onServer: (target: BackendId) => void }) {
+function Race({ lightingClock,lightingRunning,room, busy, leavingBusy, canClose, act, onDetail, presentation, lowQuality, setLowQuality, reduceMotion, setReduceMotion, muted, setMuted, animationSpeed, setAnimationSpeed, online, onRename, onRules, onEnd, onLeave, onInvite, onLobby, onServer }: { lightingClock:RoomLightingClock;lightingRunning:boolean;room: RoomView; busy: boolean; leavingBusy: boolean; canClose: boolean; act: (action: GameAction) => void; onDetail: ShowCharacter; presentation: UsePresentationResult; lowQuality: boolean; setLowQuality: (value: boolean) => void; reduceMotion: boolean; setReduceMotion: (value: boolean) => void; muted: boolean; setMuted: (value: boolean) => void; animationSpeed: number; setAnimationSpeed: (value: number) => void; online: boolean; onRename: () => void; onRules: () => void; onEnd: () => void; onLeave: () => void; onInvite: () => void; onLobby: () => void; onServer: (target: BackendId) => void }) {
   busy = busy || !!room.pause;
+  const [appearanceMode, setAppearanceMode] = useState(() => { try { return sceneAppearance(localStorage.getItem('magical-athlete:scene-appearance')); } catch { return sceneAppearance(null); } });
+  useEffect(() => { try { localStorage.setItem('magical-athlete:scene-appearance', appearanceMode); } catch { /* Optional local preference. */ } }, [appearanceMode]);
   const [racePanel, setRacePanel] = useState<'menu' | 'scores' | 'log' | 'track'>();
   const settingsOpen = racePanel === 'menu';
   const setSettingsOpen = (open: boolean) => setRacePanel(open ? 'menu' : undefined);
@@ -558,7 +566,7 @@ function Race({ room, busy, leavingBusy, canClose, act, onDetail, presentation, 
   const actorName = active ? characterName(active.characterId) : '选手';
   const status = room.pause ? '比赛已暂停 · 等待房主恢复' : playing ? `${playbackRacer ? characterName(playbackRacer.characterId) + ' · ' : ''}${playbackLabel}` : pendingPrompt(room) ? pendingPrompt(room) : room.turnStage === 'starting' ? `${actorName} · 正在处理回合开始技能` : mine ? `${actorName} · 轮到你了，掷骰出发` : `${player?.name ?? '选手'}的${actorName}正在行动`;
   return <section className="immersive-race" data-testid="immersive-race">
-    <Suspense fallback={<div className="scene-loading">立体赛场正在就位…</div>}><Board3D clock={presentation.clock} paused={presentation.paused} room={showing} racers={presentation.racers} beat={beat} queue={presentation.state?.queue} startedAt={presentation.startedAt} durationMs={presentation.durationMs} lowQuality={lowQuality} reducedMotion={reduceMotion} muted={muted} onDetail={onDetail} onSkipIntro={presentation.skip} onIntroReady={presentation.startIntro} onDiceSettled={presentation.onDiceSettled} introReady={presentation.introReady} choiceBusy={busy} onChooseRoute={pendingChoice ? optionId => act({ type: 'choose', choiceId: pendingChoice.id, optionId }) : undefined} /></Suspense>
+    <Suspense fallback={<div className="scene-loading">立体赛场正在就位…</div>}><Board3D lightingClock={lightingClock} lightingRunning={lightingRunning} appearanceMode={appearanceMode} clock={presentation.clock} paused={presentation.paused} room={showing} racers={presentation.racers} beat={beat} queue={presentation.state?.queue} startedAt={presentation.startedAt} durationMs={presentation.durationMs} lowQuality={lowQuality} reducedMotion={reduceMotion} muted={muted} onDetail={onDetail} onSkipIntro={presentation.skip} onIntroReady={presentation.startIntro} onDiceSettled={presentation.onDiceSettled} introReady={presentation.introReady} choiceBusy={busy} onChooseRoute={pendingChoice ? optionId => act({ type: 'choose', choiceId: pendingChoice.id, optionId }) : undefined} /></Suspense>
     {beat?.abilityReveal && <AbilityReveal key={beat.key} reveal={beat.abilityReveal} onDetail={onDetail} />}
     <div className="race-hud-top">
       <nav className="race-hud-buttons" aria-label="比赛工具">
@@ -581,7 +589,7 @@ function Race({ room, busy, leavingBusy, canClose, act, onDetail, presentation, 
     {racePanel && racePanel !== 'menu' && <Modal title={racePanel === 'scores' ? '累计积分' : racePanel === 'log' ? '事件记录' : '本场赛事与地图'} onClose={() => setRacePanel(undefined)}><div className="race-detail-content">{racePanel === 'scores' ? <Scoreboard room={room} /> : racePanel === 'log' ? <EventLog room={room} /> : <TrackDetails room={showing} queue={presentation.state?.queue} />}</div></Modal>}
     {settingsOpen && <Modal title="比赛菜单" onClose={() => setSettingsOpen(false)}><div className="race-menu-content" id="presentation-settings-panel">
       {racersPerPlayer(room.players.length,room.config) === 2 && <section className="locked-race-order" aria-label="本场锁定行动顺序"><strong>本场基础行动顺序</strong>{room.players.map(owner => <p key={owner.id}>{owner.name}：{(room.baseTurnOrder ?? room.racers.map(racer => racer.id)).map(id => room.racers.find(racer => racer.id === id)).filter((racer): racer is Racer => !!racer && racer.playerId === owner.id).map(racer => characterName(racer.characterId)).join(' → ')}</p>)}<small>技能明确追加、跳过或改变行动顺序时，按技能结算。</small></section>}
-      <div className="presentation-settings"><label><input type="checkbox" checked={lowQuality} onChange={event => setLowQuality(event.target.checked)} />低画质</label><label><input type="checkbox" checked={muted} onChange={event => setMuted(event.target.checked)} />静音</label><label><input type="checkbox" disabled={presentation.paused} checked={reduceMotion} onChange={event => setReduceMotion(event.target.checked)} />减少动效</label><label>动画速度<select disabled={presentation.paused} aria-label="动画速度" value={animationSpeed} onChange={event => setAnimationSpeed(Number(event.target.value))}><option value={1}>1× · 完整演出</option><option value={2}>2× · 快速</option><option value={4}>4× · 极速</option></select></label></div>
+      <div className="presentation-settings"><label>场景光照<select title="自动约3分钟循环，同房间跨局接续；暂停、切到后台或断线时冻结。手动选择固定时段。" aria-label="场景光照" value={appearanceMode} onChange={event => setAppearanceMode(sceneAppearance(event.target.value))}>{SCENE_APPEARANCES.map(option => <option key={option.value} value={option.value}>{option.label}</option>)}</select></label><label><input type="checkbox" checked={lowQuality} onChange={event => setLowQuality(event.target.checked)} />低画质</label><label><input type="checkbox" checked={muted} onChange={event => setMuted(event.target.checked)} />静音</label><label><input type="checkbox" disabled={presentation.paused} checked={reduceMotion} onChange={event => setReduceMotion(event.target.checked)} />减少动效</label><label>动画速度<select disabled={presentation.paused} aria-label="动画速度" value={animationSpeed} onChange={event => setAnimationSpeed(Number(event.target.value))}><option value={1}>1× · 完整演出</option><option value={2}>2× · 快速</option><option value={4}>4× · 极速</option></select></label></div>
       <RoomConfigPanel room={room} busy={busy} act={act} />
       <div className="race-menu-links"><LandscapeControl className="button button-secondary" />{!IS_CN_SITE && !spectator && <Button secondary onClick={() => { setSettingsOpen(false); onRename(); }}>修改昵称 · 剩余 {room.renameRemaining ?? 1} 次</Button>}<Button secondary onClick={() => { setSettingsOpen(false); onRules(); }}>帮助与规则</Button>{room.mode !== 'practice' && room.mode !== 'ai' && <Button secondary onClick={onInvite}>邀请朋友</Button>}<Button secondary disabled={leavingBusy} onClick={() => { setSettingsOpen(false); onLobby(); }}>返回游戏大厅</Button><Button secondary disabled={leavingBusy} onClick={() => { setSettingsOpen(false); onLeave(); }}>{spectator ? '退出观看' : '退出房间'}</Button>{!spectator && room.hostId === room.selfId && <button className="end-room-button" disabled={leavingBusy || !canClose} onClick={() => { setSettingsOpen(false); onEnd(); }}>结束房间</button>}</div>
       <ServerChoices current={room.backendId} disabled={leavingBusy || !!readPendingCreation()} onSelect={target => { setSettingsOpen(false); onServer(target); }} />

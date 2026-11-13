@@ -75,3 +75,25 @@ test('a failed detailed asset does not poison economy quality and can recover wh
     expect(highRequests).toBeGreaterThan(attempts);expect(application.rooms.get(env.code).game).toEqual(before);expect(env.errors).toEqual([]);
   }finally{await env.context.close();}
 });
+
+test('a missing WebGL context keeps the confirmed dice readable and advances without Skip',async({browser})=>{
+  const env=await fixture(browser,true);
+  try{
+    await env.context.addInitScript(()=>{
+      const original=HTMLCanvasElement.prototype.getContext;
+      HTMLCanvasElement.prototype.getContext=function(this:HTMLCanvasElement,contextId:string,...args:unknown[]){
+        return /webgl/i.test(contextId)?null:Reflect.apply(original,this,[contextId,...args]);
+      } as typeof original;
+    });
+    await env.open();
+    const board=env.page.getByTestId('board-3d');
+    await expect(board).toHaveAttribute('data-scene-failed','true');
+    await env.page.getByRole('button',{name:'掷骰子',exact:true}).click();
+    await expect(env.page.locator('.dice-renderer-fallback')).toBeVisible();
+    await expect(env.page.getByTestId('dice-value')).toContainText(/[1-6]/);
+    await expect(board).toHaveAttribute('data-phase','idle',{timeout:20_000});
+    await expect(env.page.locator('.dice-spotlight')).toBeHidden();
+    await expect(env.page.locator('.scene-fallback')).toHaveCount(1);
+    await expect(env.page.getByRole('button',{name:'重新载入 3D',exact:true})).toHaveCount(1);
+  }finally{await env.context.close();}
+});

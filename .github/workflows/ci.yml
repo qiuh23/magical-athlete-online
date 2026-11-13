@@ -71,7 +71,7 @@ jobs:
           tests/https-entries.test.ts tests/backends.test.ts
           tests/lobby.test.ts tests/lobby-resources.test.ts
           tests/dual-backend-worker.test.ts tests/dual-backend-server.test.ts
-          tests/network-backends.test.ts
+          tests/network-backends.test.ts tests/asset-cache.test.ts
       - name: Validate the full gameplay and persistence unit suite on explicit request
         if: github.event_name == 'workflow_dispatch' && steps.validation.outputs.suite != 'release'
         run: pnpm test

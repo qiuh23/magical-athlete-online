@@ -1,0 +1,65 @@
+import {createParkSource,buildParkFoundation} from '../../src/client/scene/environment/parked-fallbacks/geometry.js';
+/** Read-only runtime audit: writes only docs/qa/scene-parked-fallbacks. No old certificates. */
+import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {MeshoptDecoder} from 'three/addons/libs/meshopt_decoder.module.js';
+import {Box3,BoxGeometry,Group,Mesh,Matrix4,MeshStandardMaterial,Vector3} from 'three';
+import {TRACKS,type TrackId} from '../../src/shared/tracks.js';
+import {environmentAssets,environmentUrl,isNaturalMap} from '../../src/client/scene/environment/layout.js';
+import {FLOODLIGHT_ASSETS,floodlightUrl,buildFloodlightGeometry} from '../../src/client/scene/environment/floodlights.js';
+import {buildEnvironmentGeometry,type EnvironmentModels} from '../../src/client/scene/environment/runtime.js';
+import {buildRebuiltDeck,buildRebuiltPads,buildDeviceFoundation,buildWild13GroundTongue} from '../../src/client/scene/environment/deck-runtime.js';
+import {rebuiltSceneryGeometry} from '../../src/client/scene/environment/RebuiltScenery.js';
+import {activeMechanismLayout} from '../../src/client/scene/mechanisms/layout.js';
+import {createMechanismInstance,MECHANISM_FILES} from '../../src/client/scene/mechanisms/models.js';
+import {mechanismPlacements} from '../../src/client/scene/mechanisms/placements.js';
+import {createTelescopicTripInstance,telescopicTripPose} from '../../src/client/scene/mechanisms/telescopic-trip.js';
+import {CERTIFIED_TRIP_URL} from '../../src/client/scene/mechanisms/certified-trip.js';
+import {buildR1Foundation,r1FootBounds} from '../../src/client/scene/mechanisms/punch-r1/support.js';
+import {bindRebuildDriver} from '../../art/mechanisms/punch-rebuild-r1/driver.js';
+import {collect,collision,surfaceHeight,type Collider} from './scene-collision.js';
+Object.assign(globalThis,{window:{location:{search:'?mechanisms=1&environment=1'}}});
+const out='docs/qa/scene-parked-fallbacks';mkdirSync(out,{recursive:true});
+const hashes:Record<string,string>={};
+const load=async(file:string)=>{const b=readFileSync(file);hashes[file]=createHash('sha256').update(b).digest('hex');return new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).parseAsync(b.buffer.slice(b.byteOffset,b.byteOffset+b.byteLength),'');};
+const json=(file:string)=>{const b=readFileSync(file);hashes[file]=createHash('sha256').update(b).digest('hex');return JSON.parse(b.toString());};
+const manifest=json('src/client/scene/environment/scene-mechanisms-manifest.json'),mounts=json('docs/qa/punch-r1-contact/mount-envelope.json');
+const assets=new Map();for(const kind of ['punch','trip','gain','loss','warp'] as const)assets.set(kind,await load('public/models/mechanisms/'+MECHANISM_FILES[kind]));
+const tile=await load('public/models/mechanisms/approved_soft_track_tile.glb'),trip=await load('public'+CERTIFIED_TRIP_URL),r1=await load('art/mechanisms/punch-rebuild-r1/punch-rebuild-r1.glb');
+const models:EnvironmentModels={},lights:EnvironmentModels={};for(const track of Object.keys(TRACKS) as TrackId[])for(const name of environmentAssets(track))if(!models[name])models[name]=(await load('public'+environmentUrl(name))).scene;for(const name of FLOODLIGHT_ASSETS)lights[name]=(await load('public'+floodlightUrl(name))).scene;
+const box=(b:number[][])=>new Box3(new Vector3(...b[0]),new Vector3(...b[1]));
+const reports:any[]=[];
+const terrain=(c:Collider)=>c.name.startsWith('scene:ground:')||c.name.includes('_base:')||c.name.includes('_landscape_')||c.name.includes('wild13-ground-tongue');
+for(const track of Object.keys(TRACKS) as TrackId[]){
+ const options={...activeMechanismLayout(track),lowQuality:false},root=new Group(),deck=buildRebuiltDeck(track,false);root.add(buildEnvironmentGeometry(track,models,options).root,buildFloodlightGeometry(track,lights,options).root,buildRebuiltPads(tile.scene,track,false));for(const name of ['pads','roads','supports','trimmedSupports'] as const){deck[name].name='deck:'+name;root.add(deck[name]);}
+ if(!isNaturalMap(track))for(const p of rebuiltSceneryGeometry(track,false,'ground')){const m=new Mesh(p.geometry,new MeshStandardMaterial());m.name='ground:'+p.paint;root.add(m);}
+ const placements=mechanismPlacements(track);if(track==='wild')root.add(buildWild13GroundTongue(placements.find(p=>p.anchor.node===13)!.matrix));
+ const scene=collect(root,'scene:'),ground=scene.filter(terrain);
+ if(track==='wild')for(const p of mounts.result.filter((p:any)=>!p.compact)){const rig=r1.scene.clone(true);bindRebuildDriver(rig).sample(p.parkPose);const m=new Matrix4().fromArray(p.mount);scene.push(...collect(rig,`r1:${p.node}:`,m),...collect(buildR1Foundation(rig,m,p.foundationBottom,p.foundationCenterBottom),`r1-foundation:${p.node}:`));}
+ const devices=placements.filter(p=>manifest.approved.some((a:any)=>a.anchor===p.anchor.id)).map(p=>{const a=manifest.approved.find((a:any)=>a.anchor===p.anchor.id),source=assets.get(p.anchor.kind),model=p.anchor.kind==='trip'?createTelescopicTripInstance(trip.scene):createMechanismInstance(source.scene,source.animations[0]);const sample=(t:number)=>{if(p.anchor.kind==='trip')(model as any).sample(telescopicTripPose(0,0,.2));else if(p.anchor.kind==='warp')(model as any).sampleWarp(t);else(model as any).sample(t);};sample(0);return{p,a,model,sample,park:collect(model.object,`approved:${p.anchor.id}:`,p.matrix),foundation:collect(buildDeviceFoundation(p.matrix,a.foundationBottom,p.anchor.kind==='trip'),`approved-foundation:${p.anchor.id}:`)};});
+ const candidates=placements.filter(p=>p.anchor.kind==='punch'&&!(track==='wild'&&[23,24].includes(p.anchor.node))||p.anchor.kind==='trip'&&(track==='wild'&&p.anchor.node===5||track==='squiggle'&&p.anchor.node===17)).map(p=>{const s=assets.get(p.anchor.kind),model=createParkSource(p.anchor.id,s);const park=collect(model.object,`park:${p.anchor.id}:`,p.matrix);let foot:Box3;
+ if(p.anchor.kind==='punch')foot=r1FootBounds(model.object);else{const f=model.object.getObjectByName('TRIP_FIXED_FOOT') as Mesh;f.geometry.computeBoundingBox();foot=f.geometry.boundingBox!.clone().applyMatrix4(model.object.matrixWorld.clone().invert().multiply(f.matrixWorld));}
+ const supportFoot=foot.clone();if(track==='wild'&&p.anchor.node===5){supportFoot.min.x+=.06;supportFoot.max.x-=.06;supportFoot.min.z+=.06;supportFoot.max.z-=.06;}
+ const probes=[[supportFoot.min.x,supportFoot.min.z],[supportFoot.min.x,supportFoot.max.z],[supportFoot.max.x,supportFoot.min.z],[supportFoot.max.x,supportFoot.max.z],[(supportFoot.min.x+supportFoot.max.x)/2,(supportFoot.min.z+supportFoot.max.z)/2]].map(([x,z])=>new Vector3(x,foot.min.y,z).applyMatrix4(p.matrix));
+ const heights=probes.map(v=>Math.max(...ground.map(c=>surfaceHeight(c,v.x,v.z,v.y+.00001)??-Infinity)));const top=probes[0]!.y,finite=heights.every(Number.isFinite),flat=finite&&Math.max(...heights)-Math.min(...heights)<=.002,bottom=finite?Math.max(...heights)-.001:NaN;
+ const support=finite&&flat&&top-bottom>0&&top-bottom<.5;const foundation:Collider[]=[];let foundationSpec:any;
+ if(support){const size=supportFoot.getSize(new Vector3()),center=supportFoot.getCenter(new Vector3()),h=top-bottom,matrix=p.matrix.clone().multiply(new Matrix4().makeTranslation(center.x,(top+bottom)/2-p.matrix.elements[13]!,center.z));foundationSpec={matrix:matrix.toArray(),size:[size.x,h,size.z],bottom,top};const m=buildParkFoundation(foundationSpec);foundation.push(...collect(m,`fallback-foundation:${p.anchor.id}:`));}
+ const envelope=new Box3();[...park,...foundation].forEach(c=>envelope.union(c.box));return{p,model,park,foundation,foot,probes,heights,top,bottom,support,flat,envelope,foundationSpec};});
+ for(const c of candidates){const hits:any[]=[],overlaps:any[]=[],supportContacts:any[]=[];const targets=[...scene,...devices.flatMap(d=>[...d.park,...d.foundation])];
+ const run=(parts:Collider[],targets:Collider[],context:any)=>{for(const a of parts)for(const b of targets){const h=collision(a,b);if(!h)continue;let allowed=false;const ys=h.bounds.map(v=>v[1]);if(a.name.startsWith('fallback-foundation:')&&terrain(b))allowed=h.kind==='surface'&&Math.max(...ys)<=c.bottom+.003&&Math.min(...ys)>=c.bottom-1e-5;if(b.name.startsWith('fallback-foundation:')&&(a.name.endsWith(':PUNCH_ROOT__teal_fixed_batch')||a.name.endsWith(':TRIP_FIXED_FOOT')))allowed=h.kind==='surface'&&Math.max(...ys)-Math.min(...ys)<2e-5&&Math.abs(Math.max(...ys)-c.top)<2e-5;
+ if(c.p.anchor.id==='squiggle:17'&&a.name.endsWith(':TRIP_FIXED_FOOT')&&b.name==='scene:deck:trimmedSupports:0'){const top=c.p.matrix.elements[13]!+c.foot.max.y;allowed=h.kind==='surface'&&Math.abs(b.box.min.y-top)<2e-5&&h.bounds.every(point=>{const worldFoot=c.foot.clone().applyMatrix4(c.p.matrix),v=new Vector3(...point);return Math.abs(v.y-top)<2e-5&&v.x>=worldFoot.min.x-1e-5&&v.x<=worldFoot.max.x+1e-5&&v.z>=worldFoot.min.z-1e-5&&v.z<=worldFoot.max.z+1e-5&&b.box.max.x-b.box.min.x<.24&&b.box.max.z-b.box.min.z<.25;});}
+ const hit={...context,a:a.name,b:b.name,...h,allowed};(allowed?supportContacts:hits).push(hit);}};
+ run([...c.park,...c.foundation],targets,{mode:'static'});run(c.park,c.foundation,{mode:'foot-interface'});
+ for(const d of candidates.filter(d=>d!==c))run([...c.park,...c.foundation],[...d.park,...d.foundation],{mode:'candidate-pair',other:d.p.anchor.id});
+ for(const d of devices){if(!c.envelope.intersectsBox(box(d.a.envelope)))continue;if(d.p.anchor.kind==='trip'){overlaps.push({kind:'approved-trip-hardware',anchor:d.p.anchor.id,status:'unverified-overlap'});continue;}const count=hits.length;for(let i=0;i<=50;i++){d.sample(i/50);run([...c.park,...c.foundation],collect(d.model.object,`action:${d.p.anchor.id}:`,d.p.matrix),{mode:'approved-action',t:i/50});}d.sample(0);overlaps.push({kind:'approved-action',anchor:d.p.anchor.id,status:hits.length===count?'51-sample-narrow-phase-clear':'collision',samples:51});}
+ for(const f of manifest.fixtures.filter((f:any)=>f.key.startsWith(track+'/')&&f.key.includes('/desktop/')))if(c.envelope.intersectsBox(box(f.envelope)))overlaps.push({kind:'banana-trip-envelope',key:f.key,status:'unverified-overlap'});
+ if(track==='wild')for(const p of mounts.result.filter((p:any)=>!p.compact))if(c.envelope.intersectsBox(box(p.sampledMotionBounds)))overlaps.push({kind:'r1-punch-motion',node:p.node,status:'unverified-overlap'});
+ const report={anchor:c.p.anchor.id,kind:c.p.anchor.kind,park:c.p.anchor.kind==='trip'&&track==='wild'?{angle:Math.PI/4,reach:0,adapter:'fitWild5Foot'}:{sample:0},mount:c.p.matrix.toArray(),foot:[c.foot.min.toArray(),c.foot.max.toArray()],terrainProbeHeights:c.heights.map(v=>Number.isFinite(v)?v:null),supportSolid:c.support,flatTerrain:c.flat,foundation:c.foundationSpec,envelope:[c.envelope.min.toArray(),c.envelope.max.toArray()],hits,supportContacts,motionChecks:overlaps,status:!c.support?'blocked-support':hits.length?'blocked-collision':overlaps.some(o=>o.status==='unverified-overlap')?'held-unverified-motion-overlap':'supported-park-only'};reports.push(report);console.log(report.anchor,report.status,'hits',hits.length,'unverified',overlaps.filter(o=>o.status==='unverified-overlap').length);writeFileSync(out+'/audit.json',JSON.stringify({scope:'Actual static triangles and closed-component containment, native fixed park only. New footprint-derived terrain solids. No actor contact or inherited certificate. 51 samples only for overlapping approved non-Trip action envelopes; other envelope overlaps held. Candidate-pair clashes conservative: all candidates present.',hashes,reports},null,2));
+ }
+}
+for(const f of ['src/client/scene/mechanisms/punch-r1/support.ts','src/client/scene/environment/parked-fallbacks/geometry.ts','scripts/recovery/audit-parked-fallbacks.ts','scripts/recovery/scene-collision.ts','src/client/scene/mechanisms/models.ts','src/client/scene/mechanisms/static-support.ts','src/client/scene/mechanisms/placements.ts','src/client/scene/environment/runtime.ts','src/client/scene/environment/deck-runtime.ts','src/client/scene/environment/floodlights.ts'])hashes[f]=createHash('sha256').update(readFileSync(f)).digest('hex');
+writeFileSync(out+'/audit.json',JSON.stringify({scope:'Actual static triangles and closed-component containment, native fixed park only. New footprint-derived terrain solids. No actor contact or inherited certificate. 51 samples only for overlapping approved non-Trip action envelopes; other envelope overlaps held. Candidate-pair clashes conservative: all candidates present. Desktop scene checked; compact requires matching global rigid rotation.',hashes,reports},null,2));
+writeFileSync(out+'/park-fixtures.json',JSON.stringify({version:'park-only-provisional-v1',physicalAction:false,contactCertificate:null,fixtures:reports.filter(r=>r.status==='supported-park-only').map(({anchor,kind,park,mount,foundation,envelope})=>({anchor,kind,park,mount,foundation,envelope})),hashes},null,2));
+
+writeFileSync('src/client/scene/environment/parked-fallbacks/manifest.json',readFileSync(out+'/park-fixtures.json'));

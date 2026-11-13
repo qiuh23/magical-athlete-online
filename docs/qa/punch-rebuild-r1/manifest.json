@@ -1,0 +1,105 @@
+{
+  "version": "punch-rebuild-r1",
+  "kind": "new limited mechanical reconstruction; not recovered adjustable-v1",
+  "baseCommit": "1cb3194912b25e5d0839ca06a0fe4f3fc6d89f49",
+  "productionApproved": false,
+  "tools": {
+    "blender": "4.3.2",
+    "node": "v24.22.1",
+    "three": "0.186.1"
+  },
+  "checks": {
+    "focusedTests": {
+      "passed": 4,
+      "failed": 0,
+      "command": "node --import tsx --test tests/punch-rebuild-r1.test.ts"
+    },
+    "mainAndWorkerTypecheck": "passed",
+    "actualSurfaceSamples": 81,
+    "newClosedSolids": 9,
+    "coldRoundtripPoses": 17,
+    "newSectionAndAxialFit": "passed",
+    "opaqueRender": "visually inspected; inherited black coplanar artifact removed"
+  },
+  "notVerified": [
+    "actor contact",
+    "map and bystanders",
+    "runtime events",
+    "continuous whole-rig swept volume",
+    "browser/mobile/FPS"
+  ],
+  "files": {
+    "art/mechanisms/punch-rebuild-r1/build.py": {
+      "bytes": 6453,
+      "sha256": "c1ee699fc9bd2f7e5e8c0f8aed2f49c35a19fda8fd77e7e9e4931bb92c8363f7"
+    },
+    "art/mechanisms/punch-rebuild-r1/check_sections.py": {
+      "bytes": 3800,
+      "sha256": "b693e428d85bc448d7aebc3f61337a96d02d6230b1c6c94d0ef3090783e85cd9"
+    },
+    "art/mechanisms/punch-rebuild-r1/contract.json": {
+      "bytes": 2256,
+      "sha256": "60f076a9801e85ec4688c3ffd9d976a8039f60304b77f40625285cab3a73bf66"
+    },
+    "art/mechanisms/punch-rebuild-r1/driver.ts": {
+      "bytes": 3194,
+      "sha256": "60654d9ac97e2fdfb0c356ed7de34992c69ec76779d954e4ba6bba2b1ac1ed7c"
+    },
+    "art/mechanisms/punch-rebuild-r1/inspect_contacts.py": {
+      "bytes": 1994,
+      "sha256": "9641d10e4d1070be6550030bdf7a5790eb86afde6a0dc67b6c5d75fe0f390c0a"
+    },
+    "art/mechanisms/punch-rebuild-r1/inspect_source.py": {
+      "bytes": 1114,
+      "sha256": "4060f588b4d9e2752eccb1f1691dc8b9d7522b0a2480461b444cc00f67c20a60"
+    },
+    "art/mechanisms/punch-rebuild-r1/punch-rebuild-r1.blend": {
+      "bytes": 1441504,
+      "sha256": "8ef9c5da844dab3b39e5dc9a470ad17fb1c8aea883ac0779c5eb311db4bb09eb"
+    },
+    "art/mechanisms/punch-rebuild-r1/punch-rebuild-r1.glb": {
+      "bytes": 474808,
+      "sha256": "aef0b2f39adcbb29eaa3f449e22804093f5efe02e1d0113ca35500cd75cb25b6"
+    },
+    "art/mechanisms/punch-rebuild-r1/render_structure.py": {
+      "bytes": 3264,
+      "sha256": "f2450b4888154329a405ea86b7d9f2a88b5dc9dbc009c8d807f3b1db11987997"
+    },
+    "art/mechanisms/punch-rebuild-r1/validate.py": {
+      "bytes": 5170,
+      "sha256": "74821644a11f48dc10617376213f1355f6e6b9a55084b93b86203bd45e37bc23"
+    },
+    "docs/qa/punch-rebuild-r1/README.md": {
+      "bytes": 5948,
+      "sha256": "1b7a10dc57cf61758d0e1df9c7d4423a07fbeb3a3c719223d9c6f6e9e3bfb4d2"
+    },
+    "docs/qa/punch-rebuild-r1/raw-contacts.json": {
+      "bytes": 6809,
+      "sha256": "6bd71a7def9198427fc97bde75de4f0f4bdd56cb2a4a273fe0bd5304be859e2c"
+    },
+    "docs/qa/punch-rebuild-r1/section-clearance.json": {
+      "bytes": 8609,
+      "sha256": "ecebd5d414d7778340d3a220a29b668a8f77d1feb103d6c7016b67c79af4ec6e"
+    },
+    "docs/qa/punch-rebuild-r1/source-inspection.json": {
+      "bytes": 6655,
+      "sha256": "553f2271a3671dc7daaef115772ae59c42f78242811242d4f033e09c51a2b3f3"
+    },
+    "docs/qa/punch-rebuild-r1/structure-opaque.png": {
+      "bytes": 1437516,
+      "sha256": "026ae0ebb35be46c67f2903075f7683c473cd3d8cdc8b359941d9220b8c8ccc8"
+    },
+    "docs/qa/punch-rebuild-r1/structure-transparent.png": {
+      "bytes": 1444673,
+      "sha256": "4f9d47f23fbdbfa6feb20977cd43003b60c8f78689c8abb8ca2b942db75cbb2d"
+    },
+    "docs/qa/punch-rebuild-r1/validation.json": {
+      "bytes": 3321,
+      "sha256": "d6d80e218ab6526fcbf3a5d5f496d73a35c38e9ef38eda36f6e623d24a4494b0"
+    },
+    "tests/punch-rebuild-r1.test.ts": {
+      "bytes": 3785,
+      "sha256": "70f3abe9a4b1e99ba78da81f92c2ee2bc34e4688090e5d92401db874c0d0bb85"
+    }
+  }
+}

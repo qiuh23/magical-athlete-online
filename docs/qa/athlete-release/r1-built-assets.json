@@ -1,0 +1,18 @@
+{
+  "outputs": [
+    {
+      "product": "client",
+      "logical": "/models/mechanisms/punch-rebuild-r1.glb",
+      "url": "/game-assets/aef0b2f39adcbb29eaa3f449e22804093f5efe02e1d0113ca35500cd75cb25b6.glb",
+      "bytes": 474808,
+      "sha256": "aef0b2f39adcbb29eaa3f449e22804093f5efe02e1d0113ca35500cd75cb25b6"
+    },
+    {
+      "product": "browser",
+      "logical": "/models/mechanisms/punch-rebuild-r1.glb",
+      "url": "/game-assets/aef0b2f39adcbb29eaa3f449e22804093f5efe02e1d0113ca35500cd75cb25b6.glb",
+      "bytes": 474808,
+      "sha256": "aef0b2f39adcbb29eaa3f449e22804093f5efe02e1d0113ca35500cd75cb25b6"
+    }
+  ]
+}

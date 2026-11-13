@@ -276,13 +276,13 @@ function LawnDetails({lowQuality,kit}:{lowQuality:boolean;kit:Kit}) {
   </group>;
 }
 
-export function DioramaStadium({ compact, track, reversed = false, lowQuality, beat, racers, showTallDecor = false }: { compact: boolean; track: RoomView['track']; reversed?: boolean; lowQuality: boolean; beat?: PresentationBeat; racers: Racer[]; showTallDecor?: boolean }) {
+export function DioramaStadium({ compact, track, reversed = false, lowQuality, beat, racers, showTallDecor = false, environmentReady = false }: { compact: boolean; track: RoomView['track']; reversed?: boolean; lowQuality: boolean; beat?: PresentationBeat; racers: Racer[]; showTallDecor?: boolean; environmentReady?:boolean }) {
   const triggered = new Set(beat?.motions.map(motion => motion.to) ?? []);
   if (beat && ['score', 'trip'].includes(beat.kind)) for (const racer of racers) if (beat.targets.includes(racer.id) || beat.source === racer.id) triggered.add(racer.position);
-  if (TRACKS[track].nodes) return <TopologyStadium {...{ track, compact, triggered, lowQuality }} />;
-  return <ClassicDiorama {...{compact,track,reversed,lowQuality,triggered,showTallDecor}}/>;
+  if (TRACKS[track].nodes) return <TopologyStadium {...{ track, compact, triggered, lowQuality, environmentReady }} />;
+  return <ClassicDiorama {...{compact,track,reversed,lowQuality,triggered,showTallDecor,environmentReady}}/>;
 }
-function ClassicDiorama({compact,track,reversed,lowQuality,triggered,showTallDecor}:{compact:boolean;track:RoomView['track'];reversed:boolean;lowQuality:boolean;triggered:Set<number>;showTallDecor:boolean}) {
+function ClassicDiorama({compact,track,reversed,lowQuality,triggered,showTallDecor,environmentReady}:{compact:boolean;track:RoomView['track'];reversed:boolean;lowQuality:boolean;triggered:Set<number>;showTallDecor:boolean;environmentReady:boolean}) {
   const kit=useKit(lowQuality);
   return <group rotation={[0, compact ? -Math.PI / 2 : 0, 0]}>
     <mesh rotation={[-Math.PI/2,0,0]} position={[.12,-.923,0]}><planeGeometry args={[WIDTH*1.07,DEPTH*1.21]}/><meshBasicMaterial map={kit.baseContact} transparent depthWrite={false} toneMapped={false}/></mesh>
@@ -292,20 +292,20 @@ function ClassicDiorama({compact,track,reversed,lowQuality,triggered,showTallDec
     <Box kit={kit} position={[0, .11, 0]} scale={[WIDTH - .55, .08, DEPTH-.55]} material={kit.turf} shadow={false} />
     <mesh geometry={kit.course} material={kit.dark} position={[0,.19,0]} receiveShadow castShadow dispose={null}/>
     {isClassicStadium(track) && !lowQuality
-      ? <StadiumAssets fallback={<ClassicContents {...{kit,track,reversed,lowQuality,triggered,showTallDecor}} />}>
-          {models => <ClassicContents {...{kit,track,reversed,lowQuality,triggered,showTallDecor,models}} />}
+      ? <StadiumAssets fallback={<ClassicContents {...{kit,track,reversed,lowQuality,triggered,showTallDecor,environmentReady}} />}>
+          {models => <ClassicContents {...{kit,track,reversed,lowQuality,triggered,showTallDecor,environmentReady,models}} />}
         </StadiumAssets>
-      : <ClassicContents {...{kit,track,reversed,lowQuality,triggered,showTallDecor}} />}
+      : <ClassicContents {...{kit,track,reversed,lowQuality,triggered,showTallDecor,environmentReady}} />}
     <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -.925, 0]} receiveShadow><planeGeometry args={isClassicStadium(track) ? [WIDTH, DEPTH] : [240, 240]} /><meshStandardMaterial color="#e3dcca" roughness={1} /></mesh>
   </group>;
 }
 
 
-function ClassicContents({kit,track,reversed,lowQuality,triggered,showTallDecor,models}: {
-  kit:Kit; track:RoomView['track']; reversed:boolean; lowQuality:boolean; triggered:Set<number>; showTallDecor:boolean; models?:StadiumModels;
+function ClassicContents({kit,track,reversed,lowQuality,triggered,showTallDecor,environmentReady,models}: {
+  kit:Kit; track:RoomView['track']; reversed:boolean; lowQuality:boolean; triggered:Set<number>; showTallDecor:boolean; environmentReady:boolean; models?:StadiumModels;
 }) {
   return <>
-    {models ? <>
+    {environmentReady ? null : models ? <>
       <StadiumDecor models={models} showTallDecor={showTallDecor}/>
       {[false,true].map(finish => {
         const point=boardPoint(finish?30:0,false), isFinish=finish!==reversed;

@@ -1,0 +1,51 @@
+{
+  "baseline": "1cb3194912b25e5d0839ca06a0fe4f3fc6d89f49",
+  "scope": "Frozen legacy geometry, contact plan sources, cache entry, build orchestration and rules were not rewritten. Runtime restrictions are independent adapters.",
+  "files": [
+    {
+      "path": "src/client/scene/ExpansionScenery.tsx",
+      "sha256": "4c37174a10e601f6ca7a347ccf34e9c3224378445655525506b11d7bf4ff7af3",
+      "byteIdenticalToCompatibleBase": true
+    },
+    {
+      "path": "src/client/scene/mechanisms/MechanismCourse.tsx",
+      "sha256": "b644cc0635841db36fd61e2faf4ad37c9f223eee805fd69e3f646ac74cc11477",
+      "byteIdenticalToCompatibleBase": true
+    },
+    {
+      "path": "src/client/scene/mechanisms/layout.ts",
+      "sha256": "e6705c25bf366f822565a26ef4303594390f3ba168fa5b5a02807dbd82791dbe",
+      "byteIdenticalToCompatibleBase": true
+    },
+    {
+      "path": "src/client/scene/mechanisms/certified-trip.ts",
+      "sha256": "c7c80549677061f82cc96775fcdbe62d97431f84cc0b42a26fabef6d30d1e5e5",
+      "byteIdenticalToCompatibleBase": true
+    },
+    {
+      "path": "src/client/scene/mechanisms/punch-profile.ts",
+      "sha256": "fe4cbc6328cbea639baac247cc0360fb4932d3243c3d55cb802a3d61426b9b00",
+      "byteIdenticalToCompatibleBase": true
+    },
+    {
+      "path": "src/client/scene/mechanisms/trip-profile.ts",
+      "sha256": "3efeb500fca3d2f96371ea32bf86e026fca80f05a28fda1feb71d5b22bfeadbd",
+      "byteIdenticalToCompatibleBase": true
+    },
+    {
+      "path": "src/client/scene/asset-loading.ts",
+      "sha256": "ec6e072693a58c73c108f894d351116a9804db934bb7747d948a7a9c587863e9",
+      "byteIdenticalToCompatibleBase": true
+    },
+    {
+      "path": "scripts/build-sites.mjs",
+      "sha256": "d05275a80bf75744b0ab9778225d882344dbf16e643c2edef0f9a394ffcabc9d",
+      "byteIdenticalToCompatibleBase": true
+    },
+    {
+      "path": "src/shared/tracks.ts",
+      "sha256": "6717002165c922b62d34554527ca250f3968fb24df8ccac7e39cb7fede558630",
+      "byteIdenticalToCompatibleBase": true
+    }
+  ]
+}

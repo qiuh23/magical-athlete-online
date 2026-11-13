@@ -1,0 +1,75 @@
+{
+  "scope": "10 byte-exact production build mappings, not browser cache telemetry",
+  "outputs": [
+    {
+      "product": "client",
+      "logical": "/models/floodlights-rebuilt-v3/base.glb",
+      "url": "/game-assets/1104dfa5c5dbc4181448e43d84559f24bbb2b92334cf2ae3cd64e93466389309.glb",
+      "bytes": 12348,
+      "sha256": "1104dfa5c5dbc4181448e43d84559f24bbb2b92334cf2ae3cd64e93466389309"
+    },
+    {
+      "product": "client",
+      "logical": "/models/floodlights-rebuilt-v3/pole.glb",
+      "url": "/game-assets/cbd7f2ee910e5a62ecba3bb229d5585082ca154a6a0b36d44e9ce01cffb46bcd.glb",
+      "bytes": 2464,
+      "sha256": "cbd7f2ee910e5a62ecba3bb229d5585082ca154a6a0b36d44e9ce01cffb46bcd"
+    },
+    {
+      "product": "client",
+      "logical": "/models/floodlights-rebuilt-v3/yoke.glb",
+      "url": "/game-assets/04b130d8b4d2e12c14974b0485cb025eb364bbfcf2ba88f255db8c6eafad691e.glb",
+      "bytes": 11092,
+      "sha256": "04b130d8b4d2e12c14974b0485cb025eb364bbfcf2ba88f255db8c6eafad691e"
+    },
+    {
+      "product": "client",
+      "logical": "/models/floodlights-rebuilt-v3/housing.glb",
+      "url": "/game-assets/0b4d0ccb58bc8a7fb4dec5efd4d531cf6dfd80945b5f71163b3cb4fa8fbeaf3a.glb",
+      "bytes": 29464,
+      "sha256": "0b4d0ccb58bc8a7fb4dec5efd4d531cf6dfd80945b5f71163b3cb4fa8fbeaf3a"
+    },
+    {
+      "product": "client",
+      "logical": "/models/floodlights-rebuilt-v3/lenses.glb",
+      "url": "/game-assets/28cc5396e6e9c9f2b42a05d1a0976131654f92b2b426e5381963c3d6dd5efb32.glb",
+      "bytes": 2520,
+      "sha256": "28cc5396e6e9c9f2b42a05d1a0976131654f92b2b426e5381963c3d6dd5efb32"
+    },
+    {
+      "product": "browser",
+      "logical": "/models/floodlights-rebuilt-v3/base.glb",
+      "url": "/game-assets/1104dfa5c5dbc4181448e43d84559f24bbb2b92334cf2ae3cd64e93466389309.glb",
+      "bytes": 12348,
+      "sha256": "1104dfa5c5dbc4181448e43d84559f24bbb2b92334cf2ae3cd64e93466389309"
+    },
+    {
+      "product": "browser",
+      "logical": "/models/floodlights-rebuilt-v3/pole.glb",
+      "url": "/game-assets/cbd7f2ee910e5a62ecba3bb229d5585082ca154a6a0b36d44e9ce01cffb46bcd.glb",
+      "bytes": 2464,
+      "sha256": "cbd7f2ee910e5a62ecba3bb229d5585082ca154a6a0b36d44e9ce01cffb46bcd"
+    },
+    {
+      "product": "browser",
+      "logical": "/models/floodlights-rebuilt-v3/yoke.glb",
+      "url": "/game-assets/04b130d8b4d2e12c14974b0485cb025eb364bbfcf2ba88f255db8c6eafad691e.glb",
+      "bytes": 11092,
+      "sha256": "04b130d8b4d2e12c14974b0485cb025eb364bbfcf2ba88f255db8c6eafad691e"
+    },
+    {
+      "product": "browser",
+      "logical": "/models/floodlights-rebuilt-v3/housing.glb",
+      "url": "/game-assets/0b4d0ccb58bc8a7fb4dec5efd4d531cf6dfd80945b5f71163b3cb4fa8fbeaf3a.glb",
+      "bytes": 29464,
+      "sha256": "0b4d0ccb58bc8a7fb4dec5efd4d531cf6dfd80945b5f71163b3cb4fa8fbeaf3a"
+    },
+    {
+      "product": "browser",
+      "logical": "/models/floodlights-rebuilt-v3/lenses.glb",
+      "url": "/game-assets/28cc5396e6e9c9f2b42a05d1a0976131654f92b2b426e5381963c3d6dd5efb32.glb",
+      "bytes": 2520,
+      "sha256": "28cc5396e6e9c9f2b42a05d1a0976131654f92b2b426e5381963c3d6dd5efb32"
+    }
+  ]
+}

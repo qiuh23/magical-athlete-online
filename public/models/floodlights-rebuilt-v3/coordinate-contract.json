@@ -1,0 +1,64 @@
+{
+  "units": "meters",
+  "runtime_axes": "Y-up; forward/local front is -Z",
+  "new_identity": "New modeling informed by saved reference. Original five fl_* templates remain missing.",
+  "base": {
+    "origin": [
+      0,
+      0,
+      0
+    ],
+    "nominal_size": [
+      0.7,
+      0.2,
+      0.65
+    ],
+    "fixed_scale": [
+      1,
+      1,
+      1
+    ]
+  },
+  "pole": {
+    "local_y": [
+      0,
+      1
+    ],
+    "cross_section_max_width": 0.115,
+    "placement": "position=(0,0.16,0); scale=(1,H-0.16,1), H is desired world hinge height"
+  },
+  "head": {
+    "files": [
+      "yoke.glb",
+      "housing.glb",
+      "lenses.glb"
+    ],
+    "placement": "All at (0,H,0), scale=(1,1,1), same quaternion about shared origin",
+    "pivot": [
+      0,
+      0,
+      0
+    ],
+    "socket_radius": 0.105,
+    "front_normal": [
+      0,
+      0,
+      -1
+    ],
+    "tilt": "Negative local X rotation points the panel normals downward; yaw is local/world Y",
+    "physical_attachment": "Origin-centered spherical socket overlaps shaft; rear crossbar intersects socket, mounts and both backing plates",
+    "housing_centers_x": [
+      -0.33,
+      0.33
+    ],
+    "housing_center_y": 0.14,
+    "housing_size_each": [
+      0.58,
+      0.36,
+      0.22
+    ],
+    "lens_front_z": -0.145,
+    "luminaire": "Opaque white diffuser backed by physical slab/frame, two real louvers per panel. No beam geometry or glTF lights."
+  },
+  "runtime_budget_scope": "Assets only. Two fixed fixtures in both tiers; two full/one low spot receivers are parent runtime responsibilities. No FPS claim."
+}

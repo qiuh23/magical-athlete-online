@@ -1,0 +1,336 @@
+{
+  "kind": "raw triangle contact discovery; not a clearance certificate",
+  "poses": 81,
+  "pairs": {
+    "PUNCH_BOOM_END_SLEEVE | PUNCH_R1_INNER_TUBE": {
+      "firstPose": [
+        0.5235987755982988,
+        0,
+        0,
+        0
+      ],
+      "samples": 81,
+      "pairCount": 74,
+      "newPart": true,
+      "parents": [
+        "PUNCH_R1_TELESCOPE_2",
+        "PUNCH_R1_TELESCOPE_2"
+      ]
+    },
+    "PUNCH_BOOM_HUB | PUNCH_R1_OUTER_TUBE": {
+      "firstPose": [
+        0.5235987755982988,
+        0,
+        0,
+        0
+      ],
+      "samples": 81,
+      "pairCount": 82,
+      "newPart": true,
+      "parents": [
+        "PUNCH_BOOM_Z",
+        "PUNCH_BOOM_Z"
+      ]
+    },
+    "PUNCH_COLLAR_STUD | PUNCH_CUFF": {
+      "firstPose": [
+        0.5235987755982988,
+        0,
+        0,
+        0
+      ],
+      "samples": 81,
+      "pairCount": 50,
+      "newPart": false,
+      "parents": [
+        "PUNCH_SLIDER_X",
+        "PUNCH_SLIDER_X"
+      ]
+    },
+    "PUNCH_COLLAR_STUD | PUNCH_SLIDER_X__gold_fixed_batch": {
+      "firstPose": [
+        0.5235987755982988,
+        0,
+        0,
+        0
+      ],
+      "samples": 77,
+      "pairCount": 54,
+      "newPart": false,
+      "parents": [
+        "PUNCH_SLIDER_X",
+        "PUNCH_SLIDER_X"
+      ]
+    },
+    "PUNCH_COUNTER_YAW__steel_fixed_batch | PUNCH_COUNTER_YAW__teal_fixed_batch": {
+      "firstPose": [
+        0.5235987755982988,
+        0,
+        0,
+        0
+      ],
+      "samples": 81,
+      "pairCount": 547,
+      "newPart": false,
+      "parents": [
+        "PUNCH_COUNTER_YAW",
+        "PUNCH_COUNTER_YAW"
+      ]
+    },
+    "PUNCH_COUNTER_YAW__teal_fixed_batch | PUNCH_SPRING": {
+      "firstPose": [
+        0.5235987755982988,
+        0,
+        0,
+        0
+      ],
+      "samples": 81,
+      "pairCount": 15,
+      "newPart": false,
+      "parents": [
+        "PUNCH_COUNTER_YAW",
+        "PUNCH_COUNTER_YAW"
+      ]
+    },
+    "PUNCH_CUFF | PUNCH_SLIDE_YOKE": {
+      "firstPose": [
+        0.5235987755982988,
+        0,
+        0,
+        0
+      ],
+      "samples": 81,
+      "pairCount": 30,
+      "newPart": false,
+      "parents": [
+        "PUNCH_SLIDER_X",
+        "PUNCH_SLIDER_X"
+      ]
+    },
+    "PUNCH_CUFF | PUNCH_SLIDER_X__coral_fixed_batch": {
+      "firstPose": [
+        0.5235987755982988,
+        0,
+        0,
+        0
+      ],
+      "samples": 81,
+      "pairCount": 111,
+      "newPart": false,
+      "parents": [
+        "PUNCH_SLIDER_X",
+        "PUNCH_SLIDER_X"
+      ]
+    },
+    "PUNCH_FIXED_BEARING | PUNCH_FIXED_OUTBOARD_BRACKET": {
+      "firstPose": [
+        0.5235987755982988,
+        0,
+        0,
+        0
+      ],
+      "samples": 81,
+      "pairCount": 195,
+      "newPart": false,
+      "parents": [
+        "PUNCH_ROOT",
+        "PUNCH_ROOT"
+      ]
+    },
+    "PUNCH_FIXED_OUTBOARD_BRACKET | PUNCH_ROOT__teal_fixed_batch": {
+      "firstPose": [
+        0.5235987755982988,
+        0,
+        0,
+        0
+      ],
+      "samples": 81,
+      "pairCount": 82,
+      "newPart": false,
+      "parents": [
+        "PUNCH_ROOT",
+        "PUNCH_ROOT"
+      ]
+    },
+    "PUNCH_R1_INNER_STOP_RING | PUNCH_R1_INNER_TUBE": {
+      "firstPose": [
+        0.5235987755982988,
+        0,
+        0,
+        0
+      ],
+      "samples": 81,
+      "pairCount": 61,
+      "newPart": true,
+      "parents": [
+        "PUNCH_R1_TELESCOPE_2",
+        "PUNCH_R1_TELESCOPE_2"
+      ]
+    },
+    "PUNCH_R1_INNER_STOP_RING | PUNCH_R1_MIDDLE_REAR_STOP": {
+      "firstPose": [
+        0.5235987755982988,
+        0,
+        0,
+        0
+      ],
+      "samples": 27,
+      "pairCount": 24,
+      "newPart": true,
+      "parents": [
+        "PUNCH_R1_TELESCOPE_2",
+        "PUNCH_R1_TELESCOPE_1"
+      ]
+    },
+    "PUNCH_R1_MIDDLE_FRONT_STOP | PUNCH_R1_MIDDLE_TUBE": {
+      "firstPose": [
+        0.5235987755982988,
+        0,
+        0,
+        0
+      ],
+      "samples": 81,
+      "pairCount": 77,
+      "newPart": true,
+      "parents": [
+        "PUNCH_R1_TELESCOPE_1",
+        "PUNCH_R1_TELESCOPE_1"
+      ]
+    },
+    "PUNCH_R1_MIDDLE_REAR_STOP | PUNCH_R1_MIDDLE_TUBE": {
+      "firstPose": [
+        0.5235987755982988,
+        0,
+        0,
+        0
+      ],
+      "samples": 81,
+      "pairCount": 93,
+      "newPart": true,
+      "parents": [
+        "PUNCH_R1_TELESCOPE_1",
+        "PUNCH_R1_TELESCOPE_1"
+      ]
+    },
+    "PUNCH_R1_MIDDLE_STOP_RING | PUNCH_R1_MIDDLE_TUBE": {
+      "firstPose": [
+        0.5235987755982988,
+        0,
+        0,
+        0
+      ],
+      "samples": 81,
+      "pairCount": 63,
+      "newPart": true,
+      "parents": [
+        "PUNCH_R1_TELESCOPE_1",
+        "PUNCH_R1_TELESCOPE_1"
+      ]
+    },
+    "PUNCH_R1_MIDDLE_STOP_RING | PUNCH_R1_OUTER_REAR_STOP": {
+      "firstPose": [
+        0.5235987755982988,
+        0,
+        0,
+        0
+      ],
+      "samples": 27,
+      "pairCount": 40,
+      "newPart": true,
+      "parents": [
+        "PUNCH_R1_TELESCOPE_1",
+        "PUNCH_BOOM_Z"
+      ]
+    },
+    "PUNCH_R1_OUTER_FRONT_STOP | PUNCH_R1_OUTER_TUBE": {
+      "firstPose": [
+        0.5235987755982988,
+        0,
+        0,
+        0
+      ],
+      "samples": 81,
+      "pairCount": 87,
+      "newPart": true,
+      "parents": [
+        "PUNCH_BOOM_Z",
+        "PUNCH_BOOM_Z"
+      ]
+    },
+    "PUNCH_R1_OUTER_REAR_STOP | PUNCH_R1_OUTER_TUBE": {
+      "firstPose": [
+        0.5235987755982988,
+        0,
+        0,
+        0
+      ],
+      "samples": 81,
+      "pairCount": 50,
+      "newPart": true,
+      "parents": [
+        "PUNCH_BOOM_Z",
+        "PUNCH_BOOM_Z"
+      ]
+    },
+    "PUNCH_SLIDE_YOKE | PUNCH_SLIDER_X__gold_fixed_batch": {
+      "firstPose": [
+        0.5235987755982988,
+        0,
+        0,
+        0
+      ],
+      "samples": 81,
+      "pairCount": 128,
+      "newPart": false,
+      "parents": [
+        "PUNCH_SLIDER_X",
+        "PUNCH_SLIDER_X"
+      ]
+    },
+    "PUNCH_SLIDER_X__gold_fixed_batch | PUNCH_SPRING": {
+      "firstPose": [
+        0.5235987755982988,
+        0,
+        0,
+        0
+      ],
+      "samples": 81,
+      "pairCount": 70,
+      "newPart": false,
+      "parents": [
+        "PUNCH_SLIDER_X",
+        "PUNCH_COUNTER_YAW"
+      ]
+    },
+    "PUNCH_R1_INNER_STOP_RING | PUNCH_R1_MIDDLE_FRONT_STOP": {
+      "firstPose": [
+        0.5235987755982988,
+        0,
+        0.3,
+        0
+      ],
+      "samples": 27,
+      "pairCount": 41,
+      "newPart": true,
+      "parents": [
+        "PUNCH_R1_TELESCOPE_2",
+        "PUNCH_R1_TELESCOPE_1"
+      ]
+    },
+    "PUNCH_R1_MIDDLE_STOP_RING | PUNCH_R1_OUTER_FRONT_STOP": {
+      "firstPose": [
+        0.5235987755982988,
+        0,
+        0.3,
+        0
+      ],
+      "samples": 18,
+      "pairCount": 41,
+      "newPart": true,
+      "parents": [
+        "PUNCH_R1_TELESCOPE_1",
+        "PUNCH_BOOM_Z"
+      ]
+    }
+  }
+}

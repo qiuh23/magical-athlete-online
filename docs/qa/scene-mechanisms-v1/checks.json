@@ -1,0 +1,47 @@
+{
+  "sourceEnvironmentCommit": "1fd9f8d10439560f356484ef09ffefa38047d8bd",
+  "totalMapAnchors": 54,
+  "totalNonPunchAnchors": 41,
+  "hardwareAnchorsAdmittedHere": 39,
+  "hardwareByKind": {
+    "gain": 11,
+    "loss": 4,
+    "warp": 12,
+    "trip": 12
+  },
+  "excludedNativeTripAnchors": [
+    "wild:5",
+    "squiggle:17"
+  ],
+  "exactTripFixtures": 24,
+  "actorDeviceLayouts": 54,
+  "hardOrUncertainHits": 0,
+  "maxSoftSeparationBoundM": 0.00045027997178870294,
+  "independentWarpEnvelopePairs": 66,
+  "independentPunchEnvelopePairs": 24,
+  "punchMountEnvelopeSHA256": "9d11128dd5efb7233f799d0f8bee461e8658527f5244e811ff4f23b2b3a089c8",
+  "verification": {
+    "finiteActualGeometryAudit": "passed",
+    "tests": {
+      "passed": 1586,
+      "failed": 0
+    },
+    "primaryTypecheck": "passed",
+    "workerTypecheck": "passed",
+    "buildSites": "passed; existing large-chunk advisory remains",
+    "environmentBuiltAssetMappings": 44,
+    "floodlightBuiltAssetMappings": 10,
+    "browserWebGL": "not run by this worker",
+    "mobile": "not run by this worker",
+    "remotePublication": "not performed"
+  },
+  "logSHA256": {
+    "scene-final-delta.log": "6f965c1d983e4f72a9f9cca5034c9e700781338d3f56938536a0641974e6a024",
+    "scene-final-tests.log": "28e4ddba7307cc3326e9dee0e3c051f1d43aefc05a6d59bc12892e37f9488225",
+    "scene-primary-tsc.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "scene-worker-tsc.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "scene-final-build.log": "4f029ebac017112423f37fcacfc12ea5ffe2d2b0173ac269f1c257def0896025",
+    "scene-built-env.log": "51c2c23480e6f5a4b8296fde0cb39f1c110082dec73c7b5c9fb88509435321f0",
+    "scene-built-lights.log": "91a0707e19ea5fe2a10bd262de3a40084a07b3244bdfe1e55bc34ade0a18d2b0"
+  }
+}

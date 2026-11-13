@@ -1,0 +1,468 @@
+{
+  "scope": "Three GLTFLoader parse only; not browser/WebGL/FPS validation",
+  "pass": true,
+  "assets": [
+    {
+      "name": "squiggle_base",
+      "pass": true,
+      "meshes": 3,
+      "triangles": 2028,
+      "materials": 3,
+      "bounds_y_up": [
+        [
+          -24.52083396911621,
+          -1.2599999904632568,
+          -5.729166507720947
+        ],
+        [
+          16.60555648803711,
+          -0.699999988079071,
+          6.013888835906982
+        ]
+      ],
+      "maxBoundsError": 0,
+      "coloredMeshes": 0
+    },
+    {
+      "name": "squiggle_furniture",
+      "pass": true,
+      "meshes": 8,
+      "triangles": 2696,
+      "materials": 8,
+      "bounds_y_up": [
+        [
+          -16.34583282470703,
+          -0.5799999833106995,
+          -2.869166612625122
+        ],
+        [
+          2.379166603088379,
+          0.23000000417232513,
+          0.5308332443237305
+        ]
+      ],
+      "maxBoundsError": 0,
+      "coloredMeshes": 0
+    },
+    {
+      "name": "tree_elm_rebuilt_lod2",
+      "pass": true,
+      "meshes": 2,
+      "triangles": 3927,
+      "materials": 2,
+      "bounds_y_up": [
+        [
+          -1.4040768146514893,
+          -0.023990437388420105,
+          -1.5035244226455688
+        ],
+        [
+          1.5658767223358154,
+          4.234600067138672,
+          1.4907010793685913
+        ]
+      ],
+      "maxBoundsError": 0,
+      "coloredMeshes": 2
+    },
+    {
+      "name": "tree_maple_rebuilt_lod2",
+      "pass": true,
+      "meshes": 2,
+      "triangles": 3924,
+      "materials": 2,
+      "bounds_y_up": [
+        [
+          -1.4158976078033447,
+          -0.023990437388420105,
+          -1.6063026189804077
+        ],
+        [
+          1.6318447589874268,
+          3.588592052459717,
+          1.3709635734558105
+        ]
+      ],
+      "maxBoundsError": 0,
+      "coloredMeshes": 2
+    },
+    {
+      "name": "tree_sapling_rebuilt_lod2",
+      "pass": true,
+      "meshes": 2,
+      "triangles": 2224,
+      "materials": 2,
+      "bounds_y_up": [
+        [
+          -0.8628181219100952,
+          -0.016825534403324127,
+          -0.7646277546882629
+        ],
+        [
+          0.9539444446563721,
+          2.2703640460968018,
+          0.7104723453521729
+        ]
+      ],
+      "maxBoundsError": 0,
+      "coloredMeshes": 2
+    },
+    {
+      "name": "boardwalks_base",
+      "pass": true,
+      "meshes": 3,
+      "triangles": 1872,
+      "materials": 3,
+      "bounds_y_up": [
+        [
+          -24.157812118530273,
+          -1.2599999904632568,
+          -7.053124904632568
+        ],
+        [
+          18.584375381469727,
+          -0.699999988079071,
+          6.412499904632568
+        ]
+      ],
+      "maxBoundsError": 0,
+      "coloredMeshes": 0
+    },
+    {
+      "name": "boardwalks_furniture",
+      "pass": true,
+      "meshes": 8,
+      "triangles": 2696,
+      "materials": 8,
+      "bounds_y_up": [
+        [
+          -20.18281364440918,
+          -0.5799999833106995,
+          -1.3781249523162842
+        ],
+        [
+          -8.457812309265137,
+          0.23000000417232513,
+          3.976875066757202
+        ]
+      ],
+      "maxBoundsError": 0,
+      "coloredMeshes": 0
+    },
+    {
+      "name": "bridges_base",
+      "pass": true,
+      "meshes": 3,
+      "triangles": 2028,
+      "materials": 3,
+      "bounds_y_up": [
+        [
+          -34.649200439453125,
+          -1.2599999904632568,
+          -8.655200004577637
+        ],
+        [
+          25.79319953918457,
+          -0.699999988079071,
+          7.663000106811523
+        ]
+      ],
+      "maxBoundsError": 0,
+      "coloredMeshes": 0
+    },
+    {
+      "name": "bridges_furniture",
+      "pass": true,
+      "meshes": 8,
+      "triangles": 2696,
+      "materials": 8,
+      "bounds_y_up": [
+        [
+          -23.989200592041016,
+          -0.5799999833106995,
+          -2.9802000522613525
+        ],
+        [
+          -5.224200248718262,
+          0.23000000417232513,
+          -0.4251999855041504
+        ]
+      ],
+      "maxBoundsError": 0,
+      "coloredMeshes": 0
+    },
+    {
+      "name": "bleachers",
+      "pass": true,
+      "meshes": 5,
+      "triangles": 7200,
+      "materials": 5,
+      "bounds_y_up": [
+        [
+          -2.75,
+          0,
+          -0.75
+        ],
+        [
+          2.75,
+          0.9549999833106995,
+          0.75
+        ]
+      ],
+      "maxBoundsError": 0,
+      "coloredMeshes": 0
+    },
+    {
+      "name": "spectators",
+      "pass": true,
+      "meshes": 4,
+      "triangles": 7848,
+      "materials": 4,
+      "bounds_y_up": [
+        [
+          -2.559999942779541,
+          0,
+          -0.4750000238418579
+        ],
+        [
+          2.559999942779541,
+          1.1549999713897705,
+          0.6520000100135803
+        ]
+      ],
+      "maxBoundsError": 0,
+      "coloredMeshes": 0
+    },
+    {
+      "name": "podium",
+      "pass": true,
+      "meshes": 5,
+      "triangles": 1952,
+      "materials": 5,
+      "bounds_y_up": [
+        [
+          -1.1399999856948853,
+          0,
+          -0.5699999928474426
+        ],
+        [
+          1.1399999856948853,
+          1.4079999923706055,
+          0.5774999856948853
+        ]
+      ],
+      "maxBoundsError": 0,
+      "coloredMeshes": 0
+    },
+    {
+      "name": "officials_kiosk",
+      "pass": true,
+      "meshes": 4,
+      "triangles": 1456,
+      "materials": 4,
+      "bounds_y_up": [
+        [
+          -0.8100000023841858,
+          0,
+          -0.5400000214576721
+        ],
+        [
+          0.8100000023841858,
+          1.7400000095367432,
+          0.5149999856948853
+        ]
+      ],
+      "maxBoundsError": 0,
+      "coloredMeshes": 0
+    },
+    {
+      "name": "scoreboard",
+      "pass": true,
+      "meshes": 4,
+      "triangles": 1624,
+      "materials": 4,
+      "bounds_y_up": [
+        [
+          -1.3600000143051147,
+          0,
+          -0.32499998807907104
+        ],
+        [
+          1.3600000143051147,
+          2.1050000190734863,
+          0.32499998807907104
+        ]
+      ],
+      "maxBoundsError": 0,
+      "coloredMeshes": 0
+    },
+    {
+      "name": "start_gate",
+      "pass": true,
+      "meshes": 4,
+      "triangles": 3432,
+      "materials": 4,
+      "bounds_y_up": [
+        [
+          -3.859999895095825,
+          0,
+          -0.3400000035762787
+        ],
+        [
+          3.859999895095825,
+          2.640000104904175,
+          0.3400000035762787
+        ]
+      ],
+      "maxBoundsError": 0,
+      "coloredMeshes": 0
+    },
+    {
+      "name": "finish_gate",
+      "pass": true,
+      "meshes": 4,
+      "triangles": 2448,
+      "materials": 4,
+      "bounds_y_up": [
+        [
+          -1.4500000476837158,
+          0,
+          -0.3400000035762787
+        ],
+        [
+          1.4499999284744263,
+          2.5900001525878906,
+          0.3400000035762787
+        ]
+      ],
+      "maxBoundsError": 0,
+      "coloredMeshes": 0
+    },
+    {
+      "name": "grandstand_rostrum",
+      "pass": true,
+      "meshes": 5,
+      "triangles": 940,
+      "materials": 2,
+      "bounds_y_up": [
+        [
+          -0.4249999523162842,
+          0.24000000953674316,
+          -0.9000000357627869
+        ],
+        [
+          5.225000381469727,
+          1.4199999570846558,
+          0.8274999856948853
+        ]
+      ],
+      "maxBoundsError": 0,
+      "coloredMeshes": 0
+    },
+    {
+      "name": "official_rostrum",
+      "pass": true,
+      "meshes": 1,
+      "triangles": 188,
+      "materials": 1,
+      "bounds_y_up": [
+        [
+          -12.720000267028809,
+          0.22999998927116394,
+          -0.75
+        ],
+        [
+          -10.880000114440918,
+          1.0299999713897705,
+          0.5499999523162842
+        ]
+      ],
+      "maxBoundsError": 0,
+      "coloredMeshes": 0
+    },
+    {
+      "name": "podium_plinth",
+      "pass": true,
+      "meshes": 1,
+      "triangles": 188,
+      "materials": 1,
+      "bounds_y_up": [
+        [
+          -9.024999618530273,
+          0.23500001430511475,
+          -0.8500000238418579
+        ],
+        [
+          -6.375,
+          0.48500001430511475,
+          0.6499999761581421
+        ]
+      ],
+      "maxBoundsError": 0,
+      "coloredMeshes": 0
+    },
+    {
+      "name": "squiggle_landscape_reexport_v1",
+      "pass": true,
+      "meshes": 6,
+      "triangles": 11872,
+      "materials": 6,
+      "bounds_y_up": [
+        [
+          -17.336444854736328,
+          -0.6919999718666077,
+          -4.122769832611084
+        ],
+        [
+          12.503422737121582,
+          -0.11773332953453064,
+          2.9636104106903076
+        ]
+      ],
+      "maxBoundsError": 0,
+      "coloredMeshes": 0
+    },
+    {
+      "name": "boardwalks_landscape_reexport_v1",
+      "pass": true,
+      "meshes": 7,
+      "triangles": 13524,
+      "materials": 7,
+      "bounds_y_up": [
+        [
+          -21.28725242614746,
+          -0.7350000143051147,
+          -3.7682347297668457
+        ],
+        [
+          15.425210952758789,
+          -0.07636517286300659,
+          5.402874946594238
+        ]
+      ],
+      "maxBoundsError": 0,
+      "coloredMeshes": 0
+    },
+    {
+      "name": "bridges_landscape_reexport_v1",
+      "pass": true,
+      "meshes": 5,
+      "triangles": 17208,
+      "materials": 5,
+      "bounds_y_up": [
+        [
+          -25.63872718811035,
+          -0.6919999718666077,
+          -4.607288360595703
+        ],
+        [
+          22.20338249206543,
+          -0.11127915978431702,
+          6.551602363586426
+        ]
+      ],
+      "maxBoundsError": 0,
+      "coloredMeshes": 0
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "rigSHA256": "aef0b2f39adcbb29eaa3f449e22804093f5efe02e1d0113ca35500cd75cb25b6",
+  "samples": 1212,
+  "scope": "Eight actual normalized runtime paths, 101 poses each; surface crossing audit. New nested hollow solids additionally use exact section/overlap proof from mechanical checkpoint. No claim of exhaustive continuous/full merged-solid containment.",
+  "allowedInterfaces": {
+    "PUNCH_BOOM_END_SLEEVE | PUNCH_R1_INNER_TUBE": "fixed-rigid-bond",
+    "PUNCH_BOOM_HUB | PUNCH_R1_OUTER_TUBE": "fixed-rigid-bond",
+    "PUNCH_COLLAR_STUD | PUNCH_CUFF": "fixed-rigid-bond",
+    "PUNCH_COLLAR_STUD | PUNCH_SLIDER_X__gold_fixed_batch": "fixed-rigid-bond",
+    "PUNCH_COUNTER_YAW__steel_fixed_batch | PUNCH_COUNTER_YAW__teal_fixed_batch": "fixed-rigid-bond",
+    "PUNCH_COUNTER_YAW__teal_fixed_batch | PUNCH_SPRING": "fixed-rigid-bond",
+    "PUNCH_CUFF | PUNCH_SLIDE_YOKE": "fixed-rigid-bond",
+    "PUNCH_CUFF | PUNCH_SLIDER_X__coral_fixed_batch": "fixed-rigid-bond",
+    "PUNCH_FIXED_BEARING | PUNCH_FIXED_OUTBOARD_BRACKET": "fixed-rigid-bond",
+    "PUNCH_FIXED_OUTBOARD_BRACKET | PUNCH_ROOT__teal_fixed_batch": "fixed-rigid-bond",
+    "PUNCH_R1_INNER_STOP_RING | PUNCH_R1_INNER_TUBE": "fixed-rigid-bond",
+    "PUNCH_R1_INNER_STOP_RING | PUNCH_R1_MIDDLE_REAR_STOP": "nominal-stop-plane",
+    "PUNCH_R1_MIDDLE_FRONT_STOP | PUNCH_R1_MIDDLE_TUBE": "fixed-rigid-bond",
+    "PUNCH_R1_MIDDLE_REAR_STOP | PUNCH_R1_MIDDLE_TUBE": "fixed-rigid-bond",
+    "PUNCH_R1_MIDDLE_STOP_RING | PUNCH_R1_MIDDLE_TUBE": "fixed-rigid-bond",
+    "PUNCH_R1_MIDDLE_STOP_RING | PUNCH_R1_OUTER_REAR_STOP": "nominal-stop-plane",
+    "PUNCH_R1_OUTER_FRONT_STOP | PUNCH_R1_OUTER_TUBE": "fixed-rigid-bond",
+    "PUNCH_R1_OUTER_REAR_STOP | PUNCH_R1_OUTER_TUBE": "fixed-rigid-bond",
+    "PUNCH_SLIDER_X__gold_fixed_batch | PUNCH_SLIDE_YOKE": "fixed-rigid-bond",
+    "PUNCH_SLIDER_X__gold_fixed_batch | PUNCH_SPRING": "spring-attachment"
+  },
+  "unexpected": []
+}

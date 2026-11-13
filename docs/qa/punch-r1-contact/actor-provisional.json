@@ -1,0 +1,798 @@
+{
+  "scope": "Actor-only provisional replay; not production or environment authorization",
+  "reports": [
+    {
+      "character": "banana",
+      "node": 23,
+      "compact": false,
+      "lowQuality": false,
+      "hash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037",
+      "solution": {
+        "pose": {
+          "boomYaw": 1.4835298641951802,
+          "headYaw": 0,
+          "reach": 0.15,
+          "stroke": 0
+        },
+        "contactStroke": 0.03588897909907346,
+        "targetPoint": [
+          0.18919727139505005,
+          1.3007054622313636,
+          0.38226217335181534
+        ],
+        "fistPoint": [
+          0.1533082922959766,
+          1.3007054622313636,
+          0.38226217335181534
+        ],
+        "actorPart": "banana_sculpt",
+        "actorTriangle": 3089,
+        "softTriangle": 740,
+        "rigVersion": "punch-rebuild-r1"
+      },
+      "productionApproved": false,
+      "hard": [],
+      "soft": [
+        {
+          "t": 0.4,
+          "kind": "surface",
+          "translationToSeparate": 0.0006233215332031251
+        },
+        {
+          "t": 0.4025,
+          "kind": "surface",
+          "translationToSeparate": 0.0014356613159179686
+        },
+        {
+          "t": 0.405,
+          "kind": "surface",
+          "translationToSeparate": 0.0021959304809570316
+        },
+        {
+          "t": 0.4075,
+          "kind": "surface",
+          "translationToSeparate": 0.0029001235961914062
+        },
+        {
+          "t": 0.41,
+          "kind": "surface",
+          "translationToSeparate": 0.0035451889038085943
+        },
+        {
+          "t": 0.4125,
+          "kind": "surface",
+          "translationToSeparate": 0.004127311706542969
+        },
+        {
+          "t": 0.415,
+          "kind": "surface",
+          "translationToSeparate": 0.004643249511718751
+        },
+        {
+          "t": 0.4175,
+          "kind": "surface",
+          "translationToSeparate": 0.005089378356933595
+        },
+        {
+          "t": 0.42,
+          "kind": "surface",
+          "translationToSeparate": 0.005462074279785156
+        },
+        {
+          "t": 0.4225,
+          "kind": "surface",
+          "translationToSeparate": 0.0057582855224609375
+        },
+        {
+          "t": 0.425,
+          "kind": "surface",
+          "translationToSeparate": 0.005974006652832031
+        },
+        {
+          "t": 0.4275,
+          "kind": "surface",
+          "translationToSeparate": 0.006105995178222656
+        },
+        {
+          "t": 0.43,
+          "kind": "surface",
+          "translationToSeparate": 0.00615081787109375
+        },
+        {
+          "t": 0.4325,
+          "kind": "surface",
+          "translationToSeparate": 0.005608940124511719
+        },
+        {
+          "t": 0.435,
+          "kind": "surface",
+          "translationToSeparate": 0.003993606567382811
+        },
+        {
+          "t": 0.4375,
+          "kind": "surface",
+          "translationToSeparate": 0.0013202667236328126
+        }
+      ],
+      "samples": 401,
+      "signature": "[\"punch-rebuild-r1\",1.48353,0,0.15,0,0.035889,0.189197,1.300705,0.382262,0.153308,1.300705,0.382262,\"banana_sculpt\",3089,740]"
+    },
+    {
+      "character": "banana",
+      "node": 23,
+      "compact": false,
+      "lowQuality": true,
+      "hash": "17dce985f674958cddc1dbaabf05322ecc0c68b65812e7146fe37822022c49fc",
+      "solution": {
+        "pose": {
+          "boomYaw": 1.4835298641951802,
+          "headYaw": 0,
+          "reach": 0.15,
+          "stroke": 0
+        },
+        "contactStroke": 0.035812994110303586,
+        "targetPoint": [
+          0.19020149941281952,
+          1.2903527019094059,
+          0.365049547546785
+        ],
+        "fistPoint": [
+          0.15438850530251594,
+          1.2903527019094059,
+          0.365049547546785
+        ],
+        "actorPart": "banana_sculpt",
+        "actorTriangle": 2037,
+        "softTriangle": 733,
+        "rigVersion": "punch-rebuild-r1"
+      },
+      "productionApproved": false,
+      "hard": [],
+      "soft": [
+        {
+          "t": 0.3975,
+          "kind": "surface",
+          "translationToSeparate": 0.00035362243652343757
+        },
+        {
+          "t": 0.4,
+          "kind": "surface",
+          "translationToSeparate": 0.001213455200195313
+        },
+        {
+          "t": 0.4025,
+          "kind": "surface",
+          "translationToSeparate": 0.0020244598388671877
+        },
+        {
+          "t": 0.405,
+          "kind": "surface",
+          "translationToSeparate": 0.0027832031250000005
+        },
+        {
+          "t": 0.4075,
+          "kind": "surface",
+          "translationToSeparate": 0.0034862518310546874
+        },
+        {
+          "t": 0.41,
+          "kind": "surface",
+          "translationToSeparate": 0.004129981994628906
+        },
+        {
+          "t": 0.4125,
+          "kind": "surface",
+          "translationToSeparate": 0.004711151123046876
+        },
+        {
+          "t": 0.415,
+          "kind": "surface",
+          "translationToSeparate": 0.005225944519042969
+        },
+        {
+          "t": 0.4175,
+          "kind": "surface",
+          "translationToSeparate": 0.0056713104248046885
+        },
+        {
+          "t": 0.42,
+          "kind": "surface",
+          "translationToSeparate": 0.006043434143066406
+        },
+        {
+          "t": 0.4225,
+          "kind": "surface",
+          "translationToSeparate": 0.006338882446289062
+        },
+        {
+          "t": 0.425,
+          "kind": "surface",
+          "translationToSeparate": 0.006554222106933595
+        },
+        {
+          "t": 0.4275,
+          "kind": "surface",
+          "translationToSeparate": 0.0066860198974609385
+        },
+        {
+          "t": 0.43,
+          "kind": "surface",
+          "translationToSeparate": 0.00673065185546875
+        },
+        {
+          "t": 0.4325,
+          "kind": "surface",
+          "translationToSeparate": 0.00618896484375
+        },
+        {
+          "t": 0.435,
+          "kind": "surface",
+          "translationToSeparate": 0.004573631286621095
+        },
+        {
+          "t": 0.4375,
+          "kind": "surface",
+          "translationToSeparate": 0.0019006729125976562
+        }
+      ],
+      "samples": 401,
+      "signature": "[\"punch-rebuild-r1\",1.48353,0,0.15,0,0.035813,0.190201,1.290353,0.36505,0.154389,1.290353,0.36505,\"banana_sculpt\",2037,733]"
+    },
+    {
+      "character": "banana",
+      "node": 23,
+      "compact": true,
+      "lowQuality": false,
+      "hash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037",
+      "solution": {
+        "pose": {
+          "boomYaw": 1.3962634015954636,
+          "headYaw": 6.123233995736766e-17,
+          "reach": 0.15,
+          "stroke": 0
+        },
+        "contactStroke": 0.13843999364314535,
+        "targetPoint": [
+          0.36572545519258026,
+          1.2592944185593469,
+          0.5663896085139659
+        ],
+        "fistPoint": [
+          0.2272854615494349,
+          1.2592944185593469,
+          0.5663896085139659
+        ],
+        "actorPart": "banana_sculpt",
+        "actorTriangle": 2449,
+        "softTriangle": 153,
+        "rigVersion": "punch-rebuild-r1"
+      },
+      "productionApproved": false,
+      "hard": [],
+      "soft": [
+        {
+          "t": 0.41,
+          "kind": "surface",
+          "translationToSeparate": 0.0000118255615234375
+        },
+        {
+          "t": 0.4125,
+          "kind": "surface",
+          "translationToSeparate": 0.002054214477539063
+        },
+        {
+          "t": 0.415,
+          "kind": "surface",
+          "translationToSeparate": 0.003863906860351563
+        },
+        {
+          "t": 0.4175,
+          "kind": "surface",
+          "translationToSeparate": 0.00542888641357422
+        },
+        {
+          "t": 0.42,
+          "kind": "surface",
+          "translationToSeparate": 0.00673675537109375
+        },
+        {
+          "t": 0.4225,
+          "kind": "surface",
+          "translationToSeparate": 0.007775115966796875
+        },
+        {
+          "t": 0.425,
+          "kind": "surface",
+          "translationToSeparate": 0.008532142639160158
+        },
+        {
+          "t": 0.4275,
+          "kind": "surface",
+          "translationToSeparate": 0.008995246887207032
+        },
+        {
+          "t": 0.43,
+          "kind": "surface",
+          "translationToSeparate": 0.009152412414550785
+        },
+        {
+          "t": 0.4325,
+          "kind": "surface",
+          "translationToSeparate": 0.008513450622558594
+        },
+        {
+          "t": 0.435,
+          "kind": "surface",
+          "translationToSeparate": 0.006612205505371094
+        },
+        {
+          "t": 0.4375,
+          "kind": "surface",
+          "translationToSeparate": 0.003471565246582031
+        }
+      ],
+      "samples": 401,
+      "signature": "[\"punch-rebuild-r1\",1.396263,0,0.15,0,0.13844,0.365725,1.259294,0.56639,0.227285,1.259294,0.56639,\"banana_sculpt\",2449,153]"
+    },
+    {
+      "character": "banana",
+      "node": 23,
+      "compact": true,
+      "lowQuality": true,
+      "hash": "17dce985f674958cddc1dbaabf05322ecc0c68b65812e7146fe37822022c49fc",
+      "solution": {
+        "pose": {
+          "boomYaw": 1.3962634015954636,
+          "headYaw": 6.123233995736766e-17,
+          "reach": 0.15,
+          "stroke": 0
+        },
+        "contactStroke": 0.13839332242632146,
+        "targetPoint": [
+          0.36567878397575637,
+          1.2592944185593469,
+          0.5663896085139659
+        ],
+        "fistPoint": [
+          0.2272854615494349,
+          1.2592944185593469,
+          0.5663896085139659
+        ],
+        "actorPart": "banana_sculpt",
+        "actorTriangle": 1708,
+        "softTriangle": 153,
+        "rigVersion": "punch-rebuild-r1"
+      },
+      "productionApproved": false,
+      "hard": [],
+      "soft": [
+        {
+          "t": 0.41,
+          "kind": "surface",
+          "translationToSeparate": 0.0005516052246093751
+        },
+        {
+          "t": 0.4125,
+          "kind": "surface",
+          "translationToSeparate": 0.0025932312011718757
+        },
+        {
+          "t": 0.415,
+          "kind": "surface",
+          "translationToSeparate": 0.004402351379394531
+        },
+        {
+          "t": 0.4175,
+          "kind": "surface",
+          "translationToSeparate": 0.005966758728027344
+        },
+        {
+          "t": 0.42,
+          "kind": "surface",
+          "translationToSeparate": 0.007274246215820313
+        },
+        {
+          "t": 0.4225,
+          "kind": "surface",
+          "translationToSeparate": 0.008312416076660157
+        },
+        {
+          "t": 0.425,
+          "kind": "surface",
+          "translationToSeparate": 0.009069061279296877
+        },
+        {
+          "t": 0.4275,
+          "kind": "surface",
+          "translationToSeparate": 0.009531974792480469
+        },
+        {
+          "t": 0.43,
+          "kind": "surface",
+          "translationToSeparate": 0.009689140319824222
+        },
+        {
+          "t": 0.4325,
+          "kind": "surface",
+          "translationToSeparate": 0.009050369262695312
+        },
+        {
+          "t": 0.435,
+          "kind": "surface",
+          "translationToSeparate": 0.007149124145507814
+        },
+        {
+          "t": 0.4375,
+          "kind": "surface",
+          "translationToSeparate": 0.00400867462158203
+        }
+      ],
+      "samples": 401,
+      "signature": "[\"punch-rebuild-r1\",1.396263,0,0.15,0,0.138393,0.365679,1.259294,0.56639,0.227285,1.259294,0.56639,\"banana_sculpt\",1708,153]"
+    },
+    {
+      "character": "banana",
+      "node": 24,
+      "compact": false,
+      "lowQuality": false,
+      "hash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037",
+      "solution": {
+        "pose": {
+          "boomYaw": 1.3962634015954636,
+          "headYaw": 0,
+          "reach": 0.15,
+          "stroke": 0
+        },
+        "contactStroke": 0.30474425392251253,
+        "targetPoint": [
+          0.4659234765190787,
+          1.0633945120112323,
+          0.2701920140092855
+        ],
+        "fistPoint": [
+          0.1611792225965662,
+          1.0633945120112323,
+          0.2701920140092855
+        ],
+        "actorPart": "banana_sculpt",
+        "actorTriangle": 2968,
+        "softTriangle": 600,
+        "rigVersion": "punch-rebuild-r1"
+      },
+      "productionApproved": false,
+      "hard": [],
+      "soft": [
+        {
+          "t": 0.4125,
+          "kind": "surface",
+          "translationToSeparate": 0.002796363830566407
+        },
+        {
+          "t": 0.415,
+          "kind": "surface",
+          "translationToSeparate": 0.0067043304443359375
+        },
+        {
+          "t": 0.4175,
+          "kind": "surface",
+          "translationToSeparate": 0.010083580017089845
+        },
+        {
+          "t": 0.42,
+          "kind": "surface",
+          "translationToSeparate": 0.012907600402832033
+        },
+        {
+          "t": 0.4225,
+          "kind": "surface",
+          "translationToSeparate": 0.015150070190429688
+        },
+        {
+          "t": 0.425,
+          "kind": "surface",
+          "translationToSeparate": 0.016784667968750003
+        },
+        {
+          "t": 0.4275,
+          "kind": "surface",
+          "translationToSeparate": 0.017784881591796878
+        },
+        {
+          "t": 0.43,
+          "kind": "surface",
+          "translationToSeparate": 0.01812400817871094
+        },
+        {
+          "t": 0.4325,
+          "kind": "surface",
+          "translationToSeparate": 0.01732807159423828
+        },
+        {
+          "t": 0.435,
+          "kind": "surface",
+          "translationToSeparate": 0.01496315002441406
+        },
+        {
+          "t": 0.4375,
+          "kind": "surface",
+          "translationToSeparate": 0.01106414794921875
+        },
+        {
+          "t": 0.44,
+          "kind": "surface",
+          "translationToSeparate": 0.005667304992675782
+        }
+      ],
+      "samples": 401,
+      "signature": "[\"punch-rebuild-r1\",1.396263,0,0.15,0,0.304744,0.465923,1.063395,0.270192,0.161179,1.063395,0.270192,\"banana_sculpt\",2968,600]"
+    },
+    {
+      "character": "banana",
+      "node": 24,
+      "compact": false,
+      "lowQuality": true,
+      "hash": "17dce985f674958cddc1dbaabf05322ecc0c68b65812e7146fe37822022c49fc",
+      "solution": {
+        "pose": {
+          "boomYaw": 1.3962634015954636,
+          "headYaw": 0,
+          "reach": 0.15,
+          "stroke": 0
+        },
+        "contactStroke": 0.30474334125354485,
+        "targetPoint": [
+          0.46592256385011105,
+          1.0633945120112323,
+          0.2701920140092855
+        ],
+        "fistPoint": [
+          0.1611792225965662,
+          1.0633945120112323,
+          0.2701920140092855
+        ],
+        "actorPart": "banana_sculpt",
+        "actorTriangle": 1985,
+        "softTriangle": 600,
+        "rigVersion": "punch-rebuild-r1"
+      },
+      "productionApproved": false,
+      "hard": [],
+      "soft": [
+        {
+          "t": 0.4125,
+          "kind": "surface",
+          "translationToSeparate": 0.0029754638671875
+        },
+        {
+          "t": 0.415,
+          "kind": "surface",
+          "translationToSeparate": 0.006883430480957031
+        },
+        {
+          "t": 0.4175,
+          "kind": "surface",
+          "translationToSeparate": 0.01026268005371094
+        },
+        {
+          "t": 0.42,
+          "kind": "surface",
+          "translationToSeparate": 0.013086700439453126
+        },
+        {
+          "t": 0.4225,
+          "kind": "surface",
+          "translationToSeparate": 0.01532936096191406
+        },
+        {
+          "t": 0.425,
+          "kind": "surface",
+          "translationToSeparate": 0.016963958740234375
+        },
+        {
+          "t": 0.4275,
+          "kind": "surface",
+          "translationToSeparate": 0.01796398162841797
+        },
+        {
+          "t": 0.43,
+          "kind": "surface",
+          "translationToSeparate": 0.01830329895019532
+        },
+        {
+          "t": 0.4325,
+          "kind": "surface",
+          "translationToSeparate": 0.017507171630859374
+        },
+        {
+          "t": 0.435,
+          "kind": "surface",
+          "translationToSeparate": 0.015142250061035156
+        },
+        {
+          "t": 0.4375,
+          "kind": "surface",
+          "translationToSeparate": 0.011243438720703127
+        },
+        {
+          "t": 0.44,
+          "kind": "surface",
+          "translationToSeparate": 0.005846214294433594
+        }
+      ],
+      "samples": 401,
+      "signature": "[\"punch-rebuild-r1\",1.396263,0,0.15,0,0.304743,0.465923,1.063395,0.270192,0.161179,1.063395,0.270192,\"banana_sculpt\",1985,600]"
+    },
+    {
+      "character": "banana",
+      "node": 24,
+      "compact": true,
+      "lowQuality": false,
+      "hash": "cd37c5380280034e395f7c2f2c083dd7fa1c6580096120ef50a1b1740f424037",
+      "solution": {
+        "pose": {
+          "boomYaw": 1.3962634015954636,
+          "headYaw": 0,
+          "reach": 0.15,
+          "stroke": 0
+        },
+        "contactStroke": 0.13533005840870677,
+        "targetPoint": [
+          0.37513079284144674,
+          1.2592944209435324,
+          0.09673482090132485
+        ],
+        "fistPoint": [
+          0.23980073443273997,
+          1.2592944209435324,
+          0.09673482090132485
+        ],
+        "actorPart": "banana_sculpt",
+        "actorTriangle": 3028,
+        "softTriangle": 1613,
+        "rigVersion": "punch-rebuild-r1"
+      },
+      "productionApproved": false,
+      "hard": [],
+      "soft": [
+        {
+          "t": 0.415,
+          "kind": "surface",
+          "translationToSeparate": 0.0005796432495117189
+        },
+        {
+          "t": 0.4175,
+          "kind": "surface",
+          "translationToSeparate": 0.002110671997070313
+        },
+        {
+          "t": 0.42,
+          "kind": "surface",
+          "translationToSeparate": 0.0033901214599609372
+        },
+        {
+          "t": 0.4225,
+          "kind": "surface",
+          "translationToSeparate": 0.004406166076660156
+        },
+        {
+          "t": 0.425,
+          "kind": "surface",
+          "translationToSeparate": 0.00514659881591797
+        },
+        {
+          "t": 0.4275,
+          "kind": "surface",
+          "translationToSeparate": 0.00559978485107422
+        },
+        {
+          "t": 0.43,
+          "kind": "surface",
+          "translationToSeparate": 0.005753517150878906
+        },
+        {
+          "t": 0.4325,
+          "kind": "surface",
+          "translationToSeparate": 0.0051176071166992194
+        },
+        {
+          "t": 0.435,
+          "kind": "surface",
+          "translationToSeparate": 0.0032249450683593753
+        },
+        {
+          "t": 0.4375,
+          "kind": "surface",
+          "translationToSeparate": 0.000098419189453125
+        }
+      ],
+      "samples": 401,
+      "signature": "[\"punch-rebuild-r1\",1.396263,0,0.15,0,0.13533,0.375131,1.259294,0.096735,0.239801,1.259294,0.096735,\"banana_sculpt\",3028,1613]"
+    },
+    {
+      "character": "banana",
+      "node": 24,
+      "compact": true,
+      "lowQuality": true,
+      "hash": "17dce985f674958cddc1dbaabf05322ecc0c68b65812e7146fe37822022c49fc",
+      "solution": {
+        "pose": {
+          "boomYaw": 1.3962634015954636,
+          "headYaw": 0,
+          "reach": 0.15,
+          "stroke": 0
+        },
+        "contactStroke": 0.13552782388480644,
+        "targetPoint": [
+          0.3753285583175464,
+          1.2592944209435324,
+          0.09673482090132485
+        ],
+        "fistPoint": [
+          0.23980073443273997,
+          1.2592944209435324,
+          0.09673482090132485
+        ],
+        "actorPart": "banana_sculpt",
+        "actorTriangle": 2031,
+        "softTriangle": 1613,
+        "rigVersion": "punch-rebuild-r1"
+      },
+      "productionApproved": false,
+      "hard": [],
+      "soft": [
+        {
+          "t": 0.415,
+          "kind": "surface",
+          "translationToSeparate": 0.0005723953247070313
+        },
+        {
+          "t": 0.4175,
+          "kind": "surface",
+          "translationToSeparate": 0.002105522155761719
+        },
+        {
+          "t": 0.42,
+          "kind": "surface",
+          "translationToSeparate": 0.003386688232421875
+        },
+        {
+          "t": 0.4225,
+          "kind": "surface",
+          "translationToSeparate": 0.0044040679931640625
+        },
+        {
+          "t": 0.425,
+          "kind": "surface",
+          "translationToSeparate": 0.005145645141601563
+        },
+        {
+          "t": 0.4275,
+          "kind": "surface",
+          "translationToSeparate": 0.005599403381347657
+        },
+        {
+          "t": 0.43,
+          "kind": "surface",
+          "translationToSeparate": 0.005753326416015625
+        },
+        {
+          "t": 0.4325,
+          "kind": "surface",
+          "translationToSeparate": 0.005117225646972656
+        },
+        {
+          "t": 0.435,
+          "kind": "surface",
+          "translationToSeparate": 0.00322418212890625
+        },
+        {
+          "t": 0.4375,
+          "kind": "surface",
+          "translationToSeparate": 0.00009670257568359376
+        }
+      ],
+      "samples": 401,
+      "signature": "[\"punch-rebuild-r1\",1.396263,0,0.15,0,0.135528,0.375329,1.259294,0.096735,0.239801,1.259294,0.096735,\"banana_sculpt\",2031,1613]"
+    }
+  ]
+}

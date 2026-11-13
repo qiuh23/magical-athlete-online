@@ -1,0 +1,18 @@
+{
+  "projectionMaxError": 1.653746031449188e-06,
+  "images": 2,
+  "browserVerified": false,
+  "scope": "Offline exact runtime geometry and framing; no actors, rigs, number textures or HUD. Cycles light response/tone mapping differs from Three; receiver energy is calibrated, not a WebGL acceptance.",
+  "actual_pixels_reviewed": true,
+  "views": [
+    {
+      "file": "boardwalks-390x844-night-offline.png",
+      "sha256": "8343df7431b711d12b61b7eed02d96790d41462f18703be4f0253d6b0ce5e718"
+    },
+    {
+      "file": "wild-1280x900-night-offline.png",
+      "sha256": "e1cf84238604d648faceb850bd9241f6e086d1118fd7548304f3c2c0a61c0f82"
+    }
+  ],
+  "observations": "Visible local warm light pools and directional shadows. Fixed supported masts, darker unlit areas. Existing dark rubber pads and omitted number artwork reduce offline readability; this is not Three color or HUD acceptance."
+}
