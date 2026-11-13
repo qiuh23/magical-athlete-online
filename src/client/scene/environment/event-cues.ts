@@ -29,8 +29,9 @@ export function environmentEventCues(track: TrackId, beat: PresentationBeat | un
       const count = ['gain', 'loss'].includes(action.anchor.kind) ? Math.min(budget, scoreFlowCount(action.scoreDelta, low)) : 0;
       budget -= count;
       const impulse=action.anchor.kind==='punch'&&mount?{
-        // Authored fist front at release, in the same fixed display mount.
-        from:(mount.variant==='punch-r1'?new Vector3(.29,1.15,.4975):new Vector3(1,1.15,1.3475)).applyMatrix4(mount.matrix),
+        // A pending asset uses its cabinet outlet. The mounted display layer
+        // replaces this with the real sampled glove before the pressure flies.
+        from:new Vector3(0,1.15,1.65).applyMatrix4(mount.matrix),
         to:new Vector3(p.x+o.x,p.y+(racer.tripped?.05:.55)*o.scale,p.z+o.z),
       }:undefined;
       return [{ action, targetId, points, count, ...(impulse?{impulse}:{}) }];
@@ -58,8 +59,8 @@ export function buildEnvironmentEventCueGeometry(cues: EventCue[]) {
   const dummy = new Object3D(); let disposed = false;
   return { root, lines, labels, particles, wind, impulses, sample(progress: number, reduced: boolean) {
     let count = 0;
-    for(const item of wind){const u=punchWindTravel(progress,item.index);item.mesh.visible=!reduced&&u>0&&u<1;if(item.mesh.visible){item.mesh.position.lerpVectors(item.cue.impulse!.from,item.cue.impulse!.to,u);item.mesh.scale.setScalar(.8+u*.6);}}
-    for(const item of impulses){const u=punchWindTravel(progress);item.plume.visible=!reduced&&progress>.22&&progress<.456;if(item.plume.visible){item.plume.position.lerpVectors(item.cue.impulse!.from,item.cue.impulse!.to,u*.5);item.plume.scale.set(1,item.length*Math.max(.02,u),1);}const hit=(progress-.40)/.13;item.impact.visible=!reduced&&hit>0&&hit<1;item.impact.position.copy(item.cue.impulse!.to);item.impact.scale.setScalar(.6+Math.max(0,hit)*1.3);}
+    for(const item of wind){const u=punchWindTravel(progress,item.index);item.mesh.visible=!reduced&&u>0&&u<1;if(item.mesh.visible){item.mesh.quaternion.setFromUnitVectors(new Vector3(0,0,1),item.cue.impulse!.to.clone().sub(item.cue.impulse!.from).normalize());item.mesh.position.lerpVectors(item.cue.impulse!.from,item.cue.impulse!.to,u);item.mesh.scale.setScalar(.8+u*.6);}}
+    for(const item of impulses){const direction=item.cue.impulse!.to.clone().sub(item.cue.impulse!.from),length=direction.length();direction.normalize();item.plume.quaternion.setFromUnitVectors(new Vector3(0,1,0),direction);item.impact.quaternion.setFromUnitVectors(new Vector3(0,0,1),direction);const u=punchWindTravel(progress);item.plume.visible=!reduced&&progress>.22&&progress<.456;if(item.plume.visible){item.plume.position.lerpVectors(item.cue.impulse!.from,item.cue.impulse!.to,u*.5);item.plume.scale.set(1,length*Math.max(.02,u),1);}const hit=(progress-.40)/.13;item.impact.visible=!reduced&&hit>0&&hit<1;item.impact.position.copy(item.cue.impulse!.to);item.impact.scale.setScalar(.6+Math.max(0,hit)*1.3);}
     lines.forEach(line => { line.visible = reduced || progress > 0 && progress < 1; });
     labels.forEach(({mesh}) => { mesh.visible = reduced || progress < 1; });
     if (!reduced) for (const cue of cues) for (let i = 0; i < cue.count; i++) {

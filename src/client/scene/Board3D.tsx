@@ -1,9 +1,6 @@
 import './asset-loading.js';
 import { Suspense, useEffect, useMemo, useCallback, useRef, useState } from 'react';
-import {SceneMechanismController} from './environment/scene-mechanisms.js';
-import {clearRevalidatedMechanismCache,RevalidatedFoundations,RevalidatedMechanismLayer} from './environment/RevalidatedMechanismLayer.js';
-import {clearParkedFallbackCache} from './environment/parked-fallbacks/ParkedFallbackLayer.js';
-import {RevalidatedTripLayer} from './environment/RevalidatedTripLayer.js';
+import {MechanismActorBounds} from './mechanisms/actor-bounds.js';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 import type { Racer, RoomView } from '../../shared/types.js';
@@ -41,7 +38,6 @@ import { rebuiltContactSceneReady, sceneAssetState, type SceneAssetState } from 
 import { environmentEnabled, environmentAllowsPhysicalContact } from './environment/layout.js';
 import { VenueLighting, clearFloodlightCache } from './environment/VenueLighting.js';
 import {punchWindRoute} from './environment/force-presentation.js';
-import { displayContactCompatible } from './environment/full-coverage.js';
 import { FullCoverageMechanismLayer, clearFullCoverageCache } from './environment/FullCoverageMechanismLayer.js';
 import { mechanismActions } from './mechanisms/events.js';
 import { EnvironmentEventCues } from './environment/EnvironmentEventCues.js';
@@ -52,10 +48,6 @@ import { FocusNodeProjector } from './mechanisms/FocusNodeLabels.js';
 import { PawnOpacity,warpOpacity } from './mechanisms/pawn-opacity.js';
 import { mechanismScope } from './mechanisms/scope.js';
 import { TripController,residentReflow,tripEntryProfile } from './mechanisms/trip-profile.js';
-import { R1PunchController, needsR1Bind, type R1Context } from './mechanisms/punch-r1/controller.js';
-import { R1_EVIDENCE, R1_SCENE_HASH } from './mechanisms/punch-r1/evidence.js';
-import { R1PunchLayer, clearR1Cache } from './mechanisms/punch-r1/R1PunchLayer.js';
-import { r1ActorPosition } from './mechanisms/punch-r1/motion.js';
 import { PunchController } from './mechanisms/punch-profile.js';
 import { pawnFallPhase, eventScoreDelta } from './mechanisms/events.js';
 
@@ -116,7 +108,6 @@ export function Board3D({ clock = wallPresentationClock, paused = false, room, r
   const environmentOnReady = useCallback(() => setEnvironmentStatus({key:environmentKey,state:'ready'}), [environmentKey]);
   const environmentOnFailure = useCallback(() => setEnvironmentStatus({key:environmentKey,state:'failed'}), [environmentKey]);
   const [mechanismRetry,setMechanismRetry]=useState(0);
-  const [r1Failure,setR1Failure]=useState('');
   const [padStatus,setPadStatus]=useState<{key:string;state:SceneAssetState}>({key:'',state:'loading'});
   const loadKey=`${room.track}:${mechanismRetry}`;
   const [certifiedFailure,setCertifiedFailure]=useState('');
@@ -139,15 +130,13 @@ export function Board3D({ clock = wallPresentationClock, paused = false, room, r
   const sceneMechanisms=rebuiltContactSceneReady({mechanisms:mechanismCandidate,environmentRequested:environmentCandidate,environment:environmentLoad,pads:padLoad,dependenciesFailed:mechanismLoad==='failed'||certifiedFailed});
   const contactScope=mechanismScope(room)+(environmentCandidate?':scene-mechanisms-v1':'');
   const punch = useMemo(()=>new GuardedPunchController(),[contactScope,mechanismRetry,resetKey]);
-  const certified=useMemo(()=>{const controller=environmentCandidate&&mechanismCandidate?new SceneMechanismController(contactScope):new GuardedCertifiedTripController(contactScope);try{if(!environmentCandidate)controller.restore(sessionStorage.getItem(`mechanism-down:${contactScope}`)??'');}catch{}return controller;},[contactScope,mechanismRetry,resetKey]);
-  const r1Scope=`${contactScope}:r1:${environmentRetry}:${mechanismRetry}:${resetKey}`;
-  const r1=useMemo(()=>new R1PunchController(r1Scope,R1_EVIDENCE),[r1Scope]);
-  const r1Failed=r1Failure===r1Scope;
-  const r1OnFailure=useCallback(()=>setR1Failure(r1Scope),[r1Scope]);
-  const r1Enabled=environmentCandidate&&mechanismCandidate;
-  const r1Input:R1Context={track:room.track,compact,lowQuality,beat,racers,now:clock.now(),start:startedAt,duration:durationMs,available:!environmentCandidate&&sceneMechanisms&&mechanismLoad==='ready'&&certified.ready&&!r1Failed,sceneHash:R1_SCENE_HASH,reducedMotion,paused};
-  r1.enter(r1Input);
-  certified.enter(room.track,compact,beat,racers,clock.now(),startedAt,durationMs,(physicalContacts&&mechanismLoad==='ready'||sceneMechanisms)&&(!environmentCandidate||!beat?.targets.some(id=>{const r=racers.find(r=>r.id===id);return r&&!displayContactCompatible(`${room.track}:${r.position}`);}))&&(!paused||!!certified.active&&certified.active.key===beat?.key),lowQuality,reducedMotion);
+  // Current scenes have one universally animated hardware owner. Historical
+  // contact rigs retain their old opt-out environment path, not the moved R1
+  // display mounts. An unknown shape must never suppress the visible cycle.
+  const certified=useMemo(()=>{const controller=new GuardedCertifiedTripController(contactScope);try{if(!environmentCandidate)controller.restore(sessionStorage.getItem(`mechanism-down:${contactScope}`)??'');}catch{}return controller;},[contactScope,mechanismRetry,resetKey]);
+  const actorBounds=useMemo(()=>new MechanismActorBounds(),[contactScope,resetKey]);
+  const mechanismOutlets=useMemo(()=>new Map<string,THREE.Vector3>(),[contactScope,mechanismRetry,resetKey]);
+  certified.enter(room.track,compact,beat,racers,clock.now(),startedAt,durationMs,physicalContacts&&mechanismLoad==='ready'&&(!paused||!!certified.active&&certified.active.key===beat?.key),lowQuality,reducedMotion);
   useEffect(()=>{try{sessionStorage.setItem(`mechanism-down:${contactScope}`,certified.dump());}catch{}},[certified,contactScope,beat?.key]);
   const trip=useMemo(()=>new GuardedTripController(),[contactScope,mechanismRetry,resetKey]);
   const tripReady=useCallback(()=>{const entry=tripEntryProfile(room.track,compact,beat,racers),ids=entry?[entry.newId,entry.oldId]:trip.plan?[trip.plan.newId,trip.plan.oldId]:[];return ids.length===2&&ids.every(id=>sculptureReaders.current.get(`${id}:${lowQuality}`)?.()===true);},[room.track,compact,beat,racers,trip,lowQuality]);
@@ -201,8 +190,8 @@ export function Board3D({ clock = wallPresentationClock, paused = false, room, r
   const focusNodes=mechanismCandidate&&!['overview','manual','intro'].includes(focus.state)?[...new Set([...focus.ids.flatMap(id=>racers.filter(r=>r.id===id).map(r=>r.position)),...focus.positions])].filter(id=>trackNodeIds(room.track).includes(id)).slice(0,8):[];
   const showTallDecor = focus.state === 'overview' && cameraMode === 'overview' && beat?.kind !== 'intro' && !choosing && !route;
   const returnSelf = () => { intro.skip(); setCameraMode('self'); setManualCamera(false); setDismissedChain(action?.chainId ?? heldFocus?.chainId ?? 'manual-self'); setCameraReset(value => value + 1); };
-  return <section ref={root} className={`board-scene ${compact ? 'compact-scene' : ''}`} data-testid="board-3d" data-scene-failed={String(sceneFailed || lost)} data-track={room.track} data-environment-candidate={String(environmentCandidate)} data-environment-load={environmentCandidate?environmentLoad:undefined} data-contact-mode={environmentCandidate?(sceneMechanisms?'finite-scene-allowlist':'cue-only-environment-unavailable'):undefined} data-r1-contact={r1Enabled?r1.reason:undefined} data-pad-load={environmentCandidate&&mechanismCandidate?padLoad:undefined} data-mechanism-candidate={String(mechanismCandidate)} data-mechanism-load={mechanismCandidate?(physicalContacts?mechanismLoad:sceneMechanisms?'finite-allowlist':'cue-only'):undefined} data-appearance-mode={appearanceMode} data-lighting-cycle-ms={SCENE_LIGHT_CYCLE_MS} data-lighting-running={String(lightingRunning)} data-tall-decor={String(showTallDecor)} data-node-count={trackNodeIds(room.track).length} data-twist-boundary={TRACKS[room.track].twistBoundary?`${TRACKS[room.track].twistBoundary!.before}-${TRACKS[room.track].twistBoundary!.after}`:undefined} data-neutral-monster={room.trackState?.twist?.monster&&!room.trackState.twist.monster.racerId&&!room.trackState.twist.monster.finished?room.trackState.twist.monster.position:undefined} data-twist-chips={room.trackState?.twist?.chips?.join(',')} data-special-event={room.trackState?.event?.id} data-event-marker={room.trackState?.event?.npc?.position} data-trampolines={room.trackState?.event?.trampolines?.join(',')} data-phase={beat?.kind ?? 'idle'} data-intro-ready={String(introReady)} data-event-ids={beat?.events.map(e => e.id).join(',') ?? ''} data-motion-count={beat?.motions.length ?? 0} data-renderer="react-three-fiber" data-playback-paused={String(paused)} data-frameloop={paused ? 'demand' : beat && beat.kind!=='intro' && !dice && !reducedMotion ? 'always' : 'demand'} data-camera-mode={cameraMode} data-camera-state={focus.state} data-camera-target-ids={focus.ids.join(',')} data-camera-chain-id={focus.chainId ?? ''} data-camera-positions={focus.positions.join(',')} data-camera-piece={focus.piece} data-camera-shot={shot?.keys.join(',')} aria-label={`${TRACKS[room.track].name}立体棋盘`}>
-    {mechanismCandidate && (mechanismLoad==='failed'||padFailed||certifiedFailed||r1Failed) && <p className="mechanism-load-error" role="status">部分机关或跑垫素材载入失败，使用临时跑面，规则仍可继续。<button onClick={()=>{clearMechanismCache(room.track);clearFullCoverageCache(room.track);clearR1Cache();clearParkedFallbackCache();setR1Failure('');if(environmentCandidate)clearRevalidatedMechanismCache(room.track);setPadStatus({key:padKey,state:'loading'});setCertifiedFailure('');setMechanismLoad('loading');setMechanismRetry(n=>n+1);}}>重新载入机关</button></p>}
+  return <section ref={root} className={`board-scene ${compact ? 'compact-scene' : ''}`} data-testid="board-3d" data-scene-failed={String(sceneFailed || lost)} data-track={room.track} data-environment-candidate={String(environmentCandidate)} data-environment-load={environmentCandidate?environmentLoad:undefined} data-contact-mode={environmentCandidate?'all-character-outboard-motion':undefined} data-pad-load={environmentCandidate&&mechanismCandidate?padLoad:undefined} data-mechanism-candidate={String(mechanismCandidate)} data-mechanism-load={mechanismCandidate?mechanismLoad:undefined} data-scene-contact-assets-ready={String(sceneMechanisms)} data-appearance-mode={appearanceMode} data-lighting-cycle-ms={SCENE_LIGHT_CYCLE_MS} data-lighting-running={String(lightingRunning)} data-tall-decor={String(showTallDecor)} data-node-count={trackNodeIds(room.track).length} data-twist-boundary={TRACKS[room.track].twistBoundary?`${TRACKS[room.track].twistBoundary!.before}-${TRACKS[room.track].twistBoundary!.after}`:undefined} data-neutral-monster={room.trackState?.twist?.monster&&!room.trackState.twist.monster.racerId&&!room.trackState.twist.monster.finished?room.trackState.twist.monster.position:undefined} data-twist-chips={room.trackState?.twist?.chips?.join(',')} data-special-event={room.trackState?.event?.id} data-event-marker={room.trackState?.event?.npc?.position} data-trampolines={room.trackState?.event?.trampolines?.join(',')} data-phase={beat?.kind ?? 'idle'} data-intro-ready={String(introReady)} data-event-ids={beat?.events.map(e => e.id).join(',') ?? ''} data-motion-count={beat?.motions.length ?? 0} data-renderer="react-three-fiber" data-playback-paused={String(paused)} data-frameloop={paused ? 'demand' : beat && beat.kind!=='intro' && !dice && !reducedMotion ? 'always' : 'demand'} data-camera-mode={cameraMode} data-camera-state={focus.state} data-camera-target-ids={focus.ids.join(',')} data-camera-chain-id={focus.chainId ?? ''} data-camera-positions={focus.positions.join(',')} data-camera-piece={focus.piece} data-camera-shot={shot?.keys.join(',')} aria-label={`${TRACKS[room.track].name}立体棋盘`}>
+    {mechanismCandidate && (mechanismLoad==='failed'||padFailed||certifiedFailed) && <p className="mechanism-load-error" role="status">部分机关或跑垫素材载入失败，使用临时跑面，规则仍可继续。<button onClick={()=>{clearMechanismCache(room.track);clearFullCoverageCache(room.track);setPadStatus({key:padKey,state:'loading'});setCertifiedFailure('');setMechanismLoad('loading');setMechanismRetry(n=>n+1);}}>重新载入机关</button></p>}
     {environmentCandidate&&environmentLoad==='failed'&&<p className="mechanism-load-error" role="status">环境素材载入失败，已保留原场景与规则。<button onClick={()=>{clearEnvironmentCache(room.track);setEnvironmentRetry(n=>n+1);}}>重新载入环境</button></p>}
     {environmentCandidate&&lightsFailed&&<p className="mechanism-load-error" role="status">场边灯具载入失败，保留月光与场景。<button onClick={()=>{clearFloodlightCache();setLightsFailed(false);setLightRetry(n=>n+1);}}>重新载入灯具</button></p>}
     <div className="scene-camera-toolbar">
@@ -233,17 +222,12 @@ export function Board3D({ clock = wallPresentationClock, paused = false, room, r
           ? <WhirlyStadium compact={compact} lowQuality={lowQuality} fallback={<DioramaStadium environmentReady={environmentReady} compact={compact} track={room.track} lowQuality={lowQuality} beat={beat} racers={racers} showTallDecor={showTallDecor} />} />
           : <DioramaStadium environmentReady={environmentReady} compact={compact} track={room.track} reversed={room.trackState?.reversed} lowQuality={lowQuality} beat={beat} racers={racers} showTallDecor={showTallDecor} />}
         {environmentCandidate&&<ApprovedEnvironment key={environmentKey} reversed={room.trackState?.reversed} track={room.track} compact={compact} lowQuality={lowQuality} onReady={environmentOnReady} onFailure={environmentOnFailure}/>}
-        {mechanismCandidate&&environmentCandidate&&<EnvironmentEventCues {...{track:room.track,beat,racers,compact,lowQuality,paused,reducedMotion,clock,startedAt,durationMs}}/>}
-        {mechanismCandidate&&environmentCandidate&&<FullCoverageMechanismLayer key={`coverage:${room.track}:${mechanismRetry}`} onFailure={()=>setMechanismLoad('failed')} physicalVisible={anchor=>{
-          if(!displayContactCompatible(anchor)||!sceneMechanisms||mechanismLoad!=='ready'||!(certified instanceof SceneMechanismController))return false;
-          return certified.renderedHardware.has(anchor);
-        }} {...{track:room.track,compact,lowQuality,racers,beat,clock,startedAt,durationMs,paused,reducedMotion}}/>}
-        {sceneMechanisms&&certified instanceof SceneMechanismController&&<><RevalidatedFoundations controller={certified} {...{track:room.track,compact,racers,beat}}/><RevalidatedMechanismLayer onReady={mechanismOnReady} key={`scene:${mechanismRetry}`} controller={certified} onFailure={()=>setMechanismLoad('failed')} {...{track:room.track,compact,racers,beat,clock,startedAt,durationMs,reducedMotion,lowQuality,paused}}/><RevalidatedTripLayer key={`scene-trip:${mechanismRetry}`} controller={certified} onFailure={()=>setCertifiedFailure(loadKey)} {...{track:room.track,compact,racers,beat,clock,startedAt,durationMs,reducedMotion,lowQuality,paused,root}}/></>}
+        {mechanismCandidate&&environmentCandidate&&<EnvironmentEventCues actorBounds={actorBounds} outlets={mechanismOutlets} {...{track:room.track,beat,racers,compact,lowQuality,paused,reducedMotion,clock,startedAt,durationMs}}/>}
+        {mechanismCandidate&&environmentCandidate&&<FullCoverageMechanismLayer outlets={mechanismOutlets} key={`coverage:${room.track}:${mechanismRetry}`} onReady={mechanismOnReady} onFailure={()=>setMechanismLoad('failed')} physicalVisible={()=>false} {...{track:room.track,compact,lowQuality,racers,beat,clock,startedAt,durationMs,paused,reducedMotion}}/>}
         {physicalContacts && <MechanismLayer certified={certified} trip={trip} tripReady={tripReady} contactReady={contactReady} punch={punch} key={mechanismRetry} paused={paused} onLoadState={setMechanismLoad} {...{track:room.track,compact,racers,beat,clock,startedAt,durationMs,reducedMotion,lowQuality,root}}/>}
         {physicalContacts&&<CertifiedTripLayer onFailure={()=>setCertifiedFailure(loadKey)} key={`certified:${mechanismRetry}`} controller={certified} racers={racers} {...{track:room.track,compact,lowQuality,paused,reducedMotion,beat,clock,startedAt,durationMs,root}}/>}
-        {r1Enabled&&room.track==='wild'&&<R1PunchLayer key={r1Scope} controller={r1} input={r1Input} clock={clock} paused={paused} onFailure={r1OnFailure}/>}
         {route && <RouteChoices {...{ route, compact }} track={room.track} buttons={routeButtons} />}
-        <Suspense fallback={null}><TwistPieces {...{ room, compact, lowQuality, reducedMotion }} />{racers.filter(r => !r.eliminated || beat?.kind === 'eliminate' && beat.targets.includes(r.id)).map(racer => <Pawn r1={r1} r1Enabled={r1Enabled} physicalContacts={physicalContacts} certified={certified} trip={trip} sculptureReaders={sculptureReaders} punch={punch} paused={paused} clock={clock} key={racer.id} racer={racer} racers={racers} room={room} compact={compact} beat={beat} startedAt={startedAt} durationMs={durationMs} lowQuality={lowQuality} reducedMotion={reducedMotion} active={active === racer.id} onDetail={onDetail} labels={labels} />)}</Suspense>
+        <Suspense fallback={null}><TwistPieces {...{ room, compact, lowQuality, reducedMotion }} />{racers.filter(r => !r.eliminated || beat?.kind === 'eliminate' && beat.targets.includes(r.id)).map(racer => <Pawn actorBounds={actorBounds} physicalContacts={physicalContacts} certified={certified} trip={trip} sculptureReaders={sculptureReaders} punch={punch} paused={paused} clock={clock} key={racer.id} racer={racer} racers={racers} room={room} compact={compact} beat={beat} startedAt={startedAt} durationMs={durationMs} lowQuality={lowQuality} reducedMotion={reducedMotion} active={active === racer.id} onDetail={onDetail} labels={labels} />)}</Suspense>
         <RaceEffects clock={clock} track={room.track} reversed={room.trackState?.reversed} {...{ beat, racers, compact, startedAt, durationMs, reducedMotion, lowQuality }} />
         <FocusNodeProjector track={room.track} compact={compact} nodes={focusNodes} labels={nodeLabels} root={root}/>
         <ScoreProjector track={room.track} beat={beat} racers={racers} compact={compact} label={scoreLabel} />
@@ -399,18 +383,18 @@ function PredictionHud({ room, racers, choosing, onDetail }: { room: RoomView; r
   </div>)}</div></aside>;
 }
 
-function Pawn({ r1,r1Enabled,physicalContacts,certified,trip,sculptureReaders,punch,paused, clock, racer, racers, room, compact, beat, startedAt, durationMs, lowQuality, reducedMotion, active, onDetail, labels }: { r1:R1PunchController;r1Enabled:boolean;physicalContacts:boolean;certified:CertifiedTripController;trip:TripController;sculptureReaders:React.RefObject<Map<string,()=>boolean>>;punch:PunchController;paused: boolean; clock: PresentationClock; racer: Racer; racers: Racer[]; room: RoomView; compact: boolean; beat?: PresentationBeat; startedAt: number; durationMs: number; lowQuality: boolean; reducedMotion: boolean; active: boolean; onDetail: (id: string, racerId?: string) => void; labels: React.RefObject<Map<string, HTMLSpanElement>> }) {
+function Pawn({ actorBounds,physicalContacts,certified,trip,sculptureReaders,punch,paused, clock, racer, racers, room, compact, beat, startedAt, durationMs, lowQuality, reducedMotion, active, onDetail, labels }: { actorBounds:MechanismActorBounds;physicalContacts:boolean;certified:CertifiedTripController;trip:TripController;sculptureReaders:React.RefObject<Map<string,()=>boolean>>;punch:PunchController;paused: boolean; clock: PresentationClock; racer: Racer; racers: Racer[]; room: RoomView; compact: boolean; beat?: PresentationBeat; startedAt: number; durationMs: number; lowQuality: boolean; reducedMotion: boolean; active: boolean; onDetail: (id: string, racerId?: string) => void; labels: React.RefObject<Map<string, HTMLSpanElement>> }) {
   const root = useRef<THREE.Group>(null), body = useRef<THREE.Group>(null);
   const protectedGeometry=certified.geometry(racer.id);
   // Keep the audited sculpture geometry through its supported down/recover pose.
   // Quality changes still apply to the rest of the scene.
   const modelQuality=protectedGeometry?.lowQuality??lowQuality;
-  const certifiedBind=certified instanceof SceneMechanismController||physicalContacts&&(certifiedTripMount(room.track,racer.position)||needsCertifiedBind(room.track,racer,beat,lowQuality)||certified.protects(racer.id));
-  const r1Bind=r1Enabled&&(needsR1Bind(room.track,racer,beat)||r1.protects(racer.id));
+  const certifiedBind=physicalContacts&&(certifiedTripMount(room.track,racer.position)||needsCertifiedBind(room.track,racer,beat,lowQuality)||certified.protects(racer.id));
   const captureKey=useRef('');
   const captureGeneration=useRef(0);
-  useEffect(()=>{captureKey.current='';captureGeneration.current++;return()=>{captureGeneration.current++;captureKey.current='';certified.actors.delete(racer.id);r1.invalidateActor(racer.id);};},[certified,r1,racer.id]);
-  useFrame(()=>{if(!body.current)return;const ids:string[]=[];body.current.traverse(n=>ids.push(n.uuid));const key=JSON.stringify([certifiedBind,r1Bind,modelQuality,racer.flags,ids]);if(key===captureKey.current)return;captureKey.current=key;certified.actors.delete(racer.id);r1.invalidateActor(racer.id);if(!certifiedBind&&!r1Bind)return;const snapshot=captureActorGeometry(body.current);if(!snapshot||snapshot.requiresSkeletonFreeze)return;const current=key,generation=captureGeneration.current;void actorGeometryFingerprint(snapshot).then(hash=>{if(captureGeneration.current===generation&&captureKey.current===current){if(certifiedBind)certified.acceptActor(racer.id,hash,snapshot.vertices);if(r1Bind)r1.acceptActor(racer.id,hash,snapshot);invalidate();}}).catch(()=>{});},-2);
+  useEffect(()=>{captureKey.current='';captureGeneration.current++;return()=>{captureGeneration.current++;captureKey.current='';certified.actors.delete(racer.id);};},[certified,racer.id]);
+  useFrame(()=>{if(!body.current||!certifiedBind)return;const ids:string[]=[];body.current.traverse(n=>ids.push(n.uuid));const key=JSON.stringify([certifiedBind,modelQuality,racer.flags,ids]);if(key===captureKey.current)return;captureKey.current=key;certified.actors.delete(racer.id);if(!certifiedBind)return;const snapshot=captureActorGeometry(body.current);if(!snapshot||snapshot.requiresSkeletonFreeze)return;const current=key,generation=captureGeneration.current;void actorGeometryFingerprint(snapshot).then(hash=>{if(captureGeneration.current===generation&&captureKey.current===current){if(certifiedBind)certified.acceptActor(racer.id,hash,snapshot.vertices);invalidate();}}).catch(()=>{});},-2);
+  useEffect(()=>body.current?actorBounds.bind(racer.id,body.current):undefined,[actorBounds,racer.id]);
   const opacity=useMemo(()=>new PawnOpacity(),[]);useEffect(()=>()=>opacity.restore(),[opacity]);
   useEffect(()=>{const key=`${racer.id}:${lowQuality}`;const read=()=>{let ready=false;root.current?.traverse(object=>{if(object.userData.racerMainSculpture){const sculpture=object.children.find(child=>child.userData.sculptureState);ready=!!sculpture?.visible&&sculpture.userData.sculptureState==='ready';}});return ready;};sculptureReaders.current.set(key,read);return()=>{if(sculptureReaders.current.get(key)===read)sculptureReaders.current.delete(key);};},[racer.id,lowQuality,sculptureReaders]);
   const { camera, size, invalidate } = useThree(); const projection = useMemo(() => new THREE.Vector3(), []);
@@ -448,11 +432,10 @@ function Pawn({ r1,r1Enabled,physicalContacts,certified,trip,sculptureReaders,pu
         const arrived = t > .5,fullSizeWarp=mechanismsEnabled()&&beat?.kind==='warp'&&beat.cause==='track-whirl'; x = (arrived ? target[0] + endOffset.x : x); z = (arrived ? target[2] + endOffset.z : z);
         y = (arrived ? target[1] : from[1]) + .005; scale = (arrived ? endOffset.scale : offset.scale) * (fullSizeWarp?1:Math.max(.04, Math.abs(2 * t - 1))); y += reducedMotion||fullSizeWarp ? 0 : Math.sin(t * Math.PI) * .65; swing = reducedMotion||fullSizeWarp ? 0 : t * Math.PI * 2;
       } else {
-        const count = Math.max(1, motion.path.length - 1), r1Progress=r1.route(racer.id,t), fraction = r1Progress??punch.route(t,racer.id)??(punchWind?punchWindRoute(t):strideProgress(t)), walk = fraction * count;
-        if(r1Progress!==undefined){r1ActorPosition(route!,fraction,count,walkPoint);x=walkPoint.x;y=walkPoint.y;z=walkPoint.z;}
-        else{route!.getPointAt(fraction, walkPoint);x=walkPoint.x;z=walkPoint.z;y=walkPoint.y+.005+(reducedMotion?0:strideLift(fraction,count));}
+        const count = Math.max(1, motion.path.length - 1), fraction = punch.route(t,racer.id)??(punchWind?punchWindRoute(t):strideProgress(t)), walk = fraction * count;
+        route!.getPointAt(fraction, walkPoint);x=walkPoint.x;z=walkPoint.z;y=walkPoint.y+.005+(reducedMotion?0:strideLift(fraction,count));
         const backwards = trackMovementDistance(room.track, motion.path, room.trackState?.reversed) < 0;
-        swing = reducedMotion||r1.protects(racer.id)||punch.protects(racer.id)||certified.protects(racer.id) ? 0 : Math.sin(walk * Math.PI * 2) * (backwards ? -.055 : .045); scale = THREE.MathUtils.lerp(offset.scale, endOffset.scale, fraction);
+        swing = reducedMotion||punch.protects(racer.id)||certified.protects(racer.id) ? 0 : Math.sin(walk * Math.PI * 2) * (backwards ? -.055 : .045); scale = THREE.MathUtils.lerp(offset.scale, endOffset.scale, fraction);
       }
     }
     if(warpMode==='single-resident-reflow'){const reflow=warpResidentLayout(room.track,compact,beat,racer,racers,t);if(reflow){x=from[0]+reflow.x;z=from[2]+reflow.z;scale=reflow.scale;}}
@@ -460,7 +443,7 @@ function Pawn({ r1,r1Enabled,physicalContacts,certified,trip,sculptureReaders,pu
     if(trip.plan?.kind==='entry'&&trip.plan.oldId===racer.id){const reflow=residentReflow(trip.progress);x=from[0]+reflow.x;scale=reflow.scale;}
     const fall = fallPhase ? pawnFallPose(trip.plan?.kind==='trip'&&trip.involves(racer.id)?trip.progress:displayTrip?displayTripFallProgress(t):t, fallPhase, reducedMotion) : undefined;
     if (fall) { tilt = fall.tilt; swing = 0; }
-    if (affected && beat?.kind === 'skill' && !reducedMotion && !r1.protects(racer.id) && !punch.protects(racer.id) && !trip.protects(racer.id) && !certified.protects(racer.id)) { y += Math.sin(t * Math.PI) * .3; swing += Math.sin(t * Math.PI * 2) * .18; }
+    if (affected && beat?.kind === 'skill' && !reducedMotion && !punch.protects(racer.id) && !trip.protects(racer.id) && !certified.protects(racer.id)) { y += Math.sin(t * Math.PI) * .3; swing += Math.sin(t * Math.PI * 2) * .18; }
     if (beat?.targets.includes(racer.id) && beat.kind === 'eliminate') scale *= 1 - ease(t);
     root.current.position.set(x, y, z); root.current.scale.setScalar(Math.max(.01, scale)); body.current.rotation.set(tilt, swing+(compact&&punch.protects(racer.id)?-Math.PI/2:0), 0); body.current.position.y = fall?.lift ?? 0;
     const certifiedFall=certified.fall(racer.id,beat,t);if(certifiedFall){body.current.quaternion.copy(certifiedFall.quaternion);body.current.position.y=certifiedFall.lift;}
@@ -474,7 +457,7 @@ function Pawn({ r1,r1Enabled,physicalContacts,certified,trip,sculptureReaders,pu
   return <group ref={root} position={[from[0] + offset.x, from[1] + .005, from[2] + offset.z]} scale={offset.scale} onClick={e => { e.stopPropagation(); if (e.delta <= 5) onDetail(racer.characterId, racer.id); }}>
     <PawnContact />
     <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, .018, 0]}><ringGeometry args={[.31, active ? .43 : .38, 24]} /><meshBasicMaterial color={active ? '#ffda27' : color} side={THREE.DoubleSide} /></mesh>
-    <group ref={body} position={[0, 0, 0]}><ToyCharacter paused={paused} characterId={racer.characterId} color={color} lowQuality={modelQuality} form={typeof racer.flags.form === 'string' ? racer.flags.form : undefined} mount={typeof racer.flags.hogOwnerId === 'string'} motionEnabled={!displayTrip&&!certifiedBind&&!r1Bind&&!r1.protects(racer.id)&&!warpBind&&!trip.protects(racer.id)&&!punch.protects(racer.id)&&!reducedMotion && (!racer.tripped || pawnFallPhase(beat, racer) === 'recover')} animation={affected ? pawnFallPhase(beat, racer) === 'trip' ? 'fall' : pawnFallPhase(beat, racer) === 'recover' ? 'recover' : beat?.kind === 'move' ? 'move' : ['skill','dice','duel-dice','score','finish'].includes(beat?.kind ?? '') ? 'skill' : 'idle' : 'idle'} /></group>
+    <group ref={body} position={[0, 0, 0]}><ToyCharacter paused={paused} characterId={racer.characterId} color={color} lowQuality={modelQuality} form={typeof racer.flags.form === 'string' ? racer.flags.form : undefined} mount={typeof racer.flags.hogOwnerId === 'string'} motionEnabled={!displayTrip&&!certifiedBind&&!warpBind&&!trip.protects(racer.id)&&!punch.protects(racer.id)&&!reducedMotion && (!racer.tripped || pawnFallPhase(beat, racer) === 'recover')} animation={affected ? pawnFallPhase(beat, racer) === 'trip' ? 'fall' : pawnFallPhase(beat, racer) === 'recover' ? 'recover' : beat?.kind === 'move' ? 'move' : ['skill','dice','duel-dice','score','finish'].includes(beat?.kind ?? '') ? 'skill' : 'idle' : 'idle'} /></group>
     {active && <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, .023, 0]}><ringGeometry args={[.46, .49, 32]} /><meshBasicMaterial color="#fff8da" side={THREE.DoubleSide} /></mesh>}
   </group>;
 }

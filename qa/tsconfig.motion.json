@@ -1,0 +1,5 @@
+{
+ "extends":"../tsconfig.json",
+ "include":["motion-proof.tsx","motion-fixtures.ts"],
+ "exclude":[]
+}

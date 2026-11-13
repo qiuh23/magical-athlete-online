@@ -1,0 +1,2605 @@
+{
+  "scope": "Independent coarse review at fixed desktop mounts. AABB separation can exclude collision; overlaps are candidates only.",
+  "limitations": [
+    "21 discrete mechanical poses per device, not a continuous sweep.",
+    "Other devices are parked; scenery, audience, lights, floor and support meshes are not included.",
+    "Proxy spaces are generic 1.6 x 1.35 x 1.6 m boxes, not actual occupied actors.",
+    "The targeted Wild23 check uses 153 static full-quality sculpture/form/mount combinations at single-racer centers on nodes 22 and 23; it does not certify animated, crowded, down, arbitrary future or all-map actor configurations.",
+    "No browser/GPU rendering is performed."
+  ],
+  "inputs": {
+    "scripts/recovery/review-mechanism-motion-bounds.ts": "fd93a89edee2aec7a5dab31bd98bc18ad1f705833f66f4e1e05d0f4c59d665a2",
+    "src/client/scene/environment/full-coverage.ts": "475d955be43565d1523b59136d6230102d06373a0f0998b78d1af06e50f63393",
+    "src/client/scene/mechanisms/models.ts": "6dcb80fdb9e53dbb48c66e002c8f65a11260de49c38172062e56d79544ccc6f3",
+    "src/client/scene/mechanisms/placements.ts": "63b3d29d3fdf635de95bcad2209f0a2fcb1057fa6a03e782c47d187b072e97d0",
+    "src/client/scene/math.ts": "54b1c1f92c222ba8864aebf9cc7f4e5b3dbd83cf0fd7856fdb93323187ffc8c3",
+    "src/client/scene/toy-model-instance.ts": "074aee2aa46f0f1f4b0202b600e58124e70743c7bbfbf963d50f140587956bb7",
+    "public/models/mechanisms/gain_joint_action.glb": "fcb164ad50bb52d22fa0b3aa66f63d515d40c9fef372060997ae3d62fa0a1fde",
+    "public/models/mechanisms/trip_telescopic_v1.2f331432.glb": "2f331432d72ef78d33c2aadd355885f25ca9f670d4d7f37b36e0c27b6db1046f",
+    "public/models/mechanisms/loss_joint_action.glb": "0323a384103f271627786c5c8ef3ba98ac1b488a03e2096c26617442250df0f6",
+    "public/models/mechanisms/punch_outboard_joint.glb": "ff8a8d4431fd08d4cc0111133ad9f0af1ea8abf3197131f5f6c6dfba0d6fa956",
+    "public/models/mechanisms/trip_joint.glb": "70c96cc02f6db99d9ec8650a81f519a39c526d8485231d632ce2908879165641",
+    "public/models/mechanisms/warp_joint_action.glb": "bd5122db40a1c86889ee423787d818f278765d0e48ce30cca9f2fcea935a1b19",
+    "public/models/mechanisms/punch-rebuild-r1.glb": "aef0b2f39adcbb29eaa3f449e22804093f5efe02e1d0113ca35500cd75cb25b6",
+    "public/models/toy-racers.glb": "ca14cd7aef0dd7bd7485c17a34d0e89eaac05c63d9e6b9e693ff224d593601d2",
+    "public/models/banana/banana.glb": "25bad0ab653cceb00f9d93b0013e7bc0ffee913c764d2b9f99803adce4e5372d",
+    "public/models/second-wind/bite-mark.glb": "9e5ae2a4d87cf193a17c9e64bcf658b19057abcd7396c83e5271997e3fc27e47",
+    "public/models/second-wind/blunderdog.glb": "e594780f71ea90ea5ae1e99205768e5e6f959cad2bfc8adfa300f5ca84e561fd",
+    "public/models/second-wind/cheatah.glb": "3f5df0366256aa2b84428211741cecb3c363e46ce9a3cc1d609a4c93006b8bc0",
+    "public/models/second-wind/critic.glb": "c0b6d667ba55137e6dca629ac5fec8124e427d6e8d3d3cf13269cca68ba89202",
+    "public/models/second-wind/diva.glb": "1799347378ef26d37727d105e4a63df35ff93f59bc6020c7aae2ff38c1dea6c4",
+    "public/models/second-wind/doppelgangster.glb": "6fa60b4154babd705ea7c85d1944b7a47a927d1cee8236708b02c8f3939a15fd",
+    "public/models/second-wind/gloth.glb": "6caa5e5e43a9406c17825294a8406602817fb5a694db5a4eac09cf5ffcee805f",
+    "public/models/second-wind/hog-knight.glb": "c712119a7a82b968f48f896ce9465d2e4883025e3a141a576d9e612fdfeb8a2d",
+    "public/models/second-wind/hopfrog.glb": "1ae468437570730d8712e4e7903d05368347c2d7c9517476c20e5b809ee6ccdc",
+    "public/models/second-wind/hotel.glb": "bdfa6f6c9c1a7eac7f68c644f0bff2e6de9f62570b6a6ea13dc76953365667b5",
+    "public/models/second-wind/icarus.glb": "10c74b9c47b218330f8491ff577ffd36c7e7137006a11194c5af9a490bf3cf1b",
+    "public/models/second-wind/kingtripper.glb": "552544444bad4d614873800abef7adf3ffeae542ce613899020f7c66c56d1c90",
+    "public/models/second-wind/kraken.glb": "6215fae70882e7026c8a3c7933259808863e446325d4ade6d3e3590232509689",
+    "public/models/second-wind/le-saboteur.glb": "c3b96c8252cbc3e7a53e2ae86775fbe9a034dc27b0f2e98c312a361cf2c0d0b2",
+    "public/models/second-wind/magical-athlete.glb": "77eb9908209b8b2af0a360aff78b437d135a043aa87af3072b1ba01695688a91",
+    "public/models/second-wind/mole.glb": "83df021f2038a5d7e541c56de6dedabcc94cc134689ceba4b4a27729cb6bb86f",
+    "public/models/second-wind/mr-dice-guy.glb": "60de8dad8b8e04983f4d929efe346a4adb5d8628db81763fb970bafebb4633ec",
+    "public/models/second-wind/mush.glb": "a26c7cbd77f9c46163f2c2c60bfc608ddf2b15ff9b64da8f134d0f5373cfae36",
+    "public/models/second-wind/nemesis.glb": "740556a629ab8d0d34598a0d72830afad9cb5cd0065de9ee48905813f530f583",
+    "public/models/second-wind/nepo-baby.glb": "fdc76ed7ca286894a4d2438333b6cfd4fa3bef04f536ae659626e2d9a7433a62",
+    "public/models/second-wind/null.glb": "758e7c0348b0a2aad5b730ab6ed8826312760948eda4b4c922e91c224acac290",
+    "public/models/second-wind/overtaker.glb": "f4b198f42d57be9b2f92cfdcfa23b6e4c3fbb300c94c75acbcfbdd54aae1f1d9",
+    "public/models/second-wind/party-pooper.glb": "912d951d04bc86ab2b8d29c3b31d163f03261ed256a2ef6afb638bc740839509",
+    "public/models/second-wind/penguin.glb": "3d8125de9e6cfcb45f8ba934238ada2675223ea114c6b5b488327a717f749b9e",
+    "public/models/second-wind/re-runner.glb": "680bc5c52450e0e7701b6b2c1889596b4446e239b14de292950a8b36b72c4163",
+    "public/models/second-wind/show-off.glb": "55109463c47bb39f1a9b6e1edb543dfdc00d0a264b996644765ad43e698d5085",
+    "public/models/second-wind/soulmate.glb": "0841b04018a0c33bb22b4a4aa3fc5c019bf564ec7445437953bfdae390c8e215",
+    "public/models/second-wind/speed-demon.glb": "6b1bfbc5d332cd8bdc0a2808ec687c5096c218a1d308a5f02e5b5b4ec22933a2",
+    "public/models/second-wind/spoilsport.glb": "8bd676a93787bed8698d3f9e21fa422c049bd8fba66bd3c69112e400c8a45523",
+    "public/models/second-wind/stepdad.glb": "ef912588135c61eb023aa5032be87aec454f43c339642791da20e8c3ff165676",
+    "public/models/second-wind/streaker.glb": "e167ddbf5d5a3a6859bfac11551b875e3b247806eb2fed15b6754dbe4a73f201",
+    "public/models/second-wind/stunner.glb": "9d298dde1be3aa2f619247c72b5b5ed59379a4055dfc6a826ae8647dadeeaf12",
+    "public/models/second-wind/switcharoo.glb": "9037c56508bfd1833123c22e775ae7b23c564a0719070956e9ad2c39f1a41ded",
+    "public/models/second-wind/tail.glb": "b2f6164a4c241999cf60917f36cd470f4f5f89c419c169a971a701062828ba14",
+    "public/models/second-wind/the-hose.glb": "4bd1c88f363b8251ba5504d453028ad1826fe2fd0b7bbf06549c90b481582473",
+    "public/models/second-wind/understudy.glb": "7dd93a43282ce07b9e5473e14e0db8327e7c6d1b32420c99feaa9f7f8e2f903c",
+    "public/models/extra-mile/extra-mile-broken-clock.glb": "ba1db9fe479ae2cc2283a0b381d940c826a362f1cc637cb8e50ef1239112baa8",
+    "public/models/extra-mile/extra-mile-cletus.glb": "468fc0ecc379ade6cc178f80ca873538b97a27a861c9460430f95b73efa5dcc8",
+    "public/models/extra-mile/extra-mile-doc-paradox.glb": "6b09041f554f1a8654d8590077bc7401f6ae2c1c1a569b3096932f8fdabdf95f",
+    "public/models/extra-mile/extra-mile-doctor-dice.glb": "eeb1a778c9b0684a8d677ae2b93163e4a038390888fe54cac3737167012368ac",
+    "public/models/extra-mile/extra-mile-dom-and-gary.glb": "dbe6af6beb502a10716fa3dc4576eb658507b3e28f0103e86faa8bd78a33e7d2",
+    "public/models/extra-mile/extra-mile-echo.glb": "d622cade5b96438a25530f48f28d9627d4be34cb3248a44744e7c875db30bba4",
+    "public/models/extra-mile/extra-mile-gingy.glb": "e4d9a9279d6da7fc08f388c5e1a8ea390d95f0e891ecff4db44fba86c4a6a35c",
+    "public/models/extra-mile/extra-mile-gluebert.glb": "b650f60f8481af52dc254120e51214b9ba4bd46e718d87a51d203a2e85acccf4",
+    "public/models/extra-mile/extra-mile-heads.glb": "ae09d3ac3b357a1aefbdc0c7f22e851d4a9ca8c88fdaafe11de437eb1c358129",
+    "public/models/extra-mile/extra-mile-honey-pot.glb": "8c5c7d637e9876d114aa476b43f2efbae949bd0504d97964e756dd221dd92ede",
+    "public/models/extra-mile/extra-mile-king-pete.glb": "2abbeb4582e7408bb9f04fb368d73b6fa6d281329e164e18993ddad7a8caf359",
+    "public/models/extra-mile/extra-mile-lazy-bones.glb": "a8ae3b7fd60bf717a6453ae7ad012edcb34eb4be234e5bccb6224a97276afe4b",
+    "public/models/extra-mile/extra-mile-marksman.glb": "15064dc54c9f592697b16eb3c7982ee4e891feeb0325cd543bfc3d1af37949ac",
+    "public/models/extra-mile/extra-mile-moneybags.glb": "0c9922ee2912032fd3fe1e1ef61d2f54bd904ac3d1a74ab71099c0ac3136200a",
+    "public/models/extra-mile/extra-mile-mr-fox.glb": "922c8f9726db685978fdf8f081f4eeada41cb5662a41897940e1e260f390246e",
+    "public/models/extra-mile/extra-mile-oddball.glb": "2c415a558c3e5b327eaf30152e7bd84c72de0b57c6a33dd2a09af4a755233a25",
+    "public/models/extra-mile/extra-mile-pooh.glb": "c7007af9179e607f735d0a7cafbe778eff10d5d7c07e072c6a41156decc5c191",
+    "public/models/extra-mile/extra-mile-robin-hood.glb": "a7e547d9a9b3da60bfec9ad78193569bc4426acb4dba725bb25f2d7a8c0203a0",
+    "public/models/extra-mile/extra-mile-saint-nick.glb": "8c5a8bda1cfc6196a6710245846eb3413b00432c1ed86cf72ffd55fe791d8ef4",
+    "public/models/extra-mile/extra-mile-school-bully.glb": "40b1df04656b7e64a7741d45bffd58f9723a8f865ac4a69019f7c77f960ba840",
+    "public/models/extra-mile/extra-mile-scout.glb": "82ecc84087f0d75b27d4a60b14753ee5c373b7713e0e68a10c5237222d6733cb",
+    "public/models/extra-mile/extra-mile-shuffler.glb": "0c522b6488c81a53e28037f8595e9d2efac58e8b5ae94954a7e979923c805a91",
+    "public/models/extra-mile/extra-mile-silly-goose.glb": "7e466e82a5f912fdf688f4a0e0af0bc5a329fd22471afd8fbd2682da2cc5982b",
+    "public/models/extra-mile/extra-mile-snake-eyes.glb": "e912b5a11b98203d0cad6353e708e0f3f493af18ce70458ddf80f817fe4e55b3",
+    "public/models/extra-mile/extra-mile-snub.glb": "36617a6f6b2f6118d570b0d7530db8446d11e2172c946b530927b0f0c8b59ae9",
+    "public/models/extra-mile/extra-mile-terrible-toddler.glb": "1ac24c794182e7320ff893bc90b34b4f596be79a64764775666386ff1ac92081",
+    "public/models/extra-mile/extra-mile-thief.glb": "6718a49f4a1a7ec1afaa3b81f581c22fa5439452d7d6bff0579d781b9b71e2d1",
+    "public/models/extra-mile/extra-mile-toll-troll.glb": "3f1b988d69fe8dab6211a93cab25726893bd0e4d3081e42fc5c2b303ab444925",
+    "public/models/extra-mile/extra-mile-totally-fair-ref.glb": "38418bf916ac490489b41d349a4f9ec7ed4300ebc88819495b8dd09f5cd4ce60",
+    "public/models/extra-mile/extra-mile-whisper.glb": "7a9c33c99199d78a577946161a7ab760811579ee515dc540ecacc1346e7eaef1",
+    "public/models/extra-mile/extra-mile-witch-hazel.glb": "e76e6f3522cecb1a856e2a9f7f29bbb9ae9eb9c5c5df1476c7a1ede772666e04",
+    "public/models/leaf/leaf-catfish.glb": "b0446b22c71e5d56eb52fbe5e72f2b6147b8999b63c3197d059f863f0b63c390",
+    "public/models/leaf/leaf-crash-dummy.glb": "5574b659d73304dce6f6112451052c14b87757119d95fb6854ef89696b5cf5dd",
+    "public/models/leaf/leaf-dark-horse.glb": "2d8e9d5567fd56137894dcac32572b6adf6a1c38aa313201f839dd5b9ec010b1",
+    "public/models/leaf/leaf-kangaroo.glb": "293ef3bbd966e399ad10dceba78594c309faacba9b9717ffd0e224234600e3a1",
+    "public/models/leaf/leaf-loan-shark.glb": "50c648e8d041dd121455fd89e7f1d3361f684656ffa60d606b60085094fe7863",
+    "public/models/leaf/leaf-lonely-wolf.glb": "15dbdb2849cf4fa1cfad3c2c4ce1f75c5fb1bd4953d5a3c42b697df9ca0034be",
+    "public/models/leaf/leaf-nepo-baby.glb": "c80bcb2779ace2a6f3dde0cdc1402db8d8031bbf761c7d46d07a25a35988f061",
+    "public/models/leaf/leaf-philanthropist.glb": "bb53d6301b21ca0c59006060abf45d74618bf172524aae00ce64283a4c290ff6",
+    "public/models/leaf/leaf-race-car.glb": "18fad093516a2ff2f655a129be9fbd12c1365731775dff95296917f3e037612e",
+    "public/models/leaf/leaf-revolutionary.glb": "8f3a61c2bf226fcde1d777670ef2f9245dd6bbe6ad9fed5e4d5e8a3b548cf6e6",
+    "public/models/leaf/leaf-sole-survivor.glb": "4858ade83ef40d507c94eb449dc521295944291d5a83f9a3dcb40c1ca6486ca0",
+    "public/models/leaf/leaf-sore-loser.glb": "305ddb96578b3d066f941f18294c305863a3ef5c20f3db6bd9b44e6c0c6c67f4",
+    "public/models/leaf/leaf-spiteful-spirit.glb": "c513922a9595f86e4caaeebfee6af3f740c2b626dd207eeb9d837ea11b47e132",
+    "public/models/leaf/leaf-toucan.glb": "3393de2dba4b4ef6fe513b46764a9657a4da956c23b60edab78cecfcc4238e0b",
+    "public/models/leaf/leaf-triangle-man.glb": "f54a7bb83c7c4376821b55a1af11e0615ffa34e93c3c711ef14bf8123554845f",
+    "public/models/leaf/leaf-zombie.glb": "78668fd2743825f3d7c980ac3064274380ed101090a558e0d96245b119b4c6e2",
+    "public/models/leaf/leaf-thespian.glb": "0dfd5f80118ea47f0f7f0a9c6873d12e161532c2bd6323c64d256e0e586a080b",
+    "public/models/leaf/leaf-filmmaker.glb": "b7b43e5859962f6c75a3634d9bce4bf9f42a2c6269f2e2d1f929e18ab6e66c30",
+    "public/models/wurstii/wurstii-bart-simpson.glb": "3d6775702f98bb032c668c5cc520569a8a58c0c40737b2f30ce7d0cd1d2dbba2",
+    "public/models/wurstii/wurstii-bucky-ohare.glb": "edd4ea9698645e6ef530af3b528e779713d8c71d1322c7c3c7dbc50aab82753c",
+    "public/models/wurstii/wurstii-bullet-bill.glb": "3ee33fa67ca98eb29369cb3ecd0e2dce0461b6d735495971739165d7ba5a0014",
+    "public/models/wurstii/wurstii-chip-n-dale.glb": "eea0efebb96ec7d145001ecc90dffa62d30ae63648369d0e4ffe64f24e18aa98",
+    "public/models/wurstii/wurstii-diddy-kong.glb": "0204e761b9539dd8adaaf23293336be9c5ae946f260fea61f435b569802a06de",
+    "public/models/wurstii/wurstii-dixie-kong.glb": "67ad21b7757d1a8deabe99d43abbdb355cca81e32d5e24d1cf55b264e5208833",
+    "public/models/wurstii/wurstii-dr-wily.glb": "d9ca8851bdb6c75332fb9f8ac5cb2bf52cb5178c392b385718ff4f0aa2cdea29",
+    "public/models/wurstii/wurstii-dry-bones.glb": "d684ecb8cc500ffd662c751772468f93147ff514e72448168f5e4d3a2aafc802",
+    "public/models/wurstii/wurstii-eric.glb": "47d607087ed5dfc0911fb1ad529e64fc318e3a5d67f3306f7e07f463601a3fce",
+    "public/models/wurstii/wurstii-falco-lombardi.glb": "89e321449655c9704b76a44ce32b0ab0adc836f595bf6394e1acaeb9dbec6254",
+    "public/models/wurstii/wurstii-frogger.glb": "86abb2396306b5b7706c84b8db3ce78f6edd5a76a8b5441f8cce88165cc9ce55",
+    "public/models/wurstii/wurstii-hoagie.glb": "d3bbcd17c4075d032c7920449901f66157252db6970ece3cd3024003f5edd70b",
+    "public/models/wurstii/wurstii-jason-vorhees.glb": "dc7666348b3643f97bc8bfebc0b571e9871dd9fff149376554d8ac02ffdc8eb1",
+    "public/models/wurstii/wurstii-knuckles.glb": "42446c3d37391bd28ec01227280a9b23393e69826fa57d442c2004d7376c46a0",
+    "public/models/wurstii/wurstii-lakitu.glb": "96b39ce999e79ba13097a497e985ab5169a4f8d3ae09dd3c81d067d1b78769d7",
+    "public/models/wurstii/wurstii-lizzie.glb": "dc623db06f04851a0f272a687b59354e91a92be50ccd7a07ece655cd56b8a549",
+    "public/models/wurstii/wurstii-magikarp.glb": "ea85fe278315828b753152cbfd398a4882bfa9cf9711b0370ab929e44631a69b",
+    "public/models/wurstii/wurstii-mario.glb": "e9669253ddb76c7875af88682a2ea4f1f67e1eb8cfbf94baf3b09433e9e2f7b7",
+    "public/models/wurstii/wurstii-mr-game-and-watch.glb": "5e50a5524bcfcf27fb04e5851930b51ab253a41d436ac01981cda1f4c4d1390b",
+    "public/models/wurstii/wurstii-olaf.glb": "72138bae87c7d437c0954205ae3cd155d5c5ebfd740b235a57b2f83846beabb8",
+    "public/models/wurstii/wurstii-pitfall-harry.glb": "0ca6ab8895fdeb7fb2ff7420927d363f9b3b754694a3953e8588905bbf670882",
+    "public/models/wurstii/wurstii-simon-belmont.glb": "1e0500461b3b83495be2e004dc78fa9018cfd56c1bd8e31a9e13792ec3ed4532",
+    "public/models/wurstii/wurstii-tails.glb": "0cf92c404a29486a28508c4a52b94eb8cc2f25d92003c21d687536fd98459dc3",
+    "public/models/wurstii/wurstii-yoshi.glb": "720fca7a55b4556049b818aa4cc5901a4fe0ae65299a60ea9852044a786a28b1",
+    "public/models/wurstii/wurstii-rollercoaster-tycoon-guest.glb": "d9f29af65d1cb8f81db888643c79a5c5c9721f48e9ae6ad88f634bdafe622e2d",
+    "public/models/wurstii/wurstii-spot.glb": "4bef917c23b24727988223526d8d8e6cab31ed32975ada6c7f65720ba2b80997",
+    "public/models/wurstii/wurstii-rockford.glb": "684148bf8965b51ce5689edb2426658c8bf3f386b2055f0e0f68e7dbcc0925e4",
+    "public/models/wurstii/wurstii-burt.glb": "a97fc8fdb9ce3d09552e27b94e449616fbe39b73abf35d98ed0601a0cb49bd21",
+    "public/models/wurstii/wurstii-piranha-plant.glb": "b90034896112dc34c27b25870ddcff274830f67e677a497f8dad8ef4921306d4",
+    "public/models/wurstii/wurstii-fluffin-puffins.glb": "de4dbde332841d439abc4cdc958f832a306f329473e71b4832870931ff34aabd",
+    "public/models/second-wind/bite-mark-were.glb": "420adfdb1540c95fd1c0777a5a128979e41fbcdb347b564b474dfc66475122f5",
+    "public/models/second-wind/hog-knight-hog.glb": "b5aca1fdb6d814028f6db99ce1f086cce9283e5c7de16375431b73d32e9ae1bd"
+  },
+  "coarse": {
+    "tracks": 7,
+    "devices": 54,
+    "framesPerDevice": 21,
+    "reports": [
+      {
+        "track": "squiggle",
+        "newCandidates": []
+      },
+      {
+        "track": "boardwalks",
+        "newCandidates": []
+      },
+      {
+        "track": "bridges",
+        "newCandidates": []
+      },
+      {
+        "track": "twisty-twirl",
+        "newCandidates": []
+      },
+      {
+        "track": "whirly-world",
+        "newCandidates": []
+      },
+      {
+        "track": "mild",
+        "newCandidates": []
+      },
+      {
+        "track": "wild",
+        "newCandidates": [
+          {
+            "key": "wild:23|PUNCH_SLIDER_X__coral_fixed_batch|proxy-space:23",
+            "progress": 0.15,
+            "volume": 0.013183566236935217,
+            "overlap": [
+              [
+                -0.7200000181794184,
+                2.5399999503046273,
+                2.275000000000004
+              ],
+              [
+                -0.25000001832843005,
+                3.05,
+                2.330000270990756
+              ]
+            ]
+          },
+          {
+            "key": "wild:23|PUNCH_COUNTER_YAW__teal_fixed_batch|proxy-space:23",
+            "progress": 0.1,
+            "volume": 0.006496023776763144,
+            "overlap": [
+              [
+                -0.5149999320507066,
+                2.180000030994415,
+                2.275000000000004
+              ],
+              [
+                -0.2250000000000012,
+                2.8200000166893004,
+                2.310000137090687
+              ]
+            ]
+          },
+          {
+            "key": "wild:23|PUNCH_COUNTER_YAW__teal_fixed_batch|proxy-space:22",
+            "progress": 0.1,
+            "volume": 0.004480019583709948,
+            "overlap": [
+              [
+                0.2250000000000012,
+                2.180000030994415,
+                2.275000000000004
+              ],
+              [
+                0.42500009536743005,
+                2.8200000166893004,
+                2.310000137090687
+              ]
+            ]
+          },
+          {
+            "key": "wild:23|PUNCH_SLIDER_X__gold_fixed_batch|proxy-space:23",
+            "progress": 0.2,
+            "volume": 0.0030882688546369484,
+            "overlap": [
+              [
+                -0.36561221226441776,
+                2.3670000076293944,
+                2.275000000000004
+              ],
+              [
+                -0.22561220794308096,
+                2.879999989271164,
+                2.318000123500828
+              ]
+            ]
+          },
+          {
+            "key": "wild:23|PUNCH_COUNTER_YAW__steel_fixed_batch|proxy-space:23",
+            "progress": 0.1,
+            "volume": 0.002153273947993706,
+            "overlap": [
+              [
+                -0.5150000074506187,
+                1.9699999928474425,
+                2.275000000000004
+              ],
+              [
+                -0.2250000000000012,
+                2.464999997615814,
+                2.290000166296971
+              ]
+            ]
+          },
+          {
+            "key": "wild:23|PUNCH_COUNTER_YAW__steel_fixed_batch|proxy-space:22",
+            "progress": 0.1,
+            "volume": 0.0020047724020138967,
+            "overlap": [
+              [
+                0.2250000000000012,
+                1.9699999928474425,
+                2.275000000000004
+              ],
+              [
+                0.4950000211596505,
+                2.464999997615814,
+                2.290000166296971
+              ]
+            ]
+          },
+          {
+            "key": "wild:23|PUNCH_SLIDE_YOKE|proxy-space:23",
+            "progress": 0.2,
+            "volume": 0.0003840023174284842,
+            "overlap": [
+              [
+                -0.36561221971499835,
+                2.469999948143959,
+                2.275000000000004
+              ],
+              [
+                -0.2456122223972073,
+                2.6299999445676803,
+                2.295000121593479
+              ]
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "wild23": {
+    "actorCount": 153,
+    "nodes": [
+      22,
+      23
+    ],
+    "frames": 51,
+    "overlaps": [],
+    "actorBounds": [
+      {
+        "id": "alchemist",
+        "boundsAtNode23": [
+          [
+            -1.2961264381847604,
+            1.8189999999999997,
+            2.8386341441084055
+          ],
+          [
+            -0.7538735618152421,
+            2.7990103762932215,
+            3.311365855891602
+          ]
+        ]
+      },
+      {
+        "id": "baba-yaga",
+        "boundsAtNode23": [
+          [
+            -1.2635326700643952,
+            1.8189999999999997,
+            2.888318277535329
+          ],
+          [
+            -0.7864673299356072,
+            2.7990103762932215,
+            3.2616817224646786
+          ]
+        ]
+      },
+      {
+        "id": "banana",
+        "boundsAtNode23": [
+          [
+            -1.2497688222907206,
+            1.8189999999999997,
+            2.951888332773831
+          ],
+          [
+            -0.8002311777092819,
+            2.7990103762932215,
+            3.1981116672261765
+          ]
+        ]
+      },
+      {
+        "id": "blimp",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.9146862697225906
+          ],
+          [
+            -0.7250030518509488,
+            2.204723441267128,
+            3.235313730277417
+          ]
+        ]
+      },
+      {
+        "id": "centaur",
+        "boundsAtNode23": [
+          [
+            -1.223248237556079,
+            1.8189999999999997,
+            2.7750030518509514
+          ],
+          [
+            -0.8267517624439235,
+            2.6391239051484723,
+            3.374996948149056
+          ]
+        ]
+      },
+      {
+        "id": "cheerleader",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.9216444898831178
+          ],
+          [
+            -0.7250030518509488,
+            2.577507034516434,
+            3.2283555101168897
+          ]
+        ]
+      },
+      {
+        "id": "coach",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.810740226447344
+          ],
+          [
+            -0.7250030518509488,
+            2.7079126255073698,
+            3.3394428846095194
+          ]
+        ]
+      },
+      {
+        "id": "copycat",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.939864040040288
+          ],
+          [
+            -0.7250030518509488,
+            2.660517380291146,
+            3.2101359599597195
+          ]
+        ]
+      },
+      {
+        "id": "dicemonger",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.8896916104617487
+          ],
+          [
+            -0.7250030518509488,
+            2.7240569170201727,
+            3.2603083895382587
+          ]
+        ]
+      },
+      {
+        "id": "duelist",
+        "boundsAtNode23": [
+          [
+            -1.2860858485671574,
+            1.8189999999999997,
+            2.9035470137638515
+          ],
+          [
+            -0.7639141514328452,
+            2.7990103762932215,
+            3.246452986236156
+          ]
+        ]
+      },
+      {
+        "id": "egg",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.864025543992435
+          ],
+          [
+            -0.7250030518509488,
+            2.755582537308878,
+            3.2859744560075725
+          ]
+        ]
+      },
+      {
+        "id": "flip-flop",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.8382679219946936
+          ],
+          [
+            -0.7250030518509488,
+            2.567374889370403,
+            3.311732078005314
+          ]
+        ]
+      },
+      {
+        "id": "genius",
+        "boundsAtNode23": [
+          [
+            -1.3062280648213154,
+            1.8189999999999997,
+            2.854137546922212
+          ],
+          [
+            -0.7437719351786871,
+            2.7990103762932215,
+            3.2955267494735594
+          ]
+        ]
+      },
+      {
+        "id": "gunk",
+        "boundsAtNode23": [
+          [
+            -1.3248748741111496,
+            1.8189999999999997,
+            2.8248397778252547
+          ],
+          [
+            -0.7248809778130448,
+            2.4446904812768944,
+            3.3251602221747527
+          ]
+        ]
+      },
+      {
+        "id": "hare",
+        "boundsAtNode23": [
+          [
+            -1.2698194830164506,
+            1.8189999999999997,
+            2.874340800195322
+          ],
+          [
+            -0.7802110354930277,
+            2.7990103762932215,
+            3.2756591998046853
+          ]
+        ]
+      },
+      {
+        "id": "heckler",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.8786744285409136
+          ],
+          [
+            -0.7250030518509488,
+            2.737820764793847,
+            3.271325571459094
+          ]
+        ]
+      },
+      {
+        "id": "huge-baby",
+        "boundsAtNode23": [
+          [
+            -1.3076319162572112,
+            1.8189999999999997,
+            2.8820619830927496
+          ],
+          [
+            -0.7423680837427913,
+            2.7990103762932215,
+            3.267815942869354
+          ]
+        ]
+      },
+      {
+        "id": "hypnotist",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.8259079256569146
+          ],
+          [
+            -0.7250030518509488,
+            2.6058587298196354,
+            3.324153111362045
+          ]
+        ]
+      },
+      {
+        "id": "inchworm",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.997544022949923
+          ],
+          [
+            -0.7250030518509488,
+            2.469166325876644,
+            3.1524864955595606
+          ]
+        ]
+      },
+      {
+        "id": "lackey",
+        "boundsAtNode23": [
+          [
+            -1.3194425794244222,
+            1.8189999999999997,
+            2.7752166814172834
+          ],
+          [
+            -0.7305574205755803,
+            2.762144016846217,
+            3.375210577715388
+          ]
+        ]
+      },
+      {
+        "id": "leaptoad",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.89478820154424
+          ],
+          [
+            -0.7250030518509488,
+            2.546042451246681,
+            3.2550897244178634
+          ]
+        ]
+      },
+      {
+        "id": "legs",
+        "boundsAtNode23": [
+          [
+            -1.245618305001985,
+            1.8189999999999997,
+            2.926466414380325
+          ],
+          [
+            -0.8043816949980176,
+            2.7990103762932215,
+            3.2235335856196823
+          ]
+        ]
+      },
+      {
+        "id": "lovable-loser",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.8517876216925604
+          ],
+          [
+            -0.7250030518509488,
+            2.4189938962981046,
+            3.298212378307447
+          ]
+        ]
+      },
+      {
+        "id": "magician",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.898053682058172
+          ],
+          [
+            -0.7250030518509488,
+            2.633752647480697,
+            3.2519463179418353
+          ]
+        ]
+      },
+      {
+        "id": "mastermind",
+        "boundsAtNode23": [
+          [
+            -1.2839495529038374,
+            1.8189999999999997,
+            2.868359172338027
+          ],
+          [
+            -0.7660504470961651,
+            2.7990103762932215,
+            3.2816408276619806
+          ]
+        ]
+      },
+      {
+        "id": "mouth",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.995865504928743
+          ],
+          [
+            -0.7250030518509488,
+            2.4386478164006467,
+            3.1541344950712644
+          ]
+        ]
+      },
+      {
+        "id": "party-animal",
+        "boundsAtNode23": [
+          [
+            -1.3244781334879616,
+            1.8189999999999997,
+            2.8833437604907415
+          ],
+          [
+            -0.7255218665120409,
+            2.7990103762932215,
+            3.266656239509266
+          ]
+        ]
+      },
+      {
+        "id": "rocket-scientist",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.9175550096133342
+          ],
+          [
+            -0.7250030518509488,
+            2.7091028473769336,
+            3.232444990386673
+          ]
+        ]
+      },
+      {
+        "id": "romantic",
+        "boundsAtNode23": [
+          [
+            -1.308608508560443,
+            1.8189999999999997,
+            2.8023781548509206
+          ],
+          [
+            -0.7413914914395594,
+            2.7990103762932215,
+            3.348232215338607
+          ]
+        ]
+      },
+      {
+        "id": "scoocher",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.8830996124149335
+          ],
+          [
+            -0.7250030518509488,
+            2.4506721091341896,
+            3.266900387585074
+          ]
+        ]
+      },
+      {
+        "id": "sisyphus",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.8773010956144938
+          ],
+          [
+            -0.7250030518509488,
+            2.6690625629444256,
+            3.2726989043855137
+          ]
+        ]
+      },
+      {
+        "id": "skipper",
+        "boundsAtNode23": [
+          [
+            -1.301436658833584,
+            1.8189999999999997,
+            2.8731810968352343
+          ],
+          [
+            -0.7485633411664186,
+            2.7990103762932215,
+            3.2766357921079172
+          ]
+        ]
+      },
+      {
+        "id": "stickler",
+        "boundsAtNode23": [
+          [
+            -1.3250885036774815,
+            1.8189999999999997,
+            2.7954504531998694
+          ],
+          [
+            -0.7250946073793768,
+            2.7010459608752706,
+            3.354885250404374
+          ]
+        ]
+      },
+      {
+        "id": "suckerfish",
+        "boundsAtNode23": [
+          [
+            -1.2593516342661837,
+            1.8189999999999997,
+            2.7750640888699034
+          ],
+          [
+            -0.7906483657338188,
+            2.2582529068880275,
+            3.375057985168008
+          ]
+        ]
+      },
+      {
+        "id": "third-wheel",
+        "boundsAtNode23": [
+          [
+            -1.3077539902951152,
+            1.8189999999999997,
+            2.8194990386669554
+          ],
+          [
+            -0.7422460097048873,
+            2.7990103762932215,
+            3.330500961333052
+          ]
+        ]
+      },
+      {
+        "id": "twin",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.9223464156010657
+          ],
+          [
+            -0.7250030518509488,
+            2.5492163762321844,
+            3.227500991851562
+          ]
+        ]
+      },
+      {
+        "id": "bite-mark",
+        "boundsAtNode23": [
+          [
+            -1.3197782830286582,
+            1.8189999999999997,
+            2.8597834711752714
+          ],
+          [
+            -0.7302217169713443,
+            2.7990103762932215,
+            3.290124973296308
+          ]
+        ]
+      },
+      {
+        "id": "blunderdog",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.8692747276223067
+          ],
+          [
+            -0.7250030518509488,
+            2.7586954252754294,
+            3.2807252723777007
+          ]
+        ]
+      },
+      {
+        "id": "cheatah",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.8063455610828005
+          ],
+          [
+            -0.7250030518509488,
+            2.775572161015656,
+            3.343654438917207
+          ]
+        ]
+      },
+      {
+        "id": "critic",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.7951757866145854
+          ],
+          [
+            -0.7250030518509488,
+            2.719234992522965,
+            3.354976805932802
+          ]
+        ]
+      },
+      {
+        "id": "diva",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.9037911618396595
+          ],
+          [
+            -0.7250030518509488,
+            2.532919492172002,
+            3.246208838160348
+          ]
+        ]
+      },
+      {
+        "id": "doppelgangster",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.96455351420637
+          ],
+          [
+            -0.7250030518509488,
+            2.6386356089968563,
+            3.1854464857936375
+          ]
+        ]
+      },
+      {
+        "id": "gloth",
+        "boundsAtNode23": [
+          [
+            -1.3231658375804938,
+            1.8189999999999997,
+            2.8922551652577324
+          ],
+          [
+            -0.7268341624195087,
+            2.7990103762932215,
+            3.257744834742275
+          ]
+        ]
+      },
+      {
+        "id": "hog-knight",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.9169446394238143
+          ],
+          [
+            -0.7250030518509488,
+            2.6584726401562544,
+            3.233360545670953
+          ]
+        ]
+      },
+      {
+        "id": "hopfrog",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.926374858851897
+          ],
+          [
+            -0.7250030518509488,
+            2.4633983275856806,
+            3.2236251411481103
+          ]
+        ]
+      },
+      {
+        "id": "hotel",
+        "boundsAtNode23": [
+          [
+            -1.3082422864467311,
+            1.8189999999999997,
+            2.8614314706869752
+          ],
+          [
+            -0.7417577135532714,
+            2.7990103762932215,
+            3.2885685293130322
+          ]
+        ]
+      },
+      {
+        "id": "icarus",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.9497520371105113
+          ],
+          [
+            -0.7250030518509488,
+            2.6777603381450845,
+            3.200247962889496
+          ]
+        ]
+      },
+      {
+        "id": "kingtripper",
+        "boundsAtNode23": [
+          [
+            -1.3010399182103958,
+            1.8189999999999997,
+            2.8920415356914004
+          ],
+          [
+            -0.7489600817896067,
+            2.7990103762932215,
+            3.258355204931795
+          ]
+        ]
+      },
+      {
+        "id": "kraken",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.833445997497486
+          ],
+          [
+            -0.7250030518509488,
+            2.4966940214239934,
+            3.3165540025025213
+          ]
+        ]
+      },
+      {
+        "id": "le-saboteur",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.8130291146580437
+          ],
+          [
+            -0.7250030518509488,
+            2.7294892117069,
+            3.3369708853419637
+          ]
+        ]
+      },
+      {
+        "id": "magical-athlete",
+        "boundsAtNode23": [
+          [
+            -1.2649670400097672,
+            1.8189999999999997,
+            2.9270767845698455
+          ],
+          [
+            -0.7850329599902353,
+            2.7990103762932215,
+            3.222923215430162
+          ]
+        ]
+      },
+      {
+        "id": "mole",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.85483947264016
+          ],
+          [
+            -0.7250030518509488,
+            2.525869716483047,
+            3.2951605273598474
+          ]
+        ]
+      },
+      {
+        "id": "mr-dice-guy",
+        "boundsAtNode23": [
+          [
+            -1.3064722128971233,
+            1.8189999999999997,
+            2.932722708822905
+          ],
+          [
+            -0.7435277871028791,
+            2.7990103762932215,
+            3.2172772911771026
+          ]
+        ]
+      },
+      {
+        "id": "mush",
+        "boundsAtNode23": [
+          [
+            -1.3247833185827216,
+            1.8189999999999997,
+            2.8397938474684934
+          ],
+          [
+            -0.7247894222846168,
+            2.4639171422467725,
+            3.310206152531514
+          ]
+        ]
+      },
+      {
+        "id": "nemesis",
+        "boundsAtNode23": [
+          [
+            -1.3179776909695744,
+            1.8189999999999997,
+            2.931379894405961
+          ],
+          [
+            -0.7321138645588562,
+            2.7990103762932215,
+            3.2186201055940464
+          ]
+        ]
+      },
+      {
+        "id": "nepo-baby",
+        "boundsAtNode23": [
+          [
+            -1.2678662984099869,
+            1.8189999999999997,
+            2.900312051759396
+          ],
+          [
+            -0.7821337015900156,
+            2.7990103762932215,
+            3.2496879482406116
+          ]
+        ]
+      },
+      {
+        "id": "null",
+        "boundsAtNode23": [
+          [
+            -1.308669545579395,
+            1.8189999999999997,
+            2.855785546433916
+          ],
+          [
+            -0.7413304544206074,
+            2.7990103762932215,
+            3.2942144535660915
+          ]
+        ]
+      },
+      {
+        "id": "overtaker",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.9096812341685268
+          ],
+          [
+            -0.7250030518509488,
+            2.7138026978362375,
+            3.2403798028504327
+          ]
+        ]
+      },
+      {
+        "id": "party-pooper",
+        "boundsAtNode23": [
+          [
+            -1.3024437696462918,
+            1.8189999999999997,
+            2.895520645771664
+          ],
+          [
+            -0.7475562303537108,
+            2.7990103762932215,
+            3.2544793542283434
+          ]
+        ]
+      },
+      {
+        "id": "penguin",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.911298715170755
+          ],
+          [
+            -0.7250030518509488,
+            2.563621112704855,
+            3.2387012848292525
+          ]
+        ]
+      },
+      {
+        "id": "re-runner",
+        "boundsAtNode23": [
+          [
+            -1.321761986144598,
+            1.8189999999999997,
+            2.9038216803491355
+          ],
+          [
+            -0.7282380138554045,
+            2.7990103762932215,
+            3.246178319650872
+          ]
+        ]
+      },
+      {
+        "id": "show-off",
+        "boundsAtNode23": [
+          [
+            -1.29826273384808,
+            1.8189999999999997,
+            2.8256637775811067
+          ],
+          [
+            -0.7517372661519224,
+            2.7990103762932215,
+            3.324336222418901
+          ]
+        ]
+      },
+      {
+        "id": "soulmate",
+        "boundsAtNode23": [
+          [
+            -1.309310434278391,
+            1.8189999999999997,
+            2.8141888180181316
+          ],
+          [
+            -0.7406895657216114,
+            2.7990103762932215,
+            3.335811181981876
+          ]
+        ]
+      },
+      {
+        "id": "speed-demon",
+        "boundsAtNode23": [
+          [
+            -1.19266869106113,
+            1.8189999999999997,
+            2.7749725333414754
+          ],
+          [
+            -0.8573313089388727,
+            2.737088320566423,
+            3.374996948149056
+          ]
+        ]
+      },
+      {
+        "id": "spoilsport",
+        "boundsAtNode23": [
+          [
+            -1.3024742881557678,
+            1.8189999999999997,
+            2.8329271828363938
+          ],
+          [
+            -0.7475257118442348,
+            2.7990103762932215,
+            3.3170728171636137
+          ]
+        ]
+      },
+      {
+        "id": "stepdad",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.9044320505386554
+          ],
+          [
+            -0.7250030518509488,
+            2.684718558305612,
+            3.245567949461352
+          ]
+        ]
+      },
+      {
+        "id": "streaker",
+        "boundsAtNode23": [
+          [
+            -1.2371951963866097,
+            1.8189999999999997,
+            2.8648495437482873
+          ],
+          [
+            -0.8128048036133928,
+            2.7990103762932215,
+            3.285272530289624
+          ]
+        ]
+      },
+      {
+        "id": "stunner",
+        "boundsAtNode23": [
+          [
+            -1.289900662251657,
+            1.8189999999999997,
+            2.8494682149723847
+          ],
+          [
+            -0.7603434858241536,
+            2.7990103762932215,
+            3.300470748008671
+          ]
+        ]
+      },
+      {
+        "id": "switcharoo",
+        "boundsAtNode23": [
+          [
+            -1.2596263008514677,
+            1.8189999999999997,
+            2.855388805810728
+          ],
+          [
+            -0.7903736991485348,
+            2.7990103762932215,
+            3.2946111941892795
+          ]
+        ]
+      },
+      {
+        "id": "tail",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.856182287057104
+          ],
+          [
+            -0.7250030518509488,
+            2.6815751518295845,
+            3.2938177129429036
+          ]
+        ]
+      },
+      {
+        "id": "the-hose",
+        "boundsAtNode23": [
+          [
+            -1.3250274666585296,
+            1.8189999999999997,
+            2.9575647755363663
+          ],
+          [
+            -0.7250030518509488,
+            2.598076509903256,
+            3.192435224463641
+          ]
+        ]
+      },
+      {
+        "id": "understudy",
+        "boundsAtNode23": [
+          [
+            -1.2933797723319205,
+            1.8189999999999997,
+            2.9028450880459036
+          ],
+          [
+            -0.756620227668082,
+            2.7990103762932215,
+            3.247063356425676
+          ]
+        ]
+      },
+      {
+        "id": "extra-mile-broken-clock",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.9283890804773134
+          ],
+          [
+            -0.7250030518509488,
+            2.7892139347514266,
+            3.221610919522694
+          ]
+        ]
+      },
+      {
+        "id": "extra-mile-cletus",
+        "boundsAtNode23": [
+          [
+            -1.2584055604724278,
+            1.8189999999999997,
+            2.9145031586657346
+          ],
+          [
+            -0.7915944395275747,
+            2.7990103762932215,
+            3.235496841334273
+          ]
+        ]
+      },
+      {
+        "id": "extra-mile-doc-paradox",
+        "boundsAtNode23": [
+          [
+            -1.309005249183631,
+            1.8189999999999997,
+            2.912641529587699
+          ],
+          [
+            -0.7410252693258474,
+            2.7990103762932215,
+            3.2373279519028326
+          ]
+        ]
+      },
+      {
+        "id": "extra-mile-doctor-dice",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.911115604113899
+          ],
+          [
+            -0.7250030518509488,
+            2.6463873104037594,
+            3.2388843958861084
+          ]
+        ]
+      },
+      {
+        "id": "extra-mile-dom-and-gary",
+        "boundsAtNode23": [
+          [
+            -1.3250274666585296,
+            1.8189999999999997,
+            2.899030274361404
+          ],
+          [
+            -0.7250335703604248,
+            2.6497748649555954,
+            3.2509697256386034
+          ]
+        ]
+      },
+      {
+        "id": "extra-mile-echo",
+        "boundsAtNode23": [
+          [
+            -1.3037865840632357,
+            1.8189999999999997,
+            2.9803926206244125
+          ],
+          [
+            -0.7462134159367668,
+            2.7990103762932215,
+            3.169607379375595
+          ]
+        ]
+      },
+      {
+        "id": "extra-mile-gingy",
+        "boundsAtNode23": [
+          [
+            -1.3249359111301016,
+            1.8189999999999997,
+            2.976516769920961
+          ],
+          [
+            -0.7249420148319968,
+            2.7327546922208317,
+            3.1734527115695705
+          ]
+        ]
+      },
+      {
+        "id": "extra-mile-gluebert",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.941969817194132
+          ],
+          [
+            -0.7250030518509488,
+            2.7900074159978026,
+            3.2080301828058753
+          ]
+        ]
+      },
+      {
+        "id": "extra-mile-heads",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.8389393292031655
+          ],
+          [
+            -0.7250030518509488,
+            2.4450872219000823,
+            3.311060670796842
+          ]
+        ]
+      },
+      {
+        "id": "extra-mile-honey-pot",
+        "boundsAtNode23": [
+          [
+            -1.3007347331156358,
+            1.8189999999999997,
+            2.844493697927797
+          ],
+          [
+            -0.7492652668843667,
+            2.7990103762932215,
+            3.3055063020722106
+          ]
+        ]
+      },
+      {
+        "id": "extra-mile-king-pete",
+        "boundsAtNode23": [
+          [
+            -1.2621593371379753,
+            1.8189999999999997,
+            2.9488670003357074
+          ],
+          [
+            -0.787840662862027,
+            2.7990103762932215,
+            3.2011329996643
+          ]
+        ]
+      },
+      {
+        "id": "extra-mile-lazy-bones",
+        "boundsAtNode23": [
+          [
+            -1.2394230475783576,
+            1.8189999999999997,
+            2.7751251258888554
+          ],
+          [
+            -0.810576952421645,
+            2.4183530075991087,
+            3.375149540696436
+          ]
+        ]
+      },
+      {
+        "id": "extra-mile-marksman",
+        "boundsAtNode23": [
+          [
+            -1.30146717734306,
+            1.8189999999999997,
+            2.832438886684778
+          ],
+          [
+            -0.7485328226569427,
+            2.7990103762932215,
+            3.3176831873531336
+          ]
+        ]
+      },
+      {
+        "id": "extra-mile-moneybags",
+        "boundsAtNode23": [
+          [
+            -1.2557199316385401,
+            1.8189999999999997,
+            2.909070863979007
+          ],
+          [
+            -0.7942800683614625,
+            2.7990103762932215,
+            3.2409291360210006
+          ]
+        ]
+      },
+      {
+        "id": "extra-mile-mr-fox",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.9500267036957952
+          ],
+          [
+            -0.7250030518509488,
+            2.6190122074037903,
+            3.1999732963042122
+          ]
+        ]
+      },
+      {
+        "id": "extra-mile-oddball",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.7959997863704373
+          ],
+          [
+            -0.7250030518509488,
+            2.4430119632557146,
+            3.35400021362957
+          ]
+        ]
+      },
+      {
+        "id": "extra-mile-pooh",
+        "boundsAtNode23": [
+          [
+            -1.2877033295693852,
+            1.8189999999999997,
+            2.908307901242107
+          ],
+          [
+            -0.7622966704306173,
+            2.7990103762932215,
+            3.2416920987579005
+          ]
+        ]
+      },
+      {
+        "id": "extra-mile-robin-hood",
+        "boundsAtNode23": [
+          [
+            -1.311538285470139,
+            1.8189999999999997,
+            2.91926404614399
+          ],
+          [
+            -0.7384617145298635,
+            2.7990103762932215,
+            3.2307359538560174
+          ]
+        ]
+      },
+      {
+        "id": "extra-mile-saint-nick",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.9055307168797913
+          ],
+          [
+            -0.7250030518509488,
+            2.7350740989410074,
+            3.244469283120216
+          ]
+        ]
+      },
+      {
+        "id": "extra-mile-school-bully",
+        "boundsAtNode23": [
+          [
+            -1.2859027375103014,
+            1.8189999999999997,
+            2.908979308450579
+          ],
+          [
+            -0.7640972624897012,
+            2.7990103762932215,
+            3.2410206915494286
+          ]
+        ]
+      },
+      {
+        "id": "extra-mile-scout",
+        "boundsAtNode23": [
+          [
+            -1.3252105777153855,
+            1.8189999999999997,
+            2.943404187139504
+          ],
+          [
+            -0.7252166814172809,
+            2.6851152989288,
+            3.2065958128605034
+          ]
+        ]
+      },
+      {
+        "id": "extra-mile-shuffler",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            3.0016335032197063
+          ],
+          [
+            -0.7250030518509488,
+            2.5302643818475903,
+            3.148366496780301
+          ]
+        ]
+      },
+      {
+        "id": "extra-mile-silly-goose",
+        "boundsAtNode23": [
+          [
+            -1.224896237067783,
+            1.8189999999999997,
+            2.853252510147408
+          ],
+          [
+            -0.8251037629322197,
+            2.7990103762932215,
+            3.2967474898525992
+          ]
+        ]
+      },
+      {
+        "id": "extra-mile-snake-eyes",
+        "boundsAtNode23": [
+          [
+            -1.2929219946897805,
+            1.8189999999999997,
+            2.9143810846278306
+          ],
+          [
+            -0.757078005310222,
+            2.7990103762932215,
+            3.235618915372177
+          ]
+        ]
+      },
+      {
+        "id": "extra-mile-snub",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.8690000610370228
+          ],
+          [
+            -0.7250030518509488,
+            2.706752922147282,
+            3.2806947538682247
+          ]
+        ]
+      },
+      {
+        "id": "extra-mile-terrible-toddler",
+        "boundsAtNode23": [
+          [
+            -1.3185880611590943,
+            1.8189999999999997,
+            2.9372394482253523
+          ],
+          [
+            -0.7312593462935283,
+            2.7990103762932215,
+            3.212760551774655
+          ]
+        ]
+      },
+      {
+        "id": "extra-mile-thief",
+        "boundsAtNode23": [
+          [
+            -1.309279915768915,
+            1.8189999999999997,
+            2.8455313272499807
+          ],
+          [
+            -0.7407200842310874,
+            2.7990103762932215,
+            3.3044686727500268
+          ]
+        ]
+      },
+      {
+        "id": "extra-mile-toll-troll",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.932325968199717
+          ],
+          [
+            -0.7250030518509488,
+            2.7593973509933774,
+            3.2176740318002905
+          ]
+        ]
+      },
+      {
+        "id": "extra-mile-totally-fair-ref",
+        "boundsAtNode23": [
+          [
+            -1.3250579851680055,
+            1.8189999999999997,
+            2.94435026093326
+          ],
+          [
+            -0.7250335703604248,
+            2.5832750328073972,
+            3.2056192205572716
+          ]
+        ]
+      },
+      {
+        "id": "extra-mile-whisper",
+        "boundsAtNode23": [
+          [
+            -1.3202970976897501,
+            1.8189999999999997,
+            2.8971991637928443
+          ],
+          [
+            -0.7297029023102524,
+            2.7990103762932215,
+            3.252800836207163
+          ]
+        ]
+      },
+      {
+        "id": "extra-mile-witch-hazel",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.9362933744315964
+          ],
+          [
+            -0.7250030518509488,
+            2.6635081942197942,
+            3.213706625568411
+          ]
+        ]
+      },
+      {
+        "id": "leaf-catfish",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.8371082186346057
+          ],
+          [
+            -0.7250030518509488,
+            2.6054009521774955,
+            3.3128917813654017
+          ]
+        ]
+      },
+      {
+        "id": "leaf-crash-dummy",
+        "boundsAtNode23": [
+          [
+            -1.3050073244422755,
+            1.8189999999999997,
+            2.9472800378429556
+          ],
+          [
+            -0.744992675557727,
+            2.7990103762932215,
+            3.202719962157052
+          ]
+        ]
+      },
+      {
+        "id": "leaf-dark-horse",
+        "boundsAtNode23": [
+          [
+            -1.1765854365672792,
+            1.8189999999999997,
+            2.7750030518509514
+          ],
+          [
+            -0.8734145634327232,
+            2.6440068666646317,
+            3.374996948149056
+          ]
+        ]
+      },
+      {
+        "id": "leaf-kangaroo",
+        "boundsAtNode23": [
+          [
+            -1.2474188970610687,
+            1.8189999999999997,
+            2.800424970244457
+          ],
+          [
+            -0.8025200659199817,
+            2.7990103762932215,
+            3.3495750297555507
+          ]
+        ]
+      },
+      {
+        "id": "leaf-loan-shark",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.85331354716636
+          ],
+          [
+            -0.7250030518509488,
+            2.687037965025788,
+            3.2965643787957433
+          ]
+        ]
+      },
+      {
+        "id": "leaf-lonely-wolf",
+        "boundsAtNode23": [
+          [
+            -1.1852526932584624,
+            1.8189999999999997,
+            2.7750030518509514
+          ],
+          [
+            -0.8657849360637239,
+            2.526083346049379,
+            3.374996948149056
+          ]
+        ]
+      },
+      {
+        "id": "leaf-nepo-baby",
+        "boundsAtNode23": [
+          [
+            -1.2906636249885568,
+            1.8189999999999997,
+            2.9156933805352985
+          ],
+          [
+            -0.7593363750114457,
+            2.7990103762932215,
+            3.234306619464709
+          ]
+        ]
+      },
+      {
+        "id": "leaf-philanthropist",
+        "boundsAtNode23": [
+          [
+            -1.321151615955078,
+            1.8189999999999997,
+            2.950698110904267
+          ],
+          [
+            -0.7288483840449245,
+            2.7990103762932215,
+            3.1993018890957403
+          ]
+        ]
+      },
+      {
+        "id": "leaf-race-car",
+        "boundsAtNode23": [
+          [
+            -1.2791276284066297,
+            1.8189999999999997,
+            2.7750030518509514
+          ],
+          [
+            -0.7708723715933726,
+            2.174662709433271,
+            3.374996948149056
+          ]
+        ]
+      },
+      {
+        "id": "leaf-revolutionary",
+        "boundsAtNode23": [
+          [
+            -1.311294137394331,
+            1.8189999999999997,
+            2.9247268593401934
+          ],
+          [
+            -0.7387058626056715,
+            2.7990103762932215,
+            3.225334177678766
+          ]
+        ]
+      },
+      {
+        "id": "leaf-sole-survivor",
+        "boundsAtNode23": [
+          [
+            -1.2823320719016096,
+            1.8189999999999997,
+            2.943312631611076
+          ],
+          [
+            -0.7676679280983929,
+            2.7990103762932215,
+            3.2066873683889314
+          ]
+        ]
+      },
+      {
+        "id": "leaf-sore-loser",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.863811914426103
+          ],
+          [
+            -0.7250030518509488,
+            2.642328348643452,
+            3.2861880855739045
+          ]
+        ]
+      },
+      {
+        "id": "leaf-spiteful-spirit",
+        "boundsAtNode23": [
+          [
+            -1.25739844965972,
+            1.8189999999999997,
+            2.9254593035676173
+          ],
+          [
+            -0.7926015503402826,
+            2.7990103762932215,
+            3.224479659413438
+          ]
+        ]
+      },
+      {
+        "id": "leaf-toucan",
+        "boundsAtNode23": [
+          [
+            -1.179911954100163,
+            1.8189999999999997,
+            2.7750030518509514
+          ],
+          [
+            -0.8700880458998395,
+            2.524771050141911,
+            3.374996948149056
+          ]
+        ]
+      },
+      {
+        "id": "leaf-triangle-man",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.952254554887543
+          ],
+          [
+            -0.7250030518509488,
+            2.717739585558641,
+            3.1977454451124645
+          ]
+        ]
+      },
+      {
+        "id": "leaf-zombie",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.9101390118106667
+          ],
+          [
+            -0.7250030518509488,
+            2.730526841029084,
+            3.2398609881893408
+          ]
+        ]
+      },
+      {
+        "id": "leaf-thespian",
+        "boundsAtNode23": [
+          [
+            -1.3165738395336783,
+            1.8189999999999997,
+            2.9029976805932836
+          ],
+          [
+            -0.7334261604663241,
+            2.7990103762932215,
+            3.247002319406724
+          ]
+        ]
+      },
+      {
+        "id": "leaf-filmmaker",
+        "boundsAtNode23": [
+          [
+            -1.3180692464980024,
+            1.8189999999999997,
+            2.888470870082709
+          ],
+          [
+            -0.7319307535020002,
+            2.7990103762932215,
+            3.2615291299172986
+          ]
+        ]
+      },
+      {
+        "id": "wurstii-bart-simpson",
+        "boundsAtNode23": [
+          [
+            -1.2557199316385401,
+            1.8189999999999997,
+            2.9367816705832124
+          ],
+          [
+            -0.7942800683614625,
+            2.7990103762932215,
+            3.213218329416795
+          ]
+        ]
+      },
+      {
+        "id": "wurstii-bucky-ohare",
+        "boundsAtNode23": [
+          [
+            -1.2595652638325157,
+            1.8189999999999997,
+            2.951461073641167
+          ],
+          [
+            -0.7904347361674868,
+            2.7990103762932215,
+            3.1985389263588404
+          ]
+        ]
+      },
+      {
+        "id": "wurstii-bullet-bill",
+        "boundsAtNode23": [
+          [
+            -1.322036652729882,
+            1.8189999999999997,
+            2.7750030518509514
+          ],
+          [
+            -0.7279633472701206,
+            2.1716413769951473,
+            3.374996948149056
+          ]
+        ]
+      },
+      {
+        "id": "wurstii-chip-n-dale",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.9047067171239394
+          ],
+          [
+            -0.7250030518509488,
+            2.4186581926938686,
+            3.244682912686548
+          ]
+        ]
+      },
+      {
+        "id": "wurstii-diddy-kong",
+        "boundsAtNode23": [
+          [
+            -1.288557847834713,
+            1.8189999999999997,
+            2.831492812891022
+          ],
+          [
+            -0.7614421521652894,
+            2.7990103762932215,
+            3.3185071871089855
+          ]
+        ]
+      },
+      {
+        "id": "wurstii-dixie-kong",
+        "boundsAtNode23": [
+          [
+            -1.2735732596819984,
+            1.8189999999999997,
+            2.8651547288430472
+          ],
+          [
+            -0.7764267403180041,
+            2.7990103762932215,
+            3.2848452711569602
+          ]
+        ]
+      },
+      {
+        "id": "wurstii-dr-wily",
+        "boundsAtNode23": [
+          [
+            -1.2966757713553283,
+            1.8189999999999997,
+            2.9051950132755553
+          ],
+          [
+            -0.7533242286446742,
+            2.7990103762932215,
+            3.244804986724452
+          ]
+        ]
+      },
+      {
+        "id": "wurstii-dry-bones",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.830729850154122
+          ],
+          [
+            -0.7250030518509488,
+            2.784269936216315,
+            3.3199415570543573
+          ]
+        ]
+      },
+      {
+        "id": "wurstii-eric",
+        "boundsAtNode23": [
+          [
+            -1.2756485183263662,
+            1.8189999999999997,
+            2.9247878963591454
+          ],
+          [
+            -0.7743514816736363,
+            2.7990103762932215,
+            3.225212103640862
+          ]
+        ]
+      },
+      {
+        "id": "wurstii-falco-lombardi",
+        "boundsAtNode23": [
+          [
+            -1.2822099978637056,
+            1.8189999999999997,
+            2.895032349620048
+          ],
+          [
+            -0.7677900021362969,
+            2.7990103762932215,
+            3.2549676503799594
+          ]
+        ]
+      },
+      {
+        "id": "wurstii-frogger",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.789743491927858
+          ],
+          [
+            -0.7250030518509488,
+            2.1462499771111174,
+            3.3602565080721494
+          ]
+        ]
+      },
+      {
+        "id": "wurstii-hoagie",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.8962225714896124
+          ],
+          [
+            -0.7250030518509488,
+            2.698604480117191,
+            3.253777428510395
+          ]
+        ]
+      },
+      {
+        "id": "wurstii-jason-vorhees",
+        "boundsAtNode23": [
+          [
+            -1.3055871761223194,
+            1.8189999999999997,
+            2.917982268745998
+          ],
+          [
+            -0.744412823877683,
+            2.7990103762932215,
+            3.2320177312540093
+          ]
+        ]
+      },
+      {
+        "id": "wurstii-knuckles",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.9157544175542505
+          ],
+          [
+            -0.7250030518509488,
+            2.6307618335520493,
+            3.234245582445757
+          ]
+        ]
+      },
+      {
+        "id": "wurstii-lakitu",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.900495162816252
+          ],
+          [
+            -0.7250030518509488,
+            2.5087793511764884,
+            3.2493827631458516
+          ]
+        ]
+      },
+      {
+        "id": "wurstii-lizzie",
+        "boundsAtNode23": [
+          [
+            -1.3049462874233235,
+            1.8189999999999997,
+            2.7945348979155895
+          ],
+          [
+            -0.7453283791619629,
+            2.7990103762932215,
+            3.355465102084418
+          ]
+        ]
+      },
+      {
+        "id": "wurstii-magikarp",
+        "boundsAtNode23": [
+          [
+            -1.2387821588793615,
+            1.8189999999999997,
+            2.7751556443983314
+          ],
+          [
+            -0.8112178411206409,
+            2.2650280159916987,
+            3.375149540696436
+          ]
+        ]
+      },
+      {
+        "id": "wurstii-mario",
+        "boundsAtNode23": [
+          [
+            -1.3063196203497434,
+            1.8189999999999997,
+            2.8934148686178203
+          ],
+          [
+            -0.7436803796502591,
+            2.7990103762932215,
+            3.256585131382187
+          ]
+        ]
+      },
+      {
+        "id": "wurstii-mr-game-and-watch",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.9820711386455923
+          ],
+          [
+            -0.7250030518509488,
+            2.642969237342448,
+            3.1675931577501792
+          ]
+        ]
+      },
+      {
+        "id": "wurstii-olaf",
+        "boundsAtNode23": [
+          [
+            -1.30161976989044,
+            1.8189999999999997,
+            2.909437086092719
+          ],
+          [
+            -0.7483802301095627,
+            2.7990103762932215,
+            3.2405629139072887
+          ]
+        ]
+      },
+      {
+        "id": "wurstii-pitfall-harry",
+        "boundsAtNode23": [
+          [
+            -1.2504402294991925,
+            1.8189999999999997,
+            2.932448042237621
+          ],
+          [
+            -0.79955977050081,
+            2.7990103762932215,
+            3.2175519577623866
+          ]
+        ]
+      },
+      {
+        "id": "wurstii-simon-belmont",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.944167149876404
+          ],
+          [
+            -0.7250030518509488,
+            2.7526832789086577,
+            3.2058328501236035
+          ]
+        ]
+      },
+      {
+        "id": "wurstii-tails",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.831462294381546
+          ],
+          [
+            -0.7250030518509488,
+            2.737637653736991,
+            3.3185377056184615
+          ]
+        ]
+      },
+      {
+        "id": "wurstii-yoshi",
+        "boundsAtNode23": [
+          [
+            -1.276472518082218,
+            1.8189999999999997,
+            2.7752166814172834
+          ],
+          [
+            -0.7735274819177844,
+            2.751920316171758,
+            3.375241096224864
+          ]
+        ]
+      },
+      {
+        "id": "wurstii-rollercoaster-tycoon-guest",
+        "boundsAtNode23": [
+          [
+            -1.2719862971892466,
+            1.8189999999999997,
+            2.940169225135048
+          ],
+          [
+            -0.778013702810756,
+            2.7990103762932215,
+            3.2098307748649595
+          ]
+        ]
+      },
+      {
+        "id": "wurstii-spot",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.9672086245307816
+          ],
+          [
+            -0.7250030518509488,
+            2.5025535752433847,
+            3.182791375469226
+          ]
+        ]
+      },
+      {
+        "id": "wurstii-rockford",
+        "boundsAtNode23": [
+          [
+            -1.2678357799005109,
+            1.8189999999999997,
+            2.910505233924379
+          ],
+          [
+            -0.7821642200994916,
+            2.7990103762932215,
+            3.2394947660756284
+          ]
+        ]
+      },
+      {
+        "id": "wurstii-burt",
+        "boundsAtNode23": [
+          [
+            -1.3083643604846351,
+            1.8189999999999997,
+            2.8605769524216473
+          ],
+          [
+            -0.7416356395153674,
+            2.7990103762932215,
+            3.28942304757836
+          ]
+        ]
+      },
+      {
+        "id": "wurstii-piranha-plant",
+        "boundsAtNode23": [
+          [
+            -1.2289857173375665,
+            1.8189999999999997,
+            2.8962836085085644
+          ],
+          [
+            -0.821014282662436,
+            2.7990103762932215,
+            3.253716391491443
+          ]
+        ]
+      },
+      {
+        "id": "wurstii-fluffin-puffins",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.835307626575522
+          ],
+          [
+            -0.7250030518509488,
+            2.3315583666493724,
+            3.3146923734244855
+          ]
+        ]
+      },
+      {
+        "id": "bite-mark-were",
+        "boundsAtNode23": [
+          [
+            -1.3249969481490536,
+            1.8189999999999997,
+            2.862469100009159
+          ],
+          [
+            -0.7250030518509488,
+            2.6584421216467784,
+            3.2874088259529444
+          ]
+        ]
+      },
+      {
+        "id": "hog-knight-mounted",
+        "boundsAtNode23": [
+          [
+            -1.2625560777611633,
+            1.8189999999999997,
+            2.7749725333414754
+          ],
+          [
+            -0.7874439222388391,
+            2.746630848109378,
+            3.374996948149056
+          ]
+        ]
+      }
+    ]
+  }
+}

@@ -1,4 +1,4 @@
-import {Component,Suspense,useEffect,useMemo,type ReactNode} from 'react';
+import {Component,Suspense,useCallback,useEffect,useMemo,type ReactNode} from 'react';
 import {useGLTF} from '@react-three/drei';
 import {useFrame,useThree} from '@react-three/fiber';
 import {Group,Matrix4,Mesh,Vector3} from 'three';
@@ -8,22 +8,25 @@ import type {PresentationBeat} from '../../presentation.js';
 import type {PresentationClock} from '../../presentation-clock.js';
 import {mechanismActions} from '../mechanisms/events.js';
 import {MechanismPlayback} from '../mechanisms/playback.js';
-import {buildDisplayFoundation,createDisplayBatch,createDisplayMechanism,DISPLAY_URLS,disposeDisplayFoundation,fullCoveragePlacements,type DisplayPlacement,type DisplayVariant} from './full-coverage.js';
-export interface FullCoverageProps{track:TrackId;compact:boolean;lowQuality:boolean;racers:Racer[];beat?:PresentationBeat;clock:PresentationClock;startedAt:number;durationMs:number;paused:boolean;reducedMotion:boolean;physicalVisible:(anchor:string)=>boolean;onFailure:()=>void}
+import {buildDisplayFoundation,createDisplayBatch,createDisplayMechanism,displayPunchOutlet,DISPLAY_URLS,disposeDisplayFoundation,fullCoveragePlacements,type DisplayPlacement,type DisplayVariant} from './full-coverage.js';
+export interface FullCoverageProps{track:TrackId;compact:boolean;lowQuality:boolean;racers:Racer[];beat?:PresentationBeat;clock:PresentationClock;startedAt:number;durationMs:number;paused:boolean;reducedMotion:boolean;physicalVisible:(anchor:string)=>boolean;onFailure:()=>void;onReady?:()=>void;outlets?:Map<string,Vector3>}
 class KindBoundary extends Component<{children:ReactNode;fallback:ReactNode;onFailure:()=>void},{failed:boolean}>{state={failed:false};static getDerivedStateFromError(){return{failed:true};}componentDidCatch(){this.props.onFailure();}render(){return this.state.failed?this.props.fallback:this.props.children;}}
 /** Every category loads independently and reuses the existing content-addressed
  * useGLTF cache. No actor, environment or pad readiness controls visual coverage. */
 export function FullCoverageMechanismLayer(props:FullCoverageProps){
  const placements=useMemo(()=>fullCoveragePlacements(props.track,props.compact),[props.track,props.compact]);
- const variants=[...new Set(placements.map(p=>p.variant))];
- return <group name="complete-special-tile-hardware">{variants.map(variant=>{const items=placements.filter(p=>p.variant===variant),fallback=<LoadingOutline placements={items}/>;return <KindBoundary key={variant} onFailure={props.onFailure} fallback={fallback}><Suspense fallback={fallback}><LoadedKind {...props} variant={variant} placements={items}/></Suspense></KindBoundary>;})}</group>;
+ const variants=useMemo(()=>[...new Set(placements.map(p=>p.variant))].map(variant=>({variant,items:placements.filter(p=>p.variant===variant)})),[placements]);
+ const loaded=useMemo(()=>new Set<DisplayVariant>(),[props.track,props.lowQuality,variants]);
+ const ready=useCallback((variant:DisplayVariant)=>{loaded.add(variant);if(variants.every(v=>loaded.has(v.variant)))props.onReady?.();},[variants,loaded,props.onReady]);
+ useEffect(()=>{if(!variants.length)props.onReady?.();},[variants,props.onReady]);
+ return <group name="complete-special-tile-hardware">{variants.map(({variant,items})=>{const fallback=<LoadingOutline placements={items}/>;return <KindBoundary key={variant} onFailure={props.onFailure} fallback={fallback}><Suspense fallback={fallback}><LoadedKind {...props} onKindReady={ready} variant={variant} placements={items}/></Suspense></KindBoundary>;})}</group>;
 }
-function LoadedKind({variant,placements,track,lowQuality,racers,beat,clock,startedAt,durationMs,paused,reducedMotion,physicalVisible,compact}:FullCoverageProps&{variant:DisplayVariant;placements:DisplayPlacement[]}){
+function LoadedKind({variant,placements,track,lowQuality,racers,beat,clock,startedAt,durationMs,paused,reducedMotion,physicalVisible,compact,onKindReady,outlets}:FullCoverageProps&{variant:DisplayVariant;placements:DisplayPlacement[];onKindReady:(variant:DisplayVariant)=>void}){
  const asset=useGLTF(DISPLAY_URLS[variant]),invalidate=useThree(s=>s.invalidate),playback=useMemo(()=>new MechanismPlayback(),[]);
  const actions=useMemo(()=>mechanismActions(track,beat,racers),[track,beat,racers]);
  const activeIds=new Set(actions.map(a=>a.anchor.id)),signature=[...activeIds].sort().join('|');
  const kit=useMemo(()=>{
-  const root=new Group(),models:ReturnType<typeof createDisplayMechanism>[]=[],foundations:Group[]=[],batches:{mesh:ReturnType<typeof createDisplayBatch>;local:Matrix4;placements:DisplayPlacement[]}[]=[],active:{placement:DisplayPlacement;holder:Group;model:ReturnType<typeof createDisplayMechanism>}[]=[];
+  const root=new Group(),models:ReturnType<typeof createDisplayMechanism>[]=[],foundations:Group[]=[],batches:{mesh:ReturnType<typeof createDisplayBatch>;local:Matrix4;placements:DisplayPlacement[]}[]=[],active:{placement:DisplayPlacement;holder:Group;model:ReturnType<typeof createDisplayMechanism>;outlet?:Vector3}[]=[];
   // Wild5 has an individual static-foot adapter and park, so it is never silently
   // batched with another native trip's different transforms.
   const groups=variant==='trip'?placements.map(p=>[p]):[placements];
@@ -31,7 +34,9 @@ function LoadedKind({variant,placements,track,lowQuality,racers,beat,clock,start
    const source=createDisplayMechanism(variant,asset.scene,asset.animations[0],lowQuality,group[0]?.anchor.id);models.push(source);source.sample(0);
    if(idle.length)source.object.traverse(n=>{if(!(n instanceof Mesh))return;const mesh=createDisplayBatch(n,idle.length);root.add(mesh);batches.push({mesh,local:n.matrixWorld.clone(),placements:idle});});
    for(const p of group){const foundation=buildDisplayFoundation(p,source.object,compact);foundation.userData.anchor=p.anchor.id;root.add(foundation);foundations.push(foundation);}
-   for(const p of group.filter(p=>activeIds.has(p.anchor.id))){const model=createDisplayMechanism(variant,asset.scene,asset.animations[0],lowQuality,p.anchor.id),holder=new Group();holder.name=`coverage-active:${p.anchor.id}`;holder.matrixAutoUpdate=false;holder.matrix.copy(p.matrix);holder.add(model.object);root.add(holder);models.push(model);active.push({placement:p,holder,model});}
+   for(const p of group.filter(p=>activeIds.has(p.anchor.id))){const model=createDisplayMechanism(variant,asset.scene,asset.animations[0],lowQuality,p.anchor.id),holder=new Group();holder.name=`coverage-active:${p.anchor.id}`;holder.userData.mechanismAnchor=p.anchor.id;holder.matrixAutoUpdate=false;holder.matrix.copy(p.matrix);holder.add(model.object);root.add(holder);models.push(model);
+    let outlet:Vector3|undefined;if(p.anchor.kind==='punch'){model.sample(.22,true);outlet=displayPunchOutlet(model.object).applyMatrix4(p.matrix);model.sample(0);}
+    active.push({placement:p,holder,model,outlet});}
   }
   let visibility:string|undefined;const matrix=new Matrix4();
   return{root,active,update(physical:(id:string)=>boolean,t:number,reduced:boolean){const hidden=placements.filter(p=>physical(p.anchor.id)).map(p=>p.anchor.id),key=hidden.join('|');
@@ -39,6 +44,16 @@ function LoadedKind({variant,placements,track,lowQuality,racers,beat,clock,start
    for(const a of active){a.holder.visible=!hidden.includes(a.placement.anchor.id);if(a.holder.visible)a.model.sample(reduced?0:t,!reduced);}
   },dispose(){models.forEach(m=>m.dispose());batches.forEach(b=>b.mesh.dispose());foundations.forEach(disposeDisplayFoundation);}};
  },[asset,variant,placements,signature,lowQuality,compact]);
+ useEffect(()=>{
+  const owned=new Map<string,Vector3>();
+  for(const item of kit.active)if(item.outlet){
+   owned.set(item.placement.anchor.id,item.outlet);outlets?.set(item.placement.anchor.id,item.outlet);
+  }
+  return()=>{for(const [anchor,point]of owned)if(outlets?.get(anchor)===point)outlets.delete(anchor);};
+ },[kit,outlets]);
+ useEffect(()=>{onKindReady(variant);},[onKindReady,variant]);
+ // Only replacement/unmount owns GPU and adapter disposal. A fresh registry or
+ // ready callback must not dispose the still-mounted model during a room update.
  useEffect(()=>{invalidate();return()=>kit.dispose();},[kit,invalidate]);
  // Original physical drivers sample at priority -1. This display follows their
  // current state so exactly one complete assembly owns the anchor in each frame.

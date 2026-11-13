@@ -31,33 +31,73 @@ export function fullCoveragePlacements(track:TrackId,compact=false):DisplayPlace
   return{...p,matrix,variant,foundationBottom:r1?.104:parked?.foundation.bottom??proof?.foundationBottom??.02};
  });
 }
-const pulse=(t:number)=>t<=0||t>=1?0:Math.pow(Math.sin(Math.PI*t),2);
-/** Bounded, outboard-only demonstration. It never transports or binds a pawn,
- * grants contact or samples an unverified full extension into the running lane. */
+const clampUnit=(value:number)=>Number.isFinite(value)?Math.max(0,Math.min(1,value)):0;
+const smoothUnit=(value:number)=>{const t=clampUnit(value);return t*t*(3-2*t);};
+const motionWindow=(t:number,riseStart:number,riseEnd:number,fallStart:number,fallEnd:number)=>smoothUnit((t-riseStart)/(riseEnd-riseStart))*(1-smoothUnit((t-fallStart)/(fallEnd-fallStart)));
+/** A complete non-contact cycle uses the real authored joints and a fixed root.
+ * Positive local Z is the cabinet/outboard side. Native punch/trip/gain clips
+ * swing towards the lane, so these display cycles articulate in the opposite
+ * direction. World-space clearance still belongs to the placement consumer.
+ * motionScale changes joint travel only, never the model or its foundation. */
 export function createDisplayMechanism(variant:DisplayVariant,source:Group,clip:AnimationClip|undefined,low=false,anchor=''){
  if(variant==='telescopic-trip'){
   const model=createTelescopicTripInstance(source,low);
-  return{object:model.object,dispose:model.dispose,sample(t:number,active=false){model.sample(telescopicTripPose(active?Math.PI*2-.12*pulse(t):0,0,.20));}};
+  return{object:model.object,dispose:model.dispose,sample(t:number,active=false,motionScale=1){
+   t=active?clampUnit(t):0;const scale=clampUnit(motionScale),aim=Math.PI/3*scale*motionWindow(t,0,.20,.76,1),reach=.55*scale*motionWindow(t,.20,.44,.58,.76);
+   model.sample(telescopicTripPose(aim>0?Math.PI*2-aim:0,reach,.20));
+  }};
  }
  if(variant==='punch-r1'){
   const object=source.clone(true),driver=bindRebuildDriver(object);
   object.traverse(n=>{if(n instanceof Mesh){n.castShadow=n.receiveShadow=!low;n.raycast=()=>{};}});
-  return{object,dispose(){},sample(t:number,active=false){driver.sample({...R1_PARK,stroke:active?.22*punchWindStroke(t):0});}};
+  return{object,dispose(){},sample(t:number,active=false,motionScale=1){
+   t=active?clampUnit(t):0;const scale=clampUnit(motionScale);
+   // Telescope first, fire from .08 to .38, retract the fist before the arm.
+   // R1 display mounts already move the whole static foundation 1.2m outboard.
+   driver.sample({...R1_PARK,reach:.25*scale*motionWindow(t,0,.08,.38,.64),stroke:.35*scale*punchWindStroke(t)});
+  }};
  }
  if(!clip)throw Error(`Missing authored clip for ${variant}`);
  const model=createMechanismInstance(source,clip,low);model.sample(0);if(anchor==='wild:5')model.fitWild5Foot();
- return{object:model.object,dispose:model.dispose,sample(t:number,active=false){
-  const u=active?pulse(t):0;model.sample(0);
-  if(variant==='punch')model.samplePunchPose({boom:0,counter:0,slider:.35+.08*(active?punchWindStroke(t):0),spring:.22*(active?punchWindStroke(t):0),route:0});
-  else if(variant==='trip')model.sampleTripPose({angle:-.12*u,reach:0});
-  else if(variant==='warp')model.sampleWarp(active?t:0);
-  // A small motor/bell movement stays in the outboard cabinet. Score particles
-  // flow from its real outlet to actual recipients, using the real score delta.
-  else if(variant==='loss'){const bell=model.object.getObjectByName('LOSS_HEAD_Y')??model.object.getObjectByName('LOSS_HEAD_X');if(bell)bell.rotation.x+=.10*u;}
-  else if(variant==='gain'){const elbow=model.object.getObjectByName('GAIN_ELBOW_X');if(elbow)elbow.rotation.x-=.12*u;}
-  if(variant==='trip'){const shaft=model.object.getObjectByName('TRIP_FIXED_SHAFT');if(shaft)shaft.rotation.y+=u*Math.PI;}
+ const joint=(name:string)=>{const node=model.object.getObjectByName(name);if(!node)throw Error(`Missing display joint ${name}`);return node;};
+ // Absolute writes are essential: repeatedly sampling the same mixer time does
+ // not restore manual edits when Three's property mixer skips unchanged values.
+ const shoulder=variant==='gain'?joint('GAIN_SHOULDER_X'):undefined,elbow=variant==='gain'?joint('GAIN_ELBOW_X'):undefined;
+ const bell=variant==='loss'?joint('LOSS_HEAD_X'):undefined;
+ const leftDoor=variant==='warp'?joint('WARP_DOOR_L_Z'):undefined,rightDoor=variant==='warp'?joint('WARP_DOOR_R_Z'):undefined;
+ const base=new Map([shoulder,elbow,bell,leftDoor,rightDoor].filter((n):n is Object3D=>!!n).map(n=>[n,n.rotation.clone()]));
+ return{object:model.object,dispose:model.dispose,sample(t:number,active=false,motionScale=1){
+  t=active?clampUnit(t):0;const scale=clampUnit(motionScale);
+  if(variant==='punch'){
+   const aim=Math.PI/3*scale*motionWindow(t,0,.08,.40,.76),stroke=scale*punchWindStroke(t);
+   model.samplePunchPose({boom:-aim,counter:aim,slider:.35+.35*stroke,spring:stroke,route:0});
+  }else if(variant==='trip'){
+   model.sampleTripPose({angle:-Math.PI/3*scale*motionWindow(t,0,.20,.76,1),reach:.55*scale*motionWindow(t,.20,.44,.58,.76)});
+  }else if(shoulder&&elbow){
+   const lift=scale*motionWindow(t,.02,.38,.60,.94);
+   shoulder.rotation.copy(base.get(shoulder)!);shoulder.rotation.x+=65*Math.PI/180*lift;
+   elbow.rotation.copy(base.get(elbow)!);elbow.rotation.x-=Math.PI/6*lift;
+  }else if(bell){
+   bell.rotation.copy(base.get(bell)!);bell.rotation.x+=t<=0||t>=1?0:(22*Math.PI/180)*scale*Math.sin(6*Math.PI*t)*Math.sin(Math.PI*t)**2;
+  }else if(leftDoor&&rightDoor){
+   const open=70*Math.PI/180*scale*motionWindow(t,.02,.25,.72,.98);
+   leftDoor.rotation.copy(base.get(leftDoor)!);leftDoor.rotation.y-=open;
+   rightDoor.rotation.copy(base.get(rightDoor)!);rightDoor.rotation.y+=open;
+  }
   model.object.updateMatrixWorld(true);
  }};
+}
+/** Actual authored glove surface in the model's local mount coordinates.
+ * Read after sampling the release pose; callers apply the same display mount.
+ * This stays correct for adapted stroke/aim and for a transformed parent. */
+export function displayPunchOutlet(object:Object3D){
+ object.updateWorldMatrix(true,true);
+ const glove=object.getObjectByName('PUNCH_SLIDER_X__coral_fixed_batch');
+ if(!(glove instanceof Mesh))throw Error('Missing authored punch glove surface');
+ const toLocal=object.matrixWorld.clone().invert().multiply(glove.matrixWorld),box=new Box3(),point=new Vector3();
+ const position=glove.geometry.getAttribute('position');
+ for(let i=0;i<position.count;i++)box.expandByPoint(glove.getVertexPosition(i,point).applyMatrix4(toLocal));
+ const front=box.getCenter(new Vector3());front.x=box.max.x;return front;
 }
 /** Static support for every displayed assembly, including previously unsupported
  * Wild16. Exact foot geometry supplies the top and footprint; the extension
