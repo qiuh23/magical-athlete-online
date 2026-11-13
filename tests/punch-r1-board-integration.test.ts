@@ -36,7 +36,7 @@ test('actual Pawn broadcasts the real snapshot with generation protection and in
  assert.match(source,/captureGeneration\.current===generation&&captureKey\.current===current/);
  assert.match(source,/r1\.acceptActor\(racer\.id,hash,snapshot\)/);assert.match(source,/r1\.invalidateActor\(racer\.id\)/);
  assert.match(source,/\[certified,r1,racer\.id\]/);
- assert.match(source,/motionEnabled=\{!certifiedBind&&!r1Bind&&!r1\.protects/);
+ assert.match(source,/motionEnabled=\{!displayTrip&&!certifiedBind&&!r1Bind&&!r1\.protects/);
  assert.match(source,/swing = reducedMotion\|\|r1\.protects/);
  const pawn=nodes(ts.isFunctionDeclaration).find(node=>node.name?.text==='Pawn')!;assert.doesNotMatch(pawn.getText(ast),/requestAnimationFrame|setInterval/);
 });

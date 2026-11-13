@@ -20,8 +20,8 @@ export function stepVenueLighting(state:ReturnType<typeof createVenueLightingSta
   state.nightFactor=venueFixtureNightFactor(state.phase);
   const fixtureFactor=state.nightFactor*state.venue,number=(key:'exposure'|'ambient'|'hemi'|'env'|'keyPower'|'fillPower'|'shadow')=>lerp(a[key],b[key]);
   return {sky:{from,to,mix},nightFactor:fixtureFactor,active:state.phase!==target||state.venue!==(ready?1:0),
-    exposure:number('exposure'),ambient:number('ambient'),hemi:number('hemi')-.12*fixtureFactor,env:number('env')+.03*fixtureFactor,
-    keyPower:number('keyPower')-1.35*fixtureFactor,fillPower:number('fillPower'),shadow:number('shadow'),
+    exposure:number('exposure'),ambient:number('ambient')-.03*fixtureFactor,hemi:number('hemi')-.28*fixtureFactor,env:number('env')-.035*fixtureFactor,
+    keyPower:number('keyPower')-1.82*fixtureFactor,fillPower:number('fillPower')-.12*fixtureFactor,shadow:number('shadow'),
     skyColor:new Color(a.sky).lerp(new Color(b.sky),mix),ground:new Color(a.ground).lerp(new Color(b.ground),mix),key:new Color(a.key).lerp(new Color(b.key),mix),fill:new Color(a.fill).lerp(new Color(b.fill),mix)};
 }
 

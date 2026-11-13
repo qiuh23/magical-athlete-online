@@ -9,9 +9,13 @@ import {automaticLightPhase,type RoomLightingClock} from '../../scene-lighting-c
 import {scheduleLightingFrames,lightingFrameDelay} from './lighting-demand.js';
 import { createSkyEnvironment, SKY_SOURCE_DIRECTIONS } from '../sky-environment.mjs';
 import { activeMechanismLayout } from '../mechanisms/layout.js';
-import { FLOODLIGHT_ASSETS, floodlightUrl, buildFloodlightGeometry, venueSpotPhotometry, VENUE_LIGHT_BUDGET } from './floodlights.js';
+import { FLOODLIGHT_ASSETS, floodlightUrl, buildFloodlightGeometry } from './floodlights.js';
 import { createVenueLightingState, stepVenueLighting, applyVenueSpotState } from './venue-lighting-state.js';
 import type { EnvironmentModels } from './runtime.js';
+import { createFloodlightBeams } from './floodlight-beams.js';
+import { FLOODLIGHT_COLOR, applyFloodlightColor } from './floodlight-color.js';
+import { venuePoolPhotometry, activeVenuePools, VENUE_POOL_BUDGET } from './floodlight-pools.js';
+import { selectVenueShadowLamps, assignVenueShadowSlots } from './venue-shadow-slots.js';
 const URLS=FLOODLIGHT_ASSETS.map(floodlightUrl);
 export function clearFloodlightCache(){useGLTF.clear(URLS);}
 class LightBoundary extends Component<{children:ReactNode;onFailure:()=>void},{failed:boolean}>{state={failed:false};static getDerivedStateFromError(){return{failed:true};}componentDidCatch(){this.props.onFailure();}render(){return this.state.failed?null:this.props.children;}}
@@ -63,16 +67,26 @@ export function VenueLighting({track,compact,lowQuality,mode,lightingClock,light
   </>;
 }
 function VenueFixtures({track,compact,lowQuality,factor,onReady}:{track:TrackId;compact:boolean;lowQuality:boolean;factor:React.RefObject<{nightFactor:number}>;onReady:(ready:boolean)=>void}){
-  const loaded=useGLTF(URLS),{invalidate}=useThree();
+  const loaded=useGLTF(URLS),{invalidate,scene,camera}=useThree();
+  const selection=useRef<string[]>([]),selectionClock=useRef(1),sample=new THREE.Vector3(),projected=new THREE.Vector3();
   const models=useMemo(()=>Object.fromEntries(FLOODLIGHT_ASSETS.map((name,i)=>[name,loaded[i]!.scene])) as EnvironmentModels,[loaded]);
   const {scale,lift}=activeMechanismLayout(track),options=useMemo(()=>({scale,lift,lowQuality}),[scale,lift,lowQuality]);
-  const [kit,setKit]=useState<{geometry:ReturnType<typeof buildFloodlightGeometry>;spots:{light:THREE.SpotLight;intensity:number}[]}>();
+  const [kit,setKit]=useState<{geometry:ReturnType<typeof buildFloodlightGeometry>;spots:{light:THREE.SpotLight;intensity:number}[];beams:ReturnType<typeof createFloodlightBeams>}>();
   useEffect(()=>{
-    const geometry=buildFloodlightGeometry(track,models,options),spots=geometry.layout.filter(lamp=>lamp.active).map((lamp,i)=>{
-      const photo=venueSpotPhotometry(lamp.receiver,lamp.target,lowQuality),light=new THREE.SpotLight('#ffe0a8',0,photo.distance,photo.angle,photo.penumbra,photo.decay);light.visible=false;light.name=`local-spot:${lamp.id}`;light.position.copy(lamp.receiver);light.target.position.copy(lamp.target);light.castShadow=i<VENUE_LIGHT_BUDGET[lowQuality?'economy':'full'].shadows;light.shadow.mapSize.set(1024,1024);light.shadow.camera.near=.15;light.shadow.camera.far=photo.distance;light.shadow.normalBias=.018;light.shadow.bias=-.00008;geometry.root.add(light,light.target);return{light,intensity:photo.intensity};
-    });setKit({geometry,spots});onReady(true);invalidate();
-    return()=>{onReady(false);spots.forEach(({light})=>light.dispose());geometry.dispose();};
-  },[track,models,options,lowQuality,onReady,invalidate]);
-  useFrame(()=>{if(!kit)return;kit.geometry.setNightFactor(factor.current.nightFactor);for(const spot of kit.spots)applyVenueSpotState(spot.light,spot.intensity,factor.current.nightFactor);},-1);
+    const geometry=buildFloodlightGeometry(track,models,options),spots=activeVenuePools(geometry.layout,lowQuality).map((lamp,i)=>{
+      const photo=venuePoolPhotometry(lamp.receiver,lamp.target,lowQuality),light=new THREE.SpotLight(FLOODLIGHT_COLOR,0,photo.distance,photo.angle,photo.penumbra,photo.decay);light.visible=false;light.name=`local-spot:${lamp.id}`;light.position.copy(lamp.receiver);light.target.position.copy(lamp.target);light.castShadow=i<VENUE_POOL_BUDGET[lowQuality?'economy':'full'].shadows;light.shadow.mapSize.set(compact?512:1024,compact?512:1024);light.shadow.camera.near=.15;light.shadow.camera.far=photo.distance;light.shadow.normalBias=.009;light.shadow.bias=-.00008;light.shadow.radius=1.5;geometry.root.add(light,light.target);return{light,intensity:photo.intensity};
+    });selection.current=[];selectionClock.current=1;applyFloodlightColor(geometry.lenses);const beams=createFloodlightBeams(geometry.layout);geometry.root.add(beams.mesh);setKit({geometry,spots,beams});onReady(true);invalidate();
+    return()=>{onReady(false);spots.forEach(({light})=>light.dispose());beams.dispose();geometry.dispose();};
+  },[track,models,options,lowQuality,compact,onReady,invalidate]);
+  useFrame((_,delta)=>{if(!kit)return;
+    selectionClock.current+=delta;
+    if(!lowQuality&&factor.current.nightFactor>0&&selectionClock.current>=.4){
+      selectionClock.current=0;const points:THREE.Vector3[]=[];kit.geometry.root.updateWorldMatrix(true,false);camera.updateWorldMatrix(true,false);
+      scene.traverse(object=>{if(!object.userData.racerModel||points.length>=16)return;sample.set(0,.8,0);object.localToWorld(sample);projected.copy(sample).project(camera);if(Math.abs(projected.x)>1.1||Math.abs(projected.y)>1.1||Math.abs(projected.z)>1)return;points.push(kit.geometry.root.worldToLocal(sample.clone()));});
+      const ray=new THREE.Raycaster();ray.setFromCamera(new THREE.Vector2(0,0),camera);const hit=ray.ray.intersectPlane(new THREE.Plane(new THREE.Vector3(0,1,0),0),sample);if(hit)points.push(kit.geometry.root.worldToLocal(hit.clone()));
+      const lamps=activeVenuePools(kit.geometry.layout,false),next=selectVenueShadowLamps(lamps,points,selection.current,VENUE_POOL_BUDGET.full.shadows);
+      if(next.join('|')!==selection.current.join('|')){assignVenueShadowSlots(kit.spots,lamps,next,false);selection.current=next;}
+    }
+    kit.geometry.setNightFactor(factor.current.nightFactor);kit.beams.setNightFactor(factor.current.nightFactor);for(const spot of kit.spots)applyVenueSpotState(spot.light,spot.intensity,factor.current.nightFactor);},-1);
   return kit?<group rotation={[0,compact?-Math.PI/2:0,0]}><primitive object={kit.geometry.root} dispose={null}/></group>:null;
 }

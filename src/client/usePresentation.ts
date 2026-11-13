@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { Racer, RoomView } from '../shared/types.js';
+import { afterPresentationPaint } from './presentation-completion.js';
 import { PresentationClock } from './presentation-clock.js';
 import { beatCompletionTime, beatDuration, completeBeat, createPlayback, diceResultReadMs, receiveRoom, skipPlayback, presentedTrackState, type PlaybackState, type PresentationBeat, type PresentationOptions } from './presentation.js';
 
@@ -58,8 +59,13 @@ export function usePresentation(room: RoomView | null, options: PresentationOpti
     if (!beat || !introReady || paused) return;
     const completeAt=beatCompletionTime(beat,startedAt,durationMs,diceSettledAt);
     if(completeAt===undefined)return;
-    const timer = setTimeout(() => { if (!clock.paused) setState(previous => previous?.queue[0]?.key === beat.key ? completeBeat(previous) : previous); }, Math.max(0, completeAt-clock.now()));
-    return () => clearTimeout(timer);
+    let cancelPaint: (() => void) | undefined;
+    const timer = setTimeout(() => {
+      cancelPaint = afterPresentationPaint(() => {
+        if (!clock.paused) setState(previous => previous?.queue[0]?.key === beat.key ? completeBeat(previous) : previous);
+      });
+    }, Math.max(0, completeAt-clock.now()));
+    return () => { clearTimeout(timer); cancelPaint?.(); };
   }, [beat?.key, durationMs, startedAt, introReady, diceSettledAt, paused, clock]);
   const skip = useCallback(() => {if(clock.paused)return;activeDiceKey.current=undefined;setDiceSettled(undefined);setState(previous => previous?.queue[0]?.kind === 'intro' ? completeBeat(previous) : previous && latestRoom.current ? skipPlayback(previous, latestRoom.current) : previous);}, [clock]);
   // While a completed action is still being shown, the action prompt must wait.

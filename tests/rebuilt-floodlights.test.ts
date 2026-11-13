@@ -35,7 +35,7 @@ test('one finite interruptible state keeps sky, main illumination and local spot
  const state=createVenueLightingState('day');let p=stepVenueLighting(state,'day',false,0);assert.equal(p.nightFactor,0);assert.equal(p.active,false);
  for(let i=0;i<10;i++)p=stepVenueLighting(state,'night',true,.016);const before=structuredClone(state);stepVenueLighting(state,'night',true,1,true);assert.deepEqual(state,before);
  const phase=state.phase;p=stepVenueLighting(state,'day',true,.01);assert.ok(state.phase<phase&&phase-state.phase<.02);
- for(let i=0;i<200;i++)p=stepVenueLighting(state,'night',true,.016);assert.equal(p.active,false);assert.equal(p.nightFactor,1);assert.ok(Math.abs(p.keyPower-.65)<1e-9);assert.deepEqual(p.sky,{from:'dusk',to:'night',mix:1});
+ for(let i=0;i<200;i++)p=stepVenueLighting(state,'night',true,.016);assert.equal(p.active,false);assert.equal(p.nightFactor,1);assert.ok(Math.abs(p.keyPower-.18)<1e-9);assert.deepEqual(p.sky,{from:'dusk',to:'night',mix:1});
  for(let i=0;i<200;i++)p=stepVenueLighting(state,'night',false,.016);assert.equal(p.nightFactor,0);assert.equal(p.keyPower,2);assert.equal(p.active,false);
  for(let i=0;i<200;i++)p=stepVenueLighting(state,'day',false,.016);assert.equal(p.sky.mix,0);assert.equal(p.keyPower,4.1);assert.equal(p.nightFactor,0);
  const component=readFileSync('src/client/scene/environment/VenueLighting.tsx','utf8'),board=readFileSync('src/client/scene/Board3D.tsx','utf8');assert.doesNotMatch(component,/requestAnimationFrame|setInterval|setTimeout|useGLTF\.preload/);assert.match(component,/preset.active&&!paused/);assert.match(component,/gl.toneMappingExposure===lastExposure.current/);assert.match(component,/useGLTF.clear\(URLS\)/);assert.match(board,/<VenueLighting[^>]*fixturesEnabled=\{environmentReady\}/);
@@ -62,7 +62,7 @@ function nodeIlluminance(track:TrackId,lowQuality:boolean,raised:boolean){
   return {node,total:zones.reduce((a,b)=>a+b,0),contributing:zones.filter(n=>n>.03).length};
  });
 }
-test('all route nodes receive real direct light; full quality overlaps multiple zones, including branches and bridge levels',()=>{
+test('historical broad-flood calibration retains route coverage; current local pools are tested separately',()=>{
  for(const track of Object.keys(TRACKS) as TrackId[])for(const lowQuality of [false,true])for(const raised of [false,true]){
   const nodes=nodeIlluminance(track,lowQuality,raised);
   // Analytic Three r186 direct receiver response, before occlusion/tone mapping.
@@ -79,7 +79,7 @@ test('quality preserves all eight fixed fixtures and caps direct-light and shado
  }
  const source=readFileSync('src/client/scene/environment/VenueLighting.tsx','utf8');
  assert.doesNotMatch(source,/compact\s*\?[^;]*filter/);
- assert.match(source,/light.shadow.mapSize.set\(1024,1024\)/);
+ assert.match(source,/light.shadow.mapSize.set\(compact\?512:1024,compact\?512:1024\)/);
  assert.doesNotMatch(source,/\[track,models,options,compact/);
- assert.match(source,/VENUE_LIGHT_BUDGET\[lowQuality\?'economy':'full'\]\.shadows/);
+ assert.match(source,/VENUE_POOL_BUDGET\[lowQuality\?'economy':'full'\]\.shadows/);
 });

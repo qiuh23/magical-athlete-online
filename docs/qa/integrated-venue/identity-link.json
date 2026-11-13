@@ -60,7 +60,7 @@
     "src/client/scene/environment/FullCoverageMechanismLayer.tsx": "c19b744467d6e2fda32a475ef0a19c86ac988c527a475c718b321e3ec7b8a645",
     "src/client/scene/environment/force-presentation.ts": "32f2f58c8119e870d08a7d33f5061f54c2d187b8620670b28baa18261b5ef643",
     "src/client/scene/environment/RevalidatedMechanismLayer.tsx": "7327cb3112bc0912ec7598489816680c220a4dba4ffc73c955f7c7a91660fcbd",
-    "src/client/scene/Board3D.tsx": "478c4557d6b3c31c98a9d0597ab5931a5b152e4c6c898efc17173bba6bbdeb2a",
+    "src/client/scene/Board3D.tsx": "d6d0414a6abe85af115fb42f3774a3df2fd2b52ba7f2f27c6d33f071fb695187",
     "src/client/scene/mechanisms/models.ts": "6dcb80fdb9e53dbb48c66e002c8f65a11260de49c38172062e56d79544ccc6f3",
     "src/client/scene/mechanisms/placements.ts": "63b3d29d3fdf635de95bcad2209f0a2fcb1057fa6a03e782c47d187b072e97d0",
     "src/client/scene/mechanisms/layout.ts": "e6705c25bf366f822565a26ef4303594390f3ba168fa5b5a02807dbd82791dbe",
@@ -134,72 +134,72 @@
     {
       "kind": "foundations",
       "path": "docs/qa/integrated-venue/mild-full.json",
-      "sha256": "b98dae86dafbaa2073d0533764525b36d3570ccd72cf28c8fb86b8b2f64c582d"
+      "sha256": "31e3a682c8ec84ccf4e400814978b12a5e5aa419f96a451cf5a9a0b87ac0f6d1"
     },
     {
       "kind": "foundations",
       "path": "docs/qa/integrated-venue/mild-economy.json",
-      "sha256": "7422e2e5f8230fad4eeb3d8614bc15ba2f5b8c533c6a4ab81f7409d624a2a85f"
+      "sha256": "eb296430fcea5c8b38627159d9901c7dc4b680526e0cebeddc26ca528b845a68"
     },
     {
       "kind": "foundations",
       "path": "docs/qa/integrated-venue/twisty-twirl-full.json",
-      "sha256": "1f84b6bcc40b3b41219d1c3711c4527a8711405377051efb093b001f28891590"
+      "sha256": "063b97567cee8d143451989baf0f0277650c80e55e8b3c80bc656d3b2e759cd6"
     },
     {
       "kind": "foundations",
       "path": "docs/qa/integrated-venue/twisty-twirl-economy.json",
-      "sha256": "4d0449dcb20ccc570b25ba95121c238f1ce57b76b42d8b3c69554d261fd47597"
+      "sha256": "6b53838a530a874e1e3327754fb00f9a28bab8aa0491a2ee5380183308b897b3"
     },
     {
       "kind": "foundations",
       "path": "docs/qa/integrated-venue/bridges-full.json",
-      "sha256": "fb3b39a682365ef36baacfcdb2ce521c68fc9d376cfdcbba68a1d5745fb61e08"
+      "sha256": "310cf61b27492bedf7258a0c21816698a4e32d4da200ca9ca9a425c3ae79b56d"
     },
     {
       "kind": "foundations",
       "path": "docs/qa/integrated-venue/bridges-economy.json",
-      "sha256": "82f7d276e6833599d1950309b5a1861e056badfd3391c93873681c89a56faceb"
+      "sha256": "a6db404a5106bf720be132dd5d88263f689ce8f92c93c22e551c2224ea488813"
     },
     {
       "kind": "foundations",
       "path": "docs/qa/integrated-venue/squiggle-full.json",
-      "sha256": "4e336a095d950907bd674b199f11f21f8b356ca8b5157da8cca8016dd8485753"
+      "sha256": "3923135380f71a238f2d30b256723f7b4c2bd4b59d719320eb9938220954111c"
     },
     {
       "kind": "foundations",
       "path": "docs/qa/integrated-venue/squiggle-economy.json",
-      "sha256": "6a8252cdade099d5d8a53f8c6685d59d331a9d6a65d62300c637bfa6057a1f50"
+      "sha256": "e018e7eeef13731add4cb6b937ebde3baadb7fae2363ea40c6e0f7f46c92b60e"
     },
     {
       "kind": "foundations",
       "path": "docs/qa/integrated-venue/boardwalks-full.json",
-      "sha256": "4a162456438725159f49ba3f4b63bb1f53beb66328d2bd3312e7355ffd32b8a2"
+      "sha256": "90f293bad54937423d61e8c77de4f9d6e4ab0b1016015a6bb5b252e190fea2d2"
     },
     {
       "kind": "foundations",
       "path": "docs/qa/integrated-venue/boardwalks-economy.json",
-      "sha256": "b4ef67c6f14855deb7bfc7da7e141721a832793a1db37b48894fe20315fe857b"
+      "sha256": "63d28d94e0c898cccd4e881ae27ca761f769b797c2146d17d18c19787a14f2b5"
     },
     {
       "kind": "foundations",
       "path": "docs/qa/integrated-venue/whirly-world-full.json",
-      "sha256": "034b4beb31f3beae7afadebf4876004d89cbca2598b78be7f417ce95229fff11"
+      "sha256": "7c1e78f8a7b00ca3c997ddc3dbacdd47c8b7cf7d9569c108776cb0ca3afe554b"
     },
     {
       "kind": "foundations",
       "path": "docs/qa/integrated-venue/whirly-world-economy.json",
-      "sha256": "6fea08e4962bee8572d25b30cfef52027a53d120d708a483e1e6958a9c9ef251"
+      "sha256": "1a54f111d700e061f5c345fd01fe1cdf6a47fe55ccb5e6689e3c93068a791f01"
     },
     {
       "kind": "foundations",
       "path": "docs/qa/integrated-venue/wild-full.json",
-      "sha256": "8974c6464cf180d783dd4bdf4f81542a3b7d6d62fa1bbd4f9097230594fe507d"
+      "sha256": "cc261cc7f3d448e384f2ea49772bad4d5c208de4f452cf05835395f58c8b852a"
     },
     {
       "kind": "foundations",
       "path": "docs/qa/integrated-venue/wild-economy.json",
-      "sha256": "9fd6e02815cdfe34b3516c0db93a8155c019c4b3a288719b81acc67a2b967f16"
+      "sha256": "6f1884ffdb295bf7c1e9b6f1862359e4cad012affcff7d73e15b5a6f1780df7c"
     },
     {
       "kind": "finishes",
