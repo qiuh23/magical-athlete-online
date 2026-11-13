@@ -132,23 +132,23 @@ function LoadingToy({ color, castShadow, failed = false }: { color: string; cast
 }
 
 /** Original toy sculptures: +Y up, +Z face, ground pivot at zero. */
-function Sculpture({ characterId, color, lowQuality = false, castShadow = true, url, rootName, animation, motionEnabled }: ToyCharacterProps & {url: string; rootName?: string}) {
+function Sculpture({ paused,characterId, color, lowQuality = false, castShadow = true, url, rootName, animation, motionEnabled }: ToyCharacterProps & {url: string; rootName?: string}) {
   const recovery = recoveryFor(url);
   const revision = useSyncExternalStore(recovery.subscribe, recovery.snapshot, recovery.snapshot);
   const fallback = <LoadingToy color={color} castShadow={castShadow && !lowQuality} />;
-  return <ModelBoundary key={url} recovery={recovery} revision={revision} fallback={<LoadingToy color={color} castShadow={castShadow && !lowQuality} failed />}><Suspense fallback={fallback}><CharacterAsset url={url} rootName={rootName} revision={revision} recovery={recovery} characterId={characterId} color={color} lowQuality={lowQuality} castShadow={castShadow && !lowQuality} animation={animation} motionEnabled={motionEnabled} /></Suspense></ModelBoundary>;
+  return <ModelBoundary key={url} recovery={recovery} revision={revision} fallback={<LoadingToy color={color} castShadow={castShadow && !lowQuality} failed />}><Suspense fallback={fallback}><CharacterAsset paused={paused} url={url} rootName={rootName} revision={revision} recovery={recovery} characterId={characterId} color={color} lowQuality={lowQuality} castShadow={castShadow && !lowQuality} animation={animation} motionEnabled={motionEnabled} /></Suspense></ModelBoundary>;
 }
 
-export function ToyCharacter({ characterId, color, lowQuality = false, castShadow = true, form, mount, animation, motionEnabled }: ToyCharacterProps) {
+export function ToyCharacter({ paused,characterId, color, lowQuality = false, castShadow = true, form, mount, animation, motionEnabled }: ToyCharacterProps) {
   const geometry = toyResources.baseGeometry(lowQuality);
   const modelId = characterId === 'bite-mark' && form === 'were-mouth' ? 'bite-mark-were' : characterId;
   const url = wurstii.has(characterId) ? `/models/wurstii/${characterId}.glb?v=authored-sculpt-final-20261024` : characterId==='banana' ? `/models/banana/${lowQuality?'banana-economy':'banana'}.glb?v=authored-sculpt-final-20261024` : expansionModels[characterId] ?? (secondWind.has(characterId) ? `/models/second-wind/${modelId}.glb?v=authored-sculpt-final-20261024` : lowQuality ? ECONOMY_URL : MODEL_URL);
   return <group name={`racer-model-${characterId}`} userData={{racerModel:true}}>
     <mesh geometry={geometry.body} material={toyResources.baseMaterial(color, lowQuality)} receiveShadow={!lowQuality} castShadow={castShadow && !lowQuality} dispose={null} />
     <mesh geometry={geometry.cap} material={toyResources.baseMaterial(color, lowQuality, true)} receiveShadow={!lowQuality} dispose={null} />
-    {mount && <group position={[0, .164, 0]}><Sculpture characterId="hog-knight-hog" rootName="toy_hog-knight-hog" url="/models/second-wind/hog-knight-hog.glb?v=authored-sculpt-final-20261024" color={color} lowQuality={lowQuality} castShadow={castShadow} animation={animation} motionEnabled={motionEnabled} /></group>}
+    {mount && <group position={[0, .164, 0]}><Sculpture paused={paused} characterId="hog-knight-hog" rootName="toy_hog-knight-hog" url="/models/second-wind/hog-knight-hog.glb?v=authored-sculpt-final-20261024" color={color} lowQuality={lowQuality} castShadow={castShadow} animation={animation} motionEnabled={motionEnabled} /></group>}
     <group position={[0, .164 + (mount ? .34 : 0), mount ? -.07 : 0]} scale={mount ? .7 : 1} userData={{racerMainSculpture:true}}>
-      <Sculpture url={url} rootName={`toy_${modelId}`} characterId={characterId} color={color} lowQuality={lowQuality} castShadow={castShadow} animation={animation} motionEnabled={motionEnabled} />
+      <Sculpture paused={paused} url={url} rootName={`toy_${modelId}`} characterId={characterId} color={color} lowQuality={lowQuality} castShadow={castShadow} animation={animation} motionEnabled={motionEnabled} />
     </group>
   </group>;
 }

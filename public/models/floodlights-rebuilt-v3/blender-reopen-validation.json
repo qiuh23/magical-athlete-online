@@ -1,0 +1,144 @@
+{
+  "pass": true,
+  "scope": "Independent fresh Blender source reopening and GLB imports; isolated render only, not runtime or FPS acceptance",
+  "blender_version": "4.3.2",
+  "validator_sha256": "4a9c469da405d7406503d69616eee5b08adeb83468cb90516a0d64a04de1a8ea",
+  "source_no_embedded_scripts_or_drivers": true,
+  "source_no_lights_cameras_or_external_dependencies": true,
+  "source_sha256_verified": true,
+  "assets": [
+    {
+      "name": "base",
+      "pass": true,
+      "triangles": 200,
+      "bounds_y_up": [
+        [
+          -0.3499999940395355,
+          0.0,
+          -0.32499998807907104
+        ],
+        [
+          0.3499999940395355,
+          0.20000000298023224,
+          0.32499998807907104
+        ]
+      ],
+      "bounds_error_max": 0.0,
+      "source_triangle_geometry_match_at_1e_5": true,
+      "front_minus_z_faces": null,
+      "linked_libraries": 0,
+      "external_images": 0,
+      "embedded_scripts": 0
+    },
+    {
+      "name": "pole",
+      "pass": true,
+      "triangles": 28,
+      "bounds_y_up": [
+        [
+          -0.057500001043081284,
+          0.0,
+          -0.057500001043081284
+        ],
+        [
+          0.057500001043081284,
+          1.0,
+          0.057500001043081284
+        ]
+      ],
+      "bounds_error_max": 0.0,
+      "source_triangle_geometry_match_at_1e_5": true,
+      "front_minus_z_faces": null,
+      "linked_libraries": 0,
+      "external_images": 0,
+      "embedded_scripts": 0
+    },
+    {
+      "name": "yoke",
+      "pass": true,
+      "triangles": 252,
+      "bounds_y_up": [
+        [
+          -0.38999998569488525,
+          -0.10499999672174454,
+          -0.10499998927116394
+        ],
+        [
+          0.38999998569488525,
+          0.1850000023841858,
+          0.1599999964237213
+        ]
+      ],
+      "bounds_error_max": 0.0,
+      "source_triangle_geometry_match_at_1e_5": true,
+      "front_minus_z_faces": null,
+      "linked_libraries": 0,
+      "external_images": 0,
+      "embedded_scripts": 0
+    },
+    {
+      "name": "housing",
+      "pass": true,
+      "triangles": 488,
+      "bounds_y_up": [
+        [
+          -0.6200000047683716,
+          -0.040000006556510925,
+          -0.1599999964237213
+        ],
+        [
+          0.6200000047683716,
+          0.3199999928474426,
+          0.06000000238418579
+        ]
+      ],
+      "bounds_error_max": 0.0,
+      "source_triangle_geometry_match_at_1e_5": true,
+      "front_minus_z_faces": null,
+      "linked_libraries": 0,
+      "external_images": 0,
+      "embedded_scripts": 0
+    },
+    {
+      "name": "lenses",
+      "pass": true,
+      "triangles": 24,
+      "bounds_y_up": [
+        [
+          -0.5850000381469727,
+          -0.004999995231628418,
+          -0.14500001072883606
+        ],
+        [
+          0.5850000381469727,
+          0.2849999964237213,
+          -0.12700000405311584
+        ]
+      ],
+      "bounds_error_max": 0.0,
+      "source_triangle_geometry_match_at_1e_5": true,
+      "front_minus_z_faces": 4,
+      "linked_libraries": 0,
+      "external_images": 0,
+      "embedded_scripts": 0
+    }
+  ],
+  "renders": [
+    {
+      "file": "front-neutral.png",
+      "sha256": "4d1579a763bdab3b8b2aba7062efafbd4f5afa068ea64a8b33f588a811f1ccb1"
+    },
+    {
+      "file": "head-tilt-attachment.png",
+      "sha256": "86e111aa32835a13c6afcf2cf9da52936493a734560256807b275c8e4fd18c76"
+    },
+    {
+      "file": "head-rear-socket.png",
+      "sha256": "4285cc4624c28b81337100432adf99d7ff668845d6ed2602bcbebd12283b3648"
+    },
+    {
+      "file": "whole-pole.png",
+      "sha256": "46ff5ac6ccca98e5c92cca204e87a096ce5c6f738c1779bb1e28d5ad3476aabc"
+    }
+  ]
+}

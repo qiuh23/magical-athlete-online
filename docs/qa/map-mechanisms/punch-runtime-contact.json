@@ -1,0 +1,51 @@
+{
+  "method": "Actual native ToyCharacter hierarchy including .164 sculpture lift, base/cap, scale1.65, pawn root +.005, static bind pose. Direct runtime actuators and original2.05 Wild path; 251 samples each empty deployment/entry/fire, both full/economy. Triangle surface crossings only, no continuous or penetration-depth proof.",
+  "reports": [
+    {
+      "quality": "banana",
+      "samplesPerPhase": 251,
+      "hardSurfaceCrossings": [],
+      "softContactSamples": 8,
+      "maxTravelTranslationToSeparateM": 0.01781190633773804,
+      "softContactRange": [
+        {
+          "phase": "fire",
+          "t": 0.112,
+          "device": "PUNCH_SLIDER_X__coral_fixed_batch",
+          "actor": "banana_sculpt",
+          "travelTranslationToSeparateM": 0.0036434173583984376
+        },
+        {
+          "phase": "fire",
+          "t": 0.14,
+          "device": "PUNCH_SLIDER_X__coral_fixed_batch",
+          "actor": "banana_sculpt",
+          "travelTranslationToSeparateM": 0.001411712169647217
+        }
+      ]
+    },
+    {
+      "quality": "banana-economy",
+      "samplesPerPhase": 251,
+      "hardSurfaceCrossings": [],
+      "softContactSamples": 8,
+      "maxTravelTranslationToSeparateM": 0.019235992431640626,
+      "softContactRange": [
+        {
+          "phase": "fire",
+          "t": 0.112,
+          "device": "PUNCH_SLIDER_X__coral_fixed_batch",
+          "actor": "banana_sculpt",
+          "travelTranslationToSeparateM": 0.0050675153732299815
+        },
+        {
+          "phase": "fire",
+          "t": 0.14,
+          "device": "PUNCH_SLIDER_X__coral_fixed_batch",
+          "actor": "banana_sculpt",
+          "travelTranslationToSeparateM": 0.0028361320495605474
+        }
+      ]
+    }
+  ]
+}

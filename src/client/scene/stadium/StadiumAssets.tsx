@@ -2,7 +2,7 @@ import { Suspense, useEffect, useMemo, type ReactNode } from 'react';
 import { useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { Group as GroupObject, InstancedMesh, Matrix4, Mesh, Object3D, type Group } from 'three';
-import { instantiateStadiumModel, STADIUM_ASSET_NAMES, STADIUM_URLS, type StadiumModels, type StadiumAssetName, STADIUM_PLACEMENTS, TALL_DECOR } from './models.js';
+import { instantiateStadiumModel, STADIUM_ASSET_NAMES, STADIUM_URLS, type StadiumModels, type StadiumAssetName, STADIUM_PLACEMENTS, stadiumDecorPosition, TALL_DECOR } from './models.js';
 
 function LoadedAssets({ children, fallback }: { children: (models: StadiumModels) => ReactNode; fallback: ReactNode }) {
   let sources: ReturnType<typeof useGLTF>[];
@@ -30,9 +30,9 @@ export function StadiumModel({ source, position = [0, 0, 0], rotationY = 0, surf
 }
 
 /** Repeated rails/flags share draws by source primitive, not one draw per prop. */
-export function StadiumDecor({ models, showTallDecor }: { models: StadiumModels; showTallDecor: boolean }) {
-  return <>{decorGroups.map(([name, placements]) => TALL_DECOR.has(name) && !showTallDecor ? null
-    : <InstancedDecor key={name} source={models[name]} placements={placements} />)}</>;
+export function StadiumDecor({ models, showTallDecor, infieldOnly=false }: { models: StadiumModels; showTallDecor: boolean; infieldOnly?:boolean }) {
+  return <>{decorGroups.filter(([name])=>!infieldOnly||!['athlete_rail_corner','athlete_rail_straight','athlete_pennant'].includes(name)).map(([name, placements]) => TALL_DECOR.has(name) && !showTallDecor ? null
+    : <InstancedDecor key={name} source={models[name]} placements={placements} mechanismCandidate={infieldOnly}/>)}</>;
 }
 const byAsset = new Map<StadiumAssetName, typeof STADIUM_PLACEMENTS>();
 for (const placement of STADIUM_PLACEMENTS) {
@@ -40,7 +40,7 @@ for (const placement of STADIUM_PLACEMENTS) {
   const placements = byAsset.get(name) ?? []; placements.push(placement); byAsset.set(name, placements);
 }
 const decorGroups = [...byAsset];
-function InstancedDecor({ source, placements }: { source: Group; placements: typeof STADIUM_PLACEMENTS }) {
+function InstancedDecor({ source, placements,mechanismCandidate=false }: { source: Group; placements: typeof STADIUM_PLACEMENTS;mechanismCandidate?:boolean }) {
   const group = useMemo(() => {
     const result = new GroupObject(); result.name = placements[0]!.asset.replace('.glb', '');
     source.updateMatrixWorld(true);
@@ -52,7 +52,7 @@ function InstancedDecor({ source, placements }: { source: Group; placements: typ
       instances.castShadow = instances.receiveShadow = true;
       instances.raycast = () => {};
       placements.forEach((entry, index) => {
-        placement.position.fromArray(entry.position); placement.rotation.set(0, entry.rotationY, 0); placement.updateMatrix();
+        placement.position.fromArray(stadiumDecorPosition(entry,mechanismCandidate)); placement.rotation.set(0, entry.rotationY, 0); placement.updateMatrix();
         matrix.multiplyMatrices(placement.matrix, node.matrixWorld); instances.setMatrixAt(index, matrix);
       });
       instances.instanceMatrix.needsUpdate = true;
@@ -60,7 +60,7 @@ function InstancedDecor({ source, placements }: { source: Group; placements: typ
       result.add(instances);
     });
     return result;
-  }, [source, placements]);
+  }, [source, placements,mechanismCandidate]);
   useEffect(() => () => { group.traverse(node => { if (node instanceof InstancedMesh) node.dispose(); }); }, [group]);
   return <primitive object={group} dispose={null} />;
 }

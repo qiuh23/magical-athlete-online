@@ -1,0 +1,305 @@
+{
+  "method": "Economy-only collapse of tiny grip marks and copper fasteners/clips. Shell/tread/rails/all other geometry unchanged. Bidirectional source/LOD vertex and triangle-centroid surface distances <=2mm. Finite samples, not continuous Hausdorff bound. Full approved GLB remains collision source.",
+  "sourceSha256": "3b5710744f0b33d6460ed68d56bc90c4af4850eee19a757d4db49542cea2b583",
+  "outputSha256": "cb12cd2693f66e3bc572710c08dac690192de274958ea5e3633ca3af6fe149f2",
+  "parts": [
+    {
+      "name": "MOD_25_axle_fastener",
+      "changed": true,
+      "sourceTriangles": 284,
+      "economyTriangles": 284,
+      "maxSampledSurfaceDistanceM": 5.314458206839845e-09,
+      "ratio": 1
+    },
+    {
+      "name": "MOD_25_axle_fastener.001",
+      "changed": true,
+      "sourceTriangles": 284,
+      "economyTriangles": 284,
+      "maxSampledSurfaceDistanceM": 5.314458206839845e-09,
+      "ratio": 1
+    },
+    {
+      "name": "MOD_25_axle_fastener.002",
+      "changed": true,
+      "sourceTriangles": 284,
+      "economyTriangles": 284,
+      "maxSampledSurfaceDistanceM": 5.314458206839845e-09,
+      "ratio": 1
+    },
+    {
+      "name": "MOD_25_axle_fastener.003",
+      "changed": true,
+      "sourceTriangles": 284,
+      "economyTriangles": 284,
+      "maxSampledSurfaceDistanceM": 5.314458206839845e-09,
+      "ratio": 1
+    },
+    {
+      "name": "MOD_25_belly",
+      "changed": false,
+      "sourceTriangles": 188,
+      "economyTriangles": 188,
+      "maxSampledSurfaceDistanceM": 0,
+      "ratio": 1
+    },
+    {
+      "name": "MOD_25_cap",
+      "changed": false,
+      "sourceTriangles": 12,
+      "economyTriangles": 12,
+      "maxSampledSurfaceDistanceM": 0,
+      "ratio": 1
+    },
+    {
+      "name": "MOD_25_corner_strut",
+      "changed": false,
+      "sourceTriangles": 188,
+      "economyTriangles": 188,
+      "maxSampledSurfaceDistanceM": 0,
+      "ratio": 1
+    },
+    {
+      "name": "MOD_25_corner_strut.001",
+      "changed": false,
+      "sourceTriangles": 188,
+      "economyTriangles": 188,
+      "maxSampledSurfaceDistanceM": 0,
+      "ratio": 1
+    },
+    {
+      "name": "MOD_25_corner_strut.002",
+      "changed": false,
+      "sourceTriangles": 188,
+      "economyTriangles": 188,
+      "maxSampledSurfaceDistanceM": 0,
+      "ratio": 1
+    },
+    {
+      "name": "MOD_25_corner_strut.003",
+      "changed": false,
+      "sourceTriangles": 188,
+      "economyTriangles": 188,
+      "maxSampledSurfaceDistanceM": 0,
+      "ratio": 1
+    },
+    {
+      "name": "MOD_25_diagonal_rib",
+      "changed": false,
+      "sourceTriangles": 12,
+      "economyTriangles": 12,
+      "maxSampledSurfaceDistanceM": 0,
+      "ratio": 1
+    },
+    {
+      "name": "MOD_25_diagonal_rib.001",
+      "changed": false,
+      "sourceTriangles": 12,
+      "economyTriangles": 12,
+      "maxSampledSurfaceDistanceM": 0,
+      "ratio": 1
+    },
+    {
+      "name": "MOD_25_grip_tick",
+      "changed": true,
+      "sourceTriangles": 188,
+      "economyTriangles": 38,
+      "maxSampledSurfaceDistanceM": 0.0019869846291840076,
+      "ratio": 0.12
+    },
+    {
+      "name": "MOD_25_grip_tick.001",
+      "changed": true,
+      "sourceTriangles": 188,
+      "economyTriangles": 38,
+      "maxSampledSurfaceDistanceM": 0.0019869846291840076,
+      "ratio": 0.12
+    },
+    {
+      "name": "MOD_25_grip_tick.002",
+      "changed": true,
+      "sourceTriangles": 188,
+      "economyTriangles": 38,
+      "maxSampledSurfaceDistanceM": 0.0019869846291840076,
+      "ratio": 0.12
+    },
+    {
+      "name": "MOD_25_grip_tick.003",
+      "changed": true,
+      "sourceTriangles": 188,
+      "economyTriangles": 38,
+      "maxSampledSurfaceDistanceM": 0.0019869846291840076,
+      "ratio": 0.12
+    },
+    {
+      "name": "MOD_25_grip_tick.004",
+      "changed": true,
+      "sourceTriangles": 188,
+      "economyTriangles": 38,
+      "maxSampledSurfaceDistanceM": 0.0019869846291840076,
+      "ratio": 0.12
+    },
+    {
+      "name": "MOD_25_grip_tick.005",
+      "changed": true,
+      "sourceTriangles": 188,
+      "economyTriangles": 38,
+      "maxSampledSurfaceDistanceM": 0.0019869846291840076,
+      "ratio": 0.12
+    },
+    {
+      "name": "MOD_25_grip_tick.006",
+      "changed": true,
+      "sourceTriangles": 188,
+      "economyTriangles": 38,
+      "maxSampledSurfaceDistanceM": 0.0019869846291840076,
+      "ratio": 0.12
+    },
+    {
+      "name": "MOD_25_grip_tick.007",
+      "changed": true,
+      "sourceTriangles": 188,
+      "economyTriangles": 38,
+      "maxSampledSurfaceDistanceM": 0.0019869846291840076,
+      "ratio": 0.12
+    },
+    {
+      "name": "MOD_25_grip_tick.008",
+      "changed": true,
+      "sourceTriangles": 188,
+      "economyTriangles": 38,
+      "maxSampledSurfaceDistanceM": 0.0019869846291840076,
+      "ratio": 0.12
+    },
+    {
+      "name": "MOD_25_grip_tick.009",
+      "changed": true,
+      "sourceTriangles": 188,
+      "economyTriangles": 38,
+      "maxSampledSurfaceDistanceM": 0.0019869846291840076,
+      "ratio": 0.12
+    },
+    {
+      "name": "MOD_25_grip_tick.010",
+      "changed": true,
+      "sourceTriangles": 188,
+      "economyTriangles": 38,
+      "maxSampledSurfaceDistanceM": 0.0019869846291840076,
+      "ratio": 0.12
+    },
+    {
+      "name": "MOD_25_grip_tick.011",
+      "changed": true,
+      "sourceTriangles": 188,
+      "economyTriangles": 38,
+      "maxSampledSurfaceDistanceM": 0.0019869846291840076,
+      "ratio": 0.12
+    },
+    {
+      "name": "MOD_25_grip_tick.012",
+      "changed": true,
+      "sourceTriangles": 188,
+      "economyTriangles": 38,
+      "maxSampledSurfaceDistanceM": 0.0019869846291840076,
+      "ratio": 0.12
+    },
+    {
+      "name": "MOD_25_grip_tick.013",
+      "changed": true,
+      "sourceTriangles": 188,
+      "economyTriangles": 38,
+      "maxSampledSurfaceDistanceM": 0.0019869846291840076,
+      "ratio": 0.12
+    },
+    {
+      "name": "MOD_25_index_back",
+      "changed": false,
+      "sourceTriangles": 188,
+      "economyTriangles": 188,
+      "maxSampledSurfaceDistanceM": 0,
+      "ratio": 1
+    },
+    {
+      "name": "MOD_25_index_bracket",
+      "changed": false,
+      "sourceTriangles": 188,
+      "economyTriangles": 188,
+      "maxSampledSurfaceDistanceM": 0,
+      "ratio": 1
+    },
+    {
+      "name": "MOD_25_inset_grip",
+      "changed": false,
+      "sourceTriangles": 188,
+      "economyTriangles": 188,
+      "maxSampledSurfaceDistanceM": 0,
+      "ratio": 1
+    },
+    {
+      "name": "MOD_25_joint_clip",
+      "changed": true,
+      "sourceTriangles": 188,
+      "economyTriangles": 188,
+      "maxSampledSurfaceDistanceM": 5.783205736520358e-08,
+      "ratio": 1
+    },
+    {
+      "name": "MOD_25_joint_clip.001",
+      "changed": true,
+      "sourceTriangles": 188,
+      "economyTriangles": 188,
+      "maxSampledSurfaceDistanceM": 5.783205736520358e-08,
+      "ratio": 1
+    },
+    {
+      "name": "MOD_25_joint_clip.002",
+      "changed": true,
+      "sourceTriangles": 188,
+      "economyTriangles": 188,
+      "maxSampledSurfaceDistanceM": 5.783205736520358e-08,
+      "ratio": 1
+    },
+    {
+      "name": "MOD_25_joint_clip.003",
+      "changed": true,
+      "sourceTriangles": 188,
+      "economyTriangles": 188,
+      "maxSampledSurfaceDistanceM": 5.783205736520358e-08,
+      "ratio": 1
+    },
+    {
+      "name": "MOD_25_side_lower_rail",
+      "changed": false,
+      "sourceTriangles": 188,
+      "economyTriangles": 188,
+      "maxSampledSurfaceDistanceM": 0,
+      "ratio": 1
+    },
+    {
+      "name": "MOD_25_side_lower_rail.001",
+      "changed": false,
+      "sourceTriangles": 188,
+      "economyTriangles": 188,
+      "maxSampledSurfaceDistanceM": 0,
+      "ratio": 1
+    },
+    {
+      "name": "MOD_25_side_upper_rail",
+      "changed": false,
+      "sourceTriangles": 188,
+      "economyTriangles": 188,
+      "maxSampledSurfaceDistanceM": 0,
+      "ratio": 1
+    },
+    {
+      "name": "MOD_25_side_upper_rail.001",
+      "changed": false,
+      "sourceTriangles": 188,
+      "economyTriangles": 188,
+      "maxSampledSurfaceDistanceM": 0,
+      "ratio": 1
+    }
+  ],
+  "sourceTriangles": 6812,
+  "economyTriangles": 4712
+}

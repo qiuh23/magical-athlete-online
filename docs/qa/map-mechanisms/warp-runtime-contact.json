@@ -1,0 +1,15 @@
+{
+  "method": "Native full-size bind banana body, .164/base/cap/+5mm, all12 Whirly endpoints, source hinge poses. Tests geometry even while fade could be transparent. Not full roster/containment/continuous proof.",
+  "reports": [
+    {
+      "quality": "banana",
+      "samplesPerEndpoint": 51,
+      "hardSurfaceCrossings": []
+    },
+    {
+      "quality": "banana-economy",
+      "samplesPerEndpoint": 51,
+      "hardSurfaceCrossings": []
+    }
+  ]
+}

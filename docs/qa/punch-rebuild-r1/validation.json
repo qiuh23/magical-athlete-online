@@ -1,0 +1,125 @@
+{
+  "rig": "punch-rebuild-r1",
+  "productionApproved": false,
+  "glbSHA256": "aef0b2f39adcbb29eaa3f449e22804093f5efe02e1d0113ca35500cd75cb25b6",
+  "finitePoseSamples": 81,
+  "newPartUnexpectedSurfacePairs": [],
+  "fixedBondPairs": [
+    [
+      "PUNCH_BOOM_END_SLEEVE",
+      "PUNCH_R1_INNER_TUBE"
+    ],
+    [
+      "PUNCH_BOOM_HUB",
+      "PUNCH_R1_OUTER_TUBE"
+    ],
+    [
+      "PUNCH_R1_INNER_STOP_RING",
+      "PUNCH_R1_INNER_TUBE"
+    ],
+    [
+      "PUNCH_R1_MIDDLE_STOP_RING",
+      "PUNCH_R1_MIDDLE_TUBE"
+    ],
+    [
+      "PUNCH_R1_OUTER_REAR_STOP",
+      "PUNCH_R1_OUTER_TUBE"
+    ],
+    [
+      "PUNCH_R1_OUTER_FRONT_STOP",
+      "PUNCH_R1_OUTER_TUBE"
+    ],
+    [
+      "PUNCH_R1_MIDDLE_REAR_STOP",
+      "PUNCH_R1_MIDDLE_TUBE"
+    ],
+    [
+      "PUNCH_R1_MIDDLE_FRONT_STOP",
+      "PUNCH_R1_MIDDLE_TUBE"
+    ]
+  ],
+  "nominalStopFaceContactPairs": [
+    [
+      "PUNCH_R1_INNER_STOP_RING",
+      "PUNCH_R1_MIDDLE_REAR_STOP"
+    ],
+    [
+      "PUNCH_R1_INNER_STOP_RING",
+      "PUNCH_R1_MIDDLE_FRONT_STOP"
+    ],
+    [
+      "PUNCH_R1_MIDDLE_STOP_RING",
+      "PUNCH_R1_OUTER_REAR_STOP"
+    ],
+    [
+      "PUNCH_R1_MIDDLE_STOP_RING",
+      "PUNCH_R1_OUTER_FRONT_STOP"
+    ]
+  ],
+  "inheritedAppearanceContacts": "Retained old same-body attachments and two morph-spring endpoint contacts are listed raw, not called zero intersections. No old collision certificate is relabeled.",
+  "newAuthoredSolids": {
+    "PUNCH_R1_INNER_STOP_RING": {
+      "nonManifoldEdges": 0,
+      "volume": 5.494372007029827e-05
+    },
+    "PUNCH_R1_INNER_TUBE": {
+      "nonManifoldEdges": 0,
+      "volume": 0.0008125736268299549
+    },
+    "PUNCH_R1_MIDDLE_FRONT_STOP": {
+      "nonManifoldEdges": 0,
+      "volume": 7.661933077277806e-05
+    },
+    "PUNCH_R1_MIDDLE_REAR_STOP": {
+      "nonManifoldEdges": 0,
+      "volume": 5.069954364570512e-05
+    },
+    "PUNCH_R1_MIDDLE_STOP_RING": {
+      "nonManifoldEdges": 0,
+      "volume": 6.94777170650146e-05
+    },
+    "PUNCH_R1_MIDDLE_TUBE": {
+      "nonManifoldEdges": 0,
+      "volume": 0.0020786272883670932
+    },
+    "PUNCH_R1_OUTER_FRONT_STOP": {
+      "nonManifoldEdges": 0,
+      "volume": 9.195316849535144e-05
+    },
+    "PUNCH_R1_OUTER_REAR_STOP": {
+      "nonManifoldEdges": 0,
+      "volume": 6.0753232591011303e-05
+    },
+    "PUNCH_R1_OUTER_TUBE": {
+      "nonManifoldEdges": 0,
+      "volume": 0.004099242691703453
+    }
+  },
+  "nestedFit": {
+    "perStageTravelM": [
+      0,
+      0.15
+    ],
+    "bodyMinimumCrossSectionGapM": 0.013,
+    "guideMinimumGapM": 0.003,
+    "minimumAxialOverlapM": 0.09,
+    "scope": "Exact rectangular nominal cross-sections; rounded edges remove material. Fixed bond regions intentionally join parts. Stops share end planes only at domain endpoints."
+  },
+  "negativeOverrun": {
+    "totalReachM": 0.32,
+    "nominalAxialPenetrationM": 0.01,
+    "triangleContactPairs": 53,
+    "rejectedByDriver": true
+  },
+  "coldRoundtrip": {
+    "poses": 17,
+    "maximumBidirectionalVertexErrorM": 1.6858739115832577e-07,
+    "triangleCount": 9612,
+    "errors": []
+  },
+  "limits": [
+    "Surface sampling is not a continuous proof or full merged-solid containment audit",
+    "No actor, bystander, map, ready/interrupt, browser or mobile performance certification",
+    "No production device/event path is switched to this model"
+  ]
+}

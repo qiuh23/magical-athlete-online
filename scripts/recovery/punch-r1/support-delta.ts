@@ -1,0 +1,11 @@
+/** Reverse combination check: the final actual foundation's conservative box
+ * is disjoint from every relevant already-sampled non-Punch motion envelope.
+ * Disjoint boxes prove exclusion only, never overlap-based contact approval. */
+import{readFileSync,writeFileSync}from'node:fs';import{createHash}from'node:crypto';import{Box3,Matrix4,Vector3}from'three';
+const root=process.env.R1_SCENE_ROOT??'.',read=(p:string)=>JSON.parse(readFileSync(p,'utf8')),sha=(p:string)=>createHash('sha256').update(readFileSync(p)).digest('hex');
+const file=`${root}/src/client/scene/environment/scene-mechanisms-manifest.json`,source=read(file),mounts=read('docs/qa/punch-r1-contact/mount-envelope.json'),box=(p:number[][])=>new Box3(new Vector3(...p[0]),new Vector3(...p[1])),rows=[];
+for(const r of mounts.result){const own=box(r.sampledMotionBounds).union(box(r.foundationBounds)),rotation=new Matrix4().makeRotationY(r.compact?-Math.PI/2:0);
+ const others=[...source.approved.filter((p:any)=>p.anchor.startsWith('wild:')).map((p:any)=>({key:p.anchor,envelope:box(p.envelope).applyMatrix4(rotation)})),...source.fixtures.filter((p:any)=>p.key.startsWith('wild/')&&p.key.includes(r.compact?'/compact/':'/desktop/')).map((p:any)=>({key:p.key,envelope:box(p.envelope)}))];
+ for(const other of others){const disjoint=!own.intersectsBox(other.envelope),xzSeparated=own.max.x<other.envelope.min.x||own.min.x>other.envelope.max.x||own.max.z<other.envelope.min.z||own.min.z>other.envelope.max.z;rows.push({node:r.node,compact:r.compact,other:other.key,disjoint,xzSeparated});if(!disjoint)throw Error('Unverified non-Punch envelope overlap: '+other.key);}
+}
+writeFileSync('docs/qa/punch-r1-contact/support-delta.json',JSON.stringify({scope:'Final fixed center support plus all 12 r1 motion envelopes versus actual frozen non-Punch hardware and actor motion envelopes. XZ/3D disjoint exclusion, not narrow-phase overlap approval. Original non-Punch reports remain unchanged historical inputs.',inputs:{'src/client/scene/environment/scene-mechanisms-manifest.json':sha(file),'src/client/scene/mechanisms/punch-r1/support.ts':sha('src/client/scene/mechanisms/punch-r1/support.ts'),'docs/qa/punch-r1-contact/mount-envelope.json':sha('docs/qa/punch-r1-contact/mount-envelope.json')},rows},null,2)+'\n');console.log(rows.length+' reverse-envelope exclusions');

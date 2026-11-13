@@ -1,0 +1,204 @@
+{
+  "pass": true,
+  "scope": "Three GLTFLoader parse plus structural/geometry/material checks only, not browser/WebGL or FPS validation",
+  "validator_sha256": "736b51f5b0b1b543e3659ee2062c48c5f3c50a0a0ab9860f646ca9bc51d0ad4c",
+  "assets": [
+    {
+      "name": "base",
+      "pass": true,
+      "sha256": "1104dfa5c5dbc4181448e43d84559f24bbb2b92334cf2ae3cd64e93466389309",
+      "triangles": 200,
+      "primitives": 2,
+      "material_count": 2,
+      "bounds_y_up": [
+        [
+          -0.3499999940395355,
+          0,
+          -0.32499998807907104
+        ],
+        [
+          0.3499999940395355,
+          0.20000000298023224,
+          0.32499998807907104
+        ]
+      ],
+      "max_bounds_error": 0,
+      "max_unit_normal_error": 6.717942602207927e-8,
+      "min_triangle_area": 0.00012470764740817898,
+      "front_minus_z_area": null,
+      "external_resources": 0,
+      "gltf_lights": 0,
+      "opaque": true
+    },
+    {
+      "name": "pole",
+      "pass": true,
+      "sha256": "cbd7f2ee910e5a62ecba3bb229d5585082ca154a6a0b36d44e9ce01cffb46bcd",
+      "triangles": 28,
+      "primitives": 1,
+      "material_count": 1,
+      "bounds_y_up": [
+        [
+          -0.057500001043081284,
+          0,
+          -0.057500001043081284
+        ],
+        [
+          0.057500001043081284,
+          1,
+          0.057500001043081284
+        ]
+      ],
+      "max_bounds_error": 0,
+      "max_unit_normal_error": 3.722549102302963e-8,
+      "min_triangle_area": 0.0006847467974965549,
+      "front_minus_z_area": null,
+      "external_resources": 0,
+      "gltf_lights": 0,
+      "opaque": true
+    },
+    {
+      "name": "yoke",
+      "pass": true,
+      "sha256": "04b130d8b4d2e12c14974b0485cb025eb364bbfcf2ba88f255db8c6eafad691e",
+      "triangles": 252,
+      "primitives": 1,
+      "material_count": 1,
+      "bounds_y_up": [
+        [
+          -0.38999998569488525,
+          -0.10499999672174454,
+          -0.10499998927116394
+        ],
+        [
+          0.38999998569488525,
+          0.1850000023841858,
+          0.1599999964237213
+        ]
+      ],
+      "max_bounds_error": 0,
+      "max_unit_normal_error": 6.717942602207927e-8,
+      "min_triangle_area": 0.000031176937661617256,
+      "front_minus_z_area": null,
+      "external_resources": 0,
+      "gltf_lights": 0,
+      "opaque": true
+    },
+    {
+      "name": "housing",
+      "pass": true,
+      "sha256": "0b4d0ccb58bc8a7fb4dec5efd4d531cf6dfd80945b5f71163b3cb4fa8fbeaf3a",
+      "triangles": 488,
+      "primitives": 1,
+      "material_count": 1,
+      "bounds_y_up": [
+        [
+          -0.6200000047683716,
+          -0.040000006556510925,
+          -0.1599999964237213
+        ],
+        [
+          0.6200000047683716,
+          0.3199999928474426,
+          0.06000000238418579
+        ]
+      ],
+      "max_bounds_error": 0,
+      "max_unit_normal_error": 6.717942602207927e-8,
+      "min_triangle_area": 0.000013856238939752831,
+      "front_minus_z_area": null,
+      "external_resources": 0,
+      "gltf_lights": 0,
+      "opaque": true
+    },
+    {
+      "name": "lenses",
+      "pass": true,
+      "sha256": "28cc5396e6e9c9f2b42a05d1a0976131654f92b2b426e5381963c3d6dd5efb32",
+      "triangles": 24,
+      "primitives": 1,
+      "material_count": 1,
+      "bounds_y_up": [
+        [
+          -0.5850000381469727,
+          -0.004999995231628418,
+          -0.14500001072883606
+        ],
+        [
+          0.5850000381469727,
+          0.2849999964237213,
+          -0.12700000405311584
+        ]
+      ],
+      "max_bounds_error": 0,
+      "max_unit_normal_error": 0,
+      "min_triangle_area": 0.002610000892877551,
+      "front_minus_z_area": 0.29580000324249234,
+      "external_resources": 0,
+      "gltf_lights": 0,
+      "opaque": true
+    }
+  ],
+  "head_tilt_contract_checks": [
+    {
+      "degrees": 0,
+      "pivot_at_shaft_tip": [
+        0,
+        0,
+        0
+      ],
+      "front_normal": [
+        0,
+        0,
+        -1
+      ],
+      "pass": true
+    },
+    {
+      "degrees": -15,
+      "pivot_at_shaft_tip": [
+        0,
+        0,
+        0
+      ],
+      "front_normal": [
+        0,
+        -0.25881904510252074,
+        -0.9659258262890683
+      ],
+      "pass": true
+    },
+    {
+      "degrees": -35,
+      "pivot_at_shaft_tip": [
+        0,
+        0,
+        0
+      ],
+      "front_normal": [
+        0,
+        -0.573576436351046,
+        -0.8191520442889918
+      ],
+      "pass": true
+    },
+    {
+      "degrees": -60,
+      "pivot_at_shaft_tip": [
+        0,
+        0,
+        0
+      ],
+      "front_normal": [
+        0,
+        -0.8660254037844386,
+        -0.5000000000000001
+      ],
+      "pass": true
+    }
+  ],
+  "totals": {
+    "triangles": 992,
+    "bytes": 57888
+  }
+}

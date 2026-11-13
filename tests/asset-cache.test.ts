@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash, webcrypto } from 'node:crypto';
-import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { runInNewContext } from 'node:vm';
@@ -227,4 +227,22 @@ test('decoded responses tolerate case-insensitive Accept-Encoding Vary without s
   assert.equal(cached!.headers.get('Content-Encoding'), null);
   assert.equal(cached!.headers.get('Content-Length'), null);
   assert.equal(instance.cache.puts, 1);
+});
+
+
+test('published mechanism models are included in content hashes and the lazy scene installs the resolver', () => {
+  const root = 'public/models/mechanisms';
+  const models = readdirSync(root, { recursive: true }).map(String).filter(path => path.endsWith('.glb')).sort();
+  assert.ok(models.length > 0, 'the published mechanism assets must be present');
+  const { urls, files } = publicAssets('public');
+  for (const path of models) {
+    const bytes = readFileSync(join(root, path));
+    const expected = '/game-assets/' + createHash('sha256').update(bytes).digest('hex') + '.glb';
+    const source = '/models/mechanisms/' + path.split('\\').join('/');
+    assert.equal(urls[source], expected, source);
+    assert.deepEqual(files.get(expected.slice(1)), bytes, source);
+    assert.equal(resolveAssetUrl(source + '?v=legacy', urls), expected);
+  }
+  assert.match(readFileSync('src/client/scene/Board3D.tsx', 'utf8'), /^import '\.\/asset-loading\.js';/);
+  assert.match(readFileSync('.github/workflows/ci.yml', 'utf8'), /tests\/asset-cache\.test\.ts/);
 });

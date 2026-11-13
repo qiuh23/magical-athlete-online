@@ -1,0 +1,86 @@
+{
+  "scope": "Isolated Blender asset images only. Human-readable visual observations, not gameplay, browser, FPS or prior-certificate acceptance.",
+  "source_vs_lod2": {
+    "inspected": [
+      "elm",
+      "maple",
+      "sapling"
+    ],
+    "observations": "Original branch structure and palette remain recognizable. The new 0.30 LOD2 has visibly simpler, more triangular leaves. No accidental transparency or missing entire crown/branch was observed. Color and opacity assertions are separately validated numerically."
+  },
+  "gates": {
+    "start_gate": {
+      "source_text_present": false,
+      "observation": "Both faces show checker trim and geometric blocks, not START lettering.",
+      "main_panel_source_object": "athlete_start_gate__ink.001",
+      "panel_bounds_local_y_up": [
+        [
+          -3.675,
+          1.91,
+          -0.125
+        ],
+        [
+          3.675,
+          2.35,
+          0.125
+        ]
+      ]
+    },
+    "finish_gate": {
+      "source_text_present": false,
+      "observation": "Both faces show three cream vertical bars and checker trim, not FINISH lettering. Original decorations retained.",
+      "main_panel_source_object": "athlete_finish_gate__coral.001",
+      "panel_bounds_local_y_up": [
+        [
+          -1.275,
+          1.94,
+          -0.115
+        ],
+        [
+          1.275,
+          2.4,
+          0.115
+        ]
+      ]
+    }
+  },
+  "renders": [
+    {
+      "name": "finish_gate_front.png",
+      "sha256": "f48c3611f348462951604b550d3b6f596c1480875db09bdfd926ade56e299fe4",
+      "bytes": 718165
+    },
+    {
+      "name": "finish_gate_rear.png",
+      "sha256": "be97002bff9e150dfae78a2778cff2ee2fd90e8f8002beaad3aa1c6193de4c20",
+      "bytes": 708885
+    },
+    {
+      "name": "start_gate_front.png",
+      "sha256": "ae14585941e71f87d40f3f8f483d1bfed55c78b0dc92f4810d2c17fb6e641fee",
+      "bytes": 705069
+    },
+    {
+      "name": "start_gate_rear.png",
+      "sha256": "27e4dec573d53d7fc756e05f7c469271c07735bb7364c9c0953988be4fff1db1",
+      "bytes": 692571
+    },
+    {
+      "name": "tree_elm_source_left_lod2_right.png",
+      "sha256": "310fad9aafdc46bda54609f356bc6c71a10d59615d73eed0b177580a930d1b6d",
+      "bytes": 927758
+    },
+    {
+      "name": "tree_maple_source_left_lod2_right.png",
+      "sha256": "11d385d68c28a4be840a70eb757aabbcd77c427ae22eedc95a061df4f386c87d",
+      "bytes": 917544
+    },
+    {
+      "name": "tree_sapling_source_left_lod2_right.png",
+      "sha256": "8693826cb1e2197ba107177de88bb7bd07e65999ee222a3c1183c999cd1f2e3c",
+      "bytes": 839389
+    }
+  ],
+  "pass_for_asset_inspection": true,
+  "runtime_validation": "Not performed by this asset exporter; requires final integrated runtime."
+}

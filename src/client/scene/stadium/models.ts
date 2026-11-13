@@ -51,3 +51,11 @@ export function instantiateStadiumModel(source: Group, surfaceColor?: string, ga
   });
   return { object, owned, dispose: () => owned.forEach(material => material.dispose()) };
 }
+
+/** Candidate-only foundation clearance. Spectators move with their bleachers;
+ * default stadium art and every other placement remain unchanged. */
+export function stadiumDecorPosition(placement:typeof STADIUM_PLACEMENTS[number],mechanismCandidate=false):[number,number,number]{
+ const p=[...placement.position] as [number,number,number];
+ if(mechanismCandidate&&['athlete_bleachers.glb','athlete_spectators_strip.glb'].includes(placement.asset))p[2]+=.25;
+ return p;
+}

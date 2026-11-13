@@ -1,0 +1,48 @@
+{
+  "base": "d6ced096dba2695cb1adbfdac53e87c665e19e03",
+  "checks": {
+    "types": "main and Worker passed",
+    "full_tests": {
+      "pass": 1576,
+      "fail": 0,
+      "skip": 0
+    },
+    "focused_tests": {
+      "pass": 22,
+      "fail": 0,
+      "skip": 0
+    },
+    "builds": "CN/server and global/browser passed",
+    "content_hash_outputs": 54,
+    "asset_parses": "5 Three and independent Blender passed",
+    "offline_views": 2,
+    "pixel_review": "two night views inspected; not night-game readability acceptance",
+    "webgl_and_mobile_3d": "not verified; user accepted current geometry/code/Blender checks for this iteration"
+  },
+  "logs": [
+    {
+      "file": "typecheck.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "build.log",
+      "sha256": "f1c280ed383c8cf45feecf57cbec10ff1bdde8183b34bfce2d8cbea09019cd84"
+    },
+    {
+      "file": "full-tests.log",
+      "sha256": "a5c8dd6a7808e0efcfe0402d85223724cc83cb3b1875693e33c6ccba4577f742"
+    },
+    {
+      "file": "focused-tests.log",
+      "sha256": "9fd866a0549e85efd99ec92c6fd4421ca1d4190a8e74fb1a2c69b726fb3d22ad"
+    },
+    {
+      "file": "runtime-render.log",
+      "sha256": "7202477d6b7fdc223cc908b90ec1f35229125db7f7796022b3e06c845a812732"
+    },
+    {
+      "file": "three-validation-final.log",
+      "sha256": "51cac16fdef4d1823b881a67dd819200394745ddb6bdfd0ada5c4a9d9fb821b2"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "new_fixed_parts": [
+    "PUNCH_ROOT__teal_fixed_batch translated outwardY\u2212.60m",
+    "PUNCH_FIXED_OUTBOARD_BRACKET"
+  ],
+  "working_joint_changes": null,
+  "moving_z_lower_bound": 0.3100000321865082,
+  "new_fixed_z_upper_bound": 0.2600000500679016,
+  "axis_separation_m": 0.04999998211860657,
+  "why_bound_covers_full_path": "All tested moving channels are only Z yaw and local X stroke. They cannot change each mesh vertex Z; spring morph changes X only. The .05m separation is invariant over those channel ranges. Unrelated tilt or scale is not covered.",
+  "bracket_column_triangle_contact_pairs": 59,
+  "bracket_bearing_triangle_contact_pairs": 106,
+  "intentional_fixed_interfaces": "Only the rigid new bracket is seated into the fixed column top and fixed bearing lower seat. No exemptions against a pawn, track or moving component.",
+  "source_original_self_collision": "Original source joint limits/path retained exactly; original prior self-interference report remains relevant to unchanged parts.",
+  "passed": true
+}

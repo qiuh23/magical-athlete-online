@@ -1,3 +1,4 @@
+import { RebuiltScenery } from './environment/RebuiltScenery.js';
 import { ExpansionScenery } from './ExpansionScenery.js';
 import { expansionTileSize } from './expansion-layout.js';
 import { BridgesRoads, BridgeRouteBadges } from './BridgesStructure.js';
@@ -53,10 +54,10 @@ function TopologyTile({ track, id, triggered }: { track: TrackId; id: number; tr
 }
 
 /** Independent courses retain every source fork and bridge; node IDs never draw the edges. */
-export function TopologyStadium({ track, compact, triggered, lowQuality }: { track: TrackId; compact: boolean; triggered: Set<number>; lowQuality:boolean }) {
+export function TopologyStadium({ track, compact, triggered, lowQuality, environmentReady=false }: { track: TrackId; compact: boolean; triggered: Set<number>; lowQuality:boolean; environmentReady?:boolean }) {
   const definition = TRACKS[track];
   return <group rotation={[0, compact ? -Math.PI / 2 : 0, 0]} name={`topology-stadium-${track}`}>
-    <ExpansionScenery track={track} lowQuality={lowQuality}/>
+    {environmentReady ? <RebuiltScenery track={track} lowQuality={lowQuality} mode="route"/> : <ExpansionScenery track={track} lowQuality={lowQuality}/>}
     {track === 'bridges' && <><BridgesRoads/><BridgeRouteBadges/></>}
     {trackNodeIds(track).sort((a, b) => (definition.nodes?.[a]?.y ?? 0) - (definition.nodes?.[b]?.y ?? 0)).map(id => <TopologyTile key={id} {...{ track, id }} triggered={triggered.has(id)} />)}
     <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -.925, 0]} receiveShadow><planeGeometry args={[240, 240]} /><meshStandardMaterial color="#e3dcca" roughness={1} /></mesh>

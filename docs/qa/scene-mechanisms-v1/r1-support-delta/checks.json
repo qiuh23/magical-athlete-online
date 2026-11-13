@@ -1,0 +1,23 @@
+{
+  "scope": "Additive parked-only layer and explicit r1 fixed-support delta over 0a72. Runtime wiring belongs to release integration.",
+  "tests": {
+    "command": "node --import tsx --test tests/*.test.ts tests/host.test.mjs",
+    "passed": 1593,
+    "failed": 0
+  },
+  "types": {
+    "primary": "passed",
+    "worker": "passed"
+  },
+  "build": "Dual build-sites outputs passed; existing >500kB chunk warnings remain. Parked layer is not yet wired into Board in this checkpoint.",
+  "geometry": {
+    "parked": "12/13 actual static candidates approved, Wild16 unsupported; no physical-action authorization.",
+    "r1Delta": "4 mount records verified, 2 new-column exact joint checks, 16 conservative original-envelope/standing-actor exclusions; unchanged source prefix and old audit preserved."
+  },
+  "unrun": [
+    "Browser/device rendering",
+    "Continuous-time collision proof",
+    "Full-roster contact grid"
+  ],
+  "publication": "None"
+}

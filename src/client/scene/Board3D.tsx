@@ -1,5 +1,9 @@
 import './asset-loading.js';
-import { Component, Suspense, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import { Suspense, useEffect, useMemo, useCallback, useRef, useState } from 'react';
+import {SceneMechanismController} from './environment/scene-mechanisms.js';
+import {clearRevalidatedMechanismCache,RevalidatedFoundations,RevalidatedMechanismLayer} from './environment/RevalidatedMechanismLayer.js';
+import {ParkedFallbackLayer,clearParkedFallbackCache} from './environment/parked-fallbacks/ParkedFallbackLayer.js';
+import {RevalidatedTripLayer} from './environment/RevalidatedTripLayer.js';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 import type { Racer, RoomView } from '../../shared/types.js';
@@ -14,14 +18,40 @@ import { DioramaStadium } from './DioramaStadium.js';
 import { WhirlyStadium } from './WhirlyStadium.js';
 import { CameraRig } from './CameraRig.js';
 import { AdaptiveQuality, PawnContact } from './StudioLighting.js';
-import { StudioLightingV7, type AthleteLightMode } from './StudioLightingV7.js';
+import type {SceneAppearance} from '../scene-appearance.js';
+import {SCENE_LIGHT_CYCLE_MS,type RoomLightingClock} from '../scene-lighting-clock.js';
 import { RaceEffects } from './RaceEffects.js';
-import { boardPoint, TILE, trackConnections, trackNodeIds, trackSvgLayout, trackMovementDistance, routeChoice } from './math.js';
+import { boardPoint, boardBounds, TILE, trackConnections, trackNodeIds, trackSvgLayout, trackMovementDistance, routeChoice } from './math.js';
 import { RouteChoices, RouteButtons } from './RouteChoices.js';
 import { TwistPieces } from './TwistPieces.js';
 import { DiceSpotlight } from './DiceSpotlight.js';
+import { SceneBoundary } from './SceneBoundary.js';
 import { pawnRoute, strideLift, strideProgress } from './pawn-motion.js';
 import { pawnFallPose } from './pawn-fall.js';
+import {warpResidentLayout,warpTransitionMode,warpTransitionOpacity,warpNeedsOpacity} from './mechanisms/warp-layout.js';
+import { MechanismLayer, clearMechanismCache } from './mechanisms/MechanismLayer.js';
+import { CertifiedTripController,needsCertifiedBind,certifiedTripMount } from './mechanisms/certified-trip.js';
+import {GuardedCertifiedTripController,GuardedPunchController,GuardedTripController} from './mechanisms/runtime-entry-guards.js';
+import { CertifiedTripLayer } from './mechanisms/CertifiedTripLayer.js';
+import {captureActorGeometry,actorGeometryFingerprint} from './mechanisms/actor-snapshot.js';
+import { ApprovedEnvironment, clearEnvironmentCache } from './environment/ApprovedEnvironment.js';
+import { rebuiltContactSceneReady, sceneAssetState, type SceneAssetState } from './environment/scene-readiness.js';
+import { environmentEnabled, environmentAllowsPhysicalContact } from './environment/layout.js';
+import { VenueLighting, clearFloodlightCache } from './environment/VenueLighting.js';
+import { EnvironmentEventCues } from './environment/EnvironmentEventCues.js';
+import { RebuiltMechanismCourse } from './environment/RebuiltMechanismCourse.js';
+import { MechanismCourse } from './mechanisms/MechanismCourse.js';
+import { mechanismsEnabled, activeMechanismLayout } from './mechanisms/layout.js';
+import { FocusNodeProjector } from './mechanisms/FocusNodeLabels.js';
+import { PawnOpacity,warpOpacity } from './mechanisms/pawn-opacity.js';
+import { mechanismScope } from './mechanisms/scope.js';
+import { TripController,residentReflow,tripEntryProfile } from './mechanisms/trip-profile.js';
+import { R1PunchController, needsR1Bind, type R1Context } from './mechanisms/punch-r1/controller.js';
+import { R1_EVIDENCE, R1_SCENE_HASH } from './mechanisms/punch-r1/evidence.js';
+import { R1PunchLayer, clearR1Cache } from './mechanisms/punch-r1/R1PunchLayer.js';
+import { r1ActorPosition } from './mechanisms/punch-r1/motion.js';
+import { PunchController } from './mechanisms/punch-profile.js';
+import { pawnFallPhase, eventScoreDelta } from './mechanisms/events.js';
 
 import { actionFocus, choiceFocus, idleFollowFocus, introFocus, ownFocus, pawnOccupancy, pawnWorldPoint, planCameraShot, type CameraFocus, type CameraMode, type CameraShot } from './camera.js';
 import { wallPresentationClock, type PresentationClock } from '../presentation-clock.js';
@@ -39,8 +69,10 @@ export interface ScenePlayback {
 interface Props extends ScenePlayback {
   room: RoomView;
   lowQuality: boolean;
-  /** Deterministic visual preset. No local clock or multiplayer protocol change. */
-  appearanceMode?: AthleteLightMode;
+  /** Local room-time auto cycle or fixed preset. No multiplayer protocol change. */
+  appearanceMode?: SceneAppearance;
+  lightingClock:RoomLightingClock;
+  lightingRunning:boolean;
   reducedMotion: boolean;
   muted: boolean;
   onDetail: (id: string, racerId?: string) => void;
@@ -58,19 +90,63 @@ const ease = (t: number) => 1 - Math.pow(1 - clamp(t, 0, 1), 3);
 const progress = (start: number, duration: number, clock: PresentationClock) => clamp((clock.now() - start) / Math.max(1, duration), 0, 1);
 const occupancy = pawnOccupancy;
 
-class SceneBoundary extends Component<{ children: ReactNode; resetKey: number; retry: () => void }, { failed: boolean }> {
-  state = { failed: false };
-  static getDerivedStateFromError() { return { failed: true }; }
-  componentDidUpdate(previous: { resetKey: number }) { if (previous.resetKey !== this.props.resetKey && this.state.failed) this.setState({ failed: false }); }
-  render() { return this.state.failed ? <div className="scene-fallback" role="status"><strong>3D 场景暂时无法显示</strong><p>选手位置与操作仍可在下方查看。</p><button onClick={this.props.retry}>重新载入 3D</button></div> : this.props.children; }
-}
 
-export function Board3D({ clock = wallPresentationClock, paused = false, room, racers, beat, queue, startedAt, durationMs, lowQuality, reducedMotion, muted, onDetail, onSkipIntro, onIntroReady, onDiceSettled, introReady = true, appearanceMode = 'day', onChooseRoute, choiceBusy = false }: Props) {
+export function Board3D({ clock = wallPresentationClock, paused = false, room, racers, beat, queue, startedAt, durationMs, lowQuality, reducedMotion, muted, onDetail, onSkipIntro, onIntroReady, onDiceSettled, introReady = true, appearanceMode = 'auto', lightingClock, lightingRunning, onChooseRoute, choiceBusy = false }: Props) {
   const [automaticLow, setAutomaticLow] = useState(false);
-  lowQuality = lowQuality || automaticLow;
-  const spectator = room.role === 'spectator';
-  const [compact, setCompact] = useState(() => matchMedia('(max-width: 650px)').matches);
   const [resetKey, setResetKey] = useState(0);
+  const [sceneFailed, setSceneFailed] = useState(false);
+  const retryScene = () => { setSceneFailed(false); setResetKey(n => n + 1); };
+  const environmentCandidate = environmentEnabled();
+  const [environmentRetry, setEnvironmentRetry] = useState(0);
+  const environmentKey = `${room.track}:${environmentRetry}:${resetKey}`;
+  const [lightRetry,setLightRetry]=useState(0);
+  const [lightsFailed,setLightsFailed]=useState(false);
+  useEffect(()=>setLightsFailed(false),[room.track]);
+  const lightFailure=useCallback(()=>setLightsFailed(true),[]);
+  const [environmentStatus, setEnvironmentStatus] = useState<{key:string;state:SceneAssetState}>({key:'', state:'loading'});
+  const environmentLoad = environmentStatus.key === environmentKey ? environmentStatus.state : 'loading';
+  const environmentReady = environmentCandidate && environmentLoad === 'ready';
+  const environmentOnReady = useCallback(() => setEnvironmentStatus({key:environmentKey,state:'ready'}), [environmentKey]);
+  const environmentOnFailure = useCallback(() => setEnvironmentStatus({key:environmentKey,state:'failed'}), [environmentKey]);
+  const [mechanismRetry,setMechanismRetry]=useState(0);
+  const [r1Failure,setR1Failure]=useState('');
+  const [padStatus,setPadStatus]=useState<{key:string;state:SceneAssetState}>({key:'',state:'loading'});
+  const loadKey=`${room.track}:${mechanismRetry}`;
+  const [certifiedFailure,setCertifiedFailure]=useState('');
+  const certifiedFailed=certifiedFailure===loadKey;
+  const [mechanismStatus,setMechanismStatus]=useState<{key:string;state:'loading'|'ready'|'failed'}>({key:'',state:'loading'});
+  const mechanismLoad=mechanismStatus.key===loadKey?mechanismStatus.state:'loading';
+  const setMechanismLoad=useCallback((state:'loading'|'ready'|'failed')=>setMechanismStatus(previous=>previous.key===loadKey&&(previous.state===state||previous.state==='failed'&&state==='ready')?previous:{key:loadKey,state}),[loadKey]);
+  const mechanismOnReady=useCallback(()=>setMechanismLoad('ready'),[setMechanismLoad]);
+  lowQuality = lowQuality || automaticLow;
+  const padKey=`${room.track}:${lowQuality}:${mechanismRetry}:${resetKey}`;
+  const padScope=useRef(padKey);padScope.current=padKey;
+  const padLoad=sceneAssetState(padKey,padStatus),padFailed=padLoad==='failed';
+  const padOnReady=useCallback((ready:boolean)=>{if(padScope.current===padKey)setPadStatus({key:padKey,state:ready?'ready':'loading'});},[padKey]);
+  const padOnFailure=useCallback(()=>{if(padScope.current===padKey)setPadStatus({key:padKey,state:'failed'});},[padKey]);
+  const spectator = room.role === 'spectator';
+  const mechanismCandidate = mechanismsEnabled() && activeMechanismLayout(room.track).lift > 0;
+  const [compact, setCompact] = useState(() => matchMedia('(max-width: 650px)').matches);
+  const physicalContacts = mechanismCandidate && environmentAllowsPhysicalContact(environmentCandidate);
+  const sculptureReaders=useRef(new Map<string,()=>boolean>());
+  const contactReady=useCallback(()=>sculptureReaders.current.get(`${beat?.motions[0]?.racerId}:${lowQuality}`)?.()===true,[beat?.motions[0]?.racerId,lowQuality]);
+  const sceneMechanisms=rebuiltContactSceneReady({mechanisms:mechanismCandidate,environmentRequested:environmentCandidate,environment:environmentLoad,pads:padLoad,dependenciesFailed:mechanismLoad==='failed'||certifiedFailed});
+  const contactScope=mechanismScope(room)+(environmentCandidate?':scene-mechanisms-v1':'');
+  const punch = useMemo(()=>new GuardedPunchController(),[contactScope,mechanismRetry,resetKey]);
+  const certified=useMemo(()=>{const controller=environmentCandidate&&mechanismCandidate?new SceneMechanismController(contactScope):new GuardedCertifiedTripController(contactScope);try{if(!environmentCandidate)controller.restore(sessionStorage.getItem(`mechanism-down:${contactScope}`)??'');}catch{}return controller;},[contactScope,mechanismRetry,resetKey]);
+  const r1Scope=`${contactScope}:r1:${environmentRetry}:${mechanismRetry}:${resetKey}`;
+  const r1=useMemo(()=>new R1PunchController(r1Scope,R1_EVIDENCE),[r1Scope]);
+  const r1Failed=r1Failure===r1Scope;
+  const r1OnFailure=useCallback(()=>setR1Failure(r1Scope),[r1Scope]);
+  const r1Enabled=environmentCandidate&&mechanismCandidate;
+  const r1Input:R1Context={track:room.track,compact,lowQuality,beat,racers,now:clock.now(),start:startedAt,duration:durationMs,available:sceneMechanisms&&mechanismLoad==='ready'&&certified.ready&&!r1Failed,sceneHash:R1_SCENE_HASH,reducedMotion,paused};
+  r1.enter(r1Input);
+  certified.enter(room.track,compact,beat,racers,clock.now(),startedAt,durationMs,(physicalContacts&&mechanismLoad==='ready'||sceneMechanisms)&&(!paused||!!certified.active&&certified.active.key===beat?.key),lowQuality,reducedMotion);
+  useEffect(()=>{try{sessionStorage.setItem(`mechanism-down:${contactScope}`,certified.dump());}catch{}},[certified,contactScope,beat?.key]);
+  const trip=useMemo(()=>new GuardedTripController(),[contactScope,mechanismRetry,resetKey]);
+  const tripReady=useCallback(()=>{const entry=tripEntryProfile(room.track,compact,beat,racers),ids=entry?[entry.newId,entry.oldId]:trip.plan?[trip.plan.newId,trip.plan.oldId]:[];return ids.length===2&&ids.every(id=>sculptureReaders.current.get(`${id}:${lowQuality}`)?.()===true);},[room.track,compact,beat,racers,trip,lowQuality]);
+  trip.enter(room.track,compact,beat,racers,clock.now(),startedAt,durationMs,physicalContacts&&mechanismLoad==='ready'&&tripReady()&&!reducedMotion&&(!paused||trip.plan?.key===beat?.key));
+  punch.enter(room.track,beat,racers,clock.now(),startedAt,durationMs,physicalContacts&&mechanismLoad==='ready'&&contactReady()&&!reducedMotion&&(!paused||punch.plan?.key===beat?.key));
   const [cameraReset, setCameraReset] = useState(0);
   const [cameraMode, setCameraMode] = useState<CameraMode>('self');
   const [manualCamera, setManualCamera] = useState(false);
@@ -93,6 +169,7 @@ export function Board3D({ clock = wallPresentationClock, paused = false, room, r
   const root = useRef<HTMLElement>(null);
   const previousShot = useRef<CameraShot | undefined>(undefined);
   const labels = useRef(new Map<string, HTMLSpanElement>());
+  const nodeLabels=useRef(new Map<number,HTMLSpanElement>());
   const routeButtons = useRef(new Map<string, HTMLButtonElement>());
   const scoreLabel = useRef<HTMLSpanElement>(null);
   useEffect(() => { const m = matchMedia('(max-width: 650px)'); const update = () => setCompact(m.matches); m.addEventListener('change', update); return () => m.removeEventListener('change', update); }, []);
@@ -115,16 +192,22 @@ export function Board3D({ clock = wallPresentationClock, paused = false, room, r
   const intro = {focus:beat?.kind==='intro'?introFocus(racers,introIndex,reducedMotion):undefined,racer:beat?.kind==='intro'&&!reducedMotion?racers[introIndex]:undefined,index:introIndex,total:racers.length,reducedMotion,skip:()=>{if(beat?.kind==='intro')onSkipIntro?.();}};
   const idleFocus = autoWatch && heldFocus && heldFocus.chainId !== dismissedChain ? idleFollowFocus(room, racers, heldFocus) : ownFocus(room, racers);
   const focus: CameraFocus = route && choosing ? choosing : cameraMode === 'overview' ? { state: 'overview', ids: active ? [active] : [], positions: [] } : choosing ?? (manualCamera ? { state: 'manual', ids: [], positions: [] } : intro.focus ?? (action && action.chainId !== dismissedChain && (autoWatch || myAction) ? shot!.focus : idleFocus));
+  const focusNodes=mechanismCandidate&&!['overview','manual','intro'].includes(focus.state)?[...new Set([...focus.ids.flatMap(id=>racers.filter(r=>r.id===id).map(r=>r.position)),...focus.positions])].filter(id=>trackNodeIds(room.track).includes(id)).slice(0,8):[];
   const showTallDecor = focus.state === 'overview' && cameraMode === 'overview' && beat?.kind !== 'intro' && !choosing && !route;
   const returnSelf = () => { intro.skip(); setCameraMode('self'); setManualCamera(false); setDismissedChain(action?.chainId ?? heldFocus?.chainId ?? 'manual-self'); setCameraReset(value => value + 1); };
-  return <section ref={root} className={`board-scene ${compact ? 'compact-scene' : ''}`} data-testid="board-3d" data-track={room.track} data-appearance-mode={appearanceMode} data-tall-decor={String(showTallDecor)} data-node-count={trackNodeIds(room.track).length} data-twist-boundary={TRACKS[room.track].twistBoundary?`${TRACKS[room.track].twistBoundary!.before}-${TRACKS[room.track].twistBoundary!.after}`:undefined} data-neutral-monster={room.trackState?.twist?.monster&&!room.trackState.twist.monster.racerId&&!room.trackState.twist.monster.finished?room.trackState.twist.monster.position:undefined} data-twist-chips={room.trackState?.twist?.chips?.join(',')} data-special-event={room.trackState?.event?.id} data-event-marker={room.trackState?.event?.npc?.position} data-trampolines={room.trackState?.event?.trampolines?.join(',')} data-phase={beat?.kind ?? 'idle'} data-intro-ready={String(introReady)} data-event-ids={beat?.events.map(e => e.id).join(',') ?? ''} data-motion-count={beat?.motions.length ?? 0} data-renderer="react-three-fiber" data-playback-paused={String(paused)} data-frameloop={paused ? 'demand' : beat && beat.kind!=='intro' && !dice && !reducedMotion ? 'always' : 'demand'} data-camera-mode={cameraMode} data-camera-state={focus.state} data-camera-target-ids={focus.ids.join(',')} data-camera-chain-id={focus.chainId ?? ''} data-camera-positions={focus.positions.join(',')} data-camera-piece={focus.piece} data-camera-shot={shot?.keys.join(',')} aria-label={`${TRACKS[room.track].name}立体棋盘`}>
+  return <section ref={root} className={`board-scene ${compact ? 'compact-scene' : ''}`} data-testid="board-3d" data-scene-failed={String(sceneFailed || lost)} data-track={room.track} data-environment-candidate={String(environmentCandidate)} data-environment-load={environmentCandidate?environmentLoad:undefined} data-contact-mode={environmentCandidate?(sceneMechanisms?'finite-scene-allowlist':'cue-only-environment-unavailable'):undefined} data-r1-contact={r1Enabled?r1.reason:undefined} data-pad-load={environmentCandidate&&mechanismCandidate?padLoad:undefined} data-mechanism-candidate={String(mechanismCandidate)} data-mechanism-load={mechanismCandidate?(physicalContacts?mechanismLoad:sceneMechanisms?'finite-allowlist':'cue-only'):undefined} data-appearance-mode={appearanceMode} data-lighting-cycle-ms={SCENE_LIGHT_CYCLE_MS} data-lighting-running={String(lightingRunning)} data-tall-decor={String(showTallDecor)} data-node-count={trackNodeIds(room.track).length} data-twist-boundary={TRACKS[room.track].twistBoundary?`${TRACKS[room.track].twistBoundary!.before}-${TRACKS[room.track].twistBoundary!.after}`:undefined} data-neutral-monster={room.trackState?.twist?.monster&&!room.trackState.twist.monster.racerId&&!room.trackState.twist.monster.finished?room.trackState.twist.monster.position:undefined} data-twist-chips={room.trackState?.twist?.chips?.join(',')} data-special-event={room.trackState?.event?.id} data-event-marker={room.trackState?.event?.npc?.position} data-trampolines={room.trackState?.event?.trampolines?.join(',')} data-phase={beat?.kind ?? 'idle'} data-intro-ready={String(introReady)} data-event-ids={beat?.events.map(e => e.id).join(',') ?? ''} data-motion-count={beat?.motions.length ?? 0} data-renderer="react-three-fiber" data-playback-paused={String(paused)} data-frameloop={paused ? 'demand' : beat && beat.kind!=='intro' && !dice && !reducedMotion ? 'always' : 'demand'} data-camera-mode={cameraMode} data-camera-state={focus.state} data-camera-target-ids={focus.ids.join(',')} data-camera-chain-id={focus.chainId ?? ''} data-camera-positions={focus.positions.join(',')} data-camera-piece={focus.piece} data-camera-shot={shot?.keys.join(',')} aria-label={`${TRACKS[room.track].name}立体棋盘`}>
+    {mechanismCandidate && (mechanismLoad==='failed'||padFailed||certifiedFailed||r1Failed) && <p className="mechanism-load-error" role="status">部分机关或跑垫素材载入失败，使用临时跑面，规则仍可继续。<button onClick={()=>{clearMechanismCache(room.track);clearR1Cache();clearParkedFallbackCache();setR1Failure('');if(environmentCandidate)clearRevalidatedMechanismCache(room.track);setPadStatus({key:padKey,state:'loading'});setCertifiedFailure('');setMechanismLoad('loading');setMechanismRetry(n=>n+1);}}>重新载入机关</button></p>}
+    {environmentCandidate&&environmentLoad==='failed'&&<p className="mechanism-load-error" role="status">环境素材载入失败，已保留原场景与规则。<button onClick={()=>{clearEnvironmentCache(room.track);setEnvironmentRetry(n=>n+1);}}>重新载入环境</button></p>}
+    {environmentCandidate&&lightsFailed&&<p className="mechanism-load-error" role="status">场边灯具载入失败，保留月光与场景。<button onClick={()=>{clearFloodlightCache();setLightsFailed(false);setLightRetry(n=>n+1);}}>重新载入灯具</button></p>}
     <div className="scene-camera-toolbar">
+      {sceneFailed || lost ? <span className="camera-unavailable" role="status">3D 镜头暂不可用</span> : <>
       <IconButton icon="focus" label="恢复默认视角" className="camera-home" onClick={returnSelf} />
       <details className="camera-options"><summary aria-label="镜头设置" title="镜头设置"><Icon kind="camera" /></summary><div className="camera-settings-content">
         <div className="scene-camera-modes" role="group" aria-label="棋盘视角"><button aria-pressed={cameraMode === 'self'} aria-label={spectator ? '跟随当前选手' : '自己'} onClick={returnSelf}><Icon kind="follow" size={18} />{spectator ? '跟随' : '自己'}</button><button aria-pressed={cameraMode === 'overview'} onClick={() => { intro.skip(); setCameraMode('overview'); setManualCamera(false); setCameraReset(value => value + 1); }}><Icon kind="overview" size={18} />总览</button></div>
         <label><input type="checkbox" aria-label={spectator ? '自动跟随赛场行动' : '自动观看他人行动'} checked={autoWatch} onChange={event => { setAutoWatch(event.target.checked); try { localStorage.setItem('magical-athlete:auto-watch', String(event.target.checked)); } catch { /* Preferences are optional. */ } }} />{spectator ? '自动跟随赛场行动' : '自动观看他人行动'}</label><small>拖动平移 · 双指或滚轮缩放</small>
       </div></details>
       {manualCamera && cameraMode === 'self' && !choosing && <span className="camera-paused" role="status">跟拍已暂停</span>}
+      </>}
     </div>
     {intro.focus && <div className="race-intro" data-testid="race-intro" data-intro-index={intro.index} role="status">
       {intro.racer && <button type="button" className="race-intro-avatar board-avatar-button" onClick={() => onDetail(intro.racer!.characterId, intro.racer!.id)} aria-label={`查看${characterName(intro.racer.characterId)}技能与当前玩家`}><Avatar id={intro.racer.characterId} /></button>}
@@ -134,26 +217,33 @@ export function Board3D({ clock = wallPresentationClock, paused = false, room, r
     <Minimap clock={clock} paused={paused} room={room} racers={racers} active={active} beat={beat} startedAt={startedAt} durationMs={durationMs} reducedMotion={reducedMotion} onDetail={onDetail} />
     <PredictionHud room={room} racers={racers} choosing={!!choosing} onDetail={onDetail} />
     {!beat && !queue?.length && <PublicDiceSummary room={room} racers={racers} onDetail={onDetail} />}
-    <SceneBoundary resetKey={resetKey} retry={() => setResetKey(n => n + 1)}>
+    <SceneBoundary resetKey={resetKey} retry={retryScene} onFailure={() => setSceneFailed(true)}>
       <Canvas className="board-webgl" key={resetKey} frameloop={paused ? 'demand' : beat && beat.kind!=='intro' && !dice && !reducedMotion ? 'always' : 'demand'} orthographic shadows={!lowQuality} dpr={lowQuality ? 1 : [1, compact ? 1.25 : 1.5]} camera={{ position: [3, 16, 16], near: .1, far: 100, zoom: 35 }} gl={{ antialias: !lowQuality, alpha: false, powerPreference: 'high-performance' }} onCreated={({ gl }) => { gl.setClearColor('#c7dfd3'); gl.outputColorSpace = THREE.SRGBColorSpace; gl.toneMapping = THREE.ACESFilmicToneMapping; gl.shadowMap.type = THREE.PCFShadowMap; gl.domElement.addEventListener('webglcontextlost', event => { event.preventDefault(); setLost(true); }); gl.domElement.addEventListener('webglcontextrestored', () => setLost(false)); }}>
-        <StudioLightingV7 compact={compact} lowQuality={lowQuality} mode={appearanceMode} />
+        <VenueLighting key={`${room.track}:${lightRetry}`} track={room.track} compact={compact} lowQuality={lowQuality} mode={appearanceMode} lightingClock={lightingClock} lightingRunning={lightingRunning} fixturesEnabled={environmentReady} paused={paused} onFailure={lightFailure} boardExtent={boardBounds(room.track,compact)}/>
         <AdaptiveQuality lowQuality={lowQuality} onSlow={() => setAutomaticLow(true)} root={root} />
         <CameraRig paused={paused} track={room.track} racers={racers} compact={compact} reset={cameraReset} focus={focus} reducedMotion={reducedMotion} onManual={() => { intro.skip(); setManualCamera(true); }} root={root} />
-        {room.track === 'whirly-world'
-          ? <WhirlyStadium compact={compact} lowQuality={lowQuality} fallback={<DioramaStadium compact={compact} track={room.track} lowQuality={lowQuality} beat={beat} racers={racers} showTallDecor={showTallDecor} />} />
-          : <DioramaStadium compact={compact} track={room.track} reversed={room.trackState?.reversed} lowQuality={lowQuality} beat={beat} racers={racers} showTallDecor={showTallDecor} />}
+        {mechanismCandidate ? (environmentCandidate ? <RebuiltMechanismCourse environmentReady={environmentReady} key={padKey} onPadReady={padOnReady} onPadFailure={padOnFailure} track={room.track} compact={compact} lowQuality={lowQuality} showTallDecor={showTallDecor}/> : <MechanismCourse key={mechanismRetry} onPadFailure={padOnFailure} track={room.track} compact={compact} lowQuality={lowQuality} showTallDecor={showTallDecor}/>) : room.track === 'whirly-world'&&!environmentReady
+          ? <WhirlyStadium compact={compact} lowQuality={lowQuality} fallback={<DioramaStadium environmentReady={environmentReady} compact={compact} track={room.track} lowQuality={lowQuality} beat={beat} racers={racers} showTallDecor={showTallDecor} />} />
+          : <DioramaStadium environmentReady={environmentReady} compact={compact} track={room.track} reversed={room.trackState?.reversed} lowQuality={lowQuality} beat={beat} racers={racers} showTallDecor={showTallDecor} />}
+        {environmentCandidate&&<ApprovedEnvironment key={environmentKey} reversed={room.trackState?.reversed} track={room.track} compact={compact} lowQuality={lowQuality} onReady={environmentOnReady} onFailure={environmentOnFailure}/>}
+        {mechanismCandidate&&environmentCandidate&&<EnvironmentEventCues {...{track:room.track,beat,racers,compact,lowQuality,paused,reducedMotion,clock,startedAt,durationMs}}/>}
+        {sceneMechanisms&&certified instanceof SceneMechanismController&&<><ParkedFallbackLayer key={`parks:${mechanismRetry}`} controller={certified} onFailure={()=>setMechanismLoad('failed')} {...{track:room.track,compact,lowQuality,racers,beat}}/><RevalidatedFoundations controller={certified} {...{track:room.track,compact,racers,beat}}/><RevalidatedMechanismLayer onReady={mechanismOnReady} key={`scene:${mechanismRetry}`} controller={certified} onFailure={()=>setMechanismLoad('failed')} {...{track:room.track,compact,racers,beat,clock,startedAt,durationMs,reducedMotion,lowQuality,paused}}/><RevalidatedTripLayer key={`scene-trip:${mechanismRetry}`} controller={certified} onFailure={()=>setCertifiedFailure(loadKey)} {...{track:room.track,compact,racers,beat,clock,startedAt,durationMs,reducedMotion,lowQuality,paused,root}}/></>}
+        {physicalContacts && <MechanismLayer certified={certified} trip={trip} tripReady={tripReady} contactReady={contactReady} punch={punch} key={mechanismRetry} paused={paused} onLoadState={setMechanismLoad} {...{track:room.track,compact,racers,beat,clock,startedAt,durationMs,reducedMotion,lowQuality,root}}/>}
+        {physicalContacts&&<CertifiedTripLayer onFailure={()=>setCertifiedFailure(loadKey)} key={`certified:${mechanismRetry}`} controller={certified} racers={racers} {...{track:room.track,compact,lowQuality,paused,reducedMotion,beat,clock,startedAt,durationMs,root}}/>}
+        {r1Enabled&&room.track==='wild'&&<R1PunchLayer key={r1Scope} controller={r1} input={r1Input} clock={clock} paused={paused} onFailure={r1OnFailure}/>}
         {route && <RouteChoices {...{ route, compact }} track={room.track} buttons={routeButtons} />}
-        <Suspense fallback={null}><TwistPieces {...{ room, compact, lowQuality, reducedMotion }} />{racers.filter(r => !r.eliminated || beat?.kind === 'eliminate' && beat.targets.includes(r.id)).map(racer => <Pawn paused={paused} clock={clock} key={racer.id} racer={racer} racers={racers} room={room} compact={compact} beat={beat} startedAt={startedAt} durationMs={durationMs} lowQuality={lowQuality} reducedMotion={reducedMotion} active={active === racer.id} onDetail={onDetail} labels={labels} />)}</Suspense>
+        <Suspense fallback={null}><TwistPieces {...{ room, compact, lowQuality, reducedMotion }} />{racers.filter(r => !r.eliminated || beat?.kind === 'eliminate' && beat.targets.includes(r.id)).map(racer => <Pawn r1={r1} r1Enabled={r1Enabled} physicalContacts={physicalContacts} certified={certified} trip={trip} sculptureReaders={sculptureReaders} punch={punch} paused={paused} clock={clock} key={racer.id} racer={racer} racers={racers} room={room} compact={compact} beat={beat} startedAt={startedAt} durationMs={durationMs} lowQuality={lowQuality} reducedMotion={reducedMotion} active={active === racer.id} onDetail={onDetail} labels={labels} />)}</Suspense>
         <RaceEffects clock={clock} track={room.track} reversed={room.trackState?.reversed} {...{ beat, racers, compact, startedAt, durationMs, reducedMotion, lowQuality }} />
+        <FocusNodeProjector track={room.track} compact={compact} nodes={focusNodes} labels={nodeLabels} root={root}/>
         <ScoreProjector track={room.track} beat={beat} racers={racers} compact={compact} label={scoreLabel} />
         <PerformanceProbe root={root} />
         <IntroReadiness beat={beat} count={racers.filter(racer=>!racer.eliminated).length} onReady={onIntroReady} root={root} />
       </Canvas>
     </SceneBoundary>
     {route && onChooseRoute && <RouteButtons route={route} buttons={routeButtons} disabled={choiceBusy} onChoose={onChooseRoute} />}
-    <div className="scene-labels" aria-hidden="true">{racers.filter(r => !r.eliminated).map(racer => { const owner = room.players.find(p => p.id === racer.playerId), scale = occupancy(racer, racers, racer.position, compact, room.track).scale; return <span key={racer.id} data-racer-id={racer.id} ref={element => { if (element) labels.current.set(racer.id, element); else labels.current.delete(racer.id); }} className={`pawn-seat ${active === racer.id ? 'is-active' : ''} ${scale < .5 ? 'is-crowded' : scale < .9 ? 'is-shared' : ''}`} style={{ borderColor: owner?.color }}>{(owner?.seat ?? 0) + 1}</span>; })}<span ref={scoreLabel} className="score-float" style={{ display: beat?.kind === 'score' || beat?.kind === 'finish' ? undefined : 'none' }}>{beat?.events[0]?.text.match(/[+＋-]\d+分/)?.[0] ?? (beat?.kind === 'finish' ? '冲线！' : '得分！')}</span></div>
-    {lost && <div className="scene-fallback"><strong>正在恢复图形画面…</strong><button onClick={() => { setLost(false); setResetKey(n => n + 1); }}>重新载入 3D</button></div>}
-    <SceneBoundary resetKey={resetKey} retry={() => setResetKey(n => n + 1)}><DiceSpotlight clock={clock} paused={paused} resultReadMs={diceResultReadMs(beat)} onSettled={onDiceSettled} active={dice} beatKey={dice ? beat?.key : undefined} contenders={duelContenders} face={beat?.face ?? room.lastRoll?.face ?? 1} faces={beat?.faces} cause={beat?.cause} triggered={beat?.events[0]?.type==='die-trigger'} reason={beat?.events.find(event=>event.rollReason)?.rollReason} detail={beat?.events.map(event=>event.text).join(" · ")} sourceRacerId={selected.racerId} sourceCharacterId={selected.characterId} stageActor={!!beat?.actor} onDetail={onDetail} startedAt={startedAt} durationMs={durationMs} reducedMotion={reducedMotion} lowQuality={lowQuality} source={selected.name} /></SceneBoundary>
+    <div className="scene-labels" aria-hidden="true">{focusNodes.map(node=><span key={`node:${node}`} className="mechanism-focus-node" ref={element=>{if(element)nodeLabels.current.set(node,element);else nodeLabels.current.delete(node);}}>{node}</span>)}{racers.filter(r => !r.eliminated).map(racer => { const owner = room.players.find(p => p.id === racer.playerId), scale = occupancy(racer, racers, racer.position, compact, room.track).scale; return <span key={racer.id} data-racer-id={racer.id} ref={element => { if (element) labels.current.set(racer.id, element); else labels.current.delete(racer.id); }} className={`pawn-seat ${active === racer.id ? 'is-active' : ''} ${scale < .5 ? 'is-crowded' : scale < .9 ? 'is-shared' : ''}`} style={{ borderColor: owner?.color }}>{(owner?.seat ?? 0) + 1}</span>; })}<span ref={scoreLabel} className="score-float" style={{ display: beat?.kind === 'score' || beat?.kind === 'finish' ? undefined : 'none' }}>{scoreCaption(beat) ?? (beat?.kind === 'finish' ? '冲线！' : '得分！')}</span></div>
+    {lost && !sceneFailed && <div className="scene-fallback" role="status"><strong>正在恢复图形画面…</strong><button onClick={() => { setLost(false); retryScene(); }}>重新载入 3D</button></div>}
+    <SceneBoundary resetKey={resetKey} retry={retryScene} fallback={dice && !sceneFailed ? <div className="dice-spotlight dice-fallback" role="status"><strong>骰子动画暂时无法显示</strong><p>点数仍按本次掷骰结果结算，可跳过动画继续。</p><button onClick={retryScene}>重新载入骰子动画</button></div> : null}><DiceSpotlight rendererResetKey={resetKey} onRetryRenderer={retryScene} clock={clock} paused={paused} resultReadMs={diceResultReadMs(beat)} onSettled={onDiceSettled} active={dice} beatKey={dice ? beat?.key : undefined} contenders={duelContenders} face={beat?.face ?? room.lastRoll?.face ?? 1} faces={beat?.faces} cause={beat?.cause} triggered={beat?.events[0]?.type==='die-trigger'} reason={beat?.events.find(event=>event.rollReason)?.rollReason} detail={beat?.events.map(event=>event.text).join(" · ")} sourceRacerId={selected.racerId} sourceCharacterId={selected.characterId} stageActor={!!beat?.actor} onDetail={onDetail} startedAt={startedAt} durationMs={durationMs} reducedMotion={reducedMotion} lowQuality={lowQuality} source={selected.name} /></SceneBoundary>
     <RaceMoment room={room} beat={beat} racers={racers} onDetail={onDetail} />
     <ul className="sr-only" aria-label="立体棋盘选手位置">{racers.map(r => <li key={r.id} data-testid="scene-racer" data-racer-id={r.id} data-position={r.position} data-target-position={beat?.motions.find(m => m.racerId === r.id)?.to ?? r.position}>{characterName(r.characterId)} · {r.position} 格{r.tripped ? ' · 绊倒' : ''}</li>)}</ul>
   </section>;
@@ -226,7 +316,7 @@ function Minimap({ clock, paused, room, racers, active, beat, startedAt, duratio
     const update = () => { const value = progress(startedAt, durationMs, clock); setTick(value); if (value < 1 && !paused) animation = requestAnimationFrame(update); };
     update(); return () => cancelAnimationFrame(animation);
   }, [beat?.key, startedAt, durationMs, reducedMotion, paused, clock]);
-  const topology = !!TRACKS[room.track].nodes, mapLayout = trackSvgLayout(room.track, 220, 104, 24);
+  const topology = !!TRACKS[room.track].nodes || activeMechanismLayout(room.track).lift > 0, mapLayout = trackSvgLayout(room.track, 220, 104, 24);
   const mapPoint = (position: number) => { if (topology) return mapLayout.point(position); const point = boardPoint(position, false, room.track); return { x: 32 + (point[0] / TILE + 7.5) * 10.3, y: 28 + (point[2] / TILE + 1.5) * 15 }; };
   const currentPosition = (racer: Racer) => {
     const motion = beat?.motions.find(value => value.racerId === racer.id);
@@ -298,12 +388,26 @@ function PredictionHud({ room, racers, choosing, onDetail }: { room: RoomView; r
   </div>)}</div></aside>;
 }
 
-function Pawn({ paused, clock, racer, racers, room, compact, beat, startedAt, durationMs, lowQuality, reducedMotion, active, onDetail, labels }: { paused: boolean; clock: PresentationClock; racer: Racer; racers: Racer[]; room: RoomView; compact: boolean; beat?: PresentationBeat; startedAt: number; durationMs: number; lowQuality: boolean; reducedMotion: boolean; active: boolean; onDetail: (id: string, racerId?: string) => void; labels: React.RefObject<Map<string, HTMLSpanElement>> }) {
+function Pawn({ r1,r1Enabled,physicalContacts,certified,trip,sculptureReaders,punch,paused, clock, racer, racers, room, compact, beat, startedAt, durationMs, lowQuality, reducedMotion, active, onDetail, labels }: { r1:R1PunchController;r1Enabled:boolean;physicalContacts:boolean;certified:CertifiedTripController;trip:TripController;sculptureReaders:React.RefObject<Map<string,()=>boolean>>;punch:PunchController;paused: boolean; clock: PresentationClock; racer: Racer; racers: Racer[]; room: RoomView; compact: boolean; beat?: PresentationBeat; startedAt: number; durationMs: number; lowQuality: boolean; reducedMotion: boolean; active: boolean; onDetail: (id: string, racerId?: string) => void; labels: React.RefObject<Map<string, HTMLSpanElement>> }) {
   const root = useRef<THREE.Group>(null), body = useRef<THREE.Group>(null);
-  const { camera, size } = useThree(); const projection = useMemo(() => new THREE.Vector3(), []);
+  const protectedGeometry=certified.geometry(racer.id);
+  // Keep the audited sculpture geometry through its supported down/recover pose.
+  // Quality changes still apply to the rest of the scene.
+  const modelQuality=protectedGeometry?.lowQuality??lowQuality;
+  const certifiedBind=certified instanceof SceneMechanismController||physicalContacts&&(certifiedTripMount(room.track,racer.position)||needsCertifiedBind(room.track,racer,beat,lowQuality)||certified.protects(racer.id));
+  const r1Bind=r1Enabled&&(needsR1Bind(room.track,racer,beat)||r1.protects(racer.id));
+  const captureKey=useRef('');
+  const captureGeneration=useRef(0);
+  useEffect(()=>{captureKey.current='';captureGeneration.current++;return()=>{captureGeneration.current++;captureKey.current='';certified.actors.delete(racer.id);r1.invalidateActor(racer.id);};},[certified,r1,racer.id]);
+  useFrame(()=>{if(!body.current)return;const ids:string[]=[];body.current.traverse(n=>ids.push(n.uuid));const key=JSON.stringify([certifiedBind,r1Bind,modelQuality,racer.flags,ids]);if(key===captureKey.current)return;captureKey.current=key;certified.actors.delete(racer.id);r1.invalidateActor(racer.id);if(!certifiedBind&&!r1Bind)return;const snapshot=captureActorGeometry(body.current);if(!snapshot||snapshot.requiresSkeletonFreeze)return;const current=key,generation=captureGeneration.current;void actorGeometryFingerprint(snapshot).then(hash=>{if(captureGeneration.current===generation&&captureKey.current===current){if(certifiedBind)certified.acceptActor(racer.id,hash,snapshot.vertices);if(r1Bind)r1.acceptActor(racer.id,hash,snapshot);invalidate();}}).catch(()=>{});},-2);
+  const opacity=useMemo(()=>new PawnOpacity(),[]);useEffect(()=>()=>opacity.restore(),[opacity]);
+  useEffect(()=>{const key=`${racer.id}:${lowQuality}`;const read=()=>{let ready=false;root.current?.traverse(object=>{if(object.userData.racerMainSculpture){const sculpture=object.children.find(child=>child.userData.sculptureState);ready=!!sculpture?.visible&&sculpture.userData.sculptureState==='ready';}});return ready;};sculptureReaders.current.set(key,read);return()=>{if(sculptureReaders.current.get(key)===read)sculptureReaders.current.delete(key);};},[racer.id,lowQuality,sculptureReaders]);
+  const { camera, size, invalidate } = useThree(); const projection = useMemo(() => new THREE.Vector3(), []);
   const owner = room.players.find(p => p.id === racer.playerId);
   const color = owner?.color ?? '#ffcf50';
   const motion = beat?.motions.find(m => m.racerId === racer.id);
+  const warpMode=mechanismsEnabled()?warpTransitionMode(beat,racers):'ordinary';
+  const warpBind=warpMode==='single-resident-reflow'&&!!beat?.motions.some(m=>m.from===racer.position||m.to===racer.position);
   const from = boardPoint(motion?.from ?? racer.position, compact, room.track);
   const offset = occupancy(racer, racers, motion?.from ?? racer.position, compact, room.track);
   const destinations = motion ? racers.map(r => ({ ...r, position: beat?.motions.find(m => m.racerId === r.id)?.to ?? r.position })) : racers;
@@ -311,14 +415,14 @@ function Pawn({ paused, clock, racer, racers, room, compact, beat, startedAt, du
   const route = useMemo(() => motion ? pawnRoute(motion.path.map((position, index) => {
     const point = boardPoint(position, compact, room.track);
     return [point[0] + (index === 0 ? offset.x : index === motion.path.length - 1 ? endOffset.x : 0), point[1], point[2] + (index === 0 ? offset.z : index === motion.path.length - 1 ? endOffset.z : 0)];
-  }), room.track === 'bridges') : undefined, [motion, compact, room.track, offset.x, offset.z, endOffset.x, endOffset.z]);
+  }), room.track === 'bridges' || beat?.cause === 'track-arrow') : undefined, [motion, compact, room.track, beat?.cause, offset.x, offset.z, endOffset.x, endOffset.z]);
   const walkPoint = useMemo(() => new THREE.Vector3(), []);
   const affected = beat?.targets.includes(racer.id) || beat?.source === racer.id;
   useFrame(() => {
     if (!root.current || !body.current) return;
     // Demand rendering in reduced-motion mode must show the confirmed endpoint
     // immediately; it cannot rely on another animation frame to reach it.
-    const t = beat && !reducedMotion ? progress(startedAt, durationMs, clock) : 1;
+    const t = trip.involves(racer.id)?trip.progress:beat && !reducedMotion ? progress(startedAt, durationMs, clock) : 1;
     let x = from[0] + offset.x, z = from[2] + offset.z, y = from[1] + .005, scale = offset.scale, tilt = racer.tripped ? -Math.PI / 2 : 0, swing = 0;
     if (motion) {
       const target = boardPoint(motion.to, compact, room.track);
@@ -328,29 +432,36 @@ function Pawn({ paused, clock, racer, racers, room, compact, beat, startedAt, du
         z = THREE.MathUtils.lerp(from[2] + offset.z, target[2] + endOffset.z, fraction) + dx / length * Math.sin(t * Math.PI) * .55;
         y = THREE.MathUtils.lerp(from[1], target[1], fraction) + .005 + Math.sin(t * Math.PI) * .6; scale = THREE.MathUtils.lerp(offset.scale, endOffset.scale, fraction); swing = Math.sin(t * Math.PI) * .25;
       } else if (beat?.kind === 'warp' || beat?.kind === 'swap') {
-        const arrived = t > .5; x = (arrived ? target[0] + endOffset.x : x); z = (arrived ? target[2] + endOffset.z : z);
-        y = (arrived ? target[1] : from[1]) + .005; scale = (arrived ? endOffset.scale : offset.scale) * Math.max(.04, Math.abs(2 * t - 1)); y += reducedMotion ? 0 : Math.sin(t * Math.PI) * .65; swing = reducedMotion ? 0 : t * Math.PI * 2;
+        const arrived = t > .5,fullSizeWarp=mechanismsEnabled()&&beat?.kind==='warp'&&beat.cause==='track-whirl'; x = (arrived ? target[0] + endOffset.x : x); z = (arrived ? target[2] + endOffset.z : z);
+        y = (arrived ? target[1] : from[1]) + .005; scale = (arrived ? endOffset.scale : offset.scale) * (fullSizeWarp?1:Math.max(.04, Math.abs(2 * t - 1))); y += reducedMotion||fullSizeWarp ? 0 : Math.sin(t * Math.PI) * .65; swing = reducedMotion||fullSizeWarp ? 0 : t * Math.PI * 2;
       } else {
-        const count = Math.max(1, motion.path.length - 1), fraction = strideProgress(t), walk = fraction * count;
-        route!.getPointAt(fraction, walkPoint); x = walkPoint.x; z = walkPoint.z; y = walkPoint.y + .005;
+        const count = Math.max(1, motion.path.length - 1), r1Progress=r1.route(racer.id,t), fraction = r1Progress??punch.route(t,racer.id)??strideProgress(t), walk = fraction * count;
+        if(r1Progress!==undefined){r1ActorPosition(route!,fraction,count,walkPoint);x=walkPoint.x;y=walkPoint.y;z=walkPoint.z;}
+        else{route!.getPointAt(fraction, walkPoint);x=walkPoint.x;z=walkPoint.z;y=walkPoint.y+.005+(reducedMotion?0:strideLift(fraction,count));}
         const backwards = trackMovementDistance(room.track, motion.path, room.trackState?.reversed) < 0;
-        y += reducedMotion ? 0 : strideLift(fraction, count); swing = reducedMotion ? 0 : Math.sin(walk * Math.PI * 2) * (backwards ? -.055 : .045); scale = THREE.MathUtils.lerp(offset.scale, endOffset.scale, fraction);
+        swing = reducedMotion||r1.protects(racer.id)||punch.protects(racer.id)||certified.protects(racer.id) ? 0 : Math.sin(walk * Math.PI * 2) * (backwards ? -.055 : .045); scale = THREE.MathUtils.lerp(offset.scale, endOffset.scale, fraction);
       }
     }
-    const fallPhase = beat?.targets.includes(racer.id) && beat.kind === 'trip' ? 'trip' : affected && beat?.kind === 'recover' ? 'recover' : racer.tripped ? 'down' : undefined;
-    const fall = fallPhase ? pawnFallPose(t, fallPhase, reducedMotion) : undefined;
+    if(warpMode==='single-resident-reflow'){const reflow=warpResidentLayout(room.track,compact,beat,racer,racers,t);if(reflow){x=from[0]+reflow.x;z=from[2]+reflow.z;scale=reflow.scale;}}
+    const fallPhase = pawnFallPhase(beat, racer);
+    if(trip.plan?.kind==='entry'&&trip.plan.oldId===racer.id){const reflow=residentReflow(trip.progress);x=from[0]+reflow.x;scale=reflow.scale;}
+    const fall = fallPhase ? pawnFallPose(trip.plan?.kind==='trip'&&trip.involves(racer.id)?trip.progress:t, fallPhase, reducedMotion) : undefined;
     if (fall) { tilt = fall.tilt; swing = 0; }
-    if (affected && beat?.kind === 'skill' && !reducedMotion) { y += Math.sin(t * Math.PI) * .3; swing += Math.sin(t * Math.PI * 2) * .18; }
+    if (affected && beat?.kind === 'skill' && !reducedMotion && !r1.protects(racer.id) && !punch.protects(racer.id) && !trip.protects(racer.id) && !certified.protects(racer.id)) { y += Math.sin(t * Math.PI) * .3; swing += Math.sin(t * Math.PI * 2) * .18; }
     if (beat?.targets.includes(racer.id) && beat.kind === 'eliminate') scale *= 1 - ease(t);
-    root.current.position.set(x, y, z); root.current.scale.setScalar(Math.max(.01, scale)); body.current.rotation.set(tilt, swing, 0); body.current.position.y = fall?.lift ?? 0;
+    root.current.position.set(x, y, z); root.current.scale.setScalar(Math.max(.01, scale)); body.current.rotation.set(tilt, swing+(compact&&punch.protects(racer.id)?-Math.PI/2:0), 0); body.current.position.y = fall?.lift ?? 0;
+    const certifiedFall=certified.fall(racer.id,beat,t);if(certifiedFall){body.current.quaternion.copy(certifiedFall.quaternion);body.current.position.y=certifiedFall.lift;}
+    const fading=!!motion&&mechanismsEnabled()&&beat?.kind==='warp'&&beat.cause==='track-whirl'&&warpNeedsOpacity(warpMode,reducedMotion);
+    if(fading)opacity.apply(root.current,warpTransitionOpacity(warpMode,t));else opacity.restore();
     const label = labels.current.get(racer.id);
-    if (label) { label.dataset.worldX = x.toFixed(4); label.dataset.worldY = y.toFixed(4); label.dataset.worldZ = z.toFixed(4); }
+    if(label)label.style.opacity=fading?String(warpTransitionOpacity(warpMode,t)):'';
+    if (label) { label.dataset.warpMode=warpMode;label.dataset.modelReady=String(sculptureReaders.current.get(`${racer.id}:${lowQuality}`)?.()===true);label.dataset.worldX = x.toFixed(4); label.dataset.worldY = y.toFixed(4); label.dataset.worldZ = z.toFixed(4); }
     if (label) { root.current.updateWorldMatrix(true, false); projection.set(0, .19, .34).applyMatrix4(root.current.matrixWorld).project(camera); label.style.transform = `translate(${(projection.x + 1) * size.width / 2}px,${(1 - projection.y) * size.height / 2}px) translate(-50%,-50%)`; label.style.visibility = projection.z < -1 || projection.z > 1 ? 'hidden' : 'visible'; }
   });
   return <group ref={root} position={[from[0] + offset.x, from[1] + .005, from[2] + offset.z]} scale={offset.scale} onClick={e => { e.stopPropagation(); if (e.delta <= 5) onDetail(racer.characterId, racer.id); }}>
     <PawnContact />
     <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, .018, 0]}><ringGeometry args={[.31, active ? .43 : .38, 24]} /><meshBasicMaterial color={active ? '#ffda27' : color} side={THREE.DoubleSide} /></mesh>
-    <group ref={body} position={[0, 0, 0]}><ToyCharacter paused={paused} characterId={racer.characterId} color={color} lowQuality={lowQuality} form={typeof racer.flags.form === 'string' ? racer.flags.form : undefined} mount={typeof racer.flags.hogOwnerId === 'string'} motionEnabled={!reducedMotion && (!racer.tripped || beat?.kind === 'trip' || beat?.kind === 'recover')} animation={affected ? beat?.kind === 'trip' ? 'fall' : beat?.kind === 'recover' ? 'recover' : beat?.kind === 'move' ? 'move' : ['skill','dice','duel-dice','score','finish'].includes(beat?.kind ?? '') ? 'skill' : 'idle' : 'idle'} /></group>
+    <group ref={body} position={[0, 0, 0]}><ToyCharacter paused={paused} characterId={racer.characterId} color={color} lowQuality={modelQuality} form={typeof racer.flags.form === 'string' ? racer.flags.form : undefined} mount={typeof racer.flags.hogOwnerId === 'string'} motionEnabled={!certifiedBind&&!r1Bind&&!r1.protects(racer.id)&&!warpBind&&!trip.protects(racer.id)&&!punch.protects(racer.id)&&!reducedMotion && (!racer.tripped || pawnFallPhase(beat, racer) === 'recover')} animation={affected ? pawnFallPhase(beat, racer) === 'trip' ? 'fall' : pawnFallPhase(beat, racer) === 'recover' ? 'recover' : beat?.kind === 'move' ? 'move' : ['skill','dice','duel-dice','score','finish'].includes(beat?.kind ?? '') ? 'skill' : 'idle' : 'idle'} /></group>
     {active && <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, .023, 0]}><ringGeometry args={[.46, .49, 32]} /><meshBasicMaterial color="#fff8da" side={THREE.DoubleSide} /></mesh>}
   </group>;
 }
@@ -374,4 +485,10 @@ function useDiceSound(beat: PresentationBeat | undefined, startedAt: number, dur
     return () => timers.forEach(clearTimeout);
   }, [beat?.key, startedAt, durationMs, muted, paused, clock]);
   useEffect(() => () => { void audio.current?.close(); }, []);
+}
+
+function scoreCaption(beat?: PresentationBeat) {
+  const event = beat?.events.find(event => event.type === 'score');
+  const delta = event && eventScoreDelta(event);
+  return delta !== undefined ? `${delta >= 0 ? '+' : ''}${delta}分` : undefined;
 }

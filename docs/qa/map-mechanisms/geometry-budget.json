@@ -1,0 +1,259 @@
+{
+  "method": "Static counts for MechanismCourse (including ExpansionScenery) and MechanismLayer, all actual instances submitted, unculled. Wild persistent anchors are excluded from idle batches. Excludes Wild StadiumDecor, pawns, lights/helpers, selection effects, DOM HUD, text shadow maps, and other Board3D environment; not whole-scene GPU stats. Active nonpersistent anchors are removed from idle instances, so their triangles are not doubled; per-anchor primitives add draws only while same-kind idle batches remain. Shadow counts assume one directional shadow pass; no FPS inference.",
+  "assets": {
+    "punch": {
+      "triangles": 7784,
+      "meshDraws": 14,
+      "bytes": 380660
+    },
+    "trip": {
+      "triangles": 2116,
+      "meshDraws": 9,
+      "bytes": 108676
+    },
+    "gain": {
+      "triangles": 2852,
+      "meshDraws": 17,
+      "bytes": 185552
+    },
+    "loss": {
+      "triangles": 2248,
+      "meshDraws": 10,
+      "bytes": 136796
+    },
+    "warp": {
+      "triangles": 3804,
+      "meshDraws": 19,
+      "bytes": 226048
+    }
+  },
+  "pad": {
+    "triangles": 6812,
+    "meshDraws": 5,
+    "bytes": 377420
+  },
+  "economyPad": {
+    "triangles": 4712,
+    "meshDraws": 5,
+    "bytes": 303488
+  },
+  "reports": [
+    {
+      "track": "mild",
+      "candidateLayerEnabled": false,
+      "candidateAdditionalTriangles": 0
+    },
+    {
+      "track": "wild",
+      "nodes": 31,
+      "edges": 30,
+      "counts": {
+        "gain": 2,
+        "trip": 3,
+        "punch": 5
+      },
+      "padTriangles": 211172,
+      "structuralTriangles": 5824,
+      "markTriangles": 82,
+      "hardwareIdleTriangles": 41072,
+      "hardwareIdleDraws": 40,
+      "persistentTriangles": 9900,
+      "persistentDraws": 23,
+      "activeAnchorDelta": {
+        "gain": {
+          "triangles": 0,
+          "maximumAdditionalDraws": 17,
+          "detail": "Same triangles transfer from idle to active; additional draw count is at most one asset primitive count while same-kind idle instances remain."
+        },
+        "trip": {
+          "triangles": 0,
+          "maximumAdditionalDraws": 9,
+          "detail": "Same triangles transfer from idle to active; additional draw count is at most one asset primitive count while same-kind idle instances remain."
+        },
+        "punch": {
+          "triangles": 0,
+          "maximumAdditionalDraws": 14,
+          "detail": "Same triangles transfer from idle to active; additional draw count is at most one asset primitive count while same-kind idle instances remain."
+        }
+      },
+      "qualities": [
+        {
+          "quality": "full",
+          "visualPadTriangles": 211172,
+          "candidateSceneTriangles": 287016,
+          "candidateSceneDraws": 124,
+          "candidateOneLightShadowTriangles": 286928,
+          "sceneryTriangles": 18960
+        },
+        {
+          "quality": "economy",
+          "visualPadTriangles": 146072,
+          "candidateSceneTriangles": 220876,
+          "candidateSceneDraws": 124,
+          "candidateOneLightShadowTriangles": 18040,
+          "sceneryTriangles": 17920
+        }
+      ]
+    },
+    {
+      "track": "squiggle",
+      "nodes": 31,
+      "edges": 30,
+      "counts": {
+        "gain": 5,
+        "trip": 3,
+        "loss": 4,
+        "punch": 1
+      },
+      "padTriangles": 211172,
+      "structuralTriangles": 5860,
+      "markTriangles": 88,
+      "hardwareIdleTriangles": 37384,
+      "hardwareIdleDraws": 50,
+      "persistentTriangles": 0,
+      "persistentDraws": 0,
+      "activeAnchorDelta": {
+        "gain": {
+          "triangles": 0,
+          "maximumAdditionalDraws": 17,
+          "detail": "Same triangles transfer from idle to active; additional draw count is at most one asset primitive count while same-kind idle instances remain."
+        },
+        "trip": {
+          "triangles": 0,
+          "maximumAdditionalDraws": 9,
+          "detail": "Same triangles transfer from idle to active; additional draw count is at most one asset primitive count while same-kind idle instances remain."
+        },
+        "loss": {
+          "triangles": 0,
+          "maximumAdditionalDraws": 10,
+          "detail": "Same triangles transfer from idle to active; additional draw count is at most one asset primitive count while same-kind idle instances remain."
+        },
+        "punch": {
+          "triangles": 0,
+          "maximumAdditionalDraws": 14,
+          "detail": "Same triangles transfer from idle to active; additional draw count is at most one asset primitive count while same-kind idle instances remain."
+        }
+      },
+      "qualities": [
+        {
+          "quality": "full",
+          "visualPadTriangles": 211172,
+          "candidateSceneTriangles": 280286,
+          "candidateSceneDraws": 114,
+          "candidateOneLightShadowTriangles": 280192,
+          "sceneryTriangles": 25776
+        },
+        {
+          "quality": "economy",
+          "visualPadTriangles": 146072,
+          "candidateSceneTriangles": 211362,
+          "candidateSceneDraws": 114,
+          "candidateOneLightShadowTriangles": 22108,
+          "sceneryTriangles": 21952
+        }
+      ]
+    },
+    {
+      "track": "boardwalks",
+      "nodes": 59,
+      "edges": 61,
+      "counts": {
+        "gain": 4,
+        "trip": 8,
+        "punch": 7
+      },
+      "padTriangles": 401908,
+      "structuralTriangles": 11120,
+      "markTriangles": 156,
+      "hardwareIdleTriangles": 82824,
+      "hardwareIdleDraws": 40,
+      "persistentTriangles": 0,
+      "persistentDraws": 0,
+      "activeAnchorDelta": {
+        "gain": {
+          "triangles": 0,
+          "maximumAdditionalDraws": 17,
+          "detail": "Same triangles transfer from idle to active; additional draw count is at most one asset primitive count while same-kind idle instances remain."
+        },
+        "trip": {
+          "triangles": 0,
+          "maximumAdditionalDraws": 9,
+          "detail": "Same triangles transfer from idle to active; additional draw count is at most one asset primitive count while same-kind idle instances remain."
+        },
+        "punch": {
+          "triangles": 0,
+          "maximumAdditionalDraws": 14,
+          "detail": "Same triangles transfer from idle to active; additional draw count is at most one asset primitive count while same-kind idle instances remain."
+        }
+      },
+      "qualities": [
+        {
+          "quality": "full",
+          "visualPadTriangles": 401908,
+          "candidateSceneTriangles": 534502,
+          "candidateSceneDraws": 140,
+          "candidateOneLightShadowTriangles": 534340,
+          "sceneryTriangles": 38488
+        },
+        {
+          "quality": "economy",
+          "visualPadTriangles": 278008,
+          "candidateSceneTriangles": 405722,
+          "candidateSceneDraws": 140,
+          "candidateOneLightShadowTriangles": 33836,
+          "sceneryTriangles": 33608
+        }
+      ]
+    },
+    {
+      "track": "bridges",
+      "candidateLayerEnabled": false,
+      "candidateAdditionalTriangles": 0
+    },
+    {
+      "track": "twisty-twirl",
+      "candidateLayerEnabled": false,
+      "candidateAdditionalTriangles": 0
+    },
+    {
+      "track": "whirly-world",
+      "nodes": 31,
+      "edges": 30,
+      "counts": {
+        "warp": 12
+      },
+      "padTriangles": 211172,
+      "structuralTriangles": 5848,
+      "markTriangles": 86,
+      "hardwareIdleTriangles": 45648,
+      "hardwareIdleDraws": 19,
+      "persistentTriangles": 0,
+      "persistentDraws": 0,
+      "activeAnchorDelta": {
+        "warp": {
+          "triangles": 0,
+          "maximumAdditionalDraws": 19,
+          "detail": "Same triangles transfer from idle to active; additional draw count is at most one asset primitive count while same-kind idle instances remain."
+        }
+      },
+      "qualities": [
+        {
+          "quality": "full",
+          "visualPadTriangles": 211172,
+          "candidateSceneTriangles": 281720,
+          "candidateSceneDraws": 82,
+          "candidateOneLightShadowTriangles": 281628,
+          "sceneryTriangles": 18960
+        },
+        {
+          "quality": "economy",
+          "visualPadTriangles": 146072,
+          "candidateSceneTriangles": 215580,
+          "candidateSceneDraws": 82,
+          "candidateOneLightShadowTriangles": 18064,
+          "sceneryTriangles": 17920
+        }
+      ]
+    }
+  ]
+}

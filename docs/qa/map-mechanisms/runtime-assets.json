@@ -1,0 +1,44 @@
+{
+  "assets": [
+    {
+      "file": "approved_soft_track_tile.glb",
+      "bytes": 377420,
+      "sha256": "7ca87e14c06e410144d2e5fbd66303605c2a442f4fae7c0928a62c5eef28c659"
+    },
+    {
+      "file": "approved_soft_track_tile_economy.glb",
+      "bytes": 303488,
+      "sha256": "0d73be354867c51328be51b9b1028b97d0ed465530c002ee39448fe9b46f7355"
+    },
+    {
+      "file": "gain_joint_action.glb",
+      "bytes": 185552,
+      "sha256": "fcb164ad50bb52d22fa0b3aa66f63d515d40c9fef372060997ae3d62fa0a1fde"
+    },
+    {
+      "file": "loss_joint_action.glb",
+      "bytes": 136796,
+      "sha256": "0323a384103f271627786c5c8ef3ba98ac1b488a03e2096c26617442250df0f6"
+    },
+    {
+      "file": "punch_outboard_joint.glb",
+      "bytes": 380660,
+      "sha256": "ff8a8d4431fd08d4cc0111133ad9f0af1ea8abf3197131f5f6c6dfba0d6fa956"
+    },
+    {
+      "file": "trip_joint.glb",
+      "bytes": 108676,
+      "sha256": "70c96cc02f6db99d9ec8650a81f519a39c526d8485231d632ce2908879165641"
+    },
+    {
+      "file": "trip_telescopic_v1.2f331432.glb",
+      "bytes": 134288,
+      "sha256": "2f331432d72ef78d33c2aadd355885f25ca9f670d4d7f37b36e0c27b6db1046f"
+    },
+    {
+      "file": "warp_joint_action.glb",
+      "bytes": 226048,
+      "sha256": "bd5122db40a1c86889ee423787d818f278765d0e48ce30cca9f2fcea935a1b19"
+    }
+  ]
+}

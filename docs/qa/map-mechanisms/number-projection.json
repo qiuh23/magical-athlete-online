@@ -1,0 +1,341 @@
+{
+  "method": "Nominal font em along the texture vertical, not rendered glyph pixels or occlusion proof. Panorama is for route finding, focus for local labels. No HUD screenshots available.",
+  "measurements": [
+    {
+      "track": "squiggle",
+      "width": 390,
+      "height": 844,
+      "overview": false,
+      "nominalNumberEmPixels": 27.48523748395379,
+      "zoom": 62.644415917843396
+    },
+    {
+      "track": "squiggle",
+      "width": 390,
+      "height": 844,
+      "overview": true,
+      "nominalNumberEmPixels": 7.626546887905641,
+      "zoom": 17.382443049357587
+    },
+    {
+      "track": "squiggle",
+      "width": 844,
+      "height": 390,
+      "overview": false,
+      "nominalNumberEmPixels": 6.793505530279583,
+      "zoom": 23.836277088638646
+    },
+    {
+      "track": "squiggle",
+      "width": 844,
+      "height": 390,
+      "overview": true,
+      "nominalNumberEmPixels": 2.6474193867297724,
+      "zoom": 9.288963082558588
+    },
+    {
+      "track": "squiggle",
+      "width": 1280,
+      "height": 900,
+      "overview": false,
+      "nominalNumberEmPixels": 24.116944632492515,
+      "zoom": 84.61878366466719
+    },
+    {
+      "track": "squiggle",
+      "width": 1280,
+      "height": 900,
+      "overview": true,
+      "nominalNumberEmPixels": 6.804496435599899,
+      "zoom": 23.874840723201444
+    },
+    {
+      "track": "boardwalks",
+      "width": 390,
+      "height": 844,
+      "overview": false,
+      "nominalNumberEmPixels": 27.48523748395379,
+      "zoom": 62.644415917843396
+    },
+    {
+      "track": "boardwalks",
+      "width": 390,
+      "height": 844,
+      "overview": true,
+      "nominalNumberEmPixels": 5.100755641655906,
+      "zoom": 11.625653884116025
+    },
+    {
+      "track": "boardwalks",
+      "width": 844,
+      "height": 390,
+      "overview": false,
+      "nominalNumberEmPixels": 6.793505530279583,
+      "zoom": 23.836277088638646
+    },
+    {
+      "track": "boardwalks",
+      "width": 844,
+      "height": 390,
+      "overview": true,
+      "nominalNumberEmPixels": 1.775858031973561,
+      "zoom": 6.230928043193077
+    },
+    {
+      "track": "boardwalks",
+      "width": 1280,
+      "height": 900,
+      "overview": false,
+      "nominalNumberEmPixels": 24.116944632492515,
+      "zoom": 84.61878366466719
+    },
+    {
+      "track": "boardwalks",
+      "width": 1280,
+      "height": 900,
+      "overview": true,
+      "nominalNumberEmPixels": 4.292246738510431,
+      "zoom": 15.060145625248294
+    },
+    {
+      "track": "bridges",
+      "width": 390,
+      "height": 844,
+      "overview": false,
+      "nominalNumberEmPixels": 27.48523748395379,
+      "zoom": 62.644415917843396
+    },
+    {
+      "track": "bridges",
+      "width": 390,
+      "height": 844,
+      "overview": true,
+      "nominalNumberEmPixels": 5.540598159218977,
+      "zoom": 12.628143952635845
+    },
+    {
+      "track": "bridges",
+      "width": 844,
+      "height": 390,
+      "overview": false,
+      "nominalNumberEmPixels": 8.527703894144098,
+      "zoom": 29.921034441597946
+    },
+    {
+      "track": "bridges",
+      "width": 844,
+      "height": 390,
+      "overview": true,
+      "nominalNumberEmPixels": 1.8523860795170053,
+      "zoom": 6.499440924822097
+    },
+    {
+      "track": "bridges",
+      "width": 1280,
+      "height": 900,
+      "overview": false,
+      "nominalNumberEmPixels": 30.273348824211542,
+      "zoom": 106.2196722676727
+    },
+    {
+      "track": "bridges",
+      "width": 1280,
+      "height": 900,
+      "overview": true,
+      "nominalNumberEmPixels": 5.411104967090005,
+      "zoom": 18.98586771974824
+    },
+    {
+      "track": "twisty-twirl",
+      "width": 390,
+      "height": 844,
+      "overview": false,
+      "nominalNumberEmPixels": 27.48523748395379,
+      "zoom": 62.644415917843396
+    },
+    {
+      "track": "twisty-twirl",
+      "width": 390,
+      "height": 844,
+      "overview": true,
+      "nominalNumberEmPixels": 10.220470683015295,
+      "zoom": 23.294520075248535
+    },
+    {
+      "track": "twisty-twirl",
+      "width": 844,
+      "height": 390,
+      "overview": false,
+      "nominalNumberEmPixels": 8.527703894144098,
+      "zoom": 29.921034441597946
+    },
+    {
+      "track": "twisty-twirl",
+      "width": 844,
+      "height": 390,
+      "overview": true,
+      "nominalNumberEmPixels": 3.403842873538067,
+      "zoom": 11.943015507709802
+    },
+    {
+      "track": "twisty-twirl",
+      "width": 1280,
+      "height": 900,
+      "overview": false,
+      "nominalNumberEmPixels": 30.273348824211542,
+      "zoom": 106.2196722676727
+    },
+    {
+      "track": "twisty-twirl",
+      "width": 1280,
+      "height": 900,
+      "overview": true,
+      "nominalNumberEmPixels": 9.384651940013667,
+      "zoom": 32.92779597007113
+    },
+    {
+      "track": "whirly-world",
+      "width": 390,
+      "height": 844,
+      "overview": false,
+      "nominalNumberEmPixels": 27.48523748395379,
+      "zoom": 62.644415917843396
+    },
+    {
+      "track": "whirly-world",
+      "width": 390,
+      "height": 844,
+      "overview": true,
+      "nominalNumberEmPixels": 7.640961502090141,
+      "zoom": 17.415296870860722
+    },
+    {
+      "track": "whirly-world",
+      "width": 844,
+      "height": 390,
+      "overview": false,
+      "nominalNumberEmPixels": 6.793505530279583,
+      "zoom": 23.836277088638646
+    },
+    {
+      "track": "whirly-world",
+      "width": 844,
+      "height": 390,
+      "overview": true,
+      "nominalNumberEmPixels": 3.3500004587890446,
+      "zoom": 11.75409938607587
+    },
+    {
+      "track": "whirly-world",
+      "width": 1280,
+      "height": 900,
+      "overview": false,
+      "nominalNumberEmPixels": 24.116944632492515,
+      "zoom": 84.61878366466719
+    },
+    {
+      "track": "whirly-world",
+      "width": 1280,
+      "height": 900,
+      "overview": true,
+      "nominalNumberEmPixels": 9.415088649008293,
+      "zoom": 33.03458882186592
+    },
+    {
+      "track": "mild",
+      "width": 390,
+      "height": 844,
+      "overview": false,
+      "nominalNumberEmPixels": 27.48523748395379,
+      "zoom": 62.644415917843396
+    },
+    {
+      "track": "mild",
+      "width": 390,
+      "height": 844,
+      "overview": true,
+      "nominalNumberEmPixels": 10.220470683015295,
+      "zoom": 23.294520075248535
+    },
+    {
+      "track": "mild",
+      "width": 844,
+      "height": 390,
+      "overview": false,
+      "nominalNumberEmPixels": 8.527703894144098,
+      "zoom": 29.921034441597946
+    },
+    {
+      "track": "mild",
+      "width": 844,
+      "height": 390,
+      "overview": true,
+      "nominalNumberEmPixels": 3.403842873538067,
+      "zoom": 11.943015507709802
+    },
+    {
+      "track": "mild",
+      "width": 1280,
+      "height": 900,
+      "overview": false,
+      "nominalNumberEmPixels": 30.273348824211542,
+      "zoom": 106.2196722676727
+    },
+    {
+      "track": "mild",
+      "width": 1280,
+      "height": 900,
+      "overview": true,
+      "nominalNumberEmPixels": 9.384651940013667,
+      "zoom": 32.92779597007113
+    },
+    {
+      "track": "wild",
+      "width": 390,
+      "height": 844,
+      "overview": false,
+      "nominalNumberEmPixels": 27.48523748395379,
+      "zoom": 62.644415917843396
+    },
+    {
+      "track": "wild",
+      "width": 390,
+      "height": 844,
+      "overview": true,
+      "nominalNumberEmPixels": 10.02876197149331,
+      "zoom": 22.857577143004697
+    },
+    {
+      "track": "wild",
+      "width": 844,
+      "height": 390,
+      "overview": false,
+      "nominalNumberEmPixels": 6.793505530279583,
+      "zoom": 23.836277088638646
+    },
+    {
+      "track": "wild",
+      "width": 844,
+      "height": 390,
+      "overview": true,
+      "nominalNumberEmPixels": 3.3500004587890446,
+      "zoom": 11.75409938607587
+    },
+    {
+      "track": "wild",
+      "width": 1280,
+      "height": 900,
+      "overview": false,
+      "nominalNumberEmPixels": 24.116944632492515,
+      "zoom": 84.61878366466719
+    },
+    {
+      "track": "wild",
+      "width": 1280,
+      "height": 900,
+      "overview": true,
+      "nominalNumberEmPixels": 9.415088649008293,
+      "zoom": 33.03458882186592
+    }
+  ]
+}

@@ -20,3 +20,8 @@ playwright-report-relay/
 /.dev-memory/
 /.codex/hooks.json
 /docs/dev-memory/
+
+# Reproducible offline QA exports are delivered separately, never production assets.
+/docs/qa/map-mechanisms/*-runtime-geometry.glb
+/docs/qa/map-mechanisms/*-geometry.png
+/docs/qa/map-mechanisms/*-runtime-cameras.json

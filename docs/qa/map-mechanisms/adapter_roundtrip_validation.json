@@ -1,0 +1,51 @@
+{
+  "method": "Round-trip GLB evaluated triangle counts, bidirectional nearest vertices and triangle centres compared against editable source at9 joint/morph poses, tolerance0.1mm, quantization1e-5m. Includes modifiers and morph weights.",
+  "samples": [
+    {
+      "a": 0,
+      "d": 0,
+      "exact_rounded_triangle_differences": []
+    },
+    {
+      "a": 0.25,
+      "d": 0,
+      "exact_rounded_triangle_differences": []
+    },
+    {
+      "a": 0.5,
+      "d": 0,
+      "exact_rounded_triangle_differences": []
+    },
+    {
+      "a": 0.75,
+      "d": 0,
+      "exact_rounded_triangle_differences": []
+    },
+    {
+      "a": 1,
+      "d": 0,
+      "exact_rounded_triangle_differences": []
+    },
+    {
+      "a": 1,
+      "d": 0.25,
+      "exact_rounded_triangle_differences": []
+    },
+    {
+      "a": 1,
+      "d": 0.5,
+      "exact_rounded_triangle_differences": []
+    },
+    {
+      "a": 1,
+      "d": 0.75,
+      "exact_rounded_triangle_differences": []
+    },
+    {
+      "a": 1,
+      "d": 1,
+      "exact_rounded_triangle_differences": []
+    }
+  ],
+  "passed": true
+}

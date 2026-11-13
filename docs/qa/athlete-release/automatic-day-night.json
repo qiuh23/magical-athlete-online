@@ -1,0 +1,85 @@
+{
+  "basePublicSnapshot": "9c9b76d680e4b88a6b6cf45455dbbde57af52825",
+  "runtimeCheckpoint": "4e740b06e85e7559b973758ee86b0b67adbe1f19",
+  "periodMs": 180000,
+  "sourceFilesChanged": [
+    "docs/qa/athlete-release/README.md",
+    "docs/qa/athlete-release/source-manifest.json",
+    "src/client/App.tsx",
+    "src/client/scene-appearance.ts",
+    "src/client/scene-lighting-clock.ts",
+    "src/client/scene/Board3D.tsx",
+    "src/client/scene/environment/VenueLighting.tsx",
+    "src/client/scene/environment/lighting-demand.ts",
+    "src/client/scene/environment/venue-lighting-state.ts",
+    "src/client/useSceneLightingClock.ts",
+    "tests/automatic-scene-lighting.test.ts",
+    "tests/fixtures/stadium-v9.tsx",
+    "tests/rebuilt-floodlights.test.ts",
+    "tests/scene-appearance.test.ts"
+  ],
+  "geometryChanged": false,
+  "r1ExactGeometryInputsUnchanged": 65,
+  "clock": "App-owned RoomLightingClock with PresentationClock delta; backend+code+creation identity; no round/track reset; same-tab/session storage bounded phase without offline timestamps",
+  "gates": "Visible connected unpaused live race only. Selection/results/offline/hidden/closed freeze; pageshow resumes when current gates permit. Missing creation identity has memory-only state.",
+  "default": "Missing/invalid stored preference becomes auto. Existing day/dusk/night literal values remain, including old defaults; not treated as proof of active user selection.",
+  "manual": "Fixed rendered preset; automatic room phase still advances during active match time and is smoothly approached when auto is selected again.",
+  "frequency": "Existing R3F frames; demand-only auto scheduler max20Hz full/max10Hz economy. No new RAF; cleanup on mode, pause, quality, frameloop or unmount.",
+  "fallback": "Same continuous lighting adapter for ready/pending/failed/environment=0; hardware disabled until ready; no invalid auto string sent to old preset API.",
+  "sharedTimeLimit": "No accumulated shared active-game time in current RoomView; no new protocol. Per browser session, not synchronized across clients.",
+  "evidence": [
+    "1638/1638 full Node tests; no skips",
+    "27 earlier focused input/clock/geometry-identity tests; final 15 clock, lamp and source-identity regressions",
+    "Both TypeScript configurations",
+    "Both build products and existing54 environment/light content mappings",
+    "Worker deploy --dry-run local compile passed; no remote deploy"
+  ],
+  "notVerified": [
+    "Actual WebGL pixels or FPS",
+    "True-phone scene readability",
+    "Measured mean match duration"
+  ],
+  "independentReview": {
+    "focusedTestsPassed": 14,
+    "scope": "Code plus independent combined clock sequences for cross-round/map, results freeze, same-session refresh without offline time. No new blocker found.",
+    "notClaimed": "Actual React lifecycle mounting was not completed in this review."
+  },
+  "actualDOM": {
+    "source": "4e740b06e85e7559b973758ee86b0b67adbe1f19",
+    "viewport": [
+      1180,
+      757
+    ],
+    "passed": [
+      "Auto and fixed modes including Auto→Night→Auto update actual Board attributes",
+      "Cycle180000ms and running state exposed",
+      "Fully visible menu controls unobstructed",
+      "Actual die2/read1000ms→0to2→idle in observed3.214s, without dice Skip"
+    ],
+    "notVerified": [
+      "Fresh-profile default in browser",
+      "Full3-minute browser cycle",
+      "Cross-round browser traversal",
+      "Phone race layout",
+      "WebGL pixels"
+    ],
+    "applicability": "The final daylight gate only changes lamp interpolation and its test, not App/menu/Board DOM; the listed actual-browser check remains scoped to its source commit."
+  },
+  "logSHA256": {
+    "final-gate-full-tests.log": "03dd69461265d8691ef28a17e6964038e37ab18da8ceb7f775a9d3f8563fece1",
+    "final-gate-types.log": "10147488e18ec2870aec1e224fef52be413bc2819ea017fba750533ca30fdcd2",
+    "final-gate-double-build.log": "beac033c896bf9e4798b8adbb29033bd6f6a8ee72d5580f7e304911bfb58d9b5",
+    "final-gate-worker-dry-run.log": "a14cf3ec4d123a5d62dceea7551b549391a56fd0d701f1d1b1fddd017ea36b75",
+    "daylight-gate-tests.log": "8b5b060c030befbf3f3cff1bb08d9f4b9a23b129dfb899021008ba976c474b35",
+    "ready-to-review-tests.log": "8f883f80638b50c6b21795b7dceec842790f9e700f10d93146ecddf8a723514a"
+  },
+  "persistenceBoundary": "sessionStorage retains bounded phase for same-tab/session refresh and reconnect; no cross-tab, cross-device or browser-close guarantee.",
+  "fixtureDaylightGate": {
+    "phaseAtOrBelow": 0.8,
+    "factor": 0,
+    "ramp": "Smoothstep from phase 0.8 to dusk 1 at factor 0.12; smoothstep to night 2 at factor 1; dawn reverses the same function.",
+    "verified": "Whole 180-second cycle sampled every 50 ms; threshold/dusk continuity; actual Three SpotLight intensity/visibility and traverseVisible exclusion. No GPU shadow-pass measurement is claimed.",
+    "geometryChanged": false,
+    "sourceSHA256": "f8f1fee2bfb58b6897b4ba99f4d63ee1d8ce95038e3906af2ac8e88305426729"
+  }
+}

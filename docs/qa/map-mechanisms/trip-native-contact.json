@@ -1,0 +1,188 @@
+{
+  "reach": 0.4365,
+  "angle": 1.044169055361146,
+  "self_pairs": 45,
+  "allowed_local_interfaces": 12,
+  "cases": [
+    {
+      "case": "full_static_arrival_reflow",
+      "samples": 201,
+      "actor_hits": [],
+      "device_actor_hits": [],
+      "soft_contact": [],
+      "actor_tile_hits": [],
+      "floor_min": 0.004999995231628418,
+      "old_changed_during_trip": 0,
+      "target_xy_bounds": [
+        [
+          -2.5945005416870117,
+          -0.07380008697509766
+        ],
+        [
+          -0.5445001125335693,
+          0.5445001125335693
+        ]
+      ],
+      "mech_x_bounds": [
+        -0.7267646789550781,
+        0.7267656326293945
+      ],
+      "passed_geometry": true
+    },
+    {
+      "case": "full_static_trip_850",
+      "samples": 401,
+      "actor_hits": [],
+      "device_actor_hits": [],
+      "soft_contact": [
+        {
+          "t": 0.1575,
+          "target": "Target_ivory_cap",
+          "max_vertex_depth": 0.00024317750649061054,
+          "true_solid_penetration": true,
+          "witness": [
+            -7.541399955749512,
+            -3.3908228874206543,
+            1.8200000524520874
+          ],
+          "surface_intersections": 12
+        },
+        {
+          "t": 0.16,
+          "target": "Target_ivory_cap",
+          "max_vertex_depth": 0.0005106449825689197,
+          "true_solid_penetration": true,
+          "witness": [
+            -7.541720390319824,
+            -3.3896121978759766,
+            1.8200000524520874
+          ],
+          "surface_intersections": 12
+        },
+        {
+          "t": 0.1625,
+          "target": "Target_ivory_cap",
+          "max_vertex_depth": 0.00014706971705891192,
+          "true_solid_penetration": true,
+          "witness": [
+            -7.541614532470703,
+            -3.3900113105773926,
+            1.8200000524520874
+          ],
+          "surface_intersections": 12
+        }
+      ],
+      "actor_tile_hits": [],
+      "floor_min": 0.004999995231628418,
+      "old_changed_during_trip": 0,
+      "target_xy_bounds": [
+        [
+          -0.8261995315551758,
+          -0.07380008697509766
+        ],
+        [
+          -0.3831977844238281,
+          1.3042529821395874
+        ]
+      ],
+      "mech_x_bounds": [
+        -0.7267646789550781,
+        0.7267656326293945
+      ],
+      "passed_geometry": true
+    },
+    {
+      "case": "economy_static_arrival_reflow",
+      "samples": 201,
+      "actor_hits": [],
+      "device_actor_hits": [],
+      "soft_contact": [],
+      "actor_tile_hits": [],
+      "floor_min": 0.004999995231628418,
+      "old_changed_during_trip": 0,
+      "target_xy_bounds": [
+        [
+          -2.5945005416870117,
+          -0.07380008697509766
+        ],
+        [
+          -0.5445001125335693,
+          0.5445001125335693
+        ]
+      ],
+      "mech_x_bounds": [
+        -0.7267646789550781,
+        0.7267656326293945
+      ],
+      "passed_geometry": true
+    },
+    {
+      "case": "economy_static_trip_850",
+      "samples": 401,
+      "actor_hits": [],
+      "device_actor_hits": [],
+      "soft_contact": [
+        {
+          "t": 0.1575,
+          "target": "Target_ivory_cap",
+          "max_vertex_depth": 0,
+          "true_solid_penetration": true,
+          "witness": [
+            -7.544214248657227,
+            -3.380189895629883,
+            1.8200739622116089
+          ],
+          "surface_intersections": 6,
+          "witness_kind": "edge_interior"
+        },
+        {
+          "t": 0.16,
+          "target": "Target_ivory_cap",
+          "max_vertex_depth": 0.00048383561079390347,
+          "true_solid_penetration": true,
+          "witness": [
+            -7.544535160064697,
+            -3.378978729248047,
+            1.8200000524520874
+          ],
+          "surface_intersections": 8
+        },
+        {
+          "t": 0.1625,
+          "target": "Target_ivory_cap",
+          "max_vertex_depth": 4.140528471907601e-05,
+          "true_solid_penetration": true,
+          "witness": [
+            -7.544426918029785,
+            -3.379387378692627,
+            1.8200000524520874
+          ],
+          "surface_intersections": 8
+        }
+      ],
+      "actor_tile_hits": [],
+      "floor_min": 0.004999995231628418,
+      "old_changed_during_trip": 0,
+      "target_xy_bounds": [
+        [
+          -0.8261995315551758,
+          -0.07380008697509766
+        ],
+        [
+          -0.3831977844238281,
+          1.3038007020950317
+        ]
+      ],
+      "mech_x_bounds": [
+        -0.7267646789550781,
+        0.7267656326293945
+      ],
+      "passed_geometry": true
+    }
+  ],
+  "self_violations": [],
+  "domain_violations": [],
+  "mechanism_tile_hits": [],
+  "elapsed_seconds": 46.20067882537842,
+  "limitations": "Finite sampling of exact Three.js evaluated mesh vertices; no continuous-time proof. Base/cap/source sculpture are actual runtime geometry; partial skin blending modeled with native move->fall fade. Dataset sources are SHA-bound."
+}

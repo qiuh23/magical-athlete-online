@@ -1,0 +1,7384 @@
+{
+  "version": "new-environment-rebuild-v2",
+  "blender_version": "4.3.2",
+  "historical_certificate_inherited": false,
+  "exporter_sha256": "e7cbee2d180c28fce0144112ad508121472899b7b75d3b5358c490c489d94f32",
+  "notes": [
+    "All assets are new exports or unchanged bytes of identified new v1 landscape reexports.",
+    "No old tested-tree, performance, collision or runtime certificates inherited.",
+    "No missing fl_* fixture geometry reconstructed or substituted.",
+    "Only LOD2 tree GLBs included. Two materials per tree, no textures, original opaque source palette in corner vertex colors.",
+    "Source-world supports retain original heights. Facility prototypes remove root placement. No extra +1.43 offset."
+  ],
+  "assets": [
+    {
+      "name": "squiggle_base",
+      "file": "squiggle_base.glb",
+      "status": "new_source_derived_environment_v2",
+      "historical_certificate_inherited": false,
+      "source": {
+        "package": "athlete_three_maps_refined_20261112.zip",
+        "package_sha256": "f4c6d3845124b5a51898ff2abd1dbf8bf05d2459d9450ab80f996649365ef994",
+        "blend_member": "athlete_three_maps_refined_20261112/squiggle_refined.blend",
+        "blend_sha256": "650c44bc8ad5f65cae2d791d68ceffd9b508a38aa2832ec59860b478f36008a4"
+      },
+      "selector": "BASE_",
+      "space": "source_world_baked_identity",
+      "removed_source_root_matrix_y_up": null,
+      "source_objects": [
+        {
+          "name": "BASE_infield_surface",
+          "triangles": 676,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.5799999833106995
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.5799999833106995
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "BASE_sculpted_silhouette",
+          "triangles": 676,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.5799999833106995
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.5799999833106995
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "BASE_thin_mint_rim",
+          "triangles": 676,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.5799999833106995
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.5799999833106995
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "source_bounds_y_up": [
+        [
+          -24.52083396911621,
+          -1.2599999904632568,
+          -5.729166507720947
+        ],
+        [
+          16.60555648803711,
+          -0.699999988079071,
+          6.013888835906982
+        ]
+      ],
+      "expected_export_bounds_y_up": [
+        [
+          -24.52083396911621,
+          -1.2599999904632568,
+          -5.729166507720947
+        ],
+        [
+          16.60555648803711,
+          -0.699999988079071,
+          6.013888835906982
+        ]
+      ],
+      "triangles": 2028,
+      "bytes": 80068,
+      "sha256": "94b8d55dc02c8034838090102e1e6771e6dc4bf16b5402db25074cddf10f4793",
+      "git_blob_sha1": "7b4fcb7d5c87f043e14015ba5e26b1ee68c45736",
+      "exporter_sha256": "e7cbee2d180c28fce0144112ad508121472899b7b75d3b5358c490c489d94f32",
+      "source_materials_or_rebuilt_materials": [
+        {
+          "name": "GROVE_natural_grass",
+          "baseColorFactor": [
+            0.11999999731779099,
+            0.23999999463558197,
+            0.14000000059604645,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.8799999952316284
+        },
+        {
+          "name": "Craft_MOD_chassis_dark",
+          "baseColorFactor": [
+            0.008568125776946545,
+            0.045186202973127365,
+            0.05951123684644699,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.5400000214576721
+        },
+        {
+          "name": "Craft_mint_vinyl",
+          "baseColorFactor": [
+            0.16202937066555023,
+            0.5088813304901123,
+            0.3915724754333496,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.41999998688697815
+        }
+      ],
+      "tree_lod2": null,
+      "primitives": 3,
+      "materials": 3,
+      "vertices": 3054,
+      "bounds_y_up": [
+        [
+          -24.52083396911621,
+          -1.2599999904632568,
+          -5.729166507720947
+        ],
+        [
+          16.60555648803711,
+          -0.699999988079071,
+          6.013888835906982
+        ]
+      ],
+      "alpha_modes": [
+        "OPAQUE"
+      ]
+    },
+    {
+      "name": "squiggle_furniture",
+      "file": "squiggle_furniture.glb",
+      "status": "new_source_derived_environment_v2",
+      "historical_certificate_inherited": false,
+      "source": {
+        "package": "athlete_three_maps_refined_20261112.zip",
+        "package_sha256": "f4c6d3845124b5a51898ff2abd1dbf8bf05d2459d9450ab80f996649365ef994",
+        "blend_member": "athlete_three_maps_refined_20261112/squiggle_refined.blend",
+        "blend_sha256": "650c44bc8ad5f65cae2d791d68ceffd9b508a38aa2832ec59860b478f36008a4"
+      },
+      "selector": "REFINED_BATCH_FURNITURE_",
+      "space": "source_world_baked_identity",
+      "removed_source_root_matrix_y_up": null,
+      "source_objects": [
+        {
+          "name": "REFINED_BATCH_FURNITURE_Craft_MOD_chassis_dark",
+          "triangles": 260,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              1.2791666984558105
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              2.2891666889190674
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.07999999821186066
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              1.2791666984558105
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              2.2891666889190674
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.07999999821186066
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "REFINED_BATCH_FURNITURE_Craft_MOD_copper_latch",
+          "triangles": 864,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.5491666793823242
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              1.9641666412353516
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.4399999976158142
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.5491666793823242
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              1.9641666412353516
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.4399999976158142
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "REFINED_BATCH_FURNITURE_Craft_MOD_sage_shell",
+          "triangles": 216,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -15.520833015441895
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.009166666306555271
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.004999999888241291
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -15.520833015441895
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.009166666306555271
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.004999999888241291
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "REFINED_BATCH_FURNITURE_Craft_coral_vinyl",
+          "triangles": 108,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              1.2791666984558105
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              2.2891666889190674
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.33000001311302185
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              1.2791666984558105
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              2.2891666889190674
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.33000001311302185
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "REFINED_BATCH_FURNITURE_Craft_mint_vinyl",
+          "triangles": 216,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.7091666460037231
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              2.2891666889190674
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.4300000071525574
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.7091666460037231
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              2.2891666889190674
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.4300000071525574
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "REFINED_BATCH_FURNITURE_Craft_ochre_vinyl",
+          "triangles": 692,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              1.2791666984558105
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              2.2891666889190674
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.09000000357627869
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              1.2791666984558105
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              2.2891666889190674
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.09000000357627869
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "REFINED_BATCH_FURNITURE_REFINED_bench_wood",
+          "triangles": 324,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -15.520833015441895
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              -0.44083333015441895
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.19499999284744263
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -15.520833015441895
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              -0.44083333015441895
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.19499999284744263
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "REFINED_BATCH_FURNITURE_REFINED_warm_path",
+          "triangles": 16,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "source_bounds_y_up": [
+        [
+          -16.34583282470703,
+          -0.5799999833106995,
+          -2.869166612625122
+        ],
+        [
+          2.379166603088379,
+          0.23000000417232513,
+          0.5308332443237305
+        ]
+      ],
+      "expected_export_bounds_y_up": [
+        [
+          -16.34583282470703,
+          -0.5799999833106995,
+          -2.869166612625122
+        ],
+        [
+          2.379166603088379,
+          0.23000000417232513,
+          0.5308332443237305
+        ]
+      ],
+      "triangles": 2696,
+      "bytes": 105164,
+      "sha256": "ffffbfca78e8d7a5da8a77d87d817d477eb1e6510560a96ec5c15e9c00e27596",
+      "git_blob_sha1": "85c155622de9d5ea61b0d091ae4daa0d92b5031b",
+      "exporter_sha256": "e7cbee2d180c28fce0144112ad508121472899b7b75d3b5358c490c489d94f32",
+      "source_materials_or_rebuilt_materials": [
+        {
+          "name": "Craft_MOD_chassis_dark",
+          "baseColorFactor": [
+            0.008568125776946545,
+            0.045186202973127365,
+            0.05951123684644699,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.5400000214576721
+        },
+        {
+          "name": "Craft_MOD_copper_latch",
+          "baseColorFactor": [
+            0.5840784311294556,
+            0.2581828534603119,
+            0.09305896610021591,
+            1.0
+          ],
+          "metallicFactor": 0.3499999940395355,
+          "roughnessFactor": 0.3499999940395355
+        },
+        {
+          "name": "Craft_MOD_sage_shell",
+          "baseColorFactor": [
+            0.13013647496700287,
+            0.30054378509521484,
+            0.2622506618499756,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.38999998569488525
+        },
+        {
+          "name": "Craft_coral_vinyl",
+          "baseColorFactor": [
+            0.7912979125976562,
+            0.1946178376674652,
+            0.11953842639923096,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.4300000071525574
+        },
+        {
+          "name": "Craft_mint_vinyl",
+          "baseColorFactor": [
+            0.16202937066555023,
+            0.5088813304901123,
+            0.3915724754333496,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.41999998688697815
+        },
+        {
+          "name": "Craft_ochre_vinyl",
+          "baseColorFactor": [
+            0.8069522380828857,
+            0.4969329833984375,
+            0.08865558356046677,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.4399999976158142
+        },
+        {
+          "name": "REFINED_bench_wood",
+          "baseColorFactor": [
+            0.4300000071525574,
+            0.2800000011920929,
+            0.17000000178813934,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.699999988079071
+        },
+        {
+          "name": "REFINED_warm_path",
+          "baseColorFactor": [
+            0.49000000953674316,
+            0.47999998927116394,
+            0.3400000035762787,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.699999988079071
+        }
+      ],
+      "tree_lod2": null,
+      "primitives": 8,
+      "materials": 8,
+      "vertices": 3389,
+      "bounds_y_up": [
+        [
+          -16.34583282470703,
+          -0.5799999833106995,
+          -2.869166612625122
+        ],
+        [
+          2.379166603088379,
+          0.23000000417232513,
+          0.5308332443237305
+        ]
+      ],
+      "alpha_modes": [
+        "OPAQUE"
+      ]
+    },
+    {
+      "name": "tree_elm_rebuilt_lod2",
+      "file": "tree_elm_rebuilt_lod2.glb",
+      "status": "new_source_derived_environment_v2",
+      "historical_certificate_inherited": false,
+      "source": {
+        "package": "athlete_three_maps_refined_20261112.zip",
+        "package_sha256": "f4c6d3845124b5a51898ff2abd1dbf8bf05d2459d9450ab80f996649365ef994",
+        "blend_member": "athlete_three_maps_refined_20261112/squiggle_refined.blend",
+        "blend_sha256": "650c44bc8ad5f65cae2d791d68ceffd9b508a38aa2832ec59860b478f36008a4"
+      },
+      "selector": "TREE_01_Broadleaf_Elm",
+      "space": "source_world_baked_identity",
+      "removed_source_root_matrix_y_up": null,
+      "source_objects": [
+        {
+          "name": "TREE_01_Broadleaf_Elm__BARK_AND_BRANCHES",
+          "triangles": 4924,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "TREE_01_Broadleaf_Elm__SCULPTED_LEAVES",
+          "triangles": 8190,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "source_bounds_y_up": [
+        [
+          -1.470269799232483,
+          -0.02525119110941887,
+          -1.5482525825500488
+        ],
+        [
+          1.5926940441131592,
+          4.179192543029785,
+          1.4907010793685913
+        ]
+      ],
+      "expected_export_bounds_y_up": [
+        [
+          -1.4040768146514893,
+          -0.023990437388420105,
+          -1.5035244226455688
+        ],
+        [
+          1.5658767223358154,
+          4.234600067138672,
+          1.4907010793685913
+        ]
+      ],
+      "triangles": 3927,
+      "bytes": 334352,
+      "sha256": "7de3c13954b48a0eb3f2763baaa5c16980a079c5ab5995a955f2a3a89456db58",
+      "git_blob_sha1": "3d26f681f1b32ef74ed49d04bd9c8ba883776905",
+      "exporter_sha256": "e7cbee2d180c28fce0144112ad508121472899b7b75d3b5358c490c489d94f32",
+      "source_materials_or_rebuilt_materials": [
+        {
+          "name": "NEW_v2_bark_source_vertex_color",
+          "baseColorFactor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.8999999761581421
+        },
+        {
+          "name": "NEW_v2_leaves_source_vertex_color",
+          "baseColorFactor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.7699999809265137
+        }
+      ],
+      "tree_lod2": [
+        {
+          "role": "bark",
+          "source_triangles": 4924,
+          "rebuilt_triangles": 1470,
+          "ratio_requested": 0.3,
+          "ratio_actual": 0.2985377741673436,
+          "source_bounds_y_up": [
+            [
+              -1.3460373878479004,
+              -0.02525119110941887,
+              -1.4625359773635864
+            ],
+            [
+              1.4435917139053345,
+              4.085606098175049,
+              1.3294743299484253
+            ]
+          ],
+          "source_palette": [
+            {
+              "name": "TREE Bark | warm grey brown",
+              "baseColorFactor": [
+                0.1899999976158142,
+                0.125,
+                0.07199999690055847,
+                1.0
+              ],
+              "metallicFactor": 0.0,
+              "roughnessFactor": 0.8799999952316284
+            },
+            {
+              "name": "TREE Bark | lit ridges",
+              "baseColorFactor": [
+                0.24500000476837158,
+                0.17499999701976776,
+                0.10000000149011612,
+                1.0
+              ],
+              "metallicFactor": 0.0,
+              "roughnessFactor": 0.9100000262260437
+            },
+            {
+              "name": "TREE Bark | fine grooves",
+              "baseColorFactor": [
+                0.12999999523162842,
+                0.08500000089406967,
+                0.04500000178813934,
+                1.0
+              ],
+              "metallicFactor": 0.0,
+              "roughnessFactor": 0.8999999761581421
+            }
+          ],
+          "surviving_palette_triangles": {
+            "TREE Bark | warm grey brown": 1437,
+            "TREE Bark | fine grooves": 33
+          },
+          "rebuilt_material": "NEW_v2_bark_source_vertex_color",
+          "removed_degenerate_faces": 0,
+          "post_decimate_topology_repaired": true,
+          "roughness": 0.9,
+          "roughness_note": "New bark approximation: original 0.88/0.90/0.91 -> 0.90; leaf roughness unchanged."
+        },
+        {
+          "role": "leaves",
+          "source_triangles": 8190,
+          "rebuilt_triangles": 2457,
+          "ratio_requested": 0.3,
+          "ratio_actual": 0.3,
+          "source_bounds_y_up": [
+            [
+              -1.470269799232483,
+              2.0538597106933594,
+              -1.5482525825500488
+            ],
+            [
+              1.5926940441131592,
+              4.179192543029785,
+              1.4907010793685913
+            ]
+          ],
+          "source_palette": [
+            {
+              "name": "TREE Foliage 00 | matte leaf",
+              "baseColorFactor": [
+                0.11500000208616257,
+                0.23999999463558197,
+                0.06300000101327896,
+                1.0
+              ],
+              "metallicFactor": 0.0,
+              "roughnessFactor": 0.7699999809265137
+            },
+            {
+              "name": "TREE Foliage 01 | matte leaf",
+              "baseColorFactor": [
+                0.18000000715255737,
+                0.3199999928474426,
+                0.08500000089406967,
+                1.0
+              ],
+              "metallicFactor": 0.0,
+              "roughnessFactor": 0.7699999809265137
+            },
+            {
+              "name": "TREE Foliage 02 | matte leaf",
+              "baseColorFactor": [
+                0.23000000417232513,
+                0.38499999046325684,
+                0.10000000149011612,
+                1.0
+              ],
+              "metallicFactor": 0.0,
+              "roughnessFactor": 0.7699999809265137
+            },
+            {
+              "name": "TREE Foliage 03 | matte leaf",
+              "baseColorFactor": [
+                0.2800000011920929,
+                0.4300000071525574,
+                0.12999999523162842,
+                1.0
+              ],
+              "metallicFactor": 0.0,
+              "roughnessFactor": 0.7699999809265137
+            },
+            {
+              "name": "TREE Foliage 04 | matte leaf",
+              "baseColorFactor": [
+                0.15000000596046448,
+                0.2800000011920929,
+                0.07500000298023224,
+                1.0
+              ],
+              "metallicFactor": 0.0,
+              "roughnessFactor": 0.7699999809265137
+            },
+            {
+              "name": "TREE Foliage 05 | matte leaf",
+              "baseColorFactor": [
+                0.3499999940395355,
+                0.46000000834465027,
+                0.17000000178813934,
+                1.0
+              ],
+              "metallicFactor": 0.0,
+              "roughnessFactor": 0.7699999809265137
+            }
+          ],
+          "surviving_palette_triangles": {
+            "TREE Foliage 03 | matte leaf": 283,
+            "TREE Foliage 00 | matte leaf": 388,
+            "TREE Foliage 05 | matte leaf": 237,
+            "TREE Foliage 02 | matte leaf": 559,
+            "TREE Foliage 01 | matte leaf": 651,
+            "TREE Foliage 04 | matte leaf": 339
+          },
+          "rebuilt_material": "NEW_v2_leaves_source_vertex_color",
+          "removed_degenerate_faces": 0,
+          "post_decimate_topology_repaired": false,
+          "roughness": 0.77,
+          "roughness_note": "New bark approximation: original 0.88/0.90/0.91 -> 0.90; leaf roughness unchanged."
+        }
+      ],
+      "primitives": 2,
+      "materials": 2,
+      "vertices": 8568,
+      "bounds_y_up": [
+        [
+          -1.4040768146514893,
+          -0.023990437388420105,
+          -1.5035244226455688
+        ],
+        [
+          1.5658767223358154,
+          4.234600067138672,
+          1.4907010793685913
+        ]
+      ],
+      "alpha_modes": [
+        "OPAQUE"
+      ]
+    },
+    {
+      "name": "tree_maple_rebuilt_lod2",
+      "file": "tree_maple_rebuilt_lod2.glb",
+      "status": "new_source_derived_environment_v2",
+      "historical_certificate_inherited": false,
+      "source": {
+        "package": "athlete_three_maps_refined_20261112.zip",
+        "package_sha256": "f4c6d3845124b5a51898ff2abd1dbf8bf05d2459d9450ab80f996649365ef994",
+        "blend_member": "athlete_three_maps_refined_20261112/squiggle_refined.blend",
+        "blend_sha256": "650c44bc8ad5f65cae2d791d68ceffd9b508a38aa2832ec59860b478f36008a4"
+      },
+      "selector": "TREE_02_Airy_FieldMaple",
+      "space": "source_world_baked_identity",
+      "removed_source_root_matrix_y_up": null,
+      "source_objects": [
+        {
+          "name": "TREE_02_Airy_FieldMaple__BARK_AND_BRANCHES",
+          "triangles": 4104,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "TREE_02_Airy_FieldMaple__SCULPTED_LEAVES",
+          "triangles": 9000,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "source_bounds_y_up": [
+        [
+          -1.4456428289413452,
+          -0.02525119110941887,
+          -1.6063026189804077
+        ],
+        [
+          1.6318447589874268,
+          3.5349836349487305,
+          1.4490435123443604
+        ]
+      ],
+      "expected_export_bounds_y_up": [
+        [
+          -1.4158976078033447,
+          -0.023990437388420105,
+          -1.6063026189804077
+        ],
+        [
+          1.6318447589874268,
+          3.588592052459717,
+          1.3709635734558105
+        ]
+      ],
+      "triangles": 3924,
+      "bytes": 353572,
+      "sha256": "1bd23283396913472077482436d1493a81fe7ee8ff1edf7105886ca28643df1c",
+      "git_blob_sha1": "a9fcc50ca381913345893c3c359009705d1928cf",
+      "exporter_sha256": "e7cbee2d180c28fce0144112ad508121472899b7b75d3b5358c490c489d94f32",
+      "source_materials_or_rebuilt_materials": [
+        {
+          "name": "NEW_v2_bark_source_vertex_color.001",
+          "baseColorFactor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.8999999761581421
+        },
+        {
+          "name": "NEW_v2_leaves_source_vertex_color.001",
+          "baseColorFactor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.7699999809265137
+        }
+      ],
+      "tree_lod2": [
+        {
+          "role": "bark",
+          "source_triangles": 4104,
+          "rebuilt_triangles": 1224,
+          "ratio_requested": 0.3,
+          "ratio_actual": 0.2982456140350877,
+          "source_bounds_y_up": [
+            [
+              -1.2998124361038208,
+              -0.02525119110941887,
+              -1.5002024173736572
+            ],
+            [
+              1.5045093297958374,
+              3.477607250213623,
+              1.2857953310012817
+            ]
+          ],
+          "source_palette": [
+            {
+              "name": "TREE Bark | warm grey brown",
+              "baseColorFactor": [
+                0.1899999976158142,
+                0.125,
+                0.07199999690055847,
+                1.0
+              ],
+              "metallicFactor": 0.0,
+              "roughnessFactor": 0.8799999952316284
+            },
+            {
+              "name": "TREE Bark | lit ridges",
+              "baseColorFactor": [
+                0.24500000476837158,
+                0.17499999701976776,
+                0.10000000149011612,
+                1.0
+              ],
+              "metallicFactor": 0.0,
+              "roughnessFactor": 0.9100000262260437
+            },
+            {
+              "name": "TREE Bark | fine grooves",
+              "baseColorFactor": [
+                0.12999999523162842,
+                0.08500000089406967,
+                0.04500000178813934,
+                1.0
+              ],
+              "metallicFactor": 0.0,
+              "roughnessFactor": 0.8999999761581421
+            }
+          ],
+          "surviving_palette_triangles": {
+            "TREE Bark | warm grey brown": 1191,
+            "TREE Bark | fine grooves": 33
+          },
+          "rebuilt_material": "NEW_v2_bark_source_vertex_color.001",
+          "removed_degenerate_faces": 0,
+          "post_decimate_topology_repaired": true,
+          "roughness": 0.9,
+          "roughness_note": "New bark approximation: original 0.88/0.90/0.91 -> 0.90; leaf roughness unchanged."
+        },
+        {
+          "role": "leaves",
+          "source_triangles": 9000,
+          "rebuilt_triangles": 2700,
+          "ratio_requested": 0.3,
+          "ratio_actual": 0.3,
+          "source_bounds_y_up": [
+            [
+              -1.4456428289413452,
+              1.7580201625823975,
+              -1.6063026189804077
+            ],
+            [
+              1.6318447589874268,
+              3.5349836349487305,
+              1.4490435123443604
+            ]
+          ],
+          "source_palette": [
+            {
+              "name": "TREE Foliage 00 | matte leaf",
+              "baseColorFactor": [
+                0.11500000208616257,
+                0.23999999463558197,
+                0.06300000101327896,
+                1.0
+              ],
+              "metallicFactor": 0.0,
+              "roughnessFactor": 0.7699999809265137
+            },
+            {
+              "name": "TREE Foliage 01 | matte leaf",
+              "baseColorFactor": [
+                0.18000000715255737,
+                0.3199999928474426,
+                0.08500000089406967,
+                1.0
+              ],
+              "metallicFactor": 0.0,
+              "roughnessFactor": 0.7699999809265137
+            },
+            {
+              "name": "TREE Foliage 02 | matte leaf",
+              "baseColorFactor": [
+                0.23000000417232513,
+                0.38499999046325684,
+                0.10000000149011612,
+                1.0
+              ],
+              "metallicFactor": 0.0,
+              "roughnessFactor": 0.7699999809265137
+            },
+            {
+              "name": "TREE Foliage 03 | matte leaf",
+              "baseColorFactor": [
+                0.2800000011920929,
+                0.4300000071525574,
+                0.12999999523162842,
+                1.0
+              ],
+              "metallicFactor": 0.0,
+              "roughnessFactor": 0.7699999809265137
+            },
+            {
+              "name": "TREE Foliage 04 | matte leaf",
+              "baseColorFactor": [
+                0.15000000596046448,
+                0.2800000011920929,
+                0.07500000298023224,
+                1.0
+              ],
+              "metallicFactor": 0.0,
+              "roughnessFactor": 0.7699999809265137
+            },
+            {
+              "name": "TREE Foliage 05 | matte leaf",
+              "baseColorFactor": [
+                0.3499999940395355,
+                0.46000000834465027,
+                0.17000000178813934,
+                1.0
+              ],
+              "metallicFactor": 0.0,
+              "roughnessFactor": 0.7699999809265137
+            }
+          ],
+          "surviving_palette_triangles": {
+            "TREE Foliage 04 | matte leaf": 444,
+            "TREE Foliage 01 | matte leaf": 809,
+            "TREE Foliage 00 | matte leaf": 399,
+            "TREE Foliage 05 | matte leaf": 221,
+            "TREE Foliage 03 | matte leaf": 299,
+            "TREE Foliage 02 | matte leaf": 528
+          },
+          "rebuilt_material": "NEW_v2_leaves_source_vertex_color.001",
+          "removed_degenerate_faces": 0,
+          "post_decimate_topology_repaired": false,
+          "roughness": 0.77,
+          "roughness_note": "New bark approximation: original 0.88/0.90/0.91 -> 0.90; leaf roughness unchanged."
+        }
+      ],
+      "primitives": 2,
+      "materials": 2,
+      "vertices": 9102,
+      "bounds_y_up": [
+        [
+          -1.4158976078033447,
+          -0.023990437388420105,
+          -1.6063026189804077
+        ],
+        [
+          1.6318447589874268,
+          3.588592052459717,
+          1.3709635734558105
+        ]
+      ],
+      "alpha_modes": [
+        "OPAQUE"
+      ]
+    },
+    {
+      "name": "tree_sapling_rebuilt_lod2",
+      "file": "tree_sapling_rebuilt_lod2.glb",
+      "status": "new_source_derived_environment_v2",
+      "historical_certificate_inherited": false,
+      "source": {
+        "package": "athlete_three_maps_refined_20261112.zip",
+        "package_sha256": "f4c6d3845124b5a51898ff2abd1dbf8bf05d2459d9450ab80f996649365ef994",
+        "blend_member": "athlete_three_maps_refined_20261112/squiggle_refined.blend",
+        "blend_sha256": "650c44bc8ad5f65cae2d791d68ceffd9b508a38aa2832ec59860b478f36008a4"
+      },
+      "selector": "TREE_03_Young_Sapling",
+      "space": "source_world_baked_identity",
+      "removed_source_root_matrix_y_up": null,
+      "source_objects": [
+        {
+          "name": "TREE_03_Young_Sapling__BARK_AND_BRANCHES",
+          "triangles": 2842,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "TREE_03_Young_Sapling__SCULPTED_LEAVES",
+          "triangles": 4590,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "source_bounds_y_up": [
+        [
+          -0.8855272531509399,
+          -0.018022621050477028,
+          -0.8041512966156006
+        ],
+        [
+          0.9539444446563721,
+          2.225137710571289,
+          0.7104723453521729
+        ]
+      ],
+      "expected_export_bounds_y_up": [
+        [
+          -0.8628181219100952,
+          -0.016825534403324127,
+          -0.7646277546882629
+        ],
+        [
+          0.9539444446563721,
+          2.2703640460968018,
+          0.7104723453521729
+        ]
+      ],
+      "triangles": 2224,
+      "bytes": 189424,
+      "sha256": "913f328637d1b23bba8603a4cbf48028e0fb957abd3033c31bef0ebab3583f40",
+      "git_blob_sha1": "68489cbcc173755a0a30752147e3d7543c7fe69a",
+      "exporter_sha256": "e7cbee2d180c28fce0144112ad508121472899b7b75d3b5358c490c489d94f32",
+      "source_materials_or_rebuilt_materials": [
+        {
+          "name": "NEW_v2_bark_source_vertex_color.002",
+          "baseColorFactor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.8999999761581421
+        },
+        {
+          "name": "NEW_v2_leaves_source_vertex_color.002",
+          "baseColorFactor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.7699999809265137
+        }
+      ],
+      "tree_lod2": [
+        {
+          "role": "bark",
+          "source_triangles": 2842,
+          "rebuilt_triangles": 847,
+          "ratio_requested": 0.3,
+          "ratio_actual": 0.29802955665024633,
+          "source_bounds_y_up": [
+            [
+              -0.7904233336448669,
+              -0.018022621050477028,
+              -0.7035532593727112
+            ],
+            [
+              0.8489665985107422,
+              2.209301233291626,
+              0.6098390221595764
+            ]
+          ],
+          "source_palette": [
+            {
+              "name": "TREE Bark | warm grey brown",
+              "baseColorFactor": [
+                0.1899999976158142,
+                0.125,
+                0.07199999690055847,
+                1.0
+              ],
+              "metallicFactor": 0.0,
+              "roughnessFactor": 0.8799999952316284
+            },
+            {
+              "name": "TREE Bark | lit ridges",
+              "baseColorFactor": [
+                0.24500000476837158,
+                0.17499999701976776,
+                0.10000000149011612,
+                1.0
+              ],
+              "metallicFactor": 0.0,
+              "roughnessFactor": 0.9100000262260437
+            },
+            {
+              "name": "TREE Bark | fine grooves",
+              "baseColorFactor": [
+                0.12999999523162842,
+                0.08500000089406967,
+                0.04500000178813934,
+                1.0
+              ],
+              "metallicFactor": 0.0,
+              "roughnessFactor": 0.8999999761581421
+            }
+          ],
+          "surviving_palette_triangles": {
+            "TREE Bark | warm grey brown": 824,
+            "TREE Bark | fine grooves": 23
+          },
+          "rebuilt_material": "NEW_v2_bark_source_vertex_color.002",
+          "removed_degenerate_faces": 0,
+          "post_decimate_topology_repaired": true,
+          "roughness": 0.9,
+          "roughness_note": "New bark approximation: original 0.88/0.90/0.91 -> 0.90; leaf roughness unchanged."
+        },
+        {
+          "role": "leaves",
+          "source_triangles": 4590,
+          "rebuilt_triangles": 1377,
+          "ratio_requested": 0.3,
+          "ratio_actual": 0.3,
+          "source_bounds_y_up": [
+            [
+              -0.8855272531509399,
+              1.1638580560684204,
+              -0.8041512966156006
+            ],
+            [
+              0.9539444446563721,
+              2.225137710571289,
+              0.7104723453521729
+            ]
+          ],
+          "source_palette": [
+            {
+              "name": "TREE Foliage 00 | matte leaf",
+              "baseColorFactor": [
+                0.11500000208616257,
+                0.23999999463558197,
+                0.06300000101327896,
+                1.0
+              ],
+              "metallicFactor": 0.0,
+              "roughnessFactor": 0.7699999809265137
+            },
+            {
+              "name": "TREE Foliage 01 | matte leaf",
+              "baseColorFactor": [
+                0.18000000715255737,
+                0.3199999928474426,
+                0.08500000089406967,
+                1.0
+              ],
+              "metallicFactor": 0.0,
+              "roughnessFactor": 0.7699999809265137
+            },
+            {
+              "name": "TREE Foliage 02 | matte leaf",
+              "baseColorFactor": [
+                0.23000000417232513,
+                0.38499999046325684,
+                0.10000000149011612,
+                1.0
+              ],
+              "metallicFactor": 0.0,
+              "roughnessFactor": 0.7699999809265137
+            },
+            {
+              "name": "TREE Foliage 03 | matte leaf",
+              "baseColorFactor": [
+                0.2800000011920929,
+                0.4300000071525574,
+                0.12999999523162842,
+                1.0
+              ],
+              "metallicFactor": 0.0,
+              "roughnessFactor": 0.7699999809265137
+            },
+            {
+              "name": "TREE Foliage 04 | matte leaf",
+              "baseColorFactor": [
+                0.15000000596046448,
+                0.2800000011920929,
+                0.07500000298023224,
+                1.0
+              ],
+              "metallicFactor": 0.0,
+              "roughnessFactor": 0.7699999809265137
+            },
+            {
+              "name": "TREE Foliage 05 | matte leaf",
+              "baseColorFactor": [
+                0.3499999940395355,
+                0.46000000834465027,
+                0.17000000178813934,
+                1.0
+              ],
+              "metallicFactor": 0.0,
+              "roughnessFactor": 0.7699999809265137
+            }
+          ],
+          "surviving_palette_triangles": {
+            "TREE Foliage 02 | matte leaf": 300,
+            "TREE Foliage 03 | matte leaf": 142,
+            "TREE Foliage 00 | matte leaf": 220,
+            "TREE Foliage 01 | matte leaf": 365,
+            "TREE Foliage 05 | matte leaf": 140,
+            "TREE Foliage 04 | matte leaf": 210
+          },
+          "rebuilt_material": "NEW_v2_leaves_source_vertex_color.002",
+          "removed_degenerate_faces": 0,
+          "post_decimate_topology_repaired": false,
+          "roughness": 0.77,
+          "roughness_note": "New bark approximation: original 0.88/0.90/0.91 -> 0.90; leaf roughness unchanged."
+        }
+      ],
+      "primitives": 2,
+      "materials": 2,
+      "vertices": 4826,
+      "bounds_y_up": [
+        [
+          -0.8628181219100952,
+          -0.016825534403324127,
+          -0.7646277546882629
+        ],
+        [
+          0.9539444446563721,
+          2.2703640460968018,
+          0.7104723453521729
+        ]
+      ],
+      "alpha_modes": [
+        "OPAQUE"
+      ]
+    },
+    {
+      "name": "boardwalks_base",
+      "file": "boardwalks_base.glb",
+      "status": "new_source_derived_environment_v2",
+      "historical_certificate_inherited": false,
+      "source": {
+        "package": "athlete_three_maps_refined_20261112.zip",
+        "package_sha256": "f4c6d3845124b5a51898ff2abd1dbf8bf05d2459d9450ab80f996649365ef994",
+        "blend_member": "athlete_three_maps_refined_20261112/boardwalks_refined.blend",
+        "blend_sha256": "41f4c4412a0598cc26d4368fc54ba1809f8c4b951de85d637055f65edb1e4dca"
+      },
+      "selector": "BASE_",
+      "space": "source_world_baked_identity",
+      "removed_source_root_matrix_y_up": null,
+      "source_objects": [
+        {
+          "name": "BASE_infield_surface",
+          "triangles": 624,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.5799999833106995
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.5799999833106995
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "BASE_sculpted_silhouette",
+          "triangles": 624,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.5799999833106995
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.5799999833106995
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "BASE_thin_mint_rim",
+          "triangles": 624,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.5799999833106995
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.5799999833106995
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "source_bounds_y_up": [
+        [
+          -24.157812118530273,
+          -1.2599999904632568,
+          -7.053124904632568
+        ],
+        [
+          18.584375381469727,
+          -0.699999988079071,
+          6.412499904632568
+        ]
+      ],
+      "expected_export_bounds_y_up": [
+        [
+          -24.157812118530273,
+          -1.2599999904632568,
+          -7.053124904632568
+        ],
+        [
+          18.584375381469727,
+          -0.699999988079071,
+          6.412499904632568
+        ]
+      ],
+      "triangles": 1872,
+      "bytes": 73856,
+      "sha256": "f842becc1cfdce6c1d050f6ebec23c3463b796ee348d27c56215be600e3728e2",
+      "git_blob_sha1": "87cc38873f947fb00732ebd8f45a8aa6becc2109",
+      "exporter_sha256": "e7cbee2d180c28fce0144112ad508121472899b7b75d3b5358c490c489d94f32",
+      "source_materials_or_rebuilt_materials": [
+        {
+          "name": "REFINED_sheltered_water",
+          "baseColorFactor": [
+            0.10499999672174454,
+            0.3100000023841858,
+            0.33000001311302185,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.23999999463558197
+        },
+        {
+          "name": "Craft_MOD_chassis_dark",
+          "baseColorFactor": [
+            0.008568125776946545,
+            0.045186202973127365,
+            0.05951123684644699,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.5400000214576721
+        },
+        {
+          "name": "Craft_mint_vinyl",
+          "baseColorFactor": [
+            0.16202937066555023,
+            0.5088813304901123,
+            0.3915724754333496,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.41999998688697815
+        }
+      ],
+      "tree_lod2": null,
+      "primitives": 3,
+      "materials": 3,
+      "vertices": 2808,
+      "bounds_y_up": [
+        [
+          -24.157812118530273,
+          -1.2599999904632568,
+          -7.053124904632568
+        ],
+        [
+          18.584375381469727,
+          -0.699999988079071,
+          6.412499904632568
+        ]
+      ],
+      "alpha_modes": [
+        "OPAQUE"
+      ]
+    },
+    {
+      "name": "boardwalks_furniture",
+      "file": "boardwalks_furniture.glb",
+      "status": "new_source_derived_environment_v2",
+      "historical_certificate_inherited": false,
+      "source": {
+        "package": "athlete_three_maps_refined_20261112.zip",
+        "package_sha256": "f4c6d3845124b5a51898ff2abd1dbf8bf05d2459d9450ab80f996649365ef994",
+        "blend_member": "athlete_three_maps_refined_20261112/boardwalks_refined.blend",
+        "blend_sha256": "41f4c4412a0598cc26d4368fc54ba1809f8c4b951de85d637055f65edb1e4dca"
+      },
+      "selector": "REFINED_BATCH_FURNITURE_",
+      "space": "source_world_baked_identity",
+      "removed_source_root_matrix_y_up": null,
+      "source_objects": [
+        {
+          "name": "REFINED_BATCH_FURNITURE_Craft_MOD_chassis_dark",
+          "triangles": 260,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -9.557812690734863
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              -3.3868749141693115
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.07999999821186066
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -9.557812690734863
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              -3.3868749141693115
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.07999999821186066
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "REFINED_BATCH_FURNITURE_Craft_MOD_copper_latch",
+          "triangles": 864,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -10.287812232971191
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              -3.7118749618530273
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.4399999976158142
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -10.287812232971191
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              -3.7118749618530273
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.4399999976158142
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "REFINED_BATCH_FURNITURE_Craft_MOD_sage_shell",
+          "triangles": 216,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -19.357812881469727
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              1.3331249952316284
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.004999999888241291
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -19.357812881469727
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              1.3331249952316284
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.004999999888241291
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "REFINED_BATCH_FURNITURE_Craft_coral_vinyl",
+          "triangles": 108,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -9.557812690734863
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              -3.3868749141693115
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.33000001311302185
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -9.557812690734863
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              -3.3868749141693115
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.33000001311302185
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "REFINED_BATCH_FURNITURE_Craft_mint_vinyl",
+          "triangles": 216,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -10.127812385559082
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              -3.3868749141693115
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.4300000071525574
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -10.127812385559082
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              -3.3868749141693115
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.4300000071525574
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "REFINED_BATCH_FURNITURE_Craft_ochre_vinyl",
+          "triangles": 692,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -9.557812690734863
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              -3.3868749141693115
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.09000000357627869
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -9.557812690734863
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              -3.3868749141693115
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.09000000357627869
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "REFINED_BATCH_FURNITURE_REFINED_bench_wood",
+          "triangles": 324,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -19.357812881469727
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.8831250071525574
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.19499999284744263
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -19.357812881469727
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.8831250071525574
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.19499999284744263
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "REFINED_BATCH_FURNITURE_REFINED_warm_path",
+          "triangles": 16,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "source_bounds_y_up": [
+        [
+          -20.18281364440918,
+          -0.5799999833106995,
+          -1.3781249523162842
+        ],
+        [
+          -8.457812309265137,
+          0.23000000417232513,
+          3.976875066757202
+        ]
+      ],
+      "expected_export_bounds_y_up": [
+        [
+          -20.18281364440918,
+          -0.5799999833106995,
+          -1.3781249523162842
+        ],
+        [
+          -8.457812309265137,
+          0.23000000417232513,
+          3.976875066757202
+        ]
+      ],
+      "triangles": 2696,
+      "bytes": 115144,
+      "sha256": "004404c2b23631801e0d2f5765af812a48793ce36b23be0998a24865d7fe7823",
+      "git_blob_sha1": "cdc64ba8fffba9c18d336c77dd23e61b8eb0ec39",
+      "exporter_sha256": "e7cbee2d180c28fce0144112ad508121472899b7b75d3b5358c490c489d94f32",
+      "source_materials_or_rebuilt_materials": [
+        {
+          "name": "Craft_MOD_chassis_dark",
+          "baseColorFactor": [
+            0.008568125776946545,
+            0.045186202973127365,
+            0.05951123684644699,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.5400000214576721
+        },
+        {
+          "name": "Craft_MOD_copper_latch",
+          "baseColorFactor": [
+            0.5840784311294556,
+            0.2581828534603119,
+            0.09305896610021591,
+            1.0
+          ],
+          "metallicFactor": 0.3499999940395355,
+          "roughnessFactor": 0.3499999940395355
+        },
+        {
+          "name": "Craft_MOD_sage_shell",
+          "baseColorFactor": [
+            0.13013647496700287,
+            0.30054378509521484,
+            0.2622506618499756,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.38999998569488525
+        },
+        {
+          "name": "Craft_coral_vinyl",
+          "baseColorFactor": [
+            0.7912979125976562,
+            0.1946178376674652,
+            0.11953842639923096,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.4300000071525574
+        },
+        {
+          "name": "Craft_mint_vinyl",
+          "baseColorFactor": [
+            0.16202937066555023,
+            0.5088813304901123,
+            0.3915724754333496,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.41999998688697815
+        },
+        {
+          "name": "Craft_ochre_vinyl",
+          "baseColorFactor": [
+            0.8069522380828857,
+            0.4969329833984375,
+            0.08865558356046677,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.4399999976158142
+        },
+        {
+          "name": "REFINED_bench_wood",
+          "baseColorFactor": [
+            0.4300000071525574,
+            0.2800000011920929,
+            0.17000000178813934,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.699999988079071
+        },
+        {
+          "name": "REFINED_warm_path",
+          "baseColorFactor": [
+            0.49000000953674316,
+            0.47999998927116394,
+            0.3400000035762787,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.699999988079071
+        }
+      ],
+      "tree_lod2": null,
+      "primitives": 8,
+      "materials": 8,
+      "vertices": 3805,
+      "bounds_y_up": [
+        [
+          -20.18281364440918,
+          -0.5799999833106995,
+          -1.3781249523162842
+        ],
+        [
+          -8.457812309265137,
+          0.23000000417232513,
+          3.976875066757202
+        ]
+      ],
+      "alpha_modes": [
+        "OPAQUE"
+      ]
+    },
+    {
+      "name": "bridges_base",
+      "file": "bridges_base.glb",
+      "status": "new_source_derived_environment_v2",
+      "historical_certificate_inherited": false,
+      "source": {
+        "package": "athlete_three_maps_refined_20261112.zip",
+        "package_sha256": "f4c6d3845124b5a51898ff2abd1dbf8bf05d2459d9450ab80f996649365ef994",
+        "blend_member": "athlete_three_maps_refined_20261112/bridges_refined.blend",
+        "blend_sha256": "4b8b91a88aad2134d074ad074d4332a39dd013a0829c63c70062472ae3c6c4c2"
+      },
+      "selector": "BASE_",
+      "space": "source_world_baked_identity",
+      "removed_source_root_matrix_y_up": null,
+      "source_objects": [
+        {
+          "name": "BASE_infield_surface",
+          "triangles": 676,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.5799999833106995
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.5799999833106995
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "BASE_sculpted_silhouette",
+          "triangles": 676,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.5799999833106995
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.5799999833106995
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "BASE_thin_mint_rim",
+          "triangles": 676,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.5799999833106995
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.5799999833106995
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "source_bounds_y_up": [
+        [
+          -34.649200439453125,
+          -1.2599999904632568,
+          -8.655200004577637
+        ],
+        [
+          25.79319953918457,
+          -0.699999988079071,
+          7.663000106811523
+        ]
+      ],
+      "expected_export_bounds_y_up": [
+        [
+          -34.649200439453125,
+          -1.2599999904632568,
+          -8.655200004577637
+        ],
+        [
+          25.79319953918457,
+          -0.699999988079071,
+          7.663000106811523
+        ]
+      ],
+      "triangles": 2028,
+      "bytes": 80072,
+      "sha256": "43024a1c49c108aeb487b4b797b3c6bb8864538bf54d0ba3b698bf852e0368fe",
+      "git_blob_sha1": "4c30bda86a723e8991d4d8f6d1f62120d2c94af5",
+      "exporter_sha256": "e7cbee2d180c28fce0144112ad508121472899b7b75d3b5358c490c489d94f32",
+      "source_materials_or_rebuilt_materials": [
+        {
+          "name": "GROVE_natural_grass",
+          "baseColorFactor": [
+            0.11999999731779099,
+            0.23999999463558197,
+            0.14000000059604645,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.8799999952316284
+        },
+        {
+          "name": "Craft_MOD_chassis_dark",
+          "baseColorFactor": [
+            0.008568125776946545,
+            0.045186202973127365,
+            0.05951123684644699,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.5400000214576721
+        },
+        {
+          "name": "Craft_mint_vinyl",
+          "baseColorFactor": [
+            0.16202937066555023,
+            0.5088813304901123,
+            0.3915724754333496,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.41999998688697815
+        }
+      ],
+      "tree_lod2": null,
+      "primitives": 3,
+      "materials": 3,
+      "vertices": 3054,
+      "bounds_y_up": [
+        [
+          -34.649200439453125,
+          -1.2599999904632568,
+          -8.655200004577637
+        ],
+        [
+          25.79319953918457,
+          -0.699999988079071,
+          7.663000106811523
+        ]
+      ],
+      "alpha_modes": [
+        "OPAQUE"
+      ]
+    },
+    {
+      "name": "bridges_furniture",
+      "file": "bridges_furniture.glb",
+      "status": "new_source_derived_environment_v2",
+      "historical_certificate_inherited": false,
+      "source": {
+        "package": "athlete_three_maps_refined_20261112.zip",
+        "package_sha256": "f4c6d3845124b5a51898ff2abd1dbf8bf05d2459d9450ab80f996649365ef994",
+        "blend_member": "athlete_three_maps_refined_20261112/bridges_refined.blend",
+        "blend_sha256": "4b8b91a88aad2134d074ad074d4332a39dd013a0829c63c70062472ae3c6c4c2"
+      },
+      "selector": "REFINED_BATCH_FURNITURE_",
+      "space": "source_world_baked_identity",
+      "removed_source_root_matrix_y_up": null,
+      "source_objects": [
+        {
+          "name": "REFINED_BATCH_FURNITURE_Craft_MOD_chassis_dark",
+          "triangles": 260,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -22.849199295043945
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              1.0152000188827515
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.07999999821186066
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -22.849199295043945
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              1.0152000188827515
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.07999999821186066
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "REFINED_BATCH_FURNITURE_Craft_MOD_copper_latch",
+          "triangles": 864,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -23.579200744628906
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.6901999711990356
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.4399999976158142
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -23.579200744628906
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.6901999711990356
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.4399999976158142
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "REFINED_BATCH_FURNITURE_Craft_MOD_sage_shell",
+          "triangles": 216,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -6.049200057983398
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              2.9351999759674072
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.004999999888241291
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -6.049200057983398
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              2.9351999759674072
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.004999999888241291
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "REFINED_BATCH_FURNITURE_Craft_coral_vinyl",
+          "triangles": 108,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -22.849199295043945
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              1.0152000188827515
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.33000001311302185
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -22.849199295043945
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              1.0152000188827515
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.33000001311302185
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "REFINED_BATCH_FURNITURE_Craft_mint_vinyl",
+          "triangles": 216,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -23.419200897216797
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              1.0152000188827515
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.4300000071525574
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -23.419200897216797
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              1.0152000188827515
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.4300000071525574
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "REFINED_BATCH_FURNITURE_Craft_ochre_vinyl",
+          "triangles": 692,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -22.849199295043945
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              1.0152000188827515
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.09000000357627869
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -22.849199295043945
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              1.0152000188827515
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.09000000357627869
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "REFINED_BATCH_FURNITURE_REFINED_bench_wood",
+          "triangles": 324,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -6.049200057983398
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              2.4851999282836914
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.19499999284744263
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -6.049200057983398
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              2.4851999282836914
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              -0.19499999284744263
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "REFINED_BATCH_FURNITURE_REFINED_warm_path",
+          "triangles": 16,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "source_bounds_y_up": [
+        [
+          -23.989200592041016,
+          -0.5799999833106995,
+          -2.9802000522613525
+        ],
+        [
+          -5.224200248718262,
+          0.23000000417232513,
+          -0.4251999855041504
+        ]
+      ],
+      "expected_export_bounds_y_up": [
+        [
+          -23.989200592041016,
+          -0.5799999833106995,
+          -2.9802000522613525
+        ],
+        [
+          -5.224200248718262,
+          0.23000000417232513,
+          -0.4251999855041504
+        ]
+      ],
+      "triangles": 2696,
+      "bytes": 116240,
+      "sha256": "70e78bf169d74dc55302e7d69db21500e4329078a62532e7765f61a5d5867f61",
+      "git_blob_sha1": "c44817a68d4760ca1a972ca7ed15260dc0bb4db0",
+      "exporter_sha256": "e7cbee2d180c28fce0144112ad508121472899b7b75d3b5358c490c489d94f32",
+      "source_materials_or_rebuilt_materials": [
+        {
+          "name": "Craft_MOD_chassis_dark",
+          "baseColorFactor": [
+            0.008568125776946545,
+            0.045186202973127365,
+            0.05951123684644699,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.5400000214576721
+        },
+        {
+          "name": "Craft_MOD_copper_latch",
+          "baseColorFactor": [
+            0.5840784311294556,
+            0.2581828534603119,
+            0.09305896610021591,
+            1.0
+          ],
+          "metallicFactor": 0.3499999940395355,
+          "roughnessFactor": 0.3499999940395355
+        },
+        {
+          "name": "Craft_MOD_sage_shell",
+          "baseColorFactor": [
+            0.13013647496700287,
+            0.30054378509521484,
+            0.2622506618499756,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.38999998569488525
+        },
+        {
+          "name": "Craft_coral_vinyl",
+          "baseColorFactor": [
+            0.7912979125976562,
+            0.1946178376674652,
+            0.11953842639923096,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.4300000071525574
+        },
+        {
+          "name": "Craft_mint_vinyl",
+          "baseColorFactor": [
+            0.16202937066555023,
+            0.5088813304901123,
+            0.3915724754333496,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.41999998688697815
+        },
+        {
+          "name": "Craft_ochre_vinyl",
+          "baseColorFactor": [
+            0.8069522380828857,
+            0.4969329833984375,
+            0.08865558356046677,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.4399999976158142
+        },
+        {
+          "name": "REFINED_bench_wood",
+          "baseColorFactor": [
+            0.4300000071525574,
+            0.2800000011920929,
+            0.17000000178813934,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.699999988079071
+        },
+        {
+          "name": "REFINED_warm_path",
+          "baseColorFactor": [
+            0.49000000953674316,
+            0.47999998927116394,
+            0.3400000035762787,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.699999988079071
+        }
+      ],
+      "tree_lod2": null,
+      "primitives": 8,
+      "materials": 8,
+      "vertices": 3850,
+      "bounds_y_up": [
+        [
+          -23.989200592041016,
+          -0.5799999833106995,
+          -2.9802000522613525
+        ],
+        [
+          -5.224200248718262,
+          0.23000000417232513,
+          -0.4251999855041504
+        ]
+      ],
+      "alpha_modes": [
+        "OPAQUE"
+      ]
+    },
+    {
+      "name": "bleachers",
+      "file": "bleachers.glb",
+      "status": "new_source_derived_environment_v2",
+      "historical_certificate_inherited": false,
+      "source": {
+        "package": "athlete_u_maps_sources_joint_updated_20261112.zip",
+        "package_sha256": "74912e4762e7b6f7c3bc5311c5f2737a87bf99a611591924ac18c74eb32eddd4",
+        "blend_member": "athlete_u_maps_sources_joint_updated_20261112/u_maps_sources/mild_plain.blend",
+        "blend_sha256": "7a509d6eb9ed12ec6292f0e749fd4850c8eea323958091b864981b42ef87ba8b"
+      },
+      "selector": "athlete_bleachers_layout",
+      "space": "source_root_local",
+      "removed_source_root_matrix_y_up": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          2.4000000953674316
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          1.3839999437332153
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -0.05000000074505806
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_objects": [
+        {
+          "name": "athlete_bleachers__coral.001",
+          "triangles": 1944,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              2.4000000953674316
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.05000000074505806
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              1.3839999437332153
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "athlete_bleachers__cream.001",
+          "triangles": 324,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              2.4000000953674316
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.05000000074505806
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              1.3839999437332153
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "athlete_bleachers__gold.001",
+          "triangles": 144,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              2.4000000953674316
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.05000000074505806
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              1.3839999437332153
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "athlete_bleachers__ink.001",
+          "triangles": 900,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              2.4000000953674316
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.05000000074505806
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              1.3839999437332153
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "athlete_bleachers__mint.001",
+          "triangles": 3888,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              2.4000000953674316
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.05000000074505806
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              1.3839999437332153
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "source_bounds_y_up": [
+        [
+          -2.75,
+          0.0,
+          -0.75
+        ],
+        [
+          2.75,
+          0.9549999833106995,
+          0.75
+        ]
+      ],
+      "expected_export_bounds_y_up": [
+        [
+          -2.75,
+          0.0,
+          -0.75
+        ],
+        [
+          2.75,
+          0.9549999833106995,
+          0.75
+        ]
+      ],
+      "triangles": 7200,
+      "bytes": 262336,
+      "sha256": "af4d188c511ddf34dcdb6575f543c7baf0a8f6572c2def5a8cf115c8a422e967",
+      "git_blob_sha1": "9418f69a6dddf490cb84b7fd7484e251f6839673",
+      "exporter_sha256": "e7cbee2d180c28fce0144112ad508121472899b7b75d3b5358c490c489d94f32",
+      "source_materials_or_rebuilt_materials": [
+        {
+          "name": "coral",
+          "baseColorFactor": [
+            0.8549926280975342,
+            0.18782077729701996,
+            0.1119324266910553,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.47999998927116394
+        },
+        {
+          "name": "cream",
+          "baseColorFactor": [
+            0.8962693810462952,
+            0.7681511640548706,
+            0.5520114302635193,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.47999998927116394
+        },
+        {
+          "name": "gold",
+          "baseColorFactor": [
+            0.8468732237815857,
+            0.5028864741325378,
+            0.09084171056747437,
+            1.0
+          ],
+          "metallicFactor": 0.550000011920929,
+          "roughnessFactor": 0.30000001192092896
+        },
+        {
+          "name": "ink",
+          "baseColorFactor": [
+            0.021219009533524513,
+            0.1119324266910553,
+            0.09084171056747437,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.47999998927116394
+        },
+        {
+          "name": "mint",
+          "baseColorFactor": [
+            0.23074005544185638,
+            0.5647115111351013,
+            0.43965718150138855,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.47999998927116394
+        }
+      ],
+      "tree_lod2": null,
+      "primitives": 5,
+      "materials": 5,
+      "vertices": 8938,
+      "bounds_y_up": [
+        [
+          -2.75,
+          0.0,
+          -0.75
+        ],
+        [
+          2.75,
+          0.9549999833106995,
+          0.75
+        ]
+      ],
+      "alpha_modes": [
+        "OPAQUE"
+      ]
+    },
+    {
+      "name": "spectators",
+      "file": "spectators.glb",
+      "status": "new_source_derived_environment_v2",
+      "historical_certificate_inherited": false,
+      "source": {
+        "package": "athlete_u_maps_sources_joint_updated_20261112.zip",
+        "package_sha256": "74912e4762e7b6f7c3bc5311c5f2737a87bf99a611591924ac18c74eb32eddd4",
+        "blend_member": "athlete_u_maps_sources_joint_updated_20261112/u_maps_sources/mild_plain.blend",
+        "blend_sha256": "7a509d6eb9ed12ec6292f0e749fd4850c8eea323958091b864981b42ef87ba8b"
+      },
+      "selector": "athlete_spectators_strip_layout",
+      "space": "source_root_local",
+      "removed_source_root_matrix_y_up": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          2.4000000953674316
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          1.3839999437332153
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -0.05000000074505806
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_objects": [
+        {
+          "name": "athlete_spectators_strip__coral.001",
+          "triangles": 996,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              2.4000000953674316
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.05000000074505806
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              1.3839999437332153
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "athlete_spectators_strip__cream.001",
+          "triangles": 4536,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              2.4000000953674316
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.05000000074505806
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              1.3839999437332153
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "athlete_spectators_strip__ink.001",
+          "triangles": 1992,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              2.4000000953674316
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.05000000074505806
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              1.3839999437332153
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "athlete_spectators_strip__mint.001",
+          "triangles": 324,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              2.4000000953674316
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.05000000074505806
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              1.3839999437332153
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "source_bounds_y_up": [
+        [
+          -2.559999942779541,
+          0.0,
+          -0.4750000238418579
+        ],
+        [
+          2.559999942779541,
+          1.1549999713897705,
+          0.6520000100135803
+        ]
+      ],
+      "expected_export_bounds_y_up": [
+        [
+          -2.559999942779541,
+          0.0,
+          -0.4750000238418579
+        ],
+        [
+          2.559999942779541,
+          1.1549999713897705,
+          0.6520000100135803
+        ]
+      ],
+      "triangles": 7848,
+      "bytes": 204692,
+      "sha256": "b60a7ddb7fdca1993f589e1f48617e5d314456045428f952d9f0ec5e7a198a66",
+      "git_blob_sha1": "6eb44ad4cee5aa0b9f837cfe19923b05984928db",
+      "exporter_sha256": "e7cbee2d180c28fce0144112ad508121472899b7b75d3b5358c490c489d94f32",
+      "source_materials_or_rebuilt_materials": [
+        {
+          "name": "coral",
+          "baseColorFactor": [
+            0.8549926280975342,
+            0.18782077729701996,
+            0.1119324266910553,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.47999998927116394
+        },
+        {
+          "name": "cream",
+          "baseColorFactor": [
+            0.8962693810462952,
+            0.7681511640548706,
+            0.5520114302635193,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.47999998927116394
+        },
+        {
+          "name": "ink",
+          "baseColorFactor": [
+            0.021219009533524513,
+            0.1119324266910553,
+            0.09084171056747437,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.47999998927116394
+        },
+        {
+          "name": "mint",
+          "baseColorFactor": [
+            0.23074005544185638,
+            0.5647115111351013,
+            0.43965718150138855,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.47999998927116394
+        }
+      ],
+      "tree_lod2": null,
+      "primitives": 4,
+      "materials": 4,
+      "vertices": 6408,
+      "bounds_y_up": [
+        [
+          -2.559999942779541,
+          0.0,
+          -0.4750000238418579
+        ],
+        [
+          2.559999942779541,
+          1.1549999713897705,
+          0.6520000100135803
+        ]
+      ],
+      "alpha_modes": [
+        "OPAQUE"
+      ]
+    },
+    {
+      "name": "podium",
+      "file": "podium.glb",
+      "status": "new_source_derived_environment_v2",
+      "historical_certificate_inherited": false,
+      "source": {
+        "package": "athlete_u_maps_sources_joint_updated_20261112.zip",
+        "package_sha256": "74912e4762e7b6f7c3bc5311c5f2737a87bf99a611591924ac18c74eb32eddd4",
+        "blend_member": "athlete_u_maps_sources_joint_updated_20261112/u_maps_sources/mild_plain.blend",
+        "blend_sha256": "7a509d6eb9ed12ec6292f0e749fd4850c8eea323958091b864981b42ef87ba8b"
+      },
+      "selector": "athlete_podium_layout",
+      "space": "source_root_local",
+      "removed_source_root_matrix_y_up": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -7.699999809265137
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.48399999737739563
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -0.10000000149011612
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_objects": [
+        {
+          "name": "athlete_podium__coral.001",
+          "triangles": 108,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -7.699999809265137
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.10000000149011612
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.48399999737739563
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "athlete_podium__cream.001",
+          "triangles": 324,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -7.699999809265137
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.10000000149011612
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.48399999737739563
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "athlete_podium__gold.001",
+          "triangles": 520,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -7.699999809265137
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.10000000149011612
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.48399999737739563
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "athlete_podium__ink.001",
+          "triangles": 784,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -7.699999809265137
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.10000000149011612
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.48399999737739563
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "athlete_podium__mint.001",
+          "triangles": 216,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -7.699999809265137
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.10000000149011612
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.48399999737739563
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "source_bounds_y_up": [
+        [
+          -1.1399999856948853,
+          0.0,
+          -0.5699999928474426
+        ],
+        [
+          1.1399999856948853,
+          1.4079999923706055,
+          0.5774999856948853
+        ]
+      ],
+      "expected_export_bounds_y_up": [
+        [
+          -1.1399999856948853,
+          0.0,
+          -0.5699999928474426
+        ],
+        [
+          1.1399999856948853,
+          1.4079999923706055,
+          0.5774999856948853
+        ]
+      ],
+      "triangles": 1952,
+      "bytes": 74384,
+      "sha256": "daac91ddfa81acd44013d6560e57cdccf39f87dd867d0737d3ebca190dec890f",
+      "git_blob_sha1": "67640caa7405b2afffdeb5a929f4515a9e708019",
+      "exporter_sha256": "e7cbee2d180c28fce0144112ad508121472899b7b75d3b5358c490c489d94f32",
+      "source_materials_or_rebuilt_materials": [
+        {
+          "name": "coral",
+          "baseColorFactor": [
+            0.8549926280975342,
+            0.18782077729701996,
+            0.1119324266910553,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.47999998927116394
+        },
+        {
+          "name": "cream",
+          "baseColorFactor": [
+            0.8962693810462952,
+            0.7681511640548706,
+            0.5520114302635193,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.47999998927116394
+        },
+        {
+          "name": "gold",
+          "baseColorFactor": [
+            0.8468732237815857,
+            0.5028864741325378,
+            0.09084171056747437,
+            1.0
+          ],
+          "metallicFactor": 0.550000011920929,
+          "roughnessFactor": 0.30000001192092896
+        },
+        {
+          "name": "ink",
+          "baseColorFactor": [
+            0.021219009533524513,
+            0.1119324266910553,
+            0.09084171056747437,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.47999998927116394
+        },
+        {
+          "name": "mint",
+          "baseColorFactor": [
+            0.23074005544185638,
+            0.5647115111351013,
+            0.43965718150138855,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.47999998927116394
+        }
+      ],
+      "tree_lod2": null,
+      "primitives": 5,
+      "materials": 5,
+      "vertices": 2419,
+      "bounds_y_up": [
+        [
+          -1.1399999856948853,
+          0.0,
+          -0.5699999928474426
+        ],
+        [
+          1.1399999856948853,
+          1.4079999923706055,
+          0.5774999856948853
+        ]
+      ],
+      "alpha_modes": [
+        "OPAQUE"
+      ]
+    },
+    {
+      "name": "officials_kiosk",
+      "file": "officials_kiosk.glb",
+      "status": "new_source_derived_environment_v2",
+      "historical_certificate_inherited": false,
+      "source": {
+        "package": "athlete_u_maps_sources_joint_updated_20261112.zip",
+        "package_sha256": "74912e4762e7b6f7c3bc5311c5f2737a87bf99a611591924ac18c74eb32eddd4",
+        "blend_member": "athlete_u_maps_sources_joint_updated_20261112/u_maps_sources/mild_plain.blend",
+        "blend_sha256": "7a509d6eb9ed12ec6292f0e749fd4850c8eea323958091b864981b42ef87ba8b"
+      },
+      "selector": "athlete_officials_kiosk_layout",
+      "space": "source_root_local",
+      "removed_source_root_matrix_y_up": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -11.800000190734863
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          1.034000039100647
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -0.10000000149011612
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_objects": [
+        {
+          "name": "athlete_officials_kiosk__coral.001",
+          "triangles": 844,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -11.800000190734863
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.10000000149011612
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              1.034000039100647
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "athlete_officials_kiosk__cream.001",
+          "triangles": 324,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -11.800000190734863
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.10000000149011612
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              1.034000039100647
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "athlete_officials_kiosk__ink.001",
+          "triangles": 180,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -11.800000190734863
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.10000000149011612
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              1.034000039100647
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "athlete_officials_kiosk__mint.001",
+          "triangles": 108,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -11.800000190734863
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.10000000149011612
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              1.034000039100647
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "source_bounds_y_up": [
+        [
+          -0.8100000023841858,
+          0.0,
+          -0.5400000214576721
+        ],
+        [
+          0.8100000023841858,
+          1.7400000095367432,
+          0.5149999856948853
+        ]
+      ],
+      "expected_export_bounds_y_up": [
+        [
+          -0.8100000023841858,
+          0.0,
+          -0.5400000214576721
+        ],
+        [
+          0.8100000023841858,
+          1.7400000095367432,
+          0.5149999856948853
+        ]
+      ],
+      "triangles": 1456,
+      "bytes": 56444,
+      "sha256": "f68de4cb4eac921518e8dfa78307b435cfd78ff8c0d20235ab1b242d726ab887",
+      "git_blob_sha1": "14335892646924135cca0fa8502e3505e4197a91",
+      "exporter_sha256": "e7cbee2d180c28fce0144112ad508121472899b7b75d3b5358c490c489d94f32",
+      "source_materials_or_rebuilt_materials": [
+        {
+          "name": "coral",
+          "baseColorFactor": [
+            0.8549926280975342,
+            0.18782077729701996,
+            0.1119324266910553,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.47999998927116394
+        },
+        {
+          "name": "cream",
+          "baseColorFactor": [
+            0.8962693810462952,
+            0.7681511640548706,
+            0.5520114302635193,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.47999998927116394
+        },
+        {
+          "name": "ink",
+          "baseColorFactor": [
+            0.021219009533524513,
+            0.1119324266910553,
+            0.09084171056747437,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.47999998927116394
+        },
+        {
+          "name": "mint",
+          "baseColorFactor": [
+            0.23074005544185638,
+            0.5647115111351013,
+            0.43965718150138855,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.47999998927116394
+        }
+      ],
+      "tree_lod2": null,
+      "primitives": 4,
+      "materials": 4,
+      "vertices": 1830,
+      "bounds_y_up": [
+        [
+          -0.8100000023841858,
+          0.0,
+          -0.5400000214576721
+        ],
+        [
+          0.8100000023841858,
+          1.7400000095367432,
+          0.5149999856948853
+        ]
+      ],
+      "alpha_modes": [
+        "OPAQUE"
+      ]
+    },
+    {
+      "name": "scoreboard",
+      "file": "scoreboard.glb",
+      "status": "new_source_derived_environment_v2",
+      "historical_certificate_inherited": false,
+      "source": {
+        "package": "athlete_u_maps_sources_joint_updated_20261112.zip",
+        "package_sha256": "74912e4762e7b6f7c3bc5311c5f2737a87bf99a611591924ac18c74eb32eddd4",
+        "blend_member": "athlete_u_maps_sources_joint_updated_20261112/u_maps_sources/mild_plain.blend",
+        "blend_sha256": "7a509d6eb9ed12ec6292f0e749fd4850c8eea323958091b864981b42ef87ba8b"
+      },
+      "selector": "athlete_scoreboard_layout",
+      "space": "source_root_local",
+      "removed_source_root_matrix_y_up": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          8.300000190734863
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.8840000033378601
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -0.30000001192092896
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_objects": [
+        {
+          "name": "athlete_scoreboard__cream.001",
+          "triangles": 196,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              8.300000190734863
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.30000001192092896
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.8840000033378601
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "athlete_scoreboard__gold.001",
+          "triangles": 672,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              8.300000190734863
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.30000001192092896
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.8840000033378601
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "athlete_scoreboard__ink.001",
+          "triangles": 324,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              8.300000190734863
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.30000001192092896
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.8840000033378601
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "athlete_scoreboard__mint.001",
+          "triangles": 432,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              8.300000190734863
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.30000001192092896
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.8840000033378601
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "source_bounds_y_up": [
+        [
+          -1.3600000143051147,
+          0.0,
+          -0.32499998807907104
+        ],
+        [
+          1.3600000143051147,
+          2.1050000190734863,
+          0.32499998807907104
+        ]
+      ],
+      "expected_export_bounds_y_up": [
+        [
+          -1.3600000143051147,
+          0.0,
+          -0.32499998807907104
+        ],
+        [
+          1.3600000143051147,
+          2.1050000190734863,
+          0.32499998807907104
+        ]
+      ],
+      "triangles": 1624,
+      "bytes": 47320,
+      "sha256": "019c4166ff445c5aff8ee74ebd9215d74a9efea9aa3746fb88cbdd9c81d7b549",
+      "git_blob_sha1": "83f85b03a39017a2b0b8bc054bb4adf20d0f37d0",
+      "exporter_sha256": "e7cbee2d180c28fce0144112ad508121472899b7b75d3b5358c490c489d94f32",
+      "source_materials_or_rebuilt_materials": [
+        {
+          "name": "cream",
+          "baseColorFactor": [
+            0.8962693810462952,
+            0.7681511640548706,
+            0.5520114302635193,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.47999998927116394
+        },
+        {
+          "name": "gold",
+          "baseColorFactor": [
+            0.8468732237815857,
+            0.5028864741325378,
+            0.09084171056747437,
+            1.0
+          ],
+          "metallicFactor": 0.550000011920929,
+          "roughnessFactor": 0.30000001192092896
+        },
+        {
+          "name": "ink",
+          "baseColorFactor": [
+            0.021219009533524513,
+            0.1119324266910553,
+            0.09084171056747437,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.47999998927116394
+        },
+        {
+          "name": "mint",
+          "baseColorFactor": [
+            0.23074005544185638,
+            0.5647115111351013,
+            0.43965718150138855,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.47999998927116394
+        }
+      ],
+      "tree_lod2": null,
+      "primitives": 4,
+      "materials": 4,
+      "vertices": 1409,
+      "bounds_y_up": [
+        [
+          -1.3600000143051147,
+          0.0,
+          -0.32499998807907104
+        ],
+        [
+          1.3600000143051147,
+          2.1050000190734863,
+          0.32499998807907104
+        ]
+      ],
+      "alpha_modes": [
+        "OPAQUE"
+      ]
+    },
+    {
+      "name": "start_gate",
+      "file": "start_gate.glb",
+      "status": "new_source_derived_environment_v2",
+      "historical_certificate_inherited": false,
+      "source": {
+        "package": "athlete_u_maps_sources_joint_updated_20261112.zip",
+        "package_sha256": "74912e4762e7b6f7c3bc5311c5f2737a87bf99a611591924ac18c74eb32eddd4",
+        "blend_member": "athlete_u_maps_sources_joint_updated_20261112/u_maps_sources/mild_plain.blend",
+        "blend_sha256": "7a509d6eb9ed12ec6292f0e749fd4850c8eea323958091b864981b42ef87ba8b"
+      },
+      "selector": "athlete_start_gate_layout",
+      "space": "source_root_local",
+      "removed_source_root_matrix_y_up": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.300000190734863
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          1.649999976158142
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -4.59499979019165
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_objects": [
+        {
+          "name": "athlete_start_gate__cream.001",
+          "triangles": 1092,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -12.300000190734863
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              4.59499979019165
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              1.649999976158142
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "athlete_start_gate__gold.001",
+          "triangles": 1008,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -12.300000190734863
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              4.59499979019165
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              1.649999976158142
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "athlete_start_gate__ink.001",
+          "triangles": 1212,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -12.300000190734863
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              4.59499979019165
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              1.649999976158142
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "athlete_start_gate__mint.001",
+          "triangles": 120,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -12.300000190734863
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              4.59499979019165
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              1.649999976158142
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "source_bounds_y_up": [
+        [
+          -3.859999895095825,
+          0.0,
+          -0.3400000035762787
+        ],
+        [
+          3.859999895095825,
+          2.640000104904175,
+          0.3400000035762787
+        ]
+      ],
+      "expected_export_bounds_y_up": [
+        [
+          -3.859999895095825,
+          0.0,
+          -0.3400000035762787
+        ],
+        [
+          3.859999895095825,
+          2.640000104904175,
+          0.3400000035762787
+        ]
+      ],
+      "triangles": 3432,
+      "bytes": 144496,
+      "sha256": "76ca081e1fe1407d6b574b3aaee1ff409dff90e838dd0e251a4fdc00bb97831c",
+      "git_blob_sha1": "53f4d90669d3d402fdcbbe2bd019375f25ed6392",
+      "exporter_sha256": "e7cbee2d180c28fce0144112ad508121472899b7b75d3b5358c490c489d94f32",
+      "source_materials_or_rebuilt_materials": [
+        {
+          "name": "cream",
+          "baseColorFactor": [
+            0.8962693810462952,
+            0.7681511640548706,
+            0.5520114302635193,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.47999998927116394
+        },
+        {
+          "name": "gold",
+          "baseColorFactor": [
+            0.8468732237815857,
+            0.5028864741325378,
+            0.09084171056747437,
+            1.0
+          ],
+          "metallicFactor": 0.550000011920929,
+          "roughnessFactor": 0.30000001192092896
+        },
+        {
+          "name": "ink",
+          "baseColorFactor": [
+            0.021219009533524513,
+            0.1119324266910553,
+            0.09084171056747437,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.47999998927116394
+        },
+        {
+          "name": "mint",
+          "baseColorFactor": [
+            0.23074005544185638,
+            0.5647115111351013,
+            0.43965718150138855,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.47999998927116394
+        }
+      ],
+      "tree_lod2": null,
+      "primitives": 4,
+      "materials": 4,
+      "vertices": 5005,
+      "bounds_y_up": [
+        [
+          -3.859999895095825,
+          0.0,
+          -0.3400000035762787
+        ],
+        [
+          3.859999895095825,
+          2.640000104904175,
+          0.3400000035762787
+        ]
+      ],
+      "alpha_modes": [
+        "OPAQUE"
+      ]
+    },
+    {
+      "name": "finish_gate",
+      "file": "finish_gate.glb",
+      "status": "new_source_derived_environment_v2",
+      "historical_certificate_inherited": false,
+      "source": {
+        "package": "athlete_u_maps_sources_joint_updated_20261112.zip",
+        "package_sha256": "74912e4762e7b6f7c3bc5311c5f2737a87bf99a611591924ac18c74eb32eddd4",
+        "blend_member": "athlete_u_maps_sources_joint_updated_20261112/u_maps_sources/mild_plain.blend",
+        "blend_sha256": "7a509d6eb9ed12ec6292f0e749fd4850c8eea323958091b864981b42ef87ba8b"
+      },
+      "selector": "athlete_finish_gate_layout",
+      "space": "source_root_local",
+      "removed_source_root_matrix_y_up": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -15.375
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          1.649999976158142
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          1.5549999475479126
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_objects": [
+        {
+          "name": "athlete_finish_gate__coral.001",
+          "triangles": 228,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -15.375
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              -1.5549999475479126
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              1.649999976158142
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "athlete_finish_gate__cream.001",
+          "triangles": 1152,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -15.375
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              -1.5549999475479126
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              1.649999976158142
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "athlete_finish_gate__gold.001",
+          "triangles": 336,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -15.375
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              -1.5549999475479126
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              1.649999976158142
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "athlete_finish_gate__ink.001",
+          "triangles": 732,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -15.375
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              -1.5549999475479126
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              1.649999976158142
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "source_bounds_y_up": [
+        [
+          -1.4500000476837158,
+          0.0,
+          -0.3400000035762787
+        ],
+        [
+          1.4499999284744263,
+          2.5900001525878906,
+          0.3400000035762787
+        ]
+      ],
+      "expected_export_bounds_y_up": [
+        [
+          -1.4500000476837158,
+          0.0,
+          -0.3400000035762787
+        ],
+        [
+          1.4499999284744263,
+          2.5900001525878906,
+          0.3400000035762787
+        ]
+      ],
+      "triangles": 2448,
+      "bytes": 92452,
+      "sha256": "c51312cac07f0743d1ca2377dae8355bfdbeabbcc9044e7d2d9765ac5012eb54",
+      "git_blob_sha1": "e0375e4d557b892fe42a22139ff903a355798a8e",
+      "exporter_sha256": "e7cbee2d180c28fce0144112ad508121472899b7b75d3b5358c490c489d94f32",
+      "source_materials_or_rebuilt_materials": [
+        {
+          "name": "coral",
+          "baseColorFactor": [
+            0.8549926280975342,
+            0.18782077729701996,
+            0.1119324266910553,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.47999998927116394
+        },
+        {
+          "name": "cream",
+          "baseColorFactor": [
+            0.8962693810462952,
+            0.7681511640548706,
+            0.5520114302635193,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.47999998927116394
+        },
+        {
+          "name": "gold",
+          "baseColorFactor": [
+            0.8468732237815857,
+            0.5028864741325378,
+            0.09084171056747437,
+            1.0
+          ],
+          "metallicFactor": 0.550000011920929,
+          "roughnessFactor": 0.30000001192092896
+        },
+        {
+          "name": "ink",
+          "baseColorFactor": [
+            0.021219009533524513,
+            0.1119324266910553,
+            0.09084171056747437,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.47999998927116394
+        }
+      ],
+      "tree_lod2": null,
+      "primitives": 4,
+      "materials": 4,
+      "vertices": 3082,
+      "bounds_y_up": [
+        [
+          -1.4500000476837158,
+          0.0,
+          -0.3400000035762787
+        ],
+        [
+          1.4499999284744263,
+          2.5900001525878906,
+          0.3400000035762787
+        ]
+      ],
+      "alpha_modes": [
+        "OPAQUE"
+      ]
+    },
+    {
+      "name": "grandstand_rostrum",
+      "file": "grandstand_rostrum.glb",
+      "status": "new_source_derived_environment_v2",
+      "historical_certificate_inherited": false,
+      "source": {
+        "package": "athlete_u_maps_sources_joint_updated_20261112.zip",
+        "package_sha256": "74912e4762e7b6f7c3bc5311c5f2737a87bf99a611591924ac18c74eb32eddd4",
+        "blend_member": "athlete_u_maps_sources_joint_updated_20261112/u_maps_sources/mild_plain.blend",
+        "blend_sha256": "7a509d6eb9ed12ec6292f0e749fd4850c8eea323958091b864981b42ef87ba8b"
+      },
+      "selector": "FIT_grandstand_",
+      "space": "source_world_baked_identity",
+      "removed_source_root_matrix_y_up": null,
+      "source_objects": [
+        {
+          "name": "FIT_grandstand_arch_inset",
+          "triangles": 188,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.10000000149011612
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              -0.8149999976158142
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.7699999809265137
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.10000000149011612
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              -0.8149999976158142
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.7699999809265137
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "FIT_grandstand_arch_inset.001",
+          "triangles": 188,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              1.5
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              -0.8149999976158142
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.7699999809265137
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              1.5
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              -0.8149999976158142
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.7699999809265137
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "FIT_grandstand_arch_inset.002",
+          "triangles": 188,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              2.9000000953674316
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              -0.8149999976158142
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.7699999809265137
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              2.9000000953674316
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              -0.8149999976158142
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.7699999809265137
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "FIT_grandstand_arch_inset.003",
+          "triangles": 188,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              4.300000190734863
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              -0.8149999976158142
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.7699999809265137
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              4.300000190734863
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              -0.8149999976158142
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.7699999809265137
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "FIT_grandstand_structural_rostrum",
+          "triangles": 188,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              2.4000000953674316
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.05000000074505806
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.8299999833106995
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              2.4000000953674316
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.05000000074505806
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.8299999833106995
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "source_bounds_y_up": [
+        [
+          -0.4249999523162842,
+          0.24000000953674316,
+          -0.9000000357627869
+        ],
+        [
+          5.225000381469727,
+          1.4199999570846558,
+          0.8274999856948853
+        ]
+      ],
+      "expected_export_bounds_y_up": [
+        [
+          -0.4249999523162842,
+          0.24000000953674316,
+          -0.9000000357627869
+        ],
+        [
+          5.225000381469727,
+          1.4199999570846558,
+          0.8274999856948853
+        ]
+      ],
+      "triangles": 940,
+      "bytes": 42756,
+      "sha256": "3891481f58a453a70d56bb6d36c55d5cce5c02a7cfcd2df9261f2bd6f44b475f",
+      "git_blob_sha1": "0badc30f272a30966252ba8f2edb8e84ebae72b8",
+      "exporter_sha256": "e7cbee2d180c28fce0144112ad508121472899b7b75d3b5358c490c489d94f32",
+      "source_materials_or_rebuilt_materials": [
+        {
+          "name": "Craft_molded_rubber.001",
+          "baseColorFactor": [
+            0.03071344457566738,
+            0.109461709856987,
+            0.09758734703063965,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.7200000286102295
+        },
+        {
+          "name": "Craft_mint_vinyl.001",
+          "baseColorFactor": [
+            0.16202937066555023,
+            0.5088813304901123,
+            0.3915724754333496,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.41999998688697815
+        }
+      ],
+      "tree_lod2": null,
+      "primitives": 5,
+      "materials": 2,
+      "vertices": 1376,
+      "bounds_y_up": [
+        [
+          -0.4249999523162842,
+          0.24000000953674316,
+          -0.9000000357627869
+        ],
+        [
+          5.225000381469727,
+          1.4199999570846558,
+          0.8274999856948853
+        ]
+      ],
+      "alpha_modes": [
+        "OPAQUE"
+      ]
+    },
+    {
+      "name": "official_rostrum",
+      "file": "official_rostrum.glb",
+      "status": "new_source_derived_environment_v2",
+      "historical_certificate_inherited": false,
+      "source": {
+        "package": "athlete_u_maps_sources_joint_updated_20261112.zip",
+        "package_sha256": "74912e4762e7b6f7c3bc5311c5f2737a87bf99a611591924ac18c74eb32eddd4",
+        "blend_member": "athlete_u_maps_sources_joint_updated_20261112/u_maps_sources/mild_plain.blend",
+        "blend_sha256": "7a509d6eb9ed12ec6292f0e749fd4850c8eea323958091b864981b42ef87ba8b"
+      },
+      "selector": "FIT_official_rostrum",
+      "space": "source_world_baked_identity",
+      "removed_source_root_matrix_y_up": null,
+      "source_objects": [
+        {
+          "name": "FIT_official_rostrum",
+          "triangles": 188,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -11.800000190734863
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.10000000149011612
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.6299999952316284
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -11.800000190734863
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.10000000149011612
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.6299999952316284
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "source_bounds_y_up": [
+        [
+          -12.720000267028809,
+          0.22999998927116394,
+          -0.75
+        ],
+        [
+          -10.880000114440918,
+          1.0299999713897705,
+          0.5499999523162842
+        ]
+      ],
+      "expected_export_bounds_y_up": [
+        [
+          -12.720000267028809,
+          0.22999998927116394,
+          -0.75
+        ],
+        [
+          -10.880000114440918,
+          1.0299999713897705,
+          0.5499999523162842
+        ]
+      ],
+      "triangles": 188,
+      "bytes": 8000,
+      "sha256": "ba867c174143cba8c7a2cb1ae8c749f698edec9447e42c67e3777de418ee04d4",
+      "git_blob_sha1": "7c3168537b45efe56c0c72000dfb4aa5ad3d2e92",
+      "exporter_sha256": "e7cbee2d180c28fce0144112ad508121472899b7b75d3b5358c490c489d94f32",
+      "source_materials_or_rebuilt_materials": [
+        {
+          "name": "Craft_mint_vinyl.001",
+          "baseColorFactor": [
+            0.16202937066555023,
+            0.5088813304901123,
+            0.3915724754333496,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.41999998688697815
+        }
+      ],
+      "tree_lod2": null,
+      "primitives": 1,
+      "materials": 1,
+      "vertices": 239,
+      "bounds_y_up": [
+        [
+          -12.720000267028809,
+          0.22999998927116394,
+          -0.75
+        ],
+        [
+          -10.880000114440918,
+          1.0299999713897705,
+          0.5499999523162842
+        ]
+      ],
+      "alpha_modes": [
+        "OPAQUE"
+      ]
+    },
+    {
+      "name": "podium_plinth",
+      "file": "podium_plinth.glb",
+      "status": "new_source_derived_environment_v2",
+      "historical_certificate_inherited": false,
+      "source": {
+        "package": "athlete_u_maps_sources_joint_updated_20261112.zip",
+        "package_sha256": "74912e4762e7b6f7c3bc5311c5f2737a87bf99a611591924ac18c74eb32eddd4",
+        "blend_member": "athlete_u_maps_sources_joint_updated_20261112/u_maps_sources/mild_plain.blend",
+        "blend_sha256": "7a509d6eb9ed12ec6292f0e749fd4850c8eea323958091b864981b42ef87ba8b"
+      },
+      "selector": "FIT_podium_landscape_plinth",
+      "space": "source_world_baked_identity",
+      "removed_source_root_matrix_y_up": null,
+      "source_objects": [
+        {
+          "name": "FIT_podium_landscape_plinth",
+          "triangles": 188,
+          "source_world_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -7.699999809265137
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.10000000149011612
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.36000001430511475
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "baked_matrix_z_up": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -7.699999809265137
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.10000000149011612
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.36000001430511475
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "source_bounds_y_up": [
+        [
+          -9.024999618530273,
+          0.23500001430511475,
+          -0.8500000238418579
+        ],
+        [
+          -6.375,
+          0.48500001430511475,
+          0.6499999761581421
+        ]
+      ],
+      "expected_export_bounds_y_up": [
+        [
+          -9.024999618530273,
+          0.23500001430511475,
+          -0.8500000238418579
+        ],
+        [
+          -6.375,
+          0.48500001430511475,
+          0.6499999761581421
+        ]
+      ],
+      "triangles": 188,
+      "bytes": 9160,
+      "sha256": "df3165332120872f50ad1ffb325a52f302a98756d3b71967b28918403ddb3f69",
+      "git_blob_sha1": "ac30db9a35d8b8584c5111d65780ebac3fca3afe",
+      "exporter_sha256": "e7cbee2d180c28fce0144112ad508121472899b7b75d3b5358c490c489d94f32",
+      "source_materials_or_rebuilt_materials": [
+        {
+          "name": "Craft_woven_binding.001",
+          "baseColorFactor": [
+            0.8879231214523315,
+            0.7835378050804138,
+            0.5711248517036438,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.6299999952316284
+        }
+      ],
+      "tree_lod2": null,
+      "primitives": 1,
+      "materials": 1,
+      "vertices": 287,
+      "bounds_y_up": [
+        [
+          -9.024999618530273,
+          0.23500001430511475,
+          -0.8500000238418579
+        ],
+        [
+          -6.375,
+          0.48500001430511475,
+          0.6499999761581421
+        ]
+      ],
+      "alpha_modes": [
+        "OPAQUE"
+      ]
+    },
+    {
+      "name": "squiggle_landscape_reexport_v1",
+      "file": "squiggle_landscape_reexport_v1.glb",
+      "status": "unchanged_bytes_of_new_source_reexport_v1",
+      "historical_certificate_inherited": false,
+      "historical_byte_match": false,
+      "source": {
+        "package": "athlete_three_maps_refined_20261112.zip",
+        "package_sha256": "f4c6d3845124b5a51898ff2abd1dbf8bf05d2459d9450ab80f996649365ef994",
+        "blend_member": "athlete_three_maps_refined_20261112/squiggle_refined.blend",
+        "blend_sha256": "650c44bc8ad5f65cae2d791d68ceffd9b508a38aa2832ec59860b478f36008a4"
+      },
+      "selector": "REFINED_BATCH_LANDSCAPE_",
+      "space": "source_world_baked_identity",
+      "triangles": 11872,
+      "bytes": 544892,
+      "sha256": "e4dfa74a8e9a1b5e6a58c22fd615b2cdbe5cc2af5a16f427596618f320ff1d08",
+      "git_blob_sha1": "5b8a217a6646617fc2c0ba3f34dbeaa70da7927c",
+      "exporter_sha256": "bbf0cf6bd8bc3f65b925cc16fffdc6589a0768a9a588c9819c3c7237172bd7a0",
+      "copy_script_sha256": "e7cbee2d180c28fce0144112ad508121472899b7b75d3b5358c490c489d94f32",
+      "source_bounds_y_up": [
+        [
+          -17.336444854736328,
+          -0.6919999718666077,
+          -4.122769832611084
+        ],
+        [
+          12.503422737121582,
+          -0.11773332953453064,
+          2.9636104106903076
+        ]
+      ],
+      "source_materials_or_rebuilt_materials": [
+        {
+          "name": "Craft_coral_vinyl",
+          "baseColorFactor": [
+            0.7912979125976562,
+            0.1946178376674652,
+            0.11953842639923096,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.4300000071525574
+        },
+        {
+          "name": "Craft_ochre_vinyl",
+          "baseColorFactor": [
+            0.8069522380828857,
+            0.4969329833984375,
+            0.08865558356046677,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.4399999976158142
+        },
+        {
+          "name": "REFINED_deep_moss",
+          "baseColorFactor": [
+            0.09000000357627869,
+            0.23499999940395355,
+            0.1599999964237213,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.699999988079071
+        },
+        {
+          "name": "REFINED_meadow",
+          "baseColorFactor": [
+            0.2199999988079071,
+            0.3799999952316284,
+            0.23999999463558197,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.699999988079071
+        },
+        {
+          "name": "REFINED_reed_leaf",
+          "baseColorFactor": [
+            0.2800000011920929,
+            0.4000000059604645,
+            0.15000000596046448,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.699999988079071
+        },
+        {
+          "name": "REFINED_stone",
+          "baseColorFactor": [
+            0.3400000035762787,
+            0.36000001430511475,
+            0.2800000011920929,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.699999988079071
+        }
+      ],
+      "primitives": 6,
+      "materials": 6,
+      "vertices": 18656,
+      "bounds_y_up": [
+        [
+          -17.336444854736328,
+          -0.6919999718666077,
+          -4.122769832611084
+        ],
+        [
+          12.503422737121582,
+          -0.11773332953453064,
+          2.9636104106903076
+        ]
+      ],
+      "alpha_modes": [
+        "OPAQUE"
+      ]
+    },
+    {
+      "name": "boardwalks_landscape_reexport_v1",
+      "file": "boardwalks_landscape_reexport_v1.glb",
+      "status": "unchanged_bytes_of_new_source_reexport_v1",
+      "historical_certificate_inherited": false,
+      "historical_byte_match": false,
+      "source": {
+        "package": "athlete_three_maps_refined_20261112.zip",
+        "package_sha256": "f4c6d3845124b5a51898ff2abd1dbf8bf05d2459d9450ab80f996649365ef994",
+        "blend_member": "athlete_three_maps_refined_20261112/boardwalks_refined.blend",
+        "blend_sha256": "41f4c4412a0598cc26d4368fc54ba1809f8c4b951de85d637055f65edb1e4dca"
+      },
+      "selector": "REFINED_BATCH_LANDSCAPE_",
+      "space": "source_world_baked_identity",
+      "triangles": 13524,
+      "bytes": 612284,
+      "sha256": "60bf7edcac36fc300b06b3dd942c77d90003f4ea1b01987b57f69c048e7c687a",
+      "git_blob_sha1": "a715aae5077cb2a829ea287e1d058345ea78c04d",
+      "exporter_sha256": "bbf0cf6bd8bc3f65b925cc16fffdc6589a0768a9a588c9819c3c7237172bd7a0",
+      "copy_script_sha256": "e7cbee2d180c28fce0144112ad508121472899b7b75d3b5358c490c489d94f32",
+      "source_bounds_y_up": [
+        [
+          -21.28725242614746,
+          -0.7350000143051147,
+          -3.7682347297668457
+        ],
+        [
+          15.425210952758789,
+          -0.07636517286300659,
+          5.402874946594238
+        ]
+      ],
+      "source_materials_or_rebuilt_materials": [
+        {
+          "name": "MAP_silver_ripples",
+          "baseColorFactor": [
+            0.46000000834465027,
+            0.6600000262260437,
+            0.6100000143051147,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.3400000035762787
+        },
+        {
+          "name": "MAP_warm_grey_stone",
+          "baseColorFactor": [
+            0.3400000035762787,
+            0.36000001430511475,
+            0.2800000011920929,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.8500000238418579
+        },
+        {
+          "name": "REFINED_bench_wood",
+          "baseColorFactor": [
+            0.4300000071525574,
+            0.2800000011920929,
+            0.17000000178813934,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.699999988079071
+        },
+        {
+          "name": "REFINED_deep_moss",
+          "baseColorFactor": [
+            0.09000000357627869,
+            0.23499999940395355,
+            0.1599999964237213,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.699999988079071
+        },
+        {
+          "name": "REFINED_earth_bank",
+          "baseColorFactor": [
+            0.18000000715255737,
+            0.23499999940395355,
+            0.18000000715255737,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.699999988079071
+        },
+        {
+          "name": "REFINED_meadow",
+          "baseColorFactor": [
+            0.2199999988079071,
+            0.3799999952316284,
+            0.23999999463558197,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.699999988079071
+        },
+        {
+          "name": "REFINED_reed_leaf",
+          "baseColorFactor": [
+            0.2800000011920929,
+            0.4000000059604645,
+            0.15000000596046448,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.699999988079071
+        }
+      ],
+      "primitives": 7,
+      "materials": 7,
+      "vertices": 21563,
+      "bounds_y_up": [
+        [
+          -21.28725242614746,
+          -0.7350000143051147,
+          -3.7682347297668457
+        ],
+        [
+          15.425210952758789,
+          -0.07636517286300659,
+          5.402874946594238
+        ]
+      ],
+      "alpha_modes": [
+        "OPAQUE"
+      ]
+    },
+    {
+      "name": "bridges_landscape_reexport_v1",
+      "file": "bridges_landscape_reexport_v1.glb",
+      "status": "unchanged_bytes_of_new_source_reexport_v1",
+      "historical_certificate_inherited": false,
+      "historical_byte_match": false,
+      "source": {
+        "package": "athlete_three_maps_refined_20261112.zip",
+        "package_sha256": "f4c6d3845124b5a51898ff2abd1dbf8bf05d2459d9450ab80f996649365ef994",
+        "blend_member": "athlete_three_maps_refined_20261112/bridges_refined.blend",
+        "blend_sha256": "4b8b91a88aad2134d074ad074d4332a39dd013a0829c63c70062472ae3c6c4c2"
+      },
+      "selector": "REFINED_BATCH_LANDSCAPE_",
+      "space": "source_world_baked_identity",
+      "triangles": 17208,
+      "bytes": 833112,
+      "sha256": "c3d74563b29aa8cb10605dbb5312cfdfc83dc79625db19e4b769b4c9f79be1fb",
+      "git_blob_sha1": "31cfb22cd74721243e3186afd4ae3665de6458f8",
+      "exporter_sha256": "bbf0cf6bd8bc3f65b925cc16fffdc6589a0768a9a588c9819c3c7237172bd7a0",
+      "copy_script_sha256": "e7cbee2d180c28fce0144112ad508121472899b7b75d3b5358c490c489d94f32",
+      "source_bounds_y_up": [
+        [
+          -25.63872718811035,
+          -0.6919999718666077,
+          -4.607288360595703
+        ],
+        [
+          22.20338249206543,
+          -0.11127908527851105,
+          6.551602363586426
+        ]
+      ],
+      "source_materials_or_rebuilt_materials": [
+        {
+          "name": "REFINED_deep_moss",
+          "baseColorFactor": [
+            0.09000000357627869,
+            0.23499999940395355,
+            0.1599999964237213,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.699999988079071
+        },
+        {
+          "name": "REFINED_meadow",
+          "baseColorFactor": [
+            0.2199999988079071,
+            0.3799999952316284,
+            0.23999999463558197,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.699999988079071
+        },
+        {
+          "name": "REFINED_reed_leaf",
+          "baseColorFactor": [
+            0.2800000011920929,
+            0.4000000059604645,
+            0.15000000596046448,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.699999988079071
+        },
+        {
+          "name": "REFINED_sheltered_water",
+          "baseColorFactor": [
+            0.10499999672174454,
+            0.3100000023841858,
+            0.33000001311302185,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.23999999463558197
+        },
+        {
+          "name": "REFINED_stone",
+          "baseColorFactor": [
+            0.3400000035762787,
+            0.36000001430511475,
+            0.2800000011920929,
+            1.0
+          ],
+          "metallicFactor": 0.0,
+          "roughnessFactor": 0.699999988079071
+        }
+      ],
+      "primitives": 5,
+      "materials": 5,
+      "vertices": 29441,
+      "bounds_y_up": [
+        [
+          -25.63872718811035,
+          -0.6919999718666077,
+          -4.607288360595703
+        ],
+        [
+          22.20338249206543,
+          -0.11127915978431702,
+          6.551602363586426
+        ]
+      ],
+      "alpha_modes": [
+        "OPAQUE"
+      ]
+    }
+  ],
+  "totals": {
+    "assets": 22,
+    "bytes": 4380220,
+    "triangles": 93971,
+    "primitives": 94
+  },
+  "publication_metadata": {
+    "scope": "Public source provenance retains filenames and content hashes. Private recovery-service identities are omitted. Existing exporter hashes describe the script used for the retained GLB bytes; the public script differs only in provenance metadata output.",
+    "public_exporter": {
+      "file": "scripts/recovery/export_environment_v2.py",
+      "sha256": "8132188e3390a8a50ab656a93733656f432be6dcef53b67433a2758f72a5934d"
+    }
+  }
+}

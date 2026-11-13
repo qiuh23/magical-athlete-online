@@ -1,3 +1,4 @@
+import { activeMechanismLayout } from './mechanisms/layout.js';
 import { useEffect, useMemo, useRef, type RefObject } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
@@ -32,13 +33,14 @@ export function CameraRig({ paused = false, track = 'mild', compact, reset, focu
   const view = useMemo(() => cameraView(compact, closeUp), [compact, closeUp]);
   // Orthographic composition is unchanged; pull the eye back so the wide Bridges
   // overview cannot clip the tabletop through the near plane.
-  const eyeDistance = track === 'bridges' ? 2.5 : 1;
+  const candidate=activeMechanismLayout(track).lift>0;
+  const eyeDistance = candidate ? Math.max(3,activeMechanismLayout(track).scale*2) : track === 'bridges' ? 2.5 : 1;
   const frame = cameraFrame(focus.positions, compact, size.width, size.height, focus.state === 'overview', points, closeUp, track);
   useEffect(() => {
     const first = cameraFrame(focus.positions, compact, size.width, size.height, focus.state === 'overview', points, closeUp, track);
     camera.position.set(first.x + view.offset[0]*eyeDistance, first.y + view.offset[1]*eyeDistance, first.z + view.offset[2]*eyeDistance);
     camera.up.set(0, 1, 0); camera.lookAt(first.x, first.y, first.z);
-    if (camera instanceof THREE.OrthographicCamera) { camera.far = track === 'bridges' ? 200 : 100; camera.zoom = first.zoom; camera.updateProjectionMatrix(); }
+    if (camera instanceof THREE.OrthographicCamera) { camera.far = candidate ? 1000 : track === 'bridges' ? 200 : 100; camera.zoom = first.zoom; camera.updateProjectionMatrix(); }
     controls.current?.target.set(first.x, first.y, first.z); controls.current?.update();
     userDrag.current = false; invalidate();
   }, [camera, compact, track]);
@@ -69,5 +71,5 @@ export function CameraRig({ paused = false, track = 'mild', compact, reset, focu
       root.current.dataset.cameraAzimuth = controls.current.getAzimuthalAngle().toFixed(4);
     }
   });
-  return <OrbitControls ref={controls} makeDefault enablePan enableRotate={false} screenSpacePanning={false} enableDamping dampingFactor={.12} minZoom={3} maxZoom={MAX_CAMERA_ZOOM} mouseButtons={{ LEFT: THREE.MOUSE.PAN, MIDDLE: THREE.MOUSE.DOLLY, RIGHT: THREE.MOUSE.PAN }} touches={{ ONE: THREE.TOUCH.PAN, TWO: THREE.TOUCH.DOLLY_PAN }} onStart={() => { userDrag.current = true; onManual(); }} onChange={() => invalidate()} />;
+  return <OrbitControls ref={controls} makeDefault enablePan enableRotate={false} screenSpacePanning={false} enableDamping dampingFactor={.12} minZoom={candidate?.5:3} maxZoom={MAX_CAMERA_ZOOM} mouseButtons={{ LEFT: THREE.MOUSE.PAN, MIDDLE: THREE.MOUSE.DOLLY, RIGHT: THREE.MOUSE.PAN }} touches={{ ONE: THREE.TOUCH.PAN, TWO: THREE.TOUCH.DOLLY_PAN }} onStart={() => { userDrag.current = true; onManual(); }} onChange={() => invalidate()} />;
 }

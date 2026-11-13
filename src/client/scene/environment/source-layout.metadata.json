@@ -1,0 +1,149 @@
+{
+  "version": "new-environment-rebuild-v2",
+  "historical_certificate_inherited": false,
+  "matrix_contract": "4x4 row-major nested arrays in glTF/Three Y-up: C*M*C^-1, C=(x,z,-y). Matrix includes original yaw, scale and placement.",
+  "asset_contract": "GLB filename stem under /models/environment-rebuilt-v2/",
+  "sourceScale": 1,
+  "coordinate_note": "No mechanismsScale. Original map_source is pre-mechanism-scale commit.",
+  "pocket_source": {
+    "file": "extracted/athlete_three_maps_refined_20261112/map_source.json",
+    "sha256": "9434ace35ed270488b53cbdb6ba0065ba47e7378f6bfe99621f7d66376c7d022",
+    "source_commit": "b3e35290674379279a7ce4f2043d80ae1c3af2cc"
+  },
+  "exporter_sha256": "e7cbee2d180c28fce0144112ad508121472899b7b75d3b5358c490c489d94f32",
+  "tracks": {
+    "squiggle": {
+      "source": {
+        "package": "athlete_three_maps_refined_20261112.zip",
+        "package_sha256": "f4c6d3845124b5a51898ff2abd1dbf8bf05d2459d9450ab80f996649365ef994",
+        "blend_member": "athlete_three_maps_refined_20261112/squiggle_refined.blend",
+        "blend_sha256": "650c44bc8ad5f65cae2d791d68ceffd9b508a38aa2832ec59860b478f36008a4"
+      },
+      "tree_count": 14,
+      "placement": "direct_source_scene_collection_instances",
+      "sourceScale": 1,
+      "selected_layer": "all_tree_instances",
+      "excluded_source_instances": []
+    },
+    "boardwalks": {
+      "source": {
+        "package": "athlete_three_maps_refined_20261112.zip",
+        "package_sha256": "f4c6d3845124b5a51898ff2abd1dbf8bf05d2459d9450ab80f996649365ef994",
+        "blend_member": "athlete_three_maps_refined_20261112/boardwalks_refined.blend",
+        "blend_sha256": "41f4c4412a0598cc26d4368fc54ba1809f8c4b951de85d637055f65edb1e4dca"
+      },
+      "tree_count": 10,
+      "placement": "direct_source_scene_collection_instances",
+      "sourceScale": 1,
+      "selected_layer": "all_tree_instances",
+      "excluded_source_instances": []
+    },
+    "bridges": {
+      "source": {
+        "package": "athlete_three_maps_refined_20261112.zip",
+        "package_sha256": "f4c6d3845124b5a51898ff2abd1dbf8bf05d2459d9450ab80f996649365ef994",
+        "blend_member": "athlete_three_maps_refined_20261112/bridges_refined.blend",
+        "blend_sha256": "4b8b91a88aad2134d074ad074d4332a39dd013a0829c63c70062472ae3c6c4c2"
+      },
+      "tree_count": 27,
+      "placement": "direct_source_scene_collection_instances",
+      "sourceScale": 1,
+      "selected_layer": "all_tree_instances",
+      "excluded_source_instances": []
+    },
+    "mild": {
+      "source": {
+        "package": "athlete_u_maps_sources_joint_updated_20261112.zip",
+        "package_sha256": "74912e4762e7b6f7c3bc5311c5f2737a87bf99a611591924ac18c74eb32eddd4",
+        "blend_member": "athlete_u_maps_sources_joint_updated_20261112/u_maps_sources/mild_plain.blend",
+        "blend_sha256": "7a509d6eb9ed12ec6292f0e749fd4850c8eea323958091b864981b42ef87ba8b"
+      },
+      "tree_count": 6,
+      "placement": "direct_source_scene_collection_instances",
+      "sourceScale": 1,
+      "selected_layer": "INFIELD_TREE_*",
+      "excluded_source_instances": [
+        "GROVE_tree_00",
+        "GROVE_tree_01",
+        "GROVE_tree_02",
+        "GROVE_tree_03",
+        "GROVE_tree_04",
+        "GROVE_tree_05",
+        "GROVE_tree_06"
+      ]
+    },
+    "twisty-twirl": {
+      "source": {
+        "package": "athlete_u_maps_sources_joint_updated_20261112.zip",
+        "package_sha256": "74912e4762e7b6f7c3bc5311c5f2737a87bf99a611591924ac18c74eb32eddd4",
+        "blend_member": "athlete_u_maps_sources_joint_updated_20261112/u_maps_sources/twisty-twirl.blend",
+        "blend_sha256": "041602a774d465b4f554f7ba4df3e61440e99e31ce1e9964be5ae3502cb28726"
+      },
+      "tree_count": 6,
+      "placement": "direct_source_scene_collection_instances",
+      "sourceScale": 1,
+      "selected_layer": "INFIELD_TREE_*",
+      "excluded_source_instances": [
+        "GROVE_tree_00",
+        "GROVE_tree_01",
+        "GROVE_tree_02",
+        "GROVE_tree_03",
+        "GROVE_tree_04",
+        "GROVE_tree_05",
+        "GROVE_tree_06"
+      ]
+    },
+    "whirly-world": {
+      "source": {
+        "package": "athlete_u_maps_sources_joint_updated_20261112.zip",
+        "package_sha256": "74912e4762e7b6f7c3bc5311c5f2737a87bf99a611591924ac18c74eb32eddd4",
+        "blend_member": "athlete_u_maps_sources_joint_updated_20261112/u_maps_sources/whirly-world.blend",
+        "blend_sha256": "75712806c2446195af5c17130fa628d077ff45810fa267a98d0e4eac5c59a0b0"
+      },
+      "tree_count": 6,
+      "placement": "direct_source_scene_collection_instances",
+      "sourceScale": 1,
+      "selected_layer": "INFIELD_TREE_*",
+      "excluded_source_instances": [
+        "GROVE_tree_00",
+        "GROVE_tree_01",
+        "GROVE_tree_02",
+        "GROVE_tree_03",
+        "GROVE_tree_04",
+        "GROVE_tree_05",
+        "GROVE_tree_06"
+      ]
+    },
+    "wild": {
+      "source": {
+        "package": "athlete_u_maps_sources_joint_updated_20261112.zip",
+        "package_sha256": "74912e4762e7b6f7c3bc5311c5f2737a87bf99a611591924ac18c74eb32eddd4",
+        "blend_member": "athlete_u_maps_sources_joint_updated_20261112/u_maps_sources/mild_plain.blend",
+        "blend_sha256": "7a509d6eb9ed12ec6292f0e749fd4850c8eea323958091b864981b42ef87ba8b"
+      },
+      "tree_count": 6,
+      "placement": "derived-source",
+      "sourceScale": 1,
+      "selected_layer": "INFIELD_TREE_*",
+      "excluded_source_instances": [
+        "GROVE_tree_00",
+        "GROVE_tree_01",
+        "GROVE_tree_02",
+        "GROVE_tree_03",
+        "GROVE_tree_04",
+        "GROVE_tree_05",
+        "GROVE_tree_06"
+      ],
+      "derived_from_track": "mild",
+      "reason": "Standalone wild/infield grove source has not been recovered; reuse actual mild U-scene placements as a declared new derivation."
+    }
+  },
+  "occlusion_fixes": "Not applied here. Original tree instance names preserved for explicit runtime repairs.",
+  "publication_metadata": {
+    "scope": "Public source provenance retains filenames and content hashes. Private recovery-service identities are omitted. Existing exporter hashes describe the script used for the retained GLB bytes; the public script differs only in provenance metadata output.",
+    "public_exporter": {
+      "file": "scripts/recovery/export_environment_v2.py",
+      "sha256": "8132188e3390a8a50ab656a93733656f432be6dcef53b67433a2758f72a5934d"
+    }
+  }
+}

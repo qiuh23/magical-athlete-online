@@ -1,0 +1,18 @@
+{
+  "scope": "All changed files against current public main, plus release reports; actual GLB JSON chunks parsed. No secret values recorded.",
+  "textOrJSONChecked": 272,
+  "glbJSONChunks": 37,
+  "hits": [
+    {
+      "path": "tests/public-source-provenance.test.ts",
+      "category": "transfer-url",
+      "classification": "literal security-test pattern"
+    },
+    {
+      "path": "tests/public-source-provenance.test.ts",
+      "category": "internal-handoff",
+      "classification": "literal security-test pattern"
+    }
+  ],
+  "unreviewedHits": 0
+}

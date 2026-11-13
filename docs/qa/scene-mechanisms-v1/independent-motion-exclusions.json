@@ -1,0 +1,480 @@
+{
+  "warpPairs": [
+    {
+      "a": "whirly-world:3",
+      "b": "whirly-world:5",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:3",
+      "b": "whirly-world:7",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:3",
+      "b": "whirly-world:10",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:3",
+      "b": "whirly-world:12",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:3",
+      "b": "whirly-world:15",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:3",
+      "b": "whirly-world:18",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:3",
+      "b": "whirly-world:20",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:3",
+      "b": "whirly-world:22",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:3",
+      "b": "whirly-world:23",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:3",
+      "b": "whirly-world:24",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:3",
+      "b": "whirly-world:27",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:5",
+      "b": "whirly-world:7",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:5",
+      "b": "whirly-world:10",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:5",
+      "b": "whirly-world:12",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:5",
+      "b": "whirly-world:15",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:5",
+      "b": "whirly-world:18",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:5",
+      "b": "whirly-world:20",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:5",
+      "b": "whirly-world:22",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:5",
+      "b": "whirly-world:23",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:5",
+      "b": "whirly-world:24",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:5",
+      "b": "whirly-world:27",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:7",
+      "b": "whirly-world:10",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:7",
+      "b": "whirly-world:12",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:7",
+      "b": "whirly-world:15",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:7",
+      "b": "whirly-world:18",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:7",
+      "b": "whirly-world:20",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:7",
+      "b": "whirly-world:22",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:7",
+      "b": "whirly-world:23",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:7",
+      "b": "whirly-world:24",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:7",
+      "b": "whirly-world:27",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:10",
+      "b": "whirly-world:12",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:10",
+      "b": "whirly-world:15",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:10",
+      "b": "whirly-world:18",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:10",
+      "b": "whirly-world:20",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:10",
+      "b": "whirly-world:22",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:10",
+      "b": "whirly-world:23",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:10",
+      "b": "whirly-world:24",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:10",
+      "b": "whirly-world:27",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:12",
+      "b": "whirly-world:15",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:12",
+      "b": "whirly-world:18",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:12",
+      "b": "whirly-world:20",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:12",
+      "b": "whirly-world:22",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:12",
+      "b": "whirly-world:23",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:12",
+      "b": "whirly-world:24",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:12",
+      "b": "whirly-world:27",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:15",
+      "b": "whirly-world:18",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:15",
+      "b": "whirly-world:20",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:15",
+      "b": "whirly-world:22",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:15",
+      "b": "whirly-world:23",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:15",
+      "b": "whirly-world:24",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:15",
+      "b": "whirly-world:27",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:18",
+      "b": "whirly-world:20",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:18",
+      "b": "whirly-world:22",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:18",
+      "b": "whirly-world:23",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:18",
+      "b": "whirly-world:24",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:18",
+      "b": "whirly-world:27",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:20",
+      "b": "whirly-world:22",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:20",
+      "b": "whirly-world:23",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:20",
+      "b": "whirly-world:24",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:20",
+      "b": "whirly-world:27",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:22",
+      "b": "whirly-world:23",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:22",
+      "b": "whirly-world:24",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:22",
+      "b": "whirly-world:27",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:23",
+      "b": "whirly-world:24",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:23",
+      "b": "whirly-world:27",
+      "disjoint": true
+    },
+    {
+      "a": "whirly-world:24",
+      "b": "whirly-world:27",
+      "disjoint": true
+    }
+  ],
+  "punchExclusions": [
+    {
+      "node": 23,
+      "compact": false,
+      "key": "wild:1",
+      "disjoint": true
+    },
+    {
+      "node": 23,
+      "compact": false,
+      "key": "wild:13",
+      "disjoint": true
+    },
+    {
+      "node": 23,
+      "compact": false,
+      "key": "wild:17",
+      "disjoint": true
+    },
+    {
+      "node": 23,
+      "compact": false,
+      "key": "wild:26",
+      "disjoint": true
+    },
+    {
+      "node": 23,
+      "compact": false,
+      "key": "wild/17/desktop/banana:false:normal:false",
+      "disjoint": true
+    },
+    {
+      "node": 23,
+      "compact": false,
+      "key": "wild/26/desktop/banana:false:normal:false",
+      "disjoint": true
+    },
+    {
+      "node": 23,
+      "compact": true,
+      "key": "wild:1",
+      "disjoint": true
+    },
+    {
+      "node": 23,
+      "compact": true,
+      "key": "wild:13",
+      "disjoint": true
+    },
+    {
+      "node": 23,
+      "compact": true,
+      "key": "wild:17",
+      "disjoint": true
+    },
+    {
+      "node": 23,
+      "compact": true,
+      "key": "wild:26",
+      "disjoint": true
+    },
+    {
+      "node": 23,
+      "compact": true,
+      "key": "wild/17/compact/banana:false:normal:false",
+      "disjoint": true
+    },
+    {
+      "node": 23,
+      "compact": true,
+      "key": "wild/26/compact/banana:false:normal:false",
+      "disjoint": true
+    },
+    {
+      "node": 24,
+      "compact": false,
+      "key": "wild:1",
+      "disjoint": true
+    },
+    {
+      "node": 24,
+      "compact": false,
+      "key": "wild:13",
+      "disjoint": true
+    },
+    {
+      "node": 24,
+      "compact": false,
+      "key": "wild:17",
+      "disjoint": true
+    },
+    {
+      "node": 24,
+      "compact": false,
+      "key": "wild:26",
+      "disjoint": true
+    },
+    {
+      "node": 24,
+      "compact": false,
+      "key": "wild/17/desktop/banana:false:normal:false",
+      "disjoint": true
+    },
+    {
+      "node": 24,
+      "compact": false,
+      "key": "wild/26/desktop/banana:false:normal:false",
+      "disjoint": true
+    },
+    {
+      "node": 24,
+      "compact": true,
+      "key": "wild:1",
+      "disjoint": true
+    },
+    {
+      "node": 24,
+      "compact": true,
+      "key": "wild:13",
+      "disjoint": true
+    },
+    {
+      "node": 24,
+      "compact": true,
+      "key": "wild:17",
+      "disjoint": true
+    },
+    {
+      "node": 24,
+      "compact": true,
+      "key": "wild:26",
+      "disjoint": true
+    },
+    {
+      "node": 24,
+      "compact": true,
+      "key": "wild/17/compact/banana:false:normal:false",
+      "disjoint": true
+    },
+    {
+      "node": 24,
+      "compact": true,
+      "key": "wild/26/compact/banana:false:normal:false",
+      "disjoint": true
+    }
+  ]
+}

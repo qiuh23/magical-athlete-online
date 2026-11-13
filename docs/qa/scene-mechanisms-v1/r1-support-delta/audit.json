@@ -1,0 +1,400 @@
+{
+  "baselineCommit": "0a72cf8bb274e911d53363b27a276c001eafca0e",
+  "baselineAudit": {
+    "path": "docs/qa/scene-mechanisms-v1/audit.json",
+    "sha256": "19db8691c26dd9624008bfa3bde6f3b7add92a8a2e6c5ddbfe116b72ec8277f2"
+  },
+  "scope": "Only Wild24 160mm fixed support column added. Rig/root/park and sampled motion bounds unchanged. Old finite audit remains immutable; its unchanged geometry plus this delta authorize the same39/24 scope, not new contacts.",
+  "sourceChanges": [
+    {
+      "path": "src/client/scene/mechanisms/punch-r1/support.ts",
+      "before": "484f15acf468b3eeb5d1f42c2c14eaa822efbe88fb3dbfd4744caa69061d8ec1",
+      "after": "58ba352910257ae72f3443592823ade845303dece705520b45125915e88eddca",
+      "basis": "Exact unchanged slab prefix, new center column checked above."
+    },
+    {
+      "path": "docs/qa/punch-r1-contact/mount-envelope.json",
+      "before": "9d11128dd5efb7233f799d0f8bee461e8658527f5244e811ff4f23b2b3a089c8",
+      "after": "d4b8bd521a1e58ffde10ae15c4f2021db1dc6fb809b9d3ca02c5dcf52ec5507d",
+      "basis": "Exact unchanged slab prefix, new center column checked above."
+    },
+    {
+      "path": "scripts/recovery/audit-scene-mechanisms.ts",
+      "before": "086c4c0bca84269d55c20fcfbf32c4c960c15cbaee62911cb3891fe53c0e4c53",
+      "after": "ea864720cb628f143c3e63fce8ee638d362e4e57d107b93a01cc43f878d6fec9",
+      "basis": "Only passes explicit foundationCenterBottom to the existing foundation factory."
+    }
+  ],
+  "records": [
+    {
+      "node": 23,
+      "compact": false,
+      "unchanged": true
+    },
+    {
+      "node": 23,
+      "compact": true,
+      "unchanged": true
+    },
+    {
+      "node": 24,
+      "compact": false,
+      "unchangedSlabVertices": 24,
+      "unchangedSlabIndices": 36,
+      "addedVertices": 24,
+      "addedIndices": 36,
+      "addedBounds": [
+        [
+          -4.284999996423725,
+          0.019000003010034572,
+          4.644999937177412
+        ],
+        [
+          -4.1250000000000036,
+          0.10400000017881394,
+          4.804999933601134
+        ]
+      ],
+      "groundProbes": [
+        0.019999999552965164,
+        0.019999999552965164,
+        0.01704138271603764,
+        0.017041382716037654,
+        0.019999999552965164
+      ],
+      "groundInterface": "Center and two inward corners touch real terrain; two outward corners overhang the original slope by approximately1.96mm. Do not claim a fully flush bottom.",
+      "contacts": [
+        {
+          "name": "scene:ground:cream",
+          "kind": "surface",
+          "crossings": 13,
+          "bounds": [
+            [
+              -4.284999996423725,
+              0.019000003010034572,
+              4.644999937177412
+            ],
+            [
+              -4.1250000000000036,
+              0.019999999552965164,
+              4.7983799741611435
+            ]
+          ],
+          "aBounds": [
+            [
+              -4.284999996423725,
+              0.019000003010034572,
+              4.644999937177412
+            ],
+            [
+              -4.1250000000000036,
+              0.10400000017881394,
+              4.804999933601134
+            ]
+          ],
+          "bBounds": [
+            [
+              -17.165000915527344,
+              -0.25,
+              -4.864999771118164
+            ],
+            [
+              17.165000915527344,
+              0.019999999552965164,
+              4.864999771118164
+            ]
+          ],
+          "allowed": "column bottom <=2mm terrain attachment"
+        }
+      ],
+      "plateJoint": {
+        "kind": "surface",
+        "crossings": 10,
+        "bounds": [
+          [
+            -4.284999996423725,
+            0.10399999645352365,
+            4.644999937177412
+          ],
+          [
+            -4.1250000000000036,
+            0.10399999645352365,
+            4.804999933601134
+          ]
+        ],
+        "aBounds": [
+          [
+            -4.284999996423725,
+            0.019000003010034572,
+            4.644999937177412
+          ],
+          [
+            -4.1250000000000036,
+            0.10400000017881394,
+            4.804999933601134
+          ]
+        ],
+        "bBounds": [
+          [
+            -4.639999970793728,
+            0.10399999645352365,
+            4.304999918699973
+          ],
+          [
+            -3.770000025630001,
+            0.1999999525845051,
+            5.144999952078574
+          ]
+        ]
+      }
+    },
+    {
+      "node": 24,
+      "compact": true,
+      "unchangedSlabVertices": 24,
+      "unchangedSlabIndices": 36,
+      "addedVertices": 24,
+      "addedIndices": 36,
+      "addedBounds": [
+        [
+          -4.804999933601134,
+          0.019000003010034572,
+          -4.284999996423725
+        ],
+        [
+          -4.644999937177412,
+          0.10400000017881394,
+          -4.1250000000000036
+        ]
+      ],
+      "groundProbes": [
+        0.01704138271603764,
+        0.019999999552965164,
+        0.017041382716037654,
+        0.019999999552965164,
+        0.019999999552965164
+      ],
+      "groundInterface": "Center and two inward corners touch real terrain; two outward corners overhang the original slope by approximately1.96mm. Do not claim a fully flush bottom.",
+      "contacts": [
+        {
+          "name": "scene:ground:cream",
+          "kind": "surface",
+          "crossings": 13,
+          "bounds": [
+            [
+              -4.7983799741611435,
+              0.019000003010034572,
+              -4.284999996423725
+            ],
+            [
+              -4.644999937177412,
+              0.019999999552965164,
+              -4.1250000000000036
+            ]
+          ],
+          "aBounds": [
+            [
+              -4.804999933601134,
+              0.019000003010034572,
+              -4.284999996423725
+            ],
+            [
+              -4.644999937177412,
+              0.10400000017881394,
+              -4.1250000000000036
+            ]
+          ],
+          "bBounds": [
+            [
+              -4.864999771118165,
+              -0.25,
+              -17.165000915527344
+            ],
+            [
+              4.864999771118165,
+              0.019999999552965164,
+              17.165000915527344
+            ]
+          ],
+          "allowed": "column bottom <=2mm terrain attachment"
+        }
+      ],
+      "plateJoint": {
+        "kind": "surface",
+        "crossings": 10,
+        "bounds": [
+          [
+            -4.804999933601134,
+            0.10399999645352365,
+            -4.284999996423725
+          ],
+          [
+            -4.644999937177412,
+            0.10399999645352365,
+            -4.1250000000000036
+          ]
+        ],
+        "aBounds": [
+          [
+            -4.804999933601134,
+            0.019000003010034572,
+            -4.284999996423725
+          ],
+          [
+            -4.644999937177412,
+            0.10400000017881394,
+            -4.1250000000000036
+          ]
+        ],
+        "bBounds": [
+          [
+            -5.144999952078574,
+            0.10399999645352365,
+            -4.639999970793728
+          ],
+          [
+            -4.304999918699973,
+            0.1999999525845051,
+            -3.770000025630001
+          ]
+        ]
+      }
+    }
+  ],
+  "exclusions": [
+    {
+      "compact": false,
+      "key": "wild:1",
+      "disjoint": true
+    },
+    {
+      "compact": false,
+      "key": "wild:13",
+      "disjoint": true
+    },
+    {
+      "compact": false,
+      "key": "wild:17",
+      "disjoint": true
+    },
+    {
+      "compact": false,
+      "key": "wild:26",
+      "disjoint": true
+    },
+    {
+      "compact": false,
+      "key": "wild/17/desktop/banana:false:normal:false",
+      "disjoint": true
+    },
+    {
+      "compact": false,
+      "key": "wild/26/desktop/banana:false:normal:false",
+      "disjoint": true
+    },
+    {
+      "compact": false,
+      "key": "standing-banana:wild:1",
+      "disjoint": true,
+      "actorBounds": [
+        [
+          -7.719500021636494,
+          1.6549999999999998,
+          -3.61950002163649
+        ],
+        [
+          -6.630499978363523,
+          3.5426171208838158,
+          -2.5304999783635176
+        ]
+      ]
+    },
+    {
+      "compact": false,
+      "key": "standing-banana:wild:13",
+      "disjoint": true,
+      "actorBounds": [
+        [
+          14.830499978363534,
+          1.6549999999999998,
+          -1.5695000216364874
+        ],
+        [
+          15.919500021636505,
+          3.5426171208838158,
+          -0.4804999783635152
+        ]
+      ]
+    },
+    {
+      "compact": true,
+      "key": "wild:1",
+      "disjoint": true
+    },
+    {
+      "compact": true,
+      "key": "wild:13",
+      "disjoint": true
+    },
+    {
+      "compact": true,
+      "key": "wild:17",
+      "disjoint": true
+    },
+    {
+      "compact": true,
+      "key": "wild:26",
+      "disjoint": true
+    },
+    {
+      "compact": true,
+      "key": "wild/17/compact/banana:false:normal:false",
+      "disjoint": true
+    },
+    {
+      "compact": true,
+      "key": "wild/26/compact/banana:false:normal:false",
+      "disjoint": true
+    },
+    {
+      "compact": true,
+      "key": "standing-banana:wild:1",
+      "disjoint": true,
+      "actorBounds": [
+        [
+          2.5304999783635176,
+          1.6549999999999998,
+          -7.719500021636494
+        ],
+        [
+          3.61950002163649,
+          3.5426171208838158,
+          -6.630499978363523
+        ]
+      ]
+    },
+    {
+      "compact": true,
+      "key": "standing-banana:wild:13",
+      "disjoint": true,
+      "actorBounds": [
+        [
+          0.4804999783635152,
+          1.6549999999999998,
+          14.830499978363534
+        ],
+        [
+          1.5695000216364874,
+          3.5426171208838158,
+          15.919500021636505
+        ]
+      ]
+    }
+  ],
+  "verifiedInputs": {
+    "art/mechanisms/punch-rebuild-r1/punch-rebuild-r1.glb": "aef0b2f39adcbb29eaa3f449e22804093f5efe02e1d0113ca35500cd75cb25b6",
+    "art/mechanisms/punch-rebuild-r1/driver.ts": "60654d9ac97e2fdfb0c356ed7de34992c69ec76779d954e4ba6bba2b1ac1ed7c",
+    "scripts/recovery/audit-r1-support-delta.ts": "75a5db21bd6e44558a29e5e9444e7b2580e309e4d2a7362b057c62079acdf596"
+  },
+  "limitations": "Finite original samples only. This does not prove new Punch actor actions, continuous time or unknown actors. Park-only candidates have their own full audit against the final support."
+}

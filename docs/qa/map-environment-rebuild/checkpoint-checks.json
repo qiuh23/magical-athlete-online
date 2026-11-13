@@ -1,0 +1,53 @@
+{
+  "identity": "new source-derived environment v2 checkpoint; no historical runtime/contact certificate inherited",
+  "base_commit": "1cb3194912b25e5d0839ca06a0fe4f3fc6d89f49",
+  "checks": {
+    "main_types": "passed",
+    "worker_types": "passed",
+    "focused_tests": {
+      "passed": 33,
+      "failed": 0,
+      "skipped": 0
+    },
+    "full_node_tests": {
+      "passed": 1572,
+      "failed": 0,
+      "skipped": 0
+    },
+    "cn_server_global_browser_builds": "passed; existing large-chunk advisory",
+    "content_hash_outputs": {
+      "passed": 44,
+      "failed": 0
+    },
+    "glb_independent_three_blender": {
+      "assets": 22,
+      "status": "passed"
+    },
+    "git_diff_check": "passed",
+    "webgl_mobile_browser": "NOT VERIFIED: supported browser could not establish local page/context",
+    "collision_scene": "NOT VERIFIED: candidate prohibits physical rigs; no old certificate inheritance"
+  },
+  "logs": [
+    {
+      "file": "environment-focused-tests-final.log",
+      "sha256": "21e4e14492ac359e854027cfefc32fa7171283ba3f48cfa66f1ae5cb2bbbd670"
+    },
+    {
+      "file": "environment-full-tests-final.log",
+      "sha256": "a917c289d8f7ed08790a0b968cfa1852bc54339c8b48eea9c9daeff8a759eba0"
+    },
+    {
+      "file": "environment-typecheck-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "environment-build-final.log",
+      "sha256": "827f09de8f4f08ed6df6ea06995068f5ce97b067067fc9fc181e740cabeeb8bc"
+    }
+  ],
+  "failed_approaches_retained": [
+    "initial duplicate decimated faces / material-group mismatch; fixed before measured source snapshot without loosening assertion",
+    "legacy source-hash mismatch; fixed by restoring original files and partitioning candidate components",
+    "event cue fixtures initially had noncontiguous IDs / incorrectly assumed merged score beats; corrected test inputs"
+  ]
+}

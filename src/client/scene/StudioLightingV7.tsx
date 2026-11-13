@@ -17,11 +17,15 @@ export const ATHLETE_LIGHT_PRESETS = {
 /** External, deterministic mode. No Date.now, timers or permanent useFrame loop.
  * Night defaults to moon/sky ambience. stadiumLights requires a visible/established venue-light source.
  */
-export function StudioLightingV7({ compact, lowQuality, mode = 'day', stadiumLights = false }: {
-  compact: boolean; lowQuality: boolean; mode?: AthleteLightMode; stadiumLights?: boolean;
+export function StudioLightingV7({ compact, lowQuality, mode = 'day', stadiumLights = false, boardExtent }: {
+  compact: boolean; lowQuality: boolean; mode?: AthleteLightMode; stadiumLights?: boolean; boardExtent?:{width:number;depth:number;x:number;z:number};
 }) {
   const { gl, scene, camera, invalidate } = useThree();
+  const shadowExtent=boardExtent?Math.max(boardExtent.width,boardExtent.depth)/2+5:21;
+  const keyTarget=useRef(new THREE.Object3D());
+  useEffect(()=>{scene.add(keyTarget.current);return()=>{scene.remove(keyTarget.current);};},[scene]);
   const keyLight = useRef<THREE.DirectionalLight | null>(null);
+  useEffect(()=>{const shadow=keyLight.current?.shadow;if(shadow){const c=shadow.camera;c.left=-shadowExtent;c.right=shadowExtent;c.top=shadowExtent;c.bottom=-shadowExtent;c.far=boardExtent?Math.max(65,shadowExtent*4):65;c.updateProjectionMatrix();gl.shadowMap.needsUpdate=true;invalidate();}},[shadowExtent,boardExtent,gl,invalidate]);
   const sky = useRef<ReturnType<typeof createSkyEnvironment> | null>(null);
   useEffect(() => {
     const controller = createSkyEnvironment({ THREE, scene, camera,
@@ -43,8 +47,12 @@ export function StudioLightingV7({ compact, lowQuality, mode = 'day', stadiumLig
     const controller = sky.current;
     if (!controller) return;
     controller.update({ camera });
-    if (keyLight.current) keyLight.current.position.copy(controller.getLightingState().direction)
-      .multiplyScalar(Math.hypot(...preset.keyPosition));
+    if (keyLight.current) {
+      keyTarget.current.position.set(boardExtent?.x??0,0,boardExtent?.z??0);
+      keyLight.current.target=keyTarget.current;
+      keyLight.current.position.copy(controller.getLightingState().direction)
+        .multiplyScalar(boardExtent?Math.max(Math.hypot(...preset.keyPosition),shadowExtent*2):Math.hypot(...preset.keyPosition)).add(keyTarget.current.position);
+    }
   });
   const ownedEnvironment = useRef<THREE.Texture | null>(null);
   const base = ATHLETE_LIGHT_PRESETS[mode];
@@ -122,8 +130,8 @@ export function StudioLightingV7({ compact, lowQuality, mode = 'day', stadiumLig
     <hemisphereLight args={[preset.sky, preset.ground, preset.hemi]} />
     <directionalLight ref={keyLight} color={preset.key} position={preset.keyPosition} intensity={preset.keyPower} castShadow={!lowQuality}
       shadow-mapSize={compact ? [1024, 1024] : [2048, 2048]}
-      shadow-camera-left={-21} shadow-camera-right={21} shadow-camera-top={21} shadow-camera-bottom={-21}
-      shadow-camera-near={.5} shadow-camera-far={65} shadow-normalBias={.018}
+      shadow-camera-left={-shadowExtent} shadow-camera-right={shadowExtent} shadow-camera-top={shadowExtent} shadow-camera-bottom={-shadowExtent}
+      shadow-camera-near={.5} shadow-camera-far={boardExtent?Math.max(65,shadowExtent*4):65} shadow-normalBias={.018}
       shadow-bias={-.00012} shadow-radius={compact ? .7 : 1.4} shadow-intensity={preset.shadow} />
     <directionalLight color={preset.fill} position={[8, 8, -7]} intensity={preset.fillPower} />
   </>;

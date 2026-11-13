@@ -14,7 +14,7 @@ test.beforeAll(async () => {
 test.afterAll(async () => application.close());
 
 async function noOverflow(page: Page) {
-  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1)).toBe(true);
 }
 
 async function neutralHome(page: Page) {
@@ -30,6 +30,7 @@ async function neutralHome(page: Page) {
 for (const [name, viewport] of [
   ['桌面', { width: 1440, height: 1000 }],
   ['手机', { width: 390, height: 844 }],
+  ['窄屏手机', { width: 320, height: 667 }],
   ['手机横屏', { width: 844, height: 390 }],
 ] as const) {
   test(`首页入口先保持未选择，展开与返回保留各模式草稿 ${name}`, async ({ page }, testInfo) => {

@@ -1,0 +1,63 @@
+{
+  "sample_step": 0.5,
+  "sample_count": 251,
+  "actor_hard_hits": [],
+  "actor_soft_hits": [
+    {
+      "frame": 43.5,
+      "actor": "Target__banana_toy-sw-yellow",
+      "device": "PUNCH_SLIDER_X__coral_fixed_batch",
+      "pairs": 8
+    },
+    {
+      "frame": 44.0,
+      "actor": "Target__banana_toy-sw-yellow",
+      "device": "PUNCH_SLIDER_X__coral_fixed_batch",
+      "pairs": 30
+    },
+    {
+      "frame": 44.5,
+      "actor": "Target__banana_toy-sw-yellow",
+      "device": "PUNCH_SLIDER_X__coral_fixed_batch",
+      "pairs": 32
+    },
+    {
+      "frame": 45.0,
+      "actor": "Target__banana_toy-sw-yellow",
+      "device": "PUNCH_SLIDER_X__coral_fixed_batch",
+      "pairs": 32
+    },
+    {
+      "frame": 45.5,
+      "actor": "Target__banana_toy-sw-yellow",
+      "device": "PUNCH_SLIDER_X__coral_fixed_batch",
+      "pairs": 22
+    },
+    {
+      "frame": 46.0,
+      "actor": "Target__banana_toy-sw-yellow",
+      "device": "PUNCH_SLIDER_X__coral_fixed_batch",
+      "pairs": 6
+    }
+  ],
+  "old_hits": [],
+  "actor_track_hits": [],
+  "moving_device_track_hits": [],
+  "static_mount_track_hits": [],
+  "root_drift": 0,
+  "old_anchor_drift": 0,
+  "minimum_floor_gap": 0.0029999971389771396,
+  "scope": "Finite BVH triangle overlap. Actor scale fixed; no physics simulation claim. Full-static mounting intersections are reported separately, not exempted as clear. Score particles/transparent magic are VFX, not colliders.",
+  "actor_scale_min": [
+    1.649999976158142,
+    1.649999976158142,
+    1.649999976158142
+  ],
+  "actor_scale_max": [
+    1.649999976158142,
+    1.649999976158142,
+    1.649999976158142
+  ],
+  "actor_and_moving_clearance_pass": true,
+  "full_mount_clearance_pass": true
+}

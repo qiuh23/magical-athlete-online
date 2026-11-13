@@ -1,0 +1,11 @@
+{
+  "origin": "Blender tile centre [0,0,deckZ0], glTF Three centre [0,deckY0,0]",
+  "surface": "cap top0, inset top.002m; actor originalfootclearance.003m",
+  "pitch": 2.05,
+  "cap_xy": [
+    2,
+    2
+  ],
+  "source": "Unchanged MOD_25 from actual_joint_trip_portable; translation only; applied modifiers for glTF; index FONT excluded so consumer can use its own node label; dark index backing retained.",
+  "not_included": "No pawn, mechanism, ground, tripod supports or animation."
+}
