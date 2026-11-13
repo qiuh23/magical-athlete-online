@@ -53,5 +53,24 @@ test('geometry feedback is read-only, ignores hidden branches, and safely handle
  for(let i=0;i<20;i++){same(actors.surface('racer',origin,fallback),[-.5,0,0]);same(actors.surface('racer',new Vector3(),fallback),[0,0,0]);}
  same(origin,originBefore.toArray());same(fallback,fallbackBefore.toArray());assert.equal(JSON.stringify(state),before);assert.equal(body.userData.state,state);
  const unknown=actors.surface('not-yet-loaded',origin,fallback);same(unknown,fallback.toArray());assert.notEqual(unknown,fallback);
- assert.deepEqual(Object.getOwnPropertyNames(Object.getPrototypeOf(actors)).sort(),['bind','bounds','constructor','surface']);cleanup(body);
+ assert.deepEqual(Object.getOwnPropertyNames(Object.getPrototypeOf(actors)).sort(),['bind','bounds','capture','clearTripSweep','constructor','setTripSweep','surface','tripHit','tripPlans']);cleanup(body);
+});
+
+test('first-frame distant skinned actors match the renderer matrix update order before any rendered frame',async()=>{
+ const {readFileSync}=await import('node:fs'),{GLTFLoader}=await import('three/addons/loaders/GLTFLoader.js'),{cloneToyModel}=await import('../src/client/scene/toy-model-instance.js');
+ const {Matrix4,Quaternion}=await import('three'),{MeshoptDecoder}=await import('three/addons/libs/meshopt_decoder.module.js');
+ const bytes=readFileSync('public/models/toy-racers.glb'),asset=await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).parseAsync(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),'');
+ for(const id of ['coach','blimp','centaur']){
+  const scene=new Group(),root=new Group(),body=new Group(),sculpture=cloneToyModel(asset.scene.getObjectByName(`toy_${id}`)!,true);sculpture.userData.sculptureState='ready';body.add(sculpture);root.add(body);scene.add(root);
+  root.position.set(31,2.4,-23);root.rotation.y=Math.PI/2;root.scale.setScalar(.95);
+  const world=new Matrix4().compose(root.position,new Quaternion().setFromAxisAngle(new Vector3(0,1,0),Math.PI/2),root.scale),actors=new MechanismActorBounds();actors.bind(id,body);
+  const first=actors.capture(id,world)!;assert.ok(first&&first.lower.length>0);
+  // Independent oracle follows WebGLRenderer's scene update before reading any
+  // evaluated skinned vertices, rather than repeating capture's old method.
+  scene.updateMatrixWorld(true);const expectedMin=new Vector3(Infinity,Infinity,Infinity),expectedMax=new Vector3(-Infinity,-Infinity,-Infinity),p=new Vector3();
+  body.traverse(node=>{if(!(node instanceof Mesh))return;const position=node.geometry.getAttribute('position');for(let i=0;i<position.count;i++){node.getVertexPosition(i,p).applyMatrix4(node.matrixWorld);expectedMin.min(p);expectedMax.max(p);}});
+  same(first.bounds.min,expectedMin.toArray());same(first.bounds.max,expectedMax.toArray());
+  const second=actors.capture(id,world)!;same(first.bounds.min,second.bounds.min.toArray());same(first.bounds.max,second.bounds.max.toArray());
+  const live=actors.bounds(id)!;same(live.min,expectedMin.toArray());same(live.max,expectedMax.toArray());
+ }
 });

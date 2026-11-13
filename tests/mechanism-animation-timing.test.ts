@@ -17,19 +17,19 @@ function tripPlayback(count=1){
  return {state:receiveRoom(createPlayback(room(1,[],racers)),final),final};
 }
 
-test('one, two and eight targets wait for the mechanism before falling, with earlier fallen pawns held down',()=>{
+test('one, two and eight targets wait for their measured sweep contact before falling, with earlier fallen pawns held down',()=>{
  for(const count of [1,2,8]){
   const {state,final}=tripPlayback(count),beat=state.queue[0]!;
   assert.equal(beat.kind,'trip');
-  assert.equal(beatDuration(beat),1600);
+  assert.equal(beatDuration(beat),2000);
   const actions=mechanismActions('wild',beat,state.racers);
   assert.equal(actions.length,1);assert.equal(actions[0]!.targets.length,count);
   for(const id of actions[0]!.targets){
    const r=state.racers.find(r=>r.id===id)!;
    assert.equal(pawnFallPhase(beat,r),'trip');
-   for(const t of [0,.16,.4,.5])assert.equal(pawnFallPose(displayTripFallProgress(t),'trip').tilt,0);
-   assert(pawnFallPose(displayTripFallProgress(.72),'trip').tilt<0);
-   assert.equal(pawnFallPose(displayTripFallProgress(.92),'trip').tilt,-Math.PI/2);
+   for(const t of [0,.16,.4,.5])assert.equal(pawnFallPose(displayTripFallProgress(t,.5),'trip').tilt,0);
+   assert(pawnFallPose(displayTripFallProgress(.72,.5),'trip').tilt<0);
+   assert.equal(pawnFallPose(displayTripFallProgress(.92,.5),'trip').tilt,-Math.PI/2);
   }
   assert.equal(pawnFallPhase(beat,state.racers.at(-1)!),'down');
   assert.equal(completeBeat(state).queue.length,0);
@@ -42,7 +42,7 @@ test('speed preserves a readable mechanism cycle, reduced motion retains its imm
  const {state}=tripPlayback(2),beat=state.queue[0]!;
  for(const speed of [.5,1,2,4,8]){
   assert(beatDuration(beat,{speed})>=1000);
-  assert.equal(pawnFallPose(displayTripFallProgress(0),'trip',true).tilt,-Math.PI/2);
+  assert.equal(pawnFallPose(displayTripFallProgress(0,.5),'trip',true).tilt,-Math.PI/2);
  }
  assert.equal(beatDuration(beat,{reducedMotion:true}),500);
 });
@@ -69,8 +69,8 @@ test('pause, skip, reconnect or replacing a beat cancels either pending frame',(
 });
 test('paused presentation time preserves the mechanism and all target poses',()=>{
  let now=0;const clock=new PresentationClock(()=>now);
- now=800;clock.setPaused(true);const before=displayTripFallProgress(clock.now()/1600);
- now=15000;assert.equal(displayTripFallProgress(clock.now()/1600),before);
+ now=800;clock.setPaused(true);const before=displayTripFallProgress(clock.now()/1600,.5);
+ now=15000;assert.equal(displayTripFallProgress(clock.now()/1600,.5),before);
  clock.setPaused(false);now+=400;
- assert.equal(clock.now(),1200);assert(displayTripFallProgress(clock.now()/1600)>before);
+ assert.equal(clock.now(),1200);assert(displayTripFallProgress(clock.now()/1600,.5)>before);
 });

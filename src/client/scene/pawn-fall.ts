@@ -19,7 +19,9 @@ export function pawnFallPose(progress: number, phase: 'trip' | 'recover' | 'down
   return { tilt, lift: support + contact };
 }
 
-/** The outboard trip demonstration peaks at 0.5. Only then does its target
- * lose balance; the pawn is down before the cabinet finishes returning to rest.
- * Certified contact plans keep their own audited contact/fall phases. */
-export function displayTripFallProgress(t:number){return clamp01((t-.5)/.42);}
+/** Per-target first contact, measured against the rendered sweep rod. Missing
+ * geometry holds the actor upright until the authoritative endpoint. */
+export function displayTripFallProgress(t:number,hitT?:number){
+ if(t>=1)return 1;if(hitT===undefined||!Number.isFinite(hitT))return 0;
+ return clamp01((t-hitT)/Math.max(.08,.94-hitT));
+}

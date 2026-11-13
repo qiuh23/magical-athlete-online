@@ -10,7 +10,7 @@ import {MechanismActorBounds} from '../src/client/scene/mechanisms/actor-bounds.
 /** Independent reference: evaluate every visible vertex, including skinning,
  * rather than reading either geometry.boundingBox or SkinnedMesh.boundingBox. */
 function evaluatedBounds(root:Object3D){
- root.updateWorldMatrix(true,true);const box=new Box3(),point=new Vector3();
+ let scene=root;while(scene.parent)scene=scene.parent;scene.updateMatrixWorld(true);const box=new Box3(),point=new Vector3();
  root.traverse(node=>{
   if(!(node instanceof Mesh))return;
   for(let parent:Object3D|null=node;parent;parent=parent.parent)if(!parent.visible)return;
