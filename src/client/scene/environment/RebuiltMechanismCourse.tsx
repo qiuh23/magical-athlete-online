@@ -9,7 +9,7 @@ import { nextTrackNodes } from '../../../shared/track-topology.js';
 import { TRACKS } from '../../../shared/tracks.js';
 import { boardPoint, trackConnections, trackNodeIds, TILE } from '../math.js';
 import { RebuiltScenery } from './RebuiltScenery.js';
-import { specialTileTexture } from '../tile-art.js';
+import { buildTileFinish, buildTileLabels } from './tile-finish.js';
 import { mechanismPlacements } from '../mechanisms/placements.js';
 import { MECHANISM_PAD_SIZE } from '../mechanisms/layout.js';
 import { mechanismPadUrl } from '../mechanisms/models.js';
@@ -24,7 +24,7 @@ export function RebuiltMechanismCourse({track,compact,lowQuality,showTallDecor,o
     {(!environmentReady||!isNaturalMap(track))&&<RebuiltScenery track={track} lowQuality={lowQuality} mode={environmentReady?'ground':'all'}/>}
     <DeckStructure track={track} lowQuality={lowQuality}/>
     <PadBoundary onFailure={onPadFailure}><Suspense fallback={null}><ApprovedDeckPads track={track} lowQuality={lowQuality} onReady={onPadReady}/></Suspense></PadBoundary>
-    {trackNodeIds(track).map(node=><DeckMark key={node} track={track} node={node}/>)}
+    <DeckFinish track={track}/>
     {track==='wild'&&!environmentReady&&<Suspense fallback={null}><StadiumAssets fallback={null}>{models=><StadiumDecor models={models} showTallDecor={showTallDecor} infieldOnly/>}</StadiumAssets></Suspense>}
   </group>;
 }
@@ -35,23 +35,14 @@ function DeckStructure({track,lowQuality}:{track:TrackId;lowQuality:boolean}) {
   useEffect(()=>()=>{kit.geometry.dispose();kit.pole.dispose();kit.trimmedPole.dispose();kit.material.dispose();kit.edge.dispose();kit.pads.dispose();kit.roads.dispose();kit.supports.dispose();kit.trimmedSupports.dispose();},[kit]);
   return <group name="raised-route">{[kit.pads,kit.roads,kit.supports,kit.trimmedSupports].map((object,i)=><primitive key={i} object={object} dispose={null}/>)}</group>;
 }
-function DeckMark({track,node}:{track:TrackId;node:number}) {
-  const special=TRACKS[track].specials[node],p=boardPoint(node,false,track);
-  const texture=useMemo(()=>{
-    if(!special)return;
-    const next=nextTrackNodes(TRACKS[track],node,Math.sign(special.move??1))[0],q=boardPoint(next??node,false,track);
-    return specialTileTexture(special.kind,special.move,node,Math.atan2(-(q[0]-p[0]),-(q[2]-p[2])),special.points,special.to);
-  },[track,node,special]);
-  const number=useMemo(()=>{
-    const canvas=document.createElement('canvas');canvas.width=canvas.height=256;const c=canvas.getContext('2d')!;
-    c.fillStyle='#173f37';c.fillRect(0,32,256,192);c.fillStyle='#fff5cf';c.font='bold 156px sans-serif';c.textAlign='center';c.textBaseline='middle';c.fillText(String(node).padStart(2,'0'),128,135);
-    const number=new CanvasTexture(canvas);number.colorSpace=SRGBColorSpace;return number;
-  },[node]);
-  useEffect(()=>()=>{texture?.dispose();number.dispose();},[texture,number]);
-  return <group>
-    <mesh name={`mechanism-node-${node}`} position={[p[0]-.58,p[1]+.016,p[2]-.6]} rotation={[-Math.PI/2,0,0]} raycast={()=>{}}><planeGeometry args={[.72,.72]}/><meshBasicMaterial map={number} transparent depthWrite={false} polygonOffset polygonOffsetFactor={-1} toneMapped={false}/></mesh>
-    {texture&&<mesh name={`mechanism-symbol-${node}`} position={[p[0]+.43,p[1]+.015,p[2]-.6]} rotation={[-Math.PI/2,0,0]} raycast={()=>{}}><planeGeometry args={[.8,.8]}/><meshBasicMaterial map={texture} transparent depthWrite={false} polygonOffset polygonOffsetFactor={-1} toneMapped={false}/></mesh>}
-  </group>;
+function DeckFinish({track}:{track:TrackId}) {
+ const kit=useMemo(()=>buildTileFinish(track),[track]);
+ const labels=useMemo(()=>{const columns=8,rows=Math.ceil(kit.labels.length/columns),canvas=document.createElement('canvas');canvas.width=columns*256;canvas.height=rows*64;const c=canvas.getContext('2d')!;
+  kit.labels.forEach(({node,caption},i)=>{const x=(i%columns)*256,y=Math.floor(i/columns)*64;c.fillStyle='#24463f';c.beginPath();c.roundRect(x+2,y+2,252,60,9);c.fill();c.fillStyle='#fff6d9';c.textBaseline='middle';c.font='bold 43px sans-serif';c.textAlign='left';c.fillText(String(node).padStart(2,'0'),x+13,y+33);if(caption){c.textAlign='right';c.font='bold 35px sans-serif';c.fillText(caption,x+243,y+33);}});
+  const texture=new CanvasTexture(canvas);texture.colorSpace=SRGBColorSpace;const labels=buildTileLabels(kit.labels,texture);return{...labels,texture};
+ },[kit]);
+ useEffect(()=>()=>{kit.dispose();labels.dispose();labels.texture.dispose();},[kit,labels]);
+ return <group name="complete-tile-finishes"><primitive object={kit.root} dispose={null}/><primitive object={labels.mesh} dispose={null}/></group>;
 }
 
 /** Approved MOD_25 soft mat, colored edge and bronze fasteners. Only the static

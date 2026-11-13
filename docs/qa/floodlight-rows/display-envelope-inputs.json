@@ -1,0 +1,11 @@
+{
+  "scope": "54 display anchors, 51 sampled poses including R1 stroke .22 peak. Snapshot supplied by the coverage audit; geometric bounds only, not actor/contact authorization.",
+  "sources": {
+    "src/client/scene/environment/full-coverage.ts": "55bcc9e706fc16bac9696adaae4dd3fa3a59a383c5dae73c7b115f6469eca11a",
+    "src/client/scene/environment/force-presentation.ts": "32f2f58c8119e870d08a7d33f5061f54c2d187b8620670b28baa18261b5ef643"
+  },
+  "snapshots": {
+    "display-envelopes-0.json": "bed2e038dcbb9ec04f7c955ccd6dfdf8a017be86b4190d3c33ff18a25f00f824",
+    "display-envelopes-1.json": "855f90b469674c8d7f2623ba17aee3125a82140cdba30cef64c215878be144d8"
+  }
+}

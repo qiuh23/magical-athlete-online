@@ -14,6 +14,8 @@ function bounds(points:number[][],compact=false){const box=new Box3(vec(points[0
 /** Old source plans are inputs, not authorization for this new environment. This
  * consumer requires the independently sampled scene/actor/layout allowlist. */
 export class SceneMechanismController extends GuardedCertifiedTripController {
+ /** Render ownership only, never contact permission. Updated by mounted holders. */
+ readonly renderedHardware=new Set<string>();
  readonly actorRadius=new Map<string,number>();
  override acceptActor(id:string,hash:string,vertices:ArrayLike<number>){super.acceptActor(id,hash,vertices);let radius=0;for(let i=0;i<vertices.length;i+=3)radius=Math.max(radius,Math.hypot(vertices[i]!,vertices[i+1]!,vertices[i+2]!));this.actorRadius.set(id,radius);}
  private spacingMatches(){return typeof window!=='undefined'&&!new URLSearchParams(window.location.search).has('mechanismSpacing');}

@@ -1,16 +1,19 @@
-import { BufferGeometry, Group, InstancedMesh, Line, LineDashedMaterial, Mesh, MeshBasicMaterial, Object3D, OctahedronGeometry, PlaneGeometry, Vector3 } from 'three';
+import { BufferGeometry, Group, InstancedMesh, Line, LineDashedMaterial, Mesh, MeshBasicMaterial, Object3D, OctahedronGeometry, PlaneGeometry, TorusGeometry, ConeGeometry, DoubleSide, Vector3 } from 'three';
 import type { Racer } from '../../../shared/types.js';
 import type { TrackId } from '../../../shared/tracks.js';
 import type { PresentationBeat } from '../../presentation.js';
 import { pawnOccupancy } from '../camera.js';
 import { boardPoint } from '../math.js';
 import { mechanismActions, type MechanismAction } from '../mechanisms/events.js';
+import {punchWindTravel} from './force-presentation.js';
+import { fullCoveragePlacements } from './full-coverage.js';
 import { scoreFlowCount, scoreFlowSample } from '../mechanisms/score-flow.js';
 
-export type EventCue = { action: MechanismAction; targetId: string; points: Vector3[]; count: number };
+export type EventCue = { action: MechanismAction; targetId: string; points: Vector3[]; count: number; impulse?: {from:Vector3;to:Vector3} };
 /** Cosmetic event projection only. No rig, mount, collision authorization or rule mutation. */
 export function environmentEventCues(track: TrackId, beat: PresentationBeat | undefined, racers: Racer[], compact: boolean, low: boolean): EventCue[] {
   let budget = low ? 16 : 32;
+  const placements=new Map(fullCoveragePlacements(track,compact).map(p=>[p.anchor.id,p]));
   const point = (node: number) => { const p = boardPoint(node, compact, track); return new Vector3(p[0], p[1] + .36, p[2]); };
   return mechanismActions(track, beat, racers).flatMap(action => {
     if (action.anchor.kind === 'warp' && action.role === 'destination') return [];
@@ -19,12 +22,18 @@ export function environmentEventCues(track: TrackId, beat: PresentationBeat | un
       const p = point(action.anchor.node), o = pawnOccupancy(racer, racers, action.anchor.node, compact, track);
       const target = p.clone().add(new Vector3(o.x, .22, o.z));
       const motion = action.motions.find(m => m.racerId === targetId);
+      const mount=placements.get(action.anchor.id),outlet=mount?new Vector3(0,action.anchor.kind==='gain'?.14:1.05,1.20).applyMatrix4(mount.matrix):p.clone();
       const points = action.anchor.kind === 'punch' && motion ? motion.path.map(point)
         : action.anchor.kind === 'warp' && motion ? [point(motion.from), point(motion.to)]
-        : [p.clone().add(new Vector3(compact ? 0 : -.6, .08, compact ? .6 : 0)), target];
+        : [outlet, target];
       const count = ['gain', 'loss'].includes(action.anchor.kind) ? Math.min(budget, scoreFlowCount(action.scoreDelta, low)) : 0;
       budget -= count;
-      return [{ action, targetId, points, count }];
+      const impulse=action.anchor.kind==='punch'&&mount?{
+        // Authored fist front at release, in the same fixed display mount.
+        from:(mount.variant==='punch-r1'?new Vector3(.29,1.15,.4975):new Vector3(1,1.15,1.3475)).applyMatrix4(mount.matrix),
+        to:new Vector3(p.x+o.x,p.y+(racer.tripped?.05:.55)*o.scale,p.z+o.z),
+      }:undefined;
+      return [{ action, targetId, points, count, ...(impulse?{impulse}:{}) }];
     });
   });
 }
@@ -39,11 +48,18 @@ export function buildEnvironmentEventCueGeometry(cues: EventCue[]) {
     const mesh = new Mesh(new PlaneGeometry(.8, .34), new MeshBasicMaterial({ transparent: true, depthWrite: false, toneMapped: false }));
     mesh.position.copy(cue.points.at(-1)!).add(new Vector3(0, .36, 0)); mesh.name = `event-score:${cue.targetId}:${cue.action.scoreDelta}`; mesh.raycast = () => {}; root.add(mesh); return { mesh, delta: cue.action.scoreDelta! };
   });
+  const windGeometry=new TorusGeometry(.28,.048,8,20),windMaterial=new MeshBasicMaterial({color:'#ed7953',transparent:true,opacity:.96,depthWrite:false,toneMapped:false});
+  const wind=cues.filter(c=>c.impulse).flatMap(cue=>Array.from({length:3},(_,index)=>{const mesh=new Mesh(windGeometry,windMaterial);mesh.name=`targeted-punch-wind:${cue.targetId}:${index}`;mesh.quaternion.setFromUnitVectors(new Vector3(0,0,1),cue.impulse!.to.clone().sub(cue.impulse!.from).normalize());mesh.visible=false;mesh.raycast=()=>{};root.add(mesh);return{mesh,cue,index};}));
+  const plumeGeometry=new ConeGeometry(.34,1,16,1,true),plumeMaterial=new MeshBasicMaterial({color:'#fff0b2',transparent:true,opacity:.30,side:DoubleSide,depthWrite:false,toneMapped:false});
+  const impactGeometry=new TorusGeometry(.24,.045,8,20),impactMaterial=new MeshBasicMaterial({color:'#fff7cf',transparent:true,opacity:.95,depthWrite:false,toneMapped:false});
+  const impulses=cues.filter(c=>c.impulse).map(cue=>{const plume=new Mesh(plumeGeometry,plumeMaterial),impact=new Mesh(impactGeometry,impactMaterial),direction=cue.impulse!.to.clone().sub(cue.impulse!.from),length=direction.length();plume.quaternion.setFromUnitVectors(new Vector3(0,1,0),direction.clone().normalize());impact.quaternion.setFromUnitVectors(new Vector3(0,0,1),direction.clone().normalize());plume.name=`punch-air-volume:${cue.targetId}`;impact.name=`punch-impact:${cue.targetId}`;plume.raycast=impact.raycast=()=>{};plume.visible=impact.visible=false;root.add(plume,impact);return{plume,impact,cue,length};});
   const geometry = new OctahedronGeometry(1, 0), material = new MeshBasicMaterial({ color: '#ffe496', depthWrite: false, transparent: true, opacity: .85, toneMapped: false });
   const particles = new InstancedMesh(geometry, material, Math.max(1, cues.reduce((n, cue) => n + cue.count, 0))); particles.count = 0; particles.frustumCulled = false; particles.raycast = () => {}; particles.name = 'event-score-flow'; root.add(particles);
   const dummy = new Object3D(); let disposed = false;
-  return { root, lines, labels, particles, sample(progress: number, reduced: boolean) {
+  return { root, lines, labels, particles, wind, impulses, sample(progress: number, reduced: boolean) {
     let count = 0;
+    for(const item of wind){const u=punchWindTravel(progress,item.index);item.mesh.visible=!reduced&&u>0&&u<1;if(item.mesh.visible){item.mesh.position.lerpVectors(item.cue.impulse!.from,item.cue.impulse!.to,u);item.mesh.scale.setScalar(.8+u*.6);}}
+    for(const item of impulses){const u=punchWindTravel(progress);item.plume.visible=!reduced&&progress>.22&&progress<.456;if(item.plume.visible){item.plume.position.lerpVectors(item.cue.impulse!.from,item.cue.impulse!.to,u*.5);item.plume.scale.set(1,item.length*Math.max(.02,u),1);}const hit=(progress-.40)/.13;item.impact.visible=!reduced&&hit>0&&hit<1;item.impact.position.copy(item.cue.impulse!.to);item.impact.scale.setScalar(.6+Math.max(0,hit)*1.3);}
     lines.forEach(line => { line.visible = reduced || progress > 0 && progress < 1; });
     labels.forEach(({mesh}) => { mesh.visible = reduced || progress < 1; });
     if (!reduced) for (const cue of cues) for (let i = 0; i < cue.count; i++) {
@@ -57,6 +73,6 @@ export function buildEnvironmentEventCueGeometry(cues: EventCue[]) {
     if (disposed) return; disposed = true;
     lines.forEach(line => { line.geometry.dispose(); line.material.dispose(); });
     labels.forEach(({mesh}) => { mesh.geometry.dispose(); mesh.material.dispose(); });
-    particles.dispose(); geometry.dispose(); material.dispose();
+    particles.dispose(); geometry.dispose(); material.dispose();windGeometry.dispose();windMaterial.dispose();plumeGeometry.dispose();plumeMaterial.dispose();impactGeometry.dispose();impactMaterial.dispose();
   } };
 }

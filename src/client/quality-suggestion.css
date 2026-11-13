@@ -1,0 +1,9 @@
+/* Part of the measured HUD flow: no backdrop, fixed overlay or focus grab.
+   The existing HUD ResizeObserver reserves room for camera/status/minimap. */
+.immersive-race .race-hud-top:has(.quality-suggestion){flex-wrap:wrap}
+.quality-suggestion{flex-basis:100%;width:max-content;max-width:min(250px,100%);padding:6px 8px;border:1px solid #31596140;border-radius:10px;background:#fffaf0f5;color:#25464c;pointer-events:auto;font-size:11px;line-height:1.4}
+.quality-suggestion>div{display:flex;gap:4px}
+.quality-suggestion button{min-height:44px;padding:5px 9px;border:0;border-radius:8px;background:transparent;color:inherit;font:inherit;cursor:pointer}
+.quality-suggestion button:first-child{font-weight:800;background:#e4eee1}
+.quality-suggestion button:focus-visible{outline:3px solid #244f54;outline-offset:2px}
+@media(max-width:650px){.quality-suggestion{margin-top:26px}}

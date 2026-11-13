@@ -1,0 +1,717 @@
+{
+  "sourceHashes": {
+    "src/client/scene/environment/seating.ts": "2c1a10b8c809ab252d6e74f1657026b76210c4fdf91cdfa25d850422f5392f84",
+    "src/client/scene/environment/seating-clearance.ts": "392e9d644cef1ea80671e331565d47aca1bcdfd60c76fbbe3d807e1ccd4edf09",
+    "src/client/scene/environment/runtime.ts": "b3f7952b028e67b02725a5d593a84355c9d3e25d626873bdc2b62cb255df1ced",
+    "src/client/scene/environment/layout.ts": "3f0ed451fc0b933e393394ce9fc2441e1eb31e6ffc64716f7993d07c09a72bd3",
+    "public/models/environment-rebuilt-v2/bleachers.glb": "af4d188c511ddf34dcdb6575f543c7baf0a8f6572c2def5a8cf115c8a422e967",
+    "public/models/environment-rebuilt-v2/spectators.glb": "b60a7ddb7fdca1993f589e1f48617e5d314456045428f952d9f0ec5e7a198a66",
+    "public/models/environment-rebuilt-v2/grandstand_rostrum.glb": "3891481f58a453a70d56bb6d36c55d5cce5c02a7cfcd2df9261f2bd6f44b475f"
+  },
+  "mechanismUnionSha256": "bed2e038dcbb9ec04f7c955ccd6dfdf8a017be86b4190d3c33ff18a25f00f824",
+  "scope": "Full-detail instance geometry. Conservative 1.35m XZ/2.45m height node volumes, optional supplied mechanism display-union AABBs, four under-bank deck support probes per bay and natural terrace/base contact triangles; finite number/pawn/corner rays in both overview directions. Bounds overlap is followed by triangle/box testing. No live browser, HUD, animated actor or physical contact certification.",
+  "mechanismPath": "supplied external union bounds",
+  "reports": [
+    {
+      "track": "squiggle",
+      "bays": [
+        {
+          "id": "squiggle:stand:0",
+          "x": -11.697566465914603,
+          "z": -7.51553493146845,
+          "yaw": 0.03,
+          "floor": 1.384
+        },
+        {
+          "id": "squiggle:stand:1",
+          "x": -1.0667210870471349,
+          "z": -7.273098320775919,
+          "yaw": 0,
+          "floor": 1.384
+        },
+        {
+          "id": "squiggle:stand:2",
+          "x": 9.576246122354961,
+          "z": -7.51553493146845,
+          "yaw": -0.08,
+          "floor": 1.384
+        },
+        {
+          "id": "squiggle:stand:3",
+          "x": 22.425386489059083,
+          "z": 3.272894244349164,
+          "yaw": -1.5707963267948966,
+          "floor": 1.384
+        }
+      ],
+      "triangles": 102744,
+      "draws": 19,
+      "routeHits": [],
+      "startLineupHits": [],
+      "mechanismHits": [],
+      "supportContacts": [
+        {
+          "bay": "squiggle:stand:0",
+          "supportedCorners": 4,
+          "terrainContactTriangles": 38
+        },
+        {
+          "bay": "squiggle:stand:1",
+          "supportedCorners": 4,
+          "terrainContactTriangles": 38
+        },
+        {
+          "bay": "squiggle:stand:2",
+          "supportedCorners": 4,
+          "terrainContactTriangles": 319
+        },
+        {
+          "bay": "squiggle:stand:3",
+          "supportedCorners": 4,
+          "terrainContactTriangles": 151
+        }
+      ],
+      "projections": [
+        {
+          "compact": false,
+          "width": 1280,
+          "height": 900,
+          "frame": {
+            "x": -4.1449199034382165,
+            "y": 1.43,
+            "z": 0.17256772636100193,
+            "zoom": 23.874840723201444
+          },
+          "numberLabelSpanPixels": 16.73677785503393,
+          "blocked": []
+        },
+        {
+          "compact": true,
+          "width": 390,
+          "height": 844,
+          "frame": {
+            "x": -0.17256772636100193,
+            "y": 1.43,
+            "z": -4.1449199034382165,
+            "zoom": 17.382443049357587
+          },
+          "numberLabelSpanPixels": 7.818282782877967,
+          "blocked": []
+        }
+      ]
+    },
+    {
+      "track": "boardwalks",
+      "bays": [
+        {
+          "id": "boardwalks:stand:0",
+          "x": -20.544173441734415,
+          "z": -12.366395663956636,
+          "yaw": 0,
+          "floor": 1.384
+        },
+        {
+          "id": "boardwalks:stand:1",
+          "x": -13.164227642276419,
+          "z": -12.366395663956636,
+          "yaw": 0,
+          "floor": 1.384
+        },
+        {
+          "id": "boardwalks:stand:2",
+          "x": 0,
+          "z": -8.576693766937668,
+          "yaw": 0,
+          "floor": 1.384
+        },
+        {
+          "id": "boardwalks:stand:3",
+          "x": 13.563143631436311,
+          "z": -12.366395663956636,
+          "yaw": 0,
+          "floor": 1.384
+        },
+        {
+          "id": "boardwalks:stand:4",
+          "x": 23.93495934959349,
+          "z": -12.366395663956636,
+          "yaw": 0,
+          "floor": 1.384
+        },
+        {
+          "id": "boardwalks:stand:5",
+          "x": 36.70027100271002,
+          "z": 4.188617886178861,
+          "yaw": -1.5707963267948966,
+          "floor": 1.384
+        }
+      ],
+      "triangles": 149028,
+      "draws": 19,
+      "routeHits": [],
+      "startLineupHits": [],
+      "mechanismHits": [],
+      "supportContacts": [
+        {
+          "bay": "boardwalks:stand:0",
+          "supportedCorners": 4,
+          "terrainContactTriangles": 41
+        },
+        {
+          "bay": "boardwalks:stand:1",
+          "supportedCorners": 4,
+          "terrainContactTriangles": 41
+        },
+        {
+          "bay": "boardwalks:stand:2",
+          "supportedCorners": 4,
+          "terrainContactTriangles": 5
+        },
+        {
+          "bay": "boardwalks:stand:3",
+          "supportedCorners": 4,
+          "terrainContactTriangles": 41
+        },
+        {
+          "bay": "boardwalks:stand:4",
+          "supportedCorners": 4,
+          "terrainContactTriangles": 147
+        },
+        {
+          "bay": "boardwalks:stand:5",
+          "supportedCorners": 4,
+          "terrainContactTriangles": 66
+        }
+      ],
+      "projections": [
+        {
+          "compact": false,
+          "width": 1280,
+          "height": 900,
+          "frame": {
+            "x": -2.5,
+            "y": 1.43,
+            "z": -0.6388888888888884,
+            "zoom": 15.060145625248294
+          },
+          "numberLabelSpanPixels": 10.557486632750297,
+          "blocked": []
+        },
+        {
+          "compact": true,
+          "width": 390,
+          "height": 844,
+          "frame": {
+            "x": 0.6388888888888884,
+            "y": 1.43,
+            "z": -2.5,
+            "zoom": 11.625653884116025
+          },
+          "numberLabelSpanPixels": 5.228991652312181,
+          "blocked": []
+        }
+      ]
+    },
+    {
+      "track": "bridges",
+      "bays": [
+        {
+          "id": "bridges:stand:0",
+          "x": -15.55,
+          "z": -9.1,
+          "yaw": 0.04,
+          "floor": 0.234
+        },
+        {
+          "id": "bridges:stand:1",
+          "x": -1.35,
+          "z": -9.6,
+          "yaw": 0,
+          "floor": 0.234
+        },
+        {
+          "id": "bridges:stand:2",
+          "x": 12.84,
+          "z": -9,
+          "yaw": -0.06,
+          "floor": 0.234
+        },
+        {
+          "id": "bridges:stand:3",
+          "x": 27,
+          "z": -0.1,
+          "yaw": -1.5707963267948966,
+          "floor": 0.234
+        }
+      ],
+      "triangles": 80292,
+      "draws": 14,
+      "routeHits": [],
+      "startLineupHits": [],
+      "mechanismHits": [],
+      "supportContacts": [
+        {
+          "bay": "bridges:stand:0",
+          "supportedCorners": 4,
+          "terrainContactTriangles": 38
+        },
+        {
+          "bay": "bridges:stand:1",
+          "supportedCorners": 4,
+          "terrainContactTriangles": 46
+        },
+        {
+          "bay": "bridges:stand:2",
+          "supportedCorners": 4,
+          "terrainContactTriangles": 180
+        },
+        {
+          "bay": "bridges:stand:3",
+          "supportedCorners": 4,
+          "terrainContactTriangles": 332
+        }
+      ],
+      "projections": [
+        {
+          "compact": false,
+          "width": 1280,
+          "height": 900,
+          "frame": {
+            "x": -4.428000000000001,
+            "y": 0,
+            "z": -0.49609999999999976,
+            "zoom": 18.98586771974824
+          },
+          "numberLabelSpanPixels": 13.309502421169503,
+          "blocked": []
+        },
+        {
+          "compact": true,
+          "width": 390,
+          "height": 844,
+          "frame": {
+            "x": 0.49609999999999976,
+            "y": 0,
+            "z": -4.428000000000001,
+            "zoom": 12.628143952635845
+          },
+          "numberLabelSpanPixels": 5.679892070651492,
+          "blocked": []
+        }
+      ]
+    },
+    {
+      "track": "twisty-twirl",
+      "bays": [
+        {
+          "id": "twisty-twirl:stand:0",
+          "x": -5.35,
+          "z": -6.25,
+          "yaw": 0,
+          "floor": 0.234
+        },
+        {
+          "id": "twisty-twirl:stand:1",
+          "x": 1.15,
+          "z": -6.25,
+          "yaw": 0,
+          "floor": 0.234
+        },
+        {
+          "id": "twisty-twirl:stand:2",
+          "x": 7.65,
+          "z": -6.25,
+          "yaw": 0,
+          "floor": 0.234
+        },
+        {
+          "id": "twisty-twirl:stand:3",
+          "x": 13.85,
+          "z": -6.15,
+          "yaw": -0.3,
+          "floor": 0.234
+        },
+        {
+          "id": "twisty-twirl:stand:4",
+          "x": 18.25,
+          "z": -0.15,
+          "yaw": -1.5707963267948966,
+          "floor": 0.234
+        }
+      ],
+      "triangles": 97440,
+      "draws": 14,
+      "routeHits": [],
+      "startLineupHits": [],
+      "mechanismHits": [],
+      "supportContacts": [
+        {
+          "bay": "twisty-twirl:stand:0",
+          "supportedCorners": 4,
+          "terrainContactTriangles": null
+        },
+        {
+          "bay": "twisty-twirl:stand:1",
+          "supportedCorners": 4,
+          "terrainContactTriangles": null
+        },
+        {
+          "bay": "twisty-twirl:stand:2",
+          "supportedCorners": 4,
+          "terrainContactTriangles": null
+        },
+        {
+          "bay": "twisty-twirl:stand:3",
+          "supportedCorners": 4,
+          "terrainContactTriangles": null
+        },
+        {
+          "bay": "twisty-twirl:stand:4",
+          "supportedCorners": 4,
+          "terrainContactTriangles": null
+        }
+      ],
+      "projections": [
+        {
+          "compact": false,
+          "width": 1280,
+          "height": 900,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "z": 0,
+            "zoom": 32.92779597007113
+          },
+          "numberLabelSpanPixels": 23.08309457626671,
+          "blocked": []
+        },
+        {
+          "compact": true,
+          "width": 390,
+          "height": 844,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "z": 0,
+            "zoom": 23.294520075248535
+          },
+          "numberLabelSpanPixels": 10.477419354838698,
+          "blocked": []
+        }
+      ]
+    },
+    {
+      "track": "whirly-world",
+      "bays": [
+        {
+          "id": "whirly-world:stand:0",
+          "x": -5.350000000000007,
+          "z": -6.250000000000008,
+          "yaw": 0,
+          "floor": 1.384
+        },
+        {
+          "id": "whirly-world:stand:1",
+          "x": 1.1500000000000015,
+          "z": -6.250000000000008,
+          "yaw": 0,
+          "floor": 1.384
+        },
+        {
+          "id": "whirly-world:stand:2",
+          "x": 7.65000000000001,
+          "z": -6.250000000000008,
+          "yaw": 0,
+          "floor": 1.384
+        },
+        {
+          "id": "whirly-world:stand:3",
+          "x": 13.850000000000017,
+          "z": -6.150000000000008,
+          "yaw": -0.3,
+          "floor": 1.384
+        },
+        {
+          "id": "whirly-world:stand:4",
+          "x": 19.050000000000026,
+          "z": -0.1500000000000002,
+          "yaw": -1.5707963267948966,
+          "floor": 1.384
+        }
+      ],
+      "triangles": 123208,
+      "draws": 19,
+      "routeHits": [],
+      "startLineupHits": [],
+      "mechanismHits": [],
+      "supportContacts": [
+        {
+          "bay": "whirly-world:stand:0",
+          "supportedCorners": 4,
+          "terrainContactTriangles": null
+        },
+        {
+          "bay": "whirly-world:stand:1",
+          "supportedCorners": 4,
+          "terrainContactTriangles": null
+        },
+        {
+          "bay": "whirly-world:stand:2",
+          "supportedCorners": 4,
+          "terrainContactTriangles": null
+        },
+        {
+          "bay": "whirly-world:stand:3",
+          "supportedCorners": 4,
+          "terrainContactTriangles": null
+        },
+        {
+          "bay": "whirly-world:stand:4",
+          "supportedCorners": 4,
+          "terrainContactTriangles": null
+        }
+      ],
+      "projections": [
+        {
+          "compact": false,
+          "width": 1280,
+          "height": 900,
+          "frame": {
+            "x": 0,
+            "y": 1.43,
+            "z": 0,
+            "zoom": 33.03458882186592
+          },
+          "numberLabelSpanPixels": 23.157958666784204,
+          "blocked": []
+        },
+        {
+          "compact": true,
+          "width": 390,
+          "height": 844,
+          "frame": {
+            "x": 0,
+            "y": 1.43,
+            "z": 0,
+            "zoom": 17.415296870860722
+          },
+          "numberLabelSpanPixels": 7.833059788980037,
+          "blocked": []
+        }
+      ]
+    },
+    {
+      "track": "mild",
+      "bays": [
+        {
+          "id": "mild:stand:0",
+          "x": -5.35,
+          "z": -6.25,
+          "yaw": 0,
+          "floor": 0.234
+        },
+        {
+          "id": "mild:stand:1",
+          "x": 1.15,
+          "z": -6.25,
+          "yaw": 0,
+          "floor": 0.234
+        },
+        {
+          "id": "mild:stand:2",
+          "x": 7.65,
+          "z": -6.25,
+          "yaw": 0,
+          "floor": 0.234
+        },
+        {
+          "id": "mild:stand:3",
+          "x": 13.85,
+          "z": -6.15,
+          "yaw": -0.3,
+          "floor": 0.234
+        },
+        {
+          "id": "mild:stand:4",
+          "x": 18.25,
+          "z": -0.15,
+          "yaw": -1.5707963267948966,
+          "floor": 0.234
+        },
+        {
+          "id": "mild:infield:0",
+          "x": 2,
+          "z": 0,
+          "yaw": 0,
+          "floor": 0.234,
+          "infield": true
+        }
+      ],
+      "triangles": 143688,
+      "draws": 14,
+      "routeHits": [],
+      "startLineupHits": [],
+      "mechanismHits": [],
+      "supportContacts": [
+        {
+          "bay": "mild:stand:0",
+          "supportedCorners": 4,
+          "terrainContactTriangles": null
+        },
+        {
+          "bay": "mild:stand:1",
+          "supportedCorners": 4,
+          "terrainContactTriangles": null
+        },
+        {
+          "bay": "mild:stand:2",
+          "supportedCorners": 4,
+          "terrainContactTriangles": null
+        },
+        {
+          "bay": "mild:stand:3",
+          "supportedCorners": 4,
+          "terrainContactTriangles": null
+        },
+        {
+          "bay": "mild:stand:4",
+          "supportedCorners": 4,
+          "terrainContactTriangles": null
+        },
+        {
+          "bay": "mild:infield:0",
+          "supportedCorners": 4,
+          "terrainContactTriangles": null
+        }
+      ],
+      "projections": [
+        {
+          "compact": false,
+          "width": 1280,
+          "height": 900,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "z": 0,
+            "zoom": 32.92779597007113
+          },
+          "numberLabelSpanPixels": 23.08309457626671,
+          "blocked": []
+        },
+        {
+          "compact": true,
+          "width": 390,
+          "height": 844,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "z": 0,
+            "zoom": 23.294520075248535
+          },
+          "numberLabelSpanPixels": 10.477419354838698,
+          "blocked": []
+        }
+      ]
+    },
+    {
+      "track": "wild",
+      "bays": [
+        {
+          "id": "wild:stand:0",
+          "x": -5.350000000000007,
+          "z": -6.250000000000008,
+          "yaw": 0,
+          "floor": 1.384
+        },
+        {
+          "id": "wild:stand:1",
+          "x": 1.1500000000000015,
+          "z": -6.250000000000008,
+          "yaw": 0,
+          "floor": 1.384
+        },
+        {
+          "id": "wild:stand:2",
+          "x": 7.65000000000001,
+          "z": -6.250000000000008,
+          "yaw": 0,
+          "floor": 1.384
+        },
+        {
+          "id": "wild:stand:3",
+          "x": 13.850000000000017,
+          "z": -6.150000000000008,
+          "yaw": -0.3,
+          "floor": 1.384
+        },
+        {
+          "id": "wild:stand:4",
+          "x": 19.400000000000023,
+          "z": -0.1500000000000002,
+          "yaw": -1.5707963267948966,
+          "floor": 1.384
+        }
+      ],
+      "triangles": 123566,
+      "draws": 19,
+      "routeHits": [],
+      "startLineupHits": [],
+      "mechanismHits": [],
+      "supportContacts": [
+        {
+          "bay": "wild:stand:0",
+          "supportedCorners": 4,
+          "terrainContactTriangles": null
+        },
+        {
+          "bay": "wild:stand:1",
+          "supportedCorners": 4,
+          "terrainContactTriangles": null
+        },
+        {
+          "bay": "wild:stand:2",
+          "supportedCorners": 4,
+          "terrainContactTriangles": null
+        },
+        {
+          "bay": "wild:stand:3",
+          "supportedCorners": 4,
+          "terrainContactTriangles": null
+        },
+        {
+          "bay": "wild:stand:4",
+          "supportedCorners": 4,
+          "terrainContactTriangles": null
+        }
+      ],
+      "projections": [
+        {
+          "compact": false,
+          "width": 1280,
+          "height": 900,
+          "frame": {
+            "x": 0,
+            "y": 1.43,
+            "z": 0,
+            "zoom": 33.03458882186592
+          },
+          "numberLabelSpanPixels": 23.157958666784204,
+          "blocked": []
+        },
+        {
+          "compact": true,
+          "width": 390,
+          "height": 844,
+          "frame": {
+            "x": 0,
+            "y": 1.43,
+            "z": 0,
+            "zoom": 22.857577143004697
+          },
+          "numberLabelSpanPixels": 10.280890973036305,
+          "blocked": []
+        }
+      ]
+    }
+  ]
+}

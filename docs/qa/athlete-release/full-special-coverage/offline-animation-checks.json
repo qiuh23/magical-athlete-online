@@ -1,0 +1,16 @@
+[
+  {
+    "name": "wild-24-eight-occupants",
+    "matrixMaxError": 2.384185791015625e-07,
+    "unchangedResidents": 7,
+    "frames": 31,
+    "scope": "Offline exact source-sampled fixed-base mechanism, pressure geometry and pawn-path preview. Neutral ground. 8 real banana sculptures, including one already down. Not a browser render, all-character certificate or final venue proof."
+  },
+  {
+    "name": "boardwalks-50-eight-occupants",
+    "matrixMaxError": 1.9371509552001953e-07,
+    "unchangedResidents": 7,
+    "frames": 31,
+    "scope": "Offline exact source-sampled fixed-base mechanism, pressure geometry and pawn-path preview. Neutral ground. 8 real banana sculptures, including one already down. Not a browser render, all-character certificate or final venue proof."
+  }
+]

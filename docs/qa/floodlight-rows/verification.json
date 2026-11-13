@@ -1,0 +1,48 @@
+{
+  "sourceCommit": "76533791b7808c37209fde7c71157fe892d3c6cf",
+  "checks": [
+    {
+      "command": "node --import tsx --test tests/rebuilt-floodlights.test.ts tests/automatic-scene-lighting.test.ts tests/floodlight-edge-mounts.test.ts",
+      "exitCode": 0,
+      "testsPassed": 17
+    },
+    {
+      "command": "node node_modules/typescript/bin/tsc -p tsconfig.release.json --noEmit",
+      "exitCode": 0
+    },
+    {
+      "command": "node node_modules/typescript/bin/tsc -p tsconfig.worker.json --noEmit",
+      "exitCode": 0
+    },
+    {
+      "command": "node scripts/build-sites.mjs",
+      "exitCode": 0,
+      "warning": "Existing >500 kB bundles"
+    },
+    {
+      "command": "node --import tsx scripts/recovery/audit-floodlight-row-lighting.ts",
+      "exitCode": 0,
+      "cases": 28
+    },
+    {
+      "command": "node --import tsx scripts/recovery/audit-floodlight-row-joints.ts ENVIRONMENT_CHECKOUT",
+      "exitCode": 0,
+      "scenes": 14,
+      "unexplainedCollisions": 0,
+      "supportedFixtures": 112
+    },
+    {
+      "command": "node --import tsx scripts/recovery/audit-floodlight-row-sightlines.ts",
+      "exitCode": 0,
+      "rays": 984,
+      "blocked": 0
+    }
+  ],
+  "notVerified": [
+    "Browser/WebGL screenshots and real-device FPS",
+    "New coverage foundations in joint geometry: Wild16/24 extensions and Boardwalk19 bridge/posts",
+    "Integrated final manifest identity chain and new actor/contact admission",
+    "Twisty CarnivalDetails, canvas glyphs and HUD visibility",
+    "Whole repository test suite after integrated source identities are reconciled"
+  ]
+}

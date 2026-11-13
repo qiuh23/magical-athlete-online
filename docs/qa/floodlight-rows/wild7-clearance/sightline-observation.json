@@ -1,0 +1,2301 @@
+{
+  "scope": "Finite orthographic overview geometric sightline precheck only. Uses actual CameraRig direction/eye distance/frame, exact current lamp triangle BVHs. Tests each node center and one representative numeral-near corner, plus classic extended-start center. No pixel glyph coverage, actors, manual camera, browser/HUD/mobile-device or all-screen-size acceptance. Below-point bases excluded; opaque/emissive lamp lens triangles treated as blockers. Full/economy hardware geometry shared.",
+  "inputs": {
+    "src/client/scene/environment/floodlights.ts": "3abfc8180b154df684bf24782cc61280360b4891a89c020bcbd8d3d8ff399c6f",
+    "src/client/scene/environment/floodlight-edge-mounts.json": "5d80a3cc843cfa91b43f0193f0092b455cd421289f5f3de2e79dbdc2309bbb7e",
+    "scripts/recovery/audit-floodlight-row-sightlines.ts": "718d864a9c9449def8e6bf63a3120abfcdc2a5c2323302712a5a902aaa8a25e3",
+    "src/client/scene/camera.ts": "9d8a74799bd08344595590d589b7135e2c9f02ec50786386aa4feec01890f2a2",
+    "src/client/scene/CameraRig.tsx": "0e438b8011f9b4089308d539e4244aae157eb067e05a2db2445b5eafcfc616a1",
+    "public/models/floodlights-rebuilt-v3/base.glb": "1104dfa5c5dbc4181448e43d84559f24bbb2b92334cf2ae3cd64e93466389309",
+    "public/models/floodlights-rebuilt-v3/pole.glb": "cbd7f2ee910e5a62ecba3bb229d5585082ca154a6a0b36d44e9ce01cffb46bcd",
+    "public/models/floodlights-rebuilt-v3/yoke.glb": "04b130d8b4d2e12c14974b0485cb025eb364bbfcf2ba88f255db8c6eafad691e",
+    "public/models/floodlights-rebuilt-v3/housing.glb": "0b4d0ccb58bc8a7fb4dec5efd4d531cf6dfd80945b5f71163b3cb4fa8fbeaf3a",
+    "public/models/floodlights-rebuilt-v3/lenses.glb": "28cc5396e6e9c9f2b42a05d1a0976131654f92b2b426e5381963c3d6dd5efb32"
+  },
+  "changedDuringRun": [],
+  "reports": [
+    {
+      "track": "wild",
+      "compact": false,
+      "width": 1280,
+      "height": 900,
+      "frame": {
+        "x": 0,
+        "y": 1.43,
+        "z": 0,
+        "zoom": 33.03458882186592
+      },
+      "cameraPosition": [
+        18,
+        49.43,
+        60
+      ],
+      "viewDirection": [
+        0.22808577638091165,
+        0.6082287370157644,
+        0.7602859212697055
+      ],
+      "samples": 62,
+      "blocked": 0
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "width": 390,
+      "height": 844,
+      "frame": {
+        "x": 0,
+        "y": 1.43,
+        "z": 0,
+        "zoom": 22.857577143004697
+      },
+      "cameraPosition": [
+        0,
+        49.43,
+        60
+      ],
+      "viewDirection": [
+        0,
+        0.6246950475544243,
+        0.7808688094430304
+      ],
+      "samples": 62,
+      "blocked": 0
+    }
+  ],
+  "blocked": [],
+  "probes": [
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 0,
+      "probe": "node-center",
+      "point": [
+        -9.225000000000012,
+        1.67,
+        -3.0750000000000037
+      ],
+      "ndc": [
+        -0.4104729729729732,
+        0.2638517912032535,
+        -0.8337560271508554
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 0,
+      "probe": "number-near-corner",
+      "point": [
+        -9.805000000000012,
+        1.666,
+        -3.675000000000004
+      ],
+      "ndc": [
+        -0.43024884640738326,
+        0.29672046680569447,
+        -0.832574120524171
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 1,
+      "probe": "node-center",
+      "point": [
+        -7.175000000000009,
+        1.67,
+        -3.0750000000000037
+      ],
+      "ndc": [
+        -0.3091216216216218,
+        0.2375500079809502,
+        -0.8346912723585378
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 1,
+      "probe": "number-near-corner",
+      "point": [
+        -7.755000000000009,
+        1.666,
+        -3.675000000000004
+      ],
+      "ndc": [
+        -0.3288974950560318,
+        0.27041868358339116,
+        -0.8335093657318535
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 2,
+      "probe": "node-center",
+      "point": [
+        -5.125000000000007,
+        1.67,
+        -3.0750000000000037
+      ],
+      "ndc": [
+        -0.20777027027027048,
+        0.21124822475864688,
+        -0.8356265175662203
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 2,
+      "probe": "number-near-corner",
+      "point": [
+        -5.705000000000007,
+        1.666,
+        -3.675000000000004
+      ],
+      "ndc": [
+        -0.22754614370468046,
+        0.24411690036108785,
+        -0.834444610939536
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 3,
+      "probe": "node-center",
+      "point": [
+        -3.0750000000000037,
+        1.67,
+        -3.0750000000000037
+      ],
+      "ndc": [
+        -0.10641891891891904,
+        0.18494644153634351,
+        -0.8365617627739028
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 3,
+      "probe": "number-near-corner",
+      "point": [
+        -3.655000000000004,
+        1.666,
+        -3.675000000000004
+      ],
+      "ndc": [
+        -0.12619479235332906,
+        0.21781511713878454,
+        -0.8353798561472185
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 4,
+      "probe": "node-center",
+      "point": [
+        -1.0250000000000012,
+        1.67,
+        -3.0750000000000037
+      ],
+      "ndc": [
+        -0.005067567567567672,
+        0.1586446583140402,
+        -0.8374970079815853
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 4,
+      "probe": "number-near-corner",
+      "point": [
+        -1.6050000000000013,
+        1.666,
+        -3.675000000000004
+      ],
+      "ndc": [
+        -0.02484344100197767,
+        0.19151333391648118,
+        -0.8363151013549011
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 5,
+      "probe": "node-center",
+      "point": [
+        1.0250000000000012,
+        1.67,
+        -3.0750000000000037
+      ],
+      "ndc": [
+        0.0962837837837837,
+        0.13234287509173684,
+        -0.8384322531892678
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 5,
+      "probe": "number-near-corner",
+      "point": [
+        0.4450000000000013,
+        1.666,
+        -3.675000000000004
+      ],
+      "ndc": [
+        0.07650791034937371,
+        0.16521155069417784,
+        -0.8372503465625836
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 6,
+      "probe": "node-center",
+      "point": [
+        3.0750000000000037,
+        1.67,
+        -3.0750000000000037
+      ],
+      "ndc": [
+        0.1976351351351351,
+        0.10604109186943352,
+        -0.8393674983969504
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 6,
+      "probe": "number-near-corner",
+      "point": [
+        2.4950000000000037,
+        1.666,
+        -3.675000000000004
+      ],
+      "ndc": [
+        0.17785926170072508,
+        0.1389097674718745,
+        -0.8381855917702661
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 7,
+      "probe": "node-center",
+      "point": [
+        5.125000000000007,
+        1.67,
+        -3.0750000000000037
+      ],
+      "ndc": [
+        0.2989864864864865,
+        0.07973930864713018,
+        -0.8403027436046329
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 7,
+      "probe": "number-near-corner",
+      "point": [
+        4.545000000000007,
+        1.666,
+        -3.675000000000004
+      ],
+      "ndc": [
+        0.27921061305207656,
+        0.11260798424957115,
+        -0.8391208369779486
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 8,
+      "probe": "node-center",
+      "point": [
+        7.175000000000009,
+        1.67,
+        -3.0750000000000037
+      ],
+      "ndc": [
+        0.4003378378378379,
+        0.05343752542482683,
+        -0.8412379888123154
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 8,
+      "probe": "number-near-corner",
+      "point": [
+        6.595000000000009,
+        1.666,
+        -3.675000000000004
+      ],
+      "ndc": [
+        0.3805619644034279,
+        0.08630620102726784,
+        -0.8400560821856311
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 9,
+      "probe": "node-center",
+      "point": [
+        9.225000000000012,
+        1.67,
+        -3.0750000000000037
+      ],
+      "ndc": [
+        0.5016891891891893,
+        0.027135742202523495,
+        -0.8421732340199979
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 9,
+      "probe": "number-near-corner",
+      "point": [
+        8.645000000000012,
+        1.666,
+        -3.675000000000004
+      ],
+      "ndc": [
+        0.48191331575477925,
+        0.06000441780496448,
+        -0.8409913273933136
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 10,
+      "probe": "node-center",
+      "point": [
+        11.275000000000013,
+        1.67,
+        -3.0750000000000037
+      ],
+      "ndc": [
+        0.6030405405405406,
+        0.0008339589802201846,
+        -0.8431084792276804
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 10,
+      "probe": "number-near-corner",
+      "point": [
+        10.695000000000013,
+        1.666,
+        -3.675000000000004
+      ],
+      "ndc": [
+        0.5832646671061306,
+        0.03370263458266118,
+        -0.8419265726009961
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 11,
+      "probe": "node-center",
+      "point": [
+        13.325000000000017,
+        1.67,
+        -3.0750000000000037
+      ],
+      "ndc": [
+        0.704391891891892,
+        -0.02546782424208316,
+        -0.8440437244353629
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 11,
+      "probe": "number-near-corner",
+      "point": [
+        12.745000000000017,
+        1.666,
+        -3.675000000000004
+      ],
+      "ndc": [
+        0.684616018457482,
+        0.007400851360357833,
+        -0.8428618178086786
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 12,
+      "probe": "node-center",
+      "point": [
+        15.37500000000002,
+        1.67,
+        -3.0750000000000037
+      ],
+      "ndc": [
+        0.8057432432432434,
+        -0.0517696074643865,
+        -0.8449789696430454
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 12,
+      "probe": "number-near-corner",
+      "point": [
+        14.79500000000002,
+        1.666,
+        -3.675000000000004
+      ],
+      "ndc": [
+        0.7859673698088334,
+        -0.01890093186194551,
+        -0.8437970630163611
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 13,
+      "probe": "node-center",
+      "point": [
+        15.37500000000002,
+        1.67,
+        -1.0250000000000012
+      ],
+      "ndc": [
+        0.7753378378378379,
+        -0.13944221820539762,
+        -0.8480964536686538
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 13,
+      "probe": "number-near-corner",
+      "point": [
+        14.79500000000002,
+        1.666,
+        -1.6250000000000013
+      ],
+      "ndc": [
+        0.7555619644034279,
+        -0.10657354260295665,
+        -0.8469145470419694
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 14,
+      "probe": "node-center",
+      "point": [
+        15.37500000000002,
+        1.67,
+        1.0250000000000012
+      ],
+      "ndc": [
+        0.7449324324324326,
+        -0.22711482894640878,
+        -0.8512139376942621
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 14,
+      "probe": "number-near-corner",
+      "point": [
+        14.79500000000002,
+        1.666,
+        0.42500000000000127
+      ],
+      "ndc": [
+        0.7251565589980226,
+        -0.19424615334396778,
+        -0.8500320310675779
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 15,
+      "probe": "node-center",
+      "point": [
+        15.37500000000002,
+        1.67,
+        3.0750000000000037
+      ],
+      "ndc": [
+        0.7145270270270271,
+        -0.3147874396874199,
+        -0.8543314217198705
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 15,
+      "probe": "number-near-corner",
+      "point": [
+        14.79500000000002,
+        1.666,
+        2.4750000000000036
+      ],
+      "ndc": [
+        0.6947511535926172,
+        -0.2819187640849789,
+        -0.8531495150931863
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 16,
+      "probe": "node-center",
+      "point": [
+        13.325000000000017,
+        1.67,
+        3.0750000000000037
+      ],
+      "ndc": [
+        0.6131756756756758,
+        -0.28848565646511654,
+        -0.853396176512188
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 16,
+      "probe": "number-near-corner",
+      "point": [
+        12.745000000000017,
+        1.666,
+        2.4750000000000036
+      ],
+      "ndc": [
+        0.5933998022412658,
+        -0.25561698086267554,
+        -0.8522142698855038
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 17,
+      "probe": "node-center",
+      "point": [
+        11.275000000000013,
+        1.67,
+        3.0750000000000037
+      ],
+      "ndc": [
+        0.5118243243243242,
+        -0.2621838732428132,
+        -0.8524609313045055
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 17,
+      "probe": "number-near-corner",
+      "point": [
+        10.695000000000013,
+        1.666,
+        2.4750000000000036
+      ],
+      "ndc": [
+        0.4920484508899143,
+        -0.2293151976403722,
+        -0.8512790246778212
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 18,
+      "probe": "node-center",
+      "point": [
+        9.225000000000012,
+        1.67,
+        3.0750000000000037
+      ],
+      "ndc": [
+        0.41047297297297297,
+        -0.2358820900205099,
+        -0.851525686096823
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 18,
+      "probe": "number-near-corner",
+      "point": [
+        8.645000000000012,
+        1.666,
+        2.4750000000000036
+      ],
+      "ndc": [
+        0.390697099538563,
+        -0.2030134144180689,
+        -0.8503437794701387
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 19,
+      "probe": "node-center",
+      "point": [
+        7.175000000000009,
+        1.67,
+        3.0750000000000037
+      ],
+      "ndc": [
+        0.3091216216216216,
+        -0.20958030679820655,
+        -0.8505904408891405
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 19,
+      "probe": "number-near-corner",
+      "point": [
+        6.595000000000009,
+        1.666,
+        2.4750000000000036
+      ],
+      "ndc": [
+        0.28934574818721165,
+        -0.17671163119576555,
+        -0.8494085342624562
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 20,
+      "probe": "node-center",
+      "point": [
+        5.125000000000007,
+        1.67,
+        3.0750000000000037
+      ],
+      "ndc": [
+        0.20777027027027029,
+        -0.1832785235759032,
+        -0.849655195681458
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 20,
+      "probe": "number-near-corner",
+      "point": [
+        4.545000000000007,
+        1.666,
+        2.4750000000000036
+      ],
+      "ndc": [
+        0.1879943968358603,
+        -0.15040984797346224,
+        -0.8484732890547737
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 21,
+      "probe": "node-center",
+      "point": [
+        3.0750000000000037,
+        1.67,
+        3.0750000000000037
+      ],
+      "ndc": [
+        0.10641891891891886,
+        -0.15697674035359988,
+        -0.8487199504737755
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 21,
+      "probe": "number-near-corner",
+      "point": [
+        2.4950000000000037,
+        1.666,
+        2.4750000000000036
+      ],
+      "ndc": [
+        0.08664304548450885,
+        -0.12410806475115888,
+        -0.8475380438470912
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 22,
+      "probe": "node-center",
+      "point": [
+        1.0250000000000012,
+        1.67,
+        3.0750000000000037
+      ],
+      "ndc": [
+        0.005067567567567489,
+        -0.13067495713129654,
+        -0.847784705266093
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 22,
+      "probe": "number-near-corner",
+      "point": [
+        0.4450000000000013,
+        1.666,
+        2.4750000000000036
+      ],
+      "ndc": [
+        -0.014708305866842516,
+        -0.09780628152885555,
+        -0.8466027986394087
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 23,
+      "probe": "node-center",
+      "point": [
+        -1.0250000000000012,
+        1.67,
+        3.0750000000000037
+      ],
+      "ndc": [
+        -0.0962837837837839,
+        -0.1043731739089932,
+        -0.8468494600584104
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 23,
+      "probe": "number-near-corner",
+      "point": [
+        -1.6050000000000013,
+        1.666,
+        2.4750000000000036
+      ],
+      "ndc": [
+        -0.11605965721819389,
+        -0.07150449830655221,
+        -0.8456675534317262
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 24,
+      "probe": "node-center",
+      "point": [
+        -3.0750000000000037,
+        1.67,
+        3.0750000000000037
+      ],
+      "ndc": [
+        -0.19763513513513528,
+        -0.07807139068668986,
+        -0.8459142148507279
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 24,
+      "probe": "number-near-corner",
+      "point": [
+        -3.655000000000004,
+        1.666,
+        2.4750000000000036
+      ],
+      "ndc": [
+        -0.21741100856954526,
+        -0.04520271508424887,
+        -0.8447323082240437
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 25,
+      "probe": "node-center",
+      "point": [
+        -5.125000000000007,
+        1.67,
+        3.0750000000000037
+      ],
+      "ndc": [
+        -0.2989864864864867,
+        -0.05176960746438652,
+        -0.8449789696430454
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 25,
+      "probe": "number-near-corner",
+      "point": [
+        -5.705000000000007,
+        1.666,
+        2.4750000000000036
+      ],
+      "ndc": [
+        -0.3187623599208967,
+        -0.018900931861945525,
+        -0.8437970630163611
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 26,
+      "probe": "node-center",
+      "point": [
+        -7.175000000000009,
+        1.67,
+        3.0750000000000037
+      ],
+      "ndc": [
+        -0.40033783783783805,
+        -0.025467824242083173,
+        -0.8440437244353629
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 26,
+      "probe": "number-near-corner",
+      "point": [
+        -7.755000000000009,
+        1.666,
+        2.4750000000000036
+      ],
+      "ndc": [
+        -0.420113711272248,
+        0.0074008513603578165,
+        -0.8428618178086786
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 27,
+      "probe": "node-center",
+      "point": [
+        -9.225000000000012,
+        1.67,
+        3.0750000000000037
+      ],
+      "ndc": [
+        -0.5016891891891894,
+        0.0008339589802201357,
+        -0.8431084792276804
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 27,
+      "probe": "number-near-corner",
+      "point": [
+        -9.805000000000012,
+        1.666,
+        2.4750000000000036
+      ],
+      "ndc": [
+        -0.5214650626235995,
+        0.03370263458266112,
+        -0.8419265726009961
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 28,
+      "probe": "node-center",
+      "point": [
+        -11.275000000000013,
+        1.67,
+        3.0750000000000037
+      ],
+      "ndc": [
+        -0.6030405405405407,
+        0.027135742202523447,
+        -0.8421732340199979
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 28,
+      "probe": "number-near-corner",
+      "point": [
+        -11.855000000000013,
+        1.666,
+        2.4750000000000036
+      ],
+      "ndc": [
+        -0.6228164139749508,
+        0.06000441780496443,
+        -0.8409913273933136
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 29,
+      "probe": "node-center",
+      "point": [
+        -13.325000000000017,
+        1.67,
+        3.0750000000000037
+      ],
+      "ndc": [
+        -0.7043918918918922,
+        0.05343752542482682,
+        -0.8412379888123154
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 29,
+      "probe": "number-near-corner",
+      "point": [
+        -13.905000000000017,
+        1.666,
+        2.4750000000000036
+      ],
+      "ndc": [
+        -0.7241677653263022,
+        0.08630620102726781,
+        -0.8400560821856311
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 30,
+      "probe": "node-center",
+      "point": [
+        -15.37500000000002,
+        1.67,
+        3.0750000000000037
+      ],
+      "ndc": [
+        -0.8057432432432435,
+        0.07973930864713015,
+        -0.8403027436046329
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": false,
+      "node": 30,
+      "probe": "number-near-corner",
+      "point": [
+        -15.95500000000002,
+        1.666,
+        2.4750000000000036
+      ],
+      "ndc": [
+        -0.8255191166776537,
+        0.11260798424957112,
+        -0.8391208369779486
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 0,
+      "probe": "node-center",
+      "point": [
+        3.0750000000000033,
+        1.67,
+        -9.225000000000012
+      ],
+      "ndc": [
+        0.36044640879353596,
+        0.32229293877755183,
+        -0.8324010824984638
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 0,
+      "probe": "number-near-corner",
+      "point": [
+        3.6750000000000034,
+        1.666,
+        -9.805000000000012
+      ],
+      "ndc": [
+        0.4307774153873966,
+        0.34174894295572417,
+        -0.8314901860294824
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 1,
+      "probe": "node-center",
+      "point": [
+        3.0750000000000033,
+        1.67,
+        -7.175000000000009
+      ],
+      "ndc": [
+        0.36044640879353596,
+        0.2529280543162415,
+        -0.8356029648054109
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 1,
+      "probe": "number-near-corner",
+      "point": [
+        3.6750000000000034,
+        1.666,
+        -7.755000000000009
+      ],
+      "ndc": [
+        0.4307774153873966,
+        0.2723840584944139,
+        -0.8346920683364296
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 2,
+      "probe": "node-center",
+      "point": [
+        3.0750000000000033,
+        1.67,
+        -5.125000000000007
+      ],
+      "ndc": [
+        0.36044640879353596,
+        0.18356316985493126,
+        -0.8388048471123579
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 2,
+      "probe": "number-near-corner",
+      "point": [
+        3.6750000000000034,
+        1.666,
+        -5.705000000000007
+      ],
+      "ndc": [
+        0.4307774153873966,
+        0.20301917403310366,
+        -0.8378939506433767
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 3,
+      "probe": "node-center",
+      "point": [
+        3.0750000000000037,
+        1.67,
+        -3.0750000000000037
+      ],
+      "ndc": [
+        0.360446408793536,
+        0.11419828539362095,
+        -0.8420067294193051
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 3,
+      "probe": "number-near-corner",
+      "point": [
+        3.6750000000000034,
+        1.666,
+        -3.6550000000000042
+      ],
+      "ndc": [
+        0.4307774153873966,
+        0.13365428957179334,
+        -0.8410958329503239
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 4,
+      "probe": "node-center",
+      "point": [
+        3.0750000000000037,
+        1.67,
+        -1.0250000000000015
+      ],
+      "ndc": [
+        0.360446408793536,
+        0.04483340093231068,
+        -0.8452086117262522
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 4,
+      "probe": "number-near-corner",
+      "point": [
+        3.675000000000004,
+        1.666,
+        -1.6050000000000015
+      ],
+      "ndc": [
+        0.43077741538739667,
+        0.06428940511048307,
+        -0.844297715257271
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 5,
+      "probe": "node-center",
+      "point": [
+        3.0750000000000037,
+        1.67,
+        1.025000000000001
+      ],
+      "ndc": [
+        0.360446408793536,
+        -0.024531483528999583,
+        -0.8484104940331993
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 5,
+      "probe": "number-near-corner",
+      "point": [
+        3.675000000000004,
+        1.666,
+        0.44500000000000106
+      ],
+      "ndc": [
+        0.43077741538739667,
+        -0.005075479350827201,
+        -0.8474995975642181
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 6,
+      "probe": "node-center",
+      "point": [
+        3.0750000000000037,
+        1.67,
+        3.0750000000000037
+      ],
+      "ndc": [
+        0.360446408793536,
+        -0.09389636799030986,
+        -0.8516123763401464
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 6,
+      "probe": "number-near-corner",
+      "point": [
+        3.675000000000004,
+        1.666,
+        2.495000000000003
+      ],
+      "ndc": [
+        0.43077741538739667,
+        -0.07444036381213748,
+        -0.8507014798711652
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 7,
+      "probe": "node-center",
+      "point": [
+        3.075000000000004,
+        1.67,
+        5.125000000000007
+      ],
+      "ndc": [
+        0.36044640879353607,
+        -0.16326125245162015,
+        -0.8548142586470936
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 7,
+      "probe": "number-near-corner",
+      "point": [
+        3.6750000000000043,
+        1.666,
+        4.545000000000007
+      ],
+      "ndc": [
+        0.4307774153873967,
+        -0.1438052482734478,
+        -0.8539033621781124
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 8,
+      "probe": "node-center",
+      "point": [
+        3.075000000000004,
+        1.67,
+        7.175000000000009
+      ],
+      "ndc": [
+        0.36044640879353607,
+        -0.2326261369129304,
+        -0.8580161409540408
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 8,
+      "probe": "number-near-corner",
+      "point": [
+        3.6750000000000043,
+        1.666,
+        6.595000000000009
+      ],
+      "ndc": [
+        0.4307774153873967,
+        -0.21317013273475802,
+        -0.8571052444850594
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 9,
+      "probe": "node-center",
+      "point": [
+        3.075000000000004,
+        1.67,
+        9.225000000000012
+      ],
+      "ndc": [
+        0.36044640879353607,
+        -0.3019910213742407,
+        -0.8612180232609878
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 9,
+      "probe": "number-near-corner",
+      "point": [
+        3.6750000000000043,
+        1.666,
+        8.645000000000012
+      ],
+      "ndc": [
+        0.4307774153873967,
+        -0.2825350171960683,
+        -0.8603071267920066
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 10,
+      "probe": "node-center",
+      "point": [
+        3.0750000000000046,
+        1.67,
+        11.275000000000013
+      ],
+      "ndc": [
+        0.3604464087935361,
+        -0.3713559058355509,
+        -0.8644199055679349
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 10,
+      "probe": "number-near-corner",
+      "point": [
+        3.6750000000000043,
+        1.666,
+        10.695000000000013
+      ],
+      "ndc": [
+        0.4307774153873967,
+        -0.35189990165737856,
+        -0.8635090090989537
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 11,
+      "probe": "node-center",
+      "point": [
+        3.0750000000000046,
+        1.67,
+        13.325000000000017
+      ],
+      "ndc": [
+        0.3604464087935361,
+        -0.4407207902968613,
+        -0.8676217878748821
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 11,
+      "probe": "number-near-corner",
+      "point": [
+        3.6750000000000047,
+        1.666,
+        12.745000000000017
+      ],
+      "ndc": [
+        0.4307774153873967,
+        -0.42126478611868884,
+        -0.8667108914059009
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 12,
+      "probe": "node-center",
+      "point": [
+        3.0750000000000046,
+        1.67,
+        15.37500000000002
+      ],
+      "ndc": [
+        0.3604464087935361,
+        -0.5100856747581716,
+        -0.8708236701818292
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 12,
+      "probe": "number-near-corner",
+      "point": [
+        3.6750000000000047,
+        1.666,
+        14.79500000000002
+      ],
+      "ndc": [
+        0.4307774153873967,
+        -0.4906296705799991,
+        -0.8699127737128479
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 13,
+      "probe": "node-center",
+      "point": [
+        1.0250000000000021,
+        1.67,
+        15.37500000000002
+      ],
+      "ndc": [
+        0.12014880293117879,
+        -0.5100856747581716,
+        -0.8708236701818292
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 13,
+      "probe": "number-near-corner",
+      "point": [
+        1.6250000000000022,
+        1.666,
+        14.79500000000002
+      ],
+      "ndc": [
+        0.1904798095250394,
+        -0.4906296705799991,
+        -0.8699127737128479
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 14,
+      "probe": "node-center",
+      "point": [
+        -1.0250000000000004,
+        1.67,
+        15.37500000000002
+      ],
+      "ndc": [
+        -0.12014880293117858,
+        -0.5100856747581716,
+        -0.8708236701818292
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 14,
+      "probe": "number-near-corner",
+      "point": [
+        -0.4250000000000004,
+        1.666,
+        14.79500000000002
+      ],
+      "ndc": [
+        -0.04981779633731797,
+        -0.4906296705799991,
+        -0.8699127737128479
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 15,
+      "probe": "node-center",
+      "point": [
+        -3.075000000000003,
+        1.67,
+        15.37500000000002
+      ],
+      "ndc": [
+        -0.36044640879353596,
+        -0.5100856747581716,
+        -0.8708236701818292
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 15,
+      "probe": "number-near-corner",
+      "point": [
+        -2.4750000000000028,
+        1.666,
+        14.79500000000002
+      ],
+      "ndc": [
+        -0.2901154021996753,
+        -0.4906296705799991,
+        -0.8699127737128479
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 16,
+      "probe": "node-center",
+      "point": [
+        -3.075000000000003,
+        1.67,
+        13.325000000000017
+      ],
+      "ndc": [
+        -0.36044640879353596,
+        -0.4407207902968613,
+        -0.8676217878748821
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 16,
+      "probe": "number-near-corner",
+      "point": [
+        -2.4750000000000028,
+        1.666,
+        12.745000000000017
+      ],
+      "ndc": [
+        -0.2901154021996753,
+        -0.42126478611868884,
+        -0.8667108914059009
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 17,
+      "probe": "node-center",
+      "point": [
+        -3.075000000000003,
+        1.67,
+        11.275000000000013
+      ],
+      "ndc": [
+        -0.36044640879353596,
+        -0.3713559058355509,
+        -0.8644199055679349
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 17,
+      "probe": "number-near-corner",
+      "point": [
+        -2.475000000000003,
+        1.666,
+        10.695000000000013
+      ],
+      "ndc": [
+        -0.29011540219967535,
+        -0.35189990165737856,
+        -0.8635090090989537
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 18,
+      "probe": "node-center",
+      "point": [
+        -3.0750000000000033,
+        1.67,
+        9.225000000000012
+      ],
+      "ndc": [
+        -0.36044640879353596,
+        -0.3019910213742407,
+        -0.8612180232609878
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 18,
+      "probe": "number-near-corner",
+      "point": [
+        -2.475000000000003,
+        1.666,
+        8.645000000000012
+      ],
+      "ndc": [
+        -0.29011540219967535,
+        -0.2825350171960683,
+        -0.8603071267920066
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 19,
+      "probe": "node-center",
+      "point": [
+        -3.0750000000000033,
+        1.67,
+        7.175000000000009
+      ],
+      "ndc": [
+        -0.36044640879353596,
+        -0.2326261369129304,
+        -0.8580161409540408
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 19,
+      "probe": "number-near-corner",
+      "point": [
+        -2.475000000000003,
+        1.666,
+        6.595000000000009
+      ],
+      "ndc": [
+        -0.29011540219967535,
+        -0.21317013273475802,
+        -0.8571052444850594
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 20,
+      "probe": "node-center",
+      "point": [
+        -3.0750000000000033,
+        1.67,
+        5.125000000000007
+      ],
+      "ndc": [
+        -0.36044640879353596,
+        -0.16326125245162015,
+        -0.8548142586470936
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 20,
+      "probe": "number-near-corner",
+      "point": [
+        -2.475000000000003,
+        1.666,
+        4.545000000000007
+      ],
+      "ndc": [
+        -0.29011540219967535,
+        -0.1438052482734478,
+        -0.8539033621781124
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 21,
+      "probe": "node-center",
+      "point": [
+        -3.0750000000000037,
+        1.67,
+        3.0750000000000037
+      ],
+      "ndc": [
+        -0.360446408793536,
+        -0.09389636799030986,
+        -0.8516123763401464
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 21,
+      "probe": "number-near-corner",
+      "point": [
+        -2.4750000000000036,
+        1.666,
+        2.4950000000000037
+      ],
+      "ndc": [
+        -0.2901154021996754,
+        -0.07444036381213748,
+        -0.8507014798711652
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 22,
+      "probe": "node-center",
+      "point": [
+        -3.0750000000000037,
+        1.67,
+        1.0250000000000015
+      ],
+      "ndc": [
+        -0.360446408793536,
+        -0.024531483528999594,
+        -0.8484104940331993
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 22,
+      "probe": "number-near-corner",
+      "point": [
+        -2.4750000000000036,
+        1.666,
+        0.44500000000000145
+      ],
+      "ndc": [
+        -0.2901154021996754,
+        -0.005075479350827226,
+        -0.8474995975642181
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 23,
+      "probe": "node-center",
+      "point": [
+        -3.0750000000000037,
+        1.67,
+        -1.025000000000001
+      ],
+      "ndc": [
+        -0.360446408793536,
+        0.04483340093231068,
+        -0.8452086117262522
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 23,
+      "probe": "number-near-corner",
+      "point": [
+        -2.4750000000000036,
+        1.666,
+        -1.605000000000001
+      ],
+      "ndc": [
+        -0.2901154021996754,
+        0.06428940511048307,
+        -0.844297715257271
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 24,
+      "probe": "node-center",
+      "point": [
+        -3.0750000000000037,
+        1.67,
+        -3.0750000000000037
+      ],
+      "ndc": [
+        -0.360446408793536,
+        0.11419828539362095,
+        -0.8420067294193051
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 24,
+      "probe": "number-near-corner",
+      "point": [
+        -2.475000000000004,
+        1.666,
+        -3.655000000000004
+      ],
+      "ndc": [
+        -0.29011540219967547,
+        0.13365428957179334,
+        -0.8410958329503239
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 25,
+      "probe": "node-center",
+      "point": [
+        -3.075000000000004,
+        1.67,
+        -5.125000000000007
+      ],
+      "ndc": [
+        -0.36044640879353607,
+        0.18356316985493126,
+        -0.8388048471123579
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 25,
+      "probe": "number-near-corner",
+      "point": [
+        -2.475000000000004,
+        1.666,
+        -5.705000000000007
+      ],
+      "ndc": [
+        -0.29011540219967547,
+        0.20301917403310366,
+        -0.8378939506433767
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 26,
+      "probe": "node-center",
+      "point": [
+        -3.075000000000004,
+        1.67,
+        -7.175000000000009
+      ],
+      "ndc": [
+        -0.36044640879353607,
+        0.2529280543162415,
+        -0.8356029648054109
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 26,
+      "probe": "number-near-corner",
+      "point": [
+        -2.475000000000004,
+        1.666,
+        -7.755000000000009
+      ],
+      "ndc": [
+        -0.29011540219967547,
+        0.2723840584944139,
+        -0.8346920683364296
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 27,
+      "probe": "node-center",
+      "point": [
+        -3.075000000000004,
+        1.67,
+        -9.225000000000012
+      ],
+      "ndc": [
+        -0.36044640879353607,
+        0.32229293877755183,
+        -0.8324010824984638
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 27,
+      "probe": "number-near-corner",
+      "point": [
+        -2.475000000000004,
+        1.666,
+        -9.805000000000012
+      ],
+      "ndc": [
+        -0.29011540219967547,
+        0.34174894295572417,
+        -0.8314901860294824
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 28,
+      "probe": "node-center",
+      "point": [
+        -3.0750000000000046,
+        1.67,
+        -11.275000000000013
+      ],
+      "ndc": [
+        -0.3604464087935361,
+        0.39165782323886195,
+        -0.8291992001915166
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 28,
+      "probe": "number-near-corner",
+      "point": [
+        -2.4750000000000045,
+        1.666,
+        -11.855000000000013
+      ],
+      "ndc": [
+        -0.2901154021996755,
+        0.4111138274170344,
+        -0.8282883037225354
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 29,
+      "probe": "node-center",
+      "point": [
+        -3.0750000000000046,
+        1.67,
+        -13.325000000000017
+      ],
+      "ndc": [
+        -0.3604464087935361,
+        0.4610227077001723,
+        -0.8259973178845694
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 29,
+      "probe": "number-near-corner",
+      "point": [
+        -2.4750000000000045,
+        1.666,
+        -13.905000000000017
+      ],
+      "ndc": [
+        -0.2901154021996755,
+        0.48047871187834473,
+        -0.8250864214155882
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 30,
+      "probe": "node-center",
+      "point": [
+        -3.0750000000000046,
+        1.67,
+        -15.37500000000002
+      ],
+      "ndc": [
+        -0.3604464087935361,
+        0.5303875921614826,
+        -0.8227954355776224
+      ],
+      "withinView": true,
+      "hits": []
+    },
+    {
+      "track": "wild",
+      "compact": true,
+      "node": 30,
+      "probe": "number-near-corner",
+      "point": [
+        -2.4750000000000045,
+        1.666,
+        -15.95500000000002
+      ],
+      "ndc": [
+        -0.2901154021996755,
+        0.549843596339655,
+        -0.8218845391086411
+      ],
+      "withinView": true,
+      "hits": []
+    }
+  ]
+}

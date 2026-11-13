@@ -1,0 +1,25 @@
+{
+  "scope": "Read-only quality telemetry and explicit-only quality selection. No geometry, lighting layout, gameplay, cache, DPR or security changes.",
+  "regression": {
+    "method": "Execute transpiled actual StudioLighting.tsx with captured React useFrame callback; no copied algorithm.",
+    "demand": { "callbacks": 90, "deltaSeconds": 0.05, "automaticQualityChanges": 0, "sampledFrameWindow": false },
+    "continuousSlowAnimation": { "callbacks": 90, "deltaSeconds": 0.05, "reportedFrameMs": 50, "automaticQualityChanges": 0 },
+    "explicitEconomyPreserved": true,
+    "defaultFullContentPreserved": true,
+    "rendererAndDprPolicyUnchanged": true
+  },
+  "checks": {
+    "targetedLightingAndQualityTests": { "passed": 18, "failed": 0 },
+    "fullTests": { "passed": 1643, "failed": 0 },
+    "typecheck": "passed",
+    "workerTypecheck": "passed",
+    "cnBuild": "passed",
+    "globalBuild": "passed",
+    "diffCheck": "passed"
+  },
+  "verificationLimits": [
+    "No real WebGL or device FPS claim.",
+    "Builds emit the pre-existing large-chunk warning.",
+    "The first full-suite run overlapped build-sites' temporary CN registry and failed two registry/source-identity assertions. The registry was restored by the completed build, actual source identity was regenerated, and all 1643 tests passed in the serial rerun."
+  ]
+}

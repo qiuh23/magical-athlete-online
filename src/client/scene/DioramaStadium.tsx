@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef } from 'react';
+import { createStadiumTurfTextures } from './environment/stadium-turf.js';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
@@ -64,14 +65,14 @@ function courseGeometry() {
   geometry.rotateX(Math.PI/2);geometry.computeVertexNormals();return geometry;
 }
 
-function useKit(lowQuality: boolean) {
+function useKit(lowQuality: boolean, refinedTurf = false) {
   const kit = useMemo(() => {
-    const grain=mouldGrain(),lawn=lawnTexture();
+    const grain=mouldGrain(),turfTextures=refinedTurf?createStadiumTurfTextures():undefined,lawn=turfTextures?.color??lawnTexture();
     // Low quality retains the albedo and sculpture, but avoids derivative-based
     // bump sampling across the large road, turf and base surfaces.
     const bumpMap=lowQuality?null:grain;
     return {
-    grain,lawn,baseContact:baseContactTexture(),course:courseGeometry(),
+    grain,lawn,...(turfTextures?{turfNormal:turfTextures.normal}:{}),baseContact:baseContactTexture(),course:courseGeometry(),
     tile: new RoundedBoxGeometry(1.99, .115, 1.99, 2, .035),
     top: new RoundedBoxGeometry(2.025, .045, 2.025, 3, .02),
     start: new RoundedBoxGeometry(1.99 + START_EXTENSION, .115, 2.65, 2, .035),
@@ -87,13 +88,13 @@ function useKit(lowQuality: boolean) {
     dark: new THREE.MeshStandardMaterial({ color: C.darkMint, roughness: .66 }),
     coral: new THREE.MeshStandardMaterial({ color: C.coral, roughness: .48 }),
     wood: new THREE.MeshStandardMaterial({ color: '#f7e7c9', roughness: .56, bumpMap,bumpScale:.007 }),
-    turf: new THREE.MeshStandardMaterial({ color: '#fffdf0',map:lawn,roughness: .96,bumpMap,bumpScale:.02 }),
+    turf: new THREE.MeshStandardMaterial({ color: '#fffdf0',map:lawn,roughness: .96,normalMap:turfTextures?.normal,normalScale:new THREE.Vector2(.45,.45),bumpMap:turfTextures?null:bumpMap,bumpScale:.02 }),
     turfShade: new THREE.MeshStandardMaterial({ color: '#e3eabf',map:lawn,roughness:.98,bumpMap,bumpScale:.026 }),
     gold: lowQuality
       ? new THREE.MeshStandardMaterial({ color: '#f6be43', roughness: .22, metalness: .72 })
       : new THREE.MeshPhysicalMaterial({ color: '#f6be43', roughness: .22, metalness: .72,clearcoat:.22 }),
     ink: new THREE.MeshStandardMaterial({ color: C.ink, roughness: .65 }),
-  };}, [lowQuality]);
+  };}, [lowQuality, refinedTurf]);
   useEffect(() => () => Object.values(kit).forEach(resource => resource.dispose()), [kit]);
   return kit;
 }
@@ -283,7 +284,7 @@ export function DioramaStadium({ compact, track, reversed = false, lowQuality, b
   return <ClassicDiorama {...{compact,track,reversed,lowQuality,triggered,showTallDecor,environmentReady}}/>;
 }
 function ClassicDiorama({compact,track,reversed,lowQuality,triggered,showTallDecor,environmentReady}:{compact:boolean;track:RoomView['track'];reversed:boolean;lowQuality:boolean;triggered:Set<number>;showTallDecor:boolean;environmentReady:boolean}) {
-  const kit=useKit(lowQuality);
+  const kit=useKit(lowQuality,track==='mild');
   return <group rotation={[0, compact ? -Math.PI / 2 : 0, 0]}>
     <mesh rotation={[-Math.PI/2,0,0]} position={[.12,-.923,0]}><planeGeometry args={[WIDTH*1.07,DEPTH*1.21]}/><meshBasicMaterial map={kit.baseContact} transparent depthWrite={false} toneMapped={false}/></mesh>
     <mesh geometry={kit.plinth} position={[0, -.62, 0]} material={kit.wood} castShadow receiveShadow dispose={null} />

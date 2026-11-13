@@ -23,9 +23,9 @@ The main WebGL failure layer keeps the minimap, detail, menu, chat and roll cont
 
 The final combined checkout reran all 12 r1 world trajectories at 101 times against the actual environment, lamps, approved non-Punch hardware, support tongue, final park-only fixtures and final center-column foundations. All 1,212 world samples had zero unexpected external or actor intersections. The existing actor evidence contains 12 × 401 poses, with soft contact confined to its verified interval and an upper separation translation of 18.3033 mm (not a claim of minimum penetration depth). All 1,212 actual joint/self samples pass their bounded interface rules.
 
-The non-Punch scene proof and its original report remain intact. The final r1 center-column change has an explicit, independently reproducible amendment and reverse-envelope separation evidence. Final r1 input identity was regenerated **after the actual combined world replay**, not by editing a certificate hash to suppress a mismatch. No new scenery or lamp matrices changed during release integration. Runtime/UI guard changes only narrow admission; their regressions and full source identity are recorded separately.
+The non-Punch scene proof and its original report remain intact. The final r1 center-column change has an explicit, independently reproducible amendment and reverse-envelope separation evidence. Final r1 input identity was regenerated **after the actual combined world replay**, not by editing a certificate hash to suppress a mismatch. No new scenery or lamp matrices changed during release integration. Runtime/UI guard changes only narrow admission; their behavioral regressions are recorded separately.
 
-`source-manifest.json` binds every tracked input outside this report directory, including the actual bootstrap, App, Board/Pawn wiring, ready gates, controller adapters, shaders/lighting, all GLBs, scripts, tests and historical proof files. The final Git tree is the external release identity; report files are excluded from the manifest to avoid recursive hashes. `preserved-inputs.json` records byte-identical legacy geometry, plan, cache, build and rule inputs.
+The repository-wide source manifest, its hash-lock test and generator have been removed at the project owner’s request. Git records the submitted source revision; functional tests, build checks and scoped geometry evidence remain the validation basis. `preserved-inputs.json` records byte-identical legacy geometry, plan, cache, build and rule inputs.
 
 ## Assets and performance bounds
 
@@ -45,7 +45,7 @@ Per-map environment budgets, exact source transforms and LOD trade-offs remain i
 
 ## Reproduce local checks
 
-Run the existing full Node test command, both TypeScript configs, `node scripts/build-sites.mjs`, both `verify-built-*` scripts and `wrangler deploy --dry-run`. `node scripts/recovery/freeze-release.mjs` regenerates content identities only after meaningful verification; it is not itself a geometry check. The raw collision scripts under `scripts/recovery/` remain available for the relevant changed inputs. See `checks.json` for the actual final outcomes and `dom-checks.json` for the separate actual-browser scope when present.
+Run the existing full Node test command, both TypeScript configs, `node scripts/build-sites.mjs`, both `verify-built-*` scripts and `wrangler deploy --dry-run`. The raw collision scripts under `scripts/recovery/` remain available for the relevant changed inputs. See `checks.json` for the actual final outcomes and `dom-checks.json` for the separate actual-browser scope when present.
 
 ## Automatic lighting continuation
 
@@ -53,6 +53,6 @@ The 180-second choice follows existing ordinary dice presentation (2,500 ms), mo
 
 The App owns the room clock because Race/Board unmount between rounds. Its key includes effective backend, room code and creation identity, excluding round, track and snapshot version. Without a creation identity, the phase remains in memory and is not restored across page loads. Session storage contains only a bounded phase, not an offline timestamp. The server snapshot exposes current pause state but no cumulative shared active-game duration, so clients and tabs may have different lighting. No protocol or rules change is included.
 
-Both approved-environment and fallback/explicit-environment-off paths now use the same continuous lighting adapter. Lamp hardware only mounts after environment readiness; missing/failed assets keep sky/main lighting working without silently turning on unsupported spotlights. All mechanical geometry, positions and bounded collision evidence remain byte-identical. The new lifecycle/clock regressions and the subsequent source-manifest check are separate from the existing finite geometry evidence.
+Both approved-environment and fallback/explicit-environment-off paths now use the same continuous lighting adapter. Lamp hardware only mounts after environment readiness; missing/failed assets keep sky/main lighting working without silently turning on unsupported spotlights. All mechanical geometry, positions and bounded collision evidence remain byte-identical. The lifecycle/clock regressions are separate from the existing finite geometry evidence.
 
 The final automatic-lighting continuation and exact validation scope are recorded in `automatic-day-night.json`; previous `checks.json` remains the pre-automatic checkpoint record.

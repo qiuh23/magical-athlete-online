@@ -13,15 +13,15 @@ test('actual Pawn has one shared r1 world-position call, no duplicate stride or 
  const branch=nodes(ts.isIfStatement).find(n=>compact(n.expression.getText(ast))==='r1Progress!==undefined');assert.ok(branch);
  const body=compact(branch.thenStatement.getText(ast));assert.ok(body.includes('x=walkPoint.x;y=walkPoint.y;z=walkPoint.z;'));assert.doesNotMatch(body,/strideLift|\.005|rotation|Math\.PI/);
  const variable=nodes(ts.isVariableDeclaration).find(n=>n.name.getText(ast)==='fraction'&&n.initializer?.getText(ast).includes('r1Progress'));
- assert.equal(compact(variable!.initializer!.getText(ast)),'r1Progress??punch.route(t,racer.id)??strideProgress(t)');
+ assert.equal(compact(variable!.initializer!.getText(ast)),'r1Progress??punch.route(t,racer.id)??(punchWind?punchWindRoute(t):strideProgress(t))');
  assert.match(source,/body\.current\.rotation\.set\(tilt, swing\+\(compact&&punch\.protects/);assert.doesNotMatch(source,/compact&&r1\.protects/);
 });
 
-test('actual Board uses current ready scopes and passes the shared clock to finite r1 layer',()=>{
+test('actual Board rejects the old r1 contact mount in rebuilt scenes and retains its strict clock wiring',()=>{
  assert.ok(source.startsWith("import './asset-loading.js';"));
  const input=nodes(ts.isVariableDeclaration).find(n=>n.name.getText(ast)==='r1Input')!;assert.ok(input.initializer&&ts.isObjectLiteralExpression(input.initializer));
  const properties=input.initializer.properties.filter(ts.isPropertyAssignment),available=properties.find(n=>n.name.getText(ast)==='available')!;
- assert.equal(compact(available.initializer.getText(ast)),"sceneMechanisms&&mechanismLoad==='ready'&&certified.ready&&!r1Failed");
+ assert.equal(compact(available.initializer.getText(ast)),"!environmentCandidate&&sceneMechanisms&&mechanismLoad==='ready'&&certified.ready&&!r1Failed");
  const layer=nodes(ts.isJsxSelfClosingElement).find(n=>n.tagName.getText(ast)==='R1PunchLayer')!;
  const attrs=Object.fromEntries(layer.attributes.properties.filter(ts.isJsxAttribute).map(a=>[a.name.getText(ast),a.initializer?.getText(ast)]));
  assert.equal(attrs.clock,'{clock}');assert.equal(attrs.paused,'{paused}');assert.equal(attrs.input,'{r1Input}');assert.equal(attrs.key,'{r1Scope}');

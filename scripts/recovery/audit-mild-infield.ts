@@ -1,0 +1,11 @@
+import{readFileSync,writeFileSync}from'node:fs';import{createHash}from'node:crypto';import{Box3,Vector3,Group,Mesh,Matrix4,BufferGeometry,Float32BufferAttribute}from'three';import{GLTFLoader}from'three/addons/loaders/GLTFLoader.js';
+import{resolve}from'node:path';import assert from'node:assert/strict';
+const S=resolve('.'),L=resolve(process.argv[2]??'.'),O=resolve(process.argv[3]??'docs/qa/segmented-stadium');
+const {collect,collision}=await import(S+'/scripts/recovery/scene-collision.ts');const{buildEnvironmentGeometry}=await import(S+'/src/client/scene/environment/runtime.ts'),{environmentAssets,environmentUrl}=await import(S+'/src/client/scene/environment/layout.ts');const{buildFloodlightGeometry,FLOODLIGHT_ASSETS,floodlightUrl}=await import(L+'/src/client/scene/environment/floodlights.ts');
+Object.assign(globalThis,{window:{location:{search:'?environment=1&mechanisms=1'}}});
+const models:any={},lights:any={};async function load(p:string){const b=readFileSync(p);return(await new GLTFLoader().parseAsync(b.buffer.slice(b.byteOffset,b.byteOffset+b.byteLength),'')).scene;}
+for(const a of environmentAssets('mild'))models[a]=await load(S+'/public'+environmentUrl(a));for(const a of FLOODLIGHT_ASSETS)lights[a]=await load(L+'/public'+floodlightUrl(a));
+const options={scale:1,lift:0,lowQuality:false},env=buildEnvironmentGeometry('mild',models,options),light=buildFloodlightGeometry('mild',lights,options);
+const parts=collect(env.root),seats=parts.filter(p=>p.name.startsWith('seating')),targets=[...parts.filter(p=>!p.name.startsWith('seating')),...collect(light.root,'light:')];const hits=[];
+for(const a of seats)for(const b of targets){if(!a.box.intersectsBox(b.box))continue;const h=collision(a,b);if(h)hits.push({a:a.name,b:b.name,...h});}
+writeFileSync(O+'/infield-object-intersections.json',JSON.stringify({inputs:Object.fromEntries([S+'/src/client/scene/environment/seating.ts',L+'/src/client/scene/environment/floodlights.ts'].map(p=>[p.startsWith(S+'/')?'environment/'+p.slice(S.length+1):'lighting/'+p.slice(L.length+1),createHash('sha256').update(readFileSync(p)).digest('hex')])),hits},null,2));console.log(JSON.stringify(hits,null,2));assert.equal(hits.length,0,'Actual seating/paving triangles intersect existing trees, facilities or fixed light geometry');

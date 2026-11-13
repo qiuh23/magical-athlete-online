@@ -1,0 +1,7 @@
+{
+  "inputs": {
+    "environment/src/client/scene/environment/seating.ts": "f665762f332c639d9adfc087810b923a450b524b9fa3a8361120ac7e22d34012",
+    "lighting/src/client/scene/environment/floodlights.ts": "3427fb25de0cad0b570b1779009d07e9dee28dc763e5701d9511043995f1276c"
+  },
+  "hits": []
+}

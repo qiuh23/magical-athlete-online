@@ -1,0 +1,77 @@
+{
+  "scope": "Offline actual runtime fixture/environment/tile meshes and framing. Mild base dimensions/course shape match DioramaStadium; canvas grain/lawn/number textures, actors, rigs and HUD omitted. Cycles light response/tone mapping differs from Three; receiver energy is calibrated, not a WebGL acceptance.",
+  "sourceInputs": {
+    "src/client/scene/environment/floodlights.ts": "3427fb25de0cad0b570b1779009d07e9dee28dc763e5701d9511043995f1276c",
+    "src/client/scene/environment/floodlight-edge-mounts.json": "5d80a3cc843cfa91b43f0193f0092b455cd421289f5f3de2e79dbdc2309bbb7e",
+    "src/client/scene/DioramaStadium.tsx": "b7ebbfb1cbce63c848413547fc0a86d61d389a97319f852435b86982401602ad",
+    "src/client/scene/camera.ts": "9d8a74799bd08344595590d589b7135e2c9f02ec50786386aa4feec01890f2a2",
+    "candidate-environment/runtime.ts": "b3f7952b028e67b02725a5d593a84355c9d3e25d626873bdc2b62cb255df1ced",
+    "candidate-environment/layout.ts": "3f0ed451fc0b933e393394ce9fc2441e1eb31e6ffc64716f7993d07c09a72bd3",
+    "candidate-environment/seating.ts": "82b14e154d9c7e62d04b46d0b56035e51a34a958324f6a76611c6bcf6f8f689d"
+  },
+  "render": {
+    "engine": "Blender 4.3.2 Cycles",
+    "samples": 256,
+    "adaptiveThreshold": 0.025,
+    "denoising": false,
+    "exposure": 0,
+    "toneMapping": "AgX Medium High Contrast"
+  },
+  "checks": {
+    "projectionMaxError": 8.344650264541858e-07,
+    "images": 2,
+    "browserVerified": false,
+    "scope": "Offline actual runtime fixture/environment/tile meshes and framing. Mild base dimensions/course shape match DioramaStadium; canvas grain/lawn/number textures, actors, rigs and HUD omitted. Cycles light response/tone mapping differs from Three; receiver energy is calibrated, not a WebGL acceptance."
+  },
+  "images": [
+    {
+      "track": "mild",
+      "compact": true,
+      "cssViewport": [
+        390,
+        844
+      ],
+      "pixelDimensions": [
+        780,
+        1688
+      ],
+      "glbSha256": "1517cbf045da0f029239a8258807e77115f709a30b5746ca5bb16f09179da753",
+      "imageSha256": "12ba186a95ffd5ee3c1ff5fda1b237af9c034d07c3da959ac192405f3b66887a",
+      "lens": {
+        "emissiveFactor": [
+          1,
+          0.7156935005005721,
+          0.3515325994898463
+        ],
+        "emissiveStrength": 2.4
+      },
+      "realSpots": 6,
+      "localShadowMaps": 1
+    },
+    {
+      "track": "boardwalks",
+      "compact": false,
+      "cssViewport": [
+        1280,
+        900
+      ],
+      "pixelDimensions": [
+        1280,
+        900
+      ],
+      "glbSha256": "71e4654df2661c839f24f677ef5e7820677194b1b2f1c504a8dbda45f6c3f086",
+      "imageSha256": "9d8ed8c12e28645c4da23a8974e1b77530884c3b0d0126d08cf91931106e55ee",
+      "lens": {
+        "emissiveFactor": [
+          1,
+          0.7156935005005721,
+          0.3515325994898463
+        ],
+        "emissiveStrength": 2.4
+      },
+      "realSpots": 6,
+      "localShadowMaps": 1
+    }
+  ],
+  "visualReview": "Both final files inspected. Mild straightaways remain continuously lit; Boardwalks keeps perimeter seats and deck height variation. Dark rear housings are deliberate; no backplate emission or added light shafts. Night background remains darker than the course. No gameplay UI/actor/number texture acceptance implied."
+}

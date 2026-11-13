@@ -1,0 +1,120 @@
+{
+  "unchanged": [
+    {
+      "track": "mild",
+      "before": "399b6cb1ba8dc09cae430b45077b859f4e0e370b2ffbbb7f36633eee127a00fa",
+      "after": "399b6cb1ba8dc09cae430b45077b859f4e0e370b2ffbbb7f36633eee127a00fa",
+      "equal": true
+    },
+    {
+      "track": "twisty-twirl",
+      "before": "1424144c7a2ac095d368945f8eac2cc0c7c16d4d449645505c19de6674f746c0",
+      "after": "1424144c7a2ac095d368945f8eac2cc0c7c16d4d449645505c19de6674f746c0",
+      "equal": true
+    },
+    {
+      "track": "boardwalks",
+      "before": "1e92c3229ffed131a7ccdc93fffd0ef4d7e5fdef602ddcffb7f95627164c24bb",
+      "after": "1e92c3229ffed131a7ccdc93fffd0ef4d7e5fdef602ddcffb7f95627164c24bb",
+      "equal": true
+    },
+    {
+      "track": "bridges",
+      "before": "ef3069da7cdfa39019b16d4d8955d6bdf1bf71600037521d6f74b9a80b2ab6de",
+      "after": "ef3069da7cdfa39019b16d4d8955d6bdf1bf71600037521d6f74b9a80b2ab6de",
+      "equal": true
+    }
+  ],
+  "entranceScope": "Squiggle end-terrace original 1.2 m tongue: sampled remaining continuous cream top strip, 0.1 m along tongue and 0.01 m across; corner edge excluded by 0.1 m. This verifies local passage continuity, not accessibility certification.",
+  "entranceMinimumClearWidth": 0.61,
+  "slices": [
+    {
+      "x": 18.825386489059085,
+      "clearWidthMeters": 0.68
+    },
+    {
+      "x": 18.925386489059086,
+      "clearWidthMeters": 0.66
+    },
+    {
+      "x": 19.025386489059088,
+      "clearWidthMeters": 0.64
+    },
+    {
+      "x": 19.12538648905909,
+      "clearWidthMeters": 0.63
+    },
+    {
+      "x": 19.22538648905909,
+      "clearWidthMeters": 0.61
+    },
+    {
+      "x": 19.325386489059092,
+      "clearWidthMeters": 0.74
+    },
+    {
+      "x": 19.425386489059093,
+      "clearWidthMeters": 1.1500000000000001
+    },
+    {
+      "x": 19.525386489059095,
+      "clearWidthMeters": 1.1500000000000001
+    },
+    {
+      "x": 19.625386489059096,
+      "clearWidthMeters": 1.1500000000000001
+    },
+    {
+      "x": 19.725386489059098,
+      "clearWidthMeters": 1.1500000000000001
+    },
+    {
+      "x": 19.8253864890591,
+      "clearWidthMeters": 1.1500000000000001
+    },
+    {
+      "x": 19.9253864890591,
+      "clearWidthMeters": 1.1500000000000001
+    },
+    {
+      "x": 20.025386489059102,
+      "clearWidthMeters": 1.1500000000000001
+    },
+    {
+      "x": 20.125386489059103,
+      "clearWidthMeters": 1.19
+    },
+    {
+      "x": 20.225386489059105,
+      "clearWidthMeters": 1.19
+    },
+    {
+      "x": 20.325386489059106,
+      "clearWidthMeters": 1.19
+    },
+    {
+      "x": 20.425386489059107,
+      "clearWidthMeters": 1.19
+    },
+    {
+      "x": 20.52538648905911,
+      "clearWidthMeters": 1.19
+    },
+    {
+      "x": 20.62538648905911,
+      "clearWidthMeters": 1.19
+    },
+    {
+      "x": 20.72538648905911,
+      "clearWidthMeters": 1.19
+    },
+    {
+      "x": 20.825386489059113,
+      "clearWidthMeters": 1.19
+    },
+    {
+      "x": 20.925386489059115,
+      "clearWidthMeters": 1.19
+    }
+  ]
+}

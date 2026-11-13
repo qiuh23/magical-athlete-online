@@ -1,0 +1,40 @@
+{
+  "scope": "Finite actual-triangle banana center-route audit at maximum solo scale 1.65, both directions, stand/legacy-down, 41 fractions, against all 51 fixed-display poses. No all-character, endpoint occupancy reflow, full animation or continuous-collision proof.",
+  "records": [
+    {
+      "anchor": "squiggle:14",
+      "compact": false,
+      "actorSamples": 164,
+      "devicePoses": 51,
+      "hits": []
+    },
+    {
+      "anchor": "squiggle:17",
+      "compact": false,
+      "actorSamples": 164,
+      "devicePoses": 51,
+      "hits": []
+    },
+    {
+      "anchor": "squiggle:21",
+      "compact": false,
+      "actorSamples": 164,
+      "devicePoses": 51,
+      "hits": []
+    },
+    {
+      "anchor": "squiggle:28",
+      "compact": false,
+      "actorSamples": 164,
+      "devicePoses": 51,
+      "hits": []
+    },
+    {
+      "anchor": "boardwalks:50",
+      "compact": false,
+      "actorSamples": 164,
+      "devicePoses": 51,
+      "hits": []
+    }
+  ]
+}

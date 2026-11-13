@@ -1,0 +1,5471 @@
+{
+  "revision": "floodlights-stadium-rows-v4-20261113",
+  "scope": "Actual fixture triangles and batch/material count, with analytic Three r186 local-light attenuation on every real track node. Shadow bound counts only these fixtures, not the whole scene. No occlusion, pixel/color agreement, whole-scene draw calls, mobile FPS or joint geometry certificate.",
+  "inputs": {
+    "src/client/scene/environment/floodlights.ts": "3427fb25de0cad0b570b1779009d07e9dee28dc763e5701d9511043995f1276c",
+    "src/client/scene/environment/VenueLighting.tsx": "58b9d2af09d0335fb1439944c6d626ea2e3136b31329ae6c1e04fb838180ce3d",
+    "src/client/scene/environment/floodlight-edge-mounts.json": "5d80a3cc843cfa91b43f0193f0092b455cd421289f5f3de2e79dbdc2309bbb7e",
+    "scripts/recovery/audit-floodlight-row-lighting.ts": "c2559ed428f22bc88b746533c7330e536f7e4105a628090a1b7b8b63c85aa6f2"
+  },
+  "assets": [
+    {
+      "path": "public/models/floodlights-rebuilt-v3/base.glb",
+      "bytes": 12348,
+      "sha256": "1104dfa5c5dbc4181448e43d84559f24bbb2b92334cf2ae3cd64e93466389309"
+    },
+    {
+      "path": "public/models/floodlights-rebuilt-v3/pole.glb",
+      "bytes": 2464,
+      "sha256": "cbd7f2ee910e5a62ecba3bb229d5585082ca154a6a0b36d44e9ce01cffb46bcd"
+    },
+    {
+      "path": "public/models/floodlights-rebuilt-v3/yoke.glb",
+      "bytes": 11092,
+      "sha256": "04b130d8b4d2e12c14974b0485cb025eb364bbfcf2ba88f255db8c6eafad691e"
+    },
+    {
+      "path": "public/models/floodlights-rebuilt-v3/housing.glb",
+      "bytes": 29464,
+      "sha256": "0b4d0ccb58bc8a7fb4dec5efd4d531cf6dfd80945b5f71163b3cb4fa8fbeaf3a"
+    },
+    {
+      "path": "public/models/floodlights-rebuilt-v3/lenses.glb",
+      "bytes": 2520,
+      "sha256": "28cc5396e6e9c9f2b42a05d1a0976131654f92b2b426e5381963c3d6dd5efb32"
+    }
+  ],
+  "reports": [
+    {
+      "track": "squiggle",
+      "raised": false,
+      "lowQuality": false,
+      "draws": 15,
+      "triangles": 8128,
+      "shadowDraws": 14,
+      "shadowTriangles": 7936,
+      "mainPlusLocalShadowDrawUpperBound": 43,
+      "budget": {
+        "fixtures": 8,
+        "spots": 6,
+        "shadows": 1
+      },
+      "minimumUnoccludedLux": 2.156523732343989,
+      "maximumUnoccludedLux": 4.324708717867324,
+      "samples": [
+        {
+          "node": 0,
+          "unoccludedLux": 3.172554784270561,
+          "contributingZones": 3
+        },
+        {
+          "node": 1,
+          "unoccludedLux": 3.77763921743087,
+          "contributingZones": 3
+        },
+        {
+          "node": 2,
+          "unoccludedLux": 3.9542676067140206,
+          "contributingZones": 3
+        },
+        {
+          "node": 3,
+          "unoccludedLux": 3.611848929533981,
+          "contributingZones": 4
+        },
+        {
+          "node": 4,
+          "unoccludedLux": 3.339123016534485,
+          "contributingZones": 4
+        },
+        {
+          "node": 5,
+          "unoccludedLux": 3.2801734836563785,
+          "contributingZones": 3
+        },
+        {
+          "node": 6,
+          "unoccludedLux": 3.0414225123560072,
+          "contributingZones": 3
+        },
+        {
+          "node": 7,
+          "unoccludedLux": 2.5223235732419558,
+          "contributingZones": 4
+        },
+        {
+          "node": 8,
+          "unoccludedLux": 2.418311961500604,
+          "contributingZones": 4
+        },
+        {
+          "node": 9,
+          "unoccludedLux": 2.8474328311359884,
+          "contributingZones": 4
+        },
+        {
+          "node": 10,
+          "unoccludedLux": 3.3620338187233707,
+          "contributingZones": 4
+        },
+        {
+          "node": 11,
+          "unoccludedLux": 3.823437509327497,
+          "contributingZones": 4
+        },
+        {
+          "node": 12,
+          "unoccludedLux": 3.211114619437934,
+          "contributingZones": 5
+        },
+        {
+          "node": 13,
+          "unoccludedLux": 2.781303943381514,
+          "contributingZones": 5
+        },
+        {
+          "node": 14,
+          "unoccludedLux": 2.550451417635624,
+          "contributingZones": 6
+        },
+        {
+          "node": 15,
+          "unoccludedLux": 2.4921852161753364,
+          "contributingZones": 6
+        },
+        {
+          "node": 16,
+          "unoccludedLux": 3.061997058209807,
+          "contributingZones": 5
+        },
+        {
+          "node": 17,
+          "unoccludedLux": 3.578769794271195,
+          "contributingZones": 4
+        },
+        {
+          "node": 18,
+          "unoccludedLux": 3.194470019685184,
+          "contributingZones": 4
+        },
+        {
+          "node": 19,
+          "unoccludedLux": 2.6717424421938833,
+          "contributingZones": 4
+        },
+        {
+          "node": 20,
+          "unoccludedLux": 2.156523732343989,
+          "contributingZones": 4
+        },
+        {
+          "node": 21,
+          "unoccludedLux": 2.6278269078391476,
+          "contributingZones": 4
+        },
+        {
+          "node": 22,
+          "unoccludedLux": 3.084534519502187,
+          "contributingZones": 4
+        },
+        {
+          "node": 23,
+          "unoccludedLux": 3.4286975453120325,
+          "contributingZones": 4
+        },
+        {
+          "node": 24,
+          "unoccludedLux": 3.868061887960414,
+          "contributingZones": 4
+        },
+        {
+          "node": 25,
+          "unoccludedLux": 4.324708717867324,
+          "contributingZones": 4
+        },
+        {
+          "node": 26,
+          "unoccludedLux": 4.0305807693646845,
+          "contributingZones": 3
+        },
+        {
+          "node": 27,
+          "unoccludedLux": 3.4070031818351247,
+          "contributingZones": 3
+        },
+        {
+          "node": 28,
+          "unoccludedLux": 2.9975098784792804,
+          "contributingZones": 3
+        },
+        {
+          "node": 29,
+          "unoccludedLux": 2.786528647075759,
+          "contributingZones": 3
+        },
+        {
+          "node": 30,
+          "unoccludedLux": 2.844880468794259,
+          "contributingZones": 3
+        }
+      ]
+    },
+    {
+      "track": "squiggle",
+      "raised": false,
+      "lowQuality": true,
+      "draws": 15,
+      "triangles": 8128,
+      "shadowDraws": 0,
+      "shadowTriangles": 0,
+      "mainPlusLocalShadowDrawUpperBound": 15,
+      "budget": {
+        "fixtures": 8,
+        "spots": 4,
+        "shadows": 0
+      },
+      "minimumUnoccludedLux": 1.4501191624912326,
+      "maximumUnoccludedLux": 4.666520807850202,
+      "samples": [
+        {
+          "node": 0,
+          "unoccludedLux": 3.9571582987223355,
+          "contributingZones": 2
+        },
+        {
+          "node": 1,
+          "unoccludedLux": 4.551443819472751,
+          "contributingZones": 2
+        },
+        {
+          "node": 2,
+          "unoccludedLux": 4.244036263714592,
+          "contributingZones": 2
+        },
+        {
+          "node": 3,
+          "unoccludedLux": 3.4860881698705732,
+          "contributingZones": 2
+        },
+        {
+          "node": 4,
+          "unoccludedLux": 2.9795627944781367,
+          "contributingZones": 3
+        },
+        {
+          "node": 5,
+          "unoccludedLux": 2.649493695824675,
+          "contributingZones": 3
+        },
+        {
+          "node": 6,
+          "unoccludedLux": 2.9753541414710334,
+          "contributingZones": 3
+        },
+        {
+          "node": 7,
+          "unoccludedLux": 3.911331100272546,
+          "contributingZones": 3
+        },
+        {
+          "node": 8,
+          "unoccludedLux": 4.2188053735971405,
+          "contributingZones": 3
+        },
+        {
+          "node": 9,
+          "unoccludedLux": 3.7720186982618125,
+          "contributingZones": 3
+        },
+        {
+          "node": 10,
+          "unoccludedLux": 3.3175156224143283,
+          "contributingZones": 3
+        },
+        {
+          "node": 11,
+          "unoccludedLux": 2.5883187341333818,
+          "contributingZones": 3
+        },
+        {
+          "node": 12,
+          "unoccludedLux": 2.9259595024598393,
+          "contributingZones": 4
+        },
+        {
+          "node": 13,
+          "unoccludedLux": 3.403979432004482,
+          "contributingZones": 4
+        },
+        {
+          "node": 14,
+          "unoccludedLux": 3.635429976260192,
+          "contributingZones": 4
+        },
+        {
+          "node": 15,
+          "unoccludedLux": 3.923281372084271,
+          "contributingZones": 4
+        },
+        {
+          "node": 16,
+          "unoccludedLux": 3.157673946341556,
+          "contributingZones": 4
+        },
+        {
+          "node": 17,
+          "unoccludedLux": 2.976393084310795,
+          "contributingZones": 3
+        },
+        {
+          "node": 18,
+          "unoccludedLux": 3.5373405719284596,
+          "contributingZones": 3
+        },
+        {
+          "node": 19,
+          "unoccludedLux": 4.01307553000211,
+          "contributingZones": 3
+        },
+        {
+          "node": 20,
+          "unoccludedLux": 4.473719219334866,
+          "contributingZones": 3
+        },
+        {
+          "node": 21,
+          "unoccludedLux": 3.8109298138584022,
+          "contributingZones": 3
+        },
+        {
+          "node": 22,
+          "unoccludedLux": 3.3314187100443435,
+          "contributingZones": 3
+        },
+        {
+          "node": 23,
+          "unoccludedLux": 3.3394292879803285,
+          "contributingZones": 3
+        },
+        {
+          "node": 24,
+          "unoccludedLux": 3.6677951996278892,
+          "contributingZones": 3
+        },
+        {
+          "node": 25,
+          "unoccludedLux": 4.3049928932987624,
+          "contributingZones": 2
+        },
+        {
+          "node": 26,
+          "unoccludedLux": 4.666520807850202,
+          "contributingZones": 2
+        },
+        {
+          "node": 27,
+          "unoccludedLux": 4.010444684083226,
+          "contributingZones": 2
+        },
+        {
+          "node": 28,
+          "unoccludedLux": 2.983748206699685,
+          "contributingZones": 2
+        },
+        {
+          "node": 29,
+          "unoccludedLux": 2.1074635897232716,
+          "contributingZones": 2
+        },
+        {
+          "node": 30,
+          "unoccludedLux": 1.4501191624912326,
+          "contributingZones": 2
+        }
+      ]
+    },
+    {
+      "track": "squiggle",
+      "raised": true,
+      "lowQuality": false,
+      "draws": 15,
+      "triangles": 8128,
+      "shadowDraws": 14,
+      "shadowTriangles": 7936,
+      "mainPlusLocalShadowDrawUpperBound": 43,
+      "budget": {
+        "fixtures": 8,
+        "spots": 6,
+        "shadows": 1
+      },
+      "minimumUnoccludedLux": 1.21502779907397,
+      "maximumUnoccludedLux": 4.733457581621678,
+      "samples": [
+        {
+          "node": 0,
+          "unoccludedLux": 3.593910186269921,
+          "contributingZones": 2
+        },
+        {
+          "node": 1,
+          "unoccludedLux": 4.4191388937244716,
+          "contributingZones": 3
+        },
+        {
+          "node": 2,
+          "unoccludedLux": 4.085422508246171,
+          "contributingZones": 3
+        },
+        {
+          "node": 3,
+          "unoccludedLux": 3.3584255303851593,
+          "contributingZones": 3
+        },
+        {
+          "node": 4,
+          "unoccludedLux": 3.1156409871603423,
+          "contributingZones": 3
+        },
+        {
+          "node": 5,
+          "unoccludedLux": 3.4668343438058242,
+          "contributingZones": 3
+        },
+        {
+          "node": 6,
+          "unoccludedLux": 3.1475040509077674,
+          "contributingZones": 3
+        },
+        {
+          "node": 7,
+          "unoccludedLux": 1.7796131730956668,
+          "contributingZones": 3
+        },
+        {
+          "node": 8,
+          "unoccludedLux": 1.5558838146091565,
+          "contributingZones": 4
+        },
+        {
+          "node": 9,
+          "unoccludedLux": 2.1472088303143897,
+          "contributingZones": 4
+        },
+        {
+          "node": 10,
+          "unoccludedLux": 2.9542539312489713,
+          "contributingZones": 4
+        },
+        {
+          "node": 11,
+          "unoccludedLux": 4.196879875968117,
+          "contributingZones": 4
+        },
+        {
+          "node": 12,
+          "unoccludedLux": 3.374836743628031,
+          "contributingZones": 4
+        },
+        {
+          "node": 13,
+          "unoccludedLux": 2.401443029661235,
+          "contributingZones": 4
+        },
+        {
+          "node": 14,
+          "unoccludedLux": 1.982259686447626,
+          "contributingZones": 4
+        },
+        {
+          "node": 15,
+          "unoccludedLux": 2.0418897424153695,
+          "contributingZones": 3
+        },
+        {
+          "node": 16,
+          "unoccludedLux": 3.302884799246084,
+          "contributingZones": 2
+        },
+        {
+          "node": 17,
+          "unoccludedLux": 3.6984378220699385,
+          "contributingZones": 4
+        },
+        {
+          "node": 18,
+          "unoccludedLux": 2.6926526383048794,
+          "contributingZones": 4
+        },
+        {
+          "node": 19,
+          "unoccludedLux": 1.8973007144482232,
+          "contributingZones": 4
+        },
+        {
+          "node": 20,
+          "unoccludedLux": 1.21502779907397,
+          "contributingZones": 4
+        },
+        {
+          "node": 21,
+          "unoccludedLux": 1.9504490367305527,
+          "contributingZones": 3
+        },
+        {
+          "node": 22,
+          "unoccludedLux": 2.7024471646606902,
+          "contributingZones": 3
+        },
+        {
+          "node": 23,
+          "unoccludedLux": 3.0731269959167022,
+          "contributingZones": 3
+        },
+        {
+          "node": 24,
+          "unoccludedLux": 3.7203369655247793,
+          "contributingZones": 3
+        },
+        {
+          "node": 25,
+          "unoccludedLux": 4.477117038950993,
+          "contributingZones": 3
+        },
+        {
+          "node": 26,
+          "unoccludedLux": 4.733457581621678,
+          "contributingZones": 3
+        },
+        {
+          "node": 27,
+          "unoccludedLux": 3.8106481529922247,
+          "contributingZones": 3
+        },
+        {
+          "node": 28,
+          "unoccludedLux": 2.848317552088611,
+          "contributingZones": 3
+        },
+        {
+          "node": 29,
+          "unoccludedLux": 2.5407351450887843,
+          "contributingZones": 3
+        },
+        {
+          "node": 30,
+          "unoccludedLux": 2.865847445984754,
+          "contributingZones": 3
+        }
+      ]
+    },
+    {
+      "track": "squiggle",
+      "raised": true,
+      "lowQuality": true,
+      "draws": 15,
+      "triangles": 8128,
+      "shadowDraws": 0,
+      "shadowTriangles": 0,
+      "mainPlusLocalShadowDrawUpperBound": 15,
+      "budget": {
+        "fixtures": 8,
+        "spots": 4,
+        "shadows": 0
+      },
+      "minimumUnoccludedLux": 1.0153637959528,
+      "maximumUnoccludedLux": 6.410142738823975,
+      "samples": [
+        {
+          "node": 0,
+          "unoccludedLux": 4.891848216600692,
+          "contributingZones": 2
+        },
+        {
+          "node": 1,
+          "unoccludedLux": 6.0447021556776015,
+          "contributingZones": 2
+        },
+        {
+          "node": 2,
+          "unoccludedLux": 5.096934518990777,
+          "contributingZones": 2
+        },
+        {
+          "node": 3,
+          "unoccludedLux": 3.450756803460618,
+          "contributingZones": 2
+        },
+        {
+          "node": 4,
+          "unoccludedLux": 2.5436104330047664,
+          "contributingZones": 2
+        },
+        {
+          "node": 5,
+          "unoccludedLux": 1.9224990269187954,
+          "contributingZones": 2
+        },
+        {
+          "node": 6,
+          "unoccludedLux": 2.1549668583008934,
+          "contributingZones": 2
+        },
+        {
+          "node": 7,
+          "unoccludedLux": 4.05024078694929,
+          "contributingZones": 3
+        },
+        {
+          "node": 8,
+          "unoccludedLux": 4.561505669304568,
+          "contributingZones": 3
+        },
+        {
+          "node": 9,
+          "unoccludedLux": 3.4302210000334505,
+          "contributingZones": 3
+        },
+        {
+          "node": 10,
+          "unoccludedLux": 2.4460035599608414,
+          "contributingZones": 3
+        },
+        {
+          "node": 11,
+          "unoccludedLux": 1.2997984461275713,
+          "contributingZones": 3
+        },
+        {
+          "node": 12,
+          "unoccludedLux": 1.688030740183212,
+          "contributingZones": 3
+        },
+        {
+          "node": 13,
+          "unoccludedLux": 2.6337942520589412,
+          "contributingZones": 3
+        },
+        {
+          "node": 14,
+          "unoccludedLux": 3.0647679948350857,
+          "contributingZones": 3
+        },
+        {
+          "node": 15,
+          "unoccludedLux": 3.8712586091059022,
+          "contributingZones": 3
+        },
+        {
+          "node": 16,
+          "unoccludedLux": 2.0215383591572627,
+          "contributingZones": 2
+        },
+        {
+          "node": 17,
+          "unoccludedLux": 1.7148268263897677,
+          "contributingZones": 3
+        },
+        {
+          "node": 18,
+          "unoccludedLux": 2.712936429263028,
+          "contributingZones": 3
+        },
+        {
+          "node": 19,
+          "unoccludedLux": 3.8194071146794943,
+          "contributingZones": 3
+        },
+        {
+          "node": 20,
+          "unoccludedLux": 5.151621394945249,
+          "contributingZones": 3
+        },
+        {
+          "node": 21,
+          "unoccludedLux": 3.8038610083887168,
+          "contributingZones": 3
+        },
+        {
+          "node": 22,
+          "unoccludedLux": 2.896368842057778,
+          "contributingZones": 3
+        },
+        {
+          "node": 23,
+          "unoccludedLux": 2.925507615794529,
+          "contributingZones": 2
+        },
+        {
+          "node": 24,
+          "unoccludedLux": 3.6124521571059467,
+          "contributingZones": 2
+        },
+        {
+          "node": 25,
+          "unoccludedLux": 5.206955419804154,
+          "contributingZones": 2
+        },
+        {
+          "node": 26,
+          "unoccludedLux": 6.410142738823975,
+          "contributingZones": 2
+        },
+        {
+          "node": 27,
+          "unoccludedLux": 5.055929092708605,
+          "contributingZones": 2
+        },
+        {
+          "node": 28,
+          "unoccludedLux": 3.066983580888512,
+          "contributingZones": 2
+        },
+        {
+          "node": 29,
+          "unoccludedLux": 1.7848024464650865,
+          "contributingZones": 2
+        },
+        {
+          "node": 30,
+          "unoccludedLux": 1.0153637959528,
+          "contributingZones": 2
+        }
+      ]
+    },
+    {
+      "track": "boardwalks",
+      "raised": false,
+      "lowQuality": false,
+      "draws": 15,
+      "triangles": 8128,
+      "shadowDraws": 14,
+      "shadowTriangles": 7936,
+      "mainPlusLocalShadowDrawUpperBound": 43,
+      "budget": {
+        "fixtures": 8,
+        "spots": 6,
+        "shadows": 1
+      },
+      "minimumUnoccludedLux": 1.7985090056629731,
+      "maximumUnoccludedLux": 4.711728672877851,
+      "samples": [
+        {
+          "node": 0,
+          "unoccludedLux": 3.383028034271006,
+          "contributingZones": 3
+        },
+        {
+          "node": 1,
+          "unoccludedLux": 3.023399010030656,
+          "contributingZones": 3
+        },
+        {
+          "node": 2,
+          "unoccludedLux": 2.804545591196145,
+          "contributingZones": 3
+        },
+        {
+          "node": 3,
+          "unoccludedLux": 2.8200710256989647,
+          "contributingZones": 3
+        },
+        {
+          "node": 4,
+          "unoccludedLux": 3.0885788898429603,
+          "contributingZones": 3
+        },
+        {
+          "node": 5,
+          "unoccludedLux": 3.4995074660223007,
+          "contributingZones": 3
+        },
+        {
+          "node": 6,
+          "unoccludedLux": 4.036678157979696,
+          "contributingZones": 3
+        },
+        {
+          "node": 7,
+          "unoccludedLux": 3.572551754901506,
+          "contributingZones": 3
+        },
+        {
+          "node": 8,
+          "unoccludedLux": 3.328434470905316,
+          "contributingZones": 3
+        },
+        {
+          "node": 9,
+          "unoccludedLux": 3.4155904735169376,
+          "contributingZones": 4
+        },
+        {
+          "node": 10,
+          "unoccludedLux": 3.315845570316374,
+          "contributingZones": 4
+        },
+        {
+          "node": 11,
+          "unoccludedLux": 3.207314925391397,
+          "contributingZones": 4
+        },
+        {
+          "node": 12,
+          "unoccludedLux": 3.1139847094478794,
+          "contributingZones": 4
+        },
+        {
+          "node": 13,
+          "unoccludedLux": 3.5551198873934577,
+          "contributingZones": 4
+        },
+        {
+          "node": 14,
+          "unoccludedLux": 3.157182821365675,
+          "contributingZones": 5
+        },
+        {
+          "node": 15,
+          "unoccludedLux": 2.8533554045131213,
+          "contributingZones": 6
+        },
+        {
+          "node": 16,
+          "unoccludedLux": 2.6166073238900847,
+          "contributingZones": 6
+        },
+        {
+          "node": 17,
+          "unoccludedLux": 2.454569140762825,
+          "contributingZones": 6
+        },
+        {
+          "node": 18,
+          "unoccludedLux": 2.453805616606661,
+          "contributingZones": 4
+        },
+        {
+          "node": 19,
+          "unoccludedLux": 2.6363749848933535,
+          "contributingZones": 4
+        },
+        {
+          "node": 20,
+          "unoccludedLux": 2.908101598774955,
+          "contributingZones": 4
+        },
+        {
+          "node": 21,
+          "unoccludedLux": 3.2085458740519157,
+          "contributingZones": 4
+        },
+        {
+          "node": 22,
+          "unoccludedLux": 3.398563510606969,
+          "contributingZones": 3
+        },
+        {
+          "node": 23,
+          "unoccludedLux": 3.3794912667985466,
+          "contributingZones": 3
+        },
+        {
+          "node": 24,
+          "unoccludedLux": 3.536616029030757,
+          "contributingZones": 3
+        },
+        {
+          "node": 25,
+          "unoccludedLux": 3.29787589903672,
+          "contributingZones": 3
+        },
+        {
+          "node": 26,
+          "unoccludedLux": 2.853232830369185,
+          "contributingZones": 3
+        },
+        {
+          "node": 27,
+          "unoccludedLux": 3.0023087534216435,
+          "contributingZones": 3
+        },
+        {
+          "node": 28,
+          "unoccludedLux": 3.3384375152635712,
+          "contributingZones": 3
+        },
+        {
+          "node": 29,
+          "unoccludedLux": 4.114004936131656,
+          "contributingZones": 3
+        },
+        {
+          "node": 30,
+          "unoccludedLux": 4.500858589426135,
+          "contributingZones": 3
+        },
+        {
+          "node": 31,
+          "unoccludedLux": 3.6667481772767023,
+          "contributingZones": 3
+        },
+        {
+          "node": 32,
+          "unoccludedLux": 4.118535225637474,
+          "contributingZones": 3
+        },
+        {
+          "node": 33,
+          "unoccludedLux": 4.408490601432737,
+          "contributingZones": 4
+        },
+        {
+          "node": 34,
+          "unoccludedLux": 4.484329641082075,
+          "contributingZones": 4
+        },
+        {
+          "node": 35,
+          "unoccludedLux": 4.406630664073847,
+          "contributingZones": 4
+        },
+        {
+          "node": 36,
+          "unoccludedLux": 4.154594844250482,
+          "contributingZones": 4
+        },
+        {
+          "node": 37,
+          "unoccludedLux": 2.7102782053158707,
+          "contributingZones": 6
+        },
+        {
+          "node": 38,
+          "unoccludedLux": 3.029029569979334,
+          "contributingZones": 6
+        },
+        {
+          "node": 39,
+          "unoccludedLux": 2.650399097902973,
+          "contributingZones": 6
+        },
+        {
+          "node": 40,
+          "unoccludedLux": 2.457966429725785,
+          "contributingZones": 5
+        },
+        {
+          "node": 41,
+          "unoccludedLux": 1.9936811393484435,
+          "contributingZones": 4
+        },
+        {
+          "node": 42,
+          "unoccludedLux": 2.7583966165765084,
+          "contributingZones": 5
+        },
+        {
+          "node": 43,
+          "unoccludedLux": 3.461406601656585,
+          "contributingZones": 5
+        },
+        {
+          "node": 44,
+          "unoccludedLux": 4.065795308504089,
+          "contributingZones": 4
+        },
+        {
+          "node": 45,
+          "unoccludedLux": 4.407096726043569,
+          "contributingZones": 4
+        },
+        {
+          "node": 46,
+          "unoccludedLux": 4.61441091449461,
+          "contributingZones": 4
+        },
+        {
+          "node": 47,
+          "unoccludedLux": 4.711728672877851,
+          "contributingZones": 4
+        },
+        {
+          "node": 48,
+          "unoccludedLux": 4.05104369975169,
+          "contributingZones": 4
+        },
+        {
+          "node": 49,
+          "unoccludedLux": 3.493200185798954,
+          "contributingZones": 4
+        },
+        {
+          "node": 50,
+          "unoccludedLux": 1.7985090056629731,
+          "contributingZones": 4
+        },
+        {
+          "node": 51,
+          "unoccludedLux": 2.0211595492046492,
+          "contributingZones": 4
+        },
+        {
+          "node": 52,
+          "unoccludedLux": 2.6498695389868425,
+          "contributingZones": 4
+        },
+        {
+          "node": 53,
+          "unoccludedLux": 3.265580444006249,
+          "contributingZones": 3
+        },
+        {
+          "node": 54,
+          "unoccludedLux": 3.6892281458601333,
+          "contributingZones": 3
+        },
+        {
+          "node": 55,
+          "unoccludedLux": 3.711113603564979,
+          "contributingZones": 3
+        },
+        {
+          "node": 56,
+          "unoccludedLux": 3.257756302414546,
+          "contributingZones": 3
+        },
+        {
+          "node": 57,
+          "unoccludedLux": 3.002426718348259,
+          "contributingZones": 3
+        },
+        {
+          "node": 58,
+          "unoccludedLux": 2.872561433696899,
+          "contributingZones": 3
+        }
+      ]
+    },
+    {
+      "track": "boardwalks",
+      "raised": false,
+      "lowQuality": true,
+      "draws": 15,
+      "triangles": 8128,
+      "shadowDraws": 0,
+      "shadowTriangles": 0,
+      "mainPlusLocalShadowDrawUpperBound": 15,
+      "budget": {
+        "fixtures": 8,
+        "spots": 4,
+        "shadows": 0
+      },
+      "minimumUnoccludedLux": 0.8436536600741573,
+      "maximumUnoccludedLux": 5.2370152303363335,
+      "samples": [
+        {
+          "node": 0,
+          "unoccludedLux": 4.423320767502656,
+          "contributingZones": 2
+        },
+        {
+          "node": 1,
+          "unoccludedLux": 3.424233037913408,
+          "contributingZones": 2
+        },
+        {
+          "node": 2,
+          "unoccludedLux": 2.5736163727260335,
+          "contributingZones": 2
+        },
+        {
+          "node": 3,
+          "unoccludedLux": 1.89139015606055,
+          "contributingZones": 2
+        },
+        {
+          "node": 4,
+          "unoccludedLux": 1.3139076970763297,
+          "contributingZones": 2
+        },
+        {
+          "node": 5,
+          "unoccludedLux": 0.8436536600741573,
+          "contributingZones": 2
+        },
+        {
+          "node": 6,
+          "unoccludedLux": 1.4361553032132721,
+          "contributingZones": 2
+        },
+        {
+          "node": 7,
+          "unoccludedLux": 2.147557383682702,
+          "contributingZones": 2
+        },
+        {
+          "node": 8,
+          "unoccludedLux": 2.8201038875631994,
+          "contributingZones": 2
+        },
+        {
+          "node": 9,
+          "unoccludedLux": 3.2295046549981272,
+          "contributingZones": 3
+        },
+        {
+          "node": 10,
+          "unoccludedLux": 3.3516851685262674,
+          "contributingZones": 3
+        },
+        {
+          "node": 11,
+          "unoccludedLux": 3.4654830188017574,
+          "contributingZones": 3
+        },
+        {
+          "node": 12,
+          "unoccludedLux": 3.5671088711846908,
+          "contributingZones": 3
+        },
+        {
+          "node": 13,
+          "unoccludedLux": 3.134229701292856,
+          "contributingZones": 3
+        },
+        {
+          "node": 14,
+          "unoccludedLux": 3.249527710112706,
+          "contributingZones": 4
+        },
+        {
+          "node": 15,
+          "unoccludedLux": 3.415228439689085,
+          "contributingZones": 4
+        },
+        {
+          "node": 16,
+          "unoccludedLux": 3.6455942930466874,
+          "contributingZones": 4
+        },
+        {
+          "node": 17,
+          "unoccludedLux": 4.041527869245554,
+          "contributingZones": 4
+        },
+        {
+          "node": 18,
+          "unoccludedLux": 4.298870544233703,
+          "contributingZones": 3
+        },
+        {
+          "node": 19,
+          "unoccludedLux": 4.0934633725174585,
+          "contributingZones": 3
+        },
+        {
+          "node": 20,
+          "unoccludedLux": 3.6227979141282125,
+          "contributingZones": 3
+        },
+        {
+          "node": 21,
+          "unoccludedLux": 3.1334735712413124,
+          "contributingZones": 3
+        },
+        {
+          "node": 22,
+          "unoccludedLux": 2.7110372023858615,
+          "contributingZones": 3
+        },
+        {
+          "node": 23,
+          "unoccludedLux": 2.917257778306602,
+          "contributingZones": 3
+        },
+        {
+          "node": 24,
+          "unoccludedLux": 3.2655132492698615,
+          "contributingZones": 3
+        },
+        {
+          "node": 25,
+          "unoccludedLux": 2.9326515076321598,
+          "contributingZones": 2
+        },
+        {
+          "node": 26,
+          "unoccludedLux": 2.457750920889181,
+          "contributingZones": 2
+        },
+        {
+          "node": 27,
+          "unoccludedLux": 3.249210181708402,
+          "contributingZones": 2
+        },
+        {
+          "node": 28,
+          "unoccludedLux": 4.258477243367256,
+          "contributingZones": 2
+        },
+        {
+          "node": 29,
+          "unoccludedLux": 5.152723503661082,
+          "contributingZones": 2
+        },
+        {
+          "node": 30,
+          "unoccludedLux": 4.997122448754246,
+          "contributingZones": 2
+        },
+        {
+          "node": 31,
+          "unoccludedLux": 3.816778952682081,
+          "contributingZones": 2
+        },
+        {
+          "node": 32,
+          "unoccludedLux": 4.81445261402289,
+          "contributingZones": 2
+        },
+        {
+          "node": 33,
+          "unoccludedLux": 4.432606137842881,
+          "contributingZones": 2
+        },
+        {
+          "node": 34,
+          "unoccludedLux": 3.800001267203605,
+          "contributingZones": 3
+        },
+        {
+          "node": 35,
+          "unoccludedLux": 3.0910132138157134,
+          "contributingZones": 3
+        },
+        {
+          "node": 36,
+          "unoccludedLux": 2.5647634949616496,
+          "contributingZones": 3
+        },
+        {
+          "node": 37,
+          "unoccludedLux": 3.582728378204332,
+          "contributingZones": 4
+        },
+        {
+          "node": 38,
+          "unoccludedLux": 3.366468594354603,
+          "contributingZones": 4
+        },
+        {
+          "node": 39,
+          "unoccludedLux": 3.741855068503198,
+          "contributingZones": 4
+        },
+        {
+          "node": 40,
+          "unoccludedLux": 4.200562875453911,
+          "contributingZones": 4
+        },
+        {
+          "node": 41,
+          "unoccludedLux": 5.045711404216119,
+          "contributingZones": 3
+        },
+        {
+          "node": 42,
+          "unoccludedLux": 3.964146094350708,
+          "contributingZones": 4
+        },
+        {
+          "node": 43,
+          "unoccludedLux": 2.820159313903191,
+          "contributingZones": 4
+        },
+        {
+          "node": 44,
+          "unoccludedLux": 2.1384519224797933,
+          "contributingZones": 3
+        },
+        {
+          "node": 45,
+          "unoccludedLux": 2.160231135838246,
+          "contributingZones": 3
+        },
+        {
+          "node": 46,
+          "unoccludedLux": 2.950281109168461,
+          "contributingZones": 3
+        },
+        {
+          "node": 47,
+          "unoccludedLux": 4.033178119578344,
+          "contributingZones": 3
+        },
+        {
+          "node": 48,
+          "unoccludedLux": 3.659147961707934,
+          "contributingZones": 3
+        },
+        {
+          "node": 49,
+          "unoccludedLux": 3.361302683745686,
+          "contributingZones": 3
+        },
+        {
+          "node": 50,
+          "unoccludedLux": 5.2370152303363335,
+          "contributingZones": 3
+        },
+        {
+          "node": 51,
+          "unoccludedLux": 4.897993124441509,
+          "contributingZones": 3
+        },
+        {
+          "node": 52,
+          "unoccludedLux": 4.040192184234706,
+          "contributingZones": 3
+        },
+        {
+          "node": 53,
+          "unoccludedLux": 3.004445667833098,
+          "contributingZones": 3
+        },
+        {
+          "node": 54,
+          "unoccludedLux": 2.0603995073369576,
+          "contributingZones": 3
+        },
+        {
+          "node": 55,
+          "unoccludedLux": 1.3980826751985123,
+          "contributingZones": 2
+        },
+        {
+          "node": 56,
+          "unoccludedLux": 1.0502410012405559,
+          "contributingZones": 2
+        },
+        {
+          "node": 57,
+          "unoccludedLux": 1.4731656984549129,
+          "contributingZones": 2
+        },
+        {
+          "node": 58,
+          "unoccludedLux": 1.8640738860853554,
+          "contributingZones": 2
+        }
+      ]
+    },
+    {
+      "track": "boardwalks",
+      "raised": true,
+      "lowQuality": false,
+      "draws": 15,
+      "triangles": 8128,
+      "shadowDraws": 14,
+      "shadowTriangles": 7936,
+      "mainPlusLocalShadowDrawUpperBound": 43,
+      "budget": {
+        "fixtures": 8,
+        "spots": 6,
+        "shadows": 1
+      },
+      "minimumUnoccludedLux": 0.9022157579213891,
+      "maximumUnoccludedLux": 5.13576365090387,
+      "samples": [
+        {
+          "node": 0,
+          "unoccludedLux": 3.8990599578836953,
+          "contributingZones": 2
+        },
+        {
+          "node": 1,
+          "unoccludedLux": 3.050362602886401,
+          "contributingZones": 3
+        },
+        {
+          "node": 2,
+          "unoccludedLux": 2.610093322633215,
+          "contributingZones": 3
+        },
+        {
+          "node": 3,
+          "unoccludedLux": 2.658728519889251,
+          "contributingZones": 3
+        },
+        {
+          "node": 4,
+          "unoccludedLux": 3.217124009686508,
+          "contributingZones": 3
+        },
+        {
+          "node": 5,
+          "unoccludedLux": 4.102157569385308,
+          "contributingZones": 3
+        },
+        {
+          "node": 6,
+          "unoccludedLux": 5.13576365090387,
+          "contributingZones": 3
+        },
+        {
+          "node": 7,
+          "unoccludedLux": 3.8776834777155607,
+          "contributingZones": 3
+        },
+        {
+          "node": 8,
+          "unoccludedLux": 3.157089490297315,
+          "contributingZones": 3
+        },
+        {
+          "node": 9,
+          "unoccludedLux": 3.1624126943757007,
+          "contributingZones": 3
+        },
+        {
+          "node": 10,
+          "unoccludedLux": 2.9586549235602986,
+          "contributingZones": 4
+        },
+        {
+          "node": 11,
+          "unoccludedLux": 2.795962286405629,
+          "contributingZones": 4
+        },
+        {
+          "node": 12,
+          "unoccludedLux": 2.6279973116907653,
+          "contributingZones": 4
+        },
+        {
+          "node": 13,
+          "unoccludedLux": 3.3492055464900847,
+          "contributingZones": 4
+        },
+        {
+          "node": 14,
+          "unoccludedLux": 2.921410469217276,
+          "contributingZones": 4
+        },
+        {
+          "node": 15,
+          "unoccludedLux": 2.524967214863764,
+          "contributingZones": 4
+        },
+        {
+          "node": 16,
+          "unoccludedLux": 2.1840327527387675,
+          "contributingZones": 4
+        },
+        {
+          "node": 17,
+          "unoccludedLux": 1.822362484932346,
+          "contributingZones": 4
+        },
+        {
+          "node": 18,
+          "unoccludedLux": 1.6832779357304146,
+          "contributingZones": 4
+        },
+        {
+          "node": 19,
+          "unoccludedLux": 1.9466804758474696,
+          "contributingZones": 4
+        },
+        {
+          "node": 20,
+          "unoccludedLux": 2.4766586902411367,
+          "contributingZones": 3
+        },
+        {
+          "node": 21,
+          "unoccludedLux": 2.9974778677554967,
+          "contributingZones": 3
+        },
+        {
+          "node": 22,
+          "unoccludedLux": 3.398633119306826,
+          "contributingZones": 3
+        },
+        {
+          "node": 23,
+          "unoccludedLux": 3.2110806893402306,
+          "contributingZones": 3
+        },
+        {
+          "node": 24,
+          "unoccludedLux": 3.301107042282183,
+          "contributingZones": 3
+        },
+        {
+          "node": 25,
+          "unoccludedLux": 3.098462875349349,
+          "contributingZones": 3
+        },
+        {
+          "node": 26,
+          "unoccludedLux": 2.6223873859794304,
+          "contributingZones": 3
+        },
+        {
+          "node": 27,
+          "unoccludedLux": 2.915503824809909,
+          "contributingZones": 3
+        },
+        {
+          "node": 28,
+          "unoccludedLux": 3.7136209314418513,
+          "contributingZones": 2
+        },
+        {
+          "node": 29,
+          "unoccludedLux": 4.876645685772319,
+          "contributingZones": 3
+        },
+        {
+          "node": 30,
+          "unoccludedLux": 4.818749250219621,
+          "contributingZones": 3
+        },
+        {
+          "node": 31,
+          "unoccludedLux": 3.6324047500197247,
+          "contributingZones": 3
+        },
+        {
+          "node": 32,
+          "unoccludedLux": 4.572418859468814,
+          "contributingZones": 3
+        },
+        {
+          "node": 33,
+          "unoccludedLux": 4.404107443500659,
+          "contributingZones": 3
+        },
+        {
+          "node": 34,
+          "unoccludedLux": 4.328156424605064,
+          "contributingZones": 4
+        },
+        {
+          "node": 35,
+          "unoccludedLux": 4.331507940741007,
+          "contributingZones": 4
+        },
+        {
+          "node": 36,
+          "unoccludedLux": 4.41876317533369,
+          "contributingZones": 4
+        },
+        {
+          "node": 37,
+          "unoccludedLux": 2.196708221264744,
+          "contributingZones": 4
+        },
+        {
+          "node": 38,
+          "unoccludedLux": 2.7721693553997087,
+          "contributingZones": 4
+        },
+        {
+          "node": 39,
+          "unoccludedLux": 2.2462273309518848,
+          "contributingZones": 3
+        },
+        {
+          "node": 40,
+          "unoccludedLux": 1.816026375687328,
+          "contributingZones": 4
+        },
+        {
+          "node": 41,
+          "unoccludedLux": 1.1167036727742279,
+          "contributingZones": 3
+        },
+        {
+          "node": 42,
+          "unoccludedLux": 2.3084738243837215,
+          "contributingZones": 2
+        },
+        {
+          "node": 43,
+          "unoccludedLux": 3.8667215465559592,
+          "contributingZones": 3
+        },
+        {
+          "node": 44,
+          "unoccludedLux": 4.849330287622519,
+          "contributingZones": 4
+        },
+        {
+          "node": 45,
+          "unoccludedLux": 4.949621601614454,
+          "contributingZones": 4
+        },
+        {
+          "node": 46,
+          "unoccludedLux": 4.472927478977585,
+          "contributingZones": 4
+        },
+        {
+          "node": 47,
+          "unoccludedLux": 4.351449261834723,
+          "contributingZones": 3
+        },
+        {
+          "node": 48,
+          "unoccludedLux": 3.9028513128346374,
+          "contributingZones": 3
+        },
+        {
+          "node": 49,
+          "unoccludedLux": 3.155057935945801,
+          "contributingZones": 3
+        },
+        {
+          "node": 50,
+          "unoccludedLux": 0.9022157579213891,
+          "contributingZones": 4
+        },
+        {
+          "node": 51,
+          "unoccludedLux": 1.1246962904361357,
+          "contributingZones": 3
+        },
+        {
+          "node": 52,
+          "unoccludedLux": 1.9843075802960968,
+          "contributingZones": 3
+        },
+        {
+          "node": 53,
+          "unoccludedLux": 3.354797513425686,
+          "contributingZones": 3
+        },
+        {
+          "node": 54,
+          "unoccludedLux": 4.289192984194575,
+          "contributingZones": 3
+        },
+        {
+          "node": 55,
+          "unoccludedLux": 4.4433915821381955,
+          "contributingZones": 3
+        },
+        {
+          "node": 56,
+          "unoccludedLux": 3.6246944299568487,
+          "contributingZones": 3
+        },
+        {
+          "node": 57,
+          "unoccludedLux": 3.0340389370914784,
+          "contributingZones": 3
+        },
+        {
+          "node": 58,
+          "unoccludedLux": 2.7216381035223245,
+          "contributingZones": 3
+        }
+      ]
+    },
+    {
+      "track": "boardwalks",
+      "raised": true,
+      "lowQuality": true,
+      "draws": 15,
+      "triangles": 8128,
+      "shadowDraws": 0,
+      "shadowTriangles": 0,
+      "mainPlusLocalShadowDrawUpperBound": 15,
+      "budget": {
+        "fixtures": 8,
+        "spots": 4,
+        "shadows": 0
+      },
+      "minimumUnoccludedLux": 0.4979511198742757,
+      "maximumUnoccludedLux": 6.797577901383704,
+      "samples": [
+        {
+          "node": 0,
+          "unoccludedLux": 5.413915028634148,
+          "contributingZones": 2
+        },
+        {
+          "node": 1,
+          "unoccludedLux": 3.7208488315654358,
+          "contributingZones": 2
+        },
+        {
+          "node": 2,
+          "unoccludedLux": 2.4389256605327327,
+          "contributingZones": 2
+        },
+        {
+          "node": 3,
+          "unoccludedLux": 1.5523070839682165,
+          "contributingZones": 2
+        },
+        {
+          "node": 4,
+          "unoccludedLux": 0.9130475414770254,
+          "contributingZones": 2
+        },
+        {
+          "node": 5,
+          "unoccludedLux": 0.4979511198742757,
+          "contributingZones": 1
+        },
+        {
+          "node": 6,
+          "unoccludedLux": 0.7219922279865384,
+          "contributingZones": 2
+        },
+        {
+          "node": 7,
+          "unoccludedLux": 1.50888680834497,
+          "contributingZones": 2
+        },
+        {
+          "node": 8,
+          "unoccludedLux": 2.4902932602064443,
+          "contributingZones": 2
+        },
+        {
+          "node": 9,
+          "unoccludedLux": 2.93674361097473,
+          "contributingZones": 2
+        },
+        {
+          "node": 10,
+          "unoccludedLux": 2.9539625181086677,
+          "contributingZones": 3
+        },
+        {
+          "node": 11,
+          "unoccludedLux": 3.0016866879985025,
+          "contributingZones": 3
+        },
+        {
+          "node": 12,
+          "unoccludedLux": 2.971311807923153,
+          "contributingZones": 3
+        },
+        {
+          "node": 13,
+          "unoccludedLux": 2.205189524118532,
+          "contributingZones": 3
+        },
+        {
+          "node": 14,
+          "unoccludedLux": 2.3618120930977473,
+          "contributingZones": 3
+        },
+        {
+          "node": 15,
+          "unoccludedLux": 2.7598785632383005,
+          "contributingZones": 3
+        },
+        {
+          "node": 16,
+          "unoccludedLux": 3.197918504075249,
+          "contributingZones": 4
+        },
+        {
+          "node": 17,
+          "unoccludedLux": 3.882381334593133,
+          "contributingZones": 3
+        },
+        {
+          "node": 18,
+          "unoccludedLux": 4.355176868904074,
+          "contributingZones": 3
+        },
+        {
+          "node": 19,
+          "unoccludedLux": 4.068920680960587,
+          "contributingZones": 3
+        },
+        {
+          "node": 20,
+          "unoccludedLux": 3.36525636373387,
+          "contributingZones": 3
+        },
+        {
+          "node": 21,
+          "unoccludedLux": 2.692390633887689,
+          "contributingZones": 3
+        },
+        {
+          "node": 22,
+          "unoccludedLux": 2.104090303899676,
+          "contributingZones": 2
+        },
+        {
+          "node": 23,
+          "unoccludedLux": 2.4506828635250684,
+          "contributingZones": 2
+        },
+        {
+          "node": 24,
+          "unoccludedLux": 3.0195631177293425,
+          "contributingZones": 2
+        },
+        {
+          "node": 25,
+          "unoccludedLux": 2.723948618074336,
+          "contributingZones": 2
+        },
+        {
+          "node": 26,
+          "unoccludedLux": 2.2319220933721113,
+          "contributingZones": 2
+        },
+        {
+          "node": 27,
+          "unoccludedLux": 3.3840181429315463,
+          "contributingZones": 2
+        },
+        {
+          "node": 28,
+          "unoccludedLux": 5.087885165451244,
+          "contributingZones": 2
+        },
+        {
+          "node": 29,
+          "unoccludedLux": 6.797577901383704,
+          "contributingZones": 2
+        },
+        {
+          "node": 30,
+          "unoccludedLux": 6.280803103926442,
+          "contributingZones": 2
+        },
+        {
+          "node": 31,
+          "unoccludedLux": 4.146567351871305,
+          "contributingZones": 2
+        },
+        {
+          "node": 32,
+          "unoccludedLux": 6.0788185538036075,
+          "contributingZones": 2
+        },
+        {
+          "node": 33,
+          "unoccludedLux": 5.099895390557762,
+          "contributingZones": 2
+        },
+        {
+          "node": 34,
+          "unoccludedLux": 3.6827780858496153,
+          "contributingZones": 2
+        },
+        {
+          "node": 35,
+          "unoccludedLux": 2.1758196986092435,
+          "contributingZones": 2
+        },
+        {
+          "node": 36,
+          "unoccludedLux": 1.4041064081280534,
+          "contributingZones": 3
+        },
+        {
+          "node": 37,
+          "unoccludedLux": 3.0369273230127636,
+          "contributingZones": 3
+        },
+        {
+          "node": 38,
+          "unoccludedLux": 2.6095508191504613,
+          "contributingZones": 3
+        },
+        {
+          "node": 39,
+          "unoccludedLux": 3.3651070026509915,
+          "contributingZones": 3
+        },
+        {
+          "node": 40,
+          "unoccludedLux": 4.149262177715323,
+          "contributingZones": 3
+        },
+        {
+          "node": 41,
+          "unoccludedLux": 5.93349802311867,
+          "contributingZones": 3
+        },
+        {
+          "node": 42,
+          "unoccludedLux": 3.3640504555367974,
+          "contributingZones": 2
+        },
+        {
+          "node": 43,
+          "unoccludedLux": 1.6159499674072193,
+          "contributingZones": 2
+        },
+        {
+          "node": 44,
+          "unoccludedLux": 0.9066231962370722,
+          "contributingZones": 3
+        },
+        {
+          "node": 45,
+          "unoccludedLux": 0.9338583470000814,
+          "contributingZones": 3
+        },
+        {
+          "node": 46,
+          "unoccludedLux": 1.8458701319621516,
+          "contributingZones": 2
+        },
+        {
+          "node": 47,
+          "unoccludedLux": 3.908837937138232,
+          "contributingZones": 2
+        },
+        {
+          "node": 48,
+          "unoccludedLux": 3.4916144610092426,
+          "contributingZones": 2
+        },
+        {
+          "node": 49,
+          "unoccludedLux": 2.98243495854943,
+          "contributingZones": 3
+        },
+        {
+          "node": 50,
+          "unoccludedLux": 6.431357357937177,
+          "contributingZones": 3
+        },
+        {
+          "node": 51,
+          "unoccludedLux": 5.746509945964374,
+          "contributingZones": 3
+        },
+        {
+          "node": 52,
+          "unoccludedLux": 3.97415029169532,
+          "contributingZones": 3
+        },
+        {
+          "node": 53,
+          "unoccludedLux": 2.1421045659055244,
+          "contributingZones": 2
+        },
+        {
+          "node": 54,
+          "unoccludedLux": 1.198137518340367,
+          "contributingZones": 2
+        },
+        {
+          "node": 55,
+          "unoccludedLux": 0.8030064823308646,
+          "contributingZones": 2
+        },
+        {
+          "node": 56,
+          "unoccludedLux": 0.6647883329613072,
+          "contributingZones": 1
+        },
+        {
+          "node": 57,
+          "unoccludedLux": 1.0633522953321182,
+          "contributingZones": 2
+        },
+        {
+          "node": 58,
+          "unoccludedLux": 1.4918893582186896,
+          "contributingZones": 2
+        }
+      ]
+    },
+    {
+      "track": "bridges",
+      "raised": false,
+      "lowQuality": false,
+      "draws": 15,
+      "triangles": 8128,
+      "shadowDraws": 14,
+      "shadowTriangles": 7936,
+      "mainPlusLocalShadowDrawUpperBound": 43,
+      "budget": {
+        "fixtures": 8,
+        "spots": 6,
+        "shadows": 1
+      },
+      "minimumUnoccludedLux": 1.6086122009521162,
+      "maximumUnoccludedLux": 4.5203883638571645,
+      "samples": [
+        {
+          "node": 0,
+          "unoccludedLux": 2.797595272645521,
+          "contributingZones": 3
+        },
+        {
+          "node": 1,
+          "unoccludedLux": 3.560003096788972,
+          "contributingZones": 3
+        },
+        {
+          "node": 2,
+          "unoccludedLux": 3.822687120167451,
+          "contributingZones": 4
+        },
+        {
+          "node": 3,
+          "unoccludedLux": 4.2483783483312125,
+          "contributingZones": 4
+        },
+        {
+          "node": 4,
+          "unoccludedLux": 2.442730654042838,
+          "contributingZones": 4
+        },
+        {
+          "node": 5,
+          "unoccludedLux": 1.7346453352765747,
+          "contributingZones": 4
+        },
+        {
+          "node": 6,
+          "unoccludedLux": 2.097588672768551,
+          "contributingZones": 4
+        },
+        {
+          "node": 7,
+          "unoccludedLux": 2.875495623860813,
+          "contributingZones": 4
+        },
+        {
+          "node": 8,
+          "unoccludedLux": 3.40021009830022,
+          "contributingZones": 4
+        },
+        {
+          "node": 9,
+          "unoccludedLux": 3.1707230689828725,
+          "contributingZones": 4
+        },
+        {
+          "node": 10,
+          "unoccludedLux": 2.5541209414506825,
+          "contributingZones": 2
+        },
+        {
+          "node": 11,
+          "unoccludedLux": 2.4675132377023816,
+          "contributingZones": 5
+        },
+        {
+          "node": 12,
+          "unoccludedLux": 2.2395183656342907,
+          "contributingZones": 5
+        },
+        {
+          "node": 13,
+          "unoccludedLux": 2.170599853840205,
+          "contributingZones": 4
+        },
+        {
+          "node": 14,
+          "unoccludedLux": 1.6944681000530621,
+          "contributingZones": 4
+        },
+        {
+          "node": 15,
+          "unoccludedLux": 1.6086122009521162,
+          "contributingZones": 4
+        },
+        {
+          "node": 16,
+          "unoccludedLux": 2.9473214216669117,
+          "contributingZones": 4
+        },
+        {
+          "node": 17,
+          "unoccludedLux": 2.669184622306517,
+          "contributingZones": 4
+        },
+        {
+          "node": 18,
+          "unoccludedLux": 1.8645645008379943,
+          "contributingZones": 4
+        },
+        {
+          "node": 19,
+          "unoccludedLux": 2.1673070971042123,
+          "contributingZones": 4
+        },
+        {
+          "node": 20,
+          "unoccludedLux": 4.5203883638571645,
+          "contributingZones": 3
+        },
+        {
+          "node": 21,
+          "unoccludedLux": 3.344770442804945,
+          "contributingZones": 3
+        },
+        {
+          "node": 22,
+          "unoccludedLux": 3.1509232085584453,
+          "contributingZones": 4
+        },
+        {
+          "node": 23,
+          "unoccludedLux": 3.0833826667332764,
+          "contributingZones": 3
+        },
+        {
+          "node": 24,
+          "unoccludedLux": 2.910155537082844,
+          "contributingZones": 3
+        },
+        {
+          "node": 25,
+          "unoccludedLux": 2.6362028177305366,
+          "contributingZones": 3
+        },
+        {
+          "node": 26,
+          "unoccludedLux": 3.1331192846248737,
+          "contributingZones": 3
+        },
+        {
+          "node": 27,
+          "unoccludedLux": 3.269272065645466,
+          "contributingZones": 3
+        },
+        {
+          "node": 28,
+          "unoccludedLux": 3.2315959306145676,
+          "contributingZones": 4
+        },
+        {
+          "node": 29,
+          "unoccludedLux": 3.026721880248387,
+          "contributingZones": 4
+        },
+        {
+          "node": 30,
+          "unoccludedLux": 2.2595250508378086,
+          "contributingZones": 4
+        }
+      ]
+    },
+    {
+      "track": "bridges",
+      "raised": false,
+      "lowQuality": true,
+      "draws": 15,
+      "triangles": 8128,
+      "shadowDraws": 0,
+      "shadowTriangles": 0,
+      "mainPlusLocalShadowDrawUpperBound": 15,
+      "budget": {
+        "fixtures": 8,
+        "spots": 4,
+        "shadows": 0
+      },
+      "minimumUnoccludedLux": 1.4034217926291057,
+      "maximumUnoccludedLux": 6.173663942235136,
+      "samples": [
+        {
+          "node": 0,
+          "unoccludedLux": 3.150089108866107,
+          "contributingZones": 2
+        },
+        {
+          "node": 1,
+          "unoccludedLux": 3.8642710488800045,
+          "contributingZones": 2
+        },
+        {
+          "node": 2,
+          "unoccludedLux": 3.663881035242108,
+          "contributingZones": 2
+        },
+        {
+          "node": 3,
+          "unoccludedLux": 2.7543907759074964,
+          "contributingZones": 3
+        },
+        {
+          "node": 4,
+          "unoccludedLux": 3.4800486210283776,
+          "contributingZones": 3
+        },
+        {
+          "node": 5,
+          "unoccludedLux": 4.0423249357091136,
+          "contributingZones": 3
+        },
+        {
+          "node": 6,
+          "unoccludedLux": 3.2723507590787007,
+          "contributingZones": 3
+        },
+        {
+          "node": 7,
+          "unoccludedLux": 3.0578926472355925,
+          "contributingZones": 3
+        },
+        {
+          "node": 8,
+          "unoccludedLux": 2.7355832602625783,
+          "contributingZones": 3
+        },
+        {
+          "node": 9,
+          "unoccludedLux": 1.948798867893996,
+          "contributingZones": 3
+        },
+        {
+          "node": 10,
+          "unoccludedLux": 4.178471776038278,
+          "contributingZones": 3
+        },
+        {
+          "node": 11,
+          "unoccludedLux": 3.0579515158000485,
+          "contributingZones": 4
+        },
+        {
+          "node": 12,
+          "unoccludedLux": 3.2593327321669063,
+          "contributingZones": 3
+        },
+        {
+          "node": 13,
+          "unoccludedLux": 3.287594666516578,
+          "contributingZones": 4
+        },
+        {
+          "node": 14,
+          "unoccludedLux": 4.095577735273426,
+          "contributingZones": 3
+        },
+        {
+          "node": 15,
+          "unoccludedLux": 6.173663942235136,
+          "contributingZones": 3
+        },
+        {
+          "node": 16,
+          "unoccludedLux": 2.994826663633967,
+          "contributingZones": 3
+        },
+        {
+          "node": 17,
+          "unoccludedLux": 2.9349424718441304,
+          "contributingZones": 3
+        },
+        {
+          "node": 18,
+          "unoccludedLux": 4.09334554439647,
+          "contributingZones": 3
+        },
+        {
+          "node": 19,
+          "unoccludedLux": 3.695310198999716,
+          "contributingZones": 3
+        },
+        {
+          "node": 20,
+          "unoccludedLux": 2.3769910625205215,
+          "contributingZones": 2
+        },
+        {
+          "node": 21,
+          "unoccludedLux": 3.187024786932626,
+          "contributingZones": 2
+        },
+        {
+          "node": 22,
+          "unoccludedLux": 3.049088911457803,
+          "contributingZones": 3
+        },
+        {
+          "node": 23,
+          "unoccludedLux": 2.3560233013458802,
+          "contributingZones": 2
+        },
+        {
+          "node": 24,
+          "unoccludedLux": 1.4034217926291057,
+          "contributingZones": 2
+        },
+        {
+          "node": 25,
+          "unoccludedLux": 2.1398493261304354,
+          "contributingZones": 2
+        },
+        {
+          "node": 26,
+          "unoccludedLux": 3.4074750042113666,
+          "contributingZones": 2
+        },
+        {
+          "node": 27,
+          "unoccludedLux": 3.147724136862407,
+          "contributingZones": 2
+        },
+        {
+          "node": 28,
+          "unoccludedLux": 1.879383012557434,
+          "contributingZones": 3
+        },
+        {
+          "node": 29,
+          "unoccludedLux": 1.92557914457045,
+          "contributingZones": 3
+        },
+        {
+          "node": 30,
+          "unoccludedLux": 3.2438751316518704,
+          "contributingZones": 3
+        }
+      ]
+    },
+    {
+      "track": "bridges",
+      "raised": true,
+      "lowQuality": false,
+      "draws": 15,
+      "triangles": 8128,
+      "shadowDraws": 14,
+      "shadowTriangles": 7936,
+      "mainPlusLocalShadowDrawUpperBound": 43,
+      "budget": {
+        "fixtures": 8,
+        "spots": 6,
+        "shadows": 1
+      },
+      "minimumUnoccludedLux": 1.6086122009521162,
+      "maximumUnoccludedLux": 4.5203883638571645,
+      "samples": [
+        {
+          "node": 0,
+          "unoccludedLux": 2.797595272645521,
+          "contributingZones": 3
+        },
+        {
+          "node": 1,
+          "unoccludedLux": 3.560003096788972,
+          "contributingZones": 3
+        },
+        {
+          "node": 2,
+          "unoccludedLux": 3.822687120167451,
+          "contributingZones": 4
+        },
+        {
+          "node": 3,
+          "unoccludedLux": 4.2483783483312125,
+          "contributingZones": 4
+        },
+        {
+          "node": 4,
+          "unoccludedLux": 2.442730654042838,
+          "contributingZones": 4
+        },
+        {
+          "node": 5,
+          "unoccludedLux": 1.7346453352765747,
+          "contributingZones": 4
+        },
+        {
+          "node": 6,
+          "unoccludedLux": 2.097588672768551,
+          "contributingZones": 4
+        },
+        {
+          "node": 7,
+          "unoccludedLux": 2.875495623860813,
+          "contributingZones": 4
+        },
+        {
+          "node": 8,
+          "unoccludedLux": 3.40021009830022,
+          "contributingZones": 4
+        },
+        {
+          "node": 9,
+          "unoccludedLux": 3.1707230689828725,
+          "contributingZones": 4
+        },
+        {
+          "node": 10,
+          "unoccludedLux": 2.5541209414506825,
+          "contributingZones": 2
+        },
+        {
+          "node": 11,
+          "unoccludedLux": 2.4675132377023816,
+          "contributingZones": 5
+        },
+        {
+          "node": 12,
+          "unoccludedLux": 2.2395183656342907,
+          "contributingZones": 5
+        },
+        {
+          "node": 13,
+          "unoccludedLux": 2.170599853840205,
+          "contributingZones": 4
+        },
+        {
+          "node": 14,
+          "unoccludedLux": 1.6944681000530621,
+          "contributingZones": 4
+        },
+        {
+          "node": 15,
+          "unoccludedLux": 1.6086122009521162,
+          "contributingZones": 4
+        },
+        {
+          "node": 16,
+          "unoccludedLux": 2.9473214216669117,
+          "contributingZones": 4
+        },
+        {
+          "node": 17,
+          "unoccludedLux": 2.669184622306517,
+          "contributingZones": 4
+        },
+        {
+          "node": 18,
+          "unoccludedLux": 1.8645645008379943,
+          "contributingZones": 4
+        },
+        {
+          "node": 19,
+          "unoccludedLux": 2.1673070971042123,
+          "contributingZones": 4
+        },
+        {
+          "node": 20,
+          "unoccludedLux": 4.5203883638571645,
+          "contributingZones": 3
+        },
+        {
+          "node": 21,
+          "unoccludedLux": 3.344770442804945,
+          "contributingZones": 3
+        },
+        {
+          "node": 22,
+          "unoccludedLux": 3.1509232085584453,
+          "contributingZones": 4
+        },
+        {
+          "node": 23,
+          "unoccludedLux": 3.0833826667332764,
+          "contributingZones": 3
+        },
+        {
+          "node": 24,
+          "unoccludedLux": 2.910155537082844,
+          "contributingZones": 3
+        },
+        {
+          "node": 25,
+          "unoccludedLux": 2.6362028177305366,
+          "contributingZones": 3
+        },
+        {
+          "node": 26,
+          "unoccludedLux": 3.1331192846248737,
+          "contributingZones": 3
+        },
+        {
+          "node": 27,
+          "unoccludedLux": 3.269272065645466,
+          "contributingZones": 3
+        },
+        {
+          "node": 28,
+          "unoccludedLux": 3.2315959306145676,
+          "contributingZones": 4
+        },
+        {
+          "node": 29,
+          "unoccludedLux": 3.026721880248387,
+          "contributingZones": 4
+        },
+        {
+          "node": 30,
+          "unoccludedLux": 2.2595250508378086,
+          "contributingZones": 4
+        }
+      ]
+    },
+    {
+      "track": "bridges",
+      "raised": true,
+      "lowQuality": true,
+      "draws": 15,
+      "triangles": 8128,
+      "shadowDraws": 0,
+      "shadowTriangles": 0,
+      "mainPlusLocalShadowDrawUpperBound": 15,
+      "budget": {
+        "fixtures": 8,
+        "spots": 4,
+        "shadows": 0
+      },
+      "minimumUnoccludedLux": 1.4034217926291057,
+      "maximumUnoccludedLux": 6.173663942235136,
+      "samples": [
+        {
+          "node": 0,
+          "unoccludedLux": 3.150089108866107,
+          "contributingZones": 2
+        },
+        {
+          "node": 1,
+          "unoccludedLux": 3.8642710488800045,
+          "contributingZones": 2
+        },
+        {
+          "node": 2,
+          "unoccludedLux": 3.663881035242108,
+          "contributingZones": 2
+        },
+        {
+          "node": 3,
+          "unoccludedLux": 2.7543907759074964,
+          "contributingZones": 3
+        },
+        {
+          "node": 4,
+          "unoccludedLux": 3.4800486210283776,
+          "contributingZones": 3
+        },
+        {
+          "node": 5,
+          "unoccludedLux": 4.0423249357091136,
+          "contributingZones": 3
+        },
+        {
+          "node": 6,
+          "unoccludedLux": 3.2723507590787007,
+          "contributingZones": 3
+        },
+        {
+          "node": 7,
+          "unoccludedLux": 3.0578926472355925,
+          "contributingZones": 3
+        },
+        {
+          "node": 8,
+          "unoccludedLux": 2.7355832602625783,
+          "contributingZones": 3
+        },
+        {
+          "node": 9,
+          "unoccludedLux": 1.948798867893996,
+          "contributingZones": 3
+        },
+        {
+          "node": 10,
+          "unoccludedLux": 4.178471776038278,
+          "contributingZones": 3
+        },
+        {
+          "node": 11,
+          "unoccludedLux": 3.0579515158000485,
+          "contributingZones": 4
+        },
+        {
+          "node": 12,
+          "unoccludedLux": 3.2593327321669063,
+          "contributingZones": 3
+        },
+        {
+          "node": 13,
+          "unoccludedLux": 3.287594666516578,
+          "contributingZones": 4
+        },
+        {
+          "node": 14,
+          "unoccludedLux": 4.095577735273426,
+          "contributingZones": 3
+        },
+        {
+          "node": 15,
+          "unoccludedLux": 6.173663942235136,
+          "contributingZones": 3
+        },
+        {
+          "node": 16,
+          "unoccludedLux": 2.994826663633967,
+          "contributingZones": 3
+        },
+        {
+          "node": 17,
+          "unoccludedLux": 2.9349424718441304,
+          "contributingZones": 3
+        },
+        {
+          "node": 18,
+          "unoccludedLux": 4.09334554439647,
+          "contributingZones": 3
+        },
+        {
+          "node": 19,
+          "unoccludedLux": 3.695310198999716,
+          "contributingZones": 3
+        },
+        {
+          "node": 20,
+          "unoccludedLux": 2.3769910625205215,
+          "contributingZones": 2
+        },
+        {
+          "node": 21,
+          "unoccludedLux": 3.187024786932626,
+          "contributingZones": 2
+        },
+        {
+          "node": 22,
+          "unoccludedLux": 3.049088911457803,
+          "contributingZones": 3
+        },
+        {
+          "node": 23,
+          "unoccludedLux": 2.3560233013458802,
+          "contributingZones": 2
+        },
+        {
+          "node": 24,
+          "unoccludedLux": 1.4034217926291057,
+          "contributingZones": 2
+        },
+        {
+          "node": 25,
+          "unoccludedLux": 2.1398493261304354,
+          "contributingZones": 2
+        },
+        {
+          "node": 26,
+          "unoccludedLux": 3.4074750042113666,
+          "contributingZones": 2
+        },
+        {
+          "node": 27,
+          "unoccludedLux": 3.147724136862407,
+          "contributingZones": 2
+        },
+        {
+          "node": 28,
+          "unoccludedLux": 1.879383012557434,
+          "contributingZones": 3
+        },
+        {
+          "node": 29,
+          "unoccludedLux": 1.92557914457045,
+          "contributingZones": 3
+        },
+        {
+          "node": 30,
+          "unoccludedLux": 3.2438751316518704,
+          "contributingZones": 3
+        }
+      ]
+    },
+    {
+      "track": "twisty-twirl",
+      "raised": false,
+      "lowQuality": false,
+      "draws": 11,
+      "triangles": 8032,
+      "shadowDraws": 10,
+      "shadowTriangles": 7840,
+      "mainPlusLocalShadowDrawUpperBound": 31,
+      "budget": {
+        "fixtures": 8,
+        "spots": 6,
+        "shadows": 1
+      },
+      "minimumUnoccludedLux": 1.3104646497989818,
+      "maximumUnoccludedLux": 4.3558729173445006,
+      "samples": [
+        {
+          "node": 0,
+          "unoccludedLux": 4.3558729173445006,
+          "contributingZones": 3
+        },
+        {
+          "node": 1,
+          "unoccludedLux": 4.25513858768786,
+          "contributingZones": 4
+        },
+        {
+          "node": 2,
+          "unoccludedLux": 4.038494611254168,
+          "contributingZones": 4
+        },
+        {
+          "node": 3,
+          "unoccludedLux": 3.5623702378385027,
+          "contributingZones": 4
+        },
+        {
+          "node": 4,
+          "unoccludedLux": 2.8432113927487355,
+          "contributingZones": 4
+        },
+        {
+          "node": 5,
+          "unoccludedLux": 2.221161544521703,
+          "contributingZones": 4
+        },
+        {
+          "node": 6,
+          "unoccludedLux": 1.7718895036891704,
+          "contributingZones": 4
+        },
+        {
+          "node": 7,
+          "unoccludedLux": 1.8284148324111407,
+          "contributingZones": 4
+        },
+        {
+          "node": 8,
+          "unoccludedLux": 2.3819059507731972,
+          "contributingZones": 4
+        },
+        {
+          "node": 9,
+          "unoccludedLux": 3.068291446124378,
+          "contributingZones": 3
+        },
+        {
+          "node": 10,
+          "unoccludedLux": 3.692721738701974,
+          "contributingZones": 3
+        },
+        {
+          "node": 11,
+          "unoccludedLux": 3.819300820591087,
+          "contributingZones": 3
+        },
+        {
+          "node": 12,
+          "unoccludedLux": 3.2491744194512315,
+          "contributingZones": 3
+        },
+        {
+          "node": 13,
+          "unoccludedLux": 2.6445339287454224,
+          "contributingZones": 3
+        },
+        {
+          "node": 14,
+          "unoccludedLux": 2.6534290339501627,
+          "contributingZones": 3
+        },
+        {
+          "node": 15,
+          "unoccludedLux": 3.091654500263857,
+          "contributingZones": 3
+        },
+        {
+          "node": 16,
+          "unoccludedLux": 3.8272890713707604,
+          "contributingZones": 3
+        },
+        {
+          "node": 17,
+          "unoccludedLux": 3.9616613276987436,
+          "contributingZones": 3
+        },
+        {
+          "node": 18,
+          "unoccludedLux": 3.9521177259175264,
+          "contributingZones": 4
+        },
+        {
+          "node": 19,
+          "unoccludedLux": 3.8772911584468845,
+          "contributingZones": 4
+        },
+        {
+          "node": 20,
+          "unoccludedLux": 3.878414361427664,
+          "contributingZones": 4
+        },
+        {
+          "node": 21,
+          "unoccludedLux": 3.528362671201853,
+          "contributingZones": 4
+        },
+        {
+          "node": 22,
+          "unoccludedLux": 2.7389402258366937,
+          "contributingZones": 4
+        },
+        {
+          "node": 23,
+          "unoccludedLux": 1.8656214907461806,
+          "contributingZones": 4
+        },
+        {
+          "node": 24,
+          "unoccludedLux": 1.3104646497989818,
+          "contributingZones": 4
+        },
+        {
+          "node": 25,
+          "unoccludedLux": 1.3443759951529115,
+          "contributingZones": 4
+        },
+        {
+          "node": 26,
+          "unoccludedLux": 1.953263925300393,
+          "contributingZones": 3
+        },
+        {
+          "node": 27,
+          "unoccludedLux": 2.922087636814355,
+          "contributingZones": 3
+        },
+        {
+          "node": 28,
+          "unoccludedLux": 3.698590587885791,
+          "contributingZones": 3
+        },
+        {
+          "node": 29,
+          "unoccludedLux": 3.878572426759333,
+          "contributingZones": 3
+        },
+        {
+          "node": 30,
+          "unoccludedLux": 3.1816492698680303,
+          "contributingZones": 3
+        }
+      ]
+    },
+    {
+      "track": "twisty-twirl",
+      "raised": false,
+      "lowQuality": true,
+      "draws": 11,
+      "triangles": 8032,
+      "shadowDraws": 0,
+      "shadowTriangles": 0,
+      "mainPlusLocalShadowDrawUpperBound": 11,
+      "budget": {
+        "fixtures": 8,
+        "spots": 4,
+        "shadows": 0
+      },
+      "minimumUnoccludedLux": 0.8578278919410978,
+      "maximumUnoccludedLux": 5.2469572667575175,
+      "samples": [
+        {
+          "node": 0,
+          "unoccludedLux": 3.8797704607746297,
+          "contributingZones": 2
+        },
+        {
+          "node": 1,
+          "unoccludedLux": 2.9758802582503927,
+          "contributingZones": 3
+        },
+        {
+          "node": 2,
+          "unoccludedLux": 2.187284834039737,
+          "contributingZones": 3
+        },
+        {
+          "node": 3,
+          "unoccludedLux": 2.041569053643147,
+          "contributingZones": 3
+        },
+        {
+          "node": 4,
+          "unoccludedLux": 2.627560131358314,
+          "contributingZones": 3
+        },
+        {
+          "node": 5,
+          "unoccludedLux": 3.5759367024041957,
+          "contributingZones": 3
+        },
+        {
+          "node": 6,
+          "unoccludedLux": 4.569817137673376,
+          "contributingZones": 3
+        },
+        {
+          "node": 7,
+          "unoccludedLux": 5.135230093847178,
+          "contributingZones": 3
+        },
+        {
+          "node": 8,
+          "unoccludedLux": 4.778738037621791,
+          "contributingZones": 3
+        },
+        {
+          "node": 9,
+          "unoccludedLux": 3.8577916670743373,
+          "contributingZones": 2
+        },
+        {
+          "node": 10,
+          "unoccludedLux": 2.8299735319881694,
+          "contributingZones": 2
+        },
+        {
+          "node": 11,
+          "unoccludedLux": 1.829157006561834,
+          "contributingZones": 2
+        },
+        {
+          "node": 12,
+          "unoccludedLux": 1.1758818699342402,
+          "contributingZones": 2
+        },
+        {
+          "node": 13,
+          "unoccludedLux": 1.8949730487037162,
+          "contributingZones": 2
+        },
+        {
+          "node": 14,
+          "unoccludedLux": 2.8408767919717572,
+          "contributingZones": 2
+        },
+        {
+          "node": 15,
+          "unoccludedLux": 4.041045472263193,
+          "contributingZones": 2
+        },
+        {
+          "node": 16,
+          "unoccludedLux": 5.03180861062373,
+          "contributingZones": 2
+        },
+        {
+          "node": 17,
+          "unoccludedLux": 4.792062794384974,
+          "contributingZones": 2
+        },
+        {
+          "node": 18,
+          "unoccludedLux": 3.7251167773398484,
+          "contributingZones": 2
+        },
+        {
+          "node": 19,
+          "unoccludedLux": 2.3899687761945505,
+          "contributingZones": 2
+        },
+        {
+          "node": 20,
+          "unoccludedLux": 1.5726338153847892,
+          "contributingZones": 3
+        },
+        {
+          "node": 21,
+          "unoccludedLux": 1.5819651397402799,
+          "contributingZones": 3
+        },
+        {
+          "node": 22,
+          "unoccludedLux": 2.4487876967583273,
+          "contributingZones": 3
+        },
+        {
+          "node": 23,
+          "unoccludedLux": 3.8256293877985783,
+          "contributingZones": 3
+        },
+        {
+          "node": 24,
+          "unoccludedLux": 4.983452407235326,
+          "contributingZones": 3
+        },
+        {
+          "node": 25,
+          "unoccludedLux": 5.2469572667575175,
+          "contributingZones": 3
+        },
+        {
+          "node": 26,
+          "unoccludedLux": 4.3503416984099665,
+          "contributingZones": 3
+        },
+        {
+          "node": 27,
+          "unoccludedLux": 3.0382294548091173,
+          "contributingZones": 3
+        },
+        {
+          "node": 28,
+          "unoccludedLux": 1.7933908179889606,
+          "contributingZones": 2
+        },
+        {
+          "node": 29,
+          "unoccludedLux": 1.147734285321662,
+          "contributingZones": 2
+        },
+        {
+          "node": 30,
+          "unoccludedLux": 0.8578278919410978,
+          "contributingZones": 2
+        }
+      ]
+    },
+    {
+      "track": "twisty-twirl",
+      "raised": true,
+      "lowQuality": false,
+      "draws": 11,
+      "triangles": 8032,
+      "shadowDraws": 10,
+      "shadowTriangles": 7840,
+      "mainPlusLocalShadowDrawUpperBound": 31,
+      "budget": {
+        "fixtures": 8,
+        "spots": 6,
+        "shadows": 1
+      },
+      "minimumUnoccludedLux": 1.3104646497989818,
+      "maximumUnoccludedLux": 4.3558729173445006,
+      "samples": [
+        {
+          "node": 0,
+          "unoccludedLux": 4.3558729173445006,
+          "contributingZones": 3
+        },
+        {
+          "node": 1,
+          "unoccludedLux": 4.25513858768786,
+          "contributingZones": 4
+        },
+        {
+          "node": 2,
+          "unoccludedLux": 4.038494611254168,
+          "contributingZones": 4
+        },
+        {
+          "node": 3,
+          "unoccludedLux": 3.5623702378385027,
+          "contributingZones": 4
+        },
+        {
+          "node": 4,
+          "unoccludedLux": 2.8432113927487355,
+          "contributingZones": 4
+        },
+        {
+          "node": 5,
+          "unoccludedLux": 2.221161544521703,
+          "contributingZones": 4
+        },
+        {
+          "node": 6,
+          "unoccludedLux": 1.7718895036891704,
+          "contributingZones": 4
+        },
+        {
+          "node": 7,
+          "unoccludedLux": 1.8284148324111407,
+          "contributingZones": 4
+        },
+        {
+          "node": 8,
+          "unoccludedLux": 2.3819059507731972,
+          "contributingZones": 4
+        },
+        {
+          "node": 9,
+          "unoccludedLux": 3.068291446124378,
+          "contributingZones": 3
+        },
+        {
+          "node": 10,
+          "unoccludedLux": 3.692721738701974,
+          "contributingZones": 3
+        },
+        {
+          "node": 11,
+          "unoccludedLux": 3.819300820591087,
+          "contributingZones": 3
+        },
+        {
+          "node": 12,
+          "unoccludedLux": 3.2491744194512315,
+          "contributingZones": 3
+        },
+        {
+          "node": 13,
+          "unoccludedLux": 2.6445339287454224,
+          "contributingZones": 3
+        },
+        {
+          "node": 14,
+          "unoccludedLux": 2.6534290339501627,
+          "contributingZones": 3
+        },
+        {
+          "node": 15,
+          "unoccludedLux": 3.091654500263857,
+          "contributingZones": 3
+        },
+        {
+          "node": 16,
+          "unoccludedLux": 3.8272890713707604,
+          "contributingZones": 3
+        },
+        {
+          "node": 17,
+          "unoccludedLux": 3.9616613276987436,
+          "contributingZones": 3
+        },
+        {
+          "node": 18,
+          "unoccludedLux": 3.9521177259175264,
+          "contributingZones": 4
+        },
+        {
+          "node": 19,
+          "unoccludedLux": 3.8772911584468845,
+          "contributingZones": 4
+        },
+        {
+          "node": 20,
+          "unoccludedLux": 3.878414361427664,
+          "contributingZones": 4
+        },
+        {
+          "node": 21,
+          "unoccludedLux": 3.528362671201853,
+          "contributingZones": 4
+        },
+        {
+          "node": 22,
+          "unoccludedLux": 2.7389402258366937,
+          "contributingZones": 4
+        },
+        {
+          "node": 23,
+          "unoccludedLux": 1.8656214907461806,
+          "contributingZones": 4
+        },
+        {
+          "node": 24,
+          "unoccludedLux": 1.3104646497989818,
+          "contributingZones": 4
+        },
+        {
+          "node": 25,
+          "unoccludedLux": 1.3443759951529115,
+          "contributingZones": 4
+        },
+        {
+          "node": 26,
+          "unoccludedLux": 1.953263925300393,
+          "contributingZones": 3
+        },
+        {
+          "node": 27,
+          "unoccludedLux": 2.922087636814355,
+          "contributingZones": 3
+        },
+        {
+          "node": 28,
+          "unoccludedLux": 3.698590587885791,
+          "contributingZones": 3
+        },
+        {
+          "node": 29,
+          "unoccludedLux": 3.878572426759333,
+          "contributingZones": 3
+        },
+        {
+          "node": 30,
+          "unoccludedLux": 3.1816492698680303,
+          "contributingZones": 3
+        }
+      ]
+    },
+    {
+      "track": "twisty-twirl",
+      "raised": true,
+      "lowQuality": true,
+      "draws": 11,
+      "triangles": 8032,
+      "shadowDraws": 0,
+      "shadowTriangles": 0,
+      "mainPlusLocalShadowDrawUpperBound": 11,
+      "budget": {
+        "fixtures": 8,
+        "spots": 4,
+        "shadows": 0
+      },
+      "minimumUnoccludedLux": 0.8578278919410978,
+      "maximumUnoccludedLux": 5.2469572667575175,
+      "samples": [
+        {
+          "node": 0,
+          "unoccludedLux": 3.8797704607746297,
+          "contributingZones": 2
+        },
+        {
+          "node": 1,
+          "unoccludedLux": 2.9758802582503927,
+          "contributingZones": 3
+        },
+        {
+          "node": 2,
+          "unoccludedLux": 2.187284834039737,
+          "contributingZones": 3
+        },
+        {
+          "node": 3,
+          "unoccludedLux": 2.041569053643147,
+          "contributingZones": 3
+        },
+        {
+          "node": 4,
+          "unoccludedLux": 2.627560131358314,
+          "contributingZones": 3
+        },
+        {
+          "node": 5,
+          "unoccludedLux": 3.5759367024041957,
+          "contributingZones": 3
+        },
+        {
+          "node": 6,
+          "unoccludedLux": 4.569817137673376,
+          "contributingZones": 3
+        },
+        {
+          "node": 7,
+          "unoccludedLux": 5.135230093847178,
+          "contributingZones": 3
+        },
+        {
+          "node": 8,
+          "unoccludedLux": 4.778738037621791,
+          "contributingZones": 3
+        },
+        {
+          "node": 9,
+          "unoccludedLux": 3.8577916670743373,
+          "contributingZones": 2
+        },
+        {
+          "node": 10,
+          "unoccludedLux": 2.8299735319881694,
+          "contributingZones": 2
+        },
+        {
+          "node": 11,
+          "unoccludedLux": 1.829157006561834,
+          "contributingZones": 2
+        },
+        {
+          "node": 12,
+          "unoccludedLux": 1.1758818699342402,
+          "contributingZones": 2
+        },
+        {
+          "node": 13,
+          "unoccludedLux": 1.8949730487037162,
+          "contributingZones": 2
+        },
+        {
+          "node": 14,
+          "unoccludedLux": 2.8408767919717572,
+          "contributingZones": 2
+        },
+        {
+          "node": 15,
+          "unoccludedLux": 4.041045472263193,
+          "contributingZones": 2
+        },
+        {
+          "node": 16,
+          "unoccludedLux": 5.03180861062373,
+          "contributingZones": 2
+        },
+        {
+          "node": 17,
+          "unoccludedLux": 4.792062794384974,
+          "contributingZones": 2
+        },
+        {
+          "node": 18,
+          "unoccludedLux": 3.7251167773398484,
+          "contributingZones": 2
+        },
+        {
+          "node": 19,
+          "unoccludedLux": 2.3899687761945505,
+          "contributingZones": 2
+        },
+        {
+          "node": 20,
+          "unoccludedLux": 1.5726338153847892,
+          "contributingZones": 3
+        },
+        {
+          "node": 21,
+          "unoccludedLux": 1.5819651397402799,
+          "contributingZones": 3
+        },
+        {
+          "node": 22,
+          "unoccludedLux": 2.4487876967583273,
+          "contributingZones": 3
+        },
+        {
+          "node": 23,
+          "unoccludedLux": 3.8256293877985783,
+          "contributingZones": 3
+        },
+        {
+          "node": 24,
+          "unoccludedLux": 4.983452407235326,
+          "contributingZones": 3
+        },
+        {
+          "node": 25,
+          "unoccludedLux": 5.2469572667575175,
+          "contributingZones": 3
+        },
+        {
+          "node": 26,
+          "unoccludedLux": 4.3503416984099665,
+          "contributingZones": 3
+        },
+        {
+          "node": 27,
+          "unoccludedLux": 3.0382294548091173,
+          "contributingZones": 3
+        },
+        {
+          "node": 28,
+          "unoccludedLux": 1.7933908179889606,
+          "contributingZones": 2
+        },
+        {
+          "node": 29,
+          "unoccludedLux": 1.147734285321662,
+          "contributingZones": 2
+        },
+        {
+          "node": 30,
+          "unoccludedLux": 0.8578278919410978,
+          "contributingZones": 2
+        }
+      ]
+    },
+    {
+      "track": "whirly-world",
+      "raised": false,
+      "lowQuality": false,
+      "draws": 11,
+      "triangles": 8032,
+      "shadowDraws": 10,
+      "shadowTriangles": 7840,
+      "mainPlusLocalShadowDrawUpperBound": 31,
+      "budget": {
+        "fixtures": 8,
+        "spots": 6,
+        "shadows": 1
+      },
+      "minimumUnoccludedLux": 1.3360964184998225,
+      "maximumUnoccludedLux": 4.3507163179076205,
+      "samples": [
+        {
+          "node": 0,
+          "unoccludedLux": 4.3507163179076205,
+          "contributingZones": 3
+        },
+        {
+          "node": 1,
+          "unoccludedLux": 4.254955983092282,
+          "contributingZones": 4
+        },
+        {
+          "node": 2,
+          "unoccludedLux": 4.046234961120693,
+          "contributingZones": 4
+        },
+        {
+          "node": 3,
+          "unoccludedLux": 3.574859762833147,
+          "contributingZones": 4
+        },
+        {
+          "node": 4,
+          "unoccludedLux": 2.861346213087098,
+          "contributingZones": 4
+        },
+        {
+          "node": 5,
+          "unoccludedLux": 2.2340824802524204,
+          "contributingZones": 4
+        },
+        {
+          "node": 6,
+          "unoccludedLux": 1.7630217427485344,
+          "contributingZones": 4
+        },
+        {
+          "node": 7,
+          "unoccludedLux": 1.7899971283310843,
+          "contributingZones": 4
+        },
+        {
+          "node": 8,
+          "unoccludedLux": 2.321956799870605,
+          "contributingZones": 4
+        },
+        {
+          "node": 9,
+          "unoccludedLux": 3.00136727368692,
+          "contributingZones": 3
+        },
+        {
+          "node": 10,
+          "unoccludedLux": 3.6280951950719262,
+          "contributingZones": 3
+        },
+        {
+          "node": 11,
+          "unoccludedLux": 3.760534133740826,
+          "contributingZones": 3
+        },
+        {
+          "node": 12,
+          "unoccludedLux": 3.207838862184947,
+          "contributingZones": 3
+        },
+        {
+          "node": 13,
+          "unoccludedLux": 2.5923932790521356,
+          "contributingZones": 3
+        },
+        {
+          "node": 14,
+          "unoccludedLux": 2.5898280413379458,
+          "contributingZones": 3
+        },
+        {
+          "node": 15,
+          "unoccludedLux": 2.9864995096383864,
+          "contributingZones": 2
+        },
+        {
+          "node": 16,
+          "unoccludedLux": 3.6625206654922478,
+          "contributingZones": 3
+        },
+        {
+          "node": 17,
+          "unoccludedLux": 3.644973659802222,
+          "contributingZones": 3
+        },
+        {
+          "node": 18,
+          "unoccludedLux": 3.4384987912729046,
+          "contributingZones": 4
+        },
+        {
+          "node": 19,
+          "unoccludedLux": 3.4063769883986588,
+          "contributingZones": 4
+        },
+        {
+          "node": 20,
+          "unoccludedLux": 3.5765998189282184,
+          "contributingZones": 4
+        },
+        {
+          "node": 21,
+          "unoccludedLux": 3.5630127720847664,
+          "contributingZones": 4
+        },
+        {
+          "node": 22,
+          "unoccludedLux": 2.9428693616490316,
+          "contributingZones": 4
+        },
+        {
+          "node": 23,
+          "unoccludedLux": 2.104098479624183,
+          "contributingZones": 4
+        },
+        {
+          "node": 24,
+          "unoccludedLux": 1.4204746660656284,
+          "contributingZones": 4
+        },
+        {
+          "node": 25,
+          "unoccludedLux": 1.3360964184998225,
+          "contributingZones": 4
+        },
+        {
+          "node": 26,
+          "unoccludedLux": 1.871033959561668,
+          "contributingZones": 4
+        },
+        {
+          "node": 27,
+          "unoccludedLux": 2.8360458114617466,
+          "contributingZones": 3
+        },
+        {
+          "node": 28,
+          "unoccludedLux": 3.6177348270129404,
+          "contributingZones": 3
+        },
+        {
+          "node": 29,
+          "unoccludedLux": 3.801029240964236,
+          "contributingZones": 3
+        },
+        {
+          "node": 30,
+          "unoccludedLux": 3.0988596317636494,
+          "contributingZones": 3
+        }
+      ]
+    },
+    {
+      "track": "whirly-world",
+      "raised": false,
+      "lowQuality": true,
+      "draws": 11,
+      "triangles": 8032,
+      "shadowDraws": 0,
+      "shadowTriangles": 0,
+      "mainPlusLocalShadowDrawUpperBound": 11,
+      "budget": {
+        "fixtures": 8,
+        "spots": 4,
+        "shadows": 0
+      },
+      "minimumUnoccludedLux": 0.8338897242221252,
+      "maximumUnoccludedLux": 5.104048835797138,
+      "samples": [
+        {
+          "node": 0,
+          "unoccludedLux": 3.8430013306804987,
+          "contributingZones": 2
+        },
+        {
+          "node": 1,
+          "unoccludedLux": 2.948590107103766,
+          "contributingZones": 3
+        },
+        {
+          "node": 2,
+          "unoccludedLux": 2.1744095552057683,
+          "contributingZones": 3
+        },
+        {
+          "node": 3,
+          "unoccludedLux": 2.0391480877892065,
+          "contributingZones": 3
+        },
+        {
+          "node": 4,
+          "unoccludedLux": 2.6235061015665866,
+          "contributingZones": 3
+        },
+        {
+          "node": 5,
+          "unoccludedLux": 3.5613812694205085,
+          "contributingZones": 3
+        },
+        {
+          "node": 6,
+          "unoccludedLux": 4.543241074957515,
+          "contributingZones": 3
+        },
+        {
+          "node": 7,
+          "unoccludedLux": 5.104048835797138,
+          "contributingZones": 3
+        },
+        {
+          "node": 8,
+          "unoccludedLux": 4.7524469632850375,
+          "contributingZones": 3
+        },
+        {
+          "node": 9,
+          "unoccludedLux": 3.838923998819157,
+          "contributingZones": 2
+        },
+        {
+          "node": 10,
+          "unoccludedLux": 2.819156240520991,
+          "contributingZones": 2
+        },
+        {
+          "node": 11,
+          "unoccludedLux": 1.8209942516702053,
+          "contributingZones": 2
+        },
+        {
+          "node": 12,
+          "unoccludedLux": 1.1641403666442738,
+          "contributingZones": 2
+        },
+        {
+          "node": 13,
+          "unoccludedLux": 1.8820960966015285,
+          "contributingZones": 2
+        },
+        {
+          "node": 14,
+          "unoccludedLux": 2.8095986621494293,
+          "contributingZones": 2
+        },
+        {
+          "node": 15,
+          "unoccludedLux": 3.9168610151066185,
+          "contributingZones": 2
+        },
+        {
+          "node": 16,
+          "unoccludedLux": 4.915493831931085,
+          "contributingZones": 2
+        },
+        {
+          "node": 17,
+          "unoccludedLux": 4.670779153075699,
+          "contributingZones": 2
+        },
+        {
+          "node": 18,
+          "unoccludedLux": 3.5940249552606662,
+          "contributingZones": 2
+        },
+        {
+          "node": 19,
+          "unoccludedLux": 2.2478941810417554,
+          "contributingZones": 2
+        },
+        {
+          "node": 20,
+          "unoccludedLux": 1.4842357734087335,
+          "contributingZones": 3
+        },
+        {
+          "node": 21,
+          "unoccludedLux": 1.5354974450546157,
+          "contributingZones": 3
+        },
+        {
+          "node": 22,
+          "unoccludedLux": 2.4347588887877465,
+          "contributingZones": 3
+        },
+        {
+          "node": 23,
+          "unoccludedLux": 3.8280157805653183,
+          "contributingZones": 3
+        },
+        {
+          "node": 24,
+          "unoccludedLux": 4.94552123465958,
+          "contributingZones": 3
+        },
+        {
+          "node": 25,
+          "unoccludedLux": 5.082080823354031,
+          "contributingZones": 3
+        },
+        {
+          "node": 26,
+          "unoccludedLux": 4.101656012191273,
+          "contributingZones": 3
+        },
+        {
+          "node": 27,
+          "unoccludedLux": 2.738460176009288,
+          "contributingZones": 3
+        },
+        {
+          "node": 28,
+          "unoccludedLux": 1.5979413163517782,
+          "contributingZones": 2
+        },
+        {
+          "node": 29,
+          "unoccludedLux": 1.066186794379336,
+          "contributingZones": 2
+        },
+        {
+          "node": 30,
+          "unoccludedLux": 0.8338897242221252,
+          "contributingZones": 2
+        }
+      ]
+    },
+    {
+      "track": "whirly-world",
+      "raised": true,
+      "lowQuality": false,
+      "draws": 11,
+      "triangles": 8032,
+      "shadowDraws": 10,
+      "shadowTriangles": 7840,
+      "mainPlusLocalShadowDrawUpperBound": 31,
+      "budget": {
+        "fixtures": 8,
+        "spots": 6,
+        "shadows": 1
+      },
+      "minimumUnoccludedLux": 0.8366396153011302,
+      "maximumUnoccludedLux": 4.742483592012104,
+      "samples": [
+        {
+          "node": 0,
+          "unoccludedLux": 4.383991183190248,
+          "contributingZones": 3
+        },
+        {
+          "node": 1,
+          "unoccludedLux": 4.267770185350367,
+          "contributingZones": 4
+        },
+        {
+          "node": 2,
+          "unoccludedLux": 4.267218166544417,
+          "contributingZones": 4
+        },
+        {
+          "node": 3,
+          "unoccludedLux": 3.845361531785134,
+          "contributingZones": 4
+        },
+        {
+          "node": 4,
+          "unoccludedLux": 2.892722325203317,
+          "contributingZones": 2
+        },
+        {
+          "node": 5,
+          "unoccludedLux": 1.9357585889103281,
+          "contributingZones": 2
+        },
+        {
+          "node": 6,
+          "unoccludedLux": 1.2583450745017244,
+          "contributingZones": 4
+        },
+        {
+          "node": 7,
+          "unoccludedLux": 1.2527147387877031,
+          "contributingZones": 4
+        },
+        {
+          "node": 8,
+          "unoccludedLux": 1.91654214211315,
+          "contributingZones": 4
+        },
+        {
+          "node": 9,
+          "unoccludedLux": 2.9518650591629836,
+          "contributingZones": 3
+        },
+        {
+          "node": 10,
+          "unoccludedLux": 3.910854158630707,
+          "contributingZones": 3
+        },
+        {
+          "node": 11,
+          "unoccludedLux": 4.20276626912998,
+          "contributingZones": 3
+        },
+        {
+          "node": 12,
+          "unoccludedLux": 3.445550827550594,
+          "contributingZones": 2
+        },
+        {
+          "node": 13,
+          "unoccludedLux": 2.4873482805199094,
+          "contributingZones": 2
+        },
+        {
+          "node": 14,
+          "unoccludedLux": 2.5714855116152817,
+          "contributingZones": 2
+        },
+        {
+          "node": 15,
+          "unoccludedLux": 3.4525004657267573,
+          "contributingZones": 2
+        },
+        {
+          "node": 16,
+          "unoccludedLux": 4.596035552676512,
+          "contributingZones": 2
+        },
+        {
+          "node": 17,
+          "unoccludedLux": 4.150140685763035,
+          "contributingZones": 3
+        },
+        {
+          "node": 18,
+          "unoccludedLux": 3.0430633415792827,
+          "contributingZones": 3
+        },
+        {
+          "node": 19,
+          "unoccludedLux": 3.0474796161386655,
+          "contributingZones": 4
+        },
+        {
+          "node": 20,
+          "unoccludedLux": 4.091158431204175,
+          "contributingZones": 4
+        },
+        {
+          "node": 21,
+          "unoccludedLux": 4.433486658799659,
+          "contributingZones": 3
+        },
+        {
+          "node": 22,
+          "unoccludedLux": 3.310048499929916,
+          "contributingZones": 3
+        },
+        {
+          "node": 23,
+          "unoccludedLux": 1.7039332403813776,
+          "contributingZones": 3
+        },
+        {
+          "node": 24,
+          "unoccludedLux": 0.8959706428815597,
+          "contributingZones": 3
+        },
+        {
+          "node": 25,
+          "unoccludedLux": 0.8366396153011302,
+          "contributingZones": 4
+        },
+        {
+          "node": 26,
+          "unoccludedLux": 1.3358338794156683,
+          "contributingZones": 3
+        },
+        {
+          "node": 27,
+          "unoccludedLux": 2.721391891318575,
+          "contributingZones": 3
+        },
+        {
+          "node": 28,
+          "unoccludedLux": 4.277510768401486,
+          "contributingZones": 3
+        },
+        {
+          "node": 29,
+          "unoccludedLux": 4.742483592012104,
+          "contributingZones": 3
+        },
+        {
+          "node": 30,
+          "unoccludedLux": 3.524004865792611,
+          "contributingZones": 3
+        }
+      ]
+    },
+    {
+      "track": "whirly-world",
+      "raised": true,
+      "lowQuality": true,
+      "draws": 11,
+      "triangles": 8032,
+      "shadowDraws": 0,
+      "shadowTriangles": 0,
+      "mainPlusLocalShadowDrawUpperBound": 11,
+      "budget": {
+        "fixtures": 8,
+        "spots": 4,
+        "shadows": 0
+      },
+      "minimumUnoccludedLux": 0.6690145591517775,
+      "maximumUnoccludedLux": 6.45219329102806,
+      "samples": [
+        {
+          "node": 0,
+          "unoccludedLux": 3.9496025331231905,
+          "contributingZones": 2
+        },
+        {
+          "node": 1,
+          "unoccludedLux": 2.521820832328685,
+          "contributingZones": 2
+        },
+        {
+          "node": 2,
+          "unoccludedLux": 1.5532388607914482,
+          "contributingZones": 3
+        },
+        {
+          "node": 3,
+          "unoccludedLux": 1.4083991070234247,
+          "contributingZones": 3
+        },
+        {
+          "node": 4,
+          "unoccludedLux": 2.0874336844151378,
+          "contributingZones": 2
+        },
+        {
+          "node": 5,
+          "unoccludedLux": 3.499851570869138,
+          "contributingZones": 2
+        },
+        {
+          "node": 6,
+          "unoccludedLux": 4.927403796286988,
+          "contributingZones": 3
+        },
+        {
+          "node": 7,
+          "unoccludedLux": 5.815957623401899,
+          "contributingZones": 3
+        },
+        {
+          "node": 8,
+          "unoccludedLux": 5.243629443069286,
+          "contributingZones": 2
+        },
+        {
+          "node": 9,
+          "unoccludedLux": 3.8854020609038833,
+          "contributingZones": 2
+        },
+        {
+          "node": 10,
+          "unoccludedLux": 2.4100347481589743,
+          "contributingZones": 2
+        },
+        {
+          "node": 11,
+          "unoccludedLux": 1.3619124226438988,
+          "contributingZones": 2
+        },
+        {
+          "node": 12,
+          "unoccludedLux": 0.8364818712554901,
+          "contributingZones": 2
+        },
+        {
+          "node": 13,
+          "unoccludedLux": 1.6208433467621683,
+          "contributingZones": 2
+        },
+        {
+          "node": 14,
+          "unoccludedLux": 2.8375990188038034,
+          "contributingZones": 2
+        },
+        {
+          "node": 15,
+          "unoccludedLux": 4.670986812602698,
+          "contributingZones": 2
+        },
+        {
+          "node": 16,
+          "unoccludedLux": 6.45219329102806,
+          "contributingZones": 2
+        },
+        {
+          "node": 17,
+          "unoccludedLux": 5.784390879044138,
+          "contributingZones": 2
+        },
+        {
+          "node": 18,
+          "unoccludedLux": 3.54785399876764,
+          "contributingZones": 2
+        },
+        {
+          "node": 19,
+          "unoccludedLux": 1.587266232275026,
+          "contributingZones": 2
+        },
+        {
+          "node": 20,
+          "unoccludedLux": 0.9081758655542764,
+          "contributingZones": 2
+        },
+        {
+          "node": 21,
+          "unoccludedLux": 0.9261578432726882,
+          "contributingZones": 2
+        },
+        {
+          "node": 22,
+          "unoccludedLux": 1.7694552389380405,
+          "contributingZones": 2
+        },
+        {
+          "node": 23,
+          "unoccludedLux": 4.005231089591149,
+          "contributingZones": 3
+        },
+        {
+          "node": 24,
+          "unoccludedLux": 6.158094559654143,
+          "contributingZones": 3
+        },
+        {
+          "node": 25,
+          "unoccludedLux": 6.440085971364176,
+          "contributingZones": 3
+        },
+        {
+          "node": 26,
+          "unoccludedLux": 4.553225449997201,
+          "contributingZones": 3
+        },
+        {
+          "node": 27,
+          "unoccludedLux": 2.152373394766459,
+          "contributingZones": 2
+        },
+        {
+          "node": 28,
+          "unoccludedLux": 1.0423736573757432,
+          "contributingZones": 2
+        },
+        {
+          "node": 29,
+          "unoccludedLux": 0.7656934294205059,
+          "contributingZones": 2
+        },
+        {
+          "node": 30,
+          "unoccludedLux": 0.6690145591517775,
+          "contributingZones": 1
+        }
+      ]
+    },
+    {
+      "track": "mild",
+      "raised": false,
+      "lowQuality": false,
+      "draws": 11,
+      "triangles": 8032,
+      "shadowDraws": 10,
+      "shadowTriangles": 7840,
+      "mainPlusLocalShadowDrawUpperBound": 31,
+      "budget": {
+        "fixtures": 8,
+        "spots": 6,
+        "shadows": 1
+      },
+      "minimumUnoccludedLux": 1.3104646497989818,
+      "maximumUnoccludedLux": 4.3558729173445006,
+      "samples": [
+        {
+          "node": 0,
+          "unoccludedLux": 4.3558729173445006,
+          "contributingZones": 3
+        },
+        {
+          "node": 1,
+          "unoccludedLux": 4.25513858768786,
+          "contributingZones": 4
+        },
+        {
+          "node": 2,
+          "unoccludedLux": 4.038494611254168,
+          "contributingZones": 4
+        },
+        {
+          "node": 3,
+          "unoccludedLux": 3.5623702378385027,
+          "contributingZones": 4
+        },
+        {
+          "node": 4,
+          "unoccludedLux": 2.8432113927487355,
+          "contributingZones": 4
+        },
+        {
+          "node": 5,
+          "unoccludedLux": 2.221161544521703,
+          "contributingZones": 4
+        },
+        {
+          "node": 6,
+          "unoccludedLux": 1.7718895036891704,
+          "contributingZones": 4
+        },
+        {
+          "node": 7,
+          "unoccludedLux": 1.8284148324111407,
+          "contributingZones": 4
+        },
+        {
+          "node": 8,
+          "unoccludedLux": 2.3819059507731972,
+          "contributingZones": 4
+        },
+        {
+          "node": 9,
+          "unoccludedLux": 3.068291446124378,
+          "contributingZones": 3
+        },
+        {
+          "node": 10,
+          "unoccludedLux": 3.692721738701974,
+          "contributingZones": 3
+        },
+        {
+          "node": 11,
+          "unoccludedLux": 3.819300820591087,
+          "contributingZones": 3
+        },
+        {
+          "node": 12,
+          "unoccludedLux": 3.2491744194512315,
+          "contributingZones": 3
+        },
+        {
+          "node": 13,
+          "unoccludedLux": 2.6445339287454224,
+          "contributingZones": 3
+        },
+        {
+          "node": 14,
+          "unoccludedLux": 2.6534290339501627,
+          "contributingZones": 3
+        },
+        {
+          "node": 15,
+          "unoccludedLux": 3.091654500263857,
+          "contributingZones": 3
+        },
+        {
+          "node": 16,
+          "unoccludedLux": 3.8272890713707604,
+          "contributingZones": 3
+        },
+        {
+          "node": 17,
+          "unoccludedLux": 3.9616613276987436,
+          "contributingZones": 3
+        },
+        {
+          "node": 18,
+          "unoccludedLux": 3.9521177259175264,
+          "contributingZones": 4
+        },
+        {
+          "node": 19,
+          "unoccludedLux": 3.8772911584468845,
+          "contributingZones": 4
+        },
+        {
+          "node": 20,
+          "unoccludedLux": 3.878414361427664,
+          "contributingZones": 4
+        },
+        {
+          "node": 21,
+          "unoccludedLux": 3.528362671201853,
+          "contributingZones": 4
+        },
+        {
+          "node": 22,
+          "unoccludedLux": 2.7389402258366937,
+          "contributingZones": 4
+        },
+        {
+          "node": 23,
+          "unoccludedLux": 1.8656214907461806,
+          "contributingZones": 4
+        },
+        {
+          "node": 24,
+          "unoccludedLux": 1.3104646497989818,
+          "contributingZones": 4
+        },
+        {
+          "node": 25,
+          "unoccludedLux": 1.3443759951529115,
+          "contributingZones": 4
+        },
+        {
+          "node": 26,
+          "unoccludedLux": 1.953263925300393,
+          "contributingZones": 3
+        },
+        {
+          "node": 27,
+          "unoccludedLux": 2.922087636814355,
+          "contributingZones": 3
+        },
+        {
+          "node": 28,
+          "unoccludedLux": 3.698590587885791,
+          "contributingZones": 3
+        },
+        {
+          "node": 29,
+          "unoccludedLux": 3.878572426759333,
+          "contributingZones": 3
+        },
+        {
+          "node": 30,
+          "unoccludedLux": 3.1816492698680303,
+          "contributingZones": 3
+        }
+      ]
+    },
+    {
+      "track": "mild",
+      "raised": false,
+      "lowQuality": true,
+      "draws": 11,
+      "triangles": 8032,
+      "shadowDraws": 0,
+      "shadowTriangles": 0,
+      "mainPlusLocalShadowDrawUpperBound": 11,
+      "budget": {
+        "fixtures": 8,
+        "spots": 4,
+        "shadows": 0
+      },
+      "minimumUnoccludedLux": 0.8578278919410978,
+      "maximumUnoccludedLux": 5.2469572667575175,
+      "samples": [
+        {
+          "node": 0,
+          "unoccludedLux": 3.8797704607746297,
+          "contributingZones": 2
+        },
+        {
+          "node": 1,
+          "unoccludedLux": 2.9758802582503927,
+          "contributingZones": 3
+        },
+        {
+          "node": 2,
+          "unoccludedLux": 2.187284834039737,
+          "contributingZones": 3
+        },
+        {
+          "node": 3,
+          "unoccludedLux": 2.041569053643147,
+          "contributingZones": 3
+        },
+        {
+          "node": 4,
+          "unoccludedLux": 2.627560131358314,
+          "contributingZones": 3
+        },
+        {
+          "node": 5,
+          "unoccludedLux": 3.5759367024041957,
+          "contributingZones": 3
+        },
+        {
+          "node": 6,
+          "unoccludedLux": 4.569817137673376,
+          "contributingZones": 3
+        },
+        {
+          "node": 7,
+          "unoccludedLux": 5.135230093847178,
+          "contributingZones": 3
+        },
+        {
+          "node": 8,
+          "unoccludedLux": 4.778738037621791,
+          "contributingZones": 3
+        },
+        {
+          "node": 9,
+          "unoccludedLux": 3.8577916670743373,
+          "contributingZones": 2
+        },
+        {
+          "node": 10,
+          "unoccludedLux": 2.8299735319881694,
+          "contributingZones": 2
+        },
+        {
+          "node": 11,
+          "unoccludedLux": 1.829157006561834,
+          "contributingZones": 2
+        },
+        {
+          "node": 12,
+          "unoccludedLux": 1.1758818699342402,
+          "contributingZones": 2
+        },
+        {
+          "node": 13,
+          "unoccludedLux": 1.8949730487037162,
+          "contributingZones": 2
+        },
+        {
+          "node": 14,
+          "unoccludedLux": 2.8408767919717572,
+          "contributingZones": 2
+        },
+        {
+          "node": 15,
+          "unoccludedLux": 4.041045472263193,
+          "contributingZones": 2
+        },
+        {
+          "node": 16,
+          "unoccludedLux": 5.03180861062373,
+          "contributingZones": 2
+        },
+        {
+          "node": 17,
+          "unoccludedLux": 4.792062794384974,
+          "contributingZones": 2
+        },
+        {
+          "node": 18,
+          "unoccludedLux": 3.7251167773398484,
+          "contributingZones": 2
+        },
+        {
+          "node": 19,
+          "unoccludedLux": 2.3899687761945505,
+          "contributingZones": 2
+        },
+        {
+          "node": 20,
+          "unoccludedLux": 1.5726338153847892,
+          "contributingZones": 3
+        },
+        {
+          "node": 21,
+          "unoccludedLux": 1.5819651397402799,
+          "contributingZones": 3
+        },
+        {
+          "node": 22,
+          "unoccludedLux": 2.4487876967583273,
+          "contributingZones": 3
+        },
+        {
+          "node": 23,
+          "unoccludedLux": 3.8256293877985783,
+          "contributingZones": 3
+        },
+        {
+          "node": 24,
+          "unoccludedLux": 4.983452407235326,
+          "contributingZones": 3
+        },
+        {
+          "node": 25,
+          "unoccludedLux": 5.2469572667575175,
+          "contributingZones": 3
+        },
+        {
+          "node": 26,
+          "unoccludedLux": 4.3503416984099665,
+          "contributingZones": 3
+        },
+        {
+          "node": 27,
+          "unoccludedLux": 3.0382294548091173,
+          "contributingZones": 3
+        },
+        {
+          "node": 28,
+          "unoccludedLux": 1.7933908179889606,
+          "contributingZones": 2
+        },
+        {
+          "node": 29,
+          "unoccludedLux": 1.147734285321662,
+          "contributingZones": 2
+        },
+        {
+          "node": 30,
+          "unoccludedLux": 0.8578278919410978,
+          "contributingZones": 2
+        }
+      ]
+    },
+    {
+      "track": "mild",
+      "raised": true,
+      "lowQuality": false,
+      "draws": 11,
+      "triangles": 8032,
+      "shadowDraws": 10,
+      "shadowTriangles": 7840,
+      "mainPlusLocalShadowDrawUpperBound": 31,
+      "budget": {
+        "fixtures": 8,
+        "spots": 6,
+        "shadows": 1
+      },
+      "minimumUnoccludedLux": 1.3104646497989818,
+      "maximumUnoccludedLux": 4.3558729173445006,
+      "samples": [
+        {
+          "node": 0,
+          "unoccludedLux": 4.3558729173445006,
+          "contributingZones": 3
+        },
+        {
+          "node": 1,
+          "unoccludedLux": 4.25513858768786,
+          "contributingZones": 4
+        },
+        {
+          "node": 2,
+          "unoccludedLux": 4.038494611254168,
+          "contributingZones": 4
+        },
+        {
+          "node": 3,
+          "unoccludedLux": 3.5623702378385027,
+          "contributingZones": 4
+        },
+        {
+          "node": 4,
+          "unoccludedLux": 2.8432113927487355,
+          "contributingZones": 4
+        },
+        {
+          "node": 5,
+          "unoccludedLux": 2.221161544521703,
+          "contributingZones": 4
+        },
+        {
+          "node": 6,
+          "unoccludedLux": 1.7718895036891704,
+          "contributingZones": 4
+        },
+        {
+          "node": 7,
+          "unoccludedLux": 1.8284148324111407,
+          "contributingZones": 4
+        },
+        {
+          "node": 8,
+          "unoccludedLux": 2.3819059507731972,
+          "contributingZones": 4
+        },
+        {
+          "node": 9,
+          "unoccludedLux": 3.068291446124378,
+          "contributingZones": 3
+        },
+        {
+          "node": 10,
+          "unoccludedLux": 3.692721738701974,
+          "contributingZones": 3
+        },
+        {
+          "node": 11,
+          "unoccludedLux": 3.819300820591087,
+          "contributingZones": 3
+        },
+        {
+          "node": 12,
+          "unoccludedLux": 3.2491744194512315,
+          "contributingZones": 3
+        },
+        {
+          "node": 13,
+          "unoccludedLux": 2.6445339287454224,
+          "contributingZones": 3
+        },
+        {
+          "node": 14,
+          "unoccludedLux": 2.6534290339501627,
+          "contributingZones": 3
+        },
+        {
+          "node": 15,
+          "unoccludedLux": 3.091654500263857,
+          "contributingZones": 3
+        },
+        {
+          "node": 16,
+          "unoccludedLux": 3.8272890713707604,
+          "contributingZones": 3
+        },
+        {
+          "node": 17,
+          "unoccludedLux": 3.9616613276987436,
+          "contributingZones": 3
+        },
+        {
+          "node": 18,
+          "unoccludedLux": 3.9521177259175264,
+          "contributingZones": 4
+        },
+        {
+          "node": 19,
+          "unoccludedLux": 3.8772911584468845,
+          "contributingZones": 4
+        },
+        {
+          "node": 20,
+          "unoccludedLux": 3.878414361427664,
+          "contributingZones": 4
+        },
+        {
+          "node": 21,
+          "unoccludedLux": 3.528362671201853,
+          "contributingZones": 4
+        },
+        {
+          "node": 22,
+          "unoccludedLux": 2.7389402258366937,
+          "contributingZones": 4
+        },
+        {
+          "node": 23,
+          "unoccludedLux": 1.8656214907461806,
+          "contributingZones": 4
+        },
+        {
+          "node": 24,
+          "unoccludedLux": 1.3104646497989818,
+          "contributingZones": 4
+        },
+        {
+          "node": 25,
+          "unoccludedLux": 1.3443759951529115,
+          "contributingZones": 4
+        },
+        {
+          "node": 26,
+          "unoccludedLux": 1.953263925300393,
+          "contributingZones": 3
+        },
+        {
+          "node": 27,
+          "unoccludedLux": 2.922087636814355,
+          "contributingZones": 3
+        },
+        {
+          "node": 28,
+          "unoccludedLux": 3.698590587885791,
+          "contributingZones": 3
+        },
+        {
+          "node": 29,
+          "unoccludedLux": 3.878572426759333,
+          "contributingZones": 3
+        },
+        {
+          "node": 30,
+          "unoccludedLux": 3.1816492698680303,
+          "contributingZones": 3
+        }
+      ]
+    },
+    {
+      "track": "mild",
+      "raised": true,
+      "lowQuality": true,
+      "draws": 11,
+      "triangles": 8032,
+      "shadowDraws": 0,
+      "shadowTriangles": 0,
+      "mainPlusLocalShadowDrawUpperBound": 11,
+      "budget": {
+        "fixtures": 8,
+        "spots": 4,
+        "shadows": 0
+      },
+      "minimumUnoccludedLux": 0.8578278919410978,
+      "maximumUnoccludedLux": 5.2469572667575175,
+      "samples": [
+        {
+          "node": 0,
+          "unoccludedLux": 3.8797704607746297,
+          "contributingZones": 2
+        },
+        {
+          "node": 1,
+          "unoccludedLux": 2.9758802582503927,
+          "contributingZones": 3
+        },
+        {
+          "node": 2,
+          "unoccludedLux": 2.187284834039737,
+          "contributingZones": 3
+        },
+        {
+          "node": 3,
+          "unoccludedLux": 2.041569053643147,
+          "contributingZones": 3
+        },
+        {
+          "node": 4,
+          "unoccludedLux": 2.627560131358314,
+          "contributingZones": 3
+        },
+        {
+          "node": 5,
+          "unoccludedLux": 3.5759367024041957,
+          "contributingZones": 3
+        },
+        {
+          "node": 6,
+          "unoccludedLux": 4.569817137673376,
+          "contributingZones": 3
+        },
+        {
+          "node": 7,
+          "unoccludedLux": 5.135230093847178,
+          "contributingZones": 3
+        },
+        {
+          "node": 8,
+          "unoccludedLux": 4.778738037621791,
+          "contributingZones": 3
+        },
+        {
+          "node": 9,
+          "unoccludedLux": 3.8577916670743373,
+          "contributingZones": 2
+        },
+        {
+          "node": 10,
+          "unoccludedLux": 2.8299735319881694,
+          "contributingZones": 2
+        },
+        {
+          "node": 11,
+          "unoccludedLux": 1.829157006561834,
+          "contributingZones": 2
+        },
+        {
+          "node": 12,
+          "unoccludedLux": 1.1758818699342402,
+          "contributingZones": 2
+        },
+        {
+          "node": 13,
+          "unoccludedLux": 1.8949730487037162,
+          "contributingZones": 2
+        },
+        {
+          "node": 14,
+          "unoccludedLux": 2.8408767919717572,
+          "contributingZones": 2
+        },
+        {
+          "node": 15,
+          "unoccludedLux": 4.041045472263193,
+          "contributingZones": 2
+        },
+        {
+          "node": 16,
+          "unoccludedLux": 5.03180861062373,
+          "contributingZones": 2
+        },
+        {
+          "node": 17,
+          "unoccludedLux": 4.792062794384974,
+          "contributingZones": 2
+        },
+        {
+          "node": 18,
+          "unoccludedLux": 3.7251167773398484,
+          "contributingZones": 2
+        },
+        {
+          "node": 19,
+          "unoccludedLux": 2.3899687761945505,
+          "contributingZones": 2
+        },
+        {
+          "node": 20,
+          "unoccludedLux": 1.5726338153847892,
+          "contributingZones": 3
+        },
+        {
+          "node": 21,
+          "unoccludedLux": 1.5819651397402799,
+          "contributingZones": 3
+        },
+        {
+          "node": 22,
+          "unoccludedLux": 2.4487876967583273,
+          "contributingZones": 3
+        },
+        {
+          "node": 23,
+          "unoccludedLux": 3.8256293877985783,
+          "contributingZones": 3
+        },
+        {
+          "node": 24,
+          "unoccludedLux": 4.983452407235326,
+          "contributingZones": 3
+        },
+        {
+          "node": 25,
+          "unoccludedLux": 5.2469572667575175,
+          "contributingZones": 3
+        },
+        {
+          "node": 26,
+          "unoccludedLux": 4.3503416984099665,
+          "contributingZones": 3
+        },
+        {
+          "node": 27,
+          "unoccludedLux": 3.0382294548091173,
+          "contributingZones": 3
+        },
+        {
+          "node": 28,
+          "unoccludedLux": 1.7933908179889606,
+          "contributingZones": 2
+        },
+        {
+          "node": 29,
+          "unoccludedLux": 1.147734285321662,
+          "contributingZones": 2
+        },
+        {
+          "node": 30,
+          "unoccludedLux": 0.8578278919410978,
+          "contributingZones": 2
+        }
+      ]
+    },
+    {
+      "track": "wild",
+      "raised": false,
+      "lowQuality": false,
+      "draws": 11,
+      "triangles": 8032,
+      "shadowDraws": 10,
+      "shadowTriangles": 7840,
+      "mainPlusLocalShadowDrawUpperBound": 31,
+      "budget": {
+        "fixtures": 8,
+        "spots": 6,
+        "shadows": 1
+      },
+      "minimumUnoccludedLux": 1.2309382317786193,
+      "maximumUnoccludedLux": 4.340551911693348,
+      "samples": [
+        {
+          "node": 0,
+          "unoccludedLux": 4.340551911693348,
+          "contributingZones": 3
+        },
+        {
+          "node": 1,
+          "unoccludedLux": 4.231243428184476,
+          "contributingZones": 4
+        },
+        {
+          "node": 2,
+          "unoccludedLux": 4.007070016413124,
+          "contributingZones": 4
+        },
+        {
+          "node": 3,
+          "unoccludedLux": 3.5319948914507484,
+          "contributingZones": 4
+        },
+        {
+          "node": 4,
+          "unoccludedLux": 2.819163368559615,
+          "contributingZones": 4
+        },
+        {
+          "node": 5,
+          "unoccludedLux": 2.2036959151643445,
+          "contributingZones": 4
+        },
+        {
+          "node": 6,
+          "unoccludedLux": 1.759222306146512,
+          "contributingZones": 4
+        },
+        {
+          "node": 7,
+          "unoccludedLux": 1.8166596546077785,
+          "contributingZones": 4
+        },
+        {
+          "node": 8,
+          "unoccludedLux": 2.3682892526494426,
+          "contributingZones": 4
+        },
+        {
+          "node": 9,
+          "unoccludedLux": 3.052308570865738,
+          "contributingZones": 3
+        },
+        {
+          "node": 10,
+          "unoccludedLux": 3.6760894912153588,
+          "contributingZones": 3
+        },
+        {
+          "node": 11,
+          "unoccludedLux": 3.801024718536037,
+          "contributingZones": 3
+        },
+        {
+          "node": 12,
+          "unoccludedLux": 3.2340804116928714,
+          "contributingZones": 3
+        },
+        {
+          "node": 13,
+          "unoccludedLux": 2.6258966141421225,
+          "contributingZones": 3
+        },
+        {
+          "node": 14,
+          "unoccludedLux": 2.6300722984923093,
+          "contributingZones": 3
+        },
+        {
+          "node": 15,
+          "unoccludedLux": 3.0516928824848817,
+          "contributingZones": 2
+        },
+        {
+          "node": 16,
+          "unoccludedLux": 3.768905658566435,
+          "contributingZones": 3
+        },
+        {
+          "node": 17,
+          "unoccludedLux": 3.8635983692309743,
+          "contributingZones": 3
+        },
+        {
+          "node": 18,
+          "unoccludedLux": 3.819781839410123,
+          "contributingZones": 4
+        },
+        {
+          "node": 19,
+          "unoccludedLux": 3.7586480347199043,
+          "contributingZones": 4
+        },
+        {
+          "node": 20,
+          "unoccludedLux": 3.7796305480195844,
+          "contributingZones": 4
+        },
+        {
+          "node": 21,
+          "unoccludedLux": 3.44077270932535,
+          "contributingZones": 4
+        },
+        {
+          "node": 22,
+          "unoccludedLux": 2.6539882640975696,
+          "contributingZones": 4
+        },
+        {
+          "node": 23,
+          "unoccludedLux": 1.7631798092668027,
+          "contributingZones": 4
+        },
+        {
+          "node": 24,
+          "unoccludedLux": 1.2309382317786193,
+          "contributingZones": 4
+        },
+        {
+          "node": 25,
+          "unoccludedLux": 1.268311106056497,
+          "contributingZones": 4
+        },
+        {
+          "node": 26,
+          "unoccludedLux": 1.8543333714157266,
+          "contributingZones": 3
+        },
+        {
+          "node": 27,
+          "unoccludedLux": 2.834256973376545,
+          "contributingZones": 3
+        },
+        {
+          "node": 28,
+          "unoccludedLux": 3.6177348270129404,
+          "contributingZones": 3
+        },
+        {
+          "node": 29,
+          "unoccludedLux": 3.801029240964236,
+          "contributingZones": 3
+        },
+        {
+          "node": 30,
+          "unoccludedLux": 3.0988596317636494,
+          "contributingZones": 3
+        }
+      ]
+    },
+    {
+      "track": "wild",
+      "raised": false,
+      "lowQuality": true,
+      "draws": 11,
+      "triangles": 8032,
+      "shadowDraws": 0,
+      "shadowTriangles": 0,
+      "mainPlusLocalShadowDrawUpperBound": 11,
+      "budget": {
+        "fixtures": 8,
+        "spots": 4,
+        "shadows": 0
+      },
+      "minimumUnoccludedLux": 0.8893365388077452,
+      "maximumUnoccludedLux": 5.189925499453295,
+      "samples": [
+        {
+          "node": 0,
+          "unoccludedLux": 3.9367951939915793,
+          "contributingZones": 2
+        },
+        {
+          "node": 1,
+          "unoccludedLux": 3.01533245896528,
+          "contributingZones": 3
+        },
+        {
+          "node": 2,
+          "unoccludedLux": 2.184588884851882,
+          "contributingZones": 3
+        },
+        {
+          "node": 3,
+          "unoccludedLux": 1.9882005610908253,
+          "contributingZones": 3
+        },
+        {
+          "node": 4,
+          "unoccludedLux": 2.5384087959305366,
+          "contributingZones": 3
+        },
+        {
+          "node": 5,
+          "unoccludedLux": 3.475075133277467,
+          "contributingZones": 3
+        },
+        {
+          "node": 6,
+          "unoccludedLux": 4.462501960374579,
+          "contributingZones": 3
+        },
+        {
+          "node": 7,
+          "unoccludedLux": 5.047695018829491,
+          "contributingZones": 3
+        },
+        {
+          "node": 8,
+          "unoccludedLux": 4.726903920585553,
+          "contributingZones": 3
+        },
+        {
+          "node": 9,
+          "unoccludedLux": 3.834694573493268,
+          "contributingZones": 2
+        },
+        {
+          "node": 10,
+          "unoccludedLux": 2.8235401009155727,
+          "contributingZones": 2
+        },
+        {
+          "node": 11,
+          "unoccludedLux": 1.8258578740860236,
+          "contributingZones": 2
+        },
+        {
+          "node": 12,
+          "unoccludedLux": 1.1712403416640256,
+          "contributingZones": 2
+        },
+        {
+          "node": 13,
+          "unoccludedLux": 1.8899628744719426,
+          "contributingZones": 2
+        },
+        {
+          "node": 14,
+          "unoccludedLux": 2.829275265327512,
+          "contributingZones": 2
+        },
+        {
+          "node": 15,
+          "unoccludedLux": 3.994966038527098,
+          "contributingZones": 2
+        },
+        {
+          "node": 16,
+          "unoccludedLux": 4.9895529624277835,
+          "contributingZones": 2
+        },
+        {
+          "node": 17,
+          "unoccludedLux": 4.7475174176737225,
+          "contributingZones": 2
+        },
+        {
+          "node": 18,
+          "unoccludedLux": 3.6758245660189264,
+          "contributingZones": 2
+        },
+        {
+          "node": 19,
+          "unoccludedLux": 2.3154559334286002,
+          "contributingZones": 2
+        },
+        {
+          "node": 20,
+          "unoccludedLux": 1.4445014419800561,
+          "contributingZones": 3
+        },
+        {
+          "node": 21,
+          "unoccludedLux": 1.27557685931743,
+          "contributingZones": 3
+        },
+        {
+          "node": 22,
+          "unoccludedLux": 1.8240870910269797,
+          "contributingZones": 3
+        },
+        {
+          "node": 23,
+          "unoccludedLux": 3.1306348471013252,
+          "contributingZones": 3
+        },
+        {
+          "node": 24,
+          "unoccludedLux": 4.452032085468496,
+          "contributingZones": 3
+        },
+        {
+          "node": 25,
+          "unoccludedLux": 5.189925499453295,
+          "contributingZones": 3
+        },
+        {
+          "node": 26,
+          "unoccludedLux": 4.687997849924877,
+          "contributingZones": 3
+        },
+        {
+          "node": 27,
+          "unoccludedLux": 3.4885279347143134,
+          "contributingZones": 3
+        },
+        {
+          "node": 28,
+          "unoccludedLux": 2.101748820965554,
+          "contributingZones": 2
+        },
+        {
+          "node": 29,
+          "unoccludedLux": 1.266093803619841,
+          "contributingZones": 2
+        },
+        {
+          "node": 30,
+          "unoccludedLux": 0.8893365388077452,
+          "contributingZones": 2
+        }
+      ]
+    },
+    {
+      "track": "wild",
+      "raised": true,
+      "lowQuality": false,
+      "draws": 11,
+      "triangles": 8032,
+      "shadowDraws": 10,
+      "shadowTriangles": 7840,
+      "mainPlusLocalShadowDrawUpperBound": 31,
+      "budget": {
+        "fixtures": 8,
+        "spots": 6,
+        "shadows": 1
+      },
+      "minimumUnoccludedLux": 0.7631640254316354,
+      "maximumUnoccludedLux": 4.742483592012104,
+      "samples": [
+        {
+          "node": 0,
+          "unoccludedLux": 4.380762188529567,
+          "contributingZones": 3
+        },
+        {
+          "node": 1,
+          "unoccludedLux": 4.253700650257117,
+          "contributingZones": 3
+        },
+        {
+          "node": 2,
+          "unoccludedLux": 4.236974826873561,
+          "contributingZones": 4
+        },
+        {
+          "node": 3,
+          "unoccludedLux": 3.8048062747919085,
+          "contributingZones": 4
+        },
+        {
+          "node": 4,
+          "unoccludedLux": 2.851368949214721,
+          "contributingZones": 2
+        },
+        {
+          "node": 5,
+          "unoccludedLux": 1.9042318823184499,
+          "contributingZones": 2
+        },
+        {
+          "node": 6,
+          "unoccludedLux": 1.2540147318214887,
+          "contributingZones": 4
+        },
+        {
+          "node": 7,
+          "unoccludedLux": 1.2815177237038302,
+          "contributingZones": 4
+        },
+        {
+          "node": 8,
+          "unoccludedLux": 1.965145399465888,
+          "contributingZones": 4
+        },
+        {
+          "node": 9,
+          "unoccludedLux": 3.0037908376297926,
+          "contributingZones": 3
+        },
+        {
+          "node": 10,
+          "unoccludedLux": 3.959436201542085,
+          "contributingZones": 3
+        },
+        {
+          "node": 11,
+          "unoccludedLux": 4.238373049315966,
+          "contributingZones": 3
+        },
+        {
+          "node": 12,
+          "unoccludedLux": 3.466702660676277,
+          "contributingZones": 2
+        },
+        {
+          "node": 13,
+          "unoccludedLux": 2.5129705725859983,
+          "contributingZones": 3
+        },
+        {
+          "node": 14,
+          "unoccludedLux": 2.5980467362118027,
+          "contributingZones": 2
+        },
+        {
+          "node": 15,
+          "unoccludedLux": 3.518693396280462,
+          "contributingZones": 2
+        },
+        {
+          "node": 16,
+          "unoccludedLux": 4.659652088467018,
+          "contributingZones": 2
+        },
+        {
+          "node": 17,
+          "unoccludedLux": 4.316466339578007,
+          "contributingZones": 3
+        },
+        {
+          "node": 18,
+          "unoccludedLux": 3.5263773914620797,
+          "contributingZones": 3
+        },
+        {
+          "node": 19,
+          "unoccludedLux": 3.7286502377836763,
+          "contributingZones": 4
+        },
+        {
+          "node": 20,
+          "unoccludedLux": 4.463419741258102,
+          "contributingZones": 4
+        },
+        {
+          "node": 21,
+          "unoccludedLux": 4.161494318954869,
+          "contributingZones": 3
+        },
+        {
+          "node": 22,
+          "unoccludedLux": 2.732562532767826,
+          "contributingZones": 3
+        },
+        {
+          "node": 23,
+          "unoccludedLux": 1.274558757022767,
+          "contributingZones": 3
+        },
+        {
+          "node": 24,
+          "unoccludedLux": 0.7631640254316354,
+          "contributingZones": 3
+        },
+        {
+          "node": 25,
+          "unoccludedLux": 0.8134167306187676,
+          "contributingZones": 3
+        },
+        {
+          "node": 26,
+          "unoccludedLux": 1.3355685165379052,
+          "contributingZones": 3
+        },
+        {
+          "node": 27,
+          "unoccludedLux": 2.721391891318575,
+          "contributingZones": 3
+        },
+        {
+          "node": 28,
+          "unoccludedLux": 4.277510768401486,
+          "contributingZones": 3
+        },
+        {
+          "node": 29,
+          "unoccludedLux": 4.742483592012104,
+          "contributingZones": 3
+        },
+        {
+          "node": 30,
+          "unoccludedLux": 3.524004865792611,
+          "contributingZones": 3
+        }
+      ]
+    },
+    {
+      "track": "wild",
+      "raised": true,
+      "lowQuality": true,
+      "draws": 11,
+      "triangles": 8032,
+      "shadowDraws": 0,
+      "shadowTriangles": 0,
+      "mainPlusLocalShadowDrawUpperBound": 11,
+      "budget": {
+        "fixtures": 8,
+        "spots": 4,
+        "shadows": 0
+      },
+      "minimumUnoccludedLux": 0.6747547762905324,
+      "maximumUnoccludedLux": 6.666348232080269,
+      "samples": [
+        {
+          "node": 0,
+          "unoccludedLux": 4.038850693369938,
+          "contributingZones": 2
+        },
+        {
+          "node": 1,
+          "unoccludedLux": 2.5879430584177636,
+          "contributingZones": 2
+        },
+        {
+          "node": 2,
+          "unoccludedLux": 1.563514268927954,
+          "contributingZones": 3
+        },
+        {
+          "node": 3,
+          "unoccludedLux": 1.3568450378226533,
+          "contributingZones": 3
+        },
+        {
+          "node": 4,
+          "unoccludedLux": 2.0025823103998457,
+          "contributingZones": 2
+        },
+        {
+          "node": 5,
+          "unoccludedLux": 3.41855966449252,
+          "contributingZones": 2
+        },
+        {
+          "node": 6,
+          "unoccludedLux": 4.858551035153573,
+          "contributingZones": 3
+        },
+        {
+          "node": 7,
+          "unoccludedLux": 5.783695389658754,
+          "contributingZones": 3
+        },
+        {
+          "node": 8,
+          "unoccludedLux": 5.241603078778663,
+          "contributingZones": 2
+        },
+        {
+          "node": 9,
+          "unoccludedLux": 3.898880628960438,
+          "contributingZones": 2
+        },
+        {
+          "node": 10,
+          "unoccludedLux": 2.422543262918273,
+          "contributingZones": 2
+        },
+        {
+          "node": 11,
+          "unoccludedLux": 1.373468300185267,
+          "contributingZones": 2
+        },
+        {
+          "node": 12,
+          "unoccludedLux": 0.8500426242748172,
+          "contributingZones": 2
+        },
+        {
+          "node": 13,
+          "unoccludedLux": 1.6356423831840174,
+          "contributingZones": 2
+        },
+        {
+          "node": 14,
+          "unoccludedLux": 2.860865858165859,
+          "contributingZones": 2
+        },
+        {
+          "node": 15,
+          "unoccludedLux": 4.770272820829993,
+          "contributingZones": 2
+        },
+        {
+          "node": 16,
+          "unoccludedLux": 6.52230110284412,
+          "contributingZones": 2
+        },
+        {
+          "node": 17,
+          "unoccludedLux": 5.872190297562266,
+          "contributingZones": 2
+        },
+        {
+          "node": 18,
+          "unoccludedLux": 3.706980968380786,
+          "contributingZones": 2
+        },
+        {
+          "node": 19,
+          "unoccludedLux": 1.6959159655616147,
+          "contributingZones": 2
+        },
+        {
+          "node": 20,
+          "unoccludedLux": 0.9267141490831057,
+          "contributingZones": 2
+        },
+        {
+          "node": 21,
+          "unoccludedLux": 0.7809100429804413,
+          "contributingZones": 2
+        },
+        {
+          "node": 22,
+          "unoccludedLux": 1.1611427386633948,
+          "contributingZones": 2
+        },
+        {
+          "node": 23,
+          "unoccludedLux": 2.718663897504526,
+          "contributingZones": 3
+        },
+        {
+          "node": 24,
+          "unoccludedLux": 5.209405788224205,
+          "contributingZones": 3
+        },
+        {
+          "node": 25,
+          "unoccludedLux": 6.666348232080269,
+          "contributingZones": 3
+        },
+        {
+          "node": 26,
+          "unoccludedLux": 5.636511990204985,
+          "contributingZones": 3
+        },
+        {
+          "node": 27,
+          "unoccludedLux": 3.277056459290873,
+          "contributingZones": 2
+        },
+        {
+          "node": 28,
+          "unoccludedLux": 1.4587772187730337,
+          "contributingZones": 2
+        },
+        {
+          "node": 29,
+          "unoccludedLux": 0.8531186784610325,
+          "contributingZones": 2
+        },
+        {
+          "node": 30,
+          "unoccludedLux": 0.6747547762905324,
+          "contributingZones": 1
+        }
+      ]
+    }
+  ]
+}

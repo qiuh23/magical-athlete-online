@@ -5,7 +5,7 @@ import { activeMechanismLayout } from '../mechanisms/layout.js';
 import source from './source-layout.json' with { type: 'json' };
 
 /** New recovery candidate, not the lost environment-v1 tested tree. */
-export const ENVIRONMENT_REVISION = 'environment-rebuilt-v3-20261113';
+export const ENVIRONMENT_REVISION = 'environment-segmented-seating-v1-20261113';
 /** Explicit local corrections. Scans may vary these in an isolated audit process;
  * rendering uses these exact fixed values, with no rule or actuator movement. */
 export const ENVIRONMENT_LOCAL_OFFSETS = {
@@ -18,7 +18,7 @@ export function environmentVenueOffset(track: TrackId | undefined, asset: string
 }
 export const TREE_ASSETS = ['tree_elm_rebuilt_lod2', 'tree_maple_rebuilt_lod2', 'tree_sapling_rebuilt_lod2'];
 export const FACILITY_ASSETS = ['bleachers', 'spectators', 'podium', 'officials_kiosk', 'scoreboard', 'grandstand_rostrum', 'official_rostrum', 'podium_plinth'];
-export const COMMON_ASSETS = [...TREE_ASSETS, 'start_gate', 'finish_gate'];
+export const COMMON_ASSETS = [...TREE_ASSETS, 'start_gate', 'finish_gate', 'bleachers', 'spectators', 'grandstand_rostrum'];
 export type EnvironmentOptions = { scale: number; lift: number; lowQuality: boolean; reversed?: boolean };
 export const isNaturalMap = (track: TrackId) => ['squiggle', 'boardwalks', 'bridges'].includes(track);
 export function environmentEnabled(search = typeof window === 'undefined' ? '' : window.location.search) {
@@ -27,7 +27,7 @@ export function environmentEnabled(search = typeof window === 'undefined' ? '' :
 /** No old contact certificate includes this rebuilt scenery, even while it loads. */
 export const environmentAllowsPhysicalContact = (candidate: boolean) => !candidate;
 export function mapEnvironmentAssets(track: TrackId) {
-  return isNaturalMap(track) ? [`${track}_base`, `${track}_landscape_reexport_v1`, `${track}_furniture`] : FACILITY_ASSETS;
+  return isNaturalMap(track) ? [`${track}_base`, `${track}_landscape_reexport_v1`, `${track}_furniture`] : FACILITY_ASSETS.filter(asset => !['bleachers','spectators','grandstand_rostrum'].includes(asset));
 }
 export const environmentAssets = (track: TrackId) => [...COMMON_ASSETS, ...mapEnvironmentAssets(track)];
 export const environmentUrl = (asset: string) => `/models/environment-rebuilt-v2/${asset}.glb`;
@@ -57,10 +57,8 @@ export function furnitureAnchors(track: TrackId) { return source[track].pockets.
 export function venuePlacements(lift: number) {
   const high = lift > 0;
   return [
-    // Keep the stand, people and support together. Historical +Z safety repair is
-    // retained as a conservative placement, not inherited collision authorization.
-    { asset: 'bleachers', position: [2.4, high ? 1.384 : .234, .22] },
-    { asset: 'spectators', position: [2.4, high ? 1.384 : .234, .22] },
+    // Preserve the accepted infield facilities. Spectator banks and their
+    // matching support now live in the separate perimeter seating builder.
     { asset: 'podium', position: [-7.7, high ? .484 : .234, -.10] },
     { asset: 'officials_kiosk', position: [-11.8, high ? 1.034 : .234, -.10] },
     { asset: 'scoreboard', position: [8.3, high ? .884 : .234, -.30] },

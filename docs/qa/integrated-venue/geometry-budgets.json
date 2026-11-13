@@ -1,0 +1,194 @@
+{
+  "scope": "Full-model constructed principal static geometry. Environment is included in courseAndEnvironment: do not add both. Instances expanded for triangle totals. Display models are independent audit objects, not runtime batched mesh counts. Excludes actors/HUD and omitted ornamental/graphic course layers. Not measured drawcalls, frame time, memory or FPS. Phone defaults to full models; economy remains a separate quality option.",
+  "maps": [
+    {
+      "track": "boardwalks",
+      "quality": "full",
+      "geometryHash": "1a633047408d787b5d6c317fa40018e962e03f7c450e7436730cb317ca0af2cd",
+      "environment": {
+        "meshObjects": 59,
+        "instancedMeshObjects": 22,
+        "instances": 104,
+        "expandedTriangles": 203795
+      },
+      "lights": {
+        "meshObjects": 15,
+        "instancedMeshObjects": 7,
+        "instances": 56,
+        "expandedTriangles": 8128
+      },
+      "courseAndEnvironment": {
+        "meshObjects": 72,
+        "instancedMeshObjects": 35,
+        "instances": 1215,
+        "expandedTriangles": 621513
+      },
+      "displayModelAuditMeshObjects": 318,
+      "displayModelTriangles": 101176,
+      "displayFoundationMeshObjects": 23,
+      "displayFoundationTriangles": 276
+    },
+    {
+      "track": "bridges",
+      "quality": "full",
+      "geometryHash": "c7e7ba7b06dc16f09c4923f5a8531525cb52e08e362c5b6b3e9156b474e5ada0",
+      "environment": {
+        "meshObjects": 54,
+        "instancedMeshObjects": 19,
+        "instances": 90,
+        "expandedTriangles": 193725
+      },
+      "lights": {
+        "meshObjects": 15,
+        "instancedMeshObjects": 7,
+        "instances": 56,
+        "expandedTriangles": 8128
+      },
+      "courseAndEnvironment": {
+        "meshObjects": 94,
+        "instancedMeshObjects": 19,
+        "instances": 90,
+        "expandedTriangles": 220997
+      },
+      "displayModelAuditMeshObjects": 0,
+      "displayModelTriangles": 0,
+      "displayFoundationMeshObjects": 0,
+      "displayFoundationTriangles": 0
+    },
+    {
+      "track": "mild",
+      "quality": "full",
+      "geometryHash": "a7761559b29b66b415c4c8a0b7e5fe6637fd95a76a6df4985090d9bc43729ee4",
+      "environment": {
+        "meshObjects": 53,
+        "instancedMeshObjects": 19,
+        "instances": 66,
+        "expandedTriangles": 173126
+      },
+      "lights": {
+        "meshObjects": 11,
+        "instancedMeshObjects": 7,
+        "instances": 52,
+        "expandedTriangles": 8032
+      },
+      "courseAndEnvironment": {
+        "meshObjects": 182,
+        "instancedMeshObjects": 19,
+        "instances": 66,
+        "expandedTriangles": 234818
+      },
+      "displayModelAuditMeshObjects": 0,
+      "displayModelTriangles": 0,
+      "displayFoundationMeshObjects": 0,
+      "displayFoundationTriangles": 0
+    },
+    {
+      "track": "squiggle",
+      "quality": "full",
+      "geometryHash": "f6e5d4612893fcc9e83a78449ba8b4dd327b469af6f4cdfb59c8b8f14ff6903a",
+      "environment": {
+        "meshObjects": 58,
+        "instancedMeshObjects": 22,
+        "instances": 84,
+        "expandedTriangles": 166614
+      },
+      "lights": {
+        "meshObjects": 15,
+        "instancedMeshObjects": 7,
+        "instances": 56,
+        "expandedTriangles": 8128
+      },
+      "courseAndEnvironment": {
+        "meshObjects": 71,
+        "instancedMeshObjects": 35,
+        "instances": 623,
+        "expandedTriangles": 385584
+      },
+      "displayModelAuditMeshObjects": 186,
+      "displayModelTriangles": 41972,
+      "displayFoundationMeshObjects": 13,
+      "displayFoundationTriangles": 156
+    },
+    {
+      "track": "twisty-twirl",
+      "quality": "full",
+      "geometryHash": "d97785e29c35aa77ed72e50e7c278bceb0771a896030d6fb983432d2a8409d3a",
+      "environment": {
+        "meshObjects": 53,
+        "instancedMeshObjects": 19,
+        "instances": 57,
+        "expandedTriangles": 126878
+      },
+      "lights": {
+        "meshObjects": 11,
+        "instancedMeshObjects": 7,
+        "instances": 52,
+        "expandedTriangles": 8032
+      },
+      "courseAndEnvironment": {
+        "meshObjects": 89,
+        "instancedMeshObjects": 19,
+        "instances": 57,
+        "expandedTriangles": 150046
+      },
+      "displayModelAuditMeshObjects": 0,
+      "displayModelTriangles": 0,
+      "displayFoundationMeshObjects": 0,
+      "displayFoundationTriangles": 0
+    },
+    {
+      "track": "whirly-world",
+      "quality": "full",
+      "geometryHash": "83982297d3da983de730bc6a66a3fdb338f981d5c523a1cde668cf72d5a37a08",
+      "environment": {
+        "meshObjects": 60,
+        "instancedMeshObjects": 24,
+        "instances": 82,
+        "expandedTriangles": 153022
+      },
+      "lights": {
+        "meshObjects": 11,
+        "instancedMeshObjects": 7,
+        "instances": 52,
+        "expandedTriangles": 8032
+      },
+      "courseAndEnvironment": {
+        "meshObjects": 77,
+        "instancedMeshObjects": 37,
+        "instances": 590,
+        "expandedTriangles": 377480
+      },
+      "displayModelAuditMeshObjects": 228,
+      "displayModelTriangles": 45648,
+      "displayFoundationMeshObjects": 12,
+      "displayFoundationTriangles": 144
+    },
+    {
+      "track": "wild",
+      "quality": "full",
+      "geometryHash": "630ab7c910d8c0542292c93cba47db7cebd3d423c1a77884f2a22ebe568a98b7",
+      "environment": {
+        "meshObjects": 60,
+        "instancedMeshObjects": 24,
+        "instances": 82,
+        "expandedTriangles": 153380
+      },
+      "lights": {
+        "meshObjects": 11,
+        "instancedMeshObjects": 7,
+        "instances": 52,
+        "expandedTriangles": 8032
+      },
+      "courseAndEnvironment": {
+        "meshObjects": 77,
+        "instancedMeshObjects": 37,
+        "instances": 668,
+        "expandedTriangles": 374310
+      },
+      "displayModelAuditMeshObjects": 167,
+      "displayModelTriangles": 59216,
+      "displayFoundationMeshObjects": 14,
+      "displayFoundationTriangles": 168
+    }
+  ]
+}

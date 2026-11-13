@@ -17,24 +17,30 @@ export function PawnContact() {
   </mesh>;
 }
 
-/** Only sustained animation load can downgrade; idle demand frames are not a frame-rate measurement. */
-export function AdaptiveQuality({ lowQuality, onSlow, root }: { lowQuality: boolean; onSlow: () => void; root: React.RefObject<HTMLElement | null> }) {
+/** Read-only frame-cost telemetry. Demand frames measure time between requested
+ * renders (including the 20 Hz day/night clock), not GPU frame throughput.
+ * Quality and content are controlled only by the user's explicit setting. */
+export function AdaptiveQuality({ lowQuality, root }: { lowQuality: boolean; root: React.RefObject<HTMLElement | null> }) {
   const sample = useRef({ frames: 0, slow: 0, elapsed: 0 });
   const { gl } = useThree();
-  useFrame((_, delta) => {
-    if (root.current) root.current.dataset.quality = lowQuality ? 'economy' : 'studio';
-    if (lowQuality) return;
+  useFrame((state, delta) => {
+    if (root.current) {
+      root.current.dataset.quality = lowQuality ? 'economy' : 'studio';
+      root.current.dataset.pixelRatio = gl.getPixelRatio().toFixed(2);
+    }
     const s = sample.current;
-    if (delta > .2) { s.frames = 0; s.slow = 0; s.elapsed = 0; return; }
+    if (state.frameloop !== 'always' || lowQuality || !Number.isFinite(delta) || delta <= 0 || delta > .2) {
+      s.frames = 0; s.slow = 0; s.elapsed = 0;
+      return;
+    }
     s.frames++; s.elapsed += delta; if (delta > .038) s.slow++;
     if (s.frames >= 90) {
-      if (s.slow > 60) {
-        if (root.current) { root.current.dataset.adaptiveReason = 'sustained-frame-cost'; root.current.dataset.sampleFrameMs = (s.elapsed * 1000 / s.frames).toFixed(1); }
-        onSlow();
+      if (root.current) {
+        root.current.dataset.sampleFrameMs = (s.elapsed * 1000 / s.frames).toFixed(1);
+        root.current.dataset.adaptiveReason = s.slow > 60 ? 'sustained-frame-cost-observed' : 'continuous-frames';
       }
       s.frames = 0; s.slow = 0; s.elapsed = 0;
     }
-    if (root.current) root.current.dataset.pixelRatio = gl.getPixelRatio().toFixed(2);
   });
   return null;
 }
