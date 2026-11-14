@@ -93,7 +93,7 @@ const progress = (start: number, duration: number, clock: PresentationClock) => 
 const occupancy = pawnOccupancy;
 
 
-export function Board3D({ clock = wallPresentationClock, paused = false, room, racers, beat, queue, startedAt, durationMs, lowQuality, onQualitySuggestion, reducedMotion, muted, onDetail, onSkipIntro, onIntroReady, onDiceSettled, introReady = true, appearanceMode = 'auto', lightingClock, lightingRunning, onChooseRoute, choiceBusy = false }: Props) {
+export function Board3D({ clock = wallPresentationClock, paused = false, room, racers, beat, queue, startedAt, durationMs, lowQuality:requestedLowQuality, onQualitySuggestion, reducedMotion, muted, onDetail, onSkipIntro, onIntroReady, onDiceSettled, introReady = true, appearanceMode = 'auto', lightingClock, lightingRunning, onChooseRoute, choiceBusy = false }: Props) {
   const [resetKey, setResetKey] = useState(0);
   const [sceneFailed, setSceneFailed] = useState(false);
   const retryScene = () => { setSceneFailed(false); setResetKey(n => n + 1); };
@@ -118,16 +118,19 @@ export function Board3D({ clock = wallPresentationClock, paused = false, room, r
   const mechanismLoad=mechanismStatus.key===loadKey?mechanismStatus.state:'loading';
   const setMechanismLoad=useCallback((state:'loading'|'ready'|'failed')=>setMechanismStatus(previous=>previous.key===loadKey&&(previous.state===state||previous.state==='failed'&&state==='ready')?previous:{key:loadKey,state}),[loadKey]);
   const mechanismOnReady=useCallback(()=>setMechanismLoad('ready'),[setMechanismLoad]);
+  const mechanismCandidate = mechanismsEnabled() && activeMechanismLayout(room.track).lift > 0;
+  const directedBeat=!!(environmentCandidate&&mechanismCandidate&&mechanismActions(room.track,beat,racers).some(a=>a.anchor.kind==='gain'||a.anchor.kind==='punch'&&!['wild:23','wild:24'].includes(a.anchor.id)));
+  const directedQualityLock=useMemo(()=>new TripSweepLayout(),[]);
+  const lowQuality=directedQualityLock.sample(`${mechanismScope(room)}:${beat?.key??''}`,requestedLowQuality,directedBeat);
   const padKey=`${room.track}:${lowQuality}:${mechanismRetry}:${resetKey}`;
   const padScope=useRef(padKey);padScope.current=padKey;
   const padLoad=sceneAssetState(padKey,padStatus),padFailed=padLoad==='failed';
   const padOnReady=useCallback((ready:boolean)=>{if(padScope.current===padKey)setPadStatus({key:padKey,state:ready?'ready':'loading'});},[padKey]);
   const padOnFailure=useCallback(()=>{if(padScope.current===padKey)setPadStatus({key:padKey,state:'failed'});},[padKey]);
   const spectator = room.role === 'spectator';
-  const mechanismCandidate = mechanismsEnabled() && activeMechanismLayout(room.track).lift > 0;
   const [requestedCompact, setCompact] = useState(() => matchMedia('(max-width: 650px)').matches);
   const tripLayoutLock=useMemo(()=>new TripSweepLayout(),[]);
-  const compact=tripLayoutLock.sample(`${mechanismScope(room)}:${beat?.key??''}`,requestedCompact,!!(environmentCandidate&&mechanismCandidate&&beat?.kind==='trip'&&beat.events.some(e=>e.type==='trip'&&e.source==='track')));
+  const compact=tripLayoutLock.sample(`${mechanismScope(room)}:${beat?.key??''}`,requestedCompact,directedBeat||!!(environmentCandidate&&mechanismCandidate&&beat?.kind==='trip'&&beat.events.some(e=>e.type==='trip'&&e.source==='track')));
   const physicalContacts = mechanismCandidate && environmentAllowsPhysicalContact(environmentCandidate);
   const sculptureReaders=useRef(new Map<string,()=>boolean>());
   const contactReady=useCallback(()=>sculptureReaders.current.get(`${beat?.motions[0]?.racerId}:${lowQuality}`)?.()===true,[beat?.motions[0]?.racerId,lowQuality]);

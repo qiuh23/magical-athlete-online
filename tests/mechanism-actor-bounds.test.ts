@@ -53,7 +53,7 @@ test('geometry feedback is read-only, ignores hidden branches, and safely handle
  for(let i=0;i<20;i++){same(actors.surface('racer',origin,fallback),[-.5,0,0]);same(actors.surface('racer',new Vector3(),fallback),[0,0,0]);}
  same(origin,originBefore.toArray());same(fallback,fallbackBefore.toArray());assert.equal(JSON.stringify(state),before);assert.equal(body.userData.state,state);
  const unknown=actors.surface('not-yet-loaded',origin,fallback);same(unknown,fallback.toArray());assert.notEqual(unknown,fallback);
- assert.deepEqual(Object.getOwnPropertyNames(Object.getPrototypeOf(actors)).sort(),['bind','bounds','capture','clearTripSweep','constructor','setTripSweep','surface','tripHit','tripPlans']);cleanup(body);
+ assert.deepEqual(Object.getOwnPropertyNames(Object.getPrototypeOf(actors)).sort(),['bind','bounds','capture','captureParts','clearTripSweep','constructor','enterDirectedBeat','setTripSweep','surface','tripHit','tripPlans']);cleanup(body);
 });
 
 test('first-frame distant skinned actors match the renderer matrix update order before any rendered frame',async()=>{

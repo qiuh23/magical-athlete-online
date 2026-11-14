@@ -1,11 +1,17 @@
 import {Box3,Matrix4,Mesh,Ray,SkinnedMesh,Triangle,Vector3,type Object3D} from 'three';
 
+import {rigidShapeEnvelopes} from './rigid-shape-envelopes.js';
+import {geometryBounds,type DirectedActor,type DirectedPlan} from '../environment/directed-mechanism.js';
 import type {SweepActor,TripSweepPlan} from '../environment/trip-sweep.js';
 
 /** Visible geometry snapshots and local feedback plans. Authoritative events
  * alone select targets; there is no character allowlist or rule mutation. */
 export class MechanismActorBounds {
  private sweeps=new Map<string,TripSweepPlan>();
+ /** Kept outside cloned GLBs so same-beat quality remounts join the same pose. */
+ readonly directedPlans=new Map<string,DirectedPlan>();
+ private directedBeat='';
+ enterDirectedBeat(key:string){if(key!==this.directedBeat){this.directedBeat=key;this.directedPlans.clear();}}
  setTripSweep(plan:TripSweepPlan){if(!plan.bystanders.length&&!plan.unreached.length)this.sweeps.set(plan.anchor,plan);}
  clearTripSweep(anchor:string,plan?:TripSweepPlan){if(!plan||this.sweeps.get(anchor)===plan)this.sweeps.delete(anchor);}
  tripHit(key:string,id:string){for(const plan of this.sweeps.values())if(plan.key===key&&plan.contacts.has(id))return plan.contacts.get(id);}
@@ -34,6 +40,22 @@ export class MechanismActorBounds {
    for(let i=1;i<clipped.length-1;i++){const t=new Triangle(clipped[0]!,clipped[i]!,clipped[i+1]!);lower.push(t);[t.a,t.b,t.c].forEach(v=>lowerBounds.expandByPoint(v));}
   }
   return{id,triangles,lower,bounds,lowerBounds};
+ }
+ /** Cheap frozen per-mesh envelopes for non-contact directed displays. Rigid
+  * geometry is cached by GLB identity; evaluated skin bounds are read once per
+  * event. This does not replace the trip's exact lower-triangle snapshot. */
+ captureParts(id:string,world:Matrix4):DirectedActor|undefined{
+  const body=this.bodies.get(id);if(!body)return;let sculptures=0,pending=false;
+  body.traverse(n=>{if(n.userData.sculptureState){sculptures++;if(n.userData.sculptureState!=='ready')pending=true;}});
+  if(!sculptures||pending)return;
+  body.updateWorldMatrix(true,false);body.updateMatrixWorld(true);
+  const relative=world.clone().multiply(body.matrixWorld.clone().invert()),parts:Box3[]=[],bounds=new Box3();
+  body.traverse(n=>{if(!(n instanceof Mesh))return;for(let p:Object3D|null=n;p;p=p.parent)if(!p.visible)return;
+   let local:Box3;if(n instanceof SkinnedMesh){n.computeBoundingBox();if(!n.boundingBox)return;local=n.boundingBox;}else local=geometryBounds(n.geometry);
+   const transform=relative.clone().multiply(n.matrixWorld),envelopes=n instanceof SkinnedMesh?[local]:rigidShapeEnvelopes(n.geometry);
+   for(const envelope of envelopes){const box=envelope.clone().applyMatrix4(transform);parts.push(box);bounds.union(box);}
+  });
+  return bounds.isEmpty()?undefined:{id,bounds,parts};
  }
  private bodies=new Map<string,Object3D>();
  bind(id:string,body:Object3D){this.bodies.set(id,body);return()=>{if(this.bodies.get(id)===body)this.bodies.delete(id);};}

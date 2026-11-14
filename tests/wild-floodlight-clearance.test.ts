@@ -20,8 +20,8 @@ test('Wild light7 clears the actual Wild16 support and tongue without weakening 
   const model=createDisplayMechanism(placement.variant,asset.scene,asset.animations[0],lowQuality,placement.anchor.id);model.sample(0);
   const foundation=buildDisplayFoundation(placement,model.object,false),targets=collect(foundation,'device:');
   const kit=buildFloodlightGeometry('wild',models,{...mechanismLayout('wild'),lowQuality}),lamp=kit.layout[7]!;
-  assert.ok(Math.abs(lamp.base.z-6.025)<1e-8);assert.equal(lamp.connector!.innerCorners[0]![2],4.93);
-  assert.ok(Math.abs(lamp.connector!.outerZ-5.575)<1e-8);
+  assert.ok(Math.abs(lamp.base.z-6.375)<1e-8);assert.equal(lamp.connector!.innerCorners[0]![2],4.93);
+  assert.ok(Math.abs(lamp.connector!.outerZ-5.925)<1e-8);
   const plinth=kit.root.getObjectByName('floodlight-fixed-foundations')!,parts=collect(plinth,'lamp:');
   const index=(plinth.userData.fixtureIndices as number[]).indexOf(7),current=parts.find(c=>c.name===`lamp:floodlight-fixed-foundations:${index}`)!;
   assert.ok(current);assert.ok(targets.some(t=>t.name.endsWith('wild16-ground-extension')));

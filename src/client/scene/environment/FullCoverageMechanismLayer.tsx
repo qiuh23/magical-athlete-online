@@ -2,6 +2,7 @@ import {Component,Suspense,useCallback,useEffect,useMemo,type ReactNode} from 'r
 import {useGLTF} from '@react-three/drei';
 import {useFrame,useThree} from '@react-three/fiber';
 import {Group,Matrix4,Mesh,Quaternion,Vector3} from 'three';
+import type {DirectedActor,DirectedPlan} from './directed-mechanism.js';
 import {boardPoint} from '../math.js';
 import {pawnOccupancy} from '../camera.js';
 import {pawnFallPose} from '../pawn-fall.js';
@@ -31,7 +32,7 @@ function LoadedKind({variant,placements,track,lowQuality,racers,beat,clock,start
  const actions=useMemo(()=>mechanismActions(track,beat,racers),[track,beat,racers]);
  const activeIds=new Set(actions.map(a=>a.anchor.id)),signature=[...activeIds].sort().join('|');
  const kit=useMemo(()=>{
-  const root=new Group(),models:ReturnType<typeof createDisplayMechanism>[]=[],foundations:Group[]=[],batches:{mesh:ReturnType<typeof createDisplayBatch>;local:Matrix4;placements:DisplayPlacement[]}[]=[],active:{placement:DisplayPlacement;holder:Group;model:ReturnType<typeof createDisplayMechanism>;outlet?:Vector3;plan?:TripSweepPlan;aborted?:boolean}[]=[];
+  const root=new Group(),models:ReturnType<typeof createDisplayMechanism>[]=[],foundations:Group[]=[],batches:{mesh:ReturnType<typeof createDisplayBatch>;local:Matrix4;placements:DisplayPlacement[]}[]=[],active:{placement:DisplayPlacement;holder:Group;model:ReturnType<typeof createDisplayMechanism>;outlet?:Vector3;plan?:TripSweepPlan;directed?:DirectedPlan[];directionAttempted?:boolean;aborted?:boolean}[]=[];
   // Wild5 has an individual static-foot adapter and park, so it is never silently
   // batched with another native trip's different transforms.
   const groups=(variant==='trip'||variant==='telescopic-trip')?placements.map(p=>[p]):[placements];
@@ -44,11 +45,44 @@ function LoadedKind({variant,placements,track,lowQuality,racers,beat,clock,start
     active.push({placement:p,holder,model,outlet});}
   }
   let visibility:string|undefined;const matrix=new Matrix4();
-  return{root,active,update(physical:(id:string)=>boolean,t:number,reduced:boolean){const hidden=placements.filter(p=>physical(p.anchor.id)).map(p=>p.anchor.id),key=hidden.join('|');
+  let actorSnapshots:DirectedActor[]|undefined;
+  const freezeActors=()=>{
+   if(actorSnapshots)return actorSnapshots;if(!actorBounds)return;
+   const snapshots=racers.filter(r=>!r.eliminated).map(r=>{
+    const node=beat?.motions.find(m=>m.racerId===r.id)?.from??r.position,p=boardPoint(node,compact,track),o=pawnOccupancy(r,racers,node,compact,track),fall=r.tripped?pawnFallPose(1,'down'):undefined;
+    const world=new Matrix4().compose(new Vector3(p[0]+o.x,p[1]+.005+(fall?.lift??0)*o.scale,p[2]+o.z),new Quaternion().setFromAxisAngle(new Vector3(1,0,0),fall?.tilt??0),new Vector3(o.scale,o.scale,o.scale));
+    return actorBounds.captureParts(r.id,world);
+   });
+   if(snapshots.every((s):s is DirectedActor=>!!s))actorSnapshots=snapshots;
+   return actorSnapshots;
+  };
+  return{root,active,update(physical:(id:string)=>boolean,t:number,reduced:boolean,registry?:Map<string,Vector3>,sampleTime?:()=>number){const hidden=placements.filter(p=>physical(p.anchor.id)).map(p=>p.anchor.id),key=hidden.join('|');
    if(key!==visibility){visibility=key;for(const batch of batches){let count=0;for(const p of batch.placements)if(!hidden.includes(p.anchor.id)){matrix.multiplyMatrices(p.matrix,batch.local);batch.mesh.setMatrixAt(count++,matrix);}batch.mesh.count=count;batch.mesh.instanceMatrix.needsUpdate=true;}for(const f of foundations)f.visible=!hidden.includes(f.userData.anchor);}
    for(const a of active){
     a.holder.visible=!hidden.includes(a.placement.anchor.id);if(!a.holder.visible)continue;
-    if(a.placement.anchor.kind==='trip'&&actorBounds){
+    if('directional' in a.model&&a.model.directional){
+     const rig=a.model.directional;
+     if(!a.directionAttempted&&!reduced){
+      actorBounds?.enterDirectedBeat(beat?.key??'');
+      const ids=[...new Set(actions.filter(action=>action.anchor.id===a.placement.anchor.id).flatMap(action=>action.targets))];
+      const identity=JSON.stringify([track,compact,a.placement.anchor.id,ids,racers.map(r=>[r.id,r.position,r.characterId,r.tripped,r.flags])]);
+      const cached=actorBounds?.directedPlans.get(identity),snapshots=cached?undefined:freezeActors();
+      if(cached||snapshots&&t<=.08){
+       const targets=snapshots?.filter(s=>ids.includes(s.id))??[];
+       const plan=cached??(targets.length===ids.length?rig.plan(a.placement.matrix,targets,snapshots!):undefined);
+       a.directed=plan?[plan]:[];a.directionAttempted=true;if(plan)actorBounds?.directedPlans.set(identity,plan);
+       a.holder.userData.directedMechanism=a.directed;
+       if(plan?.kind==='punch'&&plan.mode==='directed'){
+        rig.sample(plan,.22);const outlet=displayPunchOutlet(a.model.object).applyMatrix4(a.placement.matrix);
+        a.outlet=outlet;registry?.set(a.placement.anchor.id,outlet);
+       }
+      }else if(t>.08){a.directionAttempted=true;a.holder.userData.directionUnavailable='Actor geometry was not ready before deployment';}
+     }
+     // One complete, slow sequence toward all authorized targets. Visual cues
+     // still launch at .22, and authoritative movement still starts at .48.
+     if(!reduced&&a.directed?.length)rig.sample(a.directed[0]!,t);
+     else a.model.sample(0);
+    }else if(a.placement.anchor.kind==='trip'&&actorBounds){
      a.plan??=actorBounds.tripPlans(beat?.key??'').find(plan=>plan.anchor===a.placement.anchor.id);
      if(!a.plan&&!a.aborted&&!reduced&&t>.12){a.aborted=true;a.holder.userData.tripSweepUnavailable='Geometry was not ready before deployment';onTripUnavailable?.(beat?.key??'','loading');}
      if(!a.plan&&!a.aborted&&!reduced){
@@ -67,14 +101,15 @@ function LoadedKind({variant,placements,track,lowQuality,racers,beat,clock,start
      a.model.sample(reduced?0:t,!reduced&&!!a.plan&&!a.aborted,1,a.plan);
     }else a.model.sample(reduced?0:t,!reduced);
    }
+   // A cold plan may use measurable CPU time. Join the shared clock again after
+   // all planning, so later Pawn/cue callbacks do not advance past a stale rig.
+   const current=sampleTime?.()??t;
+   if(current!==t)for(const a of active)if(a.holder.visible&&'directional'in a.model&&a.model.directional&&!reduced&&a.directed?.length)a.model.directional.sample(a.directed[0]!,current);
   },dispose(){models.forEach(m=>m.dispose());batches.forEach(b=>b.mesh.dispose());foundations.forEach(disposeDisplayFoundation);}};
  },[asset,variant,placements,signature,lowQuality,compact,beat?.key,actorBounds]);
  useEffect(()=>{
-  const owned=new Map<string,Vector3>();
-  for(const item of kit.active)if(item.outlet){
-   owned.set(item.placement.anchor.id,item.outlet);outlets?.set(item.placement.anchor.id,item.outlet);
-  }
-  return()=>{for(const [anchor,point]of owned)if(outlets?.get(anchor)===point)outlets.delete(anchor);};
+  for(const item of kit.active)if(item.outlet)outlets?.set(item.placement.anchor.id,item.outlet);
+  return()=>{for(const item of kit.active)if(outlets?.get(item.placement.anchor.id)===item.outlet)outlets?.delete(item.placement.anchor.id);};
  },[kit,outlets]);
  useEffect(()=>{onKindReady(variant);},[onKindReady,variant]);
  // Only replacement/unmount owns GPU and adapter disposal. A fresh registry or
@@ -82,7 +117,7 @@ function LoadedKind({variant,placements,track,lowQuality,racers,beat,clock,start
  useEffect(()=>{invalidate();return()=>kit.dispose();},[kit,invalidate]);
  // Original physical drivers sample at priority -1. This display follows their
  // current state so exactly one complete assembly owns the anchor in each frame.
- useFrame(()=>kit.update(physicalVisible,playback.sample(beat?.key??'',clock.now(),startedAt,durationMs,paused,reducedMotion),reducedMotion));
+ useFrame(()=>{const sampleTime=()=>playback.sample(beat?.key??'',clock.now(),startedAt,durationMs,paused,reducedMotion);kit.update(physicalVisible,sampleTime(),reducedMotion,outlets,sampleTime);});
  return <primitive object={kit.root} dispose={null}/>;
 }
 /** Only a temporary same-footprint loading silhouette. The original authored
