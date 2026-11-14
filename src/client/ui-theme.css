@@ -335,3 +335,59 @@ button:active:not(:disabled) { filter: brightness(.96); }
     max-height:calc(60dvh - var(--race-hud-height,44px) - 40px - env(safe-area-inset-top));
   }
 }
+
+/* Menu-only density: one quick row, then a single open disclosure at a time.
+   Container sizing matters here: the panel is narrow even on a wide desktop. */
+.race-menu-panel .race-menu-content { padding:8px 12px 12px; }
+.race-menu-panel .race-menu-shortcuts { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:4px 0 12px; }
+.race-menu-panel .race-menu-shortcuts .button { display:flex;flex-direction:column;justify-content:center;gap:5px;min-width:0;min-height:66px;padding:8px 4px;border:1px solid var(--ui-border);border-radius:10px;box-shadow:none;background:var(--ui-control);color:var(--ui-text);font:600 14px/1.4 var(--ui-font); }
+.race-menu-panel .race-menu-content > .race-menu-section { margin:0;padding:0;border:0;border-top:1px solid var(--ui-border);border-radius:0;background:transparent;min-width:0; }
+.race-menu-panel .race-menu-section > summary { display:flex;align-items:center;gap:10px;min-height:50px;padding:8px 2px;list-style:none;font:600 14px/1.5 var(--ui-font);color:var(--ui-text); }
+.race-menu-panel .race-menu-section > summary::-webkit-details-marker { display:none; }
+.race-menu-panel .race-menu-section > summary > :is(span,strong) { min-width:0;font:inherit; }
+.race-menu-panel .race-menu-section > summary::after { content:'';width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);margin-left:auto;margin-right:5px;flex:none; }
+.race-menu-panel .race-menu-section[open] > summary::after { transform:rotate(225deg); }
+.race-menu-panel .race-menu-section > summary > .ui-icon { flex:none;width:20px;height:20px;color:var(--ui-text-muted); }
+.race-menu-panel .race-menu-section-body { min-width:0;padding:2px 0 12px; }
+.race-menu-panel .race-menu-section-body h3 { margin:8px 0;font:600 13px/1.5 var(--ui-font); }
+.race-menu-panel :is(button,summary,select):focus-visible { outline:3px solid var(--ui-accent);outline-offset:2px; }
+.race-menu-panel .presentation-settings { display:grid;grid-template-columns:minmax(0,1fr);gap:4px;margin:0 0 8px;padding:0;border:0;background:transparent; }
+.race-menu-panel .presentation-settings > label { display:flex;align-items:center;gap:10px;min-width:0;min-height:44px;padding:2px 0;font:400 14px/1.5 var(--ui-font); }
+.race-menu-panel .presentation-settings > label:has(select) { flex-wrap:wrap;justify-content:space-between; }
+.race-menu-panel .presentation-settings select { max-width:100%;min-height:44px;font-size:13px; }
+.race-menu-panel .presentation-settings input { width:18px;height:18px;margin:0;flex:none; }
+.race-menu-panel :is(.race-menu-links,.race-menu-danger) { display:grid;grid-template-columns:minmax(0,1fr);gap:4px;margin:0; }
+.race-menu-panel .race-menu-links .button,.race-menu-panel .race-menu-section-body > .landscape-control .button,.race-menu-panel .race-menu-section-body > .landscape-control.button { justify-content:flex-start;min-width:0;min-height:44px;padding:10px;border:0;border-radius:8px;box-shadow:none;background:var(--ui-control);font:500 14px/1.5 var(--ui-font);white-space:normal;text-align:left; }
+.race-menu-panel .race-menu-action-meta { margin-left:auto;font-size:12px;color:var(--ui-text-muted); }
+.race-menu-panel .race-menu-danger { margin-top:8px;padding-top:8px;border-top:1px solid var(--ui-border); }
+.race-menu-panel .race-menu-danger .end-room-button { margin:0;min-height:44px;padding:10px;border:0;box-shadow:none;border-radius:8px;text-align:left;font:500 14px/1.5 var(--ui-font); }
+.race-menu-panel :is(.race-menu-note,.race-menu-footer) { margin:10px 0 0;font:400 12px/1.6 var(--ui-font);color:var(--ui-text-muted);overflow-wrap:anywhere; }
+.race-menu-panel .race-menu-footer { padding-top:8px;border-top:1px solid var(--ui-border); }
+.race-menu-panel .race-menu-config-title { display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 10px;margin:0 0 8px;font:600 14px/1.5 var(--ui-font); }
+.race-menu-panel .race-menu-config-title > span { font-size:12px;font-weight:400;color:var(--ui-text-muted); }
+.race-menu-panel .race-menu-schedule { display:grid;gap:4px;list-style:none;margin:0;padding:0; }
+.race-menu-panel .race-menu-schedule li { display:flex;align-items:center;gap:8px;min-width:0;min-height:36px;padding:6px 8px;border-radius:8px;background:var(--ui-control);font:400 13px/1.4 var(--ui-font); }
+.race-menu-panel .race-menu-schedule li[aria-current] { background:var(--ui-control-active); }
+.race-menu-panel .race-menu-round { display:grid;place-items:center;flex:none;min-width:20px;height:22px;color:var(--ui-text-muted);font-size:12px; }
+.race-menu-panel .race-menu-schedule li > span:nth-child(2) { min-width:0;overflow-wrap:anywhere; }
+.race-menu-panel .race-menu-schedule small { display:block;font-size:12px;color:var(--ui-text-muted); }
+.race-menu-panel .race-menu-schedule b { margin-left:auto;flex:none;font-size:12px;font-weight:500; }
+.race-menu-panel .race-menu-config-facts { display:grid;grid-template-columns:64px minmax(0,1fr);gap:8px;margin:12px 0 0;font:400 13px/1.6 var(--ui-font); }
+.race-menu-panel .race-menu-config-facts dt { color:var(--ui-text-muted); }.race-menu-panel .race-menu-config-facts dd { margin:0;overflow-wrap:anywhere; }
+/* Editable next-game settings still fit the panel, independent of viewport. */
+.race-menu-panel .room-config-fields { margin:4px 0 12px; }
+.race-menu-panel .room-config-fields fieldset { padding:8px; }
+.race-menu-panel :is(.preset-options,.map-options) { grid-template-columns:repeat(2,minmax(0,1fr));gap:6px; }
+.race-menu-panel .room-config-fields .preset-option { display:flex;flex-direction:row;gap:6px;min-height:64px;padding:7px; }
+.race-menu-panel .preset-option > .track-thumbnail { display:none; }
+.race-menu-panel .preset-option > span { min-width:0; }
+.race-menu-panel .preset-option strong { font-size:14px;white-space:normal;overflow-wrap:anywhere; }
+.race-menu-panel .preset-option small { font-size:12px;white-space:normal; }
+.race-menu-panel .pack-options { grid-template-columns:minmax(0,1fr); }
+.race-menu-panel .map-card strong { font-size:13px;word-break:normal;overflow-wrap:anywhere; }
+.race-menu-panel .map-card-meta { font-size:12px; }
+.race-menu-panel .config-actions { flex-direction:column;align-items:stretch;gap:6px; }
+.race-menu-panel .config-actions .button { white-space:normal; }
+.race-menu-panel .race-count-row label { flex-wrap:wrap; }
+.race-menu-panel .config-actions p { margin:0; }
+.race-menu-panel .locked-race-order { margin:0 0 12px; }

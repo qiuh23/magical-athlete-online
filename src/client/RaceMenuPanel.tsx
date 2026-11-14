@@ -1,13 +1,12 @@
 import { useEffect, useRef, type ReactNode } from 'react';
 import { Icon } from './Icons.js';
-import { installRaceMenuDismissal } from './race-menu-dismissal.js';
+import { canDismissRaceMenu, installRaceMenuDismissal } from './race-menu-dismissal.js';
 
 export function RaceMenuPanel({ children, onClose }: { children: ReactNode; onClose: () => void }) {
   const panel = useRef<HTMLElement>(null), closeButton = useRef<HTMLButtonElement>(null);
   const restoreFocus = useRef(true), close = useRef<(restore?: boolean) => boolean>(() => false);
   close.current = (restore = true) => {
-    if (panel.current?.querySelector('[data-submitting="true"]')) return false;
-    if (panel.current?.querySelector('[data-unsaved="true"]') && !window.confirm('放弃未保存的修改？')) return false;
+    if (!canDismissRaceMenu(panel.current)) return false;
     restoreFocus.current = restore; onClose(); return true;
   };
   useEffect(() => {
