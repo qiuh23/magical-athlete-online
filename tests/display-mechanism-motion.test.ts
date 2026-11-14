@@ -77,7 +77,8 @@ test('glove release uses the real sampled surface and is independent of parent w
   for(const scale of [1,.65]){
    model.sample(.22,true,scale);const outlet=displayPunchOutlet(model.object);
    const glove=model.object.getObjectByName('PUNCH_SLIDER_X__coral_fixed_batch')!,bounds=new Box3().setFromObject(glove,true),center=bounds.getCenter(new Vector3());
-   close(outlet.toArray(),[bounds.max.x,center.y,center.z],`${variant} actual front`);
+   const attribute=(glove as Mesh).geometry.getAttribute('position'),front=new Vector3();let max=-Infinity,count=0;for(let i=0;i<attribute.count;i++)max=Math.max(max,attribute.getX(i));for(let i=0;i<attribute.count;i++)if(Math.abs(attribute.getX(i)-max)<1e-6){front.add(new Vector3().fromBufferAttribute(attribute,i));count++;}front.divideScalar(count).applyMatrix4(glove.matrixWorld);
+   close(outlet.toArray(),front.toArray(),`${variant} actual authored front vertices`);
    const holder=new Group();holder.position.set(12,4,-7);holder.rotation.y=.8;holder.add(model.object);holder.updateMatrixWorld(true);
    close(displayPunchOutlet(model.object).toArray(),outlet.toArray(),`${variant} mount-independent outlet`);holder.remove(model.object);model.object.updateMatrixWorld(true);
    model.sample(.08,true,scale);const retracted=displayPunchOutlet(model.object);assert.ok(outlet.x-retracted.x>.22*scale,`${variant} complete visible fist stroke`);

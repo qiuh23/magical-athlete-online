@@ -1,3 +1,4 @@
+import {createDirectedMechanism,NATIVE_PUNCH_PARK_BOOM,authoredPunchFront} from './directed-mechanism.js';
 import {createTripSweepRig,sampleTripSweep,type TripSweepPlan} from './trip-sweep.js';
 import {boardPoint} from '../math.js';
 import {Box3,BoxGeometry,Group,InstancedMesh,Matrix4,Mesh,MeshStandardMaterial,Object3D,Vector3,type AnimationClip} from 'three';
@@ -30,6 +31,9 @@ export function fullCoveragePlacements(track:TrackId,compact=false):DisplayPlace
   // continue to use the untouched certified mount, never this offset.
   if(track==='boardwalks'&&[19,23].includes(p.anchor.node))matrix.multiply(new Matrix4().makeTranslation(p.anchor.node===23?.70:0,0,.45));
   if(r1)matrix.multiply(new Matrix4().makeTranslation(0,0,1.2));
+  // Native punch cabinets need a stable outboard stand-off from the existing
+  // world-space crowd grid. Every display consumer uses this same mount.
+  if(p.anchor.kind==='punch'&&!r1)matrix.multiply(new Matrix4().makeTranslation(0,0,p.anchor.id==='boardwalks:9'?.80:['squiggle:14','boardwalks:32','boardwalks:50'].includes(p.anchor.id)?.70:.35));
   const variant:DisplayVariant=r1?'punch-r1':p.anchor.kind==='trip'&&SCENE_MECHANISMS.fixtures.some(f=>f.key.startsWith(`${track}/${p.anchor.node}/`))?'telescopic-trip':p.anchor.kind;
   return{...p,matrix,variant,foundationBottom:r1?.104:parked?.foundation.bottom??proof?.foundationBottom??.02};
  });
@@ -70,10 +74,11 @@ export function createDisplayMechanism(variant:DisplayVariant,source:Group,clip:
  const bell=variant==='loss'?joint('LOSS_HEAD_X'):undefined;
  const leftDoor=variant==='warp'?joint('WARP_DOOR_L_Z'):undefined,rightDoor=variant==='warp'?joint('WARP_DOOR_R_Z'):undefined;
  const base=new Map([shoulder,elbow,bell,leftDoor,rightDoor].filter((n):n is Object3D=>!!n).map(n=>[n,n.rotation.clone()]));
- return{object:model.object,dispose:model.dispose,sample(t:number,active=false,motionScale=1){
+ const directional=variant==='gain'||variant==='punch'?createDirectedMechanism(variant,model.object):undefined;
+ return{object:model.object,directional,dispose:model.dispose,sample(t:number,active=false,motionScale=1){
   t=active?clampUnit(t):0;const scale=clampUnit(motionScale);
   if(variant==='punch'){
-   const aim=Math.PI/3*scale*motionWindow(t,0,.08,.40,.76),stroke=scale*punchWindStroke(t);
+   const aim=-NATIVE_PUNCH_PARK_BOOM+Math.PI/6*scale*motionWindow(t,0,.08,.40,.76),stroke=scale*punchWindStroke(t);
    model.samplePunchPose({boom:-aim,counter:aim,slider:.35+.35*stroke,spring:stroke,route:0});
 
   }else if(shoulder&&elbow){
@@ -97,10 +102,8 @@ export function displayPunchOutlet(object:Object3D){
  object.updateWorldMatrix(true,true);
  const glove=object.getObjectByName('PUNCH_SLIDER_X__coral_fixed_batch');
  if(!(glove instanceof Mesh))throw Error('Missing authored punch glove surface');
- const toLocal=object.matrixWorld.clone().invert().multiply(glove.matrixWorld),box=new Box3(),point=new Vector3();
- const position=glove.geometry.getAttribute('position');
- for(let i=0;i<position.count;i++)box.expandByPoint(glove.getVertexPosition(i,point).applyMatrix4(toLocal));
- const front=box.getCenter(new Vector3());front.x=box.max.x;return front;
+ const toLocal=object.matrixWorld.clone().invert().multiply(glove.matrixWorld);
+ return authoredPunchFront(glove.geometry).applyMatrix4(toLocal);
 }
 /** Static support for every displayed assembly, including previously unsupported
  * Wild16. Exact foot geometry supplies the top and footprint; the extension
@@ -116,9 +119,20 @@ export function buildDisplayFoundation(placement:DisplayPlacement,model:Group,co
  // The old punch batches its column and foot; its true bottom 35 mm is the foot.
  if(placement.variant==='punch')max.y=min.y+.035;
  const bottom=placement.anchor.id==='boardwalks:19'?.14:placement.anchor.id==='boardwalks:23'?0:placement.foundationBottom,worldTop=new Vector3(0,min.y,0).applyMatrix4(placement.matrix).y;
- const border=placement.anchor.id==='boardwalks:19'?0:.04;
+ // Squiggle14's decorative 2cm lip alone enters the moss edge after the
+ // native stand-off. Keep the complete authored foot footprint, omit that lip.
+ const border=['boardwalks:19','squiggle:14'].includes(placement.anchor.id)?0:.04;
  const size=new Vector3(max.x-min.x+border,Math.max(.02,worldTop-bottom),max.z-min.z+border),center=new Vector3((min.x+max.x)/2,min.y-size.y/2,(min.z+max.z)/2);
- const material=new MeshStandardMaterial({color:'#65857b',roughness:.8}),mesh=new Mesh(new BoxGeometry(...size.toArray() as[number,number,number]),material);mesh.matrixAutoUpdate=false;mesh.matrix.copy(placement.matrix).multiply(new Matrix4().makeTranslation(...center.toArray() as[number,number,number]));mesh.name='coverage-footprint-plinth';mesh.receiveShadow=true;root.add(mesh);
+ const material=new MeshStandardMaterial({color:'#65857b',roughness:.8});
+ const slab=(name:string,dimensions:Vector3,at:Vector3)=>{const mesh=new Mesh(new BoxGeometry(...dimensions.toArray() as[number,number,number]),material);mesh.matrixAutoUpdate=false;mesh.matrix.copy(placement.matrix).multiply(new Matrix4().makeTranslation(...at.toArray() as[number,number,number]));mesh.name=name;mesh.receiveShadow=true;root.add(mesh);};
+ if(placement.anchor.id==='squiggle:14'){
+  // The outboard moss is 0.12m high. Keep the complete authored foot on an
+  // upper plate; a ground-bearing lower step ends 10mm before the actual moss
+  // footprint at local Z=1.9647168. No terrain cut or floating full-height base.
+  const mossTop=.120000020,rootY=placement.matrix.elements[13]!,lowerEnd=1.9647168-.01;
+  slab('coverage-footprint-plinth',new Vector3(size.x,worldTop-mossTop,size.z),new Vector3(center.x,(worldTop+mossTop)/2-rootY,center.z));
+  slab('squiggle14-ground-step',new Vector3(size.x,mossTop-bottom,lowerEnd-min.z),new Vector3(center.x,(mossTop+bottom)/2-rootY,(min.z+lowerEnd)/2));
+ }else slab('coverage-footprint-plinth',size,center);
  if(placement.anchor.id==='boardwalks:19'){
   for(const [x,z]of [[-.6,1.27],[-.6,1.97],[.6,1.27],[.6,1.67]]){const post=new Mesh(new BoxGeometry(.08,.141,.08),material);post.name='meadow-clear-bridge-post';post.matrixAutoUpdate=false;post.matrix.copy(placement.matrix).multiply(new Matrix4().makeTranslation(x!,-1.5805,z!));root.add(post);}
  }

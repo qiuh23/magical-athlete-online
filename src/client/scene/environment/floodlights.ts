@@ -29,7 +29,7 @@ export function floodlightLayout(track:TrackId,options:EnvironmentOptions){
     const x=(edge?edge.x*options.scale:minX+span*fraction)+offsetX;
     const slope=edge?(edge.innerCorners[1]![2]!-edge.innerCorners[0]![2]!)/(edge.innerCorners[1]![0]!-edge.innerCorners[0]![0]!):0;
     const edgeOffset=track==='squiggle'&&row===0&&column===0?.4:0;
-    const z=edge?edge.edgeZ*options.scale+slope*offsetX+side*(.9+edgeOffset):side<0?(column===3?-7.78:-7.7):classic?5.9:maxZ+2.5+(track==='wild'&&column===3?.45:0);
+    const z=edge?edge.edgeZ*options.scale+slope*offsetX+side*(.9+edgeOffset):side<0?(column===3?-7.78:-7.7):classic?5.9:maxZ+2.5+(track==='wild'&&column===3?.80:0);
     const venuePlatform=!natural&&row===0;
     const nearest=route.reduce((a,b)=>Math.abs(b.point.x-x)<Math.abs(a.point.x-x)?b:a);
     const base=new Vector3(x,venuePlatform?.15:floor,z),head=new Vector3(x,height,z);
