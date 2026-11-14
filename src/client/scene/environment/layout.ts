@@ -1,4 +1,5 @@
 import { Matrix4, Vector3 } from 'three';
+import {VENUE_TREE_SELECTION} from './scene-hierarchy.js';
 import { TRACKS, type TrackId } from '../../../shared/tracks.js';
 import { boardPoint } from '../math.js';
 import { activeMechanismLayout } from '../mechanisms/layout.js';
@@ -38,7 +39,7 @@ export function environmentPoint(track: TrackId, node: number, options: Environm
   return new Vector3(p[0] / current.scale * options.scale, p[1] - current.lift + options.lift, p[2] / current.scale * options.scale);
 }
 export function environmentTrees(track: TrackId, options: EnvironmentOptions) {
-  return source[track].trees.map(tree => {
+  return source[track].trees.filter((_,index)=>VENUE_TREE_SELECTION[track].includes(index)).map(tree => {
     const matrix = new Matrix4().set(...tree.matrix.flat() as Parameters<Matrix4['set']>);
     matrix.elements[12] *= options.scale / tree.sourceScale;
     matrix.elements[14] *= options.scale / tree.sourceScale;
@@ -60,7 +61,6 @@ export function venuePlacements(lift: number) {
     // Preserve the accepted infield facilities. Spectator banks and their
     // matching support now live in the separate perimeter seating builder.
     { asset: 'podium', position: [-7.7, high ? .484 : .234, -.10] },
-    { asset: 'officials_kiosk', position: [-11.8, high ? 1.034 : .234, -.10] },
     { asset: 'scoreboard', position: [8.3, high ? .884 : .234, -.30] },
   ];
 }

@@ -44,7 +44,7 @@ export function rebuiltSceneryGeometry(track:TrackId,low:boolean,mode:'all'|'gro
  for(let i=0;i<Math.round(w*7);i++)block(i%2?'cream':'dark',[x-w+.15+i*.28,1.66,z],[.27,.12,.16]);
  }
  const pockets=sceneryPockets(track);
- pockets.forEach((p,i)=>{
+ pockets.slice(0,2).forEach((p,i)=>{
  const venue=i<2&&p.r>1.3;disc(track==='boardwalks'?'cream':'dark',[p.x,.075,p.z],[p.r,.1,p.r*.78]);disc('grass',[p.x,.14,p.z],[p.r-.12,.05,p.r*.78-.1]);
  if(venue&&i===0){ // podium and cup, kept below pawn head height
  for(let k=0;k<3;k++){const h=k===1?.53:.3;block(k===1?'coral':'cream',[p.x+(k-1)*.62,.19+h/2,p.z],[.58,h,.72])}
@@ -58,7 +58,6 @@ export function rebuiltSceneryGeometry(track:TrackId,low:boolean,mode:'all'|'gro
  }
  });
  // Sparse side markers are situated outside the node square and never at forks.
- if(!low&&track==='squiggle')for(const id of [3,10,18,24]){const p=boardPoint(id,false,track);disc('cream',[p[0]-1.25,.26,p[2]],[.055,.45,.055]);block('coral',[p[0]-1.09,.45,p[2]],[.32,.2,.04]);}
  }
  box.dispose();sphere.dispose();cyl.dispose();return [...buckets].map(([paint,parts])=>{const geometry=mergeGeometries(parts,false)!;parts.forEach(p=>p.dispose());return {paint,geometry}});
 }

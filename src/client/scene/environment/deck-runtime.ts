@@ -7,7 +7,7 @@ import {deckSupportBottom} from '../mechanisms/static-support.js';
 
 /** Shared rendering/audit source. Geometry and instance transforms are not proxies. */
 export function buildRebuiltDeck(track:TrackId,lowQuality:boolean){
-    const geometry=new BoxGeometry(1,1,1),pole=new CylinderGeometry(.09,.13,1,10),material=new MeshStandardMaterial({color:'#263f4b',roughness:.75}),edge=new MeshStandardMaterial({color:'#638c83',roughness:.8});
+    const geometry=new BoxGeometry(1,1,1),pole=new CylinderGeometry(.09,.13,1,10),material=new MeshStandardMaterial({color:'#c8b99a',roughness:.75}),edge=new MeshStandardMaterial({color:'#62756b',roughness:.8});
     const nodes=trackNodeIds(track),connections=trackConnections(track),pads=new InstancedMesh(geometry,material,nodes.length),roads=new InstancedMesh(geometry,material,connections.length+1),supports=new InstancedMesh(pole,edge,nodes.length*4);
     const trimmedPole=new CylinderGeometry(.09,.13-(.13-.09)*(.40-.18)/(1.5-.18),1,10),trimmedSupports=new InstancedMesh(trimmedPole,edge,track==='squiggle'?1:0);
     const dummy=new Object3D();

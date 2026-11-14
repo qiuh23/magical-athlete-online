@@ -1,6 +1,9 @@
 import { Color } from 'three';
 import { ATHLETE_LIGHT_PRESETS, type AthleteLightMode } from '../StudioLightingV7.js';
 const modes=['day','dusk','night'] as const;
+/** Night remains a lit sporting venue. Local white pools do the main work;
+ * modest broad fill keeps pawns and idle mechanisms readable between pools. */
+export const VENUE_NIGHT_FLOOR={ambient:.06,hemi:.36,env:.10,keyPower:.42,fillPower:.18} as const;
 export const VENUE_LIGHT_ONSET_PHASE=.8;
 /** Keep most daylight fully off, then ease into the existing dusk/night levels. */
 export function venueFixtureNightFactor(value:number){
@@ -20,8 +23,9 @@ export function stepVenueLighting(state:ReturnType<typeof createVenueLightingSta
   state.nightFactor=venueFixtureNightFactor(state.phase);
   const fixtureFactor=state.nightFactor*state.venue,number=(key:'exposure'|'ambient'|'hemi'|'env'|'keyPower'|'fillPower'|'shadow')=>lerp(a[key],b[key]);
   return {sky:{from,to,mix},nightFactor:fixtureFactor,active:state.phase!==target||state.venue!==(ready?1:0),
-    exposure:number('exposure'),ambient:number('ambient')-.03*fixtureFactor,hemi:number('hemi')-.28*fixtureFactor,env:number('env')-.035*fixtureFactor,
-    keyPower:number('keyPower')-1.82*fixtureFactor,fillPower:number('fillPower')-.12*fixtureFactor,shadow:number('shadow'),
+    exposure:number('exposure'),
+    ...Object.fromEntries((Object.keys(VENUE_NIGHT_FLOOR) as (keyof typeof VENUE_NIGHT_FLOOR)[]).map(key=>[key,number(key)+(VENUE_NIGHT_FLOOR[key]-ATHLETE_LIGHT_PRESETS.night[key])*fixtureFactor])) as typeof VENUE_NIGHT_FLOOR,
+    shadow:number('shadow'),
     skyColor:new Color(a.sky).lerp(new Color(b.sky),mix),ground:new Color(a.ground).lerp(new Color(b.ground),mix),key:new Color(a.key).lerp(new Color(b.key),mix),fill:new Color(a.fill).lerp(new Color(b.fill),mix)};
 }
 

@@ -50,7 +50,7 @@ test('new environment cannot consume old contact certificates while loading, rea
 });
 
 test('source anchors retain real seven-map topology and crown geometry across layout similarities', () => {
-  const counts: Record<TrackId, number> = { mild: 6, wild: 6, 'twisty-twirl': 6, 'whirly-world': 6, squiggle: 14, boardwalks: 10, bridges: 27 };
+  const counts: Record<TrackId, number> = { mild: 2, wild: 2, 'twisty-twirl': 2, 'whirly-world': 2, squiggle: 4, boardwalks: 3, bridges: 5 };
   for (const track of tracks) {
     const options = { ...mechanismLayout(track), lowQuality: false }, raw = { scale: 1, lift: 0, lowQuality: false };
     const a = environmentTrees(track, raw), b = environmentTrees(track, options); assert.equal(a.length, counts[track]);
@@ -60,7 +60,7 @@ test('source anchors retain real seven-map topology and crown geometry across la
   }
   assert.equal(trackNodeIds('boardwalks').length, 59); assert.equal(trackConnections('boardwalks').length, 61);
   assert.deepEqual(TRACKS['twisty-twirl'].twistBoundary, { before: 13, after: 14 });
-  assert.deepEqual(venuePlacements(1.43).map(p=>p.asset),['podium','officials_kiosk','scoreboard']);
+  assert.deepEqual(venuePlacements(1.43).map(p=>p.asset),['podium','scoreboard']);
   assert.ok(venuePlacements(0).every(p => p.position[1]! >= .15));
 });
 
@@ -85,7 +85,7 @@ test('furniture and foliage remaps keep each rigid component dimensions, not per
 test('seven actual scenes share cached trees and materials, own remapped geometry, and dispose only owned resources', async () => {
   for (const track of tracks) for (const lowQuality of [false, true]) {
     const m = await sources(track), options = { ...mechanismLayout(track), lowQuality }, kit = buildEnvironmentGeometry(track, m, options);
-    assert.ok(kit.trees.length >= 6); assert.ok(kit.batches.length <= 10);
+    assert.ok(kit.trees.length >= 2 && kit.trees.length <= 5); assert.ok(kit.batches.length <= 10);
     const shadows = new Set(kit.batches.filter(b => b.mesh.castShadow).flatMap(b => b.entries.map(e => e.name))); assert.equal(shadows.size, lowQuality ? 0 : 2);
     let sourceDisposed = false; const observed = new Set<object>();
     for (const { mesh } of kit.batches) {
@@ -125,22 +125,18 @@ test('reversed Twisty gates swap labels and owned colors without moving the sour
   normal.dispose();reversed.dispose();
 });
 
-// The unchanged legacy file remains the certified input. This comparison is separate evidence,
-// not permission to attach its certificate to candidate geometry or contact controllers.
-test('candidate all partition matches frozen default scenery byte for byte', () => {
-  for (const track of tracks) for (const low of [false, true]) {
-    const a = sceneryGeometry(track, low), b = rebuiltSceneryGeometry(track, low, 'all');
-    assert.equal(a.length, b.length);
-    for (let i = 0; i < a.length; i++) {
-      assert.equal(a[i]!.paint, b[i]!.paint);
-      const ag = a[i]!.geometry, bg = b[i]!.geometry;
-      assert.deepEqual(ag.groups, bg.groups); assert.deepEqual(ag.index, bg.index);
-      assert.deepEqual(Object.keys(ag.attributes), Object.keys(bg.attributes));
-      for (const key of Object.keys(ag.attributes)) {
-        assert.deepEqual(ag.getAttribute(key).array, bg.getAttribute(key).array);
-        assert.equal(ag.getAttribute(key).itemSize, bg.getAttribute(key).itemSize);
-      }
-      ag.dispose(); bg.dispose();
-    }
-  }
+// Compare actual geometry with the unchanged public fallback builder: removing
+// pockets/flags must never add or move a triangle. No archived contact claim.
+test('quieter scenery is an exact triangle subset of the unchanged fallback',()=>{
+ for(const track of tracks)for(const low of [false,true]){
+  const legacy=sceneryGeometry(track,low),quiet=rebuiltSceneryGeometry(track,low,'all'),route=rebuiltSceneryGeometry(track,low,'route');
+  const count=(parts:typeof legacy)=>parts.reduce((sum,p)=>sum+p.geometry.getAttribute('position').count,0);
+  assert.ok(count(quiet)<=count(legacy));assert.ok(count(route)>0);
+  const triangles=(parts:typeof legacy)=>parts.flatMap(({paint,geometry})=>{
+   const p=geometry.getAttribute('position'),index=geometry.index,out:string[]=[];
+   for(let i=0;i<(index?.count??p.count);i+=3){const v=[0,1,2].map(j=>{const n=index?.getX(i+j)??i+j;return [p.getX(n),p.getY(n),p.getZ(n)].map(x=>Math.round(x*1e6)).join(',');});out.push(paint+':'+v.sort().join('|'));}return out;
+  });
+  const originals=new Set(triangles(legacy));for(const triangle of triangles(quiet))assert.ok(originals.has(triangle),track+' changed fallback geometry');
+  for(const p of [...legacy,...quiet,...route]){assert.ok([...p.geometry.getAttribute('position').array].every(Number.isFinite));p.geometry.dispose();}
+ }
 });

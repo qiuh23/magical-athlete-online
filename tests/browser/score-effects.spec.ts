@@ -180,9 +180,9 @@ for (const [device, viewport] of [
     try {
       const panel = page.getByTestId('skill-choice'), pending = structuredClone(f.room.game.pending), version = app.rooms.get(f.room.code).version;
       await fits(page, panel);
-      if (device === 'small-portrait') for (const target of await panel.locator('.choice-character>.button').all()) await expect(target).toBeInViewport({ ratio: 1 });
+      if (device === 'small-portrait') for (const target of await panel.locator('.choice-dock-option.is-character > .button').all()) { await target.scrollIntoViewIfNeeded(); await expect(target).toBeInViewport({ ratio: 1 }); }
       await capture(page, `${device}-choice`);
-      const detail = panel.locator('.choice-character-detail').first();
+      const detail = panel.locator('.is-character > .choice-dock-inspect').first();
       await detail.click(); await expect(page.getByRole('dialog')).toBeVisible();
       await page.getByRole('button', { name: '关闭', exact: true }).click();
       expect(app.rooms.get(f.room.code).game.pending).toEqual(pending); expect(app.rooms.get(f.room.code).version).toBe(version);
@@ -197,7 +197,7 @@ for (const [device, viewport] of [
       const spectator = await open(browser, f.watcher, viewport);
       try { await expect(spectator.page.getByTestId('skill-choice')).toHaveCount(0); expect(spectator.errors).toEqual([]); }
       finally { await spectator.context.close(); }
-      await panel.locator('.choice-character>.button').first().click();
+      await panel.locator('.choice-dock-option.is-character > .button').first().click();
       await expect.poll(() => app.rooms.get(f.room.code).game.pending?.kind).toBe('duel-roll');
       expect(client.errors).toEqual([]);
     } finally { await client.context.close(); }

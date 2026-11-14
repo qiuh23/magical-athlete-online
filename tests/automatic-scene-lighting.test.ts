@@ -8,11 +8,11 @@ import type {RoomView} from '../src/shared/types.js';
 const room={backendId:'cloudflare',code:'DAY',createdAt:123,phase:'race',round:1,track:'wild'} as RoomView;
 const close=(a:number,b:number,e=1e-8)=>assert.ok(Math.abs(a-b)<e,`${a} != ${b}`);
 function storage(){const m=new Map<string,string>();return{m,getItem:(k:string)=>m.get(k)??null,setItem:(k:string,v:string)=>{m.set(k,v);}};}
-test('180-second continuous cycle exposes distinct lighting within a quick match and loops without jumps',()=>{
- assert.equal(SCENE_LIGHT_CYCLE_MS,180000);[0,1,2,1,0].forEach((p,i)=>close(automaticLightPhase(i*45000),p));
- assert.ok(automaticLightPhase(15000)>.13);assert.ok(automaticLightPhase(30000)>.49);
- for(let t=0;t<360000;t+=50)assert.ok(Math.abs(automaticLightPhase(t+50)-automaticLightPhase(t))<.00175);
- close(automaticLightPhase(180000-.1),automaticLightPhase(.1));
+test('nine-minute cycle is three times slower and loops without jumps',()=>{
+ assert.equal(SCENE_LIGHT_CYCLE_MS,540000);[0,1,2,1,0].forEach((p,i)=>close(automaticLightPhase(i*SCENE_LIGHT_CYCLE_MS/4),p));
+ assert.ok(automaticLightPhase(45000)>.13);assert.ok(automaticLightPhase(90000)>.49);
+ for(let t=0;t<SCENE_LIGHT_CYCLE_MS*2;t+=50)assert.ok(Math.abs(automaticLightPhase(t+50)-automaticLightPhase(t))<.00059);
+ close(automaticLightPhase(SCENE_LIGHT_CYCLE_MS-.1),automaticLightPhase(.1));
 });
 test('room clock continues across rounds/tracks/snapshots, pauses correctly and refresh restores no offline time',()=>{
  let real=100;const p=new PresentationClock(()=>real),s=storage(),key=sceneLightingRoomKey(room),clock=new RoomLightingClock(key,p,s);clock.setRunning(true);real+=45000;close(clock.now(),45000);
@@ -30,7 +30,7 @@ test('online room phase, visibility and pause gates freeze display time; beat sp
 test('invalid storage fails open as a day start; saved phase is bounded and storage is optional',()=>{
  const s=storage(),key='invalid',storageKey=`magical-athlete:room-lighting-v1:${key}`;
  for(const text of ['bad','{"version":2,"elapsed":90000}','{"version":1,"elapsed":-1}','{"version":1,"elapsed":"bad"}']){s.setItem(storageKey,text);const c=new RoomLightingClock(key,{now:()=>0},s);assert.equal(c.now(),0);}
- s.setItem(storageKey,JSON.stringify({version:1,elapsed:SCENE_LIGHT_CYCLE_MS+1234}));close(new RoomLightingClock(key,{now:()=>0},s).now(),1234);
+ s.setItem(storageKey,JSON.stringify({version:1,elapsed:SCENE_LIGHT_CYCLE_MS+1234,cycleMs:SCENE_LIGHT_CYCLE_MS}));close(new RoomLightingClock(key,{now:()=>0},s).now(),1234);
  const c=new RoomLightingClock('denied',{now:()=>0},{getItem(){throw Error('blocked');},setItem(){throw Error('blocked');}});c.setRunning(true);c.save();assert.equal(c.now(),0);
 });
 test('scoped demand scheduling is bounded, cancellable, and never a new animation RAF',()=>{
@@ -42,13 +42,13 @@ test('scoped demand scheduling is bounded, cancellable, and never a new animatio
 test('actual sky source and main-light input share every continuous phase; missing fixtures never force a reset',()=>{
  const scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(45,1,.1,100),sky=createSkyEnvironment({THREE,scene,camera,profile:'athlete',style:'physical',directions:SKY_SOURCE_DIRECTIONS.athlete,state:{mode:'day'},lowQuality:true});
  let previous:THREE.Vector3|undefined;const state=createVenueLightingState(0);
- for(let i=0;i<=3600;i++){const target=automaticLightPhase(i*50),p=stepVenueLighting(state,target,true,.05);sky.update({camera,state:p.sky});const lighting=sky.getLightingState();assert.ok(lighting.direction.toArray().every(Number.isFinite));close(lighting.direction.length(),1);if(previous)assert.ok(previous.angleTo(lighting.direction)<.01);previous=lighting.direction;}
- close(state.phase,0);const atNight=createVenueLightingState(2);let p=stepVenueLighting(atNight,2,false,0);close(p.keyPower,2);assert.equal(p.nightFactor,0);assert.deepEqual(p.sky,{from:'dusk',to:'night',mix:1});for(let i=0;i<20;i++)p=stepVenueLighting(atNight,2,true,.05);close(p.nightFactor,1);close(p.keyPower,.18);sky.dispose();
+ for(let i=0;i<=SCENE_LIGHT_CYCLE_MS/50;i++){const target=automaticLightPhase(i*50),p=stepVenueLighting(state,target,true,.05);sky.update({camera,state:p.sky});const lighting=sky.getLightingState();assert.ok(lighting.direction.toArray().every(Number.isFinite));close(lighting.direction.length(),1);if(previous)assert.ok(previous.angleTo(lighting.direction)<.01);previous=lighting.direction;}
+ close(state.phase,0);const atNight=createVenueLightingState(2);let p=stepVenueLighting(atNight,2,false,0);close(p.keyPower,2);assert.equal(p.nightFactor,0);assert.deepEqual(p.sky,{from:'dusk',to:'night',mix:1});for(let i=0;i<20;i++)p=stepVenueLighting(atNight,2,true,.05);close(p.nightFactor,1);close(p.keyPower,.42);sky.dispose();
  const source=readFileSync('src/client/scene/environment/VenueLighting.tsx','utf8'),board=readFileSync('src/client/scene/Board3D.tsx','utf8');assert.match(source,/sky.current\?\.update\(\{camera,state:preset.sky\}\)/);assert.match(source,/getLightingState\(\).direction/);assert.match(source,/key.current.position.copy\(direction\)/);assert.match(source,/key.current.shadow.intensity=preset.shadow/);assert.match(source,/fixturesEnabled&&<VenueFixtures/);assert.match(board,/<VenueLighting[^>]*fixturesEnabled=\{environmentReady\}/);assert.doesNotMatch(board,/<StudioLightingV7/);
 });
 test('manual and auto changes converge smoothly while preserving the independently running room cycle',()=>{
  const state=createVenueLightingState(0);let previous=0;for(let i=0;i<30;i++){stepVenueLighting(state,2,true,.05);assert.ok(state.phase-previous<=.0900001);previous=state.phase;}close(state.phase,2);
- const target=automaticLightPhase(45000);stepVenueLighting(state,target,true,.05);assert.ok(state.phase>target);for(let i=0;i<30;i++)stepVenueLighting(state,target,true,.05);close(state.phase,target);const snapshot=structuredClone(state);stepVenueLighting(state,0,true,1,true);assert.deepEqual(state,snapshot);
+ const target=automaticLightPhase(SCENE_LIGHT_CYCLE_MS/4);stepVenueLighting(state,target,true,.05);assert.ok(state.phase>target);for(let i=0;i<30;i++)stepVenueLighting(state,target,true,.05);close(state.phase,target);const snapshot=structuredClone(state);stepVenueLighting(state,0,true,1,true);assert.deepEqual(state,snapshot);
 });
 
 test('automatic fixtures stay fully absent in daylight and fade continuously at dusk and dawn',()=>{
@@ -56,6 +56,12 @@ test('automatic fixtures stay fully absent in daylight and fade continuously at 
  for(const p of [0,.1,.5,.79,VENUE_LIGHT_ONSET_PHASE]){const factor=venueFixtureNightFactor(p);assert.equal(factor,0);applyVenueSpotState(light,70,factor);assert.equal(light.intensity,0);assert.equal(light.visible,false);const shadowLights:THREE.Object3D[]=[];scene.traverseVisible(o=>{if(o===light&&light.castShadow)shadowLights.push(o);});assert.equal(shadowLights.length,0);}
  close(venueFixtureNightFactor(1),.12);close(venueFixtureNightFactor(2),1);
  for(const boundary of [VENUE_LIGHT_ONSET_PHASE,1,2])assert.ok(Math.abs(venueFixtureNightFactor(boundary+1e-6)-venueFixtureNightFactor(boundary-1e-6))<1e-8);
- let previous=0;let off=0;const state=createVenueLightingState(0);for(let ms=0;ms<=SCENE_LIGHT_CYCLE_MS;ms+=50){const phase=automaticLightPhase(ms),p=stepVenueLighting(state,phase,true,.05);applyVenueSpotState(light,70,p.nightFactor);assert.ok(Math.abs(p.nightFactor-previous)<.003);previous=p.nightFactor;close(venueFixtureNightFactor(phase),venueFixtureNightFactor(automaticLightPhase(SCENE_LIGHT_CYCLE_MS-ms)));if(ms<=39000||ms>=141000){assert.equal(p.nightFactor,0);assert.equal(light.visible,false);off++;}if(ms===45000||ms===135000)close(p.nightFactor,.12);if(ms===90000)close(p.nightFactor,1);}
+ let previous=0;let off=0;const state=createVenueLightingState(0);for(let ms=0;ms<=SCENE_LIGHT_CYCLE_MS;ms+=50){const phase=automaticLightPhase(ms),p=stepVenueLighting(state,phase,true,.05);applyVenueSpotState(light,70,p.nightFactor);assert.ok(Math.abs(p.nightFactor-previous)<.003);previous=p.nightFactor;close(venueFixtureNightFactor(phase),venueFixtureNightFactor(automaticLightPhase(SCENE_LIGHT_CYCLE_MS-ms)));if(ms<=SCENE_LIGHT_CYCLE_MS*39/180||ms>=SCENE_LIGHT_CYCLE_MS*141/180){assert.equal(p.nightFactor,0);assert.equal(light.visible,false);off++;}if(ms===SCENE_LIGHT_CYCLE_MS/4||ms===SCENE_LIGHT_CYCLE_MS*3/4)close(p.nightFactor,.12);if(ms===SCENE_LIGHT_CYCLE_MS/2)close(p.nightFactor,1);}
  assert.ok(off>1500);assert.equal(previous,0);light.dispose();
+});
+
+test('legacy saved phase migrates without a day/night jump and new saves carry the cycle',()=>{
+ const s=storage(),key='migration';s.setItem(`magical-athlete:room-lighting-v1:${key}`,JSON.stringify({version:1,elapsed:90000}));
+ const c=new RoomLightingClock(key,{now:()=>0},s);close(c.now(),270000);close(automaticLightPhase(c.now()),2);c.save();
+ const saved=JSON.parse(s.getItem(c.storageKey)!);assert.equal(saved.cycleMs,540000);close(new RoomLightingClock(key,{now:()=>0},s).now(),270000);
 });

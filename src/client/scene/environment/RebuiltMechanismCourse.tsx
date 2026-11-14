@@ -9,7 +9,7 @@ import { nextTrackNodes } from '../../../shared/track-topology.js';
 import { TRACKS } from '../../../shared/tracks.js';
 import { boardPoint, trackConnections, trackNodeIds, TILE } from '../math.js';
 import { RebuiltScenery } from './RebuiltScenery.js';
-import { buildTileFinish, buildTileLabels } from './tile-finish.js';
+import { buildTileFinish, buildTileLabels, createTileLabelAtlas } from './tile-finish.js';
 import { mechanismPlacements } from '../mechanisms/placements.js';
 import { MECHANISM_PAD_SIZE } from '../mechanisms/layout.js';
 import { mechanismPadUrl } from '../mechanisms/models.js';
@@ -37,10 +37,7 @@ function DeckStructure({track,lowQuality}:{track:TrackId;lowQuality:boolean}) {
 }
 function DeckFinish({track}:{track:TrackId}) {
  const kit=useMemo(()=>buildTileFinish(track),[track]);
- const labels=useMemo(()=>{const columns=8,rows=Math.ceil(kit.labels.length/columns),canvas=document.createElement('canvas');canvas.width=columns*256;canvas.height=rows*64;const c=canvas.getContext('2d')!;
-  kit.labels.forEach(({node,caption},i)=>{const x=(i%columns)*256,y=Math.floor(i/columns)*64;c.fillStyle='#24463f';c.beginPath();c.roundRect(x+2,y+2,252,60,9);c.fill();c.fillStyle='#fff6d9';c.textBaseline='middle';c.font='bold 43px sans-serif';c.textAlign='left';c.fillText(String(node).padStart(2,'0'),x+13,y+33);if(caption){c.textAlign='right';c.font='bold 35px sans-serif';c.fillText(caption,x+243,y+33);}});
-  const texture=new CanvasTexture(canvas);texture.colorSpace=SRGBColorSpace;const labels=buildTileLabels(kit.labels,texture);return{...labels,texture};
- },[kit]);
+ const labels=useMemo(()=>{const texture=createTileLabelAtlas(kit.labels);return {...buildTileLabels(kit.labels,texture),texture};},[kit]);
  useEffect(()=>()=>{kit.dispose();labels.dispose();labels.texture.dispose();},[kit,labels]);
  return <group name="complete-tile-finishes"><primitive object={kit.root} dispose={null}/><primitive object={labels.mesh} dispose={null}/></group>;
 }

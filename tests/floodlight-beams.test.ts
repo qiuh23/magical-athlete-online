@@ -22,7 +22,7 @@ test('night contrast only changes when fixtures are ready; daytime is unaffected
  const day=createVenueLightingState('day');let d=stepVenueLighting(day,'day',true,1);for(let i=0;i<30;i++)d=stepVenueLighting(day,'day',true,1);
  assert.equal(d.nightFactor,0);assert.equal(d.keyPower,4.1);
  const n=createVenueLightingState('night');let p=stepVenueLighting(n,'night',true,1);for(let i=0;i<30;i++)p=stepVenueLighting(n,'night',true,1);
- assert.ok(p.keyPower<.4);assert.ok(p.hemi>.1);assert.equal(p.nightFactor,1);
+ assert.ok(p.keyPower<.5);assert.ok(p.hemi>.1);assert.equal(p.nightFactor,1);
  const unavailable=stepVenueLighting(createVenueLightingState('night'),'night',false,1);assert.equal(unavailable.keyPower,2);
 });
 

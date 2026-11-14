@@ -1,5 +1,6 @@
 import { Box3, BoxGeometry, BufferGeometry, Group, InstancedMesh, Matrix4, Mesh, MeshBasicMaterial, MeshStandardMaterial, PlaneGeometry, Vector3, type Material } from 'three';
 import { buildStadiumSeating } from './seating.js';
+import {isQuietLandscapeMesh,mutedVenueMaterial} from './scene-hierarchy.js';
 import type { TrackId } from '../../../shared/tracks.js';
 import { environmentTrees, environmentVenueOffset, furnitureAnchors, gatePlacements, isNaturalMap, venuePlacements, type EnvironmentOptions } from './layout.js';
 
@@ -55,6 +56,8 @@ export function buildEnvironmentGeometry(track: TrackId, models: EnvironmentMode
   let seating: ReturnType<typeof buildStadiumSeating> | undefined;
   const root = new Group(); root.name = `rebuilt-environment:${track}`;
   const geometries: BufferGeometry[] = [], materials: Material[] = [], batches: EnvironmentTreeBatch[] = [], trees: EnvironmentTree[] = [], signs:EnvironmentGeometry['signs']=[];
+  const muted=new Map<Material,Material>();
+  const quiet=(m:Material)=>{if(!muted.has(m)){const owned=mutedVenueMaterial(m);muted.set(m,owned);materials.push(owned);}return muted.get(m)!;};
   const source = (name: string) => { const model = models[name]; if (!model) throw Error(`Missing environment asset ${name}`); model.updateMatrixWorld(true); return model; };
   const mark = <T extends Mesh>(mesh: T, role: string): T => { mesh.raycast = noRaycast; mesh.castShadow = !options.lowQuality && role === 'facility'; mesh.receiveShadow = true; mesh.userData.environmentRole = role; return mesh; };
   const add = (name: string, matrix: Matrix4) => {
@@ -62,6 +65,7 @@ export function buildEnvironmentGeometry(track: TrackId, models: EnvironmentMode
     source(name).traverse(node => {
       if (!(node instanceof Mesh)) return;
       const recolor = (material:Material) => {
+        if(!name.endsWith('_gate'))return quiet(material);
         if (!options.reversed || !name.endsWith('_gate') || !(material instanceof MeshStandardMaterial) || !/^(mint|coral)(\.|$)/.test(material.name)) return material;
         const owned=material.clone();owned.color.set(material.name.startsWith('mint')?'#ee785e':'#438674');materials.push(owned);return owned;
       };
@@ -74,19 +78,19 @@ export function buildEnvironmentGeometry(track: TrackId, models: EnvironmentMode
   const support = (name: string, p: number[], dimensions: number[]) => { const mesh = mark(new Mesh(box, stone), 'facility'); mesh.name = name; mesh.position.fromArray(p); mesh.scale.fromArray(dimensions); root.add(mesh); };
   try {
     if (isNaturalMap(track)) {
-      for (const part of ['base', 'landscape', 'furniture'] as const) {
+      for (const part of ['base', 'landscape'] as const) {
         const name = `${track}_${part === 'landscape' ? 'landscape_reexport_v1' : part}`;
-        source(name).traverse(node => { if (!(node instanceof Mesh)) return; const geometry = remapEnvironmentGeometry(node, track, part, options.scale); geometries.push(geometry); const mesh = mark(new Mesh(geometry, node.material), part === 'base' ? 'ground' : part === 'landscape' ? 'landscape' : 'facility'); mesh.name = `${name}:${node.name}`; root.add(mesh); });
+        source(name).traverse(node => { if (!(node instanceof Mesh) || (part==='landscape'&&!isQuietLandscapeMesh(node.name))) return; const geometry = remapEnvironmentGeometry(node, track, part, options.scale); geometries.push(geometry); const mesh = mark(new Mesh(geometry, Array.isArray(node.material)?node.material.map(quiet):quiet(node.material)), part === 'base' ? 'ground' : part === 'landscape' ? 'landscape' : 'facility'); mesh.name = `${name}:${node.name}`; root.add(mesh); });
       }
     } else {
       for (const p of venuePlacements(options.lift)) { const offset=environmentVenueOffset(track,p.asset); add(p.asset, new Matrix4().makeTranslation(p.position[0]! * options.scale+offset.x, p.position[1]!+offset.y, p.position[2]! * options.scale+offset.z)); }
       if (options.lift) {
-        for (const [asset, x, z] of [['official_rostrum', -11.8, -.1], ['podium_plinth', -7.7, -.1]] as const) {
+        for (const [asset, x, z] of [['podium_plinth', -7.7, -.1]] as const) {
           // Source support already occupies high-deck WORLD coordinates.
           source(asset).traverse(node => { if (!(node instanceof Mesh)) return; const geometry = node.geometry.clone().applyMatrix4(node.matrixWorld); const offset=environmentVenueOffset(track,asset); geometry.translate(x * (options.scale - 1)+offset.x, offset.y, z * (options.scale - 1)+offset.z); geometries.push(geometry); const mesh = mark(new Mesh(geometry, node.material), 'facility'); mesh.name = asset; root.add(mesh); });
         }
       }
-      for (const [name, x, z, w, d] of [['official', -11.8, -.1, 1.84, 1.3], ['podium', -7.7, -.1, 2.65, 1.5]] as const) {
+      for (const [name, x, z, w, d] of [['podium', -7.7, -.1, 2.65, 1.5]] as const) {
         const offset=environmentVenueOffset(track,name); support(`${name}-${options.lift ? 'ground-contact' : 'low-plinth'}`, [x * options.scale+offset.x, (options.lift ? .145 : .192)+offset.y, z * options.scale+offset.z], [w, options.lift ? .19 : .084, d]);
       }
     }
@@ -111,7 +115,7 @@ export function buildEnvironmentGeometry(track: TrackId, models: EnvironmentMode
         if (!(node instanceof Mesh)) return;
         for (const shadow of [false, true]) {
           const group = entries.filter(p => shadowNames.has(p.name) === shadow); if (!group.length) continue;
-          const mesh = mark(new InstancedMesh(node.geometry, node.material, group.length), 'tree'); mesh.name = `${asset}:${node.name}:${shadow ? 'shadow' : 'plain'}`; mesh.castShadow = shadow; mesh.frustumCulled = false;
+          const mesh = mark(new InstancedMesh(node.geometry, Array.isArray(node.material)?node.material.map(quiet):quiet(node.material), group.length), 'tree'); mesh.name = `${asset}:${node.name}:${shadow ? 'shadow' : 'plain'}`; mesh.castShadow = shadow; mesh.frustumCulled = false;
           const instances = group.map(p => ({ ...p, matrix: new Matrix4().multiplyMatrices(p.matrix, node.matrixWorld) }));
           instances.forEach((p, index) => mesh.setMatrixAt(index, p.matrix)); batches.push({ mesh, entries: instances }); root.add(mesh);
         }
