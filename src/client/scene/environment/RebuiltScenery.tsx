@@ -11,7 +11,8 @@ export const palette={cream:'#f2e3c5',dark:'#42786b',mint:'#87bdae',wood:'#c7a47
 type Paint=keyof typeof palette;
 function surfaceStamp(wood=false) {
  const c=document.createElement('canvas');c.width=c.height=128;const ctx=c.getContext('2d')!;ctx.fillStyle='#eee6d5';ctx.fillRect(0,0,128,128);
- let seed=194;for(let i=0;i<1800;i++){seed=(Math.imul(seed,1664525)+1013904223)|0;const x=(seed>>>8)%128,y=(seed>>>16)%128;ctx.fillStyle=`rgba(67,75,45,${.02+(i%4)*.012})`;ctx.fillRect(x,y,wood?8:1,1)}
+ // Preserve authored bands and wood seams; soften only the tiny random marks.
+ let seed=194;for(let i=0;i<1800;i++){seed=(Math.imul(seed,1664525)+1013904223)|0;const x=(seed>>>8)%128,y=(seed>>>16)%128;ctx.fillStyle=`rgba(67,75,45,${.005+(i%4)*.003})`;ctx.fillRect(x,y,wood?8:1,1)}
  if(!wood){ctx.fillStyle='rgba(255,255,220,.08)';for(let x=0;x<128;x+=32)ctx.fillRect(x,0,16,128)}
  if(wood){ctx.strokeStyle='rgba(96,65,34,.2)';ctx.lineWidth=1;for(let y=0;y<128;y+=32){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(128,y);ctx.stroke()}}
  const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.colorSpace=THREE.SRGBColorSpace;return t;
