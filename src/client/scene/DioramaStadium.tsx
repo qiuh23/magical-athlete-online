@@ -26,7 +26,8 @@ function mouldGrain() {
   let seed = 73;
   for (let index = 0; index < pixels.data.length; index += 4) {
     seed = (Math.imul(seed, 1664525) + 1013904223) | 0;
-    const value = 190 + ((seed >>> 24) % 35);
+    // Keep the mean roughness stamp near 207 while softening texel noise.
+    const value = 203 + ((seed >>> 24) % 9);
     pixels.data.set([value, value, value, 255], index);
   }
   context.putImageData(pixels, 0, 0);
@@ -40,7 +41,7 @@ function lawnTexture() {
   const context=canvas.getContext('2d')!,pixels=context.createImageData(256,256);let seed=419;
   for(let y=0;y<256;y++)for(let x=0;x<256;x++){
     seed=(Math.imul(seed,1664525)+1013904223)|0;
-    const variation=((seed>>>24)%9)-4, stripe=Math.floor(x/32)%2?6:-4;
+    const variation=((seed>>>24)%3)-1, stripe=Math.floor(x/32)%2?6:-4;
     pixels.data.set([124+variation+stripe,165+variation+stripe,76+variation,255],(y*256+x)*4);
   }
   context.putImageData(pixels,0,0);const texture=new THREE.CanvasTexture(canvas);texture.colorSpace=THREE.SRGBColorSpace;

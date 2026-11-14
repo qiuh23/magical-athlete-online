@@ -19,7 +19,7 @@ test('turf is deterministic and bounded, with short dense fibres and no emissive
   const n=[0,1,2].map(c=>a.normal[i+c]!/127.5-1);assert.ok(Math.abs(Math.hypot(...n)-1)<.008);assert.ok(n[2]!>.94);
  }
  assert.ok(channelMean(a.color,1)>118&&channelMean(a.color,1)<121);
- assert.equal(createHash('sha256').update(a.color).digest('hex'),'3d6d16f353630839ba6e55c21f3a66a306bcda46dc42dc979e6d624f1237c638');
+ assert.equal(createHash('sha256').update(a.color).digest('hex'),'4044a48d1a64c453b8248ddb24f5bade39ca9d575ee9eeeffe46b45c1e09714f');
 });
 test('mowing alternates eighteen broad passes, with soft edges and quiet turning headlands',()=>{
  assert.equal(STADIUM_TURF_BANDS,18);for(let i=0;i<18;i++){const direction=stadiumMowDirection((i+.5)/18,.5);assert.ok(Math.abs(direction)>.98);assert.equal(Math.sign(direction),i%2?-1:1);}
@@ -97,4 +97,23 @@ test('actual turf mesh keeps its bounded rounded surface and original playing he
  const geometry=new RoundedBoxGeometry(...box as [number,number,number,number,number]);
  geometry.scale(...scale as [number,number,number]);geometry.translate(...position as [number,number,number]);geometry.computeBoundingBox();
  assert.ok(Math.abs(geometry.boundingBox!.max.y-.15)<1e-7);assert.ok(Math.abs(geometry.boundingBox!.min.y-.07)<1e-7);geometry.dispose();
+});
+
+test('fine colour and normal variation stays subtle without flattening mower direction',()=>{
+ const {color,normal}=stadiumTurfPixels();
+ // Neighbor differences after removing the deliberate broad mower signal.
+ // v2 measured 2.585 green, 13.269 normal-X, 8.858 normal-Y byte RMS.
+ const rms=(bytes:Uint8Array,channel:number,bandScale=0)=>{
+  let sum=0,count=0;
+  for(let y=1;y<height;y++)for(let x=0;x<width;x++){
+   const bandDelta=stadiumMowDirection(x/(width-1),y/(height-1))-stadiumMowDirection(x/(width-1),(y-1)/(height-1));
+   const delta=bytes[(y*width+x)*4+channel]!-bytes[((y-1)*width+x)*4+channel]!-bandScale*bandDelta;
+   sum+=delta*delta;count++;
+  }
+  return Math.sqrt(sum/count);
+ };
+ const green=rms(color,1,11.5),nx=rms(normal,0),ny=rms(normal,1,127.5*.085);
+ assert.ok(green>.4&&green<1,`green residual RMS ${green}`);
+ assert.ok(nx>2&&nx<4,`normal-X residual RMS ${nx}`);
+ assert.ok(ny>1&&ny<3,`normal-Y residual RMS ${ny}`);
 });

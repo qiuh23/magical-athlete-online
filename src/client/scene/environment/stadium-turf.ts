@@ -1,8 +1,8 @@
 import { DataTexture, LinearFilter, LinearMipmapLinearFilter, MeshStandardMaterial, RepeatWrapping, RGBAFormat, SRGBColorSpace, Vector2 } from 'three';
 
-/** One authored surface, not a carpet of blade meshes. The offline evidence uses
- * these exact pixels/material values; only the renderer and sky fill differ. */
-export const STADIUM_TURF_REVISION = 'sports-infield-short-cut-v2';
+/** One authored surface, not a carpet of blade meshes. v3 softens fine grain;
+ * archived v2 render evidence describes the previous pixels, not this revision. */
+export const STADIUM_TURF_REVISION = 'sports-infield-short-cut-v3';
 export const STADIUM_TURF_SIZE = [1024, 256] as const;
 export const STADIUM_TURF_BANDS = 18;
 export const STADIUM_TURF_ROUGHNESS = .92;
@@ -36,18 +36,18 @@ export function stadiumTurfPixels() {
   const [w,h] = STADIUM_TURF_SIZE, color = new Uint8Array(w*h*4), normal = new Uint8Array(w*h*4);
   for (let y=0;y<h;y++) for (let x=0;x<w;x++) {
     const u=x/(w-1), v=y/(h-1), direction=stadiumMowDirection(u,v);
-    // Dense 2–4 texel fibres, not large bright flecks. Different length scales
-    // prevent both a flat painted surface and a visibly tiled noise texture.
+    // Retain close-up fibres at lower contrast without changing broad mower
+    // passes or mottling. Fine random contrast can sparkle during camera motion.
     const fibre = (hash(x,y)*.46 + hash(x,y-1)*.34 + hash(x,y-2)*.20 - .5) * 2;
-    const tip = hash(x+91,y+43) > .973 ? 4 : 0;
+    const tip = hash(x+91,y+43) > .973 ? 1 : 0;
     const mottling = patch(u*36,v*11)*3.2 + patch(u*103,v*29)*1.6;
-    const light = direction*11.5 + mottling + fibre*8;
+    const light = direction*11.5 + mottling + fibre*2;
     const i=(y*w+x)*4;
     color.set([Math.round(77+light*.88+tip),Math.round(119+light+tip*.7),Math.round(58+light*.52),255],i);
     // Bent short grass changes the PBR light response between mowing passes.
-    // Sparse fine slopes survive close views; mipmaps average them at overview.
-    const nx=(hash(x-1,y)-hash(x+1,y))*.18;
-    const ny=direction*.085+(hash(x,y-1)-hash(x,y+1))*.12;
+    // Keep the authored band tilt; only quiet the random fine slopes.
+    const nx=(hash(x-1,y)-hash(x+1,y))*.045;
+    const ny=direction*.085+(hash(x,y-1)-hash(x,y+1))*.03;
     const nz=Math.sqrt(1-nx*nx-ny*ny);
     normal.set([Math.round(127.5+nx*127.5),Math.round(127.5+ny*127.5),Math.round(127.5+nz*127.5),255],i);
   }
