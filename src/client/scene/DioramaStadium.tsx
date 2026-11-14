@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef } from 'react';
-import { createStadiumTurfTextures } from './environment/stadium-turf.js';
+import { createStadiumTurfTextures, createStadiumTurfMaterial } from './environment/stadium-turf.js';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
@@ -88,7 +88,7 @@ function useKit(lowQuality: boolean, refinedTurf = false) {
     dark: new THREE.MeshStandardMaterial({ color: C.darkMint, roughness: .66 }),
     coral: new THREE.MeshStandardMaterial({ color: C.coral, roughness: .48 }),
     wood: new THREE.MeshStandardMaterial({ color: '#f7e7c9', roughness: .56, bumpMap,bumpScale:.007 }),
-    turf: new THREE.MeshStandardMaterial({ color: '#fffdf0',map:lawn,roughness: .96,normalMap:turfTextures?.normal,normalScale:new THREE.Vector2(.45,.45),bumpMap:turfTextures?null:bumpMap,bumpScale:.02 }),
+    turf: turfTextures ? createStadiumTurfMaterial(turfTextures,lowQuality) : new THREE.MeshStandardMaterial({color:'#fffdf0',map:lawn,roughness:.96,bumpMap,bumpScale:.02}),
     turfShade: new THREE.MeshStandardMaterial({ color: '#e3eabf',map:lawn,roughness:.98,bumpMap,bumpScale:.026 }),
     gold: lowQuality
       ? new THREE.MeshStandardMaterial({ color: '#f6be43', roughness: .22, metalness: .72 })
@@ -317,8 +317,10 @@ function ClassicContents({kit,track,reversed,lowQuality,triggered,showTallDecor,
         </group>;
       })}
     </> : <>
-      <Box kit={kit} position={[-7.7,.154,0]} scale={[3.25,.022,1.87]} material={kit.turfShade} shadow={false}/>
-      <Box kit={kit} position={[2.4,.154,-.05]} scale={[6.15,.022,2.08]} material={kit.turfShade} shadow={false}/>
+      {track!=='mild'&&<>
+        <Box kit={kit} position={[-7.7,.154,0]} scale={[3.25,.022,1.87]} material={kit.turfShade} shadow={false}/>
+        <Box kit={kit} position={[2.4,.154,-.05]} scale={[6.15,.022,2.08]} material={kit.turfShade} shadow={false}/>
+      </>}
       <LawnDetails lowQuality={lowQuality} kit={kit}/>
       <Gate kit={kit} reversed={reversed}/><Gate finish kit={kit} reversed={reversed}/><CourseDetails kit={kit} lowQuality={lowQuality}/>
     </>}
