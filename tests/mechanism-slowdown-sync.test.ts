@@ -25,14 +25,14 @@ const speeds = [.5, 1, 2, 4, 8];
 const reducedMs = { trip: 500, move: 400, score: 500, warp: 450 };
 const close = (actual: number, expected: number) => assert(Math.abs(actual - expected) < 1e-9, `${actual} != ${expected}`);
 
-test('all fixed mechanism categories slow the shared duration by 25%, preserving fast floors and reduced motion', () => {
+test('all fixed mechanism categories use 2400ms typical cycles, preserving fast floors and reduced motion', () => {
   for (const [name, event] of mechanismEvents) {
     const beat = singleBeat(event), natural = name === 'long punch' ? 2200 : 1600;
     assert(isMechanismBeat(beat), name);
     assert.equal(beat.naturalDurationMs, natural, `${name}: queue basis is unchanged`);
     assert.equal(beat.durationMs, natural, `${name}: only resolved playback duration changes`);
     for (const speed of speeds) {
-      assert.equal(beatDuration(beat, { speed }), Math.max(1000, Math.round(natural * 1.25 / speed)), `${name} at ${speed}x`);
+      assert.equal(beatDuration(beat, { speed }), Math.max(1000, Math.round(natural * 1.5 / speed)), `${name} at ${speed}x`);
       assert.equal(beatDuration(beat, { speed, reducedMotion: true }), Math.round(reducedMs[beat.kind as keyof typeof reducedMs] / speed), `${name}: reduced mode at ${speed}x`);
     }
   }
@@ -77,7 +77,7 @@ test('slower visible mechanics do not cross queue compression thresholds or reti
       const minimum = beat.kind === 'skill' ? 1500 : beat.kind === 'move' ? 700 : 650;
       const expected = Math.max(minimum, Math.round(beat.naturalDurationMs! * pace));
       assert.equal(beat.durationMs, expected, `queue duration at ${natural}ms`);
-      assert.equal(beatDuration(beat), isMechanismBeat(beat) ? Math.max(1000, Math.round(expected * 1.25)) : expected);
+      assert.equal(beatDuration(beat), isMechanismBeat(beat) ? Math.max(1000, Math.round(expected * 1.5)) : expected);
     }
     const durations = state.queue.map(beat => [beat.naturalDurationMs, beat.durationMs, beatDuration(beat)]), active = state.queue[0];
     const updated = receiveRoom(state, { ...state.confirmed, version: 3, logs: [...state.confirmed.logs, { id: state.eventCursor + 1, type: 'power', source: 'a', text: '后续技能' }] });
@@ -100,9 +100,9 @@ test('model, pawn/FX progress and completion share the slower clock for every me
       assert.equal(now >= beatCompletionTime(beat, startedAt, duration)!, fraction === 1, `${name} ${speed}x reduced=${reducedMotion} completion at ${fraction}`);
     }
     if (!reducedMotion && speed === 1) {
-      const oldEnd = startedAt + beat.durationMs;
+      const oldEnd = startedAt + Math.round(beat.durationMs * 1.25);
       assert(oldEnd < beatCompletionTime(beat, startedAt, duration)!, 'the old endpoint cannot release the next turn while the slower rig is still active');
-      close(model.sample(beat.key, oldEnd, startedAt, duration, false, false), .8);
+      close(model.sample(beat.key, oldEnd, startedAt, duration, false, false), 5 / 6);
     }
   }
 });

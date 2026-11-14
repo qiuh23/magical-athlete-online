@@ -5,6 +5,8 @@ import { beatDuration, completeBeat, createPlayback, receiveRoom, skipPlayback }
 import { displayTripFallProgress, pawnFallPose } from '../src/client/scene/pawn-fall.js';
 import { mechanismActions, pawnFallPhase } from '../src/client/scene/mechanisms/events.js';
 import { PresentationClock } from '../src/client/presentation-clock.js';
+import { sampleTripSweep, SWEEP_PARK_REACH, type TripSweepPlan } from '../src/client/scene/environment/trip-sweep.js';
+import { punchWindRoute, punchWindStroke, punchWindTravel } from '../src/client/scene/environment/force-presentation.js';
 import type { GameEvent, Racer, RoomView } from '../src/shared/types.js';
 
 const racer=(id:string,tripped=false):Racer=>({id,playerId:id,characterId:'banana',position:5,tripped,finished:false,eliminated:false,flags:{}});
@@ -21,7 +23,7 @@ test('one, two and eight targets wait for their measured sweep contact before fa
  for(const count of [1,2,8]){
   const {state,final}=tripPlayback(count),beat=state.queue[0]!;
   assert.equal(beat.kind,'trip');
-  assert.equal(beatDuration(beat),2000);
+  assert.equal(beatDuration(beat),2400);
   const actions=mechanismActions('wild',beat,state.racers);
   assert.equal(actions.length,1);assert.equal(actions[0]!.targets.length,count);
   for(const id of actions[0]!.targets){
@@ -36,6 +38,27 @@ test('one, two and eight targets wait for their measured sweep contact before fa
   assert.deepEqual(completeBeat(state).racers,final.racers);
   assert.deepEqual(skipPlayback(state,final).racers,final.racers);
  }
+});
+
+test('the longer shared cycle preserves force, target reaction and complete retract order',()=>{
+ const {state}=tripPlayback(2),duration=beatDuration(state.queue[0]!);
+ const plan:TripSweepPlan={key:'timing',anchor:'wild:5',start:-.5,end:.5,reach:1,height:.22,parkHeight:.22,contacts:new Map([['r0',.4],['r1',.5]]),bystanders:[],unreached:[]};
+ const at=(ms:number)=>sampleTripSweep(plan,ms/duration);
+ assert.equal(at(288).yaw,plan.start,'aim completes before deployment and sweep');
+ assert.equal(at(624).yaw,plan.start,'the working sweep begins at the same phase');
+ for(const [id,hit] of plan.contacts){
+  assert.equal(displayTripFallProgress(hit,hit),0,`${id} cannot react before contact`);
+  assert(displayTripFallProgress(hit+.1,hit)>0,`${id} reacts after its own contact`);
+ }
+ assert.equal(at(1920).reach,SWEEP_PARK_REACH,'arm retracts before turning back');
+ assert.notEqual(at(2000).yaw,0,'the old endpoint still belongs to the returning mechanism');
+ assert.deepEqual(at(2400),{yaw:0,reach:SWEEP_PARK_REACH,height:plan.parkHeight});
+ assert.equal(punchWindStroke(528/duration),1,'force peaks at release');
+ assert.equal(punchWindTravel(528/duration),0,'pressure launches after the peak');
+ assert(Math.abs(punchWindTravel(1008/duration)-1)<1e-9,'pressure arrives before target movement');
+ assert.equal(punchWindRoute(1152/duration),0,'the target waits for the force');
+ assert(punchWindRoute(1440/duration)>0,'the target then follows the confirmed route');
+ assert.equal(punchWindRoute(2208/duration),1,'route finishes before the shared endpoint');
 });
 
 test('speed preserves a readable mechanism cycle, reduced motion retains its immediate endpoint',()=>{
