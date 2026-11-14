@@ -1,3 +1,4 @@
+import {assertHistoricalVenueInput} from './helpers/integrated-venue-evidence.js';
 import ts from 'typescript';
 import {Matrix4} from 'three';
 import {RoundedBoxGeometry} from 'three/addons/geometries/RoundedBoxGeometry.js';
@@ -7,7 +8,7 @@ const read=(p:string)=>JSON.parse(readFileSync(p,'utf8')),sha=(p:string)=>create
 const input=read('src/client/scene/environment/floodlight-edge-mounts.json'),record=read('docs/qa/floodlight-rows/edge-mount-inputs.json');
 test('natural lamp layout corners retain actual BVH inputs without claiming authorization',()=>{
  assert.equal(input.version,1);assert.deepEqual(Object.keys(input.tracks),['squiggle','boardwalks','bridges']);assert.equal(record.measured.length,96);
- assert.equal(sha(record.output),record.sha256);for(const [p,h] of Object.entries(record.inputs))assert.equal(sha(p),h,p);
+ assert.equal(sha(record.output),record.sha256);for(const [p,h] of Object.entries(record.inputs))assertHistoricalVenueInput(p,h);
  assert.match(record.scope,/layout input only/);assert.match(record.scope,/No new collision/);
  for(const [track,t] of Object.entries(input.tracks) as [string,any][]){assert.equal(t.fixtures.length,8);for(const [i,f] of t.fixtures.entries()){
  assert.equal(f.innerCorners.length,4);const raw=record.measured.filter((m:any)=>m.track===track&&m.fixture===i);assert.equal(raw.length,4);

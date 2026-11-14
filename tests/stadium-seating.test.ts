@@ -11,7 +11,7 @@ const models:EnvironmentModels={};
 async function load(){for(const name of ['bleachers','spectators','grandstand_rostrum'])if(!models[name]){const b=readFileSync(`public/models/environment-rebuilt-v2/${name}.glb`);models[name]=(await new GLTFLoader().parseAsync(b.buffer.slice(b.byteOffset,b.byteOffset+b.byteLength),'')).scene;}return models;}
 const tracks=Object.keys(TRACKS)as TrackId[];
 test('seven seat plans keep the foreground open and make real shape-specific entrances',()=>{
- for(const track of tracks){const plan=stadiumSeatingPlan(track,{...mechanismLayout(track),lowQuality:false});assert.ok(plan.bays.length>=4&&plan.bays.length<=6);assert.equal(plan.bays.filter(b=>b.yaw<-1).length,1);assert.ok(plan.bays.filter(b=>b.yaw>-1&&!b.infield).every(b=>b.z<0));assert.equal(new Set(plan.bays.map(b=>b.id)).size,plan.bays.length);}
+ for(const track of tracks){const plan=stadiumSeatingPlan(track,{...mechanismLayout(track),lowQuality:false});assert.ok(plan.bays.length===2);assert.equal(plan.bays.filter(b=>b.yaw<-1).length,1);assert.ok(plan.bays.filter(b=>b.yaw>-1&&!b.infield).every(b=>b.z<0));assert.equal(new Set(plan.bays.map(b=>b.id)).size,plan.bays.length);}
  const options={scale:1,lift:1.43,lowQuality:false};assert.ok(stadiumSeatingPlan('wild',options).bays.at(-1)!.x>stadiumSeatingPlan('whirly-world',options).bays.at(-1)!.x);
  assert.equal(stadiumSeatingPlan('boardwalks',options).promenades.length,0);
 });
@@ -26,9 +26,9 @@ test('source support remains under each raised spectator bank instead of an empt
  const kit=buildStadiumSeating('wild',await load(),{...mechanismLayout('wild'),lowQuality:false});let supports=0;kit.root.traverse(n=>{if(n instanceof InstancedMesh&&n.name.includes('grandstand_structural_rostrum')){supports+=n.count;const m=new Matrix4();n.getMatrixAt(0,m);const box=new Box3().setFromBufferAttribute(n.geometry.getAttribute('position')).applyMatrix4(m);assert.ok(box.min.y<=.240001&&box.max.y>=1.38);}});assert.equal(supports,kit.plan.bays.length);kit.dispose();
 });
 
-test('Mild has one low infield bank without copying it to other courses',()=>{
+test('all infields are open rather than crowded with another spectator bank',()=>{
  const options={scale:1,lift:0,lowQuality:false};
  const inner=stadiumSeatingPlan('mild',options).bays.filter(b=>b.infield);
- assert.equal(inner.length,1);assert.deepEqual([inner[0]!.x,inner[0]!.z,inner[0]!.floor],[2,0,.234]);
+ assert.equal(inner.length,0);
  assert.equal(stadiumSeatingPlan('twisty-twirl',options).bays.filter(b=>b.infield).length,0);
 });

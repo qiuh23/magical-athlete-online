@@ -4,6 +4,7 @@ import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import type { TrackId } from '../../../shared/tracks.js';
 import { type EnvironmentOptions } from './layout.js';
 import type { EnvironmentModels } from './runtime.js';
+import { mutedVenueMaterial } from './scene-hierarchy.js';
 import { cutSeatingBlock, seatingFootingCuts } from './seating-clearance.js';
 
 export const SEATING_REVISION = 'segmented-venue-seating-v1';
@@ -21,9 +22,8 @@ export function stadiumSeatingPlan(track: TrackId, options: EnvironmentOptions):
   const natural = ['squiggle','boardwalks','bridges'].includes(track);
   // Bay dimensions stay in metres. Only anchor spacing follows the route's
   // presentation expansion, matching rigid trees and existing venue facilities.
-  const bays: SeatingBay[] = seats.map(([x,z,yaw],i)=>({id:`${track}:stand:${i}`,x:x*scale,z:z*scale,yaw,floor}));
+  const bays: SeatingBay[] = seats.filter((_,i)=>i===1||i===seats.length-1).map(([x,z,yaw],i)=>({id:`${track}:stand:${i}`,x:x*scale,z:z*scale,yaw,floor}));
   const turnX = bays.at(-1)!.x;
-  if(track==='mild')bays.push({id:'mild:infield:0',x:2.0,z:0,yaw:0,floor:.234,infield:true} as SeatingBay);
   const promenades: SeatingPlan['promenades'] = natural ? [] : [
     {a:[-17*scale,-6.6*scale],b:[14.6*scale,-6.6*scale],width:3.3},
     {a:[14.6*scale,-6.6*scale],b:[turnX,-3.7*scale],width:3.3},
@@ -32,7 +32,7 @@ export function stadiumSeatingPlan(track: TrackId, options: EnvironmentOptions):
   return { bays, promenades, ground };
 }
 
-const paints = { stone:'#526b64', cream:'#e7ddc4', wood:'#ba946f', ink:'#285e55', gold:'#d9b15e' };
+const paints = { stone:'#526b64', cream:'#a6aa98', wood:'#ba946f', ink:'#285e55', gold:'#9b9679' };
 type Paint = keyof typeof paints;
 /** Existing detailed seat and crowd meshes are shared in GPU instance batches.
  * New joinery is one merged buffer per material. Full content is identical on
@@ -53,7 +53,7 @@ export function buildStadiumSeating(track: TrackId, models: EnvironmentModels, o
   };
   const batch = (asset:string,matrices:Matrix4[]) => {
     const source=models[asset]; if(!source)throw Error(`Missing seating asset ${asset}`); source.updateMatrixWorld(true);
-    source.traverse(node=>{if(!(node instanceof Mesh))return;const mesh=mark(new InstancedMesh(node.geometry,node.material,matrices.length),'seating');mesh.name=`seating:${asset}:${node.name}`;
+    source.traverse(node=>{if(!(node instanceof Mesh))return;const mesh=mark(new InstancedMesh(node.geometry,Array.isArray(node.material)?node.material.map(m=>{const owned=mutedVenueMaterial(m);materials.push(owned as MeshStandardMaterial);return owned;}):(()=>{const owned=mutedVenueMaterial(node.material);materials.push(owned as MeshStandardMaterial);return owned;})(),matrices.length),'seating');mesh.name=`seating:${asset}:${node.name}`;
       matrices.forEach((m,i)=>mesh.setMatrixAt(i,new Matrix4().multiplyMatrices(m,node.matrixWorld)));mesh.computeBoundingBox();mesh.computeBoundingSphere();root.add(mesh);instances.push(mesh);});
   };
   // Layered outer decks meet the existing stadium sidewall, rather than floating
@@ -105,50 +105,7 @@ export function buildStadiumSeating(track: TrackId, models: EnvironmentModels, o
     // finish without adding flags, billboards or repeated decorative clutter.
     block('gold',[0,.169,1.10],[5.62,.018,.045],matrix);
   }
-  if(track==='mild'){
-    // Tree wells and exact footing clearances interrupt only the low paving,
-    // not the route. The original trunks/roots and plinths remain untouched.
-    const holes=[[-12.745,-10.855,-.775,.575],[-9.05,-6.35,-.875,.675],
-      [-10.24,-9.53,-.94,-.22],[10.24,10.85,.43,1.06],[7.41,8.03,.47,1.10],
-      [-14.39,-13.96,1.285,1.825]];
-    const paving=(x:number,z:number,w:number,d:number)=>{
-      for(const [paint,y,h,inset]of [['wood',.163,.026,0],['cream',.179,.008,.04]]as const){
-        let pieces=[[x-w/2+inset,x+w/2-inset,z-d/2+inset,z+d/2-inset]];
-        for(const [lx,hx,lz,hz]of holes){const next:number[][]=[];
-          for(const[a,b,c,e]of pieces){const loX=Math.max(a!,lx!),hiX=Math.min(b!,hx!),loZ=Math.max(c!,lz!),hiZ=Math.min(e!,hz!);
-            if(loX>=hiX||loZ>=hiZ){next.push([a!,b!,c!,e!]);continue;}
-            if(a!<loX)next.push([a!,loX,c!,e!]);if(hiX<b!)next.push([hiX,b!,c!,e!]);
-            if(c!<loZ)next.push([loX,hiX,c!,loZ]);if(hiZ<e!)next.push([loX,hiX,hiZ,e!]);
-          }pieces=next;
-        }
-        for(const[a,b,c,e]of pieces)block(paint,[(a!+b!)/2,y,(c!+e!)/2],[b!-a!,h,e!-c!]);
-      }
-    };
-    // A continuous service path stays inside the 3.45m free infield corridor.
-    paving(-.65,1.20,28.0,.88);
-    for(const x of [-11.8,-7.7, -1.15,5.15,12.25])paving(x,.54,.66,.56);
-    // Officials and medal presentation are now read as a connected precinct.
-    paving(-9.75,-.15,6.65,1.67);
-    // Arrival forecourt: one clear longitudinal lane, two seating pockets,
-    // transverse paver joints, and planters at its edge instead of dead paving.
-    block('stone',[-12.75,.158,-6.63],[8.2,.016,1.0]);
-    for(let x=-16.3;x<-8.5;x+=.65)block('cream',[x,.168,-6.63],[.018,.006,.90]);
-    const bench=(x:number,z:number)=>{
-      for(const end of [-.62,.62])block('stone',[x+end,.34,z],[.12,.38,.38]);
-      for(const slat of [-.15,0,.15])block('wood',[x,.55,z+slat],[1.52,.07,.11]);
-      block('ink',[x,.75,z-.24],[1.52,.22,.055]);
-      for(const end of [-.65,.65])block('ink',[x+end,.64,z-.24],[.045,.42,.045]);
-    };
-    bench(-15.0,-7.4);bench(-10.45,-7.4);
-    // Clear entry between the benches; low planting strips, no new tree canopy.
-    for(const x of [-15.0,-10.45]){
-      block('stone',[x,.33,-5.62],[2.05,.36,.48]);
-      block('wood',[x,.515,-5.62],[1.90,.025,.34]);
-      for(let i=0;i<9;i++)block('ink',[x-.8+i*.2,.59,-5.62],[.23,.16+(i%3)*.035,.27]);
-    }
-    // A quiet green-side rest bench terminates the path before the hairpin.
-    bench(12.25,-.35);
-  }
+  // Keep the infield open turf: no bank, repeated benches, planters or pavers.
   batch('bleachers',plan.bays.map(b=>place(b.x,b.floor,b.z,b.yaw)));
   batch('spectators',plan.bays.map(b=>place(b.x,b.floor,b.z,b.yaw)));
   const high=plan.bays.filter(b=>b.floor>.5);

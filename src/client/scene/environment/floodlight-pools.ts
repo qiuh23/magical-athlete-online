@@ -6,7 +6,8 @@ export function activeVenuePools<T extends {active:boolean}>(lamps:ReadonlyArray
  * Keep mount/aim geometry unchanged and leave readable cool ambient between pools. */
 export function venuePoolPhotometry(position:Vector3,target:Vector3,lowQuality=false){
  const axis=target.clone().sub(position).normalize(),cosine=Math.max(.05,-axis.y),receivingDistance=position.distanceTo(target);
- const distance=receivingDistance*1.65,targetLux=lowQuality?1.05:.64;
+ // 2.27× the old full-quality pool, without raising global exposure.
+ const distance=receivingDistance*1.65,targetLux=lowQuality?1.75:1.45;
  return {intensity:targetLux/(spotDistanceAttenuation(receivingDistance,distance)*cosine),distance,angle:.57,penumbra:.42,decay:2,targetLux,receivingDistance,cosine,position:position.toArray(),target:target.toArray()};
 }
 /** Unoccluded direct irradiance only: not a rendered pixel/visibility guarantee. */
