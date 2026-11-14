@@ -1,6 +1,10 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {createHash} from 'node:crypto';
+import {readFileSync} from 'node:fs';
+import ts from 'typescript';
+import {RoundedBoxGeometry} from 'three/addons/geometries/RoundedBoxGeometry.js';
+import {BOARD_CENTER_SPAN,TILE} from '../src/client/scene/math.js';
 import {LinearFilter,LinearMipmapLinearFilter,NoColorSpace,RepeatWrapping,SRGBColorSpace} from 'three';
 import {stadiumTurfPixels,stadiumMowDirection,createStadiumTurfTextures,createStadiumTurfMaterial,STADIUM_TURF_SIZE,STADIUM_TURF_BANDS,STADIUM_TURF_REVISION} from '../src/client/scene/environment/stadium-turf.js';
 
@@ -48,4 +52,49 @@ test('Mild keeps a continuous field even while legacy decorative assets are unav
  assert.match(source,/const kit=useKit\(lowQuality,track==='mild'\)/);
  assert.match(source,/track!=='mild'&&<>\s*<Box[^\n]+material=\{kit.turfShade\}/);
  assert.match(source,/material=\{kit.turf\} shadow=\{false\}/);
+});
+test('actual turf mesh keeps its bounded rounded surface and original playing height',()=>{
+ const path='src/client/scene/DioramaStadium.tsx',source=readFileSync(path,'utf8');
+ const ast=ts.createSourceFile(path,source,ts.ScriptTarget.Latest,true,ts.ScriptKind.TSX);
+ const constants:Record<string,number>={TILE};
+ const numeric=(node:ts.Expression):number=>{
+  if(ts.isNumericLiteral(node))return Number(node.text);
+  if(ts.isParenthesizedExpression(node))return numeric(node.expression);
+  if(ts.isIdentifier(node)&&node.text in constants)return constants[node.text]!;
+  if(ts.isPropertyAccessExpression(node)&&node.expression.getText(ast)==='BOARD_CENTER_SPAN'){
+   assert.ok(node.name.text==='width'||node.name.text==='depth');return BOARD_CENTER_SPAN[node.name.text];
+  }
+  if(ts.isPrefixUnaryExpression(node)&&node.operator===ts.SyntaxKind.MinusToken)return -numeric(node.operand);
+  if(ts.isBinaryExpression(node)){
+   const a=numeric(node.left),b=numeric(node.right);
+   if(node.operatorToken.kind===ts.SyntaxKind.PlusToken)return a+b;
+   if(node.operatorToken.kind===ts.SyntaxKind.MinusToken)return a-b;
+   if(node.operatorToken.kind===ts.SyntaxKind.AsteriskToken)return a*b;
+  }
+  throw Error('Unreviewed turf geometry expression: '+node.getText(ast));
+ };
+ const visit=(node:ts.Node,fn:(node:ts.Node)=>void)=>{fn(node);node.forEachChild(child=>visit(child,fn));};
+ let box:number[]|undefined,position:number[]|undefined,scale:number[]|undefined;
+ visit(ast,node=>{
+  if(ts.isVariableDeclaration(node)&&ts.isIdentifier(node.name)&&['WIDTH','DEPTH'].includes(node.name.text)){
+   assert.ok(node.initializer);constants[node.name.text]=numeric(node.initializer);
+  }
+  if(ts.isPropertyAssignment(node)&&node.name.getText(ast)==='box'){
+   assert.equal(box,undefined);assert.ok(ts.isNewExpression(node.initializer));
+   assert.equal(node.initializer.expression.getText(ast),'RoundedBoxGeometry');box=node.initializer.arguments?.map(numeric);
+  }
+  if(!ts.isJsxSelfClosingElement(node)||node.tagName.getText(ast)!=='Box')return;
+  const attribute=(name:string)=>node.attributes.properties.find(a=>ts.isJsxAttribute(a)&&a.name.getText(ast)===name) as ts.JsxAttribute|undefined;
+  const material=attribute('material')?.initializer;
+  if(!material||!ts.isJsxExpression(material)||material.expression?.getText(ast)!=='kit.turf')return;
+  assert.equal(position,undefined,'Exactly one continuous turf surface');
+  const array=(name:string)=>{const value=attribute(name)?.initializer;assert.ok(value&&ts.isJsxExpression(value)&&value.expression&&ts.isArrayLiteralExpression(value.expression));return value.expression.elements.map(item=>numeric(item as ts.Expression));};
+  position=array('position');scale=array('scale');assert.equal(attribute('rotation'),undefined);
+ });
+ assert.deepEqual(box,[1,1,1,2,.1]);assert.deepEqual(position,[0,.11,0]);
+ assert.deepEqual(scale,[BOARD_CENTER_SPAN.width+TILE*1.95-.55,.08,BOARD_CENTER_SPAN.depth+TILE*2.05-.55]);
+ assert.match(source,/return <mesh geometry=\{kit\.box\} material=\{material\} position=\{position\} scale=\{scale\}/);
+ const geometry=new RoundedBoxGeometry(...box as [number,number,number,number,number]);
+ geometry.scale(...scale as [number,number,number]);geometry.translate(...position as [number,number,number]);geometry.computeBoundingBox();
+ assert.ok(Math.abs(geometry.boundingBox!.max.y-.15)<1e-7);assert.ok(Math.abs(geometry.boundingBox!.min.y-.07)<1e-7);geometry.dispose();
 });

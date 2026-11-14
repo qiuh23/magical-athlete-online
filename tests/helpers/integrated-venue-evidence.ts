@@ -19,10 +19,19 @@ const retiredMotionInputs=new Set([
  'src/client/scene/Board3D.tsx',
  'tests/helpers/integrated-venue-evidence.ts',
 ]);
+/** Exact source bytes from d0df757a68519b8499f21ee4e8707b559b2ea9ca.
+ * Old reports describe that presentation, not today's grass or geometry.
+ * Current turf and support geometry are checked by stadium-turf.test.ts and
+ * floodlight-edge-mounts.test.ts; future visual edits do not renew this evidence. */
+const archivedPresentationInputs:Record<string,string>={
+ 'src/client/scene/environment/stadium-turf.ts':'tests/fixtures/integrated-venue-pre-turf/stadium-turf.ts.txt',
+ 'src/client/scene/DioramaStadium.tsx':'tests/fixtures/integrated-venue-pre-turf/DioramaStadium.tsx.txt',
+};
 /** Keep archived venue reports tied to their original source. These two
  * explicit source-only deltas do not certify current geometry; the current
  * floodlight and rigid-envelope regression tests exercise those changes. */
 function archivedInputDigest(path:string,root:string){
+ if(archivedPresentationInputs[path])return sha(resolve(root,archivedPresentationInputs[path]));
  if(!['src/client/scene/environment/floodlights.ts','src/client/scene/toy-model-instance.ts'].includes(path))return sha(resolve(root,path));
  let source=readFileSync(resolve(root,path),'utf8');
  const replaceOnce=(current:string,previous:string)=>{
