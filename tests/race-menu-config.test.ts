@@ -38,3 +38,11 @@ test('practice, two players, three-player double and larger games keep their mod
   assert.match(renderToStaticMarkup(createElement(RaceMenuConfigSummary,{room,config:{...config,threePlayerMode:'double'}})),/三人双角色 · 非官方/);
   assert.match(html({players:Array.from({length:8},()=>({})) as RoomView['players']}),/8 人 · 每人单角色 · 非官方/);
 });
+
+test('quick mode summary distinguishes automatic teams from legacy draft and excludes practice',()=>{
+ const room={phase:'race',round:1,mode:'multiplayer',players:[{},{}]} as RoomView;
+ const enabled=renderToStaticMarkup(createElement(RaceMenuConfigSummary,{room,config:{...config,quickMode:true}}));
+ assert.match(enabled,/<dt>快速模式<\/dt><dd>开启 · 系统分配队伍，赛前自选上场选手<\/dd>/);
+ assert.match(html(),/<dt>快速模式<\/dt><dd>关闭 · 通过选秀组队<\/dd>/);
+ assert.doesNotMatch(html({mode:'practice'}),/<dt>快速模式<\/dt>/);
+});

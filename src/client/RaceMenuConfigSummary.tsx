@@ -18,6 +18,7 @@ export function RaceMenuConfigSummary({ room, config }: { room: RoomView; config
     <dl className="race-menu-config-facts">
       <dt>角色包</dt><dd>{CHARACTER_PACK_IDS.filter(pack => config.characterPacks[pack]).map(pack => packNames[pack]).join('、')}</dd>
       <dt>人数玩法</dt><dd>{room.mode === 'practice' ? '单人练习 · 每场 1 位角色' : room.players.length === 2 ? '两人双角色' : room.players.length === 3 ? config.threePlayerMode === 'double' ? '三人双角色 · 非官方' : '三人单角色' : `${room.players.length} 人 · 每人单角色${room.players.length >= 7 ? ' · 非官方' : ''}`}</dd>
+      {room.mode !== 'practice' && <><dt>快速模式</dt><dd>{config.quickMode ? '开启 · 系统分配队伍，赛前自选上场选手' : '关闭 · 通过选秀组队'}</dd></>}
       <dt>特殊赛事</dt><dd>{schedule.some(race => race.special) ? `第 ${schedule.filter(race => race.special).map(race => race.round).join('、')} 场 · 非官方` : '关闭'}</dd>
     </dl>
   </div>;

@@ -16,6 +16,8 @@ export interface RoomConfig {
   visibility?: 'public' | 'private';
   /** Omitted by older rooms, which use one racer each with three players. */
   threePlayerMode?: ThreePlayerMode;
+  /** Optional for older payloads; quick rooms deal teams before manual lineups. */
+  quickMode?: boolean;
 }
 export function legacyRoomConfig(pool: CharacterPool = 'original', practice = false): RoomConfig {
   return { version: ROOM_CONFIG_VERSION, characterPacks: { original: practice || pool !== 'second-wind', 'second-wind': practice || ['second-wind','mixed','all'].includes(pool), 'extra-mile': false, 'leaf-fan': false, wurstii: pool === 'wurstii' || pool === 'all' }, optionalRules: [] };
@@ -23,7 +25,7 @@ export function legacyRoomConfig(pool: CharacterPool = 'original', practice = fa
 export function validateRoomConfig(value: unknown): RoomConfig {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw Error('角色包配置无效。');
   const config = value as Record<string, unknown>, packs = config.characterPacks;
-  if (Object.keys(config).some(key => !['version','characterPacks','optionalRules','competition','visibility','threePlayerMode'].includes(key)) || config.version !== ROOM_CONFIG_VERSION || !packs || typeof packs !== 'object' || Array.isArray(packs)) throw Error('角色包配置版本或字段无效。');
+  if (Object.keys(config).some(key => !['version','characterPacks','optionalRules','competition','visibility','threePlayerMode','quickMode'].includes(key)) || config.version !== ROOM_CONFIG_VERSION || !packs || typeof packs !== 'object' || Array.isArray(packs)) throw Error('角色包配置版本或字段无效。');
   const flags = packs as Record<string, unknown>;
   if (CHARACTER_PACK_IDS.some(id => !(id === 'wurstii' && flags[id] === undefined) && typeof flags[id] !== 'boolean') || Object.keys(flags).some(id => !CHARACTER_PACK_IDS.includes(id as CharacterPackId))) throw Error('角色包开关无效。');
   if (!Array.isArray(config.optionalRules) || config.optionalRules.length) throw Error('没有已核实的独立可选玩法，请勿提交未知玩法。');
@@ -31,6 +33,7 @@ export function validateRoomConfig(value: unknown): RoomConfig {
   if(config.competition!==undefined)result.competition=validateCompetition(config.competition);
   if(config.visibility!==undefined){if(config.visibility!=='public'&&config.visibility!=='private')throw Error('房间可见性无效。');result.visibility=config.visibility;}
   if(config.threePlayerMode!==undefined){if(config.threePlayerMode!=='single'&&config.threePlayerMode!=='double')throw Error('三人玩法只能选择每人单角色或每人双角色。');result.threePlayerMode=config.threePlayerMode;}
+  if(config.quickMode!==undefined){if(typeof config.quickMode!=='boolean')throw Error('快速模式开关无效。');result.quickMode=config.quickMode;}
   if (!enabledCharacterIds(result).length) throw Error('请至少启用一个含已完成角色的角色包。');
   return result;
 }
