@@ -1,4 +1,5 @@
 import { RaceMenuPanel } from './RaceMenuPanel.js';
+import { canDismissRaceMenu } from './race-menu-dismissal.js';
 import { useRacetrackPreload } from './useRacetrackPreload.js';
 import {useSceneLightingClock} from './useSceneLightingClock.js';
 import type {RoomLightingClock} from './scene-lighting-clock.js';
@@ -541,6 +542,10 @@ function Race({ lightingClock,lightingRunning,room, busy, leavingBusy, canClose,
   const [racePanel, setRacePanel] = useState<'menu' | 'scores' | 'log' | 'track'>();
   const settingsOpen = racePanel === 'menu';
   const setSettingsOpen = (open: boolean) => setRacePanel(open ? 'menu' : undefined);
+  const leaveMenu = (next: () => void) => {
+    if (!canDismissRaceMenu(document.getElementById('presentation-settings-panel'))) return;
+    setSettingsOpen(false); next();
+  };
   const spectator = room.role === 'spectator';
   const active = room.racers.find(racer => racer.id === room.currentRacerId);
   const player = room.players.find(p => p.id === active?.playerId);
@@ -579,13 +584,35 @@ function Race({ lightingClock,lightingRunning,room, busy, leavingBusy, canClose,
     {!playing && showing.phase !== 'race' ? <div className="race-results-overlay"><Results room={showing} busy={busy || !sameStage} closeDisabled={leavingBusy || !canClose} onEnd={onEnd} act={act} onDetail={onDetail} /></div> : pendingChoice ? <ChoiceDock room={room} busy={busy} act={act} onDetail={onDetail} /> : showing.phase === 'race' && <div className="floating-roll"><span className="roll-caption" data-testid={beat?.kind === 'dice' || beat?.kind === 'duel-dice' ? undefined : 'dice-value'}>{!playing && room.lastRoll && <span className="last-roll-numbers" aria-label={`上次骰面 ${room.lastRoll.face}，移动 ${room.lastRoll.distance} 格`}><Icon kind="dice" size={16} /><b>{room.lastRoll.face}</b><Icon kind="move" size={16} /><b>{room.lastRoll.distance}</b><small>格</small></span>}</span>{spectator ? <span className="spectator-race-label">观战中 · 赛况自动同步</span> : <Button className="race-roll-button" data-testid="roll-button" disabled={!canRoll} onClick={() => act({ type: 'roll' })}><Icon kind="dice" size={27} />{room.pause ? '已暂停' : playing ? '演出中' : busy ? '正在处理…' : canRoll ? '掷骰子' : room.waitingFor || room.pending ? '等待选择' : mine ? '准备中' : `等待${player ? `${player.seat + 1}号` : '选手'}`}</Button>}</div>}
     {racePanel && racePanel !== 'menu' && <Modal title={racePanel === 'scores' ? '累计积分' : racePanel === 'log' ? '事件记录' : '本场赛事与地图'} onClose={() => setRacePanel(undefined)}><div className="race-detail-content">{racePanel === 'scores' ? <Scoreboard room={room} /> : racePanel === 'log' ? <EventLog room={room} /> : <TrackDetails room={showing} queue={presentation.state?.queue} />}</div></Modal>}
     {settingsOpen && <RaceMenuPanel onClose={() => setSettingsOpen(false)}><div className="race-menu-content">
-      {racersPerPlayer(room.players.length,room.config) === 2 && <section className="locked-race-order" aria-label="本场锁定行动顺序"><strong>本场基础行动顺序</strong>{room.players.map(owner => <p key={owner.id}>{owner.name}：{(room.baseTurnOrder ?? room.racers.map(racer => racer.id)).map(id => room.racers.find(racer => racer.id === id)).filter((racer): racer is Racer => !!racer && racer.playerId === owner.id).map(racer => characterName(racer.characterId)).join(' → ')}</p>)}<small>技能明确追加、跳过或改变行动顺序时，按技能结算。</small></section>}
-      <div className="presentation-settings"><label>场景光照<select title="自动约9分钟循环，同房间跨局接续；暂停、切到后台或断线时冻结。手动选择固定时段。" aria-label="场景光照" value={appearanceMode} onChange={event => setAppearanceMode(sceneAppearance(event.target.value))}>{SCENE_APPEARANCES.map(option => <option key={option.value} value={option.value}>{option.label}</option>)}</select></label><label><input type="checkbox" checked={lowQuality} onChange={event => setLowQuality(event.target.checked)} />低画质</label><label><input type="checkbox" checked={muted} onChange={event => setMuted(event.target.checked)} />静音</label><label><input type="checkbox" disabled={presentation.paused} checked={reduceMotion} onChange={event => setReduceMotion(event.target.checked)} />减少动效</label><label>动画速度<select disabled={presentation.paused} aria-label="动画速度" value={animationSpeed} onChange={event => setAnimationSpeed(Number(event.target.value))}><option value={1}>1× · 完整演出</option><option value={2}>2× · 快速</option><option value={4}>4× · 极速</option></select></label></div>
-      <RoomConfigPanel room={room} busy={busy} act={act} />
-      <div className="race-menu-links"><LandscapeControl className="button button-secondary" />{!IS_CN_SITE && !spectator && <Button secondary onClick={() => { setSettingsOpen(false); onRename(); }}>修改昵称 · 剩余 {room.renameRemaining ?? 1} 次</Button>}<Button secondary onClick={() => { setSettingsOpen(false); onRules(); }}>帮助与规则</Button>{room.mode !== 'practice' && room.mode !== 'ai' && <Button secondary onClick={onInvite}>邀请朋友</Button>}<Button secondary disabled={leavingBusy} onClick={() => { setSettingsOpen(false); onLobby(); }}>返回游戏大厅</Button><Button secondary disabled={leavingBusy} onClick={() => { setSettingsOpen(false); onLeave(); }}>{spectator ? '退出观看' : '退出房间'}</Button>{!spectator && room.hostId === room.selfId && <button className="end-room-button" disabled={leavingBusy || !canClose} onClick={() => { setSettingsOpen(false); onEnd(); }}>结束房间</button>}</div>
-      <ServerChoices current={room.backendId} disabled={leavingBusy || !!readPendingCreation()} onSelect={target => { setSettingsOpen(false); onServer(target); }} />
-      <div className="race-menu-shortcuts"><Button secondary onClick={() => { setSettingsOpen(false); setRacePanel('scores'); }}><Icon kind="trophy" />累计积分</Button><Button secondary onClick={() => { setSettingsOpen(false); setRacePanel('log'); }}><Icon kind="log" />事件记录</Button><Button secondary onClick={() => { setSettingsOpen(false); setRacePanel('track'); }}><Icon kind="skill" />本场赛事与地图</Button></div><details><summary>运动员与位置</summary><div className="racer-strip">{showing.racers.map(racer => <RacerSummary key={racer.id} racer={racer} room={room} onDetail={(id, racerId) => { setSettingsOpen(false); onDetail(id, racerId); }} />)}</div></details>{!spectator && <details><summary>我的队伍</summary><MyTeam room={room} onDetail={(id, racerId) => { setSettingsOpen(false); onDetail(id, racerId); }} /></details>}
-      <p className="race-menu-note"><RoomLifetime expiresAt={room.expiresAt} mode={room.mode} /> · {room.spectators?.filter(spectator => spectator.connected).length ?? 0} 人观战</p><p className="race-menu-note">房间 {formatRoomCode(room.code,room.backendId??'cloudflare')} · {backendLabel(room.backendId)} · {room.mode === 'practice' ? '单人练习规则' : multiplayerModeLabel(room)}<br />拖动平移 · 滚轮或双指缩放 · {spectator ? '跟随选手' : '回到自己'}可恢复自动观看{room.hosting === 'browser' && <><br />请保持计算房主网页打开。对局进度自动保存在原浏览器中。</>}</p>
+      <nav className="race-menu-shortcuts" aria-label="赛况速览">
+        <Button secondary aria-label="累计积分" onClick={() => leaveMenu(() => setRacePanel('scores'))}><Icon kind="trophy" /><span>积分</span></Button>
+        <Button secondary aria-label="事件记录" onClick={() => leaveMenu(() => setRacePanel('log'))}><Icon kind="log" /><span>记录</span></Button>
+        <Button secondary aria-label="本场赛事与地图" onClick={() => leaveMenu(() => setRacePanel('track'))}><Icon kind="overview" /><span>地图</span></Button>
+      </nav>
+      <details className="race-menu-section" name="race-menu-sections"><summary><Icon kind="sound" /><span>画面与声音</span></summary><div className="race-menu-section-body">
+        <div className="presentation-settings"><label>场景光照<select title="自动约9分钟循环，同房间跨局接续；暂停、切到后台或断线时冻结。手动选择固定时段。" aria-label="场景光照" value={appearanceMode} onChange={event => setAppearanceMode(sceneAppearance(event.target.value))}>{SCENE_APPEARANCES.map(option => <option key={option.value} value={option.value}>{option.label}</option>)}</select></label><label><input type="checkbox" checked={lowQuality} onChange={event => setLowQuality(event.target.checked)} />低画质</label><label><input type="checkbox" checked={muted} onChange={event => setMuted(event.target.checked)} />静音</label><label><input type="checkbox" disabled={presentation.paused} checked={reduceMotion} onChange={event => setReduceMotion(event.target.checked)} />减少动效</label><label>动画速度<select disabled={presentation.paused} aria-label="动画速度" value={animationSpeed} onChange={event => setAnimationSpeed(Number(event.target.value))}><option value={1}>1× · 完整演出</option><option value={2}>2× · 快速</option><option value={4}>4× · 极速</option></select></label></div>
+        <LandscapeControl className="button button-secondary" />
+      </div></details>
+      <RoomConfigPanel room={room} busy={busy} act={act} compact />
+      <details className="race-menu-section" name="race-menu-sections"><summary><Icon kind="people" /><span>选手与队伍</span></summary><div className="race-menu-section-body">
+        {racersPerPlayer(room.players.length,room.config) === 2 && <section className="locked-race-order" aria-label="本场锁定行动顺序"><strong>本场基础行动顺序</strong>{room.players.map(owner => <p key={owner.id}>{owner.name}：{(room.baseTurnOrder ?? room.racers.map(racer => racer.id)).map(id => room.racers.find(racer => racer.id === id)).filter((racer): racer is Racer => !!racer && racer.playerId === owner.id).map(racer => characterName(racer.characterId)).join(' → ')}</p>)}<small>技能明确追加、跳过或改变行动顺序时，按技能结算。</small></section>}
+        <h3>运动员与位置</h3><div className="racer-strip">{showing.racers.map(racer => <RacerSummary key={racer.id} racer={racer} room={room} onDetail={(id, racerId) => leaveMenu(() => onDetail(id, racerId))} />)}</div>
+        {!spectator && <MyTeam room={room} onDetail={(id, racerId) => leaveMenu(() => onDetail(id, racerId))} />}
+      </div></details>
+      <details className="race-menu-section" name="race-menu-sections"><summary><Icon kind="menu" /><span>更多操作</span></summary><div className="race-menu-section-body">
+        <div className="race-menu-links">
+          <Button secondary onClick={() => leaveMenu(onRules)}><Icon kind="rules" />帮助与规则</Button>
+          {!IS_CN_SITE && !spectator && <Button secondary onClick={() => leaveMenu(onRename)}>修改昵称<span className="race-menu-action-meta">剩余 {room.renameRemaining ?? 1} 次</span></Button>}
+          {room.mode !== 'practice' && room.mode !== 'ai' && <Button secondary onClick={onInvite}><Icon kind="copy" />邀请朋友</Button>}
+          <Button secondary disabled={leavingBusy} onClick={() => leaveMenu(onLobby)}><Icon kind="back" />返回游戏大厅</Button>
+          <Button secondary disabled={leavingBusy} onClick={() => leaveMenu(onLeave)}>{spectator ? '退出观看' : '退出房间'}</Button>
+        </div>
+        <ServerChoices current={room.backendId} disabled={leavingBusy || !!readPendingCreation()} onSelect={target => leaveMenu(() => onServer(target))} />
+        {!spectator && room.hostId === room.selfId && <div className="race-menu-danger"><button className="end-room-button" disabled={leavingBusy || !canClose} onClick={() => leaveMenu(onEnd)}>结束房间</button></div>}
+        <p className="race-menu-note"><RoomLifetime expiresAt={room.expiresAt} mode={room.mode} /> · {room.spectators?.filter(spectator => spectator.connected).length ?? 0} 人观战</p>
+        <p className="race-menu-note">{room.mode === 'practice' ? '单人练习规则' : multiplayerModeLabel(room)}<br />拖动平移 · 滚轮或双指缩放 · {spectator ? '跟随选手' : '回到自己'}可恢复自动观看{room.hosting === 'browser' && <><br />请保持计算房主网页打开。对局进度自动保存在原浏览器中。</>}</p>
+      </div></details>
+      <p className="race-menu-footer">房间 {formatRoomCode(room.code,room.backendId??'cloudflare')} · {backendLabel(room.backendId)}</p>
     </div></RaceMenuPanel>}
   </section>;
 }

@@ -30,3 +30,33 @@ test('menu dismissal allows normal tabbing, preserves outside input and yields t
  modal=false;allowed=false;const rejected=event(outside);fire('pointerdown',rejected);assert.equal(rejected.prevented,true);assert.equal(rejected.stopped,true);
  remove();assert.equal(handlers.size,0);
 });
+
+test('all menu exits keep unsaved settings on cancel and block a submitting form',async()=>{
+ const {canDismissRaceMenu}=await import('../src/client/race-menu-dismissal.js');
+ let unsaved=false,submitting=false,asked=0;
+ const panel={querySelector(selector:string){return selector.includes('submitting')?submitting?{}:null:unsaved?{}:null;}} as unknown as HTMLElement;
+ const confirm=()=>{asked++;return false;};
+ assert.equal(canDismissRaceMenu(null,confirm),true);assert.equal(canDismissRaceMenu(panel,confirm),true);assert.equal(asked,0);
+ unsaved=true;assert.equal(canDismissRaceMenu(panel,confirm),false);assert.equal(asked,1);
+ assert.equal(canDismissRaceMenu(panel,()=>true),true);
+ submitting=true;assert.equal(canDismissRaceMenu(panel,confirm),false);assert.equal(asked,1);
+ const app=readFileSync(new URL('../src/client/App.tsx',import.meta.url),'utf8');
+ const menu=app.slice(app.indexOf('{settingsOpen && <RaceMenuPanel'),app.indexOf('</div></RaceMenuPanel>}'));
+ assert.doesNotMatch(menu.slice(menu.indexOf('<div className="race-menu-content">')),/setSettingsOpen\(false\)/);
+ for(const label of ['onRules','onRename','onLobby','onLeave','onEnd'])assert.ok(menu.includes(`leaveMenu(${label})`));
+});
+
+test('menu groups are initially folded and expose only three quick actions',()=>{
+ const app=readFileSync(new URL('../src/client/App.tsx',import.meta.url),'utf8');
+ const menu=app.slice(app.indexOf('{settingsOpen && <RaceMenuPanel'),app.indexOf('</div></RaceMenuPanel>}'));
+ assert.equal((menu.match(/name="race-menu-sections"/g)??[]).length,3);
+ assert.doesNotMatch(menu,/<details[^>]*\bopen\b/);
+ const quick=menu.slice(menu.indexOf('<nav'),menu.indexOf('</nav>'));
+ assert.equal((quick.match(/<Button /g)??[]).length,3);
+ for(const label of ['累计积分','事件记录','本场赛事与地图'])assert.ok(quick.includes(`aria-label="${label}"`));
+ assert.match(menu,/<RoomConfigPanel[^>]*compact/);
+ const config=readFileSync(new URL('../src/client/RoomConfig.tsx',import.meta.url),'utf8');
+ assert.match(config,/open=\{compact\?undefined:true\}/);
+ const css=readFileSync(new URL('../src/client/ui-theme.css',import.meta.url),'utf8');
+ assert.match(css,/\.race-menu-panel :is\(\.preset-options,\.map-options\)[^}]*repeat\(2,minmax\(0,1fr\)\)/);
+});
