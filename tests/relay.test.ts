@@ -1333,3 +1333,60 @@ test('CN audit is disabled without a ledger; Worker refuses missing or mismatche
   const missing=await worker.default.fetch(new Request('https://game.test/'),{...env,SITE_EDITION:undefined});assert.equal(missing.status,503);assert.match((await missing.json()).error,/SITE_EDITION/);
   const mismatch=await worker.default.fetch(new Request('https://game.test/'),{...env,SITE_EDITION:'global'});assert.equal(mismatch.status,503);assert.match((await mismatch.json()).error,/SITE_EDITION/);
 });
+
+test('Worker quick mode validates creation/configure and preserves legacy manual draft',async()=>{
+  for(const invalid of ['true',1,null,{}]){
+    const env=await instance();
+    const response=await env.relay.fetch(new Request('https://room.internal/create/ABC234',{method:'POST',body:JSON.stringify({name:'非法',maxPlayers:2,config:{...legacyRoomConfig(),quickMode:invalid},authorityMode:'worker'})}));
+    assert(response.status>=400);assert.equal(typeof (await response.json() as any).error,'string');assert.equal(await env.ctx.storage.get('room'),undefined);
+  }
+  for(const quickMode of [undefined,false,true]){
+    let env=await modern('multiplayer',{...legacyRoomConfig(),...(quickMode===undefined?{}:{quickMode})});
+    const guest=await join(env),host=await authenticate(env),peer=await authenticate(env,guest.identity);
+    for(const socket of [host,peer])assert((await workerAction(env,socket,{type:'ready',ready:true})).result.ok);
+    assert((await workerAction(env,host,{type:'start'})).result.ok);
+    const record=await env.ctx.storage.get<any>('room');assert.equal(record.phase,quickMode?'selection':'draft');assert.equal(record.config.quickMode,quickMode);
+  }
+  const env=await modern(),guest=await join(env),host=await authenticate(env),peer=await authenticate(env,guest.identity),config={...legacyRoomConfig(),quickMode:true};
+  assert.equal((await workerAction(env,peer,{type:'configure',config})).result.ok,false);
+  assert((await workerAction(env,host,{type:'configure',config})).result.ok);
+  assert.notEqual((await workerAction(env,host,{type:'configure',config:{...config,quickMode:'true'} as any})).result?.ok,true);assert.equal(host.sent.at(-1).type,'error');
+  const record=await env.ctx.storage.get<any>('room');assert.equal(record.config.quickMode,true);assert.equal(record.serverRoom.game.config.quickMode,true);
+});
+
+test('Worker quick start is authoritative, gated and idempotent across hibernation with private lineup projections',async()=>{
+  let env=await modern('multiplayer',{...legacyRoomConfig(),quickMode:true});
+  const guest=await join(env),host=await authenticate(env),peer=await authenticate(env,guest.identity);
+  assert.equal((await workerAction(env,host,{type:'start'})).result.ok,false);
+  for(const socket of [host,peer])assert((await workerAction(env,socket,{type:'ready',ready:true})).result.ok);
+  assert.equal((await workerAction(env,peer,{type:'start'})).result.ok,false);
+  const started=await workerAction(env,host,{type:'start'});assert(started.result.ok);
+  const record=await env.ctx.storage.get<any>('room'),game=record.serverRoom.game;
+  assert.equal(record.phase,'selection');assert.equal(game.draft,undefined);assert(game.players.every((p:any)=>p.hand.length===8&&p.selection.length===0));assert.equal(new Set(game.players.flatMap((p:any)=>p.hand)).size,16);
+  for(const [socket,id] of [[host,env.created.identity.playerId],[peer,guest.identity.playerId]] as const){
+    const view=socket.sent.findLast(m=>m.type==='snapshot').room as RoomView;
+    assert.equal(view.phase,'selection');for(const p of view.players){assert.equal(p.hand?.length,p.id===id?8:undefined);assert.equal(p.selection?.length,p.id===id?0:undefined);}
+  }
+  assert.equal((await workerAction(env,host,{type:'draft',characterId:game.players[0].hand[0]})).result.ok,false);
+  assert.notEqual((await workerAction(env,host,{type:'assign',characterIds:[]} as any)).result?.ok,true);
+  env={...await instance(env.ctx.storage,env.ctx.sockets),created:env.created};
+  assert((await workerAction(env,host,{type:'start'},crypto.randomUUID(),started.envelope)).result.duplicate);
+  assert.equal((await workerAction(env,host,{type:'start'})).result.ok,false);
+  const restored=(await env.ctx.storage.get<any>('room')).serverRoom.game;
+  assert.deepEqual(restored.players.map((p:any)=>p.hand),game.players.map((p:any)=>p.hand));assert.deepEqual(restored.deck,game.deck);assert.deepEqual(restored.randomLog,game.randomLog);
+  const own=game.players.find((p:any)=>p.id===env.created.identity.playerId);
+  assert((await workerAction(env,host,{type:'select',characterIds:own.hand.slice(0,2)})).result.ok);
+  const privateView=peer.sent.findLast(m=>m.type==='snapshot').room as RoomView;
+  assert.equal(privateView.phase,'selection');assert.equal(privateView.players.find(p=>p.id===own.id)!.selection,undefined);assert.equal(privateView.players.find(p=>p.id===own.id)!.selected,true);
+});
+
+test('Worker quick AI creation and alarm never choose the human lineup; practice stays free draft',async()=>controlledClock(async clock=>{
+  const env=await modern('ai',{...legacyRoomConfig(),quickMode:true}),host=await authenticate(env);
+  assert.equal(env.created.room.phase,'selection');
+  for(let i=0;i<5;i++){clock.now+=2_000;host.lastAutoResponseAt=new Date(clock.now);await env.relay.alarm();}
+  const game=(await env.ctx.storage.get<any>('room')).serverRoom.game;
+  assert.equal(game.phase,'selection');assert.equal(game.players.find((p:any)=>!p.isAI).selection.length,0);assert.equal(game.players.find((p:any)=>p.isAI).selection.length,2);
+  const human=game.players.find((p:any)=>!p.isAI);assert((await workerAction(env,host,{type:'select',characterIds:human.hand.slice(0,2)})).result.ok);
+  assert.equal((await env.ctx.storage.get<any>('room')).phase,'race');
+  const practice=await modern('practice',{...legacyRoomConfig(),quickMode:true});assert.equal(practice.created.room.phase,'draft');assert.equal(practice.created.room.players[0]!.handCount,0);
+}));

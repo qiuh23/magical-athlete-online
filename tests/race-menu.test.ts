@@ -60,3 +60,27 @@ test('menu groups are initially folded and expose only three quick actions',()=>
  const css=readFileSync(new URL('../src/client/ui-theme.css',import.meta.url),'utf8');
  assert.match(css,/\.race-menu-panel :is\(\.preset-options,\.map-options\)[^}]*repeat\(2,minmax\(0,1fr\)\)/);
 });
+
+test('host end-room action is a direct menu item, never nested in more actions',()=>{
+ const app=readFileSync(new URL('../src/client/App.tsx',import.meta.url),'utf8');
+ const menu=app.slice(app.indexOf('{settingsOpen && <RaceMenuPanel'),app.indexOf('</div></RaceMenuPanel>}'));
+ const end=menu.indexOf('className="race-menu-danger"');
+ assert.ok(end>menu.lastIndexOf('</details>'));
+ assert.equal((menu.match(/>结束房间<\/button>/g)??[]).length,1);
+ assert.match(menu,/!spectator && room.hostId === room.selfId && <div className="race-menu-danger"><button className="end-room-button" disabled=\{leavingBusy \|\| !canClose\} onClick=\{\(\) => leaveMenu\(onEnd\)\}/);
+});
+
+test('quick mode is a non-practice editable config field and updates lobby start descriptions',()=>{
+ const config=readFileSync(new URL('../src/client/RoomConfig.tsx',import.meta.url),'utf8');
+ assert.match(config,/!practice&&<label className="quick-mode-toggle"/);
+ assert.match(config,/checked=\{config.quickMode===true\}/);
+ assert.match(config,/onChange=\{event=>onChange\(\{\.\.\.config,quickMode:event.target.checked\}\)\}/);
+ assert.match(config,/跳过选秀，系统分配队伍；每场赛前自行选择上场选手/);
+ const playerSettings=config.slice(config.indexOf('<fieldset className="player-settings"'),config.indexOf('<SpecialEventFields'));
+ assert.match(playerSettings,/disabled=\{disabled\}/);assert.match(playerSettings,/quick-mode-toggle/);
+ assert.match(config,/config.quickMode \? '快速模式' : '选秀模式'/);
+ const app=readFileSync(new URL('../src/client/App.tsx',import.meta.url),'utf8');
+ assert.match(app,/quickMode\?'分配队伍并选人':'开始选秀'/);
+ assert.match(app,/quickMode\?'确认玩法并分配队伍':'确认玩法并开始选秀'/);
+ assert.match(app,/room.mode!=='practice'&&room.config\?\.quickMode===true/);
+});

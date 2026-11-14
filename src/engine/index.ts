@@ -257,7 +257,16 @@ export function startGame(s: GameState): void {
   const first=rollOff(s,s.players.map(p=>p.id));s.flags.draftFirst=first;
   const classicDuo=s.players.length===2&&matchRaceCount(s)===4;
   s.draft={market:s.deck.splice(0,classicDuo?8:s.players.length*2),order:snake(s,first,classicDuo),cursor:0,batch:0};s.phase='draft';
-  log(s,'phase',s.players.length>6?'7～8人扩展选秀开始':'选秀开始');
+  if(s.config?.quickMode){
+    log(s,'phase','快速模式：系统随机分配整局角色，每场比赛前仍由玩家暗选上场角色。');
+    // Resolve the existing draft against the authoritative shuffled deck in one
+    // start transaction. This preserves batch sizes, rotating snake order,
+    // reserves and draft-position abilities without exposing a client deal action.
+    while(s.phase==='draft'&&s.draft){
+      const draft=s.draft;
+      applyGameAction(s,draft.order[draft.cursor]!,{type:'draft',characterId:draft.market[0]!});
+    }
+  }else log(s,'phase',s.players.length>6?'7～8人扩展选秀开始':'选秀开始');
 }
 function beginSelection(s: GameState) {
   s.phase='selection';s.draft=undefined;s.pending=undefined;s.queue=[];s.baseTurnOrder=undefined;s.players.forEach(p=>p.selection=[]);
@@ -936,7 +945,7 @@ export function applyGameAction(s:GameState,playerId:string,action:GameAction):v
   if(action.type==='draft'){
     if(s.mode==='practice')throw Error(`请从完整牌池一次确认${matchRaceCount(s)}张练习角色牌`);
     if(s.phase!=='draft'||!s.draft)throw Error('现在不是选秀阶段');const d=s.draft;if(d.order[d.cursor]!==playerId)throw Error('还没有轮到你选秀');
-    const index=d.market.indexOf(action.characterId);if(index<0)throw Error('这张角色牌不在候选区');d.market.splice(index,1);p.hand.push(action.characterId);((s.flags.fanDraftOrder??={}) as Record<string,number>)[action.characterId]=d.cursor;d.cursor++;log(s,'draft',`${p.name}选择${character(action.characterId)?.nameZh}`,{cause:action.characterId});
+    const index=d.market.indexOf(action.characterId);if(index<0)throw Error('这张角色牌不在候选区');d.market.splice(index,1);p.hand.push(action.characterId);((s.flags.fanDraftOrder??={}) as Record<string,number>)[action.characterId]=d.cursor;d.cursor++;log(s,'draft',s.config?.quickMode?`系统为${p.name}分配${character(action.characterId)?.nameZh}`:`${p.name}选择${character(action.characterId)?.nameZh}`,{cause:action.characterId});
     if(d.cursor===d.order.length){
       const rounds=matchRaceCount(s),classicDuo=s.players.length===2&&rounds===4;
       const batches=classicDuo?2:rounds*racersPerPlayer(s.players.length,s.config)/2;
