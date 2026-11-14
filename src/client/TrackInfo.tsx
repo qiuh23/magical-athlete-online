@@ -5,6 +5,7 @@ import { EVENTS_RULES_VERSION } from '../shared/rules-versions.js';
 import type { PresentationBeat } from './presentation.js';
 import { EventArt, eventVisual } from './EventArt.js';
 import { Icon } from './Icons.js';
+import { PortalPairList } from './PortalGuide.js';
 
 export function visibleTwists(room: RoomView, queue: PresentationBeat[] = []) {
   const later = new Set(queue.slice(1).flatMap(beat => beat.events.filter(event => event.type === 'twist').map(event => event.cause)));
@@ -29,7 +30,7 @@ export function TrackDetails({ room, queue }: { room: RoomView; queue?: Presenta
     {room.track === 'whirly-world' && <details className="track-rule-card" data-testid="whirly-rules">
       <summary>Whirly World · 传送规则</summary>
       <p>停在漩涡格时，传送到配对格；只经过不触发。一次传送不会沿同一连接立即弹回。</p>
-      <p>六组连接：3↔5、7↔12、10↔15、18↔22、20↔23、24↔27；其余格子为普通格。</p>
+      <PortalPairList track={room.track}/>
       <p>本图采用共同确认的网页版布局。</p>
     </details>}
     {room.track === 'bridges' && <details className="track-rule-card" data-testid="bridges-rules">

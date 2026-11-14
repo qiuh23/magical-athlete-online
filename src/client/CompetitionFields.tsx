@@ -4,14 +4,15 @@ import { CHARACTER_PACK_IDS, type RoomConfig } from '../shared/room-config.js';
 import { CHARACTERS } from '../shared/characters.js';
 import { TRACKS, type TrackId } from '../shared/tracks.js';
 import { trackSvgLayout } from './scene/math.js';
+import { portalDescription, portalEndpoints } from './portal-guide.js';
 
 export function TrackThumbnail({id}:{id:MapId}) {
   if(!(id in TRACKS))return null;
   const playable=id as TrackId, track=TRACKS[playable],layout=trackSvgLayout(playable,320,110,16);
-  const radius=track.nodes?4.3:5.5;
+  const radius=track.nodes?4.3:5.5,portals=new Map(portalEndpoints(playable).map(portal=>[portal.from,portal]));
   return <svg className="track-thumbnail" viewBox="0 0 320 110" role="img" data-track={id} data-node-count={layout.nodes.length} aria-label={`${TRACK_CATALOG[id].name} 实际路线与特殊格缩略图`}>
     {layout.edges.map(([from,to])=>{const a=layout.point(from),b=layout.point(to);return <line key={`${from}-${to}`} x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke="#78967d" strokeWidth={radius*1.5} strokeLinecap="round" />;})}
-    {[...layout.nodes].sort((a,b)=>(track.nodes?.[a]?.y??0)-(track.nodes?.[b]?.y??0)).map(index=>{const p=layout.point(index),special=track.specials[index];return <g key={index} data-map-node={index}><rect x={p.x-radius} y={p.y-radius} width={radius*2} height={radius*2} rx="1.5" fill={index===0?'#edb65e':index===track.finish?'#db785b':track.nodes?.[index]?.color??(special?'#e4d77c':'#fff9db')} stroke={(track.nodes?.[index]?.y??0)>0?'#fff9db':'#567966'} strokeWidth={(track.nodes?.[index]?.y??0)>0?1.6:.6} /><text x={p.x} y={p.y+2.8} textAnchor="middle" fontSize={track.nodes?6.7:8} fill="#173f37">{index===0?'起':index===track.finish?'终':special?.kind==='star'?(special.points??1)===1?'★':String(special.points):special?.kind==='trip'?'!':special?.kind==='arrow'?(special.move!>0?'+':'−'):special?.kind==='warp'?'↪':''}</text></g>;})}
+    {[...layout.nodes].sort((a,b)=>(track.nodes?.[a]?.y??0)-(track.nodes?.[b]?.y??0)).map(index=>{const p=layout.point(index),special=track.specials[index],portal=portals.get(index);return <g key={index} data-map-node={index} data-portal-to={portal?.to}>{portal&&<title>{portalDescription(portal)}</title>}<rect x={p.x-radius} y={p.y-radius} width={radius*2} height={radius*2} rx={portal?radius:1.5} fill={index===0?'#edb65e':index===track.finish?'#db785b':portal?.color??track.nodes?.[index]?.color??(special?'#e4d77c':'#fff9db')} stroke={(track.nodes?.[index]?.y??0)>0?'#fff9db':'#567966'} strokeWidth={(track.nodes?.[index]?.y??0)>0?1.6:.6} /><text x={p.x} y={p.y+2.8} textAnchor="middle" fontSize={track.nodes?6.7:8} fill={portal?'#071b17':'#173f37'}>{index===0?'起':index===track.finish?'终':portal?portal.code:special?.kind==='star'?(special.points??1)===1?'★':String(special.points):special?.kind==='trip'?'!':special?.kind==='arrow'?(special.move!>0?'+':'−'):''}</text></g>;})}
     {track.twistBoundary&&(()=>{const a=layout.point(track.twistBoundary.before),b=layout.point(track.twistBoundary.after),x=(a.x+b.x)/2,y=(a.y+b.y)/2;return <g data-twist-boundary={`${track.twistBoundary.before}-${track.twistBoundary.after}`}><circle cx={x} cy={y} r="6" fill="#7850a2" stroke="#fff8df" /><text x={x} y={y+2.7} textAnchor="middle" fontSize="8" fontWeight="900" fill="#fff8df">扭</text></g>;})()}
   </svg>;
 }

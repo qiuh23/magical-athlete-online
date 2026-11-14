@@ -3,6 +3,7 @@ import { TRACKS } from '../shared/tracks.js';
 import type { RoomView } from '../shared/types.js';
 import { TrackThumbnail } from './CompetitionFields.js';
 import './track-preview.css';
+import { PortalPairList } from './PortalGuide.js';
 
 /** The same authoritative route thumbnail used when configuring a race. */
 export function TrackPreview({ room }: { room: Pick<RoomView, 'track' | 'round'> }) {
@@ -21,10 +22,11 @@ export function TrackPreview({ room }: { room: Pick<RoomView, 'track' | 'round'>
         {kinds.has('star') && <span><b>★ / 数字</b>积分</span>}
         {kinds.has('trip') && <span><b>!</b>绊倒</span>}
         {kinds.has('arrow') && <span><b>＋ / −</b>位移</span>}
-        {kinds.has('warp') && <span><b>↪</b>传送</span>}
+        {kinds.has('warp') && <span><b>↔</b>同字母配对传送</span>}
         {track.twistBoundary && <span><b className="preview-twist">扭</b>变化卡边界</span>}
         {!!track.bridges?.length && <span><b className="preview-bridge">▣</b>白边为高架路段</span>}
       </div>
+      {kinds.has('warp') && <PortalPairList track={room.track}/>}
     </div>
   </section>;
 }

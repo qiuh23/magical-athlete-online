@@ -47,6 +47,8 @@ import { RebuiltMechanismCourse } from './environment/RebuiltMechanismCourse.js'
 import { MechanismCourse } from './mechanisms/MechanismCourse.js';
 import { mechanismsEnabled, activeMechanismLayout } from './mechanisms/layout.js';
 import { FocusNodeProjector } from './mechanisms/FocusNodeLabels.js';
+import { PortalLabels, PortalLabelProjector } from './PortalLabels.js';
+import { PortalLegend, PortalMapMarkers } from '../PortalGuide.js';
 import { PawnOpacity,warpOpacity } from './mechanisms/pawn-opacity.js';
 import { mechanismScope } from './mechanisms/scope.js';
 import { TripController,residentReflow,tripEntryProfile } from './mechanisms/trip-profile.js';
@@ -174,6 +176,7 @@ export function Board3D({ clock = wallPresentationClock, paused = false, room, r
   const previousShot = useRef<CameraShot | undefined>(undefined);
   const labels = useRef(new Map<string, HTMLSpanElement>());
   const nodeLabels=useRef(new Map<number,HTMLSpanElement>());
+  const portalLabels=useRef(new Map<number,HTMLSpanElement>());
   const routeButtons = useRef(new Map<string, HTMLButtonElement>());
   const scoreLabel = useRef<HTMLSpanElement>(null);
   useEffect(() => { const m = matchMedia('(max-width: 650px)'); const update = () => setCompact(m.matches); m.addEventListener('change', update); return () => m.removeEventListener('change', update); }, []);
@@ -240,12 +243,14 @@ export function Board3D({ clock = wallPresentationClock, paused = false, room, r
         <Suspense fallback={null}><TwistPieces {...{ room, compact, lowQuality, reducedMotion }} />{racers.filter(r => !r.eliminated || beat?.kind === 'eliminate' && beat.targets.includes(r.id)).map(racer => <Pawn actorBounds={actorBounds} physicalContacts={physicalContacts} certified={certified} trip={trip} sculptureReaders={sculptureReaders} punch={punch} paused={paused} clock={clock} key={racer.id} racer={racer} racers={racers} room={room} compact={compact} beat={beat} startedAt={startedAt} durationMs={durationMs} lowQuality={lowQuality} reducedMotion={reducedMotion} active={active === racer.id} onDetail={onDetail} labels={labels} />)}</Suspense>
         <RaceEffects tripContact={environmentCandidate&&mechanismCandidate?{targets:new Set(mechanismActions(room.track,beat,racers).filter(a=>a.anchor.kind==='trip').flatMap(a=>a.targets)),hit:(id:string)=>actorBounds.tripHit(beat?.key??'',id)}:undefined} clock={clock} track={room.track} reversed={room.trackState?.reversed} {...{ beat, racers, compact, startedAt, durationMs, reducedMotion, lowQuality }} />
         <FocusNodeProjector track={room.track} compact={compact} nodes={focusNodes} labels={nodeLabels} root={root}/>
+        <PortalLabelProjector track={room.track} compact={compact} labels={portalLabels} root={root}/>
         <ScoreProjector track={room.track} beat={beat} racers={racers} compact={compact} label={scoreLabel} />
         <PerformanceProbe root={root} />
         <IntroReadiness beat={beat} count={racers.filter(racer=>!racer.eliminated).length} onReady={onIntroReady} root={root} />
       </Canvas>
     </SceneBoundary>
     {route && onChooseRoute && <RouteButtons route={route} buttons={routeButtons} disabled={choiceBusy} onChoose={onChooseRoute} />}
+    {!lost && !sceneFailed && <PortalLabels track={room.track} labels={portalLabels}/>}
     <div className="scene-labels" aria-hidden="true">{focusNodes.map(node=><span key={`node:${node}`} className="mechanism-focus-node" ref={element=>{if(element)nodeLabels.current.set(node,element);else nodeLabels.current.delete(node);}}>{node}</span>)}{racers.filter(r => !r.eliminated).map(racer => { const owner = room.players.find(p => p.id === racer.playerId), scale = occupancy(racer, racers, racer.position, compact, room.track).scale; return <span key={racer.id} data-racer-id={racer.id} ref={element => { if (element) labels.current.set(racer.id, element); else labels.current.delete(racer.id); }} className={`pawn-seat ${active === racer.id ? 'is-active' : ''} ${scale < .5 ? 'is-crowded' : scale < .9 ? 'is-shared' : ''}`} style={{ borderColor: owner?.color }}>{(owner?.seat ?? 0) + 1}</span>; })}<span ref={scoreLabel} className="score-float" style={{ display: beat?.kind === 'score' || beat?.kind === 'finish' ? undefined : 'none' }}>{scoreCaption(beat) ?? (beat?.kind === 'finish' ? '冲线！' : '得分！')}</span></div>
     {lost && !sceneFailed && <div className="scene-fallback" role="status"><strong>正在恢复图形画面…</strong><button onClick={() => { setLost(false); retryScene(); }}>重新载入 3D</button></div>}
     <SceneBoundary resetKey={resetKey} retry={retryScene} fallback={dice && !sceneFailed ? <div className="dice-spotlight dice-fallback" role="status"><strong>骰子动画暂时无法显示</strong><p>点数仍按本次掷骰结果结算，可跳过动画继续。</p><button onClick={retryScene}>重新载入骰子动画</button></div> : null}><DiceSpotlight rendererResetKey={resetKey} onRetryRenderer={retryScene} clock={clock} paused={paused} resultReadMs={diceResultReadMs(beat)} onSettled={onDiceSettled} active={dice} beatKey={dice ? beat?.key : undefined} contenders={duelContenders} face={beat?.face ?? room.lastRoll?.face ?? 1} faces={beat?.faces} cause={beat?.cause} triggered={beat?.events[0]?.type==='die-trigger'} reason={beat?.events.find(event=>event.rollReason)?.rollReason} detail={beat?.events.map(event=>event.text).join(" · ")} sourceRacerId={selected.racerId} sourceCharacterId={selected.characterId} stageActor={!!beat?.actor} onDetail={onDetail} startedAt={startedAt} durationMs={durationMs} reducedMotion={reducedMotion} lowQuality={lowQuality} source={selected.name} /></SceneBoundary>
@@ -357,6 +362,7 @@ function Minimap({ clock, paused, room, racers, active, beat, startedAt, duratio
     <svg className="minimap-track" viewBox="0 0 220 104" aria-hidden="true">
       {trackConnections(room.track).map(([from, to]) => { const a = mapPoint(from), b = mapPoint(to); return <g key={`${from}-${to}`}><line x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke="#d9e5da" strokeWidth={topology ? 9 : 15} strokeLinecap="round" /><line x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke="#62877b" strokeWidth={topology ? 4 : 8} strokeLinecap="round" /></g>; })}
       {[0, 5, 10, 12, 15, 20, 25, 30].map(index => { const point = mapPoint(index), upper = index <= 12; return <g key={index} data-map-node={index}><circle cx={point.x} cy={point.y} r="1.8" fill="#ecf5e8" /><text x={point.x} y={point.y + (upper ? -14 : 18)} textAnchor="middle">{index === 0 ? room.trackState?.reversed ? '终点' : '起点' : index === 30 ? room.trackState?.reversed ? '起点' : '终点' : index}</text></g>; })}
+      <PortalMapMarkers track={room.track} point={mapPoint}/>
       {[...visibleRacers].sort((first, second) => Number(first.playerId === room.selfId) - Number(second.playerId === room.selfId)).map(racer => {
         const point = currentMapPoint(racer), owner = room.players.find(player => player.id === racer.playerId), own = racer.playerId === room.selfId;
         const peers = visibleRacers.filter(value => { const other = mapPoint(currentPosition(value)), own = mapPoint(currentPosition(racer)); return Math.hypot(other.x - own.x, other.y - own.y) < .1; }), index = peers.findIndex(value => value.id === racer.id);
@@ -379,6 +385,7 @@ function Minimap({ clock, paused, room, racers, active, beat, startedAt, duratio
       {active === racer.id && <i title="正在行动" />}
     </div>)}</div>
     {others.length > 0 && <div className="minimap-positions" aria-label="其他选手位置">{others.map(racer => { const owner = room.players.find(player => player.id === racer.playerId); return <span key={racer.id} data-racer-id={racer.id} data-position={Math.round(currentPosition(racer))} className={active === racer.id ? 'is-active' : ''} style={{ borderColor: owner?.color }} aria-label={`${(owner?.seat ?? 0) + 1}号选手，${characterName(racer.characterId)}，${positionText(racer)}`}><i style={{ background: owner?.color }} /><small>{(owner?.seat ?? 0) + 1}号</small><b>{racer.eliminated ? '出局' : <>{Math.round(currentPosition(racer))}<em>格</em></>}</b></span>; })}</div>}
+    <PortalLegend track={room.track} beat={beat}/>
   </aside>;
 }
 
