@@ -35,8 +35,10 @@ test('stadium lamps and scattering volumes use one cool-white profile',()=>{
 
 test('stadium ground, turf and course remain light-responsive standard materials',()=>{
  const source=readFileSync('src/client/scene/DioramaStadium.tsx','utf8');
- for(const key of ['plastic','mint','dark','wood','turf','turfShade'])assert.match(source,new RegExp(key+': new THREE\\.MeshStandardMaterial'));
- assert.match(source,/turf: new THREE\.MeshStandardMaterial\(\{[^\n]*map:lawn/);
+ for(const key of ['plastic','mint','dark','wood','turfShade'])assert.match(source,new RegExp(key+': new THREE\\.MeshStandardMaterial'));
+ assert.match(source,/turf: turfTextures \? createStadiumTurfMaterial\(turfTextures,lowQuality\) : new THREE\.MeshStandardMaterial\(\{[^\n]*map:lawn/);
+ const turfSource=readFileSync('src/client/scene/environment/stadium-turf.ts','utf8');
+ assert.match(turfSource,/new MeshStandardMaterial\(\{[^\n]*map:textures.color/);
  assert.match(readFileSync('src/client/scene/environment/VenueLighting.tsx','utf8'),/new THREE\.SpotLight\(FLOODLIGHT_COLOR/);
  assert.match(readFileSync('src/client/scene/environment/floodlight-color.ts','utf8'),/material\.emissive\.set\(FLOODLIGHT_COLOR\)/);
 });
