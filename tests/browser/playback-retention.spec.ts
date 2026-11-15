@@ -70,7 +70,7 @@ async function record(page: Page) {
     scope.__sequenceObserver?.disconnect(); scope.__sequenceRecords = [];
     const save = () => {
       const board = document.querySelector('[data-testid="board-3d"]');
-      const next = { phase: board?.getAttribute('data-phase') ?? '', events: board?.getAttribute('data-event-ids') ?? '', choice: !!document.querySelector('.choice-panel'), at: performance.now() };
+      const next = { phase: board?.getAttribute('data-phase') ?? '', events: board?.getAttribute('data-event-ids') ?? '', choice: !!document.querySelector('[data-testid="skill-choice"]'), at: performance.now() };
       const previous = scope.__sequenceRecords.at(-1);
       if (!previous || next.phase !== previous.phase || next.events !== previous.events || next.choice !== previous.choice) scope.__sequenceRecords.push(next);
     };

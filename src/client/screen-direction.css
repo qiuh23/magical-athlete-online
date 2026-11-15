@@ -3,10 +3,4 @@
 .landscape-help{max-width:24em;font:12px/1.5 system-ui,sans-serif;color:inherit;white-space:normal;overflow-wrap:anywhere}
 .landscape-control button{min-height:44px}
 .race-menu-links>.landscape-control{display:flex;align-items:stretch}
-@media(max-width:650px){
- .site-header nav .header-link{white-space:nowrap}
- .site-header nav:has(.landscape-help:not([hidden])){width:100%;flex-wrap:wrap;gap:0 12px}
- .site-header nav:has(.landscape-help:not([hidden])) .landscape-control{order:1;flex-basis:100%}
- .site-header .landscape-help{max-width:none}
-}
 @media(hover:hover) and (pointer:fine){.landscape-control{display:none!important}}

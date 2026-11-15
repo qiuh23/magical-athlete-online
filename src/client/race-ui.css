@@ -1,10 +1,9 @@
 /* Compact race chrome. The room setup and its visible options keep their own
    layout. Fixed regions share the measurements already maintained by chat. */
-.race-icon-button,.chat-toggle{display:inline-flex;align-items:center;justify-content:center;flex:none;width:44px;height:44px;min-width:44px;min-height:44px;padding:10px;border:1px solid color-mix(in srgb, var(--ui-text) 25.098%, transparent);border-radius:13px;background:color-mix(in srgb, var(--paper) 93.333%, transparent);color:var(--ui-text);box-shadow:0 3px 12px color-mix(in srgb, var(--ui-text) 7.059%, transparent);cursor:pointer}
-.race-icon-button:hover:not(:disabled),.chat-toggle:hover{background:var(--paper);border-color:var(--ui-control-border)}
-.race-icon-button:focus-visible,.chat-toggle:focus-visible,.race-event-chip:focus-visible,.scene-camera-toolbar summary:focus-visible,.floating-racer:focus-visible,.skip-animation:focus-visible{outline:3px solid var(--ui-text);outline-offset:3px}
+.race-icon-button{display:inline-flex;align-items:center;justify-content:center;flex:none;width:44px;height:44px;min-width:44px;min-height:44px;padding:10px;border:1px solid color-mix(in srgb, var(--ui-text) 25.098%, transparent);border-radius:13px;background:color-mix(in srgb, var(--paper) 93.333%, transparent);color:var(--ui-text);box-shadow:var(--shadow-1);cursor:pointer}
+.race-icon-button:hover:not(:disabled){background:var(--paper);border-color:var(--ui-control-border)}
+.race-icon-button:focus-visible, .race-event-chip:focus-visible, .scene-camera-toolbar summary:focus-visible, .floating-racer:focus-visible, .skip-animation:focus-visible{outline:3px solid var(--ui-text);outline-offset:3px}
 .race-icon-button:disabled{cursor:default;opacity:.55}
-.chat-toggle{position:relative;width:48px;height:48px;border-radius:16px;padding:10px}
 .chat-unread{position:absolute;top:-7px;right:-7px;min-width:22px;height:22px;margin:0;padding:0 4px;border:2px solid var(--paper);font-size:10px}
 .room-chat header button{display:grid;place-items:center;min-height:44px;min-width:44px}
 .immersive-race .race-hud-top{top:max(16px,env(safe-area-inset-top));left:max(18px,env(safe-area-inset-left));right:calc(max(20px,env(safe-area-inset-right)) + 268px);max-width:none;display:flex;align-items:center;flex-wrap:nowrap;gap:12px}
@@ -19,7 +18,7 @@
 .immersive-race .scene-camera-toolbar{top:calc(max(16px,env(safe-area-inset-top)) + var(--race-hud-height,44px) + 10px);left:max(18px,env(safe-area-inset-left));right:auto;max-width:calc(100% - 310px);display:flex;align-items:flex-start;gap:4px;flex-wrap:nowrap}
 .immersive-race .scene-camera-toolbar .camera-home,.immersive-race .camera-options summary{display:grid;place-items:center;width:44px;height:44px;min-width:44px;min-height:44px;padding:10px;border:1px solid color-mix(in srgb, var(--ui-text) 25.098%, transparent);border-radius:13px;background:color-mix(in srgb, var(--paper) 93.333%, transparent);font-size:12px}
 .immersive-race .scene-camera-toolbar .camera-options{position:relative;inset:auto}
-.immersive-race .camera-settings-content{width:220px;padding:8px;border:1px solid color-mix(in srgb, var(--ui-control-border) 33.333%, transparent);background:color-mix(in srgb, var(--paper) 98.039%, transparent);border-radius:12px;margin-top:6px;box-shadow:0 6px 20px color-mix(in srgb, var(--ui-text) 12.549%, transparent)}
+.immersive-race .camera-settings-content{width:220px;padding:8px;border:1px solid color-mix(in srgb, var(--ui-control-border) 33.333%, transparent);background:color-mix(in srgb, var(--paper) 98.039%, transparent);border-radius:12px;margin-top:6px;box-shadow:var(--shadow-2)}
 .immersive-race .camera-settings-content label,.immersive-race .camera-settings-content small{position:static;display:flex;align-items:center;gap:6px;width:auto;white-space:normal;border:0;border-radius:0;box-shadow:none;background:none;padding:8px 2px;font-size:11px}
 .immersive-race .camera-settings-content small{font-size:10px;padding:2px}
 .immersive-race .camera-settings-content .scene-camera-modes{display:flex}
@@ -49,7 +48,6 @@
 .race-track-details .special-event-detail{padding:12px 16px;border:1px solid color-mix(in srgb, var(--brand-blue) 40.000%, transparent);border-radius:14px;background:var(--paper)}
 .race-track-details p{margin:8px 0}
 .race-menu-shortcuts{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
-.race-menu-shortcuts .button{font-size:12px;min-height:44px;gap:6px}
 .immersive-race .floating-racers{border:1px solid color-mix(in srgb, var(--ui-text) 14.902%, transparent);background:color-mix(in srgb, var(--paper) 86.275%, transparent);gap:5px;padding:6px 8px}
 .immersive-race .floating-racer.is-active:before{width:0;height:0;border-radius:0;background:none;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid var(--ui-text);left:calc(50% - 4px);top:-4px}
 .racer-state{position:absolute;top:-4px;right:-5px;display:grid;place-items:center;width:22px;height:22px;border:1px solid color-mix(in srgb, var(--ui-text) 40.000%, transparent);border-radius:7px;background:var(--paper);color:var(--ui-text)}
@@ -58,7 +56,8 @@
 .last-roll-numbers{display:flex;align-items:center;gap:6px;font-size:12px}
 .last-roll-numbers>svg:nth-of-type(2){margin-left:5px}
 /* Independent cards avoid the legacy scene banner's broad text selectors. */
-.immersive-race .race-moment,.immersive-race>.ability-reveal-card{position:absolute;z-index:29;top:auto;bottom:max(128px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);width:max-content;max-width:min(360px,calc(100% - 36px));padding:12px 14px;border:1px solid color-mix(in srgb, var(--ui-control-border) 40.000%, transparent);border-radius:16px;background:color-mix(in srgb, var(--paper) 94.902%, transparent);box-shadow:0 7px 24px color-mix(in srgb, var(--ui-text) 12.549%, transparent);color:var(--ui-text);backdrop-filter:blur(12px)}
+.immersive-race .race-moment{position:absolute;z-index:29;top:auto;bottom:max(128px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);width:max-content;max-width:min(360px,calc(100% - 36px));padding:12px 14px;border:1px solid color-mix(in srgb, var(--ui-control-border) 40.000%, transparent);border-radius:16px;background:color-mix(in srgb, var(--paper) 94.902%, transparent);box-shadow:var(--shadow-2);color:var(--ui-text);backdrop-filter:blur(12px)}
+.immersive-race>.ability-reveal-card{position:absolute;z-index:29;top:auto;bottom:max(128px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);width:max-content;max-width:min(360px,calc(100% - 36px));padding:12px 14px;border:1px solid color-mix(in srgb, var(--ui-control-border) 40.000%, transparent);border-radius:16px;background:color-mix(in srgb, var(--paper) 94.902%, transparent);box-shadow:var(--shadow-1);color:var(--ui-text);backdrop-filter:blur(12px)}
 .immersive-race .race-moment{pointer-events:none}
 .moment-heading{display:flex;align-items:baseline;flex-wrap:wrap;gap:3px 8px;margin-bottom:9px;overflow-wrap:anywhere}
 .moment-heading>strong{font-size:16px;line-height:1.35;color:var(--ui-text)}
@@ -143,21 +142,6 @@
 .event-log li>div>small{display:block}
 
 /* Choices are tokens, portraits and independently focusable detail controls. */
-.floating-choice .compact-choice-options{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px;margin-top:6px}
-.compact-choice-options>.choice-option{display:inline-flex;flex:0 1 auto;min-width:0}
-.compact-choice-options>.choice-number-option{position:relative;display:inline-flex;flex:none;align-items:stretch;background:var(--paper);border:1px solid var(--ui-control-border);border-radius:13px;overflow:visible}
-.floating-choice .choice-number-button.button{position:relative;display:flex;flex-direction:column;justify-content:center;gap:1px;flex:none;width:44px;min-width:44px;min-height:48px;border:0;border-radius:12px;box-shadow:none;padding:5px;background:var(--ui-text);color:var(--paper)}
-.choice-number-button>b{font-size:23px;line-height:1.1}
-.choice-number-metrics{display:flex;flex-direction:column;justify-content:center;gap:2px;padding:3px 4px}
-.choice-number-metrics>small{display:flex;align-items:center;justify-content:center;gap:2px;font-size:10px;line-height:1.25;color:var(--ui-text);white-space:nowrap}
-.choice-number-retreat>span{font-size:9px}
-.choice-shared-cost{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:800;margin-top:6px;color:var(--ui-text)}
-.choice-number-detail{display:grid;place-items:center;flex:none;width:44px;min-width:44px;min-height:48px;border:0;border-radius:0 12px 12px 0;background:transparent;color:var(--ui-text);padding:8px;cursor:pointer}
-.choice-number-detail:focus-visible,.choice-character-detail:focus-visible{outline:3px solid var(--ui-text);outline-offset:2px}
-.floating-choice .compact-choice-options>.choice-character,.floating-choice .choice-offer{display:grid;grid-template-columns:32px minmax(0,1fr) 44px;gap:4px;flex:1 1 190px;padding:5px;border-radius:13px}
-.floating-choice .choice-character>.button{border:0;background:transparent;color:var(--ui-text);box-shadow:none;padding:5px;min-height:44px;min-width:0;font-size:12px}
-.floating-choice .choice-character .choice-character-detail{grid-column:3;grid-row:1;display:grid;place-items:center;width:44px;min-width:44px;min-height:44px;padding:8px;border:0;background:transparent;border-radius:10px;color:var(--ui-text)}
-.floating-choice .choice-offer>strong{font-size:12px}
 .floating-choice .choice-power-icons{grid-column:2/-1;display:flex;align-items:center;gap:5px;padding:0;min-height:0;font-size:10px}
 .choice-power-icons:empty{display:none!important}
 .choice-power-icons .avatar{width:24px;height:24px}
@@ -172,8 +156,6 @@
 .compact-dice-hint>.avatar{width:28px;height:28px}
 .compact-dice-hint>b{display:grid;place-items:center;min-width:22px;height:26px;border:1px solid var(--ui-gold);border-radius:6px;background:var(--paper);font-size:17px}
 .compact-dice-hint>small{font-size:10px}
-.floating-choice .choice-collapse{display:grid;place-items:center;width:44px;min-width:44px;min-height:44px;padding:8px;margin:-4px -4px 3px 8px;border:0;background:transparent}
-.floating-choice .choice-operator{font-size:10px}
 .immersive-race .minimap-own-positions{display:flex;flex-wrap:wrap;gap:4px}
 .immersive-race .minimap-own-position{display:flex;align-items:center;gap:6px;flex:1 1 75px;min-height:44px;padding:4px 6px;min-width:0}
 .immersive-race .minimap-own-position>span{display:flex;align-items:center;gap:4px;min-width:0}
@@ -183,19 +165,10 @@
 .immersive-race .minimap-own-avatar>.avatar{width:30px;height:30px}
 
 @media(orientation:landscape) and (min-width:480px) and (max-height:570px){
- html[data-view="race"] body .immersive-race .floating-choice.choice-panel{left:196px;right:172px;width:auto;transform:none;bottom:92px;max-height:calc(100dvh - 166px);padding:10px}
- body:has(>.room-community.in-race.is-open) .immersive-race .floating-choice.choice-panel,
- body:has(>.room-community.in-race .chat-notice-region) .immersive-race .floating-choice.choice-panel{left:250px}
  body:has(>.room-community.in-race.is-open) .immersive-race .floating-racers,
  body:has(>.room-community.in-race .chat-notice-region) .immersive-race .floating-racers{left:250px;max-width:calc(100% - 430px)}
- html[data-view="race"] body .immersive-race .floating-choice.choice-panel.is-collapsed{max-height:90px}
- .floating-choice .choice-number-button.button,.choice-number-detail{min-height:44px}
- .floating-choice .choice-number-button>b{font-size:21px}
- .floating-choice .compact-choice-options{gap:6px}
- .floating-choice .choice-character{flex-basis:150px}
 }
 @media(max-width:650px){
- .floating-choice .compact-choice-options>.choice-character{flex-basis:100%}
  .immersive-race .minimap-own-position{gap:3px;min-height:44px;padding:3px 4px}
  .immersive-race .minimap-own-position strong{font-size:17px}
  .immersive-race .minimap-own-avatar>.avatar{width:26px;height:26px;min-width:26px}
@@ -235,7 +208,6 @@
  html[data-chat-keyboard="true"] .immersive-race .board-minimap{top:8px;right:8px;width:110px}
  html[data-chat-keyboard="true"] .immersive-race .minimap-own-positions,html[data-chat-keyboard="true"] .immersive-race .minimap-positions{display:none}
  html[data-chat-keyboard="true"] body>.room-community.in-race .room-chat{height:min(210px,calc(var(--chat-viewport-height,100dvh) - 80px));max-height:calc(var(--chat-viewport-height,100dvh) - 80px)}
- html[data-chat-keyboard="true"][data-view="race"] body .immersive-race .floating-choice.choice-panel{left:250px;right:132px;bottom:calc(var(--chat-keyboard-offset,0px) + 64px);max-height:calc(var(--chat-viewport-height,100dvh) - 128px);padding:8px}
  html[data-chat-keyboard="true"][data-view="race"] body .immersive-race .floating-racers{left:250px;bottom:calc(var(--chat-keyboard-offset,0px) + 8px);max-width:calc(100% - 430px);padding:4px 6px}
  html[data-chat-keyboard="true"] .immersive-race .floating-racer{width:32px;flex-basis:32px}
  html[data-chat-keyboard="true"] .immersive-race .floating-avatar{width:28px;height:28px}
@@ -258,7 +230,6 @@
  html[data-chat-keyboard="true"] .immersive-race .floating-avatar>.avatar{width:26px;height:26px}
  html[data-chat-keyboard="true"] .immersive-race .floating-racer{width:34px;flex-basis:34px}
  html[data-chat-keyboard="true"] .immersive-race .floating-racer-score{font-size:9px;margin-top:2px}
- html[data-chat-keyboard="true"][data-view="race"] body .immersive-race .floating-choice.choice-panel{max-height:calc(100dvh - var(--chat-keyboard-offset,0px) - var(--race-chat-height,180px) - max(var(--race-minimap-bottom,210px),var(--race-status-bottom,210px)) - 42px);padding:9px}
 }
 @media(orientation:portrait) and (max-width:650px){
  html[data-chat-compact="true"] body>.room-community.in-race .room-chat{height:124px;max-height:124px}
@@ -267,30 +238,12 @@
  html[data-chat-compact="true"] .race-hud-buttons>.race-icon-button:nth-child(n+2){display:none}
  html[data-chat-compact="true"] .immersive-race .race-status-stack{top:10px;left:112px;right:12px;max-height:44px}
  html[data-chat-compact="true"] .immersive-race .race-event-chips,html[data-chat-compact="true"] .immersive-race .board-minimap{display:none}
- html[data-chat-compact="true"][data-view="race"] body .immersive-race .floating-choice.choice-panel{max-height:calc(var(--chat-viewport-height,100dvh) - var(--race-chat-height,124px) - 166px);padding:8px}
 }
-
-.floating-choice.choice-panel{bottom:max(128px,env(safe-area-inset-bottom));border-width:1px;border-color:color-mix(in srgb, var(--ui-control-border) 40.000%, transparent);background:color-mix(in srgb, var(--paper) 96.078%, transparent);border-radius:16px;box-shadow:0 7px 24px color-mix(in srgb, var(--ui-text) 12.549%, transparent)}
-.floating-choice .choice-heading{display:grid;grid-template-columns:44px minmax(0,1fr) 44px;align-items:center;gap:4px 8px}
-.floating-choice.choice-panel>.choice-heading{padding-left:0}
-.floating-choice .choice-heading>.choice-collapse{grid-column:3;grid-row:1/3;align-self:start;margin:0;float:none}
-.floating-choice .choice-heading>.choice-actor-detail,.floating-choice .choice-heading>.burst{grid-column:1;grid-row:1/3;margin:0;float:none}
-.floating-choice .choice-heading>h2{grid-column:2;grid-row:1;font-size:16px;line-height:1.4;overflow-wrap:anywhere}
-.floating-choice .choice-heading>.choice-operator{grid-column:2;grid-row:2;font-size:11px;color:var(--ui-text-muted)}
-.floating-choice .choice-heading>p{grid-column:1/-1}
 @media(max-width:650px) and (orientation:portrait){
- html[data-view="race"] body .immersive-race .floating-choice.choice-panel{bottom:calc(max(14px,env(safe-area-inset-bottom)) + 174px);max-height:max(120px,calc(100dvh - max(var(--race-minimap-bottom,220px),var(--race-status-bottom,180px)) - 200px))}
  html[data-view="race"]:not([data-chat-keyboard="true"]) body:has(.floating-choice.is-collapsed) .immersive-race .floating-racers{bottom:calc(max(12px,env(safe-area-inset-bottom)) + 87px)}
 }
 @media(max-width:350px) and (orientation:portrait){
  /* Keep the first target row visible between the map and the order strip. */
- html[data-view="race"] body .immersive-race .floating-choice.choice-panel{padding:8px}
- .floating-choice .choice-heading>h2{font-size:13px;grid-row:1}
- .floating-choice .choice-heading>.choice-operator{display:none}
- .floating-choice .choice-heading>.choice-actor-detail,.floating-choice .choice-heading>.burst,.floating-choice .choice-heading>.choice-collapse{grid-row:1}
- .floating-choice .compact-choice-options{gap:6px}
- .floating-choice .compact-choice-options>.choice-character{flex-basis:calc((100% - 6px)/2);grid-template-columns:24px minmax(0,1fr) 44px;gap:2px;padding:3px}
- .floating-choice .compact-choice-options>.choice-character>.avatar{width:24px;height:24px}
  .immersive-race>.ability-reveal-card{padding:8px}
  .ability-reveal-heading h2{font-size:14px}
  .ability-reveal-heading small{font-size:10px}
@@ -303,10 +256,6 @@
  .ability-reveal-card .ability-reveal-duration{margin-top:6px;font-size:10px}
 }
 @media(orientation:landscape) and (min-width:480px) and (max-width:650px) and (max-height:570px){
- .floating-choice .choice-heading>.choice-actor-detail,.floating-choice .choice-heading>.burst{grid-row:1}
- .floating-choice .choice-heading>.choice-collapse{grid-row:1}
- .floating-choice .choice-heading>.choice-operator{grid-row:1}
- .floating-choice .choice-heading>h2{grid-column:1/-1;grid-row:2;font-size:14px}
  .ability-reveal-heading h2{font-size:14px}
  .ability-reveal-flow{gap:6px}
  .ability-reveal-flow>svg{margin-top:10px}
