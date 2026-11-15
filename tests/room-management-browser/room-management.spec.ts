@@ -3,17 +3,22 @@ import { createApplication } from '../../src/server/index.js';
 import type { Identity } from '../../src/shared/types.js';
 
 const nodeOrigin='http://127.0.0.1:3321',workerOrigin='https://127.0.0.1:8797';
-const deployment={backends:[{id:'cloudflare',origin:workerOrigin,transport:'worker',enabled:true},{id:'aliyun',origin:nodeOrigin,transport:'socketio',enabled:true}]};
+const deployment={siteEdition:'global',backends:[{id:'cloudflare',origin:'',transport:'socketio',enabled:true}]};
+// Keep the original nickname/chat behavior on both transport adapters.
+// Fixture labels name the transport; backend and invitation IDs name the site.
+const fixtures=[
+  {label:'worker',backend:'cloudflare',origin:workerOrigin,prefix:'/api/browser/rooms'},
+  {label:'node',backend:'cloudflare',origin:nodeOrigin,prefix:'/api/rooms'},
+] as const;
 let app:ReturnType<typeof createApplication>;
-const previousEnv={BACKEND_ID:process.env.BACKEND_ID,BACKENDS_CONFIG_JSON:process.env.BACKENDS_CONFIG_JSON};
+const previousEnv={SITE_EDITION:process.env.SITE_EDITION,BACKEND_ID:process.env.BACKEND_ID,BACKENDS_CONFIG_JSON:process.env.BACKENDS_CONFIG_JSON};
 test.beforeAll(async()=>{
-  process.env.BACKEND_ID='aliyun';process.env.BACKENDS_CONFIG_JSON=JSON.stringify(deployment);app=createApplication(':memory:');
+  process.env.SITE_EDITION='global';process.env.BACKEND_ID='cloudflare';process.env.BACKENDS_CONFIG_JSON=JSON.stringify(deployment);app=createApplication(':memory:');
   await new Promise<void>(resolve=>app.http.listen(3321,'127.0.0.1',resolve));
 });
 test.afterAll(async()=>{await app.close();for(const [key,value] of Object.entries(previousEnv))if(value===undefined)delete process.env[key];else process.env[key]=value;});
 
 async function connect(context:BrowserContext,identity:Identity,backend:'cloudflare'|'aliyun',origin:string){
-  await context.route('**/backends.json',route=>route.fulfill({json:deployment}));
   await context.addInitScript(({identity,backend})=>{
     localStorage.setItem(`magical-athlete:identity:${backend}:${identity.roomCode}`,JSON.stringify({...identity,backendId:backend}));
     localStorage.setItem('magical-athlete:low-quality','true');localStorage.setItem('magical-athlete:muted','true');
@@ -31,8 +36,8 @@ async function togglePause(page:Page,paused:boolean){
   }finally{page.off('dialog',onDialog);}
 }
 
-for(const backend of ['cloudflare','aliyun'] as const)for(const device of ['desktop','mobile'] as const)test(`${backend} ${device}: kick confirmation, invalid credentials, pause/leave/reconnect and resume`,async({browser},info)=>{
-  const contexts:BrowserContext[]=[],pages:Page[]=[],errors:string[]=[];const origin=backend==='cloudflare'?workerOrigin:nodeOrigin,prefix=backend==='cloudflare'?'/api/browser/rooms':'/api/rooms';
+for(const {label,backend,origin,prefix} of fixtures)for(const device of ['desktop','mobile'] as const)test(`${label} ${device}: kick confirmation, invalid credentials, pause/leave/reconnect and resume`,async({browser},info)=>{
+  const contexts:BrowserContext[]=[],pages:Page[]=[],errors:string[]=[];
   const viewport=device==='mobile'?{width:390,height:844}:{width:1440,height:1000};
   try{
     for(let i=0;i<4;i++)contexts.push(await browser.newContext({viewport,ignoreHTTPSErrors:true}));
@@ -62,8 +67,7 @@ for(const backend of ['cloudflare','aliyun'] as const)for(const device of ['desk
   }finally{await Promise.all(contexts.map(c=>c.close()));}
 });
 
-for(const backend of ['cloudflare','aliyun'] as const)for(const mode of ['ai','practice'] as const)test(`${backend} ${mode}: direct pause shows the original retention beside the button`,async({browser},info)=>{
-  const origin=backend==='cloudflare'?workerOrigin:nodeOrigin,prefix=backend==='cloudflare'?'/api/browser/rooms':'/api/rooms';
+for(const {label,backend,origin,prefix} of fixtures)for(const mode of ['ai','practice'] as const)test(`${label} ${mode}: direct pause shows the original retention beside the button`,async({browser},info)=>{
   const context=await browser.newContext({viewport:mode==='ai'?{width:390,height:844}:{width:1440,height:1000},ignoreHTTPSErrors:true}),errors:string[]=[];
   const label=mode==='ai'?'30 分钟':'10 分钟';
   try{

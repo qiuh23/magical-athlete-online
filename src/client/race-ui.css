@@ -1,25 +1,25 @@
 /* Compact race chrome. The room setup and its visible options keep their own
    layout. Fixed regions share the measurements already maintained by chat. */
-.race-icon-button,.chat-toggle{display:inline-flex;align-items:center;justify-content:center;flex:none;width:44px;height:44px;min-width:44px;min-height:44px;padding:10px;border:1px solid #31596140;border-radius:13px;background:#fffaf0ee;color:#25464c;box-shadow:0 3px 12px #23494112;cursor:pointer}
-.race-icon-button:hover:not(:disabled),.chat-toggle:hover{background:#fff6dc;border-color:#537969}
-.race-icon-button:focus-visible,.chat-toggle:focus-visible,.race-event-chip:focus-visible,.scene-camera-toolbar summary:focus-visible,.floating-racer:focus-visible,.skip-animation:focus-visible{outline:3px solid #244f54;outline-offset:3px}
+.race-icon-button,.chat-toggle{display:inline-flex;align-items:center;justify-content:center;flex:none;width:44px;height:44px;min-width:44px;min-height:44px;padding:10px;border:1px solid color-mix(in srgb, var(--ui-text) 25.098%, transparent);border-radius:13px;background:color-mix(in srgb, var(--paper) 93.333%, transparent);color:var(--ui-text);box-shadow:0 3px 12px color-mix(in srgb, var(--ui-text) 7.059%, transparent);cursor:pointer}
+.race-icon-button:hover:not(:disabled),.chat-toggle:hover{background:var(--paper);border-color:var(--ui-control-border)}
+.race-icon-button:focus-visible,.chat-toggle:focus-visible,.race-event-chip:focus-visible,.scene-camera-toolbar summary:focus-visible,.floating-racer:focus-visible,.skip-animation:focus-visible{outline:3px solid var(--ui-text);outline-offset:3px}
 .race-icon-button:disabled{cursor:default;opacity:.55}
 .chat-toggle{position:relative;width:48px;height:48px;border-radius:16px;padding:10px}
-.chat-unread{position:absolute;top:-7px;right:-7px;min-width:22px;height:22px;margin:0;padding:0 4px;border:2px solid #fffaf0;font-size:10px}
+.chat-unread{position:absolute;top:-7px;right:-7px;min-width:22px;height:22px;margin:0;padding:0 4px;border:2px solid var(--paper);font-size:10px}
 .room-chat header button{display:grid;place-items:center;min-height:44px;min-width:44px}
 .immersive-race .race-hud-top{top:max(16px,env(safe-area-inset-top));left:max(18px,env(safe-area-inset-left));right:calc(max(20px,env(safe-area-inset-right)) + 268px);max-width:none;display:flex;align-items:center;flex-wrap:nowrap;gap:12px}
 .immersive-race .race-hud-buttons{display:flex;align-items:center;flex-wrap:nowrap;gap:4px;max-width:none}
 .immersive-race .room-pause-actions.is-compact{display:inline-flex}
-.immersive-race .room-pause-control.race-icon-button{width:44px;height:44px;padding:10px;border-color:#31596140;border-radius:13px;background:#fffaf0ee;color:#25464c}
-.immersive-race .room-pause-control.is-paused{background:#285e54;color:#fffaf0}
+.immersive-race .room-pause-control.race-icon-button{width:44px;height:44px;padding:10px;border-color:color-mix(in srgb, var(--ui-text) 25.098%, transparent);border-radius:13px;background:color-mix(in srgb, var(--paper) 93.333%, transparent);color:var(--ui-text)}
+.immersive-race .room-pause-control.is-paused{background:var(--ui-text);color:var(--paper)}
 .immersive-race .race-hud-top .race-match-label{position:static;display:flex;flex-direction:row;align-items:center;gap:8px;padding:0;max-width:none;white-space:nowrap;font-size:11px}
 .immersive-race .race-match-label>strong>span{display:inline;font-size:10px}
-.immersive-race .race-match-label .connection{display:flex;align-items:center;gap:4px;color:#315961}
-.immersive-race .race-match-label .connection:not(.is-online){color:#a64230}
+.immersive-race .race-match-label .connection{display:flex;align-items:center;gap:4px;color:var(--ui-text)}
+.immersive-race .race-match-label .connection:not(.is-online){color:var(--brand-red)}
 .immersive-race .scene-camera-toolbar{top:calc(max(16px,env(safe-area-inset-top)) + var(--race-hud-height,44px) + 10px);left:max(18px,env(safe-area-inset-left));right:auto;max-width:calc(100% - 310px);display:flex;align-items:flex-start;gap:4px;flex-wrap:nowrap}
-.immersive-race .scene-camera-toolbar .camera-home,.immersive-race .camera-options summary{display:grid;place-items:center;width:44px;height:44px;min-width:44px;min-height:44px;padding:10px;border:1px solid #31596140;border-radius:13px;background:#fffaf0ee;font-size:12px}
+.immersive-race .scene-camera-toolbar .camera-home,.immersive-race .camera-options summary{display:grid;place-items:center;width:44px;height:44px;min-width:44px;min-height:44px;padding:10px;border:1px solid color-mix(in srgb, var(--ui-text) 25.098%, transparent);border-radius:13px;background:color-mix(in srgb, var(--paper) 93.333%, transparent);font-size:12px}
 .immersive-race .scene-camera-toolbar .camera-options{position:relative;inset:auto}
-.immersive-race .camera-settings-content{width:220px;padding:8px;border:1px solid #53796955;background:#fffaf0fa;border-radius:12px;margin-top:6px;box-shadow:0 6px 20px #23494120}
+.immersive-race .camera-settings-content{width:220px;padding:8px;border:1px solid color-mix(in srgb, var(--ui-control-border) 33.333%, transparent);background:color-mix(in srgb, var(--paper) 98.039%, transparent);border-radius:12px;margin-top:6px;box-shadow:0 6px 20px color-mix(in srgb, var(--ui-text) 12.549%, transparent)}
 .immersive-race .camera-settings-content label,.immersive-race .camera-settings-content small{position:static;display:flex;align-items:center;gap:6px;width:auto;white-space:normal;border:0;border-radius:0;box-shadow:none;background:none;padding:8px 2px;font-size:11px}
 .immersive-race .camera-settings-content small{font-size:10px;padding:2px}
 .immersive-race .camera-settings-content .scene-camera-modes{display:flex}
@@ -27,18 +27,18 @@
 .immersive-race .scene-camera-toolbar .camera-paused{position:static;font-size:10px;white-space:nowrap}
 .immersive-race .race-status-stack{position:absolute;z-index:38;top:calc(max(16px,env(safe-area-inset-top)) + var(--race-hud-height,44px) + var(--race-camera-height,44px) + 20px);left:max(18px,env(safe-area-inset-left));right:auto;display:flex;flex-direction:column;align-items:flex-start;gap:8px;width:min(300px,calc(100% - 310px));pointer-events:none}
 .immersive-race .race-status-stack>.race-status-pill{position:static;transform:none;display:flex;justify-content:flex-start;flex-wrap:wrap;max-width:100%;min-height:44px;white-space:normal;border-radius:14px;padding:4px 8px 4px 4px;gap:5px;pointer-events:auto;font-size:11px;line-height:1.4}
-.status-portrait{display:block;flex:none;width:32px;height:32px;background:#e7edda;border-radius:50%}
+.status-portrait{display:block;flex:none;width:32px;height:32px;background:var(--ui-control);border-radius:50%}
 .status-portrait>.avatar{width:32px;height:32px}
 .race-status-copy{min-width:0;overflow-wrap:anywhere}
-.immersive-race .race-status-pill .skip-animation{display:grid;place-items:center;min-width:44px;min-height:36px;padding:4px;border-left:1px solid #31596126;border-radius:0 9px 9px 0}
+.immersive-race .race-status-pill .skip-animation{display:grid;place-items:center;min-width:44px;min-height:36px;padding:4px;border-left:1px solid color-mix(in srgb, var(--ui-text) 14.902%, transparent);border-radius:0 9px 9px 0}
 .immersive-race .race-status-pill .countdown{font-size:11px;margin-left:0}
 .immersive-race .race-status-stack>.race-event-chips{position:static;display:flex;flex-direction:column;gap:4px;width:100%;max-height:140px;overflow:auto;pointer-events:auto;scrollbar-width:thin;font-size:11px}
-.race-event-chip{display:flex;align-items:center;gap:7px;flex:none;width:fit-content;max-width:100%;min-height:44px;padding:3px 9px 3px 4px;border:1px solid #53796945;border-radius:13px;background:#fffaf0e8;color:#315961;font:inherit;text-align:left;cursor:pointer;line-height:1.35}
+.race-event-chip{display:flex;align-items:center;gap:7px;flex:none;width:fit-content;max-width:100%;min-height:44px;padding:3px 9px 3px 4px;border:1px solid color-mix(in srgb, var(--ui-control-border) 27.059%, transparent);border-radius:13px;background:color-mix(in srgb, var(--paper) 90.980%, transparent);color:var(--ui-text);font:inherit;text-align:left;cursor:pointer;line-height:1.35}
 .race-event-chip>.event-art,.race-event-chip>svg{flex:none}
 .race-event-chip>span{min-width:0;overflow-wrap:anywhere;font-size:11px;font-weight:800}
 .race-event-chip b{display:block;font-size:10px;font-weight:600;margin-top:2px}
-.event-art{flex:none;color:#315951;overflow:visible}
-.race-fixed-faces{display:flex;flex-wrap:wrap;gap:4px;padding:4px;border-radius:10px;background:#fffaf0e8;font-size:10px}
+.event-art{flex:none;color:var(--ui-text);overflow:visible}
+.race-fixed-faces{display:flex;flex-wrap:wrap;gap:4px;padding:4px;border-radius:10px;background:color-mix(in srgb, var(--paper) 90.980%, transparent);font-size:10px}
 .race-fixed-faces>span{white-space:nowrap}.race-fixed-faces b{font-size:14px}
 .race-detail-content{padding:18px 24px 24px;overflow-wrap:anywhere}
 .race-detail-content .event-log{margin:0}.race-detail-content .event-log h2{font-size:15px}
@@ -46,37 +46,37 @@
 .race-track-details .twist-card-panel{padding:12px 16px}
 .race-track-details .twist-card-list{padding:0}
 .race-track-details .event-art{float:left;margin:0 10px 6px 0}
-.race-track-details .special-event-detail{padding:12px 16px;border:1px solid #9272bd66;border-radius:14px;background:#f8f1ff}
+.race-track-details .special-event-detail{padding:12px 16px;border:1px solid color-mix(in srgb, var(--brand-blue) 40.000%, transparent);border-radius:14px;background:var(--paper)}
 .race-track-details p{margin:8px 0}
 .race-menu-shortcuts{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
 .race-menu-shortcuts .button{font-size:12px;min-height:44px;gap:6px}
-.immersive-race .floating-racers{border:1px solid #31596126;background:#fffaf0dc;gap:5px;padding:6px 8px}
-.immersive-race .floating-racer.is-active:before{width:0;height:0;border-radius:0;background:none;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid #315961;left:calc(50% - 4px);top:-4px}
-.racer-state{position:absolute;top:-4px;right:-5px;display:grid;place-items:center;width:22px;height:22px;border:1px solid #31596166;border-radius:7px;background:#fff0c9;color:#315961}
+.immersive-race .floating-racers{border:1px solid color-mix(in srgb, var(--ui-text) 14.902%, transparent);background:color-mix(in srgb, var(--paper) 86.275%, transparent);gap:5px;padding:6px 8px}
+.immersive-race .floating-racer.is-active:before{width:0;height:0;border-radius:0;background:none;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid var(--ui-text);left:calc(50% - 4px);top:-4px}
+.racer-state{position:absolute;top:-4px;right:-5px;display:grid;place-items:center;width:22px;height:22px;border:1px solid color-mix(in srgb, var(--ui-text) 40.000%, transparent);border-radius:7px;background:var(--paper);color:var(--ui-text)}
 .immersive-race .floating-roll .race-roll-button:disabled{min-height:44px;min-width:136px;padding:8px 14px;border-radius:13px;font-size:12px;gap:7px}
 .immersive-race .roll-caption:empty{display:none}
 .last-roll-numbers{display:flex;align-items:center;gap:6px;font-size:12px}
 .last-roll-numbers>svg:nth-of-type(2){margin-left:5px}
 /* Independent cards avoid the legacy scene banner's broad text selectors. */
-.immersive-race .race-moment,.immersive-race>.ability-reveal-card{position:absolute;z-index:29;top:auto;bottom:max(128px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);width:max-content;max-width:min(360px,calc(100% - 36px));padding:12px 14px;border:1px solid #53796966;border-radius:16px;background:#fffaf3f2;box-shadow:0 7px 24px #23494120;color:#254f48;backdrop-filter:blur(12px)}
+.immersive-race .race-moment,.immersive-race>.ability-reveal-card{position:absolute;z-index:29;top:auto;bottom:max(128px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);width:max-content;max-width:min(360px,calc(100% - 36px));padding:12px 14px;border:1px solid color-mix(in srgb, var(--ui-control-border) 40.000%, transparent);border-radius:16px;background:color-mix(in srgb, var(--paper) 94.902%, transparent);box-shadow:0 7px 24px color-mix(in srgb, var(--ui-text) 12.549%, transparent);color:var(--ui-text);backdrop-filter:blur(12px)}
 .immersive-race .race-moment{pointer-events:none}
 .moment-heading{display:flex;align-items:baseline;flex-wrap:wrap;gap:3px 8px;margin-bottom:9px;overflow-wrap:anywhere}
-.moment-heading>strong{font-size:16px;line-height:1.35;color:#254f48}
-.moment-heading>small{font-size:11px;line-height:1.4;color:#5a766c;font-weight:650}
+.moment-heading>strong{font-size:16px;line-height:1.35;color:var(--ui-text)}
+.moment-heading>small{font-size:11px;line-height:1.4;color:var(--ui-text-muted);font-weight:650}
 .moment-participants{display:flex;align-items:flex-start;gap:8px;min-width:0}
-.moment-participants>svg{flex:none;margin-top:10px;color:#6f897b}
+.moment-participants>svg{flex:none;margin-top:10px;color:var(--ui-text-muted)}
 .moment-racer,.moment-origin{display:flex;flex-direction:column;align-items:center;gap:4px;flex:none;min-width:44px;max-width:100%;margin:0;padding:0;border:0;background:none;color:inherit;font:inherit;text-align:center}
 .moment-racer{cursor:pointer;pointer-events:auto;border-radius:8px}
-.moment-racer:focus-visible,.ability-reveal-card button:focus-visible{outline:3px solid #244f54;outline-offset:3px}
+.moment-racer:focus-visible,.ability-reveal-card button:focus-visible{outline:3px solid var(--ui-text);outline-offset:3px}
 .moment-racer>.avatar,.moment-origin>.avatar,.moment-origin>.event-art{display:block;flex:none;width:36px;height:36px}
 .moment-origin{width:48px}
 .moment-origin>svg:not(.avatar):not(.event-art){height:36px}
 .moment-racer>small,.moment-origin>small{font-size:10px;line-height:1.25;font-weight:700;overflow-wrap:anywhere}
 .moment-targets{display:flex;align-items:flex-start;flex-wrap:wrap;gap:6px;min-width:0}
-.moment-number{display:inline-flex;align-items:baseline;justify-content:center;gap:2px;padding:4px 5px;border-radius:7px;background:#f7df9b;color:#294f49;font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap;line-height:1.15}
+.moment-number{display:inline-flex;align-items:baseline;justify-content:center;gap:2px;padding:4px 5px;border-radius:7px;background:var(--ui-control-hover);color:var(--ui-text);font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap;line-height:1.15}
 .moment-number>small{font-size:9px;font-weight:600}
 .moment-self-result{margin-top:7px}
-.moment-more{align-self:center;border:1px solid #53796930;border-radius:7px;padding:4px;font-size:10px;font-weight:750;white-space:nowrap}
+.moment-more{align-self:center;border:1px solid color-mix(in srgb, var(--ui-control-border) 18.824%, transparent);border-radius:7px;padding:4px;font-size:10px;font-weight:750;white-space:nowrap}
 .immersive-race>.ability-reveal-card{width:min(360px,calc(100% - 36px));max-height:260px;overflow:auto;pointer-events:auto}
 .racer-state{font-size:9px;font-weight:850;line-height:1;white-space:nowrap}
 
@@ -138,30 +138,30 @@
 }
 
 .immersive-race .floating-racer-score{white-space:nowrap}
-.event-log .event-log-mark{display:flex;flex:none;flex-direction:column;align-items:center;width:36px;color:#315961;gap:3px}
+.event-log .event-log-mark{display:flex;flex:none;flex-direction:column;align-items:center;width:36px;color:var(--ui-text);gap:3px}
 .event-log .event-log-mark small{font-size:9px}
 .event-log li>div>small{display:block}
 
 /* Choices are tokens, portraits and independently focusable detail controls. */
 .floating-choice .compact-choice-options{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px;margin-top:6px}
 .compact-choice-options>.choice-option{display:inline-flex;flex:0 1 auto;min-width:0}
-.compact-choice-options>.choice-number-option{position:relative;display:inline-flex;flex:none;align-items:stretch;background:#f1f2e6;border:1px solid #a6b69c;border-radius:13px;overflow:visible}
-.floating-choice .choice-number-button.button{position:relative;display:flex;flex-direction:column;justify-content:center;gap:1px;flex:none;width:44px;min-width:44px;min-height:48px;border:0;border-radius:12px;box-shadow:none;padding:5px;background:#315961;color:#fffaf0}
+.compact-choice-options>.choice-number-option{position:relative;display:inline-flex;flex:none;align-items:stretch;background:var(--paper);border:1px solid var(--ui-control-border);border-radius:13px;overflow:visible}
+.floating-choice .choice-number-button.button{position:relative;display:flex;flex-direction:column;justify-content:center;gap:1px;flex:none;width:44px;min-width:44px;min-height:48px;border:0;border-radius:12px;box-shadow:none;padding:5px;background:var(--ui-text);color:var(--paper)}
 .choice-number-button>b{font-size:23px;line-height:1.1}
 .choice-number-metrics{display:flex;flex-direction:column;justify-content:center;gap:2px;padding:3px 4px}
-.choice-number-metrics>small{display:flex;align-items:center;justify-content:center;gap:2px;font-size:10px;line-height:1.25;color:#315961;white-space:nowrap}
+.choice-number-metrics>small{display:flex;align-items:center;justify-content:center;gap:2px;font-size:10px;line-height:1.25;color:var(--ui-text);white-space:nowrap}
 .choice-number-retreat>span{font-size:9px}
-.choice-shared-cost{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:800;margin-top:6px;color:#315961}
-.choice-number-detail{display:grid;place-items:center;flex:none;width:44px;min-width:44px;min-height:48px;border:0;border-radius:0 12px 12px 0;background:transparent;color:#315961;padding:8px;cursor:pointer}
-.choice-number-detail:focus-visible,.choice-character-detail:focus-visible{outline:3px solid #244f54;outline-offset:2px}
+.choice-shared-cost{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:800;margin-top:6px;color:var(--ui-text)}
+.choice-number-detail{display:grid;place-items:center;flex:none;width:44px;min-width:44px;min-height:48px;border:0;border-radius:0 12px 12px 0;background:transparent;color:var(--ui-text);padding:8px;cursor:pointer}
+.choice-number-detail:focus-visible,.choice-character-detail:focus-visible{outline:3px solid var(--ui-text);outline-offset:2px}
 .floating-choice .compact-choice-options>.choice-character,.floating-choice .choice-offer{display:grid;grid-template-columns:32px minmax(0,1fr) 44px;gap:4px;flex:1 1 190px;padding:5px;border-radius:13px}
-.floating-choice .choice-character>.button{border:0;background:transparent;color:#315961;box-shadow:none;padding:5px;min-height:44px;min-width:0;font-size:12px}
-.floating-choice .choice-character .choice-character-detail{grid-column:3;grid-row:1;display:grid;place-items:center;width:44px;min-width:44px;min-height:44px;padding:8px;border:0;background:transparent;border-radius:10px;color:#315961}
+.floating-choice .choice-character>.button{border:0;background:transparent;color:var(--ui-text);box-shadow:none;padding:5px;min-height:44px;min-width:0;font-size:12px}
+.floating-choice .choice-character .choice-character-detail{grid-column:3;grid-row:1;display:grid;place-items:center;width:44px;min-width:44px;min-height:44px;padding:8px;border:0;background:transparent;border-radius:10px;color:var(--ui-text)}
 .floating-choice .choice-offer>strong{font-size:12px}
 .floating-choice .choice-power-icons{grid-column:2/-1;display:flex;align-items:center;gap:5px;padding:0;min-height:0;font-size:10px}
 .choice-power-icons:empty{display:none!important}
 .choice-power-icons .avatar{width:24px;height:24px}
-.choice-power-icons>strong{display:inline-flex;align-items:center;gap:3px;font-size:10px;color:#9d432e}
+.choice-power-icons>strong{display:inline-flex;align-items:center;gap:3px;font-size:10px;color:var(--brand-red)}
 .choice-related-racers{margin-top:6px}
 .choice-related-list{gap:5px;padding:0}
 .choice-related-list>.choice-related-character{display:flex;align-items:center;gap:4px;flex:none;width:auto;min-width:44px;min-height:44px;padding:4px 7px;border-radius:12px}
@@ -170,7 +170,7 @@
 .choice-related-character>svg{flex:none}
 .floating-choice .compact-dice-hint{display:inline-flex;align-items:center;justify-content:flex-start;gap:5px;min-height:40px;max-width:100%;padding:4px 7px;margin-top:6px;font-size:11px}
 .compact-dice-hint>.avatar{width:28px;height:28px}
-.compact-dice-hint>b{display:grid;place-items:center;min-width:22px;height:26px;border:1px solid #b79e5e;border-radius:6px;background:#fffaf0;font-size:17px}
+.compact-dice-hint>b{display:grid;place-items:center;min-width:22px;height:26px;border:1px solid var(--ui-gold);border-radius:6px;background:var(--paper);font-size:17px}
 .compact-dice-hint>small{font-size:10px}
 .floating-choice .choice-collapse{display:grid;place-items:center;width:44px;min-width:44px;min-height:44px;padding:8px;margin:-4px -4px 3px 8px;border:0;background:transparent}
 .floating-choice .choice-operator{font-size:10px}
@@ -205,12 +205,12 @@
 .prediction-hud .prediction-chip{gap:4px;padding:3px 5px}
 .prediction-hud .prediction-avatar{position:relative;display:grid;place-items:center;flex:none;width:44px;height:44px;border-radius:11px;overflow:visible}
 .prediction-hud .prediction-avatar>.avatar{width:32px;height:32px}
-.prediction-avatar>b{position:absolute;right:-2px;bottom:-1px;display:grid;place-items:center;min-width:16px;height:16px;border:1px solid #315961;border-radius:50%;background:#fffaf0;font-size:9px;line-height:1;color:#315961}
+.prediction-avatar>b{position:absolute;right:-2px;bottom:-1px;display:grid;place-items:center;min-width:16px;height:16px;border:1px solid var(--ui-text);border-radius:50%;background:var(--paper);font-size:9px;line-height:1;color:var(--ui-text)}
 .floating-choice .compact-route-dice{display:inline-flex;align-items:center;gap:6px;padding:5px 8px;min-height:40px}
 .compact-route-dice>b{font-size:21px}.compact-route-dice>svg:nth-of-type(2){margin-left:8px}
-.choice-actor-detail{float:left;display:grid;place-items:center;width:44px;min-width:44px;height:44px;padding:3px;margin:0 8px 3px 0;border:1px solid #a6b69c;border-radius:12px;background:#eef0dc;color:#315961;cursor:pointer}
+.choice-actor-detail{float:left;display:grid;place-items:center;width:44px;min-width:44px;height:44px;padding:3px;margin:0 8px 3px 0;border:1px solid var(--ui-control-border);border-radius:12px;background:var(--paper);color:var(--ui-text);cursor:pointer}
 .choice-actor-detail>.avatar{width:34px;height:34px}
-.choice-actor-detail:focus-visible{outline:3px solid #244f54;outline-offset:2px}
+.choice-actor-detail:focus-visible{outline:3px solid var(--ui-text);outline-offset:2px}
 .immersive-race .room-pause-control.is-paused:hover:not(:disabled){background:#34796c}
 @media(orientation:landscape) and (min-width:480px) and (max-height:570px){
  body>.room-community.in-race .chat-notice-region{width:228px;max-width:228px}
@@ -270,13 +270,13 @@
  html[data-chat-compact="true"][data-view="race"] body .immersive-race .floating-choice.choice-panel{max-height:calc(var(--chat-viewport-height,100dvh) - var(--race-chat-height,124px) - 166px);padding:8px}
 }
 
-.floating-choice.choice-panel{bottom:max(128px,env(safe-area-inset-bottom));border-width:1px;border-color:#53796966;background:#fffaf3f5;border-radius:16px;box-shadow:0 7px 24px #23494120}
+.floating-choice.choice-panel{bottom:max(128px,env(safe-area-inset-bottom));border-width:1px;border-color:color-mix(in srgb, var(--ui-control-border) 40.000%, transparent);background:color-mix(in srgb, var(--paper) 96.078%, transparent);border-radius:16px;box-shadow:0 7px 24px color-mix(in srgb, var(--ui-text) 12.549%, transparent)}
 .floating-choice .choice-heading{display:grid;grid-template-columns:44px minmax(0,1fr) 44px;align-items:center;gap:4px 8px}
 .floating-choice.choice-panel>.choice-heading{padding-left:0}
 .floating-choice .choice-heading>.choice-collapse{grid-column:3;grid-row:1/3;align-self:start;margin:0;float:none}
 .floating-choice .choice-heading>.choice-actor-detail,.floating-choice .choice-heading>.burst{grid-column:1;grid-row:1/3;margin:0;float:none}
 .floating-choice .choice-heading>h2{grid-column:2;grid-row:1;font-size:16px;line-height:1.4;overflow-wrap:anywhere}
-.floating-choice .choice-heading>.choice-operator{grid-column:2;grid-row:2;font-size:11px;color:#5a766c}
+.floating-choice .choice-heading>.choice-operator{grid-column:2;grid-row:2;font-size:11px;color:var(--ui-text-muted)}
 .floating-choice .choice-heading>p{grid-column:1/-1}
 @media(max-width:650px) and (orientation:portrait){
  html[data-view="race"] body .immersive-race .floating-choice.choice-panel{bottom:calc(max(14px,env(safe-area-inset-bottom)) + 174px);max-height:max(120px,calc(100dvh - max(var(--race-minimap-bottom,220px),var(--race-status-bottom,180px)) - 200px))}

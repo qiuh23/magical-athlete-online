@@ -15,9 +15,9 @@
   overflow: hidden;
   border: 0;
   border-radius: 12px;
-  background: #fffaf4;
-  color: #254b46;
-  box-shadow: 0 0 0 1px #31596150, 0 6px 20px #1b372b24;
+  background: var(--paper);
+  color: var(--ui-text);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--ui-text) 31.373%, transparent), 0 6px 20px color-mix(in srgb, var(--ui-text) 14.118%, transparent);
   pointer-events: auto;
 }
 .immersive-race .floating-choice.race-choice-dock button {
@@ -30,7 +30,7 @@
   touch-action: manipulation;
 }
 .immersive-race .floating-choice.race-choice-dock button:disabled { cursor: default; opacity: .55; }
-.immersive-race .floating-choice.race-choice-dock :is(button, [tabindex]):focus-visible { outline: 3px solid #c66b18; outline-offset: -3px; }
+.immersive-race .floating-choice.race-choice-dock :is(button, [tabindex]):focus-visible { outline: 3px solid var(--ui-gold); outline-offset: -3px; }
 .immersive-race .floating-choice.race-choice-dock .choice-dock-heading {
   display: flex;
   flex: 0 0 44px;
@@ -49,7 +49,7 @@
   border: 0;
   border-radius: 8px;
   background: transparent;
-  color: #315961;
+  color: var(--ui-text);
 }
 .immersive-race .floating-choice.race-choice-dock .choice-dock-actor > .avatar { width: 30px; height: 30px; }
 .immersive-race .floating-choice.race-choice-dock .choice-dock-title {
@@ -66,7 +66,7 @@
   text-align: left;
 }
 .immersive-race .floating-choice.race-choice-dock .choice-dock-title > strong { width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 14px; line-height: 19px; font-weight: 750; }
-.immersive-race .floating-choice.race-choice-dock .choice-dock-title > small { font-size: 11px; line-height: 15px; color: #53695f; }
+.immersive-race .floating-choice.race-choice-dock .choice-dock-title > small { font-size: 11px; line-height: 15px; color: var(--ui-text-muted); }
 .immersive-race .floating-choice.race-choice-dock .choice-dock-body { min-height: 0; overflow: auto; overscroll-behavior: contain; padding: 0 8px 8px; scrollbar-width: thin; }
 .immersive-race .floating-choice.race-choice-dock .choice-dock-options {
   display: flex;
@@ -80,7 +80,7 @@
   overflow-x: auto;
   overscroll-behavior-inline: contain;
   scrollbar-width: thin;
-  scrollbar-color: #809b8d transparent;
+  scrollbar-color: var(--ui-text-muted) transparent;
 }
 .immersive-race .floating-choice.race-choice-dock .choice-dock-option {
   display: grid;
@@ -91,8 +91,8 @@
   min-width: 92px;
   padding: 0;
   border-radius: 9px;
-  background: #edf1e8;
-  box-shadow: inset 0 0 0 1px #31596138;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ui-text) 21.961%, transparent);
 }
 .immersive-race .floating-choice.race-choice-dock .choice-dock-action {
   display: flex;
@@ -105,15 +105,15 @@
   padding: 6px 10px;
   border: 0;
   border-radius: 9px 0 0 9px;
-  background: #315f51;
-  color: #fffef6;
+  background: var(--ui-text);
+  color: var(--paper);
   box-shadow: none;
   font-size: 13px;
   line-height: 18px;
   text-align: left;
   transform: none;
 }
-.immersive-race .floating-choice.race-choice-dock .choice-dock-action.is-secondary { background: transparent; color: #315961; }
+.immersive-race .floating-choice.race-choice-dock .choice-dock-action.is-secondary { background: transparent; color: var(--ui-text); }
 .immersive-race .floating-choice.race-choice-dock .choice-dock-action > .avatar { flex: 0 0 30px; width: 30px; height: 30px; }
 .immersive-race .floating-choice.race-choice-dock .choice-dock-label { display: flex; flex-direction: column; min-width: 0; gap: 2px; }
 .immersive-race .floating-choice.race-choice-dock .choice-dock-label > strong { font-size: 13px; line-height: 18px; font-weight: 700; overflow-wrap: anywhere; }
@@ -121,7 +121,7 @@
 .immersive-race .floating-choice.race-choice-dock .choice-dock-label small { font-size: 11px; line-height: 15px; white-space: nowrap; font-weight: 500; }
 .immersive-race .floating-choice.race-choice-dock .choice-dock-label strong > small { margin-left: 3px; }
 .immersive-race .floating-choice.race-choice-dock .choice-dock-metrics { display: flex; flex-wrap: wrap; justify-content: center; column-gap: 5px; }
-.immersive-race .floating-choice.race-choice-dock .choice-dock-inspect { display: grid; place-items: center; width: 44px; padding: 8px; border: 0; border-radius: 0 9px 9px 0; background: transparent; color: #315961; }
+.immersive-race .floating-choice.race-choice-dock .choice-dock-inspect { display: grid; place-items: center; width: 44px; padding: 8px; border: 0; border-radius: 0 9px 9px 0; background: transparent; color: var(--ui-text); }
 .immersive-race .floating-choice.race-choice-dock .choice-power-icons { grid-column: 1 / -1; display: flex; align-items: center; flex-wrap: nowrap; gap: 4px; min-height: 0; padding: 2px 6px; overflow: hidden; }
 .immersive-race .floating-choice.race-choice-dock .choice-power-icons .avatar { width: 20px; height: 20px; }
 .immersive-race .floating-choice.race-choice-dock .choice-dock-route { border-radius: 9px; }
@@ -133,11 +133,11 @@
 .immersive-race .floating-choice.race-choice-dock .choice-dice-hint { display: inline-flex; flex-wrap: nowrap; flex: 0 0 auto; align-items: center; gap: 4px; min-height: 28px; max-width: 100%; margin: 0; padding: 2px 5px; border: 0; border-radius: 6px; white-space: nowrap; }
 .immersive-race .floating-choice.race-choice-dock .choice-dice-hint > .avatar { width: 24px; height: 24px; }
 .immersive-race .floating-choice.race-choice-dock .choice-dice-hint > b { min-width: 20px; height: 24px; font-size: 15px; }
-.immersive-race .floating-choice.race-choice-dock .choice-dock-offer { display: flex; align-items: center; gap: 5px; padding: 3px 8px; border: 1px solid #99b6a4; border-radius: 8px; background: #edf2dc; color: #315961; white-space: nowrap; font-size: 12px; }
+.immersive-race .floating-choice.race-choice-dock .choice-dock-offer { display: flex; align-items: center; gap: 5px; padding: 3px 8px; border: 1px solid var(--ui-control-border); border-radius: 8px; background: var(--paper); color: var(--ui-text); white-space: nowrap; font-size: 12px; }
 .immersive-race .floating-choice.race-choice-dock .choice-dock-offer > .avatar { width: 28px; height: 28px; }
-.immersive-race .floating-choice.race-choice-dock .choice-dock-explanation { padding: 6px 8px; color: #254b46; }
+.immersive-race .floating-choice.race-choice-dock .choice-dock-explanation { padding: 6px 8px; color: var(--ui-text); }
 .immersive-race .floating-choice.race-choice-dock .choice-dock-explanation p { font-size: 14px; line-height: 1.6; margin: 0 0 6px; color: inherit; overflow-wrap: anywhere; }
-.immersive-race .floating-choice.race-choice-dock .choice-dock-explanation small { font-size: 11px; line-height: 1.5; color: #53695f; }
+.immersive-race .floating-choice.race-choice-dock .choice-dock-explanation small { font-size: 11px; line-height: 1.5; color: var(--ui-text-muted); }
 .immersive-race .floating-choice.race-choice-dock .choice-dock-wait { margin: 0; padding: 8px; font-size: 13px; }
 .immersive-race .floating-choice.race-choice-dock.is-collapsed { height: 44px; max-height: 44px; }
 .immersive-race .floating-choice.race-choice-dock.is-collapsed .choice-dock-heading > .choice-dice-hint { max-width: 38%; overflow-x: auto; scrollbar-width: none; }
@@ -163,4 +163,4 @@
   body:has(> .room-community.in-race.is-open) .immersive-race .floating-choice.race-choice-dock,
   body:has(> .room-community.in-race .chat-notice-region) .immersive-race .floating-choice.race-choice-dock { left: 12px; bottom: calc(max(14px, env(safe-area-inset-bottom)) + var(--race-chat-height, 44px) + var(--chat-keyboard-offset, 0px) + 12px); }
 }
-.immersive-race .floating-choice.race-choice-dock .choice-dock-roll { display: inline-flex; align-items: center; gap: 5px; min-height: 28px; padding: 2px 6px; border-radius: 6px; background: #fff0c9; font-size: 13px; white-space: nowrap; }
+.immersive-race .floating-choice.race-choice-dock .choice-dock-roll { display: inline-flex; align-items: center; gap: 5px; min-height: 28px; padding: 2px 6px; border-radius: 6px; background: var(--paper); font-size: 13px; white-space: nowrap; }

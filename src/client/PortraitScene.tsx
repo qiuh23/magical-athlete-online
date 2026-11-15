@@ -23,7 +23,7 @@ export function portraitTheme(id: string): Theme {
 }
 
 export function portraitStyle(id: string): CSSProperties {
-  return { '--portrait-paper': themes[portraitTheme(id)], '--portrait-accent': '#293b36' } as CSSProperties;
+  return { '--portrait-paper': themes[portraitTheme(id)], '--portrait-accent': 'var(--ui-text)' } as CSSProperties;
 }
 
 /** Flat cartoon stock keeps the athlete readable without a competing backdrop. */
