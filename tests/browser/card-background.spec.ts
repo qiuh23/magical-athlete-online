@@ -1,9 +1,11 @@
-import { mkdirSync } from 'node:fs';
+import { mkdirSync, readFileSync } from 'node:fs';
 import { test, expect } from '@playwright/test';
 import { createApplication } from '../../src/server/index.js';
 
 let application: ReturnType<typeof createApplication>, url: string;
 const output = 'test-results/card-background';
+const paperHex = readFileSync(new URL('../../src/client/ui-theme.css', import.meta.url), 'utf8').match(/--paper:\s*#([0-9a-f]{6})/i)![1]!;
+const paperColor = `rgb(${[0, 2, 4].map(offset => parseInt(paperHex.slice(offset, offset + 2), 16)).join(', ')})`;
 
 test.beforeAll(async () => {
   application = createApplication(':memory:');
@@ -51,7 +53,7 @@ test('flat card backgrounds keep artwork, selection and details readable on desk
         const artwork = card.locator('.character-avatar-detail');
         expect(await artwork.evaluate(element => getComputedStyle(element).backgroundImage)).toBe('none');
         expect(await artwork.evaluate(element => getComputedStyle(element).backgroundColor)).toBe(colors[(await card.getAttribute('data-character-id'))!]);
-        expect(await card.locator('.character-copy').evaluate(element => getComputedStyle(element).backgroundColor)).toBe('rgb(255, 253, 245)');
+        expect(await card.locator('.character-copy').evaluate(element => getComputedStyle(element).backgroundColor)).toBe(paperColor);
         await expect(artwork.locator('.portrait-scenery')).toHaveCount(0);
         const frame = await artwork.boundingBox(), avatar = await artwork.locator('.avatar').boundingBox();
         expect(frame).toBeTruthy(); expect(avatar).toBeTruthy();
@@ -71,7 +73,7 @@ test('flat card backgrounds keep artwork, selection and details readable on desk
       await expect(dialog.locator('.portrait-scene .avatar')).toBeVisible();
       await expect(dialog.locator('.portrait-scenery')).toHaveCount(0);
       await expect(dialog.locator('.identity-name')).toHaveText('香蕉');
-      expect(await dialog.locator('.modal-header').evaluate(element => getComputedStyle(element).backgroundColor)).toBe('rgb(241, 242, 230)');
+      expect(await dialog.locator('.modal-header').evaluate(element => getComputedStyle(element).backgroundColor)).toBe(paperColor);
       await dialog.screenshot({ path: `${output}/${name}-detail.png` });
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
       expect(errors).toEqual([]);

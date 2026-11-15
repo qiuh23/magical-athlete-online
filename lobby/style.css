@@ -1,28 +1,13 @@
-/* Shared interface vocabulary from Wizard and Catan; each illustration keeps
-   its own palette. The two independently built lobbies use the same chrome. */
+/* Global token fallbacks are generated from src/client/ui-theme.css by
+   scripts/build-lobby.mjs. Edit their values in ui-theme.css, then rebuild;
+   the build explicitly updates this file before copying identical CSS to both
+   sites. Layout rules and local --game-* values remain authored here.
+   改 token 必须两处同步：唯一值源在 ui-theme.css，本文件 fallback 由构建更新。 */
 :root {
-  --ui-font: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
-  --ui-text: #173b3d;
-  --ui-text-muted: #536b5e;
-  --ui-surface: #f8f7ef;
-  --ui-control: #e4ece4;
-  --ui-control-hover: #d0dfd3;
-  --ui-control-active: #dce8d5;
-  --ui-border: #d1d9c6;
-  --ui-control-border: #b8c9bf;
-  --ui-accent: #397456;
-  --ui-focus: #9a4c26;
-  --ui-radius: 14px;
-  --ui-space: 4px;
-  --ui-space-2: calc(var(--ui-space) * 2);
-  --ui-space-3: calc(var(--ui-space) * 3);
-  --ui-touch-size: 44px;
-  --ui-shadow: 0 8px 24px #173b3d18;
-  --ui-duration: 150ms;
-  font-family: var(--ui-font);
+  font-family: var(--ui-font, -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif);
   font-variant-numeric: tabular-nums;
   -webkit-font-smoothing: antialiased;
-  color: var(--ui-text);
+  color: var(--ui-text, #173b3d);
   background: #f2f5ef;
   font-synthesis: none;
   color-scheme: light;
@@ -30,23 +15,23 @@
 * { box-sizing: border-box; }
 body { margin: 0; }
 [hidden] { display: none !important; }
-::selection { color: var(--ui-text); background: #d5e7c6; }
+::selection { color: var(--ui-text, #173b3d); background: #d5e7c6; }
 a { color: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
 .page { max-width: 1360px; margin: auto; padding: 0 max(32px, env(safe-area-inset-left)) 0 max(32px, env(safe-area-inset-right)); }
-header { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: var(--ui-space-3); border-bottom: 1px solid var(--ui-border); }
-.brand { min-height: var(--ui-touch-size); text-decoration: none; display: inline-flex; align-items: center; gap: var(--ui-space-3); font-size: 22px; font-weight: 700; letter-spacing: .02em; border-radius: var(--ui-radius); }
+header { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: calc(var(--ui-space, 4px) * 3); border-bottom: 1px solid var(--ui-border, #d1d9c6); }
+.brand { min-height: var(--ui-touch-size, 44px); text-decoration: none; display: inline-flex; align-items: center; gap: calc(var(--ui-space, 4px) * 3); font-size: 22px; font-weight: 700; letter-spacing: .02em; border-radius: var(--radius-lg, 14px); }
 .brand-icon { width: 28px; height: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 3px; transform: rotate(-9deg); }
 .brand-icon i { background: #326e57; border-radius: 3px; }
 .brand-icon i:nth-child(2) { background: #9ebd9d; }
 .brand-icon i:nth-child(3) { background: #dfca72; }
-.site-badge { display: inline-flex; align-items: center; gap: var(--ui-space-2); border: 1px solid var(--ui-control-border); border-radius: var(--ui-radius); padding: 8px 12px; font-size: 14px; line-height: 20px; color: var(--ui-text-muted); background: var(--ui-surface); }
+.site-badge { display: inline-flex; align-items: center; gap: calc(var(--ui-space, 4px) * 2); border: 1px solid var(--ui-control-border, #b8c9bf); border-radius: var(--radius-lg, 14px); padding: 8px 12px; font-size: 14px; line-height: 20px; color: var(--ui-text-muted, #536b5e); background: var(--ui-surface, #f8f7ef); }
 .site-badge svg { width: 18px; height: 18px; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 .site-badge strong { font-weight: 600; }
 main { padding: 36px 0; }
 h1 { font-size: clamp(28px, 3vw, 38px); line-height: 1.3; letter-spacing: -.025em; margin: 0 0 24px; font-weight: 700; }
 .games { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
-.game { --game-accent: #32694f; --game-action-text: #fffef2; overflow: hidden; text-decoration: none; border-radius: var(--ui-radius); border: 1px solid var(--ui-border); background: var(--ui-surface); box-shadow: 0 4px 12px #173b3d08; transition: transform var(--ui-duration) ease, box-shadow var(--ui-duration) ease, border-color var(--ui-duration) ease; display: flex; flex-direction: column; min-width: 0; }
+.game { --game-accent: #32694f; --game-action-text: #fffef2; overflow: hidden; text-decoration: none; border-radius: var(--radius-lg, 14px); border: 1px solid var(--ui-border, #d1d9c6); background: var(--ui-surface, #f8f7ef); box-shadow: 0 4px 12px #173b3d08; transition: transform var(--duration-2, 150ms) ease, box-shadow var(--duration-2, 150ms) ease, border-color var(--duration-2, 150ms) ease; display: flex; flex-direction: column; min-width: 0; }
 .wizard { --game-accent: #ead096; --game-action-text: #342b1d; }
 .catan { --game-accent: #805a34; }
 .art { aspect-ratio: 16 / 9; position: relative; overflow: hidden; isolation: isolate; }
@@ -56,49 +41,49 @@ h1 { font-size: clamp(28px, 3vw, 38px); line-height: 1.3; letter-spacing: -.025e
 .track { background: #c4e7ce; }
 .cards { background: #123e33; }
 .island { background: #dce8da; }
-.game-content { padding: 20px; display: flex; align-items: center; justify-content: space-between; gap: var(--ui-space-3); flex: 1; }
+.game-content { padding: 20px; display: flex; align-items: center; justify-content: space-between; gap: calc(var(--ui-space, 4px) * 3); flex: 1; }
 h2 { font-size: clamp(22px, 2vw, 28px); line-height: 1.35; letter-spacing: -.02em; margin: 0; text-wrap: balance; font-weight: 700; }
-.action { display: inline-flex; flex: none; gap: var(--ui-space); align-items: center; justify-content: center; background: var(--game-accent); border-radius: var(--ui-radius); padding: 10px 12px; font-size: 14px; font-weight: 600; line-height: 20px; color: var(--game-action-text); min-height: var(--ui-touch-size); transition: background-color var(--ui-duration) ease; }
+.action { display: inline-flex; flex: none; gap: var(--ui-space, 4px); align-items: center; justify-content: center; background: var(--game-accent); border-radius: var(--radius-lg, 14px); padding: 10px 12px; font-size: 14px; font-weight: 600; line-height: 20px; color: var(--game-action-text); min-height: var(--ui-touch-size, 44px); transition: background-color var(--duration-2, 150ms) ease; }
 .action svg { width: 20px; height: 20px; flex: none; stroke-width: 1.7; }
 .game[aria-disabled=true] { box-shadow: none; }
-.game[aria-disabled=true] .action { background: var(--ui-control); color: var(--ui-text-muted); }
+.game[aria-disabled=true] .action { background: var(--ui-control, #e4ece4); color: var(--ui-text-muted, #536b5e); }
 .game[aria-disabled=true] .action svg { display: none; }
-.game.invited { border-color: var(--ui-accent); box-shadow: 0 0 0 2px #39745626; }
+.game.invited { border-color: var(--ui-accent, #397456); box-shadow: 0 0 0 2px #39745626; }
 .status { font-size: 14px; color: #8a3f24; line-height: 1.6; margin: 16px 0 0; }
 .status:empty, .invitation p:empty { display: none; }
-.invitation { display: flex; align-items: center; justify-content: space-between; gap: 16px; border-radius: var(--ui-radius); border: 1px solid var(--ui-control-border); background: var(--ui-control); padding: 16px 20px; margin-bottom: 20px; font-size: 14px; line-height: 1.6; }
+.invitation { display: flex; align-items: center; justify-content: space-between; gap: 16px; border-radius: var(--radius-lg, 14px); border: 1px solid var(--ui-control-border, #b8c9bf); background: var(--ui-control, #e4ece4); padding: 16px 20px; margin-bottom: 20px; font-size: 14px; line-height: 1.6; }
 .invitation strong { font-size: 16px; font-weight: 650; }
-.invitation p { margin: var(--ui-space) 0 0; color: var(--ui-text-muted); overflow-wrap: anywhere; }
-button { font: 600 14px/20px var(--ui-font); min-height: var(--ui-touch-size); border: 1px solid var(--ui-control-border); background: var(--ui-surface); color: var(--ui-text); border-radius: var(--ui-radius); padding: 10px 12px; cursor: pointer; transition: background-color var(--ui-duration) ease, border-color var(--ui-duration) ease; }
+.invitation p { margin: var(--ui-space, 4px) 0 0; color: var(--ui-text-muted, #536b5e); overflow-wrap: anywhere; }
+button { font: 600 14px/20px var(--ui-font, -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif); min-height: var(--ui-touch-size, 44px); border: 1px solid var(--ui-control-border, #b8c9bf); background: var(--ui-surface, #f8f7ef); color: var(--ui-text, #173b3d); border-radius: var(--radius-lg, 14px); padding: 10px 12px; cursor: pointer; transition: background-color var(--duration-2, 150ms) ease, border-color var(--duration-2, 150ms) ease; }
 .invitation button { flex: none; }
-#retry { margin-top: var(--ui-space-3); }
-:is(a,button):focus-visible { outline: 3px solid var(--ui-focus); outline-offset: 3px; }
-button:active { background: var(--ui-control-active); }
+#retry { margin-top: calc(var(--ui-space, 4px) * 3); }
+:is(a,button):focus-visible { outline: 3px solid var(--ui-focus, #9a4c26); outline-offset: 3px; }
+button:active { background: var(--ui-control-active, #dce8d5); }
 .game[href]:active { transform: translateY(1px); }
-footer { border-top: 1px solid var(--ui-border); display: flex; justify-content: flex-end; padding: var(--ui-space) 0 16px; font-size: 12px; line-height: 20px; color: var(--ui-text-muted); }
-footer a { min-height: var(--ui-touch-size); display: inline-flex; align-items: center; text-decoration: none; border-radius: var(--ui-radius); }
+footer { border-top: 1px solid var(--ui-border, #d1d9c6); display: flex; justify-content: flex-end; padding: var(--ui-space, 4px) 0 16px; font-size: 12px; line-height: 20px; color: var(--ui-text-muted, #536b5e); }
+footer a { min-height: var(--ui-touch-size, 44px); display: inline-flex; align-items: center; text-decoration: none; border-radius: var(--radius-lg, 14px); }
 footer a:hover { text-decoration: underline; }
 @media (hover: hover) and (pointer: fine) {
-  .game[href]:hover { transform: translateY(-3px); border-color: #9bb79a; box-shadow: var(--ui-shadow); }
+  .game[href]:hover { transform: translateY(-3px); border-color: #9bb79a; box-shadow: var(--shadow-2, 0 8px 24px #173b3d18); }
   .game[href]:hover .action { background: #224f3b; color: #fffef2; }
   .wizard[href]:hover .action { background: #f4dda9; color: #342b1d; }
   .catan[href]:hover .action { background: #654425; }
   .game[href]:hover .die-body { transform: translateY(-8px) rotate(8deg); }
-  button:hover { background: var(--ui-control-hover); }
+  button:hover { background: var(--ui-control-hover, #d0dfd3); }
 }
 .game[href]:focus-visible .die-body { transform: translateY(-8px) rotate(8deg); }
 .game[href]:active .die-body { transform: translateY(-3px) rotate(-5deg); }
 @media (max-width: 1000px) {
   .page { padding-left: max(20px, env(safe-area-inset-left)); padding-right: max(20px, env(safe-area-inset-right)); }
-  .games { gap: var(--ui-space-3); }
-  .game-content { padding: 16px; flex-direction: column; align-items: flex-start; gap: var(--ui-space-2); }
+  .games { gap: calc(var(--ui-space, 4px) * 3); }
+  .game-content { padding: 16px; flex-direction: column; align-items: flex-start; gap: calc(var(--ui-space, 4px) * 2); }
   h2 { font-size: 24px; }
   .action { align-self: flex-end; }
 }
 @media (max-width: 639px) {
   .page { padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16px, env(safe-area-inset-right)); }
   header { min-height: 64px; }
-  .brand { font-size: 20px; gap: var(--ui-space-2); }
+  .brand { font-size: 20px; gap: calc(var(--ui-space, 4px) * 2); }
   main { padding: 24px 0; }
   h1 { font-size: 28px; margin-bottom: 20px; }
   .games { grid-template-columns: 1fr; }
@@ -108,7 +93,7 @@ footer a:hover { text-decoration: underline; }
   .game-content { padding: 14px 12px; justify-content: space-between; }
   h2 { font-size: 22px; }
   .action { padding: 10px; }
-  .invitation { padding: var(--ui-space-3); gap: var(--ui-space-2); align-items: flex-start; flex-direction: column; }
+  .invitation { padding: calc(var(--ui-space, 4px) * 3); gap: calc(var(--ui-space, 4px) * 2); align-items: flex-start; flex-direction: column; }
   .invitation button { align-self: flex-end; }
   footer { justify-content: center; }
 }
@@ -122,15 +107,14 @@ footer a:hover { text-decoration: underline; }
 @media (max-height: 500px) and (min-width: 640px) {
   header { min-height: 56px; }
   main { padding: 16px 0; }
-  h1 { font-size: 25px; margin-bottom: var(--ui-space-3); }
-  .game-content { padding: 10px; flex-direction: row; align-items: center; gap: var(--ui-space); }
+  h1 { font-size: 25px; margin-bottom: calc(var(--ui-space, 4px) * 3); }
+  .game-content { padding: 10px; flex-direction: row; align-items: center; gap: var(--ui-space, 4px); }
   h2 { font-size: 20px; }
   .action { padding: 10px 8px; }
   footer { padding: 0; }
-  .invitation { padding: var(--ui-space-2) var(--ui-space-3); margin-bottom: var(--ui-space-3); }
+  .invitation { padding: calc(var(--ui-space, 4px) * 2) calc(var(--ui-space, 4px) * 3); margin-bottom: calc(var(--ui-space, 4px) * 3); }
 }
 @media (prefers-reduced-motion: reduce) {
-  :root { --ui-duration: 0ms; }
   *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
   .game[href]:hover, .game[href]:focus-visible, .game[href]:active, .die-body { transform: none !important; }
 }
