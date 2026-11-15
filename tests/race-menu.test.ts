@@ -80,7 +80,7 @@ test('quick mode is a non-practice editable config field and updates lobby start
  assert.match(playerSettings,/disabled=\{disabled\}/);assert.match(playerSettings,/quick-mode-toggle/);
  assert.match(config,/config.quickMode \? '快速模式' : '选秀模式'/);
  const app=readFileSync(new URL('../src/client/App.tsx',import.meta.url),'utf8');
- assert.match(app,/quickMode\?'分配队伍并选人':'开始选秀'/);
+ assert.match(app,/<Icon kind="flag" \/>开始游戏<\/Button>/);
  assert.match(app,/quickMode\?'确认玩法并分配队伍':'确认玩法并开始选秀'/);
  assert.match(app,/room.mode!=='practice'&&room.config\?\.quickMode===true/);
 });
