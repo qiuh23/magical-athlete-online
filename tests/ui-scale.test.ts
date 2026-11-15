@@ -119,6 +119,9 @@ test('semantic layers keep controls below menus, results below toasts, and local
   assert.deepEqual(values('immersive.css', '.race-results-overlay', 'z-index'), ['var(--z-modal)']);
   assert.deepEqual(values('styles.css', '.toast', 'z-index'), ['var(--z-toast)']);
   assert.deepEqual(values('styles.css', '.hero-art', 'isolation'), ['isolate']);
+  // A non-hovered, unused card must also contain its focused artwork (z20),
+  // otherwise it can paint over the sibling sticky confirmation bar (z10).
+  assert.deepEqual(values('character-cards.css', '.character-card', 'isolation'), ['isolate']);
   assert.deepEqual(values('styles.css', '.hero-orbit', 'z-index'), ['var(--z-base)']);
 });
 

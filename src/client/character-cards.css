@@ -79,6 +79,8 @@ html[data-motion=reduce] .character-avatar-detail:hover .avatar{transform:none}
   scroll-margin-bottom: calc(190px + var(--selection-action-bottom));
 }
 .character-card {
+  /* Local print, badges and keyboard focus stay below global sticky actions. */
+  isolation: isolate;
   position: relative;
   display: flex;
   flex-direction: column;
