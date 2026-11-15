@@ -1,16 +1,16 @@
 .rules-menu{min-width:0}
-.rules-sections{position:sticky;top:68px;z-index:1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-bottom:18px;padding-block:8px;background:var(--paper)}
-.rules-sections button{min-height:44px;padding:8px 6px;border:1px solid var(--ui-control-border);border-radius:8px;background:var(--paper);color:var(--ui-text);font-size:13px;font-weight:750}
+.rules-sections{position:sticky;top:68px;z-index:var(--z-sticky);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;margin-bottom:16px;padding-block:8px;background:var(--paper)}
+.rules-sections button{min-height:44px;padding:8px 4px;border:1px solid var(--ui-control-border);border-radius:var(--radius-sm);background:var(--paper);color:var(--ui-text);font-size:13px;font-weight:700}
 .rules-sections button[aria-selected=true]{background:var(--ui-text);color:var(--paper);border-color:var(--ui-text)}
 .rules-menu [role=tabpanel]{min-width:0;overflow-wrap:anywhere}
 .rules-menu [data-rule-reference]{scroll-margin-top:180px}
-.rules-menu h4{font-size:15px;margin:20px 0 8px}
+.rules-menu h4{font-size:14px;margin:16px 0 8px}
 .rules-menu details{margin-block:16px;border-top:1px solid var(--ui-border);padding-top:8px}
-.rules-menu summary{cursor:pointer;min-height:44px;align-content:center;font-weight:750}
+.rules-menu summary{cursor:pointer;min-height:44px;align-content:center;font-weight:700}
 .rules-table-scroll{max-width:100%;overflow-x:auto;margin-block:16px}
 .rules-table-scroll table{border-collapse:collapse;width:100%;font-size:12px;line-height:1.6}
 .rules-table-scroll th,.rules-table-scroll td{border:1px solid var(--ui-border);padding:8px;text-align:left;min-width:65px;vertical-align:top}
 .rules-table-scroll th{background:var(--ui-control)}
-.rules-crosslink{border:0;background:transparent;padding:3px 0;color:var(--ui-text);font:inherit;text-decoration:underline;text-underline-offset:3px}
-.map-rule-list{display:grid;gap:12px;margin-block:16px}.map-rule-list dt{font-weight:750}.map-rule-list dd{margin:4px 0 0}
+.rules-crosslink{border:0;background:transparent;padding:4px 0;color:var(--ui-text);font:inherit;text-decoration:underline;text-underline-offset:3px}
+.map-rule-list{display:grid;gap:12px;margin-block:16px}.map-rule-list dt{font-weight:700}.map-rule-list dd{margin:4px 0 0}
 @media(max-width:450px){.rules-sections{grid-template-columns:repeat(2,minmax(0,1fr))}}

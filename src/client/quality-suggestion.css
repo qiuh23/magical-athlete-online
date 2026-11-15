@@ -1,9 +1,9 @@
 /* Part of the measured HUD flow: no backdrop, fixed overlay or focus grab.
    The existing HUD ResizeObserver reserves room for camera/status/minimap. */
 .immersive-race .race-hud-top:has(.quality-suggestion){flex-wrap:wrap}
-.quality-suggestion{flex-basis:100%;width:max-content;max-width:min(250px,100%);padding:6px 8px;border:1px solid color-mix(in srgb, var(--ui-text) 25.098%, transparent);border-radius:10px;background:color-mix(in srgb, var(--paper) 96.078%, transparent);color:var(--ui-text);pointer-events:auto;font-size:11px;line-height:1.4}
+.quality-suggestion{flex-basis:100%;width:max-content;max-width:min(250px,100%);padding:4px 8px;border:1px solid color-mix(in srgb, var(--ui-text) 25.098%, transparent);border-radius:var(--radius-md);background:color-mix(in srgb, var(--paper) 96.078%, transparent);color:var(--ui-text);pointer-events:auto;font-size:11px;line-height:1.4}
 .quality-suggestion>div{display:flex;gap:4px}
-.quality-suggestion button{min-height:44px;padding:5px 9px;border:0;border-radius:8px;background:transparent;color:inherit;font:inherit;cursor:pointer}
+.quality-suggestion button{min-height:44px;padding:4px 8px;border:0;border-radius:var(--radius-sm);background:transparent;color:inherit;font:inherit;cursor:pointer}
 .quality-suggestion button:first-child{font-weight:800;background:var(--paper)}
 .quality-suggestion button:focus-visible{outline:3px solid var(--ui-text);outline-offset:2px}
-@media(max-width:650px){.quality-suggestion{margin-top:26px}}
+@media(max-width:650px){.quality-suggestion{margin-top:24px}}

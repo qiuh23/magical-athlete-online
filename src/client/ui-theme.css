@@ -26,6 +26,8 @@
 :root {
   --ui-font: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
   --font-display: "Arial Black", var(--ui-font);
+  --font-print: Georgia, "Times New Roman", serif;
+  --font-reading: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
   --ui-text: #25464c;
   --ui-text-muted: #5b7268;
   --paper: #fffdf4;
@@ -62,11 +64,6 @@
   --duration-2: 180ms;
   --duration-3: 240ms;
   --ui-touch-size: 44px;
-  /* Transitional carnival names, removed with their uses in stage 3. */
-  --yellow: var(--brand-yellow);
-  --ink: var(--ui-text);
-  --green: var(--brand-green);
-  --pink: var(--brand-pink);
 }
 body[data-game-theme="athlete"] {
   min-height: 100dvh;
@@ -74,10 +71,11 @@ body[data-game-theme="athlete"] {
   font-variant-numeric: tabular-nums;
   -webkit-font-smoothing: antialiased;
 }
+.countdown, .racer-seat, .floating-racer-score, .dice-result b, .duel-values { font-family: var(--font-display); }
 button, input, select, textarea { font-family: var(--ui-font); font-variant-numeric: tabular-nums; }
 button, a, summary { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
 button {
-  transition: background-color var(--duration-2) ease, border-color var(--duration-2) ease, box-shadow var(--duration-2) ease;
+  transition: background-color var(--duration-2) cubic-bezier(.2,.7,.3,1), border-color var(--duration-2) cubic-bezier(.2,.7,.3,1), box-shadow var(--duration-2) cubic-bezier(.2,.7,.3,1);
 }
 :is(button, a, input, select, textarea, summary):focus-visible {
   outline: 3px solid var(--ui-focus);
@@ -101,7 +99,7 @@ button:active:not(:disabled) { filter: brightness(.96); }
 :is(.race-icon-button) {
   width: var(--ui-touch-size);
   height: var(--ui-touch-size);
-  padding: 10px;
+  padding: 8px;
   background: var(--ui-surface);
   border-color: var(--ui-control-border);
   color: var(--ui-text);
@@ -116,22 +114,22 @@ button:active:not(:disabled) { filter: brightness(.96); }
 /* Nicknames remain an overseas-only field. Domestic random-name markup and
    behavior are unchanged. The form owner preserves native submit validation. */
 .entry-identity { margin: 0 0 16px; display: grid; gap: calc(var(--ui-space) * 2); }
-.entry-identity label { color: var(--ui-text); font-size: 14px; font-weight: 650; }
+.entry-identity label { color: var(--ui-text); font-size: 14px; font-weight: 600; }
 .entry-identity input {
-  width: 100%; min-height: 48px; padding: 10px 14px;
+  width: 100%; min-height: 48px; padding: 8px 12px;
   border: 1px solid color-mix(in srgb, var(--ui-text) 50.196%, transparent); border-radius: var(--radius-lg);
-  background: var(--paper); color: var(--ink); font-size: 16px;
+  background: var(--paper); color: var(--ui-text); font-size: 16px;
 }
 .home .entry-tabs { gap: calc(var(--ui-space) * 3); }
 .home .entry-tabs button { border-width: 1px; border-radius: var(--radius-lg); box-shadow: var(--shadow-1); }
 .home .entry-tabs button:hover:not(:disabled) { box-shadow: var(--shadow-1); }
-.home .entry-tabs button[aria-selected="true"] { box-shadow: none; border-color: var(--brand-blue); background: var(--paper); color: var(--ink); }
+.home .entry-tabs button[aria-selected="true"] { box-shadow: none; border-color: var(--brand-blue); background: var(--paper); color: var(--ui-text); }
 .home .entry-tabs .entry-icon { width: 40px; height: 40px; border: 0; background: transparent; }
 .home .entry-tabs .entry-icon .ui-icon { width: 24px; height: 24px; }
 .home .entry-panel.configuring { border-radius: var(--radius-lg); border-width: 1px; box-shadow: var(--shadow-2); }
 .home .entry-panel.configuring .entry-tabs { gap: calc(var(--ui-space) * 2); padding: calc(var(--ui-space) * 3); }
-.home .entry-panel.configuring .entry-tabs button { border-radius: 10px; }
-.home .entry-panel :is(input:not([type="radio"]):not([type="checkbox"]), select) { min-height: 44px; border-width: 1px; border-radius: 10px; }
+.home .entry-panel.configuring .entry-tabs button { border-radius: var(--radius-md); }
+.home .entry-panel :is(input:not([type="radio"]):not([type="checkbox"]), select) { min-height: 44px; border-width: 1px; border-radius: var(--radius-md); }
 .home .entry-panel .setup-back { border-radius: var(--radius-lg); }
 .home .meet-racers { border-top-width: 1px; }
 
@@ -139,13 +137,13 @@ button:active:not(:disabled) { filter: brightness(.96); }
 @media (min-width: 1050px) {
   .home:not(:has(.entry-panel.configuring)) {
     display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-    gap: 0 48px; align-items: start; padding-top: 32px;
+    gap: 0 32px; align-items: start; padding-top: 32px;
   }
   .home:not(:has(.entry-panel.configuring)) > .hero {
     grid-column: 1; grid-row: 1 / 5; display: block; padding: 0; min-height: 390px;
   }
-  .home:not(:has(.entry-panel.configuring)) .hero h1 { font-size: clamp(54px, 5vw, 76px); position: relative; z-index: 1; }
-  .home:not(:has(.entry-panel.configuring)) .hero-art { height: 280px; margin-top: -48px; margin-left: 48px; }
+  .home:not(:has(.entry-panel.configuring)) .hero h1 { font-size: clamp(32px, 5vw, 96px); position: relative; z-index: var(--z-sticky); }
+  .home:not(:has(.entry-panel.configuring)) .hero-art { height: 280px; margin-top: -32px; margin-left: 32px; }
   .home:not(:has(.entry-panel.configuring)) .hero-stamp { left: auto; right: 8px; top: -24px; transform: rotate(6deg); }
   .home:not(:has(.entry-panel.configuring)) > :is(.backend-line, .entry-identity, .fixed-nickname, .entry-panel) { grid-column: 2; }
   .home:not(:has(.entry-panel.configuring)) > .backend-line { margin-top: 8px; }
@@ -153,12 +151,12 @@ button:active:not(:disabled) { filter: brightness(.96); }
   .home:not(:has(.entry-panel.configuring)) > .owned-room-return { grid-row: 5; }
   .home:not(:has(.entry-panel.configuring)) > .meet-racers { margin-top: 32px; }
   .home:not(:has(.entry-panel.configuring)) .entry-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .home:not(:has(.entry-panel.configuring)) .entry-tabs button { min-height: 80px; padding: 14px; gap: 8px; }
-  .home:not(:has(.entry-panel.configuring)) .entry-tabs strong { font-size: 17px; }
+  .home:not(:has(.entry-panel.configuring)) .entry-tabs button { min-height: 80px; padding: 12px; gap: 8px; }
+  .home:not(:has(.entry-panel.configuring)) .entry-tabs strong { font-size: 16px; }
   .home:not(:has(.entry-panel.configuring)) .entry-arrow { display: none; }
 }
 .home:has(.entry-panel.configuring) > .hero { display: none; }
-.home:has(.entry-panel.configuring) > .backend-line { margin-top: 20px; }
+.home:has(.entry-panel.configuring) > .backend-line { margin-top: 16px; }
 
 /* Rooms use the same surfaces and readable action labels as the game menu. */
 .room-bar { border-bottom-width: 1px; }
@@ -173,14 +171,14 @@ button:active:not(:disabled) { filter: brightness(.96); }
 .immersive-race .floating-racers { border-radius: var(--radius-lg); border-color: var(--ui-border); box-shadow: var(--shadow-2); }
 .immersive-race .floating-avatar { position: relative; }
 .racer-seat {
-  position: absolute; z-index: 2; top: -3px; left: -4px;
-  display: grid; place-items: center; min-width: 16px; height: 16px; padding: 0 3px;
-  border: 1px solid var(--paper); border-radius: 6px;
-  background: var(--ui-text); color: var(--paper); font: 650 10px/1 var(--ui-font);
+  position: absolute; z-index: var(--z-sticky); top: -3px; left: -4px;
+  display: grid; place-items: center; min-width: 16px; height: 16px; padding: 0 4px;
+  border: 1px solid var(--paper); border-radius: var(--radius-sm);
+  background: var(--ui-text); color: var(--paper); font: 600 11px/1 var(--font-display);
 }
 .immersive-race .floating-racer-score { justify-content: center; font-size: 16px; line-height: 20px; margin-top: 4px; color: var(--ui-text); }
-.immersive-race .floating-racer-score > span { font-weight: 750; }
-.immersive-race .floating-racer-score small { font-size: 10px; margin-left: 2px; }
+.immersive-race .floating-racer-score > span { font-weight: 700; }
+.immersive-race .floating-racer-score small { font-size: 11px; margin-left: 4px; }
 .immersive-race .floating-racer.is-active .floating-avatar { outline-color: var(--ui-accent); }
 .immersive-race .race-match-label { font-size: 14px; line-height: 20px; }
 .immersive-race .race-status-pill { border-radius: var(--radius-lg); box-shadow: var(--shadow-2); }
@@ -203,29 +201,29 @@ button:active:not(:disabled) { filter: brightness(.96); }
 /* The chat component is mounted only overseas. Its trigger now shares the
    game's control tokens, matching Wizard's chat/toolbar consistency. */
 .room-community .room-chat { border: 1px solid var(--ui-control-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-2); }
-.room-community .room-chat header button { display: grid; place-items: center; min-width: 44px; min-height: 44px; border-radius: 10px; }
+.room-community .room-chat header button { display: grid; place-items: center; min-width: 44px; min-height: 44px; border-radius: var(--radius-md); }
 .room-community .room-chat :is(header strong, .chat-personal, .chat-personal button, .chat-messages, form button) { font-size: 14px; }
-.room-community .room-chat textarea { font-size: 16px; border-radius: 10px; }
-.room-community .room-chat form button { min-height: 44px; border-radius: 10px; }
+.room-community .room-chat textarea { font-size: 16px; border-radius: var(--radius-md); }
+.room-community .room-chat form button { min-height: 44px; border-radius: var(--radius-md); }
 
 @media (max-width: 650px) {
   .home { padding-inline: 16px; }
-  .home .entry-tabs { gap: 10px; }
-  .home .entry-tabs button { min-height: 72px; padding: 10px; }
+  .home .entry-tabs { gap: 8px; }
+  .home .entry-tabs button { min-height: 72px; padding: 8px; }
   .home .entry-tabs .entry-icon { width: 32px; height: 36px; }
-  .home .entry-panel.configuring .entry-tabs { gap: 6px; padding: 8px; }
+  .home .entry-panel.configuring .entry-tabs { gap: 4px; padding: 8px; }
   .home .entry-panel.configuring .entry-tabs strong { font-size: 13px; }
   .home .entry-panel.configuring form { padding: 12px; }
   .home:has(.entry-panel.configuring) > .backend-line { margin-top: 12px; }
-  .entry-identity { margin-bottom: 14px; }
+  .entry-identity { margin-bottom: 12px; }
   .immersive-race .floating-racer-score { font-size: 14px; line-height: 18px; }
-  .immersive-race .floating-racer-score small { font-size: 10px; }
+  .immersive-race .floating-racer-score small { font-size: 11px; }
   .immersive-race .race-match-label { font-size: 12px; line-height: 18px; }
   .immersive-race .race-status-copy { font-size: 12px; line-height: 18px; }
   .race-menu-content { padding: 12px; }
 }
 @media (orientation: landscape) and (max-height: 570px) {
-  .home:not(:has(.entry-panel.configuring)) > .entry-identity { grid-column: 2; margin: 0 0 10px; }
+  .home:not(:has(.entry-panel.configuring)) > .entry-identity { grid-column: 2; margin: 0 0 8px; }
   .immersive-race .floating-racer-score { font-size: 14px; line-height: 18px; }
   .immersive-race .race-status-copy { font-size: 12px; line-height: 18px; }
 }
@@ -252,7 +250,7 @@ button:active:not(:disabled) { filter: brightness(.96); }
   html[data-race-chat-open="true"] .immersive-race :is(.race-match-label, .scene-camera-toolbar, .minimap-positions) { display: none; }
   html[data-view="race"][data-race-chat-open="true"] body .immersive-race .floating-racers {
     top: 62px; bottom: auto; left: 12px; right: 12px;
-    width: max-content; max-width: calc(100% - 24px); padding: 4px 6px;
+    width: max-content; max-width: calc(100% - 24px); padding: 4px 4px;
   }
   html[data-race-chat-open="true"] .immersive-race .board-minimap {
     top: calc(62px + var(--race-chat-order-height, 72px) + 12px);
@@ -264,9 +262,9 @@ button:active:not(:disabled) { filter: brightness(.96); }
   /* Keep reporting reachable without spending a permanent history row on it.
      Its disclosure closes when another part of the chat is clicked. */
   html[data-race-chat-open="true"] body > .room-community.in-race .room-chat { position: relative; }
-  html[data-race-chat-open="true"] body > .room-community.in-race .room-chat header { min-height: 60px; padding-right: 60px; }
+  html[data-race-chat-open="true"] body > .room-community.in-race .room-chat header { min-height: 60px; padding-right: calc(var(--ui-touch-size) + 16px); }
   html[data-race-chat-open="true"] body > .room-community.in-race .room-chat header button { position: absolute; top: 8px; right: 8px; }
-  html[data-race-chat-open="true"] body > .room-community.in-race .chat-report { position: absolute; z-index: 2; top: 8px; right: 56px; width: 44px; padding: 0; }
+  html[data-race-chat-open="true"] body > .room-community.in-race .chat-report { position: absolute; z-index: var(--z-menu); top: 8px; right: 56px; width: 44px; padding: 0; }
   html[data-race-chat-open="true"] body > .room-community.in-race .chat-report > summary { display: grid; place-items: center; min-height: 44px; padding: 0; font-size: 0; list-style: none; }
   html[data-race-chat-open="true"] body > .room-community.in-race .chat-report > summary::-webkit-details-marker { display: none; }
   html[data-race-chat-open="true"] body > .room-community.in-race .chat-report > summary::after { content: '举报'; font: 500 12px/16px var(--ui-font); }
@@ -280,10 +278,11 @@ button:active:not(:disabled) { filter: brightness(.96); }
      prompt remains available in the expanded choice, with a 44px trigger. */
 }
 @media (prefers-reduced-motion: reduce) { :root { --duration-1: 0ms; --duration-2: 0ms; --duration-3: 0ms; } }
+html[data-motion="reduce"] { --duration-1: 0ms; --duration-2: 0ms; --duration-3: 0ms; }
 
 /* Ordinary match settings are a small edge panel, never a blurred modal. */
 .immersive-race .race-menu-panel {
-  position:absolute;z-index:45;right:max(12px,env(safe-area-inset-right));
+  position:absolute;z-index:var(--z-menu);right:max(12px,env(safe-area-inset-right));
   top:calc(max(12px,env(safe-area-inset-top)) + var(--race-hud-height,66px) + 10px);
   width:min(320px,calc(100% - 24px - env(safe-area-inset-left) - env(safe-area-inset-right)));
   max-height:min(440px,52dvh,calc(100dvh - var(--race-hud-height,66px) - 132px - env(safe-area-inset-top) - env(safe-area-inset-bottom)));
@@ -292,8 +291,8 @@ button:active:not(:disabled) { filter: brightness(.96); }
   color:var(--ui-text);pointer-events:auto;
 }
 .race-menu-panel-header { display:flex;align-items:center;justify-content:space-between;gap:8px;padding:4px 8px 4px 12px;border-bottom:1px solid var(--ui-border);flex:none; }
-.race-menu-panel-header h2 { margin:0;font:650 16px/1.4 var(--ui-font); }
-.race-menu-panel-header .close-button { display:grid;place-items:center;width:44px;height:44px;min-width:44px;padding:10px;border:0;background:var(--ui-control);color:var(--ui-text); }
+.race-menu-panel-header h2 { margin:0;font:600 16px/1.4 var(--ui-font); }
+.race-menu-panel-header .close-button { display:grid;place-items:center;width:44px;height:44px;min-width:44px;padding:8px;border:0;background:var(--ui-control);color:var(--ui-text); }
 .race-menu-panel-scroll { min-height:0;overflow:auto;overscroll-behavior:contain; }
 .race-menu-panel .race-menu-content { padding:12px; }
 .race-menu-panel :is(.race-menu-links,.race-menu-shortcuts) { grid-template-columns:1fr; }
@@ -313,32 +312,32 @@ button:active:not(:disabled) { filter: brightness(.96); }
 /* Menu-only density: one quick row, then a single open disclosure at a time.
    Container sizing matters here: the panel is narrow even on a wide desktop. */
 .race-menu-panel .race-menu-content { padding:8px 12px 12px; }
-.race-menu-panel .race-menu-shortcuts { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:4px 0 12px; }
+.race-menu-panel .race-menu-shortcuts { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;margin:4px 0 12px; }
 .race-menu-panel .race-menu-content > .race-menu-section { margin:0;padding:0;border:0;border-top:1px solid var(--ui-border);border-radius:0;background:transparent;min-width:0; }
-.race-menu-panel .race-menu-section > summary { display:flex;align-items:center;gap:10px;min-height:50px;padding:8px 2px;list-style:none;font:600 14px/1.5 var(--ui-font);color:var(--ui-text); }
+.race-menu-panel .race-menu-section > summary { display:flex;align-items:center;gap:8px;min-height:50px;padding:8px 4px;list-style:none;font:600 14px/1.5 var(--ui-font);color:var(--ui-text); }
 .race-menu-panel .race-menu-section > summary::-webkit-details-marker { display:none; }
 .race-menu-panel .race-menu-section > summary > :is(span,strong) { min-width:0;font:inherit; }
-.race-menu-panel .race-menu-section > summary::after { content:'';width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);margin-left:auto;margin-right:5px;flex:none; }
+.race-menu-panel .race-menu-section > summary::after { content:'';width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);margin-left:auto;margin-right:4px;flex:none; }
 .race-menu-panel .race-menu-section[open] > summary::after { transform:rotate(225deg); }
 .race-menu-panel .race-menu-section > summary > .ui-icon { flex:none;width:20px;height:20px;color:var(--ui-text-muted); }
-.race-menu-panel .race-menu-section-body { min-width:0;padding:2px 0 12px; }
+.race-menu-panel .race-menu-section-body { min-width:0;padding:4px 0 12px; }
 .race-menu-panel .race-menu-section-body h3 { margin:8px 0;font:600 13px/1.5 var(--ui-font); }
 .race-menu-panel :is(button,summary,select):focus-visible { outline:3px solid var(--ui-accent);outline-offset:2px; }
 .race-menu-panel .presentation-settings { display:grid;grid-template-columns:minmax(0,1fr);gap:4px;margin:0 0 8px;padding:0;border:0;background:transparent; }
-.race-menu-panel .presentation-settings > label { display:flex;align-items:center;gap:10px;min-width:0;min-height:44px;padding:2px 0;font:400 14px/1.5 var(--ui-font); }
+.race-menu-panel .presentation-settings > label { display:flex;align-items:center;gap:8px;min-width:0;min-height:44px;padding:4px 0;font:400 14px/1.5 var(--ui-font); }
 .race-menu-panel .presentation-settings > label:has(select) { flex-wrap:wrap;justify-content:space-between; }
 .race-menu-panel .presentation-settings select { max-width:100%;min-height:44px;font-size:13px; }
 .race-menu-panel .presentation-settings input { width:18px;height:18px;margin:0;flex:none; }
 .race-menu-panel :is(.race-menu-links,.race-menu-danger) { display:grid;grid-template-columns:minmax(0,1fr);gap:4px;margin:0; }
 .race-menu-panel .race-menu-action-meta { margin-left:auto;font-size:12px;color:var(--ui-text-muted); }
 .race-menu-panel .race-menu-danger { margin-top:8px;padding-top:8px;border-top:1px solid var(--ui-border); }
-.race-menu-panel .race-menu-danger .end-room-button { margin:0;min-height:44px;padding:10px;border:0;box-shadow:none;border-radius:8px;text-align:left;font:500 14px/1.5 var(--ui-font); }
-.race-menu-panel :is(.race-menu-note,.race-menu-footer) { margin:10px 0 0;font:400 12px/1.6 var(--ui-font);color:var(--ui-text-muted);overflow-wrap:anywhere; }
+.race-menu-panel .race-menu-danger .end-room-button { margin:0;min-height:44px;padding:8px;border:0;box-shadow:none;border-radius:var(--radius-sm);text-align:left;font:500 14px/1.5 var(--ui-font); }
+.race-menu-panel :is(.race-menu-note,.race-menu-footer) { margin:8px 0 0;font:400 12px/1.6 var(--ui-font);color:var(--ui-text-muted);overflow-wrap:anywhere; }
 .race-menu-panel .race-menu-footer { padding-top:8px;border-top:1px solid var(--ui-border); }
-.race-menu-panel .race-menu-config-title { display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 10px;margin:0 0 8px;font:600 14px/1.5 var(--ui-font); }
+.race-menu-panel .race-menu-config-title { display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 8px;margin:0 0 8px;font:600 14px/1.5 var(--ui-font); }
 .race-menu-panel .race-menu-config-title > span { font-size:12px;font-weight:400;color:var(--ui-text-muted); }
 .race-menu-panel .race-menu-schedule { display:grid;gap:4px;list-style:none;margin:0;padding:0; }
-.race-menu-panel .race-menu-schedule li { display:flex;align-items:center;gap:8px;min-width:0;min-height:36px;padding:6px 8px;border-radius:8px;background:var(--ui-control);font:400 13px/1.4 var(--ui-font); }
+.race-menu-panel .race-menu-schedule li { display:flex;align-items:center;gap:8px;min-width:0;min-height:36px;padding:4px 8px;border-radius:var(--radius-sm);background:var(--ui-control);font:400 13px/1.4 var(--ui-font); }
 .race-menu-panel .race-menu-schedule li[aria-current] { background:var(--ui-control-active); }
 .race-menu-panel .race-menu-round { display:grid;place-items:center;flex:none;min-width:20px;height:22px;color:var(--ui-text-muted);font-size:12px; }
 .race-menu-panel .race-menu-schedule li > span:nth-child(2) { min-width:0;overflow-wrap:anywhere; }
@@ -349,8 +348,8 @@ button:active:not(:disabled) { filter: brightness(.96); }
 /* Editable next-game settings still fit the panel, independent of viewport. */
 .race-menu-panel .room-config-fields { margin:4px 0 12px; }
 .race-menu-panel .room-config-fields fieldset { padding:8px; }
-.race-menu-panel :is(.preset-options,.map-options) { grid-template-columns:repeat(2,minmax(0,1fr));gap:6px; }
-.race-menu-panel .room-config-fields .preset-option { display:flex;flex-direction:row;gap:6px;min-height:64px;padding:7px; }
+.race-menu-panel :is(.preset-options,.map-options) { grid-template-columns:repeat(2,minmax(0,1fr));gap:4px; }
+.race-menu-panel .room-config-fields .preset-option { display:flex;flex-direction:row;gap:4px;min-height:64px;padding:8px; }
 .race-menu-panel .preset-option > .track-thumbnail { display:none; }
 .race-menu-panel .preset-option > span { min-width:0; }
 .race-menu-panel .preset-option strong { font-size:14px;white-space:normal;overflow-wrap:anywhere; }
@@ -358,7 +357,7 @@ button:active:not(:disabled) { filter: brightness(.96); }
 .race-menu-panel .pack-options { grid-template-columns:minmax(0,1fr); }
 .race-menu-panel .map-card strong { font-size:13px;word-break:normal;overflow-wrap:anywhere; }
 .race-menu-panel .map-card-meta { font-size:12px; }
-.race-menu-panel .config-actions { flex-direction:column;align-items:stretch;gap:6px; }
+.race-menu-panel .config-actions { flex-direction:column;align-items:stretch;gap:4px; }
 .race-menu-panel .race-count-row label { flex-wrap:wrap; }
 .race-menu-panel .config-actions p { margin:0; }
 .race-menu-panel .locked-race-order { margin:0 0 12px; }
@@ -382,7 +381,7 @@ button:active:not(:disabled) { filter: brightness(.96); }
 }
 .config-actions .button {
   font-size: 12px;
-  padding: 10px 16px;
+  padding: 8px 16px;
   white-space: nowrap;
 }
 @media (max-width:650px) {
@@ -430,7 +429,7 @@ button:active:not(:disabled) { filter: brightness(.96); }
   opacity: .55;
 }
 .site-header a.header-link:focus-visible {
-  outline-color: var(--yellow);
+  outline-color: var(--brand-yellow);
 }
 @media (max-width: 650px) {
   .site-header > nav {
@@ -442,16 +441,16 @@ button:active:not(:disabled) { filter: brightness(.96); }
   }
 }
 .site-header button:focus-visible {
-  outline-color: var(--yellow);
+  outline-color: var(--brand-yellow);
 }
 .site-header {
   background: var(--brand-blue);
   color: var(--paper);
-  padding: 18px max(4vw,20px);
+  padding: 16px max(4vw,16px);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 3px solid var(--ink);
+  border-bottom: 3px solid var(--ui-text);
   gap: 16px;
 }
 .site-header nav {
@@ -460,15 +459,15 @@ button:active:not(:disabled) { filter: brightness(.96); }
 }
 .button {
   background: var(--brand-red);
-  border: 2px solid var(--ink);
+  border: 2px solid var(--ui-text);
   box-shadow: var(--shadow-hard);
   color: var(--paper);
-  font-weight: 850;
+  font-weight: 800;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  transition: transform .12s,box-shadow .12s;
+  transition: transform var(--duration-1) cubic-bezier(.2,.7,.3,1), box-shadow var(--duration-1) cubic-bezier(.2,.7,.3,1);
 }
 .button:not(:disabled):active {
   transform: translate(3px,4px);
@@ -479,7 +478,7 @@ button:active:not(:disabled) { filter: brightness(.96); }
 }
 .button-secondary {
   background: var(--paper);
-  color: var(--ink);
+  color: var(--ui-text);
 }
 .button:disabled {
   box-shadow: var(--shadow-1);
@@ -494,14 +493,14 @@ button:active:not(:disabled) { filter: brightness(.96); }
 }
 .lobby-actions .button {
   flex: 1;
-  padding: 12px 14px;
+  padding: 12px 12px;
   font-size: 14px;
 }
 .lobby-invite .button {
   font-size: 13px;
   width: 100%;
-  background: var(--yellow);
-  color: var(--ink);
+  background: var(--brand-yellow);
+  color: var(--ui-text);
   min-height: 47px;
 }
 .sticky-action .button {
@@ -513,15 +512,15 @@ button:active:not(:disabled) { filter: brightness(.96); }
 }
 .choice-options .button {
   font-size: 12px;
-  padding: 10px 15px;
+  padding: 8px 16px;
   min-height: 42px;
 }
 .choice-options .button-secondary {
-  background: var(--yellow);
+  background: var(--brand-yellow);
 }
 .modal-backdrop {
   position: fixed;
-  z-index: 50;
+  z-index: var(--z-modal);
   inset: 0;
   display: flex;
   align-items: center;
@@ -537,42 +536,42 @@ button:active:not(:disabled) { filter: brightness(.96); }
 .modal-header {
   position: sticky;
   top: 0;
-  z-index: 2;
-  border-bottom: 2px solid var(--ink);
+  z-index: var(--z-sticky);
+  border-bottom: 2px solid var(--ui-text);
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 .modal-header h2 {
-  font-size: 22px;
-  font-weight: 950;
+  font-size: 20px;
+  font-weight: 800;
 }
 .modal-avatar {
   height: 220px;
   width: 220px;
   margin: 0 auto;
-  background: var(--green);
+  background: var(--brand-green);
   border-radius: 50%;
   padding: 12px;
 }
 @media (max-width:1000px) {
   .entry-panel .button {
     font-size: 12px;
-    padding: 12px 14px;
+    padding: 12px 12px;
   }
 }
 @media (max-width:650px) {
   .site-header {
-    padding: 14px 18px;
+    padding: 12px 16px;
   }
   .entry-panel .button {
     font-size: 14px;
     width: 100%;
-    margin-top: 2px;
+    margin-top: 4px;
     min-height: 50px;
   }
   .lobby-actions .button {
-    padding: 11px;
+    padding: 12px;
   }
   .lobby-invite>.button {
     grid-column: 1/-1;
@@ -582,13 +581,13 @@ button:active:not(:disabled) { filter: brightness(.96); }
     min-height: 45px;
     font-size: 12px;
     width: 100%;
-    padding: 10px 14px;
+    padding: 8px 12px;
   }
   .race-action .button {
     min-width: 0;
     width: auto;
     flex-shrink: 0;
-    padding: 12px 14px;
+    padding: 12px 12px;
     font-size: 11px;
     gap: 8px;
     min-height: 48px;
@@ -602,7 +601,7 @@ button:active:not(:disabled) { filter: brightness(.96); }
     min-width: 100px;
     font-size: 11px;
     min-height: 43px;
-    padding: 10px 12px;
+    padding: 8px 12px;
   }
   .results-actions .button {
     font-size: 12px;
@@ -610,11 +609,11 @@ button:active:not(:disabled) { filter: brightness(.96); }
     min-height: 47px;
   }
   .modal-backdrop {
-    padding: 18px;
+    padding: 16px;
   }
   .modal-panel {
     max-height: calc(100dvh - 36px);
-    border-radius: 10px;
+    border-radius: var(--radius-md);
     box-shadow: var(--shadow-3);
   }
   .modal-avatar {
@@ -638,12 +637,12 @@ button:active:not(:disabled) { filter: brightness(.96); }
 }
 .entry-panel .directory-room-actions .button {
   grid-area: auto;
-  padding: 10px 13px;
+  padding: 8px 12px;
   margin: 0;
   white-space: nowrap;
 }
 .entry-panel .directory-room-actions .button-secondary {
-  background: var(--yellow);
+  background: var(--brand-yellow);
 }
 @media (max-width:800px) {
   .entry-panel .directory-room-actions .button {
@@ -661,7 +660,7 @@ button:active:not(:disabled) { filter: brightness(.96); }
   flex: none;
   min-width: 80px;
   min-height: 44px;
-  padding: 10px;
+  padding: 8px;
   font-size: 12px;
   white-space: nowrap;
 }
@@ -679,12 +678,12 @@ button:active:not(:disabled) { filter: brightness(.96); }
   width: 100%;
   height: 100%;
   min-height: 54px;
-  padding: 12px 18px;
+  padding: 12px 16px;
 }
 .leave-room-options .button {
   width: 100%;
   min-height: 50px;
-  padding: 11px 12px;
+  padding: 12px 12px;
   font-size: 13px;
 }
 @media (max-width:650px) {
@@ -693,7 +692,7 @@ button:active:not(:disabled) { filter: brightness(.96); }
   }
   .results-host-actions>.button {
     min-height: 50px;
-    padding: 10px 12px;
+    padding: 8px 12px;
   }
 }
 .owned-room-list .button {
@@ -709,10 +708,10 @@ button:active:not(:disabled) { filter: brightness(.96); }
 .floating-choice .button {
   min-height: 46px;
   font-size: 13px;
-  padding: 10px 16px;
+  padding: 8px 16px;
   box-shadow: var(--shadow-1);
   border: 1px solid var(--ui-text);
-  border-radius: 9px;
+  border-radius: var(--radius-sm);
   background: var(--ui-text);
   color: var(--paper);
   flex: 1 1 auto;
@@ -723,20 +722,20 @@ button:active:not(:disabled) { filter: brightness(.96); }
 }
 .race-menu-links .button {
   font-size: 12px;
-  padding: 10px 16px;
+  padding: 8px 16px;
 }
 html[data-view="race"] .modal-panel {
-  color: var(--ink);
+  color: var(--ui-text);
 }
 @media (max-width:650px) {
   .floating-choice .button {
     min-height: 44px;
-    padding: 9px 12px;
+    padding: 8px 12px;
     font-size: 12px;
   }
   .race-menu-links .button {
     font-size: 11px;
-    padding: 10px;
+    padding: 8px;
   }
 }
 body:has(.home) .site-header {
@@ -750,7 +749,7 @@ body:has(.home) .site-header nav {
 }
 body:has(.home) .site-header .header-link {
   font-size: 13px;
-  font-weight: 650;
+  font-weight: 600;
   min-height: 44px;
 }
 body:has(.home) .site-header :is(a, button):focus-visible {
@@ -760,10 +759,10 @@ body:has(.home) .site-header :is(a, button):focus-visible {
   background: var(--ui-text);
   color: var(--paper);
   border: 1px solid var(--ui-text);
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   box-shadow: var(--shadow-hard);
   min-height: 48px;
-  font-size: 15px;
+  font-size: 14px;
 }
 .home .entry-panel .button:hover:not(:disabled) {
   background: var(--ui-text);
@@ -793,7 +792,7 @@ body:has(.home) .site-header :is(a, button):focus-visible {
   height: 106px;
   padding: 0;
   border: 1px solid var(--ui-border);
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   background: var(--paper);
   overflow: hidden;
 }
@@ -802,7 +801,7 @@ body:has(.home) .site-header :is(a, button):focus-visible {
 }
 .modal-panel:has(.character-detail) {
   border: 1px solid var(--ui-control-border);
-  border-radius: 15px;
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-3);
   background: var(--paper);
 }
@@ -874,7 +873,7 @@ body:has(.home) .site-header :is(a, button):focus-visible {
 .race-menu-shortcuts .button {
   font-size: 12px;
   min-height: 44px;
-  gap: 6px;
+  gap: 4px;
 }
 .site-header nav .header-icon {
   display: grid;
@@ -883,7 +882,7 @@ body:has(.home) .site-header :is(a, button):focus-visible {
   height: 44px;
   padding: 8px;
   border: 1px solid currentColor;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
 }
 .site-header .lobby-return {
   display: grid;
@@ -892,14 +891,14 @@ body:has(.home) .site-header :is(a, button):focus-visible {
   height: 44px;
   padding: 8px;
   border: 1px solid currentColor;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
 }
 .site-header .sound-toggle {
   min-width: 44px;
   min-height: 44px;
 }
 .site-header .wordmark {
-  gap: 10px;
+  gap: 8px;
 }
 .home .fixed-nickname .button {
   padding: 8px;
@@ -916,15 +915,15 @@ body:has(.home) .site-header :is(a, button):focus-visible {
 }
 .lobby-invite>.button {
   width: 100%;
-  font-size: 15px;
+  font-size: 14px;
   min-height: 48px;
 }
 .room-config-panel .config-actions .button {
   min-height: 48px;
-  font-size: 15px;
+  font-size: 14px;
 }
 .modal-panel .close-button {
-  font-size: 28px;
+  font-size: 24px;
 }
 @media (max-width:850px) {
   .lobby-invite>.button {
@@ -935,16 +934,16 @@ body:has(.home) .site-header :is(a, button):focus-visible {
   .site-header nav .header-icon {
     width: 44px;
     height: 44px;
-    padding: 9px;
+    padding: 8px;
   }
   .site-header .lobby-return {
     width: 44px;
     height: 44px;
-    padding: 9px;
+    padding: 8px;
   }
   .lobby-invite>.button {
     width: 100%;
-    font-size: 15px;
+    font-size: 14px;
   }
   .lobby-actions .button {
     font-size: 14px;
@@ -958,12 +957,12 @@ body:has(.home) .site-header :is(a, button):focus-visible {
   line-height: 1.4;
 }
 .button {
-  padding: 12px 18px;
+  padding: 12px 16px;
   gap: calc(var(--ui-space) * 2);
 }
 .site-header {
   min-height: 64px;
-  padding-block: 10px;
+  padding-block: 8px;
   border-bottom-width: 1px;
 }
 .site-header .wordmark {
@@ -972,15 +971,15 @@ body:has(.home) .site-header :is(a, button):focus-visible {
 .site-header .logo-dice {
   width: 36px;
   height: 36px;
-  padding: 5px;
-  border-radius: 10px;
+  padding: 4px;
+  border-radius: var(--radius-md);
 }
 .site-header nav {
   gap: calc(var(--ui-space) * 2);
 }
 .site-header :is(.header-link, .sound-toggle) {
   height: 44px;
-  padding: 10px;
+  padding: 8px;
   border: 1px solid color-mix(in srgb, var(--paper) 33.333%, transparent);
   background: color-mix(in srgb, var(--paper) 4.314%, transparent);
 }
@@ -1000,7 +999,7 @@ body:has(.home) .site-header :is(a, button):focus-visible {
 }
 .immersive-race .floating-choice .button {
   font-size: 14px;
-  border-radius: 10px;
+  border-radius: var(--radius-md);
 }
 .modal-backdrop {
   padding: calc(var(--ui-space) * 3);
@@ -1021,14 +1020,14 @@ body:has(.home) .site-header :is(a, button):focus-visible {
   background: var(--ui-surface);
 }
 .modal-header h2 {
-  font: 650 20px/1.4 var(--ui-font);
+  font: 600 20px/1.4 var(--ui-font);
 }
 .modal-header .close-button {
   display: grid;
   place-items: center;
   width: 44px;
   height: 44px;
-  padding: 10px;
+  padding: 8px;
   border: 1px solid var(--ui-border);
   background: var(--ui-control);
   color: var(--ui-text);
@@ -1044,13 +1043,13 @@ body:has(.home) .site-header :is(a, button):focus-visible {
     padding: 8px 12px;
   }
   .site-header .wordmark {
-    font-size: 17px;
-    gap: 6px;
+    font-size: 16px;
+    gap: 4px;
   }
   .site-header .logo-dice {
     width: 30px;
     height: 32px;
-    padding: 3px;
+    padding: 4px;
   }
   body:has(.home) .site-header nav {
     gap: 4px;
@@ -1059,7 +1058,7 @@ body:has(.home) .site-header :is(a, button):focus-visible {
     display: none;
   }
   .modal-header {
-    padding: 10px 12px;
+    padding: 8px 12px;
   }
   .modal-header h2 {
     font-size: 18px;
@@ -1077,12 +1076,12 @@ body:has(.home) .site-header :is(a, button):focus-visible {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 5px;
+  gap: 4px;
   min-width: 0;
   min-height: 66px;
   padding: 8px 4px;
   border: 1px solid var(--ui-border);
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   box-shadow: none;
   background: var(--ui-control);
   color: var(--ui-text);
@@ -1092,9 +1091,9 @@ body:has(.home) .site-header :is(a, button):focus-visible {
   justify-content: flex-start;
   min-width: 0;
   min-height: 44px;
-  padding: 10px;
+  padding: 8px;
   border: 0;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   box-shadow: none;
   background: var(--ui-control);
   font: 500 14px/1.5 var(--ui-font);
@@ -1105,9 +1104,9 @@ body:has(.home) .site-header :is(a, button):focus-visible {
   justify-content: flex-start;
   min-width: 0;
   min-height: 44px;
-  padding: 10px;
+  padding: 8px;
   border: 0;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   box-shadow: none;
   background: var(--ui-control);
   font: 500 14px/1.5 var(--ui-font);
@@ -1118,9 +1117,9 @@ body:has(.home) .site-header :is(a, button):focus-visible {
   justify-content: flex-start;
   min-width: 0;
   min-height: 44px;
-  padding: 10px;
+  padding: 8px;
   border: 0;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   box-shadow: none;
   background: var(--ui-control);
   font: 500 14px/1.5 var(--ui-font);

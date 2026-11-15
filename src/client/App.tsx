@@ -619,7 +619,7 @@ function Race({ lightingClock,lightingRunning,room, busy, leavingBusy, canClose,
 }
 function Dice({ face }: { face?: number }) {
   const spots: Record<number, [number, number][]> = { 1: [[25, 25]], 2: [[13, 13], [37, 37]], 3: [[13, 13], [25, 25], [37, 37]], 4: [[13, 13], [37, 13], [13, 37], [37, 37]], 5: [[13, 13], [37, 13], [25, 25], [13, 37], [37, 37]], 6: [[13, 12], [37, 12], [13, 25], [37, 25], [13, 38], [37, 38]] };
-  return <svg className="dice" viewBox="0 0 50 50" role="img" aria-label={face ? `骰子 ${face} 点` : '等待掷骰'}><rect x="2" y="2" width="46" height="46" rx="9" fill="var(--paper)" stroke="var(--ink)" strokeWidth="3" />{face ? spots[face]?.map(([x, y], index) => <circle cx={x} cy={y} r="3.4" fill="var(--ink)" key={index} />) : <text x="25" y="35" textAnchor="middle" fontSize="30" fontWeight="bold">?</text>}</svg>;
+  return <svg className="dice" viewBox="0 0 50 50" role="img" aria-label={face ? `骰子 ${face} 点` : '等待掷骰'}><rect x="2" y="2" width="46" height="46" rx="9" fill="var(--paper)" stroke="var(--ui-text)" strokeWidth="3" />{face ? spots[face]?.map(([x, y], index) => <circle cx={x} cy={y} r="3.4" fill="var(--ui-text)" key={index} />) : <text x="25" y="35" textAnchor="middle" fontSize="30" fontWeight="bold">?</text>}</svg>;
 }
 function RacerSummary({ racer, room, onDetail }: { racer: Racer; room: RoomView; onDetail: ShowCharacter }) {
   const player = currentController(room,racer);
