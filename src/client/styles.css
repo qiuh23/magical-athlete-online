@@ -2,8 +2,8 @@
 @import './portal-guide.css';
 :root {
   font-family: var(--ui-font);
-  color: var(--ink);
-  background: var(--yellow);
+  color: var(--ui-text);
+  background: var(--brand-yellow);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   line-height: 1.5;
@@ -63,13 +63,13 @@ button svg {
 .wordmark {
   display: flex;
   align-items: center;
-  gap: 13px;
+  gap: 12px;
   border: 0;
   background: none;
   color: inherit;
   text-align: left;
-  font-size: 23px;
-  font-weight: 900;
+  font-size: 24px;
+  font-weight: 800;
   letter-spacing: -1px;
   padding: 0;
 }
@@ -78,14 +78,14 @@ button svg {
   font-size: 11px;
   letter-spacing: .4px;
   font-weight: 600;
-  margin-top: 1px;
+  margin-top: 4px;
 }
 .logo-dice {
-  background: var(--yellow);
-  color: var(--ink);
-  padding: 7px;
-  border: 2px solid var(--ink);
-  border-radius: 10px;
+  background: var(--brand-yellow);
+  color: var(--ui-text);
+  padding: 8px;
+  border: 2px solid var(--ui-text);
+  border-radius: var(--radius-md);
   transform: rotate(-12deg);
 }
 .header-link {
@@ -107,13 +107,13 @@ button svg {
   place-items: center;
 }
 .footer {
-  padding: 27px max(4vw,20px);
+  padding: 24px max(4vw,16px);
   font-size: 11px;
   display: flex;
   justify-content: space-between;
   gap: 16px;
-  border-top: 2px solid var(--ink);
-  margin-top: 48px;
+  border-top: 2px solid var(--ui-text);
+  margin-top: 32px;
 }
 .footer a {
   font-weight: 700;
@@ -121,7 +121,7 @@ button svg {
 .text-button {
   border: 0;
   background: transparent;
-  padding: 6px 0;
+  padding: 4px 0;
   color: var(--brand-blue);
   text-decoration: underline;
   text-underline-offset: 4px;
@@ -143,39 +143,39 @@ button svg {
 }
 .hero-title {
   position: relative;
-  z-index: 2;
-  padding: 10px 0 28px;
+  z-index: var(--z-sticky);
+  padding: 8px 0 24px;
 }
 .hero-title>span {
   font-size: 24px;
-  font-weight: 900;
+  font-weight: 800;
   letter-spacing: 3px;
   display: block;
   margin-bottom: 12px;
 }
 .hero h1 {
-  font-size: clamp(64px,7.8vw,116px);
-  font-weight: 950;
+  font-size: clamp(32px, 7.8vw, 96px);
+  font-weight: 800;
   line-height: 1.05;
   letter-spacing: -5px;
   transform: rotate(-3deg);
   position: relative;
   width: max-content;
-  -webkit-text-stroke: 1px var(--ink);
+  -webkit-text-stroke: 1px var(--ui-text);
 }
 .title-star {
   position: absolute;
   right: -63px;
   top: 41px;
-  font-size: 70px;
+  font-size: 32px;
   color: var(--brand-red);
-  -webkit-text-stroke: 2px var(--ink);
+  -webkit-text-stroke: 2px var(--ui-text);
   transform: rotate(13deg);
 }
 .hero-title p {
   font-size: 16px;
   line-height: 1.9;
-  margin-top: 30px;
+  margin-top: 32px;
   font-weight: 700;
 }
 .hero-art {
@@ -186,7 +186,7 @@ button svg {
 .hero-orbit {
   position: absolute;
   border: 23px solid var(--paper);
-  outline: 3px solid var(--ink);
+  outline: 3px solid var(--ui-text);
   box-shadow: var(--shadow-1);
   width: 89%;
   height: 210px;
@@ -194,14 +194,14 @@ button svg {
   transform: rotate(-18deg);
   top: 151px;
   left: 5%;
-  background: var(--green);
-  z-index: -1;
+  background: var(--brand-green);
+  z-index: var(--z-base);
 }
 .hero-orbit:after {
   content: "";
   position: absolute;
   inset: 9px;
-  border: 2px dashed var(--ink);
+  border: 2px dashed var(--ui-text);
   border-radius: 50%;
 }
 .hero-racer {
@@ -213,7 +213,7 @@ button svg {
   left: 40%;
   top: 2%;
   transform: rotate(15deg);
-  z-index: 3;
+  z-index: var(--z-dock);
 }
 .hero-racer-1 {
   width: 153px;
@@ -226,21 +226,21 @@ button svg {
   left: 21%;
   top: 24%;
   transform: rotate(-12deg);
-  z-index: 2;
+  z-index: var(--z-sticky);
 }
 .hero-racer-3 {
   width: 170px;
   left: 1%;
   bottom: 1%;
   transform: rotate(-12deg);
-  z-index: 3;
+  z-index: var(--z-dock);
 }
 .hero-racer-4 {
   width: 190px;
   left: 45%;
   bottom: 0;
   transform: rotate(3deg);
-  z-index: 2;
+  z-index: var(--z-sticky);
 }
 .hero-finish {
   position: absolute;
@@ -254,7 +254,7 @@ button svg {
   top: 2%;
   background: var(--brand-red);
   color: var(--paper);
-  border: 2px solid var(--ink);
+  border: 2px solid var(--ui-text);
   height: 100px;
   width: 100px;
   border-radius: 50%;
@@ -268,16 +268,16 @@ button svg {
   box-shadow: var(--shadow-1);
 }
 .hero-stamp strong {
-  font-size: 15px;
+  font-size: 14px;
 }
 .entry-panel {
   display: grid;
   grid-template-columns: 180px 1fr;
   background: var(--paper);
-  border: 3px solid var(--ink);
-  border-radius: 15px;
+  border: 3px solid var(--ui-text);
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-2);
-  margin: 8px 0 55px;
+  margin: 8px 0 32px;
   overflow: hidden;
 }
 .entry-tabs {
@@ -285,36 +285,36 @@ button svg {
   flex-direction: column;
   background: var(--brand-blue);
   padding: 24px 0;
-  gap: 10px;
+  gap: 8px;
 }
 .entry-tabs button {
-  font-weight: 900;
-  font-size: 17px;
+  font-weight: 800;
+  font-size: 16px;
   border: 0;
   border-left: 6px solid transparent;
   background: transparent;
   color: var(--paper);
-  padding: 20px 22px;
+  padding: 16px 24px;
   text-align: left;
 }
 .entry-tabs button[aria-selected=true] {
   background: var(--paper);
-  color: var(--ink);
+  color: var(--ui-text);
   border-left-color: var(--brand-red);
-  margin-right: -3px;
+  margin-right: -4px;
 }
 .entry-panel form {
   display: grid;
   grid-template-columns: minmax(130px,1fr) minmax(240px,1.3fr);
-  column-gap: 22px;
-  row-gap: 20px;
-  padding: 28px 34px 23px;
+  column-gap: 24px;
+  row-gap: 16px;
+  padding: 24px 32px 24px;
   align-items: end;
 }
 .entry-panel h2 {
   grid-column: 1/-1;
-  font-size: 21px;
-  font-weight: 900;
+  font-size: 20px;
+  font-weight: 800;
 }
 .entry-panel label {
   font-size: 12px;
@@ -327,11 +327,11 @@ button svg {
   width: 100%;
   height: 46px;
   background: var(--paper);
-  border: 2px solid var(--ink);
-  border-radius: 6px;
-  padding: 10px 12px;
+  border: 2px solid var(--ui-text);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
   min-width: 0;
-  color: var(--ink);
+  color: var(--ui-text);
   font-size: 14px;
 }
 .entry-panel input::placeholder {
@@ -341,7 +341,7 @@ button svg {
 .form-split {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px;
+  gap: 12px;
 }
 .entry-panel .form-note {
   font-size: 11px;
@@ -360,21 +360,21 @@ button svg {
 }
 .room-code-input {
   letter-spacing: 3px;
-  font-weight: 900;
+  font-weight: 800;
 }
 .meet-racers {
   display: flex;
-  gap: 35px;
+  gap: 32px;
   align-items: center;
-  margin-bottom: 35px;
+  margin-bottom: 32px;
 }
 .section-intro {
   flex: 0 0 225px;
 }
 .section-intro h2 {
-  font-size: 26px;
+  font-size: 24px;
   line-height: 1.4;
-  font-weight: 900;
+  font-weight: 800;
   letter-spacing: -.8px;
 }
 .section-intro p {
@@ -385,18 +385,18 @@ button svg {
 .sample-racers {
   display: grid;
   grid-template-columns: repeat(6,1fr);
-  gap: 13px;
+  gap: 12px;
   flex: 1;
 }
 .sample-racers button {
   border: 0;
   background: none;
-  padding: 5px;
+  padding: 4px;
   min-width: 0;
 }
 .sample-racers .avatar {
   height: 100px;
-  transition: transform .15s;
+  transition: transform var(--duration-2) cubic-bezier(.2,.7,.3,1);
 }
 .sample-racers button:hover .avatar {
   transform: rotate(-6deg);
@@ -411,8 +411,8 @@ button svg {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px max(4vw,20px);
-  border-bottom: 2px solid var(--ink);
+  padding: 12px max(4vw,16px);
+  border-bottom: 2px solid var(--ui-text);
   background: var(--paper);
   gap: 12px;
 }
@@ -430,15 +430,15 @@ button svg {
   padding: 0;
   display: flex;
   align-items: center;
-  gap: 9px;
-  font-weight: 950;
+  gap: 8px;
+  font-weight: 800;
   letter-spacing: 2px;
 }
 .connection {
   display: flex;
   align-items: center;
-  gap: 5px;
-  font-size: 10px;
+  gap: 4px;
+  font-size: 11px;
   font-weight: 500;
 }
 .connection i {
@@ -457,12 +457,12 @@ button svg {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 0;
+  padding: 4px 0;
   font-size: 12px;
 }
 .connection-banner,.error-banner {
-  padding: 13px max(4vw,20px);
-  background: var(--ink);
+  padding: 12px max(4vw,16px);
+  background: var(--ui-text);
   color: var(--paper);
   font-size: 13px;
   display: flex;
@@ -473,13 +473,13 @@ button svg {
 .connection-banner button,.error-banner button {
   border: 0;
   background: transparent;
-  color: var(--yellow);
+  color: var(--brand-yellow);
   text-decoration: underline;
   padding: 0;
   font-weight: 800;
 }
 .connection-banner small {
-  font-size: 10px;
+  font-size: 11px;
   width: 100%;
   overflow-wrap: anywhere;
 }
@@ -488,20 +488,20 @@ button svg {
   justify-content: space-between;
 }
 .error-banner button {
-  font-size: 22px;
+  font-size: 20px;
   text-decoration: none;
 }
 .game-shell {
   max-width: 1420px;
   margin: auto;
-  padding: 28px 4vw 0;
+  padding: 24px 4vw 0;
 }
 .stage-heading {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 18px;
-  margin-bottom: 25px;
+  gap: 16px;
+  margin-bottom: 24px;
 }
 .stage-kicker {
   font-size: 12px;
@@ -509,15 +509,15 @@ button svg {
   margin-bottom: 4px;
 }
 .stage-heading h1 {
-  font-size: 34px;
-  font-weight: 950;
+  font-size: 32px;
+  font-weight: 800;
   letter-spacing: -1px;
 }
 .mode-tag {
   display: block;
-  border: 2px solid var(--ink);
-  padding: 7px 12px;
-  border-radius: 5px;
+  border: 2px solid var(--ui-text);
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
   font-size: 11px;
   font-weight: 800;
   background: var(--paper);
@@ -527,25 +527,25 @@ button svg {
 .lobby-layout {
   display: grid;
   grid-template-columns: 1.8fr 1fr;
-  border: 3px solid var(--ink);
+  border: 3px solid var(--ui-text);
   background: var(--paper);
-  border-radius: 14px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-2);
 }
 .player-area {
-  padding: 28px;
+  padding: 24px;
 }
 .lobby-count {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 22px;
+  margin-bottom: 24px;
   gap: 12px;
 }
 .lobby-count>span:first-child {
-  font-size: 28px;
-  font-weight: 950;
+  font-size: 24px;
+  font-weight: 800;
 }
 .lobby-count small {
   font-size: 13px;
@@ -553,23 +553,23 @@ button svg {
 }
 .ready-count {
   font-size: 11px;
-  background: var(--green);
-  padding: 4px 10px;
-  border-radius: 20px;
+  background: var(--brand-green);
+  padding: 4px 8px;
+  border-radius: var(--radius-lg);
 }
 .lobby-seats {
   display: grid;
   grid-template-columns: repeat(2,minmax(0,1fr));
-  gap: 13px;
+  gap: 12px;
 }
 .seat {
-  border: 2px solid var(--ink);
-  border-radius: 8px;
+  border: 2px solid var(--ui-text);
+  border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
-  gap: 11px;
+  gap: 12px;
   min-height: 98px;
-  padding: 13px 11px;
+  padding: 12px 12px;
   position: relative;
   flex-wrap: wrap;
 }
@@ -580,13 +580,13 @@ button svg {
   width: 45px;
   height: 45px;
   background: var(--player-color);
-  border: 2px solid var(--ink);
+  border: 2px solid var(--ui-text);
   display: grid;
   place-items: center;
   position: relative;
   border-radius: 50%;
-  font-size: 21px;
-  font-weight: 900;
+  font-size: 20px;
+  font-weight: 800;
   flex-shrink: 0;
   color: var(--paper);
   text-shadow: none;
@@ -595,16 +595,16 @@ button svg {
   position: absolute;
   right: -4px;
   bottom: -3px;
-  color: var(--ink);
+  color: var(--ui-text);
   text-shadow: none;
   background: var(--paper);
-  border: 1.5px solid var(--ink);
+  border: 1.5px solid var(--ui-text);
   border-radius: 50%;
   width: 19px;
   height: 19px;
   display: grid;
   place-items: center;
-  font-size: 10px;
+  font-size: 11px;
 }
 .seat strong {
   display: block;
@@ -613,20 +613,20 @@ button svg {
   max-width: 180px;
 }
 .seat strong small,.scoreboard strong small,.final-ranking strong small {
-  font-size: 9px;
-  padding: 1px 4px;
-  margin-left: 6px;
-  background: var(--yellow);
-  border-radius: 3px;
-  color: var(--ink);
+  font-size: 11px;
+  padding: 4px 4px;
+  margin-left: 4px;
+  background: var(--brand-yellow);
+  border-radius: var(--radius-sm);
+  color: var(--ui-text);
 }
 .seat p {
-  font-size: 10px;
-  margin-top: 5px;
+  font-size: 11px;
+  margin-top: 4px;
   color: var(--ui-text-muted);
 }
 .ready-badge {
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 800;
   color: var(--ui-text-muted);
   margin-left: auto;
@@ -641,7 +641,7 @@ button svg {
   min-height: 98px;
 }
 .empty-avatar {
-  font-size: 28px;
+  font-size: 24px;
   width: 45px;
   text-align: center;
   font-weight: 500;
@@ -652,14 +652,14 @@ button svg {
 }
 .empty-seat small {
   display: block;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 400;
-  margin-top: 5px;
+  margin-top: 4px;
 }
 .lobby-actions {
   display: flex;
-  gap: 15px;
-  margin-top: 27px;
+  gap: 16px;
+  margin-top: 24px;
   flex-wrap: wrap;
 }
 .helper-text {
@@ -670,21 +670,21 @@ button svg {
 .lobby-invite {
   background: var(--brand-blue);
   color: var(--paper);
-  padding: 30px 26px;
+  padding: 32px 24px;
   text-align: center;
-  border-left: 3px solid var(--ink);
+  border-left: 3px solid var(--ui-text);
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .invite-drawing {
-  color: var(--yellow);
+  color: var(--brand-yellow);
   transform: rotate(-10deg);
-  margin: 3px 0 16px;
+  margin: 4px 0 16px;
 }
 .lobby-invite h2 {
-  font-size: 29px;
-  font-weight: 950;
+  font-size: 32px;
+  font-weight: 800;
   transform: rotate(-3deg);
 }
 .lobby-invite>p {
@@ -693,44 +693,44 @@ button svg {
   margin-top: 12px;
 }
 .invite-code {
-  font-family: "Arial Black",sans-serif;
-  font-size: 34px;
+  font-family: var(--font-display);
+  font-size: 32px;
   letter-spacing: 7px;
-  margin: 21px 0;
+  margin: 24px 0;
 }
 .selectable-link {
-  font-size: 9px;
-  margin-top: 17px;
+  font-size: 11px;
+  margin-top: 16px;
   overflow-wrap: anywhere;
   max-width: 100%;
   user-select: all;
 }
 .lobby-invite .small-note {
-  font-size: 10px;
+  font-size: 11px;
   opacity: .8;
-  margin-top: 17px;
+  margin-top: 16px;
 }
 .transfer-host {
-  margin-top: 20px;
-  font-size: 10px;
+  margin-top: 16px;
+  font-size: 11px;
   width: 100%;
   text-align: left;
 }
 .transfer-host button {
   display: block;
   background: var(--paper);
-  color: var(--ink);
-  border: 2px solid var(--ink);
+  color: var(--ui-text);
+  border: 2px solid var(--ui-text);
   margin-top: 8px;
   font-size: 12px;
-  padding: 7px 10px;
-  border-radius: 5px;
+  padding: 8px 8px;
+  border-radius: var(--radius-sm);
   width: 100%;
 }
 .room-details {
-  border-top: 2px solid var(--ink);
-  margin-top: 35px;
-  padding-top: 15px;
+  border-top: 2px solid var(--ui-text);
+  margin-top: 32px;
+  padding-top: 16px;
   font-size: 11px;
   line-height: 1.9;
 }
@@ -744,14 +744,14 @@ button svg {
   margin-top: 12px;
 }
 .rules-status {
-  font-size: 10px;
+  font-size: 11px;
   color: var(--ui-text-muted);
 }
 .check-row {
   display: flex;
   gap: 8px;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 8px;
   font-size: 12px;
 }
 .check-row input {
@@ -761,14 +761,14 @@ button svg {
 }
 .turn-notice {
   background: var(--paper);
-  border: 2px solid var(--ink);
-  border-radius: 9px;
+  border: 2px solid var(--ui-text);
+  border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
-  padding: 13px 17px;
-  gap: 13px;
-  margin-bottom: 21px;
-  font-weight: 900;
+  padding: 12px 16px;
+  gap: 12px;
+  margin-bottom: 24px;
+  font-weight: 800;
   min-height: 72px;
 }
 .turn-notice.your-turn {
@@ -795,14 +795,14 @@ button svg {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 2px;
-  font-family: "Arial Black",sans-serif;
+  gap: 4px;
+  font-family: var(--font-display);
   font-size: 18px;
   flex-shrink: 0;
 }
 .countdown small {
-  font-size: 9px;
-  margin: 3px 0 0;
+  font-size: 11px;
+  margin: 4px 0 0;
 }
 .countdown.urgent {
   color: var(--brand-red);
@@ -810,15 +810,15 @@ button svg {
 }
 .draft-order {
   display: flex;
-  gap: 7px;
+  gap: 8px;
   flex-wrap: wrap;
-  margin-bottom: 22px;
+  margin-bottom: 24px;
 }
 .draft-order span {
-  border: 1px solid var(--ink);
-  font-size: 10px;
-  padding: 4px 9px;
-  border-radius: 4px;
+  border: 1px solid var(--ui-text);
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
   background: var(--paper);
 }
 .draft-order span.active {
@@ -834,7 +834,7 @@ button svg {
 .character-grid {
   display: grid;
   grid-template-columns: repeat(4,minmax(0,1fr));
-  gap: 18px;
+  gap: 16px;
 }
 .character-art {
   height: 170px;
@@ -844,7 +844,7 @@ button svg {
   justify-content: center;
   position: relative;
   border: 0;
-  border-bottom: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ui-text);
   width: 100%;
   padding: 12px;
   opacity: 1!important;
@@ -852,7 +852,7 @@ button svg {
 .character-art .avatar {
   height: 145px;
   width: 145px;
-  transition: transform .15s;
+  transition: transform var(--duration-2) cubic-bezier(.2,.7,.3,1);
 }
 .character-art:not(:disabled):hover .avatar {
   transform: rotate(-5deg) scale(1.04);
@@ -863,27 +863,27 @@ button svg {
   top: 10px;
   background: var(--brand-blue);
   color: var(--paper);
-  border: 2px solid var(--ink);
+  border: 2px solid var(--ui-text);
   border-radius: 50%;
   height: 28px;
   width: 28px;
   display: grid;
   place-items: center;
-  font-weight: 900;
+  font-weight: 800;
 }
 .character-copy {
-  padding: 15px 15px 11px;
+  padding: 16px 16px 12px;
 }
 .character-copy h3 {
-  font-size: 19px;
-  font-weight: 950;
+  font-size: 18px;
+  font-weight: 800;
   letter-spacing: -.5px;
 }
 .english-name {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 800;
   opacity: .55;
-  margin-top: 3px;
+  margin-top: 4px;
 }
 .ability-text {
   font-size: 12px;
@@ -892,12 +892,12 @@ button svg {
   min-height: 65px;
 }
 .detail-button {
-  padding: 10px 0 0;
-  margin-top: 13px;
+  padding: 8px 0 0;
+  margin-top: 12px;
   background: transparent;
   border: 0;
   border-top: 1px solid color-mix(in srgb, var(--ui-text) 20.784%, transparent);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 800;
   display: flex;
   align-items: center;
@@ -905,33 +905,33 @@ button svg {
   width: 100%;
 }
 .detail-button span {
-  font-size: 17px;
+  font-size: 16px;
   line-height: 1;
 }
 .used-label {
   position: absolute;
   font-size: 11px;
   font-weight: 800;
-  background: var(--ink);
+  background: var(--ui-text);
   color: var(--paper);
-  border-radius: 4px;
-  padding: 5px 10px;
+  border-radius: var(--radius-sm);
+  padding: 4px 8px;
   bottom: 12px;
 }
 .sticky-action {
   position: sticky;
   bottom: 16px;
-  z-index: 10;
+  z-index: var(--z-sticky);
   margin: 24px auto 0;
-  padding: 13px 17px;
-  border: 2px solid var(--ink);
-  border-radius: 10px;
+  padding: 12px 16px;
+  border: 2px solid var(--ui-text);
+  border-radius: var(--radius-md);
   box-shadow: var(--shadow-2);
   background: var(--paper);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 18px;
+  gap: 16px;
   max-width: 900px;
 }
 .sticky-action>span {
@@ -941,41 +941,41 @@ button svg {
 .secret-icon {
   background: var(--brand-blue);
   color: var(--paper);
-  border: 2px solid var(--ink);
+  border: 2px solid var(--ui-text);
   border-radius: 50%;
   width: 38px;
   height: 38px;
   display: grid;
   place-items: center;
-  font-family: "Arial Black",sans-serif;
+  font-family: var(--font-display);
   font-size: 24px;
 }
 .selection-progress {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 22px;
+  gap: 8px;
+  margin-bottom: 24px;
 }
 .selection-progress>span {
   display: flex;
   align-items: center;
-  gap: 7px;
-  padding: 7px 10px;
+  gap: 8px;
+  padding: 8px 8px;
   background: var(--paper);
-  border: 1px solid var(--ink);
-  border-radius: 5px;
+  border: 1px solid var(--ui-text);
+  border-radius: var(--radius-sm);
   font-size: 11px;
 }
 .selection-progress i {
   height: 9px;
   width: 9px;
-  border: 1px solid var(--ink);
+  border: 1px solid var(--ui-text);
   border-radius: 50%;
 }
 .selection-progress strong {
-  font-size: 9px;
+  font-size: 11px;
   opacity: .5;
-  margin-left: 5px;
+  margin-left: 4px;
 }
 .selection-progress .locked strong {
   color: var(--ui-text);
@@ -987,11 +987,11 @@ button svg {
   flex-shrink: 0;
 }
 .race-turn {
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 .finish-checkers {
   height: 8px;
-  background: repeating-conic-gradient(var(--paper) 0% 25%,var(--ink) 0% 50%) 0 0/12px 12px;
+  background: repeating-conic-gradient(var(--paper) 0% 25%,var(--ui-text) 0% 50%) 0 0/12px 12px;
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -1001,18 +1001,18 @@ button svg {
   display: grid;
   grid-template-columns: repeat(4,minmax(0,1fr));
   gap: 8px;
-  margin-top: 18px;
+  margin-top: 16px;
 }
 .racer-summary {
   background: var(--paper);
   display: flex;
   align-items: center;
-  gap: 7px;
-  border: 1.5px solid var(--ink);
+  gap: 8px;
+  border: 1.5px solid var(--ui-text);
   border-left: 5px solid var(--player-color);
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   text-align: left;
-  padding: 8px 7px;
+  padding: 8px 8px;
   min-width: 0;
 }
 .racer-summary .avatar {
@@ -1024,16 +1024,16 @@ button svg {
   min-width: 0;
 }
 .racer-summary strong {
-  font-size: 10px;
+  font-size: 11px;
   display: block;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .racer-summary small {
-  font-size: 8px;
+  font-size: 11px;
   display: block;
-  margin-top: 3px;
+  margin-top: 4px;
   color: var(--ui-text-muted);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1045,8 +1045,8 @@ button svg {
 }
 .racer-summary.active {
   background: var(--ui-control-hover);
-  border-top: 2px solid var(--ink);
-  border-bottom: 2px solid var(--ink);
+  border-top: 2px solid var(--ui-text);
+  border-bottom: 2px solid var(--ui-text);
 }
 .racer-summary.eliminated {
   opacity: .5;
@@ -1054,7 +1054,7 @@ button svg {
 .last-dice {
   display: flex;
   align-items: center;
-  gap: 13px;
+  gap: 12px;
 }
 .dice {
   height: 47px;
@@ -1066,10 +1066,10 @@ button svg {
   font-weight: 800;
 }
 .last-dice small {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 500;
   display: block;
-  margin-top: 5px;
+  margin-top: 4px;
   color: var(--ui-text-muted);
 }
 .race-action {
@@ -1079,8 +1079,8 @@ button svg {
   position: absolute;
   left: 0;
   top: -6px;
-  color: var(--yellow);
-  font-size: 36px;
+  color: var(--brand-yellow);
+  font-size: 32px;
 }
 .choice-options {
   display: flex;
@@ -1093,37 +1093,37 @@ button svg {
 .below-game {
   display: grid;
   grid-template-columns: 1fr 1.5fr;
-  gap: 30px;
-  margin-top: 35px;
+  gap: 32px;
+  margin-top: 32px;
 }
 .below-game h2 {
   font-size: 16px;
-  font-weight: 900;
+  font-weight: 800;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 12px;
 }
 .scoreboard {
-  border-top: 2px solid var(--ink);
+  border-top: 2px solid var(--ui-text);
   padding-top: 16px;
 }
 .scoreboard>div>div {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 9px 9px;
+  gap: 8px;
+  padding: 8px 8px;
   border-bottom: 1px solid color-mix(in srgb, var(--ui-text) 18.824%, transparent);
   font-size: 11px;
 }
 .score-rank {
-  font-family: "Arial Black",sans-serif;
+  font-family: var(--font-display);
   width: 15px;
 }
 .scoreboard i,.final-ranking i {
   width: 10px;
   height: 10px;
-  border: 1px solid var(--ink);
+  border: 1px solid var(--ui-text);
   border-radius: 50%;
   flex-shrink: 0;
 }
@@ -1135,22 +1135,22 @@ button svg {
   font-size: 18px;
 }
 .scoreboard b small {
-  font-size: 9px;
+  font-size: 11px;
   margin-left: 4px;
 }
 .score-self {
   background: var(--ui-control-hover);
 }
 .offline-note {
-  font-size: 8px;
+  font-size: 11px;
   color: var(--ui-text-muted);
 }
 .event-log {
-  border-top: 2px solid var(--ink);
+  border-top: 2px solid var(--ui-text);
   padding-top: 16px;
 }
 .event-log h2 span {
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 500;
 }
 .event-log ol {
@@ -1159,38 +1159,38 @@ button svg {
   margin: 0;
   max-height: 281px;
   overflow-y: auto;
-  padding-right: 10px;
+  padding-right: 8px;
   scrollbar-width: thin;
-  scrollbar-color: var(--ink) transparent;
+  scrollbar-color: var(--ui-text) transparent;
 }
 .event-log li {
   display: flex;
-  gap: 10px;
-  padding: 7px 0;
+  gap: 8px;
+  padding: 8px 0;
   border-bottom: 1px dashed color-mix(in srgb, var(--ui-text) 18.824%, transparent);
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.8;
 }
 .event-log li>span {
-  font-family: "Arial Black",sans-serif;
-  font-size: 9px;
+  font-family: var(--font-display);
+  font-size: 11px;
   opacity: .35;
   min-width: 20px;
 }
 .my-team {
-  border-top: 2px solid var(--ink);
-  padding-top: 18px;
-  margin-top: 30px;
+  border-top: 2px solid var(--ui-text);
+  padding-top: 16px;
+  margin-top: 32px;
 }
 .my-team h2 {
   font-size: 16px;
-  font-weight: 900;
-  margin-bottom: 15px;
+  font-weight: 800;
+  margin-bottom: 16px;
 }
 .my-team h2 small {
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 500;
-  margin-left: 6px;
+  margin-left: 4px;
 }
 .my-team>div {
   display: flex;
@@ -1201,10 +1201,10 @@ button svg {
   display: flex;
   align-items: center;
   gap: 8px;
-  border: 1.5px solid var(--ink);
-  padding: 7px 13px 7px 7px;
+  border: 1.5px solid var(--ui-text);
+  padding: 8px 12px 8px 8px;
   background: var(--paper);
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   text-align: left;
 }
 .my-team .avatar {
@@ -1216,49 +1216,49 @@ button svg {
   display: block;
 }
 .my-team small {
-  font-size: 9px;
+  font-size: 11px;
   display: block;
   color: var(--ui-text-muted);
-  margin-top: 5px;
+  margin-top: 4px;
 }
 .my-team .used {
   filter: grayscale(1);
   opacity: .5;
 }
 .results-panel {
-  border: 3px solid var(--ink);
-  border-radius: 13px;
+  border: 3px solid var(--ui-text);
+  border-radius: var(--radius-md);
   overflow: hidden;
   background: var(--paper);
   box-shadow: var(--shadow-2);
 }
 .results-title {
-  padding: 27px 30px;
+  padding: 24px 32px;
   display: flex;
   align-items: center;
-  gap: 23px;
+  gap: 24px;
   background: var(--brand-blue);
   color: var(--paper);
-  border-bottom: 3px solid var(--ink);
+  border-bottom: 3px solid var(--ui-text);
 }
 .results-title>svg {
-  color: var(--yellow);
+  color: var(--brand-yellow);
   transform: rotate(-8deg);
 }
 .results-title h2 {
-  font-size: 27px;
-  font-weight: 950;
+  font-size: 24px;
+  font-weight: 800;
   overflow-wrap: anywhere;
 }
 .results-title p {
   font-size: 12px;
   opacity: .85;
-  margin-top: 7px;
+  margin-top: 8px;
 }
 .round-results {
   display: flex;
-  gap: 22px;
-  padding: 35px;
+  gap: 24px;
+  padding: 32px;
   align-items: stretch;
   justify-content: center;
   flex-wrap: wrap;
@@ -1269,13 +1269,13 @@ button svg {
   max-width: 230px;
   text-align: center;
   position: relative;
-  padding: 14px 12px;
+  padding: 12px 12px;
   background: var(--paper);
-  border: 2px solid var(--ink);
-  border-radius: 8px;
+  border: 2px solid var(--ui-text);
+  border-radius: var(--radius-sm);
 }
 .result-racer.rank-1 {
-  background: var(--yellow);
+  background: var(--brand-yellow);
   transform: rotate(-2deg);
 }
 .result-racer.rank-2 {
@@ -1286,8 +1286,8 @@ button svg {
   position: absolute;
   left: 10px;
   top: 8px;
-  font-family: "Arial Black",sans-serif;
-  font-size: 25px;
+  font-family: var(--font-display);
+  font-size: 24px;
 }
 .result-racer>button {
   height: 115px;
@@ -1298,18 +1298,18 @@ button svg {
   margin: auto;
 }
 .result-racer h3 {
-  font-size: 17px;
-  font-weight: 900;
+  font-size: 16px;
+  font-weight: 800;
 }
 .result-racer p {
   font-size: 11px;
-  margin-top: 5px;
+  margin-top: 4px;
 }
 .result-racer>strong {
   font-size: 32px;
-  font-family: "Arial Black",sans-serif;
+  font-family: var(--font-display);
   display: block;
-  margin-top: 15px;
+  margin-top: 16px;
 }
 .result-racer>strong small {
   font-family: inherit;
@@ -1318,7 +1318,7 @@ button svg {
 }
 .results-actions {
   text-align: center;
-  padding: 10px 25px 30px;
+  padding: 8px 24px 32px;
 }
 .results-actions>p {
   font-size: 12px;
@@ -1326,18 +1326,18 @@ button svg {
 }
 .final-ranking {
   max-width: 750px;
-  padding: 25px;
+  padding: 24px;
   margin: auto;
 }
 .final-ranking>div {
   display: flex;
   align-items: center;
   gap: 16px;
-  border-bottom: 1.5px solid var(--ink);
-  padding: 15px;
+  border-bottom: 1.5px solid var(--ui-text);
+  padding: 16px;
 }
 .ranking-number {
-  font-family: "Arial Black",sans-serif;
+  font-family: var(--font-display);
   font-size: 20px;
   width: 30px;
 }
@@ -1346,29 +1346,29 @@ button svg {
   flex: 1;
 }
 .ranking-score {
-  font-family: "Arial Black",sans-serif;
-  font-size: 29px;
+  font-family: var(--font-display);
+  font-size: 32px;
 }
 .ranking-score small {
   font-size: 11px;
-  margin-left: 7px;
+  margin-left: 8px;
 }
 .final-ranking .winner {
-  background: var(--yellow);
-  border: 2px solid var(--ink);
-  border-radius: 7px;
+  background: var(--brand-yellow);
+  border: 2px solid var(--ui-text);
+  border-radius: var(--radius-sm);
   box-shadow: var(--shadow-1);
   margin-bottom: 8px;
 }
 .paper-panel {
   background: var(--paper);
-  border: 3px solid var(--ink);
-  padding: 30px;
-  border-radius: 12px;
+  border: 3px solid var(--ui-text);
+  padding: 32px;
+  border-radius: var(--radius-md);
 }
 .paper-panel p {
   font-size: 13px;
-  margin: 15px 0;
+  margin: 16px 0;
 }
 .restore-screen {
   min-height: 60vh;
@@ -1376,12 +1376,12 @@ button svg {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 20px;
-  padding: 50px 25px;
+  gap: 16px;
+  padding: 32px 24px;
   text-align: center;
 }
 .restore-screen h1 {
-  font-size: 28px;
+  font-size: 24px;
 }
 .restore-screen p {
   font-size: 13px;
@@ -1394,15 +1394,15 @@ button svg {
 }
 .toast {
   position: fixed;
-  z-index: 100;
+  z-index: var(--z-toast);
   bottom: 25px;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--ink);
+  background: var(--ui-text);
   color: var(--paper);
   border: 2px solid var(--paper);
-  border-radius: 8px;
-  padding: 13px 23px;
+  border-radius: var(--radius-sm);
+  padding: 12px 24px;
   font-size: 12px;
   font-weight: 800;
   box-shadow: var(--shadow-2);
@@ -1413,59 +1413,59 @@ button svg {
 .close-button {
   height: 34px;
   width: 34px;
-  border: 2px solid var(--ink);
+  border: 2px solid var(--ui-text);
   border-radius: 50%;
   background: var(--paper);
-  font-size: 26px;
+  font-size: 24px;
   line-height: 1;
   display: grid;
   place-items: center;
 }
 .character-modal {
-  padding: 15px 28px 28px;
+  padding: 16px 24px 24px;
 }
 .character-modal>.english-name {
   text-align: center;
-  margin: 13px 0 22px;
+  margin: 12px 0 24px;
   font-size: 13px;
 }
 .character-modal h3 {
-  font-size: 15px;
-  font-weight: 900;
-  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 800;
+  margin-bottom: 8px;
 }
 .full-ability {
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.95;
 }
 .character-modal .small-note {
-  font-size: 10px;
+  font-size: 11px;
   color: var(--ui-text-muted);
-  margin-top: 22px;
+  margin-top: 24px;
   line-height: 1.9;
 }
 .rules-copy {
-  padding: 23px 27px;
+  padding: 24px 24px;
   font-size: 13px;
   line-height: 1.9;
 }
 .rules-copy p {
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 .rules-copy ol {
-  padding-left: 22px;
+  padding-left: 24px;
 }
 .rules-copy li {
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   padding-left: 4px;
 }
 .rules-copy h3 {
-  font-size: 17px;
-  margin: 20px 0 10px;
+  font-size: 16px;
+  margin: 16px 0 8px;
 }
 @media(min-width:1500px) {
   .hero h1 {
-    font-size: 118px;
+    font-size: 32px;
   }
   .hero-art {
     height: 460px;
@@ -1492,10 +1492,10 @@ button svg {
     grid-template-columns: 1fr 1fr;
   }
   .hero h1 {
-    font-size: 80px;
+    font-size: 32px;
   }
   .hero-title>span {
-    font-size: 21px;
+    font-size: 20px;
   }
   .hero-art {
     height: 350px;
@@ -1548,37 +1548,37 @@ button svg {
   }
   .entry-panel form {
     padding: 24px;
-    gap: 18px;
+    gap: 16px;
   }
   .entry-tabs button {
     font-size: 14px;
-    padding: 18px 15px;
+    padding: 16px 16px;
   }
   .entry-panel h2 {
-    font-size: 19px;
+    font-size: 18px;
   }
   .section-intro {
     flex-basis: 190px;
   }
   .section-intro h2 {
-    font-size: 23px;
+    font-size: 24px;
   }
   .sample-racers {
     grid-template-columns: repeat(3,1fr);
-    gap: 13px;
+    gap: 12px;
   }
   .sample-racers .avatar {
     height: 75px;
   }
   .sample-racers strong {
-    font-size: 10px;
-    margin-top: 2px;
+    font-size: 11px;
+    margin-top: 4px;
   }
   .lobby-layout {
     grid-template-columns: 1.8fr 1fr;
   }
   .player-area {
-    padding: 20px;
+    padding: 16px;
   }
   .lobby-seats {
     grid-template-columns: 1fr;
@@ -1591,7 +1591,7 @@ button svg {
     min-height: 70px;
   }
   .lobby-invite {
-    padding: 30px 20px;
+    padding: 32px 16px;
   }
   .character-grid {
     grid-template-columns: repeat(3,minmax(0,1fr));
@@ -1600,21 +1600,21 @@ button svg {
     grid-template-columns: repeat(4,minmax(0,1fr));
   }
   .racer-summary {
-    gap: 5px;
-    padding: 7px 5px;
+    gap: 4px;
+    padding: 8px 4px;
   }
   .racer-summary .avatar {
     width: 29px;
     height: 29px;
   }
   .racer-summary strong {
-    font-size: 9px;
+    font-size: 11px;
   }
   .racer-summary small {
-    font-size: 7px;
+    font-size: 11px;
   }
   .racer-summary>b {
-    font-size: 9px;
+    font-size: 11px;
   }
   .below-game {
     grid-template-columns: 1fr 1.25fr;
@@ -1623,17 +1623,17 @@ button svg {
 }
 @media(max-width:650px) {
   .wordmark {
-    font-size: 19px;
-    gap: 10px;
+    font-size: 18px;
+    gap: 8px;
     letter-spacing: -.6px;
   }
   .wordmark small {
-    font-size: 8px;
+    font-size: 11px;
     letter-spacing: 0;
   }
   .logo-dice {
-    padding: 5px;
-    border-radius: 8px;
+    padding: 4px;
+    border-radius: var(--radius-sm);
   }
   .logo-dice svg {
     height: 23px;
@@ -1651,12 +1651,12 @@ button svg {
     width: 17px;
   }
   .home {
-    padding: 0 18px;
+    padding: 0 16px;
   }
   .hero {
     display: block;
     min-height: 0;
-    padding: 28px 0 0;
+    padding: 24px 0 0;
   }
   .hero-title {
     padding-bottom: 0;
@@ -1664,22 +1664,22 @@ button svg {
   .hero-title>span {
     font-size: 16px;
     letter-spacing: 2px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
   .hero h1 {
-    font-size: 76px;
+    font-size: 32px;
     letter-spacing: -4px;
     line-height: 1.04;
   }
   .title-star {
-    font-size: 48px;
+    font-size: 32px;
     top: 40px;
     right: -50px;
   }
   .hero-title p {
     font-size: 12px;
     line-height: 1.8;
-    margin-top: 20px;
+    margin-top: 16px;
   }
   .hero-art {
     height: 260px;
@@ -1731,26 +1731,26 @@ button svg {
     height: 72px;
     left: 0;
     top: 1%;
-    font-size: 10px;
+    font-size: 11px;
   }
   .hero-stamp strong {
-    font-size: 10px;
+    font-size: 11px;
   }
   .entry-panel {
     display: block;
-    margin: 7px 0 40px;
+    margin: 8px 0 32px;
     box-shadow: var(--shadow-2);
-    border-radius: 11px;
+    border-radius: var(--radius-md);
   }
   .entry-tabs {
     flex-direction: row;
     padding: 0;
     gap: 0;
-    border-bottom: 2px solid var(--ink);
+    border-bottom: 2px solid var(--ui-text);
   }
   .entry-tabs button {
     width: 50%;
-    padding: 15px 10px;
+    padding: 16px 8px;
     text-align: center;
     border: 0;
     border-bottom: 4px solid transparent;
@@ -1764,13 +1764,13 @@ button svg {
   .entry-panel form {
     display: flex;
     flex-direction: column;
-    gap: 18px;
-    padding: 24px 20px 20px;
+    gap: 16px;
+    padding: 24px 16px 16px;
     align-items: stretch;
   }
   .entry-panel h2 {
     font-size: 18px;
-    margin-bottom: 1px;
+    margin-bottom: 4px;
   }
   .entry-panel label {
     font-size: 11px;
@@ -1783,7 +1783,7 @@ button svg {
     gap: 12px;
   }
   .entry-panel .form-note {
-    font-size: 10px;
+    font-size: 11px;
     text-align: center;
     align-self: stretch;
   }
@@ -1792,26 +1792,26 @@ button svg {
   }
   .meet-racers {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
   .section-intro {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
     gap: 12px;
-    margin-bottom: 22px;
+    margin-bottom: 24px;
   }
   .section-intro h2 {
-    font-size: 21px;
+    font-size: 20px;
   }
   .section-intro p {
-    font-size: 10px;
+    font-size: 11px;
     text-align: right;
     margin: 0;
   }
   .sample-racers {
     grid-template-columns: repeat(3,1fr);
-    gap: 18px;
+    gap: 16px;
   }
   .sample-racers .avatar {
     height: 94px;
@@ -1821,32 +1821,32 @@ button svg {
     margin-top: 4px;
   }
   .footer {
-    padding: 23px 18px;
+    padding: 24px 16px;
     flex-direction: column;
-    gap: 7px;
-    font-size: 9px;
+    gap: 8px;
+    font-size: 11px;
     margin-top: 32px;
   }
   .footer a {
-    font-size: 10px;
+    font-size: 11px;
   }
   .room-bar {
-    padding: 11px 18px;
+    padding: 12px 16px;
   }
   .room-label {
     gap: 8px;
-    font-size: 10px;
+    font-size: 11px;
   }
   .room-label>button {
-    font-size: 15px;
-    gap: 6px;
+    font-size: 14px;
+    gap: 4px;
     letter-spacing: 1px;
   }
   .room-label>button svg {
     width: 12px;
   }
   .connection {
-    font-size: 8px;
+    font-size: 11px;
     gap: 4px;
   }
   .connection i {
@@ -1854,58 +1854,58 @@ button svg {
     width: 5px;
   }
   .invite-button {
-    font-size: 10px;
-    gap: 5px;
+    font-size: 11px;
+    gap: 4px;
   }
   .invite-button svg {
     height: 13px;
     width: 13px;
   }
   .game-shell {
-    padding: 21px 16px 0;
+    padding: 24px 16px 0;
   }
   .stage-heading {
-    gap: 10px;
-    margin-bottom: 20px;
+    gap: 8px;
+    margin-bottom: 16px;
   }
   .stage-heading h1 {
-    font-size: 26px;
+    font-size: 24px;
     letter-spacing: -.7px;
   }
   .stage-kicker {
-    font-size: 9px;
+    font-size: 11px;
     margin-bottom: 4px;
   }
   .mode-tag {
-    font-size: 8px;
-    padding: 5px 7px;
+    font-size: 11px;
+    padding: 4px 8px;
     transform: rotate(2deg);
     border-width: 1.5px;
   }
   .lobby-layout {
     display: flex;
     flex-direction: column;
-    border-radius: 10px;
+    border-radius: var(--radius-md);
     box-shadow: var(--shadow-2);
   }
   .player-area {
-    padding: 20px 16px;
+    padding: 16px 16px;
   }
   .lobby-count {
-    margin-bottom: 17px;
+    margin-bottom: 16px;
   }
   .lobby-count>span:first-child {
-    font-size: 26px;
+    font-size: 24px;
   }
   .lobby-count small {
     font-size: 11px;
   }
   .ready-count {
-    font-size: 9px;
+    font-size: 11px;
     padding: 4px 8px;
   }
   .lobby-seats {
-    gap: 10px;
+    gap: 8px;
   }
   .seat {
     min-height: 75px;
@@ -1915,17 +1915,17 @@ button svg {
   .seat-avatar {
     height: 40px;
     width: 40px;
-    font-size: 19px;
+    font-size: 18px;
   }
   .seat strong {
     font-size: 13px;
     max-width: 180px;
   }
   .seat p {
-    font-size: 9px;
+    font-size: 11px;
   }
   .ready-badge {
-    font-size: 9px;
+    font-size: 11px;
   }
   .empty-seat {
     min-height: 65px;
@@ -1937,27 +1937,27 @@ button svg {
     font-size: 11px;
   }
   .empty-seat small {
-    font-size: 8px;
+    font-size: 11px;
   }
   .lobby-actions {
     gap: 12px;
-    margin-top: 22px;
+    margin-top: 24px;
   }
   .lobby-actions svg {
     width: 18px;
     height: 18px;
   }
   .helper-text {
-    font-size: 10px;
+    font-size: 11px;
     line-height: 1.8;
   }
   .lobby-invite {
-    padding: 23px 20px;
+    padding: 24px 16px;
     border-left: 0;
-    border-top: 3px solid var(--ink);
+    border-top: 3px solid var(--ui-text);
     display: grid;
     grid-template-columns: 70px 1fr;
-    column-gap: 15px;
+    column-gap: 16px;
     text-align: left;
     align-items: center;
   }
@@ -1972,12 +1972,12 @@ button svg {
   }
   .lobby-invite h2 {
     grid-column: 2;
-    font-size: 23px;
+    font-size: 24px;
     transform: none;
   }
   .lobby-invite>p {
-    font-size: 10px;
-    margin-top: 5px;
+    font-size: 11px;
+    margin-top: 4px;
     grid-column: 2;
     line-height: 1.7;
   }
@@ -1986,107 +1986,107 @@ button svg {
   }
   .invite-code {
     grid-column: 1/-1;
-    font-size: 29px;
+    font-size: 32px;
     letter-spacing: 6px;
     text-align: center;
-    margin: 17px 0;
+    margin: 16px 0;
   }
   .selectable-link {
     grid-column: 1/-1;
     text-align: center;
-    font-size: 8px;
-    margin-top: 13px;
+    font-size: 11px;
+    margin-top: 12px;
   }
   .lobby-invite .small-note {
     grid-column: 1/-1;
     text-align: center;
-    font-size: 9px;
-    margin-top: 11px;
+    font-size: 11px;
+    margin-top: 12px;
   }
   .transfer-host {
     grid-column: 1/-1;
-    margin-top: 14px;
-    font-size: 9px;
+    margin-top: 12px;
+    font-size: 11px;
   }
   .room-details {
-    margin-top: 27px;
-    padding-top: 13px;
-    font-size: 10px;
+    margin-top: 24px;
+    padding-top: 12px;
+    font-size: 11px;
   }
   .room-details summary {
     font-size: 11px;
   }
   .room-details p {
-    margin-top: 10px;
+    margin-top: 8px;
   }
   .rules-status {
-    font-size: 9px;
+    font-size: 11px;
   }
   .turn-notice {
-    padding: 11px 12px;
-    gap: 10px;
-    margin-bottom: 17px;
+    padding: 12px 12px;
+    gap: 8px;
+    margin-bottom: 16px;
     min-height: 69px;
     font-size: 13px;
-    border-radius: 7px;
+    border-radius: var(--radius-sm);
   }
   .turn-notice>svg {
     height: 22px;
     width: 22px;
   }
   .turn-notice small {
-    font-size: 9px;
+    font-size: 11px;
     line-height: 1.8;
     margin-top: 4px;
   }
   .countdown {
     width: 36px;
     height: 36px;
-    font-size: 15px;
+    font-size: 14px;
     border-width: 1.5px;
   }
   .countdown small {
-    font-size: 8px;
+    font-size: 11px;
   }
   .draft-order {
-    gap: 5px;
-    margin-bottom: 18px;
+    gap: 4px;
+    margin-bottom: 16px;
   }
   .draft-order span {
-    font-size: 8px;
-    padding: 3px 6px;
+    font-size: 11px;
+    padding: 4px 4px;
   }
   .character-grid {
     grid-template-columns: repeat(2,minmax(0,1fr));
-    gap: 13px;
+    gap: 12px;
   }
   .character-art {
     height: 133px;
-    padding: 10px;
+    padding: 8px;
   }
   .character-art .avatar {
     height: 115px;
     width: 115px;
   }
   .character-copy {
-    padding: 12px 11px 9px;
+    padding: 12px 12px 8px;
   }
   .character-copy h3 {
     font-size: 16px;
   }
   .english-name {
-    font-size: 8px;
+    font-size: 11px;
     line-height: 1.5;
   }
   .ability-text {
-    font-size: 10px;
+    font-size: 11px;
     line-height: 1.85;
-    margin-top: 9px;
+    margin-top: 8px;
     min-height: 75px;
   }
   .detail-button {
-    font-size: 9px;
-    margin-top: 10px;
+    font-size: 11px;
+    margin-top: 8px;
     padding-top: 8px;
   }
   .selected-tick {
@@ -2098,16 +2098,16 @@ button svg {
   }
   .sticky-action {
     bottom: 10px;
-    gap: 10px;
-    padding: 11px 12px;
-    margin-top: 22px;
-    border-radius: 8px;
+    gap: 8px;
+    padding: 12px 12px;
+    margin-top: 24px;
+    border-radius: var(--radius-sm);
     flex-direction: column;
     align-items: stretch;
     box-shadow: var(--shadow-2);
   }
   .sticky-action>span {
-    font-size: 10px;
+    font-size: 11px;
     text-align: center;
   }
   .secret-icon {
@@ -2116,17 +2116,17 @@ button svg {
     font-size: 20px;
   }
   .selection-progress {
-    gap: 7px;
-    margin-bottom: 20px;
+    gap: 8px;
+    margin-bottom: 16px;
   }
   .selection-progress>span {
-    font-size: 9px;
-    padding: 6px 8px;
-    gap: 5px;
+    font-size: 11px;
+    padding: 4px 8px;
+    gap: 4px;
   }
   .selection-progress strong {
-    font-size: 8px;
-    margin-left: 3px;
+    font-size: 11px;
+    margin-left: 4px;
   }
   .selection-progress i {
     width: 7px;
@@ -2138,86 +2138,86 @@ button svg {
   }
   .racer-strip {
     grid-template-columns: repeat(2,minmax(0,1fr));
-    gap: 7px;
+    gap: 8px;
     margin-top: 16px;
   }
   .racer-summary {
-    padding: 7px 6px;
-    gap: 6px;
+    padding: 8px 4px;
+    gap: 4px;
     border-left-width: 4px;
-    border-radius: 5px;
+    border-radius: var(--radius-sm);
   }
   .racer-summary .avatar {
     width: 30px;
     height: 30px;
   }
   .racer-summary strong {
-    font-size: 10px;
+    font-size: 11px;
   }
   .racer-summary small {
-    font-size: 8px;
-    margin-top: 2px;
+    font-size: 11px;
+    margin-top: 4px;
   }
   .racer-summary>b {
-    font-size: 10px;
+    font-size: 11px;
   }
   .race-action {
     flex-direction: row;
     gap: 12px;
-    padding: 10px;
+    padding: 8px;
   }
   .last-dice {
-    gap: 9px;
+    gap: 8px;
   }
   .dice {
     height: 38px;
     width: 38px;
   }
   .last-dice>span {
-    font-size: 9px;
+    font-size: 11px;
     max-width: 130px;
     line-height: 1.6;
   }
   .last-dice small {
-    font-size: 8px;
+    font-size: 11px;
     line-height: 1.6;
-    margin-top: 3px;
+    margin-top: 4px;
   }
   .burst {
-    font-size: 29px;
+    font-size: 32px;
     top: -5px;
   }
   .choice-options {
-    margin-top: 18px;
+    margin-top: 16px;
     justify-content: flex-start;
-    gap: 10px;
+    gap: 8px;
   }
   .below-game {
     display: flex;
     flex-direction: column;
-    gap: 25px;
-    margin-top: 29px;
+    gap: 24px;
+    margin-top: 32px;
   }
   .below-game h2 {
-    font-size: 15px;
-    margin-bottom: 10px;
+    font-size: 14px;
+    margin-bottom: 8px;
   }
   .scoreboard,.event-log {
-    padding-top: 13px;
+    padding-top: 12px;
   }
   .scoreboard>div>div {
     padding: 8px;
-    font-size: 10px;
-    gap: 9px;
+    font-size: 11px;
+    gap: 8px;
   }
   .scoreboard b {
-    font-size: 17px;
+    font-size: 16px;
   }
   .scoreboard b small {
-    font-size: 8px;
+    font-size: 11px;
   }
   .event-log li {
-    font-size: 10px;
+    font-size: 11px;
     line-height: 1.9;
     padding: 8px 0;
   }
@@ -2225,92 +2225,92 @@ button svg {
     max-height: 240px;
   }
   .my-team {
-    margin-top: 25px;
-    padding-top: 14px;
+    margin-top: 24px;
+    padding-top: 12px;
   }
   .my-team h2 {
-    font-size: 15px;
-    margin-bottom: 13px;
+    font-size: 14px;
+    margin-bottom: 12px;
   }
   .my-team>div {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 9px;
+    gap: 8px;
   }
   .my-team button {
-    padding: 6px;
-    gap: 6px;
-    border-radius: 6px;
+    padding: 4px;
+    gap: 4px;
+    border-radius: var(--radius-sm);
   }
   .my-team .avatar {
     height: 37px;
     width: 37px;
   }
   .my-team strong {
-    font-size: 10px;
+    font-size: 11px;
   }
   .my-team small {
-    font-size: 8px;
-    margin-top: 3px;
+    font-size: 11px;
+    margin-top: 4px;
   }
   .results-title {
-    padding: 22px 17px;
-    gap: 14px;
+    padding: 24px 16px;
+    gap: 12px;
   }
   .results-title>svg {
     height: 46px;
     width: 46px;
   }
   .results-title h2 {
-    font-size: 21px;
+    font-size: 20px;
     line-height: 1.5;
   }
   .results-title p {
-    font-size: 10px;
+    font-size: 11px;
     line-height: 1.8;
-    margin-top: 6px;
+    margin-top: 4px;
   }
   .round-results {
-    padding: 22px 16px;
-    gap: 14px;
+    padding: 24px 16px;
+    gap: 12px;
   }
   .result-racer {
     min-width: 125px;
     max-width: 180px;
-    padding: 12px 10px;
+    padding: 12px 8px;
   }
   .result-racer>button {
     height: 94px;
     width: 94px;
   }
   .rank-medal {
-    font-size: 21px;
+    font-size: 20px;
     left: 8px;
     top: 6px;
   }
   .result-racer h3 {
-    font-size: 15px;
+    font-size: 14px;
   }
   .result-racer p {
-    font-size: 10px;
+    font-size: 11px;
   }
   .result-racer>strong {
-    font-size: 27px;
+    font-size: 24px;
     margin-top: 12px;
   }
   .results-actions {
-    padding: 8px 17px 23px;
+    padding: 8px 16px 24px;
   }
   .results-actions>p {
-    font-size: 10px;
+    font-size: 11px;
     line-height: 1.8;
   }
   .final-ranking {
-    padding: 20px 15px;
+    padding: 16px 16px;
   }
   .final-ranking>div {
-    padding: 12px 10px;
-    gap: 10px;
+    padding: 12px 8px;
+    gap: 8px;
   }
   .ranking-number {
     font-size: 18px;
@@ -2320,22 +2320,22 @@ button svg {
     font-size: 13px;
   }
   .ranking-score {
-    font-size: 25px;
+    font-size: 24px;
   }
   .ranking-score small {
-    font-size: 9px;
+    font-size: 11px;
   }
   .close-button {
     height: 31px;
     width: 31px;
-    font-size: 23px;
+    font-size: 24px;
   }
   .character-modal {
-    padding: 14px 21px 23px;
+    padding: 12px 24px 24px;
   }
   .character-modal>.english-name {
     font-size: 11px;
-    margin: 12px 0 20px;
+    margin: 12px 0 16px;
   }
   .character-modal h3 {
     font-size: 14px;
@@ -2345,27 +2345,27 @@ button svg {
     line-height: 2;
   }
   .character-modal .small-note {
-    font-size: 9px;
-    margin-top: 19px;
+    font-size: 11px;
+    margin-top: 16px;
   }
   .rules-copy {
-    padding: 20px;
+    padding: 16px;
     font-size: 12px;
     line-height: 1.95;
   }
   .rules-copy li {
-    margin-bottom: 14px;
+    margin-bottom: 12px;
   }
   .rules-copy h3 {
     font-size: 16px;
   }
   .connection-banner,.error-banner {
-    padding: 12px 18px;
+    padding: 12px 16px;
     font-size: 11px;
-    gap: 10px;
+    gap: 8px;
   }
   .restore-screen {
-    gap: 18px;
+    gap: 16px;
   }
   .restore-screen h1 {
     font-size: 24px;
@@ -2375,19 +2375,19 @@ button svg {
   }
 }
 .manual-copy {
-  padding: 25px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
   font-size: 13px;
 }
 .manual-copy input {
   width: 100%;
-  border: 2px solid var(--ink);
-  border-radius: 5px;
+  border: 2px solid var(--ui-text);
+  border-radius: var(--radius-sm);
   background: var(--paper);
-  color: var(--ink);
-  padding: 13px;
+  color: var(--ui-text);
+  padding: 12px;
   font-size: 13px;
   user-select: all;
 }
@@ -2397,14 +2397,14 @@ button svg {
 .room-actions {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 16px;
   margin-left: auto;
 }
 .end-room-button {
   min-height: 42px;
-  padding: 8px 13px;
-  border: 2px solid var(--ink);
-  border-radius: 6px;
+  padding: 8px 12px;
+  border: 2px solid var(--ui-text);
+  border-radius: var(--radius-sm);
   background: var(--paper);
   color: var(--brand-red);
   font-size: 12px;
@@ -2419,19 +2419,19 @@ button svg {
   cursor: not-allowed;
 }
 .end-room-confirm {
-  padding: 25px;
+  padding: 24px;
   font-size: 14px;
   line-height: 1.9;
 }
 .end-room-confirm-actions {
   display: flex;
   justify-content: flex-end;
-  gap: 14px;
+  gap: 12px;
   flex-wrap: wrap;
-  margin-top: 25px;
+  margin-top: 24px;
 }
 .end-room-error {
-  margin-top: 15px;
+  margin-top: 16px;
   color: var(--brand-red);
   font-weight: 800;
 }
@@ -2440,15 +2440,15 @@ button svg {
 }
 @media(max-width:650px) {
   .room-actions {
-    gap: 15px;
+    gap: 16px;
   }
   .end-room-button {
     min-height: 44px;
-    padding: 9px 12px;
+    padding: 8px 12px;
     font-size: 11px;
   }
   .end-room-confirm {
-    padding: 20px;
+    padding: 16px;
     font-size: 12px;
   }
   .end-room-confirm-actions {
@@ -2458,16 +2458,16 @@ button svg {
 .browser-host-intro {
   background: var(--brand-blue);
   color: var(--paper);
-  border: 2px solid var(--ink);
-  border-radius: 8px;
-  padding: 17px 22px;
-  margin: 0 0 22px;
+  border: 2px solid var(--ui-text);
+  border-radius: var(--radius-sm);
+  padding: 16px 24px;
+  margin: 0 0 24px;
   display: flex;
   align-items: center;
-  gap: 25px;
+  gap: 24px;
 }
 .browser-host-intro strong {
-  font-size: 17px;
+  font-size: 16px;
   flex-shrink: 0;
 }
 .browser-host-intro p {
@@ -2476,15 +2476,15 @@ button svg {
   max-width: 750px;
 }
 .authority-notice {
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.8;
-  padding: 10px 14px;
+  padding: 8px 12px;
   background: var(--paper);
-  border: 1.5px solid var(--ink);
-  border-radius: 6px;
-  margin-bottom: 20px;
+  border: 1.5px solid var(--ui-text);
+  border-radius: var(--radius-sm);
+  margin-bottom: 16px;
   display: flex;
-  gap: 14px;
+  gap: 12px;
   align-items: center;
 }
 .authority-notice strong {
@@ -2495,29 +2495,29 @@ button svg {
   .browser-host-intro {
     display: block;
     padding: 16px;
-    margin-bottom: 22px;
+    margin-bottom: 24px;
   }
   .browser-host-intro strong {
-    font-size: 15px;
+    font-size: 14px;
   }
   .browser-host-intro p {
-    font-size: 10px;
+    font-size: 11px;
     margin-top: 8px;
   }
   .authority-notice {
     display: block;
-    padding: 10px 12px;
-    font-size: 9px;
+    padding: 8px 12px;
+    font-size: 11px;
   }
   .authority-notice strong {
     display: block;
-    font-size: 10px;
-    margin-bottom: 3px;
+    font-size: 11px;
+    margin-bottom: 4px;
   }
 }
 @media(max-width:650px) {
   .rules-copy ul {
-    padding-left: 20px;
+    padding-left: 16px;
   }
   .house-rules-list li {
     font-size: 11px;
@@ -2526,23 +2526,19 @@ button svg {
 }
 @media(prefers-reduced-motion:reduce) {
   *,*:before,*:after {
-    animation: none!important;
-    transition: none!important;
     scroll-behavior: auto!important;
   }
 }
 html[data-motion=reduce] *,html[data-motion=reduce] *:before,html[data-motion=reduce] *:after {
-  animation: none!important;
-  transition: none!important;
   scroll-behavior: auto!important;
 }
 .leave-room-button {
   min-height: 42px;
-  border: 2px solid var(--ink);
-  border-radius: 6px;
-  padding: 8px 13px;
+  border: 2px solid var(--ui-text);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
   background: var(--paper);
-  color: var(--ink);
+  color: var(--ui-text);
   font-size: 12px;
   font-weight: 800;
   white-space: nowrap;
@@ -2551,11 +2547,11 @@ html[data-motion=reduce] *,html[data-motion=reduce] *:before,html[data-motion=re
   background: var(--ui-control-hover);
 }
 .spectator-badge {
-  font-size: 10px;
+  font-size: 11px;
   background: var(--brand-blue);
   color: var(--paper);
-  border-radius: 4px;
-  padding: 4px 7px;
+  border-radius: var(--radius-sm);
+  padding: 4px 8px;
   white-space: nowrap;
 }
 .room-session-note {
@@ -2564,16 +2560,16 @@ html[data-motion=reduce] *,html[data-motion=reduce] *:before,html[data-motion=re
   justify-content: space-between;
   gap: 8px;
   font-size: 11px;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
   color: var(--ui-text);
 }
 .room-session-note.is-spectating {
-  padding: 13px 16px;
+  padding: 12px 16px;
   background: var(--paper);
-  border: 2px solid var(--ink);
+  border: 2px solid var(--ui-text);
   border-left: 7px solid var(--brand-blue);
-  border-radius: 7px;
-  color: var(--ink);
+  border-radius: var(--radius-sm);
+  color: var(--ui-text);
 }
 .room-session-note strong {
   font-size: 12px;
@@ -2585,7 +2581,7 @@ html[data-motion=reduce] *,html[data-motion=reduce] *:before,html[data-motion=re
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: 18px;
+  gap: 16px;
 }
 .join-role {
   border: 0;
@@ -2606,10 +2602,10 @@ html[data-motion=reduce] *,html[data-motion=reduce] *:before,html[data-motion=re
   flex-direction: row;
   align-items: center;
   flex: 1;
-  border: 2px solid var(--ink);
-  border-radius: 7px;
-  padding: 11px 13px;
-  gap: 10px;
+  border: 2px solid var(--ui-text);
+  border-radius: var(--radius-sm);
+  padding: 12px 12px;
+  gap: 8px;
   cursor: pointer;
   background: var(--paper);
   min-width: 0;
@@ -2628,15 +2624,15 @@ html[data-motion=reduce] *,html[data-motion=reduce] *:before,html[data-motion=re
 }
 .join-role small {
   display: block;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 500;
   margin-top: 4px;
   line-height: 1.6;
 }
 .room-directory {
-  border-top: 2px solid var(--ink);
-  margin-top: 3px;
-  padding-top: 18px;
+  border-top: 2px solid var(--ui-text);
+  margin-top: 4px;
+  padding-top: 16px;
   min-width: 0;
 }
 .room-directory-heading {
@@ -2644,11 +2640,11 @@ html[data-motion=reduce] *,html[data-motion=reduce] *:before,html[data-motion=re
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  margin-bottom: 15px;
+  margin-bottom: 16px;
 }
 .room-directory-heading h3 {
   font-size: 18px;
-  font-weight: 900;
+  font-weight: 800;
 }
 .room-directory-heading p {
   font-size: 11px;
@@ -2662,20 +2658,20 @@ html[data-motion=reduce] *,html[data-motion=reduce] *:before,html[data-motion=re
 }
 .room-directory-list {
   display: grid;
-  gap: 11px;
+  gap: 12px;
   max-height: 520px;
   overflow-y: auto;
-  padding: 0 5px 5px 0;
+  padding: 0 4px 4px 0;
   scrollbar-width: thin;
 }
 .directory-room {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 18px;
-  border: 2px solid var(--ink);
-  border-radius: 8px;
-  padding: 15px;
+  gap: 16px;
+  border: 2px solid var(--ui-text);
+  border-radius: var(--radius-sm);
+  padding: 16px;
   background: var(--paper);
 }
 .directory-room-main {
@@ -2685,7 +2681,7 @@ html[data-motion=reduce] *,html[data-motion=reduce] *:before,html[data-motion=re
 .directory-room-main>div {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   flex-wrap: wrap;
 }
 .directory-room-main strong {
@@ -2693,11 +2689,11 @@ html[data-motion=reduce] *,html[data-motion=reduce] *:before,html[data-motion=re
   overflow-wrap: anywhere;
 }
 .directory-phase {
-  font-size: 9px;
+  font-size: 11px;
   color: var(--paper);
   background: var(--brand-blue);
-  border-radius: 4px;
-  padding: 4px 6px;
+  border-radius: var(--radius-sm);
+  padding: 4px 4px;
   white-space: nowrap;
 }
 .directory-phase.is-lobby {
@@ -2706,7 +2702,7 @@ html[data-motion=reduce] *,html[data-motion=reduce] *:before,html[data-motion=re
 }
 .directory-room-main p {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   flex-wrap: wrap;
   font-size: 11px;
   margin-top: 8px;
@@ -2716,21 +2712,21 @@ html[data-motion=reduce] *,html[data-motion=reduce] *:before,html[data-motion=re
 }
 .directory-room-main small {
   display: block;
-  font-size: 10px;
+  font-size: 11px;
   color: var(--ui-text-muted);
-  margin-top: 7px;
+  margin-top: 8px;
   line-height: 1.8;
 }
 .directory-room-actions {
   display: flex;
-  gap: 9px;
+  gap: 8px;
   flex: none;
   align-items: center;
 }
 .directory-empty {
-  padding: 24px 18px;
+  padding: 24px 16px;
   border: 1.5px dashed var(--ui-control-border);
-  border-radius: 7px;
+  border-radius: var(--radius-sm);
   text-align: center;
   font-size: 12px;
   color: var(--ui-text-muted);
@@ -2742,10 +2738,10 @@ html[data-motion=reduce] *,html[data-motion=reduce] *:before,html[data-motion=re
   margin-bottom: 12px;
 }
 .directory-footnote {
-  font-size: 10px;
+  font-size: 11px;
   color: var(--ui-text-muted);
   line-height: 1.8;
-  margin-top: 11px;
+  margin-top: 12px;
 }
 @media(max-width:800px) {
   .directory-room {
@@ -2759,7 +2755,7 @@ html[data-motion=reduce] *,html[data-motion=reduce] *:before,html[data-motion=re
   }
   .room-actions {
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 8px;
   }
   .room-label {
     flex-wrap: wrap;
@@ -2775,10 +2771,10 @@ html[data-motion=reduce] *,html[data-motion=reduce] *:before,html[data-motion=re
   .leave-room-button {
     min-height: 44px;
     font-size: 11px;
-    padding: 9px 11px;
+    padding: 8px 12px;
   }
   .room-bar {
-    gap: 10px;
+    gap: 8px;
   }
   .room-actions {
     margin-left: 0;
@@ -2786,17 +2782,17 @@ html[data-motion=reduce] *,html[data-motion=reduce] *:before,html[data-motion=re
     justify-content: flex-end;
   }
   .room-session-note {
-    font-size: 10px;
+    font-size: 11px;
     margin-bottom: 16px;
   }
   .room-session-note strong {
     font-size: 11px;
   }
   .spectator-badge {
-    font-size: 9px;
+    font-size: 11px;
   }
   .entry-panel .join-role label {
-    padding: 10px;
+    padding: 8px;
     font-size: 11px;
     min-width: 130px;
   }
@@ -2805,26 +2801,26 @@ html[data-motion=reduce] *,html[data-motion=reduce] *:before,html[data-motion=re
     height: 18px;
   }
   .join-role small {
-    font-size: 9px;
+    font-size: 11px;
   }
   .room-directory-heading h3 {
     font-size: 16px;
   }
   .room-directory-heading p {
-    font-size: 10px;
+    font-size: 11px;
   }
   .directory-room {
-    padding: 13px;
+    padding: 12px;
   }
   .directory-room-main strong {
     font-size: 12px;
   }
   .directory-room-main p {
-    font-size: 10px;
+    font-size: 11px;
     gap: 8px;
   }
   .directory-room-main small {
-    font-size: 9px;
+    font-size: 11px;
   }
   .room-directory-list {
     max-height: 600px;
@@ -2842,7 +2838,7 @@ html[data-motion=reduce] *,html[data-motion=reduce] *:before,html[data-motion=re
   bottom: var(--selection-action-bottom);
   display: grid;
   grid-template-columns: minmax(0,1fr) auto;
-  gap: 20px;
+  gap: 16px;
   max-width: 1000px;
 }
 .selection-order {
@@ -2858,7 +2854,7 @@ html[data-motion=reduce] *,html[data-motion=reduce] *:before,html[data-motion=re
   display: block;
   font-size: 12px;
   color: var(--ui-text);
-  margin-bottom: 5px;
+  margin-bottom: 4px;
 }
 .selection-order ol {
   display: grid;
@@ -2881,7 +2877,7 @@ html[data-motion=reduce] *,html[data-motion=reduce] *:before,html[data-motion=re
 .selection-order li {
   grid-row: 1;
   display: grid;
-  gap: 2px;
+  gap: 4px;
   min-width: 0;
   overflow-wrap: anywhere;
   font-size: 14px;
@@ -2895,21 +2891,21 @@ html[data-motion=reduce] *,html[data-motion=reduce] *:before,html[data-motion=re
   grid-column: 3;
 }
 .selection-order li b {
-  font-size: 10px;
+  font-size: 11px;
   color: var(--ui-text);
 }
 .selection-confirm {
   display: grid;
-  gap: 6px;
+  gap: 4px;
   text-align: center;
 }
 .selection-confirm>span {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 800;
 }
 .practice-team-actions {
   display: flex;
-  gap: 10px;
+  gap: 8px;
 }
 /* Leave room for the floating chat button as well as the phone home indicator. */
 @media(max-width:1280px) {
@@ -2920,7 +2916,7 @@ html[data-motion=reduce] *,html[data-motion=reduce] *:before,html[data-motion=re
 @media(max-width:1000px) {
   .duo-selection-action.sticky-action {
     grid-template-columns: minmax(0,1fr);
-    gap: 10px;
+    gap: 8px;
   }
   .selection-confirm {
     grid-template-columns: minmax(0,1fr) auto;
@@ -2933,20 +2929,20 @@ html[data-motion=reduce] *,html[data-motion=reduce] *:before,html[data-motion=re
     --selection-action-bottom: calc(max(14px,env(safe-area-inset-bottom)) + 54px);
   }
   .duo-selection-action.sticky-action {
-    padding: 10px;
-    gap: 9px;
+    padding: 8px;
+    gap: 8px;
   }
   .selection-order {
-    gap: 10px;
+    gap: 8px;
   }
   .selection-order-preview {
     flex: 1;
   }
   .selection-order-preview>strong {
-    font-size: 10px;
+    font-size: 11px;
   }
   .selection-order ol {
-    gap: 10px;
+    gap: 8px;
   }
   .selection-order li {
     font-size: 12px;
@@ -2957,14 +2953,14 @@ html[data-motion=reduce] *,html[data-motion=reduce] *:before,html[data-motion=re
     gap: 0;
   }
   .selection-confirm>span {
-    font-size: 9px;
-    margin-bottom: 5px;
+    font-size: 11px;
+    margin-bottom: 4px;
   }
   .practice-team-actions {
     flex-wrap: wrap;
   }
   .practice-pool {
-    padding-bottom: 60px;
+    padding-bottom: calc(var(--ui-touch-size) + 16px);
   }
 }
 .results-host-actions {
@@ -2977,8 +2973,8 @@ html[data-motion=reduce] *,html[data-motion=reduce] *:before,html[data-motion=re
 .leave-room-options {
   display: grid;
   grid-template-columns: repeat(2,minmax(0,1fr));
-  gap: 14px;
-  margin-top: 20px;
+  gap: 12px;
+  margin-top: 16px;
 }
 .leave-room-options>section {
   display: flex;
@@ -2986,8 +2982,8 @@ html[data-motion=reduce] *,html[data-motion=reduce] *:before,html[data-motion=re
   gap: 12px;
   min-width: 0;
   padding: 16px;
-  border: 2px solid var(--ink);
-  border-radius: 9px;
+  border: 2px solid var(--ui-text);
+  border-radius: var(--radius-sm);
   background: var(--paper);
 }
 .leave-room-options h3 {
@@ -2999,10 +2995,10 @@ html[data-motion=reduce] *,html[data-motion=reduce] *:before,html[data-motion=re
   line-height: 1.8;
 }
 .acquired-ability {
-  margin: 20px 0 26px;
-  padding: 18px;
-  border: 2px solid var(--ink);
-  border-radius: 10px;
+  margin: 16px 0 24px;
+  padding: 16px;
+  border: 2px solid var(--ui-text);
+  border-radius: var(--radius-md);
   background: var(--ui-control-hover);
   text-align: left;
 }
@@ -3012,7 +3008,7 @@ html[data-motion=reduce] *,html[data-motion=reduce] *:before,html[data-motion=re
 }
 .acquired-ability-card {
   display: flex;
-  gap: 14px;
+  gap: 12px;
   align-items: center;
   margin: 12px 0;
 }
@@ -3028,12 +3024,12 @@ html[data-motion=reduce] *,html[data-motion=reduce] *:before,html[data-motion=re
   margin: 4px 0 0;
 }
 .acquired-ability .full-ability {
-  margin: 10px 0;
+  margin: 8px 0;
 }
 .effective-ability {
   margin-top: 16px;
-  padding-top: 14px;
-  border-top: 1px dashed var(--ink);
+  padding-top: 12px;
+  border-top: 1px dashed var(--ui-text);
 }
 .inherited-ability {
   font-size: 12px;
@@ -3041,11 +3037,11 @@ html[data-motion=reduce] *,html[data-motion=reduce] *:before,html[data-motion=re
 }
 @media(max-width:650px) {
   .leave-room-options {
-    gap: 10px;
+    gap: 8px;
   }
   .leave-room-options>section {
     padding: 12px;
-    gap: 10px;
+    gap: 8px;
   }
   .leave-room-options h3 {
     font-size: 14px;
@@ -3054,34 +3050,34 @@ html[data-motion=reduce] *,html[data-motion=reduce] *:before,html[data-motion=re
     font-size: 11px;
   }
   .acquired-ability {
-    padding: 14px;
+    padding: 12px;
   }
 }
 @media(max-width:650px) {
   .results-host-actions {
-    gap: 9px;
+    gap: 8px;
   }
 }
 .owned-room-return {
   margin: 24px 0 4px;
-  padding: 22px;
-  border: 3px solid var(--ink);
-  border-radius: 13px;
-  background: var(--yellow);
+  padding: 24px;
+  border: 3px solid var(--ui-text);
+  border-radius: var(--radius-md);
+  background: var(--brand-yellow);
   box-shadow: var(--shadow-2);
 }
 .owned-room-heading {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 14px;
+  gap: 12px;
 }
 .owned-room-heading h2 {
-  font-size: 23px;
+  font-size: 24px;
 }
 .owned-room-heading p {
   font-size: 12px;
-  margin-top: 7px;
+  margin-top: 8px;
   line-height: 1.7;
 }
 .owned-room-heading>[role=status] {
@@ -3090,16 +3086,16 @@ html[data-motion=reduce] *,html[data-motion=reduce] *:before,html[data-motion=re
 .owned-room-list {
   display: grid;
   gap: 12px;
-  margin-top: 18px;
+  margin-top: 16px;
 }
 .owned-room-list article {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 18px;
+  gap: 16px;
   padding: 16px;
-  border: 2px solid var(--ink);
-  border-radius: 9px;
+  border: 2px solid var(--ui-text);
+  border-radius: var(--radius-sm);
   background: var(--paper);
 }
 .owned-room-list article>div {
@@ -3112,33 +3108,33 @@ html[data-motion=reduce] *,html[data-motion=reduce] *:before,html[data-motion=re
 }
 .owned-room-list span,.owned-room-list small {
   display: block;
-  margin-top: 6px;
+  margin-top: 4px;
   font-size: 12px;
   line-height: 1.6;
 }
 .owned-room-list small {
-  font-size: 10px;
+  font-size: 11px;
   color: var(--ui-text);
 }
 .owned-room-error {
   display: flex;
-  gap: 18px;
+  gap: 16px;
   align-items: center;
   justify-content: space-between;
-  margin-top: 14px;
+  margin-top: 12px;
   font-size: 12px;
   line-height: 1.7;
 }
 @media(max-width:650px) {
   .owned-room-return {
-    margin: 18px 0 2px;
+    margin: 16px 0 4px;
     padding: 16px;
     box-shadow: var(--shadow-2);
   }
   .owned-room-heading {
     align-items: flex-start;
     flex-direction: column;
-    gap: 9px;
+    gap: 8px;
   }
   .owned-room-heading h2 {
     font-size: 20px;
@@ -3147,13 +3143,13 @@ html[data-motion=reduce] *,html[data-motion=reduce] *:before,html[data-motion=re
     font-size: 11px;
   }
   .owned-room-list {
-    margin-top: 14px;
+    margin-top: 12px;
   }
   .owned-room-list article {
     align-items: stretch;
     flex-direction: column;
     gap: 12px;
-    padding: 13px;
+    padding: 12px;
   }
   .owned-room-list strong {
     font-size: 16px;
@@ -3161,6 +3157,6 @@ html[data-motion=reduce] *,html[data-motion=reduce] *:before,html[data-motion=re
   .owned-room-error {
     align-items: flex-start;
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
   }
 }

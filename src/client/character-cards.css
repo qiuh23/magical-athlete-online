@@ -3,46 +3,47 @@ body:has(.character-grid){background:var(--paper)}
 .avatar{overflow:hidden}
 .avatar.sw-avatar,.avatar.fan-avatar{border-radius:0;clip-path:none;background:transparent}
 .portrait-scene{position:relative;display:block;isolation:isolate;width:100%;aspect-ratio:1;color:var(--portrait-accent)}
-.portrait-scene>.avatar{position:absolute;width:88%;height:88%;left:6%;top:5%;transition:transform .25s ease}
+.portrait-scene>.avatar{position:absolute;width:88%;height:88%;left:6%;top:5%;transition:transform var(--duration-3) cubic-bezier(.2,.7,.3,1)}
 .character-grid{gap:24px;align-items:stretch}
-.card-print-line{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:4px;width:100%;font-family:Georgia,"Times New Roman",serif;font-size:9px;font-weight:700;letter-spacing:.1em;white-space:nowrap}
-.card-print-line>span:last-child{font-size:10px;font-style:italic;letter-spacing:0;font-variant-numeric:tabular-nums}
-.character-avatar-detail .portrait-scene{width:100%;max-width:255px;margin:-1px auto -5px}
+.card-print-line{flex-wrap:wrap;position:relative;z-index:var(--z-sticky);display:flex;align-items:center;justify-content:space-between;gap:4px;width:100%;font-family:var(--font-print);font-size:11px;font-weight:700;letter-spacing:.1em;white-space:normal;overflow-wrap:anywhere}
+.card-print-line>span{min-width:0}
+.card-print-line>span:last-child{font-size:11px;font-style:italic;letter-spacing:0;font-variant-numeric:tabular-nums}
+.character-avatar-detail .portrait-scene{width:100%;max-width:255px;margin:-4px auto -4px}
 .character-avatar-detail:hover .avatar{transform:none}
-.card-art-caption{display:flex;align-items:center;justify-content:space-between;width:100%;border-top:1px solid color-mix(in srgb, var(--ui-control-border) 18.824%, transparent);padding-top:7px;font-size:8px;letter-spacing:.2em;font-weight:700}
+.card-art-caption{display:flex;flex-wrap:wrap;gap:4px;align-items:center;justify-content:space-between;width:100%;border-top:1px solid color-mix(in srgb, var(--ui-control-border) 18.824%, transparent);padding-top:8px;font-size:11px;letter-spacing:.2em;font-weight:700}
 .card-art-caption>span:nth-child(2){font-size:13px;line-height:1;opacity:.6}
-.character-copy h3{font-family:"Noto Serif SC","Songti SC","STSong","SimSun",serif;font-size:25px;line-height:1.35;font-weight:900;letter-spacing:.025em;color:var(--ui-text);overflow-wrap:anywhere}
-.character-copy .edition-badge{align-self:flex-start;max-width:100%;margin:0;padding:3px 6px;background:var(--paper);color:var(--ui-text-muted);border:1px solid var(--ui-border);border-radius:3px;font-size:9px;line-height:1.5;font-weight:500;white-space:normal}
+.character-copy h3{font-family:var(--font-reading);font-size:24px;line-height:1.35;font-weight:800;letter-spacing:.025em;color:var(--ui-text);overflow-wrap:anywhere}
+.character-copy .edition-badge{align-self:flex-start;max-width:100%;margin:0;padding:4px 4px;background:var(--paper);color:var(--ui-text-muted);border:1px solid var(--ui-border);border-radius:var(--radius-sm);font-size:11px;line-height:1.5;font-weight:500;white-space:normal}
 .character-copy .ability-text{min-height:0;margin-top:12px;color:var(--ui-text);font-size:12px;line-height:1.85;overflow-wrap:anywhere;white-space:pre-line}
 .card-actions{margin-top:auto;padding-top:16px}
-.character-detail .identity-name{font-family:"Noto Serif SC","Songti SC","STSong","SimSun",serif;font-size:23px;color:var(--ui-text)}
+.character-detail .identity-name{font-family:var(--font-reading);font-size:24px;color:var(--ui-text)}
 @media(hover:hover){
  .character-avatar-detail:hover .avatar{transform:translateY(-3px) rotate(-2deg)}
 }
-@media(max-width:1000px){.character-grid{gap:18px}}
+@media(max-width:1000px){.character-grid{gap:16px}}
 @media(max-width:650px){
- .character-grid{gap:13px}
- .card-print-line{font-size:6px;letter-spacing:.04em}
- .card-print-line>span:last-child{font-size:8px}
- .character-avatar-detail .portrait-scene{margin:2px auto 0}
- .card-art-caption{font-size:7px;letter-spacing:.05em;padding-top:5px}
+ .character-grid{gap:12px}
+ .card-print-line{font-size:11px;letter-spacing:.04em}
+ .card-print-line>span:last-child{font-size:11px}
+ .character-avatar-detail .portrait-scene{margin:4px auto 0}
+ .card-art-caption{font-size:11px;letter-spacing:.05em;padding-top:4px}
  .character-copy h3{font-size:20px;line-height:1.4}
- .character-copy .edition-badge{font-size:8px;padding:2px 4px}
- .character-copy .ability-text{font-size:11px;line-height:1.8;margin-top:10px}
+ .character-copy .edition-badge{font-size:11px;padding:4px 4px}
+ .character-copy .ability-text{font-size:11px;line-height:1.8;margin-top:8px}
  .card-actions{padding-top:12px}
  .character-detail .identity-name{font-size:20px}
 }
-@media(prefers-reduced-motion:reduce){.portrait-scene>.avatar{transition:none}.character-avatar-detail:hover .avatar{transform:none}}
+@media(prefers-reduced-motion:reduce){.character-avatar-detail:hover .avatar{transform:none}}
 html[data-motion=reduce] .character-avatar-detail:hover .avatar{transform:none}
 /*  Character card styles consolidated in original cascade order. Responsive and state conditions stay attached to their rules.  */
 .character-card:nth-child(4n + 2) .character-avatar-detail {
-  background: var(--pink);
+  background: var(--brand-pink);
 }
 .character-card:nth-child(4n + 3) .character-avatar-detail {
   background: var(--brand-blue);
 }
 .character-card:nth-child(4n + 4) .character-avatar-detail {
-  background: var(--yellow);
+  background: var(--brand-yellow);
 }
 .character-card:nth-child(n) .character-art.character-pick {
   margin-top: 12px;
@@ -51,13 +52,13 @@ html[data-motion=reduce] .character-avatar-detail:hover .avatar{transform:none}
   overflow: hidden;
 }
 .character-card:nth-child(4n + 2) .character-art {
-  background: var(--pink);
+  background: var(--brand-pink);
 }
 .character-card:nth-child(4n + 3) .character-art {
   background: var(--brand-blue);
 }
 .character-card:nth-child(4n + 4) .character-art {
-  background: var(--yellow);
+  background: var(--brand-yellow);
 }
 .character-card.used .character-art {
   filter: grayscale(1);
@@ -82,19 +83,19 @@ html[data-motion=reduce] .character-avatar-detail:hover .avatar{transform:none}
   display: flex;
   flex-direction: column;
   min-width: 0;
-  padding: 7px;
+  padding: 8px;
   border: 1px solid var(--ui-border);
-  border-radius: 15px;
+  border-radius: var(--radius-lg);
   background: var(--paper);
   box-shadow: var(--shadow-1);
-  transition: transform .2s ease,box-shadow .2s ease,border-color .2s ease;
+  transition: transform var(--duration-2) cubic-bezier(.2,.7,.3,1),box-shadow var(--duration-2) cubic-bezier(.2,.7,.3,1),border-color var(--duration-2) cubic-bezier(.2,.7,.3,1);
 }
 .character-card:after {
   content: "";
   position: absolute;
   inset: 3px;
   border: 1px solid var(--ui-border);
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   pointer-events: none;
 }
 .character-card.selected {
@@ -115,10 +116,10 @@ html[data-motion=reduce] .character-avatar-detail:hover .avatar{transform:none}
   justify-content: flex-start;
   position: relative;
   height: auto;
-  padding: 14px 12px 10px;
+  padding: 12px 12px 8px;
   background: var(--portrait-paper);
   border: 1px solid color-mix(in srgb, var(--ui-text) 20.000%, transparent);
-  border-radius: 9px 9px 4px 4px;
+  border-radius: var(--radius-sm) var(--radius-sm) var(--radius-sm) var(--radius-sm);
   overflow: hidden;
   color: var(--portrait-accent);
 }
@@ -127,11 +128,11 @@ html[data-motion=reduce] .character-avatar-detail:hover .avatar{transform:none}
   flex-direction: column;
   flex: 1;
   min-width: 0;
-  padding: 18px 14px 8px;
+  padding: 16px 12px 8px;
   background: var(--paper);
 }
 .character-card .english-name {
-  font-family: Georgia,"Times New Roman",serif;
+  font-family: var(--font-print);
   font-style: italic;
   font-size: 12px;
   line-height: 1.5;
@@ -150,14 +151,14 @@ html[data-motion=reduce] .character-avatar-detail:hover .avatar{transform:none}
   min-height: 42px;
   height: auto;
   margin: 0;
-  padding: 9px 12px;
+  padding: 8px 12px;
   border: 1px solid var(--ui-text);
-  border-radius: 5px;
+  border-radius: var(--radius-sm);
   background: var(--ui-text);
   color: var(--paper);
   font-size: 12px;
   font-weight: 700;
-  transition: background .2s ease,transform .2s ease;
+  transition: background var(--duration-2) cubic-bezier(.2,.7,.3,1),transform var(--duration-2) cubic-bezier(.2,.7,.3,1);
 }
 .character-card:nth-child(n) .character-art.character-pick[aria-pressed=true] {
   background: var(--ui-control);
@@ -172,11 +173,11 @@ html[data-motion=reduce] .character-avatar-detail:hover .avatar{transform:none}
 }
 .character-card .detail-button {
   min-height: 39px;
-  margin: 7px 0 0;
-  padding: 8px 0 2px;
+  margin: 8px 0 0;
+  padding: 8px 0 4px;
   border: 0;
   color: var(--ui-text-muted);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
 }
 .character-card .detail-button span {
@@ -191,18 +192,18 @@ html[data-motion=reduce] .character-avatar-detail:hover .avatar{transform:none}
   background: var(--ui-text);
   color: var(--paper);
   box-shadow: var(--shadow-1);
-  z-index: 2;
+  z-index: var(--z-sticky);
 }
 .character-card .used-label {
   bottom: 32px;
   background: var(--ui-text);
   border: 1px solid var(--paper);
-  z-index: 2;
+  z-index: var(--z-sticky);
 }
 .character-card button:focus-visible {
   outline: 3px solid var(--ui-text-muted);
   outline-offset: 3px;
-  z-index: 3;
+  z-index: var(--z-dock);
 }
 @media (hover:hover) {
   .character-card:hover {
@@ -225,33 +226,33 @@ html[data-motion=reduce] .character-avatar-detail:hover .avatar{transform:none}
 }
 @media (max-width:650px) {
   .character-card {
-    padding: 5px;
-    border-radius: 11px;
+    padding: 4px;
+    border-radius: var(--radius-md);
   }
   .character-card:after {
     inset: 2px;
-    border-radius: 9px;
+    border-radius: var(--radius-sm);
   }
   .character-card:nth-child(n) .character-avatar-detail {
-    padding: 10px 7px 7px;
-    border-radius: 6px 6px 3px 3px;
+    padding: 8px 8px 8px;
+    border-radius: var(--radius-sm) var(--radius-sm) var(--radius-sm) var(--radius-sm);
   }
   .character-card .character-copy {
-    padding: 12px 7px 5px;
+    padding: 12px 8px 4px;
   }
   .character-card .english-name {
-    font-size: 10px;
-    margin: 3px 0 9px;
+    font-size: 11px;
+    margin: 4px 0 8px;
   }
   .character-card:nth-child(n) .character-art.character-pick {
     font-size: 11px;
     min-height: 44px;
-    padding: 9px 8px;
+    padding: 8px 8px;
   }
   .character-card .detail-button {
-    font-size: 9px;
+    font-size: 11px;
     min-height: 44px;
-    margin-top: 3px;
+    margin-top: 4px;
   }
   .character-card .selected-tick {
     top: 25px;
@@ -261,9 +262,6 @@ html[data-motion=reduce] .character-avatar-detail:hover .avatar{transform:none}
   }
 }
 @media (prefers-reduced-motion:reduce) {
-  .character-card {
-    transition: none;
-  }
   .character-card:hover {
     transform: none;
   }

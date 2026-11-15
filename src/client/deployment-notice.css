@@ -1,4 +1,4 @@
 html[data-preview-environment="true"] { --preview-notice-height: 32px; }
-.deployment-notice { position: sticky; top: 0; z-index: 250; height: var(--preview-notice-height); padding: 5px 12px; display: flex; align-items: center; justify-content: center; background: var(--ui-control-hover); color: var(--ui-text); font-size: 12px; font-weight: 700; line-height: 1.4; text-align: center; border-bottom: 1px solid var(--ui-gold); }
+.deployment-notice { position: sticky; top: 0; z-index: var(--z-sticky); height: var(--preview-notice-height); padding: 4px 12px; display: flex; align-items: center; justify-content: center; background: var(--ui-control-hover); color: var(--ui-text); font-size: 12px; font-weight: 700; line-height: 1.4; text-align: center; border-bottom: 1px solid var(--ui-gold); }
 html[data-preview-environment="true"] .immersive-race { height: calc(100dvh - var(--preview-notice-height)); }
 @media(max-width:650px) { html[data-preview-environment="true"] { --preview-notice-height: 44px; } .deployment-notice { font-size: 11px; } }
