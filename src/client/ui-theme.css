@@ -87,43 +87,31 @@ button:active:not(:disabled) { filter: brightness(.96); }
 .ui-icon { stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 
 /* One control rhythm for entry, rooms and the floating race tools. */
-.button, .text-button, .invite-button, .leave-room-button, .end-room-button {
+.text-button, .invite-button, .leave-room-button, .end-room-button {
   min-height: var(--ui-touch-size);
   border-radius: var(--radius-lg);
   font-size: 14px;
   line-height: 1.4;
 }
-.button { padding: 12px 18px; gap: calc(var(--ui-space) * 2); }
-:is(.race-icon-button, .chat-toggle, .close-button, .header-link, .sound-toggle) {
+:is(.race-icon-button, .close-button, .header-link, .sound-toggle) {
   min-width: var(--ui-touch-size);
   min-height: var(--ui-touch-size);
   border-radius: var(--radius-lg);
 }
-:is(.race-icon-button, .chat-toggle) {
+:is(.race-icon-button) {
   width: var(--ui-touch-size);
   height: var(--ui-touch-size);
   padding: 10px;
   background: var(--ui-surface);
   border-color: var(--ui-control-border);
   color: var(--ui-text);
-  box-shadow: var(--shadow-2);
+  box-shadow: var(--shadow-1);
 }
-:is(.race-icon-button, .chat-toggle):hover:not(:disabled) { background: var(--ui-control-hover); border-color: var(--ui-text-muted); }
+:is(.race-icon-button):hover:not(:disabled) { background: var(--ui-control-hover); border-color: var(--ui-text-muted); }
 .race-icon-button[aria-expanded="true"], .race-icon-button[aria-pressed="true"] {
   background: var(--ui-control-active);
   border-color: var(--ui-text);
 }
-.site-header {
-  min-height: 64px;
-  padding-block: 10px;
-  border-bottom-width: 1px;
-}
-.site-header .wordmark { font-size: 20px; }
-.site-header .logo-dice { width: 36px; height: 36px; padding: 5px; border-radius: 10px; }
-.site-header nav { gap: calc(var(--ui-space) * 2); }
-.site-header :is(.header-link, .sound-toggle) { height: 44px; padding: 10px; border: 1px solid color-mix(in srgb, var(--paper) 33.333%, transparent); background: color-mix(in srgb, var(--paper) 4.314%, transparent); }
-.site-header .sound-toggle .ui-icon { width: 22px; height: 22px; }
-.site-header :is(.header-link, .sound-toggle):hover { background: color-mix(in srgb, var(--paper) 16.471%, transparent); }
 
 /* Nicknames remain an overseas-only field. Domestic random-name markup and
    behavior are unchanged. The form owner preserves native submit validation. */
@@ -135,8 +123,8 @@ button:active:not(:disabled) { filter: brightness(.96); }
   background: var(--paper); color: var(--ink); font-size: 16px;
 }
 .home .entry-tabs { gap: calc(var(--ui-space) * 3); }
-.home .entry-tabs button { border-width: 1px; border-radius: var(--radius-lg); box-shadow: 0 3px 0 var(--ui-text); }
-.home .entry-tabs button:hover:not(:disabled) { box-shadow: 0 5px 0 var(--ui-text); }
+.home .entry-tabs button { border-width: 1px; border-radius: var(--radius-lg); box-shadow: var(--shadow-1); }
+.home .entry-tabs button:hover:not(:disabled) { box-shadow: var(--shadow-1); }
 .home .entry-tabs button[aria-selected="true"] { box-shadow: none; border-color: var(--brand-blue); background: var(--paper); color: var(--ink); }
 .home .entry-tabs .entry-icon { width: 40px; height: 40px; border: 0; background: transparent; }
 .home .entry-tabs .entry-icon .ui-icon { width: 24px; height: 24px; }
@@ -145,7 +133,6 @@ button:active:not(:disabled) { filter: brightness(.96); }
 .home .entry-panel.configuring .entry-tabs button { border-radius: 10px; }
 .home .entry-panel :is(input:not([type="radio"]):not([type="checkbox"]), select) { min-height: 44px; border-width: 1px; border-radius: 10px; }
 .home .entry-panel .setup-back { border-radius: var(--radius-lg); }
-.home .entry-panel.configuring .entry-submit > .button { min-height: 48px; font-size: 16px; }
 .home .meet-racers { border-top-width: 1px; }
 
 /* Retain the artwork as the home anchor, with all four ways to play visible. */
@@ -180,7 +167,6 @@ button:active:not(:disabled) { filter: brightness(.96); }
 .lobby-seats .seat { border-width: 1px; }
 .room-config-panel > summary { min-height: 44px; font-size: 16px; }
 .room-config-panel .config-actions p { font-size: 14px; }
-.results-panel .results-actions .button { font-size: 14px; }
 
 /* Scores remain next to every avatar. Seat numbers use a small badge so that
    negative or double-digit totals get the full width below the portrait. */
@@ -201,33 +187,21 @@ button:active:not(:disabled) { filter: brightness(.96); }
 .immersive-race .race-status-copy { font-size: 14px; line-height: 20px; }
 .immersive-race .countdown { font-size: 14px; }
 .immersive-race .race-roll-button { border-radius: var(--radius-lg); font-family: var(--ui-font); }
-.immersive-race .floating-choice.choice-panel { border-radius: var(--radius-lg); border-color: var(--ui-control-border); box-shadow: var(--shadow-2); }
-.immersive-race .floating-choice .choice-heading > h2 { font-size: 16px; line-height: 1.4; }
-.immersive-race .floating-choice :is(.choice-operator, .spectator-wait) { font-size: 12px; }
-.immersive-race .floating-choice .button { font-size: 14px; border-radius: 10px; }
-.immersive-race .collapsed-choice-summary strong { font-size: 14px; }
-.immersive-race .collapsed-choice-summary small { font-size: 12px; }
 .immersive-race .race-results-overlay .results-panel { border-width: 1px; border-radius: var(--radius-lg); box-shadow: var(--shadow-2); }
 
 /* Ordinary overlays already dismiss on backdrop or Escape in Modal. Keep
    scroll inside the viewport and use the same close target on every screen. */
-.modal-backdrop { padding: calc(var(--ui-space) * 3); background: color-mix(in srgb, var(--ui-text) 40.000%, transparent); backdrop-filter: blur(5px); }
-.modal-panel { max-height: calc(100dvh - 24px); border: 1px solid var(--ui-control-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-2); overscroll-behavior: contain; }
-.modal-header { padding: 12px 16px; gap: 12px; border-bottom-width: 1px; background: var(--ui-surface); }
-.modal-header h2 { font: 650 20px/1.4 var(--ui-font); }
-.modal-header .close-button { display: grid; place-items: center; width: 44px; height: 44px; padding: 10px; border: 1px solid var(--ui-border); background: var(--ui-control); color: var(--ui-text); }
-.modal-header .close-button:hover { background: var(--ui-control-hover); }
 .race-menu-content { font: 400 14px/1.6 var(--ui-font); }
-.race-menu-content :is(.race-menu-note, summary, .button, .end-room-button, label) { font-size: 14px; }
+/* Keep the broad menu baseline before the denser note and summary rules. */
+.race-menu-content :is(.race-menu-note, summary, .button, .end-room-button, label) {
+  font-size: 14px;
+}
 .race-menu-content summary { min-height: 44px; display: flex; align-items: center; }
 .race-menu-links, .race-menu-shortcuts { gap: calc(var(--ui-space) * 2); }
-.race-menu-links .button { min-height: 44px; }
 :is(.notice-toast, .error-banner, .connection-banner) { border-radius: var(--radius-lg); font-size: 14px; box-shadow: var(--shadow-2); }
 
 /* The chat component is mounted only overseas. Its trigger now shares the
    game's control tokens, matching Wizard's chat/toolbar consistency. */
-.room-community .chat-toggle { width: 44px; height: 44px; padding: 10px; border-radius: var(--radius-lg); background: var(--ui-surface); border: 1px solid var(--ui-control-border); color: var(--ui-text); box-shadow: var(--shadow-2); }
-.room-community .chat-toggle .ui-icon { width: 22px; height: 22px; }
 .room-community .room-chat { border: 1px solid var(--ui-control-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-2); }
 .room-community .room-chat header button { display: grid; place-items: center; min-width: 44px; min-height: 44px; border-radius: 10px; }
 .room-community .room-chat :is(header strong, .chat-personal, .chat-personal button, .chat-messages, form button) { font-size: 14px; }
@@ -235,11 +209,6 @@ button:active:not(:disabled) { filter: brightness(.96); }
 .room-community .room-chat form button { min-height: 44px; border-radius: 10px; }
 
 @media (max-width: 650px) {
-  body:has(.home) .site-header { padding: 8px 12px; }
-  .site-header .wordmark { font-size: 17px; gap: 6px; }
-  .site-header .logo-dice { width: 30px; height: 32px; padding: 3px; }
-  body:has(.home) .site-header nav { gap: 4px; }
-  .site-header .landscape-control { display: none; }
   .home { padding-inline: 16px; }
   .home .entry-tabs { gap: 10px; }
   .home .entry-tabs button { min-height: 72px; padding: 10px; }
@@ -253,17 +222,12 @@ button:active:not(:disabled) { filter: brightness(.96); }
   .immersive-race .floating-racer-score small { font-size: 10px; }
   .immersive-race .race-match-label { font-size: 12px; line-height: 18px; }
   .immersive-race .race-status-copy { font-size: 12px; line-height: 18px; }
-  .immersive-race .floating-choice .choice-heading > h2 { font-size: 15px; }
-  .modal-header { padding: 10px 12px; }
-  .modal-header h2 { font-size: 18px; }
   .race-menu-content { padding: 12px; }
 }
 @media (orientation: landscape) and (max-height: 570px) {
   .home:not(:has(.entry-panel.configuring)) > .entry-identity { grid-column: 2; margin: 0 0 10px; }
   .immersive-race .floating-racer-score { font-size: 14px; line-height: 18px; }
   .immersive-race .race-status-copy { font-size: 12px; line-height: 18px; }
-  .modal-panel { max-height: calc(100dvh - 16px); }
-  .modal-backdrop { padding: 8px; }
 }
 @media (orientation: landscape) and (min-width: 480px) and (max-width: 1000px) and (max-height: 570px) {
   html[data-race-chat-open="true"] .immersive-race .floating-racer-score { font-size: 14px; line-height: 18px; }
@@ -273,10 +237,6 @@ button:active:not(:disabled) { filter: brightness(.96); }
   body:has(> .room-community.in-race.is-open) .immersive-race .floating-roll,
   body:has(> .room-community.in-race .chat-notice-region) .immersive-race .floating-roll {
     bottom: calc(max(14px, env(safe-area-inset-bottom)) + var(--chat-keyboard-offset, 0px));
-  }
-  html[data-chat-keyboard="true"][data-view="race"] body .immersive-race .floating-choice.choice-panel {
-    bottom: calc(var(--chat-keyboard-offset, 0px) + 8px + var(--race-chat-order-height, 64px) + 12px);
-    max-height: calc(var(--chat-viewport-height, 100dvh) - var(--race-chat-order-height, 64px) - 84px);
   }
   html[data-chat-keyboard="true"][data-chat-compact="true"] body > .room-community.in-race :is(.chat-personal, .chat-report) { display: none; }
   html[data-chat-keyboard="true"][data-chat-compact="true"] body > .room-community.in-race .chat-messages { padding: 4px 8px; }
@@ -301,11 +261,6 @@ button:active:not(:disabled) { filter: brightness(.96); }
     top: calc(62px + var(--race-chat-order-height, 72px) + 12px);
     left: 12px; right: 152px; width: auto; max-height: 96px; overflow: auto;
   }
-  html[data-view="race"][data-race-chat-open="true"] body .immersive-race .floating-choice.choice-panel {
-    bottom: var(--race-chat-choice-bottom);
-    max-height: max(64px, calc(100dvh - var(--race-chat-choice-bottom) - var(--race-chat-clear-top, 280px)));
-    padding: 8px;
-  }
   /* Keep reporting reachable without spending a permanent history row on it.
      Its disclosure closes when another part of the chat is clicked. */
   html[data-race-chat-open="true"] body > .room-community.in-race .room-chat { position: relative; }
@@ -315,7 +270,7 @@ button:active:not(:disabled) { filter: brightness(.96); }
   html[data-race-chat-open="true"] body > .room-community.in-race .chat-report > summary { display: grid; place-items: center; min-height: 44px; padding: 0; font-size: 0; list-style: none; }
   html[data-race-chat-open="true"] body > .room-community.in-race .chat-report > summary::-webkit-details-marker { display: none; }
   html[data-race-chat-open="true"] body > .room-community.in-race .chat-report > summary::after { content: '举报'; font: 500 12px/16px var(--ui-font); }
-  html[data-race-chat-open="true"] body > .room-community.in-race .chat-report > p { position: absolute; top: 44px; right: 0; width: min(280px, calc(100vw - 48px)); padding: 12px; border: 1px solid var(--ui-border); border-radius: var(--radius-lg); background: var(--ui-surface); box-shadow: var(--shadow-2); }
+  html[data-race-chat-open="true"] body > .room-community.in-race .chat-report > p { position: absolute; top: 44px; right: 0; width: min(280px, calc(100vw - 48px)); padding: 12px; border: 1px solid var(--ui-border); border-radius: var(--radius-lg); background: var(--ui-surface); box-shadow: var(--shadow-1); }
   html[data-chat-compact="true"][data-race-chat-open="true"] body > .room-community.in-race .chat-personal { display: none; }
   html[data-chat-compact="true"][data-race-chat-open="true"] body > .room-community.in-race .room-chat header { min-height: 50px; }
   html[data-chat-compact="true"][data-race-chat-open="true"] body > .room-community.in-race .room-chat header button { top: 3px; }
@@ -323,34 +278,6 @@ button:active:not(:disabled) { filter: brightness(.96); }
 @media (orientation: landscape) and (min-width: 480px) and (max-width: 650px) and (max-height: 350px) {
   /* Leave the enlarged score strip above this collapsed summary. The full
      prompt remains available in the expanded choice, with a 44px trigger. */
-  html[data-view="race"] body .immersive-race .floating-choice.choice-panel.is-collapsed {
-    padding: 8px;
-    max-height: 72px;
-  }
-  .immersive-race .collapsed-choice-summary { gap: 8px; }
-  .immersive-race .collapsed-choice-summary strong { font-size: 14px; line-height: 18px; }
-  .immersive-race .collapsed-choice-summary > span > small {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-    margin-top: 2px;
-    font-size: 12px;
-    line-height: 16px;
-  }
-  .immersive-race .collapsed-choice-summary > span:has(.choice-dice-hint) > small { display: none; }
-  .immersive-race .collapsed-choice-summary .choice-dice-hint {
-    min-height: 24px;
-    margin-top: 4px;
-    padding: 2px 4px;
-    line-height: 16px;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-  }
-  .immersive-race .collapsed-choice-summary .choice-dice-hint > .avatar { width: 20px; height: 20px; }
-  .immersive-race .collapsed-choice-summary .choice-dice-hint > * { flex-shrink: 0; white-space: nowrap; }
-  .immersive-race .collapsed-choice-summary .choice-dice-hint > b { min-width: 20px; height: 22px; font-size: 14px; }
-  .immersive-race .collapsed-choice-summary .choice-collapse { margin: 0; }
 }
 @media (prefers-reduced-motion: reduce) { :root { --duration-1: 0ms; --duration-2: 0ms; --duration-3: 0ms; } }
 
@@ -387,7 +314,6 @@ button:active:not(:disabled) { filter: brightness(.96); }
    Container sizing matters here: the panel is narrow even on a wide desktop. */
 .race-menu-panel .race-menu-content { padding:8px 12px 12px; }
 .race-menu-panel .race-menu-shortcuts { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:4px 0 12px; }
-.race-menu-panel .race-menu-shortcuts .button { display:flex;flex-direction:column;justify-content:center;gap:5px;min-width:0;min-height:66px;padding:8px 4px;border:1px solid var(--ui-border);border-radius:10px;box-shadow:none;background:var(--ui-control);color:var(--ui-text);font:600 14px/1.4 var(--ui-font); }
 .race-menu-panel .race-menu-content > .race-menu-section { margin:0;padding:0;border:0;border-top:1px solid var(--ui-border);border-radius:0;background:transparent;min-width:0; }
 .race-menu-panel .race-menu-section > summary { display:flex;align-items:center;gap:10px;min-height:50px;padding:8px 2px;list-style:none;font:600 14px/1.5 var(--ui-font);color:var(--ui-text); }
 .race-menu-panel .race-menu-section > summary::-webkit-details-marker { display:none; }
@@ -404,7 +330,6 @@ button:active:not(:disabled) { filter: brightness(.96); }
 .race-menu-panel .presentation-settings select { max-width:100%;min-height:44px;font-size:13px; }
 .race-menu-panel .presentation-settings input { width:18px;height:18px;margin:0;flex:none; }
 .race-menu-panel :is(.race-menu-links,.race-menu-danger) { display:grid;grid-template-columns:minmax(0,1fr);gap:4px;margin:0; }
-.race-menu-panel .race-menu-links .button,.race-menu-panel .race-menu-section-body > .landscape-control .button,.race-menu-panel .race-menu-section-body > .landscape-control.button { justify-content:flex-start;min-width:0;min-height:44px;padding:10px;border:0;border-radius:8px;box-shadow:none;background:var(--ui-control);font:500 14px/1.5 var(--ui-font);white-space:normal;text-align:left; }
 .race-menu-panel .race-menu-action-meta { margin-left:auto;font-size:12px;color:var(--ui-text-muted); }
 .race-menu-panel .race-menu-danger { margin-top:8px;padding-top:8px;border-top:1px solid var(--ui-border); }
 .race-menu-panel .race-menu-danger .end-room-button { margin:0;min-height:44px;padding:10px;border:0;box-shadow:none;border-radius:8px;text-align:left;font:500 14px/1.5 var(--ui-font); }
@@ -434,7 +359,780 @@ button:active:not(:disabled) { filter: brightness(.96); }
 .race-menu-panel .map-card strong { font-size:13px;word-break:normal;overflow-wrap:anywhere; }
 .race-menu-panel .map-card-meta { font-size:12px; }
 .race-menu-panel .config-actions { flex-direction:column;align-items:stretch;gap:6px; }
-.race-menu-panel .config-actions .button { white-space:normal; }
 .race-menu-panel .race-count-row label { flex-wrap:wrap; }
 .race-menu-panel .config-actions p { margin:0; }
 .race-menu-panel .locked-race-order { margin:0 0 12px; }
+/*  Header, button and modal styles consolidated in original cascade order. Responsive and state conditions stay attached to their rules.  */
+@media (max-width:650px) {
+  .site-header nav .header-link {
+    white-space: nowrap;
+  }
+  .site-header nav:has(.landscape-help:not([hidden])) {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 0 12px;
+  }
+  .site-header nav:has(.landscape-help:not([hidden])) .landscape-control {
+    order: 1;
+    flex-basis: 100%;
+  }
+  .site-header .landscape-help {
+    max-width: none;
+  }
+}
+.config-actions .button {
+  font-size: 12px;
+  padding: 10px 16px;
+  white-space: nowrap;
+}
+@media (max-width:650px) {
+  .config-actions .button {
+    white-space: normal;
+  }
+}
+.entry-panel.configuring form>.button {
+  grid-column: 1/-1;
+  grid-row: auto;
+  justify-self: end;
+  min-width: 260px;
+}
+@media (max-width:650px) {
+  .entry-panel.configuring form>.button {
+    justify-self: stretch;
+    min-width: 0;
+  }
+}
+.three-player-actions .button {
+  min-height: 46px;
+}
+@media (max-width:650px) {
+  .three-player-actions .button {
+    width: 100%;
+  }
+}
+.character-detail .character-identity .modal-avatar {
+  flex: none;
+  margin: 0;
+}
+@media (max-width:650px) {
+  .character-detail .character-identity .modal-avatar {
+    padding: 4px;
+  }
+}
+.site-header a.header-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.site-header a.header-link[aria-disabled="true"] {
+  opacity: .55;
+}
+.site-header a.header-link:focus-visible {
+  outline-color: var(--yellow);
+}
+@media (max-width: 650px) {
+  .site-header > nav {
+    margin-left: auto;
+    gap: 12px;
+  }
+  .site-header a.header-link {
+    font-size: 11px;
+  }
+}
+.site-header button:focus-visible {
+  outline-color: var(--yellow);
+}
+.site-header {
+  background: var(--brand-blue);
+  color: var(--paper);
+  padding: 18px max(4vw,20px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 3px solid var(--ink);
+  gap: 16px;
+}
+.site-header nav {
+  display: flex;
+  align-items: center;
+}
+.button {
+  background: var(--brand-red);
+  border: 2px solid var(--ink);
+  box-shadow: var(--shadow-hard);
+  color: var(--paper);
+  font-weight: 850;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: transform .12s,box-shadow .12s;
+}
+.button:not(:disabled):active {
+  transform: translate(3px,4px);
+  box-shadow: none;
+}
+.button:not(:disabled):hover {
+  filter: brightness(1.035);
+}
+.button-secondary {
+  background: var(--paper);
+  color: var(--ink);
+}
+.button:disabled {
+  box-shadow: var(--shadow-1);
+}
+.entry-panel .button {
+  grid-column: 2;
+  grid-row: 3;
+  min-height: 48px;
+}
+.entry-panel .form-error+.button {
+  grid-row: auto;
+}
+.lobby-actions .button {
+  flex: 1;
+  padding: 12px 14px;
+  font-size: 14px;
+}
+.lobby-invite .button {
+  font-size: 13px;
+  width: 100%;
+  background: var(--yellow);
+  color: var(--ink);
+  min-height: 47px;
+}
+.sticky-action .button {
+  font-size: 13px;
+  min-height: 45px;
+}
+.race-action .button {
+  min-width: 190px;
+}
+.choice-options .button {
+  font-size: 12px;
+  padding: 10px 15px;
+  min-height: 42px;
+}
+.choice-options .button-secondary {
+  background: var(--yellow);
+}
+.modal-backdrop {
+  position: fixed;
+  z-index: 50;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-panel {
+  background: var(--paper);
+  width: 100%;
+  max-width: 620px;
+  overflow: auto;
+  outline: none;
+}
+.modal-header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  border-bottom: 2px solid var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.modal-header h2 {
+  font-size: 22px;
+  font-weight: 950;
+}
+.modal-avatar {
+  height: 220px;
+  width: 220px;
+  margin: 0 auto;
+  background: var(--green);
+  border-radius: 50%;
+  padding: 12px;
+}
+@media (max-width:1000px) {
+  .entry-panel .button {
+    font-size: 12px;
+    padding: 12px 14px;
+  }
+}
+@media (max-width:650px) {
+  .site-header {
+    padding: 14px 18px;
+  }
+  .entry-panel .button {
+    font-size: 14px;
+    width: 100%;
+    margin-top: 2px;
+    min-height: 50px;
+  }
+  .lobby-actions .button {
+    padding: 11px;
+  }
+  .lobby-invite>.button {
+    grid-column: 1/-1;
+    min-height: 46px;
+  }
+  .sticky-action .button {
+    min-height: 45px;
+    font-size: 12px;
+    width: 100%;
+    padding: 10px 14px;
+  }
+  .race-action .button {
+    min-width: 0;
+    width: auto;
+    flex-shrink: 0;
+    padding: 12px 14px;
+    font-size: 11px;
+    gap: 8px;
+    min-height: 48px;
+  }
+  .race-action .button svg {
+    height: 20px;
+    width: 20px;
+  }
+  .choice-options .button {
+    flex: 1;
+    min-width: 100px;
+    font-size: 11px;
+    min-height: 43px;
+    padding: 10px 12px;
+  }
+  .results-actions .button {
+    font-size: 12px;
+    width: 100%;
+    min-height: 47px;
+  }
+  .modal-backdrop {
+    padding: 18px;
+  }
+  .modal-panel {
+    max-height: calc(100dvh - 36px);
+    border-radius: 10px;
+    box-shadow: var(--shadow-3);
+  }
+  .modal-avatar {
+    height: 185px;
+    width: 185px;
+  }
+}
+.button-danger {
+  background: var(--brand-red);
+  color: var(--paper);
+}
+@media (max-width:650px) {
+  .end-room-confirm-actions .button {
+    flex: 1;
+    min-height: 46px;
+    font-size: 12px;
+  }
+}
+.entry-panel .join-entry-form>.button {
+  align-self: stretch;
+}
+.entry-panel .directory-room-actions .button {
+  grid-area: auto;
+  padding: 10px 13px;
+  margin: 0;
+  white-space: nowrap;
+}
+.entry-panel .directory-room-actions .button-secondary {
+  background: var(--yellow);
+}
+@media (max-width:800px) {
+  .entry-panel .directory-room-actions .button {
+    flex: 1;
+  }
+}
+@media (max-width:650px) {
+  .entry-panel .directory-room-actions .button {
+    font-size: 11px;
+    min-height: 45px;
+  }
+}
+.duo-selection-action .selection-order>.button {
+  width: auto;
+  flex: none;
+  min-width: 80px;
+  min-height: 44px;
+  padding: 10px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.selection-confirm>.button {
+  min-width: 210px;
+  min-height: 48px;
+}
+@media (max-width:650px) {
+  .selection-confirm>.button {
+    min-width: 0;
+    min-height: 48px;
+  }
+}
+.results-host-actions>.button {
+  width: 100%;
+  height: 100%;
+  min-height: 54px;
+  padding: 12px 18px;
+}
+.leave-room-options .button {
+  width: 100%;
+  min-height: 50px;
+  padding: 11px 12px;
+  font-size: 13px;
+}
+@media (max-width:650px) {
+  .leave-room-options .button {
+    font-size: 12px;
+  }
+  .results-host-actions>.button {
+    min-height: 50px;
+    padding: 10px 12px;
+  }
+}
+.owned-room-list .button {
+  flex: none;
+}
+@media (max-width:650px) {
+  .owned-room-list .button {
+    width: 100%;
+    min-height: 48px;
+    font-size: 13px;
+  }
+}
+.floating-choice .button {
+  min-height: 46px;
+  font-size: 13px;
+  padding: 10px 16px;
+  box-shadow: var(--shadow-1);
+  border: 1px solid var(--ui-text);
+  border-radius: 9px;
+  background: var(--ui-text);
+  color: var(--paper);
+  flex: 1 1 auto;
+}
+.floating-choice .button-secondary {
+  background: var(--paper);
+  color: var(--ui-text);
+}
+.race-menu-links .button {
+  font-size: 12px;
+  padding: 10px 16px;
+}
+html[data-view="race"] .modal-panel {
+  color: var(--ink);
+}
+@media (max-width:650px) {
+  .floating-choice .button {
+    min-height: 44px;
+    padding: 9px 12px;
+    font-size: 12px;
+  }
+  .race-menu-links .button {
+    font-size: 11px;
+    padding: 10px;
+  }
+}
+body:has(.home) .site-header {
+  background: var(--paper);
+  color: var(--ui-text);
+  border-bottom: 1px solid var(--ui-border);
+  padding: 16px max(4vw, 24px);
+}
+body:has(.home) .site-header nav {
+  gap: 16px;
+}
+body:has(.home) .site-header .header-link {
+  font-size: 13px;
+  font-weight: 650;
+  min-height: 44px;
+}
+body:has(.home) .site-header :is(a, button):focus-visible {
+  outline-color: var(--ui-text);
+}
+.home .entry-panel .button {
+  background: var(--ui-text);
+  color: var(--paper);
+  border: 1px solid var(--ui-text);
+  border-radius: 10px;
+  box-shadow: var(--shadow-hard);
+  min-height: 48px;
+  font-size: 15px;
+}
+.home .entry-panel .button:hover:not(:disabled) {
+  background: var(--ui-text);
+  color: var(--paper);
+  filter: none;
+}
+.home .entry-panel .button:disabled {
+  opacity: 1;
+  background: var(--ui-control);
+  color: var(--ui-text);
+  border-color: var(--ui-border);
+  box-shadow: none;
+}
+.home .entry-panel .join-entry-form > .button {
+  align-self: stretch;
+}
+@media (max-width: 650px) {
+  body:has(.home) .site-header {
+    gap: 8px 12px;
+  }
+  body:has(.home) .site-header .header-link {
+    font-size: 12px;
+  }
+}
+.character-detail .character-identity .modal-avatar {
+  width: 106px;
+  height: 106px;
+  padding: 0;
+  border: 1px solid var(--ui-border);
+  border-radius: 12px;
+  background: var(--paper);
+  overflow: hidden;
+}
+.character-detail .modal-avatar .portrait-scene {
+  background: var(--portrait-paper);
+}
+.modal-panel:has(.character-detail) {
+  border: 1px solid var(--ui-control-border);
+  border-radius: 15px;
+  box-shadow: var(--shadow-3);
+  background: var(--paper);
+}
+.modal-panel:has(.character-detail) .modal-header {
+  background: var(--paper);
+  border-bottom: 1px solid var(--ui-border);
+  color: var(--ui-text);
+}
+.modal-panel:has(.character-detail) .modal-header h2 {
+  font-size: 18px;
+  letter-spacing: .03em;
+}
+.modal-panel:has(.character-detail) .close-button {
+  background: var(--paper);
+  border: 1px solid var(--ui-control-border);
+  color: var(--ui-text);
+}
+@media (max-width:650px) {
+  .character-detail .character-identity .modal-avatar {
+    width: 86px;
+    height: 86px;
+  }
+}
+.entry-submit>.button {
+  min-height: 48px;
+  margin-left: auto;
+  order: 1;
+}
+.lobby-actions .button {
+  min-height: 44px;
+}
+.site-header nav .header-link {
+  min-height: 44px;
+}
+@media (max-width:650px) {
+  .entry-submit>.button {
+    width: 100%;
+    order: 0;
+  }
+  .site-header {
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .site-header nav {
+    gap: 8px;
+    margin-left: auto;
+  }
+  .site-header .wordmark small {
+    display: none;
+  }
+  .site-header nav .header-link {
+    font-size: 12px;
+  }
+}
+@media (orientation:landscape) and (min-width:480px) and (max-height:570px) and (max-width:1000px) {
+  .entry-submit>.button {
+    width: auto;
+    order: 1;
+  }
+  .site-header {
+    padding-block: 8px;
+  }
+  .floating-choice .button {
+    min-height: 44px;
+    padding: 8px;
+    font-size: 13px;
+  }
+}
+.race-menu-shortcuts .button {
+  font-size: 12px;
+  min-height: 44px;
+  gap: 6px;
+}
+.site-header nav .header-icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 8px;
+  border: 1px solid currentColor;
+  border-radius: 12px;
+}
+.site-header .lobby-return {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 8px;
+  border: 1px solid currentColor;
+  border-radius: 12px;
+}
+.site-header .sound-toggle {
+  min-width: 44px;
+  min-height: 44px;
+}
+.site-header .wordmark {
+  gap: 10px;
+}
+.home .fixed-nickname .button {
+  padding: 8px;
+  min-width: 44px;
+  min-height: 44px;
+  box-shadow: none;
+}
+.home .entry-submit>.button {
+  min-width: 180px;
+}
+.entry-panel .directory-room-actions .button {
+  font-size: 14px;
+  min-height: 44px;
+}
+.lobby-invite>.button {
+  width: 100%;
+  font-size: 15px;
+  min-height: 48px;
+}
+.room-config-panel .config-actions .button {
+  min-height: 48px;
+  font-size: 15px;
+}
+.modal-panel .close-button {
+  font-size: 28px;
+}
+@media (max-width:850px) {
+  .lobby-invite>.button {
+    width: auto;
+  }
+}
+@media (max-width:650px) {
+  .site-header nav .header-icon {
+    width: 44px;
+    height: 44px;
+    padding: 9px;
+  }
+  .site-header .lobby-return {
+    width: 44px;
+    height: 44px;
+    padding: 9px;
+  }
+  .lobby-invite>.button {
+    width: 100%;
+    font-size: 15px;
+  }
+  .lobby-actions .button {
+    font-size: 14px;
+    min-height: 48px;
+  }
+}
+.button {
+  min-height: var(--ui-touch-size);
+  border-radius: var(--radius-lg);
+  font-size: 14px;
+  line-height: 1.4;
+}
+.button {
+  padding: 12px 18px;
+  gap: calc(var(--ui-space) * 2);
+}
+.site-header {
+  min-height: 64px;
+  padding-block: 10px;
+  border-bottom-width: 1px;
+}
+.site-header .wordmark {
+  font-size: 20px;
+}
+.site-header .logo-dice {
+  width: 36px;
+  height: 36px;
+  padding: 5px;
+  border-radius: 10px;
+}
+.site-header nav {
+  gap: calc(var(--ui-space) * 2);
+}
+.site-header :is(.header-link, .sound-toggle) {
+  height: 44px;
+  padding: 10px;
+  border: 1px solid color-mix(in srgb, var(--paper) 33.333%, transparent);
+  background: color-mix(in srgb, var(--paper) 4.314%, transparent);
+}
+.site-header .sound-toggle .ui-icon {
+  width: 22px;
+  height: 22px;
+}
+.site-header :is(.header-link, .sound-toggle):hover {
+  background: color-mix(in srgb, var(--paper) 16.471%, transparent);
+}
+.home .entry-panel.configuring .entry-submit > .button {
+  min-height: 48px;
+  font-size: 16px;
+}
+.results-panel .results-actions .button {
+  font-size: 14px;
+}
+.immersive-race .floating-choice .button {
+  font-size: 14px;
+  border-radius: 10px;
+}
+.modal-backdrop {
+  padding: calc(var(--ui-space) * 3);
+  background: color-mix(in srgb, var(--ui-text) 40.000%, transparent);
+  backdrop-filter: blur(5px);
+}
+.modal-panel {
+  max-height: calc(100dvh - 24px);
+  border: 1px solid var(--ui-control-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-3);
+  overscroll-behavior: contain;
+}
+.modal-header {
+  padding: 12px 16px;
+  gap: 12px;
+  border-bottom-width: 1px;
+  background: var(--ui-surface);
+}
+.modal-header h2 {
+  font: 650 20px/1.4 var(--ui-font);
+}
+.modal-header .close-button {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  border: 1px solid var(--ui-border);
+  background: var(--ui-control);
+  color: var(--ui-text);
+}
+.modal-header .close-button:hover {
+  background: var(--ui-control-hover);
+}
+.race-menu-links .button {
+  min-height: 44px;
+}
+@media (max-width: 650px) {
+  body:has(.home) .site-header {
+    padding: 8px 12px;
+  }
+  .site-header .wordmark {
+    font-size: 17px;
+    gap: 6px;
+  }
+  .site-header .logo-dice {
+    width: 30px;
+    height: 32px;
+    padding: 3px;
+  }
+  body:has(.home) .site-header nav {
+    gap: 4px;
+  }
+  .site-header .landscape-control {
+    display: none;
+  }
+  .modal-header {
+    padding: 10px 12px;
+  }
+  .modal-header h2 {
+    font-size: 18px;
+  }
+}
+@media (orientation: landscape) and (max-height: 570px) {
+  .modal-panel {
+    max-height: calc(100dvh - 16px);
+  }
+  .modal-backdrop {
+    padding: 8px;
+  }
+}
+.race-menu-panel .race-menu-shortcuts .button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  min-width: 0;
+  min-height: 66px;
+  padding: 8px 4px;
+  border: 1px solid var(--ui-border);
+  border-radius: 10px;
+  box-shadow: none;
+  background: var(--ui-control);
+  color: var(--ui-text);
+  font: 600 14px/1.4 var(--ui-font);
+}
+.race-menu-panel .race-menu-links .button {
+  justify-content: flex-start;
+  min-width: 0;
+  min-height: 44px;
+  padding: 10px;
+  border: 0;
+  border-radius: 8px;
+  box-shadow: none;
+  background: var(--ui-control);
+  font: 500 14px/1.5 var(--ui-font);
+  white-space: normal;
+  text-align: left;
+}
+.race-menu-panel .race-menu-section-body > .landscape-control .button {
+  justify-content: flex-start;
+  min-width: 0;
+  min-height: 44px;
+  padding: 10px;
+  border: 0;
+  border-radius: 8px;
+  box-shadow: none;
+  background: var(--ui-control);
+  font: 500 14px/1.5 var(--ui-font);
+  white-space: normal;
+  text-align: left;
+}
+.race-menu-panel .race-menu-section-body > .landscape-control.button {
+  justify-content: flex-start;
+  min-width: 0;
+  min-height: 44px;
+  padding: 10px;
+  border: 0;
+  border-radius: 8px;
+  box-shadow: none;
+  background: var(--ui-control);
+  font: 500 14px/1.5 var(--ui-font);
+  white-space: normal;
+  text-align: left;
+}
+.race-menu-panel .config-actions .button {
+  white-space: normal;
+}
+.button-secondary {
+  box-shadow: var(--shadow-1);
+}
+.home .entry-panel .button-secondary {
+  box-shadow: var(--shadow-1);
+}

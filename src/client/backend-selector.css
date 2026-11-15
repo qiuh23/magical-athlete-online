@@ -23,17 +23,11 @@
 .backend-line .backend-help, .backend-line .backend-failure { flex: 1 0 100%; margin: 0; }
 .backend-line .backend-help, .backend-line .backend-failure { line-height: 1.8; }
 .backend-line .backend-failure { color: var(--brand-red); }
-.site-header a.header-link { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; white-space: nowrap; }
-.site-header a.header-link[aria-disabled="true"] { opacity: .55; }
-.site-header a.header-link:focus-visible { outline-color: var(--yellow); }
 .room-switch-server { margin-left: 18px; min-height: 44px; }
 @media (max-width: 650px) {
   .backend-line { margin-bottom: 15px; gap: 0 10px; font-size: 11px; }
   .current-line { gap: 5px; }
   .current-line small { font-size: 10px; }
-  .site-header { flex-wrap: wrap; gap: 4px 12px; }
-  .site-header > nav { margin-left: auto; gap: 12px; }
-  .site-header a.header-link { font-size: 11px; }
 }
 .target-backend-note { font-size: 12px; line-height: 1.8; color: var(--ui-text); }
 .legacy-backend-choice { min-width: 0; padding: 13px; border: 1px solid var(--ui-border); border-radius: 8px; }

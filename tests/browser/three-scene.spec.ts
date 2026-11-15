@@ -116,7 +116,7 @@ async function recordBeats(page: Page, autoClickSkipOnMove = false) {
     (window as unknown as { __sceneSkipped: SkipRecord }).__sceneSkipped = skipped;
     const save = () => {
       const positions = Object.fromEntries(Array.from(board.querySelectorAll<HTMLElement>('[data-testid="scene-racer"]')).map(node => [node.dataset.racerId!, { position: node.dataset.position ?? '', target: node.dataset.targetPosition ?? '' }]));
-      const next = { phase: board.getAttribute('data-phase') ?? '', events: board.getAttribute('data-event-ids') ?? '', motions: board.getAttribute('data-motion-count') ?? '', upFace: board.querySelector('.dice-spotlight')?.getAttribute('data-up-face') ?? '', upFaces: board.querySelector('.dice-spotlight')?.getAttribute('data-up-faces') ?? '', positions, rollDisabled: !!document.querySelector('.floating-roll button')?.hasAttribute('disabled'), choices: document.querySelectorAll('.choice-panel').length };
+      const next = { phase: board.getAttribute('data-phase') ?? '', events: board.getAttribute('data-event-ids') ?? '', motions: board.getAttribute('data-motion-count') ?? '', upFace: board.querySelector('.dice-spotlight')?.getAttribute('data-up-face') ?? '', upFaces: board.querySelector('.dice-spotlight')?.getAttribute('data-up-faces') ?? '', positions, rollDisabled: !!document.querySelector('.floating-roll button')?.hasAttribute('disabled'), choices: document.querySelectorAll('[data-testid="skill-choice"]').length };
       const previous = records.at(-1);
       if (JSON.stringify(next) !== JSON.stringify(previous && { ...previous, at: undefined })) records.push({ ...next, at: performance.now() });
       // Record the simultaneous pre-move positions before invoking the actual
