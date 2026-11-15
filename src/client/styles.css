@@ -39,8 +39,8 @@ a {
   text-underline-offset: 4px;
 }
 button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible {
-  outline: 3px solid var(--brand-blue);
-  outline-offset: 4px;
+  outline: 2px solid var(--ui-focus);
+  outline-offset: 2px;
 }
 button:disabled {
   opacity: .5;
@@ -1275,14 +1275,20 @@ button svg {
   border-radius: var(--radius-sm);
 }
 .result-racer.rank-1 {
-  background: var(--brand-yellow);
+  border-color: var(--rank-gold);
   transform: rotate(-2deg);
 }
 .result-racer.rank-2 {
-  background: var(--brand-blue);
+  border-color: var(--rank-silver);
   transform: rotate(2deg);
 }
+.result-racer.rank-3 { border-color: var(--rank-bronze); }
+.result-racer.rank-1 .rank-medal, .final-ranking > .rank-1 .ranking-number, .final-ranking > .winner .ranking-number { color: var(--rank-gold); }
+.result-racer.rank-2 .rank-medal, .final-ranking > .rank-2:not(.winner) .ranking-number { color: var(--rank-silver); }
+.result-racer.rank-3 .rank-medal, .final-ranking > .rank-3:not(.winner) .ranking-number { color: var(--rank-bronze); }
 .rank-medal {
+  color: var(--ui-text-muted);
+  font-weight: 700;
   position: absolute;
   left: 10px;
   top: 8px;
@@ -1337,6 +1343,9 @@ button svg {
   padding: 16px;
 }
 .ranking-number {
+  color: var(--ui-text-muted);
+  font-weight: 700;
+  flex-shrink: 0;
   font-family: var(--font-display);
   font-size: 20px;
   width: 30px;
@@ -1344,6 +1353,8 @@ button svg {
 .final-ranking strong {
   font-size: 16px;
   flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 .ranking-score {
   font-family: var(--font-display);
@@ -1354,8 +1365,8 @@ button svg {
   margin-left: 8px;
 }
 .final-ranking .winner {
-  background: var(--brand-yellow);
-  border: 2px solid var(--ui-text);
+  background: color-mix(in srgb, var(--rank-gold) 12%, var(--paper));
+  border: 1px solid var(--rank-gold);
   border-radius: var(--radius-sm);
   box-shadow: var(--shadow-1);
   margin-bottom: 8px;
@@ -1463,7 +1474,7 @@ button svg {
   font-size: 16px;
   margin: 16px 0 8px;
 }
-@media(min-width:1500px) {
+@media(min-width: 1280px) {
   .hero h1 {
     font-size: 32px;
   }
@@ -2313,7 +2324,7 @@ button svg {
     gap: 8px;
   }
   .ranking-number {
-    font-size: 18px;
+    font-size: 20px;
     width: 20px;
   }
   .final-ranking strong {
@@ -2743,7 +2754,7 @@ html[data-motion=reduce] *,html[data-motion=reduce] *:before,html[data-motion=re
   line-height: 1.8;
   margin-top: 12px;
 }
-@media(max-width:800px) {
+@media(max-width: 650px) {
   .directory-room {
     align-items: flex-start;
     flex-direction: column;

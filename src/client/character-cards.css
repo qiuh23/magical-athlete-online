@@ -7,7 +7,7 @@ body:has(.character-grid){background:var(--paper)}
 .character-grid{gap:24px;align-items:stretch}
 .card-print-line{flex-wrap:wrap;position:relative;z-index:var(--z-sticky);display:flex;align-items:center;justify-content:space-between;gap:4px;width:100%;font-family:var(--font-print);font-size:11px;font-weight:700;letter-spacing:.1em;white-space:normal;overflow-wrap:anywhere}
 .card-print-line>span{min-width:0}
-.card-print-line>span:last-child{font-size:11px;font-style:italic;letter-spacing:0;font-variant-numeric:tabular-nums}
+.card-print-line>span:last-child{font-family:var(--font-display);font-size:11px;font-style:italic;letter-spacing:0;font-variant-numeric:tabular-nums}
 .character-avatar-detail .portrait-scene{width:100%;max-width:255px;margin:-4px auto -4px}
 .character-avatar-detail:hover .avatar{transform:none}
 .card-art-caption{display:flex;flex-wrap:wrap;gap:4px;align-items:center;justify-content:space-between;width:100%;border-top:1px solid color-mix(in srgb, var(--ui-control-border) 18.824%, transparent);padding-top:8px;font-size:11px;letter-spacing:.2em;font-weight:700}
@@ -68,7 +68,7 @@ html[data-motion=reduce] .character-avatar-detail:hover .avatar{transform:none}
     box-shadow: var(--shadow-1);
   }
   .character-card.selected {
-    outline-width: 3px;
+    outline-width: 2px;
     outline-offset: 2px;
   }
 }
@@ -101,10 +101,10 @@ html[data-motion=reduce] .character-avatar-detail:hover .avatar{transform:none}
   pointer-events: none;
 }
 .character-card.selected {
-  border-color: var(--ui-control-border);
-  outline: 3px solid var(--ui-text-muted);
-  outline-offset: 3px;
-  box-shadow: var(--shadow-2);
+  border-color: var(--brand-blue);
+  outline: 2px solid var(--brand-blue);
+  outline-offset: 2px;
+  box-shadow: var(--shadow-hard);
 }
 .character-card.used {
   opacity: .7;
@@ -150,7 +150,7 @@ html[data-motion=reduce] .character-avatar-detail:hover .avatar{transform:none}
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  min-height: 42px;
+  min-height: var(--ui-touch-size);
   height: auto;
   margin: 0;
   padding: 8px 12px;
@@ -174,7 +174,7 @@ html[data-motion=reduce] .character-avatar-detail:hover .avatar{transform:none}
   opacity: 1;
 }
 .character-card .detail-button {
-  min-height: 39px;
+  min-height: var(--ui-touch-size);
   margin: 8px 0 0;
   padding: 8px 0 4px;
   border: 0;
@@ -203,15 +203,19 @@ html[data-motion=reduce] .character-avatar-detail:hover .avatar{transform:none}
   z-index: var(--z-sticky);
 }
 .character-card button:focus-visible {
-  outline: 3px solid var(--ui-text-muted);
-  outline-offset: 3px;
+  outline: 2px solid var(--ui-focus);
+  outline-offset: 2px;
   z-index: var(--z-dock);
 }
 @media (hover:hover) {
   .character-card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-2px);
     border-color: var(--ui-control-border);
     box-shadow: var(--shadow-2);
+  }
+  .character-card.selected:hover {
+    border-color: var(--brand-blue);
+    box-shadow: var(--shadow-hard);
   }
   .character-card:nth-child(n) .character-art.character-pick:hover:not(:disabled) {
     background: var(--ui-text);
@@ -229,7 +233,7 @@ html[data-motion=reduce] .character-avatar-detail:hover .avatar{transform:none}
 @media (max-width:650px) {
   .character-card {
     padding: 4px;
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-lg);
   }
   .character-card:after {
     inset: 2px;

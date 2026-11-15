@@ -44,6 +44,9 @@
   --ui-control-border: #9caf9f;
   --ui-accent: #254de4;
   --ui-gold: #b57422;
+  --rank-gold: var(--ui-gold);
+  --rank-silver: #7d8a84;
+  --rank-bronze: #a06a3b;
   --ui-focus: #254de4;
   --radius-sm: 8px;
   --radius-md: 12px;
@@ -78,8 +81,8 @@ button {
   transition: background-color var(--duration-2) cubic-bezier(.2,.7,.3,1), border-color var(--duration-2) cubic-bezier(.2,.7,.3,1), box-shadow var(--duration-2) cubic-bezier(.2,.7,.3,1);
 }
 :is(button, a, input, select, textarea, summary):focus-visible {
-  outline: 3px solid var(--ui-focus);
-  outline-offset: 3px;
+  outline: 2px solid var(--ui-focus);
+  outline-offset: 2px;
 }
 button:active:not(:disabled) { filter: brightness(.96); }
 .ui-icon { stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
@@ -134,7 +137,7 @@ button:active:not(:disabled) { filter: brightness(.96); }
 .home .meet-racers { border-top-width: 1px; }
 
 /* Retain the artwork as the home anchor, with all four ways to play visible. */
-@media (min-width: 1050px) {
+@media (min-width: 1000px) {
   .home:not(:has(.entry-panel.configuring)) {
     display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
     gap: 0 32px; align-items: start; padding-top: 32px;
@@ -227,7 +230,7 @@ button:active:not(:disabled) { filter: brightness(.96); }
   .immersive-race .floating-racer-score { font-size: 14px; line-height: 18px; }
   .immersive-race .race-status-copy { font-size: 12px; line-height: 18px; }
 }
-@media (orientation: landscape) and (min-width: 480px) and (max-width: 1000px) and (max-height: 570px) {
+@media (orientation: landscape) and (max-width: 1000px) and (max-height: 570px) {
   html[data-race-chat-open="true"] .immersive-race .floating-racer-score { font-size: 14px; line-height: 18px; }
   /* The notice and trigger share the left column, beside the map. A zero
      height cap based on the right-hand map used to draw them over each other. */
@@ -273,7 +276,7 @@ button:active:not(:disabled) { filter: brightness(.96); }
   html[data-chat-compact="true"][data-race-chat-open="true"] body > .room-community.in-race .room-chat header { min-height: 50px; }
   html[data-chat-compact="true"][data-race-chat-open="true"] body > .room-community.in-race .room-chat header button { top: 3px; }
 }
-@media (orientation: landscape) and (min-width: 480px) and (max-width: 650px) and (max-height: 350px) {
+@media (orientation: landscape) and (max-width: 650px) and (max-height: 350px) {
   /* Leave the enlarged score strip above this collapsed summary. The full
      prompt remains available in the expanded choice, with a 44px trigger. */
 }
@@ -322,7 +325,7 @@ html[data-motion="reduce"] { --duration-1: 0ms; --duration-2: 0ms; --duration-3:
 .race-menu-panel .race-menu-section > summary > .ui-icon { flex:none;width:20px;height:20px;color:var(--ui-text-muted); }
 .race-menu-panel .race-menu-section-body { min-width:0;padding:4px 0 12px; }
 .race-menu-panel .race-menu-section-body h3 { margin:8px 0;font:600 13px/1.5 var(--ui-font); }
-.race-menu-panel :is(button,summary,select):focus-visible { outline:3px solid var(--ui-accent);outline-offset:2px; }
+.race-menu-panel :is(button,summary,select):focus-visible { outline:2px solid var(--ui-focus);outline-offset:2px; }
 .race-menu-panel .presentation-settings { display:grid;grid-template-columns:minmax(0,1fr);gap:4px;margin:0 0 8px;padding:0;border:0;background:transparent; }
 .race-menu-panel .presentation-settings > label { display:flex;align-items:center;gap:8px;min-width:0;min-height:44px;padding:4px 0;font:400 14px/1.5 var(--ui-font); }
 .race-menu-panel .presentation-settings > label:has(select) { flex-wrap:wrap;justify-content:space-between; }
@@ -429,7 +432,7 @@ html[data-motion="reduce"] { --duration-1: 0ms; --duration-2: 0ms; --duration-3:
   opacity: .55;
 }
 .site-header a.header-link:focus-visible {
-  outline-color: var(--brand-yellow);
+  outline-color: var(--ui-focus);
 }
 @media (max-width: 650px) {
   .site-header > nav {
@@ -441,16 +444,16 @@ html[data-motion="reduce"] { --duration-1: 0ms; --duration-2: 0ms; --duration-3:
   }
 }
 .site-header button:focus-visible {
-  outline-color: var(--brand-yellow);
+  outline-color: var(--ui-focus);
 }
 .site-header {
-  background: var(--brand-blue);
-  color: var(--paper);
+  background: var(--paper);
+  color: var(--ui-text);
   padding: 16px max(4vw,16px);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 3px solid var(--ui-text);
+  border-bottom: 1px solid var(--ui-border);
   gap: 16px;
 }
 .site-header nav {
@@ -644,7 +647,7 @@ html[data-motion="reduce"] { --duration-1: 0ms; --duration-2: 0ms; --duration-3:
 .entry-panel .directory-room-actions .button-secondary {
   background: var(--brand-yellow);
 }
-@media (max-width:800px) {
+@media (max-width: 650px) {
   .entry-panel .directory-room-actions .button {
     flex: 1;
   }
@@ -753,7 +756,7 @@ body:has(.home) .site-header .header-link {
   min-height: 44px;
 }
 body:has(.home) .site-header :is(a, button):focus-visible {
-  outline-color: var(--ui-text);
+  outline-color: var(--ui-focus);
 }
 .home .entry-panel .button {
   background: var(--ui-text);
@@ -856,7 +859,7 @@ body:has(.home) .site-header :is(a, button):focus-visible {
     font-size: 12px;
   }
 }
-@media (orientation:landscape) and (min-width:480px) and (max-height:570px) and (max-width:1000px) {
+@media (orientation:landscape) and (max-height:570px) and (max-width:1000px) {
   .entry-submit>.button {
     width: auto;
     order: 1;
@@ -925,7 +928,7 @@ body:has(.home) .site-header :is(a, button):focus-visible {
 .modal-panel .close-button {
   font-size: 24px;
 }
-@media (max-width:850px) {
+@media (max-width: 1000px) {
   .lobby-invite>.button {
     width: auto;
   }
@@ -980,15 +983,15 @@ body:has(.home) .site-header :is(a, button):focus-visible {
 .site-header :is(.header-link, .sound-toggle) {
   height: 44px;
   padding: 8px;
-  border: 1px solid color-mix(in srgb, var(--paper) 33.333%, transparent);
-  background: color-mix(in srgb, var(--paper) 4.314%, transparent);
+  border: 1px solid var(--ui-border);
+  background: var(--ui-surface);
 }
 .site-header .sound-toggle .ui-icon {
   width: 22px;
   height: 22px;
 }
 .site-header :is(.header-link, .sound-toggle):hover {
-  background: color-mix(in srgb, var(--paper) 16.471%, transparent);
+  background: var(--ui-control-hover);
 }
 .home .entry-panel.configuring .entry-submit > .button {
   min-height: 48px;

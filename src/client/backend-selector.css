@@ -17,7 +17,7 @@
 .server-choice { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 4px; min-width: 0; min-height: 48px; padding: 8px 12px; border: 1px solid var(--ui-border); border-radius: var(--radius-sm); background: var(--paper); text-align: left; font-size: 13px; line-height: 1.5; }
 .server-choice small { font-size: 11px; font-weight: 400; }
 .server-choice[data-current="true"] { color: var(--ui-text); border-color: var(--ui-control-border); background: var(--ui-control); opacity: 1; }
-.server-choice:focus-visible { outline: 3px solid var(--brand-blue); outline-offset: 3px; }
+.server-choice:focus-visible { outline: 2px solid var(--ui-focus); outline-offset: 2px; }
 @media (hover: hover) { .server-choice:not(:disabled):hover { border-color: var(--brand-blue); background: var(--paper); } }
 .server-choice:not(:disabled):active { background: var(--brand-blue); transform: translateY(1px); }
 .backend-line .backend-help, .backend-line .backend-failure { flex: 1 0 100%; margin: 0; }

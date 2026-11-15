@@ -2,7 +2,7 @@
    layout. Fixed regions share the measurements already maintained by chat. */
 .race-icon-button{display:inline-flex;align-items:center;justify-content:center;flex:none;width:44px;height:44px;min-width:44px;min-height:44px;padding:8px;border:1px solid color-mix(in srgb, var(--ui-text) 25.098%, transparent);border-radius:var(--radius-md);background:color-mix(in srgb, var(--paper) 93.333%, transparent);color:var(--ui-text);box-shadow:var(--shadow-1);cursor:pointer}
 .race-icon-button:hover:not(:disabled){background:var(--paper);border-color:var(--ui-control-border)}
-.race-icon-button:focus-visible, .race-event-chip:focus-visible, .scene-camera-toolbar summary:focus-visible, .floating-racer:focus-visible, .skip-animation:focus-visible{outline:3px solid var(--ui-text);outline-offset:3px}
+.race-icon-button:focus-visible, .race-event-chip:focus-visible, .scene-camera-toolbar summary:focus-visible, .floating-racer:focus-visible, .skip-animation:focus-visible{outline:2px solid var(--ui-focus);outline-offset:2px}
 .race-icon-button:disabled{cursor:default;opacity:.55}
 .chat-unread{position:absolute;top:-7px;right:-7px;min-width:22px;height:22px;margin:0;padding:0 4px;border:2px solid var(--paper);font-size:11px}
 .room-chat header button{display:grid;place-items:center;min-height:44px;min-width:44px}
@@ -48,8 +48,8 @@
 .race-track-details .special-event-detail{padding:12px 16px;border:1px solid color-mix(in srgb, var(--brand-blue) 40.000%, transparent);border-radius:var(--radius-lg);background:var(--paper)}
 .race-track-details p{margin:8px 0}
 .race-menu-shortcuts{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
-.immersive-race .floating-racers{border:1px solid color-mix(in srgb, var(--ui-text) 14.902%, transparent);background:color-mix(in srgb, var(--paper) 86.275%, transparent);gap:4px;padding:4px 8px}
-.immersive-race .floating-racer.is-active:before{width:0;height:0;border-radius:0;background:none;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid var(--ui-text);left:calc(50% - 4px);top:-4px}
+.immersive-race .floating-racers{border:1px solid var(--ui-border);background:var(--ui-surface);backdrop-filter:blur(8px);box-shadow:var(--shadow-2);gap:4px;padding:4px 8px}
+.immersive-race .floating-racer.is-active:before{width:3px;height:auto;inset:4px auto 4px 0;border-radius:999px;background:var(--player-color);border:0}
 .racer-state{position:absolute;top:-4px;right:-5px;display:grid;place-items:center;width:22px;height:22px;border:1px solid color-mix(in srgb, var(--ui-text) 40.000%, transparent);border-radius:var(--radius-sm);background:var(--paper);color:var(--ui-text)}
 .immersive-race .floating-roll .race-roll-button:disabled{min-height:44px;min-width:136px;padding:8px 12px;border-radius:var(--radius-md);font-size:12px;gap:8px}
 .immersive-race .roll-caption:empty{display:none}
@@ -66,7 +66,7 @@
 .moment-participants>svg{flex:none;margin-top:8px;color:var(--ui-text-muted)}
 .moment-racer,.moment-origin{display:flex;flex-direction:column;align-items:center;gap:4px;flex:none;min-width:44px;max-width:100%;margin:0;padding:0;border:0;background:none;color:inherit;font:inherit;text-align:center}
 .moment-racer{cursor:pointer;pointer-events:auto;border-radius:var(--radius-sm)}
-.moment-racer:focus-visible,.ability-reveal-card button:focus-visible{outline:3px solid var(--ui-text);outline-offset:3px}
+.moment-racer:focus-visible,.ability-reveal-card button:focus-visible{outline:2px solid var(--ui-focus);outline-offset:2px}
 .moment-racer>.avatar,.moment-origin>.avatar,.moment-origin>.event-art{display:block;flex:none;width:36px;height:36px}
 .moment-origin{width:48px}
 .moment-origin>svg:not(.avatar):not(.event-art){height:36px}
@@ -79,7 +79,7 @@
 .immersive-race>.ability-reveal-card{width:min(360px,calc(100% - 36px));max-height:260px;overflow:auto;pointer-events:auto}
 .racer-state{font-size:11px;font-weight:800;line-height:1;white-space:nowrap}
 
-@media(max-width:1366px) and (min-width:651px) and (min-height:571px){
+@media(max-width: 1280px) and (width > 650px) and (min-height:571px){
  .immersive-race .race-hud-top{flex-wrap:wrap;gap:8px 12px}
  .immersive-race .race-status-stack{width:min(300px,calc(100% - 310px))}
  .immersive-race .race-match-label>strong>span{display:none}
@@ -111,7 +111,7 @@
  .immersive-race .dice-spotlight.has-reason{height:auto}
  .immersive-race .dice-spotlight.is-multi,.immersive-race .dice-spotlight.is-duel{height:auto;width:min(342px,calc(100% - 28px))}
 }
-@media(orientation:landscape) and (min-width:480px) and (max-height:570px){
+@media(orientation:landscape) and (max-height:570px){
  .immersive-race .race-hud-top{top:max(8px,env(safe-area-inset-top));left:12px;right:174px;gap:8px}
  .immersive-race .race-hud-top .race-match-label{font-size:11px}
  .immersive-race .race-match-label>strong>span{display:none}
@@ -130,7 +130,7 @@
  .immersive-race .dice-spotlight.has-reason{height:calc(100dvh - 80px)}
  .immersive-race .dice-spotlight.is-multi,.immersive-race .dice-spotlight.is-duel{height:calc(100dvh - 80px);width:310px}
 }
-@media(max-height:350px) and (min-width:651px){
+@media(max-height:350px) and (width > 650px){
  .immersive-race .race-status-stack{top:62px;left:112px;width:172px}
  .immersive-race .race-status-stack>.race-event-chips{max-height:44px}
  .immersive-race .race-moment,.immersive-race>.ability-reveal-card{bottom:88px;max-height:124px}
@@ -164,7 +164,7 @@
 .immersive-race .minimap-own-avatar{display:grid;place-items:center;width:44px;height:44px;min-width:44px}
 .immersive-race .minimap-own-avatar>.avatar{width:30px;height:30px}
 
-@media(orientation:landscape) and (min-width:480px) and (max-height:570px){
+@media(orientation:landscape) and (max-height:570px){
  body:has(>.room-community.in-race.is-open) .immersive-race .floating-racers,
  body:has(>.room-community.in-race .chat-notice-region) .immersive-race .floating-racers{left:250px;max-width:calc(100% - 430px)}
 }
@@ -183,12 +183,12 @@
 .compact-route-dice>b{font-size:20px}.compact-route-dice>svg:nth-of-type(2){margin-left:8px}
 .choice-actor-detail{float:left;display:grid;place-items:center;width:44px;min-width:44px;height:44px;padding:4px;margin:0 8px 4px 0;border:1px solid var(--ui-control-border);border-radius:var(--radius-md);background:var(--paper);color:var(--ui-text);cursor:pointer}
 .choice-actor-detail>.avatar{width:34px;height:34px}
-.choice-actor-detail:focus-visible{outline:3px solid var(--ui-text);outline-offset:2px}
+.choice-actor-detail:focus-visible{outline:2px solid var(--ui-focus);outline-offset:2px}
 .immersive-race .room-pause-control.is-paused:hover:not(:disabled){background:#34796c}
-@media(orientation:landscape) and (min-width:480px) and (max-height:570px){
+@media(orientation:landscape) and (max-height:570px){
  body>.room-community.in-race .chat-notice-region{width:228px;max-width:228px}
 }
-@media(orientation:landscape) and (min-width:480px) and (max-width:650px) and (max-height:570px){
+@media(orientation:landscape) and (max-width:650px) and (max-height:570px){
  .immersive-race .race-moment{bottom:88px;padding:8px}
  .moment-heading{margin-bottom:8px}
  .moment-participants{gap:4px}
@@ -201,7 +201,7 @@
  .immersive-race>.ability-reveal-card{bottom:88px;max-height:calc(100dvh - 150px)}
 }
 
-@media(orientation:landscape) and (min-width:480px) and (max-height:570px){
+@media(orientation:landscape) and (max-height:570px){
  html[data-chat-keyboard="true"] .immersive-race .scene-camera-toolbar{display:none}
  html[data-chat-keyboard="true"] .immersive-race .race-status-stack{top:8px;left:308px;right:132px;width:auto;max-height:44px}
  html[data-chat-keyboard="true"] .immersive-race .race-event-chips{display:none}
@@ -242,7 +242,7 @@
 @media(max-width:650px) and (orientation:portrait){
  html[data-view="race"]:not([data-chat-keyboard="true"]) body:has(.floating-choice.is-collapsed) .immersive-race .floating-racers{bottom:calc(max(12px,env(safe-area-inset-bottom)) + 87px)}
 }
-@media(max-width:350px) and (orientation:portrait){
+@media(max-width: 650px) and (orientation:portrait){
  /* Keep the first target row visible between the map and the order strip. */
  .immersive-race>.ability-reveal-card{padding:8px}
  .ability-reveal-heading h2{font-size:14px}
@@ -255,7 +255,7 @@
  .ability-reveal-powers strong{font-size:11px;line-height:1.2}
  .ability-reveal-card .ability-reveal-duration{margin-top:4px;font-size:11px}
 }
-@media(orientation:landscape) and (min-width:480px) and (max-width:650px) and (max-height:570px){
+@media(orientation:landscape) and (max-width:650px) and (max-height:570px){
  .ability-reveal-heading h2{font-size:14px}
  .ability-reveal-flow{gap:4px}
  .ability-reveal-flow>svg{margin-top:8px}

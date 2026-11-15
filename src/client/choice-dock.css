@@ -12,10 +12,12 @@
   flex-direction: column;
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  /* Body/options own scrolling; let the common outer focus ring stay visible. */
+  overflow: visible;
   border: 0;
   border-radius: var(--radius-md);
-  background: var(--paper);
+  background: var(--ui-surface);
+  backdrop-filter: blur(8px);
   color: var(--ui-text);
   box-shadow: var(--shadow-2);
   pointer-events: auto;
@@ -30,7 +32,7 @@
   touch-action: manipulation;
 }
 .immersive-race .floating-choice.race-choice-dock button:disabled { cursor: default; opacity: .55; }
-.immersive-race .floating-choice.race-choice-dock :is(button, [tabindex]):focus-visible { outline: 3px solid var(--ui-gold); outline-offset: -3px; }
+.immersive-race .floating-choice.race-choice-dock :is(button, [tabindex]):focus-visible { outline: 2px solid var(--ui-focus); outline-offset: 2px; }
 .immersive-race .floating-choice.race-choice-dock .choice-dock-heading {
   display: flex;
   flex: 0 0 44px;
@@ -148,7 +150,7 @@
   html[data-race-chat-open="true"] .immersive-race .floating-choice.race-choice-dock { bottom: var(--race-chat-choice-bottom); max-height: min(30dvh, max(96px, calc(100dvh - var(--race-chat-choice-bottom) - var(--race-chat-clear-top, 280px)))); }
   html[data-race-chat-open="true"] .immersive-race .floating-choice.race-choice-dock.is-collapsed { max-height: 44px; }
 }
-@media (orientation: landscape) and (min-width: 480px) and (max-height: 570px) {
+@media (orientation: landscape) and (max-height: 570px) {
   .immersive-race .floating-choice.race-choice-dock { left: 196px; right: 172px; width: auto; transform: none; bottom: 92px; max-height: min(40dvh, 170px); }
   .immersive-race .floating-choice.race-choice-dock .choice-dock-body { display: flex; gap: 4px; }
   .immersive-race .floating-choice.race-choice-dock .choice-dock-context { flex: 0 1 36%; margin: 0; }
