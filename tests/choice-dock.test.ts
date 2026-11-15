@@ -136,7 +136,9 @@ test('layout contract caps the dock and keeps action and inspect targets finger-
   assert.match(css, /min-height: 44px;\s*min-width: 44px;/);
   assert.match(css, /\.choice-dock-inspect[^}]*width: 44px/);
   assert.match(css, /\.choice-dock-options[^}]*flex-wrap: nowrap[^}]*overflow-x: auto/s);
-  assert.doesNotMatch(css, /backdrop-filter|filter:\s*blur|position:\s*fixed|inset:\s*0/);
+  // Surface blur belongs to the bounded dock, never a page-covering layer.
+  assert.match(css, /background: var\(--ui-surface\);\s*backdrop-filter: blur\(8px\)/);
+  assert.doesNotMatch(css, /(?:^|[;{]\s*)filter:\s*blur|position:\s*fixed|inset:\s*0/);
   // These are declarative cap calculations, not measured browser layout.
   for (const height of [667, 844, 1024]) assert(Math.min(height * .3, 220) / height <= .3);
   for (const height of [320, 390, 500]) assert(Math.min(height * .4, 170) / height <= .4);

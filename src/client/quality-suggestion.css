@@ -5,5 +5,5 @@
 .quality-suggestion>div{display:flex;gap:4px}
 .quality-suggestion button{min-height:44px;padding:4px 8px;border:0;border-radius:var(--radius-sm);background:transparent;color:inherit;font:inherit;cursor:pointer}
 .quality-suggestion button:first-child{font-weight:800;background:var(--paper)}
-.quality-suggestion button:focus-visible{outline:3px solid var(--ui-text);outline-offset:2px}
+.quality-suggestion button:focus-visible{outline:2px solid var(--ui-focus);outline-offset:2px}
 @media(max-width:650px){.quality-suggestion{margin-top:24px}}

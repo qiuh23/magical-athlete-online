@@ -7,7 +7,7 @@ body:has(.home) .lobby-return { padding: 8px 12px; border: 1px solid var(--ui-bo
 body:has(.home) .sound-toggle { height: 44px; width: 44px; border-color: var(--ui-border); }
 body:has(.home) .footer { color: var(--ui-text); border-top: 1px solid var(--ui-border); font-size: 12px; margin-top: 32px; }
 .home { max-width: 1280px; padding: 0 max(24px, 4vw); }
-.home > .hero { min-height: 420px; grid-template-columns: .9fr 1.1fr; padding-top: 24px; overflow: visible; }
+.home > .hero { background: radial-gradient(ellipse at 72% 48%, color-mix(in srgb, var(--brand-yellow) 30%, var(--paper)), var(--paper) 72%); border-radius: var(--radius-lg); min-height: 420px; grid-template-columns: .9fr 1.1fr; padding-top: 24px; overflow: visible; }
 .home .hero-title { padding-bottom: 24px; }
 .home .hero-title > span { font-size: 18px; letter-spacing: 1px; margin-bottom: 16px; }
 .home .hero h1 { font-size: clamp(32px, 6.8vw, 96px); line-height: 1.05; letter-spacing: -4px; -webkit-text-stroke: 0; }
@@ -50,7 +50,7 @@ body:has(.home) .footer { color: var(--ui-text); border-top: 1px solid var(--ui-
 .home #create-tab .entry-icon { background: var(--brand-yellow); color: var(--ui-text); border-color: var(--brand-yellow); }
 .home .entry-tabs button[aria-selected="true"] { background: var(--ui-text); color: var(--paper); border-color: var(--ui-text); }
 .home .entry-tabs button[aria-selected="true"] .entry-icon { color: var(--ui-text); }
-.home :is(button, a, input, select, summary):focus-visible { outline: 3px solid var(--ui-text); outline-offset: 4px; }
+.home :is(button, a, input, select, summary):focus-visible { outline: 2px solid var(--ui-focus); outline-offset: 2px; }
 .home .entry-tabs button:disabled { opacity: 1; color: var(--ui-text); background: var(--ui-control); border-color: var(--ui-border); box-shadow: none; }
 .home #create-tab:disabled { color: var(--ui-text); background: var(--ui-control); border-color: var(--ui-border); box-shadow: none; }
 @media (hover: hover) {
@@ -81,10 +81,10 @@ body:has(.home) .footer { color: var(--ui-text); border-top: 1px solid var(--ui-
 .home .section-intro p { font-size: 13px; color: var(--ui-text); }
 .home .sample-racers strong { font-size: 13px; }
 .home .sample-racers button { border-radius: var(--radius-md); min-height: 44px; }
-@media (max-width: 850px) {
+@media (max-width: 1000px) {
   .home .entry-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .entry-heading { align-items: start; flex-direction: column; gap: 4px; }
-  .home > .hero { min-height: 360px; }
+  .home > .hero { background: radial-gradient(ellipse at 72% 48%, color-mix(in srgb, var(--brand-yellow) 30%, var(--paper)), var(--paper) 72%); border-radius: var(--radius-lg); min-height: 360px; }
   .home .hero-art { height: 310px; }
   .home .hero-racer-0 { width: 132px; }
   .home .hero-racer-1 { width: 107px; }
@@ -101,7 +101,7 @@ body:has(.home) .footer { color: var(--ui-text); border-top: 1px solid var(--ui-
   body:has(.home) .sound-toggle { height: 44px; width: 44px; }
   body:has(.home) .footer { padding: 24px 16px; font-size: 11px; }
   .home { padding: 0 16px; }
-  .home > .hero { min-height: 440px; display: block; padding-top: 24px; }
+  .home > .hero { background: radial-gradient(ellipse at 72% 48%, color-mix(in srgb, var(--brand-yellow) 30%, var(--paper)), var(--paper) 72%); border-radius: var(--radius-lg); min-height: 440px; display: block; padding-top: 24px; }
   .home .hero-title { padding: 0; }
   .home .hero-title > span { font-size: 16px; margin-bottom: 12px; }
   .home .hero h1 { font-size: 32px; letter-spacing: -3px; }
@@ -140,8 +140,8 @@ body:has(.home) .footer { color: var(--ui-text); border-top: 1px solid var(--ui-
   .home .section-intro h2 { font-size: 20px; }
   .home .section-intro p { font-size: 12px; }
 }
-@media (orientation: landscape) and (min-width: 480px) and (max-height: 570px) and (max-width: 1000px) {
-  .home > .hero { min-height: 300px; padding-top: 16px; }
+@media (orientation: landscape) and (max-height: 570px) and (max-width: 1000px) {
+  .home > .hero { background: radial-gradient(ellipse at 72% 48%, color-mix(in srgb, var(--brand-yellow) 30%, var(--paper)), var(--paper) 72%); border-radius: var(--radius-lg); min-height: 300px; padding-top: 16px; }
   .home .hero h1 { font-size: 32px; }
   .home .hero-title > span { font-size: 16px; margin-bottom: 8px; }
   .home .hero-title p { font-size: 13px; margin-top: 16px; }

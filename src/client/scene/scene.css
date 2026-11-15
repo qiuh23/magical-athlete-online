@@ -48,7 +48,7 @@
  .minimap-positions b{font-size:11px}
  .minimap-positions em{font-size:11px}
 }
-@media(max-width:360px){
+@media(max-width: 650px){
  .scene-camera-toolbar{max-width:calc(100% - 174px)}
  .scene-camera-toolbar .camera-options{position:absolute;top:102px;left:0}
  .scene-camera-toolbar .camera-options label,.scene-camera-toolbar .camera-options small{left:0;right:auto}
@@ -90,7 +90,7 @@
 .prediction-hud.is-choosing{bottom:auto;top:150px}
 @media(max-width:650px){.prediction-hud{left:max(12px,env(safe-area-inset-left));right:max(12px,env(safe-area-inset-right));bottom:calc(max(12px,env(safe-area-inset-bottom)) + 168px);max-width:none}.prediction-hud-title{font-size:11px;padding:4px 4px}.prediction-hud-list{gap:4px;max-height:94px}.prediction-chip{gap:4px;padding:4px 8px;border-radius:var(--radius-sm)}.prediction-avatar{width:22px;height:22px;flex-basis:22px}.prediction-racer{max-width:88px}.prediction-racer strong{font-size:11px}.prediction-racer small{font-size:11px}.prediction-hud.is-choosing{top:max(260px,32dvh);bottom:auto}}
 .board-avatar-button{display:inline-block;border:0;padding:0;background:transparent;color:inherit;font:inherit;cursor:pointer;border-radius:50%;pointer-events:auto;flex-shrink:0;line-height:0}
-.board-avatar-button:focus-visible,.dice-source-avatar:focus-visible{outline:3px solid var(--ui-gold);outline-offset:3px}
+.board-avatar-button:focus-visible,.dice-source-avatar:focus-visible{outline:2px solid var(--ui-focus);outline-offset:2px}
 .race-intro .race-intro-avatar.board-avatar-button{margin:0;padding:0;border-radius:50%;min-height:0;background:var(--ui-control-hover)}
 .minimap-own-avatar.board-avatar-button{position:relative;pointer-events:auto}
 .prediction-avatar.board-avatar-button,.skill-banner-avatar.board-avatar-button{pointer-events:auto}
@@ -116,7 +116,7 @@
 .dice-spotlight.has-reason>div:not([class]){inset:136px 0 52px!important;height:auto!important}
 .route-choice-overlay{position:absolute;inset:0;z-index:var(--z-menu);pointer-events:none}
 .route-arrow{position:absolute;left:0;top:0;pointer-events:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:64px;min-height:66px;padding:8px 8px;border:2px solid var(--ui-gold);border-radius:var(--radius-lg);background:var(--brand-yellow);color:var(--ui-gold);box-shadow:var(--shadow-1);cursor:pointer;touch-action:manipulation;white-space:nowrap;user-select:none}
-.route-arrow svg{width:32px;height:32px;pointer-events:none}.route-arrow span{font-size:12px;font-weight:800;pointer-events:none}.route-arrow:hover{background:var(--ui-control-hover)}.route-arrow:focus-visible{outline:3px solid var(--ui-text);outline-offset:4px}.route-arrow:disabled{opacity:.6;cursor:wait}
+.route-arrow svg{width:32px;height:32px;pointer-events:none}.route-arrow span{font-size:12px;font-weight:800;pointer-events:none}.route-arrow:hover{background:var(--ui-control-hover)}.route-arrow:focus-visible{outline:2px solid var(--ui-focus);outline-offset:2px}.route-arrow:disabled{opacity:.6;cursor:wait}
 /* Shared skill shots reserve the open space above the action controls, keeping
    their captions clear of the nearby models being shown together. */
 .board-scene[data-camera-state="action"][data-camera-shot*=","] .scene-action-banner{top:auto;bottom:140px}
