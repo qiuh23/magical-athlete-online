@@ -1,0 +1,193 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-16T08:07:32.839556+00:00",
+  "title": "胡闹运动会 · 纸面嘉年华",
+  "extensions": {
+    "source": {
+      "repository": "qiuh23/magical-athlete-online",
+      "commit": "7e542f72d6affae64a7bed39e723dd89d36d5898",
+      "path": "src/client/ui-theme.css"
+    },
+    "shadows": [
+      {
+        "name": "shadow-1",
+        "value": "0 2px 8px rgba(35,73,65,.10)"
+      },
+      {
+        "name": "shadow-2",
+        "value": "0 8px 24px rgba(35,73,65,.18)"
+      },
+      {
+        "name": "shadow-3",
+        "value": "0 16px 48px rgba(35,73,65,.26)"
+      },
+      {
+        "name": "shadow-hard",
+        "value": "3px 4px 0 #25464c"
+      }
+    ],
+    "motion": [
+      {
+        "name": "duration-1",
+        "value": "120ms"
+      },
+      {
+        "name": "duration-2",
+        "value": "180ms"
+      },
+      {
+        "name": "duration-3",
+        "value": "240ms"
+      }
+    ],
+    "tokens": {
+      "--ui-font": "-apple-system, BlinkMacSystemFont, \"PingFang SC\", \"Microsoft YaHei\", system-ui, sans-serif",
+      "--font-display": "\"Arial Black\", var(--ui-font)",
+      "--font-print": "Georgia, \"Times New Roman\", serif",
+      "--font-reading": "\"Noto Serif SC\", \"Songti SC\", \"STSong\", \"SimSun\", serif",
+      "--ui-text": "#25464c",
+      "--ui-text-muted": "#5b7268",
+      "--paper": "#fffdf4",
+      "--brand-yellow": "#ffda27",
+      "--brand-red": "#f44735",
+      "--brand-blue": "#254de4",
+      "--brand-green": "#b5d66b",
+      "--brand-pink": "#f6a8d0",
+      "--ui-surface": "rgba(255,253,244,.96)",
+      "--ui-control": "#f2f1e5",
+      "--ui-control-hover": "#fff2bf",
+      "--ui-control-active": "#e5edda",
+      "--ui-border": "#c0cbb7",
+      "--ui-control-border": "#9caf9f",
+      "--ui-accent": "#254de4",
+      "--ui-gold": "#b57422",
+      "--rank-gold": "var(--ui-gold)",
+      "--rank-silver": "#7d8a84",
+      "--rank-bronze": "#a06a3b",
+      "--ui-focus": "#254de4",
+      "--radius-sm": "8px",
+      "--radius-md": "12px",
+      "--radius-lg": "14px",
+      "--ui-space": "4px",
+      "--shadow-1": "0 2px 8px rgba(35,73,65,.10)",
+      "--shadow-2": "0 8px 24px rgba(35,73,65,.18)",
+      "--shadow-3": "0 16px 48px rgba(35,73,65,.26)",
+      "--shadow-hard": "3px 4px 0 #25464c",
+      "--z-base": "0",
+      "--z-sticky": "10",
+      "--z-dock": "20",
+      "--z-banner": "30",
+      "--z-menu": "40",
+      "--z-modal": "50",
+      "--z-toast": "60",
+      "--duration-1": "120ms",
+      "--duration-2": "180ms",
+      "--duration-3": "240ms",
+      "--ui-touch-size": "44px"
+    },
+    "reducedMotion": {
+      "query": "(prefers-reduced-motion: reduce)",
+      "selector": ":root",
+      "tokens": {
+        "--duration-1": "0ms",
+        "--duration-2": "0ms",
+        "--duration-3": "0ms"
+      }
+    },
+    "manualReducedMotion": {
+      "selector": "html[data-motion=\"reduce\"]",
+      "tokens": {
+        "--duration-1": "0ms",
+        "--duration-2": "0ms",
+        "--duration-3": "0ms"
+      }
+    },
+    "focus": {
+      "selector": ":is(button, a, input, select, textarea, summary):focus-visible",
+      "outline": "2px solid var(--ui-focus)",
+      "outlineOffset": "2px"
+    },
+    "frontmatter": {
+      "name": "胡闹运动会 · 纸面嘉年华",
+      "description": "以角色和赛道为主体，用纸面面板、明亮品牌色和硬阴影组织比赛信息。",
+      "colors": {
+        "primary": "#f44735",
+        "text": "#25464c",
+        "muted": "#5b7268",
+        "paper": "#fffdf4",
+        "line": "#c0cbb7",
+        "accent": "#254de4",
+        "focus": "#254de4"
+      },
+      "typography": {
+        "body": {
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"PingFang SC\", \"Microsoft YaHei\", system-ui, sans-serif"
+        },
+        "title": {
+          "fontFamily": "\"Arial Black\", var(--ui-font)"
+        }
+      },
+      "rounded": {
+        "control": "14px",
+        "panel": "14px"
+      },
+      "spacing": {
+        "base": "4px"
+      },
+      "components": {
+        "button-primary": {
+          "backgroundColor": "{colors.primary}",
+          "textColor": "#fffdf4",
+          "rounded": "{rounded.control}",
+          "padding": "12px 16px"
+        }
+      }
+    }
+  },
+  "components": [
+    {
+      "name": "button",
+      "selector": ".button",
+      "minHeight": "var(--ui-touch-size)",
+      "borderRadius": "var(--radius-lg)",
+      "fontSize": "14px",
+      "lineHeight": "1.4",
+      "padding": "12px 16px",
+      "gap": "calc(var(--ui-space) * 2)"
+    },
+    {
+      "name": "modal-title",
+      "selector": ".modal-header h2",
+      "font": "600 20px/1.4 var(--ui-font)",
+      "responsive": [
+        {
+          "query": "(max-width: 650px)",
+          "fontSize": "18px"
+        }
+      ]
+    },
+    {
+      "name": "race-menu-copy",
+      "selector": ".race-menu-content",
+      "font": "400 14px/1.6 var(--ui-font)"
+    }
+  ],
+  "narrative": {
+    "northStar": "角色与赛道优先的纸面嘉年华",
+    "overview": "以角色和赛道为主体，用纸面面板、明亮品牌色和硬阴影组织比赛信息。",
+    "keyCharacteristics": [
+      "鲜明品牌色",
+      "纸面面板",
+      "偏移硬阴影",
+      "贴边比赛菜单"
+    ],
+    "dos": [
+      "界面语义色使用对应 token",
+      "保留角色与赛道的视觉主次"
+    ],
+    "donts": [
+      "不把场景美术色当作控件语义色",
+      "不把局部组件尺寸当作全站默认值"
+    ]
+  }
+}
