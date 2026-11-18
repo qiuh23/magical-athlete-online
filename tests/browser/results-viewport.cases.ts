@@ -2,6 +2,7 @@ import {readFileSync} from 'node:fs';
 import {test,expect} from '@playwright/test';
 import {createApplication} from '../../src/server/index.js';
 import {createGame} from '../../src/engine/index.js';
+import {SITE_NICKNAMES} from '../../src/shared/site-policy.js';
 
 test.describe("results viewport matrix", () => {
 let application:ReturnType<typeof createApplication>,url:string;
@@ -22,9 +23,10 @@ for (const viewport of [{width:1440,height:900},{width:390,height:844},{width:84
     for (const form of ['round','final','guest','spectator'] as const) {
       test(`${form} ${mode} ${viewport.width}x${viewport.height}: complete standings and fixed actions`, async ({browser}, info) => {
         const count = mode === 'three-dual' ? 3 : 8, dual = mode !== 'eight-single';
-        const host = application.rooms.create('房主同学', count, 0), code = host.identity.roomCode;
-        const members = [host, ...Array.from({length:count-1}, (_,i) => application.rooms.join(code, `选手${i+2}`))];
-        const watcher = application.rooms.join(code, '观众', 'spectator');
+        const name=(index:number)=>edition==='cn'?SITE_NICKNAMES[index]!.name:`选手${index+1}`;
+        const host = application.rooms.create(name(0), count, 0), code = host.identity.roomCode;
+        const members = [host, ...Array.from({length:count-1}, (_,i) => application.rooms.join(code, name(i+1)))];
+        const watcher = application.rooms.join(code, name(count), 'spectator');
         const room = application.rooms.get(code), game = createGame(room.game.players, 42);
         game.phase = form === 'final' ? 'finished' : 'results'; game.round = 1;
         game.players.forEach((p,i) => {p.score=16-i;});
