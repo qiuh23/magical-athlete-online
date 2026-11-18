@@ -1,4 +1,5 @@
 import { BoxGeometry, BufferGeometry, Float32BufferAttribute, Group, InstancedMesh, Matrix4, Mesh, MeshStandardMaterial, Object3D, Quaternion, Vector3 } from 'three';
+import { FLOODLIGHT_COLOR } from './floodlight-color.js';
 import type { TrackId } from '../../../shared/tracks.js';
 import edgeMounts from './floodlight-edge-mounts.json' with {type:'json'};
 import { trackNodeIds } from '../math.js';
@@ -68,14 +69,17 @@ export function buildFloodlightGeometry(track:TrackId,models:EnvironmentModels,o
   for(const lamp of layout){if(!lamp.connector)continue;const {innerCorners,outerZ}=lamp.connector,vertices=[...innerCorners,...innerCorners.map(([x,y])=>[x!,y!,outerZ])];const g=new BufferGeometry();g.setAttribute('position',new Float32BufferAttribute(vertices.flat(),3));const faces=[0,1,3,0,3,2,4,6,7,4,7,5,0,4,5,0,5,1,2,3,7,2,7,6,0,2,6,0,6,4,1,5,7,1,7,3];if(lamp.row===1)for(let i=0;i<faces.length;i+=3)[faces[i+1],faces[i+2]]=[faces[i+2]!,faces[i+1]!];g.setIndex(faces);g.computeVertexNormals();ownedGeometry.push(g);const beam=new Mesh(g,stone);beam.name=`floodlight-outrigger:${lamp.row*4+lamp.column}`;beam.userData.environmentRole='light-foundation';beam.castShadow=!options.lowQuality;beam.receiveShadow=true;beam.raycast=()=>{};root.add(beam);}
   for(const asset of FLOODLIGHT_ASSETS){const source=models[asset];if(!source)throw Error(`Missing floodlight ${asset}`);source.updateMatrixWorld(true);source.traverse(node=>{
     if(!(node instanceof Mesh))return;
-    const groups=[{lamps:layout.map((lamp,i)=>({lamp,i})),active:asset==='lenses'}];
+    const lamps=layout.map((lamp,i)=>({lamp,i}));
+    const groups=asset==='lenses'&&options.lowQuality
+      ?[true,false].map(active=>({lamps:lamps.filter(({lamp})=>lamp.active===active),active}))
+      :[{lamps,active:asset==='lenses'}];
     for(const group of groups){let material=node.material;if(asset==='lenses'){
-      if(!(material instanceof MeshStandardMaterial))throw Error('Lens material must be standard');material=material.clone();material.emissive.set('#ffdca0');material.emissiveIntensity=0;owned.push(material);lenses.push({material,active:true});
+      if(!(material instanceof MeshStandardMaterial))throw Error('Lens material must be standard');material=material.clone();material.emissive.set(FLOODLIGHT_COLOR);material.emissiveIntensity=0;material.toneMapped=false;owned.push(material);lenses.push({material,active:group.active});
     }
     const mesh=new InstancedMesh(node.geometry,material,group.lamps.length);mesh.name=`floodlight:${asset}:${node.name}:${group.lamps[0]!.i}`;mesh.userData.environmentRole='light-hardware';mesh.raycast=()=>{};mesh.castShadow=!options.lowQuality&&asset!=='lenses';mesh.receiveShadow=true;
     group.lamps.forEach(({lamp},i)=>{dummy.position.copy(asset==='base'?lamp.base:asset==='pole'?lamp.base.clone().add(new Vector3(0,.16,0)):lamp.head);dummy.quaternion.copy(asset==='base'||asset==='pole'?new Quaternion():lamp.rotation);dummy.scale.set(1,asset==='pole'?lamp.height-.16:1,1);dummy.updateMatrix();mesh.setMatrixAt(i,new Matrix4().multiplyMatrices(dummy.matrix,node.matrixWorld));});mesh.computeBoundingSphere();root.add(mesh);batches.push(mesh);
     }
   });}
   root.updateMatrixWorld(true);let disposed=false;
-  return {root,layout,lenses,setNightFactor(value:number){const factor=Math.max(0,Math.min(1,value));for(const lens of lenses)lens.material.emissiveIntensity=2.4*factor;},dispose(){if(disposed)return;disposed=true;batches.forEach(m=>m.dispose());geometry.dispose();ownedGeometry.forEach(g=>g.dispose());owned.forEach(m=>m.dispose());}};
+  return {root,layout,lenses,setNightFactor(value:number){const factor=Math.max(0,Math.min(1,value));for(const lens of lenses)lens.material.emissiveIntensity=lens.active?6*factor:0;},dispose(){if(disposed)return;disposed=true;batches.forEach(m=>m.dispose());geometry.dispose();ownedGeometry.forEach(g=>g.dispose());owned.forEach(m=>m.dispose());}};
 }

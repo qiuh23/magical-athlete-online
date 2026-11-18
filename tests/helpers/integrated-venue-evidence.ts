@@ -48,6 +48,10 @@ function archivedInputDigest(path:string,root:string){
   source=source.replace(current,previous);
  };
  if(path==='src/client/scene/environment/floodlights.ts'){
+  replaceOnce("import { FLOODLIGHT_COLOR } from './floodlight-color.js';\n",'');
+  replaceOnce("const lamps=layout.map((lamp,i)=>({lamp,i}));\n    const groups=asset==='lenses'&&options.lowQuality\n      ?[true,false].map(active=>({lamps:lamps.filter(({lamp})=>lamp.active===active),active}))\n      :[{lamps,active:asset==='lenses'}];","const groups=[{lamps:layout.map((lamp,i)=>({lamp,i})),active:asset==='lenses'}];");
+  replaceOnce("material.emissive.set(FLOODLIGHT_COLOR);material.emissiveIntensity=0;material.toneMapped=false;owned.push(material);lenses.push({material,active:group.active});","material.emissive.set('#ffdca0');material.emissiveIntensity=0;owned.push(material);lenses.push({material,active:true});");
+  replaceOnce('lens.material.emissiveIntensity=lens.active?6*factor:0','lens.material.emissiveIntensity=2.4*factor');
   replaceOnce("(track==='wild'&&column===3?.80:0)","(track==='wild'&&column===3?.45:0)");
  }else if(path==='src/client/scene/toy-model-instance.ts'){
   replaceOnce("import {rigidShapeEnvelopes} from './mechanisms/rigid-shape-envelopes.js';\n",'');
