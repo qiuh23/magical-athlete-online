@@ -66,6 +66,12 @@ for (const viewport of [{width:1440,height:900},{width:390,height:844},{width:84
             })).toEqual({inside:true,noPanelScroll:true,noPageScroll:true,rowsVisible:true,footerHit:true});
           };
           await check();
+          if(form==='round') {
+            expect(await panel.locator('.round-draw-notice').evaluate(el=>{
+              const style=getComputedStyle(el);
+              return el.getBoundingClientRect().height<=parseFloat(style.lineHeight)+parseFloat(style.paddingTop)+parseFloat(style.paddingBottom)+parseFloat(style.borderTopWidth)+parseFloat(style.borderBottomWidth)+1;
+            }), 'forced-cycle status remains one small line').toBe(true);
+          }
           if (form === 'guest' || form === 'spectator') {
             await expect(panel.locator('.results-actions button')).toHaveCount(0);
             await expect(panel.locator('.results-actions')).toContainText('等待房主进入下一场');

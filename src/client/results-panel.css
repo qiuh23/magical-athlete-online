@@ -68,7 +68,7 @@
 .results-panel .result-racer h3, .results-panel .result-racer p {
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-.results-panel .result-racer > strong { font-size: 20px; margin: 0; white-space: nowrap; }
+.results-panel .result-racer > strong { font-size: 20px; line-height: 1.2; margin: 0; white-space: nowrap; }
 .results-panel .result-racer > strong small { font-size: 11px; margin-left: 4px; }
 .results-panel .final-ranking { flex: none; min-height: 0; width: 100%; margin: 0; padding: 8px 12px; }
 .results-panel .final-ranking > div { gap: 8px; padding: 4px 8px; margin: 0; }
