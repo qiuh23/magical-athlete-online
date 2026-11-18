@@ -1,3 +1,4 @@
+import './results-viewport.cases.js';
 import {test,expect} from '@playwright/test';
 import {setCameraView} from './camera-controls.js';
 /** Run the dev server first: node node_modules/vite/bin/vite.js --host 127.0.0.1 --port 5186.
