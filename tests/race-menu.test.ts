@@ -56,7 +56,7 @@ test('menu groups are initially folded and expose only three quick actions',()=>
  for(const label of ['累计积分','事件记录','本场赛事与地图'])assert.ok(quick.includes(`aria-label="${label}"`));
  assert.match(menu,/<RoomConfigPanel[^>]*compact/);
  const config=readFileSync(new URL('../src/client/RoomConfig.tsx',import.meta.url),'utf8');
- assert.match(config,/open=\{compact\?undefined:true\}/);
+ assert.match(config,/open=\{compact\|\|results\?undefined:true\}/);
  const css=readFileSync(new URL('../src/client/ui-theme.css',import.meta.url),'utf8');
  assert.match(css,/\.race-menu-panel :is\(\.preset-options,\.map-options\)[^}]*repeat\(2,minmax\(0,1fr\)\)/);
 });

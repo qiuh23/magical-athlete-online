@@ -12,6 +12,7 @@ import './room-experience.css';
 import './race-ui.css';
 import './visual-first.css';
 import './ui-theme.css';
+import './results-panel.css';
 
 void registerAssetCache();
 
